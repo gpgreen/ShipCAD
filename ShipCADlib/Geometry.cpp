@@ -3,6 +3,9 @@
 using namespace Geometry;
 using namespace std;
 
+static QVector3D ZERO = QVector3D();
+static QVector3D ONE = QVector3D(1,1,1);
+
 Entity::Entity()
   : _build(false)
 {
@@ -25,19 +28,19 @@ void Entity::clear()
   _build = false;
   _min = ZERO;
   _max = ZERO;
-  _color = Qt::Black;
+  _color = Qt::black;
   _pen_width = 1;
-  _pen_style = SOLID;
+  _pen_style = Qt::SolidLine;
 }
 
 static void MinMax(const QVector3D& p, QVector3D& min, QVector3D& max)
 {
-  if (p.X<min.X) min.X=p.X;
-  if (p.Y<min.Y) min.Y=p.Y;
-  if (p.Z<min.Z) min.Z=p.Z;
-  if (p.X>max.X) max.X=p.X;
-  if (p.Y>max.Y) max.Y=p.Y;
-  if (p.Z>max.Z) max.Z=p.Z;
+    if (p.x()<min.x()) min.setX(p.x());
+    if (p.y()<min.y()) min.setY(p.y());
+    if (p.z()<min.z()) min.setZ(p.z());
+    if (p.x()>max.x()) max.setX(p.x());
+    if (p.y()>max.y()) max.setY(p.y());
+    if (p.z()>max.z()) max.setZ(p.z());
 }
 
 void Entity::extents(QVector3D& min, QVector3D& max)
@@ -58,7 +61,7 @@ void Entity::rebuild()
   // does nothing
 }
 
-bool Entity::getBuild()
+bool Entity::getBuild() const
 {
   return _build;
 }
@@ -129,7 +132,7 @@ int Spline::getFragments()
 bool Spline::getKnuckle(int index)
 {
   if (index >= 0 && index < _nopoints)
-    return _knuckle[index];
+    return _knuckles[index];
   throw ListIndexOutOfBounds();
 }
 
@@ -212,7 +215,7 @@ void Spline::rebuild()
     u[0] = _derivatives[0];
 
     for (int i=2; i<_nopoints-1; ++i) {
-      if (_knuckle[i-1]) {
+      if (_knuckles[i-1]) {
 	u[i-1] = ZERO;
 	_derivatives[i-1] = ZERO;
       } else {

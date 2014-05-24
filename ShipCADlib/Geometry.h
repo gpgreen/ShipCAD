@@ -3,7 +3,7 @@
 {    open source surface-modelling program based on subdivision surfaces and intended for     }
 {    designing ships.                                                                         }
 {                                                                                             }
-{    Copyright © 2005, by Martijn van Engeland                                                }
+{    Copyright Â© 2005, by Martijn van Engeland                                                }
 {    e-mail                  : Info@FREEship.org                                              }
 {    FREE!ship project page  : https://sourceforge.net/projects/freeship                      }
 {    FREE!ship homepage      : www.FREEship.org                                               }
@@ -26,6 +26,9 @@
 #ifndef GEOMETRY_H_
 #define GEOMETRY_H_
 
+#include <QtCore>
+#include <QtGui>
+
 namespace Geometry {
 
   class Entity : public QObject
@@ -36,8 +39,8 @@ namespace Geometry {
 
     virtual void create();
     virtual void clear();
-    virtual void extents(const QVector3D& min, const QVector3D& max);
-    virtual void draw(Viewport& vp) = 0;
+    virtual void extents(QVector3D& min, QVector3D& max);
+    //virtual void draw(Viewport& vp) = 0;
     virtual void rebuild() = 0;
 
     bool getBuild() const;
@@ -51,14 +54,14 @@ namespace Geometry {
     virtual QVector3D getMax();
     virtual void setBuild(bool val);
 
-  private:
+  protected:
 
     bool _build;
     QVector3D _min;
     QVector3D _max;
     int _pen_width;
     QColor _color;
-    QPenStyle _pen_style;
+    Qt::PenStyle _pen_style;
 
     Q_PROPERTY(bool Build READ getBuild WRITE setBuild)
     Q_PROPERTY(QColor Color MEMBER _color READ getColor WRITE setColor)
@@ -83,20 +86,20 @@ namespace Geometry {
     virtual void create();
     qreal curvature(qreal parameter, QVector3D normal);
     void delete_point(int index);
-    int distance_to_cursor(int x, int y, Viewport vp);
-    virtual void draw(Viewport vp);
+    //int distance_to_cursor(int x, int y, Viewport vp);
+    //virtual void draw(Viewport vp);
     QVector3D first_derive(qreal parameter);
     void insert(int index, QVector3D p);
     void insert_spline(int index, bool invert, bool duplicate_point, Spline source);
-    bool intersect_plane(QPlane plane, IntersectionData& output);
+    //bool intersect_plane(QVector3D plane, IntersectionData& output);
     void invert_direction();
-    virtual void load_binary(FileBuffer source);
+    //virtual void load_binary(FileBuffer source);
     virtual void rebuild();
-    virtual void save_binary(FileBuffer destination);
-    void save_to_dxf(vector<string> strings, string layername, bool sendmirror);
+    //virtual void save_binary(FileBuffer destination);
+    void save_to_dxf(QVector<QString> strings, QString layername, bool sendmirror);
     QVector3D second_derive(qreal parameter);
     bool simplify(qreal criterium);
-    QVector3D value(extended);
+    //QVector3D value(extended);
 
   private:
 
@@ -107,9 +110,10 @@ namespace Geometry {
     void setCapacity(int val);
     void setFragments(int val);
     void setKnuckle(int index, bool val);
-    void setPoint(int index, QVector3D p);
+    void setPoint(int index, const QVector3D& p);
 
-  private:
+  protected:
+
     int _capacity;
     int _nopoints;
     int _fragments;
@@ -118,9 +122,10 @@ namespace Geometry {
     qreal _curvature_scale;
     QColor _color;
     qreal _total_length;
-    std::vector<QVector3D> _points;
-    std::vector<bool> _knuckles;
-    std::vector<QVector3D> _derivatives;
+    QVector<QVector3D> _points;
+    QVector<bool> _knuckles;
+    QVector<qreal> _parameters;
+    QVector<QVector3D> _derivatives;
   };
 
 };				/* end namespace */

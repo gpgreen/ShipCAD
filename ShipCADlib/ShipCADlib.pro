@@ -11,10 +11,13 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += shipcadlib.cpp \
-    Geometry.cpp
+    glwidget.cpp \
+    geometry.cpp
 
 HEADERS += shipcadlib.h \
-    Geometry.h
+    glwidget.h \
+    utility.h \
+    geometry.h
 
 unix:!symbian {
     maemo5 {

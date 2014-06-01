@@ -3,7 +3,7 @@
 ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
-** This file is part of the examples of the Qt Toolkit.
+** This file is part of the documentation of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:BSD$
 ** You may use this file under the terms of the BSD license as follows:
@@ -38,49 +38,52 @@
 **
 ****************************************************************************/
 
-#ifndef GLWIDGET_H
-#define GLWIDGET_H
+#include <QtGui/QGuiApplication>
+#include <QtGui/QScreen>
+#include <vector>
 
-#include <QGLWidget>
+#include "geometry.h"
 
-class QtLogo;
+using namespace ShipCADGeometry;
 
-class GLWidget : public QGLWidget
+int main(int argc, char **argv)
 {
-    Q_OBJECT
+    QGuiApplication app(argc, argv);
 
-public:
-    GLWidget(QWidget *parent = 0);
-    ~GLWidget();
+    QSurfaceFormat format;
+    format.setSamples(16);
 
-    QSize minimumSizeHint() const;
-    QSize sizeHint() const;
+    // make a spline
+    Spline spline;
+    spline.add(QVector3D(0,0,0));
+    spline.add(QVector3D(0.7,1.0,0));
+    spline.add(QVector3D(1,1,0));
+    spline.setProperty("Color", QColor(Qt::blue));
+    spline.setProperty("ShowCurvature", true);
 
-public slots:
-    void setXRotation(int angle);
-    void setYRotation(int angle);
-    void setZRotation(int angle);
+    Viewport window;
+    window.setFormat(format);
+    window.resize(640, 480);
+    window.add(&spline);
+    window.show();
 
-signals:
-    void xRotationChanged(int angle);
-    void yRotationChanged(int angle);
-    void zRotationChanged(int angle);
+    window.setAnimating(true);
 
-protected:
-    void initializeGL();
-    void paintGL();
-    void resizeGL(int width, int height);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
+    return app.exec();
+}
 
-private:
-    QtLogo *logo;
-    int xRot;
-    int yRot;
-    int zRot;
-    QPoint lastPos;
-    QColor qtGreen;
-    QColor qtPurple;
-};
+#if 0
+#include <QtGui/QGuiApplication>
+#include "qtquick2applicationviewer.h"
 
+int main(int argc, char *argv[])
+{
+    QGuiApplication app(argc, argv);
+
+    QtQuick2ApplicationViewer viewer;
+    viewer.setMainQmlFile(QStringLiteral("qml/GuiTest/main.qml"));
+    viewer.showExpanded();
+
+    return app.exec();
+}
 #endif

@@ -1,10 +1,13 @@
 #include <cmath>
+#include <QtGui/QOpenGLShaderProgram>
 
 #include "geometry.h"
 #include "utility.h"
+#include "exception.h"
 
 using namespace ShipCADGeometry;
 using namespace ShipCADUtility;
+using namespace ShipCADException;
 using namespace std;
 
 static QVector3D ZERO = QVector3D();
@@ -17,7 +20,7 @@ Plane::Plane()
     _vars[0] = _vars[1] = _vars[2] = _vars[3] = 0;
 }
 
-Plane::Plane(qreal a, qreal b, qreal c, qreal d)
+Plane::Plane(float a, float b, float c, float d)
 {
     _vars[0] = a;
     _vars[1] = b;
@@ -28,21 +31,125 @@ Plane::Plane(qreal a, qreal b, qreal c, qreal d)
 QPair<QVector3D, QVector3D> Plane::vertex_normal() const
 {
     QVector3D vertex;
-    QVector3D normal;
+    QVector3D normal(_vars[0], _vars[1], _vars[2]);
     return qMakePair(vertex, normal);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-Entity::Entity()
-    : _build(false), _pen_width(1), _color(Qt::black), _pen_style(Qt::Solid)
+Viewport::Viewport()
+    : _mode(vmWireFrame), m_program(0), m_frame(0)
 {
-    // does nothing
+    // does nothing else
 }
 
-Entity::~Entity()
+Viewport::~Viewport()
 {
-    // does nothing
+    delete m_program;
+}
+
+static const char *vertexShaderSource =
+    "attribute highp vec4 posAttr;\n"
+    "attribute lowp vec4 colAttr;\n"
+    "varying lowp vec4 col;\n"
+    "uniform highp mat4 matrix;\n"
+    "void main() {\n"
+    "   col = colAttr;\n"
+    "   gl_Position = matrix * posAttr;\n"
+    "}\n";
+
+static const char *fragmentShaderSource =
+    "varying lowp vec4 col;\n"
+    "void main() {\n"
+    "   gl_FragColor = col;\n"
+    "}\n";
+
+void Viewport::initialize()
+{
+    m_program = new QOpenGLShaderProgram(this);
+    m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
+    m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
+    m_program->link();
+    m_posAttr = m_program->attributeLocation("posAttr");
+    m_colAttr = m_program->attributeLocation("colAttr");
+    m_matrixUniform = m_program->uniformLocation("matrix");
+}
+
+GLuint Viewport::loadShader(GLenum type, const char *source)
+{
+    GLuint shader = glCreateShader(type);
+    glShaderSource(shader, 1, &source, 0);
+    glCompileShader(shader);
+    return shader;
+}
+
+Viewport::ViewportMode Viewport::getViewportMode() const
+{
+    return _mode;
+}
+
+void Viewport::setViewportMode(enum ViewportMode mode)
+{
+    _mode = mode;
+}
+
+void Viewport::add(Entity* entity)
+{
+    _entities.push_back(entity);
+}
+
+void Viewport::render()
+{
+    glViewport(0, 0, width(), height());
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    m_program->bind();
+
+    QMatrix4x4 matrix;
+    matrix.perspective(90, 4.0/3.0, 0.1, 100.0);
+    matrix.translate(0, 0, -2);
+    matrix.rotate(100.0f * m_frame / screen()->refreshRate(), 0, 1, 0);
+
+    m_program->setUniformValue(m_matrixUniform, matrix);
+
+    for (size_t i=0; i<_entities.size(); ++i)
+        _entities[i]->draw(*this);
+
+#if 0
+    GLfloat vertices[] = {
+        0.0f, 0.707f,
+        -0.5f, -0.5f,
+        0.5f, -0.5f
+    };
+
+    GLfloat colors[] = {
+        1.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f
+    };
+
+    glVertexAttribPointer(m_posAttr, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+    glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, colors);
+
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(0);
+#endif
+    m_program->release();
+
+    ++m_frame;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+Entity::Entity()
+{
+    clear();
 }
 
 void Entity::clear()
@@ -61,16 +168,6 @@ void Entity::extents(QVector3D& min, QVector3D& max)
         rebuild();
     MinMax(_min, min, max);
     MinMax(_max, min, max);
-}
-
-void Entity::draw(Viewport& vp)
-{
-    // does nothing
-}
-
-void Entity::rebuild()
-{
-    // does nothing
 }
 
 bool Entity::getBuild() const
@@ -109,6 +206,11 @@ Spline::Spline()
     : Entity()
 {
     clear();
+}
+
+Spline::~Spline()
+{
+    // does nothing
 }
 
 #if 0
@@ -167,7 +269,7 @@ bool Spline::getKnuckle(int index) const
 {
     if (index >= 0 && index < _nopoints)
         return _knuckles[index];
-    throw ListIndexOutOfBounds();
+    throw ListIndexOutOfBounds(__FILE__);
 }
 
 void Spline::setKnuckle(int index, bool val)
@@ -175,8 +277,9 @@ void Spline::setKnuckle(int index, bool val)
     if (index >= 0 && index < _nopoints) {
         _knuckles[index] = val;
         setBuild(false);
-    } else {
-        throw ListIndexOutOfBounds();
+    } 
+    else {
+        throw ListIndexOutOfBounds(__FILE__);
     }
 }
 
@@ -185,17 +288,19 @@ void Spline::setPoint(int index, const QVector3D& p)
     if (index >= 0 && index < _nopoints) {
         _points[index] = p;
         setBuild(false);
-    } else {
-        throw PointIndexOutOfBounds();
+    } 
+    else {
+        throw PointIndexOutOfBounds(__FILE__);
     }
 }
 
-qreal Spline::getParameter(int index) const
+float Spline::getParameter(int index) const
 {
     if (index >= 0 && index < _nopoints) {
         return _parameters[index];
-    } else {
-        throw ListIndexOutOfBounds();
+    } 
+    else {
+        throw ListIndexOutOfBounds(__FILE__);
     }
 }
 
@@ -203,8 +308,9 @@ QVector3D Spline::getPoint(int index) const
 {
     if (index >= 0 && index < _nopoints) {
         return _points[index];
-    } else {
-        throw PointIndexOutOfBounds();
+    } 
+    else {
+        throw PointIndexOutOfBounds(__FILE__);
     }
 }
 
@@ -217,22 +323,25 @@ void Spline::rebuild()
     for (int i=1; i<_nopoints; ++i) {
         _total_length += sqrt(_points[i].distanceToPoint(_points[i-1]));
     }
-    QVector<QVector3D> u;
+    vector<QVector3D> u;
     QVector3D un, qn;
-    qreal sig, p;
+    float sig, p;
 
     if (_nopoints > 1) {
+        _derivatives.clear();
         _derivatives.reserve(_nopoints);
+        _parameters.clear();
         _parameters.reserve(_nopoints);
         u.reserve(_nopoints);
 
         if (fabs(_total_length) <  1E-5) {
-            for (int i=1; i<=_nopoints; ++i) {
-                _parameters.push_back((i - 1) / (_nopoints - 1));
+            for (int i=0; i<_nopoints; ++i) {
+                _parameters.push_back(i / static_cast<float>(_nopoints));
             }
-        } else {
+        } 
+        else {
             _parameters.push_back(0);
-            qreal length = 0;
+            float length = 0;
             for (int i=2; i<=_nopoints-1; ++i) {
                 length += sqrt(_points[i-2].distanceToPoint(_points[i-1]));
                 _parameters.push_back(length / _total_length);
@@ -247,12 +356,14 @@ void Spline::rebuild()
             if (_knuckles[i-1]) {
                 u[i-1] = ZERO;
                 _derivatives.push_back(ZERO);
-            } else {
+            } 
+            else {
                 if (fabs(_parameters[i] - _parameters[i-2]) < 1e-5
                         || fabs(_parameters[i-1] - _parameters[i-2]) < 1e-5
                         || fabs(_parameters[i] - _parameters[i-1]) < 1e-5) {
                     _derivatives.push_back(ZERO);
-                } else {
+                } 
+                else {
                     sig = (_parameters[i-1] - _parameters[i-2])
                             / (_parameters[i] - _parameters[i-2]);
                     // first x-value
@@ -278,7 +389,7 @@ void Spline::rebuild()
                     // then z-value
                     p = sig * _derivatives[i-2].z() + 2.0;
                     p1.setZ((sig - 1.0) / p);
-                    p2.setZ( (6.0 * ((_points[i].y() - _points[i-1].z())
+                    p2.setZ( (6.0 * ((_points[i].z() - _points[i-1].z())
                               / (_parameters[i] - _parameters[i-1])
                              - (_points[i-1].z() - _points[i-2].z())
                             / (_parameters[i-1] - _parameters[i-2]))
@@ -323,10 +434,9 @@ void Spline::rebuild()
             }
         }
     }
-    Entity::rebuild();
 }
 
-QVector3D Spline::second_derive(qreal parameter)
+QVector3D Spline::second_derive(float parameter)
 {
     QVector3D result = ZERO;
     if (_nopoints < 2)
@@ -351,10 +461,9 @@ QVector3D Spline::second_derive(qreal parameter)
                 lo = k;
             else
                 hi = k;
-            _parameters[k] = _parameters[k] - 1 + 1;
-        } while (hi - lo <= 1);
+        } while (hi - lo > 1);
     }
-    qreal frac;
+    float frac;
     if (_parameters[hi] - _parameters[lo] <= 0.0)
         frac = 0.5;
     else
@@ -362,12 +471,13 @@ QVector3D Spline::second_derive(qreal parameter)
     result.setX(_derivatives[lo].x() + frac * (_derivatives[hi].x() - _derivatives[lo].x()));
     result.setY(_derivatives[lo].y() + frac * (_derivatives[hi].y() - _derivatives[lo].y()));
     result.setZ(_derivatives[lo].z() + frac * (_derivatives[hi].z() - _derivatives[lo].z()));
+    return result;
 }
 
-qreal Spline::weight(int index) const
+float Spline::weight(int index) const
 {
-    qreal result;
-    qreal length, dist;
+    float result;
+    float length, dist;
 
     if (index == 0 || (index == _nopoints - 1) || _knuckles[index]) {
         result = 1E10;
@@ -395,9 +505,9 @@ qreal Spline::weight(int index) const
     return result;
 }
 
-int Spline::find_next_point(QVector<qreal>& weights) const
+int Spline::find_next_point(vector<float>& weights) const
 {
-    qreal minval;
+    float minval;
     int i, result;
     result = -1;
     if (_nopoints < 3)
@@ -414,10 +524,10 @@ int Spline::find_next_point(QVector<qreal>& weights) const
     return result;
 }
 
-bool Spline::simplify(qreal criterium)
+bool Spline::simplify(float criterium)
 {
-    QVector<qreal> weights(_nopoints);
-    qreal total_length;
+    vector<float> weights(_nopoints);
+    float total_length;
     int index, n1, n2;
     bool result = false;
 
@@ -444,9 +554,9 @@ bool Spline::simplify(qreal criterium)
             }
             else {
                 if (weights[index] < criterium) {
-                    weights.remove(index);
-                    _points.remove(index);
-                    _knuckles.remove(index);
+                    weights.erase(weights.begin()+index);
+                    _points.erase(_points.begin()+index);
+                    _knuckles.erase(_knuckles.begin()+index);
                     _nopoints--;
                     if (index - 1 >= 0 && index -1 < _nopoints)
                         weights[index+1] = weights[index+1]/total_length;
@@ -480,9 +590,9 @@ void Spline::add(const QVector3D& p)
     setBuild(false);
 }
 
-qreal Spline::coord_length(qreal t1, qreal t2)
+float Spline::coord_length(float t1, float t2)
 {
-    qreal result = 0.0;
+    float result = 0.0;
     if (!_build)
         rebuild();
     if (!_build)
@@ -490,7 +600,7 @@ qreal Spline::coord_length(qreal t1, qreal t2)
 
     QVector3D p1, p2;
     for (int i=0; i<=_fragments; ++i) {
-        qreal t = t1 + (i / _fragments) * (t2 - t1);
+        float t = t1 + (i / static_cast<float>(_fragments)) * (t2 - t1);
         p2 = value(t);
         if (i > 0)
             result += sqrt((p2.x() - p1.x()) * (p2.x() - p1.x())
@@ -501,17 +611,17 @@ qreal Spline::coord_length(qreal t1, qreal t2)
     return result;
 }
 
-qreal Spline::chord_length_approximation(qreal percentage) const
+float Spline::chord_length_approximation(float percentage)
 {
-    qreal result, length, total_length;
-    qreal t1, t2;
+    float result, length, total_length;
+    float t1, t2;
     t1 = 0;
     t2 = 1.0;
-    qreal parameter = 1.0;
+    float parameter = 1.0;
     int counter = 0;
-    qreal l1 = 0;
-    qreal l2 = 0;
-    qreal desired_length = 0;
+    float l1 = 0;
+    float l2 = 0;
+    float desired_length = 0;
     if (percentage < 0)
         result = 0;
     else if (percentage > 1)
@@ -543,17 +653,16 @@ qreal Spline::chord_length_approximation(qreal percentage) const
             }
             counter++;
         }
-        while (counter > 75 || fabs(length - desired_length) < 1E-3);
+        while (counter <= 75 && fabs(length - desired_length) >= 1E-3);
         result = parameter;
     }
     return result;
 }
 
-qreal Spline::curvature(qreal parameter, QVector3D& val, QVector3D& normal)
+float Spline::curvature(float parameter, QVector3D& normal)
 {
-    qreal result;
+    float result;
 
-    val = value(parameter);
     QVector3D vel1 = first_derive(parameter);
     QVector3D acc = second_derive(parameter);
 
@@ -561,18 +670,17 @@ qreal Spline::curvature(qreal parameter, QVector3D& val, QVector3D& normal)
     crossproduct.setX(acc.y()*vel1.z()-acc.z()*vel1.y());
     crossproduct.setY(-(acc.x()*vel1.z()-acc.z()*vel1.x()));
     crossproduct.setZ(acc.x()*vel1.y()-acc.y()*vel1.x());
-    qreal l = sqrt((crossproduct.x()*crossproduct.x())
+    float l = sqrt((crossproduct.x()*crossproduct.x())
                    +(crossproduct.y()*crossproduct.y())
                    +(crossproduct.z()*crossproduct.z()));
     if (l == 0)
         l = 0.00001;
-    qreal vdota = (vel1.x()*acc.x()) + (vel1.y()*acc.y()) + (vel1.z()*acc.z());
-    qreal vdotv = (vel1.x()*vel1.x()) + (vel1.y()*vel1.y()) + (vel1.z()*vel1.z());
-    qreal denom = pow(vdotv, 1.5);
-    if (denom < 0)
-        result = l/denom;
-    else
+    float vdota = (vel1.x()*acc.x()) + (vel1.y()*acc.y()) + (vel1.z()*acc.z());
+    float vdotv = (vel1.x()*vel1.x()) + (vel1.y()*vel1.y()) + (vel1.z()*vel1.z());
+    if (vdotv < 0)
         result = 0;
+    else
+        result = l/pow(vdotv, 1.5);
     normal.setX(vdotv*acc.x()-vdota*vel1.x());
     normal.setY(vdotv*acc.y()-vdota*vel1.y());
     normal.setZ(vdotv*acc.z()-vdota*vel1.z());
@@ -584,8 +692,8 @@ void Spline::delete_point(int index)
 {
     if (_nopoints > 0) {
         _nopoints--;
-        _points.remove(index);
-        _knuckles.remove(index);
+        _points.erase(_points.begin()+index);
+        _knuckles.erase(_knuckles.begin()+index);
         setBuild(false);
     }
 }
@@ -593,7 +701,8 @@ void Spline::delete_point(int index)
 int Spline::distance_to_cursor(int x, int y, Viewport& vp) const
 {
     int result = 1000000;
-    qreal param = 0.0;
+#if 0
+    float param = 0.0;
     // check if cursor position lies within the boundaries
     QVector2D pt(x, y);
     if (pt.x() >= 0 && pt.y() <= vp.width()
@@ -601,8 +710,8 @@ int Spline::distance_to_cursor(int x, int y, Viewport& vp) const
         QVector2D p1 = vp.project(value(0));
         QVector3D p = value(0);
         QVector3D v1(p);
-        for (int i=1; i<=_fragments; ++i) {
-            QVector3D v2 = value((i - 1) / (_fragments - 1));
+        for (int i=0; i<_fragments; ++i) {
+            QVector3D v2 = value(i / static_cast<float>(_fragments));
             QVector2D p2 = vp.project(v2);
             int tmp = floor(DistanceToLine(p1, p2, x, y, param));
             if (tmp < result) {
@@ -613,14 +722,15 @@ int Spline::distance_to_cursor(int x, int y, Viewport& vp) const
             v1 = v2;
         }
     }
+#endif
     return result;
 }
 
-QVector3D Spline::first_derive(qreal parameter) const
+QVector3D Spline::first_derive(float parameter)
 {
 
-    qreal t1 = parameter - 1E-3;
-    qreal t2 = parameter + 1E-3;
+    float t1 = parameter - 1E-3;
+    float t2 = parameter + 1E-3;
     if (t1 < 0)
         t1 = 0;
     if (t2 > 1)
@@ -637,74 +747,90 @@ QVector3D Spline::first_derive(qreal parameter) const
 void Spline::insert(int index, const QVector3D& p)
 {
     if (index >= 0 && index < _nopoints) {
-        _points.insert(index, p);
-        _knuckles.insert(index, false);
+        _points.insert(_points.begin()+index, p);
+        _knuckles.insert(_knuckles.begin()+index, false);
         _nopoints++;
         setBuild(false);
     }
     else
-        throw IndexOutOfRange();
+        throw IndexOutOfRange(__FILE__);
 }
 
 void Spline::draw(Viewport& vp)
 {
-    if (_build)
+    if (!_build)
         rebuild();
 
     QVector3D p1;
     QVector3D p2;
     QVector3D normal;
-    QVector<QVector2D> parray1;
-    QVector<QVector2D> parray2;
+    vector<QVector3D> parray1;
+    vector<QVector3D> parray2;
 
-    if (vp.mode() == vmWireFrame) {
+    for (int i=0; i<_fragments; ++i)
+        parray1.push_back(value(i/static_cast<float>(_fragments)));
+    if (vp.getViewportMode() == Viewport::vmWireFrame) {
         if (_show_curvature) {
-            for (int i=1; i<=_fragments; ++i) {
-                qreal c = curvature((i - 1) / (_fragments - 1), p1, normal);
-                parray1.push_back(vp.project(p1));
-                parray2.push_back(vp.project(p2));
+            for (int i=0; i<_fragments; ++i) {
+                float c = curvature(i / static_cast<float>(_fragments), normal);
+                p2.setX(parray1[i].x() - c * 2 * _curvature_scale * normal.x());
+                p2.setY(parray1[i].y() - c * 2 * _curvature_scale * normal.y());
+                p2.setZ(parray1[i].z() - c * 2 * _curvature_scale * normal.z());
+                parray2.push_back(p2);
             }
-            vp.setPenWidth(1);
-            vp.setPenColor(CurvatureColor);
             for (int i=1; i<=_fragments; ++i) {
                 if (i % 4 == 0 || i == 1 || i == _fragments) {
-                    vp.moveTo(parray1[i-1].x(), parray1[i-1].y());
-                    vp.lineTo(parray2[i-1].x(), parray2[i-1].y());
+                    glBegin(GL_LINES);
+                    glLineWidth(1);
+                    glColor3f(_curvature_color.redF(), _curvature_color.greenF(), _curvature_color.blueF());
+                    glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
+                    glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
+                    glEnd();
                 }
             }
-            vp.polyline(parray2);
-        }
-        else {
-            for (int i=1; i<=_fragments; ++i) {
-                p1 = value((i - 1) / (_fragments - 1));
-                parray1.push_back(vp.project(p1));
+            glBegin(GL_LINES);
+            glLineWidth(1);
+            glColor3f(_curvature_color.redF(), _curvature_color.greenF(), _curvature_color.blueF());
+            for (size_t i=1; i<parray2.size(); ++i) {
+                glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
+                glVertex3f(parray2[i].x(), parray2[i].y(), parray2[i].z());
             }
+            glEnd();
         }
-        vp.setPenWidth(1);
-        vp.setPenColor(_color);
-        vp.setPenStyle(_penstyle);
-        vp.polyline(parray1);
         if (_show_points) {
-            vp.setFont("small fonts");
-            vp.setFontSize(7);
-            vp.setFontColor(Qt::black);
-            vp.setBrushStyle(Qt::clear);
-            for (int i=1; i<=_nopoints; ++i) {
-                pt = vp.project(_points[i-1]);
-                vp.ellipse(pt.x() - 2, pt.y() - 2, pt.x() + 2, pt.y() + 2);
-                vp.text(pt.x() + 2, pt.y(), IntToStr(i));
+            //vp.setFont("small fonts");
+            //vp.setFontSize(7);
+            //vp.setFontColor(Qt::black);
+            //vp.setBrushStyle(Qt::clear);
+            glBegin(GL_POINTS);
+            for (int i=0; i<_nopoints; ++i) {
+                glVertex3f(_points[i].x(), _points[i].y(), _points[i].z());
+                //vp.text(pt.x() + 2, pt.y(), IntToStr(i));
             }
+            glEnd();
         }
     }
+#if 0
     else {
         // draw to z-buffer
         p1 = value(0);
         for (int i=1; i<=_fragments; ++i) {
-            p2 = value(i/_fragments);
+            p2 = value(i/static_cast<float>(_fragments);
             vp.draw_line_to_z_buffer(p1, p2, r, g, b);
             p1 = p2;
         }
     }
+#endif
+    //vp.setPenStyle(_penstyle);
+    //vp.polyline(parray1);
+    glBegin(GL_LINES);
+    glLineWidth(1);
+    glColor3f(_color.redF(), _color.greenF(), _color.blueF());
+    for (size_t i=1; i<parray1.size(); ++i) {
+        glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
+        glVertex3f(parray1[i].x(), parray1[i].y(), parray1[i].z());
+    }
+    glEnd();
 }
 
 void Spline::insert_spline(int index, bool invert, bool duplicate_point, const Spline& source)
@@ -712,13 +838,13 @@ void Spline::insert_spline(int index, bool invert, bool duplicate_point, const S
     if (_nopoints == 0) {
         if (invert) {
             for (int i=0; i<source._nopoints; ++i) {
-                _points.push_back(source._nopoints[_nopoints-1-i]);
+                _points.push_back(source._points[_nopoints-1-i]);
                 _knuckles.push_back(source._knuckles[_nopoints-1-i]);
             }
         }
         else {
             for (int i=0; i<source._nopoints; ++i) {
-                _points.push_back(source._nopoints[i]);
+                _points.push_back(source._points[i]);
                 _knuckles.push_back(source._knuckles[i]);
             }
         }
@@ -767,7 +893,7 @@ void Spline::save_binary(FileBuffer& destination)
 {
 }
 
-void Spline::save_to_dxf(QVector<QString>& strings, QString layername, bool send_mirror)
+void Spline::save_to_dxf(vector<QString>& strings, QString layername, bool send_mirror)
 {
 }
 
@@ -777,7 +903,7 @@ void Spline::clear()
     _fragments = 100;
     _show_curvature = false;
     _curvature_scale = 0.10;
-    _curvature_color = Qt::pink;
+    _curvature_color = Qt::magenta;
     _show_points = false;
     setBuild(false);
     Entity::clear();
@@ -787,7 +913,7 @@ void Spline::clear()
     _derivatives.clear();
 }
 
-QVector3D Spline::value(qreal parameter) const
+QVector3D Spline::value(float parameter)
 {
     QVector3D result;
     if (_nopoints < 2)
@@ -806,37 +932,38 @@ QVector3D Spline::value(qreal parameter) const
         lo = 0;
         hi = _nopoints - 1;
         do {
-            int k = (lo + hi) % 2;
+            int k = (lo + hi) / 2;
             if (_parameters[k] < parameter)
                 lo = k;
             else
                 hi = k;
         }
-        while (hi - lo <= 1);
+        while (hi - lo > 1);
     }
-    qreal h, a, b;
+    float h, a, b;
     h = _parameters[hi] - _parameters[lo];
-    if (fabs(h) < 1E6) {
+    if (fabs(h) < 1E-6) {
         result = _points[hi];
     }
     else {
         a = (_parameters[hi] - parameter) / h;
-        b = (parameter - _parameters[lo]) / h;
+        //b = (parameter - _parameters[lo]) / h;
+        b = 1 - a;
         result.setX(a * _points[lo].x()
                     + b * _points[hi].x()
                     + ((a * a * a - a) * _derivatives[lo].x()
                        +(b * b * b - b) * _derivatives[hi].x())
-                    * (h * h) / 6);
+                    * (h * h) / 6.0);
         result.setY(a * _points[lo].y()
                     + b * _points[hi].y()
                     + ((a * a * a - a) * _derivatives[lo].y()
                        +(b * b * b - b) * _derivatives[hi].y())
-                    * (h * h) / 6);
+                    * (h * h) / 6.0);
         result.setZ(a * _points[lo].z()
                     + b * _points[hi].z()
                     + ((a * a * a - a) * _derivatives[lo].z()
                        +(b * b * b - b) * _derivatives[hi].z())
-                    * (h * h) / 6);
+                    * (h * h) / 6.0);
     }
     return result;
 }

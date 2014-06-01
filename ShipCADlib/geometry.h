@@ -26,29 +26,31 @@
 #ifndef GEOMETRY_H_
 #define GEOMETRY_H_
 
+#include <vector>
 #include <QtCore>
 #include <QtGui>
-#include "glwidget.h"
+#include "openglwindow.h"
 
 namespace ShipCADGeometry {
 
 class FileBuffer;
+class Entity;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Plane : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     explicit Plane();
-    explicit Plane(qreal a, qreal b, qreal c, qreal d);
-    ~Plane();
+    explicit Plane(float a, float b, float c, float d);
+    ~Plane() {}
 
     QPair<QVector3D, QVector3D> vertex_normal() const;
 
 private:
 
-    qreal _vars[4];
+    float _vars[4];
 
 };
 
@@ -56,43 +58,68 @@ private:
 
 class IntersectionData : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
 
     explicit IntersectionData();
-    ~IntersectionData();
+    ~IntersectionData() {}
 
 private:
 
     int _number_of_intersections;
-    QVector<QVector3D> _points;
-    QVector<qreal> _parameters;
+    std::vector<QVector3D> _points;
+    std::vector<float> _parameters;
 
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Viewport : public GLWidget
+class Viewport : public OpenGLWindow
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
 
     explicit Viewport();
     ~Viewport();
 
-    void setPenWidth(int w);
-    void setPenColor(QColor c);
-    void moveTo();
-    void lineTo();
-    void polyline();
+    enum ViewportMode {vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra};
 
+    void initialize();
+    void render();
+
+    enum ViewportMode getViewportMode() const;
+    void setViewportMode(enum ViewportMode mode);
+
+    void add(Entity* entity);
+
+private:
+
+    GLuint loadShader(GLenum type, const char *source);
+
+    enum ViewportMode _mode;
+
+    GLuint m_posAttr;
+    GLuint m_colAttr;
+    GLuint m_matrixUniform;
+
+    QOpenGLShaderProgram *m_program;
+    int m_frame;
+
+    std::vector<Entity*> _entities;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Entity : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
+    Q_PROPERTY(bool Build READ getBuild WRITE setBuild)
+    Q_PROPERTY(QColor Color MEMBER _color)
+    Q_PROPERTY(QVector3D Min READ getMin)
+    Q_PROPERTY(QVector3D Max READ getMax)
+    Q_PROPERTY(int PenWidth MEMBER _pen_width)
+    Q_PROPERTY(Qt::PenStyle penstyle MEMBER _pen_style)
+
 public:
 
     explicit Entity();
@@ -100,7 +127,7 @@ public:
     //Entity(const Entity& entity);
     // assignment operator
     //Entity& operator=(const Entity& entity);
-    virtual ~Entity();
+    virtual ~Entity() {}
 
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
@@ -110,9 +137,6 @@ public:
     virtual QVector3D getMin();
     virtual QVector3D getMax();
     bool getBuild() const;
-    int getPenWidth() const;
-    QColor getColor() const;
-    void setColor(const QColor&);
     
 protected:
 
@@ -127,12 +151,6 @@ protected:
     QColor _color;
     Qt::PenStyle _pen_style;
 
-    Q_PROPERTY(bool Build READ getBuild WRITE setBuild)
-    Q_PROPERTY(QColor Color MEMBER _color READ getColor WRITE setColor)
-    Q_PROPERTY(QVector3D Min READ getMin)
-    Q_PROPERTY(QVector3D Max READ getMax)
-    Q_PROPERTY(int PenWidth MEMBER _pen_width)
-    Q_PROPERTY(int penstyle MEMBER _pen_style)
 
 };
 
@@ -140,7 +158,12 @@ protected:
 
 class Spline : public Entity
 {
-    Q_OBJECT;
+    Q_OBJECT
+    Q_PROPERTY(bool ShowCurvature MEMBER _show_curvature)
+    Q_PROPERTY(bool ShowPoints MEMBER _show_points)
+    Q_PROPERTY(QColor CurvatureColor MEMBER _curvature_color)
+    Q_PROPERTY(float CurvatureScale MEMBER _curvature_scale)
+
 public:
 
     explicit Spline();
@@ -156,23 +179,23 @@ public:
     void insert(int index, const QVector3D& p);
     void insert_spline(int index, bool invert, bool duplicate_point, const Spline& source);
     void invert_direction();
-    bool simplify(qreal criterium);
+    bool simplify(float criterium);
     virtual void clear();
     virtual void rebuild();
 
     // geometry ops
-    qreal coord_length(qreal t1, qreal t2);
-    qreal chord_length_approximation(qreal percentage) const;
-    qreal curvature(qreal parameter, QVector3D& value, QVector3D& normal);
-    QVector3D first_derive(qreal parameter) const;
-    QVector3D second_derive(qreal parameter);
+    float coord_length(float t1, float t2);
+    float chord_length_approximation(float percentage);
+    float curvature(float parameter, QVector3D& normal);
+    QVector3D first_derive(float parameter);
+    QVector3D second_derive(float parameter);
     bool intersect_plane(const Plane& plane, IntersectionData& output) const;
-    QVector3D value(qreal parameter) const;
+    QVector3D value(float parameter);
 
     // persistence
     virtual void load_binary(FileBuffer& source);
     virtual void save_binary(FileBuffer& destination);
-    void save_to_dxf(QVector<QString>& strings, QString layername, bool sendmirror);
+    void save_to_dxf(std::vector<QString>& strings, QString layername, bool sendmirror);
 
     // drawing
     int distance_to_cursor(int x, int y, Viewport& vp) const;
@@ -180,7 +203,7 @@ public:
 
     // getters/setters
 
-    qreal getParameter(int index) const;
+    float getParameter(int index) const;
 
     QVector3D getPoint(int index) const;
     void setPoint(int index, const QVector3D& p);
@@ -196,8 +219,8 @@ protected:
     void setBuild(bool val);
 
     // methods used in simplify
-    qreal weight(int index) const;
-    int find_next_point(QVector<qreal>& weights) const;
+    float weight(int index) const;
+    int find_next_point(std::vector<float>& weights) const;
 
 protected:
 
@@ -205,23 +228,24 @@ protected:
     int _fragments;
     bool _show_curvature;
     bool _show_points;
-    qreal _curvature_scale;
-    qreal _total_length;
-    QVector<QVector3D> _points;
-    QVector<bool> _knuckles;
-    QVector<qreal> _parameters;
-    QVector<QVector3D> _derivatives;
+    float _curvature_scale;
+    float _total_length;
+    QColor _curvature_color;
+    std::vector<QVector3D> _points;
+    std::vector<bool> _knuckles;
+    std::vector<float> _parameters;
+    std::vector<QVector3D> _derivatives;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 class FileBuffer : public QObject
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
 
     explicit FileBuffer();
-    ~FileBuffer();
+    ~FileBuffer() {}
 
 private:
 

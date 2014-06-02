@@ -698,10 +698,10 @@ void Spline::delete_point(int index)
     }
 }
 
+#if 0
 int Spline::distance_to_cursor(int x, int y, Viewport& vp) const
 {
     int result = 1000000;
-#if 0
     float param = 0.0;
     // check if cursor position lies within the boundaries
     QVector2D pt(x, y);
@@ -722,9 +722,9 @@ int Spline::distance_to_cursor(int x, int y, Viewport& vp) const
             v1 = v2;
         }
     }
-#endif
     return result;
 }
+#endif
 
 QVector3D Spline::first_derive(float parameter)
 {
@@ -771,6 +771,8 @@ void Spline::draw(Viewport& vp)
         parray1.push_back(value(i/static_cast<float>(_fragments)));
     if (vp.getViewportMode() == Viewport::vmWireFrame) {
         if (_show_curvature) {
+            glLineWidth(1);
+            glColor3f(_curvature_color.redF(), _curvature_color.greenF(), _curvature_color.blueF());
             for (int i=0; i<_fragments; ++i) {
                 float c = curvature(i / static_cast<float>(_fragments), normal);
                 p2.setX(parray1[i].x() - c * 2 * _curvature_scale * normal.x());
@@ -781,16 +783,12 @@ void Spline::draw(Viewport& vp)
             for (int i=1; i<=_fragments; ++i) {
                 if (i % 4 == 0 || i == 1 || i == _fragments) {
                     glBegin(GL_LINES);
-                    glLineWidth(1);
-                    glColor3f(_curvature_color.redF(), _curvature_color.greenF(), _curvature_color.blueF());
                     glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
                     glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
                     glEnd();
                 }
             }
             glBegin(GL_LINES);
-            glLineWidth(1);
-            glColor3f(_curvature_color.redF(), _curvature_color.greenF(), _curvature_color.blueF());
             for (size_t i=1; i<parray2.size(); ++i) {
                 glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
                 glVertex3f(parray2[i].x(), parray2[i].y(), parray2[i].z());
@@ -821,11 +819,9 @@ void Spline::draw(Viewport& vp)
         }
     }
 #endif
-    //vp.setPenStyle(_penstyle);
-    //vp.polyline(parray1);
-    glBegin(GL_LINES);
     glLineWidth(1);
     glColor3f(_color.redF(), _color.greenF(), _color.blueF());
+    glBegin(GL_LINES);
     for (size_t i=1; i<parray1.size(); ++i) {
         glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
         glVertex3f(parray1[i].x(), parray1[i].y(), parray1[i].z());
@@ -835,62 +831,101 @@ void Spline::draw(Viewport& vp)
 
 void Spline::insert_spline(int index, bool invert, bool duplicate_point, const Spline& source)
 {
-    if (_nopoints == 0) {
-        if (invert) {
-            for (int i=0; i<source._nopoints; ++i) {
-                _points.push_back(source._points[_nopoints-1-i]);
-                _knuckles.push_back(source._knuckles[_nopoints-1-i]);
-            }
+    setBuild(false);
+    int nonewpoints;
+    if (duplicate_point)
+        nonewpoints = source._nopoints-1;
+    else
+        nonewpoints = source._nopoints;
+    if (_nopoints == 0)
+        index = 0;
+    _points.insert(_points.begin()+index, nonewpoints, ZERO);
+    _knuckles.insert(_knuckles.begin()+index, nonewpoints, false);
+    if (invert) {
+        for (int i=0; i<nonewpoints; ++i) {
+            _points[i+index] = source._points[nonewpoints-i-1];
+            _knuckles[i+index] = source._knuckles[nonewpoints-i-1];
         }
-        else {
-            for (int i=0; i<source._nopoints; ++i) {
-                _points.push_back(source._points[i]);
-                _knuckles.push_back(source._knuckles[i]);
-            }
-        }
-        _nopoints = source._nopoints;
     }
     else {
-        int nonewpoints;
-        if (duplicate_point)
-            nonewpoints = source._nopoints-1;
-        else
-            nonewpoints = source._nopoints;
-        setBuild(false);
-        if (index <_nopoints) {
-            // insert new data
-            if (invert) {
-                _knuckles[index] = _knuckles[index] || source._knuckles[source._nopoints-1];
-                for (int i=1; i<=nonewpoints; ++i) {
-                    _points[index+i-1] = source._points[source._nopoints-i];
-                    _knuckles[index+i-1] = source._knuckles[source._nopoints-i];
-                }
-            }
-            else {
-                _knuckles[index] = _knuckles[index] || source._knuckles[0];
-                for (int i=1; i<=nonewpoints; ++i) {
-                    _points[index+i-1] = source._points[source._nopoints-i];
-                    _knuckles[index+i-1] = source._knuckles[source._nopoints-i];
-                }
-            }
+        for (int i=0; i<nonewpoints; ++i) {
+            _points[i+index] = source._points[i];
+            _knuckles[i+index] = source._knuckles[i];
         }
     }
+    _nopoints += nonewpoints;
 }
 
-bool Spline::intersect_plane(const Plane& plane, IntersectionData& output) const
+void Spline::add_to_output(const QVector3D& p, float parameter, IntersectionData& output)
 {
+    output._number_of_intersections++;
+    output._points.push_back(p);
+    output._parameters.push_back(parameter);
+}
+
+bool Spline::intersect_plane(const Plane& plane, IntersectionData& output)
+{
+    output._number_of_intersections = 0;
+    float t1 = 0;
+    QVector3D p1 = value(t1);
+    float s1 = plane.a() * p1.x() + plane.b() * p1.y() + plane.c() * p1.z() + plane.d();
+    if (fabs(s1) < 1E-6)
+        add_to_output(p1, t1, output);
+    for (int i=1; i<=_fragments; ++i) {
+        float t2 = i / static_cast<float>(_fragments);
+        QVector3D p2 = value(t2);
+        float s2 = plane.a() * p2.x() + plane.b() * p2.y() + plane.c() * p2.z() + plane.d();
+        if (fabs(s2) < 1E-6)
+            add_to_output(p2, t2, output);
+        if ((s1 < 0 && s2 > 0) || (s2 < 0 && s1 > 0)) {
+            // intersection found
+            float t = s1 / (s2 - s1);
+            t = t1 + t * (t2 - t1);
+            add_to_output(value(t), t, output);
+        }
+        p1 = p2;
+        s1 = s2;
+        t1 = t2;
+    }
+    return output._number_of_intersections > 0;
 }
 
 void Spline::invert_direction()
 {
+    int mid = _nopoints / 2;
+    for (int i=0; i<mid; ++i) {
+        swap(_points[i], _points[_nopoints - i - 1]);
+        bool tmp = _knuckles[i];
+        _knuckles[i] = _knuckles[_nopoints - i - 1];
+        _knuckles[_nopoints - i - 1] = tmp;
+    }
 }
 
 void Spline::load_binary(FileBuffer& source)
 {
+    source.load(_show_curvature);
+    source.load(_curvature_scale);
+    int n;
+    source.load(n);
+    for (int i=0; i<n; ++i) {
+        QVector3D p;
+        source.load(p);
+        add(p);
+        bool k;
+        source.load(k);
+        _knuckles[i] = k;
+    }
 }
 
 void Spline::save_binary(FileBuffer& destination)
 {
+    destination.add(_show_curvature);
+    destination.add(_curvature_scale);
+    destination.add(_nopoints);
+    for (int i=0; i<_nopoints; ++i) {
+        destination.add(_points[i]);
+        destination.add(_knuckles[i]);
+    }
 }
 
 void Spline::save_to_dxf(vector<QString>& strings, QString layername, bool send_mirror)
@@ -968,3 +1003,47 @@ QVector3D Spline::value(float parameter)
     return result;
 }
 
+FileBuffer::FileBuffer()
+{
+
+}
+
+void FileBuffer::load(bool& val)
+{
+
+}
+
+void FileBuffer::add(bool val)
+{
+
+}
+
+void FileBuffer::load(float& val)
+{
+
+}
+
+void FileBuffer::add(float val)
+{
+
+}
+
+void FileBuffer::load(int& val)
+{
+
+}
+
+void FileBuffer::add(int val)
+{
+
+}
+
+void FileBuffer::load(QVector3D& val)
+{
+
+}
+
+void FileBuffer::add(const QVector3D& val)
+{
+
+}

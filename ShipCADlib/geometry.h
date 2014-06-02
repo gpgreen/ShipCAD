@@ -46,6 +46,15 @@ public:
     explicit Plane(float a, float b, float c, float d);
     ~Plane() {}
 
+    float a() const
+        { return _vars[0]; }
+    float b() const
+        { return _vars[1]; }
+    float c() const
+        { return _vars[2]; }
+    float d() const
+        { return _vars[3]; }
+
     QPair<QVector3D, QVector3D> vertex_normal() const;
 
 private:
@@ -70,6 +79,7 @@ private:
     std::vector<QVector3D> _points;
     std::vector<float> _parameters;
 
+    friend class Spline;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -189,7 +199,7 @@ public:
     float curvature(float parameter, QVector3D& normal);
     QVector3D first_derive(float parameter);
     QVector3D second_derive(float parameter);
-    bool intersect_plane(const Plane& plane, IntersectionData& output) const;
+    bool intersect_plane(const Plane& plane, IntersectionData& output);
     QVector3D value(float parameter);
 
     // persistence
@@ -198,7 +208,7 @@ public:
     void save_to_dxf(std::vector<QString>& strings, QString layername, bool sendmirror);
 
     // drawing
-    int distance_to_cursor(int x, int y, Viewport& vp) const;
+    //int distance_to_cursor(int x, int y, Viewport& vp) const;
     virtual void draw(Viewport& vp);
 
     // getters/setters
@@ -221,6 +231,9 @@ protected:
     // methods used in simplify
     float weight(int index) const;
     int find_next_point(std::vector<float>& weights) const;
+
+    // method used in intersect_plane
+    void add_to_output(const QVector3D& p, float parameter, IntersectionData& output);
 
 protected:
 
@@ -246,6 +259,18 @@ public:
 
     explicit FileBuffer();
     ~FileBuffer() {}
+
+    void load(bool& val);
+    void add(bool val);
+
+    void load(float& val);
+    void add(float val);
+
+    void load(int& val);
+    void add(int val);
+
+    void load(QVector3D& val);
+    void add(const QVector3D& val);
 
 private:
 

@@ -17,7 +17,15 @@ extern float DistanceToLine(const QVector2D& p1, const QVector2D& p2,
 
 extern QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float param);
 
+// convert a color to a DXF color index
 extern int FindDXFColorIndex(QColor color);
+
+// convert a float to a string with a max number of specified decimals
+extern QString truncate(float val, int max_length);
+
+// calculate the normal of a plane defined by points p1,p2,p3 and scale to unit-length
+extern QVector3D UnifiedNormal(const QVector3D& p1, const QVector3D& p2, 
+			       const QVector3D& p3);
 
 };
 

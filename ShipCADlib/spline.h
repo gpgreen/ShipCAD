@@ -27,6 +27,7 @@
 #define SPLINE_H_
 
 #include <vector>
+#include <iosfwd>
 #include <QObject>
 #include <QVector3D>
 #include <QColor>
@@ -44,18 +45,15 @@ class IntersectionData;
 class Spline : public Entity
 {
     Q_OBJECT
+    Q_PROPERTY(int Fragments READ getFragments WRITE setFragments)
     Q_PROPERTY(bool ShowCurvature MEMBER _show_curvature)
     Q_PROPERTY(bool ShowPoints MEMBER _show_points)
-    Q_PROPERTY(QColor CurvatureColor MEMBER _curvature_color)
     Q_PROPERTY(float CurvatureScale MEMBER _curvature_scale)
+    Q_PROPERTY(QColor CurvatureColor MEMBER _curvature_color)
 
 public:
 
     explicit Spline();
-    // copy constructor
-    //Spline(const Spline& spline);
-    // assignment operator
-    //Spline& operator=(const Spline& spline);
     virtual ~Spline();
     
     // altering
@@ -99,6 +97,9 @@ public:
     bool getKnuckle(int index) const;
     void setKnuckle(int index, bool val);
 
+    // output
+    void dump(std::ostream& os) const;
+
 protected:
 
     void setBuild(bool val);
@@ -128,6 +129,8 @@ protected:
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
+
+std::ostream& operator << (std::ostream& os, const ShipCADGeometry::Spline& spline);
 
 #endif
 

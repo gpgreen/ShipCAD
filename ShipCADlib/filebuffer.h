@@ -26,6 +26,8 @@
 #ifndef FILEBUFFER_H_
 #define FILEBUFFER_H_
 
+#include <vector>
+#include <QFile>
 #include <QObject>
 #include <QVector3D>
 
@@ -39,7 +41,7 @@ class FileBuffer : public QObject
 public:
 
     explicit FileBuffer();
-    ~FileBuffer() {}
+    ~FileBuffer();
 
     void load(bool& val);
     void add(bool val);
@@ -55,6 +57,9 @@ public:
 
 private:
 
+    QFile* _fb;         // file to read/write from
+    size_t _pos;           // current position in the data vector
+    std::vector<unsigned char> _data;   // the data
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

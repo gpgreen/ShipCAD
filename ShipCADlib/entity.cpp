@@ -1,6 +1,9 @@
+#include <iostream>
+
 #include "entity.h"
 #include "utility.h"
 
+using namespace std;
 using namespace ShipCADGeometry;
 using namespace ShipCADUtility;
 
@@ -62,3 +65,19 @@ QVector3D Entity::getMax()
     return _max;
 }
 
+void Entity::dump(ostream& os) const
+{
+  os << " Build:" << (_build ? "true" : "false")
+     << "\n Min:[" << _min.x() << "," << _min.y() << "," << _min.z()
+     << "]\n Max:[" << _max.x() << "," << _max.y() << "," << _max.z()
+     << "]\n PenWidth:" << _pen_width
+     << "\n PenStyle:" << _pen_style
+     << "\n Color:[" << _color.red() << "," << _color.green() << "," << _color.blue()
+     << "]";
+}
+
+ostream& operator << (ostream& os, const ShipCADGeometry::Entity& entity)
+{
+  entity.dump(os);
+  return os;
+}

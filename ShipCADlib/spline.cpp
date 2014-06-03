@@ -1,4 +1,6 @@
 #include <cmath>
+#include <algorithm>
+#include <iostream>
 
 #include "spline.h"
 #include "plane.h"
@@ -725,22 +727,41 @@ void Spline::save_to_dxf(vector<QString>& strings, QString layername, bool send_
     }
     for (int i=1; i<=_fragments; ++i)
         params.push_back((i-1)/static_cast<float>(_fragments-1));
-    //sort_float_array
-    strings.push_back("0\nPOLYLINE");
-    strings.push_back(QString("8\n%1").arg(layername));   // layername
-    strings.push_back(QString("62\n%1").arg(ind));      // color by layer
-    strings.push_back("70\n10");    // not closed
-    strings.push_back("66\n1");     // vertices follow
-    for (int i=0; i<params.size(); ++i) {
+    sort(params.begin(), params.end());
+
+    strings.push_back("0\r\nPOLYLINE");
+    strings.push_back(QString("8\r\n%1").arg(layername));   // layername
+    strings.push_back(QString("62\r\n%1").arg(ind));      // color by layer
+    strings.push_back("70\r\n10");    // not closed
+    strings.push_back("66\r\n1");     // vertices follow
+    for (size_t i=0; i<params.size(); ++i) {
         QVector3D p = value(params[i]);
-        strings.push_back("0\nVERTEX");
-        strings.push_back(QString("8\n%1").arg(layername));
-        strings.push_back(QString("10\n%1").arg(p.x(), 4));
-        strings.push_back(QString("20\n%1").arg(p.y(), 4));
-        strings.push_back(QString("30\n%1").arg(p.z(), 4));
-        strings.push_back("70\n32");    // 3D polyline mesh vertex
+        strings.push_back("0\r\nVERTEX");
+        strings.push_back(QString("8\r\n%1").arg(layername));
+        strings.push_back(QString("10\r\n%1").arg(ShipCADUtility::truncate(p.x(), 4)));
+        strings.push_back(QString("20\r\n%1").arg(ShipCADUtility::truncate(p.y(), 4)));
+        strings.push_back(QString("30\r\n%1").arg(ShipCADUtility::truncate(p.z(), 4)));
+        strings.push_back("70\r\n32");    // 3D polyline mesh vertex
     }
-    strings.push_back("0\nSEQEND");
+    strings.push_back("0\r\nSEQEND");
+    if (send_mirror) {
+      // send the starboard side too
+      strings.push_back("0\r\nPOLYLINE");
+      strings.push_back(QString("8\r\n%1").arg(layername));   // layername
+      strings.push_back(QString("62\r\n%1").arg(ind));      // color by layer
+      strings.push_back("70\r\n10");    // not closed
+      strings.push_back("66\r\n1");     // vertices follow
+      for (size_t i=0; i<params.size(); ++i) {
+        QVector3D p = value(params[i]);
+        strings.push_back("0\r\nVERTEX");
+        strings.push_back(QString("8\r\n%1").arg(layername));
+        strings.push_back(QString("10\r\n%1").arg(ShipCADUtility::truncate(p.x(), 4)));
+        strings.push_back(QString("20\r\n%1").arg(ShipCADUtility::truncate(-p.y(), 4)));
+        strings.push_back(QString("30\r\n%1").arg(ShipCADUtility::truncate(p.z(), 4)));
+        strings.push_back("70\r\n32");    // 3D polyline mesh vertex
+      }
+      strings.push_back("0\r\nSEQEND");
+    }
 }
 
 void Spline::clear()
@@ -814,3 +835,35 @@ QVector3D Spline::value(float parameter)
     return result;
 }
 
+void Spline::dump(ostream& os) const
+{
+    os << "Spline nopoints=" << _nopoints << "\n";
+    Entity::dump(os);
+    os << "\n Fragments:" << _fragments
+       << "\n ShowCurvature:" << (_show_curvature ? "true" : "false")
+       << "\n ShowPoints:" << (_show_points ? "true" : "false")
+       << "\n CurvatureScale:" << _curvature_scale
+       << "\n CurvatureColor:[" << _curvature_color.red()
+       << "," << _curvature_color.green()
+       << "," << _curvature_color.blue()
+       << "]\n TotalLength:" << _total_length
+       << "\n Data (p, k, param, deriv)\n =========================\n";
+    for (size_t i=0; i<_points.size(); ++i) {
+        os << " [" << _points[i].x() << "," << _points[i].y() << "," << _points[i].z()
+           << "]\t" << (_knuckles[i] ? 't' : 'f');
+        if (_parameters.size() > i && _derivatives.size() > i) {
+            os << "\t" << _parameters[i]
+                  << "\t[" << _derivatives[i].x()
+                  << "," << _derivatives[i].y()
+                  << "," << _derivatives[i].z()
+                  << "]";
+        }
+        os << endl;
+    }
+}
+
+ostream& operator << (ostream& os, const ShipCADGeometry::Spline& spline)
+{
+    spline.dump(os);
+    return os;
+}

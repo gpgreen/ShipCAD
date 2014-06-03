@@ -23,89 +23,78 @@
   {                                                                                             }
   {#############################################################################################*/
 
-#ifndef ENTITY_H_
-#define ENTITY_H_
+#ifndef NURBSURFACE_H_
+#define NURBSURFACE_H_
 
-#include <QObject>
-#include <QColor>
-#include <QPen>
-#include <QVector3D>
 #include <vector>
 #include <iosfwd>
+#include <QObject>
+#include <QVector3D>
+#include "entity.h"
 
 namespace ShipCADGeometry {
 
-class Viewport;
-
 //////////////////////////////////////////////////////////////////////////////////////
 
-class IntersectionData : public QObject
+class NURBSurface : public Entity
 {
     Q_OBJECT
-public:
-
-    explicit IntersectionData();
-    ~IntersectionData() {}
-
-private:
-
-    int _number_of_intersections;
-    std::vector<QVector3D> _points;
-    std::vector<float> _parameters;
-
-    friend class Spline;
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class Entity : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(bool Build READ getBuild WRITE setBuild)
-    Q_PROPERTY(QColor Color MEMBER _color)
-    Q_PROPERTY(QVector3D Min READ getMin)
-    Q_PROPERTY(QVector3D Max READ getMax)
-    Q_PROPERTY(int PenWidth MEMBER _pen_width)
-    Q_PROPERTY(Qt::PenStyle penstyle MEMBER _pen_style)
+    //Q_PROPERTY(int Fragments READ getFragments WRITE setFragments)
+    //Q_PROPERTY(bool ShowCurvature MEMBER _show_curvature)
+    //Q_PROPERTY(bool ShowPoints MEMBER _show_points)
+    //Q_PROPERTY(float CurvatureScale MEMBER _curvature_scale)
+    //Q_PROPERTY(QColor CurvatureColor MEMBER _curvature_color)
 
 public:
 
-    explicit Entity();
-    virtual ~Entity() {}
-
-    virtual void clear();
-    virtual void extents(QVector3D& min, QVector3D& max);
-    virtual void draw(Viewport& vp) = 0;
-    virtual void rebuild() = 0;
-
-    QVector3D getMin();
-    QVector3D getMax();
-    bool getBuild() const;
+    explicit NURBSurface();
+    virtual ~NURBSurface();
     
+    // altering
+    virtual void clear();
+    virtual void rebuild();
+
+    // geometry ops
+
+    // persistence
+
+    // drawing
+    //int distance_to_cursor(int x, int y, Viewport& vp) const;
+    virtual void draw(Viewport& vp);
+
+    // getters/setters
+    QVector3D getPoint(int row, int col) const;
+
     // output
     void dump(std::ostream& os) const;
 
 protected:
 
+    void setColDegree(int val);
+    void setRowDegree(int val);
+    void setPoint(int row, int col, const QVector3D& val);
     virtual void setBuild(bool val);
 
 protected:
 
-    bool _build;
-    QVector3D _min;
-    QVector3D _max;
-    int _pen_width;
-    QColor _color;
-    Qt::PenStyle _pen_style;
+    int _col_count;
+    int _row_count;
+    int _col_degree;
+    int _row_degree;
+    int _col_knots;
+    int _row_knots;
 
-
+    std::vector<QVector3D> _points;
+    std::vector<bool> _knuckles;
+    std::vector<float> _parameters;
+    std::vector<QVector3D> _derivatives;
 };
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::Entity& entity);
-
-//////////////////////////////////////////////////////////////////////////////////////
+std::ostream& operator << (std::ostream& os, const ShipCADGeometry::NURBSurface& surface);
 
 #endif
 

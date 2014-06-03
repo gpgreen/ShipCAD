@@ -41,11 +41,14 @@
 #include <QtGui/QGuiApplication>
 #include <QtGui/QScreen>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 #include "viewport.h"
 #include "spline.h"
 
 using namespace ShipCADGeometry;
+using namespace std;
 
 int main(int argc, char **argv)
 {
@@ -61,6 +64,18 @@ int main(int argc, char **argv)
     spline.add(QVector3D(1,1,0));
     spline.setProperty("Color", QColor(Qt::blue));
     spline.setProperty("ShowCurvature", true);
+    cerr << spline << endl;
+    spline.setProperty("Build", true);
+    cerr << spline << endl;
+
+    // write it to dxf..
+    vector<QString> dxfstrings;
+    QString layer("splinelayer");
+    spline.save_to_dxf(dxfstrings, layer, false);
+    ofstream os("spline.dxf");
+    for (size_t i=0; i<dxfstrings.size(); ++i)
+        os << dxfstrings[i].toStdString() << "\r\n";
+    os.close();
 
     Viewport window;
     window.setFormat(format);

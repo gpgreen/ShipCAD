@@ -17,7 +17,10 @@ SOURCES += shipcadlib.cpp \
     spline.cpp \
     viewport.cpp \
     openglwindow.cpp \
-    utility.cpp
+    utility.cpp \
+    subdivbase.cpp \
+    subdivsurface.cpp \
+    subdivpoint.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \
@@ -27,7 +30,13 @@ HEADERS += shipcadlib.h \
     viewport.h \
     utility.h \
     exception.h \
-    openglwindow.h
+    openglwindow.h \
+    nurbsurface.h \
+    subdivbase.h \
+    subdivsurface.h \
+    subdivedge.h \
+    subdivface.h \
+    subdivpoint.h
 
 unix:!symbian {
     maemo5 {

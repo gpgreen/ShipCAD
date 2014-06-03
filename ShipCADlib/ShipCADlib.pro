@@ -11,12 +11,21 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += shipcadlib.cpp \
-    geometry.cpp \
-    openglwindow.cpp
+    entity.cpp \
+    filebuffer.cpp \
+    plane.cpp \
+    spline.cpp \
+    viewport.cpp \
+    openglwindow.cpp \
+    utility.cpp
 
 HEADERS += shipcadlib.h \
+    entity.h \
+    filebuffer.h \
+    plane.h \
+    spline.h \
+    viewport.h \
     utility.h \
-    geometry.h \
     exception.h \
     openglwindow.h
 

@@ -42,7 +42,8 @@
 #include <QtGui/QScreen>
 #include <vector>
 
-#include "geometry.h"
+#include "viewport.h"
+#include "spline.h"
 
 using namespace ShipCADGeometry;
 

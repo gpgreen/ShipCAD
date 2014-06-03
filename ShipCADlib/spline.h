@@ -23,146 +23,19 @@
   {                                                                                             }
   {#############################################################################################*/
 
-#ifndef GEOMETRY_H_
-#define GEOMETRY_H_
+#ifndef SPLINE_H_
+#define SPLINE_H_
 
 #include <vector>
 #include <QtCore>
 #include <QtGui>
-#include "openglwindow.h"
+#include "entity.h"
 
 namespace ShipCADGeometry {
 
 class FileBuffer;
-class Entity;
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class Plane : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Plane();
-    explicit Plane(float a, float b, float c, float d);
-    ~Plane() {}
-
-    float a() const
-        { return _vars[0]; }
-    float b() const
-        { return _vars[1]; }
-    float c() const
-        { return _vars[2]; }
-    float d() const
-        { return _vars[3]; }
-
-    QPair<QVector3D, QVector3D> vertex_normal() const;
-
-private:
-
-    float _vars[4];
-
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class IntersectionData : public QObject
-{
-    Q_OBJECT
-public:
-
-    explicit IntersectionData();
-    ~IntersectionData() {}
-
-private:
-
-    int _number_of_intersections;
-    std::vector<QVector3D> _points;
-    std::vector<float> _parameters;
-
-    friend class Spline;
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class Viewport : public OpenGLWindow
-{
-    Q_OBJECT
-public:
-
-    explicit Viewport();
-    ~Viewport();
-
-    enum ViewportMode {vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra};
-
-    void initialize();
-    void render();
-
-    enum ViewportMode getViewportMode() const;
-    void setViewportMode(enum ViewportMode mode);
-
-    void add(Entity* entity);
-
-private:
-
-    GLuint loadShader(GLenum type, const char *source);
-
-    enum ViewportMode _mode;
-
-    GLuint m_posAttr;
-    GLuint m_colAttr;
-    GLuint m_matrixUniform;
-
-    QOpenGLShaderProgram *m_program;
-    int m_frame;
-
-    std::vector<Entity*> _entities;
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class Entity : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(bool Build READ getBuild WRITE setBuild)
-    Q_PROPERTY(QColor Color MEMBER _color)
-    Q_PROPERTY(QVector3D Min READ getMin)
-    Q_PROPERTY(QVector3D Max READ getMax)
-    Q_PROPERTY(int PenWidth MEMBER _pen_width)
-    Q_PROPERTY(Qt::PenStyle penstyle MEMBER _pen_style)
-
-public:
-
-    explicit Entity();
-    // copy constructor
-    //Entity(const Entity& entity);
-    // assignment operator
-    //Entity& operator=(const Entity& entity);
-    virtual ~Entity() {}
-
-    virtual void clear();
-    virtual void extents(QVector3D& min, QVector3D& max);
-    virtual void draw(Viewport& vp) = 0;
-    virtual void rebuild() = 0;
-
-    virtual QVector3D getMin();
-    virtual QVector3D getMax();
-    bool getBuild() const;
-    
-protected:
-
-    virtual void setBuild(bool val);
-
-protected:
-
-    bool _build;
-    QVector3D _min;
-    QVector3D _max;
-    int _pen_width;
-    QColor _color;
-    Qt::PenStyle _pen_style;
-
-
-};
+class Plane;
+class IntersectionData;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -248,32 +121,6 @@ protected:
     std::vector<bool> _knuckles;
     std::vector<float> _parameters;
     std::vector<QVector3D> _derivatives;
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class FileBuffer : public QObject
-{
-    Q_OBJECT
-public:
-
-    explicit FileBuffer();
-    ~FileBuffer() {}
-
-    void load(bool& val);
-    void add(bool val);
-
-    void load(float& val);
-    void add(float val);
-
-    void load(int& val);
-    void add(int val);
-
-    void load(QVector3D& val);
-    void add(const QVector3D& val);
-
-private:
-
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

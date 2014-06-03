@@ -28,33 +28,6 @@ Spline::~Spline()
     // does nothing
 }
 
-#if 0
-Spline::Spline(const Spline& spline)
-    : Entity(spline),
-      _nopoints(spline._nopoints),
-      _fragments(spline._fragments), _show_curvature(spline._show_curvature),
-      _show_points(spline._show_points), _curvature_scale(spline._curvature_scale),
-      _total_length(spline._total_length)
-{
-    for (int i=0; i<_nopoints; ++i) {
-        _points[i] = spline._points[i];
-        _knuckles[i] = spline._knuckles[i];
-    }
-    setBuild(false);
-}
-
-Spline& Spline::operator =(const Spline& spline)
-{
-    _nopoints = spline._nopoints;
-    _fragments = spline._fragments;
-    for (int i=0; i<_nopoints; ++i) {
-        _points[i] = spline._points[i];
-        _knuckles[i] = spline._knuckles[i];
-    }
-    setBuild(false);
-}
-#endif
-
 void Spline::setBuild(bool val)
 {
     if (!val) {
@@ -414,6 +387,7 @@ float Spline::coord_length(float t1, float t2)
         return result;
 
     QVector3D p1, p2;
+    // BUGBUG p1 is not initialized
     for (int i=0; i<=_fragments; ++i) {
         float t = t1 + (i / static_cast<float>(_fragments)) * (t2 - t1);
         p2 = value(t);
@@ -481,13 +455,8 @@ float Spline::curvature(float parameter, QVector3D& normal)
     QVector3D vel1 = first_derive(parameter);
     QVector3D acc = second_derive(parameter);
 
-    QVector3D crossproduct;
-    crossproduct.setX(acc.y()*vel1.z()-acc.z()*vel1.y());
-    crossproduct.setY(-(acc.x()*vel1.z()-acc.z()*vel1.x()));
-    crossproduct.setZ(acc.x()*vel1.y()-acc.y()*vel1.x());
-    float l = sqrt((crossproduct.x()*crossproduct.x())
-                   +(crossproduct.y()*crossproduct.y())
-                   +(crossproduct.z()*crossproduct.z()));
+    QVector3D crossproduct = QVector3D::crossProduct(acc, vel1);
+    float l = crossproduct.length();
     if (l == 0)
         l = 0.00001;
     float vdota = (vel1.x()*acc.x()) + (vel1.y()*acc.y()) + (vel1.z()*acc.z());
@@ -745,6 +714,33 @@ void Spline::save_binary(FileBuffer& destination)
 
 void Spline::save_to_dxf(vector<QString>& strings, QString layername, bool send_mirror)
 {
+    int ind = FindDXFColorIndex(_color);
+    if (!_build)
+        rebuild();
+    vector<float> params;
+    for (int i=2; i<_nopoints; ++i) {
+        if (_knuckles[i-1]) {
+            params.push_back(_parameters[i-1]);
+        }
+    }
+    for (int i=1; i<=_fragments; ++i)
+        params.push_back((i-1)/static_cast<float>(_fragments-1));
+    //sort_float_array
+    strings.push_back("0\nPOLYLINE");
+    strings.push_back(QString("8\n%1").arg(layername));   // layername
+    strings.push_back(QString("62\n%1").arg(ind));      // color by layer
+    strings.push_back("70\n10");    // not closed
+    strings.push_back("66\n1");     // vertices follow
+    for (int i=0; i<params.size(); ++i) {
+        QVector3D p = value(params[i]);
+        strings.push_back("0\nVERTEX");
+        strings.push_back(QString("8\n%1").arg(layername));
+        strings.push_back(QString("10\n%1").arg(p.x(), 4));
+        strings.push_back(QString("20\n%1").arg(p.y(), 4));
+        strings.push_back(QString("30\n%1").arg(p.z(), 4));
+        strings.push_back("70\n32");    // 3D polyline mesh vertex
+    }
+    strings.push_back("0\nSEQEND");
 }
 
 void Spline::clear()

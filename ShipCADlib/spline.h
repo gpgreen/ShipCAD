@@ -27,8 +27,10 @@
 #define SPLINE_H_
 
 #include <vector>
-#include <QtCore>
-#include <QtGui>
+#include <QObject>
+#include <QVector3D>
+#include <QColor>
+#include <QString>
 #include "entity.h"
 
 namespace ShipCADGeometry {

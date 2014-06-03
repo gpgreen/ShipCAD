@@ -26,8 +26,9 @@
 #ifndef PLANE_H_
 #define PLANE_H_
 
-#include <QtCore>
-#include <QtGui>
+#include <QObject>
+#include <QVector3D>
+#include <QPair>
 
 namespace ShipCADGeometry {
 

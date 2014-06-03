@@ -26,8 +26,11 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
-#include <QtCore>
-#include <QtGui>
+#include <QObject>
+#include <QColor>
+#include <QPen>
+#include <QVector3D>
+#include <vector>
 
 namespace ShipCADGeometry {
 
@@ -67,10 +70,6 @@ class Entity : public QObject
 public:
 
     explicit Entity();
-    // copy constructor
-    //Entity(const Entity& entity);
-    // assignment operator
-    //Entity& operator=(const Entity& entity);
     virtual ~Entity() {}
 
     virtual void clear();

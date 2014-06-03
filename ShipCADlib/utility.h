@@ -2,6 +2,7 @@
 #define UTILITY_H_
 
 #include <QVector3D>
+#include <QColor>
 
 namespace ShipCADUtility {
 
@@ -15,6 +16,8 @@ extern float DistanceToLine(const QVector2D& p1, const QVector2D& p2,
 #endif
 
 extern QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float param);
+
+extern int FindDXFColorIndex(QColor color);
 
 };
 

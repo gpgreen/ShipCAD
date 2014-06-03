@@ -26,7 +26,8 @@
 #ifndef FILEBUFFER_H_
 #define FILEBUFFER_H_
 
-#include <QtCore>
+#include <QObject>
+#include <QVector3D>
 
 namespace ShipCADGeometry {
 

@@ -1,8 +1,9 @@
 #include <cmath>
-
+#include <boost/math/constants/constants.hpp>
 #include "utility.h"
 
 using namespace std;
+using namespace boost::math::float_constants;
 
 void ShipCADUtility::MinMax(const QVector3D& p, QVector3D& min, QVector3D& max)
 {
@@ -103,7 +104,7 @@ int ShipCADUtility::FindDXFColorIndex(QColor color)
     int r = color.red();
     int g = color.green();
     int b = color.blue();
-    float dist = 1E30;
+    float dist = 1E30f;
     for (int i=0; i<255; ++i) {
         int r1 = DXFLayerColors[i].red();
         int g1 = DXFLayerColors[i].green();
@@ -133,9 +134,14 @@ QVector3D ShipCADUtility::UnifiedNormal(const QVector3D& p1, const QVector3D& p2
                      (p2.x()-p1.x())*(p3.y()-p1.y())-(p2.y()-p1.y())*(p3.x()-p1.x()));
     float l = result.length();
     if (l < 1E-6)
-        l = 1E-6;
+        l = 1E-6f;
     result.setX(result.x() / l);
     result.setY(result.y() / l);
     result.setZ(result.z() / l);
     return result;
+}
+
+extern float ShipCADUtility::RadToDeg(float rad)
+{
+  return rad * 180.0 / pi;
 }

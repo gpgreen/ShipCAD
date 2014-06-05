@@ -80,7 +80,7 @@ public:
 
     QVector3D getMin();
     QVector3D getMax();
-    bool getBuild() const;
+    bool getBuild();
     
     // output
     void dump(std::ostream& os) const;
@@ -97,7 +97,6 @@ protected:
     int _pen_width;
     QColor _color;
     Qt::PenStyle _pen_style;
-
 
 };
 

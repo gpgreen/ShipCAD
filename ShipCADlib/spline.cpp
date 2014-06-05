@@ -42,7 +42,7 @@ void Spline::setBuild(bool val)
     Entity::setBuild(val);
 }
 
-void Spline::setFragments(int val)
+void Spline::setFragments(size_t val)
 {
     if (val != _fragments) {
         _fragments = val;
@@ -50,21 +50,21 @@ void Spline::setFragments(int val)
     }
 }
 
-int Spline::getFragments() const
+int Spline::getFragments()
 {
     return _fragments;
 }
 
-bool Spline::getKnuckle(int index) const
+bool Spline::getKnuckle(size_t index)
 {
-    if (index >= 0 && index < _nopoints)
+    if (index < _nopoints)
         return _knuckles[index];
     throw ListIndexOutOfBounds(__FILE__);
 }
 
-void Spline::setKnuckle(int index, bool val)
+void Spline::setKnuckle(size_t index, bool val)
 {
-    if (index >= 0 && index < _nopoints) {
+    if (index < _nopoints) {
         _knuckles[index] = val;
         setBuild(false);
     } 
@@ -73,9 +73,9 @@ void Spline::setKnuckle(int index, bool val)
     }
 }
 
-void Spline::setPoint(int index, const QVector3D& p)
+void Spline::setPoint(size_t index, const QVector3D& p)
 {
-    if (index >= 0 && index < _nopoints) {
+    if (index < _nopoints) {
         _points[index] = p;
         setBuild(false);
     } 
@@ -84,9 +84,9 @@ void Spline::setPoint(int index, const QVector3D& p)
     }
 }
 
-float Spline::getParameter(int index) const
+float Spline::getParameter(size_t index)
 {
-    if (index >= 0 && index < _nopoints) {
+    if (index < _nopoints) {
         return _parameters[index];
     } 
     else {
@@ -94,9 +94,9 @@ float Spline::getParameter(int index) const
     }
 }
 
-QVector3D Spline::getPoint(int index) const
+QVector3D Spline::getPoint(size_t index)
 {
-    if (index >= 0 && index < _nopoints) {
+    if (index < _nopoints) {
         return _points[index];
     } 
     else {
@@ -110,7 +110,7 @@ void Spline::rebuild()
 
     // attempt to eliminate double points
     _total_length = 0;
-    for (int i=1; i<_nopoints; ++i) {
+    for (size_t i=1; i<_nopoints; ++i) {
         _total_length += sqrt(_points[i].distanceToPoint(_points[i-1]));
     }
     vector<QVector3D> u;
@@ -125,15 +125,15 @@ void Spline::rebuild()
         u.reserve(_nopoints);
 
         if (fabs(_total_length) <  1E-5) {
-            for (int i=0; i<_nopoints; ++i) {
+            for (size_t i=0; i<_nopoints; ++i) {
                 _parameters.push_back(i / static_cast<float>(_nopoints));
             }
         } 
         else {
             _parameters.push_back(0);
             float length = 0;
-            for (int i=2; i<=_nopoints-1; ++i) {
-                length += sqrt(_points[i-2].distanceToPoint(_points[i-1]));
+            for (size_t i=1; i<_nopoints-1; ++i) {
+                length += sqrt(_points[i-1].distanceToPoint(_points[i]));
                 _parameters.push_back(length / _total_length);
             }
             _parameters.push_back(1.0);
@@ -142,49 +142,49 @@ void Spline::rebuild()
         _derivatives.push_back(ZERO);
         u.push_back(_derivatives[0]);
 
-        for (int i=2; i<=_nopoints-1; ++i) {
-            if (_knuckles[i-1]) {
+        for (size_t i=1; i<_nopoints-1; ++i) {
+            if (_knuckles[i]) {
                 u[i-1] = ZERO;
                 _derivatives.push_back(ZERO);
             } 
             else {
-                if (fabs(_parameters[i] - _parameters[i-2]) < 1e-5
-                        || fabs(_parameters[i-1] - _parameters[i-2]) < 1e-5
-                        || fabs(_parameters[i] - _parameters[i-1]) < 1e-5) {
+                if (fabs(_parameters[i+1] - _parameters[i-1]) < 1e-5
+                        || fabs(_parameters[i] - _parameters[i-1]) < 1e-5
+                        || fabs(_parameters[i+1] - _parameters[i]) < 1e-5) {
                     _derivatives.push_back(ZERO);
                 } 
                 else {
-                    sig = (_parameters[i-1] - _parameters[i-2])
-                            / (_parameters[i] - _parameters[i-2]);
+                    sig = (_parameters[i] - _parameters[i-1])
+                            / (_parameters[i+1] - _parameters[i-1]);
                     // first x-value
-                    p = sig * _derivatives[i-2].x() + 2.0;
+                    p = sig * _derivatives[i-1].x() + 2.0;
                     QVector3D p1;
                     QVector3D p2;
                     p1.setX((sig - 1.0) / p);
-                    p2.setX( (6.0 * ((_points[i].x() - _points[i-1].x())
-                              / (_parameters[i] - _parameters[i-1])
-                             - (_points[i-1].x() - _points[i-2].x())
-                            / (_parameters[i-1] - _parameters[i-2]))
-                            / (_parameters[i] - _parameters[i-2])
-                            - sig * u[i-2].x()) / p);
+                    p2.setX( (6.0 * ((_points[i+1].x() - _points[i].x())
+                              / (_parameters[i+1] - _parameters[i])
+                             - (_points[i].x() - _points[i-1].x())
+                            / (_parameters[i] - _parameters[i-1]))
+                            / (_parameters[i+1] - _parameters[i-1])
+                            - sig * u[i-1].x()) / p);
                     // then y-value
-                    p = sig * _derivatives[i-2].y() + 2.0;
+                    p = sig * _derivatives[i-1].y() + 2.0;
                     p1.setY((sig - 1.0) / p);
-                    p2.setY( (6.0 * ((_points[i].y() - _points[i-1].y())
-                              / (_parameters[i] - _parameters[i-1])
-                             - (_points[i-1].y() - _points[i-2].y())
-                            / (_parameters[i-1] - _parameters[i-2]))
-                            / (_parameters[i] - _parameters[i-2])
-                            - sig * u[i-2].y()) / p);
+                    p2.setY( (6.0 * ((_points[i+1].y() - _points[i].y())
+                              / (_parameters[i+1] - _parameters[i])
+                             - (_points[i].y() - _points[i-1].y())
+                            / (_parameters[i] - _parameters[i-1]))
+                            / (_parameters[i+1] - _parameters[i-1])
+                            - sig * u[i-1].y()) / p);
                     // then z-value
-                    p = sig * _derivatives[i-2].z() + 2.0;
+                    p = sig * _derivatives[i-1].z() + 2.0;
                     p1.setZ((sig - 1.0) / p);
-                    p2.setZ( (6.0 * ((_points[i].z() - _points[i-1].z())
-                              / (_parameters[i] - _parameters[i-1])
-                             - (_points[i-1].z() - _points[i-2].z())
-                            / (_parameters[i-1] - _parameters[i-2]))
-                            / (_parameters[i] - _parameters[i-2])
-                            - sig * u[i-2].z()) / p);
+                    p2.setZ( (6.0 * ((_points[i+1].z() - _points[i].z())
+                              / (_parameters[i+1] - _parameters[i])
+                             - (_points[i].z() - _points[i-1].z())
+                            / (_parameters[i] - _parameters[i-1]))
+                            / (_parameters[i+1] - _parameters[i-1])
+                            - sig * u[i-1].z()) / p);
                     _derivatives.push_back(p1);
                     u.push_back(p2);
                 }
@@ -214,13 +214,13 @@ void Spline::rebuild()
     _build = true;
     // determine min/max values
     if (_nopoints > 0) {
-        for (int i=1; i<=_nopoints; ++i) {
-            if (i == 1) {
-                _min = _points[i-1];
+        for (size_t i=0; i<_nopoints; ++i) {
+            if (i == 0) {
+                _min = _points[i];
                 _max = _min;
             }
             else {
-                MinMax(_points[i-1], _min, _max);
+                MinMax(_points[i], _min, _max);
             }
         }
     }
@@ -264,7 +264,7 @@ QVector3D Spline::second_derive(float parameter)
     return result;
 }
 
-float Spline::weight(int index) const
+float Spline::weight(size_t index)
 {
     float result;
     float length, dist;
@@ -295,19 +295,22 @@ float Spline::weight(int index) const
     return result;
 }
 
-int Spline::find_next_point(vector<float>& weights) const
+// get the next point index with the minimum weight
+// will not return the first point index, only in the range from second to end
+vector<float>::iterator Spline::find_next_point(vector<float>& weights)
 {
     float minval;
-    int i, result;
-    result = -1;
+    vector<float>::iterator result = weights.end();
+    vector<float>::iterator i = weights.begin();
     if (_nopoints < 3)
         return result;
     minval = weights[1];
-    result = 1;
-    i = 2;
-    while (i<_nopoints && minval > 0) {
-        if (weights[i-1] < minval) {
-            result = i - 1;
+    i++;
+    result = i;
+    while (i<weights.end() && minval > 0) {
+        if (*i < minval) {
+	    minval = *i;
+            result = i;
         }
         i++;
     }
@@ -317,55 +320,39 @@ int Spline::find_next_point(vector<float>& weights) const
 bool Spline::simplify(float criterium)
 {
     vector<float> weights(_nopoints);
-    float total_length;
-    int index, n1, n2;
     bool result = false;
 
     if (_nopoints < 3)
         return true;
 
-    n1 = n2 = 0;
-    for (int i=1; i<_nopoints; ++i)
-        if (_knuckles[i-1])
-            n1++;
-
-    total_length = _total_length * _total_length;
+    float total_length = _total_length * _total_length;
     if (total_length == 0)
         return result;
 
-    for (int i=1; i<=_nopoints; ++i)
-        weights.push_back(weight(i-1)/total_length);
+    for (size_t i=0; i<_nopoints; ++i)
+        weights.push_back(weight(i)/total_length);
 
+    vector<float>::iterator index;
     do {
         index = find_next_point(weights);
-        if (index != -1) {
-            if (index == 0 || index == _nopoints-1 || _nopoints<3) {
-                index = 1;
-            }
-            else {
-                if (weights[index] < criterium) {
-                    weights.erase(weights.begin()+index);
-                    _points.erase(_points.begin()+index);
-                    _knuckles.erase(_knuckles.begin()+index);
-                    _nopoints--;
-                    if (index - 1 >= 0 && index -1 < _nopoints)
-                        weights[index+1] = weights[index+1]/total_length;
-                }
-                else
-                    index = -1;
-            }
-        }
+	vector<float>::iterator last = weights.end();
+	last--;
+        if (index == weights.end() || _nopoints < 3 || index == last)
+	  break;
+	if (*index < criterium) {
+	  size_t j = index - weights.begin();
+	  weights.erase(index);
+	  _points.erase(_points.begin()+j);
+	  _knuckles.erase(_knuckles.begin()+j);
+	  _nopoints--;
+	  if (j > 0 && j < _nopoints)
+	    weights[j] = weights[j]/total_length;
+	}
+	else
+	  break;
     }
-    while (index != -1);
+    while (index != weights.end());
     result = true;
-
-    for (int i=1; i<=_nopoints; ++i)
-        if (_knuckles[i-1])
-            n2++;
-
-    // BUGBUG: duplicated below
-    if (n1 != n2)
-        _build = false;
 
     setBuild(false);
 
@@ -390,7 +377,7 @@ float Spline::coord_length(float t1, float t2)
 
     QVector3D p1, p2;
     // BUGBUG p1 is not initialized
-    for (int i=0; i<=_fragments; ++i) {
+    for (size_t i=0; i<=_fragments; ++i) {
         float t = t1 + (i / static_cast<float>(_fragments)) * (t2 - t1);
         p2 = value(t);
         if (i > 0)
@@ -460,7 +447,7 @@ float Spline::curvature(float parameter, QVector3D& normal)
     QVector3D crossproduct = QVector3D::crossProduct(acc, vel1);
     float l = crossproduct.length();
     if (l == 0)
-        l = 0.00001;
+        l = 0.00001f;
     float vdota = (vel1.x()*acc.x()) + (vel1.y()*acc.y()) + (vel1.z()*acc.z());
     float vdotv = (vel1.x()*vel1.x()) + (vel1.y()*vel1.y()) + (vel1.z()*vel1.z());
     if (vdotv < 0)
@@ -474,7 +461,7 @@ float Spline::curvature(float parameter, QVector3D& normal)
     return result;
 }
 
-void Spline::delete_point(int index)
+void Spline::delete_point(size_t index)
 {
     if (_nopoints > 0) {
         _nopoints--;
@@ -530,9 +517,9 @@ QVector3D Spline::first_derive(float parameter)
     return result;
 }
 
-void Spline::insert(int index, const QVector3D& p)
+void Spline::insert(size_t index, const QVector3D& p)
 {
-    if (index >= 0 && index < _nopoints) {
+    if (index < _nopoints) {
         _points.insert(_points.begin()+index, p);
         _knuckles.insert(_knuckles.begin()+index, false);
         _nopoints++;
@@ -553,20 +540,20 @@ void Spline::draw(Viewport& vp)
     vector<QVector3D> parray1;
     vector<QVector3D> parray2;
 
-    for (int i=0; i<_fragments; ++i)
+    for (size_t i=0; i<_fragments; ++i)
         parray1.push_back(value(i/static_cast<float>(_fragments)));
     if (vp.getViewportMode() == Viewport::vmWireFrame) {
         if (_show_curvature) {
             glLineWidth(1);
             glColor3f(_curvature_color.redF(), _curvature_color.greenF(), _curvature_color.blueF());
-            for (int i=0; i<_fragments; ++i) {
+            for (size_t i=0; i<_fragments; ++i) {
                 float c = curvature(i / static_cast<float>(_fragments), normal);
                 p2.setX(parray1[i].x() - c * 2 * _curvature_scale * normal.x());
                 p2.setY(parray1[i].y() - c * 2 * _curvature_scale * normal.y());
                 p2.setZ(parray1[i].z() - c * 2 * _curvature_scale * normal.z());
                 parray2.push_back(p2);
             }
-            for (int i=1; i<=_fragments; ++i) {
+            for (size_t i=1; i<=_fragments; ++i) {
                 if (i % 4 == 0 || i == 1 || i == _fragments) {
                     glBegin(GL_LINES);
                     glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
@@ -587,7 +574,7 @@ void Spline::draw(Viewport& vp)
             //vp.setFontColor(Qt::black);
             //vp.setBrushStyle(Qt::clear);
             glBegin(GL_POINTS);
-            for (int i=0; i<_nopoints; ++i) {
+            for (size_t i=0; i<_nopoints; ++i) {
                 glVertex3f(_points[i].x(), _points[i].y(), _points[i].z());
                 //vp.text(pt.x() + 2, pt.y(), IntToStr(i));
             }
@@ -615,7 +602,8 @@ void Spline::draw(Viewport& vp)
     glEnd();
 }
 
-void Spline::insert_spline(int index, bool invert, bool duplicate_point, const Spline& source)
+void Spline::insert_spline(size_t index, bool invert, bool duplicate_point, 
+			   const Spline& source)
 {
     setBuild(false);
     int nonewpoints;
@@ -657,7 +645,7 @@ bool Spline::intersect_plane(const Plane& plane, IntersectionData& output)
     float s1 = plane.a() * p1.x() + plane.b() * p1.y() + plane.c() * p1.z() + plane.d();
     if (fabs(s1) < 1E-6)
         add_to_output(p1, t1, output);
-    for (int i=1; i<=_fragments; ++i) {
+    for (size_t i=1; i<=_fragments; ++i) {
         float t2 = i / static_cast<float>(_fragments);
         QVector3D p2 = value(t2);
         float s2 = plane.a() * p2.x() + plane.b() * p2.y() + plane.c() * p2.z() + plane.d();
@@ -708,7 +696,7 @@ void Spline::save_binary(FileBuffer& destination)
     destination.add(_show_curvature);
     destination.add(_curvature_scale);
     destination.add(_nopoints);
-    for (int i=0; i<_nopoints; ++i) {
+    for (size_t i=0; i<_nopoints; ++i) {
         destination.add(_points[i]);
         destination.add(_knuckles[i]);
     }
@@ -720,12 +708,12 @@ void Spline::save_to_dxf(vector<QString>& strings, QString layername, bool send_
     if (!_build)
         rebuild();
     vector<float> params;
-    for (int i=2; i<_nopoints; ++i) {
+    for (size_t i=2; i<_nopoints; ++i) {
         if (_knuckles[i-1]) {
             params.push_back(_parameters[i-1]);
         }
     }
-    for (int i=1; i<=_fragments; ++i)
+    for (size_t i=1; i<=_fragments; ++i)
         params.push_back((i-1)/static_cast<float>(_fragments-1));
     sort(params.begin(), params.end());
 
@@ -769,7 +757,7 @@ void Spline::clear()
     _nopoints = 0;
     _fragments = 100;
     _show_curvature = false;
-    _curvature_scale = 0.10;
+    _curvature_scale = 0.10f;
     _curvature_color = Qt::magenta;
     _show_points = false;
     setBuild(false);

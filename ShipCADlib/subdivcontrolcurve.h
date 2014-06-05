@@ -23,11 +23,12 @@
   {                                                                                             }
   {#############################################################################################*/
 
-#ifndef SUBDIVSURFACE_H_
-#define SUBDIVSURFACE_H_
+#ifndef SUBDIVCONTROLCURVE_H_
+#define SUBDIVCONTROLCURVE_H_
 
 #include <iosfwd>
 #include <QObject>
+#include "subdivbase.h"
 
 namespace ShipCADGeometry {
 
@@ -35,29 +36,32 @@ namespace ShipCADGeometry {
 
 class SubdivisionPoint;
 
-class SubdivisionSurface : public QObject
+class SubdivisionControlCurve : public SubdivisionBase
 {
     Q_OBJECT
+    //Q_PROPERTY(SubdivisionSurface* Owner READ getOwner)
 
 public:
 
-    explicit SubdivisionSurface();
-    virtual ~SubdivisionSurface();
-    
-    size_t indexOfPoint(SubdivisionPoint* pt);
+    explicit SubdivisionControlCurve(SubdivisionSurface* owner);
+    virtual ~SubdivisionControlCurve();
+
+    // modifications
+    void replaceVertexPoint(SubdivisionPoint* oldpt, SubdivisionPoint* newpt);
+
+    // getters/setters
 
     // output
     void dump(std::ostream& os) const;
 
 protected:
-
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionSurface& surface);
+std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionControlCurve& curve);
 
 #endif
 

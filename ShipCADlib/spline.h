@@ -45,7 +45,7 @@ class IntersectionData;
 class Spline : public Entity
 {
     Q_OBJECT
-    Q_PROPERTY(int Fragments READ getFragments WRITE setFragments)
+    Q_PROPERTY(size_t Fragments READ getFragments WRITE setFragments)
     Q_PROPERTY(bool ShowCurvature MEMBER _show_curvature)
     Q_PROPERTY(bool ShowPoints MEMBER _show_points)
     Q_PROPERTY(float CurvatureScale MEMBER _curvature_scale)
@@ -58,9 +58,10 @@ public:
     
     // altering
     void add(const QVector3D& p);
-    void delete_point(int index);
-    void insert(int index, const QVector3D& p);
-    void insert_spline(int index, bool invert, bool duplicate_point, const Spline& source);
+    void delete_point(size_t index);
+    void insert(size_t index, const QVector3D& p);
+    void insert_spline(size_t index, bool invert, bool duplicate_point, 
+		       const Spline& source);
     void invert_direction();
     bool simplify(float criterium);
     virtual void clear();
@@ -78,7 +79,8 @@ public:
     // persistence
     virtual void load_binary(FileBuffer& source);
     virtual void save_binary(FileBuffer& destination);
-    void save_to_dxf(std::vector<QString>& strings, QString layername, bool sendmirror);
+    void save_to_dxf(std::vector<QString>& strings, QString layername, 
+		     bool sendmirror);
 
     // drawing
     //int distance_to_cursor(int x, int y, Viewport& vp) const;
@@ -86,16 +88,13 @@ public:
 
     // getters/setters
 
-    float getParameter(int index) const;
-
-    QVector3D getPoint(int index) const;
-    void setPoint(int index, const QVector3D& p);
-
-    int getFragments() const;
-    void setFragments(int val);
-
-    bool getKnuckle(int index) const;
-    void setKnuckle(int index, bool val);
+    float getParameter(size_t index);
+    QVector3D getPoint(size_t index);
+    void setPoint(size_t index, const QVector3D& p);
+    int getFragments();
+    void setFragments(size_t val);
+    bool getKnuckle(size_t index);
+    void setKnuckle(size_t index, bool val);
 
     // output
     void dump(std::ostream& os) const;
@@ -105,23 +104,26 @@ protected:
     void setBuild(bool val);
 
     // methods used in simplify
-    float weight(int index) const;
-    int find_next_point(std::vector<float>& weights) const;
+    float weight(size_t index);
+    std::vector<float>::iterator find_next_point(std::vector<float>& weights);
 
     // method used in intersect_plane
-    void add_to_output(const QVector3D& p, float parameter, IntersectionData& output);
+    void add_to_output(const QVector3D& p, float parameter, 
+		       IntersectionData& output);
 
 protected:
 
-    int _nopoints;
-    int _fragments;
+    size_t _nopoints;
+    size_t _fragments;
     bool _show_curvature;
     bool _show_points;
     float _curvature_scale;
-    float _total_length;
     QColor _curvature_color;
     std::vector<QVector3D> _points;
     std::vector<bool> _knuckles;
+
+    // cached elements
+    float _total_length;
     std::vector<float> _parameters;
     std::vector<QVector3D> _derivatives;
 };

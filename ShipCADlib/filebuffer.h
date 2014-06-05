@@ -52,6 +52,9 @@ public:
     void load(int& val);
     void add(int val);
 
+    void load(size_t& val);
+    void add(size_t val);
+
     void load(QVector3D& val);
     void add(const QVector3D& val);
 

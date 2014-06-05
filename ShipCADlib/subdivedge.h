@@ -35,6 +35,9 @@ namespace ShipCADGeometry {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+class SubdivisionPoint;
+class SubdivisionControlCurve;
+
 class SubdivisionEdge : public SubdivisionBase
 {
     Q_OBJECT
@@ -45,8 +48,14 @@ public:
     explicit SubdivisionEdge(SubdivisionSurface* owner);
     virtual ~SubdivisionEdge();
 
+    SubdivisionPoint* startPoint() const;
+    SubdivisionPoint* endPoint() const;
+
     // getters/setters
     bool isBoundaryEdge() const;
+    int numberOfFaces() const;
+    bool isCrease() const;
+    SubdivisionControlCurve* getCurve() const;
 
     // output
     void dump(std::ostream& os) const;

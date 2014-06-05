@@ -35,7 +35,7 @@ void Entity::extents(QVector3D& min, QVector3D& max)
     MinMax(_max, min, max);
 }
 
-bool Entity::getBuild() const
+bool Entity::getBuild()
 {
     return _build;
 }
@@ -67,17 +67,17 @@ QVector3D Entity::getMax()
 
 void Entity::dump(ostream& os) const
 {
-  os << " Build:" << (_build ? "true" : "false")
-     << "\n Min:[" << _min.x() << "," << _min.y() << "," << _min.z()
-     << "]\n Max:[" << _max.x() << "," << _max.y() << "," << _max.z()
-     << "]\n PenWidth:" << _pen_width
-     << "\n PenStyle:" << _pen_style
-     << "\n Color:[" << _color.red() << "," << _color.green() << "," << _color.blue()
-     << "]";
+    os << " Build:" << (_build ? "true" : "false")
+       << "\n Min:[" << _min.x() << "," << _min.y() << "," << _min.z()
+       << "]\n Max:[" << _max.x() << "," << _max.y() << "," << _max.z()
+       << "]\n PenWidth:" << _pen_width
+       << "\n PenStyle:" << _pen_style
+       << "\n Color:[" << _color.red() << "," << _color.green() << "," << _color.blue()
+       << "]";
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::Entity& entity)
 {
-  entity.dump(os);
-  return os;
+    entity.dump(os);
+    return os;
 }

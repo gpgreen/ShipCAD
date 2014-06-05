@@ -27,6 +27,7 @@ extern QString truncate(float val, int max_length);
 extern QVector3D UnifiedNormal(const QVector3D& p1, const QVector3D& p2, 
 			       const QVector3D& p3);
 
+extern float RadToDeg(float rad);
 };
 
 #endif

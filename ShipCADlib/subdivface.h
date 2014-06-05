@@ -47,10 +47,10 @@ public:
     virtual ~SubdivisionFace();
     
     // getters/setters
-    int numberOfPoints() const;
-    QVector3D faceCenter() const;
-    SubdivisionPoint getPoint(int index) const;
-    int getPointIndex(const SubdivisionPoint& pt) const;
+    size_t numberOfPoints();
+    QVector3D faceCenter();
+    SubdivisionPoint* getPoint(int index);
+    size_t indexOfPoint(SubdivisionPoint* pt);
 
     // output
     void dump(std::ostream& os) const;

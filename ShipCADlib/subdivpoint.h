@@ -45,11 +45,11 @@ class Viewport;
 class SubdivisionPoint : public SubdivisionBase
 {
     Q_OBJECT
-    //Q_PROPERTY(int Fragments READ getFragments WRITE setFragments)
-    //Q_PROPERTY(bool ShowCurvature MEMBER _show_curvature)
-    //Q_PROPERTY(bool ShowPoints MEMBER _show_points)
-    //Q_PROPERTY(float CurvatureScale MEMBER _curvature_scale)
-    //Q_PROPERTY(QColor CurvatureColor MEMBER _curvature_color)
+    Q_PROPERTY(QVector3D Coordinate READ getCoordinate WRITE setCoordinate)
+    Q_PROPERTY(float Curvature READ getCurvature)
+    Q_PROPERTY(bool IsBoundaryVertex READ isBoundaryVertex)
+    Q_PROPERTY(QVector3D Normal READ getNormal)
+    Q_PROPERTY(size_t VertexIndex READ getIndex)
 
 public:
 
@@ -60,15 +60,16 @@ public:
     
     // altering
     void clear();
-    void add_edge(SubdivisionEdge* edge);
-    void add_face(SubdivisionFace* face);
-    void delete_edge(SubdivisionEdge* edge);
-    void delete_face(SubdivisionFace* face);
+    void addEdge(SubdivisionEdge* edge);
+    void addFace(SubdivisionFace* face);
+    void deleteEdge(SubdivisionEdge* edge);
+    void deleteFace(SubdivisionFace* face);
     void destroy();
     
     // geometry ops
-    float curvature() const;
-    QVector3D averaging() const;
+    float getCurvature();
+    QVector3D averaging();
+    SubdivisionPoint* calculateVertexPoint();
 
     // persistence
     void load_binary(FileBuffer& source);
@@ -79,17 +80,31 @@ public:
     virtual void draw(Viewport& vp);
 
     // getters/setters
-    QVector3D getCoordinate() const;
-    QVector3D getNormal() const;
-    void setCoordinate(const QVector3D val);
-    SubdivisionFace* getFace(int index) const;
-    SubdivisionEdge* getEdge(int index) const;
-    bool isBoundaryVertex() const;
-    int getIndex() const;
+    QVector3D getCoordinate();
+    void setCoordinate(const QVector3D& val);
+    QVector3D getNormal();
+    SubdivisionFace* getFace(size_t index);
+    SubdivisionEdge* getEdge(size_t index);
+    bool isBoundaryVertex();
+    size_t getIndex();
+    size_t numberOfEdges() { return _edges.size(); }
+    size_t numberOfFaces() { return _faces.size(); }
+    size_t numberOfCurves();
+    bool getRegularPoint();
+    QVector3D getLimitPoint();
+    bool isRegularNURBSPoint(std::vector<SubdivisionFace*>& faces);
+    size_t indexOfFace(SubdivisionFace* face);
+    bool hasFace(SubdivisionFace* face);
 
     // output
     void dump(std::ostream& os) const;
 
+ protected:
+
+    // used in getCurvature
+    float Angle_VV_3D(const QVector3D& p1, const QVector3D& p2,
+		      const QVector3D& p3);
+ 
 protected:
 
     std::vector<SubdivisionFace*> _faces;

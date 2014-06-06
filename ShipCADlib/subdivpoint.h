@@ -30,6 +30,7 @@
 #include <iosfwd>
 #include <QObject>
 #include <QVector3D>
+#include <QColor>
 
 #include "subdivbase.h"
 
@@ -50,6 +51,7 @@ class SubdivisionPoint : public SubdivisionBase
     Q_PROPERTY(bool IsBoundaryVertex READ isBoundaryVertex)
     Q_PROPERTY(QVector3D Normal READ getNormal)
     Q_PROPERTY(size_t VertexIndex READ getIndex)
+    Q_PROPERTY(vertex_type_t VertexType READ getVertexType WRITE setVertexType)
 
 public:
 
@@ -71,10 +73,6 @@ public:
     QVector3D averaging();
     SubdivisionPoint* calculateVertexPoint();
 
-    // persistence
-    void load_binary(FileBuffer& source);
-    void save_binary(FileBuffer& destination);
-
     // drawing
     //int distance_to_cursor(int x, int y, Viewport& vp) const;
     virtual void draw(Viewport& vp);
@@ -95,6 +93,8 @@ public:
     bool isRegularNURBSPoint(std::vector<SubdivisionFace*>& faces);
     size_t indexOfFace(SubdivisionFace* face);
     bool hasFace(SubdivisionFace* face);
+    vertex_type_t getVertexType() { return _vtype; }
+    void setVertexType(vertex_type_t nt) { _vtype = nt; }
 
     // output
     void dump(std::ostream& os) const;
@@ -115,9 +115,45 @@ protected:
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+class SubdivisionControlPoint : public SubdivisionPoint
+{
+    Q_OBJECT
+
+public:
+
+    explicit SubdivisionControlPoint(SubdivisionSurface* owner);
+    virtual ~SubdivisionControlPoint();
+
+    // modifiers
+    void collapse();
+    
+    // persistence
+    void load_binary(FileBuffer& source);
+    void save_binary(FileBuffer& destination);
+
+    // drawing
+    //int distance_to_cursor(int x, int y, Viewport& vp) const;
+    virtual void draw(Viewport& vp);
+
+ protected:
+
+    QColor _color;
+    bool _locked;
+    bool _leaked;
+    bool _selected;
+    bool _visible;
+};
+    
+//////////////////////////////////////////////////////////////////////////////////////
+
 };				/* end namespace */
 
+//////////////////////////////////////////////////////////////////////////////////////
+
 std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionPoint& point);
+std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionControlPoint& point);
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 #endif
 

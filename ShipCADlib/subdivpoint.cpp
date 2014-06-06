@@ -442,6 +442,11 @@ QVector3D SubdivisionPoint::getNormal()
     return result;
 }
 
+void SubdivisionPoint::draw(Viewport& vp)
+{
+  // does nothing
+}
+
 void SubdivisionPoint::dump(ostream& os) const
 {
     os << "SubdivisionPoint ["

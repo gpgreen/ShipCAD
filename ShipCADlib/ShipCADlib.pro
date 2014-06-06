@@ -20,7 +20,8 @@ SOURCES += shipcadlib.cpp \
     utility.cpp \
     subdivbase.cpp \
     subdivsurface.cpp \
-    subdivpoint.cpp
+    subdivpoint.cpp \
+    subdivedge.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

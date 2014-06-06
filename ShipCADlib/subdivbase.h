@@ -34,6 +34,7 @@ namespace ShipCADGeometry {
 //////////////////////////////////////////////////////////////////////////////////////
 
 class SubdivisionSurface;
+class Viewport;
 
 class SubdivisionBase : public QObject
 {
@@ -46,6 +47,8 @@ public:
     virtual ~SubdivisionBase();
     
     SubdivisionSurface* getOwner() const;
+
+    virtual void draw(Viewport& vp) = 0;
 
     // output
     void dump(std::ostream& os) const;

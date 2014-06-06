@@ -34,6 +34,8 @@ namespace ShipCADGeometry {
 //////////////////////////////////////////////////////////////////////////////////////
 
 class SubdivisionPoint;
+class SubdivisionEdge;
+class SubdivisionControlEdge;
 
 class SubdivisionSurface : public QObject
 {
@@ -45,12 +47,19 @@ public:
     virtual ~SubdivisionSurface();
     
     size_t indexOfPoint(SubdivisionPoint* pt);
+    size_t indexOfEdge(SubdivisionEdge* edge);
+    size_t indexOfControlEdge(SubdivisionControlEdge* cedge);
+
+    // getters/setters
+    bool getBuild() { return _build; }
+    void setBuild(bool val);
 
     // output
     void dump(std::ostream& os) const;
 
 protected:
 
+    bool _build;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

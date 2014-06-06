@@ -6,6 +6,7 @@
 #include "subdivsurface.h"
 #include "subdivpoint.h"
 #include "subdivface.h"
+#include "subdivcontrolcurve.h"
 #include "viewport.h"
 
 using namespace std;
@@ -218,10 +219,136 @@ void SubdivisionEdge::draw(Viewport& vp)
 
 void SubdivisionEdge::dump(ostream& os) const
 {
-    //  os << " Owner:" << hex() << _owner;
+    os << "SubdivisionEdge ["
+       << hex << this << "]\n";
+    SubdivisionBase::dump(os);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionEdge& edge)
+{
+    edge.dump(os);
+    return os;
+}
+
+SubdivisionControlEdge::SubdivisionControlEdge(SubdivisionSurface* owner)
+    : SubdivisionBase(owner)
+{
+    clear();
+}
+
+SubdivisionControlEdge::~SubdivisionControlEdge()
+{
+    // does nothing
+}
+
+void SubdivisionControlEdge::clear()
+{
+
+}
+
+void SubdivisionControlEdge::collapse()
+{
+
+}
+
+QColor SubdivisionControlEdge::getColor()
+{
+    QColor result;
+    if (_selected)
+        result = _owner->getSelectedColor();
+    else if (_faces.size() > 2)
+        result = cLime;
+    else if (_crease)
+        result = _owner->getCreaseEdgeColor();
+    else
+        result = _owner->getEdgeColor();
+    return result;
+}
+
+size_t SubdivisionControlEdge::getIndex()
+{
+    return _owner->indexOfControlEdge(this);
+}
+
+bool SubdivisionControlEdge::isBoundaryEdge()
+{
+    bool result = false;
+    int n = 0;
+    for (size_t i=0; i<_faces.size(); ++i) {
+        if (_faces[i]->useInHydrostatics())
+            n++;
+    }
+    if (n == 1)
+        result = (fabs(startPoint()->getCoordinate().y()) > 1E-4f || fabs(endPoint()->getCoordinate().y()) > 1E-4f);
+    return result;
+}
+
+void SubdivisionControlEdge::setSelected(bool val)
+{
+    _owner->setSelectedControlEdges(this);
+}
+
+bool SubdivisionControlEdge::getSelected()
+{
+    return _owner->hasSelectedControlEdge(this);
+}
+
+bool SubdivisionControlEdge::getVisible()
+{
+    // meant for control edges onlly
+    // a control edge is visible if at least one of it's
+    //  neighbouring control faces belongs to a visible layer
+    bool result = false;
+
+    // BUGBUG: bunch of stuff here to see what layer...
+
+    // finally check if the edge is selected
+    // selected edges must be visible at all times
+    if (!result)
+        result = getSelected();
+    if (!result && getCurve() != 0)
+        result = getCurve()->isSelected();
+    return result;
+}
+
+SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(QVector3D p)
+{
+
+}
+
+void SubdivisionControlEdge::load_binary(FileBuffer& source)
+{
+
+}
+
+void SubdivisionControlEdge::save_binary(FileBuffer& destination)
+{
+
+}
+
+void SubdivisionControlEdge::trace()
+{
+
+}
+
+void SubdivisionControlEdge::draw(Viewport &vp)
+{
+
+}
+
+void SubdivisionControlEdge::dump(std::ostream& os) const
+{
+
+}
+
+void SubdivisionControlEdge::dump(ostream& os) const
+{
+    os << "SubdivisionControlEdge ["
+       << hex << this << "]\n";
+    SubdivisionBase::dump(os);
+}
+
+ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlEdge& edge)
 {
     edge.dump(os);
     return os;

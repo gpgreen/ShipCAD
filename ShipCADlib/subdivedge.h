@@ -47,7 +47,11 @@ class FileBuffer;
 class SubdivisionEdge : public SubdivisionBase
 {
     Q_OBJECT
-    //Q_PROPERTY(SubdivisionSurface* Owner READ getOwner)
+    Q_PROPERTY(SubdivisionPoint* StartPoint READ getStartPoint)
+    Q_PROPERTY(SubdivisionPoint* EndPoint READ getEndPoint)
+    Q_PROPERTY(bool Crease READ isCrease WRITE setCrease)
+    Q_PROPERTY(size_t Index READ getIndex)
+    Q_PROPERTY(SubdivisionControlCurve* Curve READ getCurve)
 
 public:
 
@@ -67,7 +71,7 @@ public:
     // getters/setters
     SubdivisionPoint* startPoint() { return _points[0]; }
     SubdivisionPoint* endPoint() { return _points[1]; }
-    bool isBoundaryEdge();
+    virtual bool isBoundaryEdge();
     size_t numberOfFaces() { return _faces.size(); }
     bool isCrease() { return _crease; }
     void setCrease(bool val);
@@ -94,7 +98,9 @@ protected:
 class SubdivisionControlEdge : public SubdivisionEdge
 {
     Q_OBJECT
-    //Q_PROPERTY(SubdivisionSurface* Owner READ getOwner)
+    Q_PROPERTY(QColor Color READ getColor)
+    Q_PROPERTY(bool Visible READ getVisible)
+    Q_PROPERTY(bool Selected READ getSelected WRITE setSelected)
 
 public:
 
@@ -102,12 +108,22 @@ public:
     virtual ~SubdivisionControlEdge();
 
     // modifiers
+    void clear();
     void collapse();
     SubdivisionControlPoint* insertControlPoint(QVector3D p);
     void load_binary(FileBuffer& source);
     void save_binary(FileBuffer& destination);
     void trace();
 
+    // getters/setters
+    size_t getIndex();
+    QColor getColor();
+    virtual bool isBoundaryEdge();
+    bool getSelected();
+    void setSelected(bool val);
+    bool getVisible();
+
+    // drawing
     virtual void draw(Viewport &vp);
 
     // output
@@ -115,7 +131,6 @@ public:
 
 protected:
 
-    QColor _color;
     bool _selected;
     bool _visible;
 };

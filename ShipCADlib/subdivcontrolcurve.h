@@ -48,6 +48,7 @@ public:
 
     // modifications
     void replaceVertexPoint(SubdivisionPoint* oldpt, SubdivisionPoint* newpt);
+    void insertEdgePoint(SubdivisionPoint* p1, SubdivisionPoint* p2, SubdivisionPoint* newpt);
 
     // getters/setters
 

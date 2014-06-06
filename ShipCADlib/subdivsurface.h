@@ -27,7 +27,9 @@
 #define SUBDIVSURFACE_H_
 
 #include <iosfwd>
+#include <vector>
 #include <QObject>
+#include <QColor>
 
 namespace ShipCADGeometry {
 
@@ -54,12 +56,21 @@ public:
     bool getBuild() { return _build; }
     void setBuild(bool val);
 
+    QColor getSelectedColor();
+    QColor getCreaseEdgeColor();
+    QColor getEdgeColor();
+    
+    void setSelectedControlEdge(SubdivisionControlEdge* edge);
+    bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
+
     // output
     void dump(std::ostream& os) const;
 
 protected:
 
     bool _build;
+
+    std::vector<SubdivisionControlEdge*> _sel_control_edges;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

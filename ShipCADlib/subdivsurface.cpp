@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 #include "subdivsurface.h"
 
@@ -15,6 +16,18 @@ SubdivisionSurface::SubdivisionSurface()
 SubdivisionSurface::~SubdivisionSurface()
 {
     // does nothing
+}
+
+void SubdivisionSurface::setSelectedControlEdge(SubdivisionControlEdge* edge)
+{
+  if (!hasSelectedControlEdge(edge))
+    _sel_control_edges.push_back(edge);
+}
+
+bool SubdivisionSurface::hasSelectedControlEdge(SubdivisionControlEdge* edge)
+{
+  return (find(_sel_control_edges.begin(), _sel_control_edges.end(), edge) 
+	  != _sel_control_edges.end());
 }
 
 void SubdivisionSurface::dump(ostream& os) const

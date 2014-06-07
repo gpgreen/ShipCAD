@@ -47,11 +47,11 @@ class FileBuffer;
 class SubdivisionEdge : public SubdivisionBase
 {
     Q_OBJECT
-    Q_PROPERTY(SubdivisionPoint* StartPoint READ getStartPoint)
-    Q_PROPERTY(SubdivisionPoint* EndPoint READ getEndPoint)
+    Q_PROPERTY(SubdivisionPoint* StartPoint READ startPoint)
+    Q_PROPERTY(SubdivisionPoint* EndPoint READ endPoint)
     Q_PROPERTY(bool Crease READ isCrease WRITE setCrease)
     Q_PROPERTY(size_t Index READ getIndex)
-    Q_PROPERTY(SubdivisionControlCurve* Curve READ getCurve)
+    Q_PROPERTY(SubdivisionControlCurve* Curve READ getCurve WRITE setCurve)
 
 public:
 
@@ -76,6 +76,7 @@ public:
     bool isCrease() { return _crease; }
     void setCrease(bool val);
     SubdivisionControlCurve* getCurve() { return _curve; }
+    void setCurve(SubdivisionControlCurve* curve) { _curve = curve; }
     size_t getIndex();
     SubdivisionFace* getFace(size_t index);
     bool hasFace(SubdivisionFace* face);
@@ -86,6 +87,7 @@ public:
     void dump(std::ostream& os) const;
 
 protected:
+
     SubdivisionPoint* _points[2];
     std::vector<SubdivisionFace*> _faces;
     bool _crease;
@@ -110,7 +112,7 @@ public:
     // modifiers
     void clear();
     void collapse();
-    SubdivisionControlPoint* insertControlPoint(QVector3D p);
+    SubdivisionControlPoint* insertControlPoint(const QVector3D& p);
     void load_binary(FileBuffer& source);
     void save_binary(FileBuffer& destination);
     void trace();
@@ -128,6 +130,10 @@ public:
 
     // output
     void dump(std::ostream& os) const;
+
+protected:
+
+    void priv_trace(SubdivisionControlPoint* p);
 
 protected:
 

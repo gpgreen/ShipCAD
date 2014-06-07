@@ -23,8 +23,8 @@
   {                                                                                             }
   {#############################################################################################*/
 
-#ifndef SUBDIVCONTROLCURVE_H_
-#define SUBDIVCONTROLCURVE_H_
+#ifndef SUBDIVLAYER_H_
+#define SUBDIVLAYER_H_
 
 #include <iosfwd>
 #include <QObject>
@@ -34,27 +34,24 @@ namespace ShipCADGeometry {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class SubdivisionPoint;
-class SubdivisionControlEdge;
+class SubdivisionControlFace;
 
-class SubdivisionControlCurve : public SubdivisionBase
+class SubdivisionLayer : public SubdivisionBase
 {
     Q_OBJECT
-    //Q_PROPERTY(SubdivisionSurface* Owner READ getOwner)
 
 public:
 
-    explicit SubdivisionControlCurve(SubdivisionSurface* owner);
-    virtual ~SubdivisionControlCurve();
+    explicit SubdivisionLayer(SubdivisionSurface* owner);
+    virtual ~SubdivisionLayer();
 
     // modifications
-    void replaceVertexPoint(SubdivisionPoint* oldpt, SubdivisionPoint* newpt);
-    void insertEdgePoint(SubdivisionPoint* p1, SubdivisionPoint* p2, SubdivisionPoint* newpt);
-    void deleteEdge(SubdivisionControlEdge* edge);
-    void insertControlPoint(SubdivisionPoint* p1, SubdivisionPoint* p2, SubdivisionPoint* newpt);
+    void deleteControlFace(SubdivisionControlFace* face);
+    void addControlFace(SubdivisionControlFace* newface);
 
     // getters/setters
-    bool isSelected();
+    bool useInHydrostatics();
+    bool isVisible();
 
     // output
     void dump(std::ostream& os) const;
@@ -66,7 +63,7 @@ protected:
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionControlCurve& curve);
+std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionLayer& layer);
 
 #endif
 

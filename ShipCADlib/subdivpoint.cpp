@@ -8,6 +8,7 @@
 #include "subdivedge.h"
 #include "subdivface.h"
 #include "subdivcontrolcurve.h"
+#include "subdivlayer.h"
 #include "viewport.h"
 #include "filebuffer.h"
 #include "utility.h"
@@ -442,7 +443,7 @@ QVector3D SubdivisionPoint::getNormal()
     return result;
 }
 
-void SubdivisionPoint::draw(Viewport& vp)
+void SubdivisionPoint::draw(Viewport& /*vp*/)
 {
   // does nothing
 }
@@ -460,6 +461,250 @@ void SubdivisionPoint::dump(ostream& os) const
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionPoint& point)
+{
+    point.dump(os);
+    return os;
+}
+
+SubdivisionControlPoint::SubdivisionControlPoint(SubdivisionSurface *owner)
+    : SubdivisionPoint(owner)
+{
+    clear();
+}
+
+SubdivisionControlPoint::~SubdivisionControlPoint()
+{
+    // does nothing
+}
+
+QColor SubdivisionControlPoint::getColor()
+{
+    if (isSelected())
+        return _owner->getSelectedColor();
+    if (_locked)
+        return Qt::darkGray;
+    if (isLeak())
+        return _owner->getLeakColor();
+    switch (getVertexType()) {
+    case svRegular:
+        return _owner->getRegularPointColor();
+    case svCorner:
+        return _owner->getCornerPointColor();
+    case svDart:
+        return _owner->getDartPointColor();
+    case svCrease:
+        return _owner->getCreasePointColor();
+    default:
+        return Qt::red;
+    }
+}
+
+size_t SubdivisionControlPoint::getIndex()
+{
+    return _owner->indexOfControlPoint(this);
+}
+
+bool SubdivisionControlPoint::isSelected()
+{
+    return _owner->hasSelectedControlPoint(this);
+}
+
+bool SubdivisionControlPoint::isVisible()
+{
+    // meant for controlpoints only
+    // a controlpoint is visible if at least one of it's
+    // neighbouring controlfaces belongs to a visible layer
+    bool result = false;
+    if (_owner->showControlNet()) {
+        for (size_t i=0; i<_faces.size(); ++i) {
+            SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(_faces[i]);
+            if (face == 0)
+                continue;
+            if (face->getLayer() != 0) {
+                if (face->getLayer()->isVisible())
+                    return true;
+            }
+        }
+    }
+    // finally check if the point is selected
+    // selected points must be visible at all times
+    // points with no faces connected also!
+    result = isSelected() || _faces.size() == 0;
+    if (!result && _owner->numberControlCurves() > 0) {
+        for (size_t i=0; i<numberOfEdges(); ++i) {
+            if (_edges[i]->getCurve() != 0) {
+                if (_edges[i]->getCurve()->isSelected()) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+bool SubdivisionControlPoint::isLeak()
+{
+    return (fabs(getCoordinate().y()) > 1E-4f && isBoundaryVertex());
+}
+
+void SubdivisionControlPoint::setSelected(bool val)
+{
+    if (val) {
+        if (!_owner->hasSelectedControlPoint(this))
+            _owner->setSelectedControlPoint(this);
+    }
+    else {
+        if (_owner->hasSelectedControlPoint(this))
+            _owner->removeSelectedControlPoint(this);
+    }
+}
+
+void SubdivisionControlPoint::setLocked(bool val)
+{
+    if (val != _locked)
+        _locked = val;
+}
+
+void SubdivisionControlPoint::setCoordinate(const QVector3D &val)
+{
+    SubdivisionControlPoint::setCoordinate(val);
+    _owner->setBuild(false);
+}
+
+void SubdivisionControlPoint::collapse()
+{
+    SubdivisionControlPoint* p1, *p2;
+    SubdivisionControlEdge* edge1, *edge2;
+    SubdivisionControlFace* face;
+    if (_faces.size() <= 2) {
+        setSelected(false);
+        p1 = 0;
+        p2 = 0;
+        // this is possibly a point on a boundary edge
+        // check for this special case
+        edge1 = 0;
+        edge2 = 0;
+        for (size_t i=0; i<numberOfEdges(); ++i) {
+            if (_edges[i]->numberOfFaces() == 1) {
+                if (edge1 == 0) {
+                    edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[i]);
+                }
+                else {
+                    edge2 = dynamic_cast<SubdivisionControlEdge*>(_edges[i]);
+                }
+            }
+        }
+        if (edge1 != 0 && edge2 != 0) {
+            for (size_t i=numberOfEdges()-1; i>=0; --i) {
+                edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[i]);
+                edge1->collapse();
+            }
+        }
+        bool edge_collapse = false;
+        bool crease = false;
+        if (_edges.size() == 2) {
+            edge_collapse = true;
+            edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[0]);
+            if (edge1 == 0)
+                throw runtime_error("edge is not a control edge SubdivisionControlPoint::collapse");
+            if (edge1->startPoint() == this) {
+                p1 = dynamic_cast<SubdivisionControlPoint*>(edge1->endPoint());
+            }
+            else {
+                p1 = dynamic_cast<SubdivisionControlPoint*>(edge1->startPoint());
+            }
+            edge2 = dynamic_cast<SubdivisionControlEdge*>(_edges[1]);
+            if (edge2 == 0)
+                throw runtime_error("edge is not a control edge SubdivisionControlPoint::collapse");
+            if (edge2->startPoint() == this) {
+                p2 = dynamic_cast<SubdivisionControlPoint*>(edge2->endPoint());
+            }
+            else {
+                p2 = dynamic_cast<SubdivisionControlPoint*>(edge2->startPoint());
+            }
+            crease = edge1->isCrease() || edge2->isCrease();
+        }
+        for (size_t i=numberOfFaces()-1; i>=0; --i) {
+            face = dynamic_cast<SubdivisionControlFace*>(_faces[i]);
+            vector<SubdivisionControlPoint*> points;
+            for (size_t j=0; j<face->numberOfPoints(); ++j) {
+                SubdivisionControlPoint* pt = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
+                if (pt && pt != this)
+                    points.push_back(pt);
+            }
+            _owner->addControlFace(points, false, face->getLayer());
+            delete face;
+        }
+
+        if (edge_collapse) {
+            edge1 = _owner->controlEdgeExists(p1, p2);
+            if (edge1 != 0)
+                edge1->setCrease(crease);
+        }
+    }   // faces.size <= 2
+    else {
+        vector<SubdivisionControlPoint*> checklist;
+        vector<SubdivisionControlEdge*> edges;
+        for (size_t i=0; i<numberOfEdges(); ++i) {
+            if (_edges[i]->startPoint() == this)
+                checklist.push_back(_edges[i]->endPoint());
+            else
+                checklist.push_back(_edges[i]->startPoint());
+        }
+        for (size_t i=0; i<numberOfFaces(); ++i) {
+            face = dynamic_cast<SubdivisionControlFace*>(_faces[i]);
+            if (face == 0)
+                throw runtime_error("face is not a control face SubdivisionControlPoint::collapse");
+            p1 = face->getPoint(face->numberOfPoints()-1);
+            for (size_t j=0; j<face->numberOfPoints(); ++j) {
+                p2 = face->getPoint(j);
+                if (p1 != this && p2 != this) {
+                    edge1 = _owner->controlEdgeExists(p1, p2);
+                    if (edge1 != 0
+                            && find(edges.begin(), edges.end(), edge1) == edges.end())
+                        _edges.push_back(edge1);
+                }
+                p1 = p2;
+            }
+        }
+        // sort edges in correct order and add new face
+        if (edges.size() > 2) {
+            vector<vector<SubdivisionPoint*> > sorted;
+            _owner->isolateEdges(edges, sorted);
+            for (size_t i=0; i<sorted.size(); ++i) {
+                vector<SubdivisionPoint*>& points = sorted[i];
+                if (points.size() > 2) {
+                    face = _owner->addControlFace(points, false);
+                    if (face != 0) {
+                        p1 = face->getPoint(face->numberOfPoints()-1);
+                        for (size_t j=0; j<face->numberOfPoints(); j++) {
+                            p2 = face->getPoint(j);
+                            // BUGBUG: doesn't do anything here
+                            edge1 = _owner->controlEdgeExists(p1, p2);
+                            p1 = p2;
+                        }
+                    }
+                }
+            }
+        }
+        // BUGBUG: supposed to delete point here
+        for (size_t i=checklist.size()-1; i>=0; --i) {
+            p1 = checklist[i];
+            if (p1->numberOfFaces() > 1 && p1->numberOfEdges() == 2)
+                p1->collapse();
+        }
+    }
+}
+
+void SubdivisionControlPoint::dump(ostream& os) const
+{
+    os << "SubdivisionControlPoint ["
+       << hex << this << "]\n";
+    SubdivisionPoint::dump(os);
+}
+
+ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlPoint& point)
 {
     point.dump(os);
     return os;

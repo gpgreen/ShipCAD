@@ -36,8 +36,12 @@ namespace ShipCADGeometry {
 //////////////////////////////////////////////////////////////////////////////////////
 
 class SubdivisionPoint;
+class SubdivisionControlPoint;
 class SubdivisionEdge;
+class SubdivisionFace;
+class SubdivisionControlFace;
 class SubdivisionControlEdge;
+class SubdivisionLayer;
 
 class SubdivisionSurface : public QObject
 {
@@ -47,21 +51,67 @@ public:
 
     explicit SubdivisionSurface();
     virtual ~SubdivisionSurface();
-    
-    size_t indexOfPoint(SubdivisionPoint* pt);
+
+    // SubdivisionPoint
+    size_t indexOfPoint(SubdivisionPoint* pt);\
+
+    // SubdivisionControlPoint
+    size_t indexOfControlPoint(SubdivisionControlPoint* pt);
+    void addControlPoint(SubdivisionControlPoint* pt);
+    SubdivisionControlPoint* getControlPoints(size_t index);
+
+    // selected SubdivisionControlPoint
+    bool hasSelectedControlPoint(SubdivisionControlPoint* pt);
+    void setSelectedControlPoint(SubdivisionControlPoint* pt);
+    void removeSelectedControlPoint(SubdivisionControlPoint* pt);
+
+    // SubdivisionEdge
     size_t indexOfEdge(SubdivisionEdge* edge);
-    size_t indexOfControlEdge(SubdivisionControlEdge* cedge);
+    void deleteEdge(SubdivisionEdge* edge);
+    SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
+
+    // SubdivisionControlEdge
+    size_t indexOfControlEdge(SubdivisionControlEdge* edge);
+    bool hasControlEdge(SubdivisionControlEdge* edge);
+    void addControlEdge(SubdivisionControlEdge* edge);
+    SubdivisionControlEdge* controlEdgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
+    void deleteControlEdge(SubdivisionControlEdge* edge);
+    SubdivisionControlEdge* addControlEdge(SubdivisionPoint* sp, SubdivisionPoint* ep);
+
+    // selected SubdivisionControlEdge
+    void setSelectedControlEdge(SubdivisionControlEdge* edge);
+    void removeSelectedControlEdge(SubdivisionControlEdge* edge);
+    bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
+
+    // SubdivisionFace
+    size_t indexOfFace(SubdivisionFace* face);
+    void deleteFace(SubdivisionFace* face);
+
+    // SubdivisionControlFace
+    bool hasControlFace(SubdivisionControlFace* face);
+    void addControlFace(SubdivisionControlFace* face);
+    void addControlFace(std::vector<SubdivisionControlPoint*>& points,
+			bool check_edges);
+    void addControlFace(std::vector<SubdivisionControlPoint*>& points,
+			bool check_edges, SubdivisionLayer* layer);
+
+    // SubdivisionControlCurve
+    size_t numberControlCurves();
 
     // getters/setters
     bool getBuild() { return _build; }
     void setBuild(bool val);
 
+    bool showControlNet();
+
     QColor getSelectedColor();
     QColor getCreaseEdgeColor();
     QColor getEdgeColor();
-    
-    void setSelectedControlEdge(SubdivisionControlEdge* edge);
-    bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
+    QColor getLeakColor();
+    QColor getRegularPointColor();
+    QColor getCornerPointColor();
+    QColor getDartPointColor();
+    QColor getCreasePointColor();
 
     // output
     void dump(std::ostream& os) const;

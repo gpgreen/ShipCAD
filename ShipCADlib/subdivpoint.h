@@ -79,12 +79,12 @@ public:
 
     // getters/setters
     QVector3D getCoordinate();
-    void setCoordinate(const QVector3D& val);
+    virtual void setCoordinate(const QVector3D& val);
     QVector3D getNormal();
     SubdivisionFace* getFace(size_t index);
     SubdivisionEdge* getEdge(size_t index);
     bool isBoundaryVertex();
-    size_t getIndex();
+    virtual size_t getIndex();
     size_t numberOfEdges() { return _edges.size(); }
     size_t numberOfFaces() { return _faces.size(); }
     size_t numberOfCurves();
@@ -118,7 +118,11 @@ protected:
 class SubdivisionControlPoint : public SubdivisionPoint
 {
     Q_OBJECT
-
+    Q_PROPERTY(QColor Color READ getColor)
+    Q_PROPERTY(bool Locked READ isLocked WRITE setLocked)
+    Q_PROPERTY(bool Selected READ isSelected WRITE setSelected)
+    Q_PROPERTY(bool Visible READ isVisible)
+    Q_PROPERTY(bool IsLeak READ isLeak)
 public:
 
     explicit SubdivisionControlPoint(SubdivisionSurface* owner);
@@ -127,6 +131,17 @@ public:
     // modifiers
     void collapse();
     
+    // getters/setters
+    QColor getColor();
+    bool isSelected();
+    bool isLeak();
+    bool isVisible();
+    void setSelected(bool val);
+    bool isLocked() { return _locked; }
+    void setLocked(bool val);
+    virtual size_t getIndex();
+    virtual void setCoordinate(const QVector3D& val);
+
     // persistence
     void load_binary(FileBuffer& source);
     void save_binary(FileBuffer& destination);
@@ -135,13 +150,12 @@ public:
     //int distance_to_cursor(int x, int y, Viewport& vp) const;
     virtual void draw(Viewport& vp);
 
+    // output
+    void dump(std::ostream& os) const;
+
  protected:
 
-    QColor _color;
     bool _locked;
-    bool _leaked;
-    bool _selected;
-    bool _visible;
 };
     
 //////////////////////////////////////////////////////////////////////////////////////

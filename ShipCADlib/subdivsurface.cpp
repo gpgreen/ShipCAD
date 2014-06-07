@@ -32,7 +32,8 @@ bool SubdivisionSurface::hasSelectedControlEdge(SubdivisionControlEdge* edge)
 
 void SubdivisionSurface::dump(ostream& os) const
 {
-  //  os << " Owner:" << hex() << _owner;
+    os << "SubdivisionSurface ["
+       << hex << this << "]\n";
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionSurface& surface)

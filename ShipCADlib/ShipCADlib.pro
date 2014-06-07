@@ -38,9 +38,12 @@ HEADERS += shipcadlib.h \
     subdivedge.h \
     subdivface.h \
     subdivpoint.h \
-    subdivcontrolcurve.h
+    subdivcontrolcurve.h \
+    subdivlayer.h
 
-win32:CONFIG(release, debug|release): INCLUDEPATH += $$PWD/../../lib/boost_1_55_0
+win32: {
+INCLUDEPATH += $$PWD/../../lib/boost_1_55_0
+}
 
 unix:!symbian {
     maemo5 {

@@ -246,8 +246,8 @@ SubdivisionControlEdge::~SubdivisionControlEdge()
     if (getCurve() != 0)
         getCurve()->deleteEdge(this);
     _owner->deleteControlEdge(this);
-    for (size_t i=_faces.size()-1; i>=0; --i)
-        delete _faces[i];
+    for (size_t i=_faces.size(); i>0; --i)
+        delete _faces[i-1];
     // remove endpoint from startpoint neighbours
     endPoint()->deleteEdge(this);
     if (endPoint()->numberOfEdges() == 0)

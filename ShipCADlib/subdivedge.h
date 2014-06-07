@@ -52,7 +52,7 @@ class SubdivisionEdge : public SubdivisionBase
     Q_PROPERTY(bool Crease READ isCrease WRITE setCrease)
     Q_PROPERTY(size_t Index READ getIndex)
     Q_PROPERTY(SubdivisionControlCurve* Curve READ getCurve WRITE setCurve)
-
+    Q_PROPERTY(bool ControlEdge READ isControlEdge WRITE setControlEdge)
 public:
 
     explicit SubdivisionEdge(SubdivisionSurface* owner);
@@ -72,6 +72,8 @@ public:
     SubdivisionPoint* startPoint() { return _points[0]; }
     SubdivisionPoint* endPoint() { return _points[1]; }
     virtual bool isBoundaryEdge();
+    bool isControlEdge() { return _control_edge; }
+    void setControlEdge(bool val) { _control_edge = val; }
     size_t numberOfFaces() { return _faces.size(); }
     bool isCrease() { return _crease; }
     void setCrease(bool val);
@@ -82,6 +84,8 @@ public:
     bool hasFace(SubdivisionFace* face);
     SubdivisionEdge* getPreviousEdge();
     SubdivisionEdge* getNextEdge();
+    void setPoints(SubdivisionPoint* p1, SubdivisionPoint* p2)
+        { _points[0] = p1; _points[1] = p2; }
 
     // output
     void dump(std::ostream& os) const;

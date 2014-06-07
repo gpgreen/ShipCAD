@@ -179,17 +179,9 @@ QVector3D SubdivisionPoint::getLimitPoint()
             size_t ind = face->indexOfPoint(this);
             p30 = face->getPoint((ind + 1) % face->numberOfPoints());
             p33 = face->getPoint((ind + 2) % face->numberOfPoints());
-            result += n * _coordinate + 4 * p30->getCoordinate() + p33->getCoordinate();
-//            result.setX(result.x() + n * _coordinate.x()
-//                        + 4 * p30->getCoordinate().x() + p33->getCoordinate().x());
-//            result.setY(result.y() + n * _coordinate.y()
-//                        + 4 * p30->getCoordinate().y() + p33->getCoordinate().y());
-//            result.setZ(result.z() + n * _coordinate.z()
-//                        + 4 * p30->getCoordinate().z() + p33->getCoordinate().z());
+            result += (n * _coordinate + 4 * p30->getCoordinate() + p33->getCoordinate());
         }
-        result.setX(result.x() / (n * (n + 5)));
-        result.setY(result.y() / (n * (n + 5)));
-        result.setZ(result.z() / (n * (n + 5)));
+        result /= (n * (n + 5));
     }
     else if (_vtype == svCrease) {
         for (size_t i=0; i<_edges.size(); ++i) {
@@ -206,15 +198,9 @@ QVector3D SubdivisionPoint::getLimitPoint()
             }
         }
         if (p30 != 0 && p33 != 0) {
-            result.setX((1/6.0)*p30->getCoordinate().x()
-                        + (2/3.0)*getCoordinate().x()
-                        + (1/6.0)*p33->getCoordinate().x());
-            result.setY((1/6.0)*p30->getCoordinate().y()
-                        + (2/3.0)*getCoordinate().y()
-                        + (1/6.0)*p33->getCoordinate().y());
-            result.setZ((1/6.0)*p30->getCoordinate().z()
-                        + (2/3.0)*getCoordinate().z()
-                        + (1/6.0)*p33->getCoordinate().z());
+            result = (1/6.0)*p30->getCoordinate()
+                    + (2/3.0)*result
+                    + (1/6.0)*p33->getCoordinate();
         }
         else {
             // this is an error
@@ -279,16 +265,14 @@ QVector3D SubdivisionPoint::averaging()
     QVector3D result;
     SubdivisionPoint* p;
     float totalweight = 0.0;
-    int nt = 0;
+    size_t nt = 0;
     float weight;
 
     if (_edges.size() == 0 || _vtype == svCorner)
         result = getCoordinate();
     else {
         if (_vtype == svCrease) {
-            result.setX(getCoordinate().x() * 0.5);
-            result.setY(getCoordinate().y() * 0.5);
-            result.setZ(getCoordinate().z() * 0.5);
+            result = getCoordinate() * 0.5;
             for (size_t i=0; i<_edges.size(); ++i) {
                 SubdivisionEdge* edge = _edges[i];
                 if (edge->numberOfFaces() == 1 || edge->isCrease()) {
@@ -296,9 +280,7 @@ QVector3D SubdivisionPoint::averaging()
                         p = edge->endPoint();
                     else
                         p = edge->startPoint();
-                    result.setX(result.x() + 0.25 * p->getCoordinate().x());
-                    result.setY(result.y() + 0.25 * p->getCoordinate().y());
-                    result.setZ(result.z() + 0.25 * p->getCoordinate().z());
+                    result += (0.25 * p->getCoordinate());
                 }
             }
         }
@@ -316,9 +298,7 @@ QVector3D SubdivisionPoint::averaging()
                             weight = .25;
                         else
                             weight = .375;
-                        center.setX(center.x() + weight * p->getCoordinate().x());
-                        center.setY(center.y() + weight * p->getCoordinate().y());
-                        center.setZ(center.z() + weight * p->getCoordinate().z());
+                        center += (weight * p->getCoordinate());
                     }
                     weight = third_pi;
                 }
@@ -326,22 +306,18 @@ QVector3D SubdivisionPoint::averaging()
                     for (size_t j=0; j<face->numberOfPoints(); ++j) {
                         p = face->getPoint(j);
                         weight = .25;
-                        center.setX(center.x() + weight * p->getCoordinate().x());
-                        center.setY(center.y() + weight * p->getCoordinate().y());
-                        center.setZ(center.z() + weight * p->getCoordinate().z());
+                        center += (weight * p->getCoordinate());
                     }
                     weight = half_pi;
                 }
                 else
                     throw runtime_error("invalid number of points in SubdivisionPoint::averaging");
-                result.setX(result.x() + weight * center.x());
-                result.setY(result.y() + weight * center.y());
-                result.setZ(result.z() + weight * center.z());
+                result += (weight * center);
             }
             if (totalweight != 0) {
                 result /= totalweight;
             }
-            int nq = _faces.size() - nt;
+            size_t nq = _faces.size() - nt;
             float a;
             if (nt == _faces.size()) {
                 // apply averaging in case of vertex surrounded by triangles
@@ -359,12 +335,7 @@ QVector3D SubdivisionPoint::averaging()
                     a = 12 / static_cast<float>(3 * nq + 2 * nt);
             }
             if (a != 1.0) {
-                result.setX(getCoordinate().x()
-                            + a * (result.x() - getCoordinate().x()));
-                result.setY(getCoordinate().y()
-                            + a * (result.y() - getCoordinate().y()));
-                result.setZ(getCoordinate().z()
-                            + a * (result.z() - getCoordinate().z()));
+                result = getCoordinate() + a * (result - getCoordinate());
             }
         }
     }
@@ -596,8 +567,8 @@ void SubdivisionControlPoint::collapse()
             }
         }
         if (edge1 != 0 && edge2 != 0) {
-            for (size_t i=numberOfEdges()-1; i>=0; --i) {
-                edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[i]);
+            for (size_t i=numberOfEdges(); i>0; --i) {
+                edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[i-1]);
                 edge1->collapse();
             }
         }
@@ -625,8 +596,8 @@ void SubdivisionControlPoint::collapse()
             }
             crease = edge1->isCrease() || edge2->isCrease();
         }
-        for (size_t i=numberOfFaces()-1; i>=0; --i) {
-            face = dynamic_cast<SubdivisionControlFace*>(_faces[i]);
+        for (size_t i=numberOfFaces(); i>0; --i) {
+            face = dynamic_cast<SubdivisionControlFace*>(_faces[i-1]);
             vector<SubdivisionControlPoint*> points;
             for (size_t j=0; j<face->numberOfPoints(); ++j) {
                 SubdivisionControlPoint* pt = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
@@ -647,18 +618,26 @@ void SubdivisionControlPoint::collapse()
         vector<SubdivisionControlPoint*> checklist;
         vector<SubdivisionControlEdge*> edges;
         for (size_t i=0; i<numberOfEdges(); ++i) {
-            if (_edges[i]->startPoint() == this)
-                checklist.push_back(_edges[i]->endPoint());
+            SubdivisionControlPoint* s = dynamic_cast<SubdivisionControlPoint*>(edges[i]->startPoint());
+            SubdivisionControlPoint* e = dynamic_cast<SubdivisionControlPoint*>(edges[i]->endPoint());
+            if (s == 0 || e == 0)
+                throw runtime_error("point not control point SubdivisionControlPoint::collapse");
+            if (s == this)
+                checklist.push_back(e);
             else
-                checklist.push_back(_edges[i]->startPoint());
+                checklist.push_back(s);
         }
         for (size_t i=0; i<numberOfFaces(); ++i) {
             face = dynamic_cast<SubdivisionControlFace*>(_faces[i]);
             if (face == 0)
                 throw runtime_error("face is not a control face SubdivisionControlPoint::collapse");
-            p1 = face->getPoint(face->numberOfPoints()-1);
+            p1 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(face->numberOfPoints()-1));
+            if (p1 == 0)
+                throw runtime_error("point not control point SubdivisionControlPoint::collapse");
             for (size_t j=0; j<face->numberOfPoints(); ++j) {
-                p2 = face->getPoint(j);
+                p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
+                if (p2 == 0)
+                    throw runtime_error("point not control point SubdivisionControlPoint::collapse");
                 if (p1 != this && p2 != this) {
                     edge1 = _owner->controlEdgeExists(p1, p2);
                     if (edge1 != 0
@@ -670,16 +649,20 @@ void SubdivisionControlPoint::collapse()
         }
         // sort edges in correct order and add new face
         if (edges.size() > 2) {
-            vector<vector<SubdivisionPoint*> > sorted;
+            vector<vector<SubdivisionControlPoint*> > sorted;
             _owner->isolateEdges(edges, sorted);
             for (size_t i=0; i<sorted.size(); ++i) {
-                vector<SubdivisionPoint*>& points = sorted[i];
+                vector<SubdivisionControlPoint*>& points = sorted[i];
                 if (points.size() > 2) {
                     face = _owner->addControlFace(points, false);
                     if (face != 0) {
-                        p1 = face->getPoint(face->numberOfPoints()-1);
+                        p1 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(face->numberOfPoints()-1));
+                        if (p1 == 0)
+                            throw runtime_error("point not control point SubdivisionControlPoint::collapse");
                         for (size_t j=0; j<face->numberOfPoints(); j++) {
-                            p2 = face->getPoint(j);
+                            p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
+                            if (p2 == 0)
+                                throw runtime_error("point not control point SubdivisionControlPoint::collapse");
                             // BUGBUG: doesn't do anything here
                             edge1 = _owner->controlEdgeExists(p1, p2);
                             p1 = p2;
@@ -689,8 +672,8 @@ void SubdivisionControlPoint::collapse()
             }
         }
         // BUGBUG: supposed to delete point here
-        for (size_t i=checklist.size()-1; i>=0; --i) {
-            p1 = checklist[i];
+        for (size_t i=checklist.size(); i>0; --i) {
+            p1 = checklist[i-1];
             if (p1->numberOfFaces() > 1 && p1->numberOfEdges() == 2)
                 p1->collapse();
         }

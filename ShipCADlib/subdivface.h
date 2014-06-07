@@ -27,7 +27,10 @@
 #define SUBDIVFACE_H_
 
 #include <iosfwd>
+#include <vector>
 #include <QObject>
+#include <QVector3D>
+
 #include "subdivbase.h"
 
 namespace ShipCADGeometry {
@@ -36,12 +39,16 @@ namespace ShipCADGeometry {
 
 class SubdivisionPoint;
 class SubdivisionLayer;
+class SubdivisionEdge;
+class SubdivisionControlCurve;
 class Viewport;
 
 class SubdivisionFace : public SubdivisionBase
 {
     Q_OBJECT
-    //Q_PROPERTY(SubdivisionSurface* Owner READ getOwner)
+    Q_PROPERTY(float Area READ getArea)
+    Q_PROPERTY(QVector3D FaceCenter READ getFaceCenter)
+    Q_PROPERTY(QVector3D FaceNormal READ getFaceNormal)
 
 public:
 
@@ -52,13 +59,26 @@ public:
     void flipNormal();
     void addPoint(SubdivisionPoint* point);
     void insertPoint(size_t index, SubdivisionPoint* point);
+    void clear();
+    void subdivide(SubdivisionSurface* owner, bool controlface,
+                   std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
+                   std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
+                   std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
+                   std::vector<SubdivisionEdge*>& interioredges,
+                   std::vector<SubdivisionEdge*>& controledges,
+                   std::vector<SubdivisionFace*>& dest);
 
     // getters/setters
-    size_t numberOfPoints();
+    size_t numberOfPoints() { return _points.size(); }
     QVector3D faceCenter();
     bool hasPoint(SubdivisionPoint* pt);
-    SubdivisionPoint* getPoint(int index);
+    SubdivisionPoint* getPoint(size_t index);
+    SubdivisionPoint* calculateFacePoint();
     size_t indexOfPoint(SubdivisionPoint* pt);
+    float getArea();
+    QVector3D getFaceCenter();
+    QVector3D getFaceNormal();
+
 
     // drawing
     virtual void draw(Viewport& vp);
@@ -67,6 +87,21 @@ public:
     void dump(std::ostream& os) const;
 
 protected:
+
+    // used in subdivide
+    void edgeCheck(SubdivisionSurface *owner,
+                   SubdivisionPoint* p1,
+                   SubdivisionPoint* p2,
+                   bool crease,
+                   bool controledge,
+                   SubdivisionControlCurve* curve,
+                   SubdivisionFace* newface,
+                   std::vector<SubdivisionEdge*> &interioredges,
+                   std::vector<SubdivisionEdge*> &controledges);
+
+protected:
+
+    std::vector<SubdivisionPoint*> _points;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

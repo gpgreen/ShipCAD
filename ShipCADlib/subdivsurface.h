@@ -49,6 +49,8 @@ class SubdivisionSurface : public QObject
 
 public:
 
+    enum subdiv_mode_t {fmQuadTriangle, fmCatmullClark};
+
     explicit SubdivisionSurface();
     virtual ~SubdivisionSurface();
 
@@ -77,6 +79,8 @@ public:
     SubdivisionControlEdge* controlEdgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
     void deleteControlEdge(SubdivisionControlEdge* edge);
     SubdivisionControlEdge* addControlEdge(SubdivisionPoint* sp, SubdivisionPoint* ep);
+    void isolateEdges(std::vector<SubdivisionControlEdge*>& input, 
+		      std::vector<std::vector<SubdivisionControlPoint*> >& sorted);
 
     // selected SubdivisionControlEdge
     void setSelectedControlEdge(SubdivisionControlEdge* edge);
@@ -90,10 +94,10 @@ public:
     // SubdivisionControlFace
     bool hasControlFace(SubdivisionControlFace* face);
     void addControlFace(SubdivisionControlFace* face);
-    void addControlFace(std::vector<SubdivisionControlPoint*>& points,
-			bool check_edges);
-    void addControlFace(std::vector<SubdivisionControlPoint*>& points,
-			bool check_edges, SubdivisionLayer* layer);
+    SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
+					   bool check_edges);
+    SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
+					   bool check_edges, SubdivisionLayer* layer);
 
     // SubdivisionControlCurve
     size_t numberControlCurves();
@@ -102,7 +106,9 @@ public:
     bool getBuild() { return _build; }
     void setBuild(bool val);
 
+    // options
     bool showControlNet();
+    subdiv_mode_t getSubdivisionMode();
 
     QColor getSelectedColor();
     QColor getCreaseEdgeColor();

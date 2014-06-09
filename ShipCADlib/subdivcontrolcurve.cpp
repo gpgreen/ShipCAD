@@ -16,7 +16,7 @@ using namespace ShipCADGeometry;
 SubdivisionControlCurve::SubdivisionControlCurve(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {
-    clear()
+    clear();
 }
 
 SubdivisionControlCurve::~SubdivisionControlCurve()
@@ -26,7 +26,9 @@ SubdivisionControlCurve::~SubdivisionControlCurve()
 
 void SubdivisionControlCurve::dump(ostream& os) const
 {
-    os << " Owner:" << hex << _owner;
+    os << "SubdivisionControlCurve ["
+       << hex << this << "]\n";
+    SubdivisionBase::dump(os);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlCurve& curve)

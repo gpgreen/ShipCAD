@@ -58,17 +58,16 @@ public:
     virtual void draw(Viewport& vp);
 
     // getters/setters
-    QVector3D getPoint(int row, int col) const;
+    QVector3D getPoint(size_t row, size_t col);
+    void setColDegree(size_t val);
+    void setRowDegree(size_t val);
+    void setPoint(size_t row, size_t col, const QVector3D& val);
+    virtual void setBuild(bool val);
 
     // output
     void dump(std::ostream& os) const;
 
 protected:
-
-    void setColDegree(int val);
-    void setRowDegree(int val);
-    void setPoint(int row, int col, const QVector3D& val);
-    virtual void setBuild(bool val);
 
 protected:
 

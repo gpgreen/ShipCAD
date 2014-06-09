@@ -30,6 +30,7 @@
 #include <vector>
 #include <QObject>
 #include <QVector3D>
+#include <QColor>
 
 #include "subdivbase.h"
 
@@ -41,7 +42,10 @@ class SubdivisionPoint;
 class SubdivisionLayer;
 class SubdivisionEdge;
 class SubdivisionControlCurve;
+class SubdivisionControlPoint;
+class SubdivisionControlEdge;
 class Viewport;
+class FileBuffer;
 
 class SubdivisionFace : public SubdivisionBase
 {
@@ -60,13 +64,13 @@ public:
     void addPoint(SubdivisionPoint* point);
     void insertPoint(size_t index, SubdivisionPoint* point);
     void clear();
-    void subdivide(SubdivisionSurface* owner, bool controlface,
-                   std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
-                   std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
-                   std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
-                   std::vector<SubdivisionEdge*>& interioredges,
-                   std::vector<SubdivisionEdge*>& controledges,
-                   std::vector<SubdivisionFace*>& dest);
+    virtual void subdivide(SubdivisionSurface* owner, bool controlface,
+	std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
+	std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
+	std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
+	std::vector<SubdivisionEdge*>& interioredges,
+	std::vector<SubdivisionEdge*>& controledges,
+	std::vector<SubdivisionFace*>& dest);
 
     // getters/setters
     size_t numberOfPoints() { return _points.size(); }
@@ -109,15 +113,54 @@ protected:
 class SubdivisionControlFace : public SubdivisionFace
 {
     Q_OBJECT
+    Q_PROPERTY(QColor Color READ getColor)
+    Q_PROPERTY(size_t FaceIndex READ getIndex)
+    Q_PROPERTY(SubdivisionLayer* Layer READ getLayer WRITE setLayer)
+    Q_PROPERTY(QVector3D Max MEMBER _max)
+    Q_PROPERTY(QVector3D Min MEMBER _min)
+    Q_PROPERTY(bool Selected READ isSelected WRITE setSelected)
+    Q_PROPERTY(bool Visible READ isVisible)
 
 public:
 
     explicit SubdivisionControlFace(SubdivisionSurface* owner);
     virtual ~SubdivisionControlFace();
 
+    // modifiers
+    void calcExtents();
+    virtual void clear();
+    void clearChildren();
+    SubdivisionControlEdge* insertEdge(SubdivisionControlPoint* p1,
+				       SubdivisionControlPoint* p2);
+    void removeReferences();
+    virtual void subdivide(SubdivisionSurface* owner,
+        std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
+        std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
+        std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
+        std::vector<SubdivisionEdge*>& interioredges,
+        std::vector<SubdivisionEdge*>& controledges,
+        std::vector<SubdivisionFace*>& dest);
+    void trace();
+
     // getters/setters
     SubdivisionLayer* getLayer();
     void setLayer(SubdivisionLayer* layer);
+    SubdivisionFace* getChild(size_t index);
+    size_t numberOfChildren() { return _children.size(); }
+    QColor getColor();
+    SubdivisionEdge* getControlEdge(size_t index);
+    size_t getNumberOfControlEdge() { return _control_edges.size(); }
+    SubdivisionEdge* getEdge(size_t index);
+    size_t getNumberOfEdge() { return _edges.size(); }
+    size_t getIndex();
+    bool isSelected();
+    bool isVisible();
+    void setSelected(bool val);
+
+    // persistence
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& destination);
+    void saveToDXF(std::vector<QString>& strings);
 
     // drawing
     virtual void draw(Viewport& vp);
@@ -126,6 +169,19 @@ public:
     void dump(std::ostream& os) const;
 
 protected:
+
+    // used in trace
+    void findAttachedFaces(std::vector<SubdivisionControlFace*>& todo_list,
+                           SubdivisionControlFace* face);
+
+protected:
+
+    SubdivisionLayer* _layer;
+    QVector3D _min;
+    QVector3D _max;
+    std::vector<SubdivisionFace*> _children;
+    std::vector<SubdivisionEdge*> _edges;
+    std::vector<SubdivisionEdge*> _control_edges;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

@@ -97,15 +97,27 @@ public:
     void deleteFace(SubdivisionFace* face);
 
     // SubdivisionControlFace
+    size_t indexOfControlFace(SubdivisionControlFace* face);
     bool hasControlFace(SubdivisionControlFace* face);
     void addControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
 					   bool check_edges);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
 					   bool check_edges, SubdivisionLayer* layer);
+    void deleteControlFace(SubdivisionControlFace* face);
+
+    // selected SubdivisionControlFace
+    void setSelectedControlFace(SubdivisionControlFace* face);
+    void removeSelectedControlFace(SubdivisionControlFace* face);
+    bool hasSelectedControlFace(SubdivisionControlFace* face);
 
     // SubdivisionControlCurve
     size_t numberControlCurves();
+
+    // SubdivisionLayer
+    size_t numberOfLayers();
+    SubdivisionLayer* getLayer(size_t index);
+    size_t indexOfLayer(SubdivisionLayer* layer);
 
     // getters/setters
     bool isBuild() { return _build; }

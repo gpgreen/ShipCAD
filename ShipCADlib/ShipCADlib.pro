@@ -22,7 +22,9 @@ SOURCES += shipcadlib.cpp \
     subdivsurface.cpp \
     subdivpoint.cpp \
     subdivedge.cpp \
-    subdivface.cpp
+    subdivface.cpp \
+    subdivcontrolcurve.cpp \
+    nurbsurface.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

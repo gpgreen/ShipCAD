@@ -198,9 +198,9 @@ QVector3D SubdivisionPoint::getLimitPoint()
             }
         }
         if (p30 != 0 && p33 != 0) {
-            result = (1/6.0)*p30->getCoordinate()
-                    + (2/3.0)*result
-                    + (1/6.0)*p33->getCoordinate();
+            result = (1/6.0f)*p30->getCoordinate()
+                    + (2/3.0f)*result
+                    + (1/6.0f)*p33->getCoordinate();
         }
         else {
             // this is an error
@@ -539,7 +539,7 @@ void SubdivisionControlPoint::setLocked(bool val)
 
 void SubdivisionControlPoint::setCoordinate(const QVector3D &val)
 {
-    SubdivisionControlPoint::setCoordinate(val);
+    SubdivisionPoint::setCoordinate(val);
     _owner->setBuild(false);
 }
 

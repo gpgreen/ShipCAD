@@ -28,6 +28,9 @@
 
 #include <iosfwd>
 #include <QObject>
+#include <QColor>
+#include <QString>
+
 #include "subdivbase.h"
 
 namespace ShipCADGeometry {
@@ -52,10 +55,14 @@ public:
     // modifications
     void deleteControlFace(SubdivisionControlFace* face);
     void addControlFace(SubdivisionControlFace* newface);
+    size_t numberOfFaces();
+    SubdivisionControlFace* getFace(size_t index);
 
     // getters/setters
     bool useInHydrostatics();
     bool isVisible();
+    QColor getColor();
+    const QString& getName();
 
     // output
     void dump(std::ostream& os) const;

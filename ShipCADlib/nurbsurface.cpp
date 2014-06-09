@@ -26,12 +26,13 @@ void NURBSurface::setBuild(bool val)
     Entity::setBuild(val);
 }
 
-void NURBSurface::setPoint(int index, const QVector3D& p)
+void NURBSurface::setPoint(size_t /*row*/, size_t /*col*/, const QVector3D& /*p*/)
 {
 }
 
-QVector3D NURBSurface::getPoint(int index) const
+QVector3D NURBSurface::getPoint(size_t /*row*/, size_t /*col*/)
 {
+    return QVector3D();
 }
 
 void NURBSurface::rebuild()
@@ -40,7 +41,7 @@ void NURBSurface::rebuild()
     _build = true;
 }
 
-void NURBSurface::draw(Viewport& vp)
+void NURBSurface::draw(Viewport& /*vp*/)
 {
 }
 

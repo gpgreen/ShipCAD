@@ -35,7 +35,7 @@ void Entity::extents(QVector3D& min, QVector3D& max)
     MinMax(_max, min, max);
 }
 
-bool Entity::getBuild()
+bool Entity::isBuild()
 {
     return _build;
 }

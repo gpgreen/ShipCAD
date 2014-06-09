@@ -93,7 +93,7 @@ public:
     void setPoint(size_t index, const QVector3D& p);
     int getFragments();
     void setFragments(size_t val);
-    bool getKnuckle(size_t index);
+    bool isKnuckle(size_t index);
     void setKnuckle(size_t index, bool val);
 
     // output

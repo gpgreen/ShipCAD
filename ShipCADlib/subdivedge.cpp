@@ -125,7 +125,7 @@ SubdivisionEdge* SubdivisionEdge::getPreviousEdge()
 {
     SubdivisionPoint* p = _points[0];
     SubdivisionEdge* result = 0;
-    if (p->getRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
+    if (p->isRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
         // find previous edge
         for (size_t i=0; i<p->numberOfEdges(); ++i) {
             if (p->getEdge(i) == this)
@@ -155,7 +155,7 @@ SubdivisionEdge* SubdivisionEdge::getNextEdge()
 {
     SubdivisionPoint* p = _points[1];
     SubdivisionEdge* result = 0;
-    if (p->getRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
+    if (p->isRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
         // find next edge
         for (size_t i=0; i<p->numberOfEdges(); ++i) {
             if (p->getEdge(i) == this)
@@ -277,7 +277,7 @@ void SubdivisionControlEdge::collapse()
         if (startPoint()->numberOfEdges() > 2 && endPoint()->numberOfEdges() > 2) {
             if (getCurve() != 0)
                 getCurve()->deleteEdge(this);
-            if (getSelected())
+            if (isSelected())
                 setSelected(false);
             s = dynamic_cast<SubdivisionControlPoint*>(startPoint());
             e = dynamic_cast<SubdivisionControlPoint*>(endPoint());
@@ -428,24 +428,34 @@ void SubdivisionControlEdge::setSelected(bool val)
         _owner->removeSelectedControlEdge(this);
 }
 
-bool SubdivisionControlEdge::getSelected()
+bool SubdivisionControlEdge::isSelected()
 {
     return _owner->hasSelectedControlEdge(this);
 }
 
-bool SubdivisionControlEdge::getVisible()
+bool SubdivisionControlEdge::isVisible()
 {
     // meant for control edges only
     // a control edge is visible if at least one of it's
     //  neighbouring control faces belongs to a visible layer
     bool result = false;
 
-    // BUGBUG: bunch of stuff here to see what layer...
+    if (_owner->showControlNet()) {
+        for (size_t i=0; i<_faces.size(); ++i) {
+            SubdivisionControlFace* cface = dynamic_cast<SubdivisionControlFace*>(_faces[i]);
+            if (cface != 0 && cface->getLayer() != 0) {
+                if (cface->getLayer()->isVisible()) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+    }
 
     // finally check if the edge is selected
     // selected edges must be visible at all times
     if (!result)
-        result = getSelected();
+        result = isSelected();
     if (!result && getCurve() != 0)
         result = getCurve()->isSelected();
     return result;
@@ -454,17 +464,21 @@ bool SubdivisionControlEdge::getVisible()
 SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(const QVector3D& p)
 {
     SubdivisionControlPoint* result = new SubdivisionControlPoint(_owner);
+    SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
+    SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
+    if (sp == 0 || ep == 0)
+        throw runtime_error("start and/or end point are not control points");
     result->setCoordinate(p);
     if (getCurve() != 0) {
         // insert the new point in the controlcurve
-        getCurve()->insertControlPoint(startPoint(), endPoint(), result);
+        getCurve()->insertControlPoint(sp, ep, result);
     }
     _owner->addControlPoint(result);
     for (size_t i=0; i<_faces.size(); ++i) {
         SubdivisionFace* face = _faces[i];
-        if (face->hasPoint(startPoint()) && face->hasPoint(endPoint())) {
-            size_t i1 = face->indexOfPoint(startPoint());
-            size_t i2 = face->indexOfPoint(endPoint());
+        if (face->hasPoint(sp) && face->hasPoint(ep)) {
+            size_t i1 = face->indexOfPoint(sp);
+            size_t i2 = face->indexOfPoint(ep);
             if (i2 == i1+1)
                 face->insertPoint(i2, result);
             else if (i1 == i2+1)
@@ -476,8 +490,8 @@ SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(const QVecto
             result->addFace(face);
         }
     }
-    endPoint()->deleteEdge(this);
-    SubdivisionControlEdge* edge = _owner->addControlEdge(result, endPoint());
+    ep->deleteEdge(this);
+    SubdivisionControlEdge* edge = _owner->addControlEdge(result, ep);
     edge->setCrease(isCrease());
     edge->setCurve(getCurve());
     if (getCurve())
@@ -512,18 +526,18 @@ void SubdivisionControlEdge::save_binary(FileBuffer& destination)
     destination.add(_owner->indexOfPoint(_points[0]));
     destination.add(_owner->indexOfPoint(_points[1]));
     destination.add(isCrease());
-    destination.add(getSelected());
+    destination.add(isSelected());
 }
 
 void SubdivisionControlEdge::priv_trace(SubdivisionControlPoint* p)
 {
     SubdivisionControlEdge* edge;
-    if (p->getRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
+    if (p->isRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
         // find next edge
         for (size_t i=0; i<p->numberOfEdges(); ++i) {
             if (p->getEdge(i) != this) {
                 edge = dynamic_cast<SubdivisionControlEdge*>(p->getEdge(i));
-                if (edge->getSelected() != getSelected() && edge->isCrease() == isCrease()) {
+                if (edge->isSelected() != isSelected() && edge->isCrease() == isCrease()) {
                     bool shares_face = false;
                     for (size_t j=0; j<numberOfFaces(); ++j) {
                         if (edge->hasFace(_faces[j])) {
@@ -534,7 +548,7 @@ void SubdivisionControlEdge::priv_trace(SubdivisionControlPoint* p)
                     if (!shares_face) {
                         if (edge->startPoint() == startPoint())
                             edge->swapData();
-                        edge->setSelected(getSelected());
+                        edge->setSelected(isSelected());
                         edge->trace();
                         break;
                     }

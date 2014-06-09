@@ -61,7 +61,7 @@ private:
 class Entity : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool Build READ getBuild WRITE setBuild)
+    Q_PROPERTY(bool Build READ isBuild WRITE setBuild)
     Q_PROPERTY(QColor Color MEMBER _color)
     Q_PROPERTY(QVector3D Min READ getMin)
     Q_PROPERTY(QVector3D Max READ getMax)
@@ -80,7 +80,7 @@ public:
 
     QVector3D getMin();
     QVector3D getMax();
-    bool getBuild();
+    bool isBuild();
     
     // output
     void dump(std::ostream& os) const;

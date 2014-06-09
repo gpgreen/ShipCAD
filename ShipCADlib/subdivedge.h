@@ -105,8 +105,8 @@ class SubdivisionControlEdge : public SubdivisionEdge
 {
     Q_OBJECT
     Q_PROPERTY(QColor Color READ getColor)
-    Q_PROPERTY(bool Visible READ getVisible)
-    Q_PROPERTY(bool Selected READ getSelected WRITE setSelected)
+    Q_PROPERTY(bool Visible READ isVisible)
+    Q_PROPERTY(bool Selected READ isSelected WRITE setSelected)
 
 public:
 
@@ -125,9 +125,9 @@ public:
     size_t getIndex();
     QColor getColor();
     virtual bool isBoundaryEdge();
-    bool getSelected();
+    bool isSelected();
     void setSelected(bool val);
-    bool getVisible();
+    bool isVisible();
 
     // drawing
     virtual void draw(Viewport &vp);

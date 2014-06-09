@@ -55,7 +55,7 @@ int Spline::getFragments()
     return _fragments;
 }
 
-bool Spline::getKnuckle(size_t index)
+bool Spline::isKnuckle(size_t index)
 {
     if (index < _nopoints)
         return _knuckles[index];

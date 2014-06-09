@@ -27,7 +27,11 @@
 #define SUBDIVCONTROLCURVE_H_
 
 #include <iosfwd>
+#include <vector>
 #include <QObject>
+#include <QColor>
+#include <QString>
+
 #include "subdivbase.h"
 
 namespace ShipCADGeometry {
@@ -35,8 +39,14 @@ namespace ShipCADGeometry {
 //////////////////////////////////////////////////////////////////////////////////////
 
 class SubdivisionPoint;
+class SubdivisionControlPoint;
 class SubdivisionControlEdge;
+class Spline;
+class Viewport;
+class FileBuffer;
 
+// Controlcurves are curves that can be added to the controlnet an are subdivide with the surface.
+// The resulting curve therefore lies on the surface, and can be used in the fairing process
 class SubdivisionControlCurve : public SubdivisionBase
 {
     Q_OBJECT
@@ -51,15 +61,41 @@ public:
     void replaceVertexPoint(SubdivisionPoint* oldpt, SubdivisionPoint* newpt);
     void insertEdgePoint(SubdivisionPoint* p1, SubdivisionPoint* p2, SubdivisionPoint* newpt);
     void deleteEdge(SubdivisionControlEdge* edge);
-    void insertControlPoint(SubdivisionPoint* p1, SubdivisionPoint* p2, SubdivisionPoint* newpt);
+    void insertControlPoint(SubdivisionControlPoint* p1, SubdivisionControlPoint* p2, 
+			    SubdivisionControlPoint* newpt);
+    void addPoint(SubdivisionPoint* p);
+    virtual void clear();
 
     // getters/setters
     bool isSelected();
+    bool isVisible();
+    bool isBuild();
+    QColor getColor();
+    size_t numberOfControlPoints();
+    SubdivisionControlPoint* getControlPoint(size_t index);
+    void setVisible(bool val);
+    void setBuild(bool val);
+    void setSelected(bool val);
+    Spline* getSpline();
+
+    // persistence
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& destiniation);
+    void saveToDXF(std::vector<QString>& strings);
+
+    // draw
+    virtual void draw(Viewport& vp);
 
     // output
     void dump(std::ostream& os) const;
 
 protected:
+
+    bool _visible;
+    bool _build;
+    std::vector<SubdivisionControlPoint*> _points;
+    std::vector<SubdivisionPoint*> _div_points;
+    Spline* _curve;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

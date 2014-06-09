@@ -43,6 +43,11 @@ class SubdivisionControlFace;
 class SubdivisionControlEdge;
 class SubdivisionLayer;
 
+// This is the subdivision surface used for modelling the hull.
+// This is actually a quad-triangle subdivision surface as publisehed in the articles:
+//
+//   "Quad/triangle subdivision" by J. Stam & C. Loop http://research.microsoft.com/~cloop/qtEG.pdf
+//   "On C2 triangle/quad subdivision" by Scott Schaeffer & Joe Warren
 class SubdivisionSurface : public QObject
 {
     Q_OBJECT
@@ -103,7 +108,7 @@ public:
     size_t numberControlCurves();
 
     // getters/setters
-    bool getBuild() { return _build; }
+    bool isBuild() { return _build; }
     void setBuild(bool val);
 
     // options

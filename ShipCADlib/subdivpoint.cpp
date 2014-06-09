@@ -123,7 +123,7 @@ size_t SubdivisionPoint::numberOfCurves()
     return result;
 }
 
-bool SubdivisionPoint::getRegularPoint()
+bool SubdivisionPoint::isRegularPoint()
 {
     bool result = false;
     // this procedure was only tested to TRACE regular quad edges

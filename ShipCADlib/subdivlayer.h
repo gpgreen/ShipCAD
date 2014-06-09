@@ -36,6 +36,10 @@ namespace ShipCADGeometry {
 
 class SubdivisionControlFace;
 
+// SubdivisionLayer is a layer-type class
+//
+// All individual controlfaces can be assigned to a leyer. Properties such as color,
+// visibility etc. are common for all controlfaces belonging the the same layer
 class SubdivisionLayer : public SubdivisionBase
 {
     Q_OBJECT

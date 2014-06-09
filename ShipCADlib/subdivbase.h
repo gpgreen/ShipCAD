@@ -36,6 +36,7 @@ namespace ShipCADGeometry {
 class SubdivisionSurface;
 class Viewport;
 
+// the base class for all subdivision points, edges and faces
 class SubdivisionBase : public QObject
 {
     Q_OBJECT
@@ -48,6 +49,7 @@ public:
     
     SubdivisionSurface* getOwner() const;
 
+    virtual void clear() = 0;
     virtual void draw(Viewport& vp) = 0;
 
     // output

@@ -88,7 +88,7 @@ public:
     size_t numberOfEdges() { return _edges.size(); }
     size_t numberOfFaces() { return _faces.size(); }
     size_t numberOfCurves();
-    bool getRegularPoint();
+    bool isRegularPoint();
     QVector3D getLimitPoint();
     bool isRegularNURBSPoint(std::vector<SubdivisionFace*>& faces);
     size_t indexOfFace(SubdivisionFace* face);

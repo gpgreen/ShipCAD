@@ -39,11 +39,6 @@ namespace ShipCADGeometry {
 class NURBSurface : public Entity
 {
     Q_OBJECT
-    //Q_PROPERTY(int Fragments READ getFragments WRITE setFragments)
-    //Q_PROPERTY(bool ShowCurvature MEMBER _show_curvature)
-    //Q_PROPERTY(bool ShowPoints MEMBER _show_points)
-    //Q_PROPERTY(float CurvatureScale MEMBER _curvature_scale)
-    //Q_PROPERTY(QColor CurvatureColor MEMBER _curvature_color)
 
 public:
 

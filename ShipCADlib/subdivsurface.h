@@ -113,6 +113,15 @@ public:
 
     // SubdivisionControlCurve
     size_t numberControlCurves();
+    bool hasControlCurve(SubdivisionControlCurve* curve);
+    void addControlCurve(SubdivisionControlCurve* curve);
+    size_t indexOfControlCurve(SubdivisionControlCurve* curve);
+    void deleteControlCurve(SubdivisionControlCurve* curve);
+
+    // selected SubdivisionControlCurve
+    void setSelectedControlCurve(SubdivisionControlCurve* curve);
+    void removeSelectedControlCurve(SubdivisionControlCurve* curve);
+    bool hasSelectedControlCurve(SubdivisionControlCurve* curve);
 
     // SubdivisionLayer
     size_t numberOfLayers();

@@ -69,12 +69,12 @@ public:
     // getters/setters
     bool isSelected();
     bool isVisible();
-    bool isBuild();
+    bool isBuild() { return _build; }
     QColor getColor();
-    size_t numberOfControlPoints();
+    size_t numberOfControlPoints() { return _points.size(); }
     SubdivisionControlPoint* getControlPoint(size_t index);
     void setVisible(bool val);
-    void setBuild(bool val);
+    void setBuild(bool val) { _build = val; }
     void setSelected(bool val);
     Spline* getSpline();
 
@@ -91,7 +91,6 @@ public:
 
 protected:
 
-    bool _visible;
     bool _build;
     std::vector<SubdivisionControlPoint*> _points;
     std::vector<SubdivisionPoint*> _div_points;

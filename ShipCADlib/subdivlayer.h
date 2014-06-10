@@ -91,9 +91,9 @@ public:
     size_t getLayerID();
     size_t getLayerIndex();
     float getMaterialDensity();
-    const QString& getName();
-    const QString& getDescription();
-    const QString& getDXFLayername() { return getName(); }
+    QString getName();
+    QString getDescription();
+    QString getDXFLayername() { return getName(); }
     QColor getColor() { return _color; }
     void setDevelopable(bool val);
     void setName(const QString& val);
@@ -114,6 +114,18 @@ public:
 
     // output
     void dump(std::ostream& os) const;
+
+signals:
+
+    void changedLayerData(size_t layerid);
+
+protected:
+
+    // used in calculate intersection points
+    void processTriangle(const QVector3D& p1,
+                         const QVector3D& p2,
+                         const QVector3D& p3,
+                         LayerProperties& props);
 
 protected:
 

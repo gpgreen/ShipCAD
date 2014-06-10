@@ -30,6 +30,10 @@
 #include <QFile>
 #include <QObject>
 #include <QVector3D>
+#include <QColor>
+#include <QString>
+
+#include "version.h"
 
 namespace ShipCADGeometry {
 
@@ -42,6 +46,8 @@ public:
 
     explicit FileBuffer();
     ~FileBuffer();
+
+    version_t version();
 
     void load(bool& val);
     void add(bool val);
@@ -57,6 +63,12 @@ public:
 
     void load(QVector3D& val);
     void add(const QVector3D& val);
+
+    void load(QColor& val);
+    void add(const QColor& val);
+
+    void load(QString& val);
+    void add(const QString& val);
 
 private:
 

@@ -28,6 +28,13 @@ extern QVector3D UnifiedNormal(const QVector3D& p1, const QVector3D& p2,
 			       const QVector3D& p3);
 
 extern float RadToDeg(float rad);
+
+// this function calculates if a point lies inside a triangle
+// assuming it lies on the plane determined by the triangle
+extern bool PointInTriangle(const QVector3D& intercept,
+			    const QVector3D& p0,
+			    const QVector3D& p1,
+			    const QVector3D& p2);
 };
 
 #endif

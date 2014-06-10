@@ -116,8 +116,8 @@ class SubdivisionControlFace : public SubdivisionFace
     Q_PROPERTY(QColor Color READ getColor)
     Q_PROPERTY(size_t FaceIndex READ getIndex)
     Q_PROPERTY(SubdivisionLayer* Layer READ getLayer WRITE setLayer)
-    Q_PROPERTY(QVector3D Max MEMBER _max)
-    Q_PROPERTY(QVector3D Min MEMBER _min)
+    Q_PROPERTY(QVector3D Max READ getMax)
+    Q_PROPERTY(QVector3D Min READ getMin)
     Q_PROPERTY(bool Selected READ isSelected WRITE setSelected)
     Q_PROPERTY(bool Visible READ isVisible)
 
@@ -156,6 +156,8 @@ public:
     bool isSelected();
     bool isVisible();
     void setSelected(bool val);
+    QVector3D getMin() { return _min; }
+    QVector3D getMax() { return _max; }
 
     // persistence
     void loadBinary(FileBuffer& source);

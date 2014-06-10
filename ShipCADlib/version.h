@@ -23,45 +23,49 @@
   {                                                                                             }
   {#############################################################################################*/
 
-#ifndef PLANE_H_
-#define PLANE_H_
+#ifndef VERSION_H_
+#define VERSION_H_
 
-#include <QObject>
-#include <QVector3D>
+#include <QString>
 
 namespace ShipCADGeometry {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Plane : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Plane();
-    explicit Plane(float a, float b, float c, float d);
-    explicit Plane(const QVector3D& p1,
-		   const QVector3D& p2,
-		   const QVector3D& p3);
-    ~Plane() {}
+  enum version_t {
+    fv100 = 1,
+    fv110,
+    fv120,
+    fv130,
+    fv140,
+    fv150,
+    fv160,
+    fv165,
+    fv170,
+    fv180,
+    fv190,
+    fv191,
+    fv195,
+    fv198,
+    fv200,
+    fv201,
+    fv210,
+    fv220,
+    fv230,
+    fv240,
+    fv250,
+    fv260,
+  };
 
-    float a() const
-        { return _vars[0]; }
-    float b() const
-        { return _vars[1]; }
-    float c() const
-        { return _vars[2]; }
-    float d() const
-        { return _vars[3]; }
+  const version_t k_current_version = fv260;
 
-private:
+  const QString k_released_date = QString("April 21, 2006");
 
-    float _vars[4];
-
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
+  extern QString versionString(version_t v);
 
 };				/* end namespace */
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 #endif
 

@@ -17,10 +17,17 @@ Plane::Plane(float a, float b, float c, float d)
     _vars[3] = d;
 }
 
-QPair<QVector3D, QVector3D> Plane::vertex_normal() const
+Plane::Plane(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
 {
-    QVector3D vertex;
-    QVector3D normal(_vars[0], _vars[1], _vars[2]);
-    return qMakePair(vertex, normal);
+  // calculate normal
+  QVector3D n;
+  n.setX((p2.y() - p1.y()) * (p3.x() - p1.x()) - (p2.x() - p1.x()) * (p3.y() - p1.y()));
+  n.setY((p2.x() - p1.x()) * (p3.x() - p1.x()) - (p2.x() - p1.x()) * (p3.x() - p1.x()));
+  n.setZ((p2.x() - p1.x()) * (p3.y() - p1.y()) - (p2.y() - p1.y()) * (p3.x() - p1.x()));
+  n.normalize();
+  _vars[0] = n.x() / n.length();
+  _vars[1] = n.y() / n.length();
+  _vars[2] = n.z() / n.length();
+  _vars[3] = -p1.x() * _vars[0] - p1.y() * _vars[1] - p1.z() * _vars[2];
 }
 

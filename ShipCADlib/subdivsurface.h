@@ -128,6 +128,12 @@ public:
     size_t numberOfLayers();
     SubdivisionLayer* getLayer(size_t index);
     size_t indexOfLayer(SubdivisionLayer* layer);
+    SubdivisionLayer* getActiveLayer();
+    void setActiveLayer(SubdivisionLayer* layer);
+    bool hasLayer(SubdivisionLayer* layer);
+    void deleteLayer(SubdivisionLayer* layer);
+    size_t lastUsedLayerID();
+    void setLastUsedLayerID(size_t newid);
 
     // getters/setters
     bool isBuild() { return _build; }
@@ -148,6 +154,7 @@ public:
     QColor getDartPointColor();
     QColor getCreasePointColor();
     QColor getControlCurveColor();
+    QColor getLayerColor();
 
     // output
     void dump(std::ostream& os) const;

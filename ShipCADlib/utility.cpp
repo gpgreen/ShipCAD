@@ -145,3 +145,28 @@ extern float ShipCADUtility::RadToDeg(float rad)
 {
   return rad * 180.0 / pi;
 }
+
+static bool SameSide(const QVector3D& p1,
+		     const QVector3D& p2,
+		     const QVector3D& a,
+		     const QVector3D& b)
+{
+  QVector3D ba = b - a;
+  QVector3D p = p1 - a;
+  QVector3D cp1 = QVector3D::crossProduct(p, ba);
+  p = p2 - a;
+  QVector3D cp2 = QVector3D::crossProduct(p, ba);
+  float dp = QVector3D::dotProduct(cp1, cp2);
+  if (fabs(dp) < 1E5f)
+    dp = dp - 1 + 1;
+  return dp >= 0;
+}
+
+extern bool ShipCADUtility::PointInTriangle(const QVector3D& intercept,
+					    const QVector3D& p0,
+					    const QVector3D& p1,
+					    const QVector3D& p2)
+{
+  return (SameSide(intercept, p0, p1, p2) && SameSide(intercept, p1, p0, p2)
+	  && SameSide(intercept, p2, p0, p1));
+}

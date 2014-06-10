@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     // make a spline
     Spline spline;
     spline.add(QVector3D(0,0,0));
-    spline.add(QVector3D(0.7,1.0,0));
+    spline.add(QVector3D(0.7f,1.0f,0));
     spline.add(QVector3D(1,1,0));
     spline.setProperty("Color", QColor(Qt::blue));
     spline.setProperty("ShowCurvature", true);

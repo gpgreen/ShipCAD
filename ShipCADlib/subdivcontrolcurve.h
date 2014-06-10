@@ -63,7 +63,7 @@ public:
     void deleteEdge(SubdivisionControlEdge* edge);
     void insertControlPoint(SubdivisionControlPoint* p1, SubdivisionControlPoint* p2, 
 			    SubdivisionControlPoint* newpt);
-    void addPoint(SubdivisionPoint* p);
+    void addPoint(SubdivisionControlPoint* p);
     virtual void clear();
 
     // getters/setters

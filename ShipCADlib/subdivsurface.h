@@ -41,6 +41,7 @@ class SubdivisionEdge;
 class SubdivisionFace;
 class SubdivisionControlFace;
 class SubdivisionControlEdge;
+class SubdivisionControlCurve;
 class SubdivisionLayer;
 
 // This is the subdivision surface used for modelling the hull.
@@ -134,6 +135,8 @@ public:
 
     // options
     bool showControlNet();
+    bool showControlCurves();
+    bool isDrawMirror();
     subdiv_mode_t getSubdivisionMode();
 
     QColor getSelectedColor();
@@ -144,6 +147,7 @@ public:
     QColor getCornerPointColor();
     QColor getDartPointColor();
     QColor getCreasePointColor();
+    QColor getControlCurveColor();
 
     // output
     void dump(std::ostream& os) const;

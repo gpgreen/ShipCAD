@@ -24,7 +24,8 @@ SOURCES += shipcadlib.cpp \
     subdivedge.cpp \
     subdivface.cpp \
     subdivcontrolcurve.cpp \
-    nurbsurface.cpp
+    nurbsurface.cpp \
+    subdivlayer.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

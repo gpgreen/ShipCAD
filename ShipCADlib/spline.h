@@ -95,6 +95,7 @@ public:
     void setFragments(size_t val);
     bool isKnuckle(size_t index);
     void setKnuckle(size_t index, bool val);
+    size_t numberOfPoints() { return _nopoints; }
 
     // output
     void dump(std::ostream& os) const;

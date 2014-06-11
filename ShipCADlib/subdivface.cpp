@@ -507,7 +507,7 @@ void SubdivisionControlFace::loadBinary(FileBuffer &source)
     _points.clear();
     for (size_t i=0; i<n; ++i) {
         source.load(index);
-        p1 = _owner->getControlPoints(index);
+        p1 = _owner->getControlPoint(index);
         _points.push_back(p1);
         p1->addFace(this);
     }

@@ -501,7 +501,7 @@ bool SubdivisionControlPoint::isVisible()
     // selected points must be visible at all times
     // points with no faces connected also!
     result = isSelected() || _faces.size() == 0;
-    if (!result && _owner->numberControlCurves() > 0) {
+    if (!result && _owner->numberOfControlCurves() > 0) {
         for (size_t i=0; i<numberOfEdges(); ++i) {
             if (_edges[i]->getCurve() != 0) {
                 if (_edges[i]->getCurve()->isSelected()) {

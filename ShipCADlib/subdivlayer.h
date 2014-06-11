@@ -89,6 +89,7 @@ public:
     bool useInHydrostatics();
     bool showInLinesplan();
     size_t getLayerID();
+    void setLayerID(size_t newid) { _layerid = newid; }
     size_t getLayerIndex();
     float getMaterialDensity();
     QString getName();

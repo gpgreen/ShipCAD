@@ -32,6 +32,8 @@
 #include <QColor>
 #include <QVector>
 
+#include "plane.h"
+
 namespace ShipCADGeometry {
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +86,7 @@ public:
     void calculateIntersections();
     void extractAllEdgeLoops();
     void extractPointsFromFaces();
-    viod extractPointsFromSelection();
+    void extractPointsFromSelection();
     void importGrid();
     bool intersectPlane();
     void insertPlane();
@@ -150,6 +152,10 @@ public:
     size_t numberOfControlFaces();
     size_t indexOfControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* getControlFace(size_t index);
+    SubdivisionControlFace* getControlFace(SubdivisionPoint* p1,
+                                    SubdivisionPoint* p2,
+                                    SubdivisionPoint* p3,
+                                    SubdivisionPoint* p4);
     bool hasControlFace(SubdivisionControlFace* face);
     void addControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points);
@@ -277,7 +283,7 @@ protected:
     QColor _control_curve_color;
     QColor _zebra_color;
 
-    Plane3D _waterline_plane;
+    Plane _waterline_plane;
     
     size_t _last_used_layerID;
 

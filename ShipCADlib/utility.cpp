@@ -162,11 +162,17 @@ static bool SameSide(const QVector3D& p1,
   return dp >= 0;
 }
 
-extern bool ShipCADUtility::PointInTriangle(const QVector3D& intercept,
-					    const QVector3D& p0,
-					    const QVector3D& p1,
-					    const QVector3D& p2)
+bool ShipCADUtility::PointInTriangle(const QVector3D& intercept,
+                            const QVector3D& p0,
+                            const QVector3D& p1,
+                            const QVector3D& p2)
 {
   return (SameSide(intercept, p0, p1, p2) && SameSide(intercept, p1, p0, p2)
 	  && SameSide(intercept, p2, p0, p1));
+}
+
+float ShipCADUtility::SquaredDistPP(const QVector3D& p1, const QVector3D& p2)
+{
+    QVector3D p21 = p2 - p1;
+    return p21.length() * p21.length();
 }

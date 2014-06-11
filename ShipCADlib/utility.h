@@ -35,6 +35,10 @@ extern bool PointInTriangle(const QVector3D& intercept,
 			    const QVector3D& p0,
 			    const QVector3D& p1,
 			    const QVector3D& p2);
+
+// calculates the squared distance between 2 points
+extern float SquaredDistPP(const QVector3D& p1, const QVector3D& p2);
+
 };
 
 #endif

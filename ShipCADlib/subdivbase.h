@@ -47,7 +47,10 @@ public:
     explicit SubdivisionBase(SubdivisionSurface* owner);
     virtual ~SubdivisionBase();
     
-    SubdivisionSurface* getOwner() const;
+    SubdivisionSurface* getOwner() { return _owner; }
+    virtual void setOwner(SubdivisionSurface* newowner)
+        { _owner = newowner; }
+
 
     virtual void clear() = 0;
     virtual void draw(Viewport& vp) = 0;

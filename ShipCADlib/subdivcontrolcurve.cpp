@@ -200,7 +200,7 @@ void SubdivisionControlCurve::loadBinary(FileBuffer &source)
     SubdivisionControlPoint* p1 = 0;
     for (size_t i=1; i<=n; ++i) {
         source.load(ind);
-        SubdivisionControlPoint* p2 = _owner->getControlPoints(ind);
+        SubdivisionControlPoint* p2 = _owner->getControlPoint(ind);
         _points.push_back(p2);
         if (i > 1) {
             SubdivisionEdge* edge = _owner->edgeExists(p1, p2);

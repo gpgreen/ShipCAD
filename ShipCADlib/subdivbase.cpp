@@ -19,11 +19,6 @@ SubdivisionBase::~SubdivisionBase()
     // does nothing
 }
 
-SubdivisionSurface* SubdivisionBase::getOwner() const
-{
-    return _owner;
-}
-
 void SubdivisionBase::dump(ostream& os) const
 {
     os << " Owner:" << hex << _owner;

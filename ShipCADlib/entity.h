@@ -78,6 +78,7 @@ public:
     virtual void draw(Viewport& vp) = 0;
     virtual void rebuild() = 0;
 
+    // getters/setters
     QVector3D getMin();
     QVector3D getMax();
     bool isBuild();

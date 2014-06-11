@@ -508,11 +508,11 @@ void SubdivisionControlEdge::load_binary(FileBuffer& source)
     size_t index;
     // read startpoint
     source.load(index);
-    _points[0] = _owner->getControlPoints(index);
+    _points[0] = _owner->getControlPoint(index);
     _points[0]->addEdge(this);
     // read endpoint
     source.load(index);
-    _points[1] = _owner->getControlPoints(index);
+    _points[1] = _owner->getControlPoint(index);
     _points[1]->addEdge(this);
     bool val;
     source.load(val);

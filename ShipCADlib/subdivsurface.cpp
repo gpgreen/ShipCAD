@@ -15,6 +15,7 @@
 
 using namespace std;
 using namespace ShipCADGeometry;
+using namespace ShipCADUtility;
 
 static QVector3D ZERO = QVector3D(0,0,0);
 
@@ -22,7 +23,7 @@ static QVector3D ZERO = QVector3D(0,0,0);
 
 SubdivisionSurface::SubdivisionSurface()
 {
-  clear();
+    clear();
 }
 
 SubdivisionSurface::~SubdivisionSurface()
@@ -30,111 +31,112 @@ SubdivisionSurface::~SubdivisionSurface()
     // does nothing
 }
 
-SubdivisionControlPoint* newControlPoint(const QVector3D& p)
+SubdivisionControlPoint* SubdivisionSurface::newControlPoint(const QVector3D& p)
 {
-  SubdivisionControlPoint* p = new SubdivisionControlPoint(this);
-  p->setCoordinate(p);
-  _control_points.push_back(p);
-  return p;
+    SubdivisionControlPoint* pt = new SubdivisionControlPoint(this);
+    pt->setCoordinate(p);
+    _control_points.push_back(pt);
+    return pt;
 }
 
 SubdivisionControlPoint* SubdivisionSurface::addControlPoint(const QVector3D& pt)
 {
-  SubdivisionControlPoint* result = 0;
-  double max_error = 1E-5;
-  for (size_t i=1; i<=numberOfControlEdges(); ++i) {
-    SubdivisionControlEdge* edge = getControlEdge(i-1);
-    if (edge->numberOfFaces() <= 1) { // boundary edge
-      if (SquaredDistPP(p, edge->startPoint()->getCoordinate()) <= max_error) {
-	result = dynamic_cast<SubdivisionControlPoint*>(edge->startPoint());
-	break;
-      }
-      else if (SquaredDistPP(p, edge->endPoint()->getCoordinate()) <= max_error) {
-	result = dynamic_cast<SubdivisionControlPoint*>(edge->endPoint());
-	break;
-      }
+    SubdivisionControlPoint* result = 0;
+    double max_error = 1E-5;
+    for (size_t i=1; i<=numberOfControlEdges(); ++i) {
+        SubdivisionControlEdge* edge = getControlEdge(i-1);
+        if (edge->numberOfFaces() <= 1) { // boundary edge
+            if (SquaredDistPP(pt, edge->startPoint()->getCoordinate()) <= max_error) {
+                result = dynamic_cast<SubdivisionControlPoint*>(edge->startPoint());
+                break;
+            }
+            else if (SquaredDistPP(pt, edge->endPoint()->getCoordinate()) <= max_error) {
+                result = dynamic_cast<SubdivisionControlPoint*>(edge->endPoint());
+                break;
+            }
+        }
     }
-  }
-  if (result == 0) {
-    // search controlpoints without edges
-    for (size_t i=1; i<=numberOfControlPoints(); ++i) {
-      SubdivisionControlPoint* point = getControlPoint(i-1);
-      if (point->numberOfEdges() == 0) {
-	if (SquaredDistPP(p, point->getCoordinate()) <= max_error) {
-	  result = point;
-	  break;
-	}
-      }
+    if (result == 0) {
+        // search controlpoints without edges
+        for (size_t i=1; i<=numberOfControlPoints(); ++i) {
+            SubdivisionControlPoint* point = getControlPoint(i-1);
+            if (point->numberOfEdges() == 0) {
+                if (SquaredDistPP(pt, point->getCoordinate()) <= max_error) {
+                    result = point;
+                    break;
+                }
+            }
+        }
     }
-  }
-  if (result == 0) {
-    result = newPoint(p);
-  }
-  return result;
+    if (result == 0) {
+        result = newControlPoint(pt);
+    }
+    return result;
 }
 
 void SubdivisionSurface::addControlPoint(SubdivisionControlPoint* pt)
 {
-  if (!hasControlPoint(pt)) {
-    _control_points.push_back(pt);
-    pt->setOwner(this);
-  }
-  setBuild(false);
+    if (!hasControlPoint(pt)) {
+        _control_points.push_back(pt);
+        pt->setOwner(this);
+    }
+    setBuild(false);
 }
 
 SubdivisionControlPoint* SubdivisionSurface::addControlPoint()
 {
-  SubdivisionControlPoint* result = new SubdivisionControlPoint(this);
-  result->setCoordinate(ZERO);
-  _control_points.push_back(result);
-  return result;
+    SubdivisionControlPoint* result = new SubdivisionControlPoint(this);
+    result->setCoordinate(ZERO);
+    _control_points.push_back(result);
+    return result;
 }
 
-SubdivisionLayer* addNewLayer()
+SubdivisionLayer* SubdivisionSurface::addNewLayer()
 {
-  SubdivisionLayer* result = new SubdivisionLayer(this);
-  _layers.push_back(result);
-  result->setLayerID(requestNewLayerID());
-  setActiveLayer(result);
-  emit changedLayerData();
+    SubdivisionLayer* result = new SubdivisionLayer(this);
+    _layers.push_back(result);
+    result->setLayerID(requestNewLayerID());
+    setActiveLayer(result);
+    emit changedLayerData();
+    return result;
 }
 
 // used in assembleFacesToPatches
-SubdivisionControlFace* getControlFace(SubdivisionPoint* p1,
-				       SubdivisionPoint* p2,
-				       SubdivisionPoint* p3,
-				       SubdivisionPoint* p4)
+SubdivisionControlFace* SubdivisionSurface::getControlFace(SubdivisionPoint* p1,
+                                                           SubdivisionPoint* p2,
+                                                           SubdivisionPoint* p3,
+                                                           SubdivisionPoint* p4)
 {
-  SubdivisionFace* face;
-  SubdivisionControlFace* cface = 0;
-  for (size_t i=1; i<=p1->numberOfFaces(); ++i) {
-    face = p1->getFace(i-1);
-    if (p2->hasFace(face) && p3->hasFace(face) && p4->hasFace(face)) {
-      cface = dynamic_cast<SubdivisionControlFace*>(face);
-      break;
+    SubdivisionFace* face;
+    SubdivisionControlFace* cface = 0;
+    for (size_t i=1; i<=p1->numberOfFaces(); ++i) {
+        face = p1->getFace(i-1);
+        if (p2->hasFace(face) && p3->hasFace(face) && p4->hasFace(face)) {
+            cface = dynamic_cast<SubdivisionControlFace*>(face);
+            break;
+        }
     }
-  }
-  return cface;
+    return cface;
 }
 
 // tries to assemble quads into as few as possible rectangular patches
 void SubdivisionSurface::assembleFacesToPatches(vector<SubdivisionLayer*>& layers,
-						assemble_mode_t mode,
-						vector<SubdivisionFace*>& assembledPatches,
-						size_t& nAssembled)
+                                                assemble_mode_t mode,
+                                                vector<SubdivisionFace*>& assembledPatches,
+                                                size_t& nAssembled)
 {
 }
 
 void SubdivisionSurface::setSelectedControlEdge(SubdivisionControlEdge* edge)
 {
-  if (!hasSelectedControlEdge(edge))
-    _sel_control_edges.push_back(edge);
+    if (!hasSelectedControlEdge(edge))
+        _sel_control_edges.push_back(edge);
 }
 
 bool SubdivisionSurface::hasSelectedControlEdge(SubdivisionControlEdge* edge)
 {
-  return (find(_sel_control_edges.begin(), _sel_control_edges.end(), edge) 
-	  != _sel_control_edges.end());
+    return (find(_sel_control_edges.begin(), _sel_control_edges.end(), edge)
+            != _sel_control_edges.end());
 }
 
 void SubdivisionSurface::dump(ostream& os) const

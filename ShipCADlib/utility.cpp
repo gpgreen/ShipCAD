@@ -176,3 +176,4 @@ float ShipCADUtility::SquaredDistPP(const QVector3D& p1, const QVector3D& p2)
     QVector3D p21 = p2 - p1;
     return p21.length() * p21.length();
 }
+

@@ -30,7 +30,7 @@
 #include <vector>
 #include <QObject>
 #include <QColor>
-#include <QVector>
+#include <QVector3D>
 
 #include "plane.h"
 
@@ -101,7 +101,7 @@ public:
     SubdivisionPoint* getPoint(size_t index);
 
     // SubdivisionControlPoint
-    size_t numberOfControlPoints();
+    size_t numberOfControlPoints() {return _control_points.size();}
     size_t indexOfControlPoint(SubdivisionControlPoint* pt);
     bool hasControlPoint(SubdivisionControlPoint* pt);
     SubdivisionControlPoint* getControlPoint(size_t index);
@@ -111,7 +111,7 @@ public:
     SubdivisionControlPoint* addControlPoint();
 
     // selected SubdivisionControlPoint
-    size_t numberOfSelectedControlPoints();
+    size_t numberOfSelectedControlPoints() {return _sel_control_points.size();}
     bool hasSelectedControlPoint(SubdivisionControlPoint* pt);
     void setSelectedControlPoint(SubdivisionControlPoint* pt);
     void removeSelectedControlPoint(SubdivisionControlPoint* pt);
@@ -124,7 +124,7 @@ public:
     SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
 
     // SubdivisionControlEdge
-    size_t numberOfControlEdges();
+    size_t numberOfControlEdges() {return _control_edges.size();}
     size_t indexOfControlEdge(SubdivisionControlEdge* edge);
     SubdivisionControlEdge* getControlEdge(size_t index);
     bool hasControlEdge(SubdivisionControlEdge* edge);
@@ -136,20 +136,19 @@ public:
 		      std::vector<std::vector<SubdivisionControlPoint*> >& sorted);
 
     // selected SubdivisionControlEdge
-    size_t numberOfSelectedControlEdges();
+    size_t numberOfSelectedControlEdges() {return _sel_control_edges.size();}
     void setSelectedControlEdge(SubdivisionControlEdge* edge);
     void removeSelectedControlEdge(SubdivisionControlEdge* edge);
     bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
 
     // SubdivisionFace
     size_t numberOfFaces();
-    size_t indexOfFace(SubdivisionFace* face);
     SubdivisionFace* getFace(size_t index);
     void deleteFace(SubdivisionFace* face);
     void clearFaces();
 
     // SubdivisionControlFace
-    size_t numberOfControlFaces();
+    size_t numberOfControlFaces() {return _control_faces.size();}
     size_t indexOfControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* getControlFace(size_t index);
     SubdivisionControlFace* getControlFace(SubdivisionPoint* p1,
@@ -158,7 +157,7 @@ public:
                                     SubdivisionPoint* p4);
     bool hasControlFace(SubdivisionControlFace* face);
     void addControlFace(SubdivisionControlFace* face);
-    SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points);
+    SubdivisionControlFace* addControlFace(std::vector<QVector3D>& points);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
 					   bool check_edges);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
@@ -166,13 +165,13 @@ public:
     void deleteControlFace(SubdivisionControlFace* face);
 
     // selected SubdivisionControlFace
-    size_t numberOfSelectedControlFaces();
+    size_t numberOfSelectedControlFaces() {return _sel_control_faces.size();}
     void setSelectedControlFace(SubdivisionControlFace* face);
     void removeSelectedControlFace(SubdivisionControlFace* face);
     bool hasSelectedControlFace(SubdivisionControlFace* face);
 
     // SubdivisionControlCurve
-    size_t numberOfControlCurves();
+    size_t numberOfControlCurves() {return _control_curves.size();}
     size_t indexOfControlCurve(SubdivisionControlCurve* curve);
     SubdivisionControlCurve* getControlCurve(size_t index);
     bool hasControlCurve(SubdivisionControlCurve* curve);
@@ -180,13 +179,13 @@ public:
     void deleteControlCurve(SubdivisionControlCurve* curve);
 
     // selected SubdivisionControlCurve
-    size_t numberOfSelectedControlCurves();
+    size_t numberOfSelectedControlCurves() {return _sel_control_curves.size();}
     void setSelectedControlCurve(SubdivisionControlCurve* curve);
     void removeSelectedControlCurve(SubdivisionControlCurve* curve);
     bool hasSelectedControlCurve(SubdivisionControlCurve* curve);
 
     // SubdivisionLayer
-    size_t numberOfLayers();
+    size_t numberOfLayers() {return _layers.size();}
     size_t indexOfLayer(SubdivisionLayer* layer);
     SubdivisionLayer* getLayer(size_t index);
     SubdivisionLayer* getActiveLayer();
@@ -202,8 +201,9 @@ public:
     bool isBuild() { return _build; }
     void setBuild(bool val);
     void setDesiredSubdivisionLevel(int val);
-    void setShowControlNet(bool val);
+    void setShowControlNet(bool val) {_show_control_net = val;}
     void setSubdivisionMode(subdiv_mode_t val);
+    bool isGaussCurvatureCalculated();
 
     // options
     bool showControlNet();
@@ -240,10 +240,14 @@ public:
 signals:
 
     void changedLayerData();
+    void changeActiveLayer();
 
 protected:
 
     SubdivisionControlPoint* newControlPoint(const QVector3D& p);
+    void findAttachedFaces(std::vector<SubdivisionControlFace*>& found_list,
+                            std::vector<SubdivisionControlFace*>& todo_list,
+                            SubdivisionControlFace* face);
 
 protected:
 
@@ -307,6 +311,8 @@ protected:
     std::vector<SubdivisionControlFace*> _sel_control_faces;
     std::vector<SubdivisionControlCurve*> _sel_control_curves;
     
+    std::vector<float> _gaus_curvature;
+
     // currently active layer, may not be 0
     SubdivisionLayer* _active_layer;
 };

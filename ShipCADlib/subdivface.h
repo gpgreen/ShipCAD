@@ -130,6 +130,7 @@ public:
     void calcExtents();
     virtual void clear();
     void clearChildren();
+    void clearControlEdges() {_control_edges.clear();}
     SubdivisionControlEdge* insertControlEdge(SubdivisionControlPoint* p1,
                                               SubdivisionControlPoint* p2);
     void removeReferences();

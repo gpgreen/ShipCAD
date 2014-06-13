@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <stdexcept>
 
 #include "subdivsurface.h"
 #include "subdivpoint.h"
@@ -154,6 +155,7 @@ void SubdivisionSurface::assembleFacesToPatches(vector<SubdivisionLayer*>& layer
                                                 vector<SubdivisionFace*>& assembledPatches,
                                                 size_t& nAssembled)
 {
+    // BUGBUG: not implemented
 }
 
 void SubdivisionSurface::calculateGaussCurvature()
@@ -475,6 +477,184 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<QVector3D
         result = 0;
     setBuild(false);
     return result;
+}
+
+SubdivisionControlEdge* SubdivisionSurface::addControlEdge(SubdivisionPoint *sp, SubdivisionPoint *ep)
+{
+    SubdivisionControlEdge* edge = controlEdgeExists(sp, ep);
+    if (edge == 0) {
+        edge = new SubdivisionControlEdge(this);
+        edge->setPoints(sp, ep);
+        edge->setControlEdge(true);
+        sp->addEdge(edge);
+        ep->addEdge(edge);
+        _control_edges.push_back(edge);
+    }
+    return edge;
+}
+
+void SubdivisionSurface::addControlCurve(SubdivisionControlCurve *curve)
+{
+    _control_curves.push_back(curve);
+    curve->setOwner(this);
+    setBuild(false);
+}
+
+SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<SubdivisionControlPoint *> &points, bool check_edges, SubdivisionLayer *layer)
+{
+    SubdivisionControlFace* result = 0;
+    SubdivisionControlPoint* p1, *p2;
+    SubdivisionControlEdge* edge;
+
+    if (points.size() > 2 && points.back() == points.front())
+        points.pop_back();
+    if (points.size() > 2) {
+        if (points.back() == points.front())
+            points.pop_back();
+        // check if another patch with the same vertices exists
+        bool face_exists = false;
+        size_t i = 1;
+        while (i <= points.size()) {
+            p1 = points[i-1];
+            size_t j = 1;
+            while (j <= p1->numberOfFaces()) {
+                SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(p1->getFace(j-1));
+                if (face->numberOfPoints() == points.size()) {
+                    face_exists = true;
+                    size_t n = 1;
+                    while (n <= points.size() && face_exists) {
+                        if (face->hasPoint(points[n-1])) {
+                            n = points.size();
+                            face_exists = false;
+                        }
+                        else
+                            ++n;
+                    }
+                    if (face_exists) {
+                        result = 0;
+                        return 0;
+                    }
+                }
+                ++j;
+            }
+            ++i;
+        }
+        if (face_exists) {
+            result = 0;
+            return 0;
+        }
+        result = new SubdivisionControlFace(this);
+        if (layer == 0)
+            result->setLayer(getLayer(0));
+        else
+            result->setLayer(layer);
+        layer->addControlFace(result);
+        _control_faces.push_back(result);
+        p1 = points.back();
+        for (size_t i=1; i<=points.size(); ++i) {
+            p2 = points[i-1];
+            p2->addFace(result);
+            result->addPoint(p2);
+            edge = controlEdgeExists(p1, p2);
+            if (edge == 0) {
+                edge = new SubdivisionControlEdge(this);
+                edge->setPoints(p1, p2);
+                edge->setControlEdge(true);
+                p1->addEdge(edge);
+                p2->addEdge(edge);
+                _control_edges.push_back(edge);
+                edge->addFace(result);
+                edge->setCrease(true);
+            }
+            else {
+                edge->addFace(result);
+                if (check_edges)
+                    edge->setCrease(edge->numberOfFaces() < 2);
+            }
+            p1 = p2;
+        }
+        if (result->numberOfPoints() < 3) {
+            delete result;
+            result = 0;
+        }
+        else
+            setBuild(false);
+    }
+    return result;
+}
+
+SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<SubdivisionControlPoint *> &points, bool check_edges)
+{
+    return addControlFace(points, check_edges, 0);
+}
+
+void SubdivisionSurface::clear()
+{
+    for (size_t i=1; i<=_control_curves.size(); ++i)
+        delete _control_curves[i-1];
+    for (size_t i=1; i<=_control_faces.size(); ++i)
+        delete _control_faces[i-1];
+    for (size_t i=1; i<=_control_edges.size(); ++i)
+        delete _control_edges[i-1];
+    for (size_t i=1; i<=_control_points.size(); ++i)
+        delete _control_points[i-1];
+    _control_curves.clear();
+    _control_faces.clear();
+    _control_edges.clear();
+    _control_points.clear();
+    for (size_t i=1; i<=_edges.size(); ++i)
+        delete _edges[i-1];
+    for (size_t i=1; i<=_points.size(); ++i)
+        delete _points[i-1];
+    for (size_t i=1; i<=_layers.size(); ++i)
+        delete _layers[i-1];
+    _edges.clear();
+    _points.clear();
+    _layers.clear();
+    emit changedLayerData();
+    _last_used_layerID = 0;
+    _sel_control_curves.clear();
+    _sel_control_edges.clear();
+    _sel_control_faces.clear();
+    _sel_control_points.clear();
+    // add one default layer and set it to active
+    SubdivisionLayer* layer = addNewLayer();
+    _active_layer = layer;
+    setBuild(false);
+    _draw_mirror = false;
+    _show_control_net = true;
+    _show_interior_edges = false;
+    _initialized = false;
+    _desired_subdiv_level = -1;
+    _show_normals = true;
+    _shade_under_water = false;
+    _main_frame_location = 1E10;
+}
+
+void SubdivisionSurface::clearFaces()
+{
+    for (size_t i=1; i<=numberOfControlFaces(); ++i) {
+        getControlFace(i-1)->clearChildren();       // deletes children and rendermesh
+    }
+    for (size_t i=1; i<=numberOfEdges(); ++i) {
+        delete getEdge(i-1);
+    }
+    _edges.clear();
+    for (size_t i=1; i<=numberOfPoints(); ++i) {
+        delete getPoint(i-1);
+    }
+    _points.clear();
+    for (size_t i=1; i<=numberOfControlFaces(); ++i)
+        getControlFace(i-1)->clearControlEdges();
+}
+
+void SubdivisionSurface::clearSelection()
+{
+    _sel_control_curves.clear();
+    _sel_control_edges.clear();
+    _sel_control_faces.clear();
+    _sel_control_points.clear();
+    emit selectItem(0);
 }
 
 bool SubdivisionSurface::validFace(SubdivisionFace* face,
@@ -951,20 +1131,20 @@ void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>&
 
 void SubdivisionSurface::extents(QVector3D& min, QVector3D& max)
 {
-  if (!isBuild())
-    rebuild();
-  if (numberOfControlFaces() > 0) {
-    for (size_t i=1; i<=numberOfLayers(); ++i)
-      getLayer(i-1).extents(min, max);
-    for (size_t i=1; i<=numberOfControlPoints(); ++i) {
-      if (_control_points[i-1]->numberOfFaces() == 0)
-	MinMax(_control_points[i-1]->getCoordinate(), min, max);
+    if (!isBuild())
+        rebuild();
+    if (numberOfControlFaces() > 0) {
+        for (size_t i=1; i<=numberOfLayers(); ++i)
+            getLayer(i-1)->extents(min, max);
+        for (size_t i=1; i<=numberOfControlPoints(); ++i) {
+            if (_control_points[i-1]->numberOfFaces() == 0)
+                MinMax(_control_points[i-1]->getCoordinate(), min, max);
+        }
     }
-  }
-  else {
-    MinMax(_min, min, max);
-    MinMax(_max, min, max);
-  }
+    else {
+        MinMax(_min, min, max);
+        MinMax(_max, min, max);
+    }
 }
 
 void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,

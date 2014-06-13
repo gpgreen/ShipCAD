@@ -38,6 +38,7 @@ namespace ShipCADGeometry {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+class SubdivisionBase;
 class SubdivisionPoint;
 class SubdivisionControlPoint;
 class SubdivisionEdge;
@@ -246,6 +247,7 @@ signals:
 
     void changedLayerData();
     void changeActiveLayer();
+    void selectItem(SubdivisionBase*);
 
 protected:
 
@@ -298,6 +300,8 @@ protected:
     QColor _zebra_color;
 
     Plane _waterline_plane;
+    QVector3D _min;
+    QVector3D _max;
     
     size_t _last_used_layerID;
 

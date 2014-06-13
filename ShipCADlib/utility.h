@@ -3,6 +3,7 @@
 
 #include <QVector3D>
 #include <QColor>
+#include <QString>
 
 namespace ShipCADUtility {
 
@@ -38,6 +39,9 @@ extern bool PointInTriangle(const QVector3D& intercept,
 
 // calculates the squared distance between 2 points
 extern float SquaredDistPP(const QVector3D& p1, const QVector3D& p2);
+
+// returns "0" for false, and "1" for true
+extern QString BoolToStr(bool val);
 
 };
 

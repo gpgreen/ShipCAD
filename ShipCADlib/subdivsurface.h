@@ -52,13 +52,17 @@ class FileBuffer;
 // This is the subdivision surface used for modelling the hull.
 // This is actually a quad-triangle subdivision surface as publisehed in the articles:
 //
-//   "Quad/triangle subdivision" by J. Stam & C. Loop http://research.microsoft.com/~cloop/qtEG.pdf
+//   "Quad/triangle subdivision" by J. Stam & C. Loop 
+//       http://research.microsoft.com/~cloop/qtEG.pdf
 //   "On C2 triangle/quad subdivision" by Scott Schaeffer & Joe Warren
 class SubdivisionSurface : public QObject
 {
     Q_OBJECT
 
 public:
+
+    typedef std::vector<std::vector<SubdivisionControlFace*> > face_grid_t;
+    typedef std::vector<std::vector<SubdivisionPoint*> > grid_t;
 
     enum subdiv_mode_t {fmQuadTriangle, fmCatmullClark};
     enum assemble_mode_t {amRegular, amNURBS};
@@ -74,15 +78,16 @@ public:
 
     // tries to assemble quads into as few as possible rectangular patches
     void assembleFacesToPatches(std::vector<SubdivisionLayer*>& layers,
-				assemble_mode_t mode,
-				std::vector<SubdivisionFace*>& assembledPatches,
-				size_t& nAssembled);
+                                assemble_mode_t mode,
+                                std::vector<SubdivisionFace*>& assembledPatches,
+                                size_t& nAssembled);
     void calculateGaussCurvature();
     void clearSelection();
-    void convertToGrid();
+    void convertToGrid(face_grid_t& input, grid_t& grid);
     void edgeConnect();
     void extents(QVector3D& min, QVector3D& max);
-    void extrudeEdges();
+    void extrudeEdges(std::vector<SubdivisionControlEdge*>& edges,
+		      const QVector3D& direction);
     void calculateIntersections();
     void extractAllEdgeLoops();
     void extractPointsFromFaces();
@@ -132,8 +137,8 @@ public:
     void addControlEdge(SubdivisionControlEdge* edge);
     SubdivisionControlEdge* controlEdgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
     void deleteControlEdge(SubdivisionControlEdge* edge);
-    void isolateEdges(std::vector<SubdivisionControlEdge*>& input, 
-		      std::vector<std::vector<SubdivisionControlPoint*> >& sorted);
+    void isolateEdges(std::vector<SubdivisionControlEdge*>& input,
+                      std::vector<std::vector<SubdivisionControlPoint*> >& sorted);
 
     // selected SubdivisionControlEdge
     size_t numberOfSelectedControlEdges() {return _sel_control_edges.size();}
@@ -152,16 +157,16 @@ public:
     size_t indexOfControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* getControlFace(size_t index);
     SubdivisionControlFace* getControlFace(SubdivisionPoint* p1,
-                                    SubdivisionPoint* p2,
-                                    SubdivisionPoint* p3,
-                                    SubdivisionPoint* p4);
+                                           SubdivisionPoint* p2,
+                                           SubdivisionPoint* p3,
+                                           SubdivisionPoint* p4);
     bool hasControlFace(SubdivisionControlFace* face);
     void addControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* addControlFace(std::vector<QVector3D>& points);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
-					   bool check_edges);
+                                           bool check_edges);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
-					   bool check_edges, SubdivisionLayer* layer);
+                                           bool check_edges, SubdivisionLayer* layer);
     void deleteControlFace(SubdivisionControlFace* face);
 
     // selected SubdivisionControlFace
@@ -246,8 +251,13 @@ protected:
 
     SubdivisionControlPoint* newControlPoint(const QVector3D& p);
     void findAttachedFaces(std::vector<SubdivisionControlFace*>& found_list,
-                            std::vector<SubdivisionControlFace*>& todo_list,
-                            SubdivisionControlFace* face);
+                           std::vector<SubdivisionControlFace*>& todo_list,
+                           SubdivisionControlFace* face);
+    bool validFace(SubdivisionFace* face,
+                   std::vector<SubdivisionFace*>& faces,
+                   std::vector<SubdivisionFace*>& tmpfaces);
+    void doAssemble(grid_t& grid, size_t& cols, size_t& rows,
+                    std::vector<SubdivisionFace*>& faces);
 
 protected:
 

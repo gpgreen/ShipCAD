@@ -286,7 +286,7 @@ bool SubdivisionLayer::calculateIntersectionPoints(SubdivisionLayer* layer)
                         // this is also a new point, first check if an edge already exists between p1 and p2
                         if (_owner->edgeExists(p1, p2) == 0) {
                             inserted = true;
-                            edge = face->insertEdge(p1, p2);
+                            edge = face->insertControlEdge(p1, p2);
                             edge->setSelected(true);
                             edges.push_back(edge);
                         }

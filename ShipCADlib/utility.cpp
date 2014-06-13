@@ -177,3 +177,7 @@ float ShipCADUtility::SquaredDistPP(const QVector3D& p1, const QVector3D& p2)
     return p21.length() * p21.length();
 }
 
+QString ShipCADUtility::BoolToStr(bool val)
+{
+    return QString( (val ? "1" : "0") );
+}

@@ -65,12 +65,12 @@ public:
     void insertPoint(size_t index, SubdivisionPoint* point);
     void clear();
     virtual void subdivide(SubdivisionSurface* owner, bool controlface,
-	std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
-	std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
-	std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
-	std::vector<SubdivisionEdge*>& interioredges,
-	std::vector<SubdivisionEdge*>& controledges,
-	std::vector<SubdivisionFace*>& dest);
+                           std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
+                           std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
+                           std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
+                           std::vector<SubdivisionEdge*>& interioredges,
+                           std::vector<SubdivisionEdge*>& controledges,
+                           std::vector<SubdivisionFace*>& dest);
 
     // getters/setters
     size_t numberOfPoints() { return _points.size(); }
@@ -130,16 +130,16 @@ public:
     void calcExtents();
     virtual void clear();
     void clearChildren();
-    SubdivisionControlEdge* insertEdge(SubdivisionControlPoint* p1,
-				       SubdivisionControlPoint* p2);
+    SubdivisionControlEdge* insertControlEdge(SubdivisionControlPoint* p1,
+                                              SubdivisionControlPoint* p2);
     void removeReferences();
     virtual void subdivide(SubdivisionSurface* owner,
-        std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
-        std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
-        std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
-        std::vector<SubdivisionEdge*>& interioredges,
-        std::vector<SubdivisionEdge*>& controledges,
-        std::vector<SubdivisionFace*>& dest);
+                           std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
+                           std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
+                           std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
+                           std::vector<SubdivisionEdge*>& interioredges,
+                           std::vector<SubdivisionEdge*>& controledges,
+                           std::vector<SubdivisionFace*>& dest);
     void trace();
 
     // getters/setters
@@ -158,6 +158,9 @@ public:
     void setSelected(bool val);
     QVector3D getMin() { return _min; }
     QVector3D getMax() { return _max; }
+    // iterators to beginning/ending of _children list
+    std::vector<SubdivisionFace*>::iterator childrenBegin() {return _children.begin();}
+    std::vector<SubdivisionFace*>::iterator childrenEnd() {return _children.end();}
 
     // persistence
     void loadBinary(FileBuffer& source);

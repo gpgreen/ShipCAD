@@ -347,7 +347,7 @@ void SubdivisionControlFace::draw(Viewport& /*vp*/)
     // does nothing
 }
 
-SubdivisionControlEdge* SubdivisionControlFace::insertEdge(
+SubdivisionControlEdge* SubdivisionControlFace::insertControlEdge(
         SubdivisionControlPoint *p1, SubdivisionControlPoint *p2)
 {
     SubdivisionControlEdge* result = 0;

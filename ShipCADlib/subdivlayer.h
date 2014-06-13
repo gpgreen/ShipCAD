@@ -83,15 +83,17 @@ public:
     LayerProperties getSurfaceProperties();
 
     // getters/setters
-    bool isVisible();
-    bool isSymmetric();
-    bool isDevelopable();
-    bool useInHydrostatics();
-    bool showInLinesplan();
+    bool isVisible() {return _visible;}
+    bool isSymmetric() {return _symmetric;}
+    bool isDevelopable() {return _developable;}
+    bool useForIntersections() {return _use_for_intersections;}
+    bool useInHydrostatics() {return _use_in_hydrostatics;}
+    bool showInLinesplan() {return _show_in_linesplan;}
     size_t getLayerID();
     void setLayerID(size_t newid) { _layerid = newid; }
     size_t getLayerIndex();
-    float getMaterialDensity();
+    float getMaterialDensity() {return _material_density;}
+    float getThickness() {return _thickness;}
     QString getName();
     QString getDescription();
     QString getDXFLayername() { return getName(); }

@@ -49,6 +49,7 @@ class SubdivisionControlCurve;
 class SubdivisionLayer;
 class Viewport;
 class FileBuffer;
+class Spline;
 
 // This is the subdivision surface used for modelling the hull.
 // This is actually a quad-triangle subdivision surface as publisehed in the articles:
@@ -72,7 +73,7 @@ public:
     virtual ~SubdivisionSurface();
 
     virtual void clear();
-    void initialize();
+    void initialize(size_t point_start, size_t edge_start, size_t face_start);
     void rebuild();
 
     // modifiers
@@ -89,7 +90,9 @@ public:
     void extents(QVector3D& min, QVector3D& max);
     void extrudeEdges(std::vector<SubdivisionControlEdge*>& edges,
 		      const QVector3D& direction);
-    void calculateIntersections();
+    void calculateIntersections(const Plane& plane,
+                                std::vector<SubdivisionControlFace*>& faces,
+                                std::vector<Spline*>& destination);
     void extractAllEdgeLoops();
     void extractPointsFromFaces();
     void extractPointsFromSelection();

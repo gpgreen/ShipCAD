@@ -31,3 +31,8 @@ Plane::Plane(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
   _vars[3] = -p1.x() * _vars[0] - p1.y() * _vars[1] - p1.z() * _vars[2];
 }
 
+float Plane::distance(const QVector3D& point) const
+{
+    return _vars[0] * point.x() + _vars[1] * point.y()
+            + _vars[2] * point.z() + _vars[3];
+}

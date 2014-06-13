@@ -1147,9 +1147,236 @@ void SubdivisionSurface::extents(QVector3D& min, QVector3D& max)
     }
 }
 
+// predicate class to find an element with given point
+struct ExistPointPred {
+    ShipCADGeometry::SubdivisionControlPoint* _querypt;
+    bool operator()(const pair<ShipCADGeometry::SubdivisionControlPoint*, ShipCADGeometry::SubdivisionControlPoint*>& val)
+    {
+        return val.first == _querypt;
+    }
+    ExistPointPred (ShipCADGeometry::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
+};
+
+// predicate class to find an element with given point
+struct ExtrudePointPred {
+    ShipCADGeometry::SubdivisionControlPoint* _querypt;
+    bool operator()(const pair<ShipCADGeometry::SubdivisionControlPoint*, ShipCADGeometry::SubdivisionControlPoint*>& val)
+    {
+        return val.second == _querypt;
+    }
+    ExtrudePointPred (ShipCADGeometry::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
+};
+
 void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
-				      const QVector3D& direction)
+                                      const QVector3D& direction)
 {
+    // first point is from edge, second is extruded point
+    vector<pair<SubdivisionControlPoint*, SubdivisionControlPoint*> > vertices;
+    vector<pair<SubdivisionControlPoint*, SubdivisionControlPoint*> >::iterator vidx;
+    vector<SubdivisionControlPoint*> vertice_objs;
+    vector<SubdivisionControlPoint*> points;
+    vector<SubdivisionControlEdge*> newedges;
+    SubdivisionControlEdge* edge, *tmp;
+    SubdivisionControlPoint* point1, *point2;
+
+    // assemble all points
+    for (size_t i=1; i<=edges.size(); ++i) {
+        edge = edges[i-1];
+        point1 = dynamic_cast<SubdivisionControlPoint*>(edge->startPoint());
+        point2 = dynamic_cast<SubdivisionControlPoint*>(edge->endPoint());
+        if (find_if(vertices.begin(), vertices.end(), ExistPointPred(point1)) == vertices.end())
+            vertices.push_back(make_pair(point1, static_cast<SubdivisionControlPoint*>(0)));
+        if (find_if(vertices.begin(), vertices.end(), ExistPointPred(point2)) == vertices.end())
+            vertices.push_back(make_pair(point2, static_cast<SubdivisionControlPoint*>(0)));
+    }
+    size_t noedges = numberOfControlEdges();
+    size_t novertices = numberOfControlPoints();
+    // create all new extruded points
+    for (size_t i=1; i<=vertices.size(); ++i) {
+        point1 = vertices[i-1].first;
+        point2 = new SubdivisionControlPoint(this);
+        point2->setCoordinate(point1->getCoordinate() + direction);
+        vertices[i-1].second = point2;
+    }
+    for (size_t i=1; i<=edges.size(); ++i) {
+        edge = edges[i-1];
+        points.clear();
+        points.push_back(dynamic_cast<SubdivisionControlPoint*>(edge->endPoint()));
+        points.push_back(dynamic_cast<SubdivisionControlPoint*>(edge->startPoint()));
+        point1 = 0;
+        point2 = 0;
+        vidx = find_if(vertices.begin(), vertices.end(), ExtrudePointPred(edge->startPoint()));
+        if (vidx != vertices.end()) {
+            point1 = (*vidx).second;
+            points.push_back(point1);
+        }
+        vidx = find_if(vertices.begin(), vertices.end(), ExtrudePointPred(edge->endPoint()));
+        if (vidx != vertices.end()) {
+            point2 = (*vidx).second;
+            points.push_back(point2);
+        }
+        SubdivisionControlFace* face = addControlFace(points, true);
+        face->setLayer(getActiveLayer());
+        if (point1 != 0 && point2 != 0) {
+            tmp = controlEdgeExists(point1, point2);
+            if (tmp != 0)
+                newedges.push_back(tmp);
+        }
+        if (edge->startPoint()->getVertexType() == SubdivisionControlPoint::svCorner && point1 != 0) {
+            tmp = controlEdgeExists(edge->startPoint(), point1);
+            if (tmp != 0)
+                tmp->setCrease(true);
+        }
+        if (edge->endPoint()->getVertexType() == SubdivisionControlPoint::svCorner && point2 != 0) {
+            tmp = controlEdgeExists(edge->endPoint(), point2);
+            if (tmp != 0)
+                tmp->setCrease(true);
+        }
+        edge->setCrease(true);
+    }
+    // return the new edges
+    for (size_t i=1; i<=newedges.size(); ++i)
+        edges.push_back(newedges[i-1]);
+    initialize(novertices+1, noedges+1, numberOfControlFaces()+1);
+}
+
+struct IntersectionData
+{
+    QVector3D point;
+    bool knuckle;
+    SubdivisionEdge* edge;
+    IntersectionData() : point(ZERO), knuckle(false), edge(0) {}
+    IntersectionData(const QVector3D& pt) : point(pt), knuckle(false), edge(0) {}
+};
+
+void SubdivisionSurface::calculateIntersections(const Plane& plane,
+                                                vector<SubdivisionControlFace*>& faces,
+                                                vector<Spline*>& destination)
+{
+    SubdivisionControlFace* ctrlface;
+    SubdivisionFace* face, *f2;
+    SubdivisionPoint* p1, *p2, *p3;
+    SubdivisionEdge* edge;
+    float side1, side2;
+
+    // first assemble all edges belong to this set of faces
+    vector<SubdivisionEdge*> edges(faces.size()+100);
+    vector<IntersectionData> intarray(10);
+    bool centerplane = ((fabs(fabs(plane.b()) - 1) < 1E-5) && (fabs(plane.d()) < 1E-4));
+    // first is start point, second is end point
+    vector<pair<IntersectionData, IntersectionData> > segments(50);
+
+    for (size_t i=1; i<=faces.size(); ++i) {
+        ctrlface = faces[i-1];
+        for (size_t j=1; j<=ctrlface->numberOfChildren(); ++j) {
+            face = ctrlface->getChild(j-1);
+            intarray.clear();
+            p1 = face->getPoint(face->numberOfPoints()-1);
+            side1 = plane.distance(p1->getCoordinate());
+            for (size_t k=1; k<=face->numberOfPoints(); ++k) {
+                p2 = face->getPoint(k-1);
+                side2 = plane.distance(p2->getCoordinate());
+                bool addedge = false;
+                if ((side1 < -1E-5 && side2 > 1E-5) || (side1 > 1E5 && side2 < -1E-5)) {
+                    // regular intersection of edge
+                    // add the edge to the list
+                    float parameter = side1 / (side2 - side1);
+                    QVector3D output = p1->getCoordinate()
+                            + parameter * (p2->getCoordinate() - p1->getCoordinate());
+                    intarray.push_back(IntersectionData(output));
+                    edge = edgeExists(p1, p2);
+                    if (edge != 0) {
+                        intarray.back().knuckle = edge->isCrease();
+                        intarray.back().edge = edge;
+                    }
+                    else {
+                        intarray.back().knuckle = false;
+                        intarray.back().edge = 0;
+                    }
+                }
+                else {
+                    // does the edge lie entirely within the plane?
+                    if ((fabs(side1) <= 1E-5) && (fabs(side2) <= 1E-5)) {
+                        // if so, then add this edge ONLY if:
+                        // 1. the edge is a boundary edge
+                        // 2. at least ONE of the attached faces does NOT lie in the plane
+                        edge = edgeExists(p1, p2);
+                        if (edge != 0) {
+                            if (edge->numberOfFaces() == 1)
+                                addedge = true;
+                            else {
+                                for (size_t n=1; n<=edge->numberOfFaces(); ++n) {
+                                    f2 = edge->getFace(n-1);
+                                    for (size_t m=1; m<=f2->numberOfPoints(); ++m) {
+                                        p3 = f2->getPoint(m-1);
+                                        float parameter = plane.distance(p3->getCoordinate());
+                                        if (fabs(parameter) > 1E-5) {
+                                            addedge = true;
+                                            break;
+                                        }
+                                    }
+                                    if (addedge)
+                                        break;
+                                }
+                            }
+                            if (addedge) {
+                                if (find(edges.begin(), edges.end(), edge) == edges.end()) {
+                                    edges.push_back(edge);
+                                    IntersectionData sp;
+                                    sp.point = p1->getCoordinate();
+                                    sp.edge = edge;
+                                    IntersectionData ep;
+                                    ep.point = p2->getCoordinate();
+                                    ep.edge = edge;
+                                    if (!edge->isCrease()) {
+                                        sp.knuckle = p1->getVertexType() != SubdivisionPoint::svRegular;
+                                        ep.knuckle = sp.knuckle;
+                                    }
+                                    else {
+                                        sp.knuckle = p1->getVertexType() == SubdivisionPoint::svCorner;
+                                        ep.knuckle = sp.knuckle;
+                                    }
+                                    segments.push_back(make_pair(sp, ep));
+                                }
+                            }
+                        }
+                    }
+                    else if (fabs(side2) < 1E-5) {
+                        IntersectionData id(p2->getCoordinate());
+                        id.knuckle = p2->getVertexType() != SubdivisionPoint::svRegular;
+                        id.edge = edgeExists(p1, p2);
+                        intarray.push_back(id);
+                    }
+                }
+                p1 = p2;
+                side1 = side2;
+            }
+            if (intarray.size() > 1) {
+                if (intarray.front().edge == intarray.back().edge) {
+                    if (intarray.front().point.distanceToPoint(intarray.back().point) < 1E-4) {
+                        intarray.pop_back();
+                    }
+                    size_t k = 2;
+                    while (k <= intarray.size()) {
+                        if (intarray[k-1].edge == intarray[k-2].edge) {
+                            if (intarray[k-1].point.distanceToPoint(intarray[k-2].point) < 1E-4) {
+                                intarray.erase(intarray.begin()+k-1);
+                            }
+                            else
+                                ++k;
+                        }
+                        else
+                            ++k;
+                    }
+                    for (size_t l=2; l<=intarray.size(); ++l) {
+                        segments.push_back(make_pair(intarray[l-2], intarray[l-1]));
+                    }
+                }
+            }
+        }
+    }
+
+    // convert segments into polylines
 }
 
 void SubdivisionSurface::dump(ostream& os) const

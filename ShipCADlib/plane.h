@@ -53,6 +53,8 @@ public:
     float d() const
         { return _vars[3]; }
 
+    float distance(const QVector3D& point) const;
+
 private:
 
     float _vars[4];

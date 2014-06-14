@@ -4,6 +4,7 @@
 #include <QVector3D>
 #include <QColor>
 #include <QString>
+#include "spline.h"
 
 namespace ShipCADUtility {
 
@@ -42,6 +43,10 @@ extern float SquaredDistPP(const QVector3D& p1, const QVector3D& p2);
 
 // returns "0" for false, and "1" for true
 extern QString BoolToStr(bool val);
+
+// This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
+extern void JoinSplineSegments(float join_error, bool force_to_one_segment,
+                               std::vector<ShipCADGeometry::Spline*> list);
 
 };
 

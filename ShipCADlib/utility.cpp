@@ -3,6 +3,7 @@
 #include "utility.h"
 
 using namespace std;
+using namespace ShipCADGeometry;
 using namespace boost::math::float_constants;
 
 void ShipCADUtility::MinMax(const QVector3D& p, QVector3D& min, QVector3D& max)
@@ -180,4 +181,95 @@ float ShipCADUtility::SquaredDistPP(const QVector3D& p1, const QVector3D& p2)
 QString ShipCADUtility::BoolToStr(bool val)
 {
     return QString( (val ? "1" : "0") );
+}
+
+struct SegmentRecord {
+    float length;
+    QVector3D cog;
+};
+
+static float Minimum(float d1, float d2, float d3, float d4)
+{
+    float result = d1;
+    if (d2 < result)
+        result = d2;
+    if (d3 < result)
+        result = d3;
+    if (d4 < result)
+        result = d4;
+    return result;
+}
+
+// This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
+void ShipCADUtility::JoinSplineSegments(float join_error,
+                                        bool force_to_one_segment,
+                                        vector<Spline*> list)
+{
+    bool fixedclosed;
+    bool matchclosed;
+    Spline* nearest, *match;
+    // remove any single line segments
+    size_t i = 1;
+    while (i < list.size()) {
+        Spline* fixed = list[i-1];
+        if (fixed->numberOfPoints() > 1) {
+            fixedclosed = fixed->getPoint(0).distanceToPoint(fixed->getPoint(fixed->numberOfPoints()-1)) < 1E-5;
+        }
+        else
+            fixedclosed = false;
+        if (fixed->numberOfPoints() > 1 && !fixedclosed) {
+            float nearestdist = 1E30f;
+            nearest = 0;
+            int matchindex = -1;
+            for (size_t j=1; j<=list.size(); ++j) {
+                if (i == j)
+                    continue;
+                match = list[j-1];
+                if (match->numberOfPoints() > 1)
+                    matchclosed = match->getPoint(0).distanceToPoint(match->getPoint(match->numberOfPoints()-1)) < 1E-5;
+                else
+                    matchclosed = false;
+                if (match->numberOfPoints() > 1 && !matchclosed) {
+                    float d1 = SquaredDistPP(fixed->getPoint(0), match->getPoint(0));
+                    float d2 = SquaredDistPP(fixed->getPoint(0), match->getPoint(match->numberOfPoints()-1));
+                    float d3 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(0));
+                    float d4 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(match->numberOfPoints()-1));
+                    float min = Minimum(d1, d2, d3, d4);
+                    if (min < nearestdist) {
+                        nearestdist = min;
+                        nearest = match;
+                        matchindex = j;
+                        if (min < 1E-5)
+                            break;
+                    }
+                }
+            }
+            if (nearest != 0) {
+                match = nearest;
+                float d1 = SquaredDistPP(fixed->getPoint(0), match->getPoint(0));
+                float d2 = SquaredDistPP(fixed->getPoint(0), match->getPoint(match->numberOfPoints()-1));
+                float d3 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(0));
+                float d4 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(match->numberOfPoints()-1));
+                float min = Minimum(d1, d2, d3, d4);
+                if (min < join_error || force_to_one_segment) {
+                    // the splines do touch each other on one of their ends
+                    if (min == d1)
+                        fixed->insert_spline(0, true, true, *match);
+                    else if (min == d2)
+                        fixed->insert_spline(0, false, true, *match);
+                    else if (min == d3)
+                        fixed->insert_spline(fixed->numberOfPoints(), false, true, *match);
+                    else if (min == d4)
+                        fixed->insert_spline(fixed->numberOfPoints(), true, true, *match);
+                    else
+                        throw runtime_error("Error in comparing minimum values JoinSplineSegments");
+                    // destroy the matching spline
+                    list.erase(list.begin()+matchindex-1);
+                    delete match;
+                    i = 0;  // reset match index to start searching for a new matching spline
+                }
+            }
+        }
+        ++i;
+    }
 }

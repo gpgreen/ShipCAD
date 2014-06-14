@@ -573,6 +573,11 @@ void SubdivisionControlEdge::draw(Viewport& /*vp*/)
 
 }
 
+void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& /*vp*/)
+{
+
+}
+
 void SubdivisionControlEdge::dump(ostream& os) const
 {
     os << "SubdivisionControlEdge ["

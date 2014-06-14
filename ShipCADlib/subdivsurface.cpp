@@ -8,6 +8,7 @@
 #include "subdivface.h"
 #include "subdivcontrolcurve.h"
 #include "plane.h"
+#include "spline.h"
 #include "subdivlayer.h"
 #include "viewport.h"
 #include "filebuffer.h"
@@ -25,13 +26,23 @@ static int sDecimals = 4;
 //////////////////////////////////////////////////////////////////////////////////////
 
 SubdivisionSurface::SubdivisionSurface()
+    : _subdivision_mode(fmQuadTriangle), _curvature_scale(0.25),
+      _show_curvature(true), _show_control_curves(true),
+      _crease_color(Qt::green), _crease_edge_color(Qt::red),
+      _underwater_color(Qt::gray),
+      _edge_color(Qt::darkGray), _selected_color(Qt::yellow),
+      _crease_point_color(Qt::green), _regular_point_color(QColor(0xc0, 0xc0, 0xc0)),
+      _corner_point_color(QColor(0, 255, 255)), _dart_point_color(QColor(0xc0, 0x80, 0x00)),
+      _layer_color(QColor(0, 255, 255)), _normal_color(QColor(0xc0, 0xc0, 0xc0)), _leak_color(Qt::red),
+      _curvature_color(Qt::white), _control_curve_color(Qt::red),
+      _zebra_color(Qt::black)
 {
     clear();
 }
 
 SubdivisionSurface::~SubdivisionSurface()
 {
-    // does nothing
+    clear();
 }
 
 SubdivisionControlPoint* SubdivisionSurface::newControlPoint(const QVector3D& p)
@@ -1240,13 +1251,13 @@ void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
     initialize(novertices+1, noedges+1, numberOfControlFaces()+1);
 }
 
-struct IntersectionData
+struct SurfIntersectionData
 {
     QVector3D point;
     bool knuckle;
     SubdivisionEdge* edge;
-    IntersectionData() : point(ZERO), knuckle(false), edge(0) {}
-    IntersectionData(const QVector3D& pt) : point(pt), knuckle(false), edge(0) {}
+    SurfIntersectionData() : point(ZERO), knuckle(false), edge(0) {}
+    SurfIntersectionData(const QVector3D& pt) : point(pt), knuckle(false), edge(0) {}
 };
 
 void SubdivisionSurface::calculateIntersections(const Plane& plane,
@@ -1258,13 +1269,14 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
     SubdivisionPoint* p1, *p2, *p3;
     SubdivisionEdge* edge;
     float side1, side2;
+    bool addedge;
 
     // first assemble all edges belong to this set of faces
     vector<SubdivisionEdge*> edges(faces.size()+100);
-    vector<IntersectionData> intarray(10);
-    bool centerplane = ((fabs(fabs(plane.b()) - 1) < 1E-5) && (fabs(plane.d()) < 1E-4));
+    vector<SurfIntersectionData> intarray(10);
+
     // first is start point, second is end point
-    vector<pair<IntersectionData, IntersectionData> > segments(50);
+    vector<pair<SurfIntersectionData, SurfIntersectionData> > segments(50);
 
     for (size_t i=1; i<=faces.size(); ++i) {
         ctrlface = faces[i-1];
@@ -1283,7 +1295,7 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                     float parameter = side1 / (side2 - side1);
                     QVector3D output = p1->getCoordinate()
                             + parameter * (p2->getCoordinate() - p1->getCoordinate());
-                    intarray.push_back(IntersectionData(output));
+                    intarray.push_back(SurfIntersectionData(output));
                     edge = edgeExists(p1, p2);
                     if (edge != 0) {
                         intarray.back().knuckle = edge->isCrease();
@@ -1322,10 +1334,10 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                             if (addedge) {
                                 if (find(edges.begin(), edges.end(), edge) == edges.end()) {
                                     edges.push_back(edge);
-                                    IntersectionData sp;
+                                    SurfIntersectionData sp;
                                     sp.point = p1->getCoordinate();
                                     sp.edge = edge;
-                                    IntersectionData ep;
+                                    SurfIntersectionData ep;
                                     ep.point = p2->getCoordinate();
                                     ep.edge = edge;
                                     if (!edge->isCrease()) {
@@ -1342,7 +1354,7 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                         }
                     }
                     else if (fabs(side2) < 1E-5) {
-                        IntersectionData id(p2->getCoordinate());
+                        SurfIntersectionData id(p2->getCoordinate());
                         id.knuckle = p2->getVertexType() != SubdivisionPoint::svRegular;
                         id.edge = edgeExists(p1, p2);
                         intarray.push_back(id);
@@ -1377,6 +1389,309 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
     }
 
     // convert segments into polylines
+    Spline* spline = 0;
+    SurfIntersectionData startp, endp;
+    pair<SurfIntersectionData, SurfIntersectionData> segment;
+    while (segments.size() > 0) {
+        if (spline == 0) {
+            spline = new Spline();
+            destination.push_back(spline);
+            segment = segments.back();
+            spline->add(segment.first.point);
+            spline->setKnuckle(0, segment.first.knuckle);
+            spline->add(segment.second.point);
+            spline->setKnuckle(1, segment.second.knuckle);
+            startp = segment.first;
+            endp = segment.second;
+            segments.pop_back();
+        }
+        addedge = false;
+        size_t j = 1;
+        while (j <= segments.size()) {
+            segment = segments[j-1];
+            if (endp.edge == segment.first.edge) {
+                addedge = endp.point.distanceToPoint(segment.first.point) < 1E-4;
+                if (addedge) {
+                    spline->setKnuckle(spline->numberOfPoints()-1, segment.first.knuckle
+                                       || spline->isKnuckle(spline->numberOfPoints()-1));
+                    spline->add(segment.second.point);
+                    spline->setKnuckle(spline->numberOfPoints()-1, segment.second.knuckle);
+                    endp = segment.second;
+                }
+            }
+            else if (endp.edge == segment.second.edge) {
+                addedge = endp.point.distanceToPoint(segment.second.point) < 1E-4;
+                if (addedge) {
+                    spline->setKnuckle(spline->numberOfPoints()-1, segment.second.knuckle
+                                       || spline->isKnuckle(spline->numberOfPoints()-1));
+                    spline->add(segment.first.point);
+                    spline->setKnuckle(spline->numberOfPoints()-1, segment.first.knuckle);
+                    endp = segment.first;
+                }
+            }
+            else if (startp.edge == segment.first.edge) {
+                addedge = startp.point.distanceToPoint(segment.first.point) < 1E-4;
+                if (addedge) {
+                    spline->setKnuckle(0, segment.first.knuckle || spline->isKnuckle(0));
+                    spline->insert(0, segment.second.point);
+                    spline->setKnuckle(0, segment.second.knuckle);
+                    startp = segment.second;
+                }
+            }
+            else if (startp.edge == segment.second.edge) {
+                addedge = startp.point.distanceToPoint(segment.second.point) < 1E-4;
+                if (addedge) {
+                    spline->setKnuckle(0, segment.second.knuckle || spline->isKnuckle(0));
+                    spline->insert(0, segment.first.point);
+                    spline->setKnuckle(0, segment.first.knuckle);
+                    startp = segment.first;
+                }
+            }
+            else if (segment.first.edge == segment.second.edge) {
+                // special case, edge lies entirely in plane
+                // perform more extensive test to check whether the two edges
+                // are possibly connected
+                if (startp.edge->startPoint()->hasEdge(segment.first.edge)
+                        || startp.edge->endPoint()->hasEdge(segment.first.edge)
+                        || endp.edge->startPoint()->hasEdge(segment.first.edge)
+                        || endp.edge->endPoint()->hasEdge(segment.first.edge)) {
+                    addedge = endp.point.distanceToPoint(segment.first.point) < 1E-4;
+                    if (addedge) {
+                        spline->setKnuckle(spline->numberOfPoints()-1, segment.first.knuckle
+                                           || spline->isKnuckle(spline->numberOfPoints()-1));
+                        spline->add(segment.second.point);
+                        spline->setKnuckle(spline->numberOfPoints()-1, segment.second.knuckle);
+                        endp = segment.second;
+                    }
+                    else {
+                        addedge = endp.point.distanceToPoint(segment.second.point) < 1E-4;
+                        if (addedge) {
+                            spline->setKnuckle(spline->numberOfPoints()-1, segment.second.knuckle
+                                               || spline->isKnuckle(spline->numberOfPoints()-1));
+                            spline->add(segment.first.point);
+                            spline->setKnuckle(spline->numberOfPoints()-1, segment.first.knuckle);
+                            endp = segment.first;
+                        }
+                        else {
+                            addedge = startp.point.distanceToPoint(segment.first.point) < 1E-4;
+                            if (addedge) {
+                                spline->setKnuckle(0, segment.first.knuckle
+                                                   || spline->isKnuckle(0));
+                                spline->insert(0, segment.second.point);
+                                spline->setKnuckle(0, segment.second.knuckle);
+                                startp = segment.second;
+                            } else {
+                                addedge = startp.point.distanceToPoint(segment.second.point) < 1E-4;
+                                if (addedge) {
+                                    spline->setKnuckle(0, segment.second.knuckle
+                                                       || spline->isKnuckle(0));
+                                    spline->insert(0, segment.first.point);
+                                    spline->setKnuckle(0, segment.first.knuckle);
+                                    startp = segment.first;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (addedge) {
+                segments.pop_back();
+                j = 1;
+                addedge = false;
+            }
+            else
+                ++j;
+        }
+        if (!addedge)
+            spline = 0;
+    }
+    if (destination.size() > 1) {
+        JoinSplineSegments(0.01f, false, destination);
+        for (size_t i=destination.size(); i>=1; --i) {
+            // remove tiny fragments of very small length
+            spline = destination[i-1];
+            if (spline->numberOfPoints()>1) {
+                float parameter = SquaredDistPP(spline->getMin(), spline->getMax());
+                if (parameter < 1E-3) {
+                    delete spline;
+                    destination.erase(destination.begin()+i-1);
+                }
+            }
+        }
+    }
+}
+
+void SubdivisionSurface::draw(Viewport &vp)
+{
+    if (!isBuild())
+        rebuild();
+    if (vp.getViewportMode() != Viewport::vmWireFrame) {
+        if (vp.getViewportMode() == Viewport::vmShadeGauss
+                || vp.getViewportMode() == Viewport::vmShadeDevelopable) {
+            if (!isGaussCurvatureCalculated())
+                calculateGaussCurvature();
+        }
+    }
+    for (size_t i=1; i<=numberOfLayers(); ++i) {
+        getLayer(i-1)->draw(vp);
+    }
+    if (showControlNet()) {
+        for (size_t i=1; i<=numberOfControlEdges(); ++i) {
+            getControlEdge(i)->draw(false, vp);
+        }
+        for (size_t i=1; i<=numberOfControlPoints(); ++i) {
+            if (getControlPoint(i-1)->isVisible())
+                getControlPoint(i-1)->draw(vp);
+        }
+    }
+    for (size_t i=1; i<=numberOfControlCurves(); ++i) {
+        if (getControlCurve(i-1)->isVisible())
+            getControlCurve(i-1)->draw(vp);
+    }
+}
+
+SubdivisionEdge* SubdivisionSurface::edgeExists(SubdivisionPoint *p1, SubdivisionPoint *p2)
+{
+    SubdivisionEdge* result = 0;
+    // if the edge exists then it must exist
+    // in both the points, therefore only the point
+    // with the smallest number of edges has to be checked
+    if (p1->numberOfEdges() <= p2->numberOfEdges()) {
+        for (size_t i=1; i<=p1->numberOfEdges(); ++i) {
+            SubdivisionEdge* edge = p1->getEdge(i-1);
+            if ((edge->startPoint() == p1 && edge->endPoint() == p2)
+                    || (edge->startPoint() == p2 && edge->endPoint() == p1))
+                return edge;
+        }
+    }
+    else {
+        for (size_t i=1; i<=p2->numberOfEdges(); ++i) {
+            SubdivisionEdge* edge = p2->getEdge(i-1);
+            if ((edge->startPoint() == p1 && edge->endPoint() == p2)
+                    || (edge->startPoint() == p2 && edge->endPoint() == p1))
+                return edge;
+        }
+    }
+    return result;
+}
+
+SubdivisionControlEdge* SubdivisionSurface::controlEdgeExists(SubdivisionPoint *p1,
+                                                              SubdivisionPoint *p2)
+{
+    SubdivisionEdge* result = edgeExists(p1, p2);
+    if (result != 0)
+        return dynamic_cast<SubdivisionControlEdge*>(result);
+    return static_cast<SubdivisionControlEdge*>(0);
+}
+
+void SubdivisionSurface::sortEdges(vector<SubdivisionEdge*>& edges)
+{
+    if (edges.size() <= 1)
+        return;
+    SubdivisionEdge* edge1 = edges[0];
+    for (size_t j=2; j<=edges.size(); ++j) {
+        SubdivisionEdge* edge2 = edges[j-1];
+        if (j == 2) {
+            if (edge1->startPoint() == edge2->startPoint())
+                edge1->swapData();
+            else if (edge1->startPoint() == edge2->endPoint()) {
+                edge1->swapData();
+                edge2->swapData();
+            }
+            else if (edge1->endPoint() == edge2->endPoint()) {
+                edge2->swapData();
+            }
+        }
+        else {
+            if (edge1->endPoint() == edge2->endPoint())
+                edge2->swapData();
+            if (edge1->endPoint() == edge2->startPoint()) {
+                edge2->swapData();
+                edge2->swapData();
+            }
+        }
+        edge1 = edge2;
+    }
+}
+
+// use the bool argument so that we don't get compile error, value passed in doesn't matter
+vector<SubdivisionPoint*> SubdivisionSurface::sortEdges(bool /*always_true*/, vector<SubdivisionEdge*>& edges)
+{
+    vector<SubdivisionPoint*> points;
+    if (edges.size() > 0) {
+        sortEdges(edges);
+        for (size_t i=1; i<=edges.size(); ++i) {
+            if (i == 1)
+                points.push_back(edges[i-1]->startPoint());
+            points.push_back(edges[i-1]->endPoint());
+        }
+    }
+    return points;
+}
+
+void SubdivisionSurface::extractAllEdgeLoops(vector<vector<SubdivisionPoint*> >& destination)
+{
+    vector<SubdivisionEdge*> sourcelist;
+    for (size_t i=1; i<=_edges.size(); ++i) {
+        SubdivisionEdge* edge = _edges[i-1];
+        if (edge->isCrease())
+            sourcelist.push_back(edge);
+    }
+    sort(sourcelist.begin(), sourcelist.end());
+    while (sourcelist.size() > 0) {
+        SubdivisionEdge* edge = sourcelist.back();
+        sourcelist.pop_back();
+        vector<SubdivisionEdge*> loop;
+        loop.push_back(edge);
+        SubdivisionEdge* nextedge;
+        // trace edge to back
+        do {
+            nextedge = edge->getPreviousEdge();
+            if (nextedge != 0) {
+                vector<SubdivisionEdge*>::iterator i = find(sourcelist.begin(), sourcelist.end(), nextedge);
+                if (i != sourcelist.end()) {
+                    loop.insert(loop.begin(), nextedge);
+                    sourcelist.erase(i);
+                    edge = nextedge;
+                }
+                else
+                    nextedge = 0;
+            }
+        } while(nextedge != 0);
+
+        vector<SubdivisionPoint*> points = sortEdges(true, loop);
+        if (points.size() > 0)
+            destination.push_back(points);
+    }
+}
+
+void SubdivisionSurface::extractPointsFromFaces(vector<SubdivisionFace*>& selectedfaces,
+                                                vector<SubdivisionControlPoint*>& points,
+                                                size_t& lockedpoints)
+{
+    sort(selectedfaces.begin(), selectedfaces.end());
+    lockedpoints = 0;
+    bool ok;
+    for (size_t i=1; i<=selectedfaces.size(); ++i) {
+        SubdivisionFace* face = selectedfaces[i-1];
+        for (size_t j=1; j<=face->numberOfPoints(); j++) {
+            SubdivisionControlPoint* p = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j-1));
+            if (find(points.begin(), points.end(), p) == points.end()) {
+                ok = true;
+                for (size_t k=1; k<=p->numberOfFaces(); ++k) {
+                    if (find(selectedfaces.begin(), selectedfaces.end(), p->getFace(k-1)) == selectedfaces.end()) {
+                        ok = false;
+                        break;
+                    }
+                }
+                if (ok) {
+                    points.push_back(p);
+                    if (p->isLocked())
+                        ++lockedpoints;
+                }
+            }
+        }
+    }
 }
 
 void SubdivisionSurface::dump(ostream& os) const

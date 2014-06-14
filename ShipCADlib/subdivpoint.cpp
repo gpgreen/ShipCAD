@@ -379,6 +379,11 @@ size_t SubdivisionPoint::indexOfFace(SubdivisionFace* face)
     throw range_error("SubdivisionPoint::indexOfFace");
 }
 
+bool SubdivisionPoint::hasEdge(SubdivisionEdge* edge)
+{
+    return (find(_edges.begin(), _edges.end(), edge) != _edges.end());
+}
+
 bool SubdivisionPoint::hasFace(SubdivisionFace* face)
 {
     return (find(_faces.begin(), _faces.end(), face) != _faces.end());

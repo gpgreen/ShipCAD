@@ -131,6 +131,7 @@ public:
 
     // drawing
     virtual void draw(Viewport &vp);
+    virtual void draw(bool draw_mirror, Viewport &vp);
 
     // output
     void dump(std::ostream& os) const;

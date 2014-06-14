@@ -92,6 +92,7 @@ public:
     QVector3D getLimitPoint();
     bool isRegularNURBSPoint(std::vector<SubdivisionFace*>& faces);
     size_t indexOfFace(SubdivisionFace* face);
+    bool hasEdge(SubdivisionEdge* edge);
     bool hasFace(SubdivisionFace* face);
     vertex_type_t getVertexType() { return _vtype; }
     void setVertexType(vertex_type_t nt) { _vtype = nt; }

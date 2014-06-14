@@ -93,8 +93,10 @@ public:
     void calculateIntersections(const Plane& plane,
                                 std::vector<SubdivisionControlFace*>& faces,
                                 std::vector<Spline*>& destination);
-    void extractAllEdgeLoops();
-    void extractPointsFromFaces();
+    void extractAllEdgeLoops(std::vector<std::vector<SubdivisionPoint*> >& destination);
+    void extractPointsFromFaces(std::vector<SubdivisionFace*>& selectedfaces,
+                                std::vector<SubdivisionControlPoint*>& points,
+                                size_t& lockedpoints);
     void extractPointsFromSelection();
     void importGrid();
     bool intersectPlane();
@@ -263,6 +265,8 @@ protected:
                    std::vector<SubdivisionFace*>& tmpfaces);
     void doAssemble(grid_t& grid, size_t& cols, size_t& rows,
                     std::vector<SubdivisionFace*>& faces);
+    void sortEdges(std::vector<SubdivisionEdge*>& edges);
+    std::vector<SubdivisionPoint*> sortEdges(bool always_true, std::vector<SubdivisionEdge*>& edges);
 
 protected:
 

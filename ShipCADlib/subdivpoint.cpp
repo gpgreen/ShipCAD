@@ -20,17 +20,22 @@ using namespace boost::math::float_constants;
 
 static QVector3D ZERO = QVector3D(0,0,0);
 
+bool ShipCADGeometry::g_point_verbose = true;
+
 //////////////////////////////////////////////////////////////////////////////////////
+
+SubdivisionPoint* SubdivisionPoint::construct(SubdivisionSurface* owner)
+{
+    void * mem = owner->getPointPool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionPoint::construct");
+    return new (mem) SubdivisionPoint(owner);
+}
 
 SubdivisionPoint::SubdivisionPoint(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {
     clear();
-}
-
-SubdivisionPoint::~SubdivisionPoint()
-{
-    // does nothing
 }
 
 void SubdivisionPoint::clear()
@@ -39,6 +44,19 @@ void SubdivisionPoint::clear()
     _faces.clear();
     _edges.clear();
     _vtype = svRegular;
+}
+
+SubdivisionPoint::vertex_type_t SubdivisionPoint::fromInt(int val)
+{
+    if (val == 0)
+        return svRegular;
+    if (val == 1)
+        return svCrease;
+    if (val == 2)
+        return svDart;
+    if (val == 3)
+        return svCorner;
+    throw range_error("invalid integer value conversion to vertex_type_t");
 }
 
 SubdivisionEdge* SubdivisionPoint::getEdge(size_t index)
@@ -397,7 +415,7 @@ QVector3D SubdivisionPoint::getNormal()
         if (face->numberOfPoints() > 4) {
             // face possibly concave at this point
             // use the normal of all points from this face
-            QVector3D c = face->faceCenter();
+            QVector3D c = face->getFaceCenter();
             QVector3D n = ZERO;
             for (size_t j=1; j<face->numberOfPoints(); ++j) {
                 n = n + UnifiedNormal(c, face->getPoint(j-1)->getCoordinate(),
@@ -424,16 +442,31 @@ void SubdivisionPoint::draw(Viewport& /*vp*/)
   // does nothing
 }
 
-void SubdivisionPoint::dump(ostream& os) const
+void SubdivisionPoint::dump(ostream& os, const char* prefix) const
 {
-    os << "SubdivisionPoint ["
+    os << prefix << "SubdivisionPoint ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os);
-    os << "\n Coordinate ["
+    priv_dump(os, prefix);
+}
+
+void SubdivisionPoint::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionBase::priv_dump(os, prefix);
+    os << "\n" << prefix << " edges (" << _edges.size() << ")\n";
+    if (g_point_verbose) {
+        for (size_t i=0; i<_edges.size(); ++i)
+            os << prefix << "  " << *_edges[i] << "\n";
+    }
+    os << prefix << " faces (" << _faces.size() << ")\n";
+    if (g_point_verbose) {
+        for (size_t i=0; i<_faces.size(); ++i)
+            os << prefix << "  " << *_faces[i] << "\n";
+    }
+    os << prefix << " Coordinate ["
        << _coordinate.x()
        << "," << _coordinate.y()
        << "," << _coordinate.z()
-       << "]\n VertexType:" << _vtype;
+       << "]\n" << prefix << " VertexType " << _vtype;
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionPoint& point)
@@ -442,15 +475,20 @@ ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionPoint& poin
     return os;
 }
 
-SubdivisionControlPoint::SubdivisionControlPoint(SubdivisionSurface *owner)
-    : SubdivisionPoint(owner)
+//////////////////////////////////////////////////////////////////////////////////////
+
+SubdivisionControlPoint* SubdivisionControlPoint::construct(SubdivisionSurface* owner)
 {
-    clear();
+    void * mem = owner->getControlPointPool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionControlPoint::construct");
+    return new (mem) SubdivisionControlPoint(owner);
 }
 
-SubdivisionControlPoint::~SubdivisionControlPoint()
+SubdivisionControlPoint::SubdivisionControlPoint(SubdivisionSurface *owner)
+    : SubdivisionPoint(owner), _locked(false)
 {
-    // does nothing
+    clear();
 }
 
 QColor SubdivisionControlPoint::getColor()
@@ -685,11 +723,67 @@ void SubdivisionControlPoint::collapse()
     }
 }
 
-void SubdivisionControlPoint::dump(ostream& os) const
+void SubdivisionControlPoint::load_binary(FileBuffer &source)
 {
-    os << "SubdivisionControlPoint ["
+    source.load(_coordinate);
+    int i;
+    source.load(i);
+    _vtype = fromInt(i);
+    bool sel;
+    source.load(sel);
+    if (sel)
+        setSelected(true);
+    if (source.version() >= fv198)
+        source.load(_locked);
+}
+
+void SubdivisionControlPoint::loadFromStream(size_t &lineno, vector<QString> &strings)
+{
+    // coordinate
+    QString str = strings[++lineno].trimmed();
+    size_t start = 0;
+    _coordinate.setX(ReadFloatFromStr(lineno, str, start));
+    _coordinate.setY(ReadFloatFromStr(lineno, str, start));
+    _coordinate.setZ(ReadFloatFromStr(lineno, str, start));
+    // vertex type
+    if (start != str.length()) {
+        int i = ReadIntFromStr(lineno, str, start);
+        _vtype = fromInt(i);
+        if (start != str.length()) {
+            bool sel = ReadBoolFromStr(lineno, str, start);
+            if (sel)
+                setSelected(true);
+        }
+    }
+    else
+        _vtype = fromInt(0);
+}
+
+void SubdivisionControlPoint::save_binary(FileBuffer &destination)
+{
+    destination.add(_coordinate);
+    destination.add(static_cast<int>(_vtype));
+    destination.add(isSelected());
+    if (destination.version() >= fv198)
+        destination.add(_locked);
+}
+
+void SubdivisionControlPoint::draw(Viewport &vp)
+{
+    // BUGBUG: unimplemented
+}
+
+void SubdivisionControlPoint::dump(ostream& os, const char* prefix) const
+{
+    os << prefix << "SubdivisionControlPoint ["
        << hex << this << "]\n";
-    SubdivisionPoint::dump(os);
+    priv_dump(os, prefix);
+}
+
+void SubdivisionControlPoint::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionPoint::priv_dump(os, prefix);
+    os << "\n" << prefix << " Locked " << (_locked ? "y" : "n");
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlPoint& point)

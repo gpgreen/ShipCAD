@@ -1,7 +1,9 @@
 #include "filebuffer.h"
+#include "utility.h"
 
 using namespace std;
 using namespace ShipCADGeometry;
+using namespace ShipCADUtility;
 
 // structure used to convert values from/to bytes
 union convert_type_t {
@@ -58,6 +60,23 @@ void FileBuffer::load(int& val)
     val = ct.ival;
 }
 
+void FileBuffer::add(const QColor& c)
+{
+    convert_type_t ct;
+    ct.ival = FindDXFColorIndex(c);
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
+}
+
+void FileBuffer::load(QColor& val)
+{
+    convert_type_t ct;
+    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
+        ct.d[i] = _data[_pos];
+    int index = ct.ival;
+    val = QColorFromDXFIndex(index);
+}
+
 void FileBuffer::add(int val)
 {
     convert_type_t ct;
@@ -112,24 +131,25 @@ void FileBuffer::add(const QVector3D& val)
 
 void FileBuffer::load(QString& val)
 {
-    // BUGBUG: convert to utf8 before saving
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
     char *buf = new char [ct.ival];
     for (int i=0; _pos<_data.size() && i<ct.ival; ++i,++_pos)
         buf[i] = _data[_pos];
-    val = QString(buf);
+    // convert char buffer (which was stored as utf8), to unicode
+    val = QString::fromUtf8(buf, ct.ival);
     delete [] buf;
 }
 
 void FileBuffer::add(const QString& val)
 {
+    // convert string to utf8
+    QByteArray s = val.toUtf8();
     convert_type_t ct;
-    ct.ival = val.length();
+    ct.ival = s.length();
     for (int i=0; i<4; ++i)
         _data.push_back(ct.d[i]);
-    QByteArray ba = val.toUtf8();
-    for (int i=0; i<ba.length(); ++i)
-        _data.push_back(ba[i]);
+    for (int i=0; i<s.length(); ++i)
+        _data.push_back(s[i]);
 }

@@ -59,6 +59,14 @@ void SubdivisionControlCurve::addPoint(SubdivisionControlPoint* p)
     setBuild(false);
 }
 
+void SubdivisionControlCurve::resetDivPoints()
+{
+    _div_points.clear();
+    for (size_t i=0; i<_points.size(); ++i)
+        _div_points.push_back(_points[i]);
+    setBuild(false);
+}
+
 QColor SubdivisionControlCurve::getColor()
 {
     if (isSelected())
@@ -81,6 +89,13 @@ SubdivisionControlPoint* SubdivisionControlCurve::getControlPoint(size_t index)
     if (index < _points.size())
         return _points[index];
     throw range_error("index for SubdivisionControlCurve::getControlPoint");
+}
+
+SubdivisionPoint* SubdivisionControlCurve::getSubdivPoint(size_t index)
+{
+    if (index < _div_points.size())
+        return _div_points[index];
+    throw range_error("index for SubdivisionControlCurve::getSubdivPoint");
 }
 
 void SubdivisionControlCurve::clear()
@@ -245,11 +260,18 @@ void SubdivisionControlCurve::saveToDXF(vector<QString> &strings)
     _curve->save_to_dxf(strings, layer, _owner->isDrawMirror());
 }
 
-void SubdivisionControlCurve::dump(ostream& os) const
+void SubdivisionControlCurve::dump(ostream& os, const char* prefix) const
 {
-    os << "SubdivisionControlCurve ["
+    os << prefix << "SubdivisionControlCurve ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os);
+    priv_dump(os, prefix);
+}
+
+void SubdivisionControlCurve::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionBase::priv_dump(os, prefix);
+    //os << "SubdivisionControlCurve ["
+    //   << hex << this << "]\n";
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlCurve& curve)

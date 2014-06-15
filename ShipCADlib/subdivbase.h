@@ -51,12 +51,15 @@ public:
     virtual void setOwner(SubdivisionSurface* newowner)
         { _owner = newowner; }
 
-
     virtual void clear() = 0;
     virtual void draw(Viewport& vp) = 0;
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
+
+protected:
+
+    void priv_dump(std::ostream& os, const char* prefix) const;
 
 protected:
 

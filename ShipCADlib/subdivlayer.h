@@ -89,7 +89,7 @@ public:
     bool useForIntersections() {return _use_for_intersections;}
     bool useInHydrostatics() {return _use_in_hydrostatics;}
     bool showInLinesplan() {return _show_in_linesplan;}
-    size_t getLayerID();
+    size_t getLayerID() {return _layerid;}
     void setLayerID(size_t newid) { _layerid = newid; }
     size_t getLayerIndex();
     float getMaterialDensity() {return _material_density;}
@@ -99,9 +99,12 @@ public:
     QString getDXFLayername() { return getName(); }
     QColor getColor() { return _color; }
     void setDevelopable(bool val);
+    void setDescription(const QString& val) {_desc = val;}
     void setName(const QString& val);
     void setSymmetric(bool val);
     void setColor(QColor col);
+    void setMaterialDensity(float val) {_material_density = val;}
+    void setThickness(float val) {_thickness = val;}
     void setShowInLinesplan(bool val);
     void setUseInHydrostatics(bool val);
     void setUseForIntersections(bool val);
@@ -116,13 +119,15 @@ public:
     virtual void draw(Viewport &vp);
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
 
 signals:
 
     void changedLayerData(size_t layerid);
 
 protected:
+
+    void priv_dump(std::ostream& os, const char* prefix) const;
 
     // used in calculate intersection points
     void processTriangle(const QVector3D& p1,

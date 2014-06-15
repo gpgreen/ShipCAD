@@ -65,6 +65,7 @@ public:
 			    SubdivisionControlPoint* newpt);
     void addPoint(SubdivisionControlPoint* p);
     virtual void clear();
+    void resetDivPoints();
 
     // getters/setters
     bool isSelected();
@@ -72,11 +73,13 @@ public:
     bool isBuild() { return _build; }
     QColor getColor();
     size_t numberOfControlPoints() { return _points.size(); }
+    size_t numberOfSubdivPoints() { return _div_points.size(); }
     SubdivisionControlPoint* getControlPoint(size_t index);
+    SubdivisionPoint* getSubdivPoint(size_t index);
     void setVisible(bool val);
     void setBuild(bool val) { _build = val; }
     void setSelected(bool val);
-    Spline* getSpline();
+    Spline* getSpline() {return _curve;}
 
     // persistence
     void loadBinary(FileBuffer& source);
@@ -87,7 +90,11 @@ public:
     virtual void draw(Viewport& vp);
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
+
+protected:
+
+    void priv_dump(std::ostream& os, const char* prefix) const;
 
 protected:
 

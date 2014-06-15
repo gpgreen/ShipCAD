@@ -63,7 +63,7 @@ public:
     void flipNormal();
     void addPoint(SubdivisionPoint* point);
     void insertPoint(size_t index, SubdivisionPoint* point);
-    void clear();
+    virtual void clear();
     virtual void subdivide(SubdivisionSurface* owner, bool controlface,
                            std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
                            std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
@@ -74,7 +74,6 @@ public:
 
     // getters/setters
     size_t numberOfPoints() { return _points.size(); }
-    QVector3D faceCenter();
     bool hasPoint(SubdivisionPoint* pt);
     SubdivisionPoint* getPoint(size_t index);
     SubdivisionPoint* calculateFacePoint();
@@ -88,10 +87,11 @@ public:
     virtual void draw(Viewport& vp);
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
 
 protected:
 
+    void priv_dump(std::ostream& os, const char* prefix) const;
     // used in subdivide
     void edgeCheck(SubdivisionSurface *owner,
                    SubdivisionPoint* p1,
@@ -144,15 +144,15 @@ public:
     void trace();
 
     // getters/setters
-    SubdivisionLayer* getLayer();
+    SubdivisionLayer* getLayer() {return _layer;}
     void setLayer(SubdivisionLayer* layer);
     SubdivisionFace* getChild(size_t index);
     size_t numberOfChildren() { return _children.size(); }
     QColor getColor();
     SubdivisionEdge* getControlEdge(size_t index);
-    size_t getNumberOfControlEdge() { return _control_edges.size(); }
+    size_t numberOfControlEdges() { return _control_edges.size(); }
     SubdivisionEdge* getEdge(size_t index);
-    size_t getNumberOfEdge() { return _edges.size(); }
+    size_t numberOfEdges() { return _edges.size(); }
     size_t getIndex();
     bool isSelected();
     bool isVisible();
@@ -172,10 +172,11 @@ public:
     virtual void draw(Viewport& vp);
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
 
 protected:
 
+    void priv_dump(std::ostream& os, const char* prefix) const;
     // used in trace
     void findAttachedFaces(std::vector<SubdivisionControlFace*>& todo_list,
                            SubdivisionControlFace* face);

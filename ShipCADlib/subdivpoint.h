@@ -43,6 +43,8 @@ class SubdivisionEdge;
 class FileBuffer;
 class Viewport;
 
+extern bool g_point_verbose;
+
 class SubdivisionPoint : public SubdivisionBase
 {
     Q_OBJECT
@@ -55,13 +57,13 @@ class SubdivisionPoint : public SubdivisionBase
 
 public:
 
-    enum vertex_type_t {svRegular, svCrease, svDart, svCorner};
+    enum vertex_type_t {svRegular=0, svCrease, svDart, svCorner};
 
     explicit SubdivisionPoint(SubdivisionSurface* owner);
-    virtual ~SubdivisionPoint();
+    virtual ~SubdivisionPoint() {}
     
     // altering
-    void clear();
+    virtual void clear();
     void addEdge(SubdivisionEdge* edge);
     void addFace(SubdivisionFace* face);
     void deleteEdge(SubdivisionEdge* edge);
@@ -78,6 +80,7 @@ public:
     virtual void draw(Viewport& vp);
 
     // getters/setters
+    vertex_type_t fromInt(int val);
     QVector3D getCoordinate();
     virtual void setCoordinate(const QVector3D& val);
     QVector3D getNormal();
@@ -98,10 +101,14 @@ public:
     void setVertexType(vertex_type_t nt) { _vtype = nt; }
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
 
- protected:
+    // makers
+    static SubdivisionPoint* construct(SubdivisionSurface* owner);
 
+protected:
+
+    void priv_dump(std::ostream& os, const char* prefix) const;
     // used in getCurvature
     float Angle_VV_3D(const QVector3D& p1, const QVector3D& p2,
 		      const QVector3D& p3);
@@ -127,11 +134,11 @@ class SubdivisionControlPoint : public SubdivisionPoint
 public:
 
     explicit SubdivisionControlPoint(SubdivisionSurface* owner);
-    virtual ~SubdivisionControlPoint();
+    virtual ~SubdivisionControlPoint() {}
 
     // modifiers
     void collapse();
-    
+
     // getters/setters
     QColor getColor();
     bool isSelected();
@@ -146,15 +153,23 @@ public:
     // persistence
     void load_binary(FileBuffer& source);
     void save_binary(FileBuffer& destination);
+    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
 
     // drawing
     //int distance_to_cursor(int x, int y, Viewport& vp) const;
     virtual void draw(Viewport& vp);
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
 
- protected:
+    // makers
+    static SubdivisionControlPoint* construct(SubdivisionSurface* owner);
+
+protected:
+
+    void priv_dump(std::ostream& os, const char* prefix) const;
+
+protected:
 
     bool _locked;
 };

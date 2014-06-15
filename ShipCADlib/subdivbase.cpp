@@ -19,9 +19,15 @@ SubdivisionBase::~SubdivisionBase()
     // does nothing
 }
 
-void SubdivisionBase::dump(ostream& os) const
+void SubdivisionBase::dump(ostream& os, const char* prefix) const
 {
-    os << " Owner:" << hex << _owner;
+    os << prefix << "SubdivisionBase [" << hex << this << "]";
+    priv_dump(os, prefix);
+}
+
+void SubdivisionBase::priv_dump(ostream& os, const char* prefix) const
+{
+    os << prefix << " Owner [" << hex << _owner << "]";
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionBase& base)

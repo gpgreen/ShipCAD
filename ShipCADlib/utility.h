@@ -1,6 +1,7 @@
 #ifndef UTILITY_H_
 #define UTILITY_H_
 
+#include <vector>
 #include <QVector3D>
 #include <QColor>
 #include <QString>
@@ -21,6 +22,9 @@ extern QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float par
 
 // convert a color to a DXF color index
 extern int FindDXFColorIndex(QColor color);
+
+// convert a DXF color index to a QColor
+extern QColor QColorFromDXFIndex(int index);
 
 // convert a float to a string with a max number of specified decimals
 extern QString truncate(float val, int max_length);
@@ -47,6 +51,10 @@ extern QString BoolToStr(bool val);
 // This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
 extern void JoinSplineSegments(float join_error, bool force_to_one_segment,
                                std::vector<ShipCADGeometry::Spline*> list);
+
+extern int ReadIntFromStr(size_t lineno, const QString& str, size_t& start);
+extern bool ReadBoolFromStr(size_t lineno, const QString& str, size_t& start);
+extern float ReadFloatFromStr(size_t lineno, const QString& str, size_t& start);
 
 };
 

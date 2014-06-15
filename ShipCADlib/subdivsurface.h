@@ -31,7 +31,7 @@
 #include <QObject>
 #include <QColor>
 #include <QVector3D>
-
+#include <boost/pool/pool.hpp>
 #include "plane.h"
 
 namespace ShipCADGeometry {
@@ -51,6 +51,8 @@ class Viewport;
 class FileBuffer;
 class Spline;
 
+extern bool g_surface_verbose;
+
 // This is the subdivision surface used for modelling the hull.
 // This is actually a quad-triangle subdivision surface as publisehed in the articles:
 //
@@ -65,6 +67,8 @@ public:
 
     typedef std::vector<std::vector<SubdivisionControlFace*> > face_grid_t;
     typedef std::vector<std::vector<SubdivisionPoint*> > grid_t;
+    typedef std::vector<std::vector<SubdivisionControlPoint*> > control_grid_t;
+    typedef std::vector<std::vector<QVector3D> > coordinate_grid_t;
 
     enum subdiv_mode_t {fmQuadTriangle, fmCatmullClark};
     enum assemble_mode_t {amRegular, amNURBS};
@@ -73,7 +77,7 @@ public:
     virtual ~SubdivisionSurface();
 
     virtual void clear();
-    void initialize(size_t point_start, size_t edge_start, size_t face_start);
+    void initialize(size_t point_start, size_t edge_start);
     void rebuild();
 
     // modifiers
@@ -97,11 +101,13 @@ public:
     void extractPointsFromFaces(std::vector<SubdivisionFace*>& selectedfaces,
                                 std::vector<SubdivisionControlPoint*>& points,
                                 size_t& lockedpoints);
-    void extractPointsFromSelection();
-    void importGrid();
-    bool intersectPlane();
-    void insertPlane();
+    void extractPointsFromSelection(std::vector<SubdivisionControlPoint*>& selectedpoints,
+                                    size_t& lockedpoints);
+    void importGrid(coordinate_grid_t& points, SubdivisionLayer* layer);
+    bool intersectPlane(const Plane& plane, bool hydrostatics_layers_only, std::vector<Spline*>& destination);
+    void insertPlane(const Plane& plane, bool add_curves);
     void subdivide();
+    void selectionDelete();
 
     size_t numberOfLockedPoints();
     size_t numberOfSelectedLockedPoints();
@@ -131,7 +137,6 @@ public:
     size_t numberOfEdges();
     size_t indexOfEdge(SubdivisionEdge* edge);
     SubdivisionEdge* getEdge(size_t index);
-    void deleteEdge(SubdivisionEdge* edge);
     SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
 
     // SubdivisionControlEdge
@@ -154,8 +159,6 @@ public:
 
     // SubdivisionFace
     size_t numberOfFaces();
-    SubdivisionFace* getFace(size_t index);
-    void deleteFace(SubdivisionFace* face);
     void clearFaces();
 
     // SubdivisionControlFace
@@ -199,12 +202,12 @@ public:
     size_t numberOfLayers() {return _layers.size();}
     size_t indexOfLayer(SubdivisionLayer* layer);
     SubdivisionLayer* getLayer(size_t index);
-    SubdivisionLayer* getActiveLayer();
+    SubdivisionLayer* getActiveLayer() {return _active_layer;}
     void setActiveLayer(SubdivisionLayer* layer);
     bool hasLayer(SubdivisionLayer* layer);
     void deleteLayer(SubdivisionLayer* layer);
-    size_t lastUsedLayerID();
-    void setLastUsedLayerID(size_t newid);
+    size_t lastUsedLayerID() {return _last_used_layerID;}
+    void setLastUsedLayerID(size_t newid) {_last_used_layerID = newid;}
     size_t requestNewLayerID();
     SubdivisionLayer* addNewLayer();
 
@@ -217,36 +220,45 @@ public:
     bool isGaussCurvatureCalculated();
 
     // options
-    bool showControlNet();
-    bool showControlCurves();
-    bool isDrawMirror();
-    subdiv_mode_t getSubdivisionMode();
+    bool showControlNet() {return _show_control_net;}
+    bool showControlCurves() {return _show_control_curves;}
+    bool isDrawMirror() {return _draw_mirror;}
+    subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
 
     // colors
-    QColor getSelectedColor();
-    QColor getCreaseEdgeColor();
-    QColor getEdgeColor();
-    QColor getLeakColor();
-    QColor getRegularPointColor();
-    QColor getCornerPointColor();
-    QColor getDartPointColor();
-    QColor getCreasePointColor();
-    QColor getControlCurveColor();
-    QColor getLayerColor();
+    QColor getSelectedColor() {return _selected_color;}
+    QColor getCreaseEdgeColor() {return _crease_color;}
+    QColor getEdgeColor() {return _edge_color;}
+    QColor getLeakColor() {return _leak_color;}
+    QColor getRegularPointColor() {return _regular_point_color;}
+    QColor getCornerPointColor() {return _corner_point_color;}
+    QColor getDartPointColor() {return _dart_point_color;}
+    QColor getCreasePointColor() {return _crease_point_color;}
+    QColor getControlCurveColor() {return _control_curve_color;}
+    QColor getLayerColor() {return _layer_color;}
 
     // persistence
     void saveBinary(FileBuffer& destination);
     void loadBinary(FileBuffer& source);
+    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
     void loadVRMLFile(const QString& filename);
     void exportFeFFile(std::vector<QString>& strings);
-    void importFeFFile(std::vector<QString>& strings, int lineno);
+    void importFeFFile(std::vector<QString>& strings, size_t& lineno);
     void exportObjFile(bool export_control_net, std::vector<QString>& strings);
+    void saveToStream(std::vector<QString>& strings);
 
     // drawing
     virtual void draw(Viewport& vp);
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
+
+    boost::pool<>& getControlPointPool() {return _cpoint_pool;}
+    //boost::pool<> _cedge_pool;
+    //boost::pool<> _cface_pool;
+    //boost::pool<> _ccurve_pool;
+    boost::pool<>& getPointPool() {return _point_pool;}
+    //boost::pool<> _edge_pool;
 
 signals:
 
@@ -256,6 +268,7 @@ signals:
 
 protected:
 
+    void priv_dump(std::ostream& os, const char* prefix) const;
     SubdivisionControlPoint* newControlPoint(const QVector3D& p);
     void findAttachedFaces(std::vector<SubdivisionControlFace*>& found_list,
                            std::vector<SubdivisionControlFace*>& todo_list,
@@ -267,6 +280,7 @@ protected:
                     std::vector<SubdivisionFace*>& faces);
     void sortEdges(std::vector<SubdivisionEdge*>& edges);
     std::vector<SubdivisionPoint*> sortEdges(bool always_true, std::vector<SubdivisionEdge*>& edges);
+    std::vector<SubdivisionControlPoint*> sortEdges(std::vector<SubdivisionControlEdge*>& edges);
 
 protected:
 
@@ -285,7 +299,6 @@ protected:
     int _current_subdiv_level;
 
     float _curvature_scale;
-    // float gaus_curvature;
     float _min_gaus_curvature;
     float _max_gaus_curvature;
     float _main_frame_location;
@@ -311,6 +324,8 @@ protected:
     QVector3D _max;
     
     size_t _last_used_layerID;
+    // currently active layer, may not be 0
+    SubdivisionLayer* _active_layer;
 
     // control points which can be changed by the user
     std::vector<SubdivisionControlPoint*> _control_points;
@@ -320,11 +335,14 @@ protected:
     std::vector<SubdivisionControlFace*> _control_faces;
     // mastercurves
     std::vector<SubdivisionControlCurve*> _control_curves;
+    // our layers
+    std::vector<SubdivisionLayer*> _layers;
+    // curvature at points
+    std::vector<float> _gaus_curvature;
 
     // entities obtained by subdividing the surface
     std::vector<SubdivisionPoint*> _points;
     std::vector<SubdivisionEdge*> _edges;
-    std::vector<SubdivisionLayer*> _layers;
 
     // selected entities
     std::vector<SubdivisionControlPoint*> _sel_control_points;
@@ -332,10 +350,13 @@ protected:
     std::vector<SubdivisionControlFace*> _sel_control_faces;
     std::vector<SubdivisionControlCurve*> _sel_control_curves;
     
-    std::vector<float> _gaus_curvature;
-
-    // currently active layer, may not be 0
-    SubdivisionLayer* _active_layer;
+    // memory pools
+    boost::pool<> _cpoint_pool;
+    boost::pool<> _cedge_pool;
+    boost::pool<> _cface_pool;
+    boost::pool<> _ccurve_pool;
+    boost::pool<> _point_pool;
+    boost::pool<> _edge_pool;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

@@ -46,6 +46,8 @@
 
 #include "viewport.h"
 #include "spline.h"
+#include "subdivsurface.h"
+#include "subdivpoint.h"
 
 using namespace ShipCADGeometry;
 using namespace std;
@@ -65,8 +67,6 @@ int main(int argc, char **argv)
     spline.setProperty("Color", QColor(Qt::blue));
     spline.setProperty("ShowCurvature", true);
     cerr << spline << endl;
-    spline.setProperty("Build", true);
-    cerr << spline << endl;
 
     // write it to dxf..
     vector<QString> dxfstrings;
@@ -76,6 +76,13 @@ int main(int argc, char **argv)
     for (size_t i=0; i<dxfstrings.size(); ++i)
         os << dxfstrings[i].toStdString() << "\r\n";
     os.close();
+    cerr << spline << endl;
+
+    // make a surface
+    SubdivisionSurface surface;
+    SubdivisionControlPoint* pt = surface.addControlPoint();
+    cerr << *pt << endl;
+    cerr << surface << endl;
 
     Viewport window;
     window.setFormat(format);

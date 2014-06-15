@@ -119,6 +119,13 @@ int ShipCADUtility::FindDXFColorIndex(QColor color)
     return result;
 }
 
+QColor ShipCADUtility::QColorFromDXFIndex(int index)
+{
+    if (index >= 0 && index <= 255)
+        return DXFLayerColors[index];
+    throw range_error("bad index in FindColorFromDXFIndex");
+}
+
 QString ShipCADUtility::truncate(float val, int max_length)
 {
     QString num;
@@ -273,3 +280,62 @@ void ShipCADUtility::JoinSplineSegments(float join_error,
         ++i;
     }
 }
+
+int ShipCADUtility::ReadIntFromStr(size_t lineno, const QString& str, size_t& start)
+{
+    int spc = str.indexOf(' ', start);
+    QStringRef s;
+    if (spc != -1)
+        s = str.midRef(start, spc - start);
+    else
+        s = str.rightRef(start);
+    bool ok;
+    int result = s.toInt(&ok);
+    if (!ok) {
+        QString msg = QString("Invalid integer value in lineno: %1").arg(lineno);
+        throw runtime_error(msg.toStdString());
+    }
+    if (spc != -1)
+        start += spc + 1;
+    else
+        start = str.length();
+    return result;
+}
+
+bool ShipCADUtility::ReadBoolFromStr(size_t lineno, const QString& str, size_t& start)
+{
+    int spc = str.indexOf(' ', start);
+    QStringRef s;
+    if (spc != -1)
+        s = str.midRef(start, spc - start);
+    else
+        s = str.rightRef(start);
+    bool result = (s == "1" || s == "TRUE" || s == "YES");
+    if (spc != -1)
+        start += spc + 1;
+    else
+        start = str.length();
+    return result;
+}
+
+float ShipCADUtility::ReadFloatFromStr(size_t lineno, const QString& str, size_t& start)
+{
+    int spc = str.indexOf(' ', start);
+    QStringRef s;
+    if (spc != -1)
+        s = str.midRef(start, spc - start);
+    else
+        s = str.rightRef(start);
+    bool ok;
+    float result = s.toFloat(&ok);
+    if (!ok) {
+        QString msg = QString("Invalid floating point value in lineno: %1").arg(lineno);
+        throw runtime_error(msg.toStdString());
+    }
+    if (spc != -1)
+        start += spc + 1;
+    else
+        start = str.length();
+    return result;
+}
+

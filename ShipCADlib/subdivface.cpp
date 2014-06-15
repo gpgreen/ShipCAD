@@ -36,6 +36,13 @@ size_t SubdivisionFace::indexOfPoint(SubdivisionPoint* pt)
     return _owner->indexOfPoint(pt);
 }
 
+void SubdivisionFace::insertPoint(size_t index, SubdivisionPoint *point)
+{
+    if (index >= _points.size())
+        throw range_error("bad index in SubdivisionFace::insertPoint");
+    _points.insert(_points.begin()+index, point);
+}
+
 static float triangle_area(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
 {
     float ax = 0.5 * ((p1.y() - p2.y()) * (p1.z() + p2.z())
@@ -57,6 +64,19 @@ float SubdivisionFace::getArea()
         result += triangle_area(_points[0]->getCoordinate(),
                 _points[i-2]->getCoordinate(),
                 _points[i-1]->getCoordinate());
+    return result;
+}
+
+QVector3D SubdivisionFace::getFaceCenter()
+{
+    QVector3D result = ZERO;
+    if (_points.size() > 1) {
+        for (size_t i=1; i<=_points.size(); ++i) {
+            SubdivisionPoint* p = _points[i-1];
+            result = result + p->getCoordinate();
+        }
+        result /= _points.size();
+    }
     return result;
 }
 
@@ -92,6 +112,12 @@ SubdivisionPoint* SubdivisionFace::getPoint(size_t index)
     if (index < _points.size())
         return _points[index];
     throw range_error("index not in range SubdivisionFace::getPoint");
+}
+
+void SubdivisionFace::addPoint(SubdivisionPoint *point)
+{
+    _points.push_back(point);
+    point->addFace(this);
 }
 
 SubdivisionPoint* SubdivisionFace::calculateFacePoint()
@@ -298,11 +324,16 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
     }
 }
 
-void SubdivisionFace::dump(ostream& os) const
+void SubdivisionFace::draw(Viewport &vp)
 {
-    os << "SubdivisionFace ["
+    // BUGBUG: unimplemented
+}
+
+void SubdivisionFace::dump(ostream& os, const char* prefix) const
+{
+    os << prefix << "SubdivisionFace ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os);
+    SubdivisionBase::dump(os, prefix);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionFace& face)
@@ -484,7 +515,6 @@ void SubdivisionControlFace::calcExtents()
 void SubdivisionControlFace::clear()
 {
     clearChildren();
-    SubdivisionFace::clear();
     _layer = 0;
 }
 
@@ -650,11 +680,11 @@ void SubdivisionControlFace::trace()
     findAttachedFaces(todo_list, this);
 }
 
-void SubdivisionControlFace::dump(ostream& os) const
+void SubdivisionControlFace::dump(ostream& os, const char* prefix) const
 {
-    os << "SubdivisionControlFace ["
+    os << prefix << "SubdivisionControlFace ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os);
+    SubdivisionBase::dump(os, prefix);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlFace& face)

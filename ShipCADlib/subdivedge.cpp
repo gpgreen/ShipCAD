@@ -220,11 +220,16 @@ void SubdivisionEdge::draw(Viewport& /*vp*/)
 {
 }
 
-void SubdivisionEdge::dump(ostream& os) const
+void SubdivisionEdge::dump(ostream& os, const char* prefix) const
 {
-    os << "SubdivisionEdge ["
+    os << prefix << "SubdivisionEdge ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os);
+    priv_dump(os, prefix);
+}
+
+void SubdivisionEdge::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionBase::priv_dump(os, prefix);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionEdge& edge)
@@ -256,11 +261,6 @@ SubdivisionControlEdge::~SubdivisionControlEdge()
     startPoint()->deleteEdge(this);
     if (startPoint()->numberOfEdges() == 0)
         delete startPoint();
-}
-
-void SubdivisionControlEdge::clear()
-{
-
 }
 
 void SubdivisionControlEdge::collapse()
@@ -368,11 +368,11 @@ void SubdivisionControlEdge::collapse()
         startPoint()->deleteEdge(this);
         endPoint()->deleteEdge(this);
         if (_owner->hasControlEdge(this))
-            _owner->deleteEdge(this);
+            _owner->deleteControlEdge(this);
         if (_owner->hasControlFace(face1))
-            _owner->deleteFace(face1);
+            _owner->deleteControlFace(face1);
         if (_owner->hasControlFace(face2))
-            _owner->deleteFace(face2);
+            _owner->deleteControlFace(face2);
         delete face1;
         delete face2;
 
@@ -521,6 +521,11 @@ void SubdivisionControlEdge::load_binary(FileBuffer& source)
     setSelected(val);
 }
 
+void SubdivisionControlEdge::loadFromStream(size_t &lineno, std::vector<QString> &strings)
+{
+    // BUGBUG: not implemented
+}
+
 void SubdivisionControlEdge::save_binary(FileBuffer& destination)
 {
     destination.add(_owner->indexOfPoint(_points[0]));
@@ -578,11 +583,16 @@ void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& /*vp*/)
 
 }
 
-void SubdivisionControlEdge::dump(ostream& os) const
+void SubdivisionControlEdge::dump(ostream& os, const char* prefix) const
 {
-    os << "SubdivisionControlEdge ["
+    os << prefix << "SubdivisionControlEdge ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os);
+    priv_dump(os, prefix);
+}
+
+void SubdivisionControlEdge::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionEdge::priv_dump(os, prefix);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlEdge& edge)

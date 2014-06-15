@@ -23,7 +23,7 @@ static QVector3D ZERO = QVector3D(0,0,0);
 SubdivisionLayer::SubdivisionLayer(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {
-    // does nothing
+    clear();
 }
 
 SubdivisionLayer::~SubdivisionLayer()
@@ -421,9 +421,16 @@ void SubdivisionLayer::saveBinary(FileBuffer& destination)
     }
 }
 
-void SubdivisionLayer::dump(ostream& os) const
+void SubdivisionLayer::dump(ostream& os, const char* prefix) const
 {
-    os << " Owner:" << hex << _owner;
+    os << prefix << "SubdivisionLayer ["
+       << hex << this << "]\n";
+    priv_dump(os, prefix);
+}
+
+void SubdivisionLayer::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionBase::priv_dump(os, prefix);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionLayer& layer)

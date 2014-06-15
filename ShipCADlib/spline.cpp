@@ -376,7 +376,7 @@ float Spline::coord_length(float t1, float t2)
         return result;
 
     QVector3D p1, p2;
-    // BUGBUG p1 is not initialized
+    p1 = ZERO;
     for (size_t i=0; i<=_fragments; ++i) {
         float t = t1 + (i / static_cast<float>(_fragments)) * (t2 - t1);
         p2 = value(t);

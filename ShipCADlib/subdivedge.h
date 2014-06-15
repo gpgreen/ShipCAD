@@ -58,13 +58,13 @@ public:
     explicit SubdivisionEdge(SubdivisionSurface* owner);
     virtual ~SubdivisionEdge();
 
+    virtual void clear();
     virtual void draw(Viewport &vp);
 
     // modifiers
     void addFace(SubdivisionFace* face);
     void assign(SubdivisionEdge* edge);
     SubdivisionPoint* calculateEdgePoint();
-    void clear();
     void deleteFace(SubdivisionFace* face);
     void swapData();
 
@@ -88,7 +88,11 @@ public:
         { _points[0] = p1; _points[1] = p2; }
 
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
+
+protected:
+
+    void priv_dump(std::ostream& os, const char* prefix) const;
 
 protected:
 
@@ -114,7 +118,6 @@ public:
     virtual ~SubdivisionControlEdge();
 
     // modifiers
-    void clear();
     void collapse();
     SubdivisionControlPoint* insertControlPoint(const QVector3D& p);
     void load_binary(FileBuffer& source);
@@ -133,11 +136,15 @@ public:
     virtual void draw(Viewport &vp);
     virtual void draw(bool draw_mirror, Viewport &vp);
 
+    // persistence
+    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
+
     // output
-    void dump(std::ostream& os) const;
+    virtual void dump(std::ostream& os, const char* prefix = "") const;
 
 protected:
 
+    void priv_dump(std::ostream& os, const char* prefix) const;
     void priv_trace(SubdivisionControlPoint* p);
 
 protected:

@@ -47,7 +47,7 @@ public:
     explicit FileBuffer();
     ~FileBuffer();
 
-    version_t version();
+    version_t version() {return _version;}
 
     void load(bool& val);
     void add(bool val);
@@ -72,6 +72,7 @@ public:
 
 private:
 
+    version_t _version;
     QFile* _fb;         // file to read/write from
     size_t _pos;           // current position in the data vector
     std::vector<unsigned char> _data;   // the data

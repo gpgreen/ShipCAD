@@ -55,6 +55,9 @@ public:
 
     float distance(const QVector3D& point) const;
 
+    // determine if plane intersects a bounding box (p1, p2)
+    bool intersectsBox(const QVector3D& p1, const QVector3D& p2) const;
+
 private:
 
     float _vars[4];

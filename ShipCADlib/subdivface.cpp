@@ -130,7 +130,7 @@ SubdivisionPoint* SubdivisionFace::calculateFacePoint()
             centre += p;
         }
         centre /= _points.size();
-        result = new SubdivisionPoint(_owner);
+        result = SubdivisionPoint::construct(_owner);
         result->setCoordinate(centre);
     }
     return result;
@@ -164,7 +164,10 @@ void SubdivisionFace::edgeCheck(SubdivisionSurface *owner,
         throw runtime_error("bad points in SubdivisionFace::edgeCheck");
     newedge = owner->edgeExists(p1, p2);
     if (newedge == 0) {
-        newedge = new SubdivisionEdge(owner);
+        if (controledge)
+            newedge = SubdivisionControlEdge::construct(owner);
+        else
+            newedge = SubdivisionEdge::construct(owner);
         newedge->setPoints(p1, p2);
         newedge->startPoint()->addEdge(newedge);
         newedge->endPoint()->addEdge(newedge);
@@ -355,7 +358,7 @@ SubdivisionControlFace::~SubdivisionControlFace()
     // remove from layer
     setLayer(0);
     if (_owner->hasControlFace(this)) {
-        _owner->deleteControlFace(this);
+        _owner->removeControlFace(this);
         SubdivisionPoint* p1 = getPoint(numberOfPoints() - 1);
         p1->deleteFace(this);
         for (size_t i=1; i<=numberOfPoints(); ++i) {
@@ -364,7 +367,7 @@ SubdivisionControlFace::~SubdivisionControlFace()
             if (edge != 0) {
                 edge->deleteFace(this);
                 if (edge->numberOfFaces() == 0)
-                    delete edge;
+                    _owner->deleteControlEdge(edge);
             }
             p1 = p2;
         }
@@ -474,7 +477,7 @@ void SubdivisionControlFace::setLayer(SubdivisionLayer *layer)
 {
     if (layer == _layer)
         return;
-    if (layer != 0) {
+    if (_layer != 0) {
         // disconnect from current layer
         _layer->deleteControlFace(this);
         _layer = 0;
@@ -523,8 +526,6 @@ void SubdivisionControlFace::clearChildren()
     for (size_t i=0; i<_children.size(); ++i)
         delete _children[i];
     _children.clear();
-    for (size_t i=0; i<_edges.size(); ++i)
-        delete _edges[i];
     _edges.clear();
 }
 

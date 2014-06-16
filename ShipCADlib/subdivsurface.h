@@ -113,7 +113,7 @@ public:
     size_t numberOfSelectedLockedPoints();
 
     // SubdivisionPoint
-    size_t numberOfPoints();
+    size_t numberOfPoints() {return _points.size();}
     size_t indexOfPoint(SubdivisionPoint* pt);
     SubdivisionPoint* getPoint(size_t index);
 
@@ -121,11 +121,14 @@ public:
     size_t numberOfControlPoints() {return _control_points.size();}
     size_t indexOfControlPoint(SubdivisionControlPoint* pt);
     bool hasControlPoint(SubdivisionControlPoint* pt);
+    void removeControlPoint(SubdivisionControlPoint* pt);
     SubdivisionControlPoint* getControlPoint(size_t index);
     SubdivisionControlPoint* addControlPoint(const QVector3D& pt);
     void addControlPoint(SubdivisionControlPoint* pt);
     // adds a new controlpoint at 0,0,0 without checking other points
     SubdivisionControlPoint* addControlPoint();
+    // delete a controlpoint singly, not by dumping the pool
+    void deleteControlPoint(SubdivisionControlPoint* point);
 
     // selected SubdivisionControlPoint
     size_t numberOfSelectedControlPoints() {return _sel_control_points.size();}
@@ -134,7 +137,7 @@ public:
     void removeSelectedControlPoint(SubdivisionControlPoint* pt);
 
     // SubdivisionEdge
-    size_t numberOfEdges();
+    size_t numberOfEdges() {return _edges.size();}
     size_t indexOfEdge(SubdivisionEdge* edge);
     SubdivisionEdge* getEdge(size_t index);
     SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
@@ -147,6 +150,7 @@ public:
     SubdivisionControlEdge* addControlEdge(SubdivisionPoint* sp, SubdivisionPoint* ep);
     void addControlEdge(SubdivisionControlEdge* edge);
     SubdivisionControlEdge* controlEdgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
+    void removeControlEdge(SubdivisionControlEdge* edge);
     void deleteControlEdge(SubdivisionControlEdge* edge);
     void isolateEdges(std::vector<SubdivisionControlEdge*>& input,
                       std::vector<std::vector<SubdivisionControlPoint*> >& sorted);
@@ -176,7 +180,7 @@ public:
                                            bool check_edges);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
                                            bool check_edges, SubdivisionLayer* layer);
-    void deleteControlFace(SubdivisionControlFace* face);
+    void removeControlFace(SubdivisionControlFace* face);
 
     // selected SubdivisionControlFace
     size_t numberOfSelectedControlFaces() {return _sel_control_faces.size();}
@@ -254,11 +258,12 @@ public:
     virtual void dump(std::ostream& os, const char* prefix = "") const;
 
     boost::pool<>& getControlPointPool() {return _cpoint_pool;}
-    //boost::pool<> _cedge_pool;
-    //boost::pool<> _cface_pool;
-    //boost::pool<> _ccurve_pool;
+    boost::pool<>& getControlEdgePool() {return _cedge_pool;}
+    boost::pool<>& getControlFacePool() {return _cface_pool;}
+    boost::pool<>& getControlCurvePool() {return _ccurve_pool;}
+    boost::pool<>& getLayerPool() {return _layer_pool;}
     boost::pool<>& getPointPool() {return _point_pool;}
-    //boost::pool<> _edge_pool;
+    boost::pool<>& getEdgePool() {return _edge_pool;}
 
 signals:
 
@@ -355,6 +360,7 @@ protected:
     boost::pool<> _cedge_pool;
     boost::pool<> _cface_pool;
     boost::pool<> _ccurve_pool;
+    boost::pool<> _layer_pool;
     boost::pool<> _point_pool;
     boost::pool<> _edge_pool;
 };

@@ -17,6 +17,14 @@ using namespace ShipCADGeometry;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+SubdivisionEdge* SubdivisionEdge::construct(SubdivisionSurface* owner)
+{
+    void * mem = owner->getEdgePool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionEdge::construct");
+    return new (mem) SubdivisionEdge(owner);
+}
+
 SubdivisionEdge::SubdivisionEdge(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {
@@ -190,7 +198,7 @@ void SubdivisionEdge::addFace(SubdivisionFace* face)
 SubdivisionPoint* SubdivisionEdge::calculateEdgePoint()
 {
     QVector3D point = 0.5 * startPoint()->getCoordinate() * endPoint()->getCoordinate();
-    SubdivisionPoint* result = new SubdivisionPoint(_owner);
+    SubdivisionPoint* result = SubdivisionPoint::construct(_owner);
     if (_crease)
         result->setVertexType(SubdivisionPoint::svCrease);
     if (_curve)
@@ -238,9 +246,20 @@ ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionEdge& edge)
     return os;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+SubdivisionControlEdge* SubdivisionControlEdge::construct(SubdivisionSurface* owner)
+{
+    void * mem = owner->getControlEdgePool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionControlEdge::construct");
+    return new (mem) SubdivisionControlEdge(owner);
+}
+
 SubdivisionControlEdge::SubdivisionControlEdge(SubdivisionSurface* owner)
     : SubdivisionEdge(owner)
 {
+    _control_edge = true;
     clear();
 }
 
@@ -250,17 +269,19 @@ SubdivisionControlEdge::~SubdivisionControlEdge()
     setSelected(false);
     if (getCurve() != 0)
         getCurve()->deleteEdge(this);
-    _owner->deleteControlEdge(this);
+    _owner->removeControlEdge(this);
     for (size_t i=_faces.size(); i>0; --i)
         delete _faces[i-1];
+    SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
+    SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
     // remove endpoint from startpoint neighbours
-    endPoint()->deleteEdge(this);
-    if (endPoint()->numberOfEdges() == 0)
-        delete endPoint();
+    ep->deleteEdge(this);
+    if (ep->numberOfEdges() == 0)
+        _owner->deleteControlPoint(ep);
     // remove startpoint from endpoint neighbours
-    startPoint()->deleteEdge(this);
-    if (startPoint()->numberOfEdges() == 0)
-        delete startPoint();
+    sp->deleteEdge(this);
+    if (sp->numberOfEdges() == 0)
+        _owner->deleteControlPoint(sp);
 }
 
 void SubdivisionControlEdge::collapse()
@@ -368,11 +389,11 @@ void SubdivisionControlEdge::collapse()
         startPoint()->deleteEdge(this);
         endPoint()->deleteEdge(this);
         if (_owner->hasControlEdge(this))
-            _owner->deleteControlEdge(this);
+            _owner->removeControlEdge(this);
         if (_owner->hasControlFace(face1))
-            _owner->deleteControlFace(face1);
+            _owner->removeControlFace(face1);
         if (_owner->hasControlFace(face2))
-            _owner->deleteControlFace(face2);
+            _owner->removeControlFace(face2);
         delete face1;
         delete face2;
 
@@ -463,7 +484,7 @@ bool SubdivisionControlEdge::isVisible()
 
 SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(const QVector3D& p)
 {
-    SubdivisionControlPoint* result = new SubdivisionControlPoint(_owner);
+    SubdivisionControlPoint* result = SubdivisionControlPoint::construct(_owner);
     SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
     SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
     if (sp == 0 || ep == 0)

@@ -121,6 +121,9 @@ public:
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
 
+    // makers
+    static SubdivisionLayer* construct(SubdivisionSurface* owner);
+
 signals:
 
     void changedLayerData(size_t layerid);

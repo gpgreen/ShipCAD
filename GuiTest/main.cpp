@@ -80,8 +80,16 @@ int main(int argc, char **argv)
 
     // make a surface
     SubdivisionSurface surface;
-    SubdivisionControlPoint* pt = surface.addControlPoint();
-    cerr << *pt << endl;
+    vector<SubdivisionControlPoint*> points;
+    SubdivisionControlPoint* pt = surface.addControlPoint(QVector3D(1,1,0));
+    points.push_back(pt);
+    pt = surface.addControlPoint(QVector3D(1,-1,0));
+    points.push_back(pt);
+    pt = surface.addControlPoint(QVector3D(-1,-1,0));
+    points.push_back(pt);
+    pt = surface.addControlPoint(QVector3D(-1,1,0));
+    points.push_back(pt);
+    surface.addControlFace(points, true);
     cerr << surface << endl;
 
     Viewport window;

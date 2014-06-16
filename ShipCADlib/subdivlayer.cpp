@@ -20,6 +20,14 @@ static QVector3D ZERO = QVector3D(0,0,0);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+SubdivisionLayer* SubdivisionLayer::construct(SubdivisionSurface* owner)
+{
+    void * mem = owner->getLayerPool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionLayer::construct");
+    return new (mem) SubdivisionLayer(owner);
+}
+
 SubdivisionLayer::SubdivisionLayer(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {

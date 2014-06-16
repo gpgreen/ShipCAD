@@ -90,6 +90,9 @@ public:
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
 
+    // makers
+    static SubdivisionEdge* construct(SubdivisionSurface* owner);
+
 protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;
@@ -141,6 +144,9 @@ public:
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
+
+    // makers
+    static SubdivisionControlEdge* construct(SubdivisionSurface* owner);
 
 protected:
 

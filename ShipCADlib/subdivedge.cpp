@@ -15,6 +15,8 @@
 using namespace std;
 using namespace ShipCADGeometry;
 
+bool ShipCADGeometry::g_edge_verbose = true;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 SubdivisionEdge* SubdivisionEdge::construct(SubdivisionSurface* owner)
@@ -232,12 +234,41 @@ void SubdivisionEdge::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionEdge ["
        << hex << this << "]\n";
-    priv_dump(os, prefix);
+    if (g_edge_verbose)
+        priv_dump(os, prefix);
 }
 
 void SubdivisionEdge::priv_dump(ostream& os, const char* prefix) const
 {
     SubdivisionBase::priv_dump(os, prefix);
+    QString nprefix(prefix);
+    nprefix.append(" ");
+    const char* snprefix = nprefix.toStdString().c_str();
+    os << "\n" << snprefix << "points\n";
+    bool tmp = g_point_verbose;
+    g_point_verbose = false;
+    os << snprefix;
+    _points[0]->dump(os, snprefix);
+    os << "\n";
+    _points[1]->dump(os, snprefix);
+    os << "\n";
+    g_point_verbose = tmp;
+    os << snprefix << "faces (" << _faces.size() << ")\n";
+    for (size_t i=0; i<_faces.size(); ++i) {
+        os << snprefix;
+        _faces[i]->dump(os, snprefix);
+        os << "\n";
+    }
+    os << snprefix << "curve ";
+    if (_curve == 0)
+        os << "null";
+    else {
+        os << snprefix << " " << *_curve;
+    }
+    os << "\n" << snprefix << "Crease "
+       << (_crease ? 'y' : 'n')
+       << "\n" << snprefix << "ControlEdge "
+       << (_control_edge ? 'y' : 'n');
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionEdge& edge)
@@ -265,23 +296,26 @@ SubdivisionControlEdge::SubdivisionControlEdge(SubdivisionSurface* owner)
 
 SubdivisionControlEdge::~SubdivisionControlEdge()
 {
-    // delete from selection
-    setSelected(false);
-    if (getCurve() != 0)
-        getCurve()->deleteEdge(this);
-    _owner->removeControlEdge(this);
-    for (size_t i=_faces.size(); i>0; --i)
-        delete _faces[i-1];
-    SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
-    SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
-    // remove endpoint from startpoint neighbours
-    ep->deleteEdge(this);
-    if (ep->numberOfEdges() == 0)
-        _owner->deleteControlPoint(ep);
-    // remove startpoint from endpoint neighbours
-    sp->deleteEdge(this);
-    if (sp->numberOfEdges() == 0)
-        _owner->deleteControlPoint(sp);
+    if (_owner->hasControlEdge(this)) {
+        // remove from owner list so that destructor
+        // won't do anything if called again during
+        // completion of the destruction
+        _owner->removeControlEdge(this);
+        if (getCurve() != 0)
+            getCurve()->deleteEdge(this);
+        for (size_t i=_faces.size(); i>0; --i)
+            _owner->deleteControlFace(dynamic_cast<SubdivisionControlFace*>(_faces[i-1]));
+        SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
+        SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
+        // remove endpoint from startpoint neighbours
+        ep->deleteEdge(this);
+        if (ep->numberOfEdges() == 0)
+            _owner->deleteControlPoint(ep);
+        // remove startpoint from endpoint neighbours
+        sp->deleteEdge(this);
+        if (sp->numberOfEdges() == 0)
+            _owner->deleteControlPoint(sp);
+    }
 }
 
 void SubdivisionControlEdge::collapse()
@@ -352,7 +386,7 @@ void SubdivisionControlEdge::collapse()
         for (size_t i=0; i<face2->numberOfPoints(); ++i)
             face2->getPoint(i)->deleteFace(face2);
         // add the new face
-        SubdivisionControlFace* newface = new SubdivisionControlFace(_owner);
+        SubdivisionControlFace* newface = SubdivisionControlFace::construct(_owner);
         newface->setLayer(layer);
         _owner->addControlFace(newface);
         for (size_t i=0; i<=ind1; ++i) {
@@ -608,7 +642,8 @@ void SubdivisionControlEdge::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionControlEdge ["
        << hex << this << "]\n";
-    priv_dump(os, prefix);
+    if (g_edge_verbose)
+        priv_dump(os, prefix);
 }
 
 void SubdivisionControlEdge::priv_dump(ostream& os, const char* prefix) const

@@ -14,6 +14,14 @@ using namespace ShipCADGeometry;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+SubdivisionControlCurve* SubdivisionControlCurve::construct(SubdivisionSurface* owner)
+{
+    void * mem = owner->getControlCurvePool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionControlCurve::construct");
+    return new (mem) SubdivisionControlCurve(owner);
+}
+
 SubdivisionControlCurve::SubdivisionControlCurve(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {
@@ -25,7 +33,7 @@ SubdivisionControlCurve::~SubdivisionControlCurve()
     if (isSelected())
         setSelected(false);
     if (_owner->hasControlCurve(this))
-        _owner->deleteControlCurve(this);
+        _owner->removeControlCurve(this);
     // remove references from control edges
     for (size_t i=1; i<_points.size(); ++i) {
         SubdivisionControlPoint* p1 = _points[i-1];
@@ -132,7 +140,7 @@ void SubdivisionControlCurve::deleteEdge(SubdivisionControlEdge* edge)
 
             if (i - 2 > 0) {
                 // build first new curve
-                SubdivisionControlCurve* newcurve = new SubdivisionControlCurve(_owner);
+                SubdivisionControlCurve* newcurve = SubdivisionControlCurve::construct(_owner);
                 _owner->addControlCurve(newcurve);
                 p1 = 0;
                 for (size_t j=0; j<=i-2; ++j) {
@@ -149,7 +157,7 @@ void SubdivisionControlCurve::deleteEdge(SubdivisionControlEdge* edge)
             }
             if (i - 1 < _points.size() - 1) {
                 // build second new curve
-                SubdivisionControlCurve* newcurve = new SubdivisionControlCurve(_owner);
+                SubdivisionControlCurve* newcurve = SubdivisionControlCurve::construct(_owner);
                 _owner->addControlCurve(newcurve);
                 p1 = 0;
                 for (size_t j=i-1; j<=_points.size()-1; ++j) {
@@ -174,7 +182,7 @@ void SubdivisionControlCurve::deleteEdge(SubdivisionControlEdge* edge)
         if (_owner->hasSelectedControlCurve(this))
             _owner->removeSelectedControlCurve(this);
         if (_owner->hasControlCurve(this))
-            _owner->deleteControlCurve(this);
+            _owner->removeControlCurve(this);
         // BUGBUG: we are supposed to delete this curve now, but can't
     }
 }

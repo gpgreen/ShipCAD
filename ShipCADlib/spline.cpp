@@ -545,7 +545,7 @@ void Spline::draw(Viewport& vp)
     if (vp.getViewportMode() == Viewport::vmWireFrame) {
         if (_show_curvature) {
             glLineWidth(1);
-            glColor3f(_curvature_color.redF(), _curvature_color.greenF(), _curvature_color.blueF());
+            vp.setColor(_curvature_color);
             for (size_t i=0; i<_fragments; ++i) {
                 float c = curvature(i / static_cast<float>(_fragments), normal);
                 p2.setX(parray1[i].x() - c * 2 * _curvature_scale * normal.x());
@@ -573,6 +573,7 @@ void Spline::draw(Viewport& vp)
             //vp.setFontSize(7);
             //vp.setFontColor(Qt::black);
             //vp.setBrushStyle(Qt::clear);
+            vp.setColor(Qt::white);
             glBegin(GL_POINTS);
             for (size_t i=0; i<_nopoints; ++i) {
                 glVertex3f(_points[i].x(), _points[i].y(), _points[i].z());
@@ -593,7 +594,7 @@ void Spline::draw(Viewport& vp)
     }
 #endif
     glLineWidth(1);
-    glColor3f(_color.redF(), _color.greenF(), _color.blueF());
+    vp.setColor(_color);
     glBegin(GL_LINES);
     for (size_t i=1; i<parray1.size(); ++i) {
         glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());

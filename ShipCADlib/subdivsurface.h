@@ -181,6 +181,7 @@ public:
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
                                            bool check_edges, SubdivisionLayer* layer);
     void removeControlFace(SubdivisionControlFace* face);
+    void deleteControlFace(SubdivisionControlFace* face);
 
     // selected SubdivisionControlFace
     size_t numberOfSelectedControlFaces() {return _sel_control_faces.size();}
@@ -194,7 +195,7 @@ public:
     SubdivisionControlCurve* getControlCurve(size_t index);
     bool hasControlCurve(SubdivisionControlCurve* curve);
     void addControlCurve(SubdivisionControlCurve* curve);
-    void deleteControlCurve(SubdivisionControlCurve* curve);
+    void removeControlCurve(SubdivisionControlCurve* curve);
 
     // selected SubdivisionControlCurve
     size_t numberOfSelectedControlCurves() {return _sel_control_curves.size();}
@@ -264,6 +265,7 @@ public:
     boost::pool<>& getLayerPool() {return _layer_pool;}
     boost::pool<>& getPointPool() {return _point_pool;}
     boost::pool<>& getEdgePool() {return _edge_pool;}
+    boost::pool<>& getFacePool() {return _face_pool;}
 
 signals:
 
@@ -363,6 +365,7 @@ protected:
     boost::pool<> _layer_pool;
     boost::pool<> _point_pool;
     boost::pool<> _edge_pool;
+    boost::pool<> _face_pool;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

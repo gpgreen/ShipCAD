@@ -45,7 +45,8 @@ SubdivisionSurface::SubdivisionSurface()
       _ccurve_pool(sizeof(SubdivisionControlCurve)),
       _layer_pool(sizeof(SubdivisionLayer)),
       _point_pool(sizeof(SubdivisionPoint)),
-      _edge_pool(sizeof(SubdivisionEdge))
+      _edge_pool(sizeof(SubdivisionEdge)),
+      _face_pool(sizeof(SubdivisionFace))
 {
     clear();
 }
@@ -131,7 +132,6 @@ void SubdivisionSurface::deleteControlPoint(SubdivisionControlPoint* point)
     if (hasSelectedControlPoint(point))
         removeSelectedControlPoint(point);
     if (hasControlPoint(point)) {
-        removeControlPoint(point);
         point->~SubdivisionControlPoint();
         _cpoint_pool.free(point);
     }
@@ -277,7 +277,6 @@ void SubdivisionSurface::deleteControlEdge(SubdivisionControlEdge* edge)
     if (hasSelectedControlEdge(edge))
         removeSelectedControlEdge(edge);
     if (hasControlEdge(edge)) {
-        removeControlEdge(edge);
         edge->~SubdivisionControlEdge();
         _cedge_pool.free(edge);
     }
@@ -290,7 +289,7 @@ SubdivisionControlCurve* SubdivisionSurface::getControlCurve(size_t index)
     throw range_error("bad index in SubdivisionSurface::getControlCurve");
 }
 
-void SubdivisionSurface::deleteControlCurve(SubdivisionControlCurve *curve)
+void SubdivisionSurface::removeControlCurve(SubdivisionControlCurve *curve)
 {
     vector<SubdivisionControlCurve*>::iterator i = find(_control_curves.begin(),
                                                         _control_curves.end(),
@@ -330,7 +329,17 @@ void SubdivisionSurface::removeControlFace(SubdivisionControlFace *face)
                                                        face);
     if (i != _control_faces.end())
         _control_faces.erase(i);
-    throw range_error("face not found in SubdivisionSurface::deleteControlFace");
+    throw range_error("face not found in SubdivisionSurface::removeControlFace");
+}
+
+void SubdivisionSurface::deleteControlFace(SubdivisionControlFace *face)
+{
+    if (hasSelectedControlFace(face))
+        removeSelectedControlFace(face);
+    if (hasControlFace(face)) {
+        face->~SubdivisionControlFace();
+        _cface_pool.free(face);
+    }
 }
 
 SubdivisionControlFace* SubdivisionSurface::getControlFace(size_t index)
@@ -586,7 +595,7 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<QVector3D
     SubdivisionControlEdge* edge;
     SubdivisionPoint* prev = 0;
     if (points.size() > 2) {
-        result = new SubdivisionControlFace(this);
+        result = SubdivisionControlFace::construct(this);
         for (size_t i=1; i<=points.size(); ++i) {
             point = addControlPoint(points[i-1]);
             result->addPoint(point);
@@ -706,7 +715,7 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<Subdivisi
             result = 0;
             return 0;
         }
-        result = new SubdivisionControlFace(this);
+        result = SubdivisionControlFace::construct(this);
         if (layer == 0)
             result->setLayer(getLayer(0));
         else
@@ -752,10 +761,6 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<Subdivisi
 
 void SubdivisionSurface::clear()
 {
-    for (size_t i=1; i<=_control_curves.size(); ++i)
-        delete _control_curves[i-1];
-    for (size_t i=1; i<=_control_faces.size(); ++i)
-        delete _control_faces[i-1];
     _control_curves.clear();
     _control_faces.clear();
     _control_edges.clear();
@@ -765,6 +770,8 @@ void SubdivisionSurface::clear()
     _points.clear();
 
     // clear the pools
+    _ccurve_pool.release_memory();
+    _cface_pool.release_memory();
     _cedge_pool.release_memory();
     _cpoint_pool.release_memory();
     _layer_pool.release_memory();
@@ -1952,7 +1959,7 @@ void SubdivisionSurface::importFeFFile(vector<QString> &strings, size_t& lineno)
     // read controlfaces
     n = ReadIntFromStr(lineno, str, start);
     for (size_t i=1; i<=n; ++i) {
-        SubdivisionControlFace* face = new SubdivisionControlFace(this);
+        SubdivisionControlFace* face = SubdivisionControlFace::construct(this);
         _control_faces.push_back(face);
         str = strings[++lineno].trimmed();
         start = 0;
@@ -2157,7 +2164,7 @@ void SubdivisionSurface::insertPlane(const Plane& plane, bool add_curves)
             for (size_t i=1; i<=sortededges.size(); ++i) {
                 vector<SubdivisionControlPoint*>& points = sortededges[i-1];
                 if (points.size() > 1) {
-                    SubdivisionControlCurve* curve = new SubdivisionControlCurve(this);
+                    SubdivisionControlCurve* curve = SubdivisionControlCurve::construct(this);
                     addControlCurve(curve);
                     for (size_t j=1; j<=points.size(); ++j) {
                         SubdivisionControlPoint* p1 = points[j-1];
@@ -2266,7 +2273,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
         source.load(n);
         _control_curves.reserve(n);
         for (size_t i=1; i<=n; ++i) {
-            SubdivisionControlCurve* curve = new SubdivisionControlCurve(this);
+            SubdivisionControlCurve* curve = SubdivisionControlCurve::construct(this);
             _control_curves.push_back(curve);
             curve->loadBinary(source);
         }
@@ -2275,7 +2282,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
     source.load(n);
     _control_faces.reserve(n);
     for (size_t i=1; i<=n; ++i) {
-        SubdivisionControlFace* face = new SubdivisionControlFace(this);
+        SubdivisionControlFace* face = SubdivisionControlFace::construct(this);
         _control_faces.push_back(face);
         face->loadBinary(source);
     }
@@ -2428,7 +2435,7 @@ void SubdivisionSurface::subdivide()
     if (numberOfControlFaces() < 1)
         return;
     ++_current_subdiv_level;
-    vector<SubdivisionEdge*> newedgelist(pow(2, _current_subdiv_level));
+    vector<SubdivisionEdge*> newedgelist(static_cast<size_t>(pow(2.0f, _current_subdiv_level)));
     size_t number = numberOfFaces();
 
     // create the list with new facepoints and a reference to the original face

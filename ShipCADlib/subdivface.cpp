@@ -20,6 +20,14 @@ const QVector3D ZERO = QVector3D(0,0,0);
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+SubdivisionFace* SubdivisionFace::construct(SubdivisionSurface* owner)
+{
+    void * mem = owner->getFacePool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionFace::construct");
+    return new (mem) SubdivisionFace(owner);
+}
+
 SubdivisionFace::SubdivisionFace(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {
@@ -257,7 +265,7 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
             pts[index] = (*etmpindex).second; // prevedge.newlocation
             SubdivisionPoint* prevedgept = pts[index];
             // add the new face
-            newface = new SubdivisionFace(owner);
+            newface = SubdivisionFace::construct(owner);
             dest.push_back(newface);
             // check the edges of the new face
             edgeCheck(owner, prevedgept, p2pt, prevedge->isCrease(), prevedge->isControlEdge() || controlface, prevedge->getCurve(), newface, interioredges, controledges);
@@ -292,7 +300,7 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
             etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(curedge));
             pts[index] = (*etmpindex).second;
             // add the new face
-            newface = new SubdivisionFace(owner);
+            newface = SubdivisionFace::construct(owner);
             dest.push_back(newface);
             // check the edges of the new face
             edgeCheck(owner, pts[0], pts[1], prevedge->isCrease(), prevedge->isControlEdge() || controlface, prevedge->getCurve(), newface, interioredges, controledges);
@@ -314,7 +322,7 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
             pts[i-1] = (*etmpindex).second;
         }
         // add the new face
-        newface = new SubdivisionFace(owner);
+        newface = SubdivisionFace::construct(owner);
         dest.push_back(newface);
         edgeCheck(owner, pts[0], pts[1], false, false, 0, newface, interioredges, controledges);
         edgeCheck(owner, pts[1], pts[2], false, false, 0, newface, interioredges, controledges);
@@ -336,13 +344,28 @@ void SubdivisionFace::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionFace ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os, prefix);
+    priv_dump(os, prefix);
+}
+
+void SubdivisionFace::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionBase::priv_dump(os, prefix);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionFace& face)
 {
     face.dump(os);
     return os;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+SubdivisionControlFace* SubdivisionControlFace::construct(SubdivisionSurface* owner)
+{
+    void * mem = owner->getControlFacePool().malloc();
+    if (mem == 0)
+        throw runtime_error("out of memory in SubdivisionControlFace::construct");
+    return new (mem) SubdivisionControlFace(owner);
 }
 
 SubdivisionControlFace::SubdivisionControlFace(SubdivisionSurface *owner)
@@ -353,12 +376,13 @@ SubdivisionControlFace::SubdivisionControlFace(SubdivisionSurface *owner)
 
 SubdivisionControlFace::~SubdivisionControlFace()
 {
-    // delete from selection
-    setSelected(false);
-    // remove from layer
-    setLayer(0);
+    // if we still exist in owner, then continue with removal,
+    // otherwise we are being deleted from an edge/point
+    // and don't need to continue
     if (_owner->hasControlFace(this)) {
         _owner->removeControlFace(this);
+        // remove from layer
+        setLayer(0);
         SubdivisionPoint* p1 = getPoint(numberOfPoints() - 1);
         p1->deleteFace(this);
         for (size_t i=1; i<=numberOfPoints(); ++i) {
@@ -371,9 +395,9 @@ SubdivisionControlFace::~SubdivisionControlFace()
             }
             p1 = p2;
         }
+        clear();
     }
     _owner->setBuild(false);
-    clear();
 }
 
 void SubdivisionControlFace::draw(Viewport& /*vp*/)
@@ -685,7 +709,12 @@ void SubdivisionControlFace::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionControlFace ["
        << hex << this << "]\n";
-    SubdivisionBase::dump(os, prefix);
+    priv_dump(os, prefix);
+}
+
+void SubdivisionControlFace::priv_dump(ostream& os, const char* prefix) const
+{
+    SubdivisionFace::priv_dump(os, prefix);
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlFace& face)

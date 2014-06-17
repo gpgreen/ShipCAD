@@ -34,6 +34,7 @@
 namespace ShipCADGeometry {
 
 class Entity;
+class SubdivisionSurface;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -54,6 +55,9 @@ public:
     void setViewportMode(enum ViewportMode mode);
 
     void add(Entity* entity);
+    void add(SubdivisionSurface* surface);
+
+    void setColor(QColor newcolor);
 
 private:
 
@@ -64,11 +68,13 @@ private:
     GLuint m_posAttr;
     GLuint m_colAttr;
     GLuint m_matrixUniform;
+    GLuint m_fragColorUniform;
 
     QOpenGLShaderProgram *m_program;
     int m_frame;
 
     std::vector<Entity*> _entities;
+    std::vector<SubdivisionSurface*> _surfaces;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

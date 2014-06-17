@@ -38,6 +38,11 @@ SubdivisionPoint::SubdivisionPoint(SubdivisionSurface* owner)
     clear();
 }
 
+SubdivisionPoint::~SubdivisionPoint()
+{
+    // does nothing
+}
+
 void SubdivisionPoint::clear()
 {
     _coordinate = ZERO;
@@ -362,7 +367,7 @@ QVector3D SubdivisionPoint::averaging()
 
 SubdivisionPoint* SubdivisionPoint::calculateVertexPoint()
 {
-    SubdivisionPoint* result = new SubdivisionPoint(_owner);
+    SubdivisionPoint* result = SubdivisionPoint::construct(_owner);
     result->setProperty("VertexType", _vtype);
     result->setCoordinate(getCoordinate());
     for (size_t i=0; i<_edges.size(); ++i) {
@@ -446,22 +451,19 @@ void SubdivisionPoint::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionPoint ["
        << hex << this << "]\n";
-    priv_dump(os, prefix);
+    if (g_point_verbose)
+        priv_dump(os, prefix);
 }
 
 void SubdivisionPoint::priv_dump(ostream& os, const char* prefix) const
 {
     SubdivisionBase::priv_dump(os, prefix);
     os << "\n" << prefix << " edges (" << _edges.size() << ")\n";
-    if (g_point_verbose) {
-        for (size_t i=0; i<_edges.size(); ++i)
-            os << prefix << "  " << *_edges[i] << "\n";
-    }
+    for (size_t i=0; i<_edges.size(); ++i)
+        os << prefix << "  " << *_edges[i] << "\n";
     os << prefix << " faces (" << _faces.size() << ")\n";
-    if (g_point_verbose) {
-        for (size_t i=0; i<_faces.size(); ++i)
-            os << prefix << "  " << *_faces[i] << "\n";
-    }
+    for (size_t i=0; i<_faces.size(); ++i)
+        os << prefix << "  " << *_faces[i] << "\n";
     os << prefix << " Coordinate ["
        << _coordinate.x()
        << "," << _coordinate.y()
@@ -489,6 +491,13 @@ SubdivisionControlPoint::SubdivisionControlPoint(SubdivisionSurface *owner)
     : SubdivisionPoint(owner), _locked(false)
 {
     clear();
+}
+
+SubdivisionControlPoint::~SubdivisionControlPoint()
+{
+    if (_owner->hasControlPoint(this)) {
+        _owner->removeControlPoint(this);
+    }
 }
 
 QColor SubdivisionControlPoint::getColor()
@@ -770,14 +779,22 @@ void SubdivisionControlPoint::save_binary(FileBuffer &destination)
 
 void SubdivisionControlPoint::draw(Viewport &vp)
 {
-    // BUGBUG: unimplemented
+    if (vp.getViewportMode() != Viewport::vmWireFrame) {
+        QVector3D& p3d = getCoordinate();
+        // BUGBUG: need to set size, 2x for selected && wireframe view
+        vp.setColor(getColor());
+        glBegin(GL_POINTS);
+        glVertex3f(p3d.x(), p3d.y(), p3d.z());
+        glEnd();
+    }
 }
 
 void SubdivisionControlPoint::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionControlPoint ["
        << hex << this << "]\n";
-    priv_dump(os, prefix);
+    if (g_point_verbose)
+        priv_dump(os, prefix);
 }
 
 void SubdivisionControlPoint::priv_dump(ostream& os, const char* prefix) const

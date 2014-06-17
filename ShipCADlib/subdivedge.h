@@ -44,6 +44,8 @@ class SubdivisionFace;
 class Viewport;
 class FileBuffer;
 
+extern bool g_edge_verbose;
+
 class SubdivisionEdge : public SubdivisionBase
 {
     Q_OBJECT

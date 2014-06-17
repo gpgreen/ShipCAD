@@ -92,6 +92,9 @@ public:
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
 
+    // makers
+    static SubdivisionControlCurve* construct(SubdivisionSurface* owner);
+
 protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;

@@ -60,7 +60,7 @@ public:
     enum vertex_type_t {svRegular=0, svCrease, svDart, svCorner};
 
     explicit SubdivisionPoint(SubdivisionSurface* owner);
-    virtual ~SubdivisionPoint() {}
+    virtual ~SubdivisionPoint();
     
     // altering
     virtual void clear();
@@ -134,7 +134,7 @@ class SubdivisionControlPoint : public SubdivisionPoint
 public:
 
     explicit SubdivisionControlPoint(SubdivisionSurface* owner);
-    virtual ~SubdivisionControlPoint() {}
+    virtual ~SubdivisionControlPoint();
 
     // modifiers
     void collapse();

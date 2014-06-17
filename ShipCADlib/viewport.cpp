@@ -2,6 +2,7 @@
 
 #include "viewport.h"
 #include "entity.h"
+#include "subdivsurface.h"
 
 using namespace ShipCADGeometry;
 
@@ -18,6 +19,7 @@ Viewport::~Viewport()
     delete m_program;
 }
 
+#if 0
 static const char *vertexShaderSource =
     "attribute highp vec4 posAttr;\n"
     "attribute lowp vec4 colAttr;\n"
@@ -33,6 +35,20 @@ static const char *fragmentShaderSource =
     "void main() {\n"
     "   gl_FragColor = col;\n"
     "}\n";
+#endif
+static const char *vertexShaderSource =
+    "attribute highp vec4 posAttr;\n"
+    "uniform highp mat4 matrix;\n"
+    "void main() {\n"
+    "   gl_Position = matrix * posAttr;\n"
+    "}\n";
+
+static const char *fragmentShaderSource =
+    "uniform vec3 fragmentColor;\n"
+    "varying out vec4 outColor;\n"
+    "void main() {\n"
+    "   outColor = vec4(fragmentColor, 1.0);\n"
+    "}\n";
 
 void Viewport::initialize()
 {
@@ -41,8 +57,9 @@ void Viewport::initialize()
     m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
     m_program->link();
     m_posAttr = m_program->attributeLocation("posAttr");
-    m_colAttr = m_program->attributeLocation("colAttr");
+//    m_colAttr = m_program->attributeLocation("colAttr");
     m_matrixUniform = m_program->uniformLocation("matrix");
+    m_fragColorUniform = m_program->uniformLocation("fragmentColor");
 }
 
 GLuint Viewport::loadShader(GLenum type, const char *source)
@@ -63,9 +80,22 @@ void Viewport::setViewportMode(enum ViewportMode mode)
     _mode = mode;
 }
 
+void Viewport::setColor(QColor newcolor)
+{
+    m_program->setUniformValue(m_fragColorUniform,
+                               newcolor.redF(),
+                               newcolor.greenF(),
+                               newcolor.blueF());
+}
+
 void Viewport::add(Entity* entity)
 {
     _entities.push_back(entity);
+}
+
+void Viewport::add(SubdivisionSurface* surface)
+{
+    _surfaces.push_back(surface);
 }
 
 void Viewport::render()
@@ -85,6 +115,8 @@ void Viewport::render()
 
     for (size_t i=0; i<_entities.size(); ++i)
         _entities[i]->draw(*this);
+    for (size_t i=0; i<_surfaces.size(); ++i)
+        _surfaces[i]->draw(*this);
 
 #if 0
     GLfloat vertices[] = {
@@ -100,7 +132,6 @@ void Viewport::render()
     };
 
     glVertexAttribPointer(m_posAttr, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-    glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, colors);
 
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);

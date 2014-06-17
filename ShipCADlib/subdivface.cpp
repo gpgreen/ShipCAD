@@ -385,8 +385,8 @@ SubdivisionControlFace::~SubdivisionControlFace()
         setLayer(0);
         SubdivisionPoint* p1 = getPoint(numberOfPoints() - 1);
         p1->deleteFace(this);
-        for (size_t i=1; i<=numberOfPoints(); ++i) {
-            SubdivisionPoint* p2 = getPoint(i - 1);
+        for (size_t i=0; i<numberOfPoints(); ++i) {
+            SubdivisionPoint* p2 = getPoint(i);
             SubdivisionControlEdge* edge = _owner->controlEdgeExists(p1, p2);
             if (edge != 0) {
                 edge->deleteFace(this);

@@ -30,7 +30,8 @@ bool ShipCADGeometry::g_surface_verbose = true;
 
 SubdivisionSurface::SubdivisionSurface()
     : _build(false), _show_curvature(true), _show_control_curves(true),
-      _subdivision_mode(fmQuadTriangle), _curvature_scale(0.25),
+      _subdivision_mode(fmQuadTriangle), _control_point_size(4),
+      _curvature_scale(0.25),
       _crease_color(Qt::green), _crease_edge_color(Qt::red),
       _underwater_color(Qt::gray),
       _edge_color(Qt::darkGray), _selected_color(Qt::yellow),
@@ -1687,21 +1688,21 @@ void SubdivisionSurface::draw(Viewport &vp)
                 calculateGaussCurvature();
         }
     }
-    for (size_t i=1; i<=numberOfLayers(); ++i) {
-        getLayer(i-1)->draw(vp);
+    for (size_t i=0; i<numberOfLayers(); ++i) {
+        getLayer(i)->draw(vp);
     }
     if (showControlNet()) {
-        for (size_t i=1; i<=numberOfControlEdges(); ++i) {
+        for (size_t i=0; i<numberOfControlEdges(); ++i) {
             getControlEdge(i)->draw(false, vp);
         }
-        for (size_t i=1; i<=numberOfControlPoints(); ++i) {
-            if (getControlPoint(i-1)->isVisible())
-                getControlPoint(i-1)->draw(vp);
+        for (size_t i=0; i<numberOfControlPoints(); ++i) {
+            if (getControlPoint(i)->isVisible())
+                getControlPoint(i)->draw(vp);
         }
     }
-    for (size_t i=1; i<=numberOfControlCurves(); ++i) {
-        if (getControlCurve(i-1)->isVisible())
-            getControlCurve(i-1)->draw(vp);
+    for (size_t i=0; i<numberOfControlCurves(); ++i) {
+        if (getControlCurve(i)->isVisible())
+            getControlCurve(i)->draw(vp);
     }
 }
 

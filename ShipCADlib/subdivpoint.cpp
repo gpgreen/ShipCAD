@@ -779,14 +779,16 @@ void SubdivisionControlPoint::save_binary(FileBuffer &destination)
 
 void SubdivisionControlPoint::draw(Viewport &vp)
 {
-    if (vp.getViewportMode() != Viewport::vmWireFrame) {
-        QVector3D& p3d = getCoordinate();
-        // BUGBUG: need to set size, 2x for selected && wireframe view
-        vp.setColor(getColor());
-        glBegin(GL_POINTS);
-        glVertex3f(p3d.x(), p3d.y(), p3d.z());
-        glEnd();
+    QVector3D p3d = getCoordinate();
+    vp.setColor(getColor());
+    glPointSize(_owner->getControlPointSize());
+    if (vp.getViewportMode() == Viewport::vmWireFrame && isSelected()) {
+        glPointSize(_owner->getControlPointSize()+4.0);
     }
+    // BUGBUG: body plan has point drawn in different places
+    glBegin(GL_POINTS);
+    glVertex3f(p3d.x(), p3d.y(), p3d.z());
+    glEnd();
 }
 
 void SubdivisionControlPoint::dump(ostream& os, const char* prefix) const

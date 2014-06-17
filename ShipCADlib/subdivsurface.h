@@ -229,6 +229,7 @@ public:
     bool showControlCurves() {return _show_control_curves;}
     bool isDrawMirror() {return _draw_mirror;}
     subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
+    int getControlPointSize() {return _control_point_size;}
 
     // colors
     QColor getSelectedColor() {return _selected_color;}
@@ -304,6 +305,7 @@ protected:
     subdiv_mode_t _subdivision_mode;
     int _desired_subdiv_level;
     int _current_subdiv_level;
+    int _control_point_size;
 
     float _curvature_scale;
     float _min_gaus_curvature;

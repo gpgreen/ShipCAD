@@ -299,7 +299,7 @@ SubdivisionControlEdge::~SubdivisionControlEdge()
     if (_owner->hasControlEdge(this)) {
         // remove from owner list so that destructor
         // won't do anything if called again during
-        // completion of the destruction
+        // rest of method
         _owner->removeControlEdge(this);
         if (getCurve() != 0)
             getCurve()->deleteEdge(this);
@@ -628,14 +628,33 @@ void SubdivisionControlEdge::trace()
     priv_trace(p);
 }
 
-void SubdivisionControlEdge::draw(Viewport& /*vp*/)
+void SubdivisionControlEdge::draw(Viewport& vp)
 {
-
+    draw(false, vp);
 }
 
-void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& /*vp*/)
+void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& vp)
 {
-
+    if (!isVisible())
+        return;
+    vp.setColor();
+    QVector3D p1 = startPoint()->getCoordinate();
+    QVector3D p2 = endPoint()->getCoordinate();
+    if (vp.getViewportMode() != Viewport::vmWireFrame) {
+        // BUGBUG: body plan has edge drawn in different places
+        if (isCrease()) {
+            glLineWidth(2);
+        }
+        else {
+            glLineWidth(1);
+        }
+    }
+    else
+        glLineWidth(1);
+    glBegin(GL_LINES);
+    glVertex3f(p1.x(), p1.y(), p1.z());
+    glVertex3f(p2.x(), p2.y(), p2.z());
+    glEnd();
 }
 
 void SubdivisionControlEdge::dump(ostream& os, const char* prefix) const

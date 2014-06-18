@@ -223,8 +223,10 @@ public:
     void setShowControlNet(bool val) {_show_control_net = val;}
     void setSubdivisionMode(subdiv_mode_t val);
     bool isGaussCurvatureCalculated();
+    const Plane& getWaterlinePlane() {return _waterline_plane;}
 
     // options
+    bool shadeUnderWater() {return _shade_under_water;}
     bool showControlNet() {return _show_control_net;}
     bool showControlCurves() {return _show_control_curves;}
     bool isDrawMirror() {return _draw_mirror;}

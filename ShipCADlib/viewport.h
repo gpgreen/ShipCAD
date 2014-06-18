@@ -27,6 +27,8 @@
 #define VIEWPORT_H_
 
 #include <vector>
+#include <map>
+#include <string>
 #include <QtCore>
 #include <QtGui>
 #include "openglwindow.h"
@@ -38,6 +40,43 @@ class SubdivisionSurface;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+class Viewport;
+
+class Shader : public QObject
+{
+    Q_OBJECT
+
+public:
+
+    explicit Shader(Viewport* vp);
+    virtual ~Shader();
+
+    virtual void initialize(const char* vertexShaderSource,
+		    const char* fragmentShaderSource,
+		    std::vector<std::string> uniforms,
+		    std::vector<std::string> attributes);
+
+    void addUniform(const std::string& name);
+    void addAttribute(const std::string& name);
+
+    void setColor(QColor newcolor);
+    void setColorRGBA(QColor newcolor, float alpha);
+
+    void setMatrix(const QMatrix4x4& matrix);
+
+    void bind() {_program->bind();}
+    void release() {_program->release();}
+
+private:
+
+    Viewport* _viewport;
+    QOpenGLShaderProgram *_program;
+    std::map<std::string, GLuint> _uniforms;
+    std::map<std::string, GLuint> _attributes;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 class Viewport : public OpenGLWindow
 {
     Q_OBJECT
@@ -46,10 +85,13 @@ public:
     explicit Viewport();
     ~Viewport();
 
-    enum ViewportMode {vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra};
+    enum ViewportMode {
+      vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra
+    };
 
     void initialize();
     void render();
+    void renderMesh(size_t nvertices, QVector3D* vertices, QVector3D* normals);
 
     enum ViewportMode getViewportMode() const;
     void setViewportMode(enum ViewportMode mode);
@@ -58,21 +100,27 @@ public:
     void add(SubdivisionSurface* surface);
 
     void setColor(QColor newcolor);
+    void setColorRGBA(QColor newcolor, float alpha);
+
+    void addShader(const std::string& name, Shader* shader);
 
 private:
 
-    GLuint loadShader(GLenum type, const char *source);
-
     enum ViewportMode _mode;
 
-    GLuint m_posAttr;
-    GLuint m_colAttr;
-    GLuint m_matrixUniform;
-    GLuint m_fragColorUniform;
+//    GLuint m_posAttr;
+//    GLuint m_matrixUniform;
+//    GLuint m_sourceColorUniform;
+//    GLuint _normalAttr;
+//    GLuint _vertexAttr;
 
-    QOpenGLShaderProgram *m_program;
+//    QOpenGLShaderProgram *m_program;
+//    QOpenGLShaderProgram *m_faceProgram;
+
     int m_frame;
 
+    std::map<std::string, Shader*> _shaders;
+    Shader* _current_shader;
     std::vector<Entity*> _entities;
     std::vector<SubdivisionSurface*> _surfaces;
 };

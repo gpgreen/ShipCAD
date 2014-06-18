@@ -6,17 +6,13 @@
 #include <QColor>
 #include <QString>
 #include "spline.h"
+#include "plane.h"
 
 namespace ShipCADUtility {
 
 extern void MinMax(const QVector3D& p, QVector3D& min, QVector3D& max);
 
 extern float DistancepointToLine(const QVector3D& p, const QVector3D& l1, const QVector3D& l2);
-
-#if 0
-extern float DistanceToLine(const QVector2D& p1, const QVector2D& p2,
-                     int x, int y, qreal& parameter);
-#endif
 
 extern QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float param);
 
@@ -41,6 +37,26 @@ extern bool PointInTriangle(const QVector3D& intercept,
 			    const QVector3D& p0,
 			    const QVector3D& p1,
 			    const QVector3D& p2);
+
+// clip a triangle given the 3 distances from a plane, 
+// returns 2 sets of coordinates, front of the plane, and back of the plane
+extern void ClipTriangle(const QVector3D& p1,
+                         const QVector3D& p2,
+                         const QVector3D& p3,
+                         float s1,
+                         float s2,
+                         float s3,
+                         std::vector<QVector3D>& front,
+                         std::vector<QVector3D>& back);
+
+// clip a triangle given a plane, returns 2 sets of coordinates, front of the plane, and
+// back of the plane
+extern void ClipTriangle(const QVector3D& p1,
+                         const QVector3D& p2,
+                         const QVector3D& p3,
+                         const ShipCADGeometry::Plane& plane,
+                         std::vector<QVector3D>& front,
+                         std::vector<QVector3D>& back);
 
 // calculates the squared distance between 2 points
 extern float SquaredDistPP(const QVector3D& p1, const QVector3D& p2);

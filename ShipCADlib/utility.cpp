@@ -23,25 +23,9 @@ float ShipCADUtility::DistancepointToLine(const QVector3D& p, const QVector3D& l
     return p.distanceToLine(l1, vec);
 }
 
-#if 0
-float DistanceToLine(const QVector2D& p1, const QVector2D& p2,
-                     int x, int y, qreal& parameter)
-{
-    qreal result = 0;
-    x = y  = 0;
-    parameter = 0;
-    result = p1.x();
-    result = p2.x();
-    return result;
-}
-#endif
-
 QVector3D ShipCADUtility::Interpolate(const QVector3D& p1, const QVector3D& p2, float param)
 {
-    QVector3D result;
-    result.setX(p1.x() + param * (p2.x() - p1.x()));
-    result.setY(p1.y() + param * (p2.y() - p1.y()));
-    result.setX(p1.z() + param * (p2.z() - p1.z()));
+    QVector3D result = p1 + (param * (p2 - p1));
     return result;
 }
 
@@ -143,57 +127,135 @@ QVector3D ShipCADUtility::UnifiedNormal(const QVector3D& p1, const QVector3D& p2
     float l = result.length();
     if (l < 1E-6)
         l = 1E-6f;
-    result.setX(result.x() / l);
-    result.setY(result.y() / l);
-    result.setZ(result.z() / l);
+    result /= l;
     return result;
 }
 
 extern float ShipCADUtility::RadToDeg(float rad)
 {
-  return rad * 180.0 / pi;
+    return rad * 180.0 / pi;
 }
 
 static bool SameSide(const QVector3D& p1,
-		     const QVector3D& p2,
-		     const QVector3D& a,
-		     const QVector3D& b)
+                     const QVector3D& p2,
+                     const QVector3D& a,
+                     const QVector3D& b)
 {
-  QVector3D ba = b - a;
-  QVector3D p = p1 - a;
-  QVector3D cp1 = QVector3D::crossProduct(p, ba);
-  p = p2 - a;
-  QVector3D cp2 = QVector3D::crossProduct(p, ba);
-  float dp = QVector3D::dotProduct(cp1, cp2);
-  if (fabs(dp) < 1E5f)
-    dp = dp - 1 + 1;
-  return dp >= 0;
+    QVector3D ba = b - a;
+    QVector3D p = p1 - a;
+    QVector3D cp1 = QVector3D::crossProduct(p, ba);
+    p = p2 - a;
+    QVector3D cp2 = QVector3D::crossProduct(p, ba);
+    float dp = QVector3D::dotProduct(cp1, cp2);
+    if (fabs(dp) < 1E5f)
+        dp = dp - 1 + 1;
+    return dp >= 0;
 }
 
 bool ShipCADUtility::PointInTriangle(const QVector3D& intercept,
-                            const QVector3D& p0,
-                            const QVector3D& p1,
-                            const QVector3D& p2)
+                                     const QVector3D& p0,
+                                     const QVector3D& p1,
+                                     const QVector3D& p2)
 {
-  return (SameSide(intercept, p0, p1, p2) && SameSide(intercept, p1, p0, p2)
-	  && SameSide(intercept, p2, p0, p1));
+    return (SameSide(intercept, p0, p1, p2) && SameSide(intercept, p1, p0, p2)
+            && SameSide(intercept, p2, p0, p1));
+}
+
+// clip a triangle given the 3 distances from a plane, 
+// returns 2 sets of coordinates, front of the plane, and back of the plane
+void ShipCADUtility::ClipTriangle(const QVector3D& p1,
+                                  const QVector3D& p2,
+                                  const QVector3D& p3,
+                                  float s1,
+                                  float s2,
+                                  float s3,
+                                  std::vector<QVector3D>& front,
+                                  std::vector<QVector3D>& back)
+{
+    if (s1 <=0 && s2 <= 0 && s3 <= 0) {
+        // all at the back of the plane
+        back.push_back(p1);
+        back.push_back(p2);
+        back.push_back(p3);
+    }
+    else if (s1 > 0 && s2 > 0 && s3 > 0) {
+        // all at the front of the plane
+        front.push_back(p1);
+        front.push_back(p2);
+        front.push_back(p3);
+    }
+    else {
+        // triangle spans the plane, calculate the intersections
+        if (s1 <= 0)
+            back.push_back(p1);
+        if (s1 >= 0)
+            front.push_back(p1);
+        if ((s1 < 0 && s2 > 0) || (s1 > 0 && s2 < 0)) {
+            float t;
+            if (s1 == s2)
+                t = 0.5;
+            else
+                t = -s1 / (s2 - s1);
+            QVector3D p = p1 + (t * (p2 - p1));
+            back.push_back(p);
+            front.push_back(p);
+        }
+        if (s2 <= 0)
+            back.push_back(p2);
+        if (s2 >= 0)
+            front.push_back(p2);
+        if ((s2 < 0 && s3 > 0) || (s2 > 0 && s3 < 0)) {
+            float t;
+            if (s2 == s3)
+                t = 0.5;
+            else
+                t = -s2 / (s3 - s2);
+            QVector3D p = p2 + (t * (p3 - p2));
+            back.push_back(p);
+            front.push_back(p);
+        }
+        if (s3 <= 0)
+            back.push_back(p3);
+        if (s3 >= 0)
+            front.push_back(p3);
+        if ((s3 < 0 && s1 > 0) || (s3 > 0 && s1 < 0)) {
+            float t;
+            if (s2 == s3)
+                t = 0.5;
+            else
+                t = -s3 / (s1 - s3);
+            QVector3D p = p3 + (t * (p1 - p3));
+            back.push_back(p);
+            front.push_back(p);
+        }
+    }
+}
+
+// clip a triangle given a plane, returns 2 sets of coordinates, front of the plane, and
+// back of the plane
+void ShipCADUtility::ClipTriangle(const QVector3D& p1,
+                                  const QVector3D& p2,
+                                  const QVector3D& p3,
+                                  const Plane& plane,
+                                  std::vector<QVector3D>& front,
+                                  std::vector<QVector3D>& back)
+{
+    float s1 = plane.distance(p1);
+    float s2 = plane.distance(p2);
+    float s3 = plane.distance(p3);
+    ClipTriangle(p1, p2, p3, s1, s2, s3, front, back);
 }
 
 float ShipCADUtility::SquaredDistPP(const QVector3D& p1, const QVector3D& p2)
 {
     QVector3D p21 = p2 - p1;
-    return p21.length() * p21.length();
+    return p21.lengthSquared();
 }
 
 QString ShipCADUtility::BoolToStr(bool val)
 {
     return QString( (val ? "1" : "0") );
 }
-
-struct SegmentRecord {
-    float length;
-    QVector3D cog;
-};
 
 static float Minimum(float d1, float d2, float d3, float d4)
 {
@@ -302,7 +364,7 @@ int ShipCADUtility::ReadIntFromStr(size_t lineno, const QString& str, size_t& st
     return result;
 }
 
-bool ShipCADUtility::ReadBoolFromStr(size_t lineno, const QString& str, size_t& start)
+bool ShipCADUtility::ReadBoolFromStr(size_t /*lineno*/, const QString& str, size_t& start)
 {
     int spc = str.indexOf(' ', start);
     QStringRef s;

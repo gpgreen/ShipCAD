@@ -206,9 +206,7 @@ void Spline::rebuild()
 
         // back substitution
         for (int k=_nopoints-1; k>=1; --k) {
-            _derivatives[k-1].setX(_derivatives[k-1].x()*_derivatives[k].x()+u[k-1].x());
-            _derivatives[k-1].setY(_derivatives[k-1].y()*_derivatives[k].y()+u[k-1].y());
-            _derivatives[k-1].setZ(_derivatives[k-1].z()*_derivatives[k].z()+u[k-1].z());
+            _derivatives[k-1] = _derivatives[k-1] * _derivatives[k] + u[k-1];
         }
     } // end _nopoints > 1
     _build = true;
@@ -258,9 +256,7 @@ QVector3D Spline::second_derive(float parameter)
         frac = 0.5;
     else
         frac = (parameter - _parameters[lo]) / (_parameters[hi] - _parameters[lo]);
-    result.setX(_derivatives[lo].x() + frac * (_derivatives[hi].x() - _derivatives[lo].x()));
-    result.setY(_derivatives[lo].y() + frac * (_derivatives[hi].y() - _derivatives[lo].y()));
-    result.setZ(_derivatives[lo].z() + frac * (_derivatives[hi].z() - _derivatives[lo].z()));
+    result = _derivatives[lo] + (frac * (_derivatives[hi] - _derivatives[lo]));
     return result;
 }
 
@@ -276,7 +272,7 @@ float Spline::weight(size_t index)
         QVector3D p1 = _points[index-1];
         QVector3D p2 = _points[index];
         QVector3D p3 = _points[index+1];
-        length = sqrt((p3.x()-p1.x())*(p3.x()-p1.x())+(p3.y()-p1.y())*(p3.y()-p1.y())+(p3.z()-p1.z())*(p3.z()-p1.z()));
+        length = (p3 - p1).length();
         if (length < 1E-5) {
             result = 0.0;
         }
@@ -381,9 +377,7 @@ float Spline::coord_length(float t1, float t2)
         float t = t1 + (i / static_cast<float>(_fragments)) * (t2 - t1);
         p2 = value(t);
         if (i > 0)
-            result += sqrt((p2.x() - p1.x()) * (p2.x() - p1.x())
-                           + ((p2.y() - p1.y()) * (p2.y() - p1.y()))
-                           + ((p2.z() - p1.z()) * (p2.z() - p1.z())));
+            result += (p2 - p1).length();
         p1 = p2;
     }
     return result;
@@ -454,9 +448,7 @@ float Spline::curvature(float parameter, QVector3D& normal)
         result = 0;
     else
         result = l/pow(vdotv, static_cast<float>(1.5));
-    normal.setX(vdotv*acc.x()-vdota*vel1.x());
-    normal.setY(vdotv*acc.y()-vdota*vel1.y());
-    normal.setZ(vdotv*acc.z()-vdota*vel1.z());
+    normal = (vdotv * acc) - (vdota * vel1);
     normal.normalize();
     return result;
 }
@@ -511,9 +503,7 @@ QVector3D Spline::first_derive(float parameter)
     QVector3D p1 = value(t1);
     QVector3D p2 = value(t2);
 
-    QVector3D result((p2.x() - p1.x()) / (t2 - t1),
-                     (p2.y() - p1.y()) / (t2 - t1),
-                     (p2.z() - p1.z()) / (t2 - t1));
+    QVector3D result = (p2 - p1) / (t2 - t1);
     return result;
 }
 
@@ -548,9 +538,7 @@ void Spline::draw(Viewport& vp)
             vp.setColor(_curvature_color);
             for (size_t i=0; i<_fragments; ++i) {
                 float c = curvature(i / static_cast<float>(_fragments), normal);
-                p2.setX(parray1[i].x() - c * 2 * _curvature_scale * normal.x());
-                p2.setY(parray1[i].y() - c * 2 * _curvature_scale * normal.y());
-                p2.setZ(parray1[i].z() - c * 2 * _curvature_scale * normal.z());
+                p2 = parray1[i] - (c * 2 * _curvature_scale * normal);
                 parray2.push_back(p2);
             }
             for (size_t i=1; i<=_fragments; ++i) {
@@ -643,13 +631,13 @@ bool Spline::intersect_plane(const Plane& plane, IntersectionData& output)
     output._number_of_intersections = 0;
     float t1 = 0;
     QVector3D p1 = value(t1);
-    float s1 = plane.a() * p1.x() + plane.b() * p1.y() + plane.c() * p1.z() + plane.d();
+    float s1 = plane.distance(p1);
     if (fabs(s1) < 1E-6)
         add_to_output(p1, t1, output);
     for (size_t i=1; i<=_fragments; ++i) {
         float t2 = i / static_cast<float>(_fragments);
         QVector3D p2 = value(t2);
-        float s2 = plane.a() * p2.x() + plane.b() * p2.y() + plane.c() * p2.z() + plane.d();
+        float s2 = plane.distance(p2);
         if (fabs(s2) < 1E-6)
             add_to_output(p2, t2, output);
         if ((s1 < 0 && s2 > 0) || (s2 < 0 && s1 > 0)) {
@@ -805,21 +793,9 @@ QVector3D Spline::value(float parameter)
         a = (_parameters[hi] - parameter) / h;
         //b = (parameter - _parameters[lo]) / h;
         b = 1 - a;
-        result.setX(a * _points[lo].x()
-                    + b * _points[hi].x()
-                    + ((a * a * a - a) * _derivatives[lo].x()
-                       +(b * b * b - b) * _derivatives[hi].x())
-                    * (h * h) / 6.0);
-        result.setY(a * _points[lo].y()
-                    + b * _points[hi].y()
-                    + ((a * a * a - a) * _derivatives[lo].y()
-                       +(b * b * b - b) * _derivatives[hi].y())
-                    * (h * h) / 6.0);
-        result.setZ(a * _points[lo].z()
-                    + b * _points[hi].z()
-                    + ((a * a * a - a) * _derivatives[lo].z()
-                       +(b * b * b - b) * _derivatives[hi].z())
-                    * (h * h) / 6.0);
+        result = a * _points[lo] + b * _points[hi] + ((a * a * a - a) * _derivatives[lo]
+                + (b * b * b - b) * _derivatives[hi])
+                * (h * h) / 6.0;
     }
     return result;
 }

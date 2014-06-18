@@ -96,8 +96,9 @@ public:
     float getThickness() {return _thickness;}
     QString getName();
     QString getDescription();
-    QString getDXFLayername() { return getName(); }
-    QColor getColor() { return _color; }
+    QString getDXFLayername() {return getName();}
+    QColor getColor() {return _color;}
+    float getAlphaBlend() {return _alphablend/255.0;}
     void setDevelopable(bool val);
     void setDescription(const QString& val) {_desc = val;}
     void setName(const QString& val);

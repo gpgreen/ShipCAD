@@ -637,7 +637,7 @@ void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& vp)
 {
     if (!isVisible())
         return;
-    vp.setColor();
+    vp.setColor(getColor());
     QVector3D p1 = startPoint()->getCoordinate();
     QVector3D p2 = endPoint()->getCoordinate();
     if (vp.getViewportMode() != Viewport::vmWireFrame) {

@@ -442,11 +442,6 @@ QVector3D SubdivisionPoint::getNormal()
     return result;
 }
 
-void SubdivisionPoint::draw(Viewport& /*vp*/)
-{
-  // does nothing
-}
-
 void SubdivisionPoint::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionPoint ["
@@ -777,18 +772,64 @@ void SubdivisionControlPoint::save_binary(FileBuffer &destination)
         destination.add(_locked);
 }
 
-void SubdivisionControlPoint::draw(Viewport &vp)
+void SubdivisionControlPoint::drawControlPoints(Viewport& vp, 
+                                                SubdivisionSurface* surface)
 {
-    QVector3D p3d = getCoordinate();
-    vp.setColor(getColor());
-    glPointSize(_owner->getControlPointSize());
-    if (vp.getViewportMode() == Viewport::vmWireFrame && isSelected()) {
-        glPointSize(_owner->getControlPointSize()+4.0);
+    LineShader* shader = vp.setLineShader();
+
+    QVector<QVector3D> selPoints;
+    QVector<QVector3D> lockPoints;
+    QVector<QVector3D> leakPoints;
+    QVector<QVector3D> regularPoints;
+    QVector<QVector3D> cornerPoints;
+    QVector<QVector3D> dartPoints;
+    QVector<QVector3D> creasePoints;
+
+    if (vp.getViewportMode() == Viewport::vmWireFrame) {
+        for (size_t i=0; i<surface->numberOfControlPoints(); ++i) {
+            SubdivisionControlPoint* pt = surface->getControlPoint(i);
+            if (!pt->isVisible())
+                continue;
+            if (pt->isSelected())
+                selPoints << pt->getCoordinate();
+            else if (pt->isLocked())
+                lockPoints << pt->getCoordinate();
+            else if (pt->isLeak())
+                leakPoints << pt->getCoordinate();
+            else {
+                switch (pt->getVertexType()) {
+                case SubdivisionPoint::svRegular:
+                    regularPoints << pt->getCoordinate();
+                    break;
+                case SubdivisionPoint::svDart:
+                    dartPoints << pt->getCoordinate();
+                    break;
+                case SubdivisionPoint::svCrease:
+                    creasePoints << pt->getCoordinate();
+                    break;
+                case SubdivisionPoint::svCorner:
+                    cornerPoints << pt->getCoordinate();
+                    break;
+                }
+            }
+        }
+        glPointSize(surface->getControlPointSize()+4.0);
+        if (selPoints.size() > 0)
+            shader->renderPoints(selPoints, surface->getSelectedColor());
+        glPointSize(surface->getControlPointSize());
+        if (lockPoints.size() > 0)
+            shader->renderPoints(lockPoints, Qt::darkGray);
+        if (leakPoints.size() > 0)
+            shader->renderPoints(leakPoints, surface->getLeakColor());
+        if (regularPoints.size() > 0)
+            shader->renderPoints(regularPoints, surface->getRegularPointColor());
+        if (dartPoints.size() > 0)
+            shader->renderPoints(dartPoints, surface->getDartPointColor());
+        if (cornerPoints.size() > 0)
+            shader->renderPoints(cornerPoints, surface->getCornerPointColor());
+        if (creasePoints.size() > 0)
+            shader->renderPoints(creasePoints, surface->getCreasePointColor());
     }
-    // BUGBUG: body plan has point drawn in different places
-    glBegin(GL_POINTS);
-    glVertex3f(p3d.x(), p3d.y(), p3d.z());
-    glEnd();
 }
 
 void SubdivisionControlPoint::dump(ostream& os, const char* prefix) const

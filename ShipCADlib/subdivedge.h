@@ -42,6 +42,7 @@ class SubdivisionControlPoint;
 class SubdivisionControlCurve;
 class SubdivisionFace;
 class Viewport;
+class LineShader;
 class FileBuffer;
 
 extern bool g_edge_verbose;
@@ -61,7 +62,7 @@ public:
     virtual ~SubdivisionEdge();
 
     virtual void clear();
-    virtual void draw(Viewport &vp);
+    virtual void draw(bool draw_mirror, Viewport& vp, LineShader* lineshader);
 
     // modifiers
     void addFace(SubdivisionFace* face);
@@ -138,8 +139,7 @@ public:
     bool isVisible();
 
     // drawing
-    virtual void draw(Viewport &vp);
-    virtual void draw(bool draw_mirror, Viewport &vp);
+    virtual void draw(bool draw_mirror, Viewport &vp, LineShader* lineshader);
 
     // persistence
     void loadFromStream(size_t& lineno, std::vector<QString>& strings);

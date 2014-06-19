@@ -11,9 +11,11 @@
 #include "subdivlayer.h"
 #include "viewport.h"
 #include "filebuffer.h"
+#include "utility.h"
 
 using namespace std;
 using namespace ShipCADGeometry;
+using namespace ShipCADUtility;
 
 bool ShipCADGeometry::g_edge_verbose = true;
 
@@ -226,8 +228,80 @@ void SubdivisionEdge::deleteFace(SubdivisionFace* face)
     }
 }
 
-void SubdivisionEdge::draw(Viewport& /*vp*/)
+void SubdivisionEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshader)
 {
+    QVector3D p1 = startPoint()->getCoordinate();
+    QVector3D p2 = endPoint()->getCoordinate();
+    QVector<QVector3D> vertices;
+    if (!draw_mirror && vp.getViewportType() == Viewport::fvBodyplan) {
+        //glBegin(GL_LINES);
+        float mfl = _owner->getMainframeLocation();
+        if ((p1.x() < mfl && p2.x() > mfl) || (p1.x() > mfl && p2.x() < mfl)) {
+            // straddles mainframe
+            QVector3D m;
+            if (p2.x() - p1.x() != 0)
+                m = Interpolate(p1, p2, (mfl - p1.x()) / (p2.x() - p1.x()));
+            else
+                m = MidPoint(p1, p2);
+            if (p1.x() <= mfl) {
+                // p2 lies on port
+                vertices << p2;
+                vertices << m;
+                //glVertex3f(p2.x(), p2.y(), p2.z());
+                //glVertex3f(m.x(), m.y(), m.z());
+                // p1 lies on stbd
+                p1.setY(-p1.y());
+                m.setY(-m.y());
+                vertices << p1;
+                vertices << m;
+                //glVertex3f(p1.x(), -p1.y(), p1.z());
+                //glVertex3f(m.x(), -m.y(), m.z());
+            }
+            else {
+                // p2 lies on port
+                vertices << p1;
+                vertices << m;
+                //glVertex3f(p1.x(), p1.y(), p1.z());
+                //glVertex3f(m.x(), m.y(), m.z());
+                // p2 lies on stbd
+                p2.setY(-p2.y());
+                m.setY(-m.y());
+                vertices << p2;
+                vertices << m;
+                //glVertex3f(p2.x(), -p2.y(), p2.z());
+                //glVertex3f(m.x(), -m.y(), m.z());
+            }
+        }
+        else {
+            if (p1.x() <= mfl)
+                p1.setY(-p1.y());
+            if (p2.x() <= mfl)
+                p2.setY(-p2.y());
+            vertices << p1;
+            vertices << p2;
+            //glVertex3f(p1.x(), p1.y(), p1.z());
+            //glVertex3f(p2.x(), p2.y(), p2.z());
+        }
+        //glEnd();
+    }
+    else {
+        //glBegin(GL_LINES);
+        // draw_mirror or not a bodyplan
+        vertices << p1;
+        vertices << p2;
+        //glVertex3f(p1.x(), p1.y(), p1.z());
+        //glVertex3f(p2.x(), p2.y(), p2.z());
+        if (draw_mirror) {
+            p1.setY(p1.y());
+            p2.setY(p2.y());
+            vertices << p1;
+            vertices << p2;
+            //glVertex3f(p1.x(), -p1.y(), p1.z());
+            //glVertex3f(p2.x(), -p2.y(), p2.z());
+        }
+        //glEnd();
+    }
+    lineshader->renderLines(vertices, _owner->getEdgeColor());
 }
 
 void SubdivisionEdge::dump(ostream& os, const char* prefix) const
@@ -628,33 +702,90 @@ void SubdivisionControlEdge::trace()
     priv_trace(p);
 }
 
-void SubdivisionControlEdge::draw(Viewport& vp)
-{
-    draw(false, vp);
-}
-
-void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& vp)
+void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshader)
 {
     if (!isVisible())
         return;
-    vp.setColor(getColor());
     QVector3D p1 = startPoint()->getCoordinate();
     QVector3D p2 = endPoint()->getCoordinate();
-    if (vp.getViewportMode() != Viewport::vmWireFrame) {
-        // BUGBUG: body plan has edge drawn in different places
+    QVector<QVector3D> vertices;
+    if (vp.getViewportMode() == Viewport::vmWireFrame) {
         if (isCrease()) {
             glLineWidth(2);
         }
         else {
             glLineWidth(1);
         }
+        //glBegin(GL_LINES);
+        if (vp.getViewportType() == Viewport::fvBodyplan) {
+            float mfl = _owner->getMainframeLocation();
+            if ((p1.x() < mfl && p2.x() > mfl) || (p1.x() > mfl && p2.x() < mfl)) {
+                // straddles mainframe
+                QVector3D m;
+                if (p2.x() - p1.x() != 0)
+                    m = Interpolate(p1, p2, (mfl - p1.x()) / (p2.x() - p1.x()));
+                else
+                    m = MidPoint(p1, p2);
+                if (p1.x() <= mfl) {
+                    // p2 lies on port
+                    vertices << p2;
+                    vertices << m;
+                    //glVertex3f(p2.x(), p2.y(), p2.z());
+                    //glVertex3f(m.x(), m.y(), m.z());
+                    // p1 lies on stbd
+                    p1.setY(-p1.y());
+                    m.setY(-m.y());
+                    vertices << p1;
+                    vertices << m;
+                    //glVertex3f(p1.x(), -p1.y(), p1.z());
+                    //glVertex3f(m.x(), -m.y(), m.z());
+                }
+                else {
+                    // p2 lies on port
+                    vertices << p1;
+                    vertices << m;
+                    //glVertex3f(p1.x(), p1.y(), p1.z());
+                    //glVertex3f(m.x(), m.y(), m.z());
+                    // p2 lies on stbd
+                    p2.setY(-p2.y());
+                    m.setY(-m.y());
+                    vertices << p2;
+                    vertices << m;
+                    //glVertex3f(p2.x(), -p2.y(), p2.z());
+                    //glVertex3f(m.x(), -m.y(), m.z());
+                }
+            }
+            else {
+                if (p1.x() <= mfl)
+                    p1.setY(-p1.y());
+                if (p2.x() <= mfl)
+                    p2.setY(-p2.y());
+                vertices << p1;
+                vertices << p2;
+                //glVertex3f(p1.x(), p1.y(), p1.z());
+                //glVertex3f(p2.x(), p2.y(), p2.z());
+            }
+        }
+        else {
+            vertices << p1;
+            vertices << p2;
+            //glVertex3f(p1.x(), p1.y(), p1.z());
+            //glVertex3f(p2.x(), p2.y(), p2.z());
+        }
+        //glEnd();
+        lineshader->renderLines(vertices, getColor());
     }
-    else
+    else {
+        // viewport is not vmWireFrame
         glLineWidth(1);
-    glBegin(GL_LINES);
-    glVertex3f(p1.x(), p1.y(), p1.z());
-    glVertex3f(p2.x(), p2.y(), p2.z());
-    glEnd();
+        vertices << p1;
+        vertices << p2;
+        lineshader->renderLines(vertices, getColor());
+        //glBegin(GL_LINES);
+        //glVertex3f(p1.x(), p1.y(), p1.z());
+        //glVertex3f(p2.x(), p2.y(), p2.z());
+        //glEnd();
+    }
 }
 
 void SubdivisionControlEdge::dump(ostream& os, const char* prefix) const

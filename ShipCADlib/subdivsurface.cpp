@@ -1688,21 +1688,17 @@ void SubdivisionSurface::draw(Viewport &vp)
                 calculateGaussCurvature();
         }
     }
-    for (size_t i=0; i<numberOfLayers(); ++i) {
-        getLayer(i)->draw(vp);
-    }
+    SubdivisionLayer::drawLayers(vp, this);
+    LineShader* lineshader = vp.setLineShader();
     if (showControlNet()) {
         for (size_t i=0; i<numberOfControlEdges(); ++i) {
-            getControlEdge(i)->draw(false, vp);
+            getControlEdge(i)->draw(false, vp, lineshader);
         }
-        for (size_t i=0; i<numberOfControlPoints(); ++i) {
-            if (getControlPoint(i)->isVisible())
-                getControlPoint(i)->draw(vp);
-        }
+        SubdivisionControlPoint::drawControlPoints(vp, this);
     }
     for (size_t i=0; i<numberOfControlCurves(); ++i) {
         if (getControlCurve(i)->isVisible())
-            getControlCurve(i)->draw(vp);
+            getControlCurve(i)->draw(vp, lineshader);
     }
 }
 

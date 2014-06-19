@@ -95,6 +95,7 @@ int main(int argc, char **argv)
     cerr << surface << endl;
 
     Viewport window;
+    window.setViewportMode(Viewport::vmShade);
     window.setFormat(format);
     window.resize(640, 480);
     window.add(&spline);

@@ -39,6 +39,7 @@ namespace ShipCADGeometry {
 class FileBuffer;
 class Plane;
 class IntersectionData;
+class LineShader;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,10 +47,10 @@ class Spline : public Entity
 {
     Q_OBJECT
     Q_PROPERTY(size_t Fragments READ getFragments WRITE setFragments)
-    Q_PROPERTY(bool ShowCurvature MEMBER _show_curvature)
+    Q_PROPERTY(bool ShowCurvature READ showCurvature WRITE setShowCurvature)
     Q_PROPERTY(bool ShowPoints MEMBER _show_points)
-    Q_PROPERTY(float CurvatureScale MEMBER _curvature_scale)
-    Q_PROPERTY(QColor CurvatureColor MEMBER _curvature_color)
+    Q_PROPERTY(float CurvatureScale READ getCurvatureScale WRITE setCurvatureScale)
+    Q_PROPERTY(QColor CurvatureColor READ getCurvatureColor WRITE setCurvatureColor)
 
 public:
 
@@ -84,10 +85,16 @@ public:
 
     // drawing
     //int distance_to_cursor(int x, int y, Viewport& vp) const;
-    virtual void draw(Viewport& vp);
+    virtual void draw(Viewport& vp, LineShader* lineshader);
 
     // getters/setters
 
+    bool showCurvature() {return _show_curvature;}
+    void setShowCurvature(bool val) {_show_curvature = val;}
+    QColor getCurvatureColor() {return _curvature_color;}
+    void setCurvatureColor(const QColor& val) {_curvature_color=val;}
+    float getCurvatureScale() {return _curvature_scale;}
+    void setCurvatureScale(float val) {_curvature_scale=val;}
     float getParameter(size_t index);
     QVector3D getPoint(size_t index);
     void setPoint(size_t index, const QVector3D& p);

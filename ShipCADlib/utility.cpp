@@ -29,6 +29,14 @@ QVector3D ShipCADUtility::Interpolate(const QVector3D& p1, const QVector3D& p2, 
     return result;
 }
 
+QVector3D ShipCADUtility::MidPoint(const QVector3D& p1, const QVector3D& p2)
+{
+    QVector3D dir = (p2 - p1);
+    dir.normalize();
+    float len = p1.distanceToPoint(p2) / 2.0;
+    return p1 + (len * dir);
+}
+
 static QColor DXFLayerColors[255] = {
     QColor(0x00,0x00,0xff), QColor(0x00,0xff,0xff), QColor(0x00,0xFF,0x00), QColor(0xFF,0xFF,0x00), QColor(0xFF,0x00,0x00),
     QColor(0xFF,0x00,0xFF), QColor(0x00,0x00,0x00), QColor(0x80,0x80,0x80), QColor(0xC0,0xC0,0xC0), QColor(0x00,0x00,0xFF),

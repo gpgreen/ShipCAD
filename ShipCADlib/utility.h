@@ -16,6 +16,8 @@ extern float DistancepointToLine(const QVector3D& p, const QVector3D& l1, const 
 
 extern QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float param);
 
+extern QVector3D MidPoint(const QVector3D& p1, const QVector3D& p2);
+
 // convert a color to a DXF color index
 extern int FindDXFColorIndex(QColor color);
 

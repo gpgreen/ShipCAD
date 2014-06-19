@@ -224,11 +224,19 @@ public:
     void setSubdivisionMode(subdiv_mode_t val);
     bool isGaussCurvatureCalculated();
     const Plane& getWaterlinePlane() {return _waterline_plane;}
+    float getCurvatureScale() {return _curvature_scale;}
+    void setCurvatureScale(float val) {_curvature_scale=val;}
+    float getMinGausCurvature() {return _min_gaus_curvature;}
+    float getMaxGausCurvature() {return _max_gaus_curvature;}
+    float getMainframeLocation() {return _main_frame_location;}
+    void setMainframeLocation(float val) {_main_frame_location=val;}
 
     // options
+    bool showCurvature() {return _show_curvature;}
     bool shadeUnderWater() {return _shade_under_water;}
     bool showControlNet() {return _show_control_net;}
     bool showControlCurves() {return _show_control_curves;}
+    bool showInteriorEdges() {return _show_interior_edges;}
     bool isDrawMirror() {return _draw_mirror;}
     subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
     int getControlPointSize() {return _control_point_size;}
@@ -241,9 +249,11 @@ public:
     QColor getRegularPointColor() {return _regular_point_color;}
     QColor getCornerPointColor() {return _corner_point_color;}
     QColor getDartPointColor() {return _dart_point_color;}
+    QColor getCreaseColor() {return _crease_color;}
     QColor getCreasePointColor() {return _crease_point_color;}
     QColor getControlCurveColor() {return _control_curve_color;}
     QColor getLayerColor() {return _layer_color;}
+    QColor getCurvatureColor() {return _curvature_color;}
 
     // persistence
     void saveBinary(FileBuffer& destination);

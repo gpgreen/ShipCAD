@@ -336,11 +336,6 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
     }
 }
 
-void SubdivisionFace::draw(Viewport &vp)
-{
-    // BUGBUG: unimplemented
-}
-
 void SubdivisionFace::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionFace ["
@@ -401,7 +396,43 @@ SubdivisionControlFace::~SubdivisionControlFace()
     _owner->setBuild(false);
 }
 
-void SubdivisionControlFace::draw(Viewport& vp)
+void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
+{
+    // make the vertex and color buffers
+    QVector<QVector3D> vertices;
+    QVector<QVector3D> normals;
+
+    if (_owner->shadeUnderWater() && vp.getViewportMode() == Viewport::vmShade
+            && getLayer()->useInHydrostatics()) {
+        // BUGBUG: split up faces into 2 sets, above water and below water
+
+    }
+    // BUGBUG: lets just shade the face to see if it works
+    for (size_t i=0; i<_children.size(); ++i) {
+        SubdivisionFace* face = _children[i];
+        for (size_t j=2; j<face->numberOfPoints(); ++j) {
+            QVector3D& p1 = face->getPoint(0)->getCoordinate();
+            QVector3D& p2 = face->getPoint(j-1)->getCoordinate();
+            QVector3D& p3 = face->getPoint(j)->getCoordinate();
+            QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
+            vertices << p1;
+            vertices << p2;
+            vertices << p3;
+            normals << n;
+            normals << n;
+            normals << n;
+        }
+    }
+
+    monoshader->renderMesh(getColor(), vertices, normals);
+}
+
+void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, float MinCurvature, float MaxCurvature)
+{
+    // BUGBUG: not implemented
+}
+
+void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
 {
     size_t n = 0;
     // count number of points for face vertices
@@ -418,8 +449,8 @@ void SubdivisionControlFace::draw(Viewport& vp)
         colors[i*4+3] = getLayer()->getAlphaBlend();
 
     if (vp.getViewportMode() != Viewport::vmWireFrame) {
-        if (_owner->shadeUnderWater() && vp.getViewportMode() == Viewport::vmShade &&
-                getLayer()->useInHydrostatics()) {
+        if (_owner->shadeUnderWater() && vp.getViewportMode() == Viewport::vmShade
+                && getLayer()->useInHydrostatics()) {
             // shade with different color below waterline
             for (size_t i=0; i<_children.size(); ++i) {
                 // clip all triangles against the waterline plane
@@ -531,8 +562,6 @@ void SubdivisionControlFace::draw(Viewport& vp)
             normals[index++] = normal;
         }
     }
-
-    vp.renderMesh(n*3, vertices, normals);
 
     delete [] vertices;
     delete [] normals;

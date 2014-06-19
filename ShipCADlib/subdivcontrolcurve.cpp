@@ -187,9 +187,31 @@ void SubdivisionControlCurve::deleteEdge(SubdivisionControlEdge* edge)
     }
 }
 
-void SubdivisionControlCurve::draw(Viewport &vp)
+void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
 {
-
+    if (numberOfControlPoints() <= 1)
+        return;
+    bool sel = isSelected();
+    Spline* curve = getSpline();
+    curve->setShowCurvature(sel && _owner->showCurvature());
+    if (curve->showCurvature())
+        curve->setFragments(600);
+    else
+        curve->setFragments(250);
+    curve->setCurvatureColor(_owner->getCurvatureColor());
+    curve->setCurvatureScale(_owner->getCurvatureScale());
+    if (!_owner->showControlNet() && sel) {
+        // draw controlpoints and edges
+    }
+    if (vp.getViewportType() == Viewport::fvBodyplan && !_owner->isDrawMirror()) {
+        // draw mainframe location
+    }
+    else {
+        //curve->draw(vp);
+    }
+    if (_owner->isDrawMirror()) {
+        // draw reversed curve
+    }
 }
 
 void SubdivisionControlCurve::insertControlPoint(SubdivisionControlPoint *p1,

@@ -36,6 +36,7 @@
 namespace ShipCADGeometry {
 
 class Viewport;
+class LineShader;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -75,7 +76,7 @@ public:
 
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
-    virtual void draw(Viewport& vp) = 0;
+    virtual void draw(Viewport& vp, LineShader* lineshader) = 0;
     virtual void rebuild() = 0;
 
     // getters/setters

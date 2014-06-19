@@ -43,6 +43,7 @@ class SubdivisionControlPoint;
 class SubdivisionControlEdge;
 class Spline;
 class Viewport;
+class LineShader;
 class FileBuffer;
 
 // Controlcurves are curves that can be added to the controlnet an are subdivide with the surface.
@@ -87,7 +88,7 @@ public:
     void saveToDXF(std::vector<QString>& strings);
 
     // draw
-    virtual void draw(Viewport& vp);
+    virtual void draw(Viewport& vp, LineShader* lineshader);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;

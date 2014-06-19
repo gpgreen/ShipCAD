@@ -334,8 +334,52 @@ void SubdivisionLayer::deleteControlFace(SubdivisionControlFace* face)
         _patches.erase(i);
 }
 
-void SubdivisionLayer::draw(Viewport& /*vp*/)
+void SubdivisionLayer::drawLayers(Viewport& vp, SubdivisionSurface* surface)
 {
+    for (size_t i=0; i<surface->numberOfLayers(); ++i) {
+        SubdivisionLayer* layer = surface->getLayer(i);
+        if (layer->isVisible())
+            layer->draw(vp);
+    }
+}
+
+void SubdivisionLayer::draw(Viewport& vp)
+{
+    if (!isVisible() || numberOfFaces() == 0)
+        return;
+    if (vp.getViewportMode() != Viewport::vmWireFrame) {
+        // not vmWireFrame, but shaded
+        if (vp.getViewportMode() == Viewport::vmShadeGauss) {
+            for (size_t i=0; i<numberOfFaces(); ++i)
+                getFace(i)->drawCurvatureFaces(vp,
+                                               _owner->getMinGausCurvature(),
+                                               _owner->getMaxGausCurvature());
+        }
+        else {
+            MonoFaceShader* shader = vp.setMonoFaceShader();
+            for (size_t i=0; i<numberOfFaces(); ++i)
+                getFace(i)->drawFaces(vp, shader);
+        }
+    }
+    else {
+        LineShader* lineshader = vp.setLineShader();
+        // vmWireFrame
+        if (_owner->showInteriorEdges()) {
+            //vp.setColor(getColor());
+            for (size_t i=0; i<numberOfFaces(); ++i)
+                getFace(i)->draw(vp, lineshader);
+        }
+        // draw all interior crease-edges
+        //vp.setColor(_owner->getCreaseColor());
+        for (size_t i=0; i<numberOfFaces(); ++i) {
+            SubdivisionControlFace* face = getFace(i);
+            for (size_t j=0; j<face->numberOfControlEdges(); ++j) {
+                SubdivisionEdge* edge = face->getControlEdge(j);
+                if (edge->isCrease())
+                    edge->draw(_owner->isDrawMirror() && isSymmetric(), vp, lineshader);
+            }
+        }
+    }
 }
 
 void SubdivisionLayer::extents(QVector3D& min, QVector3D& max)

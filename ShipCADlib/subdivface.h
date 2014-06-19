@@ -45,7 +45,9 @@ class SubdivisionControlCurve;
 class SubdivisionControlPoint;
 class SubdivisionControlEdge;
 class Viewport;
+class LineShader;
 class FileBuffer;
+class MonoFaceShader;
 
 class SubdivisionFace : public SubdivisionBase
 {
@@ -81,10 +83,6 @@ public:
     float getArea();
     QVector3D getFaceCenter();
     QVector3D getFaceNormal();
-
-
-    // drawing
-    virtual void draw(Viewport& vp);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
@@ -172,7 +170,9 @@ public:
     void saveToDXF(std::vector<QString>& strings);
 
     // drawing
-    virtual void draw(Viewport& vp);
+    virtual void draw(Viewport& vp, LineShader* lineshader);
+    virtual void drawFaces(Viewport& vp, MonoFaceShader* monoshader);
+    virtual void drawCurvatureFaces(Viewport& vp, float MinCurvature, float MaxCurvature);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;

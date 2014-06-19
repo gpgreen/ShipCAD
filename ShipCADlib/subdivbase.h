@@ -52,7 +52,6 @@ public:
         { _owner = newowner; }
 
     virtual void clear() = 0;
-    virtual void draw(Viewport& vp) = 0;
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;

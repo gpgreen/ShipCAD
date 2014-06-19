@@ -75,10 +75,6 @@ public:
     QVector3D averaging();
     SubdivisionPoint* calculateVertexPoint();
 
-    // drawing
-    //int distance_to_cursor(int x, int y, Viewport& vp) const;
-    virtual void draw(Viewport& vp);
-
     // getters/setters
     vertex_type_t fromInt(int val);
     QVector3D getCoordinate();
@@ -156,8 +152,7 @@ public:
     void loadFromStream(size_t& lineno, std::vector<QString>& strings);
 
     // drawing
-    //int distance_to_cursor(int x, int y, Viewport& vp) const;
-    virtual void draw(Viewport& vp);
+    static void drawControlPoints(Viewport& vp, SubdivisionSurface* surface);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;

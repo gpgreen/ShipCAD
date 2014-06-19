@@ -519,7 +519,7 @@ void Spline::insert(size_t index, const QVector3D& p)
         throw IndexOutOfRange(__FILE__);
 }
 
-void Spline::draw(Viewport& vp)
+void Spline::draw(Viewport& vp, LineShader* lineshader)
 {
     if (!_build)
         rebuild();
@@ -529,13 +529,14 @@ void Spline::draw(Viewport& vp)
     QVector3D normal;
     vector<QVector3D> parray1;
     vector<QVector3D> parray2;
+    QVector<QVector3D> vertices;
 
     for (size_t i=0; i<_fragments; ++i)
         parray1.push_back(value(i/static_cast<float>(_fragments)));
     if (vp.getViewportMode() == Viewport::vmWireFrame) {
         if (_show_curvature) {
             glLineWidth(1);
-            vp.setColor(_curvature_color);
+            //setColor(_curvature_color);
             for (size_t i=0; i<_fragments; ++i) {
                 float c = curvature(i / static_cast<float>(_fragments), normal);
                 p2 = parray1[i] - (c * 2 * _curvature_scale * normal);
@@ -543,31 +544,39 @@ void Spline::draw(Viewport& vp)
             }
             for (size_t i=1; i<=_fragments; ++i) {
                 if (i % 4 == 0 || i == 1 || i == _fragments) {
-                    glBegin(GL_LINES);
-                    glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
-                    glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
-                    glEnd();
+                    vertices << parray1[i-1];
+                    vertices << parray2[i-1];
+//                    glBegin(GL_LINES);
+//                    glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
+//                    glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
+//                    glEnd();
                 }
             }
-            glBegin(GL_LINES);
+            //glBegin(GL_LINES);
             for (size_t i=1; i<parray2.size(); ++i) {
-                glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
-                glVertex3f(parray2[i].x(), parray2[i].y(), parray2[i].z());
+                //glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
+                //glVertex3f(parray2[i].x(), parray2[i].y(), parray2[i].z());
+                vertices << parray2[i-1];
+                vertices << parray2[i];
             }
-            glEnd();
+            //glEnd();
+            lineshader->renderLines(vertices, _curvature_color);
         }
         if (_show_points) {
             //vp.setFont("small fonts");
             //vp.setFontSize(7);
             //vp.setFontColor(Qt::black);
             //vp.setBrushStyle(Qt::clear);
-            vp.setColor(Qt::white);
-            glBegin(GL_POINTS);
+            //vp.setColor(Qt::white);
+//            glBegin(GL_POINTS);
+            vertices.clear();
             for (size_t i=0; i<_nopoints; ++i) {
-                glVertex3f(_points[i].x(), _points[i].y(), _points[i].z());
+                vertices << _points[i];
+//                glVertex3f(_points[i].x(), _points[i].y(), _points[i].z());
                 //vp.text(pt.x() + 2, pt.y(), IntToStr(i));
             }
-            glEnd();
+//            glEnd();
+            lineshader->renderPoints(vertices, Qt::white);
         }
     }
 #if 0
@@ -582,13 +591,16 @@ void Spline::draw(Viewport& vp)
     }
 #endif
     glLineWidth(1);
-    vp.setColor(_color);
-    glBegin(GL_LINES);
+    //vp.setColor(_color);
+    //glBegin(GL_LINES);
     for (size_t i=1; i<parray1.size(); ++i) {
-        glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
-        glVertex3f(parray1[i].x(), parray1[i].y(), parray1[i].z());
+        //glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
+        //glVertex3f(parray1[i].x(), parray1[i].y(), parray1[i].z());
+        vertices << parray1[i-1];
+        vertices << parray1[i];
     }
-    glEnd();
+    //glEnd();
+    lineshader->renderLines(vertices, _color);
 }
 
 void Spline::insert_spline(size_t index, bool invert, bool duplicate_point, 

@@ -37,10 +37,9 @@ namespace ShipCADGeometry {
 
 class Entity;
 class SubdivisionSurface;
+class Viewport;
 
 //////////////////////////////////////////////////////////////////////////////////////
-
-class Viewport;
 
 class Shader : public QObject
 {
@@ -59,20 +58,49 @@ public:
     void addUniform(const std::string& name);
     void addAttribute(const std::string& name);
 
-    void setColor(QColor newcolor);
-    void setColorRGBA(QColor newcolor, float alpha);
-
     void setMatrix(const QMatrix4x4& matrix);
 
     void bind() {_program->bind();}
     void release() {_program->release();}
 
-private:
+protected:
 
     Viewport* _viewport;
     QOpenGLShaderProgram *_program;
     std::map<std::string, GLuint> _uniforms;
     std::map<std::string, GLuint> _attributes;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class LineShader : public Shader
+{
+    Q_OBJECT
+
+public:
+
+    explicit LineShader(Viewport* vp);
+    virtual ~LineShader() {}
+
+    void renderPoints(QVector<QVector3D>& points, QColor color);
+    void renderLines(QVector<QVector3D>& vertices, QColor lineColor);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class MonoFaceShader : public Shader
+{
+    Q_OBJECT
+
+public:
+
+    explicit MonoFaceShader(Viewport* vp);
+    virtual ~MonoFaceShader() {}
+
+    virtual void renderMesh(QColor meshColor,
+                            QVector<QVector3D>& vertices,
+                            QVector<QVector3D>& normals);
+
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -85,39 +113,37 @@ public:
     explicit Viewport();
     ~Viewport();
 
-    enum ViewportMode {
-      vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra
+    enum viewport_mode_t {
+        vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra
+    };
+    enum viewport_type_t {
+        fvBodyplan, fvProfile, fvPlan, fvPerspective
     };
 
     void initialize();
     void render();
-    void renderMesh(size_t nvertices, QVector3D* vertices, QVector3D* normals);
 
-    enum ViewportMode getViewportMode() const;
-    void setViewportMode(enum ViewportMode mode);
+    viewport_mode_t getViewportMode() const {return _mode;}
+    void setViewportMode(viewport_mode_t mode);
+
+    viewport_type_t getViewportType() const {return _viewtype;}
+    void setViewportType(viewport_type_t ty);
 
     void add(Entity* entity);
     void add(SubdivisionSurface* surface);
 
-    void setColor(QColor newcolor);
-    void setColorRGBA(QColor newcolor, float alpha);
-
     void addShader(const std::string& name, Shader* shader);
+
+    LineShader* setLineShader();
+    MonoFaceShader* setMonoFaceShader();
 
 private:
 
-    enum ViewportMode _mode;
-
-//    GLuint m_posAttr;
-//    GLuint m_matrixUniform;
-//    GLuint m_sourceColorUniform;
-//    GLuint _normalAttr;
-//    GLuint _vertexAttr;
-
-//    QOpenGLShaderProgram *m_program;
-//    QOpenGLShaderProgram *m_faceProgram;
+    enum viewport_mode_t _mode;
+    enum viewport_type_t _viewtype;
 
     int m_frame;
+    QMatrix4x4 _matrix;
 
     std::map<std::string, Shader*> _shaders;
     Shader* _current_shader;

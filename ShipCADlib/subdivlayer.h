@@ -117,6 +117,7 @@ public:
     void saveToDXF(std::vector<QString>& strings);
 
     // draw
+    static void drawLayers(Viewport &vp, SubdivisionSurface* surface);
     virtual void draw(Viewport &vp);
 
     // output

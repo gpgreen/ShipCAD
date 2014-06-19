@@ -31,7 +31,6 @@ void Shader::initialize(const char* vertexShaderSource,
   _program->link();
 
   addUniform("matrix");
-  addUniform("sourceColor");
 
   for (size_t i=0; i<uniforms.size(); ++i)
     addUniform(uniforms[i]);
@@ -53,45 +52,12 @@ void Shader::addAttribute(const string& name)
     throw runtime_error("bad attribute");
 }
 
-void Shader::setColor(QColor newcolor)
-{
-  _program->setUniformValue(_uniforms["sourceColor"],
-			    newcolor.redF(),
-			    newcolor.greenF(),
-			    newcolor.blueF(),
-			    1.0f);
-}
-
-void Shader::setColorRGBA(QColor newcolor, float alpha)
-{
-  _program->setUniformValue(_uniforms["sourceColor"],
-			    newcolor.redF(),
-			    newcolor.greenF(),
-			    newcolor.blueF(),
-			    alpha);
-}
-
 void Shader::setMatrix(const QMatrix4x4& matrix)
 {
   _program->setUniformValue(_uniforms["matrix"], matrix);
 }
   
 //////////////////////////////////////////////////////////////////////////////////////
-
-Viewport::Viewport()
-    : _mode(vmWireFrame), m_frame(0), _current_shader(0)
-{
-    // does nothing else
-}
-
-Viewport::~Viewport()
-{
-    map<string, Shader*>::iterator i = _shaders.begin();
-    while (i != _shaders.end()) {
-        delete (*i).second;
-        ++i;
-    }
-}
 
 static const char *vertexShaderSource =
     "attribute highp vec4 posAttr;\n"
@@ -107,7 +73,52 @@ static const char *fragmentShaderSource =
     "   outColor = sourceColor;\n"
     "}\n";
 
-static const char* VertexShadervmShade = 
+
+LineShader::LineShader(Viewport* vp)
+  : Shader(vp)
+{
+    vector<string> attrs;
+    vector<string> unis;
+    unis.push_back("sourceColor");
+    attrs.push_back("posAttr");
+    initialize(vertexShaderSource, fragmentShaderSource, unis, attrs);
+}
+
+void LineShader::renderPoints(QVector<QVector3D>& points, QColor color)
+{
+    _program->setUniformValue(_uniforms["sourceColor"],
+                  color.redF(),
+                  color.greenF(),
+                  color.blueF(),
+                  1.0f);
+
+    GLuint posAttr = _attributes["posAttr"];
+
+    _program->enableAttributeArray(posAttr);
+    _program->setAttributeArray(posAttr, points.constData());
+    glDrawArrays(GL_POINTS, 0, points.size());
+    _program->disableAttributeArray(posAttr);
+}
+
+void LineShader::renderLines(QVector<QVector3D>& vertices, QColor lineColor)
+{
+    _program->setUniformValue(_uniforms["sourceColor"],
+                  lineColor.redF(),
+                  lineColor.greenF(),
+                  lineColor.blueF(),
+                  1.0f);
+
+    GLuint posAttr = _attributes["posAttr"];
+
+    _program->enableAttributeArray(posAttr);
+    _program->setAttributeArray(posAttr, vertices.constData());
+    glDrawArrays(GL_LINES, 0, vertices.size());
+    _program->disableAttributeArray(posAttr);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+static const char* VertexShadervmShade =
         "attribute highp vec4 vertex;"
         "attribute mediump vec3 normal;"
         "uniform mediump mat4 matrix;"
@@ -123,79 +134,91 @@ static const char* VertexShadervmShade =
         "    gl_Position = matrix * vertex;"
         "}";
 
-static const char* FragmentShadervmShade = 
+static const char* FragmentShadervmShade =
         "varying mediump vec4 color;"
         "void main(void)"
         "{"
         "    gl_FragColor = color;"
         "}";
 
+MonoFaceShader::MonoFaceShader(Viewport* vp)
+  : Shader(vp)
+{
+    vector<string> attrs;
+    vector<string> unis;
+    unis.push_back("sourceColor");
+    attrs.push_back("vertex");
+    attrs.push_back("normal");
+    initialize(VertexShadervmShade, FragmentShadervmShade, unis, attrs);
+}
+
+void MonoFaceShader::renderMesh(QColor meshColor,
+                                QVector<QVector3D>& vertices,
+                                QVector<QVector3D>& normals)
+{
+    if (vertices.size() != normals.size())
+        throw runtime_error("vertex and normal array not same size MonoFaceShader::renderMesh");
+
+    _program->setUniformValue(_uniforms["sourceColor"],
+                  meshColor.redF(),
+                  meshColor.greenF(),
+                  meshColor.blueF(),
+                  1.0f);
+
+    GLuint normalAttr = _attributes["normal"];
+    GLuint vertexAttr = _attributes["vertex"];
+
+    _program->enableAttributeArray(normalAttr);
+    _program->enableAttributeArray(vertexAttr);
+    _program->setAttributeArray(vertexAttr, vertices.constData());
+    _program->setAttributeArray(normalAttr, normals.constData());
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    _program->disableAttributeArray(normalAttr);
+    _program->disableAttributeArray(vertexAttr);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+Viewport::Viewport()
+    : _mode(vmWireFrame), _viewtype(fvPerspective), m_frame(0), _current_shader(0)
+{
+    // does nothing else
+}
+
+Viewport::~Viewport()
+{
+    map<string, Shader*>::iterator i = _shaders.begin();
+    while (i != _shaders.end()) {
+        delete (*i).second;
+        ++i;
+    }
+}
+
 void Viewport::initialize()
 {
-    //    m_program = new QOpenGLShaderProgram(this);
-    //    m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
-    //    m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
-    //    m_program->link();
-    //    m_posAttr = m_program->attributeLocation("posAttr");
-    //    m_matrixUniform = m_program->uniformLocation("matrix");
-    //    m_sourceColorUniform = m_program->uniformLocation("sourceColor");
-    //    _vertexAttr = m_program->attributeLocation("vertex");
-    //    _normalAttr = m_program->attributeLocation("normal");
-
-    //    m_faceProgram = new QOpenGLShaderProgram(this);
-    //    m_faceProgram->addShaderFromSourceCode(QOpenGLShader::Vertex, VertexShadervmShade);
-    //    m_faceProgram->addShaderFromSourceCode(QOpenGLShader::Fragment, FragmentShadervmShade);
-    //    m_faceProgram->link();
-    //    m_matrixUniform = m_faceProgram->uniformLocation("matrix");
-    //    m_sourceColorUniform = m_faceProgram->uniformLocation("sourceColor");
-    //    _vertexAttr = m_faceProgram->attributeLocation("vertex");
-    //    _normalAttr = m_faceProgram->attributeLocation("normal");
-
     vector<string> attrs;
     vector<string> unis;
 
-    Shader* lineshader = new Shader(this);
-    attrs.push_back("posAttr");
-    lineshader->initialize(vertexShaderSource, fragmentShaderSource, unis, attrs);
+    LineShader* lineshader = new LineShader(this);
     addShader("lineshader", lineshader);
 
-    attrs.clear();
-    unis.clear();
-    Shader* faceshader = new Shader(this);
-    attrs.push_back("vertex");
-    attrs.push_back("normal");
-    faceshader->initialize(VertexShadervmShade, FragmentShadervmShade, unis, attrs);
-    addShader("faceshader", faceshader);
+    MonoFaceShader* monofaceshader = new MonoFaceShader(this);
+    addShader("monofaceshader", monofaceshader);
 }
 
-Viewport::ViewportMode Viewport::getViewportMode() const
-{
-    return _mode;
-}
-
-void Viewport::setViewportMode(enum ViewportMode mode)
+void Viewport::setViewportMode(viewport_mode_t mode)
 {
     _mode = mode;
+    // BUGBUG: need to trigger redraw
 }
 
-void Viewport::setColor(QColor newcolor)
+void Viewport::setViewportType(viewport_type_t ty)
 {
-    _current_shader->setColorRGBA(newcolor, 1.0f);
-//    m_program->setUniformValue(m_sourceColorUniform,
-//                               newcolor.redF(),
-//                               newcolor.greenF(),
-//                               newcolor.blueF(),
-//			       1.0f);
-}
-
-void Viewport::setColorRGBA(QColor newcolor, float alpha)
-{
-    _current_shader->setColorRGBA(newcolor, alpha);
-//    m_program->setUniformValue(m_sourceColorUniform,
-//                               newcolor.redF(),
-//                               newcolor.greenF(),
-//                               newcolor.blueF(),
-//			       alpha);
+    if (ty != _viewtype) {
+        _viewtype = ty;
+        //_zoom = 1.0;
+        // BUGBUG: need to do rest of viewangle
+    }
 }
 
 void Viewport::add(Entity* entity)
@@ -213,45 +236,55 @@ void Viewport::addShader(const string &name, Shader *shader)
     _shaders[name] = shader;
 }
 
-void Viewport::renderMesh(size_t nvertices, QVector3D* vertices, QVector3D* normals)
-{
-//    m_program->enableAttributeArray(_normalAttr);
-//    m_program->enableAttributeArray(_vertexAttr);
-//    m_program->setAttributeArray(_vertexAttr, vertices);
-//    m_program->setAttributeArray(_normalAttr, normals);
-//    glDrawArrays(GL_TRIANGLES, 0, nvertices);
-//    m_program->disableAttributeArray(_normalAttr);
-//    m_program->disableAttributeArray(_vertexAttr);
-}
-
 void Viewport::render()
 {
     glViewport(0, 0, width(), height());
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    Shader* shader = _shaders["lineshader"];
-    _current_shader = shader;
+    _matrix = QMatrix4x4();
+    _matrix.perspective(90, 4.0f/3.0f, 0.1f, 100.0f);
+    _matrix.translate(0, 0, -2);
+    _matrix.rotate(100.0f * m_frame / screen()->refreshRate(), 0, 1, 0);
 
-    QMatrix4x4 matrix;
-    matrix.perspective(90, 4.0f/3.0f, 0.1f, 100.0f);
-    matrix.translate(0, 0, -2);
-    matrix.rotate(100.0f * m_frame / screen()->refreshRate(), 0, 1, 0);
-
-    //m_program->bind();
-    shader->bind();
-
-    //m_program->setUniformValue(m_matrixUniform, matrix);
-    shader->setMatrix(matrix);
+    LineShader* lineshader = setLineShader();
 
     for (size_t i=0; i<_entities.size(); ++i)
-        _entities[i]->draw(*this);
+        _entities[i]->draw(*this, lineshader);
+
+    // now the shader can change...
     for (size_t i=0; i<_surfaces.size(); ++i)
         _surfaces[i]->draw(*this);
 
-    //m_program->release();
-    shader->release();
+    if (_current_shader != 0)
+        _current_shader->release();
 
     ++m_frame;
+}
+
+LineShader* Viewport::setLineShader()
+{
+    Shader* shader = _shaders["lineshader"];
+    if (shader == _current_shader)
+        return dynamic_cast<LineShader*>(_current_shader);
+    if (_current_shader != 0)
+        _current_shader->release();
+    shader->bind();
+    shader->setMatrix(_matrix);
+    _current_shader = shader;
+    return dynamic_cast<LineShader*>(_current_shader);
+}
+
+MonoFaceShader* Viewport::setMonoFaceShader()
+{
+    Shader* shader = _shaders["monofaceshader"];
+    if (shader == _current_shader)
+        return dynamic_cast<MonoFaceShader*>(_current_shader);
+    if (_current_shader != 0)
+        _current_shader->release();
+    shader->bind();
+    shader->setMatrix(_matrix);
+    _current_shader = shader;
+    return dynamic_cast<MonoFaceShader*>(_current_shader);
 }
 

@@ -130,7 +130,8 @@ void SubdivisionEdge::setCrease(bool val)
         else if (n > 2)
             endPoint->setVertexType(SubdivisionPoint::svCorner);
     }
-    _owner->setBuild(false);
+    // BUGBUG: this fails during subdivide
+    //_owner->setBuild(false);
 }
 
 SubdivisionEdge* SubdivisionEdge::getPreviousEdge()
@@ -344,7 +345,7 @@ SubdivisionControlEdge* SubdivisionControlEdge::construct(SubdivisionSurface* ow
 }
 
 SubdivisionControlEdge::SubdivisionControlEdge(SubdivisionSurface* owner)
-    : SubdivisionEdge(owner)
+    : SubdivisionEdge(owner), _selected(false), _visible(true)
 {
     _control_edge = true;
     clear();

@@ -28,7 +28,8 @@ void Shader::initialize(const char* vertexShaderSource,
   _program = new QOpenGLShaderProgram(_viewport);
   _program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
   _program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
-  _program->link();
+  if (!_program->link())
+      cerr << "OpenGL Link failed - Log:\n" << _program->log().toStdString() << endl;
 
   addUniform("matrix");
 
@@ -62,15 +63,17 @@ void Shader::setMatrix(const QMatrix4x4& matrix)
 static const char *vertexShaderSource =
     "attribute highp vec4 posAttr;\n"
     "uniform highp mat4 matrix;\n"
+    "uniform lowp vec4 sourceColor;\n"
+    "varying mediump vec4 color;\n"
     "void main() {\n"
+    "   color = sourceColor;\n"
     "   gl_Position = matrix * posAttr;\n"
     "}\n";
 
 static const char *fragmentShaderSource =
-    "uniform vec4 sourceColor;\n"
-    "varying out vec4 outColor;\n"
+    "varying mediump vec4 color;\n"
     "void main() {\n"
-    "   outColor = sourceColor;\n"
+    "   gl_FragColor = color;\n"
     "}\n";
 
 
@@ -94,8 +97,8 @@ void LineShader::renderPoints(QVector<QVector3D>& points, QColor color)
 
     GLuint posAttr = _attributes["posAttr"];
 
-    _program->enableAttributeArray(posAttr);
     _program->setAttributeArray(posAttr, points.constData());
+    _program->enableAttributeArray(posAttr);
     glDrawArrays(GL_POINTS, 0, points.size());
     _program->disableAttributeArray(posAttr);
 }
@@ -110,8 +113,8 @@ void LineShader::renderLines(QVector<QVector3D>& vertices, QColor lineColor)
 
     GLuint posAttr = _attributes["posAttr"];
 
-    _program->enableAttributeArray(posAttr);
     _program->setAttributeArray(posAttr, vertices.constData());
+    _program->enableAttributeArray(posAttr);
     glDrawArrays(GL_LINES, 0, vertices.size());
     _program->disableAttributeArray(posAttr);
 }
@@ -168,10 +171,10 @@ void MonoFaceShader::renderMesh(QColor meshColor,
     GLuint normalAttr = _attributes["normal"];
     GLuint vertexAttr = _attributes["vertex"];
 
-    _program->enableAttributeArray(normalAttr);
-    _program->enableAttributeArray(vertexAttr);
     _program->setAttributeArray(vertexAttr, vertices.constData());
     _program->setAttributeArray(normalAttr, normals.constData());
+    _program->enableAttributeArray(normalAttr);
+    _program->enableAttributeArray(vertexAttr);
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     _program->disableAttributeArray(normalAttr);
     _program->disableAttributeArray(vertexAttr);
@@ -249,12 +252,14 @@ void Viewport::render()
     for (size_t i=0; i<_entities.size(); ++i)
         _entities[i]->draw(*this, lineshader);
 
-    // now the shader can change...
     for (size_t i=0; i<_surfaces.size(); ++i)
         _surfaces[i]->draw(*this);
 
-    if (_current_shader != 0)
+    // need to release the shader, otherwise doesn't draw right
+    if (_current_shader != 0) {
         _current_shader->release();
+        _current_shader = 0;
+    }
 
     ++m_frame;
 }
@@ -269,6 +274,7 @@ LineShader* Viewport::setLineShader()
     shader->bind();
     shader->setMatrix(_matrix);
     _current_shader = shader;
+    //cerr << "set line shader\n";
     return dynamic_cast<LineShader*>(_current_shader);
 }
 
@@ -282,6 +288,7 @@ MonoFaceShader* Viewport::setMonoFaceShader()
     shader->bind();
     shader->setMatrix(_matrix);
     _current_shader = shader;
+    //cerr << "set mono face shader\n";
     return dynamic_cast<MonoFaceShader*>(_current_shader);
 }
 

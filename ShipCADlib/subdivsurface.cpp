@@ -2459,14 +2459,29 @@ void SubdivisionSurface::subdivide()
         }
     }
     // calculate other edgepoints
-    edgepoints.reserve(edgepoints.size() + numberOfEdges());
-    for (size_t i=1; i<=numberOfEdges(); ++i) {
-        edgepoints.push_back(make_pair(getEdge(i-1), getEdge(i-1)->calculateEdgePoint()));
+    if (numberOfEdges() == 0) {
+        edgepoints.reserve(edgepoints.size() + numberOfControlEdges());
+        for (size_t i=1; i<=numberOfControlEdges(); ++i) {
+            edgepoints.push_back(make_pair(getControlEdge(i-1), getControlEdge(i-1)->calculateEdgePoint()));
+        }
+    }
+    else {
+        edgepoints.reserve(edgepoints.size() + numberOfEdges());
+        for (size_t i=1; i<=numberOfEdges(); ++i) {
+            edgepoints.push_back(make_pair(getEdge(i-1), getEdge(i-1)->calculateEdgePoint()));
+        }
     }
     // calculate vertex points
-    vertexpoints.reserve(vertexpoints.size() + numberOfPoints());
-    for (size_t i=1; i<=numberOfPoints(); ++i)
-        vertexpoints.push_back(make_pair(getPoint(i-1), getPoint(i-1)->calculateVertexPoint()));
+    if (numberOfPoints() == 0) {
+        vertexpoints.reserve(vertexpoints.size() + numberOfControlPoints());
+        for (size_t i=1; i<=numberOfControlPoints(); ++i)
+            vertexpoints.push_back(make_pair(getControlPoint(i-1), getControlPoint(i-1)->calculateVertexPoint()));
+    }
+    else {
+        vertexpoints.reserve(vertexpoints.size() + numberOfPoints());
+        for (size_t i=1; i<=numberOfPoints(); ++i)
+            vertexpoints.push_back(make_pair(getPoint(i-1), getPoint(i-1)->calculateVertexPoint()));
+    }
     // sort the points for faster access
     // vertexpoints.sort
     // edgepoints.sort

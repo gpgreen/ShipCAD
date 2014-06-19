@@ -65,7 +65,7 @@ int main(int argc, char **argv)
     spline.add(QVector3D(0.7f,1.0f,0));
     spline.add(QVector3D(1,1,0));
     spline.setProperty("Color", QColor(Qt::blue));
-    spline.setProperty("CurvatureColor", QColor(Qt::yellow));
+    //spline.setProperty("CurvatureColor", QColor(Qt::yellow));
     spline.setProperty("ShowCurvature", true);
     //spline.setProperty("ShowPoints", true);
     cerr << spline << endl;
@@ -93,9 +93,11 @@ int main(int argc, char **argv)
     points.push_back(pt);
     surface.addControlFace(points, true);
     cerr << surface << endl;
+    surface.subdivide();
+    cerr << surface << endl;
 
     Viewport window;
-    window.setViewportMode(Viewport::vmShade);
+    //window.setViewportMode(Viewport::vmShade);
     window.setFormat(format);
     window.resize(640, 480);
     window.add(&spline);

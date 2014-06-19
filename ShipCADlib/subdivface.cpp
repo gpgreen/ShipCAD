@@ -411,9 +411,9 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
     for (size_t i=0; i<_children.size(); ++i) {
         SubdivisionFace* face = _children[i];
         for (size_t j=2; j<face->numberOfPoints(); ++j) {
-            QVector3D& p1 = face->getPoint(0)->getCoordinate();
-            QVector3D& p2 = face->getPoint(j-1)->getCoordinate();
-            QVector3D& p3 = face->getPoint(j)->getCoordinate();
+            QVector3D p1 = face->getPoint(0)->getCoordinate();
+            QVector3D p2 = face->getPoint(j-1)->getCoordinate();
+            QVector3D p3 = face->getPoint(j)->getCoordinate();
             QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
             vertices << p1;
             vertices << p2;
@@ -455,9 +455,9 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
             for (size_t i=0; i<_children.size(); ++i) {
                 // clip all triangles against the waterline plane
                 for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
-                    QVector3D& p1 = _children[i]->getPoint(0)->getCoordinate();
-                    QVector3D& p2 = _children[i]->getPoint(j-1)->getCoordinate();
-                    QVector3D& p3 = _children[i]->getPoint(j)->getCoordinate();
+                    QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
+                    QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
+                    QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
 
                     // check if clipping is required
                     float min = _owner->getWaterlinePlane().distance(p1);
@@ -550,9 +550,9 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
     for (size_t i=0; i<_children.size(); ++i) {
         SubdivisionFace* face = _children[i];
         for (size_t j=2; j<face->numberOfPoints(); ++j) {
-            QVector3D& p1 = face->getPoint(0)->getCoordinate();
-            QVector3D& p2 = face->getPoint(j-1)->getCoordinate();
-            QVector3D& p3 = face->getPoint(j)->getCoordinate();
+            QVector3D p1 = face->getPoint(0)->getCoordinate();
+            QVector3D p2 = face->getPoint(j-1)->getCoordinate();
+            QVector3D p3 = face->getPoint(j)->getCoordinate();
             QVector3D normal = QVector3D::normal(p2 - p1, p3 - p1);
             vertices[index] = p1;
             normals[index++] = normal;

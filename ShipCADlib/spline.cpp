@@ -536,7 +536,6 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
     if (vp.getViewportMode() == Viewport::vmWireFrame) {
         if (_show_curvature) {
             glLineWidth(1);
-            //setColor(_curvature_color);
             for (size_t i=0; i<_fragments; ++i) {
                 float c = curvature(i / static_cast<float>(_fragments), normal);
                 p2 = parray1[i] - (c * 2 * _curvature_scale * normal);
@@ -546,20 +545,12 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
                 if (i % 4 == 0 || i == 1 || i == _fragments) {
                     vertices << parray1[i-1];
                     vertices << parray2[i-1];
-//                    glBegin(GL_LINES);
-//                    glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
-//                    glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
-//                    glEnd();
                 }
             }
-            //glBegin(GL_LINES);
             for (size_t i=1; i<parray2.size(); ++i) {
-                //glVertex3f(parray2[i-1].x(), parray2[i-1].y(), parray2[i-1].z());
-                //glVertex3f(parray2[i].x(), parray2[i].y(), parray2[i].z());
                 vertices << parray2[i-1];
                 vertices << parray2[i];
             }
-            //glEnd();
             lineshader->renderLines(vertices, _curvature_color);
         }
         if (_show_points) {
@@ -568,38 +559,19 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
             //vp.setFontColor(Qt::black);
             //vp.setBrushStyle(Qt::clear);
             //vp.setColor(Qt::white);
-//            glBegin(GL_POINTS);
             vertices.clear();
             for (size_t i=0; i<_nopoints; ++i) {
                 vertices << _points[i];
-//                glVertex3f(_points[i].x(), _points[i].y(), _points[i].z());
                 //vp.text(pt.x() + 2, pt.y(), IntToStr(i));
             }
-//            glEnd();
             lineshader->renderPoints(vertices, Qt::white);
         }
     }
-#if 0
-    else {
-        // draw to z-buffer
-        p1 = value(0);
-        for (int i=1; i<=_fragments; ++i) {
-            p2 = value(i/static_cast<float>(_fragments);
-            vp.draw_line_to_z_buffer(p1, p2, r, g, b);
-            p1 = p2;
-        }
-    }
-#endif
     glLineWidth(1);
-    //vp.setColor(_color);
-    //glBegin(GL_LINES);
     for (size_t i=1; i<parray1.size(); ++i) {
-        //glVertex3f(parray1[i-1].x(), parray1[i-1].y(), parray1[i-1].z());
-        //glVertex3f(parray1[i].x(), parray1[i].y(), parray1[i].z());
         vertices << parray1[i-1];
         vertices << parray1[i];
     }
-    //glEnd();
     lineshader->renderLines(vertices, _color);
 }
 

@@ -196,9 +196,6 @@ Viewport::~Viewport()
 
 void Viewport::initialize()
 {
-    vector<string> attrs;
-    vector<string> unis;
-
     LineShader* lineshader = new LineShader(this);
     addShader("lineshader", lineshader);
 

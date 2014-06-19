@@ -365,12 +365,10 @@ void SubdivisionLayer::draw(Viewport& vp)
         LineShader* lineshader = vp.setLineShader();
         // vmWireFrame
         if (_owner->showInteriorEdges()) {
-            //vp.setColor(getColor());
             for (size_t i=0; i<numberOfFaces(); ++i)
                 getFace(i)->draw(vp, lineshader);
         }
         // draw all interior crease-edges
-        //vp.setColor(_owner->getCreaseColor());
         for (size_t i=0; i<numberOfFaces(); ++i) {
             SubdivisionControlFace* face = getFace(i);
             for (size_t j=0; j<face->numberOfControlEdges(); ++j) {

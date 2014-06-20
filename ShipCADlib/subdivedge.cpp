@@ -202,7 +202,7 @@ void SubdivisionEdge::addFace(SubdivisionFace* face)
 
 SubdivisionPoint* SubdivisionEdge::calculateEdgePoint()
 {
-    QVector3D point = 0.5 * startPoint()->getCoordinate() * endPoint()->getCoordinate();
+    QVector3D point = 0.5 * (startPoint()->getCoordinate() + endPoint()->getCoordinate());
     SubdivisionPoint* result = SubdivisionPoint::construct(_owner);
     if (_crease)
         result->setVertexType(SubdivisionPoint::svCrease);
@@ -485,8 +485,8 @@ void SubdivisionControlEdge::collapse()
             _owner->removeControlFace(face1);
         if (_owner->hasControlFace(face2))
             _owner->removeControlFace(face2);
-        delete face1;
-        delete face2;
+        _owner->deleteControlFace(face1);
+        _owner->deleteControlFace(face2);
 
         // check if startpoint and endpoint can be collapsed as well
         if (s->numberOfFaces() > 1 && s->numberOfEdges() == 2)

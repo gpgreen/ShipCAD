@@ -429,6 +429,16 @@ SubdivisionPoint* SubdivisionSurface::getPoint(size_t index)
     throw range_error("bad index in SubdivisionSurface::getPoint");
 }
 
+void SubdivisionSurface::deletePoint(SubdivisionPoint* point)
+{
+  vector<SubdivisionPoint*>::iterator i = find(_points.begin(), _points.end(), point);
+  if (i != _points.end()) {
+    _points.erase(i);
+    point->~SubdivisionPoint();
+    _point_pool.free(point);
+  }
+}
+
 SubdivisionEdge* SubdivisionSurface::getEdge(size_t index)
 {
     if (index < _edges.size())
@@ -436,6 +446,15 @@ SubdivisionEdge* SubdivisionSurface::getEdge(size_t index)
     throw range_error("bad index in SubdivisionSurface::getEdge");
 }
 
+void SubdivisionSurface::deleteEdge(SubdivisionEdge* edge)
+{
+  vector<SubdivisionEdge*>::iterator i = find(_edges.begin(), _edges.end(), edge);
+  if (i != _edges.end()) {
+    _edges.erase(i);
+    edge->~SubdivisionEdge();
+    _edge_pool.free(edge);
+  }
+}
 size_t SubdivisionSurface::indexOfEdge(SubdivisionEdge *edge)
 {
     vector<SubdivisionEdge*>::iterator i = find(_edges.begin(),
@@ -640,7 +659,7 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<QVector3D
                     edge->endPoint()->deleteFace(result);
                 }
             }
-            delete result;
+            deleteControlFace(result);
             result = 0;
         }
         else
@@ -746,7 +765,7 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<Subdivisi
             p1 = p2;
         }
         if (result->numberOfPoints() < 3) {
-            delete result;
+            deleteControlFace(result);
             result = 0;
         }
         else
@@ -810,6 +829,8 @@ void SubdivisionSurface::clearFaces()
     // dump all points
     _points.clear();
     _point_pool.release_memory();
+    // dump all faces
+    _face_pool.release_memory();
     // clear edges in control faces
     for (size_t i=1; i<=numberOfControlFaces(); ++i)
         getControlFace(i-1)->clearControlEdges();
@@ -891,7 +912,8 @@ void SubdivisionSurface::doAssemble(grid_t& grid,
             if (tmpfaces.size() == cols - 1) {
                 // search was successfull
                 for (size_t i=1; i<=tmpfaces.size(); ++i) {
-                    vector<SubdivisionPoint*> newrow(cols);
+		  vector<SubdivisionPoint*> newrow;
+		  newrow.reserve(cols);
                     for (size_t j=0; j<cols; ++j)
                         newrow.push_back(static_cast<SubdivisionPoint*>(0));
                     grid.push_back(newrow);
@@ -991,7 +1013,8 @@ void SubdivisionSurface::doAssemble(grid_t& grid,
             }
             if (tmpfaces.size() == cols - 1) {
                 // search was successfull
-                vector<SubdivisionPoint*> newrow(cols);
+	      vector<SubdivisionPoint*> newrow;
+	      newrow.reserve(cols);
                 for (size_t j=0; j<cols; ++j)
                     newrow.push_back(static_cast<SubdivisionPoint*>(0));
                 grid.insert(grid.begin(), newrow);
@@ -1085,7 +1108,8 @@ void SubdivisionSurface::convertToGrid(face_grid_t& input, grid_t& grid)
         return;
     // assemble all childfaces in one temp sorted list
     size_t n = input[0][0]->numberOfChildren();
-    vector<SubdivisionFace*> backup(input.size() * input[0].size() * n);
+    vector<SubdivisionFace*> backup;
+    backup.reserve(input.size() * input[0].size() * n);
     for (size_t i=1; i<=input.size(); ++i) {
         for (size_t j=1; j<=input[i-1].size(); ++j) {
             SubdivisionControlFace* ctrlface = input[i-1][j-1];
@@ -1096,7 +1120,8 @@ void SubdivisionSurface::convertToGrid(face_grid_t& input, grid_t& grid)
     sort(backup.begin(), backup.end());
     if (backup.size() == 0)
         return;
-    vector<SubdivisionFace*> faces(backup.size());
+    vector<SubdivisionFace*> faces;
+    faces.reserve(backup.size());
     size_t ind = 0;
     do {
         faces.insert(faces.end(), backup.begin(), backup.end());
@@ -1105,11 +1130,11 @@ void SubdivisionSurface::convertToGrid(face_grid_t& input, grid_t& grid)
         faces.erase(faces.begin()+ind-1);
         rows = 2;
         cols = 2;
-        vector<SubdivisionPoint*> row0(2);
+        vector<SubdivisionPoint*> row0;
         row0.push_back(face->getPoint(0));
         row0.push_back(face->getPoint(1));
         grid.push_back(row0);
-        vector<SubdivisionPoint*> row1(2);
+        vector<SubdivisionPoint*> row1;
         row1.push_back(face->getPoint(2));
         row1.push_back(face->getPoint(3));
         grid.push_back(row1);
@@ -1189,7 +1214,8 @@ void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>&
     if (!export_control_net) {
         // export subdivided surface
         // create points for portside
-        vector<SubdivisionPoint*> tmp(numberOfPoints());
+      vector<SubdivisionPoint*> tmp;
+      tmp.reserve(numberOfPoints());
         for (size_t i=1; i<=numberOfPoints(); ++i) {
             // BUGBUG: FloatToStrF ffFixed, 7, 4
             strings.push_back(QString("v %1 %2 %3").arg(getPoint(i-1)->getCoordinate().y())
@@ -1244,7 +1270,8 @@ void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>&
         // export the control net only
         // first sort controlpoints for fac
         // create points for portside
-        vector<SubdivisionPoint*> tmp(numberOfPoints());
+      vector<SubdivisionPoint*> tmp;
+      tmp.reserve(numberOfPoints());
         for (size_t i=1; i<=numberOfControlPoints(); ++i) {
             // BUGBUG: FloatToStrF ffFixed, 7, 4
             strings.push_back(QString("v %1 %2 %3").arg(getControlPoint(i-1)->getCoordinate().y())
@@ -1428,11 +1455,12 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
     bool addedge;
 
     // first assemble all edges belong to this set of faces
-    vector<SubdivisionEdge*> edges(faces.size()+100);
-    vector<SurfIntersectionData> intarray(10);
+    vector<SubdivisionEdge*> edges;
+    edges.reserve(faces.size()+100);
+    vector<SurfIntersectionData> intarray;
 
     // first is start point, second is end point
-    vector<pair<SurfIntersectionData, SurfIntersectionData> > segments(50);
+    vector<pair<SurfIntersectionData, SurfIntersectionData> > segments;
 
     for (size_t i=1; i<=faces.size(); ++i) {
         ctrlface = faces[i-1];
@@ -1997,7 +2025,8 @@ void SubdivisionSurface::importGrid(coordinate_grid_t& points, SubdivisionLayer*
 
     control_grid_t grid(rows);
     for (size_t i=1; i<=rows; ++i) {
-        vector<SubdivisionControlPoint*> row(cols);
+      vector<SubdivisionControlPoint*> row;
+      row.reserve(cols);
         for (size_t j=1; j<=cols; ++j)
             row.push_back(addControlPoint(points[i-1][j-1]));
         grid.push_back(row);
@@ -2402,12 +2431,12 @@ void SubdivisionSurface::selectionDelete()
         if (i > numberOfSelectedControlCurves())
             i = numberOfSelectedControlCurves();
     }
-    i = numberOfSelectedControlFaces();
+    i = _sel_control_faces.size();
     while (i >= 1) {
-        delete getControlFace(i-1);
+        deleteControlFace(_sel_control_faces[i-1]);
         --i;
-        if (i > numberOfSelectedControlFaces())
-            i = numberOfSelectedControlFaces();
+        if (i > _sel_control_faces.size())
+            i = _sel_control_faces.size();
     }
     i = _sel_control_edges.size();
     while (i >= 1) {
@@ -2432,7 +2461,7 @@ void SubdivisionSurface::subdivide()
     if (numberOfControlFaces() < 1)
         return;
     ++_current_subdiv_level;
-    vector<SubdivisionEdge*> newedgelist(static_cast<size_t>(pow(2.0f, _current_subdiv_level)));
+    vector<SubdivisionEdge*> newedgelist;
     size_t number = numberOfFaces();
 
     // create the list with new facepoints and a reference to the original face
@@ -2496,14 +2525,13 @@ void SubdivisionSurface::subdivide()
         getControlFace(i-1)->subdivide(this, vertexpoints, edgepoints, facepoints, interioredges, newedgelist, dest);
     }
 
-    // BUGBUG: cleanup old mesh
-    for (size_t i=1; i<=_edges.size(); ++i) {
-        delete _edges[i-1];
+    for (size_t i=0; i<_edges.size(); ++i) {
+      deleteEdge(_edges[i]);
     }
-    _edges.clear();
     _edges = newedgelist;
-    _points.clear();
-//    _point_pool.release_memory();
+    for (size_t i=0; i<_points.size(); ++i) {
+      deletePoint(_points[i]);
+    }
     _points.reserve(vertexpoints.size() + edgepoints.size() + facepoints.size());
     for (size_t i=1; i<=vertexpoints.size(); ++i)
         if (vertexpoints[i-1].first != 0)
@@ -2515,12 +2543,13 @@ void SubdivisionSurface::subdivide()
         if (facepoints[i-1].first != 0)
             _points.push_back(facepoints[i-1].second);
     // perform averaging procedure to smooth the new mesh
-    vector<QVector3D> tmppoints(_points.size());
-    for (size_t i=1; i<=_points.size(); ++i) {
-        tmppoints.push_back(_points[i-1]->averaging());
+    vector<QVector3D> tmppoints;
+    tmppoints.reserve(_points.size());
+    for (size_t i=0; i<_points.size(); ++i) {
+        tmppoints.push_back(_points[i]->averaging());
     }
-    for (size_t i=1; i<=_points.size(); ++i) {
-        _points[i-1]->setCoordinate(tmppoints[i-1]);
+    for (size_t i=0; i<_points.size(); ++i) {
+        _points[i]->setCoordinate(tmppoints[i]);
     }
 }
 
@@ -2534,10 +2563,9 @@ void SubdivisionSurface::dump(ostream& os, const char* prefix) const
 void SubdivisionSurface::priv_dump(ostream& os, const char* prefix) const
 {
     os << prefix << " Control Points (" << _control_points.size() << ")\n";
-    char * np = new char[strlen(prefix) + 3];
-    memcpy(np, prefix, strlen(prefix));
-    memcpy(np+strlen(prefix), "  ", 2);
-    np[strlen(prefix)+2] = 0;
+    QString s(prefix);
+    s.append(" ");
+    const char* np = s.toStdString().c_str();
     if (g_surface_verbose) {
         for (size_t i=0; i<_control_points.size(); ++i) {
             _control_points[i]->dump(os, np);
@@ -2548,8 +2576,13 @@ void SubdivisionSurface::priv_dump(ostream& os, const char* prefix) const
     os << prefix << " Control Faces (" << _control_faces.size() << ")\n";
     os << prefix << " Control Curves (" << _control_curves.size() << ")\n";
     os << prefix << " Points (" << _points.size() << ")\n";
+    if (g_surface_verbose) {
+        for (size_t i=0; i<_points.size(); ++i) {
+            _points[i]->dump(os, np);
+            os << "\n";
+        }
+    }
     os << prefix << " Edges (" << _edges.size() << ")\n";
-    delete [] np;
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionSurface& surface)

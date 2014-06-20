@@ -173,14 +173,11 @@ void SubdivisionFace::edgeCheck(SubdivisionSurface *owner,
         throw runtime_error("bad points in SubdivisionFace::edgeCheck");
     newedge = owner->edgeExists(p1, p2);
     if (newedge == 0) {
-        if (controledge)
-            newedge = SubdivisionControlEdge::construct(owner);
-        else
-            newedge = SubdivisionEdge::construct(owner);
+        newedge = SubdivisionEdge::construct(owner);
+        newedge->setControlEdge(controledge);
         newedge->setPoints(p1, p2);
         newedge->startPoint()->addEdge(newedge);
         newedge->endPoint()->addEdge(newedge);
-        newedge->setControlEdge(controledge);
         newedge->setCrease(crease);
         if (newedge->isControlEdge())
             controledges.push_back(newedge);
@@ -482,8 +479,10 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
                     }
                     else {
                         // pierces water, clip triangle
-                        std::vector<QVector3D> above(6);
-                        std::vector<QVector3D> below(6);
+		      std::vector<QVector3D> above;
+		      above.reserve(6);
+		      std::vector<QVector3D> below;
+		      below.reserve(6);
                         ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
                         for (size_t k=3; k<=above.size(); ++k)
                             // shade triangle above
@@ -520,8 +519,10 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
                         }
                         else {
                             // pierces water, clip triangle
-                            std::vector<QVector3D> above(6);
-                            std::vector<QVector3D> below(6);
+			  std::vector<QVector3D> above;
+			  above.reserve(6);
+			  std::vector<QVector3D> below;
+			  below.reserve(6);
                             ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
                             for (size_t k=3; k<=above.size(); ++k)
                                 // shade triangle above
@@ -710,8 +711,6 @@ void SubdivisionControlFace::clear()
 
 void SubdivisionControlFace::clearChildren()
 {
-    for (size_t i=0; i<_children.size(); ++i)
-        delete _children[i];
     _children.clear();
     _edges.clear();
 }
@@ -809,19 +808,34 @@ void SubdivisionControlFace::subdivide(SubdivisionSurface *owner,
 {
     _control_edges.clear();
     if (_children.size() == 0) {
-        SubdivisionFace::subdivide(owner, true, vertexpoints, edgepoints, facepoints, _edges, _control_edges,
+        // not subdivided yet
+        SubdivisionFace::subdivide(owner,
+                                   true,
+                                   vertexpoints,
+                                   edgepoints,
+                                   facepoints,
+                                   _edges,          // interior edges
+                                   _control_edges,  // control edges
                                    _children);
     }
     else {
-        vector<SubdivisionFace*> tmplist;
-        vector<SubdivisionEdge*> tmp;
+        // has been subdivided
+        vector<SubdivisionFace*> tmpfaces;
+        vector<SubdivisionEdge*> tmpedges;
         for (size_t i=0; i<_children.size(); ++i) {
             SubdivisionFace* face = _children[i];
-            face->subdivide(owner, false, vertexpoints, edgepoints, facepoints, tmp, _control_edges, tmplist);
+            face->subdivide(owner,
+                            false,
+                            vertexpoints,
+                            edgepoints,
+                            facepoints,
+                            tmpedges,               // interior edges
+                            _control_edges,         // control edges
+                            tmpfaces);
         }
         clearChildren();
-        _edges = tmp;
-        _children = tmplist;
+        _edges = tmpedges;
+        _children = tmpfaces;
     }
     for (size_t i=0; i<_control_edges.size(); ++i) {
         if (find(controledges.begin(), controledges.end(), _control_edges[i]) == controledges.end())

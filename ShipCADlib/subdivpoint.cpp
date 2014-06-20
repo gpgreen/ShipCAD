@@ -313,7 +313,7 @@ QVector3D SubdivisionPoint::averaging()
                 SubdivisionFace* face = _faces[i];
                 QVector3D center = ZERO;
                 if (face->numberOfPoints() == 3) {
-                    nt++;
+                    ++nt;
                     // calculate centerpoint
                     for (size_t j=0; j<face->numberOfPoints(); ++j) {
                         p = face->getPoint(j);
@@ -344,14 +344,14 @@ QVector3D SubdivisionPoint::averaging()
             float a;
             if (nt == _faces.size()) {
                 // apply averaging in case of vertex surrounded by triangles
-                a = 5/3.0 - 8/3.0*(.375+.25*cos(two_pi/_faces.size()));
+                a = 5/3.0 - 8/3.0*sqrt(.375+.25*cos(two_pi/_faces.size()));
             }
             else if (nq == _faces.size()) {
                 // apply averaging in case of vertex surrounded by quads
                 a = 4 / static_cast<float>(_faces.size());
             }
             else {
-                // apply averagin in case of vertex on boundary of quads and triangles
+                // apply averaging in case of vertex on boundary of quads and triangles
                 if (nq == 0 && nt == 3)
                     a = 1.5;
                 else
@@ -453,17 +453,20 @@ void SubdivisionPoint::dump(ostream& os, const char* prefix) const
 void SubdivisionPoint::priv_dump(ostream& os, const char* prefix) const
 {
     SubdivisionBase::priv_dump(os, prefix);
-    os << "\n" << prefix << " edges (" << _edges.size() << ")\n";
+    QString s(prefix);
+    s.append(" ");
+    const char* nprefix = s.toStdString().c_str();
+    os << "\n" << nprefix << "edges (" << _edges.size() << ")\n";
     for (size_t i=0; i<_edges.size(); ++i)
-        os << prefix << "  " << *_edges[i] << "\n";
-    os << prefix << " faces (" << _faces.size() << ")\n";
+        os << nprefix << *_edges[i] << "\n";
+    os << nprefix << "faces (" << _faces.size() << ")\n";
     for (size_t i=0; i<_faces.size(); ++i)
-        os << prefix << "  " << *_faces[i] << "\n";
-    os << prefix << " Coordinate ["
+        os << nprefix << *_faces[i] << "\n";
+    os << nprefix << "Coordinate ["
        << _coordinate.x()
        << "," << _coordinate.y()
        << "," << _coordinate.z()
-       << "]\n" << prefix << " VertexType " << _vtype;
+       << "]\n" << nprefix << "VertexType " << _vtype;
 }
 
 ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionPoint& point)
@@ -652,7 +655,7 @@ void SubdivisionControlPoint::collapse()
                     points.push_back(pt);
             }
             _owner->addControlFace(points, false, face->getLayer());
-            delete face;
+            _owner->deleteControlFace(face);
         }
 
         if (edge_collapse) {

@@ -319,7 +319,8 @@ vector<float>::iterator Spline::find_next_point(vector<float>& weights)
 
 bool Spline::simplify(float criterium)
 {
-    vector<float> weights(_nopoints);
+  vector<float> weights;
+  weights.reserve(_nopoints);
     bool result = false;
 
     if (_nopoints < 3)

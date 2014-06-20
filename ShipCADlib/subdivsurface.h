@@ -116,6 +116,7 @@ public:
     size_t numberOfPoints() {return _points.size();}
     size_t indexOfPoint(SubdivisionPoint* pt);
     SubdivisionPoint* getPoint(size_t index);
+    void deletePoint(SubdivisionPoint* pt);
 
     // SubdivisionControlPoint
     size_t numberOfControlPoints() {return _control_points.size();}
@@ -141,6 +142,7 @@ public:
     size_t indexOfEdge(SubdivisionEdge* edge);
     SubdivisionEdge* getEdge(size_t index);
     SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
+    void deleteEdge(SubdivisionEdge* edge);
 
     // SubdivisionControlEdge
     size_t numberOfControlEdges() {return _control_edges.size();}

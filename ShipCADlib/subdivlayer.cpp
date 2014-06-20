@@ -36,8 +36,7 @@ SubdivisionLayer::SubdivisionLayer(SubdivisionSurface* owner)
 
 SubdivisionLayer::~SubdivisionLayer()
 {
-    for (size_t i=_patches.size(); i>0; --i)
-        delete _patches[i-1];
+  _patches.clear();
     if (_owner->getActiveLayer() == this)
         _owner->setActiveLayer(0);
     if (_owner->hasLayer(this))

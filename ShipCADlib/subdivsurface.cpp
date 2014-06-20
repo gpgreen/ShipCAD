@@ -431,12 +431,12 @@ SubdivisionPoint* SubdivisionSurface::getPoint(size_t index)
 
 void SubdivisionSurface::deletePoint(SubdivisionPoint* point)
 {
-  vector<SubdivisionPoint*>::iterator i = find(_points.begin(), _points.end(), point);
-  if (i != _points.end()) {
-    _points.erase(i);
-    point->~SubdivisionPoint();
-    _point_pool.free(point);
-  }
+    vector<SubdivisionPoint*>::iterator i = find(_points.begin(), _points.end(), point);
+    if (i != _points.end()) {
+        _points.erase(i);
+        point->~SubdivisionPoint();
+        _point_pool.free(point);
+    }
 }
 
 SubdivisionEdge* SubdivisionSurface::getEdge(size_t index)
@@ -448,13 +448,14 @@ SubdivisionEdge* SubdivisionSurface::getEdge(size_t index)
 
 void SubdivisionSurface::deleteEdge(SubdivisionEdge* edge)
 {
-  vector<SubdivisionEdge*>::iterator i = find(_edges.begin(), _edges.end(), edge);
-  if (i != _edges.end()) {
-    _edges.erase(i);
-    edge->~SubdivisionEdge();
-    _edge_pool.free(edge);
-  }
+    vector<SubdivisionEdge*>::iterator i = find(_edges.begin(), _edges.end(), edge);
+    if (i != _edges.end()) {
+        _edges.erase(i);
+        edge->~SubdivisionEdge();
+        _edge_pool.free(edge);
+    }
 }
+
 size_t SubdivisionSurface::indexOfEdge(SubdivisionEdge *edge)
 {
     vector<SubdivisionEdge*>::iterator i = find(_edges.begin(),
@@ -2525,10 +2526,13 @@ void SubdivisionSurface::subdivide()
         getControlFace(i-1)->subdivide(this, vertexpoints, edgepoints, facepoints, interioredges, newedgelist, dest);
     }
 
+    // delete the edges that are in the list, not dumping the pool, as we have new edges that
+    // are in the pool that we want to keep
     for (size_t i=0; i<_edges.size(); ++i) {
       deleteEdge(_edges[i]);
     }
     _edges = newedgelist;
+    // delete the points that are in the list, don't dump the pool
     for (size_t i=0; i<_points.size(); ++i) {
       deletePoint(_points[i]);
     }
@@ -2545,6 +2549,7 @@ void SubdivisionSurface::subdivide()
     // perform averaging procedure to smooth the new mesh
     vector<QVector3D> tmppoints;
     tmppoints.reserve(_points.size());
+    // make a copy of all points, average them, put em back
     for (size_t i=0; i<_points.size(); ++i) {
         tmppoints.push_back(_points[i]->averaging());
     }

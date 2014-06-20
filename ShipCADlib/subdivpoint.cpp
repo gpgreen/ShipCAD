@@ -336,6 +336,7 @@ QVector3D SubdivisionPoint::averaging()
                 else
                     throw runtime_error("invalid number of points in SubdivisionPoint::averaging");
                 result += (weight * center);
+                totalweight += weight;
             }
             if (totalweight != 0) {
                 result /= totalweight;

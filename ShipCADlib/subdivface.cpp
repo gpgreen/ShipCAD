@@ -402,7 +402,92 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
     if (_owner->shadeUnderWater() && vp.getViewportMode() == Viewport::vmShade
             && getLayer()->useInHydrostatics()) {
         // BUGBUG: split up faces into 2 sets, above water and below water
+        // shade with different color below waterline
+        for (size_t i=0; i<_children.size(); ++i) {
+            // clip all triangles against the waterline plane
+            for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
+                QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
+                QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
+                QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
 
+                // check if clipping is required
+                float min = _owner->getWaterlinePlane().distance(p1);
+                float max = min;
+                float tmp = _owner->getWaterlinePlane().distance(p2);
+                if (tmp < min)
+                    min = tmp;
+                else if (tmp > max)
+                    max = tmp;
+                tmp = _owner->getWaterlinePlane().distance(p3);
+                if (tmp < min)
+                    min = tmp;
+                else if (tmp > max)
+                    max = tmp;
+                if (max <= 0.0) {
+                    // entirely below the plane
+                    // shade triangle
+                }
+                else if (min >= 0.0) {
+                    // entirely above the plane
+                    // shade triangle
+                }
+                else {
+                    // pierces water, clip triangle
+                    std::vector<QVector3D> above;
+                    above.reserve(6);
+                    std::vector<QVector3D> below;
+                    below.reserve(6);
+                    ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
+                    for (size_t k=3; k<=above.size(); ++k)
+                        // shade triangle above
+                        ;
+                    for (size_t k=3; k<=below.size(); ++k)
+                        // shade triangle below
+                        ;
+                }
+                if (_owner->isDrawMirror() && getLayer()->isSymmetric()) {
+                    p1.setY(-p1.y());
+                    p2.setY(-p2.y());
+                    p3.setY(-p3.y());
+
+                    // check if clipping is required
+                    float min = _owner->getWaterlinePlane().distance(p1);
+                    float max = min;
+                    float tmp = _owner->getWaterlinePlane().distance(p2);
+                    if (tmp < min)
+                        min = tmp;
+                    else if (tmp > max)
+                        max = tmp;
+                    tmp = _owner->getWaterlinePlane().distance(p3);
+                    if (tmp < min)
+                        min = tmp;
+                    else if (tmp > max)
+                        max = tmp;
+                    if (max <= 0.0) {
+                        // entirely below the plane
+                        // shade triangle
+                    }
+                    else if (min >= 0.0) {
+                        // entirely above the plane
+                        // shade triangle
+                    }
+                    else {
+                        // pierces water, clip triangle
+                        std::vector<QVector3D> above;
+                        above.reserve(6);
+                        std::vector<QVector3D> below;
+                        below.reserve(6);
+                        ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
+                        for (size_t k=3; k<=above.size(); ++k)
+                            // shade triangle above
+                            ;
+                        for (size_t k=3; k<=below.size(); ++k)
+                            // shade triangle below
+                            ;
+                    }
+                }
+            }
+        }
     }
     // BUGBUG: lets just shade the face to see if it works
     for (size_t i=0; i<_children.size(); ++i) {
@@ -431,142 +516,30 @@ void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, float MinCurvature
 
 void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
 {
-    size_t n = 0;
-    // count number of points for face vertices
-    for (size_t i=0; i<_children.size(); ++i)
-        n += _children[i]->numberOfPoints();
-
-    // make the vertex and color buffers
-    QVector3D* vertices = new QVector3D[n * 3];
-    QVector3D* normals = new QVector3D[n * 3];
-    GLfloat* colors = new GLfloat[n * 4];
-
-    // set the alpha color
-    for (size_t i=0; i<n; ++i)
-        colors[i*4+3] = getLayer()->getAlphaBlend();
-
-    if (vp.getViewportMode() != Viewport::vmWireFrame) {
-        if (_owner->shadeUnderWater() && vp.getViewportMode() == Viewport::vmShade
-                && getLayer()->useInHydrostatics()) {
-            // shade with different color below waterline
-            for (size_t i=0; i<_children.size(); ++i) {
-                // clip all triangles against the waterline plane
-                for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
-                    QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
-                    QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
-                    QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
-
-                    // check if clipping is required
-                    float min = _owner->getWaterlinePlane().distance(p1);
-                    float max = min;
-                    float tmp = _owner->getWaterlinePlane().distance(p2);
-                    if (tmp < min)
-                        min = tmp;
-                    else if (tmp > max)
-                        max = tmp;
-                    tmp = _owner->getWaterlinePlane().distance(p3);
-                    if (tmp < min)
-                        min = tmp;
-                    else if (tmp > max)
-                        max = tmp;
-                    if (max <= 0.0) {
-                        // entirely below the plane
-                        // shade triangle
-                    }
-                    else if (min >= 0.0) {
-                        // entirely above the plane
-                        // shade triangle
-                    }
-                    else {
-                        // pierces water, clip triangle
-		      std::vector<QVector3D> above;
-		      above.reserve(6);
-		      std::vector<QVector3D> below;
-		      below.reserve(6);
-                        ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
-                        for (size_t k=3; k<=above.size(); ++k)
-                            // shade triangle above
-                            ;
-                        for (size_t k=3; k<=below.size(); ++k)
-                            // shade triangle below
-                            ;
-                    }
-                    if (_owner->isDrawMirror() && getLayer()->isSymmetric()) {
-                        p1.setY(-p1.y());
-                        p2.setY(-p2.y());
-                        p3.setY(-p3.y());
-
-                        // check if clipping is required
-                        float min = _owner->getWaterlinePlane().distance(p1);
-                        float max = min;
-                        float tmp = _owner->getWaterlinePlane().distance(p2);
-                        if (tmp < min)
-                            min = tmp;
-                        else if (tmp > max)
-                            max = tmp;
-                        tmp = _owner->getWaterlinePlane().distance(p3);
-                        if (tmp < min)
-                            min = tmp;
-                        else if (tmp > max)
-                            max = tmp;
-                        if (max <= 0.0) {
-                            // entirely below the plane
-                            // shade triangle
-                        }
-                        else if (min >= 0.0) {
-                            // entirely above the plane
-                            // shade triangle
-                        }
-                        else {
-                            // pierces water, clip triangle
-			  std::vector<QVector3D> above;
-			  above.reserve(6);
-			  std::vector<QVector3D> below;
-			  below.reserve(6);
-                            ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
-                            for (size_t k=3; k<=above.size(); ++k)
-                                // shade triangle above
-                                ;
-                            for (size_t k=3; k<=below.size(); ++k)
-                                // shade triangle below
-                                ;
-                        }
-                    }
-                }
-            }
-        }
-        else if (vp.getViewportMode() == Viewport::vmShadeZebra) {
-            // vmShadeZebra
-        }
-        else {
-            // vmShade && vmGausShade
-        }
+    QVector<QVector3D> vertices;
+    if (vp.getViewportMode() != Viewport::vmWireFrame)
+        return;
+    // vmWireFrame
+    // draw interior edges (not descending from controledges)
+    QColor edgeColor;
+    if (isSelected())
+        edgeColor = _owner->getSelectedColor();
+    else
+        edgeColor = getLayer()->getColor();
+    for (size_t i=0; i<_edges.size(); ++i)
+        _edges[i]->draw(_owner->isDrawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
+    // draw edges descending from controledges, but slightly darker than interior
+    // edges
+    if (!isSelected())
+        edgeColor = QColor(getLayer()->getColor().redF()*0.6,
+                           getLayer()->getColor().greenF()*0.6,
+                           getLayer()->getColor().blueF()*0.6);
+    for (size_t i=0; i<_control_edges.size(); ++i)
+        _control_edges[i]->draw(_owner->isDrawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
+    // show normals
+    if (isSelected() && _owner->showNormals()) {
+        // BUGBUG: showing normals not implemented
     }
-    else {
-        // vmWireFrame
-        // draw interior edges (not descending from controledges)
-    }
-    // BUGBUG: lets just shade the face to see if it works
-    size_t index = 0;
-    for (size_t i=0; i<_children.size(); ++i) {
-        SubdivisionFace* face = _children[i];
-        for (size_t j=2; j<face->numberOfPoints(); ++j) {
-            QVector3D p1 = face->getPoint(0)->getCoordinate();
-            QVector3D p2 = face->getPoint(j-1)->getCoordinate();
-            QVector3D p3 = face->getPoint(j)->getCoordinate();
-            QVector3D normal = QVector3D::normal(p2 - p1, p3 - p1);
-            vertices[index] = p1;
-            normals[index++] = normal;
-            vertices[index] = p2;
-            normals[index++] = normal;
-            vertices[index] = p3;
-            normals[index++] = normal;
-        }
-    }
-
-    delete [] vertices;
-    delete [] normals;
-    delete [] colors;
 }
 
 SubdivisionControlEdge* SubdivisionControlFace::insertControlEdge(
@@ -709,8 +682,13 @@ void SubdivisionControlFace::clear()
     _layer = 0;
 }
 
+// used to clear all subdivided edges and faces, but not the subdivided points
 void SubdivisionControlFace::clearChildren()
 {
+    for (size_t i=0; i<_children.size(); ++i)
+        _owner->getFacePool().free(_children[i]);
+    for (size_t i=0; i<_edges.size(); ++i)
+        _owner->getEdgePool().free(_edges[i]);
     _children.clear();
     _edges.clear();
 }

@@ -373,7 +373,7 @@ void SubdivisionLayer::draw(Viewport& vp)
             for (size_t j=0; j<face->numberOfControlEdges(); ++j) {
                 SubdivisionEdge* edge = face->getControlEdge(j);
                 if (edge->isCrease())
-                    edge->draw(_owner->isDrawMirror() && isSymmetric(), vp, lineshader);
+                    edge->draw(_owner->isDrawMirror() && isSymmetric(), vp, lineshader, _owner->getCreaseColor());
             }
         }
     }

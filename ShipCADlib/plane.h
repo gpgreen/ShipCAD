@@ -26,16 +26,14 @@
 #ifndef PLANE_H_
 #define PLANE_H_
 
-#include <QObject>
 #include <QVector3D>
 
 namespace ShipCADGeometry {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Plane : public QObject
+class Plane
 {
-    Q_OBJECT
 public:
     explicit Plane();
     explicit Plane(float a, float b, float c, float d);

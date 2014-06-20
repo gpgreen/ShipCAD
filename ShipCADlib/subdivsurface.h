@@ -221,17 +221,22 @@ public:
     // getters/setters
     bool isBuild() { return _build; }
     void setBuild(bool val);
-    void setDesiredSubdivisionLevel(int val);
-    void setShowControlNet(bool val) {_show_control_net = val;}
+    subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
     void setSubdivisionMode(subdiv_mode_t val);
+    void setDesiredSubdivisionLevel(int val);
+
     bool isGaussCurvatureCalculated();
-    const Plane& getWaterlinePlane() {return _waterline_plane;}
     float getCurvatureScale() {return _curvature_scale;}
     void setCurvatureScale(float val) {_curvature_scale=val;}
     float getMinGausCurvature() {return _min_gaus_curvature;}
     float getMaxGausCurvature() {return _max_gaus_curvature;}
+
+    const Plane& getWaterlinePlane() {return _waterline_plane;}
+    void setWaterlinePlane(const Plane& val) {_waterline_plane = val;}
     float getMainframeLocation() {return _main_frame_location;}
     void setMainframeLocation(float val) {_main_frame_location=val;}
+
+    int getControlPointSize() {return _control_point_size;}
 
     // options
     bool showCurvature() {return _show_curvature;}
@@ -240,8 +245,15 @@ public:
     bool showControlCurves() {return _show_control_curves;}
     bool showInteriorEdges() {return _show_interior_edges;}
     bool isDrawMirror() {return _draw_mirror;}
-    subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
-    int getControlPointSize() {return _control_point_size;}
+    bool showNormals() {return _show_normals;}
+
+    void setShowCurvature(bool val) {_show_curvature = val;}
+    void setShowUnderWater(bool val) {_shade_under_water = val;}
+    void setShowControlNet(bool val) {_show_control_net = val;}
+    void setShowControlCurves(bool val) {_show_control_curves = val;}
+    void setShowInteriorEdges(bool val) {_show_interior_edges = val;}
+    void setDrawMirror(bool val) {_draw_mirror = val;}
+    void setShowNormals(bool val) {_show_normals = val;}
 
     // colors
     QColor getSelectedColor() {return _selected_color;}
@@ -364,8 +376,12 @@ protected:
     std::vector<float> _gaus_curvature;
 
     // entities obtained by subdividing the surface
-    std::vector<SubdivisionPoint*> _points;
-    std::vector<SubdivisionEdge*> _edges;
+    std::vector<SubdivisionPoint*> _points;     // all subdivided points, corners of the SubdivisionFace
+    std::vector<SubdivisionEdge*> _edges;       // interior edges of subdivided faces descended from control
+                                                // edges. They are not of SubdivisionControlEdge type, the
+                                                // interior edges of the subdivided faces are not in this
+                                                // list, but are only retrievable through the face itself
+                                                // in their _edges list.
 
     // selected entities
     std::vector<SubdivisionControlPoint*> _sel_control_points;

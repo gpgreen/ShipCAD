@@ -192,9 +192,10 @@ protected:
     SubdivisionLayer* _layer;
     QVector3D _min;
     QVector3D _max;
-    std::vector<SubdivisionFace*> _children;
-    std::vector<SubdivisionEdge*> _edges;
-    std::vector<SubdivisionEdge*> _control_edges;
+    std::vector<SubdivisionFace*> _children;    // subdivided faces
+    std::vector<SubdivisionEdge*> _edges;       // subdivided internal edges
+    std::vector<SubdivisionEdge*> _control_edges;   // control edges (may be of SubdivisionEdge type if
+                                                    // this face has been subdivided
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

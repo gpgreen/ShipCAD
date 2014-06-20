@@ -82,7 +82,9 @@ int main(int argc, char **argv)
 
     // make a surface
     SubdivisionSurface surface;
-    surface.setDesiredSubdivisionLevel(2);
+    surface.setDesiredSubdivisionLevel(3);
+    surface.setShowControlNet(true);
+    surface.setShowInteriorEdges(true);
     vector<SubdivisionControlPoint*> points;
     SubdivisionControlPoint* pt = surface.addControlPoint(QVector3D(1,1,0));
     points.push_back(pt);
@@ -98,7 +100,7 @@ int main(int argc, char **argv)
 //    cerr << surface << endl;
 
     Viewport window;
-    window.setViewportMode(Viewport::vmShade);
+    //window.setViewportMode(Viewport::vmShade);
     window.setFormat(format);
     window.resize(640, 480);
     window.add(&spline);

@@ -229,7 +229,7 @@ void SubdivisionEdge::deleteFace(SubdivisionFace* face)
     }
 }
 
-void SubdivisionEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshader)
+void SubdivisionEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshader, const QColor& edgeColor)
 {
     QVector3D p1 = startPoint()->getCoordinate();
     QVector3D p2 = endPoint()->getCoordinate();
@@ -284,7 +284,7 @@ void SubdivisionEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshade
             vertices << p2;
         }
     }
-    lineshader->renderLines(vertices, _owner->getEdgeColor());
+    lineshader->renderLines(vertices, edgeColor);
 }
 
 void SubdivisionEdge::dump(ostream& os, const char* prefix) const

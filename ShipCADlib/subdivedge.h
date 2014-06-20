@@ -62,7 +62,8 @@ public:
     virtual ~SubdivisionEdge();
 
     virtual void clear();
-    virtual void draw(bool draw_mirror, Viewport& vp, LineShader* lineshader);
+    virtual void draw(bool draw_mirror, Viewport& vp, LineShader* lineshader,
+                      const QColor& edgeColor);
 
     // modifiers
     void addFace(SubdivisionFace* face);

@@ -615,7 +615,7 @@ SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(const QVecto
     return result;
 }
 
-void SubdivisionControlEdge::load_binary(FileBuffer& source)
+void SubdivisionControlEdge::loadBinary(FileBuffer& source)
 {
     size_t index;
     // read startpoint
@@ -635,10 +635,35 @@ void SubdivisionControlEdge::load_binary(FileBuffer& source)
 
 void SubdivisionControlEdge::loadFromStream(size_t &lineno, std::vector<QString> &strings)
 {
-    // BUGBUG: not implemented
+    QString str = strings[++lineno].trimmed();
+    size_t start = 0;
+    // startpoint
+    size_t index = ReadIntFromStr(lineno, str, start);
+    _points[0] = _owner->getControlPoint(index);
+    _points[0]->addEdge(this);
+    // endpoint
+    index = ReadIntFromStr(lineno, str, start);
+    _points[1] = _owner->getControlPoint(index);
+    _points[1]->addEdge(this);
+    // crease
+    _crease = ReadBoolFromStr(lineno, str, start);
+    if (start < str.length()) {
+        // flag to indicate that this edge was selected when the model was saved (for undo-purposes)
+        _selected = ReadBoolFromStr(lineno, str, start);
+    }
 }
 
-void SubdivisionControlEdge::save_binary(FileBuffer& destination)
+void SubdivisionControlEdge::saveToStream(std::vector<QString> &strings)
+{
+    SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(_points[0]);
+    SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(_points[1]);
+    strings.push_back(QString("%1 %2 %3 %4")
+                      .arg(_owner->indexOfControlPoint(sp))
+                        .arg(_owner->indexOfControlPoint(ep))
+                        .arg(BoolToStr(_crease)).arg(BoolToStr(_selected)));
+}
+
+void SubdivisionControlEdge::saveBinary(FileBuffer& destination)
 {
     destination.add(_owner->indexOfPoint(_points[0]));
     destination.add(_owner->indexOfPoint(_points[1]));
@@ -685,7 +710,7 @@ void SubdivisionControlEdge::trace()
     priv_trace(p);
 }
 
-void SubdivisionControlEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshader)
+void SubdivisionControlEdge::draw(Viewport& vp, LineShader* lineshader)
 {
     if (!isVisible())
         return;

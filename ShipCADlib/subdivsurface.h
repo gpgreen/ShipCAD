@@ -244,7 +244,7 @@ public:
     bool showControlNet() {return _show_control_net;}
     bool showControlCurves() {return _show_control_curves;}
     bool showInteriorEdges() {return _show_interior_edges;}
-    bool isDrawMirror() {return _draw_mirror;}
+    bool drawMirror() {return _draw_mirror;}
     bool showNormals() {return _show_normals;}
 
     void setShowCurvature(bool val) {_show_curvature = val;}

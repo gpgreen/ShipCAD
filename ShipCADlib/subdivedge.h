@@ -127,8 +127,6 @@ public:
     // modifiers
     void collapse();
     SubdivisionControlPoint* insertControlPoint(const QVector3D& p);
-    void load_binary(FileBuffer& source);
-    void save_binary(FileBuffer& destination);
     void trace();
 
     // getters/setters
@@ -140,10 +138,13 @@ public:
     bool isVisible();
 
     // drawing
-    virtual void draw(bool draw_mirror, Viewport &vp, LineShader* lineshader);
+    virtual void draw(Viewport &vp, LineShader* lineshader);
 
     // persistence
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& destination);
     void loadFromStream(size_t& lineno, std::vector<QString>& strings);
+    void saveToStream(std::vector<QString>& strings);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;

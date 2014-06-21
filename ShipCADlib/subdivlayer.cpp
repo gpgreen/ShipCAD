@@ -373,7 +373,7 @@ void SubdivisionLayer::draw(Viewport& vp)
             for (size_t j=0; j<face->numberOfControlEdges(); ++j) {
                 SubdivisionEdge* edge = face->getControlEdge(j);
                 if (edge->isCrease())
-                    edge->draw(_owner->isDrawMirror() && isSymmetric(), vp, lineshader, _owner->getCreaseColor());
+                    edge->draw(_owner->drawMirror() && isSymmetric(), vp, lineshader, _owner->getCreaseColor());
             }
         }
     }
@@ -386,7 +386,7 @@ void SubdivisionLayer::extents(QVector3D& min, QVector3D& max)
             SubdivisionControlFace* face = _patches[i-1];
             MinMax(face->getMin(), min, max);
             MinMax(face->getMax(), min, max);
-            if (isSymmetric() && _owner->isDrawMirror()) {
+            if (isSymmetric() && _owner->drawMirror()) {
                 QVector3D p = face->getMin();
                 p.setY(-p.y());
                 MinMax(p, min, max);

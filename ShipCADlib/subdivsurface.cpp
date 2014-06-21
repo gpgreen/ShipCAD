@@ -1225,7 +1225,7 @@ void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>&
             if (getPoint(i-1)->getCoordinate().y() > 0)
                 tmp.push_back(getPoint(i-1));
         }
-        if (isDrawMirror()) {
+        if (drawMirror()) {
             // create points for starboard side
             sort(tmp.begin(), tmp.end());
             for (size_t i=1; i<=tmp.size(); ++i) {
@@ -1247,7 +1247,7 @@ void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>&
                         str.append(QString(" %1").arg(index+1));
                     }
                     strings.push_back(str);
-                    if (cface->getLayer()->isSymmetric() && isDrawMirror()) {
+                    if (cface->getLayer()->isSymmetric() && drawMirror()) {
                         // starboard side
                         QString str("f");
                         for (size_t k=child->numberOfPoints(); k>=1; --k) {
@@ -1281,7 +1281,7 @@ void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>&
             if (getControlPoint(i-1)->getCoordinate().y() > 0)
                 tmp.push_back(getControlPoint(i-1));
         }
-        if (isDrawMirror()) {
+        if (drawMirror()) {
             // create points for starboard side
             sort(tmp.begin(), tmp.end());
             for (size_t i=1; i<=tmp.size(); ++i) {
@@ -1302,7 +1302,7 @@ void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>&
                         str.append(QString(" %1").arg(index+1));
                     }
                     strings.push_back(str);
-                    if (cface->getLayer()->isSymmetric() && isDrawMirror()) {
+                    if (cface->getLayer()->isSymmetric() && drawMirror()) {
                         // starboard side
                         QString str("f");
                         for (size_t k=cface->numberOfPoints(); k>=1; --k) {
@@ -1721,7 +1721,7 @@ void SubdivisionSurface::draw(Viewport &vp)
     LineShader* lineshader = vp.setLineShader();
     if (showControlNet()) {
         for (size_t i=0; i<numberOfControlEdges(); ++i) {
-            getControlEdge(i)->draw(false, vp, lineshader);
+            getControlEdge(i)->draw(vp, lineshader);
         }
         SubdivisionControlPoint::drawControlPoints(vp, this);
     }
@@ -2293,7 +2293,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
     for (size_t i=1; i<=n; ++i) {
         SubdivisionControlEdge* edge = SubdivisionControlEdge::construct(this);
         _control_edges.push_back(edge);
-        edge->load_binary(source);
+        edge->loadBinary(source);
     }
     if (source.version() >= fv195) {
         // load control curves
@@ -2405,7 +2405,7 @@ void SubdivisionSurface::saveBinary(FileBuffer &destination)
     // save control edges
     destination.add(numberOfControlEdges());
     for (size_t i=1; i<=numberOfControlEdges(); ++i)
-        getControlEdge(i-1)->save_binary(destination);
+        getControlEdge(i-1)->saveBinary(destination);
     if (destination.version() >= fv195) {
         destination.add(numberOfControlCurves());
         for (size_t i=1; i<=numberOfControlCurves(); ++i)

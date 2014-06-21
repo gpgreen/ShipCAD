@@ -200,16 +200,17 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
         curve->setFragments(250);
     curve->setCurvatureColor(_owner->getCurvatureColor());
     curve->setCurvatureScale(_owner->getCurvatureScale());
+    // BUGBUG: not implemented yet
     if (!_owner->showControlNet() && sel) {
         // draw controlpoints and edges
     }
-    if (vp.getViewportType() == Viewport::fvBodyplan && !_owner->isDrawMirror()) {
+    if (vp.getViewportType() == Viewport::fvBodyplan && !_owner->drawMirror()) {
         // draw mainframe location
     }
     else {
         //curve->draw(vp);
     }
-    if (_owner->isDrawMirror()) {
+    if (_owner->drawMirror()) {
         // draw reversed curve
     }
 }
@@ -287,7 +288,7 @@ void SubdivisionControlCurve::saveToDXF(vector<QString> &strings)
 {
     QString layer("Control_curves");
     _curve->setFragments(_curve->numberOfPoints());
-    _curve->save_to_dxf(strings, layer, _owner->isDrawMirror());
+    _curve->save_to_dxf(strings, layer, _owner->drawMirror());
 }
 
 void SubdivisionControlCurve::dump(ostream& os, const char* prefix) const

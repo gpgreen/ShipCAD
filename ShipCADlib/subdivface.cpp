@@ -445,7 +445,7 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
                         // shade triangle below
                         ;
                 }
-                if (_owner->isDrawMirror() && getLayer()->isSymmetric()) {
+                if (_owner->drawMirror() && getLayer()->isSymmetric()) {
                     p1.setY(-p1.y());
                     p2.setY(-p2.y());
                     p3.setY(-p3.y());
@@ -527,7 +527,7 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
     else
         edgeColor = getLayer()->getColor();
     for (size_t i=0; i<_edges.size(); ++i)
-        _edges[i]->draw(_owner->isDrawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
+        _edges[i]->draw(_owner->drawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
     // draw edges descending from controledges, but slightly darker than interior
     // edges
     if (!isSelected())
@@ -535,7 +535,7 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
                            getLayer()->getColor().greenF()*0.6,
                            getLayer()->getColor().blueF()*0.6);
     for (size_t i=0; i<_control_edges.size(); ++i)
-        _control_edges[i]->draw(_owner->isDrawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
+        _control_edges[i]->draw(_owner->drawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
     // show normals
     if (isSelected() && _owner->showNormals()) {
         // BUGBUG: showing normals not implemented

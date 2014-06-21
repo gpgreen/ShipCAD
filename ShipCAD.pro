@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS = GuiTest \
-    ShipCADlib
+    ShipCADlib \
+    Viewer

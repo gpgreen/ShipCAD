@@ -60,51 +60,51 @@ int main(int argc, char **argv)
     format.setSamples(16);
 
     // make a spline
-    Spline spline;
-    spline.add(QVector3D(0,0,0));
-    spline.add(QVector3D(0.7f,1.0f,0));
-    spline.add(QVector3D(1,1,0));
-    spline.setProperty("Color", QColor(Qt::blue));
-    //spline.setProperty("CurvatureColor", QColor(Qt::yellow));
-    spline.setProperty("ShowCurvature", true);
-    //spline.setProperty("ShowPoints", true);
-    cerr << spline << endl;
+    Spline* spline = new Spline;
+    spline->add(QVector3D(0,0,0));
+    spline->add(QVector3D(0.7f,1.0f,0));
+    spline->add(QVector3D(1,1,0));
+    spline->setProperty("Color", QColor(Qt::blue));
+    //spline->setProperty("CurvatureColor", QColor(Qt::yellow));
+    spline->setProperty("ShowCurvature", true);
+    //spline->setProperty("ShowPoints", true);
+    cerr << *spline << endl;
 
     // write it to dxf..
     vector<QString> dxfstrings;
     QString layer("splinelayer");
-    spline.save_to_dxf(dxfstrings, layer, false);
+    spline->save_to_dxf(dxfstrings, layer, false);
     ofstream os("spline.dxf");
     for (size_t i=0; i<dxfstrings.size(); ++i)
         os << dxfstrings[i].toStdString() << "\r\n";
     os.close();
-    cerr << spline << endl;
+    cerr << *spline << endl;
 
     // make a surface
-    SubdivisionSurface surface;
-    surface.setDesiredSubdivisionLevel(3);
-    surface.setShowControlNet(true);
-    surface.setShowInteriorEdges(true);
+    SubdivisionSurface* surface = new SubdivisionSurface;
+    surface->setDesiredSubdivisionLevel(3);
+    surface->setShowControlNet(true);
+    surface->setShowInteriorEdges(true);
     vector<SubdivisionControlPoint*> points;
-    SubdivisionControlPoint* pt = surface.addControlPoint(QVector3D(1,1,0));
+    SubdivisionControlPoint* pt = surface->addControlPoint(QVector3D(1,1,0));
     points.push_back(pt);
-    pt = surface.addControlPoint(QVector3D(1,-1,0));
+    pt = surface->addControlPoint(QVector3D(1,-1,0));
     points.push_back(pt);
-    pt = surface.addControlPoint(QVector3D(-1,-1,0));
+    pt = surface->addControlPoint(QVector3D(-1,-1,0));
     points.push_back(pt);
-    pt = surface.addControlPoint(QVector3D(-1,1,0));
+    pt = surface->addControlPoint(QVector3D(-1,1,0));
     points.push_back(pt);
-    surface.addControlFace(points, true);
-    cerr << surface << endl;
-    surface.rebuild();
-//    cerr << surface << endl;
+    surface->addControlFace(points, true);
+    cerr << *surface << endl;
+    surface->rebuild();
+//    cerr << *surface << endl;
 
     Viewport window;
     //window.setViewportMode(Viewport::vmShade);
     window.setFormat(format);
     window.resize(640, 480);
-    window.add(&spline);
-    window.add(&surface);
+    window.add(spline);
+    window.add(surface);
     window.show();
 
     window.setAnimating(true);

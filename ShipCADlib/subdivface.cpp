@@ -12,6 +12,7 @@
 #include "viewport.h"
 #include "filebuffer.h"
 #include "utility.h"
+#include "shader.h"
 
 using namespace std;
 using namespace ShipCADGeometry;
@@ -773,6 +774,65 @@ void SubdivisionControlFace::saveToDXF(vector<QString>& /*strings*/)
     if (numberOfPoints() == 4) {
         // create one polymesh for all childfaces
         //BUGBUG: we need a SubdivisionGrid and FaceGrid object
+    }
+}
+
+void SubdivisionControlFace::saveToStream(vector<QString> &strings)
+{
+    QString facestr;
+    facestr.setNum(_points.size());
+    for (size_t i=0; i<_points.size(); ++i) {
+        SubdivisionControlPoint* point = dynamic_cast<SubdivisionControlPoint*>(_points[i]);
+        facestr.append(QString(" %1").arg(_owner->indexOfControlPoint(point)));
+    }
+    // add layer index
+    size_t index;
+    if (_layer != 0)
+        index = _owner->indexOfLayer(_layer);
+    else
+        index = 0;
+    facestr.append(QString(" %1 %2").arg(index).arg(BoolToStr(isSelected())));
+    strings.push_back(facestr);
+}
+
+void SubdivisionControlFace::loadFromStream(size_t &lineno, vector<QString> &strings)
+{
+    QString str = strings[++lineno].trimmed();
+    size_t start = 0;
+    // read control point data
+    size_t n = ReadIntFromStr(lineno, str, start);
+    for (size_t i=0; i<n; ++i) {
+        size_t index = ReadIntFromStr(lineno, str, start);
+        SubdivisionControlPoint* p1 = _owner->getControlPoint(index);
+        _points.push_back(p1);
+        p1->addFace(this);
+    }
+    // read layer index
+    size_t index = ReadIntFromStr(lineno, str, start);
+    if (index < _owner->numberOfLayers()) {
+        _layer = _owner->getLayer(index);
+    }
+    else {
+        _layer = _owner->getLayer(0);   // reference to an invalid layer, assign to owners default layer
+    }
+    if (_layer != 0)
+        _layer->addControlFace(this);
+    else
+        throw runtime_error("Invalid layer reference in SubdivisionControlFace::loadFromStream");
+    if (start != str.length()) {
+        bool sel = ReadBoolFromStr(lineno, str, start);
+        if (sel)
+            setSelected(true);
+    }
+    SubdivisionPoint* p1 = _points.back();
+    for (size_t i=0; i<_points.size(); ++i) {
+        SubdivisionPoint* p2 = _points[i];
+        SubdivisionControlEdge* edge = _owner->controlEdgeExists(p1, p2);
+        if (edge != 0)
+            edge->addFace(this);
+        else
+            throw runtime_error("missing control edge in SubdivisionControlFace::loadFromStream");
+        p1 = p2;
     }
 }
 

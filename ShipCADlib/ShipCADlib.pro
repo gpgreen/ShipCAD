@@ -26,7 +26,8 @@ SOURCES += shipcadlib.cpp \
     subdivcontrolcurve.cpp \
     nurbsurface.cpp \
     subdivlayer.cpp \
-    version.cpp
+    version.cpp \
+    shader.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \
@@ -45,7 +46,8 @@ HEADERS += shipcadlib.h \
     subdivpoint.h \
     subdivcontrolcurve.h \
     subdivlayer.h \
-    version.h
+    version.h \
+    shader.h
 
 win32: {
 INCLUDEPATH += $$PWD/../../lib/boost_1_55_0

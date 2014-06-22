@@ -150,6 +150,7 @@ public:
     void load_binary(FileBuffer& source);
     void save_binary(FileBuffer& destination);
     void loadFromStream(size_t& lineno, std::vector<QString>& strings);
+    void saveToStream(std::vector<QString>& strings);
 
     // drawing
     static void drawControlPoints(Viewport& vp, SubdivisionSurface* surface);

@@ -12,6 +12,7 @@
 #include "viewport.h"
 #include "filebuffer.h"
 #include "utility.h"
+#include "shader.h"
 
 using namespace std;
 using namespace ShipCADGeometry;

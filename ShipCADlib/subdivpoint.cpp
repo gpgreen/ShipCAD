@@ -12,6 +12,7 @@
 #include "viewport.h"
 #include "filebuffer.h"
 #include "utility.h"
+#include "shader.h"
 
 using namespace ShipCADGeometry;
 using namespace ShipCADUtility;
@@ -765,6 +766,17 @@ void SubdivisionControlPoint::loadFromStream(size_t &lineno, vector<QString> &st
     }
     else
         _vtype = fromInt(0);
+}
+
+void SubdivisionControlPoint::saveToStream(std::vector<QString> &strings)
+{
+    strings.push_back(QString("%1 %2 %3 %4 %5")
+                      // BUGBUG: need to fix length of string
+                      .arg(_coordinate.x())
+                      .arg(_coordinate.y())
+                      .arg(_coordinate.z())
+                      .arg(static_cast<int>(_vtype))
+                      .arg(BoolToStr(isSelected())));
 }
 
 void SubdivisionControlPoint::save_binary(FileBuffer &destination)

@@ -7,6 +7,7 @@
 #include "viewport.h"
 #include "filebuffer.h"
 #include "utility.h"
+#include "shader.h"
 #include "exception.h"
 
 using namespace ShipCADGeometry;

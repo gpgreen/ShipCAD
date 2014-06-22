@@ -23,80 +23,85 @@
   {                                                                                             }
   {#############################################################################################*/
 
-#ifndef VIEWPORT_H_
-#define VIEWPORT_H_
+#ifndef SHADER_H
+#define SHADER_H
 
 #include <vector>
 #include <map>
 #include <string>
 #include <QtCore>
 #include <QtGui>
-#include "openglwindow.h"
 
 namespace ShipCADGeometry {
 
-class Entity;
-class SubdivisionSurface;
-class Shader;
-class LineShader;
-class MonoFaceShader;
+class Viewport;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Viewport : public OpenGLWindow
+class Shader : public QObject
 {
     Q_OBJECT
+
 public:
 
-    explicit Viewport();
-    ~Viewport();
+    explicit Shader(Viewport* vp);
+    virtual ~Shader();
 
-    enum viewport_mode_t {
-        vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra
-    };
-    enum viewport_type_t {
-        fvBodyplan, fvProfile, fvPlan, fvPerspective
-    };
+    virtual void initialize(const char* vertexShaderSource,
+            const char* fragmentShaderSource,
+            std::vector<std::string> uniforms,
+            std::vector<std::string> attributes);
 
-    void initialize();
-    void render();
+    void addUniform(const std::string& name);
+    void addAttribute(const std::string& name);
 
-    viewport_mode_t getViewportMode() const {return _mode;}
-    void setViewportMode(viewport_mode_t mode);
+    void setMatrix(const QMatrix4x4& matrix);
 
-    viewport_type_t getViewportType() const {return _viewtype;}
-    void setViewportType(viewport_type_t ty);
+    void bind() {_program->bind();}
+    void release() {_program->release();}
 
-    void add(Entity* entity);
-    void add(SubdivisionSurface* surface);
+protected:
 
-    void addShader(const std::string& name, Shader* shader);
-
-    LineShader* setLineShader();
-    MonoFaceShader* setMonoFaceShader();
-
-public slots:
-
-    void showControlNet(bool val);
-    void showInteriorEdges(bool val);
-
-private:
-
-    enum viewport_mode_t _mode;
-    enum viewport_type_t _viewtype;
-
-    int m_frame;
-    QMatrix4x4 _matrix;
-
-    std::map<std::string, Shader*> _shaders;
-    Shader* _current_shader;
-    std::vector<Entity*> _entities;
-    std::vector<SubdivisionSurface*> _surfaces;
+    Viewport* _viewport;
+    QOpenGLShaderProgram *_program;
+    std::map<std::string, GLuint> _uniforms;
+    std::map<std::string, GLuint> _attributes;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-};				/* end namespace */
+class LineShader : public Shader
+{
+    Q_OBJECT
 
-#endif
+public:
 
+    explicit LineShader(Viewport* vp);
+    virtual ~LineShader() {}
+
+    void renderPoints(QVector<QVector3D>& points, QColor color);
+    void renderLines(QVector<QVector3D>& vertices, QColor lineColor);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class MonoFaceShader : public Shader
+{
+    Q_OBJECT
+
+public:
+
+    explicit MonoFaceShader(Viewport* vp);
+    virtual ~MonoFaceShader() {}
+
+    virtual void renderMesh(QColor meshColor,
+                            QVector<QVector3D>& vertices,
+                            QVector<QVector3D>& normals);
+
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+}   // end namespace
+
+#endif // SHADER_H

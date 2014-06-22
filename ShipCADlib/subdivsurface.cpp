@@ -1201,7 +1201,16 @@ void SubdivisionSurface::exportFeFFile(vector<QString>& strings)
                           .arg(layer->getMaterialDensity())
                           .arg(layer->getThickness()));
     }
-    // BUGBUG: save to stream not implemented for points/edges/faces
+    // BUGBUG: sort controlpoints for faster access of function (indexof())
+    strings.push_back(QString("%1").arg(_control_points.size()));
+    for (size_t i=0; i<_control_points.size(); ++i)
+        _control_points[i]->saveToStream(strings);
+    strings.push_back(QString("%1").arg(_control_edges.size()));
+    for (size_t i=0; i<_control_edges.size(); ++i)
+        _control_edges[i]->saveToStream(strings);
+    strings.push_back(QString("%1").arg(_control_faces.size()));
+    for (size_t i=0; i<_control_faces.size(); ++i)
+        _control_faces[i]->saveToStream(strings);
 }
 
 void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>& strings)
@@ -2321,7 +2330,57 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
 
 void SubdivisionSurface::loadFromStream(size_t& lineno, vector<QString>& strings)
 {
-    // BUGBUG: not implemented
+    // first read layerdata
+    QString str = strings[++lineno].trimmed();
+    size_t start = 0;
+    size_t n = ReadIntFromStr(lineno, str, start);
+    if (n > 0) {
+        // delete current layers and load new ones
+        for (size_t i=0; i<_layers.size(); ++i) {
+            deleteLayer(_layers[i]);
+        }
+        for (size_t i=0; i<n; ++i) {
+            SubdivisionLayer* layer = addNewLayer();
+            layer->loadFromStream(lineno, strings);
+        }
+    }
+    // read index of active layer
+    str = strings[++lineno].trimmed();
+    start = 0;
+    n = ReadIntFromStr(lineno, str, start);
+    _active_layer = _layers[n];
+
+    // read controlpoints
+    str = strings[++lineno].trimmed();
+    start = 0;
+    n = ReadIntFromStr(lineno, str, start);
+    for (size_t i=0; i<n; ++i) {
+        SubdivisionControlPoint* point = SubdivisionControlPoint::construct(this);
+        _control_points.push_back(point);
+        point->loadFromStream(lineno, strings);
+    }
+    // read control edges
+    str = strings[++lineno].trimmed();
+    start = 0;
+    n = ReadIntFromStr(lineno, str, start);
+    for (size_t i=0; i<n; ++i) {
+        SubdivisionControlEdge* edge = SubdivisionControlEdge::construct(this);
+        _control_edges.push_back(edge);
+        edge->loadFromStream(lineno, strings);
+    }
+    // read control faces
+    str = strings[++lineno].trimmed();
+    start = 0;
+    n = ReadIntFromStr(lineno, str, start);
+    for (size_t i=0; i<n; ++i) {
+        SubdivisionControlFace* face = SubdivisionControlFace::construct(this);
+        _control_faces.push_back(face);
+        face->loadFromStream(lineno, strings);
+    }
+    setBuild(false);
+    _initialized = true;
+    emit changedLayerData();
+    emit changeActiveLayer();
 }
 
 void SubdivisionSurface::loadVRMLFile(const QString &filename)
@@ -2419,7 +2478,22 @@ void SubdivisionSurface::saveBinary(FileBuffer &destination)
 
 void SubdivisionSurface::saveToStream(vector<QString>& strings)
 {
-    // BUGBUG: unimplemented
+    // first save layerdata
+    strings.push_back(QString("%1").arg(numberOfLayers()));
+    for (size_t i=0; i<numberOfLayers(); ++i)
+        getLayer(i)->saveToStream(strings);
+    // save index of active layer
+    strings.push_back(QString("%1").arg(indexOfLayer(_active_layer)));
+    // BUGBUG: sort controlpoints for faster access to function indexof
+    strings.push_back(QString("%1").arg(numberOfControlPoints()));
+    for (size_t i=0; i<numberOfControlPoints(); ++i)
+        getControlPoint(i)->saveToStream(strings);
+    strings.push_back(QString("%1").arg(numberOfControlEdges()));
+    for (size_t i=0; i<numberOfControlEdges(); ++i)
+        getControlEdge(i)->saveToStream(strings);
+    strings.push_back(QString("%1").arg(numberOfControlFaces()));
+    for (size_t i=0; i<numberOfControlFaces(); ++i)
+        getControlFace(i)->saveToStream(strings);
 }
 
 void SubdivisionSurface::selectionDelete()

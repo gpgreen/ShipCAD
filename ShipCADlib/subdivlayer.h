@@ -115,6 +115,8 @@ public:
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& destination);
     void saveToDXF(std::vector<QString>& strings);
+    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
+    void saveToStream(std::vector<QString>& strings);
 
     // draw
     static void drawLayers(Viewport &vp, SubdivisionSurface* surface);

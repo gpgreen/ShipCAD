@@ -446,6 +446,54 @@ void SubdivisionLayer::saveToDXF(vector<QString>& strings)
     // BUGBUG: not implemented
 }
 
+void SubdivisionLayer::loadFromStream(size_t &lineno, std::vector<QString> &strings)
+{
+    // read description
+    QString str = strings[++lineno].trimmed();
+    size_t start = 0;
+    _desc = str;
+    // read layer identification
+    str = strings[++lineno].trimmed();
+    start = 0;
+    _layerid = ReadIntFromStr(lineno, str, start);
+    if (_layerid > _owner->lastUsedLayerID())
+        _owner->setLastUsedLayerID(_layerid);
+    // read color
+    int col = ReadIntFromStr(lineno, str, start);
+    _color = QColorFromDXFIndex(col);
+    // read visible
+    _visible = ReadBoolFromStr(lineno, str, start);
+    _symmetric = ReadBoolFromStr(lineno, str, start);
+    // read developability
+    if (start != str.length())
+        _developable = ReadBoolFromStr(lineno, str, start);
+    else
+        _developable = false;
+    // read calc intersections flag
+    if (start != str.length())
+        _use_for_intersections = ReadBoolFromStr(lineno, str, start);
+    else
+        _use_for_intersections = true;
+    // read use in hydrostatics flag
+    if (start != str.length())
+        _use_in_hydrostatics = ReadBoolFromStr(lineno, str, start);
+    else
+        _use_in_hydrostatics = true;
+}
+
+void SubdivisionLayer::saveToStream(std::vector<QString> &strings)
+{
+    strings.push_back(_desc);
+    strings.push_back(QString("%1 %2 %3 %4 %5 %6 %7")
+                      .arg(_layerid)
+                      .arg(FindDXFColorIndex(_color))
+                      .arg(BoolToStr(_visible))
+                      .arg(BoolToStr(_symmetric))
+                      .arg(BoolToStr(_developable))
+                      .arg(BoolToStr(_use_for_intersections))
+                      .arg(BoolToStr(_use_in_hydrostatics)));
+}
+
 void SubdivisionLayer::saveBinary(FileBuffer& destination)
 {
     destination.add(_desc);

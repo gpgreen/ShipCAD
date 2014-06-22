@@ -51,6 +51,9 @@
     <addaction name="actionShade_Curvature"/>
     <addaction name="actionShade_Developable"/>
     <addaction name="actionShade_Zebra"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_Control_Net"/>
+    <addaction name="actionShow_Interior_Edges"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMode"/>
@@ -110,6 +113,22 @@
    </property>
    <property name="text">
     <string>Shade Zebra</string>
+   </property>
+  </action>
+  <action name="actionShow_Control_Net">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Control Net</string>
+   </property>
+  </action>
+  <action name="actionShow_Interior_Edges">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Interior Edges</string>
    </property>
   </action>
  </widget>

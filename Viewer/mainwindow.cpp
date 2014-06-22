@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionShade_Curvature, SIGNAL(triggered()), SLOT(shadeCurvature()));
     connect(ui->actionShade_Developable, SIGNAL(triggered()), SLOT(shadeDevelopable()));
     connect(ui->actionShade_Zebra, SIGNAL(triggered()), SLOT(shadeZebra()));
+    connect(ui->actionShow_Control_Net, SIGNAL(triggered(bool)), _vp, SLOT(showControlNet(bool)));
+    connect(ui->actionShow_Interior_Edges, SIGNAL(triggered(bool)), _vp, SLOT(showInteriorEdges(bool)));
 
     // make a spline
     Spline* spline = new Spline;
@@ -68,8 +70,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // make a surface
     SubdivisionSurface* surface = new SubdivisionSurface;
     surface->setDesiredSubdivisionLevel(3);
-    surface->setShowControlNet(true);
-    surface->setShowInteriorEdges(true);
     vector<SubdivisionControlPoint*> points;
     SubdivisionControlPoint* pt = surface->addControlPoint(QVector3D(1,1,0));
     points.push_back(pt);
@@ -83,6 +83,14 @@ MainWindow::MainWindow(QWidget *parent) :
     cerr << *surface << endl;
     surface->rebuild();
 //    cerr << *surface << endl;
+\
+    // write it to text file
+    vector<QString> strings;
+    surface->saveToStream(strings);
+    ofstream sos("surface.txt");
+    for (size_t i=0; i<strings.size(); ++i)
+        sos << strings[i].toStdString() << "\r\n";
+    sos.close();
 
     _vp->add(spline);
     _vp->add(surface);
@@ -139,3 +147,4 @@ MainWindow::shadeZebra()
     _vp->setViewportMode(Viewport::vmShadeZebra);
   cout << "Viewport mode shad zebra" << endl;
 }
+

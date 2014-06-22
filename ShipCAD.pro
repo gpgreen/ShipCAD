@@ -1,6 +1,5 @@
 TEMPLATE = subdirs
-CONFIG += ordered
 
-SUBDIRS = GuiTest \
+SUBDIRS = \
     ShipCADlib \
     Viewer

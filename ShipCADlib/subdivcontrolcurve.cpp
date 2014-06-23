@@ -8,6 +8,8 @@
 #include "spline.h"
 #include "viewport.h"
 #include "filebuffer.h"
+#include "shader.h"
+#include "entity.h"
 
 using namespace std;
 using namespace ShipCADGeometry;
@@ -200,18 +202,94 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
         curve->setFragments(250);
     curve->setCurvatureColor(_owner->getCurvatureColor());
     curve->setCurvatureScale(_owner->getCurvatureScale());
+    QVector<QVector3D> vertices;
     // BUGBUG: not implemented yet
     if (!_owner->showControlNet() && sel) {
         // draw controlpoints and edges
+        for (size_t i=2; i<=_points.size(); ++i) {
+            SubdivisionPoint* p1 = _points[i-2];
+            SubdivisionPoint* p2 = _points[i-1];
+            SubdivisionControlEdge* edge = _owner->controlEdgeExists(p1, p2);
+            if (edge != 0)
+                edge->draw(vp, lineshader);
+            if (i == 2)
+                vertices << p1->getCoordinate();
+            vertices << p2->getCoordinate();
+        }
+        lineshader->renderPoints(vertices, getColor());
     }
+    vertices.clear();
     if (vp.getViewportType() == Viewport::fvBodyplan && !_owner->drawMirror()) {
         // draw mainframe location
+        Plane mfl(1, 0, 0, -_owner->getMainframeLocation());
+        IntersectionData output;
+        vector<float> parameters;
+        parameters.push_back(0);
+        parameters.push_back(1.0);
+        if (curve->intersect_plane(mfl, output)) {
+            parameters.insert(parameters.end(), output.parameters.begin(), output.parameters.end());
+            sort(parameters.begin(), parameters.end());
+        }
+        QVector<QVector3D> curvelines;
+        for (size_t i=2; i<=parameters.size(); ++i) {
+            QVector3D p3d = curve->value(0.5*(parameters[i-2] + parameters[i-1]));
+            int scale;
+            if (p3d.x() < _owner->getMainframeLocation())
+                scale = -1;
+            else
+                scale = 1;
+            size_t fragm = (parameters[i-1] - parameters[i-2]) * curve->getFragments();
+            if (fragm < 10)
+                fragm = 10;
+            if (curve->showCurvature()) {
+                for (size_t j=1; j<=fragm; ++j) {
+                    float t = parameters[i-2] + (parameters[i-1] - parameters[i-2]) * (j - 1) / (fragm - 1);
+                    QVector3D normal;
+                    p3d = curve->value(t);
+                    float c = curve->curvature(t, normal);
+                    p3d.setY(p3d.y() * scale);
+                    normal.setY(normal.y() * scale);
+                    QVector3D p3d2 = p3d - (c * 2 * curve->getCurvatureScale() * normal);
+                    vertices << p3d;
+                    vertices << p3d2;
+                    if ((j % 4) == 0 || j == 1 || j == fragm) {
+                        // draw normal lines
+                        curvelines << p3d;
+                        curvelines << p3d2;
+                    }
+                    vertices << p3d2;
+                }
+                for (size_t j=0; j<curvelines.size(); ++j)
+                    vertices << curvelines[j];
+            }
+            else {
+                vertices.clear();
+                for (size_t j=1; j<=fragm; ++j) {
+                    float t = parameters[i-2] + (parameters[i-1] - parameters[i-2]) * (j - 1) / (fragm - 1);
+                    p3d = curve->value(t);
+                    p3d.setY(p3d.y() * scale);
+                    vertices << p3d;
+                }
+            }
+        }
+        lineshader->renderLines(vertices, curve->getCurvatureColor());
     }
     else {
-        //curve->draw(vp);
+        curve->draw(vp, lineshader);
     }
     if (_owner->drawMirror()) {
         // draw reversed curve
+        for (size_t i=1; i<=curve->numberOfPoints(); ++i) {
+            QVector3D p3d = curve->getPoint(i-1);
+            p3d.setY(-p3d.y());
+            curve->setPoint(i-1, p3d);
+        }
+        curve->draw(vp, lineshader);
+        for (size_t i=1; i<=curve->numberOfPoints(); ++i) {
+            QVector3D p3d = curve->getPoint(i-1);
+            p3d.setY(-p3d.y());
+            curve->setPoint(i-1, p3d);
+        }
     }
 }
 

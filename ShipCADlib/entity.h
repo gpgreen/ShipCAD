@@ -45,16 +45,12 @@ class IntersectionData : public QObject
     Q_OBJECT
 public:
 
-    explicit IntersectionData();
+    explicit IntersectionData() : number_of_intersections(0) {}
     ~IntersectionData() {}
 
-private:
-
-    int _number_of_intersections;
-    std::vector<QVector3D> _points;
-    std::vector<float> _parameters;
-
-    friend class Spline;
+    int number_of_intersections;
+    std::vector<QVector3D> points;
+    std::vector<float> parameters;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

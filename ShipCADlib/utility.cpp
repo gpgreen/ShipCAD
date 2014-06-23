@@ -31,10 +31,7 @@ QVector3D ShipCADUtility::Interpolate(const QVector3D& p1, const QVector3D& p2, 
 
 QVector3D ShipCADUtility::MidPoint(const QVector3D& p1, const QVector3D& p2)
 {
-    QVector3D dir = (p2 - p1);
-    dir.normalize();
-    float len = p1.distanceToPoint(p2) / 2.0;
-    return p1 + (len * dir);
+    return 0.5 * (p1 + p2);
 }
 
 static QColor DXFLayerColors[255] = {
@@ -132,11 +129,9 @@ QVector3D ShipCADUtility::UnifiedNormal(const QVector3D& p1, const QVector3D& p2
     QVector3D result((p2.y()-p1.y())*(p3.z()-p1.z())-(p2.z()-p1.z())*(p3.y()-p1.y()),
                      (p2.z()-p1.z())*(p3.x()-p1.x())-(p2.x()-p1.x())*(p3.z()-p1.z()),
                      (p2.x()-p1.x())*(p3.y()-p1.y())-(p2.y()-p1.y())*(p3.x()-p1.x()));
-    float l = result.length();
-    if (l < 1E-6)
-        l = 1E-6f;
-    result /= l;
+    result.normalize();
     return result;
+
 }
 
 extern float ShipCADUtility::RadToDeg(float rad)

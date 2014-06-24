@@ -32,7 +32,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -54,6 +54,11 @@
     <addaction name="separator"/>
     <addaction name="actionShow_Control_Net"/>
     <addaction name="actionShow_Interior_Edges"/>
+    <addaction name="actionShow_Control_Curves"/>
+    <addaction name="actionShow_Curvature"/>
+    <addaction name="actionShow_Normals"/>
+    <addaction name="actionDraw_Mirror"/>
+    <addaction name="actionShade_Underwater"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMode"/>
@@ -129,7 +134,7 @@
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Show Control Net</string>
@@ -141,6 +146,46 @@
    </property>
    <property name="text">
     <string>Show Interior Edges</string>
+   </property>
+  </action>
+  <action name="actionShow_Control_Curves">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Control Curves</string>
+   </property>
+  </action>
+  <action name="actionShow_Curvature">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Curvature</string>
+   </property>
+  </action>
+  <action name="actionShow_Normals">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Normals</string>
+   </property>
+  </action>
+  <action name="actionDraw_Mirror">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Draw Mirror</string>
+   </property>
+  </action>
+  <action name="actionShade_Underwater">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Shade Underwater</string>
    </property>
   </action>
  </widget>

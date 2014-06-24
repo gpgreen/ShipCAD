@@ -43,8 +43,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionShade_Curvature, SIGNAL(triggered()), SLOT(shadeCurvature()));
     connect(ui->actionShade_Developable, SIGNAL(triggered()), SLOT(shadeDevelopable()));
     connect(ui->actionShade_Zebra, SIGNAL(triggered()), SLOT(shadeZebra()));
-    connect(ui->actionShow_Control_Net, SIGNAL(triggered(bool)), _vp, SLOT(showControlNet(bool)));
-    connect(ui->actionShow_Interior_Edges, SIGNAL(triggered(bool)), _vp, SLOT(showInteriorEdges(bool)));
+    connect(ui->actionShow_Control_Net, SIGNAL(triggered(bool)), SLOT(showControlNet(bool)));
+    connect(ui->actionShow_Interior_Edges, SIGNAL(triggered(bool)), SLOT(showInteriorEdges(bool)));
+    connect(ui->actionShow_Control_Curves, SIGNAL(triggered(bool)), SLOT(showControlCurves(bool)));
+    connect(ui->actionShow_Curvature, SIGNAL(triggered(bool)), SLOT(showCurvature(bool)));
+    connect(ui->actionShow_Normals, SIGNAL(triggered(bool)), SLOT(showNormals(bool)));
+    connect(ui->actionDraw_Mirror, SIGNAL(triggered(bool)), SLOT(drawMirror(bool)));
+    connect(ui->actionShade_Underwater, SIGNAL(triggered(bool)), SLOT(shadeUnderwater(bool)));
 
     // make a spline
     Spline* spline = new Spline;
@@ -93,7 +98,7 @@ MainWindow::MainWindow(QWidget *parent) :
     sos.close();
 
     _vp->add(spline);
-    _vp->add(surface);
+    setSurface(surface);
 }
 
 MainWindow::~MainWindow()
@@ -106,6 +111,21 @@ void
 MainWindow::setAnimating(bool animating)
 {
   _vp->setAnimating(animating);
+}
+
+void
+MainWindow::setSurface(SubdivisionSurface *surface)
+{
+    _vp->setSurface(surface);
+    if (surface != 0) {
+        ui->actionShow_Control_Net->setChecked(surface->showControlNet());
+        ui->actionShow_Interior_Edges->setChecked(surface->showInteriorEdges());
+        ui->actionShow_Control_Curves->setChecked(surface->showControlCurves());
+        ui->actionShow_Curvature->setChecked(surface->showCurvature());
+        ui->actionShow_Normals->setChecked(surface->showNormals());
+        ui->actionDraw_Mirror->setChecked(surface->drawMirror());
+        ui->actionShade_Underwater->setChecked(surface->shadeUnderWater());
+    }
 }
 
 void
@@ -148,3 +168,72 @@ MainWindow::shadeZebra()
   cout << "Viewport mode shad zebra" << endl;
 }
 
+void
+MainWindow::showControlNet(bool val)
+{
+    SubdivisionSurface* s = _vp->getSurface();
+    if (s && s->showControlNet() != val) {
+        s->setShowControlNet(val);
+        cout << "surface control net visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+MainWindow::showInteriorEdges(bool val)
+{
+    SubdivisionSurface* s = _vp->getSurface();
+    if (s && s->showInteriorEdges() != val) {
+        s->setShowInteriorEdges(val);
+        cout << "surface interior edges visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+MainWindow::showControlCurves(bool val)
+{
+    SubdivisionSurface* s = _vp->getSurface();
+    if (s && s->showControlCurves() != val) {
+        s->setShowControlCurves(val);
+        cout << "surface control curves visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+MainWindow::showCurvature(bool val)
+{
+    SubdivisionSurface* s = _vp->getSurface();
+    if (s && s->showCurvature() != val) {
+        s->setShowCurvature(val);
+        cout << "surface curvature visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+MainWindow::showNormals(bool val)
+{
+    SubdivisionSurface* s = _vp->getSurface();
+    if (s && s->showNormals() != val) {
+        s->setShowNormals(val);
+        cout << "surface normals visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+MainWindow::drawMirror(bool val)
+{
+    SubdivisionSurface* s = _vp->getSurface();
+    if (s && s->drawMirror() != val) {
+        s->setDrawMirror(val);
+        cout << "surface draw mirror: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+MainWindow::shadeUnderwater(bool val)
+{
+    SubdivisionSurface* s = _vp->getSurface();
+    if (s && s->shadeUnderWater() != val) {
+        s->setShadeUnderWater(val);
+        cout << "surface shade underwater: " << (val ? 'y' : 'n') << endl;
+    }
+}

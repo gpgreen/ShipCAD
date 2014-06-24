@@ -1,3 +1,6 @@
+#include <iostream>
+#include <fstream>
+
 #include "filebuffer.h"
 #include "utility.h"
 
@@ -14,14 +17,55 @@ union convert_type_t {
 };
 
 FileBuffer::FileBuffer()
-    : _fb(0), _pos(0)
+    : _pos(0)
 {
     // does nothing
 }
 
 FileBuffer::~FileBuffer()
 {
-    delete _fb;
+    _data.clear();
+}
+
+void FileBuffer::reset()
+{
+    _pos = 0;
+}
+
+void FileBuffer::loadFromFile(const QString &filename)
+{
+    _pos = 0;
+    _data.clear();
+    ifstream ifile(filename.toStdString());
+    unsigned char byte;
+    while (ifile) {
+        ifile >> byte;
+        _data.push_back(byte);
+    }
+    ifile.close();
+    cout << "Read " << _data.size() << " bytes from '" << filename.toStdString() << "'" << endl;
+}
+
+void FileBuffer::saveToFile(const QString &filename)
+{
+    ofstream ofile(filename.toStdString());
+    for (size_t i=0; i<_data.size() && ofile; ++i)
+        ofile << _data[i];
+    ofile.close();
+    cout << "Wrote " << _data.size() << " bytes to '" << filename.toStdString() << "'" << endl;
+}
+
+void FileBuffer::load(version_t& val)
+{
+    convert_type_t ct;
+    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
+        ct.d[i] = _data[_pos];
+    val = static_cast<version_t>(ct.ival);
+}
+
+void FileBuffer::add(version_t val)
+{
+    _data.push_back(static_cast<version_t>(val));
 }
 
 void FileBuffer::load(bool& val)
@@ -152,4 +196,38 @@ void FileBuffer::add(const QString& val)
         _data.push_back(ct.d[i]);
     for (int i=0; i<s.length(); ++i)
         _data.push_back(s[i]);
+}
+
+void FileBuffer::load(Plane& val)
+{
+    convert_type_t ct;
+    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
+        ct.d[i] = _data[_pos];
+    val.setA(ct.fval);
+    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
+        ct.d[i] = _data[_pos];
+    val.setB(ct.fval);
+    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
+        ct.d[i] = _data[_pos];
+    val.setC(ct.fval);
+    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
+        ct.d[i] = _data[_pos];
+    val.setD(ct.fval);
+}
+
+void FileBuffer::add(const Plane& val)
+{
+    convert_type_t ct;
+    ct.fval = val.a();
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
+    ct.fval = val.b();
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
+    ct.fval = val.c();
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
+    ct.fval = val.d();
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
 }

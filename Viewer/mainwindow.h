@@ -10,6 +10,7 @@ class MainWindow;
 
 namespace ShipCADGeometry {
 class Viewport;
+class SubdivisionSurface;
 }
 
 class MainWindow : public QMainWindow
@@ -22,6 +23,8 @@ public:
 
     void setAnimating(bool animating);
 
+    void setSurface(ShipCADGeometry::SubdivisionSurface* surface);
+
 protected slots:
 
     void wireFrame();
@@ -29,6 +32,13 @@ protected slots:
     void shadeCurvature();
     void shadeDevelopable();
     void shadeZebra();
+    void showControlNet(bool val);
+    void showInteriorEdges(bool val);
+    void showControlCurves(bool val);
+    void showCurvature(bool val);
+    void showNormals(bool val);
+    void drawMirror(bool val);
+    void shadeUnderwater(bool val);
 
 private:
     Ui::MainWindow *ui;

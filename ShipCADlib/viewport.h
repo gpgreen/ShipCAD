@@ -67,18 +67,15 @@ public:
     viewport_type_t getViewportType() const {return _viewtype;}
     void setViewportType(viewport_type_t ty);
 
+    SubdivisionSurface* getSurface() {return _surface;}
+    void setSurface(SubdivisionSurface* surface) {_surface = surface;}
+
     void add(Entity* entity);
-    void add(SubdivisionSurface* surface);
 
     void addShader(const std::string& name, Shader* shader);
 
     LineShader* setLineShader();
     MonoFaceShader* setMonoFaceShader();
-
-public slots:
-
-    void showControlNet(bool val);
-    void showInteriorEdges(bool val);
 
 private:
 
@@ -91,7 +88,7 @@ private:
     std::map<std::string, Shader*> _shaders;
     Shader* _current_shader;
     std::vector<Entity*> _entities;
-    std::vector<SubdivisionSurface*> _surfaces;
+    SubdivisionSurface* _surface;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

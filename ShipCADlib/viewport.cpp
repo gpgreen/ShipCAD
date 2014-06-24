@@ -9,7 +9,8 @@ using namespace ShipCADGeometry;
 //////////////////////////////////////////////////////////////////////////////////////
 
 Viewport::Viewport()
-    : _mode(vmWireFrame), _viewtype(fvPerspective), m_frame(0), _current_shader(0)
+    : _mode(vmWireFrame), _viewtype(fvPerspective), m_frame(0), _current_shader(0),
+    _surface(0)
 {
     // does nothing else
 }
@@ -52,11 +53,6 @@ void Viewport::add(Entity* entity)
     _entities.push_back(entity);
 }
 
-void Viewport::add(SubdivisionSurface* surface)
-{
-    _surfaces.push_back(surface);
-}
-
 void Viewport::addShader(const string &name, Shader *shader)
 {
     _shaders[name] = shader;
@@ -78,8 +74,7 @@ void Viewport::render()
     for (size_t i=0; i<_entities.size(); ++i)
         _entities[i]->draw(*this, lineshader);
 
-    for (size_t i=0; i<_surfaces.size(); ++i)
-        _surfaces[i]->draw(*this);
+    _surface->draw(*this);
 
     // need to release the shader, otherwise doesn't draw right
     if (_current_shader != 0) {
@@ -116,20 +111,4 @@ MonoFaceShader* Viewport::setMonoFaceShader()
     _current_shader = shader;
     //cerr << "set mono face shader\n";
     return dynamic_cast<MonoFaceShader*>(_current_shader);
-}
-
-void
-Viewport::showControlNet(bool val)
-{
-    for (size_t i=0; i<_surfaces.size(); ++i)
-        _surfaces[i]->setShowControlNet(val);
-    cout << "surface control net visible: " << (val ? 'y' : 'n') << endl;
-}
-
-void
-Viewport::showInteriorEdges(bool val)
-{
-    for (size_t i=0; i<_surfaces.size(); ++i)
-        _surfaces[i]->setShowInteriorEdges(val);
-    cout << "surface interior edges visible: " << (val ? 'y' : 'n') << endl;
 }

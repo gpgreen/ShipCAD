@@ -51,6 +51,18 @@ public:
     float d() const
         { return _vars[3]; }
 
+    void setA(float val)
+        { _vars[0] = val; }
+
+    void setB(float val)
+        { _vars[1] = val; }
+
+    void setC(float val)
+        { _vars[2] = val; }
+
+    void setD(float val)
+        { _vars[3] = val; }
+
     float distance(const QVector3D& point) const;
 
     // determine if plane intersects a bounding box (p1, p2)

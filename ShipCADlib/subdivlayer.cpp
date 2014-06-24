@@ -431,21 +431,6 @@ void SubdivisionLayer::loadBinary(FileBuffer& source)
     }
 }
 
-void SubdivisionLayer::moveDown()
-{
-    // BUGBUG: not implemented
-}
-
-void SubdivisionLayer::moveUp()
-{
-    // BUGBUG: not implemented
-}
-
-void SubdivisionLayer::saveToDXF(vector<QString>& strings)
-{
-    // BUGBUG: not implemented
-}
-
 void SubdivisionLayer::loadFromStream(size_t &lineno, std::vector<QString> &strings)
 {
     // read description

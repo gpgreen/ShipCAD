@@ -2383,11 +2383,6 @@ void SubdivisionSurface::loadFromStream(size_t& lineno, vector<QString>& strings
     emit changeActiveLayer();
 }
 
-void SubdivisionSurface::loadVRMLFile(const QString &filename)
-{
-    // BUGBUG: not implemented
-}
-
 void SubdivisionSurface::rebuild()
 {
     if (!_initialized)

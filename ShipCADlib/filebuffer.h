@@ -34,6 +34,7 @@
 #include <QString>
 
 #include "version.h"
+#include "plane.h"
 
 namespace ShipCADGeometry {
 
@@ -47,7 +48,15 @@ public:
     explicit FileBuffer();
     ~FileBuffer();
 
-    version_t version() {return _version;}
+    // version
+    version_t version() {return ShipCADGeometry::k_current_version;}
+
+    // save/restore/reset
+    void loadFromFile(const QString& filename);
+    void saveToFile(const QString& filename);
+    void reset();
+
+    // load/add
 
     void load(bool& val);
     void add(bool val);
@@ -61,6 +70,9 @@ public:
     void load(size_t& val);
     void add(size_t val);
 
+    void load(version_t& val);
+    void add(version_t val);
+
     void load(QVector3D& val);
     void add(const QVector3D& val);
 
@@ -70,10 +82,11 @@ public:
     void load(QString& val);
     void add(const QString& val);
 
+    void load(ShipCADGeometry::Plane& val);
+    void add(const ShipCADGeometry::Plane& val);
+
 private:
 
-    version_t _version;
-    QFile* _fb;         // file to read/write from
     size_t _pos;           // current position in the data vector
     std::vector<unsigned char> _data;   // the data
 };

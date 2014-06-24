@@ -248,7 +248,7 @@ public:
     bool showNormals() {return _show_normals;}
 
     void setShowCurvature(bool val) {_show_curvature = val;}
-    void setShowUnderWater(bool val) {_shade_under_water = val;}
+    void setShadeUnderWater(bool val) {_shade_under_water = val;}
     void setShowControlNet(bool val) {_show_control_net = val;}
     void setShowControlCurves(bool val) {_show_control_curves = val;}
     void setShowInteriorEdges(bool val) {_show_interior_edges = val;}

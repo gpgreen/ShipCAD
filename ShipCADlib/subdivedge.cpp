@@ -636,7 +636,7 @@ void SubdivisionControlEdge::loadBinary(FileBuffer& source)
 
 void SubdivisionControlEdge::loadFromStream(size_t &lineno, std::vector<QString> &strings)
 {
-    QString str = strings[++lineno].trimmed();
+    QString str = strings[lineno++].trimmed();
     size_t start = 0;
     // startpoint
     size_t index = ReadIntFromStr(lineno, str, start);

@@ -1,6 +1,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <QFileDialog>
+#include <QMessageBox>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -38,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _modeGroup->addAction(ui->actionShade_Zebra);
 
     // connect actions to slots
+    connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openFile()));
     connect(ui->actionWire_Frame, SIGNAL(triggered()), SLOT(wireFrame()));
     connect(ui->actionShade, SIGNAL(triggered()), SLOT(shade()));
     connect(ui->actionShade_Curvature, SIGNAL(triggered()), SLOT(shadeCurvature()));
@@ -111,6 +114,44 @@ void
 MainWindow::setAnimating(bool animating)
 {
   _vp->setAnimating(animating);
+}
+
+void
+MainWindow::openFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"), QString(),
+            tr("All Files (*.*)"));
+
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::ReadOnly)) {
+            QMessageBox::critical(this, tr("Error"), tr("Could not open file"));
+            return;
+        }
+        QTextStream in(&file);
+        // read in file line by line
+        vector<QString> lines;
+        do {
+            QString line = in.readLine();
+            if (line.isNull())
+                break;
+            lines.push_back(line);
+        }
+        while (!in.atEnd());
+        file.close();
+        // now we have the file as lines, make a surface
+        SubdivisionSurface* newsurface = new SubdivisionSurface;
+        size_t lineno = 0;
+        newsurface->loadFromStream(lineno, lines);
+        // now set the gui to this new surface
+        SubdivisionSurface* old = _vp->getSurface();
+        if (old != 0) {
+            delete old;
+        }
+        setSurface(newsurface);
+        newsurface->setDesiredSubdivisionLevel(3);
+        newsurface->rebuild();
+    }
 }
 
 void

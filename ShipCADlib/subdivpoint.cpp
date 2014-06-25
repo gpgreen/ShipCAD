@@ -749,7 +749,7 @@ void SubdivisionControlPoint::load_binary(FileBuffer &source)
 void SubdivisionControlPoint::loadFromStream(size_t &lineno, vector<QString> &strings)
 {
     // coordinate
-    QString str = strings[++lineno].trimmed();
+    QString str = strings[lineno++].trimmed();
     size_t start = 0;
     _coordinate.setX(ReadFloatFromStr(lineno, str, start));
     _coordinate.setY(ReadFloatFromStr(lineno, str, start));

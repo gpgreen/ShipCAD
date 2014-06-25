@@ -353,7 +353,7 @@ int ShipCADUtility::ReadIntFromStr(size_t lineno, const QString& str, size_t& st
     if (spc != -1)
         s = str.midRef(start, spc - start);
     else
-        s = str.rightRef(start);
+        s = str.midRef(start);
     bool ok;
     int result = s.toInt(&ok);
     if (!ok) {
@@ -361,7 +361,7 @@ int ShipCADUtility::ReadIntFromStr(size_t lineno, const QString& str, size_t& st
         throw runtime_error(msg.toStdString());
     }
     if (spc != -1)
-        start += spc + 1;
+        start = spc + 1;
     else
         start = str.length();
     return result;
@@ -374,10 +374,10 @@ bool ShipCADUtility::ReadBoolFromStr(size_t /*lineno*/, const QString& str, size
     if (spc != -1)
         s = str.midRef(start, spc - start);
     else
-        s = str.rightRef(start);
+        s = str.midRef(start);
     bool result = (s == "1" || s == "TRUE" || s == "YES");
     if (spc != -1)
-        start += spc + 1;
+        start = spc + 1;
     else
         start = str.length();
     return result;
@@ -390,7 +390,7 @@ float ShipCADUtility::ReadFloatFromStr(size_t lineno, const QString& str, size_t
     if (spc != -1)
         s = str.midRef(start, spc - start);
     else
-        s = str.rightRef(start);
+        s = str.midRef(start);
     bool ok;
     float result = s.toFloat(&ok);
     if (!ok) {
@@ -398,7 +398,7 @@ float ShipCADUtility::ReadFloatFromStr(size_t lineno, const QString& str, size_t
         throw runtime_error(msg.toStdString());
     }
     if (spc != -1)
-        start += spc + 1;
+        start = spc + 1;
     else
         start = str.length();
     return result;

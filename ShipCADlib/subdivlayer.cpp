@@ -434,11 +434,11 @@ void SubdivisionLayer::loadBinary(FileBuffer& source)
 void SubdivisionLayer::loadFromStream(size_t &lineno, std::vector<QString> &strings)
 {
     // read description
-    QString str = strings[++lineno].trimmed();
+    QString str = strings[lineno++].trimmed();
     size_t start = 0;
     _desc = str;
     // read layer identification
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     _layerid = ReadIntFromStr(lineno, str, start);
     if (_layerid > _owner->lastUsedLayerID())

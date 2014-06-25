@@ -1941,7 +1941,7 @@ void SubdivisionSurface::importFeFFile(vector<QString> &strings, size_t& lineno)
     SubdivisionLayer* layer;
 
     // read layer information
-    QString str = strings[++lineno].trimmed();
+    QString str = strings[lineno++].trimmed();
     start = 0;
     size_t n = ReadIntFromStr(lineno, str, start);
     for (size_t i=1; i<=n; ++i) {
@@ -1950,7 +1950,7 @@ void SubdivisionSurface::importFeFFile(vector<QString> &strings, size_t& lineno)
         else
             layer = getLayer(i-1);
         layer->setDescription(strings[++lineno].trimmed());
-        str = strings[++lineno].trimmed();
+        str = strings[lineno++].trimmed();
         start = 0;
         layer->setLayerID(ReadIntFromStr(lineno, str, start));  // layer id
         if (layer->getLayerID() > _last_used_layerID)
@@ -1969,7 +1969,7 @@ void SubdivisionSurface::importFeFFile(vector<QString> &strings, size_t& lineno)
     }
     emit changedLayerData();
 
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     // read controlpoints
     n = ReadIntFromStr(lineno, str, start);
@@ -1979,7 +1979,7 @@ void SubdivisionSurface::importFeFFile(vector<QString> &strings, size_t& lineno)
         point->loadFromStream(lineno, strings);
     }
 
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     // read controledges
     n = ReadIntFromStr(lineno, str, start);
@@ -1989,14 +1989,14 @@ void SubdivisionSurface::importFeFFile(vector<QString> &strings, size_t& lineno)
         edge->loadFromStream(lineno, strings);
     }
 
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     // read controlfaces
     n = ReadIntFromStr(lineno, str, start);
     for (size_t i=1; i<=n; ++i) {
         SubdivisionControlFace* face = SubdivisionControlFace::construct(this);
         _control_faces.push_back(face);
-        str = strings[++lineno].trimmed();
+        str = strings[lineno++].trimmed();
         start = 0;
         size_t np = ReadIntFromStr(lineno, str, start);
         for (size_t j=1; j<=np; ++j) {
@@ -2331,7 +2331,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
 void SubdivisionSurface::loadFromStream(size_t& lineno, vector<QString>& strings)
 {
     // first read layerdata
-    QString str = strings[++lineno].trimmed();
+    QString str = strings[lineno++].trimmed();
     size_t start = 0;
     size_t n = ReadIntFromStr(lineno, str, start);
     if (n > 0) {
@@ -2345,13 +2345,13 @@ void SubdivisionSurface::loadFromStream(size_t& lineno, vector<QString>& strings
         }
     }
     // read index of active layer
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     n = ReadIntFromStr(lineno, str, start);
     _active_layer = _layers[n];
 
     // read controlpoints
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     n = ReadIntFromStr(lineno, str, start);
     for (size_t i=0; i<n; ++i) {
@@ -2360,7 +2360,7 @@ void SubdivisionSurface::loadFromStream(size_t& lineno, vector<QString>& strings
         point->loadFromStream(lineno, strings);
     }
     // read control edges
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     n = ReadIntFromStr(lineno, str, start);
     for (size_t i=0; i<n; ++i) {
@@ -2369,7 +2369,7 @@ void SubdivisionSurface::loadFromStream(size_t& lineno, vector<QString>& strings
         edge->loadFromStream(lineno, strings);
     }
     // read control faces
-    str = strings[++lineno].trimmed();
+    str = strings[lineno++].trimmed();
     start = 0;
     n = ReadIntFromStr(lineno, str, start);
     for (size_t i=0; i<n; ++i) {

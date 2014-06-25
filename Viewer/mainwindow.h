@@ -25,6 +25,10 @@ public:
 
     void setSurface(ShipCADGeometry::SubdivisionSurface* surface);
 
+public slots:
+
+    void openFile();
+
 protected slots:
 
     void wireFrame();

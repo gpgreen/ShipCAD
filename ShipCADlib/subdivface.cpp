@@ -797,7 +797,7 @@ void SubdivisionControlFace::saveToStream(vector<QString> &strings)
 
 void SubdivisionControlFace::loadFromStream(size_t &lineno, vector<QString> &strings)
 {
-    QString str = strings[++lineno].trimmed();
+    QString str = strings[lineno++].trimmed();
     size_t start = 0;
     // read control point data
     size_t n = ReadIntFromStr(lineno, str, start);

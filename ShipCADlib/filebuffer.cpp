@@ -36,7 +36,7 @@ void FileBuffer::loadFromFile(const QString &filename)
 {
     _pos = 0;
     _data.clear();
-    ifstream ifile(filename.toStdString());
+    ifstream ifile(filename.toStdString().c_str());
     unsigned char byte;
     while (ifile) {
         ifile >> byte;
@@ -48,7 +48,7 @@ void FileBuffer::loadFromFile(const QString &filename)
 
 void FileBuffer::saveToFile(const QString &filename)
 {
-    ofstream ofile(filename.toStdString());
+    ofstream ofile(filename.toStdString().c_str());
     for (size_t i=0; i<_data.size() && ofile; ++i)
         ofile << _data[i];
     ofile.close();

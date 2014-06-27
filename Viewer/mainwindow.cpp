@@ -19,7 +19,7 @@ using namespace ShipCADGeometry;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _vp(0)
+    _vp(0), _animation_timer(0)
 {
     ui->setupUi(this);
 
@@ -106,14 +106,61 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete _animation_timer;
     delete _vp;
     delete ui;
 }
 
 void
+MainWindow::resizeEvent(QResizeEvent *event)
+{
+    // need to make sure viewport gets resized
+    _vp->setWindowSize(event->size());
+}
+
+void
 MainWindow::setAnimating(bool animating)
 {
-  _vp->setAnimating(animating);
+    if (animating && _animation_timer != 0)
+        return;
+    if (!animating && _animation_timer != 0) {
+        _animation_timer->stop();
+        delete _animation_timer;
+        _animation_timer = 0;
+        _vp->setAnimating(false);
+        return;
+    }
+    if (!animating)
+        return;
+    _animation_timer = new QTimer(this);
+    connect(_animation_timer, SIGNAL(timeout()), this, SLOT(animationTimeout()));
+    _animation_timer->start(100);
+    _vp->setAnimating(true);
+}
+
+void MainWindow::animationTimeout()
+{
+    static float angle = 0;
+    static float elevation = 0;
+    static bool up = true;
+    angle += 5;
+    if (angle >= 180)
+        angle -= 360;
+    if (up)
+        elevation += 1;
+    else
+        elevation -= 1;
+    if (elevation >= 90) {
+        up = false;
+        elevation = 89;
+    }
+    if (elevation <= 0) {
+        up = true;
+        elevation = 0;
+    }
+    _vp->setAngle(angle);
+    _vp->setElevation(elevation);
+//    _vp->render();
 }
 
 void

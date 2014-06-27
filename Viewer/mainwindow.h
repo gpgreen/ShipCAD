@@ -29,6 +29,10 @@ public slots:
 
     void openFile();
 
+protected:
+
+    virtual void resizeEvent(QResizeEvent *event);
+
 protected slots:
 
     void wireFrame();
@@ -44,10 +48,13 @@ protected slots:
     void drawMirror(bool val);
     void shadeUnderwater(bool val);
 
+    void animationTimeout();
+
 private:
     Ui::MainWindow *ui;
     ShipCADGeometry::Viewport* _vp;
     QActionGroup* _modeGroup;
+    QTimer* _animation_timer;
 };
 
 #endif // MAINWINDOW_H

@@ -42,7 +42,7 @@ void Viewport::initialize()
 void Viewport::setViewportMode(viewport_mode_t mode)
 {
     _mode = mode;
-    // BUGBUG: need to trigger redraw
+    renderLater();
 }
 
 void Viewport::setCameraType(camera_type_t val)
@@ -113,8 +113,9 @@ void Viewport::setElevation(float val)
     }
 }
 
-void Viewport::setWindowSize(const QSize& /*sz*/)
+void Viewport::setWindowSize(const QSize& sz)
 {
+    setGeometry(0, 0, sz.width(), sz.height());
     // at this point, our window has been resized, so
     // redo the transformations
     initializeViewport(_min3d, _max3d);
@@ -167,6 +168,7 @@ void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
     _matrix = _proj * _view;
 
     cout << "angle: " << _angle << " elev: " << _elevation << endl;
+    renderLater();
 }
 
 void Viewport::add(Entity* entity)
@@ -196,9 +198,9 @@ void Viewport::addShader(const string &name, Shader *shader)
 
 void Viewport::render()
 {
-    glViewport(0, 0, width(), height());
+    //glViewport(0, 0, width(), height());
 
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT);
 
     LineShader* lineshader = setLineShader();
 
@@ -243,3 +245,41 @@ MonoFaceShader* Viewport::setMonoFaceShader()
     //cerr << "set mono face shader\n";
     return dynamic_cast<MonoFaceShader*>(_current_shader);
 }
+
+void
+Viewport::mousePressEvent(QMouseEvent *event)
+{
+    _prev_pos = event->pos();
+    // are we getting mouse clicks in the gl window?
+    cout << "mouse press: " << event->pos().x() << "," << event->pos().y() << endl;
+}
+
+void
+Viewport::mouseReleaseEvent(QMouseEvent *event)
+{
+    // are we getting mouse clicks in the gl window?
+    cout << "mouse release: " << event->pos().x() << "," << event->pos().y() << endl;
+}
+
+void
+Viewport::mouseMoveEvent(QMouseEvent *event)
+{
+    if (_view_type == fvPerspective && event->buttons().testFlag(Qt::MidButton)) {
+        // dragging the perspective around with middle button
+        _angle += (event->pos().x() - _prev_pos.x()) / 2.0f;
+        while (_angle > 180)
+            _angle -= 360;
+        while (_angle < -180)
+            _angle += 360;
+        _elevation += (event->pos().y() - _prev_pos.y()) / 2.0f;
+        while (_elevation > 180)
+            _elevation -= 360;
+        while (_elevation < -180)
+            _elevation += 360;
+        initializeViewport(_min3d, _max3d);
+    }
+    _prev_pos = event->pos();
+    // are we getting mouse clicks in the gl window?
+    cout << "mouse move: " << event->pos().x() << "," << event->pos().y() << endl;
+}
+

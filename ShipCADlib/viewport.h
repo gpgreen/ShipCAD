@@ -92,6 +92,9 @@ public slots:
 protected:
 
     void initializeViewport(const QVector3D& min, const QVector3D& max);
+    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent *);
+    virtual void mouseMoveEvent(QMouseEvent *);
 
 private:
 
@@ -116,7 +119,7 @@ private:
     QVector3D _max3d;
     QVector3D _midpoint;
     QVector3D _camera_location;
-
+    QPoint _prev_pos;		/* last position of mouse */
     std::map<std::string, Shader*> _shaders;
     Shader* _current_shader;
     std::vector<Entity*> _entities;

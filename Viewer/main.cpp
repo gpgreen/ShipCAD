@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    w.setAnimating(true);
+    //w.setAnimating(true);
 
     return a.exec();
 }

@@ -116,6 +116,7 @@ MainWindow::resizeEvent(QResizeEvent *event)
 {
     // need to make sure viewport gets resized
     _vp->setWindowSize(event->size());
+    cout << "window size: " << event->size().width() << "," << event->size().height() << endl;
 }
 
 void
@@ -160,7 +161,6 @@ void MainWindow::animationTimeout()
     }
     _vp->setAngle(angle);
     _vp->setElevation(elevation);
-//    _vp->render();
 }
 
 void
@@ -198,6 +198,7 @@ MainWindow::openFile()
         setSurface(newsurface);
         newsurface->setDesiredSubdivisionLevel(3);
         newsurface->rebuild();
+        _vp->renderLater();
     }
 }
 
@@ -262,6 +263,7 @@ MainWindow::showControlNet(bool val)
     SubdivisionSurface* s = _vp->getSurface();
     if (s && s->showControlNet() != val) {
         s->setShowControlNet(val);
+        _vp->renderLater();
         cout << "surface control net visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -272,6 +274,7 @@ MainWindow::showInteriorEdges(bool val)
     SubdivisionSurface* s = _vp->getSurface();
     if (s && s->showInteriorEdges() != val) {
         s->setShowInteriorEdges(val);
+        _vp->renderLater();
         cout << "surface interior edges visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -282,6 +285,7 @@ MainWindow::showControlCurves(bool val)
     SubdivisionSurface* s = _vp->getSurface();
     if (s && s->showControlCurves() != val) {
         s->setShowControlCurves(val);
+        _vp->renderLater();
         cout << "surface control curves visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -292,6 +296,7 @@ MainWindow::showCurvature(bool val)
     SubdivisionSurface* s = _vp->getSurface();
     if (s && s->showCurvature() != val) {
         s->setShowCurvature(val);
+        _vp->renderLater();
         cout << "surface curvature visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -302,6 +307,7 @@ MainWindow::showNormals(bool val)
     SubdivisionSurface* s = _vp->getSurface();
     if (s && s->showNormals() != val) {
         s->setShowNormals(val);
+        _vp->renderLater();
         cout << "surface normals visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -312,6 +318,7 @@ MainWindow::drawMirror(bool val)
     SubdivisionSurface* s = _vp->getSurface();
     if (s && s->drawMirror() != val) {
         s->setDrawMirror(val);
+        _vp->renderLater();
         cout << "surface draw mirror: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -322,6 +329,7 @@ MainWindow::shadeUnderwater(bool val)
     SubdivisionSurface* s = _vp->getSurface();
     if (s && s->shadeUnderWater() != val) {
         s->setShadeUnderWater(val);
+        _vp->renderLater();
         cout << "surface shade underwater: " << (val ? 'y' : 'n') << endl;
     }
 }

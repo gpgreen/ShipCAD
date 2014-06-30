@@ -112,14 +112,6 @@ MainWindow::~MainWindow()
 }
 
 void
-MainWindow::resizeEvent(QResizeEvent *event)
-{
-    // need to make sure viewport gets resized
-    _vp->setWindowSize(event->size());
-    cout << "window size: " << event->size().width() << "," << event->size().height() << endl;
-}
-
-void
 MainWindow::setAnimating(bool animating)
 {
     if (animating && _animation_timer != 0)

@@ -11,8 +11,9 @@ using namespace ShipCADUtility;
 //////////////////////////////////////////////////////////////////////////////////////
 
 Viewport::Viewport()
-    : _mode(vmWireFrame), _view_type(fvPerspective), m_frame(0),
-      _camera(ftStandard), _field_of_view(atan(35.0/50.0)),
+    : _mode(vmWireFrame), _view_type(fvPerspective),
+      _camera(ftStandard),
+      _field_of_view(atan(35.0/50.0)),
       _angle(20), _elevation(20),
       _zoom(1.0), _panX(0), _panY(0),
       _distance(0), _scale(1.0), _margin(0),
@@ -113,11 +114,10 @@ void Viewport::setElevation(float val)
     }
 }
 
-void Viewport::setWindowSize(const QSize& sz)
+void Viewport::resizeEvent(QResizeEvent *event)
 {
-    setGeometry(0, 0, sz.width(), sz.height());
-    // at this point, our window has been resized, so
-    // redo the transformations
+    cout << "vp resize event: " << event->size().width()
+         << "," << event->size().height() << endl;
     initializeViewport(_min3d, _max3d);
 }
 
@@ -150,14 +150,13 @@ void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
     // and the angle, elevation
 
     _proj = QMatrix4x4();
-    _proj.perspective(RadToDeg(_field_of_view), 4/3.0f, 0.1f, 100.0f);
+    _proj.perspective(RadToDeg(_field_of_view), width() / static_cast<float>(height()), 0.1f, 100.0f);
 
     QMatrix4x4 model;
     // find the camera location
     model.rotate(_elevation, 1, 0, 0);
     model.rotate(_angle, 0, 0, 1);
     _camera_location = model.map(QVector3D(_max3d.x() + _distance, 0, 0));
-    _model = model;
 
     // perspective view matrix
     QMatrix4x4 view;
@@ -198,9 +197,9 @@ void Viewport::addShader(const string &name, Shader *shader)
 
 void Viewport::render()
 {
-    //glViewport(0, 0, width(), height());
+    glViewport(0, 0, width(), height());
 
-    //glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
 
     LineShader* lineshader = setLineShader();
 
@@ -214,8 +213,6 @@ void Viewport::render()
         _current_shader->release();
         _current_shader = 0;
     }
-
-    ++m_frame;
 }
 
 LineShader* Viewport::setLineShader()
@@ -247,9 +244,50 @@ MonoFaceShader* Viewport::setMonoFaceShader()
 }
 
 void
+Viewport::convertMouseCoordToWorld(int mx, int my)
+{
+    float x = mx;
+    float y = my;
+
+    QVector3D view = _midpoint - _camera_location;
+    view.normalize();
+    QVector3D h = QVector3D::crossProduct(view, QVector3D(0,0,1));
+    h.normalize();
+    QVector3D v = QVector3D::crossProduct(h, view);
+    v.normalize();
+
+    float vlength = tan(_field_of_view / 2.0f) * 0.1f;
+    float hlength = vlength * width() / height();
+    v *= vlength;
+    h *= hlength;
+
+    // translate mouse coordinates so that origin lies in the center of the viewport
+    x -= width() / 2.0f;
+    y -= height() / 2.0f;
+
+    // scale mouse coordinates so that half the viewport width and height becomes 1
+    x /= width() / 2.0f;
+    y /= height() / 2.0f;
+
+    // linear combination to compute intersection of picking ray with viewport plane
+    QVector3D pos = _camera_location + view * 0.1f + h * x + v * y;
+    QVector3D dir = pos - _camera_location;
+    dir.normalize();
+
+    cout << "mouse lb release model coord: " << pos.x()
+         << "," << pos.y()
+         << "," << pos.z() << endl;
+    // lets find the distance from the 1,1,0 point
+    QVector3D p1(1,1,0);
+    float dist = p1.distanceToLine(pos, dir);
+    cout << "mouse pos distance to 1,1,0: " << dist << endl;
+}
+
+void
 Viewport::mousePressEvent(QMouseEvent *event)
 {
     _prev_pos = event->pos();
+    _prev_buttons = event->buttons();
     // are we getting mouse clicks in the gl window?
     cout << "mouse press: " << event->pos().x() << "," << event->pos().y() << endl;
 }
@@ -257,6 +295,11 @@ Viewport::mousePressEvent(QMouseEvent *event)
 void
 Viewport::mouseReleaseEvent(QMouseEvent *event)
 {
+    // for mouse release, the button released won't be in the set
+    if (_prev_buttons.testFlag(Qt::LeftButton) && !event->buttons().testFlag(Qt::LeftButton)) {
+        convertMouseCoordToWorld(event->pos().x(), event->pos().y());
+    }
+    _prev_buttons = event->buttons();
     // are we getting mouse clicks in the gl window?
     cout << "mouse release: " << event->pos().x() << "," << event->pos().y() << endl;
 }
@@ -266,7 +309,7 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
 {
     if (_view_type == fvPerspective && event->buttons().testFlag(Qt::MidButton)) {
         // dragging the perspective around with middle button
-        _angle += (event->pos().x() - _prev_pos.x()) / 2.0f;
+        _angle -= (event->pos().x() - _prev_pos.x()) / 2.0f;
         while (_angle > 180)
             _angle -= 360;
         while (_angle < -180)

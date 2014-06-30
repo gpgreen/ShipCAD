@@ -29,10 +29,6 @@ public slots:
 
     void openFile();
 
-protected:
-
-    virtual void resizeEvent(QResizeEvent *event);
-
 protected slots:
 
     void wireFrame();

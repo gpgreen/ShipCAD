@@ -1,23 +1,22 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-06-21T15:08:14
+# Project created by QtCreator 2015-07-25T17:58:39
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += testlib opengl
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       -= gui
 
-TARGET = Viewer
+TARGET = tst_unitteststest
+CONFIG   += console
+CONFIG   -= app_bundle
+
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp
-
-HEADERS  += mainwindow.h
-
-FORMS    += mainwindow.ui
+SOURCES += tst_unitteststest.cpp
+DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/release/ -lShipCADlib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/debug/ -lShipCADlib

@@ -54,6 +54,7 @@ INCLUDEPATH += $$PWD/../../lib/boost_1_55_0
 }
 
 unix:!symbian {
+    INCLUDEPATH += /usr/local/include
     maemo5 {
         target.path = /opt/usr/lib
     } else {

@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS = \
     ShipCADlib \
-    Viewer
+    Viewer \
+    UnitTests

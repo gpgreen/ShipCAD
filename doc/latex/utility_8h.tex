@@ -1,0 +1,53 @@
+\hypertarget{utility_8h}{\section{Ship\-C\-A\-Dlib/utility.h File Reference}
+\label{utility_8h}\index{Ship\-C\-A\-Dlib/utility.\-h@{Ship\-C\-A\-Dlib/utility.\-h}}
+}
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$Q\-Vector3\-D$>$}\\*
+{\ttfamily \#include $<$Q\-Color$>$}\\*
+{\ttfamily \#include $<$Q\-String$>$}\\*
+{\ttfamily \#include \char`\"{}spline.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}plane.\-h\char`\"{}}\\*
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceShipCADUtility}{Ship\-C\-A\-D\-Utility}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespaceShipCADUtility_a59319d180ddc21b49297d06ea29e9c1c}{Ship\-C\-A\-D\-Utility\-::\-Min\-Max} (const Q\-Vector3\-D \&p, Q\-Vector3\-D \&min, Q\-Vector3\-D \&max)
+\item 
+float \hyperlink{namespaceShipCADUtility_a9cc45330fe03dcb360436d1ea4f9ae06}{Ship\-C\-A\-D\-Utility\-::\-Distancepoint\-To\-Line} (const Q\-Vector3\-D \&p, const Q\-Vector3\-D \&l1, const Q\-Vector3\-D \&l2)
+\item 
+Q\-Vector3\-D \hyperlink{namespaceShipCADUtility_a3414bb124c7ac03c319374dcbbb98696}{Ship\-C\-A\-D\-Utility\-::\-Interpolate} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, float param)
+\item 
+Q\-Vector3\-D \hyperlink{namespaceShipCADUtility_a96e919481d0fc77dee9afa7fbb7cd7f7}{Ship\-C\-A\-D\-Utility\-::\-Mid\-Point} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
+\item 
+int \hyperlink{namespaceShipCADUtility_ab449c99b07dc90b100ddc3b9851e0548}{Ship\-C\-A\-D\-Utility\-::\-Find\-D\-X\-F\-Color\-Index} (Q\-Color color)
+\item 
+Q\-Color \hyperlink{namespaceShipCADUtility_ac607c4476c9d09a898cf1ef99f153354}{Ship\-C\-A\-D\-Utility\-::\-Q\-Color\-From\-D\-X\-F\-Index} (int index)
+\item 
+Q\-String \hyperlink{namespaceShipCADUtility_a06d7835bd1c8b83fe16499cf6401f800}{Ship\-C\-A\-D\-Utility\-::truncate} (float val, int max\-\_\-length)
+\item 
+Q\-Vector3\-D \hyperlink{namespaceShipCADUtility_a6c3600057ec6518536b613bc5b2003ec}{Ship\-C\-A\-D\-Utility\-::\-Unified\-Normal} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3)
+\item 
+float \hyperlink{namespaceShipCADUtility_a36f59326defec976681e829c81f829ce}{Ship\-C\-A\-D\-Utility\-::\-Rad\-To\-Deg} (float rad)
+\item 
+bool \hyperlink{namespaceShipCADUtility_a3e6a6645c0b5e02a7135564cb8f90b0b}{Ship\-C\-A\-D\-Utility\-::\-Point\-In\-Triangle} (const Q\-Vector3\-D \&intercept, const Q\-Vector3\-D \&p0, const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
+\item 
+void \hyperlink{namespaceShipCADUtility_a63f9e1935b82fadbb0a879890f6e900a}{Ship\-C\-A\-D\-Utility\-::\-Clip\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, float s1, float s2, float s3, std\-::vector$<$ Q\-Vector3\-D $>$ \&front, std\-::vector$<$ Q\-Vector3\-D $>$ \&back)
+\item 
+void \hyperlink{namespaceShipCADUtility_a3dd4d34d4eeb2313308550ebf55b8453}{Ship\-C\-A\-D\-Utility\-::\-Clip\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, const \hyperlink{classShipCADGeometry_1_1Plane}{Ship\-C\-A\-D\-Geometry\-::\-Plane} \&plane, std\-::vector$<$ Q\-Vector3\-D $>$ \&front, std\-::vector$<$ Q\-Vector3\-D $>$ \&back)
+\item 
+float \hyperlink{namespaceShipCADUtility_aa688998eb221182cf32c8eaee80a809b}{Ship\-C\-A\-D\-Utility\-::\-Squared\-Dist\-P\-P} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
+\item 
+Q\-String \hyperlink{namespaceShipCADUtility_ad1fd0e98d2f46a5e7c35f88b00e765df}{Ship\-C\-A\-D\-Utility\-::\-Bool\-To\-Str} (bool val)
+\item 
+void \hyperlink{namespaceShipCADUtility_a94b88e646569b0c70c6c3dffdf32aaa4}{Ship\-C\-A\-D\-Utility\-::\-Join\-Spline\-Segments} (float join\-\_\-error, bool force\-\_\-to\-\_\-one\-\_\-segment, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1Spline}{Ship\-C\-A\-D\-Geometry\-::\-Spline} $\ast$ $>$ list)
+\item 
+int \hyperlink{namespaceShipCADUtility_a6fe1f7432edf08946917a52f998bb42b}{Ship\-C\-A\-D\-Utility\-::\-Read\-Int\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
+\item 
+bool \hyperlink{namespaceShipCADUtility_a34003cf28aac675205cd28213d4cf162}{Ship\-C\-A\-D\-Utility\-::\-Read\-Bool\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
+\item 
+float \hyperlink{namespaceShipCADUtility_ae685ee3f5698f8144532f89fb29bf064}{Ship\-C\-A\-D\-Utility\-::\-Read\-Float\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
+\end{DoxyCompactItemize}

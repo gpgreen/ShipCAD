@@ -1,0 +1,184 @@
+\hypertarget{classShipCADGeometry_1_1Shader}{\section{Ship\-C\-A\-D\-Geometry\-:\-:Shader Class Reference}
+\label{classShipCADGeometry_1_1Shader}\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+}
+
+
+{\ttfamily \#include $<$shader.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-Geometry\-:\-:Shader\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classShipCADGeometry_1_1Shader}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCADGeometry_1_1Shader_a36bc24054e22fb965b04dae9a2b76eb7}{Shader} (\hyperlink{classShipCADGeometry_1_1Viewport}{Viewport} $\ast$vp)
+\item 
+virtual \hyperlink{classShipCADGeometry_1_1Shader_aff01df87e8a102f270b5b135a295e59d}{$\sim$\-Shader} ()
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1Shader_a011fae279e362f548e8c4e4b35b7291e}{initialize} (const char $\ast$vertex\-Shader\-Source, const char $\ast$fragment\-Shader\-Source, std\-::vector$<$ std\-::string $>$ uniforms, std\-::vector$<$ std\-::string $>$ attributes)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Shader_ac8faec958f9d5806510d39be5f512c8e}{add\-Uniform} (const std\-::string \&name)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Shader_a6a298be357d7860d859aedbe397b81b9}{add\-Attribute} (const std\-::string \&name)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Shader_a7d7fe16e4eb06ad1eb19e22b38cff96e}{set\-Matrix} (const Q\-Matrix4x4 \&matrix)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Shader_a29440ce9478af96ffae40b8928cc03f0}{bind} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1Shader_a2c7d1fca280aec57ba648ccdbdeed7a9}{release} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCADGeometry_1_1Viewport}{Viewport} $\ast$ \hyperlink{classShipCADGeometry_1_1Shader_a23ce29f9de114bcfe114028465c58136}{\-\_\-viewport}
+\item 
+Q\-Open\-G\-L\-Shader\-Program $\ast$ \hyperlink{classShipCADGeometry_1_1Shader_a1e25fa850e34b5f1f025e67a96c42349}{\-\_\-program}
+\item 
+std\-::map$<$ std\-::string, G\-Luint $>$ \hyperlink{classShipCADGeometry_1_1Shader_ab5999f6b8f8542413147444f5144d523}{\-\_\-uniforms}
+\item 
+std\-::map$<$ std\-::string, G\-Luint $>$ \hyperlink{classShipCADGeometry_1_1Shader_a0277ebbb9232cacd53738979f9a0b62e}{\-\_\-attributes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 45 of file shader.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCADGeometry_1_1Shader_a36bc24054e22fb965b04dae9a2b76eb7}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{Shader}]{\setlength{\rightskip}{0pt plus 5cm}Shader\-::\-Shader (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} $\ast$}]{vp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1Shader_a36bc24054e22fb965b04dae9a2b76eb7}
+
+
+Definition at line 42 of file shader.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Shader_aff01df87e8a102f270b5b135a295e59d}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!$\sim$\-Shader@{$\sim$\-Shader}}
+\index{$\sim$\-Shader@{$\sim$\-Shader}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{$\sim$\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}Shader\-::$\sim$\-Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Shader_aff01df87e8a102f270b5b135a295e59d}
+
+
+Definition at line 48 of file shader.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCADGeometry_1_1Shader_a6a298be357d7860d859aedbe397b81b9}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!add\-Attribute@{add\-Attribute}}
+\index{add\-Attribute@{add\-Attribute}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{add\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}void Shader\-::add\-Attribute (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Shader_a6a298be357d7860d859aedbe397b81b9}
+
+
+Definition at line 79 of file shader.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Shader_ac8faec958f9d5806510d39be5f512c8e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!add\-Uniform@{add\-Uniform}}
+\index{add\-Uniform@{add\-Uniform}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{add\-Uniform}]{\setlength{\rightskip}{0pt plus 5cm}void Shader\-::add\-Uniform (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Shader_ac8faec958f9d5806510d39be5f512c8e}
+
+
+Definition at line 72 of file shader.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Shader_a29440ce9478af96ffae40b8928cc03f0}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!bind@{bind}}
+\index{bind@{bind}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{bind}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Shader\-::bind (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Shader_a29440ce9478af96ffae40b8928cc03f0}
+
+
+Definition at line 64 of file shader.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Shader_a011fae279e362f548e8c4e4b35b7291e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!initialize@{initialize}}
+\index{initialize@{initialize}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{initialize}]{\setlength{\rightskip}{0pt plus 5cm}void Shader\-::initialize (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{vertex\-Shader\-Source, }
+\item[{const char $\ast$}]{fragment\-Shader\-Source, }
+\item[{std\-::vector$<$ std\-::string $>$}]{uniforms, }
+\item[{std\-::vector$<$ std\-::string $>$}]{attributes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Shader_a011fae279e362f548e8c4e4b35b7291e}
+
+
+Definition at line 53 of file shader.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Shader_a2c7d1fca280aec57ba648ccdbdeed7a9}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!release@{release}}
+\index{release@{release}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{release}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Shader\-::release (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Shader_a2c7d1fca280aec57ba648ccdbdeed7a9}
+
+
+Definition at line 65 of file shader.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Shader_a7d7fe16e4eb06ad1eb19e22b38cff96e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!set\-Matrix@{set\-Matrix}}
+\index{set\-Matrix@{set\-Matrix}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{set\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void Shader\-::set\-Matrix (
+\begin{DoxyParamCaption}
+\item[{const Q\-Matrix4x4 \&}]{matrix}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Shader_a7d7fe16e4eb06ad1eb19e22b38cff96e}
+
+
+Definition at line 86 of file shader.\-cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classShipCADGeometry_1_1Shader_a0277ebbb9232cacd53738979f9a0b62e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!\-\_\-attributes@{\-\_\-attributes}}
+\index{\-\_\-attributes@{\-\_\-attributes}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{\-\_\-attributes}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, G\-Luint$>$ Ship\-C\-A\-D\-Geometry\-::\-Shader\-::\-\_\-attributes\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Shader_a0277ebbb9232cacd53738979f9a0b62e}
+
+
+Definition at line 72 of file shader.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Shader_a1e25fa850e34b5f1f025e67a96c42349}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!\-\_\-program@{\-\_\-program}}
+\index{\-\_\-program@{\-\_\-program}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{\-\_\-program}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Open\-G\-L\-Shader\-Program$\ast$ Ship\-C\-A\-D\-Geometry\-::\-Shader\-::\-\_\-program\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Shader_a1e25fa850e34b5f1f025e67a96c42349}
+
+
+Definition at line 70 of file shader.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Shader_ab5999f6b8f8542413147444f5144d523}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!\-\_\-uniforms@{\-\_\-uniforms}}
+\index{\-\_\-uniforms@{\-\_\-uniforms}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{\-\_\-uniforms}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$std\-::string, G\-Luint$>$ Ship\-C\-A\-D\-Geometry\-::\-Shader\-::\-\_\-uniforms\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Shader_ab5999f6b8f8542413147444f5144d523}
+
+
+Definition at line 71 of file shader.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Shader_a23ce29f9de114bcfe114028465c58136}{\index{Ship\-C\-A\-D\-Geometry\-::\-Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}!\-\_\-viewport@{\-\_\-viewport}}
+\index{\-\_\-viewport@{\-\_\-viewport}!ShipCADGeometry::Shader@{Ship\-C\-A\-D\-Geometry\-::\-Shader}}
+\subsubsection[{\-\_\-viewport}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Viewport}$\ast$ Ship\-C\-A\-D\-Geometry\-::\-Shader\-::\-\_\-viewport\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Shader_a23ce29f9de114bcfe114028465c58136}
+
+
+Definition at line 69 of file shader.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{shader_8h}{shader.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{shader_8cpp}{shader.\-cpp}\end{DoxyCompactItemize}

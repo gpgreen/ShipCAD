@@ -1,0 +1,744 @@
+\hypertarget{classShipCADGeometry_1_1Spline}{\section{Ship\-C\-A\-D\-Geometry\-:\-:Spline Class Reference}
+\label{classShipCADGeometry_1_1Spline}\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+}
+
+
+{\ttfamily \#include $<$spline.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-Geometry\-:\-:Spline\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classShipCADGeometry_1_1Spline}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCADGeometry_1_1Spline_a7ad84ea604562c7c9cb309b4e78e25c5}{Spline} ()
+\item 
+virtual \hyperlink{classShipCADGeometry_1_1Spline_a0c900ca3c99987532e1d0c21ba992968}{$\sim$\-Spline} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_ac3d9f4514573be91b316413bf062791a}{add} (const Q\-Vector3\-D \&p)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a120c5530571f138daad61426053220f3}{delete\-\_\-point} (size\-\_\-t index)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_aa1ea6446e0b59d5cce88580242cd25b6}{insert} (size\-\_\-t index, const Q\-Vector3\-D \&p)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_aa8e588b92d23c74bb6ec120624b49e54}{insert\-\_\-spline} (size\-\_\-t index, bool invert, bool duplicate\-\_\-point, const \hyperlink{classShipCADGeometry_1_1Spline}{Spline} \&source)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a26293a4ee636c2b968c45731425d5c94}{invert\-\_\-direction} ()
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_a043f418b363a0dc7161b9106a72ef8b4}{simplify} (float criterium)
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1Spline_a02967f3eee8b1755eab0d7da55c3c621}{clear} ()
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1Spline_a9b466ad7510032dafb0421f2d834bde6}{rebuild} ()
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_a9d4d64a34b1511efc5c41b9e31956a3e}{coord\-\_\-length} (float t1, float t2)
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_ae15513771d88f4f545048d4204e98325}{chord\-\_\-length\-\_\-approximation} (float percentage)
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_a5681a27480f934a73462e53b2b4e2461}{curvature} (float parameter, Q\-Vector3\-D \&normal)
+\item 
+Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1Spline_afe15664ac97d1d3452d5a5cfd023c471}{first\-\_\-derive} (float parameter)
+\item 
+Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1Spline_abe04c117432e350f3a9f66395d2d3037}{second\-\_\-derive} (float parameter)
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_afd932e0c63a3b03200ecdc7c656be8e4}{intersect\-\_\-plane} (const \hyperlink{classShipCADGeometry_1_1Plane}{Plane} \&plane, \hyperlink{classShipCADGeometry_1_1IntersectionData}{Intersection\-Data} \&output)
+\item 
+Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1Spline_a589d6d945e0fbb905ea94907cd216165}{value} (float parameter)
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1Spline_aedf951fc91bb7465959ea8dc23356cdd}{load\-\_\-binary} (\hyperlink{classShipCADGeometry_1_1FileBuffer}{File\-Buffer} \&source)
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1Spline_aa353db49887868aa708c310aec3537f5}{save\-\_\-binary} (\hyperlink{classShipCADGeometry_1_1FileBuffer}{File\-Buffer} \&destination)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a8b50b6f5338b9504bd6850a605b53620}{save\-\_\-to\-\_\-dxf} (std\-::vector$<$ Q\-String $>$ \&strings, Q\-String layername, bool sendmirror)
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1Spline_a6424ed433d241f566c15891cc25a74dd}{draw} (\hyperlink{classShipCADGeometry_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCADGeometry_1_1LineShader}{Line\-Shader} $\ast$lineshader)
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_a15d2f95f885223099dbd2f04b43f05c9}{show\-Curvature} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a2d38ce18032601fb8e94d8b0368b3954}{set\-Show\-Curvature} (bool val)
+\item 
+Q\-Color \hyperlink{classShipCADGeometry_1_1Spline_a9a6c37e20ea46497a2e5a8274f55514e}{get\-Curvature\-Color} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a8ac4a4b3e3da9282d7b470e3937cb1e5}{set\-Curvature\-Color} (const Q\-Color \&val)
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_a8af6aa0b0c11d98dfabb72f594c30151}{get\-Curvature\-Scale} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a7e205cdf485b5b7c5ab7d436ea097fed}{set\-Curvature\-Scale} (float val)
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_ac617856776bb267bdab050b56de4ec74}{get\-Parameter} (size\-\_\-t index)
+\item 
+Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1Spline_ad316be28cfd23e518f9e761c46644440}{get\-Point} (size\-\_\-t index)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_ae02af8d5473f952644ac5103d7beebf2}{set\-Point} (size\-\_\-t index, const Q\-Vector3\-D \&p)
+\item 
+int \hyperlink{classShipCADGeometry_1_1Spline_a489b034b416be54fe323ad021620f820}{get\-Fragments} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_aaae6e558fad0833cde71f9ed38e4fb96}{set\-Fragments} (size\-\_\-t val)
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_a90a954f52321f3b1b27b43991e9997a5}{is\-Knuckle} (size\-\_\-t index)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_ad4f075e2e8f1d3ac7c2d22b5be75bbad}{set\-Knuckle} (size\-\_\-t index, bool val)
+\item 
+size\-\_\-t \hyperlink{classShipCADGeometry_1_1Spline_a4f040e953d07359616c9342f2aff0029}{number\-Of\-Points} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a156ffe855d149ad445b178078ee4451c}{dump} (std\-::ostream \&os) const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_a6e932411f0f4463514f80011c58f5e6a}{set\-Build} (bool val)
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_a63165f7cf70338e51b0f16504366031e}{weight} (size\-\_\-t index)
+\item 
+std\-::vector$<$ float $>$\-::iterator \hyperlink{classShipCADGeometry_1_1Spline_a20b39f3a1bd853040df4760cd912ee64}{find\-\_\-next\-\_\-point} (std\-::vector$<$ float $>$ \&weights)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Spline_ab8f0b98595ccbd62e754fe92354a207b}{add\-\_\-to\-\_\-output} (const Q\-Vector3\-D \&p, float parameter, \hyperlink{classShipCADGeometry_1_1IntersectionData}{Intersection\-Data} \&output)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\-\_\-t \hyperlink{classShipCADGeometry_1_1Spline_a0d0c8014132eda7835842d6a20ccdf74}{\-\_\-nopoints}
+\item 
+size\-\_\-t \hyperlink{classShipCADGeometry_1_1Spline_afc73aefcc80c61121888a63abf687b40}{\-\_\-fragments}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_aa3640f8d0561a651aec79a5d80c871f3}{\-\_\-show\-\_\-curvature}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_a64b335f1c21a26f5f01ddcfbf92501d6}{\-\_\-show\-\_\-points}
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_a775e87cfe42d7f2eb747b1ab3e772b88}{\-\_\-curvature\-\_\-scale}
+\item 
+Q\-Color \hyperlink{classShipCADGeometry_1_1Spline_a2c51c87d9f9caedf39f887029f040a36}{\-\_\-curvature\-\_\-color}
+\item 
+std\-::vector$<$ Q\-Vector3\-D $>$ \hyperlink{classShipCADGeometry_1_1Spline_ab6db595e6a4dd703838d5baec8543f34}{\-\_\-points}
+\item 
+std\-::vector$<$ bool $>$ \hyperlink{classShipCADGeometry_1_1Spline_a5bfae9fec6fa04634083bb7fa6ac9452}{\-\_\-knuckles}
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_a4f4832362958e63f9b9503414466a2ae}{\-\_\-total\-\_\-length}
+\item 
+std\-::vector$<$ float $>$ \hyperlink{classShipCADGeometry_1_1Spline_a48f36b8eb159586aa334877f4ab7a015}{\-\_\-parameters}
+\item 
+std\-::vector$<$ Q\-Vector3\-D $>$ \hyperlink{classShipCADGeometry_1_1Spline_a57c78404d9c30c448d9f5ac377fc0e8f}{\-\_\-derivatives}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+size\-\_\-t \hyperlink{classShipCADGeometry_1_1Spline_a964d9e0dcb98962d920dd5e595598a42}{Fragments}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_ad4357d84fc550cf73581a303f7bd9088}{Show\-Curvature}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Spline_a7e14387674284ab28e1a0e725c5c5b0e}{Show\-Points}
+\item 
+float \hyperlink{classShipCADGeometry_1_1Spline_a2f9eb570f1bfe818d966a40cd0733df2}{Curvature\-Scale}
+\item 
+Q\-Color \hyperlink{classShipCADGeometry_1_1Spline_a4bc6d35c4d11b8df95e69300ef7120c7}{Curvature\-Color}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 50 of file spline.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCADGeometry_1_1Spline_a7ad84ea604562c7c9cb309b4e78e25c5}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!Spline@{Spline}}
+\index{Spline@{Spline}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{Spline}]{\setlength{\rightskip}{0pt plus 5cm}Spline\-::\-Spline (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1Spline_a7ad84ea604562c7c9cb309b4e78e25c5}
+
+
+Definition at line 52 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a0c900ca3c99987532e1d0c21ba992968}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!$\sim$\-Spline@{$\sim$\-Spline}}
+\index{$\sim$\-Spline@{$\sim$\-Spline}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{$\sim$\-Spline}]{\setlength{\rightskip}{0pt plus 5cm}Spline\-::$\sim$\-Spline (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Spline_a0c900ca3c99987532e1d0c21ba992968}
+
+
+Definition at line 58 of file spline.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCADGeometry_1_1Spline_ac3d9f4514573be91b316413bf062791a}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!add@{add}}
+\index{add@{add}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::add (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{p}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_ac3d9f4514573be91b316413bf062791a}
+
+
+Definition at line 389 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ab8f0b98595ccbd62e754fe92354a207b}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!add\-\_\-to\-\_\-output@{add\-\_\-to\-\_\-output}}
+\index{add\-\_\-to\-\_\-output@{add\-\_\-to\-\_\-output}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{add\-\_\-to\-\_\-output}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::add\-\_\-to\-\_\-output (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{p, }
+\item[{float}]{parameter, }
+\item[{{\bf Intersection\-Data} \&}]{output}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_ab8f0b98595ccbd62e754fe92354a207b}
+
+
+Definition at line 610 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ae15513771d88f4f545048d4204e98325}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!chord\-\_\-length\-\_\-approximation@{chord\-\_\-length\-\_\-approximation}}
+\index{chord\-\_\-length\-\_\-approximation@{chord\-\_\-length\-\_\-approximation}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{chord\-\_\-length\-\_\-approximation}]{\setlength{\rightskip}{0pt plus 5cm}float Spline\-::chord\-\_\-length\-\_\-approximation (
+\begin{DoxyParamCaption}
+\item[{float}]{percentage}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_ae15513771d88f4f545048d4204e98325}
+
+
+Definition at line 417 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a02967f3eee8b1755eab0d7da55c3c621}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!clear@{clear}}
+\index{clear@{clear}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Spline_a02967f3eee8b1755eab0d7da55c3c621}
+
+
+Reimplemented from \hyperlink{classShipCADGeometry_1_1Entity_a998d0e5d360371046fd5835ba1e0877a}{Ship\-C\-A\-D\-Geometry\-::\-Entity}.
+
+
+
+Definition at line 732 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a9d4d64a34b1511efc5c41b9e31956a3e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!coord\-\_\-length@{coord\-\_\-length}}
+\index{coord\-\_\-length@{coord\-\_\-length}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{coord\-\_\-length}]{\setlength{\rightskip}{0pt plus 5cm}float Spline\-::coord\-\_\-length (
+\begin{DoxyParamCaption}
+\item[{float}]{t1, }
+\item[{float}]{t2}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a9d4d64a34b1511efc5c41b9e31956a3e}
+
+
+Definition at line 397 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a5681a27480f934a73462e53b2b4e2461}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!curvature@{curvature}}
+\index{curvature@{curvature}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{curvature}]{\setlength{\rightskip}{0pt plus 5cm}float Spline\-::curvature (
+\begin{DoxyParamCaption}
+\item[{float}]{parameter, }
+\item[{Q\-Vector3\-D \&}]{normal}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a5681a27480f934a73462e53b2b4e2461}
+
+
+Definition at line 465 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a120c5530571f138daad61426053220f3}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!delete\-\_\-point@{delete\-\_\-point}}
+\index{delete\-\_\-point@{delete\-\_\-point}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{delete\-\_\-point}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::delete\-\_\-point (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a120c5530571f138daad61426053220f3}
+
+
+Definition at line 487 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a6424ed433d241f566c15891cc25a74dd}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!draw@{draw}}
+\index{draw@{draw}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp, }
+\item[{{\bf Line\-Shader} $\ast$}]{lineshader}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Spline_a6424ed433d241f566c15891cc25a74dd}
+
+
+Implements \hyperlink{classShipCADGeometry_1_1Entity_a894bb00b5f65692c1a64e62d748f4041}{Ship\-C\-A\-D\-Geometry\-::\-Entity}.
+
+
+
+Definition at line 525 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a156ffe855d149ad445b178078ee4451c}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!dump@{dump}}
+\index{dump@{dump}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::dump (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const}}\label{classShipCADGeometry_1_1Spline_a156ffe855d149ad445b178078ee4451c}
+
+
+Definition at line 791 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a20b39f3a1bd853040df4760cd912ee64}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!find\-\_\-next\-\_\-point@{find\-\_\-next\-\_\-point}}
+\index{find\-\_\-next\-\_\-point@{find\-\_\-next\-\_\-point}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{find\-\_\-next\-\_\-point}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ float $>$\-::iterator Spline\-::find\-\_\-next\-\_\-point (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ float $>$ \&}]{weights}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a20b39f3a1bd853040df4760cd912ee64}
+
+
+Definition at line 326 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_afe15664ac97d1d3452d5a5cfd023c471}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!first\-\_\-derive@{first\-\_\-derive}}
+\index{first\-\_\-derive@{first\-\_\-derive}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{first\-\_\-derive}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Spline\-::first\-\_\-derive (
+\begin{DoxyParamCaption}
+\item[{float}]{parameter}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_afe15664ac97d1d3452d5a5cfd023c471}
+
+
+Definition at line 497 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a9a6c37e20ea46497a2e5a8274f55514e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!get\-Curvature\-Color@{get\-Curvature\-Color}}
+\index{get\-Curvature\-Color@{get\-Curvature\-Color}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{get\-Curvature\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-Geometry\-::\-Spline\-::get\-Curvature\-Color (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Spline_a9a6c37e20ea46497a2e5a8274f55514e}
+
+
+Definition at line 98 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a8af6aa0b0c11d98dfabb72f594c30151}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!get\-Curvature\-Scale@{get\-Curvature\-Scale}}
+\index{get\-Curvature\-Scale@{get\-Curvature\-Scale}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{get\-Curvature\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Spline\-::get\-Curvature\-Scale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Spline_a8af6aa0b0c11d98dfabb72f594c30151}
+
+
+Definition at line 100 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a489b034b416be54fe323ad021620f820}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!get\-Fragments@{get\-Fragments}}
+\index{get\-Fragments@{get\-Fragments}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{get\-Fragments}]{\setlength{\rightskip}{0pt plus 5cm}int Spline\-::get\-Fragments (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a489b034b416be54fe323ad021620f820}
+
+
+Definition at line 83 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ac617856776bb267bdab050b56de4ec74}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!get\-Parameter@{get\-Parameter}}
+\index{get\-Parameter@{get\-Parameter}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{get\-Parameter}]{\setlength{\rightskip}{0pt plus 5cm}float Spline\-::get\-Parameter (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_ac617856776bb267bdab050b56de4ec74}
+
+
+Definition at line 117 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ad316be28cfd23e518f9e761c46644440}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!get\-Point@{get\-Point}}
+\index{get\-Point@{get\-Point}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{get\-Point}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Spline\-::get\-Point (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_ad316be28cfd23e518f9e761c46644440}
+
+
+Definition at line 127 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_aa1ea6446e0b59d5cce88580242cd25b6}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!insert@{insert}}
+\index{insert@{insert}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{insert}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::insert (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index, }
+\item[{const Q\-Vector3\-D \&}]{p}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_aa1ea6446e0b59d5cce88580242cd25b6}
+
+
+Definition at line 513 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_aa8e588b92d23c74bb6ec120624b49e54}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!insert\-\_\-spline@{insert\-\_\-spline}}
+\index{insert\-\_\-spline@{insert\-\_\-spline}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{insert\-\_\-spline}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::insert\-\_\-spline (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index, }
+\item[{bool}]{invert, }
+\item[{bool}]{duplicate\-\_\-point, }
+\item[{const {\bf Spline} \&}]{source}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_aa8e588b92d23c74bb6ec120624b49e54}
+
+
+Definition at line 582 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_afd932e0c63a3b03200ecdc7c656be8e4}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!intersect\-\_\-plane@{intersect\-\_\-plane}}
+\index{intersect\-\_\-plane@{intersect\-\_\-plane}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{intersect\-\_\-plane}]{\setlength{\rightskip}{0pt plus 5cm}bool Spline\-::intersect\-\_\-plane (
+\begin{DoxyParamCaption}
+\item[{const {\bf Plane} \&}]{plane, }
+\item[{{\bf Intersection\-Data} \&}]{output}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_afd932e0c63a3b03200ecdc7c656be8e4}
+
+
+Definition at line 617 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a26293a4ee636c2b968c45731425d5c94}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!invert\-\_\-direction@{invert\-\_\-direction}}
+\index{invert\-\_\-direction@{invert\-\_\-direction}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{invert\-\_\-direction}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::invert\-\_\-direction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a26293a4ee636c2b968c45731425d5c94}
+
+
+Definition at line 644 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a90a954f52321f3b1b27b43991e9997a5}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!is\-Knuckle@{is\-Knuckle}}
+\index{is\-Knuckle@{is\-Knuckle}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{is\-Knuckle}]{\setlength{\rightskip}{0pt plus 5cm}bool Spline\-::is\-Knuckle (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a90a954f52321f3b1b27b43991e9997a5}
+
+
+Definition at line 88 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_aedf951fc91bb7465959ea8dc23356cdd}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!load\-\_\-binary@{load\-\_\-binary}}
+\index{load\-\_\-binary@{load\-\_\-binary}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{load\-\_\-binary}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::load\-\_\-binary (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-Buffer} \&}]{source}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Spline_aedf951fc91bb7465959ea8dc23356cdd}
+
+
+Definition at line 655 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a4f040e953d07359616c9342f2aff0029}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!number\-Of\-Points@{number\-Of\-Points}}
+\index{number\-Of\-Points@{number\-Of\-Points}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{number\-Of\-Points}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Geometry\-::\-Spline\-::number\-Of\-Points (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Spline_a4f040e953d07359616c9342f2aff0029}
+
+
+Definition at line 109 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a9b466ad7510032dafb0421f2d834bde6}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!rebuild@{rebuild}}
+\index{rebuild@{rebuild}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{rebuild}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::rebuild (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Spline_a9b466ad7510032dafb0421f2d834bde6}
+
+
+Implements \hyperlink{classShipCADGeometry_1_1Entity_ad49217d575c57a1fcc99768081b864ee}{Ship\-C\-A\-D\-Geometry\-::\-Entity}.
+
+
+
+Definition at line 137 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_aa353db49887868aa708c310aec3537f5}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!save\-\_\-binary@{save\-\_\-binary}}
+\index{save\-\_\-binary@{save\-\_\-binary}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{save\-\_\-binary}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::save\-\_\-binary (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-Buffer} \&}]{destination}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Spline_aa353db49887868aa708c310aec3537f5}
+
+
+Definition at line 671 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a8b50b6f5338b9504bd6850a605b53620}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!save\-\_\-to\-\_\-dxf@{save\-\_\-to\-\_\-dxf}}
+\index{save\-\_\-to\-\_\-dxf@{save\-\_\-to\-\_\-dxf}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{save\-\_\-to\-\_\-dxf}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::save\-\_\-to\-\_\-dxf (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Q\-String $>$ \&}]{strings, }
+\item[{Q\-String}]{layername, }
+\item[{bool}]{sendmirror}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a8b50b6f5338b9504bd6850a605b53620}
+
+
+Definition at line 682 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_abe04c117432e350f3a9f66395d2d3037}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!second\-\_\-derive@{second\-\_\-derive}}
+\index{second\-\_\-derive@{second\-\_\-derive}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{second\-\_\-derive}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Spline\-::second\-\_\-derive (
+\begin{DoxyParamCaption}
+\item[{float}]{parameter}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_abe04c117432e350f3a9f66395d2d3037}
+
+
+Definition at line 257 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a6e932411f0f4463514f80011c58f5e6a}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!set\-Build@{set\-Build}}
+\index{set\-Build@{set\-Build}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{set\-Build}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::set\-Build (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1Spline_a6e932411f0f4463514f80011c58f5e6a}
+
+
+Reimplemented from \hyperlink{classShipCADGeometry_1_1Entity_a1889198398f42bb7f77a2334031c3f33}{Ship\-C\-A\-D\-Geometry\-::\-Entity}.
+
+
+
+Definition at line 63 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a8ac4a4b3e3da9282d7b470e3937cb1e5}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!set\-Curvature\-Color@{set\-Curvature\-Color}}
+\index{set\-Curvature\-Color@{set\-Curvature\-Color}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{set\-Curvature\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Spline\-::set\-Curvature\-Color (
+\begin{DoxyParamCaption}
+\item[{const Q\-Color \&}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Spline_a8ac4a4b3e3da9282d7b470e3937cb1e5}
+
+
+Definition at line 99 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a7e205cdf485b5b7c5ab7d436ea097fed}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!set\-Curvature\-Scale@{set\-Curvature\-Scale}}
+\index{set\-Curvature\-Scale@{set\-Curvature\-Scale}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{set\-Curvature\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Spline\-::set\-Curvature\-Scale (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Spline_a7e205cdf485b5b7c5ab7d436ea097fed}
+
+
+Definition at line 101 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_aaae6e558fad0833cde71f9ed38e4fb96}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!set\-Fragments@{set\-Fragments}}
+\index{set\-Fragments@{set\-Fragments}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{set\-Fragments}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::set\-Fragments (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_aaae6e558fad0833cde71f9ed38e4fb96}
+
+
+Definition at line 75 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ad4f075e2e8f1d3ac7c2d22b5be75bbad}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!set\-Knuckle@{set\-Knuckle}}
+\index{set\-Knuckle@{set\-Knuckle}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{set\-Knuckle}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::set\-Knuckle (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index, }
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_ad4f075e2e8f1d3ac7c2d22b5be75bbad}
+
+
+Definition at line 95 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ae02af8d5473f952644ac5103d7beebf2}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!set\-Point@{set\-Point}}
+\index{set\-Point@{set\-Point}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{set\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::set\-Point (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index, }
+\item[{const Q\-Vector3\-D \&}]{p}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_ae02af8d5473f952644ac5103d7beebf2}
+
+
+Definition at line 106 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a2d38ce18032601fb8e94d8b0368b3954}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!set\-Show\-Curvature@{set\-Show\-Curvature}}
+\index{set\-Show\-Curvature@{set\-Show\-Curvature}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{set\-Show\-Curvature}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Spline\-::set\-Show\-Curvature (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Spline_a2d38ce18032601fb8e94d8b0368b3954}
+
+
+Definition at line 97 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a15d2f95f885223099dbd2f04b43f05c9}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!show\-Curvature@{show\-Curvature}}
+\index{show\-Curvature@{show\-Curvature}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{show\-Curvature}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Spline\-::show\-Curvature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Spline_a15d2f95f885223099dbd2f04b43f05c9}
+
+
+Definition at line 96 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a043f418b363a0dc7161b9106a72ef8b4}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!simplify@{simplify}}
+\index{simplify@{simplify}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{simplify}]{\setlength{\rightskip}{0pt plus 5cm}bool Spline\-::simplify (
+\begin{DoxyParamCaption}
+\item[{float}]{criterium}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a043f418b363a0dc7161b9106a72ef8b4}
+
+
+Definition at line 346 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a589d6d945e0fbb905ea94907cd216165}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!value@{value}}
+\index{value@{value}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{value}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Spline\-::value (
+\begin{DoxyParamCaption}
+\item[{float}]{parameter}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1Spline_a589d6d945e0fbb905ea94907cd216165}
+
+
+Definition at line 748 of file spline.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a63165f7cf70338e51b0f16504366031e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!weight@{weight}}
+\index{weight@{weight}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{weight}]{\setlength{\rightskip}{0pt plus 5cm}float Spline\-::weight (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a63165f7cf70338e51b0f16504366031e}
+
+
+Definition at line 293 of file spline.\-cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classShipCADGeometry_1_1Spline_a2c51c87d9f9caedf39f887029f040a36}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-curvature\-\_\-color@{\-\_\-curvature\-\_\-color}}
+\index{\-\_\-curvature\-\_\-color@{\-\_\-curvature\-\_\-color}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-curvature\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-curvature\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a2c51c87d9f9caedf39f887029f040a36}
+
+
+Definition at line 133 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a775e87cfe42d7f2eb747b1ab3e772b88}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-curvature\-\_\-scale@{\-\_\-curvature\-\_\-scale}}
+\index{\-\_\-curvature\-\_\-scale@{\-\_\-curvature\-\_\-scale}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-curvature\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-curvature\-\_\-scale\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a775e87cfe42d7f2eb747b1ab3e772b88}
+
+
+Definition at line 132 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a57c78404d9c30c448d9f5ac377fc0e8f}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-derivatives@{\-\_\-derivatives}}
+\index{\-\_\-derivatives@{\-\_\-derivatives}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-derivatives}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$Q\-Vector3\-D$>$ Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-derivatives\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a57c78404d9c30c448d9f5ac377fc0e8f}
+
+
+Definition at line 140 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_afc73aefcc80c61121888a63abf687b40}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-fragments@{\-\_\-fragments}}
+\index{\-\_\-fragments@{\-\_\-fragments}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-fragments}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-fragments\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_afc73aefcc80c61121888a63abf687b40}
+
+
+Definition at line 129 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a5bfae9fec6fa04634083bb7fa6ac9452}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-knuckles@{\-\_\-knuckles}}
+\index{\-\_\-knuckles@{\-\_\-knuckles}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-knuckles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$bool$>$ Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-knuckles\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a5bfae9fec6fa04634083bb7fa6ac9452}
+
+
+Definition at line 135 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a0d0c8014132eda7835842d6a20ccdf74}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-nopoints@{\-\_\-nopoints}}
+\index{\-\_\-nopoints@{\-\_\-nopoints}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-nopoints}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-nopoints\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a0d0c8014132eda7835842d6a20ccdf74}
+
+
+Definition at line 128 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a48f36b8eb159586aa334877f4ab7a015}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-parameters@{\-\_\-parameters}}
+\index{\-\_\-parameters@{\-\_\-parameters}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-parameters}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$float$>$ Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-parameters\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a48f36b8eb159586aa334877f4ab7a015}
+
+
+Definition at line 139 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ab6db595e6a4dd703838d5baec8543f34}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-points@{\-\_\-points}}
+\index{\-\_\-points@{\-\_\-points}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$Q\-Vector3\-D$>$ Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-points\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_ab6db595e6a4dd703838d5baec8543f34}
+
+
+Definition at line 134 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_aa3640f8d0561a651aec79a5d80c871f3}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-show\-\_\-curvature@{\-\_\-show\-\_\-curvature}}
+\index{\-\_\-show\-\_\-curvature@{\-\_\-show\-\_\-curvature}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-show\-\_\-curvature}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-show\-\_\-curvature\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_aa3640f8d0561a651aec79a5d80c871f3}
+
+
+Definition at line 130 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a64b335f1c21a26f5f01ddcfbf92501d6}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-show\-\_\-points@{\-\_\-show\-\_\-points}}
+\index{\-\_\-show\-\_\-points@{\-\_\-show\-\_\-points}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-show\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-show\-\_\-points\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a64b335f1c21a26f5f01ddcfbf92501d6}
+
+
+Definition at line 131 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a4f4832362958e63f9b9503414466a2ae}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!\-\_\-total\-\_\-length@{\-\_\-total\-\_\-length}}
+\index{\-\_\-total\-\_\-length@{\-\_\-total\-\_\-length}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{\-\_\-total\-\_\-length}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-\_\-total\-\_\-length\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1Spline_a4f4832362958e63f9b9503414466a2ae}
+
+
+Definition at line 138 of file spline.\-h.
+
+
+
+\subsection{Property Documentation}
+\hypertarget{classShipCADGeometry_1_1Spline_a4bc6d35c4d11b8df95e69300ef7120c7}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!Curvature\-Color@{Curvature\-Color}}
+\index{Curvature\-Color@{Curvature\-Color}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{Curvature\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-Curvature\-Color\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1Spline_a4bc6d35c4d11b8df95e69300ef7120c7}
+
+
+Definition at line 57 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a2f9eb570f1bfe818d966a40cd0733df2}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!Curvature\-Scale@{Curvature\-Scale}}
+\index{Curvature\-Scale@{Curvature\-Scale}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{Curvature\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-Curvature\-Scale\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1Spline_a2f9eb570f1bfe818d966a40cd0733df2}
+
+
+Definition at line 56 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a964d9e0dcb98962d920dd5e595598a42}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!Fragments@{Fragments}}
+\index{Fragments@{Fragments}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{Fragments}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-Fragments\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1Spline_a964d9e0dcb98962d920dd5e595598a42}
+
+
+Definition at line 53 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_ad4357d84fc550cf73581a303f7bd9088}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!Show\-Curvature@{Show\-Curvature}}
+\index{Show\-Curvature@{Show\-Curvature}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{Show\-Curvature}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-Show\-Curvature\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1Spline_ad4357d84fc550cf73581a303f7bd9088}
+
+
+Definition at line 54 of file spline.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Spline_a7e14387674284ab28e1a0e725c5c5b0e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}!Show\-Points@{Show\-Points}}
+\index{Show\-Points@{Show\-Points}!ShipCADGeometry::Spline@{Ship\-C\-A\-D\-Geometry\-::\-Spline}}
+\subsubsection[{Show\-Points}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Spline\-::\-Show\-Points}}\label{classShipCADGeometry_1_1Spline_a7e14387674284ab28e1a0e725c5c5b0e}
+
+
+Definition at line 55 of file spline.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{spline_8h}{spline.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{spline_8cpp}{spline.\-cpp}\end{DoxyCompactItemize}

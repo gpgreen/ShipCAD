@@ -1,0 +1,75 @@
+\hypertarget{subdivface_8cpp}{\section{Ship\-C\-A\-Dlib/subdivface.cpp File Reference}
+\label{subdivface_8cpp}\index{Ship\-C\-A\-Dlib/subdivface.\-cpp@{Ship\-C\-A\-Dlib/subdivface.\-cpp}}
+}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$stdexcept$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}subdivface.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivsurface.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivpoint.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivedge.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivcontrolcurve.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivlayer.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}viewport.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}filebuffer.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}utility.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}shader.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structPointPred}{Point\-Pred}
+\item 
+struct \hyperlink{structFacePred}{Face\-Pred}
+\item 
+struct \hyperlink{structEdgePred}{Edge\-Pred}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \hyperlink{subdivface_8cpp_a9aefd09f46060e3da01531be0d614e14}{operator$<$$<$} (ostream \&os, const \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face} \&face)
+\item 
+ostream \& \hyperlink{subdivface_8cpp_a197f66eeb6ecb67739bd6518f5e31ec8}{operator$<$$<$} (ostream \&os, const \hyperlink{classShipCADGeometry_1_1SubdivisionControlFace}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Face} \&face)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const Q\-Vector3\-D \hyperlink{subdivface_8cpp_a7ad595cecefd42a42060c532d819934a}{Z\-E\-R\-O} = Q\-Vector3\-D(0,0,0)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{subdivface_8cpp_a9aefd09f46060e3da01531be0d614e14}{\index{subdivface.\-cpp@{subdivface.\-cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivface.cpp@{subdivface.\-cpp}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face} \&}]{face}
+\end{DoxyParamCaption}
+)}}\label{subdivface_8cpp_a9aefd09f46060e3da01531be0d614e14}
+
+
+Definition at line 377 of file subdivface.\-cpp.
+
+\hypertarget{subdivface_8cpp_a197f66eeb6ecb67739bd6518f5e31ec8}{\index{subdivface.\-cpp@{subdivface.\-cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivface.cpp@{subdivface.\-cpp}}
+\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Face} \&}]{face}
+\end{DoxyParamCaption}
+)}}\label{subdivface_8cpp_a197f66eeb6ecb67739bd6518f5e31ec8}
+
+
+Definition at line 963 of file subdivface.\-cpp.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{subdivface_8cpp_a7ad595cecefd42a42060c532d819934a}{\index{subdivface.\-cpp@{subdivface.\-cpp}!Z\-E\-R\-O@{Z\-E\-R\-O}}
+\index{Z\-E\-R\-O@{Z\-E\-R\-O}!subdivface.cpp@{subdivface.\-cpp}}
+\subsubsection[{Z\-E\-R\-O}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Vector3\-D Z\-E\-R\-O = Q\-Vector3\-D(0,0,0)}}\label{subdivface_8cpp_a7ad595cecefd42a42060c532d819934a}
+
+
+Definition at line 49 of file subdivface.\-cpp.
+

@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['validface',['validFace',['../classShipCADGeometry_1_1SubdivisionSurface.html#a5b6204bb0648f2e85cbf07ffbac4bd42',1,'ShipCADGeometry::SubdivisionSurface']]],
+  ['value',['value',['../classShipCADGeometry_1_1Spline.html#a589d6d945e0fbb905ea94907cd216165',1,'ShipCADGeometry::Spline']]],
+  ['version',['version',['../classShipCADGeometry_1_1FileBuffer.html#ace63be89e9b23f3ea9a1e93001314d42',1,'ShipCADGeometry::FileBuffer']]],
+  ['version_2ecpp',['version.cpp',['../version_8cpp.html',1,'']]],
+  ['version_2eh',['version.h',['../version_8h.html',1,'']]],
+  ['version_5ft',['version_t',['../namespaceShipCADGeometry.html#aa8b61644e46115e9d63667f213045e97',1,'ShipCADGeometry']]],
+  ['versionstring',['versionString',['../namespaceShipCADGeometry.html#abf7a88cfd0a107473fb677cc9d7d7043',1,'ShipCADGeometry']]],
+  ['vertex_5ftype_5ft',['vertex_type_t',['../classShipCADGeometry_1_1SubdivisionPoint.html#a03df9289cd8543cd3a567fa6c8e44c43',1,'ShipCADGeometry::SubdivisionPoint']]],
+  ['vertexindex',['VertexIndex',['../classShipCADGeometry_1_1SubdivisionPoint.html#a3603dcd95c922b3852e0ba6f95a08b7f',1,'ShipCADGeometry::SubdivisionPoint']]],
+  ['vertextype',['VertexType',['../classShipCADGeometry_1_1SubdivisionPoint.html#a194e5f0d73d3af0bd21fa3cd4fa03296',1,'ShipCADGeometry::SubdivisionPoint']]],
+  ['viewport',['Viewport',['../classShipCADGeometry_1_1Viewport.html',1,'ShipCADGeometry']]],
+  ['viewport',['Viewport',['../classShipCADGeometry_1_1Viewport.html#a9fde8f966d9802dd42254acf0ed05386',1,'ShipCADGeometry::Viewport']]],
+  ['viewport_2ecpp',['viewport.cpp',['../viewport_8cpp.html',1,'']]],
+  ['viewport_2eh',['viewport.h',['../viewport_8h.html',1,'']]],
+  ['viewport_5fmode_5ft',['viewport_mode_t',['../classShipCADGeometry_1_1Viewport.html#a32872391303d6fbcc5766df64933cc14',1,'ShipCADGeometry::Viewport']]],
+  ['viewport_5ftype_5ft',['viewport_type_t',['../classShipCADGeometry_1_1Viewport.html#a97a32c07745357d09b8f282c69ea9199',1,'ShipCADGeometry::Viewport']]],
+  ['visible',['Visible',['../classShipCADGeometry_1_1SubdivisionControlEdge.html#ae0d06a7dc36895347443a4c236bc1ea8',1,'ShipCADGeometry::SubdivisionControlEdge::Visible()'],['../classShipCADGeometry_1_1SubdivisionControlFace.html#a49356a1146c3fc1220302deffbc20250',1,'ShipCADGeometry::SubdivisionControlFace::Visible()'],['../classShipCADGeometry_1_1SubdivisionControlPoint.html#a1170db5bc9091fb18f6dfb3fd61d4413',1,'ShipCADGeometry::SubdivisionControlPoint::Visible()']]],
+  ['vmshade',['vmShade',['../classShipCADGeometry_1_1Viewport.html#a32872391303d6fbcc5766df64933cc14a9488ba3ad66c2b37b9406f0adbdd6792',1,'ShipCADGeometry::Viewport']]],
+  ['vmshadedevelopable',['vmShadeDevelopable',['../classShipCADGeometry_1_1Viewport.html#a32872391303d6fbcc5766df64933cc14a9da8a886df0e362400269f63b64482a9',1,'ShipCADGeometry::Viewport']]],
+  ['vmshadegauss',['vmShadeGauss',['../classShipCADGeometry_1_1Viewport.html#a32872391303d6fbcc5766df64933cc14a852f2c09b58295a234f0ee90eb47b9b8',1,'ShipCADGeometry::Viewport']]],
+  ['vmshadezebra',['vmShadeZebra',['../classShipCADGeometry_1_1Viewport.html#a32872391303d6fbcc5766df64933cc14a8cb0ee8619f5beec0ee7a2b6cf906a22',1,'ShipCADGeometry::Viewport']]],
+  ['vmwireframe',['vmWireFrame',['../classShipCADGeometry_1_1Viewport.html#a32872391303d6fbcc5766df64933cc14aee736ccba0126663edb6080495acd9b6',1,'ShipCADGeometry::Viewport']]]
+];

@@ -1,0 +1,217 @@
+\hypertarget{classShipCADGeometry_1_1Plane}{\section{Ship\-C\-A\-D\-Geometry\-:\-:Plane Class Reference}
+\label{classShipCADGeometry_1_1Plane}\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+}
+
+
+{\ttfamily \#include $<$plane.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCADGeometry_1_1Plane_acac0d9c003e0ab10d07b146c3566a0c7}{Plane} ()
+\item 
+\hyperlink{classShipCADGeometry_1_1Plane_a9a1420228e8baa632c7e8ba66f27772f}{Plane} (float \hyperlink{classShipCADGeometry_1_1Plane_a10415ad5e7667357729cc959e0996b30}{a}, float \hyperlink{classShipCADGeometry_1_1Plane_a5613d841f9e3c6af069f0beaf1a7c0fd}{b}, float \hyperlink{classShipCADGeometry_1_1Plane_aeedccb0995b432ba91083334d8458501}{c}, float \hyperlink{classShipCADGeometry_1_1Plane_a947034d0487902addd31d38d1556d4aa}{d})
+\item 
+\hyperlink{classShipCADGeometry_1_1Plane_adbaa1f5c7100e5592312359cb8eede37}{Plane} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3)
+\item 
+\hyperlink{classShipCADGeometry_1_1Plane_ac89b14d37d595f51d24325a40488f927}{$\sim$\-Plane} ()
+\item 
+float \hyperlink{classShipCADGeometry_1_1Plane_a10415ad5e7667357729cc959e0996b30}{a} () const 
+\item 
+float \hyperlink{classShipCADGeometry_1_1Plane_a5613d841f9e3c6af069f0beaf1a7c0fd}{b} () const 
+\item 
+float \hyperlink{classShipCADGeometry_1_1Plane_aeedccb0995b432ba91083334d8458501}{c} () const 
+\item 
+float \hyperlink{classShipCADGeometry_1_1Plane_a947034d0487902addd31d38d1556d4aa}{d} () const 
+\item 
+void \hyperlink{classShipCADGeometry_1_1Plane_aa4741e4b523f68f17585580883e3b0bc}{set\-A} (float val)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Plane_a629fb660d7053b4efa09e0eb8c21b093}{set\-B} (float val)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Plane_a2e7b8636aa78d21630e3419933c0d0f2}{set\-C} (float val)
+\item 
+void \hyperlink{classShipCADGeometry_1_1Plane_a6920a08fe9e29c4fbf264f258e27ffa7}{set\-D} (float val)
+\item 
+float \hyperlink{classShipCADGeometry_1_1Plane_a6851b997a300848fcb37b33407165c44}{distance} (const Q\-Vector3\-D \&point) const 
+\item 
+bool \hyperlink{classShipCADGeometry_1_1Plane_a76d5f22d213962e8ab0880fae3e919df}{intersects\-Box} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2) const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 39 of file plane.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCADGeometry_1_1Plane_acac0d9c003e0ab10d07b146c3566a0c7}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!Plane@{Plane}}
+\index{Plane@{Plane}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{Plane}]{\setlength{\rightskip}{0pt plus 5cm}Plane\-::\-Plane (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1Plane_acac0d9c003e0ab10d07b146c3566a0c7}
+
+
+Definition at line 36 of file plane.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a9a1420228e8baa632c7e8ba66f27772f}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!Plane@{Plane}}
+\index{Plane@{Plane}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{Plane}]{\setlength{\rightskip}{0pt plus 5cm}Plane\-::\-Plane (
+\begin{DoxyParamCaption}
+\item[{float}]{a, }
+\item[{float}]{b, }
+\item[{float}]{c, }
+\item[{float}]{d}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1Plane_a9a1420228e8baa632c7e8ba66f27772f}
+
+
+Definition at line 41 of file plane.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Plane_adbaa1f5c7100e5592312359cb8eede37}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!Plane@{Plane}}
+\index{Plane@{Plane}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{Plane}]{\setlength{\rightskip}{0pt plus 5cm}Plane\-::\-Plane (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{p1, }
+\item[{const Q\-Vector3\-D \&}]{p2, }
+\item[{const Q\-Vector3\-D \&}]{p3}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1Plane_adbaa1f5c7100e5592312359cb8eede37}
+
+
+Definition at line 49 of file plane.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Plane_ac89b14d37d595f51d24325a40488f927}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!$\sim$\-Plane@{$\sim$\-Plane}}
+\index{$\sim$\-Plane@{$\sim$\-Plane}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{$\sim$\-Plane}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-Geometry\-::\-Plane\-::$\sim$\-Plane (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_ac89b14d37d595f51d24325a40488f927}
+
+
+Definition at line 47 of file plane.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCADGeometry_1_1Plane_a10415ad5e7667357729cc959e0996b30}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!a@{a}}
+\index{a@{a}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Plane\-::a (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_a10415ad5e7667357729cc959e0996b30}
+
+
+Definition at line 49 of file plane.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a5613d841f9e3c6af069f0beaf1a7c0fd}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!b@{b}}
+\index{b@{b}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{b}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Plane\-::b (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_a5613d841f9e3c6af069f0beaf1a7c0fd}
+
+
+Definition at line 51 of file plane.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Plane_aeedccb0995b432ba91083334d8458501}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!c@{c}}
+\index{c@{c}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{c}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Plane\-::c (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_aeedccb0995b432ba91083334d8458501}
+
+
+Definition at line 53 of file plane.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a947034d0487902addd31d38d1556d4aa}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!d@{d}}
+\index{d@{d}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{d}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Plane\-::d (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_a947034d0487902addd31d38d1556d4aa}
+
+
+Definition at line 55 of file plane.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a6851b997a300848fcb37b33407165c44}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!distance@{distance}}
+\index{distance@{distance}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{distance}]{\setlength{\rightskip}{0pt plus 5cm}float Plane\-::distance (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{point}
+\end{DoxyParamCaption}
+) const}}\label{classShipCADGeometry_1_1Plane_a6851b997a300848fcb37b33407165c44}
+
+
+Definition at line 63 of file plane.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a76d5f22d213962e8ab0880fae3e919df}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!intersects\-Box@{intersects\-Box}}
+\index{intersects\-Box@{intersects\-Box}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{intersects\-Box}]{\setlength{\rightskip}{0pt plus 5cm}bool Plane\-::intersects\-Box (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{p1, }
+\item[{const Q\-Vector3\-D \&}]{p2}
+\end{DoxyParamCaption}
+) const}}\label{classShipCADGeometry_1_1Plane_a76d5f22d213962e8ab0880fae3e919df}
+
+
+Definition at line 69 of file plane.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1Plane_aa4741e4b523f68f17585580883e3b0bc}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!set\-A@{set\-A}}
+\index{set\-A@{set\-A}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{set\-A}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Plane\-::set\-A (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_aa4741e4b523f68f17585580883e3b0bc}
+
+
+Definition at line 58 of file plane.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a629fb660d7053b4efa09e0eb8c21b093}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!set\-B@{set\-B}}
+\index{set\-B@{set\-B}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{set\-B}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Plane\-::set\-B (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_a629fb660d7053b4efa09e0eb8c21b093}
+
+
+Definition at line 61 of file plane.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a2e7b8636aa78d21630e3419933c0d0f2}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!set\-C@{set\-C}}
+\index{set\-C@{set\-C}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{set\-C}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Plane\-::set\-C (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_a2e7b8636aa78d21630e3419933c0d0f2}
+
+
+Definition at line 64 of file plane.\-h.
+
+\hypertarget{classShipCADGeometry_1_1Plane_a6920a08fe9e29c4fbf264f258e27ffa7}{\index{Ship\-C\-A\-D\-Geometry\-::\-Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}!set\-D@{set\-D}}
+\index{set\-D@{set\-D}!ShipCADGeometry::Plane@{Ship\-C\-A\-D\-Geometry\-::\-Plane}}
+\subsubsection[{set\-D}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Plane\-::set\-D (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1Plane_a6920a08fe9e29c4fbf264f258e27ffa7}
+
+
+Definition at line 67 of file plane.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{plane_8h}{plane.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{plane_8cpp}{plane.\-cpp}\end{DoxyCompactItemize}

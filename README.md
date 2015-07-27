@@ -1,5 +1,4 @@
-ShipCAD
--------
+## ShipCAD
 
 Port of the Free!Ship program to C++ and Qt.
 
@@ -9,7 +8,7 @@ This program is in Delphi Pascal. The license is GPLv2.
 This port is incomplete. There is a test viewer that shows a test subdivision surface but there is no GUI interface
 to allow editing yet.
 
-Prerequisites
--------------
-boost 1.55
-Qt 5.5
+# Prerequisites
+* boost 1.55
+* Qt 5.5
+

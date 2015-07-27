@@ -1,0 +1,534 @@
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge}{\section{Ship\-C\-A\-D\-Geometry\-:\-:Subdivision\-Edge Class Reference}
+\label{classShipCADGeometry_1_1SubdivisionEdge}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+}
+
+
+{\ttfamily \#include $<$subdivedge.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-Geometry\-:\-:Subdivision\-Edge\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{classShipCADGeometry_1_1SubdivisionEdge}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}{Subdivision\-Edge} (\hyperlink{classShipCADGeometry_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
+\item 
+virtual \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}{$\sim$\-Subdivision\-Edge} ()
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}{clear} ()
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}{draw} (bool draw\-\_\-mirror, \hyperlink{classShipCADGeometry_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCADGeometry_1_1LineShader}{Line\-Shader} $\ast$lineshader, const Q\-Color \&edge\-Color)
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}{add\-Face} (\hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ab91ca7bbcd013cc01e90b077ea1aae9b}{assign} (\hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$edge)
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}{calculate\-Edge\-Point} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}{delete\-Face} (\hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}{swap\-Data} ()
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a0d8b0bc79b1f8d19f2c4798251aeff31}{start\-Point} ()
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a6d98a4d163b1beae788038f36b5ee2fe}{end\-Point} ()
+\item 
+virtual bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ad95a3ec8ba66deb74cbfd3d36428fc34}{is\-Boundary\-Edge} ()
+\item 
+bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ae47df0c89e604d2185c12ef1be43e535}{is\-Control\-Edge} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_aef8475bab828f5e100dd12699f0aad9b}{set\-Control\-Edge} (bool val)
+\item 
+size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a9120bf0ef10c838cd69e402eecd8c896}{number\-Of\-Faces} ()
+\item 
+bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a26be9f91b5fae2c62b99ea501e4a6015}{is\-Crease} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}{set\-Crease} (bool val)
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_afb80c9ae06d2bb9bb596e2eac6efa993}{get\-Curve} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a6412679e0438dac8545200df59480783}{set\-Curve} (\hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$curve)
+\item 
+size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a4be990243bb29ead43c76171197130d5}{get\-Index} ()
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a55dc9daab165567ed40e37f9e01ee766}{get\-Face} (size\-\_\-t index)
+\item 
+bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a286bc4d7959703a153945e3bcb9c9ad3}{has\-Face} (\hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}{get\-Previous\-Edge} ()
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}{get\-Next\-Edge} ()
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_affa2f4fab16979100d12f1823b26aa9c}{set\-Points} (\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p1, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p2)
+\item 
+virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}{construct} (\hyperlink{classShipCADGeometry_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}{priv\-\_\-dump} (std\-::ostream \&os, const char $\ast$prefix) const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a1df486b149723fe19190b178897f9a27}{\-\_\-points} \mbox{[}2\mbox{]}
+\item 
+std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_af74c555a9f1e520c8a7092819182c565}{\-\_\-faces}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ae098b2abe43d484178e743a4e0ee2dd1}{\-\_\-crease}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a0253d92464fa44ece75199bafc2ab604}{\-\_\-control\-\_\-edge}
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ae3d4de49a5c6b332d52a6c4e98704183}{\-\_\-curve}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_add30db0d6a7aac1c8f081012f3cccf03}{Start\-Point}
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_aaec4f19ba8274a3b501a06fedb0658cb}{End\-Point}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_ab36f0260a63d4ca62c45feddf96f8505}{Crease}
+\item 
+size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a5d959fb5043fcad1c24e603b50e9fa95}{Index}
+\item 
+\hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_abdc110088d3e486395a31dd7c7328dd4}{Curve}
+\item 
+bool \hyperlink{classShipCADGeometry_1_1SubdivisionEdge_a2b11b00bcc223691e6e00c4b8db272b6}{Control\-Edge}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 54 of file subdivedge.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!Subdivision\-Edge@{Subdivision\-Edge}}
+\index{Subdivision\-Edge@{Subdivision\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{Subdivision\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Edge\-::\-Subdivision\-Edge (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}
+
+
+Definition at line 62 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!$\sim$\-Subdivision\-Edge@{$\sim$\-Subdivision\-Edge}}
+\index{$\sim$\-Subdivision\-Edge@{$\sim$\-Subdivision\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{$\sim$\-Subdivision\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Edge\-::$\sim$\-Subdivision\-Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}
+
+
+Definition at line 68 of file subdivedge.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!add\-Face@{add\-Face}}
+\index{add\-Face@{add\-Face}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{add\-Face}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::add\-Face (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Face} $\ast$}]{face}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}
+
+
+Definition at line 227 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ab91ca7bbcd013cc01e90b077ea1aae9b}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!assign@{assign}}
+\index{assign@{assign}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::assign (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Edge} $\ast$}]{edge}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_ab91ca7bbcd013cc01e90b077ea1aae9b}
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!calculate\-Edge\-Point@{calculate\-Edge\-Point}}
+\index{calculate\-Edge\-Point@{calculate\-Edge\-Point}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{calculate\-Edge\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point} $\ast$ Subdivision\-Edge\-::calculate\-Edge\-Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}
+
+
+Definition at line 233 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!clear@{clear}}
+\index{clear@{clear}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}
+
+
+Implements \hyperlink{classShipCADGeometry_1_1SubdivisionBase_ae668920d97c0810c72996a531e0ca107}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
+
+
+
+Definition at line 73 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!construct@{construct}}
+\index{construct@{construct}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Edge} $\ast$ Subdivision\-Edge\-::construct (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}
+
+
+Definition at line 54 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!delete\-Face@{delete\-Face}}
+\index{delete\-Face@{delete\-Face}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{delete\-Face}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::delete\-Face (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Face} $\ast$}]{face}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}
+
+
+Definition at line 250 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!draw@{draw}}
+\index{draw@{draw}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::draw (
+\begin{DoxyParamCaption}
+\item[{bool}]{draw\-\_\-mirror, }
+\item[{{\bf Viewport} \&}]{vp, }
+\item[{{\bf Line\-Shader} $\ast$}]{lineshader, }
+\item[{const Q\-Color \&}]{edge\-Color}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}
+
+
+Definition at line 262 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!dump@{dump}}
+\index{dump@{dump}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::dump (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os, }
+\item[{const char $\ast$}]{prefix = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}
+
+
+Reimplemented from \hyperlink{classShipCADGeometry_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
+
+
+
+Reimplemented in \hyperlink{classShipCADGeometry_1_1SubdivisionControlEdge_abdfa96ff05eff404214a92d38d7eb715}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Edge}.
+
+
+
+Definition at line 320 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a6d98a4d163b1beae788038f36b5ee2fe}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!end\-Point@{end\-Point}}
+\index{end\-Point@{end\-Point}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{end\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point}$\ast$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::end\-Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a6d98a4d163b1beae788038f36b5ee2fe}
+
+
+Definition at line 81 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_afb80c9ae06d2bb9bb596e2eac6efa993}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!get\-Curve@{get\-Curve}}
+\index{get\-Curve@{get\-Curve}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{get\-Curve}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Control\-Curve}$\ast$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::get\-Curve (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_afb80c9ae06d2bb9bb596e2eac6efa993}
+
+
+Definition at line 88 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a55dc9daab165567ed40e37f9e01ee766}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!get\-Face@{get\-Face}}
+\index{get\-Face@{get\-Face}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{get\-Face}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Face} $\ast$ Subdivision\-Edge\-::get\-Face (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_a55dc9daab165567ed40e37f9e01ee766}
+
+
+Definition at line 102 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a4be990243bb29ead43c76171197130d5}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!get\-Index@{get\-Index}}
+\index{get\-Index@{get\-Index}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{get\-Index}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Subdivision\-Edge\-::get\-Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_a4be990243bb29ead43c76171197130d5}
+
+
+Definition at line 82 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!get\-Next\-Edge@{get\-Next\-Edge}}
+\index{get\-Next\-Edge@{get\-Next\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{get\-Next\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Edge} $\ast$ Subdivision\-Edge\-::get\-Next\-Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}
+
+
+Definition at line 197 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!get\-Previous\-Edge@{get\-Previous\-Edge}}
+\index{get\-Previous\-Edge@{get\-Previous\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{get\-Previous\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Edge} $\ast$ Subdivision\-Edge\-::get\-Previous\-Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}
+
+
+Definition at line 167 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a286bc4d7959703a153945e3bcb9c9ad3}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!has\-Face@{has\-Face}}
+\index{has\-Face@{has\-Face}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{has\-Face}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\-Edge\-::has\-Face (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Face} $\ast$}]{face}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_a286bc4d7959703a153945e3bcb9c9ad3}
+
+
+Definition at line 109 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ad95a3ec8ba66deb74cbfd3d36428fc34}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!is\-Boundary\-Edge@{is\-Boundary\-Edge}}
+\index{is\-Boundary\-Edge@{is\-Boundary\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{is\-Boundary\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\-Edge\-::is\-Boundary\-Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ad95a3ec8ba66deb74cbfd3d36428fc34}
+
+
+Reimplemented in \hyperlink{classShipCADGeometry_1_1SubdivisionControlEdge_a23adc8ad28860987b7b4866eada3c463}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Edge}.
+
+
+
+Definition at line 92 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ae47df0c89e604d2185c12ef1be43e535}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!is\-Control\-Edge@{is\-Control\-Edge}}
+\index{is\-Control\-Edge@{is\-Control\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{is\-Control\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::is\-Control\-Edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ae47df0c89e604d2185c12ef1be43e535}
+
+
+Definition at line 83 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a26be9f91b5fae2c62b99ea501e4a6015}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!is\-Crease@{is\-Crease}}
+\index{is\-Crease@{is\-Crease}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{is\-Crease}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::is\-Crease (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a26be9f91b5fae2c62b99ea501e4a6015}
+
+
+Definition at line 86 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a9120bf0ef10c838cd69e402eecd8c896}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!number\-Of\-Faces@{number\-Of\-Faces}}
+\index{number\-Of\-Faces@{number\-Of\-Faces}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{number\-Of\-Faces}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::number\-Of\-Faces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a9120bf0ef10c838cd69e402eecd8c896}
+
+
+Definition at line 85 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!priv\-\_\-dump@{priv\-\_\-dump}}
+\index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{priv\-\_\-dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::priv\-\_\-dump (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os, }
+\item[{const char $\ast$}]{prefix}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}
+
+
+Definition at line 328 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_aef8475bab828f5e100dd12699f0aad9b}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!set\-Control\-Edge@{set\-Control\-Edge}}
+\index{set\-Control\-Edge@{set\-Control\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{set\-Control\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::set\-Control\-Edge (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_aef8475bab828f5e100dd12699f0aad9b}
+
+
+Definition at line 84 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!set\-Crease@{set\-Crease}}
+\index{set\-Crease@{set\-Crease}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{set\-Crease}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::set\-Crease (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}
+
+
+Definition at line 114 of file subdivedge.\-cpp.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a6412679e0438dac8545200df59480783}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!set\-Curve@{set\-Curve}}
+\index{set\-Curve@{set\-Curve}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{set\-Curve}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::set\-Curve (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Control\-Curve} $\ast$}]{curve}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a6412679e0438dac8545200df59480783}
+
+
+Definition at line 89 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_affa2f4fab16979100d12f1823b26aa9c}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!set\-Points@{set\-Points}}
+\index{set\-Points@{set\-Points}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{set\-Points}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::set\-Points (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Point} $\ast$}]{p1, }
+\item[{{\bf Subdivision\-Point} $\ast$}]{p2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_affa2f4fab16979100d12f1823b26aa9c}
+
+
+Definition at line 95 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a0d8b0bc79b1f8d19f2c4798251aeff31}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!start\-Point@{start\-Point}}
+\index{start\-Point@{start\-Point}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{start\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point}$\ast$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::start\-Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a0d8b0bc79b1f8d19f2c4798251aeff31}
+
+
+Definition at line 80 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!swap\-Data@{swap\-Data}}
+\index{swap\-Data@{swap\-Data}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{swap\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::swap\-Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCADGeometry_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}
+
+
+Definition at line 245 of file subdivedge.\-cpp.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a0253d92464fa44ece75199bafc2ab604}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!\-\_\-control\-\_\-edge@{\-\_\-control\-\_\-edge}}
+\index{\-\_\-control\-\_\-edge@{\-\_\-control\-\_\-edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{\-\_\-control\-\_\-edge}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-\_\-control\-\_\-edge\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a0253d92464fa44ece75199bafc2ab604}
+
+
+Definition at line 113 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ae098b2abe43d484178e743a4e0ee2dd1}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!\-\_\-crease@{\-\_\-crease}}
+\index{\-\_\-crease@{\-\_\-crease}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{\-\_\-crease}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-\_\-crease\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ae098b2abe43d484178e743a4e0ee2dd1}
+
+
+Definition at line 112 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ae3d4de49a5c6b332d52a6c4e98704183}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!\-\_\-curve@{\-\_\-curve}}
+\index{\-\_\-curve@{\-\_\-curve}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{\-\_\-curve}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Control\-Curve}$\ast$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-\_\-curve\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ae3d4de49a5c6b332d52a6c4e98704183}
+
+
+Definition at line 114 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_af74c555a9f1e520c8a7092819182c565}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!\-\_\-faces@{\-\_\-faces}}
+\index{\-\_\-faces@{\-\_\-faces}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{\-\_\-faces}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Face}$\ast$$>$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-\_\-faces\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_af74c555a9f1e520c8a7092819182c565}
+
+
+Definition at line 111 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a1df486b149723fe19190b178897f9a27}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!\-\_\-points@{\-\_\-points}}
+\index{\-\_\-points@{\-\_\-points}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point}$\ast$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-\_\-points\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a1df486b149723fe19190b178897f9a27}
+
+
+Definition at line 110 of file subdivedge.\-h.
+
+
+
+\subsection{Property Documentation}
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a2b11b00bcc223691e6e00c4b8db272b6}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!Control\-Edge@{Control\-Edge}}
+\index{Control\-Edge@{Control\-Edge}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{Control\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-Control\-Edge\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a2b11b00bcc223691e6e00c4b8db272b6}
+
+
+Definition at line 62 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_ab36f0260a63d4ca62c45feddf96f8505}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!Crease@{Crease}}
+\index{Crease@{Crease}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{Crease}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-Crease\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_ab36f0260a63d4ca62c45feddf96f8505}
+
+
+Definition at line 59 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_abdc110088d3e486395a31dd7c7328dd4}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!Curve@{Curve}}
+\index{Curve@{Curve}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{Curve}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Control\-Curve} Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-Curve\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_abdc110088d3e486395a31dd7c7328dd4}
+
+
+Definition at line 61 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_aaec4f19ba8274a3b501a06fedb0658cb}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!End\-Point@{End\-Point}}
+\index{End\-Point@{End\-Point}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{End\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point} Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-End\-Point\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_aaec4f19ba8274a3b501a06fedb0658cb}
+
+
+Definition at line 58 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_a5d959fb5043fcad1c24e603b50e9fa95}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!Index@{Index}}
+\index{Index@{Index}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{Index}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-Index\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_a5d959fb5043fcad1c24e603b50e9fa95}
+
+
+Definition at line 60 of file subdivedge.\-h.
+
+\hypertarget{classShipCADGeometry_1_1SubdivisionEdge_add30db0d6a7aac1c8f081012f3cccf03}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}!Start\-Point@{Start\-Point}}
+\index{Start\-Point@{Start\-Point}!ShipCADGeometry::SubdivisionEdge@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge}}
+\subsubsection[{Start\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point} Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Edge\-::\-Start\-Point\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionEdge_add30db0d6a7aac1c8f081012f3cccf03}
+
+
+Definition at line 57 of file subdivedge.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{subdivedge_8h}{subdivedge.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{subdivedge_8cpp}{subdivedge.\-cpp}\end{DoxyCompactItemize}

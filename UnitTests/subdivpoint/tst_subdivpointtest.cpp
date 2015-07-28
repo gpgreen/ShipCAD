@@ -42,38 +42,29 @@ class TestSubdivisionPoint : public QObject
 
 public:
     TestSubdivisionPoint();
-
+    ~TestSubdivisionPoint();
 private:
     SubdivisionSurface* _owner;
 						
 private Q_SLOTS:
-    void initTestCase();
-    void cleanupTestCase();
-    void testCase1();
-    void testCase2();
-    void testCase3();
-    void testCase4();
-    void testCase5();
-    void testCase6();
-    void testCase7();
+    void testCaseConstruct();
+    void testCaseSetVertex();
+    void testCaseSetCoord();
+    void testCaseAddFace();
+    void testCaseAddEdge();
 };
 
 TestSubdivisionPoint::TestSubdivisionPoint()
 {
-	// does nothing
+    _owner = new SubdivisionSurface();
 }
 
-void TestSubdivisionPoint::initTestCase()
-{
-	_owner = new SubdivisionSurface();
-}
-
-void TestSubdivisionPoint::cleanupTestCase()
+TestSubdivisionPoint::~TestSubdivisionPoint()
 {
 	delete _owner;
 }
 
-void TestSubdivisionPoint::testCase1()
+void TestSubdivisionPoint::testCaseConstruct()
 {
     SubdivisionPoint *pt = SubdivisionPoint::construct(_owner);
 	QVERIFY(pt->getCoordinate()[0] == 0 &&
@@ -88,14 +79,14 @@ void TestSubdivisionPoint::testCase1()
 	QVERIFY(pt->getVertexType() == SubdivisionPoint::svRegular);
 }
 
-void TestSubdivisionPoint::testCase2()
+void TestSubdivisionPoint::testCaseSetVertex()
 {
     SubdivisionPoint *pt = SubdivisionPoint::construct(_owner);
     pt->setVertexType(SubdivisionPoint::svCorner);
     QVERIFY(pt->getVertexType() == SubdivisionPoint::svCorner);
 }
 
-void TestSubdivisionPoint::testCase3()
+void TestSubdivisionPoint::testCaseSetCoord()
 {
     SubdivisionPoint *pt = SubdivisionPoint::construct(_owner);
     pt->setCoordinate(QVector3D(1,2,3));
@@ -104,7 +95,7 @@ void TestSubdivisionPoint::testCase3()
 		pt->getCoordinate()[2] == 3);
 }
 
-void TestSubdivisionPoint::testCase4()
+void TestSubdivisionPoint::testCaseAddFace()
 {
     SubdivisionPoint *pt = SubdivisionPoint::construct(_owner);
 	SubdivisionFace *f = SubdivisionFace::construct(_owner);
@@ -118,7 +109,7 @@ void TestSubdivisionPoint::testCase4()
 	QVERIFY(!pt->hasFace(f));
 }
 
-void TestSubdivisionPoint::testCase5()
+void TestSubdivisionPoint::testCaseAddEdge()
 {
     SubdivisionPoint *pt = SubdivisionPoint::construct(_owner);
 	SubdivisionEdge *e = SubdivisionEdge::construct(_owner);
@@ -131,36 +122,7 @@ void TestSubdivisionPoint::testCase5()
 	QVERIFY(!pt->hasEdge(e));
 }
 	
-void TestSubdivisionPoint::testCase6()
-{
-    SubdivisionControlPoint *pt = SubdivisionControlPoint::construct(_owner);
-	QVERIFY(pt->getCoordinate()[0] == 0 &&
-			pt->getCoordinate()[1] == 0 &&
-			pt->getCoordinate()[2] == 0);
-    float c = pt->getCurvature();
-    QVERIFY(c == 0.0 || c == 360.0);
-    QVERIFY(!pt->isBoundaryVertex());
-	QVERIFY(pt->getNormal()[0] == 0 &&
-			pt->getNormal()[1] == 0 &&
-			pt->getNormal()[2] == 0);
-	QVERIFY(pt->getVertexType() == SubdivisionPoint::svRegular);
-	QVERIFY(!pt->isLocked());
-	QVERIFY(pt->isVisible());
-	QVERIFY(!pt->isLeak());
-	QVERIFY(!pt->isSelected());
-}
-
-void TestSubdivisionPoint::testCase7()
-{
-    SubdivisionControlPoint *pt = SubdivisionControlPoint::construct(_owner);
-    pt->setVertexType(SubdivisionPoint::svCorner);
-    QVERIFY(pt->getVertexType() == SubdivisionPoint::svCorner);
-	pt->setLocked(true);
-	pt->setSelected(true);
-	QVERIFY(pt->isLocked());
-	QVERIFY(pt->isSelected());
-}
 
 QTEST_APPLESS_MAIN(TestSubdivisionPoint)
 
-#include "tst_unitteststest.moc"
+#include "tst_subdivpointtest.moc"

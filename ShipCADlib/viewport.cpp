@@ -343,7 +343,7 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
             _angle -= 360;
         while (_angle < -180)
             _angle += 360;
-        _elevation += (event->pos().y() - _prev_pos.y()) / 2.0f;
+        _elevation += -(event->pos().y() - _prev_pos.y()) / 2.0f;
         while (_elevation > 180)
             _elevation -= 360;
         while (_elevation < -180)

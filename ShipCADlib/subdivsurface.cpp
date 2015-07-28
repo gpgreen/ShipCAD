@@ -2621,7 +2621,7 @@ void SubdivisionSurface::subdivide()
     for (size_t i=1; i<=numberOfControlFaces(); ++i) {
         interioredges.clear();
         dest.clear();
-        getControlFace(i-1)->subdivide(this, vertexpoints, edgepoints, facepoints, interioredges, newedgelist, dest);
+        getControlFace(i-1)->subdivide(vertexpoints, edgepoints, facepoints, interioredges, newedgelist, dest);
     }
 
     // delete the edges that are in the list, not dumping the pool, as we have new edges that

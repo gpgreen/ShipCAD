@@ -192,13 +192,11 @@ void SubdivisionFace::flipNormal()
         swap(_points[i], _points[_points.size() - i - 1]);
 }
 
-void SubdivisionFace::edgeCheck(SubdivisionSurface *owner,
-                                SubdivisionPoint* p1,
+void SubdivisionFace::edgeCheck(SubdivisionPoint* p1,
                                 SubdivisionPoint* p2,
                                 bool crease,
                                 bool controledge,
                                 SubdivisionControlCurve* curve,
-                                SubdivisionFace* newface,
                                 vector<SubdivisionEdge*> &interioredges,
                                 vector<SubdivisionEdge*> &controledges
                                 )
@@ -206,9 +204,9 @@ void SubdivisionFace::edgeCheck(SubdivisionSurface *owner,
     SubdivisionEdge* newedge = 0;
     if (p1 == 0 || p2 == 0)
         throw runtime_error("bad points in SubdivisionFace::edgeCheck");
-    newedge = owner->edgeExists(p1, p2);
+    newedge = _owner->edgeExists(p1, p2);
     if (newedge == 0) {
-        newedge = SubdivisionEdge::construct(owner);
+        newedge = SubdivisionEdge::construct(_owner);
         newedge->setControlEdge(controledge);
         newedge->setPoints(p1, p2);
         newedge->startPoint()->addEdge(newedge);
@@ -223,7 +221,7 @@ void SubdivisionFace::edgeCheck(SubdivisionSurface *owner,
         controledges.push_back(newedge);
     if (newedge->isControlEdge())
         newedge->setCurve(curve);
-    newedge->addFace(newface);
+    newedge->addFace(this);
 }
 
 // predicate class to find an element with given point
@@ -256,8 +254,7 @@ struct EdgePred {
     EdgePred (ShipCADGeometry::SubdivisionEdge* queryedge) : _queryedge(queryedge) {}
 };
 
-void SubdivisionFace::subdivide(SubdivisionSurface *owner,
-                                bool controlface,
+void SubdivisionFace::subdivide(bool controlface,
                                 vector<pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
                                 vector<pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
                                 vector<pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
@@ -274,13 +271,13 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
     vector<pair<SubdivisionEdge*,SubdivisionPoint*> >::iterator etmpindex;
     vector<pair<SubdivisionFace*,SubdivisionPoint*> >::iterator ftmpindex;
 
-    if (_points.size() != 3 || owner->getSubdivisionMode() == SubdivisionSurface::fmCatmullClark) {
+    if (_points.size() != 3 || _owner->getSubdivisionMode() == SubdivisionSurface::fmCatmullClark) {
         for (size_t i=1; i<=_points.size(); ++i) {
             p2 = _points[i-1];
             size_t index = (i + _points.size() - 2) % _points.size();
-            prevedge = owner->edgeExists(p2, _points[index]);
+            prevedge = _owner->edgeExists(p2, _points[index]);
             index = (i + _points.size()) % _points.size();
-            curedge = owner->edgeExists(p2, _points[index]);
+            curedge = _owner->edgeExists(p2, _points[index]);
             index = (i - 1) % 4;
             ptmpindex = find_if(vertexpoints.begin(), vertexpoints.end(), PointPred(p2));
             pts[index] = (*ptmpindex).second; // p2.newlocation
@@ -298,13 +295,19 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
             pts[index] = (*etmpindex).second; // prevedge.newlocation
             SubdivisionPoint* prevedgept = pts[index];
             // add the new face
-            newface = SubdivisionFace::construct(owner);
+            newface = SubdivisionFace::construct(_owner);
             dest.push_back(newface);
             // check the edges of the new face
-            edgeCheck(owner, prevedgept, p2pt, prevedge->isCrease(), prevedge->isControlEdge() || controlface, prevedge->getCurve(), newface, interioredges, controledges);
-            edgeCheck(owner, p2pt, curredgept, curedge->isCrease(), curedge->isControlEdge() || controlface, curedge->getCurve(), newface, interioredges, controledges);
-            edgeCheck(owner, curredgept, newlocation, false, false, 0, newface, interioredges, controledges);
-            edgeCheck(owner, prevedgept, newlocation, false, false, 0, newface, interioredges, controledges);
+            newface->edgeCheck(prevedgept, p2pt, prevedge->isCrease(),
+							   prevedge->isControlEdge() || controlface,
+							   prevedge->getCurve(), interioredges, controledges);
+            newface->edgeCheck(p2pt, curredgept, curedge->isCrease(),
+							   curedge->isControlEdge() || controlface,
+							   curedge->getCurve(), interioredges, controledges);
+            newface->edgeCheck(curredgept, newlocation, false, false, 0,
+							   interioredges, controledges);
+            newface->edgeCheck(prevedgept, newlocation, false, false, 0,
+							   interioredges, controledges);
             for (size_t j=0; j<4; ++j) {
                 // add new face to points
                 pts[j]->addFace(newface);
@@ -319,9 +322,9 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
         for (size_t i=1; i<=_points.size(); ++i) {
             p2 = _points[i-1];
             size_t index = (i-2+numberOfPoints()) % numberOfPoints();
-            prevedge = owner->edgeExists(p2, _points[index]);
+            prevedge = _owner->edgeExists(p2, _points[index]);
             index = (i+numberOfPoints()) % numberOfPoints();
-            curedge = owner->edgeExists(p2, _points[index]);
+            curedge = _owner->edgeExists(p2, _points[index]);
 
             index = 0;
             etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(prevedge));
@@ -333,12 +336,17 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
             etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(curedge));
             pts[index] = (*etmpindex).second;
             // add the new face
-            newface = SubdivisionFace::construct(owner);
+            newface = SubdivisionFace::construct(_owner);
             dest.push_back(newface);
             // check the edges of the new face
-            edgeCheck(owner, pts[0], pts[1], prevedge->isCrease(), prevedge->isControlEdge() || controlface, prevedge->getCurve(), newface, interioredges, controledges);
-            edgeCheck(owner, pts[1], pts[2], curedge->isCrease(), curedge->isControlEdge() || controlface, curedge->getCurve(), newface, interioredges, controledges);
-            edgeCheck(owner, pts[2], pts[0], false, false, 0, newface, interioredges, controledges);
+            newface->edgeCheck(pts[0], pts[1], prevedge->isCrease(),
+							   prevedge->isControlEdge() || controlface,
+							   prevedge->getCurve(), interioredges, controledges);
+            newface->edgeCheck(pts[1], pts[2], curedge->isCrease(),
+                               curedge->isControlEdge() || controlface,
+							   curedge->getCurve(), interioredges, controledges);
+            newface->edgeCheck(pts[2], pts[0], false, false, 0,
+							   interioredges, controledges);
             for (size_t j=0; j<3; ++j) {
                 // add new face to points
                 pts[j]->addFace(newface);
@@ -350,16 +358,19 @@ void SubdivisionFace::subdivide(SubdivisionSurface *owner,
         for (size_t i=1; i<=numberOfPoints(); ++i) {
             p2 = _points[i-1];
             size_t index = (i - 2 + numberOfPoints()) % numberOfPoints();
-            prevedge = owner->edgeExists(p2, _points[index]);
+            prevedge = _owner->edgeExists(p2, _points[index]);
             etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(prevedge));
             pts[i-1] = (*etmpindex).second;
         }
         // add the new face
-        newface = SubdivisionFace::construct(owner);
+        newface = SubdivisionFace::construct(_owner);
         dest.push_back(newface);
-        edgeCheck(owner, pts[0], pts[1], false, false, 0, newface, interioredges, controledges);
-        edgeCheck(owner, pts[1], pts[2], false, false, 0, newface, interioredges, controledges);
-        edgeCheck(owner, pts[2], pts[0], false, false, 0, newface, interioredges, controledges);
+        newface->edgeCheck(pts[0], pts[1], false, false, 0,
+						   interioredges, controledges);
+        newface->edgeCheck(pts[1], pts[2], false, false, 0,
+						   interioredges, controledges);
+        newface->edgeCheck(pts[2], pts[0], false, false, 0,
+						   interioredges, controledges);
         for (size_t j=0; j<3; ++j) {
             // add new face to points
             pts[j]->addFace(newface);
@@ -870,19 +881,18 @@ void SubdivisionControlFace::loadFromStream(size_t &lineno, vector<QString> &str
     }
 }
 
-void SubdivisionControlFace::subdivide(SubdivisionSurface *owner,
-                                       vector<pair<SubdivisionPoint*,SubdivisionPoint*> >& vertexpoints,
-                                       vector<pair<SubdivisionEdge*,SubdivisionPoint*> >& edgepoints,
-                                       vector<pair<SubdivisionFace*,SubdivisionPoint*> >& facepoints,
-                                       vector<SubdivisionEdge*>& /*interioredges*/,
-                                       vector<SubdivisionEdge*>& controledges,
-                                       vector<SubdivisionFace*>& /*dest*/)
+void SubdivisionControlFace::subdivide(
+	vector<pair<SubdivisionPoint*,SubdivisionPoint*> >& vertexpoints,
+	vector<pair<SubdivisionEdge*,SubdivisionPoint*> >& edgepoints,
+	vector<pair<SubdivisionFace*,SubdivisionPoint*> >& facepoints,
+	vector<SubdivisionEdge*>& /*interioredges*/,
+	vector<SubdivisionEdge*>& controledges,
+	vector<SubdivisionFace*>& /*dest*/)
 {
     _control_edges.clear();
     if (_children.size() == 0) {
         // not subdivided yet
-        SubdivisionFace::subdivide(owner,
-                                   true,
+        SubdivisionFace::subdivide(true,
                                    vertexpoints,
                                    edgepoints,
                                    facepoints,
@@ -896,8 +906,7 @@ void SubdivisionControlFace::subdivide(SubdivisionSurface *owner,
         vector<SubdivisionEdge*> tmpedges;
         for (size_t i=0; i<_children.size(); ++i) {
             SubdivisionFace* face = _children[i];
-            face->subdivide(owner,
-                            false,
+            face->subdivide(false,
                             vertexpoints,
                             edgepoints,
                             facepoints,

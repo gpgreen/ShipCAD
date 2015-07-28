@@ -70,13 +70,14 @@ public:
     void addPoint(SubdivisionPoint* point);
     void insertPoint(size_t index, SubdivisionPoint* point);
     virtual void clear();
-    virtual void subdivide(SubdivisionSurface* owner, bool controlface,
-                           std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
-                           std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
-                           std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
-                           std::vector<SubdivisionEdge*>& interioredges,
-                           std::vector<SubdivisionEdge*>& controledges,
-                           std::vector<SubdivisionFace*>& dest);
+    virtual void subdivide(
+		bool controlface,
+		std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
+		std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
+		std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
+		std::vector<SubdivisionEdge*>& interioredges,
+		std::vector<SubdivisionEdge*>& controledges,
+		std::vector<SubdivisionFace*>& dest);
 
     // getters/setters
     size_t numberOfPoints() { return _points.size(); }
@@ -113,23 +114,19 @@ protected:
 	 * This method will create edges between 2 points if it doesn't
 	 * exist.
 	 *
-	 * \param owner surface that owns these points
 	 * \param p1 start point of edge
 	 * \param p2 end point of edge
 	 * \param crease whether this edge is a crease
 	 * \param controledge whether this edge is a control edge
 	 * \param curve if edge is a controledge, then pass the curve to be attached
-	 * \param newface the face belonging to edge and p1,p2
 	 * \param interioredges if this edge is an interior edge, add it to this list
 	 * \param controledges if this edge is a control, add it to this list
 	 */
-    void edgeCheck(SubdivisionSurface *owner,
-                   SubdivisionPoint* p1,
+    void edgeCheck(SubdivisionPoint* p1,
                    SubdivisionPoint* p2,
                    bool crease,
                    bool controledge,
                    SubdivisionControlCurve* curve,
-                   SubdivisionFace* newface,
                    std::vector<SubdivisionEdge*> &interioredges,
                    std::vector<SubdivisionEdge*> &controledges);
 
@@ -164,13 +161,13 @@ public:
     SubdivisionControlEdge* insertControlEdge(SubdivisionControlPoint* p1,
                                               SubdivisionControlPoint* p2);
     void removeReferences();
-    virtual void subdivide(SubdivisionSurface* owner,
-                           std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
-                           std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
-                           std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
-                           std::vector<SubdivisionEdge*>& interioredges,
-                           std::vector<SubdivisionEdge*>& controledges,
-                           std::vector<SubdivisionFace*>& dest);
+    virtual void subdivide(
+		std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
+		std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
+		std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
+		std::vector<SubdivisionEdge*>& interioredges,
+		std::vector<SubdivisionEdge*>& controledges,
+		std::vector<SubdivisionFace*>& dest);
     void trace();
 
     // getters/setters

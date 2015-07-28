@@ -32,19 +32,14 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../ShipCADlib/debug/ShipCADlib.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../ShipCADlib/libShipCADlib.a
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../lib/boost_1_55_0/stage/lib/ -llibboost_system-vc100-mt-1_55
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../lib/boost_1_55_0/stage/lib/ -llibboost_system-vc100-mt-gd-1_55
-#else:unix: LIBS += -L/usr/local/lib -lboost_system
+# BOOST
 
-win32: {
-INCLUDEPATH += $$PWD/../../lib/boost_1_55_0
-LIBS += -L$$PWD/../../lib/boost_1_55_0/stage/lib/ -llibboost_system-vc120-mt-gd-1_55
-}
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../lib/boost_1_55_0/stage/lib/ -llibboost_system-vc100-mt-1_55
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../lib/boost_1_55_0/stage/lib/ -llibboost_system-vc100-mt-gd-1_55
+else:unix: LIBS += -L/usr/local/lib -lboost_system
 
-unix!symbian: {
-INCLUDEPATH += /usr/local/include
-LIBS += -L/usr/local/lib/ -lboost_system
-}
+win32:INCLUDEPATH += $$PWD/../../lib/boost_1_55_0
+else:unix!symbian: INCLUDEPATH += /usr/local/include
 
 win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../usr/lib/x86_64-linux-gnu/release/libboost_system.a
 else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../../usr/lib/x86_64-linux-gnu/debug/libboost_system.a

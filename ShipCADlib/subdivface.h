@@ -1,31 +1,31 @@
-/*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
- *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
- *    open source surface-modelling program based on subdivision surfaces and intended for     *
- *    designing ships.                                                                         *
- *                                                                                             *
- *    Copyright © 2005, by Martijn van Engeland                                                *
- *    e-mail                  : Info@FREEship.org                                              *
- *    FREE!ship project page  : https://sourceforge.net/projects/freeship                      *
- *    FREE!ship homepage      : www.FREEship.org                                               *
- *                                                                                             *
- *    This program is free software; you can redistribute it and/or modify it under            *
- *    the terms of the GNU General Public License as published by the                          *
- *    Free Software Foundation; either version 2 of the License, or (at your option)           *
- *    any later version.                                                                       *
- *                                                                                             *
- *    This program is distributed in the hope that it will be useful, but WITHOUT ANY          *
- *    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A          *
- *    PARTICULAR PURPOSE. See the GNU General Public License for more details.                 *
- *                                                                                             *
- *    You should have received a copy of the GNU General Public License along with             *
- *    this program; if not, write to the Free Software Foundation, Inc.,                       *
- *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
- *                                                                                             *
- *#############################################################################################*/
+/*###############################################################################################
+ *    ShipCAD																					*
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>									*
+ *    Original Copyright header below															*
+ *																								*
+ *    This code is distributed as part of the FREE!ship project. FREE!ship is an                *
+ *    open source surface-modelling program based on subdivision surfaces and intended for      *
+ *    designing ships.                                                                          *
+ *                                                                                              *
+ *    Copyright © 2005, by Martijn van Engeland                                                 *
+ *    e-mail                  : Info@FREEship.org                                               *
+ *    FREE!ship project page  : https://sourceforge.net/projects/freeship                       *
+ *    FREE!ship homepage      : www.FREEship.org                                                *
+ *                                                                                              *
+ *    This program is free software; you can redistribute it and/or modify it under             *
+ *    the terms of the GNU General Public License as published by the                           *
+ *    Free Software Foundation; either version 2 of the License, or (at your option)            *
+ *    any later version.                                                                        *
+ *                                                                                              *
+ *    This program is distributed in the hope that it will be useful, but WITHOUT ANY           *
+ *    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A           *
+ *    PARTICULAR PURPOSE. See the GNU General Public License for more details.                  *
+ *                                                                                              *
+ *    You should have received a copy of the GNU General Public License along with              *
+ *    this program; if not, write to the Free Software Foundation, Inc.,                        *
+ *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                     *
+ *                                                                                              *
+ *##############################################################################################*/
 
 #ifndef SUBDIVFACE_H_
 #define SUBDIVFACE_H_
@@ -81,8 +81,18 @@ public:
     // getters/setters
     size_t numberOfPoints() { return _points.size(); }
     bool hasPoint(SubdivisionPoint* pt);
+	/*! \brief get face point
+	 *
+	 * \param index index of point to get
+	 * \return the point at index
+	 */
     SubdivisionPoint* getPoint(size_t index);
     SubdivisionPoint* calculateFacePoint();
+	/*! \brief get index of point in parent surface
+	 *
+	 * \param pt point to find in parent surface
+	 * \return index of that point in parent surface
+	 */
     size_t indexOfPoint(SubdivisionPoint* pt);
     float getArea();
     QVector3D getFaceCenter();
@@ -98,6 +108,21 @@ protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;
     // used in subdivide
+	/*! \brief check for edge between points
+	 *
+	 * This method will create edges between 2 points if it doesn't
+	 * exist.
+	 *
+	 * \param owner surface that owns these points
+	 * \param p1 start point of edge
+	 * \param p2 end point of edge
+	 * \param crease whether this edge is a crease
+	 * \param controledge whether this edge is a control edge
+	 * \param curve if edge is a controledge, then pass the curve to be attached
+	 * \param newface the face belonging to edge and p1,p2
+	 * \param interioredges if this edge is an interior edge, add it to this list
+	 * \param controledges if this edge is a control, add it to this list
+	 */
     void edgeCheck(SubdivisionSurface *owner,
                    SubdivisionPoint* p1,
                    SubdivisionPoint* p2,

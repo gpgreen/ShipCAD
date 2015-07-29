@@ -2555,6 +2555,8 @@ void SubdivisionSurface::selectionDelete()
     setBuild(false);
 }
 
+// edges seem to be usually looked up by points or the edge itself, it might make
+// sense to use a map(s)
 void SubdivisionSurface::subdivide()
 {
     if (numberOfControlFaces() < 1)
@@ -2572,18 +2574,23 @@ void SubdivisionSurface::subdivide()
 
     if (number == 0) {
         facepoints.reserve(numberOfControlFaces());
-        for (size_t i=1; i<=numberOfControlFaces(); ++i) {
-            facepoints.push_back(make_pair(getControlFace(i-1), getControlFace(i-1)->calculateFacePoint()));
+        for (size_t i=0; i<numberOfControlFaces(); ++i) {
+            SubdivisionPoint *pt = getControlFace(i)->calculateFacePoint();
+            if (pt)
+                facepoints.push_back(make_pair(getControlFace(i), pt));
         }
     }
     else {
         facepoints.reserve(4*numberOfControlFaces());
-        for (size_t i=1; i<=numberOfControlFaces(); ++i) {
-            SubdivisionControlFace* ctrlface = getControlFace(i-1);
-            for (size_t j=1; j<=ctrlface->numberOfChildren(); ++j)
-                facepoints.push_back(make_pair(ctrlface->getChild(j-1), ctrlface->getChild(j-1)->calculateFacePoint()));
-            for (size_t j=1; j<=ctrlface->numberOfEdges(); ++j)
-                edgepoints.push_back(make_pair(ctrlface->getEdge(j-1), ctrlface->getEdge(j-1)->calculateEdgePoint()));
+        for (size_t i=0; i<numberOfControlFaces(); ++i) {
+            SubdivisionControlFace* ctrlface = getControlFace(i);
+            for (size_t j=0; j<ctrlface->numberOfChildren(); ++j) {
+                SubdivisionPoint *pt = ctrlface->getChild(j)->calculateFacePoint();
+                if (pt)
+                    facepoints.push_back(make_pair(ctrlface->getChild(j), pt));
+            }
+            for (size_t j=0; j<ctrlface->numberOfEdges(); ++j)
+                edgepoints.push_back(make_pair(ctrlface->getEdge(j), ctrlface->getEdge(j)->calculateEdgePoint()));
         }
     }
     // calculate other edgepoints

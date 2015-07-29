@@ -88,6 +88,17 @@ public:
 	 * \return the point at index
 	 */
     SubdivisionPoint* getPoint(size_t index);
+	/*! \brief Get point on center of face for subdivision
+	 *
+	 * When subdividing a face, each edge is split, and a point is put in
+	 * the center of the face, then all are connected and new faces created.
+	 * If the face is a triangle and we are not using fvCatmullClark, then a
+	 * center point is not created. The face is then divided into triangles,
+	 * instead of quadrilateral faces. In that case this returns a null point
+	 *
+	 * \return the point at center of face, or 0 if triangle and not using fvCatmullClark,
+	 * or the number of face points is less than 3
+	 */
     SubdivisionPoint* calculateFacePoint();
 	/*! \brief get index of point in parent surface
 	 *

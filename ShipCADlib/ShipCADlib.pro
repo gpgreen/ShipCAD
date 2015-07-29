@@ -4,6 +4,8 @@
 #
 #-------------------------------------------------
 
+include(../common.pri)
+
 QT       += opengl
 
 TARGET = ShipCADlib
@@ -49,12 +51,7 @@ HEADERS += shipcadlib.h \
     version.h \
     shader.h
 
-win32: {
-INCLUDEPATH += $$PWD/../../lib/boost_1_55_0
-}
-
 unix:!symbian {
-    INCLUDEPATH += /usr/local/include
     maemo5 {
         target.path = /opt/usr/lib
     } else {

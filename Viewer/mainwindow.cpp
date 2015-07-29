@@ -116,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent) :
     points.push_back(pt);
     pt = surface->addControlPoint(QVector3D(-1,1,0));
     points.push_back(pt);
-    pt = surface->addControlPoint(QVector3D(0,0,-.25));
+    pt = surface->addControlPoint(QVector3D(0,0,-.5));
     points.push_back(pt);
     vector<SubdivisionControlPoint*> fc1;
     fc1.push_back(points[0]);

@@ -30,6 +30,7 @@
 #include <QString>
 #include <QtTest>
 #include <cmath>
+#include <vector>
 #include "subdivpoint.h"
 #include "subdivface.h"
 #include "subdivedge.h"
@@ -51,6 +52,7 @@ private:
 private Q_SLOTS:
     void testCaseConstruct();
     void testCaseAddPoints();
+    void testCaseSubdivision4pt();
 };
 
 SubdivfaceTest::SubdivfaceTest()
@@ -101,6 +103,71 @@ void SubdivfaceTest::testCaseAddPoints()
     QVERIFY2(fc[0] == 0 && abs(fc[1] - 0.6666667) <= 0.000001 && fc[2] == 0, "face center");
     QVector3D fn = face->getFaceNormal();
     QVERIFY2(fn[0] == 0 && fn[1] == 0 && fn[2] == -1, "face normal");
+}
+
+void SubdivfaceTest::testCaseSubdivision4pt()
+{
+    SubdivisionFace *face = new SubdivisionFace(_owner);
+
+    // create vertex points
+    SubdivisionPoint *pt1 = SubdivisionPoint::construct(_owner);
+    pt1->setCoordinate(QVector3D(0,0,0));
+    SubdivisionPoint *pt2 = SubdivisionPoint::construct(_owner);
+    pt2->setCoordinate(QVector3D(1,0,0));
+    SubdivisionPoint *pt3 = SubdivisionPoint::construct(_owner);
+    pt3->setCoordinate(QVector3D(1,1,0));
+    SubdivisionPoint *pt4 = SubdivisionPoint::construct(_owner);
+    pt4->setCoordinate(QVector3D(0,1,0));
+
+    face->addPoint(pt1);
+    face->addPoint(pt2);
+    face->addPoint(pt3);
+    face->addPoint(pt4);
+
+    // create edges
+    SubdivisionEdge *edge1 = SubdivisionEdge::construct(_owner);
+    edge1->setPoints(pt1, pt2);
+    edge1->addFace(face);
+    pt1->addEdge(edge1);
+    pt2->addEdge(edge1);
+    SubdivisionEdge *edge2 = SubdivisionEdge::construct(_owner);
+    edge2->setPoints(pt2, pt3);
+    edge2->addFace(face);
+    pt2->addEdge(edge2);
+    pt3->addEdge(edge2);
+    SubdivisionEdge *edge3 = SubdivisionEdge::construct(_owner);
+    edge3->setPoints(pt3, pt4);
+    edge3->addFace(face);
+    pt3->addEdge(edge3);
+    pt4->addEdge(edge3);
+    SubdivisionEdge *edge4 = SubdivisionEdge::construct(_owner);
+    edge4->setPoints(pt4, pt1);
+    edge4->addFace(face);
+    pt4->addEdge(edge4);
+    pt1->addEdge(edge4);
+
+    vector<pair<SubdivisionPoint*,SubdivisionPoint*> > vertexpoints;
+    vector<pair<SubdivisionFace*,SubdivisionPoint*> > facepoints;
+    vector<pair<SubdivisionEdge*,SubdivisionPoint*> > edgepoints;
+    vector<SubdivisionEdge*> interioredges;
+    vector<SubdivisionEdge*> controledges;
+    vector<SubdivisionFace*> dest;
+
+    // create vertex points
+    for (int i=0; i<face->numberOfPoints(); i++)
+        vertexpoints.push_back(make_pair(face->getPoint(i), face->getPoint(i)->calculateVertexPoint()));
+    // create facepoints
+    facepoints.push_back(make_pair(face, face->calculateFacePoint()));
+    // create edgepoints
+    edgepoints.push_back(make_pair(edge1, edge1->calculateEdgePoint()));
+    edgepoints.push_back(make_pair(edge2, edge2->calculateEdgePoint()));
+    edgepoints.push_back(make_pair(edge3, edge3->calculateEdgePoint()));
+    edgepoints.push_back(make_pair(edge4, edge4->calculateEdgePoint()));
+
+    face->subdivide(false, vertexpoints, edgepoints, facepoints, interioredges, controledges, dest);
+    QVERIFY2(dest.size() == 4, "sb 4 faces");
+    QVERIFY2(interioredges.size() == 12, "sb 12 interior edges");
+    QVERIFY2(controledges.size() == 0, "sb 0 control edges");
 }
 
 QTEST_APPLESS_MAIN(SubdivfaceTest)

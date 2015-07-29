@@ -288,7 +288,7 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
                     }
                     vertices << p3d2;
                 }
-                for (size_t j=0; j<curvelines.size(); ++j)
+                for (int j=0; j<curvelines.size(); ++j)
                     vertices << curvelines[j];
             }
             else {

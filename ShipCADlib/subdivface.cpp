@@ -166,6 +166,8 @@ SubdivisionPoint* SubdivisionFace::calculateFacePoint()
 {
     SubdivisionPoint* result = 0;
     QVector3D centre = ZERO;
+    if (_points.size() < 3)
+        throw range_error("trying to calculate face point with less than 3 points");
     if (_points.size() > 3 || _owner->getSubdivisionMode() == SubdivisionSurface::fmCatmullClark) {
         for (size_t i=0; i<_points.size(); ++i) {
             QVector3D p = _points[i]->getCoordinate();
@@ -753,7 +755,7 @@ void SubdivisionControlFace::loadBinary(FileBuffer &source)
         p1->addFace(this);
     }
     // read layer index
-    int ind;
+    size_t ind;
     source.load(ind);
     if (ind >= 0 && ind < _owner->numberOfLayers())
         _layer = _owner->getLayer(ind);

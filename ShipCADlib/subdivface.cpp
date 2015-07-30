@@ -256,6 +256,9 @@ struct EdgePred {
     EdgePred (ShipCADGeometry::SubdivisionEdge* queryedge) : _queryedge(queryedge) {}
 };
 
+// TODO: facepoints should be common to this face, and then we don't
+// have to search the list each time to find the facepoint for this
+// face
 void SubdivisionFace::subdivide(bool controlface,
                                 vector<pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
                                 vector<pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
@@ -727,7 +730,9 @@ void SubdivisionControlFace::calcExtents()
 void SubdivisionControlFace::clear()
 {
     clearChildren();
+	clearControlEdges();
     _layer = 0;
+	_min = _max = ZERO;
 }
 
 // used to clear all subdivided edges and faces, but not the subdivided points

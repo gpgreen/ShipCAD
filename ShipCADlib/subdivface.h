@@ -62,14 +62,52 @@ class SubdivisionFace : public SubdivisionBase
 
 public:
 
+	/*! \brief Constructor
+	 *
+	 * \param owner parent surface
+	 */
     explicit SubdivisionFace(SubdivisionSurface* owner);
     virtual ~SubdivisionFace();
     
     // modifiers
+	/*! \brief swap normal vector to other face
+	 */
     void flipNormal();
+	/*! \brief add a point to the face
+	 *
+	 * \param point point to add
+	 */
     void addPoint(SubdivisionPoint* point);
+	/*! \brief insert a new point into the face
+	 *
+	 * \param index insert the new point at this index
+	 * \param point point to add to face
+	 */
     void insertPoint(size_t index, SubdivisionPoint* point);
+	/*! \brief reset point attributes to default values
+	 */
     virtual void clear();
+	/*! \brief subdivide the face
+	 *
+	 * \param vertexpoints list of Point <-> Point pairs. The first
+	 * point is a vertex point on this face, the second point is a
+	 * copy of this point to use in the new subdivided faces
+	 *
+	 * \param edgepoints list of Edge <-> Point pairs. The edge is an
+	 * edge on this face. The point is the midpoint of that edge to
+	 * use in the new subdivided faces
+	 *
+	 * \param facepoints list of Face <-> Point
+	 * pairs.  
+	 * 
+	 * \param interioredges after subdivision, the new interior edges
+	 * of the newly created faces will be added to this list
+	 * 
+	 * \param controledges after subdivision, the new edges descended
+	 * from control edges will be added to this list
+	 *
+	 * \param dest the new subdivided faces will be added to this list
+	 */
     virtual void subdivide(
 		bool controlface,
 		std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
@@ -80,7 +118,16 @@ public:
 		std::vector<SubdivisionFace*>& dest);
 
     // getters/setters
+	/*! \brief number of points for this face
+	 *
+	 * \return number of points for this face
+	 */
     size_t numberOfPoints() { return _points.size(); }
+	/*! \brief does the face have this point
+	 *
+	 * \param pt the point to check
+	 * \return true if the point is part of the face
+	 */
     bool hasPoint(SubdivisionPoint* pt);
 	/*! \brief get face point
 	 *
@@ -106,8 +153,18 @@ public:
 	 * \return index of that point in parent surface
 	 */
     size_t indexOfPoint(SubdivisionPoint* pt);
+	/*! \brief calculate the area of this face
+	 */
     float getArea();
+	/*! \brief get coordinates of the center of the face
+	 *
+	 * \return coordinates of the face center
+	 */
     QVector3D getFaceCenter();
+	/*! \brief get coordinates of the face normal
+	 *
+	 * \return coordinates of the face normal
+	 */
     QVector3D getFaceNormal();
 
     // output
@@ -143,7 +200,7 @@ protected:
 
 protected:
 
-    std::vector<SubdivisionPoint*> _points;
+    std::vector<SubdivisionPoint*> _points; /**< points belonging to this face */
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -161,16 +218,55 @@ class SubdivisionControlFace : public SubdivisionFace
 
 public:
 
+	/*! \brief Constructor
+	 *
+	 * \param owner parent surface
+	 */
     explicit SubdivisionControlFace(SubdivisionSurface* owner);
     virtual ~SubdivisionControlFace();
 
     // modifiers
+	/*! \brief get min/max coordinate amongst all children
+	 *
+	 * For each child face, update the min and max value for
+	 * this face.
+	 */
     void calcExtents();
+	/*! \brief reset attributes to default values
+	 */
     virtual void clear();
+	/*! \brief remove all child faces and edges
+	 *
+	 * Remove all child faces and edges and also remove
+	 * them from the parent surface face and edge pools
+	 */
     void clearChildren();
+	/*! \brief remove all control edges of this face
+	 */
     void clearControlEdges() {_control_edges.clear();}
+	/*! \brief add a control edge
+	 *
+	 * BUGBUG: this shouldn't exist here, but belongs to
+	 * surface
+	 *
+	 * Using 2 control points, add a control edge to this face. The
+	 * edge must already exist. If
+	 * the edge already exists between these points, returns this
+	 * edge.
+	 *
+	 * \param p1 start point of edge
+	 * \param p2 end point of edge
+	 * \return new control edge or 0 if no edge exists between
+	 * these 2 points
+	 */
     SubdivisionControlEdge* insertControlEdge(SubdivisionControlPoint* p1,
                                               SubdivisionControlPoint* p2);
+	/*! \brief Removes this face and all edges from points
+	 *
+	 * For each point in the face, remove this face from the point.
+	 * For each edge in the face, remove the face from that edge.
+	 * When done, the points and edges no longer reference this face
+	 */
     void removeReferences();
     virtual void subdivide(
 		std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
@@ -179,6 +275,11 @@ public:
 		std::vector<SubdivisionEdge*>& interioredges,
 		std::vector<SubdivisionEdge*>& controledges,
 		std::vector<SubdivisionFace*>& dest);
+	/*! \brief select all control faces connected to this one
+	 *
+	 * Select all control faces connected to this one on the same
+	 * layer, that are not separated by a crease edge
+	 */
     void trace();
 
     // getters/setters
@@ -228,13 +329,12 @@ protected:
 
 protected:
 
-    SubdivisionLayer* _layer;
-    QVector3D _min;
-    QVector3D _max;
-    std::vector<SubdivisionFace*> _children;    // subdivided faces
-    std::vector<SubdivisionEdge*> _edges;       // subdivided internal edges
-    std::vector<SubdivisionEdge*> _control_edges;   // control edges (may be of SubdivisionEdge type if
-                                                    // this face has been subdivided
+    SubdivisionLayer* _layer;	/**< which layer this face belongs to */
+    QVector3D _min;				/**< minimum coordinate of this face */
+    QVector3D _max;				/**< maximum coordinate of this face */
+    std::vector<SubdivisionFace*> _children;    /**< subdivided faces */
+    std::vector<SubdivisionEdge*> _edges;       /**< subdivided internal edges */
+    std::vector<SubdivisionEdge*> _control_edges;   /**< control edges (may be of SubdivisionEdge type if this face has been subdivided */
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

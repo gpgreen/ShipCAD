@@ -25,19 +25,19 @@ void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a553df49a1137f89d2df2846
 void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_aacd383eb085c4f6b92db89e25be6b3a1}{insert\-Point} (size\-\_\-t index, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$point)
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a413ae7e76f559780c8a69e998974fb75}{clear} ()
-\item 
-virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a85362079fffc9b625e26059bd95cfa55}{subdivide} (\hyperlink{classShipCADGeometry_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner, bool controlface, std\-::vector$<$ std\-::pair$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ $>$ $>$ \&vertexpoints, std\-::vector$<$ std\-::pair$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ $>$ $>$ \&edgepoints, std\-::vector$<$ std\-::pair$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ $>$ $>$ \&facepoints, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&interioredges, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&controledges, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \&dest)
+\begin{DoxyCompactList}\small\item\em reset this element to default values \end{DoxyCompactList}\item 
+virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a934edbf44e524a2ec250f896c3cc182d}{subdivide} (bool controlface, std\-::vector$<$ std\-::pair$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ $>$ $>$ \&vertexpoints, std\-::vector$<$ std\-::pair$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ $>$ $>$ \&edgepoints, std\-::vector$<$ std\-::pair$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ $>$ $>$ \&facepoints, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&interioredges, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&controledges, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \&dest)
 \item 
 size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionFace_acb8b1174cf96615f4e84ca4e62f5979c}{number\-Of\-Points} ()
 \item 
 bool \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a575f9199178fc28c9229fa4c7d2824ef}{has\-Point} (\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$pt)
 \item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a0df579a3063c124ca2355eba4ece7480}{get\-Point} (size\-\_\-t index)
-\item 
+\begin{DoxyCompactList}\small\item\em get face point \end{DoxyCompactList}\item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionFace_aeb9c6f01f3896dc39819265922a04892}{calculate\-Face\-Point} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Get point on center of face for subdivision. \end{DoxyCompactList}\item 
 size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a8b32525b95c836e065cb124a61caec61}{index\-Of\-Point} (\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$pt)
-\item 
+\begin{DoxyCompactList}\small\item\em get index of point in parent surface \end{DoxyCompactList}\item 
 float \hyperlink{classShipCADGeometry_1_1SubdivisionFace_ace99f0fe3b54e57912e5391e0aff84ea}{get\-Area} ()
 \item 
 Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a3574fd6a4241a81faa7f2ff741d07811}{get\-Face\-Center} ()
@@ -45,7 +45,7 @@ Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a3574fd6a4241a8
 Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1SubdivisionFace_add361089333f9d08a411d16ea1782246}{get\-Face\-Normal} ()
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_aa5bd261ae5fc0a1c7fe8cc5328b8477f}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -56,8 +56,8 @@ static \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\
 \item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_ab2f647963b552728f40d8c329318676e}{priv\-\_\-dump} (std\-::ostream \&os, const char $\ast$prefix) const 
 \item 
-void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_ae4a4aa76685437969018d50f912fa410}{edge\-Check} (\hyperlink{classShipCADGeometry_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p1, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p2, bool crease, bool controledge, \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$curve, \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$newface, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&interioredges, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&controledges)
-\end{DoxyCompactItemize}
+void \hyperlink{classShipCADGeometry_1_1SubdivisionFace_a5399f7ec8ed458f6dbc733688c006cf8}{edge\-Check} (\hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p1, \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p2, bool crease, bool controledge, \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$curve, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&interioredges, std\-::vector$<$ \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&controledges)
+\begin{DoxyCompactList}\small\item\em check for edge between points \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -116,7 +116,7 @@ Definition at line 67 of file subdivface.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionFace_a553df49a1137f89d2df2846ffca74842}
 
 
-Definition at line 155 of file subdivface.\-cpp.
+Definition at line 159 of file subdivface.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_aeb9c6f01f3896dc39819265922a04892}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!calculate\-Face\-Point@{calculate\-Face\-Point}}
 \index{calculate\-Face\-Point@{calculate\-Face\-Point}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -127,7 +127,16 @@ Definition at line 155 of file subdivface.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionFace_aeb9c6f01f3896dc39819265922a04892}
 
 
-Definition at line 161 of file subdivface.\-cpp.
+Get point on center of face for subdivision. 
+
+When subdividing a face, each edge is split, and a point is put in the center of the face, then all are connected and new faces created. If the face is a triangle and we are not using fv\-Catmull\-Clark, then a center point is not created. The face is then divided into triangles, instead of quadrilateral faces. In that case this returns a null point
+
+\begin{DoxyReturn}{Returns}
+the point at center of face, or 0 if triangle and not using fv\-Catmull\-Clark, or the number of face points is less than 3 
+\end{DoxyReturn}
+
+
+Definition at line 165 of file subdivface.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_a413ae7e76f559780c8a69e998974fb75}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!clear@{clear}}
 \index{clear@{clear}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -138,6 +147,10 @@ Definition at line 161 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionFace_a413ae7e76f559780c8a69e998974fb75}
 
 
+reset this element to default values 
+
+
+
 Implements \hyperlink{classShipCADGeometry_1_1SubdivisionBase_ae668920d97c0810c72996a531e0ca107}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
 
 
@@ -146,7 +159,7 @@ Reimplemented in \hyperlink{classShipCADGeometry_1_1SubdivisionControlFace_ad168
 
 
 
-Definition at line 177 of file subdivface.\-cpp.
+Definition at line 183 of file subdivface.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_a4a6f182fa7e5cf63fc95c7614805f136}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!construct@{construct}}
 \index{construct@{construct}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -169,6 +182,17 @@ Definition at line 53 of file subdivface.\-cpp.
 ) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionFace_aa5bd261ae5fc0a1c7fe8cc5328b8477f}
 
 
+print out the element to a stream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em prefix} & string to prefix on each line output \\
+\hline
+\end{DoxyParams}
+
+
 Reimplemented from \hyperlink{classShipCADGeometry_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
 
 
@@ -177,26 +201,47 @@ Reimplemented in \hyperlink{classShipCADGeometry_1_1SubdivisionControlFace_a9478
 
 
 
-Definition at line 365 of file subdivface.\-cpp.
+Definition at line 384 of file subdivface.\-cpp.
 
-\hypertarget{classShipCADGeometry_1_1SubdivisionFace_ae4a4aa76685437969018d50f912fa410}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!edge\-Check@{edge\-Check}}
+\hypertarget{classShipCADGeometry_1_1SubdivisionFace_a5399f7ec8ed458f6dbc733688c006cf8}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!edge\-Check@{edge\-Check}}
 \index{edge\-Check@{edge\-Check}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
 \subsubsection[{edge\-Check}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Face\-::edge\-Check (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Surface} $\ast$}]{owner, }
 \item[{{\bf Subdivision\-Point} $\ast$}]{p1, }
 \item[{{\bf Subdivision\-Point} $\ast$}]{p2, }
 \item[{bool}]{crease, }
 \item[{bool}]{controledge, }
 \item[{{\bf Subdivision\-Control\-Curve} $\ast$}]{curve, }
-\item[{{\bf Subdivision\-Face} $\ast$}]{newface, }
 \item[{std\-::vector$<$ {\bf Subdivision\-Edge} $\ast$ $>$ \&}]{interioredges, }
 \item[{std\-::vector$<$ {\bf Subdivision\-Edge} $\ast$ $>$ \&}]{controledges}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionFace_ae4a4aa76685437969018d50f912fa410}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionFace_a5399f7ec8ed458f6dbc733688c006cf8}
 
 
-Definition at line 189 of file subdivface.\-cpp.
+check for edge between points 
+
+This method will create edges between 2 points if it doesn't exist.
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & start point of edge \\
+\hline
+{\em p2} & end point of edge \\
+\hline
+{\em crease} & whether this edge is a crease \\
+\hline
+{\em controledge} & whether this edge is a control edge \\
+\hline
+{\em curve} & if edge is a controledge, then pass the curve to be attached \\
+\hline
+{\em interioredges} & if this edge is an interior edge, add it to this list \\
+\hline
+{\em controledges} & if this edge is a control, add it to this list \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 197 of file subdivface.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_a16d5e005d1c7c847ccf9ba72b67142fa}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!flip\-Normal@{flip\-Normal}}
 \index{flip\-Normal@{flip\-Normal}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -207,7 +252,7 @@ Definition at line 189 of file subdivface.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionFace_a16d5e005d1c7c847ccf9ba72b67142fa}
 
 
-Definition at line 182 of file subdivface.\-cpp.
+Definition at line 188 of file subdivface.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_ace99f0fe3b54e57912e5391e0aff84ea}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!get\-Area@{get\-Area}}
 \index{get\-Area@{get\-Area}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -251,7 +296,19 @@ Definition at line 121 of file subdivface.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionFace_a0df579a3063c124ca2355eba4ece7480}
 
 
-Definition at line 148 of file subdivface.\-cpp.
+get face point 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & index of point to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the point at index 
+\end{DoxyReturn}
+
+
+Definition at line 152 of file subdivface.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_a575f9199178fc28c9229fa4c7d2824ef}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!has\-Point@{has\-Point}}
 \index{has\-Point@{has\-Point}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -262,7 +319,7 @@ Definition at line 148 of file subdivface.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionFace_a575f9199178fc28c9229fa4c7d2824ef}
 
 
-Definition at line 143 of file subdivface.\-cpp.
+Definition at line 147 of file subdivface.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_a8b32525b95c836e065cb124a61caec61}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!index\-Of\-Point@{index\-Of\-Point}}
 \index{index\-Of\-Point@{index\-Of\-Point}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -271,6 +328,18 @@ Definition at line 143 of file subdivface.\-cpp.
 \item[{{\bf Subdivision\-Point} $\ast$}]{pt}
 \end{DoxyParamCaption}
 )}}\label{classShipCADGeometry_1_1SubdivisionFace_a8b32525b95c836e065cb124a61caec61}
+
+
+get index of point in parent surface 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & point to find in parent surface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+index of that point in parent surface 
+\end{DoxyReturn}
 
 
 Definition at line 72 of file subdivface.\-cpp.
@@ -296,7 +365,7 @@ Definition at line 77 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionFace_acb8b1174cf96615f4e84ca4e62f5979c}
 
 
-Definition at line 82 of file subdivface.\-h.
+Definition at line 83 of file subdivface.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionFace_ab2f647963b552728f40d8c329318676e}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!priv\-\_\-dump@{priv\-\_\-dump}}
 \index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
@@ -308,13 +377,12 @@ Definition at line 82 of file subdivface.\-h.
 ) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionFace_ab2f647963b552728f40d8c329318676e}
 
 
-Definition at line 372 of file subdivface.\-cpp.
+Definition at line 391 of file subdivface.\-cpp.
 
-\hypertarget{classShipCADGeometry_1_1SubdivisionFace_a85362079fffc9b625e26059bd95cfa55}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!subdivide@{subdivide}}
+\hypertarget{classShipCADGeometry_1_1SubdivisionFace_a934edbf44e524a2ec250f896c3cc182d}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}!subdivide@{subdivide}}
 \index{subdivide@{subdivide}!ShipCADGeometry::SubdivisionFace@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face}}
 \subsubsection[{subdivide}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Face\-::subdivide (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Surface} $\ast$}]{owner, }
 \item[{bool}]{controlface, }
 \item[{std\-::vector$<$ std\-::pair$<$ {\bf Subdivision\-Point} $\ast$, {\bf Subdivision\-Point} $\ast$ $>$ $>$ \&}]{vertexpoints, }
 \item[{std\-::vector$<$ std\-::pair$<$ {\bf Subdivision\-Edge} $\ast$, {\bf Subdivision\-Point} $\ast$ $>$ $>$ \&}]{edgepoints, }
@@ -323,10 +391,10 @@ Definition at line 372 of file subdivface.\-cpp.
 \item[{std\-::vector$<$ {\bf Subdivision\-Edge} $\ast$ $>$ \&}]{controledges, }
 \item[{std\-::vector$<$ {\bf Subdivision\-Face} $\ast$ $>$ \&}]{dest}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionFace_a85362079fffc9b625e26059bd95cfa55}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionFace_a934edbf44e524a2ec250f896c3cc182d}
 
 
-Definition at line 253 of file subdivface.\-cpp.
+Definition at line 259 of file subdivface.\-cpp.
 
 
 
@@ -336,7 +404,7 @@ Definition at line 253 of file subdivface.\-cpp.
 \subsubsection[{\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Point}$\ast$$>$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Face\-::\-\_\-points\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionFace_a1442d01623618d3bd3d231ac2f61bdf2}
 
 
-Definition at line 113 of file subdivface.\-h.
+Definition at line 146 of file subdivface.\-h.
 
 
 

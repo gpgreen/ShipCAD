@@ -97,6 +97,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>the base class for all subdivision points, edges and faces  
+ <a href="classShipCADGeometry_1_1SubdivisionBase.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ShipCADGeometry::SubdivisionBase:</div>
@@ -108,31 +111,37 @@ Inheritance diagram for ShipCADGeometry::SubdivisionBase:</div>
 <area href="classShipCADGeometry_1_1SubdivisionEdge.html" alt="ShipCADGeometry::SubdivisionEdge" shape="rect" coords="275,112,540,136"/>
 <area href="classShipCADGeometry_1_1SubdivisionFace.html" alt="ShipCADGeometry::SubdivisionFace" shape="rect" coords="550,112,815,136"/>
 <area href="classShipCADGeometry_1_1SubdivisionLayer.html" alt="ShipCADGeometry::SubdivisionLayer" shape="rect" coords="825,112,1090,136"/>
-<area href="classShipCADGeometry_1_1SubdivisionPoint.html" alt="ShipCADGeometry::SubdivisionPoint" shape="rect" coords="1100,112,1365,136"/>
+<area href="classShipCADGeometry_1_1SubdivisionPoint.html" title="3D Point " alt="ShipCADGeometry::SubdivisionPoint" shape="rect" coords="1100,112,1365,136"/>
 <area href="classShipCADGeometry_1_1SubdivisionControlEdge.html" alt="ShipCADGeometry::SubdivisionControlEdge" shape="rect" coords="275,168,540,192"/>
 <area href="classShipCADGeometry_1_1SubdivisionControlFace.html" alt="ShipCADGeometry::SubdivisionControlFace" shape="rect" coords="550,168,815,192"/>
-<area href="classShipCADGeometry_1_1SubdivisionControlPoint.html" alt="ShipCADGeometry::SubdivisionControlPoint" shape="rect" coords="1100,168,1365,192"/>
+<area href="classShipCADGeometry_1_1SubdivisionControlPoint.html" title="Control point. " alt="ShipCADGeometry::SubdivisionControlPoint" shape="rect" coords="1100,168,1365,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad424b99e73d138f565a152ed0ee648cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADGeometry_1_1SubdivisionBase.html#ad424b99e73d138f565a152ed0ee648cb">SubdivisionBase</a> (<a class="el" href="classShipCADGeometry_1_1SubdivisionSurface.html">SubdivisionSurface</a> *owner)</td></tr>
+<tr class="memdesc:ad424b99e73d138f565a152ed0ee648cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ad424b99e73d138f565a152ed0ee648cb">More...</a><br/></td></tr>
 <tr class="separator:ad424b99e73d138f565a152ed0ee648cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12b4adebcd9fb52d4d82d9ff469e144d"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADGeometry_1_1SubdivisionBase.html#a12b4adebcd9fb52d4d82d9ff469e144d">~SubdivisionBase</a> ()</td></tr>
 <tr class="separator:a12b4adebcd9fb52d4d82d9ff469e144d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6003c22ab0149e6f01beff5dde397370"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCADGeometry_1_1SubdivisionSurface.html">SubdivisionSurface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADGeometry_1_1SubdivisionBase.html#a6003c22ab0149e6f01beff5dde397370">getOwner</a> ()</td></tr>
+<tr class="memdesc:a6003c22ab0149e6f01beff5dde397370"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the owning surface  <a href="#a6003c22ab0149e6f01beff5dde397370">More...</a><br/></td></tr>
 <tr class="separator:a6003c22ab0149e6f01beff5dde397370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e4716f15f6a81c2c5dd26b9931ecb91"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADGeometry_1_1SubdivisionBase.html#a8e4716f15f6a81c2c5dd26b9931ecb91">setOwner</a> (<a class="el" href="classShipCADGeometry_1_1SubdivisionSurface.html">SubdivisionSurface</a> *newowner)</td></tr>
+<tr class="memdesc:a8e4716f15f6a81c2c5dd26b9931ecb91"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the owing surface  <a href="#a8e4716f15f6a81c2c5dd26b9931ecb91">More...</a><br/></td></tr>
 <tr class="separator:a8e4716f15f6a81c2c5dd26b9931ecb91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae668920d97c0810c72996a531e0ca107"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADGeometry_1_1SubdivisionBase.html#ae668920d97c0810c72996a531e0ca107">clear</a> ()=0</td></tr>
+<tr class="memdesc:ae668920d97c0810c72996a531e0ca107"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset this element to default values  <a href="#ae668920d97c0810c72996a531e0ca107">More...</a><br/></td></tr>
 <tr class="separator:ae668920d97c0810c72996a531e0ca107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7807e64ac8d2acc3da572e03cf0523b6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADGeometry_1_1SubdivisionBase.html#a7807e64ac8d2acc3da572e03cf0523b6">dump</a> (std::ostream &amp;os, const char *prefix=&quot;&quot;) const </td></tr>
+<tr class="memdesc:a7807e64ac8d2acc3da572e03cf0523b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">print out the element to a stream  <a href="#a7807e64ac8d2acc3da572e03cf0523b6">More...</a><br/></td></tr>
 <tr class="separator:a7807e64ac8d2acc3da572e03cf0523b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a024aa781bbf2e54b6fb088e33126998e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADGeometry_1_1SubdivisionBase.html#a024aa781bbf2e54b6fb088e33126998e">priv_dump</a> (std::ostream &amp;os, const char *prefix) const </td></tr>
+<tr class="memdesc:a024aa781bbf2e54b6fb088e33126998e"><td class="mdescLeft">&#160;</td><td class="mdescRight">dump the element to a stream  <a href="#a024aa781bbf2e54b6fb088e33126998e">More...</a><br/></td></tr>
 <tr class="separator:a024aa781bbf2e54b6fb088e33126998e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -146,8 +155,9 @@ Properties</h2></td></tr>
 <tr class="separator:af3adf1c6df9fd4ddb5c945193fe5c65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00044">44</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
+<div class="textblock"><p>the base class for all subdivision points, edges and faces </p>
+
+<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00046">46</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ad424b99e73d138f565a152ed0ee648cb"></a>
 <div class="memitem">
@@ -170,6 +180,14 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">owner</td><td>which surface this element belongs to </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Definition at line <a class="el" href="subdivbase_8cpp_source.html#l00040">40</a> of file <a class="el" href="subdivbase_8cpp_source.html">subdivbase.cpp</a>.</p>
 
@@ -222,7 +240,9 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classShipCADGeometry_1_1SubdivisionControlFace.html#ad168e31f0ef2537b3cd0f58b0c1c54e2">ShipCADGeometry::SubdivisionControlFace</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionLayer.html#a7046d17ba87dd5ce7399f22ae327fc6e">ShipCADGeometry::SubdivisionLayer</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionControlCurve.html#aa574f77f4abc5a8eef05e7cef7f8d8a2">ShipCADGeometry::SubdivisionControlCurve</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionFace.html#a413ae7e76f559780c8a69e998974fb75">ShipCADGeometry::SubdivisionFace</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionPoint.html#aef22d2b6cb48e57ce69652eeb7a69711">ShipCADGeometry::SubdivisionPoint</a>, and <a class="el" href="classShipCADGeometry_1_1SubdivisionEdge.html#a08358ac65c2d710855b8b93c64ce9d02">ShipCADGeometry::SubdivisionEdge</a>.</p>
+<p>reset this element to default values </p>
+
+<p>Implemented in <a class="el" href="classShipCADGeometry_1_1SubdivisionControlFace.html#ad168e31f0ef2537b3cd0f58b0c1c54e2">ShipCADGeometry::SubdivisionControlFace</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionPoint.html#aef22d2b6cb48e57ce69652eeb7a69711">ShipCADGeometry::SubdivisionPoint</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionLayer.html#a7046d17ba87dd5ce7399f22ae327fc6e">ShipCADGeometry::SubdivisionLayer</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionControlCurve.html#aa574f77f4abc5a8eef05e7cef7f8d8a2">ShipCADGeometry::SubdivisionControlCurve</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionFace.html#a413ae7e76f559780c8a69e998974fb75">ShipCADGeometry::SubdivisionFace</a>, and <a class="el" href="classShipCADGeometry_1_1SubdivisionEdge.html#a08358ac65c2d710855b8b93c64ce9d02">ShipCADGeometry::SubdivisionEdge</a>.</p>
 
 </div>
 </div>
@@ -258,7 +278,16 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classShipCADGeometry_1_1SubdivisionControlFace.html#a947868fba3e9bb6c587847fb9245c9ff">ShipCADGeometry::SubdivisionControlFace</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionControlPoint.html#a4a9d6e45291c27f19f0d76c9b9d19048">ShipCADGeometry::SubdivisionControlPoint</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionControlEdge.html#abdfa96ff05eff404214a92d38d7eb715">ShipCADGeometry::SubdivisionControlEdge</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionLayer.html#ab41e005f720a2bba4b2efa74bfd5943e">ShipCADGeometry::SubdivisionLayer</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionPoint.html#aed72cf5e8dc67e980010d195f3a376a3">ShipCADGeometry::SubdivisionPoint</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionEdge.html#a14cc58877644ebd7b7ebffbdf8ef87f7">ShipCADGeometry::SubdivisionEdge</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionControlCurve.html#a30e8d074583a386be2ab6343cb5f8502">ShipCADGeometry::SubdivisionControlCurve</a>, and <a class="el" href="classShipCADGeometry_1_1SubdivisionFace.html#aa5bd261ae5fc0a1c7fe8cc5328b8477f">ShipCADGeometry::SubdivisionFace</a>.</p>
+<p>print out the element to a stream </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>the output stream </td></tr>
+    <tr><td class="paramname">prefix</td><td>string to prefix on each line output </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classShipCADGeometry_1_1SubdivisionControlPoint.html#a4a9d6e45291c27f19f0d76c9b9d19048">ShipCADGeometry::SubdivisionControlPoint</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionControlFace.html#a947868fba3e9bb6c587847fb9245c9ff">ShipCADGeometry::SubdivisionControlFace</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionPoint.html#aed72cf5e8dc67e980010d195f3a376a3">ShipCADGeometry::SubdivisionPoint</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionControlEdge.html#abdfa96ff05eff404214a92d38d7eb715">ShipCADGeometry::SubdivisionControlEdge</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionLayer.html#ab41e005f720a2bba4b2efa74bfd5943e">ShipCADGeometry::SubdivisionLayer</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionFace.html#aa5bd261ae5fc0a1c7fe8cc5328b8477f">ShipCADGeometry::SubdivisionFace</a>, <a class="el" href="classShipCADGeometry_1_1SubdivisionEdge.html#a14cc58877644ebd7b7ebffbdf8ef87f7">ShipCADGeometry::SubdivisionEdge</a>, and <a class="el" href="classShipCADGeometry_1_1SubdivisionControlCurve.html#a30e8d074583a386be2ab6343cb5f8502">ShipCADGeometry::SubdivisionControlCurve</a>.</p>
 
 <p>Definition at line <a class="el" href="subdivbase_8cpp_source.html#l00051">51</a> of file <a class="el" href="subdivbase_8cpp_source.html">subdivbase.cpp</a>.</p>
 
@@ -285,7 +314,10 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00054">54</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
+<p>get the owning surface </p>
+<dl class="section return"><dt>Returns</dt><dd>the owning surface </dd></dl>
+
+<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00064">64</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
 
 </div>
 </div>
@@ -321,6 +353,15 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>dump the element to a stream </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>the output stream </td></tr>
+    <tr><td class="paramname">prefix</td><td>string to prefix on each line output </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Definition at line <a class="el" href="subdivbase_8cpp_source.html#l00057">57</a> of file <a class="el" href="subdivbase_8cpp_source.html">subdivbase.cpp</a>.</p>
 
 </div>
@@ -347,7 +388,15 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00055">55</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
+<p>set the owing surface </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newowner</td><td>the owning surface </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00069">69</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
 
 </div>
 </div>
@@ -369,8 +418,9 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>the owning surface </p>
 
-<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00069">69</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00094">94</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
 
 </div>
 </div>
@@ -393,7 +443,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00047">47</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivbase_8h_source.html#l00049">49</a> of file <a class="el" href="subdivbase_8h_source.html">subdivbase.h</a>.</p>
 
 </div>
 </div>
@@ -404,7 +454,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 26 2015 18:45:16 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Jul 31 2015 22:35:40 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

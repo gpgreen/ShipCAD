@@ -34,7 +34,7 @@ size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_ac25e800b3f77d61
 bool \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_ab2d11ebf60ad6edd818eb0c42971946c}{calculate\-Intersection\-Points} (\hyperlink{classShipCADGeometry_1_1SubdivisionLayer}{Subdivision\-Layer} $\ast$layer)
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_a7046d17ba87dd5ce7399f22ae327fc6e}{clear} ()
-\item 
+\begin{DoxyCompactList}\small\item\em reset this element to default values \end{DoxyCompactList}\item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_a319ae070f596e92307671cda0a607887}{assign\-Properties} (\hyperlink{classShipCADGeometry_1_1SubdivisionLayer}{Subdivision\-Layer} $\ast$source)
 \item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_a75d5f29031d9c93f291d370c79614e87}{move\-Down} ()
@@ -112,7 +112,7 @@ void \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_a502c7889a73015d4295fb9
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_a86f8600ffbf3973bc31c99bdb9e5b18d}{draw} (\hyperlink{classShipCADGeometry_1_1Viewport}{Viewport} \&vp)
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionLayer_ab41e005f720a2bba4b2efa74bfd5943e}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -242,6 +242,10 @@ Definition at line 230 of file subdivlayer.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionLayer_a7046d17ba87dd5ce7399f22ae327fc6e}
 
 
+reset this element to default values 
+
+
+
 Implements \hyperlink{classShipCADGeometry_1_1SubdivisionBase_ae668920d97c0810c72996a531e0ca107}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
 
 
@@ -301,6 +305,17 @@ Definition at line 364 of file subdivlayer.\-cpp.
 \item[{const char $\ast$}]{prefix = {\ttfamily \char`\"{}\char`\"{}}}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionLayer_ab41e005f720a2bba4b2efa74bfd5943e}
+
+
+print out the element to a stream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em prefix} & string to prefix on each line output \\
+\hline
+\end{DoxyParams}
 
 
 Reimplemented from \hyperlink{classShipCADGeometry_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.

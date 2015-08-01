@@ -29,7 +29,7 @@ void \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_a9469b178a88269d
 void \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_a1155b0abe401a7128369a589b6e6ac9c}{add\-Point} (\hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint}{Subdivision\-Control\-Point} $\ast$p)
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_aa574f77f4abc5a8eef05e7cef7f8d8a2}{clear} ()
-\item 
+\begin{DoxyCompactList}\small\item\em reset this element to default values \end{DoxyCompactList}\item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_a34e280e9ba6e6705577d1afd229e9f20}{reset\-Div\-Points} ()
 \item 
 bool \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_a8b3c57aba1c16b77b902daacd7b88d0c}{is\-Selected} ()
@@ -65,7 +65,7 @@ void \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_a22726dc4edf385c
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_a4d7d8e87dc582529e763039ffe593360}{draw} (\hyperlink{classShipCADGeometry_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCADGeometry_1_1LineShader}{Line\-Shader} $\ast$lineshader)
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionControlCurve_a30e8d074583a386be2ab6343cb5f8502}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -144,6 +144,10 @@ Definition at line 95 of file subdivcontrolcurve.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionControlCurve_aa574f77f4abc5a8eef05e7cef7f8d8a2}
 
 
+reset this element to default values 
+
+
+
 Implements \hyperlink{classShipCADGeometry_1_1SubdivisionBase_ae668920d97c0810c72996a531e0ca107}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
 
 
@@ -192,6 +196,17 @@ Definition at line 221 of file subdivcontrolcurve.\-cpp.
 \item[{const char $\ast$}]{prefix = {\ttfamily \char`\"{}\char`\"{}}}
 \end{DoxyParamCaption}
 ) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionControlCurve_a30e8d074583a386be2ab6343cb5f8502}
+
+
+print out the element to a stream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em prefix} & string to prefix on each line output \\
+\hline
+\end{DoxyParams}
 
 
 Reimplemented from \hyperlink{classShipCADGeometry_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.

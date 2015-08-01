@@ -3,6 +3,11 @@
 }
 
 
+Control point.  
+
+
+
+
 {\ttfamily \#include $<$subdivpoint.\-h$>$}
 
 Inheritance diagram for Ship\-C\-A\-D\-Geometry\-:\-:Subdivision\-Control\-Point\-:\begin{figure}[H]
@@ -15,7 +20,7 @@ Inheritance diagram for Ship\-C\-A\-D\-Geometry\-:\-:Subdivision\-Control\-Point
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a812f4e2343926ef41bc7104f0f7b1dd9}{Subdivision\-Control\-Point} (\hyperlink{classShipCADGeometry_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 virtual \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_aed35211e2f60cd5ed1de628d732e4791}{$\sim$\-Subdivision\-Control\-Point} ()
 \item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a3c11cf5f0a22b44cbc8674a5d82942b0}{collapse} ()
@@ -35,7 +40,7 @@ bool \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_aaaa65fafa27eb87
 void \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a5f2cde3c54ca44c4b4d3ded0e3bc4ded}{set\-Locked} (bool val)
 \item 
 virtual size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a13c569f0894ba6193a3abf894bc4b517}{get\-Index} ()
-\item 
+\begin{DoxyCompactList}\small\item\em index of this point in parent surface \end{DoxyCompactList}\item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a54a5233e02ef34a174c24d5dcf3c6407}{set\-Coordinate} (const Q\-Vector3\-D \&val)
 \item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a989c801ca1c836ca73f77c68d719f546}{load\-\_\-binary} (\hyperlink{classShipCADGeometry_1_1FileBuffer}{File\-Buffer} \&source)
@@ -47,7 +52,7 @@ void \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a09769bfb0b63980
 void \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a60cc866bff57473700fbea4e17adcb4d}{save\-To\-Stream} (std\-::vector$<$ Q\-String $>$ \&strings)
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a4a9d6e45291c27f19f0d76c9b9d19048}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -82,9 +87,11 @@ bool \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a722a0531b6f2740
 
 
 \subsection{Detailed Description}
+Control point. 
 
+Subdivision Surfaces consist of control points which define the surface contour 
 
-Definition at line 126 of file subdivpoint.\-h.
+Definition at line 216 of file subdivpoint.\-h.
 
 
 
@@ -96,6 +103,17 @@ Definition at line 126 of file subdivpoint.\-h.
 \item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a812f4e2343926ef41bc7104f0f7b1dd9}
+
+
+Constructor. 
+
+New points should be created with the static construct method
+
+
+\begin{DoxyParams}{Parameters}
+{\em owner} & the surface this control point belongs to \\
+\hline
+\end{DoxyParams}
 
 
 Definition at line 519 of file subdivpoint.\-cpp.
@@ -158,6 +176,17 @@ Definition at line 820 of file subdivpoint.\-cpp.
 ) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a4a9d6e45291c27f19f0d76c9b9d19048}
 
 
+print out the element to a stream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em prefix} & string to prefix on each line output \\
+\hline
+\end{DoxyParams}
+
+
 Reimplemented from \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_aed72cf5e8dc67e980010d195f3a376a3}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}.
 
 
@@ -182,6 +211,13 @@ Definition at line 532 of file subdivpoint.\-cpp.
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a13c569f0894ba6193a3abf894bc4b517}
+
+
+index of this point in parent surface 
+
+\begin{DoxyReturn}{Returns}
+the index of this point in parent surface 
+\end{DoxyReturn}
 
 
 Reimplemented from \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a8406682549c10ec9e1a184132f6ed2f0}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}.
@@ -210,7 +246,7 @@ Definition at line 598 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_aaaa65fafa27eb876db3b1d5fc646aba8}
 
 
-Definition at line 148 of file subdivpoint.\-h.
+Definition at line 244 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionControlPoint_af446fc02c7dc2e20383e741f71f4c358}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}!is\-Selected@{is\-Selected}}
 \index{is\-Selected@{is\-Selected}!ShipCADGeometry::SubdivisionControlPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}}
@@ -334,9 +370,9 @@ Definition at line 603 of file subdivpoint.\-cpp.
 \hypertarget{classShipCADGeometry_1_1SubdivisionControlPoint_a65710e5c15163d01dcfdb562abb23103}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}!\-\_\-locked@{\-\_\-locked}}
 \index{\-\_\-locked@{\-\_\-locked}!ShipCADGeometry::SubdivisionControlPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}}
 \subsubsection[{\-\_\-locked}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point\-::\-\_\-locked\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a65710e5c15163d01dcfdb562abb23103}
+whether point is locked 
 
-
-Definition at line 174 of file subdivpoint.\-h.
+Definition at line 274 of file subdivpoint.\-h.
 
 
 
@@ -346,35 +382,35 @@ Definition at line 174 of file subdivpoint.\-h.
 \subsubsection[{Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point\-::\-Color\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_aecfab9d47ea8e16714ce095e3e055e55}
 
 
-Definition at line 129 of file subdivpoint.\-h.
+Definition at line 219 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionControlPoint_a722a0531b6f27404b82850de2305dbea}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}!Is\-Leak@{Is\-Leak}}
 \index{Is\-Leak@{Is\-Leak}!ShipCADGeometry::SubdivisionControlPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}}
 \subsubsection[{Is\-Leak}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point\-::\-Is\-Leak\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a722a0531b6f27404b82850de2305dbea}
 
 
-Definition at line 133 of file subdivpoint.\-h.
+Definition at line 223 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionControlPoint_a1e192709a33919e76207ebce39c4c916}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}!Locked@{Locked}}
 \index{Locked@{Locked}!ShipCADGeometry::SubdivisionControlPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}}
 \subsubsection[{Locked}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point\-::\-Locked\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a1e192709a33919e76207ebce39c4c916}
 
 
-Definition at line 130 of file subdivpoint.\-h.
+Definition at line 220 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionControlPoint_a8ae4af44e0ff44086685a9b3a362dd43}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}!Selected@{Selected}}
 \index{Selected@{Selected}!ShipCADGeometry::SubdivisionControlPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}}
 \subsubsection[{Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point\-::\-Selected\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a8ae4af44e0ff44086685a9b3a362dd43}
 
 
-Definition at line 131 of file subdivpoint.\-h.
+Definition at line 221 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionControlPoint_a1170db5bc9091fb18f6dfb3fd61d4413}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}!Visible@{Visible}}
 \index{Visible@{Visible}!ShipCADGeometry::SubdivisionControlPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}}
 \subsubsection[{Visible}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point\-::\-Visible\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionControlPoint_a1170db5bc9091fb18f6dfb3fd61d4413}
 
 
-Definition at line 132 of file subdivpoint.\-h.
+Definition at line 222 of file subdivpoint.\-h.
 
 
 

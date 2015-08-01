@@ -1,7 +1,7 @@
 var searchData=
 [
   ['edge',['edge',['../structSurfIntersectionData.html#a31e44618f1b59ddee1aef3dcff15fa6e',1,'SurfIntersectionData']]],
-  ['edgecheck',['edgeCheck',['../classShipCADGeometry_1_1SubdivisionFace.html#ae4a4aa76685437969018d50f912fa410',1,'ShipCADGeometry::SubdivisionFace']]],
+  ['edgecheck',['edgeCheck',['../classShipCADGeometry_1_1SubdivisionFace.html#a5399f7ec8ed458f6dbc733688c006cf8',1,'ShipCADGeometry::SubdivisionFace']]],
   ['edgeconnect',['edgeConnect',['../classShipCADGeometry_1_1SubdivisionSurface.html#aa0460120d8a093682ca352a47affdb87',1,'ShipCADGeometry::SubdivisionSurface']]],
   ['edgeexists',['edgeExists',['../classShipCADGeometry_1_1SubdivisionSurface.html#adfdeabdc19eb55a7ba4ab0b607207300',1,'ShipCADGeometry::SubdivisionSurface']]],
   ['edgepred',['EdgePred',['../structEdgePred.html',1,'EdgePred'],['../structEdgePred.html#a2724c226c11bfc8a0586f08f022fb8e7',1,'EdgePred::EdgePred()']]],

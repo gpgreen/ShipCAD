@@ -3,6 +3,11 @@
 }
 
 
+3\-D Point  
+
+
+
+
 {\ttfamily \#include $<$subdivpoint.\-h$>$}
 
 Inheritance diagram for Ship\-C\-A\-D\-Geometry\-:\-:Subdivision\-Point\-:\begin{figure}[H]
@@ -24,35 +29,35 @@ enum \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567f
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_aed60af1f2fcbc89bad438a6a131a9f52}{Subdivision\-Point} (\hyperlink{classShipCADGeometry_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
-\item 
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 virtual \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a218f451cd47873d61a4a987ec0cb3e6a}{$\sim$\-Subdivision\-Point} ()
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_aef22d2b6cb48e57ce69652eeb7a69711}{clear} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Reset contents of the Point to default values. \end{DoxyCompactList}\item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_acd07a93927bf7b6bfe9b4a3233efffdf}{add\-Edge} (\hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$edge)
-\item 
+\begin{DoxyCompactList}\small\item\em add an Edge \end{DoxyCompactList}\item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a077ca16509feb6db73fa40a0098b72b4}{add\-Face} (\hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
-\item 
+\begin{DoxyCompactList}\small\item\em add a Face \end{DoxyCompactList}\item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a5c1e66b5a28923dca99fe856ce1dff0c}{delete\-Edge} (\hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$edge)
-\item 
+\begin{DoxyCompactList}\small\item\em delete an Edge \end{DoxyCompactList}\item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a7ed94fd26e20c2e30d1f36be6b1a9b29}{delete\-Face} (\hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
-\item 
+\begin{DoxyCompactList}\small\item\em delete a Face \end{DoxyCompactList}\item 
 void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a63d20b811bb4af05b5f06014efd9385b}{destroy} ()
 \item 
 float \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_aa07a859d70f97e57fc5318fc64a9d897}{get\-Curvature} ()
-\item 
+\begin{DoxyCompactList}\small\item\em find the curvature of the surface at this point \end{DoxyCompactList}\item 
 Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a0c9e47af796dacd9542d065bbd0d0fcf}{averaging} ()
-\item 
+\begin{DoxyCompactList}\small\item\em find the 3\-D coordinates of a point \end{DoxyCompactList}\item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a92632ddbe28fb6901e445b60eab8d3ee}{calculate\-Vertex\-Point} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Create a vertex point. \end{DoxyCompactList}\item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43}{vertex\-\_\-type\-\_\-t} \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a42fed467d1f925a9b8b6c46599cf81f4}{from\-Int} (int val)
-\item 
+\begin{DoxyCompactList}\small\item\em gets a vertex\-\_\-type\-\_\-t from integer \end{DoxyCompactList}\item 
 Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a0cf49d3e181eb00c08119721b33275bc}{get\-Coordinate} ()
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a98ab99a0ccc4709a40e05b36147c0f55}{set\-Coordinate} (const Q\-Vector3\-D \&val)
 \item 
 Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a8dd5facd4006480baea4a7f4487094f5}{get\-Normal} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Calculate normal vector. \end{DoxyCompactList}\item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a673d2a2c94f52e5523a012959417dcc3}{get\-Face} (size\-\_\-t index)
 \item 
 \hyperlink{classShipCADGeometry_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a518c4e3dc5de74950c87ff0f733716ba}{get\-Edge} (size\-\_\-t index)
@@ -60,7 +65,7 @@ Q\-Vector3\-D \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a8dd5facd40064
 bool \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_afbcf1244015a92be04faed20163699f7}{is\-Boundary\-Vertex} ()
 \item 
 virtual size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a8406682549c10ec9e1a184132f6ed2f0}{get\-Index} ()
-\item 
+\begin{DoxyCompactList}\small\item\em index of this point in parent surface \end{DoxyCompactList}\item 
 size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a7f798acd30dd4f5c9d0a9832ddd088de}{number\-Of\-Edges} ()
 \item 
 size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a24915c41e00cd2781aa40b09c7425486}{number\-Of\-Faces} ()
@@ -84,12 +89,12 @@ bool \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a720d2fc986ba8a365e8722
 void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a21d0f7b28fb19cb9f8d905c5f6eb9110}{set\-Vertex\-Type} (\hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43}{vertex\-\_\-type\-\_\-t} nt)
 \item 
 virtual void \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_aed72cf5e8dc67e980010d195f3a376a3}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \hyperlink{classShipCADGeometry_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a8e907cca747b0483374d4fdde8eb4ad1}{construct} (\hyperlink{classShipCADGeometry_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em make a point \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -126,9 +131,11 @@ size\-\_\-t \hyperlink{classShipCADGeometry_1_1SubdivisionPoint_a3603dcd95c922b3
 
 
 \subsection{Detailed Description}
+3\-D Point 
 
+Used on boundaries of Faces. 
 
-Definition at line 52 of file subdivpoint.\-h.
+Definition at line 57 of file subdivpoint.\-h.
 
 
 
@@ -141,17 +148,17 @@ Definition at line 52 of file subdivpoint.\-h.
 \begin{description}
 \index{sv\-Regular@{sv\-Regular}!Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!sv\-Regular@{sv\-Regular}}\item[{\em 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43a30dab596d2a968d283f161c490768ab0}{sv\-Regular}\label{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43a30dab596d2a968d283f161c490768ab0}
-}]\index{sv\-Crease@{sv\-Crease}!Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!sv\-Crease@{sv\-Crease}}\item[{\em 
+}]a regular point, no crease edges \index{sv\-Crease@{sv\-Crease}!Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!sv\-Crease@{sv\-Crease}}\item[{\em 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43a7724ab9a0642a0ad21a896fb61a38035}{sv\-Crease}\label{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43a7724ab9a0642a0ad21a896fb61a38035}
-}]\index{sv\-Dart@{sv\-Dart}!Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!sv\-Dart@{sv\-Dart}}\item[{\em 
+}]crease point, exactly 2 crease edges \index{sv\-Dart@{sv\-Dart}!Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!sv\-Dart@{sv\-Dart}}\item[{\em 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43a94b87414422f77b76ecdbfadf29b985c}{sv\-Dart}\label{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43a94b87414422f77b76ecdbfadf29b985c}
-}]\index{sv\-Corner@{sv\-Corner}!Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!sv\-Corner@{sv\-Corner}}\item[{\em 
+}]dart point, exactly 1 crease edge \index{sv\-Corner@{sv\-Corner}!Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!sv\-Corner@{sv\-Corner}}\item[{\em 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43adaf8032ead1bd79e03cff882b7b3987f}{sv\-Corner}\label{classShipCADGeometry_1_1SubdivisionPoint_a03df9289cd8543cd3a567fa6c8e44c43adaf8032ead1bd79e03cff882b7b3987f}
-}]\end{description}
+}]corner point that has more than 2 crease edges \end{description}
 \end{Desc}
 
 
-Definition at line 64 of file subdivpoint.\-h.
+Definition at line 69 of file subdivpoint.\-h.
 
 
 
@@ -164,6 +171,10 @@ Definition at line 64 of file subdivpoint.\-h.
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_aed60af1f2fcbc89bad438a6a131a9f52}
 
+
+Constructor. 
+
+Use the static construct method to create points 
 
 Definition at line 65 of file subdivpoint.\-cpp.
 
@@ -190,6 +201,15 @@ Definition at line 71 of file subdivpoint.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_acd07a93927bf7b6bfe9b4a3233efffdf}
 
 
+add an Edge 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & the edge to add to this point \\
+\hline
+\end{DoxyParams}
+
+
 Definition at line 304 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a077ca16509feb6db73fa40a0098b72b4}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!add\-Face@{add\-Face}}
@@ -199,6 +219,15 @@ Definition at line 304 of file subdivpoint.\-cpp.
 \item[{{\bf Subdivision\-Face} $\ast$}]{face}
 \end{DoxyParamCaption}
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_a077ca16509feb6db73fa40a0098b72b4}
+
+
+add a Face 
+
+
+\begin{DoxyParams}{Parameters}
+{\em face} & the face to add to this point \\
+\hline
+\end{DoxyParams}
 
 
 Definition at line 310 of file subdivpoint.\-cpp.
@@ -225,6 +254,15 @@ Definition at line 121 of file subdivpoint.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_a0c9e47af796dacd9542d065bbd0d0fcf}
 
 
+find the 3\-D coordinates of a point 
+
+Get coordinates for this point from faces and edges attached to this point If this is a crease point, then take all opposite end points of edges If this is not a crease point, but all other kinds, then take all points on faces attached to this point, weight them and calculate an average
+
+\begin{DoxyReturn}{Returns}
+coordinates of the calculated point 
+\end{DoxyReturn}
+
+
 Definition at line 316 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a92632ddbe28fb6901e445b60eab8d3ee}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!calculate\-Vertex\-Point@{calculate\-Vertex\-Point}}
@@ -236,6 +274,15 @@ Definition at line 316 of file subdivpoint.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_a92632ddbe28fb6901e445b60eab8d3ee}
 
 
+Create a vertex point. 
+
+During the subdivision process, new points are created at the same position as existing points. This method creates a new point at the same position as the old one, also replaces the original point in any curves that contain it with the newly constructed point
+
+\begin{DoxyReturn}{Returns}
+new point that is a copy of this one 
+\end{DoxyReturn}
+
+
 Definition at line 399 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_aef22d2b6cb48e57ce69652eeb7a69711}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!clear@{clear}}
@@ -245,6 +292,10 @@ Definition at line 399 of file subdivpoint.\-cpp.
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_aef22d2b6cb48e57ce69652eeb7a69711}
+
+
+Reset contents of the Point to default values. 
+
 
 
 Implements \hyperlink{classShipCADGeometry_1_1SubdivisionBase_ae668920d97c0810c72996a531e0ca107}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
@@ -262,6 +313,17 @@ Definition at line 76 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a8e907cca747b0483374d4fdde8eb4ad1}
 
 
+make a point 
+
+This doesn't add the point to the parent surface
+
+
+\begin{DoxyParams}{Parameters}
+{\em owner} & surface this point belongs to \\
+\hline
+\end{DoxyParams}
+
+
 Definition at line 57 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a5c1e66b5a28923dca99fe856ce1dff0c}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!delete\-Edge@{delete\-Edge}}
@@ -273,6 +335,15 @@ Definition at line 57 of file subdivpoint.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_a5c1e66b5a28923dca99fe856ce1dff0c}
 
 
+delete an Edge 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & the edge to delete from this point \\
+\hline
+\end{DoxyParams}
+
+
 Definition at line 412 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a7ed94fd26e20c2e30d1f36be6b1a9b29}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!delete\-Face@{delete\-Face}}
@@ -282,6 +353,15 @@ Definition at line 412 of file subdivpoint.\-cpp.
 \item[{{\bf Subdivision\-Face} $\ast$}]{face}
 \end{DoxyParamCaption}
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_a7ed94fd26e20c2e30d1f36be6b1a9b29}
+
+
+delete a Face 
+
+
+\begin{DoxyParams}{Parameters}
+{\em face} & the face to delete from this point \\
+\hline
+\end{DoxyParams}
 
 
 Definition at line 420 of file subdivpoint.\-cpp.
@@ -303,6 +383,17 @@ Definition at line 420 of file subdivpoint.\-cpp.
 ) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_aed72cf5e8dc67e980010d195f3a376a3}
 
 
+print out the element to a stream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em prefix} & string to prefix on each line output \\
+\hline
+\end{DoxyParams}
+
+
 Reimplemented from \hyperlink{classShipCADGeometry_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Base}.
 
 
@@ -320,6 +411,20 @@ Definition at line 476 of file subdivpoint.\-cpp.
 \item[{int}]{val}
 \end{DoxyParamCaption}
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_a42fed467d1f925a9b8b6c46599cf81f4}
+
+
+gets a vertex\-\_\-type\-\_\-t from integer 
+
+Returns the vertex\-\_\-type\-\_\-t from an integer, used in serialization
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & an integer representing vertex type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vertex type 
+\end{DoxyReturn}
 
 
 Definition at line 84 of file subdivpoint.\-cpp.
@@ -342,6 +447,15 @@ Definition at line 116 of file subdivpoint.\-cpp.
 {}
 \end{DoxyParamCaption}
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_aa07a859d70f97e57fc5318fc64a9d897}
+
+
+find the curvature of the surface at this point 
+
+For each pair of points attached to faces attached to this point, take the dot product of the triangular face created from that pair and this point. Add these dot products together and convert from radians to degrees
+
+\begin{DoxyReturn}{Returns}
+the curvature of the surface at this point 
+\end{DoxyReturn}
 
 
 Definition at line 137 of file subdivpoint.\-cpp.
@@ -377,6 +491,13 @@ Definition at line 104 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a8406682549c10ec9e1a184132f6ed2f0}
 
 
+index of this point in parent surface 
+
+\begin{DoxyReturn}{Returns}
+the index of this point in parent surface 
+\end{DoxyReturn}
+
+
 Reimplemented in \hyperlink{classShipCADGeometry_1_1SubdivisionControlPoint_a13c569f0894ba6193a3abf894bc4b517}{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Control\-Point}.
 
 
@@ -403,6 +524,15 @@ Definition at line 221 of file subdivpoint.\-cpp.
 )}}\label{classShipCADGeometry_1_1SubdivisionPoint_a8dd5facd4006480baea4a7f4487094f5}
 
 
+Calculate normal vector. 
+
+Find the surface normal at this point by finding the normal of each face attached to this point, and adding them together.
+
+\begin{DoxyReturn}{Returns}
+coordinates of the normal vector 
+\end{DoxyReturn}
+
+
 Definition at line 446 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_aca81609903ccd333db7f6f5f48d569ed}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!get\-Vertex\-Type@{get\-Vertex\-Type}}
@@ -414,7 +544,7 @@ Definition at line 446 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_aca81609903ccd333db7f6f5f48d569ed}
 
 
-Definition at line 100 of file subdivpoint.\-h.
+Definition at line 180 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_ada0d082be616958c024bb1743d392e2f}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!has\-Edge@{has\-Edge}}
 \index{has\-Edge@{has\-Edge}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
@@ -502,7 +632,7 @@ Definition at line 170 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a7f798acd30dd4f5c9d0a9832ddd088de}
 
 
-Definition at line 91 of file subdivpoint.\-h.
+Definition at line 171 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a24915c41e00cd2781aa40b09c7425486}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!number\-Of\-Faces@{number\-Of\-Faces}}
 \index{number\-Of\-Faces@{number\-Of\-Faces}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
@@ -513,7 +643,7 @@ Definition at line 91 of file subdivpoint.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a24915c41e00cd2781aa40b09c7425486}
 
 
-Definition at line 92 of file subdivpoint.\-h.
+Definition at line 172 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_aa2d85a086268f335eefeaef0b48a96a1}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!priv\-\_\-dump@{priv\-\_\-dump}}
 \index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
@@ -551,7 +681,7 @@ Definition at line 299 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a21d0f7b28fb19cb9f8d905c5f6eb9110}
 
 
-Definition at line 101 of file subdivpoint.\-h.
+Definition at line 181 of file subdivpoint.\-h.
 
 
 
@@ -559,30 +689,30 @@ Definition at line 101 of file subdivpoint.\-h.
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a7150fdf34fce9bc242b2266313c1c313}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!\-\_\-coordinate@{\-\_\-coordinate}}
 \index{\-\_\-coordinate@{\-\_\-coordinate}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{\-\_\-coordinate}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-\_\-coordinate\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a7150fdf34fce9bc242b2266313c1c313}
+3\-D coordinates of this point 
 
-
-Definition at line 120 of file subdivpoint.\-h.
+Definition at line 205 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a1ee85e0a7815d8d737dcd6f654bf15a5}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!\-\_\-edges@{\-\_\-edges}}
 \index{\-\_\-edges@{\-\_\-edges}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Edge}$\ast$$>$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a1ee85e0a7815d8d737dcd6f654bf15a5}
+list of edges attached to this point 
 
-
-Definition at line 119 of file subdivpoint.\-h.
+Definition at line 204 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_aa6e398141f2b296763548ecdf904d200}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!\-\_\-faces@{\-\_\-faces}}
 \index{\-\_\-faces@{\-\_\-faces}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{\-\_\-faces}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Face}$\ast$$>$ Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-\_\-faces\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_aa6e398141f2b296763548ecdf904d200}
+list of faces attached to this point 
 
-
-Definition at line 118 of file subdivpoint.\-h.
+Definition at line 203 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a9ffc795a56a1b963ba29725be17be266}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!\-\_\-vtype@{\-\_\-vtype}}
 \index{\-\_\-vtype@{\-\_\-vtype}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{\-\_\-vtype}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex\-\_\-type\-\_\-t} Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-\_\-vtype\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a9ffc795a56a1b963ba29725be17be266}
+vertex type of this point 
 
-
-Definition at line 121 of file subdivpoint.\-h.
+Definition at line 206 of file subdivpoint.\-h.
 
 
 
@@ -592,42 +722,42 @@ Definition at line 121 of file subdivpoint.\-h.
 \subsubsection[{Coordinate}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-Coordinate\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a4a8b002061482e596fb9228a8968cd57}
 
 
-Definition at line 55 of file subdivpoint.\-h.
+Definition at line 60 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a7ca022ae7a31b478234ee212a24e3047}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!Curvature@{Curvature}}
 \index{Curvature@{Curvature}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{Curvature}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-Curvature\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a7ca022ae7a31b478234ee212a24e3047}
 
 
-Definition at line 56 of file subdivpoint.\-h.
+Definition at line 61 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_af9d5dfd7c9c8bea01aab36388f0f0afe}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!Is\-Boundary\-Vertex@{Is\-Boundary\-Vertex}}
 \index{Is\-Boundary\-Vertex@{Is\-Boundary\-Vertex}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{Is\-Boundary\-Vertex}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-Is\-Boundary\-Vertex\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_af9d5dfd7c9c8bea01aab36388f0f0afe}
 
 
-Definition at line 57 of file subdivpoint.\-h.
+Definition at line 62 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a547c0cb9b9641fcb9d6a5beb3a86d59c}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!Normal@{Normal}}
 \index{Normal@{Normal}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{Normal}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-Normal\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a547c0cb9b9641fcb9d6a5beb3a86d59c}
 
 
-Definition at line 58 of file subdivpoint.\-h.
+Definition at line 63 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a3603dcd95c922b3852e0ba6f95a08b7f}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!Vertex\-Index@{Vertex\-Index}}
 \index{Vertex\-Index@{Vertex\-Index}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{Vertex\-Index}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-Vertex\-Index\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a3603dcd95c922b3852e0ba6f95a08b7f}
 
 
-Definition at line 59 of file subdivpoint.\-h.
+Definition at line 64 of file subdivpoint.\-h.
 
 \hypertarget{classShipCADGeometry_1_1SubdivisionPoint_a194e5f0d73d3af0bd21fa3cd4fa03296}{\index{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}!Vertex\-Type@{Vertex\-Type}}
 \index{Vertex\-Type@{Vertex\-Type}!ShipCADGeometry::SubdivisionPoint@{Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point}}
 \subsubsection[{Vertex\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex\-\_\-type\-\_\-t} Ship\-C\-A\-D\-Geometry\-::\-Subdivision\-Point\-::\-Vertex\-Type\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCADGeometry_1_1SubdivisionPoint_a194e5f0d73d3af0bd21fa3cd4fa03296}
 
 
-Definition at line 60 of file subdivpoint.\-h.
+Definition at line 65 of file subdivpoint.\-h.
 
 
 

@@ -18,8 +18,8 @@ isEmpty(_BOOST_ROOT) {
     INCLUDEPATH += $$_BOOST_ROOT
     LIBS += -L$$_BOOST_ROOT/stage/lib/
 
-    win32:CONFIG(release, debug|release): LIBS += -llibboost_system-vc100-mt-1_55
-    else:win32:CONFIG(debug, debug|release): LIBS += -llibboost_system-vc100-mt-gd-1_55
+    win32:CONFIG(release, debug|release): LIBS += -llibboost_system-vc120-mt-1_55
+    else:win32:CONFIG(debug, debug|release): LIBS += -llibboost_system-vc120-mt-gd-1_55
     else:unix: LIBS += -lboost_system
 
 }

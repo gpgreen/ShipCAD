@@ -3,4 +3,5 @@ TEMPLATE = subdirs
 SUBDIRS = \
     subdivpoint \
     subdivcontrolpoint \
-    subdivface
+    subdivface \
+    subdivcontrolface

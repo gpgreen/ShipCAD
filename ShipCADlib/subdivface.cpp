@@ -888,13 +888,13 @@ void SubdivisionControlFace::loadFromStream(size_t &lineno, vector<QString> &str
     }
 }
 
+// TODO: controledges should be reworked in subdivsurf::subdivide, we have them here in the face
+// list, so we shouldn't have to collect them in the param list also
 void SubdivisionControlFace::subdivide(
 	vector<pair<SubdivisionPoint*,SubdivisionPoint*> >& vertexpoints,
 	vector<pair<SubdivisionEdge*,SubdivisionPoint*> >& edgepoints,
 	vector<pair<SubdivisionFace*,SubdivisionPoint*> >& facepoints,
-	vector<SubdivisionEdge*>& /*interioredges*/,
-	vector<SubdivisionEdge*>& controledges,
-	vector<SubdivisionFace*>& /*dest*/)
+	vector<SubdivisionEdge*>& controledges)
 {
     _control_edges.clear();
     if (_children.size() == 0) {

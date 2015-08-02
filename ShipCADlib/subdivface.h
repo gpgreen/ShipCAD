@@ -268,13 +268,27 @@ public:
 	 * When done, the points and edges no longer reference this face
 	 */
     void removeReferences();
+	/*! \brief subdivide the face
+	 *
+	 * \param vertexpoints list of Point <-> Point pairs. The first
+	 * point is a vertex point on this face, the second point is a
+	 * copy of this point to use in the new subdivided faces
+	 *
+	 * \param edgepoints list of Edge <-> Point pairs. The edge is an
+	 * edge on this face. The point is the midpoint of that edge to
+	 * use in the new subdivided faces
+	 *
+	 * \param facepoints list of Face <-> Point
+	 * pairs.  
+	 * 
+	 * \param controledges after subdivision, the new edges descended
+	 * from control edges will be added to this list
+	 */
     virtual void subdivide(
 		std::vector<std::pair<SubdivisionPoint*,SubdivisionPoint*> > &vertexpoints,
 		std::vector<std::pair<SubdivisionEdge*,SubdivisionPoint*> > &edgepoints,
 		std::vector<std::pair<SubdivisionFace*,SubdivisionPoint*> > &facepoints,
-		std::vector<SubdivisionEdge*>& interioredges,
-		std::vector<SubdivisionEdge*>& controledges,
-		std::vector<SubdivisionFace*>& dest);
+		std::vector<SubdivisionEdge*>& controledges);
 	/*! \brief select all control faces connected to this one
 	 *
 	 * Select all control faces connected to this one on the same

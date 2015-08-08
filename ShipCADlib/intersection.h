@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD																				   *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
+ *    Original Copyright header below														   *
+ *																							   *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -27,24 +27,77 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef SHIPCADLIB_H
-#define SHIPCADLIB_H
+#ifndef INTERSECTION_H_
+#define INTERSECTION_H_
 
-const float kFoot = 0.3048;
-const float kLbs = 0.4535924;
-const float kWeightConversionFactor = (1000/kLbs)/((1/kFoot)*(1/kFoot)*(1/kFoot));
-const int kIncrementSize = 25;
-const int kDecimals = 4;
-const int kPixelCountMax = 32768;
-const float kZBufferScaleFactor = 1.004;
-const float kZoomfactor = 1.02;
-const int FileBufferBlockSize = 4096;
+#include <vector>
+#include <string>
+#include <QtCore>
+#include <QtGui>
+#include "entity.h"
+#include "plane.h"
 
-class ShipCADlib
+namespace ShipCADGeometry {
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class ShipCAD;
+class Viewport;
+class LineShader;
+class FileBuffer;
+class Spline;
+
+class Intersection : public Entity
 {
-    
+    Q_OBJECT
+
 public:
-    ShipCADlib();
+
+    enum intersection_type_t {
+        fiFree,
+        fiStation,
+        fiButtock,
+        fiWaterline,
+        fiDiagonal,
+    };
+
+    explicit Intersection(ShipCAD* owner);
+    virtual ~Intersection();
+
+    static Intersection* construct(ShipCAD* owner);
+
+    virtual void clear();
+    virtual void extents(QVector3D& min, QVector3D& max);
+    virtual void draw(Viewport& vp, LineShader* lineshader) = 0;
+    virtual void rebuild();
+
+    void add(Spline* sp);
+    void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
+    void createStarboardPart();
+    void deleteItem(Spline* item);
+
+    void loadBinary(FileBuffer& buf);
+    void saveBinary(FileBuffer& buf);
+
+    void saveToDXF(QStringList& strings);
+
+public slots:
+
+protected:
+
+private:
+
+    ShipCAD* _owner;
+    std::vector<Spline*> _items;
+    intersection_type_t _intersection_type;
+    Plane _plane;
+    bool _show_curvature;
+    bool _use_hydrostatic_surfaces_only;
 };
 
-#endif // SHIPCADLIB_H
+//////////////////////////////////////////////////////////////////////////////////////
+
+};				/* end namespace */
+
+#endif
+

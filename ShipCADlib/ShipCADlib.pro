@@ -29,7 +29,8 @@ SOURCES += shipcadlib.cpp \
     nurbsurface.cpp \
     subdivlayer.cpp \
     version.cpp \
-    shader.cpp
+    shader.cpp \
+    projsettings.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \
@@ -49,7 +50,11 @@ HEADERS += shipcadlib.h \
     subdivcontrolcurve.h \
     subdivlayer.h \
     version.h \
-    shader.h
+    shader.h \
+    projsettings.h \
+    hydrostaticcalc.h \
+    shipcad.h \
+    intersection.h
 
 unix:!symbian {
     maemo5 {

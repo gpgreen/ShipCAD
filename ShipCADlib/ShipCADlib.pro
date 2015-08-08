@@ -54,7 +54,11 @@ HEADERS += shipcadlib.h \
     projsettings.h \
     hydrostaticcalc.h \
     shipcad.h \
-    intersection.h
+    intersection.h \
+    marker.h \
+    flowline.h \
+    visibility.h \
+    preferences.h
 
 unix:!symbian {
     maemo5 {

@@ -27,58 +27,41 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef INTERSECTION_H_
-#define INTERSECTION_H_
+#ifndef PREFERENCES_H
+#define PREFERENCES_H
 
-#include <vector>
 #include <QtCore>
 #include <QtGui>
-#include "entity.h"
-#include "plane.h"
 
 namespace ShipCADGeometry {
 
+class ShipCAD;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ShipCAD;
-class Viewport;
-class LineShader;
-class FileBuffer;
-class Spline;
-
-class Intersection : public Entity
+class Preferences : public QObject
 {
     Q_OBJECT
-
 public:
 
-    enum intersection_type_t {
-        fiFree,
-        fiStation,
-        fiButtock,
-        fiWaterline,
-        fiDiagonal,
-    };
+    explicit Preferences(ShipCAD* owner);
+    ~Preferences();
 
-    explicit Intersection(ShipCAD* owner);
-    virtual ~Intersection();
+    static Preferences* construct(ShipCAD* owner);
 
-    static Intersection* construct(ShipCAD* owner);
+    QString getExportDirectory();
+    QString getImportDirectory();
+    QString getOpenDirectory();
+    QString getSaveDirectory();
 
-    virtual void clear();
-    virtual void extents(QVector3D& min, QVector3D& max);
-    virtual void draw(Viewport& vp, LineShader* lineshader) = 0;
-    virtual void rebuild();
+    void setViewportColor(QColor col);
 
-    void add(Spline* sp);
-    void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
-    void createStarboardPart();
-    void deleteItem(Spline* item);
+    void edit();
+    void load();
+    void resetColors();
+    void save();
 
-    void loadBinary(FileBuffer& buf);
-    void saveBinary(FileBuffer& buf);
-
-    void saveToDXF(QStringList& strings);
+    void clear();
 
 public slots:
 
@@ -87,46 +70,43 @@ protected:
 private:
 
     ShipCAD* _owner;
-    std::vector<Spline*> _items;
-    intersection_type_t _intersection_type;
-    Plane _plane;
-    bool _show_curvature;
-    bool _use_hydrostatic_surfaces_only;
-};
+    int _point_size;
+    QColor _buttock_color;
+    QColor _waterline_color;
+    QColor _station_color;
+    QColor _diagonal_color;
+    QColor _edge_color;
+    QColor _crease_color;
+    QColor _crease_edge_color;
+    QColor _grid_color;
+    QColor _grid_font_color;
+    QColor _crease_point_color;
+    QColor _regular_point_color;
+    QColor _corner_point_color;
+    QColor _dart_point_color;
+    QColor _select_color;
+    QColor _layer_color;
+    QColor _normal_color;
+    QColor _underwater_color;
+    QColor _viewport_color;
+    QColor _leakpoint_color;
+    QColor _marker_color;
+    QColor _curvature_plot_color;
+    QColor _control_curve_color;
+    QColor _hydrostatics_font_color;
+    QColor _zebra_stripe_color;
+    QString _open_directory;
+    QString _save_directory;
+    QString _import_directory;
+    QString _export_directory;
+    QString _lang_file;
+    int _max_undo_memory;
 
-/*! \brief Vector class to contain Intersection pointers
- *
- */
-class IntersectionVector
-{
-public:
-
-    typedef std::vector<Intersection*>::iterator ivec_iterator ;
-
-    IntersectionVector();
-    ~IntersectionVector();
-
-    void clear();
-
-    size_t size() {return _vec.size();}
-
-    void add(Intersection* i) {_vec.push_back(i);}
-    void del(Intersection* i);
-
-    typedef void apply_fn(Intersection* elem);
-    void apply(apply_fn* fn)
-      {std::for_each(_vec.begin(), _vec.end(), fn);}
-
-    ivec_iterator begin() {return _vec.begin();}
-    ivec_iterator end() {return _vec.end();}
-
-private:
-    std::vector<Intersection*> _vec;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 
-#endif
+#endif // PREFERENCES_H
 

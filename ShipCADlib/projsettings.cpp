@@ -59,14 +59,17 @@ ProjectSettings::construct(ShipCAD *owner)
 	return ps;
 }
 
+static void hc_set(HydrostaticCalc* elem)
+{
+    elem->setCalculated(false);
+}
+
 void ProjectSettings::setHydrostaticCoefficients(hydrostatic_coeff_t coeff)
 {
 	if (coeff != _hydrostatic_coefficients) {
 		_hydrostatic_coefficients = coeff;
 		_owner->setFileChanged(true);
-        for (size_t i=0; i<_owner->numberOfHydrostaticCalculation(); i++) {
-			_owner->getHydrostaticCalculation(i)->setCalculated(false);
-		}
+        _owner->getHydrostaticCalculations().apply(hc_set);
 	}
 }
 

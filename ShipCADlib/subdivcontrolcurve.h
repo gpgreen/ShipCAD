@@ -114,6 +114,54 @@ protected:
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief Vector class to contain SubdivisionControlCurve pointers
+ *
+ */
+class SubdivisionControlCurveVector
+{
+public:
+
+    typedef std::vector<SubdivisionControlCurve*>::iterator ccvec_iterator ;
+
+    SubdivisionControlCurveVector(bool owned);
+    ~SubdivisionControlCurveVector();
+
+    /*! \brief remove all curves from the vector
+     */
+    void clear();
+
+    size_t size() {return _vec.size();}
+
+    void add(SubdivisionControlCurve* curve) {_vec.push_back(curve);}
+
+    /*! \brief delete a curve from the vector
+     *
+     * \param curve the curve to find and delete from the vector
+     * \return true if vector has curve and it's deleted, false if curve not in list
+     */
+    bool del(SubdivisionControlCurve* curve);
+
+    /*! \brief typedef for function used in apply method
+     */
+    typedef void apply_fn(SubdivisionControlCurve* elem);
+
+    /*! \brief apply a function to each curve in the vector
+     *
+     * \param fn the function to apply to each curve
+     */
+    void apply(apply_fn* fn)
+      {std::for_each(_vec.begin(), _vec.end(), fn);}
+
+    ccvec_iterator begin() {return _vec.begin();}
+    ccvec_iterator end() {return _vec.end();}
+
+private:
+    bool _owned; /**< are the curves owned by this vector, (memory freed when deleted) */
+    std::vector<SubdivisionControlCurve*> _vec;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 };				/* end namespace */
 
 std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionControlCurve& curve);

@@ -31,7 +31,7 @@
 #define HYDROSTATICCALC_H_
 
 #include <vector>
-#include <string>
+#include <algorithm>
 #include <QtCore>
 #include <QtGui>
 #include "plane.h"
@@ -161,6 +161,35 @@ private:
 	std::vector<HydrostaticsCalculation> _calculations;
     Intersection* _mainframe;
 	
+};
+
+/*! \brief Vector class to contain HydrostaticCalc pointers
+ *
+ */
+class HydrostaticCalcVector
+{
+public:
+    typedef std::vector<HydrostaticCalc*>::iterator hcvec_iterator ;
+
+    HydrostaticCalcVector();
+    ~HydrostaticCalcVector();
+
+    void clear();
+
+    size_t size() {return _vec.size();}
+
+    void add(HydrostaticCalc* c) {_vec.push_back(c);}
+    void del(HydrostaticCalc* c);
+
+    typedef void apply_fn(HydrostaticCalc* elem);
+    void apply(apply_fn* fn)
+      {std::for_each(_vec.begin(), _vec.end(), fn);}
+
+    hcvec_iterator begin() {return _vec.begin();}
+    hcvec_iterator end() {return _vec.end();}
+
+private:
+    std::vector<HydrostaticCalc*> _vec;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

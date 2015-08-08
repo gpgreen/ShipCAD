@@ -27,106 +27,93 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef INTERSECTION_H_
-#define INTERSECTION_H_
+#ifndef VISIBILITY_H
+#define VISIBILITY_H
 
 #include <vector>
+#include <string>
 #include <QtCore>
 #include <QtGui>
-#include "entity.h"
-#include "plane.h"
 
 namespace ShipCADGeometry {
 
+class ShipCAD;
+class FileBuffer;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ShipCAD;
-class Viewport;
-class LineShader;
-class FileBuffer;
-class Spline;
-
-class Intersection : public Entity
+class Visibility : public QObject
 {
     Q_OBJECT
-
 public:
 
-    enum intersection_type_t {
-        fiFree,
-        fiStation,
-        fiButtock,
-        fiWaterline,
-        fiDiagonal,
+    enum model_view_t {
+        mvPort,
+        mvBoth,
     };
 
-    explicit Intersection(ShipCAD* owner);
-    virtual ~Intersection();
+    explicit Visibility(ShipCAD* owner);
+    ~Visibility();
 
-    static Intersection* construct(ShipCAD* owner);
-
-    virtual void clear();
-    virtual void extents(QVector3D& min, QVector3D& max);
-    virtual void draw(Viewport& vp, LineShader* lineshader) = 0;
-    virtual void rebuild();
-
-    void add(Spline* sp);
-    void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
-    void createStarboardPart();
-    void deleteItem(Spline* item);
+    void setCursorIncrement(float val);
+    void setCurvatureScale(float val);
+    void setShowButtocks(bool show);
+    void setShowControlNet(bool show);
+    void setShowCurvature(bool show);
+    void setShowDiagonals(bool show);
+    void setShowFlowlines(bool show);
+    void setShowGrid(bool show);
+    void setModelView(model_view_t vw);
+    void setShowInteriorEdges(bool show);
+    void setShowMarkers(bool show);
+    void setShowNormals(bool show);
+    void setShowStations(bool show);
+    void setShowWaterlines(bool show);
+    void setShowControlCurves(bool show);
+    void setShowHydrostaticData(bool show);
 
     void loadBinary(FileBuffer& buf);
     void saveBinary(FileBuffer& buf);
 
-    void saveToDXF(QStringList& strings);
+    void clear();
 
 public slots:
+
+    void decreaseCurvatureScale();
+    void increaseCurvatureScale();
 
 protected:
 
 private:
 
     ShipCAD* _owner;
-    std::vector<Spline*> _items;
-    intersection_type_t _intersection_type;
-    Plane _plane;
+    bool _show_control_net;
+    bool _show_interior_edges;
+    bool _show_stations;
+    bool _show_buttocks;
+    bool _show_waterlines;
+    bool _show_diagonals;
+    model_view_t _model_view;
+    bool _show_normals;
+    bool _show_grid;
+    bool _show_markers;
+    bool _show_control_curves;
     bool _show_curvature;
-    bool _use_hydrostatic_surfaces_only;
-};
-
-/*! \brief Vector class to contain Intersection pointers
- *
- */
-class IntersectionVector
-{
-public:
-
-    typedef std::vector<Intersection*>::iterator ivec_iterator ;
-
-    IntersectionVector();
-    ~IntersectionVector();
-
-    void clear();
-
-    size_t size() {return _vec.size();}
-
-    void add(Intersection* i) {_vec.push_back(i);}
-    void del(Intersection* i);
-
-    typedef void apply_fn(Intersection* elem);
-    void apply(apply_fn* fn)
-      {std::for_each(_vec.begin(), _vec.end(), fn);}
-
-    ivec_iterator begin() {return _vec.begin();}
-    ivec_iterator end() {return _vec.end();}
-
-private:
-    std::vector<Intersection*> _vec;
+    bool _show_hydrostatic_data;
+    bool _show_hydro_displacement;
+    bool _show_hydro_lateral_area;
+    bool _show_hydro_sectional_area;
+    bool _show_hydro_metacentric_area;
+    bool _show_hydro_lcf;
+    bool _show_flow_lines;
+    float _curvature_scale;
+    float _cursor_increment;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 
-#endif
+
+#endif // VISIBILITY_H
 

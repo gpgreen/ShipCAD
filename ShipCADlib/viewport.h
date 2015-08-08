@@ -32,7 +32,6 @@
 
 #include <vector>
 #include <map>
-#include <string>
 #include <QtCore>
 #include <QtGui>
 #include "openglwindow.h"

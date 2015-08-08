@@ -27,131 +27,55 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef SHIPCAD_H_
-#define SHIPCAD_H_
+#ifndef FLOWLINE_H_
+#define FLOWLINE_H_
 
-#include <vector>
 #include <QtCore>
 #include <QtGui>
-#include "version.h"
-#include "hydrostaticcalc.h"
-#include "intersection.h"
-#include "subdivcontrolcurve.h"
+#include "entity.h"
 
 namespace ShipCADGeometry {
 
-class Marker;
-class Flowline;
-class FileBuffer;
-class SubdivisionControlPoint;
-class SubdivisionFace;
-class SubdivisionSurface;
-class SubdivisionLayer;
+class ShipCAD;
 class Viewport;
-class Preferences;
-class Visibility;
-class ProjectSettings;
-
+class LineShader;
+class FileBuffer;
+	
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ShipCAD : public QObject
+class Flowline : public Entity
 {
     Q_OBJECT
+
 public:
 
-    enum precision_t {
-        fpLow,
-        fpMedium,
-        fpHigh,
-        fpVeryHigh,
-    };
+    explicit Flowline(ShipCAD* owner);
+    virtual ~Flowline();
 
-    enum edit_mode_t {
-        emSelectItems,
-    };
-
-    explicit ShipCAD();
-    ~ShipCAD();
-
-    void buildValidFrameTable(bool close_at_deck);
-    SubdivisionLayer* getActiveLayer();
-    // getBackgroundImage()
-    bool getBuild();
-    IntersectionVector& getStations() {return _stations;}
-    IntersectionVector& getWaterlines() {return _waterlines;}
-    IntersectionVector& getButtocks() {return _buttocks;}
-    IntersectionVector& getDiagonals() {return _diagonals;}
-    SubdivisionControlCurveVector& getControlCurves() {return _control_curves;}
-    Flowline* getFlowline(size_t index);
-    QString getFilename();
-    HydrostaticCalcVector& getHydrostaticCalculations() {return _calculations;}
-    size_t getNumberOfLayers();
-    SubdivisionLayer* getLayer(size_t index);
-    Marker* getMarker(size_t index);
-    size_t getNumberOfMarkers();
-    size_t getNumberOfFlowlines();
-    size_t getNumberOfLockedPoints();
-    size_t getNumberOfViewports();
-
-    // viewport? we might want to move this into the gui window class
-    void addViewport(Viewport* vp);
-    bool adjustMarkers();
-
-    SubdivisionSurface* getSurface();
-
-	void setFileChanged(bool changed);
-
-	size_t numberOfHydrostaticCalculation();
+	static Flowline* construct(ShipCAD* owner);
 	
-    void loadBinary(FileBuffer& buf);
+    virtual void clear();
+    virtual void extents(QVector3D& min, QVector3D& max);
+    virtual void draw(Viewport& vp, LineShader* lineshader);
+    virtual void rebuild();
+
+	bool isVisible();
+	void setVisible(bool set);
+	bool isSelected();
+	void setSelected(bool set);
+
+	void loadBinary(FileBuffer& buf);
 	void saveBinary(FileBuffer& buf);
-    void savePart(std::vector<SubdivisionFace*> faces);
-
-    void rebuildModel();
-
-	void clear();
-    void clearUndo();
-
-signals:
-    void fileChanged();
-    void updateUndoData();
-    void updateRecentFileList();
-    void changeCursorIncrement();
-    void updateGeometryInfo();
-
+									
 public slots:
 
 protected:
 
 private:
 
-    std::vector<Viewport*> _viewports;
-    precision_t _precision;
-    version_t _file_version;
-    edit_mode_t _edit_mode;
-    Preferences* _prefs;
-    SubdivisionControlPoint* _active_control_point;
-    bool _file_changed;
-    SubdivisionSurface* _surface;
-    QString _filename;
-    // Edit class
-    IntersectionVector _stations;
-    IntersectionVector _waterlines;
-    IntersectionVector _buttocks;
-    IntersectionVector _diagonals;
-    SubdivisionControlCurveVector _control_curves;
-    Visibility* _vis;
-    // Frame class
-    bool _filename_set;
-    bool _currently_moving;
-    bool _stop_asking_for_file_version;
-    // previous cursor position
-    ProjectSettings* _settings;
-    HydrostaticCalcVector _calculations;
-    // undo objects
-    // delft resisttance
-    // kaper resisteance
-    HydrostaticCalc* _design_hydrostatics;
+	ShipCAD* _owner;
+	bool _visible;
+	bool _selected;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

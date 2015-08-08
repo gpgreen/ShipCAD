@@ -29,6 +29,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 #include "subdivcontrolcurve.h"
 #include "subdivsurface.h"
@@ -417,3 +418,47 @@ ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlCurv
     curve.dump(os);
     return os;
 }
+
+SubdivisionControlCurveVector::SubdivisionControlCurveVector(bool owned)
+	: _owned(owned)
+{
+	// does nothing
+}
+
+struct CurvePred 
+{
+	ShipCADGeometry::SubdivisionControlCurve* _querycurve;
+	bool operator()(const ShipCADGeometry::SubdivisionControlCurve* val)
+		{
+			return val == _querycurve;
+		}
+	CurvePred(ShipCADGeometry::SubdivisionControlCurve* querycurve) : _querycurve(querycurve) {}
+};
+
+SubdivisionControlCurveVector::~SubdivisionControlCurveVector()
+{
+	clear();
+}
+
+void SubdivisionControlCurveVector::clear()
+{
+	if (_owned) {
+		for (size_t i=0; i<_vec.size(); i++)
+			delete _vec[i];
+	}
+	_vec.clear();
+}
+
+bool SubdivisionControlCurveVector::del(SubdivisionControlCurve* elem)
+{
+	bool removed = false;
+    ccvec_iterator i = find_if(_vec.begin(), _vec.end(), CurvePred(elem));
+	if (i != _vec.end()) {
+		if (_owned)
+			delete *i;
+		_vec.erase(i);
+		removed = true;
+	}
+	return removed;
+}
+

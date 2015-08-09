@@ -75,8 +75,8 @@ public:
     void createStarboardPart();
     void deleteItem(Spline* item);
 
-    void loadBinary(FileBuffer& buf);
-    void saveBinary(FileBuffer& buf);
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& dest);
 
     void saveToDXF(QStringList& strings);
 

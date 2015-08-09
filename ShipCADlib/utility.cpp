@@ -30,6 +30,7 @@
 #include <cmath>
 #include <boost/math/constants/constants.hpp>
 #include "utility.h"
+#include "shipcadlib.h"
 
 using namespace std;
 using namespace ShipCADGeometry;
@@ -431,5 +432,20 @@ float ShipCADUtility::ReadFloatFromStr(size_t lineno, const QString& str, size_t
     else
         start = str.length();
     return result;
+}
+
+float ShipCADUtility::FindWaterViscosity(float density,
+                                         ShipCADGeometry::ProjectSettings::unit_type_t units)
+{
+	float result;
+	double tmp_density;
+    if (units == ProjectSettings::fuMetric) {
+		result = 1.13902 + ((density - 0.999) / (1.0259-0.999))*(1.18831-1.13902);
+	} else {
+		tmp_density = density / kWeightConversionFactor;
+		result = 1.13902+((tmp_density-0.999)/(1.0259-0.999))*(1.18831-1.13902);
+		result /= (kFoot * kFoot);
+	}
+	return result;
 }
 

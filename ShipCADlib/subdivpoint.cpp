@@ -771,7 +771,7 @@ void SubdivisionControlPoint::load_binary(FileBuffer &source)
     source.load(sel);
     if (sel)
         setSelected(true);
-    if (source.version() >= fv198)
+    if (source.getVersion() >= fv198)
         source.load(_locked);
 }
 
@@ -813,7 +813,7 @@ void SubdivisionControlPoint::save_binary(FileBuffer &destination)
     destination.add(_coordinate);
     destination.add(static_cast<int>(_vtype));
     destination.add(isSelected());
-    if (destination.version() >= fv198)
+    if (destination.getVersion() >= fv198)
         destination.add(_locked);
 }
 

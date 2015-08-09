@@ -30,7 +30,10 @@ SOURCES += shipcadlib.cpp \
     subdivlayer.cpp \
     version.cpp \
     shader.cpp \
-    projsettings.cpp
+    projsettings.cpp \
+    undoobject.cpp \
+    shipcad.cpp \
+    visibility.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \
@@ -58,7 +61,8 @@ HEADERS += shipcadlib.h \
     marker.h \
     flowline.h \
     visibility.h \
-    preferences.h
+    preferences.h \
+    undoobject.h
 
 unix:!symbian {
     maemo5 {

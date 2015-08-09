@@ -27,70 +27,38 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef PROJSETTINGS_H_
-#define PROJSETTINGS_H_
+#ifndef UNDOOBJECT_H_
+#define UNDOOBJECT_H_
 
-#include <vector>
-#include <iosfwd>
 #include <QtCore>
 #include <QtGui>
+#include "filebuffer.h"
+#include "shipcad.h"
 
 namespace ShipCADGeometry {
 
 class ShipCAD;
-class FileBuffer;
-	
+
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ProjectSettings : public QObject
+class UndoObject : public QObject
 {
     Q_OBJECT
 public:
 
-	enum unit_type_t {
-        fuMetric = 0,
-        fuImperial,
-	};
+    explicit UndoObject(ShipCAD* owner);
+    ~UndoObject() {}
 
-	enum hydrostatic_coeff_t {
-        fcProjectSettings = 0,
-		fcActualData
-	};
-	
-    explicit ProjectSettings(ShipCAD* owner);
-    ~ProjectSettings();
+	size_t getMemory();
+	bool isTempRedoObj() {return _is_temp_redo_obj;}
+	QString getTime() {return _time.toString("hh:mm:ss.zzz");}
+	QString& getUndoText() {return _undo_text;}
 
-	void setHydrostaticCoefficients(hydrostatic_coeff_t coeff);
-	void setDisableModelCheck(bool val);
-	float getMainframeLocation();
-	void setAppendageCoefficient(float coeff);
-	void setBeam(float beam);
-	void setDraft(float draft);
-	void setLength(float length);
-	void setMainframeLocation(float loc);
-	void setWaterDensity(float val);
-	void setSavePreview(bool val);
-	void setStartDraft(float val);
-	void setTrim(float val);
-	void setEndDraft(float val);
-	void setDraftStep(float val);
-	void setUseDefaultMainframeLocation(bool use);
-	void setName(const QString& name);
-	void setDesigner(const QString& designer);
-	void setComment(const QString& comment);
-	void setFileCreatedBy(const QString& createdby);
-	void setShadeUnderwaterShip(bool set);
-	void setSimplifyIntersections(bool set);
-	void setUnderWaterColor(QColor& col);
-	void setUnits(unit_type_t unit);
-								   
-    void loadBinary(FileBuffer& source, QImage* img);
-    void saveBinary(FileBuffer& dest);
+	void accept();
+	void restore();
 	
-	void clear();
-				
-	void dump(std::ostream& os) const;
-	
+signals:
+
 public slots:
 
 protected:
@@ -98,45 +66,19 @@ protected:
 private:
 
 	ShipCAD* _owner;
-	bool _main_particulars_has_been_set;
-	bool _disable_model_check;
-	float _appendage_coefficient;
-	float _beam;
-	float _draft;
-	float _length;
-	float _water_density;
-	float _mainframe_location;
-	bool _use_default_mainframe_location;
-	QString _name;
-	QString _designer;
-	QString _comment;
-	QString _file_created_by;
-	bool _shade_underwater_ship;
-	bool _save_preview;
-	QColor _underwater_color;
-	unit_type_t _units;
-	bool _simplify_intersections;
-	hydrostatic_coeff_t _hydrostatic_coefficients;
-	float _start_draft;
-	float _end_draft;
-	float _draft_step;
-	float _trim;
-	std::vector<float> _displacements;
-	float _min_displacement;
-	float _max_displacement;
-	float _displ_increment;
-	bool _use_displ_increments;
-	std::vector<float> _angles;
-	std::vector<float> _stab_trims;
-	bool _free_trim;
-	float _fvcg;
+	QString _undo_text;
+	FileBuffer _undo_data;
+	bool _file_changed;
+	bool _filename_set;
+	QString _filename;
+    ShipCAD::edit_mode_t _edit_mode;
+	QTime _time;
+	bool _is_temp_redo_obj;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::ProjectSettings& settings);
-	
 #endif
 

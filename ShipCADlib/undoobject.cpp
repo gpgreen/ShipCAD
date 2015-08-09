@@ -27,97 +27,28 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef VISIBILITY_H
-#define VISIBILITY_H
+#include "undoobject.h"
 
-#include <vector>
-#include <string>
-#include <QtCore>
-#include <QtGui>
+using namespace ShipCADGeometry;
+using namespace std;
 
-namespace ShipCADGeometry {
-
-class ShipCAD;
-class FileBuffer;
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class Visibility : public QObject
+UndoObject::UndoObject(ShipCAD* owner)
+    : _owner(owner)
 {
-    Q_OBJECT
-public:
+    // does nothing
+}
 
-    enum model_view_t {
-        mvPort=0,
-        mvBoth,
-    };
+size_t UndoObject::getMemory()
+{
+    return sizeof(this) + _undo_text.size() + _filename.size() + _undo_data.size();
+}
 
-    explicit Visibility(ShipCAD* owner);
-    ~Visibility() {}
+void UndoObject::accept()
+{
+    // TODO
+}
 
-    void setCursorIncrement(float val);
-    void setCurvatureScale(float val);
-    void setShowButtocks(bool show);
-    void setShowControlNet(bool show);
-    void setShowCurvature(bool show);
-    void setShowDiagonals(bool show);
-    void setShowFlowlines(bool show);
-    void setShowGrid(bool show);
-    void setModelView(model_view_t vw);
-    void setShowInteriorEdges(bool show);
-    void setShowMarkers(bool show);
-    void setShowNormals(bool show);
-    void setShowStations(bool show);
-    void setShowWaterlines(bool show);
-    void setShowControlCurves(bool show);
-    void setShowHydrostaticData(bool show);
-
-    void loadBinary(FileBuffer& source);
-    void saveBinary(FileBuffer& dest);
-
-    void clear();
-
-signals:
-
-    void onChangeCursorIncrement();
-
-public slots:
-
-    void decreaseCurvatureScale();
-    void increaseCurvatureScale();
-
-protected:
-
-private:
-
-    ShipCAD* _owner;
-    bool _show_control_net;
-    bool _show_interior_edges;
-    bool _show_stations;
-    bool _show_buttocks;
-    bool _show_waterlines;
-    bool _show_diagonals;
-    model_view_t _model_view;
-    bool _show_normals;
-    bool _show_grid;
-    bool _show_markers;
-    bool _show_control_curves;
-    bool _show_curvature;
-    bool _show_hydrostatic_data;
-    bool _show_hydro_displacement;
-    bool _show_hydro_lateral_area;
-    bool _show_hydro_sectional_areas;
-    bool _show_hydro_metacentric_height;
-    bool _show_hydro_lcf;
-    bool _show_flow_lines;
-    float _curvature_scale;
-    float _cursor_increment;
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-};				/* end namespace */
-
-
-#endif // VISIBILITY_H
-
+void UndoObject::restore()
+{
+    // TODO
+}

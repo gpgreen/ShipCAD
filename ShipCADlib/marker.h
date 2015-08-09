@@ -80,6 +80,38 @@ private:
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief Vector class to contain Intersection pointers
+ *
+ */
+class MarkerVector
+{
+public:
+
+    typedef std::vector<Marker*>::iterator mvec_iterator ;
+
+    MarkerVector();
+    ~MarkerVector();
+
+    void clear();
+
+    size_t size() {return _vec.size();}
+
+    void add(Marker* i) {_vec.push_back(i);}
+    void del(Marker* i);
+
+    typedef void apply_fn(Marker* elem);
+    void apply(apply_fn* fn)
+      {std::for_each(_vec.begin(), _vec.end(), fn);}
+
+    mvec_iterator begin() {return _vec.begin();}
+    mvec_iterator end() {return _vec.end();}
+
+private:
+    std::vector<Marker*> _vec;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 };				/* end namespace */
 
 #endif

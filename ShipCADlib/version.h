@@ -36,37 +36,41 @@ namespace ShipCADGeometry {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-  enum version_t {
-    fv100 = 1,
-    fv110,
-    fv120,
-    fv130,
-    fv140,
-    fv150,
-    fv160,
-    fv165,
-    fv170,
-    fv180,
-    fv190,
-    fv191,
-    fv195,
-    fv198,
-    fv200,
-    fv201,
-    fv210,
-    fv220,
-    fv230,
-    fv240,
-    fv250,
-    fv260,
-  };
+	enum version_t {
+		fv100 = 1,
+		fv110,
+		fv120,
+		fv130,
+		fv140,
+		fv150,
+		fv160,
+		fv165,
+		fv170,
+		fv180,
+		fv190,
+		fv191,
+		fv195,
+		fv198,
+		fv200,
+		fv201,
+		fv210,
+		fv220,
+		fv230,
+		fv240,
+		fv250,
+		fv260,
+	};
 
-  const version_t k_current_version = fv260;
+	const version_t k_current_version = fv260;
 
-  const QString k_released_date = QString("April 21, 2006");
+	const QString k_released_date = QString("April 21, 2006");
 
-  extern QString versionString(version_t v);
+	extern QString versionString(version_t v);
 
+	extern version_t versionFromInt(int vint);
+
+	extern int versionToInt(version_t v);
+	
 };				/* end namespace */
 
 //////////////////////////////////////////////////////////////////////////////////////

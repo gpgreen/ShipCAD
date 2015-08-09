@@ -35,6 +35,16 @@ using namespace ShipCADGeometry;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+version_t ShipCADGeometry::versionFromInt(int vint)
+{
+	return static_cast<version_t>(vint);
+}
+
+int ShipCADGeometry::versionToInt(version_t v)
+{
+	return static_cast<int>(v);
+}
+
 QString ShipCADGeometry::versionString(version_t v)
 {
     if (v == fv100)

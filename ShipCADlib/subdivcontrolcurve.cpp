@@ -425,6 +425,7 @@ SubdivisionControlCurveVector::SubdivisionControlCurveVector(bool owned)
 	// does nothing
 }
 
+#if 0
 struct CurvePred 
 {
 	ShipCADGeometry::SubdivisionControlCurve* _querycurve;
@@ -434,6 +435,7 @@ struct CurvePred
 		}
 	CurvePred(ShipCADGeometry::SubdivisionControlCurve* querycurve) : _querycurve(querycurve) {}
 };
+#endif
 
 SubdivisionControlCurveVector::~SubdivisionControlCurveVector()
 {
@@ -452,7 +454,7 @@ void SubdivisionControlCurveVector::clear()
 bool SubdivisionControlCurveVector::del(SubdivisionControlCurve* elem)
 {
 	bool removed = false;
-    ccvec_iterator i = find_if(_vec.begin(), _vec.end(), CurvePred(elem));
+    ccvec_iterator i = find(_vec.begin(), _vec.end(), elem);
 	if (i != _vec.end()) {
 		if (_owned)
 			delete *i;

@@ -228,7 +228,7 @@ void SubdivisionSurface::assembleFacesToPatches(vector<SubdivisionLayer*>& layer
                                                 vector<SubdivisionFace*>& assembledPatches,
                                                 size_t& nAssembled)
 {
-    // BUGBUG: not implemented
+    // TODO: not implemented
 }
 
 void SubdivisionSurface::calculateGaussCurvature()
@@ -2333,7 +2333,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
         _control_edges.push_back(edge);
         edge->loadBinary(source);
     }
-    if (source.version() >= fv195) {
+    if (source.getVersion() >= fv195) {
         // load control curves
         source.load(n);
         _control_curves.reserve(n);
@@ -2489,7 +2489,7 @@ void SubdivisionSurface::saveBinary(FileBuffer &destination)
     destination.add(numberOfControlEdges());
     for (size_t i=1; i<=numberOfControlEdges(); ++i)
         getControlEdge(i-1)->saveBinary(destination);
-    if (destination.version() >= fv195) {
+    if (destination.getVersion() >= fv195) {
         destination.add(numberOfControlCurves());
         for (size_t i=1; i<=numberOfControlCurves(); ++i)
             getControlCurve(i-1)->saveBinary(destination);

@@ -441,15 +441,15 @@ void SubdivisionLayer::loadBinary(FileBuffer& source)
     _use_for_intersections = true;
     _use_in_hydrostatics = true;
     _show_in_linesplan = true;
-    if (source.version() >= fv180) {
+    if (source.getVersion() >= fv180) {
         source.load(_use_for_intersections);
         source.load(_use_in_hydrostatics);
-        if (source.version() >= fv191) {
+        if (source.getVersion() >= fv191) {
             source.load(_material_density);
             source.load(_thickness);
-            if (source.version() >= fv201) {
+            if (source.getVersion() >= fv201) {
                 source.load(_show_in_linesplan);
-                if (source.version() >= fv260) {
+                if (source.getVersion() >= fv260) {
                     int i;
                     source.load(i);
                     _alphablend = i;
@@ -515,15 +515,15 @@ void SubdivisionLayer::saveBinary(FileBuffer& destination)
     destination.add(_visible);
     destination.add(_symmetric);
     destination.add(_developable);
-    if (destination.version() >= fv180) {
+    if (destination.getVersion() >= fv180) {
         destination.add(_use_for_intersections);
         destination.add(_use_in_hydrostatics);
-        if (destination.version() >= fv191) {
+        if (destination.getVersion() >= fv191) {
             destination.add(_material_density);
             destination.add(_thickness);
-            if (destination.version() >= fv201) {
+            if (destination.getVersion() >= fv201) {
                 destination.add(_show_in_linesplan);
-                if (destination.version() >= fv260) {
+                if (destination.getVersion() >= fv260) {
                     destination.add(_alphablend);
                 }
             }

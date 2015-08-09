@@ -52,9 +52,12 @@ public:
     explicit FileBuffer();
     ~FileBuffer();
 
-    // version
-    version_t version() {return ShipCADGeometry::k_current_version;}
+    size_t size() {return _data.size();}
 
+    // version
+    version_t getVersion() {return ShipCADGeometry::k_current_version;}
+	void setVersion(ShipCADGeometry::version_t v);
+	
     // save/restore/reset
     void loadFromFile(const QString& filename);
     void saveToFile(const QString& filename);

@@ -37,6 +37,10 @@
 #include "hydrostaticcalc.h"
 #include "intersection.h"
 #include "subdivcontrolcurve.h"
+#include "visibility.h"
+#include "projsettings.h"
+#include "preferences.h"
+#include "marker.h"
 
 namespace ShipCADGeometry {
 
@@ -48,9 +52,6 @@ class SubdivisionFace;
 class SubdivisionSurface;
 class SubdivisionLayer;
 class Viewport;
-class Preferences;
-class Visibility;
-class ProjectSettings;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -77,6 +78,7 @@ public:
     SubdivisionLayer* getActiveLayer();
     // getBackgroundImage()
     bool getBuild();
+    version_t getFileVersion() {return _file_version;}
     IntersectionVector& getStations() {return _stations;}
     IntersectionVector& getWaterlines() {return _waterlines;}
     IntersectionVector& getButtocks() {return _buttocks;}
@@ -103,8 +105,8 @@ public:
 
 	size_t numberOfHydrostaticCalculation();
 	
-    void loadBinary(FileBuffer& buf);
-	void saveBinary(FileBuffer& buf);
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& dest);
     void savePart(std::vector<SubdivisionFace*> faces);
 
     void rebuildModel();
@@ -113,11 +115,11 @@ public:
     void clearUndo();
 
 signals:
-    void fileChanged();
+    void onFileChanged();
     void updateUndoData();
     void updateRecentFileList();
-    void changeCursorIncrement();
-    void updateGeometryInfo();
+    void onChangeCursorIncrement();
+    void onUpdateGeometryInfo();
 
 public slots:
 
@@ -129,7 +131,7 @@ private:
     precision_t _precision;
     version_t _file_version;
     edit_mode_t _edit_mode;
-    Preferences* _prefs;
+    Preferences _prefs;
     SubdivisionControlPoint* _active_control_point;
     bool _file_changed;
     SubdivisionSurface* _surface;
@@ -140,17 +142,18 @@ private:
     IntersectionVector _buttocks;
     IntersectionVector _diagonals;
     SubdivisionControlCurveVector _control_curves;
-    Visibility* _vis;
+    MarkerVector _markers;
+    Visibility _vis;
     // Frame class
     bool _filename_set;
     bool _currently_moving;
     bool _stop_asking_for_file_version;
     // previous cursor position
-    ProjectSettings* _settings;
+    ProjectSettings _settings;
     HydrostaticCalcVector _calculations;
     // undo objects
-    // delft resisttance
-    // kaper resisteance
+    // delft resistance
+    // kaper resistance
     HydrostaticCalc* _design_hydrostatics;
 };
 

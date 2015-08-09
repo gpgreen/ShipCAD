@@ -35,6 +35,7 @@
 #include "hydrostaticcalc.h"
 #include "subdivlayer.h"
 #include "subdivsurface.h"
+#include "filebuffer.h"
 
 using namespace std;
 using namespace ShipCADGeometry;
@@ -50,13 +51,6 @@ ProjectSettings::ProjectSettings(ShipCAD* owner)
 
 ProjectSettings::~ProjectSettings()
 {
-}
-
-ProjectSettings*
-ProjectSettings::construct(ShipCAD *owner)
-{
-	ProjectSettings* ps = new ProjectSettings(owner);
-	return ps;
 }
 
 static void hc_set(HydrostaticCalc* elem)
@@ -322,13 +316,72 @@ void ProjectSettings::clear()
 	_fvcg = 1.0;
 }
 
-void ProjectSettings::loadBinary(FileBuffer& buf, QImage& img)
+void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
 {
 	clear();
-	// TODO:
+    source.load(_name);
+    source.load(_designer);
+    source.load(_length);
+    source.load(_beam);
+    source.load(_draft);
+    source.load(_main_particulars_has_been_set);
+    source.load(_water_density);
+    source.load(_appendage_coefficient);
+    source.load(_shade_underwater_ship);
+    source.load(_underwater_color);
+    int n;
+    source.load(n);
+    _units = static_cast<unit_type_t>(n);
+    source.load(_use_default_mainframe_location);
+    source.load(_mainframe_location);
+    source.load(_disable_model_check);
+    source.load(_comment);
+    source.load(_file_created_by);
+    _save_preview = true;
+    if (_owner->getFileVersion() >= fv210) {
+        source.load(n);
+        _hydrostatic_coefficients = static_cast<hydrostatic_coeff_t>(n);
+        source.load(_save_preview);
+        if (_save_preview) {
+            // TODO load image
+        }
+        if (_owner->getFileVersion() >= fv230) {
+            source.load(_simplify_intersections);
+        }
+        if (_owner->getFileVersion() >= fv250) {
+            source.load(_start_draft);
+            source.load(_end_draft);
+            source.load(_draft_step);
+            source.load(_trim);
+            source.load(n);
+            for (int i=0; i<n; i++) {
+                float f;
+                source.load(f);
+                _displacements.push_back(f);
+            }
+            source.load(_min_displacement);
+            source.load(_max_displacement);
+            source.load(_displ_increment);
+            source.load(_use_displ_increments);
+            source.load(n);
+            for (int i=0; i<n; i++) {
+                float f;
+                source.load(f);
+                _angles.push_back(f);
+            }
+            source.load(n);
+            for (int i=0; i<n; i++) {
+                float f;
+                source.load(f);
+                _stab_trims.push_back(f);
+            }
+            source.load(_free_trim);
+            source.load(_fvcg);
+        }
+    }
 }
 
-void ProjectSettings::saveBinary(FileBuffer& buf)
+void ProjectSettings::saveBinary(FileBuffer& dest)
 {
 	// TODO:
 }

@@ -652,7 +652,7 @@ void Spline::invert_direction()
     }
 }
 
-void Spline::load_binary(FileBuffer& source)
+void Spline::loadBinary(FileBuffer& source)
 {
     source.load(_show_curvature);
     source.load(_curvature_scale);
@@ -668,7 +668,7 @@ void Spline::load_binary(FileBuffer& source)
     }
 }
 
-void Spline::save_binary(FileBuffer& destination)
+void Spline::saveBinary(FileBuffer& destination)
 {
     destination.add(_show_curvature);
     destination.add(_curvature_scale);
@@ -679,7 +679,7 @@ void Spline::save_binary(FileBuffer& destination)
     }
 }
 
-void Spline::save_to_dxf(vector<QString>& strings, QString layername, bool send_mirror)
+void Spline::saveToDXF(vector<QString>& strings, QString layername, bool send_mirror)
 {
     int ind = FindDXFColorIndex(_color);
     if (!_build)

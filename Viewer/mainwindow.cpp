@@ -97,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // write it to dxf..
     vector<QString> dxfstrings;
     QString layer("splinelayer");
-    spline->save_to_dxf(dxfstrings, layer, false);
+    spline->saveToDXF(dxfstrings, layer, false);
     ofstream os("spline.dxf");
     for (size_t i=0; i<dxfstrings.size(); ++i)
         os << dxfstrings[i].toStdString() << "\r\n";

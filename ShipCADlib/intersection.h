@@ -46,6 +46,13 @@ class LineShader;
 class FileBuffer;
 class Spline;
 
+/*! \brief List of curves intersecting hull
+ *
+ * A list of curves from the intersection of the ships hull (represented by a
+ * subdivision surface) and a plane
+ * This plane can be a orthogonal plane (eg stations, waterlines, buttocks) or
+ * a freely oriented 3D plane
+ */
 class Intersection : public Entity
 {
     Q_OBJECT
@@ -53,7 +60,7 @@ class Intersection : public Entity
 public:
 
     enum intersection_type_t {
-        fiFree,
+        fiFree = 0,
         fiStation,
         fiButtock,
         fiWaterline,
@@ -63,13 +70,16 @@ public:
     explicit Intersection(ShipCAD* owner);
     virtual ~Intersection();
 
-    static Intersection* construct(ShipCAD* owner);
-
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
     virtual void draw(Viewport& vp, LineShader* lineshader) = 0;
     virtual void rebuild();
 
+    QColor getColor();
+    Plane getPlane() {return _plane;}
+    size_t getCount() {return _items.size();}
+    Spline* getItem(size_t index);
+    const QString& getDescription();
     void add(Spline* sp);
     void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
     void createStarboardPart();

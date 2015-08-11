@@ -33,6 +33,7 @@
 #include <QtCore>
 #include <QtGui>
 #include "entity.h"
+#include "spline.h"
 
 namespace ShipCADGeometry {
 
@@ -43,7 +44,7 @@ class FileBuffer;
 	
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Marker : public Entity
+class Marker : public Spline
 {
     Q_OBJECT
 
@@ -52,20 +53,16 @@ public:
     explicit Marker(ShipCAD* owner);
     virtual ~Marker();
 
-	static Marker* construct(ShipCAD* owner);
-	
     virtual void clear();
-    virtual void extents(QVector3D& min, QVector3D& max);
     virtual void draw(Viewport& vp, LineShader* lineshader);
-    virtual void rebuild();
 
-	bool isVisible();
-	void setVisible(bool set);
+    bool isVisible() {return _visible;}
+    void setVisible(bool set) {_visible=set;}
 	bool isSelected();
 	void setSelected(bool set);
 
-	void loadBinary(FileBuffer& buf);
-	void saveBinary(FileBuffer& buf);
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& dest);
 									
 public slots:
 
@@ -75,7 +72,6 @@ private:
 
 	ShipCAD* _owner;
 	bool _visible;
-	bool _selected;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

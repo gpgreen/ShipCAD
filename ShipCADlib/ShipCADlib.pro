@@ -33,7 +33,9 @@ SOURCES += shipcadlib.cpp \
     projsettings.cpp \
     undoobject.cpp \
     shipcad.cpp \
-    visibility.cpp
+    visibility.cpp \
+    intersection.cpp \
+    marker.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

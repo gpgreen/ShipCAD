@@ -74,6 +74,9 @@ public:
     explicit ShipCAD();
     ~ShipCAD();
 
+    ProjectSettings& getProjectSettings() {return _settings;}
+    Preferences& getPreferences() {return _prefs;}
+
     void buildValidFrameTable(bool close_at_deck);
     SubdivisionLayer* getActiveLayer();
     // getBackgroundImage()

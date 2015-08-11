@@ -61,6 +61,11 @@ public:
     void resetColors();
     void save();
 
+    QColor getStationColor() {return _station_color;}
+    QColor getButtockColor() {return _buttock_color;}
+    QColor getWaterlineColor() {return _waterline_color;}
+    QColor getDiagonalColor() {return _diagonal_color;}
+
     void clear();
 
 public slots:

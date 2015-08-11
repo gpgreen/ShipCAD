@@ -80,6 +80,7 @@ public:
 	void setComment(const QString& comment);
 	void setFileCreatedBy(const QString& createdby);
 	void setShadeUnderwaterShip(bool set);
+    bool getSimplifyIntersections() {return _simplify_intersections;}
 	void setSimplifyIntersections(bool set);
 	void setUnderWaterColor(QColor& col);
 	void setUnits(unit_type_t unit);

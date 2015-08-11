@@ -396,7 +396,7 @@ void SubdivisionControlCurve::saveToDXF(vector<QString> &strings)
 {
     QString layer("Control_curves");
     _curve->setFragments(_curve->numberOfPoints());
-    _curve->save_to_dxf(strings, layer, _owner->drawMirror());
+    _curve->saveToDXF(strings, layer, _owner->drawMirror());
 }
 
 void SubdivisionControlCurve::dump(ostream& os, const char* prefix) const

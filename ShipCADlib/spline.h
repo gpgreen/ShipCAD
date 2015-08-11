@@ -82,9 +82,9 @@ public:
     QVector3D value(float parameter);
 
     // persistence
-    virtual void load_binary(FileBuffer& source);
-    virtual void save_binary(FileBuffer& destination);
-    void save_to_dxf(std::vector<QString>& strings, QString layername, 
+    virtual void loadBinary(FileBuffer& source);
+    virtual void saveBinary(FileBuffer& destination);
+    void saveToDXF(std::vector<QString>& strings, QString layername,
 		     bool sendmirror);
 
     // drawing

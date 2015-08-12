@@ -32,7 +32,7 @@ SOURCES += shipcadlib.cpp \
     shader.cpp \
     projsettings.cpp \
     undoobject.cpp \
-    shipcad.cpp \
+    shipcadmodel.cpp \
     visibility.cpp \
     intersection.cpp \
     marker.cpp
@@ -58,7 +58,7 @@ HEADERS += shipcadlib.h \
     shader.h \
     projsettings.h \
     hydrostaticcalc.h \
-    shipcad.h \
+    shipcadmodel.h \
     intersection.h \
     marker.h \
     flowline.h \

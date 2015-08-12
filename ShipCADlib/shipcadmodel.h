@@ -27,8 +27,8 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef SHIPCAD_H_
-#define SHIPCAD_H_
+#ifndef SHIPCADMODEL_H_
+#define SHIPCADMODEL_H_
 
 #include <vector>
 #include <QtCore>

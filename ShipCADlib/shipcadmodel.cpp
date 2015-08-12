@@ -27,7 +27,7 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#include "shipcad.h"
+#include "shipcadmodel.h"
 #include "filebuffer.h"
 #include "subdivsurface.h"
 

@@ -34,7 +34,7 @@
 #include "subdivedge.h"
 #include "subdivsurface.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
 class TestSubdivisionPoint : public QObject
 {
@@ -76,14 +76,14 @@ void TestSubdivisionPoint::testCaseConstruct()
 	QVERIFY(pt->getNormal()[0] == 0 &&
 			pt->getNormal()[1] == 0 &&
 			pt->getNormal()[2] == 0);
-	QVERIFY(pt->getVertexType() == SubdivisionPoint::svRegular);
+    QVERIFY(pt->getVertexType() == svRegular);
 }
 
 void TestSubdivisionPoint::testCaseSetVertex()
 {
     SubdivisionPoint *pt = SubdivisionPoint::construct(_owner);
-    pt->setVertexType(SubdivisionPoint::svCorner);
-    QVERIFY(pt->getVertexType() == SubdivisionPoint::svCorner);
+    pt->setVertexType(svCorner);
+    QVERIFY(pt->getVertexType() == svCorner);
 }
 
 void TestSubdivisionPoint::testCaseSetCoord()

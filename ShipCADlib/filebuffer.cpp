@@ -34,8 +34,7 @@
 #include "utility.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
 // structure used to convert values from/to bytes
 union convert_type_t {

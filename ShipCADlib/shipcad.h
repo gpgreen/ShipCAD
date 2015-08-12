@@ -33,6 +33,7 @@
 #include <vector>
 #include <QtCore>
 #include <QtGui>
+#include "shipcadlib.h"
 #include "version.h"
 #include "hydrostaticcalc.h"
 #include "intersection.h"
@@ -42,7 +43,7 @@
 #include "preferences.h"
 #include "marker.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 class Marker;
 class Flowline;
@@ -55,24 +56,13 @@ class Viewport;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ShipCAD : public QObject
+class ShipCADModel : public QObject
 {
     Q_OBJECT
 public:
 
-    enum precision_t {
-        fpLow,
-        fpMedium,
-        fpHigh,
-        fpVeryHigh,
-    };
-
-    enum edit_mode_t {
-        emSelectItems,
-    };
-
-    explicit ShipCAD();
-    ~ShipCAD();
+    explicit ShipCADModel();
+    ~ShipCADModel();
 
     ProjectSettings& getProjectSettings() {return _settings;}
     Preferences& getPreferences() {return _prefs;}
@@ -92,11 +82,17 @@ public:
     HydrostaticCalcVector& getHydrostaticCalculations() {return _calculations;}
     size_t getNumberOfLayers();
     SubdivisionLayer* getLayer(size_t index);
-    Marker* getMarker(size_t index);
-    size_t getNumberOfMarkers();
     size_t getNumberOfFlowlines();
     size_t getNumberOfLockedPoints();
     size_t getNumberOfViewports();
+
+    // marker
+    bool isSelectedMarker(Marker* mark);
+    void setSelectedMarker(Marker* mark);
+    void removeSelectedMarker(Marker* mark);
+    Marker* getMarker(size_t index);
+    void deleteMarker(Marker* mark);
+    size_t getNumberOfMarkers();
 
     // viewport? we might want to move this into the gui window class
     void addViewport(Viewport* vp);

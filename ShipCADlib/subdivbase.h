@@ -33,7 +33,7 @@
 #include <iosfwd>
 #include <QObject>
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -98,7 +98,7 @@ protected:
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionBase& base);
+std::ostream& operator << (std::ostream& os, const ShipCAD::SubdivisionBase& base);
 
 #endif
 

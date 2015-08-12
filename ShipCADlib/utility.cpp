@@ -33,10 +33,10 @@
 #include "shipcadlib.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 using namespace boost::math::float_constants;
 
-void ShipCADUtility::MinMax(const QVector3D& p, QVector3D& min, QVector3D& max)
+void ShipCAD::MinMax(const QVector3D& p, QVector3D& min, QVector3D& max)
 {
     if (p.x()<min.x()) min.setX(p.x());
     if (p.y()<min.y()) min.setY(p.y());
@@ -46,20 +46,20 @@ void ShipCADUtility::MinMax(const QVector3D& p, QVector3D& min, QVector3D& max)
     if (p.z()>max.z()) max.setZ(p.z());
 }
 
-float ShipCADUtility::DistancepointToLine(const QVector3D& p, const QVector3D& l1, const QVector3D& l2)
+float ShipCAD::DistancepointToLine(const QVector3D& p, const QVector3D& l1, const QVector3D& l2)
 {
     QVector3D vec = l2 - l1;
     vec.normalize();
     return p.distanceToLine(l1, vec);
 }
 
-QVector3D ShipCADUtility::Interpolate(const QVector3D& p1, const QVector3D& p2, float param)
+QVector3D ShipCAD::Interpolate(const QVector3D& p1, const QVector3D& p2, float param)
 {
     QVector3D result = p1 + (param * (p2 - p1));
     return result;
 }
 
-QVector3D ShipCADUtility::MidPoint(const QVector3D& p1, const QVector3D& p2)
+QVector3D ShipCAD::MidPoint(const QVector3D& p1, const QVector3D& p2)
 {
     return 0.5 * (p1 + p2);
 }
@@ -118,7 +118,7 @@ static QColor DXFLayerColors[255] = {
     QColor(0x2D,0x2D,0x2D), QColor(0x5B,0x5B,0x5B), QColor(0x89,0x89,0x89), QColor(0xB7,0xB7,0xB7), QColor(0xB3,0xB3,0xB3)
 };
 
-int ShipCADUtility::FindDXFColorIndex(QColor color)
+int ShipCAD::FindDXFColorIndex(QColor color)
 {
     int result = 1;
     int r = color.red();
@@ -138,14 +138,14 @@ int ShipCADUtility::FindDXFColorIndex(QColor color)
     return result;
 }
 
-QColor ShipCADUtility::QColorFromDXFIndex(int index)
+QColor ShipCAD::QColorFromDXFIndex(int index)
 {
     if (index >= 0 && index <= 255)
         return DXFLayerColors[index];
     throw range_error("bad index in FindColorFromDXFIndex");
 }
 
-QString ShipCADUtility::truncate(float val, int max_length)
+QString ShipCAD::truncate(float val, int max_length)
 {
     QString num;
     num.setNum(val);
@@ -154,7 +154,7 @@ QString ShipCADUtility::truncate(float val, int max_length)
     return num;
 }
 
-QVector3D ShipCADUtility::UnifiedNormal(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
+QVector3D ShipCAD::UnifiedNormal(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
 {
     QVector3D result((p2.y()-p1.y())*(p3.z()-p1.z())-(p2.z()-p1.z())*(p3.y()-p1.y()),
                      (p2.z()-p1.z())*(p3.x()-p1.x())-(p2.x()-p1.x())*(p3.z()-p1.z()),
@@ -164,7 +164,7 @@ QVector3D ShipCADUtility::UnifiedNormal(const QVector3D& p1, const QVector3D& p2
 
 }
 
-extern float ShipCADUtility::RadToDeg(float rad)
+extern float ShipCAD::RadToDeg(float rad)
 {
     return rad * 180.0 / pi;
 }
@@ -185,7 +185,7 @@ static bool SameSide(const QVector3D& p1,
     return dp >= 0;
 }
 
-bool ShipCADUtility::PointInTriangle(const QVector3D& intercept,
+bool ShipCAD::PointInTriangle(const QVector3D& intercept,
                                      const QVector3D& p0,
                                      const QVector3D& p1,
                                      const QVector3D& p2)
@@ -196,7 +196,7 @@ bool ShipCADUtility::PointInTriangle(const QVector3D& intercept,
 
 // clip a triangle given the 3 distances from a plane, 
 // returns 2 sets of coordinates, front of the plane, and back of the plane
-void ShipCADUtility::ClipTriangle(const QVector3D& p1,
+void ShipCAD::ClipTriangle(const QVector3D& p1,
                                   const QVector3D& p2,
                                   const QVector3D& p3,
                                   float s1,
@@ -266,7 +266,7 @@ void ShipCADUtility::ClipTriangle(const QVector3D& p1,
 
 // clip a triangle given a plane, returns 2 sets of coordinates, front of the plane, and
 // back of the plane
-void ShipCADUtility::ClipTriangle(const QVector3D& p1,
+void ShipCAD::ClipTriangle(const QVector3D& p1,
                                   const QVector3D& p2,
                                   const QVector3D& p3,
                                   const Plane& plane,
@@ -279,13 +279,13 @@ void ShipCADUtility::ClipTriangle(const QVector3D& p1,
     ClipTriangle(p1, p2, p3, s1, s2, s3, front, back);
 }
 
-float ShipCADUtility::SquaredDistPP(const QVector3D& p1, const QVector3D& p2)
+float ShipCAD::SquaredDistPP(const QVector3D& p1, const QVector3D& p2)
 {
     QVector3D p21 = p2 - p1;
     return p21.lengthSquared();
 }
 
-QString ShipCADUtility::BoolToStr(bool val)
+QString ShipCAD::BoolToStr(bool val)
 {
     return QString( (val ? "1" : "0") );
 }
@@ -303,7 +303,7 @@ static float Minimum(float d1, float d2, float d3, float d4)
 }
 
 // This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
-void ShipCADUtility::JoinSplineSegments(float join_error,
+void ShipCAD::JoinSplineSegments(float join_error,
                                         bool force_to_one_segment,
                                         vector<Spline*> list)
 {
@@ -376,7 +376,7 @@ void ShipCADUtility::JoinSplineSegments(float join_error,
     }
 }
 
-int ShipCADUtility::ReadIntFromStr(size_t lineno, const QString& str, size_t& start)
+int ShipCAD::ReadIntFromStr(size_t lineno, const QString& str, size_t& start)
 {
     int spc = str.indexOf(' ', start);
     QStringRef s;
@@ -397,7 +397,7 @@ int ShipCADUtility::ReadIntFromStr(size_t lineno, const QString& str, size_t& st
     return result;
 }
 
-bool ShipCADUtility::ReadBoolFromStr(size_t /*lineno*/, const QString& str, size_t& start)
+bool ShipCAD::ReadBoolFromStr(size_t /*lineno*/, const QString& str, size_t& start)
 {
     int spc = str.indexOf(' ', start);
     QStringRef s;
@@ -413,7 +413,7 @@ bool ShipCADUtility::ReadBoolFromStr(size_t /*lineno*/, const QString& str, size
     return result;
 }
 
-float ShipCADUtility::ReadFloatFromStr(size_t lineno, const QString& str, size_t& start)
+float ShipCAD::ReadFloatFromStr(size_t lineno, const QString& str, size_t& start)
 {
     int spc = str.indexOf(' ', start);
     QStringRef s;
@@ -434,12 +434,11 @@ float ShipCADUtility::ReadFloatFromStr(size_t lineno, const QString& str, size_t
     return result;
 }
 
-float ShipCADUtility::FindWaterViscosity(float density,
-                                         ShipCADGeometry::ProjectSettings::unit_type_t units)
+float ShipCAD::FindWaterViscosity(float density, unit_type_t units)
 {
 	float result;
 	double tmp_density;
-    if (units == ProjectSettings::fuMetric) {
+    if (units == fuMetric) {
 		result = 1.13902 + ((density - 0.999) / (1.0259-0.999))*(1.18831-1.13902);
 	} else {
 		tmp_density = density / kWeightConversionFactor;

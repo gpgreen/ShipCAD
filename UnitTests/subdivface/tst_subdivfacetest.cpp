@@ -37,7 +37,7 @@
 #include "subdivedge.h"
 #include "subdivsurface.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 using namespace std;
 
 class SubdivfaceTest : public QObject

@@ -43,8 +43,7 @@
 #include "shader.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
 const QVector3D ZERO = QVector3D(0,0,0);
 
@@ -168,7 +167,7 @@ SubdivisionPoint* SubdivisionFace::calculateFacePoint()
     QVector3D centre = ZERO;
     if (_points.size() < 3)
         throw range_error("trying to calculate face point with less than 3 points");
-    if (_points.size() > 3 || _owner->getSubdivisionMode() == SubdivisionSurface::fmCatmullClark) {
+    if (_points.size() > 3 || _owner->getSubdivisionMode() == fmCatmullClark) {
         for (size_t i=0; i<_points.size(); ++i) {
             QVector3D p = _points[i]->getCoordinate();
             centre += p;
@@ -228,32 +227,32 @@ void SubdivisionFace::edgeCheck(SubdivisionPoint* p1,
 
 // predicate class to find an element with given point
 struct PointPred {
-    ShipCADGeometry::SubdivisionPoint* _querypt;
-    bool operator()(const pair<ShipCADGeometry::SubdivisionPoint*, ShipCADGeometry::SubdivisionPoint*>& val)
+    ShipCAD::SubdivisionPoint* _querypt;
+    bool operator()(const pair<ShipCAD::SubdivisionPoint*, ShipCAD::SubdivisionPoint*>& val)
     {
         return val.first == _querypt;
     }
-    PointPred (ShipCADGeometry::SubdivisionPoint* querypt) : _querypt(querypt) {}
+    PointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(querypt) {}
 };
 
 // predicate class to find an element with given face
 struct FacePred {
-    ShipCADGeometry::SubdivisionFace* _queryface;
-    bool operator()(const pair<ShipCADGeometry::SubdivisionFace*, ShipCADGeometry::SubdivisionPoint*>& val)
+    ShipCAD::SubdivisionFace* _queryface;
+    bool operator()(const pair<ShipCAD::SubdivisionFace*, ShipCAD::SubdivisionPoint*>& val)
     {
         return val.first == _queryface;
     }
-    FacePred (ShipCADGeometry::SubdivisionFace* queryface) : _queryface(queryface) {}
+    FacePred (ShipCAD::SubdivisionFace* queryface) : _queryface(queryface) {}
 };
 
 // predicate class to find an element with given edge
 struct EdgePred {
-    ShipCADGeometry::SubdivisionEdge* _queryedge;
-    bool operator()(const pair<ShipCADGeometry::SubdivisionEdge*, ShipCADGeometry::SubdivisionPoint*>& val)
+    ShipCAD::SubdivisionEdge* _queryedge;
+    bool operator()(const pair<ShipCAD::SubdivisionEdge*, ShipCAD::SubdivisionPoint*>& val)
     {
         return val.first == _queryedge;
     }
-    EdgePred (ShipCADGeometry::SubdivisionEdge* queryedge) : _queryedge(queryedge) {}
+    EdgePred (ShipCAD::SubdivisionEdge* queryedge) : _queryedge(queryedge) {}
 };
 
 // TODO: facepoints should be common to this face, and then we don't
@@ -276,7 +275,7 @@ void SubdivisionFace::subdivide(bool controlface,
     vector<pair<SubdivisionEdge*,SubdivisionPoint*> >::iterator etmpindex;
     vector<pair<SubdivisionFace*,SubdivisionPoint*> >::iterator ftmpindex;
 
-    if (_points.size() != 3 || _owner->getSubdivisionMode() == SubdivisionSurface::fmCatmullClark) {
+    if (_points.size() != 3 || _owner->getSubdivisionMode() == fmCatmullClark) {
         for (size_t i=1; i<=_points.size(); ++i) {
             p2 = _points[i-1];
             size_t index = (i + _points.size() - 2) % _points.size();
@@ -396,7 +395,7 @@ void SubdivisionFace::priv_dump(ostream& os, const char* prefix) const
     SubdivisionBase::priv_dump(os, prefix);
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionFace& face)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionFace& face)
 {
     face.dump(os);
     return os;
@@ -450,7 +449,7 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
     QVector<QVector3D> vertices;
     QVector<QVector3D> normals;
 
-    if (_owner->shadeUnderWater() && vp.getViewportMode() == Viewport::vmShade
+    if (_owner->shadeUnderWater() && vp.getViewportMode() == vmShade
             && getLayer()->useInHydrostatics()) {
         // BUGBUG: split up faces into 2 sets, above water and below water
         // shade with different color below waterline
@@ -568,7 +567,7 @@ void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, float MinCurvature
 void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
 {
     QVector<QVector3D> vertices;
-    if (vp.getViewportMode() != Viewport::vmWireFrame)
+    if (vp.getViewportMode() != vmWireFrame)
         return;
     // vmWireFrame
     // draw interior edges (not descending from controledges)
@@ -982,7 +981,7 @@ void SubdivisionControlFace::priv_dump(ostream& os, const char* prefix) const
     SubdivisionFace::priv_dump(os, prefix);
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlFace& face)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionControlFace& face)
 {
     face.dump(os);
     return os;

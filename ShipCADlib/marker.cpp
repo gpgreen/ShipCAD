@@ -40,9 +40,9 @@
 #include "shader.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
-Marker::Marker(ShipCAD* owner)
+Marker::Marker(ShipCADModel* owner)
     : _owner(owner)
 {
     clear();
@@ -84,7 +84,7 @@ void Marker::loadBinary(FileBuffer& source)
         bool sel;
         source.load(sel);
         if (sel)
-            _owner->addSelectedMarker(this);
+            _owner->setSelectedMarker(this);
     }
     Spline::loadBinary(source);
 }

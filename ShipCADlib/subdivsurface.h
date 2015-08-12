@@ -36,9 +36,10 @@
 #include <QColor>
 #include <QVector3D>
 #include <boost/pool/pool.hpp>
+#include "shipcadlib.h"
 #include "plane.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -73,9 +74,6 @@ public:
     typedef std::vector<std::vector<SubdivisionPoint*> > grid_t;
     typedef std::vector<std::vector<SubdivisionControlPoint*> > control_grid_t;
     typedef std::vector<std::vector<QVector3D> > coordinate_grid_t;
-
-    enum subdiv_mode_t {fmQuadTriangle, fmCatmullClark};
-    enum assemble_mode_t {amRegular, amNURBS};
 
     explicit SubdivisionSurface();
     virtual ~SubdivisionSurface();
@@ -408,7 +406,7 @@ protected:
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionSurface& surface);
+std::ostream& operator << (std::ostream& os, const ShipCAD::SubdivisionSurface& surface);
 
 #endif
 

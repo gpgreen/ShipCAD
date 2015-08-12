@@ -37,7 +37,7 @@
 
 #include "subdivbase.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -173,8 +173,8 @@ protected:
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionEdge& edge);
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionControlEdge& edge);
+std::ostream& operator << (std::ostream& os, const ShipCAD::SubdivisionEdge& edge);
+std::ostream& operator << (std::ostream& os, const ShipCAD::SubdivisionControlEdge& edge);
 
 //////////////////////////////////////////////////////////////////////////////////////
 

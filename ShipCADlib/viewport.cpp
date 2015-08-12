@@ -34,8 +34,7 @@
 #include "utility.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

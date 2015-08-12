@@ -64,7 +64,9 @@ HEADERS += shipcadlib.h \
     flowline.h \
     visibility.h \
     preferences.h \
-    undoobject.h
+    undoobject.h \
+    resistance.h \
+    backgroundimage.h
 
 unix:!symbian {
     maemo5 {

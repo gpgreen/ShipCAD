@@ -37,7 +37,7 @@
 #include <vector>
 #include <iosfwd>
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 class Viewport;
 class LineShader;
@@ -104,7 +104,7 @@ protected:
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::Entity& entity);
+std::ostream& operator << (std::ostream& os, const ShipCAD::Entity& entity);
 
 //////////////////////////////////////////////////////////////////////////////////////
 

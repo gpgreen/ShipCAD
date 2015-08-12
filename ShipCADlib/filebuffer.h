@@ -40,7 +40,7 @@
 #include "version.h"
 #include "plane.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -55,8 +55,8 @@ public:
     size_t size() {return _data.size();}
 
     // version
-    version_t getVersion() {return ShipCADGeometry::k_current_version;}
-	void setVersion(ShipCADGeometry::version_t v);
+    version_t getVersion() {return k_current_version;}
+    void setVersion(version_t v);
 	
     // save/restore/reset
     void loadFromFile(const QString& filename);
@@ -89,8 +89,8 @@ public:
     void load(QString& val);
     void add(const QString& val);
 
-    void load(ShipCADGeometry::Plane& val);
-    void add(const ShipCADGeometry::Plane& val);
+    void load(Plane& val);
+    void add(const Plane& val);
 
 private:
 

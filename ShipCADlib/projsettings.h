@@ -34,10 +34,11 @@
 #include <iosfwd>
 #include <QtCore>
 #include <QtGui>
+#include "shipcadlib.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
-class ShipCAD;
+class ShipCADModel;
 class FileBuffer;
 	
 //////////////////////////////////////////////////////////////////////////////////////
@@ -47,17 +48,7 @@ class ProjectSettings : public QObject
     Q_OBJECT
 public:
 
-	enum unit_type_t {
-        fuMetric = 0,
-        fuImperial,
-	};
-
-	enum hydrostatic_coeff_t {
-        fcProjectSettings = 0,
-		fcActualData
-	};
-	
-    explicit ProjectSettings(ShipCAD* owner);
+    explicit ProjectSettings(ShipCADModel* owner);
     ~ProjectSettings();
 
 	void setHydrostaticCoefficients(hydrostatic_coeff_t coeff);
@@ -98,7 +89,7 @@ protected:
 
 private:
 
-	ShipCAD* _owner;
+    ShipCADModel* _owner;
 	bool _main_particulars_has_been_set;
 	bool _disable_model_check;
 	float _appendage_coefficient;
@@ -137,7 +128,7 @@ private:
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::ProjectSettings& settings);
+std::ostream& operator << (std::ostream& os, const ShipCAD::ProjectSettings& settings);
 	
 #endif
 

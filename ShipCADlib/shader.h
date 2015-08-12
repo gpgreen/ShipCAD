@@ -36,7 +36,7 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 class Viewport;
 

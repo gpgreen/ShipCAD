@@ -44,10 +44,9 @@
 #include "shader.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
-bool ShipCADGeometry::g_edge_verbose = true;
+bool ShipCAD::g_edge_verbose = true;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -126,19 +125,19 @@ void SubdivisionEdge::setCrease(bool val)
         if (edge->isCrease())
             n++;
     }
-    if (startPoint->getVertexType() == SubdivisionPoint::svCorner) {
+    if (startPoint->getVertexType() == svCorner) {
         if (startPoint->numberOfFaces() > 1 && n == 2)
-            startPoint->setVertexType(SubdivisionPoint::svCrease);
+            startPoint->setVertexType(svCrease);
     }
     else {
         if (n == 0)
-            startPoint->setVertexType(SubdivisionPoint::svRegular);
+            startPoint->setVertexType(svRegular);
         else if (n == 1)
-            startPoint->setVertexType(SubdivisionPoint::svDart);
+            startPoint->setVertexType(svDart);
         else if (n == 2)
-            startPoint->setVertexType(SubdivisionPoint::svCrease);
+            startPoint->setVertexType(svCrease);
         else if (n > 2)
-            startPoint->setVertexType(SubdivisionPoint::svCorner);
+            startPoint->setVertexType(svCorner);
     }
     n = 0;
     for (size_t i=0; i<endPoint->numberOfEdges(); ++i) {
@@ -146,19 +145,19 @@ void SubdivisionEdge::setCrease(bool val)
         if (edge->isCrease())
             n++;
     }
-    if (endPoint->getVertexType() == SubdivisionPoint::svCorner) {
+    if (endPoint->getVertexType() == svCorner) {
         if (endPoint->numberOfFaces() > 1 && n == 2)
-            endPoint->setVertexType(SubdivisionPoint::svCrease);
+            endPoint->setVertexType(svCrease);
     }
     else {
         if (n == 0)
-            endPoint->setVertexType(SubdivisionPoint::svRegular);
+            endPoint->setVertexType(svRegular);
         else if (n == 1)
-            endPoint->setVertexType(SubdivisionPoint::svDart);
+            endPoint->setVertexType(svDart);
         else if (n == 2)
-            endPoint->setVertexType(SubdivisionPoint::svCrease);
+            endPoint->setVertexType(svCrease);
         else if (n > 2)
-            endPoint->setVertexType(SubdivisionPoint::svCorner);
+            endPoint->setVertexType(svCorner);
     }
     // BUGBUG: this fails during subdivide
     //_owner->setBuild(false);
@@ -168,7 +167,7 @@ SubdivisionEdge* SubdivisionEdge::getPreviousEdge()
 {
     SubdivisionPoint* p = _points[0];
     SubdivisionEdge* result = 0;
-    if (p->isRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
+    if (p->isRegularPoint() && p->getVertexType() != svCorner) {
         // find previous edge
         for (size_t i=0; i<p->numberOfEdges(); ++i) {
             if (p->getEdge(i) == this)
@@ -198,7 +197,7 @@ SubdivisionEdge* SubdivisionEdge::getNextEdge()
 {
     SubdivisionPoint* p = _points[1];
     SubdivisionEdge* result = 0;
-    if (p->isRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
+    if (p->isRegularPoint() && p->getVertexType() != svCorner) {
         // find next edge
         for (size_t i=0; i<p->numberOfEdges(); ++i) {
             if (p->getEdge(i) == this)
@@ -235,7 +234,7 @@ SubdivisionPoint* SubdivisionEdge::calculateEdgePoint()
     QVector3D point = 0.5 * (startPoint()->getCoordinate() + endPoint()->getCoordinate());
     SubdivisionPoint* result = SubdivisionPoint::construct(_owner);
     if (_crease)
-        result->setVertexType(SubdivisionPoint::svCrease);
+        result->setVertexType(svCrease);
     if (_curve)
         _curve->insertEdgePoint(startPoint(), endPoint(), result);
     result->setCoordinate(point);
@@ -264,7 +263,7 @@ void SubdivisionEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshade
     QVector3D p1 = startPoint()->getCoordinate();
     QVector3D p2 = endPoint()->getCoordinate();
     QVector<QVector3D> vertices;
-    if (!draw_mirror && vp.getViewportType() == Viewport::fvBodyplan) {
+    if (!draw_mirror && vp.getViewportType() == fvBodyplan) {
         float mfl = _owner->getMainframeLocation();
         if ((p1.x() < mfl && p2.x() > mfl) || (p1.x() > mfl && p2.x() < mfl)) {
             // straddles mainframe
@@ -358,7 +357,7 @@ void SubdivisionEdge::priv_dump(ostream& os, const char* prefix) const
        << (_control_edge ? 'y' : 'n');
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionEdge& edge)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionEdge& edge)
 {
     edge.dump(os);
     return os;
@@ -637,7 +636,7 @@ SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(const QVecto
     edge->setCrease(isCrease());
     edge->setCurve(getCurve());
     if (getCurve())
-        result->setVertexType(SubdivisionPoint::svCrease);
+        result->setVertexType(svCrease);
     for (size_t i=0; i<_faces.size(); ++i)
         edge->addFace(_faces[i]);
     _points[1] = result;
@@ -704,7 +703,7 @@ void SubdivisionControlEdge::saveBinary(FileBuffer& destination)
 void SubdivisionControlEdge::priv_trace(SubdivisionControlPoint* p)
 {
     SubdivisionControlEdge* edge;
-    if (p->isRegularPoint() && p->getVertexType() != SubdivisionPoint::svCorner) {
+    if (p->isRegularPoint() && p->getVertexType() != svCorner) {
         // find next edge
         for (size_t i=0; i<p->numberOfEdges(); ++i) {
             if (p->getEdge(i) != this) {
@@ -747,14 +746,14 @@ void SubdivisionControlEdge::draw(Viewport& vp, LineShader* lineshader)
     QVector3D p1 = startPoint()->getCoordinate();
     QVector3D p2 = endPoint()->getCoordinate();
     QVector<QVector3D> vertices;
-    if (vp.getViewportMode() == Viewport::vmWireFrame) {
+    if (vp.getViewportMode() == vmWireFrame) {
         if (isCrease()) {
             glLineWidth(2);
         }
         else {
             glLineWidth(1);
         }
-        if (vp.getViewportType() == Viewport::fvBodyplan) {
+        if (vp.getViewportType() == fvBodyplan) {
             float mfl = _owner->getMainframeLocation();
             if ((p1.x() < mfl && p2.x() > mfl) || (p1.x() > mfl && p2.x() < mfl)) {
                 // straddles mainframe
@@ -820,7 +819,7 @@ void SubdivisionControlEdge::priv_dump(ostream& os, const char* prefix) const
     SubdivisionEdge::priv_dump(os, prefix);
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlEdge& edge)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionControlEdge& edge)
 {
     edge.dump(os);
     return os;

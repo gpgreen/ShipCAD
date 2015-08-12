@@ -35,7 +35,7 @@
 #include "viewport.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

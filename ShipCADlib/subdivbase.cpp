@@ -33,7 +33,7 @@
 #include "subdivsurface.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -59,7 +59,7 @@ void SubdivisionBase::priv_dump(ostream& os, const char* prefix) const
     os << prefix << " Owner [" << hex << _owner << "]";
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionBase& base)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionBase& base)
 {
     base.dump(os);
     return os;

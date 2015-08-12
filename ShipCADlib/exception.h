@@ -33,7 +33,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace ShipCADException {
+namespace ShipCAD {
 
     class ListIndexOutOfBounds : public std::out_of_range
     {

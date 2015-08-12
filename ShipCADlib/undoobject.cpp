@@ -29,7 +29,7 @@
 
 #include "undoobject.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 using namespace std;
 
 UndoObject::UndoObject(ShipCAD* owner)

@@ -43,14 +43,13 @@
 #include "utility.h"
 #include "shader.h"
 
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 using namespace std;
 using namespace boost::math::float_constants;
 
 static QVector3D ZERO = QVector3D(0,0,0);
 
-bool ShipCADGeometry::g_point_verbose = true;
+bool ShipCAD::g_point_verbose = true;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,7 +80,7 @@ void SubdivisionPoint::clear()
     _vtype = svRegular;
 }
 
-SubdivisionPoint::vertex_type_t SubdivisionPoint::fromInt(int val)
+ShipCAD::vertex_type_t SubdivisionPoint::fromInt(int val)
 {
     if (val == 0)
         return svRegular;
@@ -500,7 +499,7 @@ void SubdivisionPoint::priv_dump(ostream& os, const char* prefix) const
        << "]\n" << nprefix << "VertexType " << _vtype;
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionPoint& point)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionPoint& point)
 {
     point.dump(os);
     return os;
@@ -830,7 +829,7 @@ void SubdivisionControlPoint::drawControlPoints(Viewport& vp,
     QVector<QVector3D> dartPoints;
     QVector<QVector3D> creasePoints;
 
-    if (vp.getViewportMode() == Viewport::vmWireFrame) {
+    if (vp.getViewportMode() == vmWireFrame) {
         for (size_t i=0; i<surface->numberOfControlPoints(); ++i) {
             SubdivisionControlPoint* pt = surface->getControlPoint(i);
             if (!pt->isVisible())
@@ -843,16 +842,16 @@ void SubdivisionControlPoint::drawControlPoints(Viewport& vp,
                 leakPoints << pt->getCoordinate();
             else {
                 switch (pt->getVertexType()) {
-                case SubdivisionPoint::svRegular:
+                case svRegular:
                     regularPoints << pt->getCoordinate();
                     break;
-                case SubdivisionPoint::svDart:
+                case svDart:
                     dartPoints << pt->getCoordinate();
                     break;
-                case SubdivisionPoint::svCrease:
+                case svCrease:
                     creasePoints << pt->getCoordinate();
                     break;
-                case SubdivisionPoint::svCorner:
+                case svCorner:
                     cornerPoints << pt->getCoordinate();
                     break;
                 }
@@ -891,7 +890,7 @@ void SubdivisionControlPoint::priv_dump(ostream& os, const char* prefix) const
     os << "\n" << prefix << " Locked " << (_locked ? "y" : "n");
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlPoint& point)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionControlPoint& point)
 {
     point.dump(os);
     return os;

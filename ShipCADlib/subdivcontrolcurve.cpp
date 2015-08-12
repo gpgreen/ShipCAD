@@ -42,7 +42,7 @@
 #include "entity.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -249,7 +249,7 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
         lineshader->renderPoints(vertices, getColor());
     }
     vertices.clear();
-    if (vp.getViewportType() == Viewport::fvBodyplan && !_owner->drawMirror()) {
+    if (vp.getViewportType() == fvBodyplan && !_owner->drawMirror()) {
         // draw mainframe location
         Plane mfl(1, 0, 0, -_owner->getMainframeLocation());
         IntersectionData output;
@@ -413,7 +413,7 @@ void SubdivisionControlCurve::priv_dump(ostream& os, const char* prefix) const
     //   << hex << this << "]\n";
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionControlCurve& curve)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionControlCurve& curve)
 {
     curve.dump(os);
     return os;
@@ -428,12 +428,12 @@ SubdivisionControlCurveVector::SubdivisionControlCurveVector(bool owned)
 #if 0
 struct CurvePred 
 {
-	ShipCADGeometry::SubdivisionControlCurve* _querycurve;
-	bool operator()(const ShipCADGeometry::SubdivisionControlCurve* val)
+	ShipCAD::SubdivisionControlCurve* _querycurve;
+	bool operator()(const ShipCAD::SubdivisionControlCurve* val)
 		{
 			return val == _querycurve;
 		}
-	CurvePred(ShipCADGeometry::SubdivisionControlCurve* querycurve) : _querycurve(querycurve) {}
+	CurvePred(ShipCAD::SubdivisionControlCurve* querycurve) : _querycurve(querycurve) {}
 };
 #endif
 

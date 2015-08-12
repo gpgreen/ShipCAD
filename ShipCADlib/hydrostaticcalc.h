@@ -34,13 +34,14 @@
 #include <algorithm>
 #include <QtCore>
 #include <QtGui>
+#include "shipcadlib.h"
 #include "plane.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ShipCAD;
+class ShipCADModel;
 class Plane;
 class Intersection;
 	
@@ -95,33 +96,10 @@ class HydrostaticCalc : public QObject
     Q_OBJECT
 public:
 
-	enum HydrostaticType {
-		fhShort,
-		fhExtensive,
-	};
-
-	enum HydrostaticsMode {
-	};
-	
-	enum HydrostaticError {
-		feNothingSubmerged,
-		feMakingWater,
-		feNotEnoughBuoyance,
-	};
-
-	enum HydrostaticsCalculation {
-		hcAll,
-		hcVolume,
-		hcMainframe,
-		hcWaterline,
-		hcSAC,
-		hcLateralArea,
-	};
-	
-    explicit HydrostaticCalc(ShipCAD* owner);
+    explicit HydrostaticCalc(ShipCADModel* owner);
     ~HydrostaticCalc();
 
-	static HydrostaticCalc* construct(ShipCAD* owner);
+    static HydrostaticCalc* construct(ShipCADModel* owner);
 	
 	void clear();
 
@@ -150,7 +128,7 @@ protected:
 
 private:
 
-	ShipCAD* _owner;
+    ShipCADModel* _owner;
 	float _heeling_angle;
 	float _trim;
 	float _draft;

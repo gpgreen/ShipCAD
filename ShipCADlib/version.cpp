@@ -31,21 +31,21 @@
 
 #include "version.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-version_t ShipCADGeometry::versionFromInt(int vint)
+version_t ShipCAD::versionFromInt(int vint)
 {
 	return static_cast<version_t>(vint);
 }
 
-int ShipCADGeometry::versionToInt(version_t v)
+int ShipCAD::versionToInt(version_t v)
 {
 	return static_cast<int>(v);
 }
 
-QString ShipCADGeometry::versionString(version_t v)
+QString ShipCAD::versionString(version_t v)
 {
     if (v == fv100)
         return QString("1.0");

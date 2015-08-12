@@ -38,7 +38,7 @@
 #include <QString>
 #include "entity.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 class FileBuffer;
 class Plane;
@@ -144,7 +144,7 @@ protected:
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::Spline& spline);
+std::ostream& operator << (std::ostream& os, const ShipCAD::Spline& spline);
 
 #endif
 

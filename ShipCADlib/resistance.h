@@ -27,91 +27,51 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef PREFERENCES_H
-#define PREFERENCES_H
-
-#include <QtCore>
-#include <QtGui>
+#ifndef RESISTANCE_H
+#define RESISTANCE_H
 
 namespace ShipCAD {
 
-class ShipCADModel;
-
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Preferences : public QObject
+struct DelftSeriesResistance
 {
-    Q_OBJECT
-public:
+    float start_speed;
+    float end_speed;
+    float bwl;
+    float cp;
+    float displacement;
+    float draft;
+    float draft_total;
+    float keel_chord_length;
+    float keel_area;
+    float lcb;
+    float lwl;
+    float rudder_chord_length;
+    float rudder_area;
+    float viscosity;
+    float wetted_surface;
+    float wl_area;
+    bool estimate_wet_surf;
+    bool extract;
+};
 
-    explicit Preferences(ShipCADModel* owner);
-    ~Preferences();
-
-    static Preferences* construct(ShipCADModel* owner);
-
-    QString getExportDirectory();
-    QString getImportDirectory();
-    QString getOpenDirectory();
-    QString getSaveDirectory();
-
-    void setViewportColor(QColor col);
-
-    void edit();
-    void load();
-    void resetColors();
-    void save();
-
-    QColor getStationColor() {return _station_color;}
-    QColor getButtockColor() {return _buttock_color;}
-    QColor getWaterlineColor() {return _waterline_color;}
-    QColor getDiagonalColor() {return _diagonal_color;}
-
-    void clear();
-
-public slots:
-
-protected:
-
-private:
-
-    ShipCADModel* _owner;
-    int _point_size;
-    QColor _buttock_color;
-    QColor _waterline_color;
-    QColor _station_color;
-    QColor _diagonal_color;
-    QColor _edge_color;
-    QColor _crease_color;
-    QColor _crease_edge_color;
-    QColor _grid_color;
-    QColor _grid_font_color;
-    QColor _crease_point_color;
-    QColor _regular_point_color;
-    QColor _corner_point_color;
-    QColor _dart_point_color;
-    QColor _select_color;
-    QColor _layer_color;
-    QColor _normal_color;
-    QColor _underwater_color;
-    QColor _viewport_color;
-    QColor _leakpoint_color;
-    QColor _marker_color;
-    QColor _curvature_plot_color;
-    QColor _control_curve_color;
-    QColor _hydrostatics_font_color;
-    QColor _zebra_stripe_color;
-    QString _open_directory;
-    QString _save_directory;
-    QString _import_directory;
-    QString _export_directory;
-    QString _lang_file;
-    int _max_undo_memory;
-
+struct KAPERResistance
+{
+    float draft;
+    float lwl;
+    float bwl;
+    float cp;
+    float displacement;
+    float lcb;
+    float wetted_surface;
+    float at_ax;
+    float entrance_angle;
+    bool extract;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
-
-#endif // PREFERENCES_H
+#endif // RESISTANCE_H
 

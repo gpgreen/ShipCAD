@@ -38,12 +38,11 @@
 #include "filebuffer.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-ProjectSettings::ProjectSettings(ShipCAD* owner)
+ProjectSettings::ProjectSettings(ShipCADModel* owner)
 	: _owner(owner)
 {
 	clear();
@@ -391,7 +390,7 @@ void ProjectSettings::dump(ostream& os) const
 	// TODO: dump this
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::ProjectSettings& settings)
+ostream& operator << (ostream& os, const ShipCAD::ProjectSettings& settings)
 {
     settings.dump(os);
     return os;

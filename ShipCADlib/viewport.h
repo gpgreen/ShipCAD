@@ -35,8 +35,9 @@
 #include <QtCore>
 #include <QtGui>
 #include "openglwindow.h"
+#include "shipcadlib.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 class Entity;
 class SubdivisionSurface;
@@ -53,16 +54,6 @@ public:
 
     explicit Viewport();
     ~Viewport();
-
-    enum viewport_mode_t {
-        vmWireFrame, vmShade, vmShadeGauss, vmShadeDevelopable, vmShadeZebra
-    };
-    enum viewport_type_t {
-        fvBodyplan, fvProfile, fvPlan, fvPerspective
-    };
-    enum camera_type_t {
-      ftWide, ftStandard, ftShortTele, ftMediumTele, ftFarTele
-    };
 
     void initialize();
     void render();
@@ -102,9 +93,9 @@ protected:
 
 private:
 
-    enum viewport_mode_t _mode;
-    enum viewport_type_t _view_type;
-    enum camera_type_t _camera;
+    viewport_mode_t _mode;
+    viewport_type_t _view_type;
+    camera_type_t _camera;
     QMatrix4x4 _matrix;     // the final view matrix = proj * view
     QMatrix4x4 _view;       // the view matrix
     QMatrix4x4 _proj;       // the projection matrix

@@ -32,7 +32,7 @@
 #include "nurbsurface.h"
 #include "viewport.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@ void NURBSurface::dump(ostream& os) const
     Entity::dump(os);
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::NURBSurface& surface)
+ostream& operator << (ostream& os, const ShipCAD::NURBSurface& surface)
 {
     surface.dump(os);
     return os;

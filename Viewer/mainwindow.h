@@ -37,7 +37,7 @@ namespace Ui {
 class MainWindow;
 }
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 class Viewport;
 class SubdivisionSurface;
 }
@@ -52,7 +52,7 @@ public:
 
     void setAnimating(bool animating);
 
-    void setSurface(ShipCADGeometry::SubdivisionSurface* surface);
+    void setSurface(ShipCAD::SubdivisionSurface* surface);
 
 public slots:
 
@@ -77,7 +77,7 @@ protected slots:
 
 private:
     Ui::MainWindow *ui;
-    ShipCADGeometry::Viewport* _vp;
+    ShipCAD::Viewport* _vp;
     QActionGroup* _modeGroup;
     QTimer* _animation_timer;
 };

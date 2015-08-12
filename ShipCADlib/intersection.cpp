@@ -40,11 +40,12 @@
 #include "shader.h"
 #include "projsettings.h"
 #include "preferences.h"
+#include "subdivsurface.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
-Intersection::Intersection(ShipCAD* owner)
+Intersection::Intersection(ShipCADModel* owner)
     : _owner(owner)
 {
     clear();
@@ -72,7 +73,7 @@ void Intersection::setBuild(bool val)
     _build = val;
 }
 
-QColor getColor()
+QColor Intersection::getColor()
 {
     switch(_intersection_type) {
     case fiStation:
@@ -84,7 +85,7 @@ QColor getColor()
     case fiDiagonal:
         return _owner->getPreferences().getDiagonalColor();
     }
-    return QColor::white;
+    return Qt::white;
 }
 
 void Intersection::extents(QVector3D& min, QVector3D& max)
@@ -138,7 +139,7 @@ void Intersection::deleteItem(Spline* item)
     if (i == _items.end())
         return;
     delete *i;
-    _items.erase(*i);
+    _items.erase(i);
 }
 
 void Intersection::loadBinary(FileBuffer& source)

@@ -35,7 +35,7 @@
 #include "filebuffer.h"
 #include "shipcad.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 class ShipCAD;
 
@@ -71,7 +71,7 @@ private:
 	bool _file_changed;
 	bool _filename_set;
 	QString _filename;
-    ShipCAD::edit_mode_t _edit_mode;
+    edit_mode_t _edit_mode;
 	QTime _time;
 	bool _is_temp_redo_obj;
 };

@@ -34,7 +34,7 @@
 #include "subdivedge.h"
 #include "subdivsurface.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
 class SubdivcontrolpointTest : public QObject
 {
@@ -72,7 +72,7 @@ void SubdivcontrolpointTest::testCaseConstruct()
     QVERIFY(pt->getNormal()[0] == 0 &&
             pt->getNormal()[1] == 0 &&
             pt->getNormal()[2] == 0);
-    QVERIFY(pt->getVertexType() == SubdivisionPoint::svRegular);
+    QVERIFY(pt->getVertexType() == svRegular);
     QVERIFY(!pt->isLocked());
     QVERIFY(pt->isVisible());
     QVERIFY(!pt->isLeak());
@@ -82,8 +82,8 @@ void SubdivcontrolpointTest::testCaseConstruct()
 void SubdivcontrolpointTest::testCaseSetVertexLockedSelected()
 {
     SubdivisionControlPoint *pt = SubdivisionControlPoint::construct(_owner);
-    pt->setVertexType(SubdivisionPoint::svCorner);
-    QVERIFY(pt->getVertexType() == SubdivisionPoint::svCorner);
+    pt->setVertexType(svCorner);
+    QVERIFY(pt->getVertexType() == svCorner);
     pt->setLocked(true);
     pt->setSelected(true);
     QVERIFY(pt->isLocked());

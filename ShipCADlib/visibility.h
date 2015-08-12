@@ -34,10 +34,11 @@
 #include <string>
 #include <QtCore>
 #include <QtGui>
+#include "shipcadlib.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
-class ShipCAD;
+class ShipCADModel;
 class FileBuffer;
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -47,12 +48,7 @@ class Visibility : public QObject
     Q_OBJECT
 public:
 
-    enum model_view_t {
-        mvPort=0,
-        mvBoth,
-    };
-
-    explicit Visibility(ShipCAD* owner);
+    explicit Visibility(ShipCADModel* owner);
     ~Visibility() {}
 
     void setCursorIncrement(float val);
@@ -90,7 +86,7 @@ protected:
 
 private:
 
-    ShipCAD* _owner;
+    ShipCADModel* _owner;
     bool _show_control_net;
     bool _show_interior_edges;
     bool _show_stations;

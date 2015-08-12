@@ -39,9 +39,7 @@
 #include "shader.h"
 #include "exception.h"
 
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
-using namespace ShipCADException;
+using namespace ShipCAD;
 using namespace std;
 
 static QVector3D ZERO = QVector3D();
@@ -536,7 +534,7 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
 
     for (size_t i=0; i<_fragments; ++i)
         parray1.push_back(value(i/static_cast<float>(_fragments)));
-    if (vp.getViewportMode() == Viewport::vmWireFrame) {
+    if (vp.getViewportMode() == vmWireFrame) {
         if (_show_curvature) {
             glLineWidth(1);
             for (size_t i=0; i<_fragments; ++i) {
@@ -679,7 +677,7 @@ void Spline::saveBinary(FileBuffer& destination)
     }
 }
 
-void Spline::saveToDXF(vector<QString>& strings, QString layername, bool send_mirror)
+void Spline::saveToDXF(std::vector<QString>& strings, QString layername, bool sendmirror)
 {
     int ind = FindDXFColorIndex(_color);
     if (!_build)
@@ -703,13 +701,13 @@ void Spline::saveToDXF(vector<QString>& strings, QString layername, bool send_mi
         QVector3D p = value(params[i]);
         strings.push_back("0\r\nVERTEX");
         strings.push_back(QString("8\r\n%1").arg(layername));
-        strings.push_back(QString("10\r\n%1").arg(ShipCADUtility::truncate(p.x(), 4)));
-        strings.push_back(QString("20\r\n%1").arg(ShipCADUtility::truncate(p.y(), 4)));
-        strings.push_back(QString("30\r\n%1").arg(ShipCADUtility::truncate(p.z(), 4)));
+        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
+        strings.push_back(QString("20\r\n%1").arg(truncate(p.y(), 4)));
+        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
         strings.push_back("70\r\n32");    // 3D polyline mesh vertex
     }
     strings.push_back("0\r\nSEQEND");
-    if (send_mirror) {
+    if (sendmirror) {
       // send the starboard side too
       strings.push_back("0\r\nPOLYLINE");
       strings.push_back(QString("8\r\n%1").arg(layername));   // layername
@@ -720,9 +718,9 @@ void Spline::saveToDXF(vector<QString>& strings, QString layername, bool send_mi
         QVector3D p = value(params[i]);
         strings.push_back("0\r\nVERTEX");
         strings.push_back(QString("8\r\n%1").arg(layername));
-        strings.push_back(QString("10\r\n%1").arg(ShipCADUtility::truncate(p.x(), 4)));
-        strings.push_back(QString("20\r\n%1").arg(ShipCADUtility::truncate(-p.y(), 4)));
-        strings.push_back(QString("30\r\n%1").arg(ShipCADUtility::truncate(p.z(), 4)));
+        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
+        strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
+        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
         strings.push_back("70\r\n32");    // 3D polyline mesh vertex
       }
       strings.push_back("0\r\nSEQEND");
@@ -815,7 +813,7 @@ void Spline::dump(ostream& os) const
     }
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::Spline& spline)
+ostream& operator << (ostream& os, const ShipCAD::Spline& spline)
 {
     spline.dump(os);
     return os;

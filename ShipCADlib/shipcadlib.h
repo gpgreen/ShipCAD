@@ -30,6 +30,10 @@
 #ifndef SHIPCADLIB_H
 #define SHIPCADLIB_H
 
+namespace ShipCAD {
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 const float kFoot = 0.3048;
 const float kLbs = 0.4535924;
 const float kWeightConversionFactor = (1000/kLbs)/((1/kFoot)*(1/kFoot)*(1/kFoot));
@@ -40,11 +44,100 @@ const float kZBufferScaleFactor = 1.004;
 const float kZoomfactor = 1.02;
 const int FileBufferBlockSize = 4096;
 
-class ShipCADlib
-{
-    
-public:
-    ShipCADlib();
+//////////////////////////////////////////////////////////////////////////////////////
+
+enum viewport_mode_t {
+    vmWireFrame,
+    vmShade,
+    vmShadeGauss,
+    vmShadeDevelopable,
+    vmShadeZebra
 };
+enum viewport_type_t {
+    fvBodyplan, fvProfile, fvPlan, fvPerspective
+};
+enum camera_type_t {
+  ftWide, ftStandard, ftShortTele, ftMediumTele, ftFarTele
+};
+
+enum HydrostaticType {
+    fhShort,
+    fhExtensive,
+};
+
+enum HydrostaticsMode {
+};
+
+enum HydrostaticError {
+    feNothingSubmerged,
+    feMakingWater,
+    feNotEnoughBuoyance,
+};
+
+enum HydrostaticsCalculation {
+    hcAll,
+    hcVolume,
+    hcMainframe,
+    hcWaterline,
+    hcSAC,
+    hcLateralArea,
+};
+
+enum intersection_type_t {
+    fiFree = 0,
+    fiStation,
+    fiButtock,
+    fiWaterline,
+    fiDiagonal,
+};
+
+enum unit_type_t {
+    fuMetric = 0,
+    fuImperial,
+};
+
+enum hydrostatic_coeff_t {
+    fcProjectSettings = 0,
+    fcActualData
+};
+
+enum precision_t {
+    fpLow,
+    fpMedium,
+    fpHigh,
+    fpVeryHigh,
+};
+
+enum edit_mode_t {
+    emSelectItems,
+};
+
+enum vertex_type_t {
+    svRegular=0,			/**< a regular point, no crease edges */
+    svCrease,				/**< crease point, exactly 2 crease edges */
+    svDart,					/**< dart point, exactly 1 crease edge */
+    svCorner				/**< corner point that has more than 2 crease edges */
+};
+
+enum subdiv_mode_t {
+    fmQuadTriangle,
+    fmCatmullClark
+};
+
+enum assemble_mode_t {
+    amRegular,
+    amNURBS
+};
+
+enum model_view_t {
+    mvPort=0,
+    mvBoth,
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+};				/* end namespace */
 
 #endif // SHIPCADLIB_H

@@ -36,7 +36,7 @@
 #include <QVector3D>
 #include "entity.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -92,7 +92,7 @@ protected:
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::NURBSurface& surface);
+std::ostream& operator << (std::ostream& os, const ShipCAD::NURBSurface& surface);
 
 #endif
 

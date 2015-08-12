@@ -38,7 +38,7 @@
 #include "plane.h"
 #include "projsettings.h"
 
-namespace ShipCADUtility {
+namespace ShipCAD {
 
 extern void MinMax(const QVector3D& p, QVector3D& min, QVector3D& max);
 
@@ -86,7 +86,7 @@ extern void ClipTriangle(const QVector3D& p1,
 extern void ClipTriangle(const QVector3D& p1,
                          const QVector3D& p2,
                          const QVector3D& p3,
-                         const ShipCADGeometry::Plane& plane,
+                         const Plane& plane,
                          std::vector<QVector3D>& front,
                          std::vector<QVector3D>& back);
 
@@ -98,7 +98,7 @@ extern QString BoolToStr(bool val);
 
 // This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
 extern void JoinSplineSegments(float join_error, bool force_to_one_segment,
-                               std::vector<ShipCADGeometry::Spline*> list);
+                               std::vector<Spline*> list);
 
 extern int ReadIntFromStr(size_t lineno, const QString& str, size_t& start);
 extern bool ReadBoolFromStr(size_t lineno, const QString& str, size_t& start);
@@ -110,8 +110,7 @@ extern float ReadFloatFromStr(size_t lineno, const QString& str, size_t& start);
 	 * \param units 
 	 * \returns the water viscocity
 	 */
-    extern float FindWaterViscosity(float density,
-                                    ShipCADGeometry::ProjectSettings::unit_type_t units);
+    extern float FindWaterViscosity(float density, unit_type_t units);
 	
 };
 

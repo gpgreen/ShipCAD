@@ -41,8 +41,7 @@
 #include "viewport.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
 static QVector3D ZERO = QVector3D(0,0,0);
 
@@ -374,9 +373,9 @@ void SubdivisionLayer::draw(Viewport& vp)
 {
     if (!isVisible() || numberOfFaces() == 0)
         return;
-    if (vp.getViewportMode() != Viewport::vmWireFrame) {
+    if (vp.getViewportMode() != vmWireFrame) {
         // not vmWireFrame, but shaded
-        if (vp.getViewportMode() == Viewport::vmShadeGauss) {
+        if (vp.getViewportMode() == vmShadeGauss) {
             for (size_t i=0; i<numberOfFaces(); ++i)
                 getFace(i)->drawCurvatureFaces(vp,
                                                _owner->getMinGausCurvature(),
@@ -543,7 +542,7 @@ void SubdivisionLayer::priv_dump(ostream& os, const char* prefix) const
     SubdivisionBase::priv_dump(os, prefix);
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionLayer& layer)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionLayer& layer)
 {
     layer.dump(os);
     return os;

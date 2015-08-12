@@ -45,15 +45,14 @@
 #include "version.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
 static QVector3D ZERO = QVector3D(0,0,0);
 static QVector3D ONE = QVector3D(1,1,1);
 
 static int sDecimals = 4;
 
-bool ShipCADGeometry::g_surface_verbose = true;
+bool ShipCAD::g_surface_verbose = true;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1382,22 +1381,22 @@ void SubdivisionSurface::extents(QVector3D& min, QVector3D& max)
 
 // predicate class to find an element with given point
 struct ExistPointPred {
-    ShipCADGeometry::SubdivisionControlPoint* _querypt;
-    bool operator()(const pair<ShipCADGeometry::SubdivisionControlPoint*, ShipCADGeometry::SubdivisionControlPoint*>& val)
+    ShipCAD::SubdivisionControlPoint* _querypt;
+    bool operator()(const pair<ShipCAD::SubdivisionControlPoint*, ShipCAD::SubdivisionControlPoint*>& val)
     {
         return val.first == _querypt;
     }
-    ExistPointPred (ShipCADGeometry::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
+    ExistPointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
 };
 
 // predicate class to find an element with given point
 struct ExtrudePointPred {
-    ShipCADGeometry::SubdivisionControlPoint* _querypt;
-    bool operator()(const pair<ShipCADGeometry::SubdivisionControlPoint*, ShipCADGeometry::SubdivisionControlPoint*>& val)
+    ShipCAD::SubdivisionControlPoint* _querypt;
+    bool operator()(const pair<ShipCAD::SubdivisionControlPoint*, ShipCAD::SubdivisionControlPoint*>& val)
     {
         return val.second == _querypt;
     }
-    ExtrudePointPred (ShipCADGeometry::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
+    ExtrudePointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
 };
 
 void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
@@ -1455,12 +1454,12 @@ void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
             if (tmp != 0)
                 newedges.push_back(tmp);
         }
-        if (edge->startPoint()->getVertexType() == SubdivisionControlPoint::svCorner && point1 != 0) {
+        if (edge->startPoint()->getVertexType() == svCorner && point1 != 0) {
             tmp = controlEdgeExists(edge->startPoint(), point1);
             if (tmp != 0)
                 tmp->setCrease(true);
         }
-        if (edge->endPoint()->getVertexType() == SubdivisionControlPoint::svCorner && point2 != 0) {
+        if (edge->endPoint()->getVertexType() == svCorner && point2 != 0) {
             tmp = controlEdgeExists(edge->endPoint(), point2);
             if (tmp != 0)
                 tmp->setCrease(true);
@@ -1564,11 +1563,11 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                                     ep.point = p2->getCoordinate();
                                     ep.edge = edge;
                                     if (!edge->isCrease()) {
-                                        sp.knuckle = p1->getVertexType() != SubdivisionPoint::svRegular;
+                                        sp.knuckle = p1->getVertexType() != svRegular;
                                         ep.knuckle = sp.knuckle;
                                     }
                                     else {
-                                        sp.knuckle = p1->getVertexType() == SubdivisionPoint::svCorner;
+                                        sp.knuckle = p1->getVertexType() == svCorner;
                                         ep.knuckle = sp.knuckle;
                                     }
                                     segments.push_back(make_pair(sp, ep));
@@ -1578,7 +1577,7 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                     }
                     else if (fabs(side2) < 1E-5) {
                         SurfIntersectionData id(p2->getCoordinate());
-                        id.knuckle = p2->getVertexType() != SubdivisionPoint::svRegular;
+                        id.knuckle = p2->getVertexType() != svRegular;
                         id.edge = edgeExists(p1, p2);
                         intarray.push_back(id);
                     }
@@ -1748,9 +1747,9 @@ void SubdivisionSurface::draw(Viewport &vp)
 {
     if (!isBuild())
         rebuild();
-    if (vp.getViewportMode() != Viewport::vmWireFrame) {
-        if (vp.getViewportMode() == Viewport::vmShadeGauss
-                || vp.getViewportMode() == Viewport::vmShadeDevelopable) {
+    if (vp.getViewportMode() != vmWireFrame) {
+        if (vp.getViewportMode() == vmShadeGauss
+                || vp.getViewportMode() == vmShadeDevelopable) {
             if (!isGaussCurvatureCalculated())
                 calculateGaussCurvature();
         }
@@ -2112,7 +2111,7 @@ void SubdivisionSurface::importGrid(coordinate_grid_t& points, SubdivisionLayer*
     for (size_t i=1; i<=rows; ++i) {
         for (size_t j=1; j<=cols; ++j) {
             if (grid[i-1][j-1]->numberOfFaces() < 2)
-                grid[i-1][j-1]->setVertexType(SubdivisionControlPoint::svCorner);
+                grid[i-1][j-1]->setVertexType(svCorner);
         }
     }
 }
@@ -2134,7 +2133,7 @@ void SubdivisionSurface::initialize(size_t point_start, size_t edge_start)
     }
     for (size_t i=point_start; i<=numberOfControlPoints(); ++i) {
         if(_control_points[i-1]->numberOfFaces() < 2)
-            _control_points[i-1]->setVertexType(SubdivisionControlPoint::svCorner);
+            _control_points[i-1]->setVertexType(svCorner);
     }
     _initialized = true;
 }
@@ -2443,13 +2442,13 @@ void SubdivisionSurface::rebuild()
                 SubdivisionPoint* point = curve->getSubdivPoint(j-1);
                 curve->getSpline()->add(point->getCoordinate());
                 if (j > 1 && j < curve->numberOfSubdivPoints()) {
-                    if (point->getVertexType() == SubdivisionPoint::svCorner)
+                    if (point->getVertexType() == svCorner)
                         curve->getSpline()->setKnuckle(j-1, true);
                     else {
                         SubdivisionEdge* edge1 = edgeExists(curve->getSubdivPoint(j-2), curve->getSubdivPoint(j-1));
                         SubdivisionEdge* edge2 = edgeExists(curve->getSubdivPoint(j-1), curve->getSubdivPoint(j));
                         if (!edge1->isCrease() && !edge2->isCrease())
-                            curve->getSpline()->setKnuckle(j-1, point->getVertexType() == SubdivisionPoint::svCrease);
+                            curve->getSpline()->setKnuckle(j-1, point->getVertexType() == svCrease);
                     }
                 }
                 curve->setBuild(true);
@@ -2691,7 +2690,7 @@ void SubdivisionSurface::priv_dump(ostream& os, const char* prefix) const
     os << prefix << " Edges (" << _edges.size() << ")\n";
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::SubdivisionSurface& surface)
+ostream& operator << (ostream& os, const ShipCAD::SubdivisionSurface& surface)
 {
     surface.dump(os);
     return os;

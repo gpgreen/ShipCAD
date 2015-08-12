@@ -35,10 +35,10 @@
 #include <QObject>
 #include <QVector3D>
 #include <QColor>
-
+#include "shipcadlib.h"
 #include "subdivbase.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,13 +65,6 @@ class SubdivisionPoint : public SubdivisionBase
     Q_PROPERTY(vertex_type_t VertexType READ getVertexType WRITE setVertexType)
 
 public:
-
-    enum vertex_type_t {
-		svRegular=0,			/**< a regular point, no crease edges */
-		svCrease,				/**< crease point, exactly 2 crease edges */
-		svDart,					/**< dart point, exactly 1 crease edge */
-		svCorner				/**< corner point that has more than 2 crease edges */
-	};
 
 	/*! \brief Constructor
 	 *
@@ -280,8 +273,8 @@ protected:
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionPoint& point);
-std::ostream& operator << (std::ostream& os, const ShipCADGeometry::SubdivisionControlPoint& point);
+std::ostream& operator << (std::ostream& os, const ShipCAD::SubdivisionPoint& point);
+std::ostream& operator << (std::ostream& os, const ShipCAD::SubdivisionControlPoint& point);
 
 //////////////////////////////////////////////////////////////////////////////////////
 

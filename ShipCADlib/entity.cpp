@@ -32,8 +32,7 @@
 #include "utility.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
-using namespace ShipCADUtility;
+using namespace ShipCAD;
 
 static QVector3D ZERO = QVector3D();
 static QVector3D ONE = QVector3D(1,1,1);
@@ -104,7 +103,7 @@ void Entity::dump(ostream& os) const
        << "]";
 }
 
-ostream& operator << (ostream& os, const ShipCADGeometry::Entity& entity)
+ostream& operator << (ostream& os, const ShipCAD::Entity& entity)
 {
     entity.dump(os);
     return os;

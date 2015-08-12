@@ -31,9 +31,9 @@
 #include "filebuffer.h"
 #include "shipcad.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
-Visibility::Visibility(ShipCAD *owner)
+Visibility::Visibility(ShipCADModel *owner)
     : _owner(owner)
 {
     clear();

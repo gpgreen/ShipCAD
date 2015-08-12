@@ -43,7 +43,7 @@
 #include "subdivpoint.h"
 
 using namespace std;
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -94,6 +94,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //spline->setProperty("ShowPoints", true);
     cerr << *spline << endl;
 
+#if 0
     // write it to dxf..
     vector<QString> dxfstrings;
     QString layer("splinelayer");
@@ -103,6 +104,7 @@ MainWindow::MainWindow(QWidget *parent) :
         os << dxfstrings[i].toStdString() << "\r\n";
     os.close();
     cerr << *spline << endl;
+#endif
 
     // make a surface
     SubdivisionSurface* surface = new SubdivisionSurface;
@@ -262,40 +264,40 @@ MainWindow::setSurface(SubdivisionSurface *surface)
 void
 MainWindow::wireFrame()
 {
-  if (_vp->getViewportMode() != Viewport::vmWireFrame)
-    _vp->setViewportMode(Viewport::vmWireFrame);
+  if (_vp->getViewportMode() != vmWireFrame)
+    _vp->setViewportMode(vmWireFrame);
   cout << "Viewport mode Wire Frame" << endl;
 }
 
 void
 MainWindow::shade()
 {
-  if (_vp->getViewportMode() != Viewport::vmShade)
-    _vp->setViewportMode(Viewport::vmShade);
+  if (_vp->getViewportMode() != vmShade)
+    _vp->setViewportMode(vmShade);
   cout << "Viewport mode shade" << endl;
 }
 
 void
 MainWindow::shadeCurvature()
 {
-  if (_vp->getViewportMode() != Viewport::vmShadeGauss)
-    _vp->setViewportMode(Viewport::vmShadeGauss);
+  if (_vp->getViewportMode() != vmShadeGauss)
+    _vp->setViewportMode(vmShadeGauss);
   cout << "Viewport mode shade gauss" << endl;
 }
 
 void
 MainWindow::shadeDevelopable()
 {
-  if (_vp->getViewportMode() != Viewport::vmShadeDevelopable)
-    _vp->setViewportMode(Viewport::vmShadeDevelopable);
+  if (_vp->getViewportMode() != vmShadeDevelopable)
+    _vp->setViewportMode(vmShadeDevelopable);
   cout << "Viewport mode shade developable" << endl;
 }
 
 void
 MainWindow::shadeZebra()
 {
-  if (_vp->getViewportMode() != Viewport::vmShadeZebra)
-    _vp->setViewportMode(Viewport::vmShadeZebra);
+  if (_vp->getViewportMode() != vmShadeZebra)
+    _vp->setViewportMode(vmShadeZebra);
   cout << "Viewport mode shad zebra" << endl;
 }
 

@@ -31,25 +31,25 @@
 #include "filebuffer.h"
 #include "subdivsurface.h"
 
-using namespace ShipCADGeometry;
+using namespace ShipCAD;
 
-ShipCAD::ShipCAD()
+ShipCADModel::ShipCADModel()
 	: _prefs(this), _control_curves(true), // control curves are memory managed here
 	  _vis(this), _settings(this)
 {
 	clear();
 }
 
-ShipCAD::~ShipCAD()
+ShipCADModel::~ShipCADModel()
 {
 	clear();
 }
 
-void ShipCAD::clear()
+void ShipCADModel::clear()
 {
 }
 
-void ShipCAD::setFileChanged(bool set)
+void ShipCADModel::setFileChanged(bool set)
 {
 	if (set != _file_changed) {
 		_file_changed = set;
@@ -57,7 +57,7 @@ void ShipCAD::setFileChanged(bool set)
 	}
 }
 
-void ShipCAD::loadBinary(FileBuffer& source)
+void ShipCADModel::loadBinary(FileBuffer& source)
 {
 	// remember the filename because it is erased by the clear method
 	QString tmpstr = _filename;
@@ -83,21 +83,21 @@ void ShipCAD::loadBinary(FileBuffer& source)
 			// stations
 			source.load(n);
 			for (int i=0; i<n; i++) {
-				Intersection* intersection = Intersection::construct(this);
+                Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_stations.add(intersection);
 			}
 			// buttocks
 			source.load(n);
 			for (int i=0; i<n; i++) {
-				Intersection* intersection = Intersection::construct(this);
+                Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_buttocks.add(intersection);
 			}
 			// waterlines
 			source.load(n);
 			for (int i=0; i<n; i++) {
-				Intersection* intersection = Intersection::construct(this);
+                Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_waterlines.add(intersection);
 			}
@@ -105,13 +105,13 @@ void ShipCAD::loadBinary(FileBuffer& source)
 				// diagonals
 				source.load(n);
 				for (int i=0; i<n; i++) {
-					Intersection* intersection = Intersection::construct(this);
+                    Intersection* intersection = new Intersection(this);
 					intersection->loadBinary(source);
 					_diagonals.add(intersection);
 				}
 				if (_file_version >= fv191) {
 					// markers
-                    Marker* marker = Marker::construct(this);
+                    Marker* marker = new Marker(this);
                     marker->loadBinary(source);
                     _markers.add(marker);
                     if (_file_version >= fv210) {

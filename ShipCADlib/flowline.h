@@ -34,7 +34,7 @@
 #include <QtGui>
 #include "entity.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 class ShipCAD;
 class Viewport;

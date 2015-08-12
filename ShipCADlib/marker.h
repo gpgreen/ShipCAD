@@ -35,9 +35,9 @@
 #include "entity.h"
 #include "spline.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
-class ShipCAD;
+class ShipCADModel;
 class Viewport;
 class LineShader;
 class FileBuffer;
@@ -50,7 +50,7 @@ class Marker : public Spline
 
 public:
 
-    explicit Marker(ShipCAD* owner);
+    explicit Marker(ShipCADModel* owner);
     virtual ~Marker();
 
     virtual void clear();
@@ -70,7 +70,7 @@ protected:
 
 private:
 
-	ShipCAD* _owner;
+    ShipCADModel* _owner;
 	bool _visible;
 };
 

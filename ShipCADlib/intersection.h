@@ -33,14 +33,15 @@
 #include <vector>
 #include <QtCore>
 #include <QtGui>
+#include "shipcadlib.h"
 #include "entity.h"
 #include "plane.h"
 
-namespace ShipCADGeometry {
+namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ShipCAD;
+class ShipCADModel;
 class Viewport;
 class LineShader;
 class FileBuffer;
@@ -59,20 +60,12 @@ class Intersection : public Entity
 
 public:
 
-    enum intersection_type_t {
-        fiFree = 0,
-        fiStation,
-        fiButtock,
-        fiWaterline,
-        fiDiagonal,
-    };
-
-    explicit Intersection(ShipCAD* owner);
+    explicit Intersection(ShipCADModel* owner);
     virtual ~Intersection();
 
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
-    virtual void draw(Viewport& vp, LineShader* lineshader) = 0;
+    virtual void draw(Viewport& vp, LineShader* lineshader);
     virtual void rebuild();
 
     QColor getColor();
@@ -94,9 +87,11 @@ public slots:
 
 protected:
 
+    virtual void setBuild(bool val);
+
 private:
 
-    ShipCAD* _owner;
+    ShipCADModel* _owner;
     std::vector<Spline*> _items;
     intersection_type_t _intersection_type;
     Plane _plane;

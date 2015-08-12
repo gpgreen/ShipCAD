@@ -53,6 +53,8 @@ public:
     explicit Marker(ShipCADModel* owner);
     virtual ~Marker();
 
+    static Marker* construct(ShipCADModel* owner);
+
     virtual void clear();
     virtual void draw(Viewport& vp, LineShader* lineshader);
 

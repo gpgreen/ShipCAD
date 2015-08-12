@@ -31,7 +31,7 @@
 #include "shipcadlib.h"
 #include "projsettings.h"
 #include "utility.h"
-#include "shipcad.h"
+#include "shipcadmodel.h"
 #include "hydrostaticcalc.h"
 #include "subdivlayer.h"
 #include "subdivsurface.h"

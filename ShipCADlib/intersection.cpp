@@ -35,7 +35,7 @@
 #include "intersection.h"
 #include "filebuffer.h"
 #include "spline.h"
-#include "shipcad.h"
+#include "shipcadmodel.h"
 #include "viewport.h"
 #include "shader.h"
 #include "projsettings.h"
@@ -54,6 +54,12 @@ Intersection::Intersection(ShipCADModel* owner)
 Intersection::~Intersection()
 {
     clear();
+}
+
+Intersection* Intersection::construct(ShipCADModel *owner)
+{
+    Intersection* i = new Intersection(owner);
+    return i;
 }
 
 void Intersection::clear()

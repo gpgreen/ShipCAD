@@ -83,21 +83,21 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 			// stations
 			source.load(n);
 			for (int i=0; i<n; i++) {
-                Intersection* intersection = new Intersection(this);
+                Intersection* intersection = Intersection::construct(this);
 				intersection->loadBinary(source);
 				_stations.add(intersection);
 			}
 			// buttocks
 			source.load(n);
 			for (int i=0; i<n; i++) {
-                Intersection* intersection = new Intersection(this);
+                Intersection* intersection = Intersection::construct(this);
 				intersection->loadBinary(source);
 				_buttocks.add(intersection);
 			}
 			// waterlines
 			source.load(n);
 			for (int i=0; i<n; i++) {
-                Intersection* intersection = new Intersection(this);
+                Intersection* intersection = Intersection::construct(this);
 				intersection->loadBinary(source);
 				_waterlines.add(intersection);
 			}
@@ -105,7 +105,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 				// diagonals
 				source.load(n);
 				for (int i=0; i<n; i++) {
-                    Intersection* intersection = new Intersection(this);
+                    Intersection* intersection = Intersection::construct(this);
 					intersection->loadBinary(source);
 					_diagonals.add(intersection);
 				}

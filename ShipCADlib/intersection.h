@@ -63,6 +63,8 @@ public:
     explicit Intersection(ShipCADModel* owner);
     virtual ~Intersection();
 
+    static Intersection* construct(ShipCADModel* owner);
+
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
     virtual void draw(Viewport& vp, LineShader* lineshader);

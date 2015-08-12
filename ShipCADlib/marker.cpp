@@ -35,7 +35,7 @@
 #include "marker.h"
 #include "filebuffer.h"
 #include "spline.h"
-#include "shipcad.h"
+#include "shipcadmodel.h"
 #include "viewport.h"
 #include "shader.h"
 
@@ -51,6 +51,12 @@ Marker::Marker(ShipCADModel* owner)
 Marker::~Marker()
 {
     _owner->deleteMarker(this);
+}
+
+Marker* Marker::construct(ShipCADModel* owner)
+{
+    Marker* m = new Marker(owner);
+    return m;
 }
 
 void Marker::clear()

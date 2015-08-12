@@ -33,7 +33,7 @@
 #include <QtCore>
 #include <QtGui>
 #include "filebuffer.h"
-#include "shipcad.h"
+#include "shipcadmodel.h"
 
 namespace ShipCAD {
 

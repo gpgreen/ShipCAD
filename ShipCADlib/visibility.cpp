@@ -29,7 +29,7 @@
 
 #include "visibility.h"
 #include "filebuffer.h"
-#include "shipcad.h"
+#include "shipcadmodel.h"
 
 using namespace ShipCAD;
 

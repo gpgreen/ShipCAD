@@ -104,13 +104,13 @@ extern int ReadIntFromStr(size_t lineno, const QString& str, size_t& start);
 extern bool ReadBoolFromStr(size_t lineno, const QString& str, size_t& start);
 extern float ReadFloatFromStr(size_t lineno, const QString& str, size_t& start);
 
-	/*! \brief find water viscocity based on density
-	 *
-	 * \param density the water density
-	 * \param units 
-	 * \returns the water viscocity
-	 */
-    extern float FindWaterViscosity(float density, unit_type_t units);
+/*! \brief find water viscosity based on density
+ *
+ * \param density the water density
+ * \param units
+ * \returns the water viscosity
+ */
+extern float FindWaterViscosity(float density, unit_type_t units);
 	
 };
 

@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['color',['Color',['../classShipCADGeometry_1_1Entity.html#a55bb9634ac4c8f08909376006de897b4',1,'ShipCADGeometry::Entity::Color()'],['../classShipCADGeometry_1_1SubdivisionControlEdge.html#a81cec7ea15307ae2e21cfcc238a059bb',1,'ShipCADGeometry::SubdivisionControlEdge::Color()'],['../classShipCADGeometry_1_1SubdivisionControlFace.html#a07b00d2ff994f882f1032c4a0cf2a288',1,'ShipCADGeometry::SubdivisionControlFace::Color()'],['../classShipCADGeometry_1_1SubdivisionControlPoint.html#aecfab9d47ea8e16714ce095e3e055e55',1,'ShipCADGeometry::SubdivisionControlPoint::Color()']]],
-  ['controledge',['ControlEdge',['../classShipCADGeometry_1_1SubdivisionEdge.html#a2b11b00bcc223691e6e00c4b8db272b6',1,'ShipCADGeometry::SubdivisionEdge']]],
-  ['coordinate',['Coordinate',['../classShipCADGeometry_1_1SubdivisionPoint.html#a4a8b002061482e596fb9228a8968cd57',1,'ShipCADGeometry::SubdivisionPoint']]],
-  ['crease',['Crease',['../classShipCADGeometry_1_1SubdivisionEdge.html#ab36f0260a63d4ca62c45feddf96f8505',1,'ShipCADGeometry::SubdivisionEdge']]],
-  ['curvature',['Curvature',['../classShipCADGeometry_1_1SubdivisionPoint.html#a7ca022ae7a31b478234ee212a24e3047',1,'ShipCADGeometry::SubdivisionPoint']]],
-  ['curvaturecolor',['CurvatureColor',['../classShipCADGeometry_1_1Spline.html#a4bc6d35c4d11b8df95e69300ef7120c7',1,'ShipCADGeometry::Spline']]],
-  ['curvaturescale',['CurvatureScale',['../classShipCADGeometry_1_1Spline.html#a2f9eb570f1bfe818d966a40cd0733df2',1,'ShipCADGeometry::Spline']]],
-  ['curve',['Curve',['../classShipCADGeometry_1_1SubdivisionEdge.html#abdc110088d3e486395a31dd7c7328dd4',1,'ShipCADGeometry::SubdivisionEdge']]]
+  ['color',['Color',['../classShipCAD_1_1Entity.html#a117b8362d17e9ef352555a85a6f015ff',1,'ShipCAD::Entity::Color()'],['../classShipCAD_1_1SubdivisionControlEdge.html#a1aaeec9c0e1dc9d7b49dfe2913e8a0a7',1,'ShipCAD::SubdivisionControlEdge::Color()'],['../classShipCAD_1_1SubdivisionControlFace.html#a7fbca8373f94937bcde294cbd41c70e4',1,'ShipCAD::SubdivisionControlFace::Color()'],['../classShipCAD_1_1SubdivisionControlPoint.html#a8c7a97ce5194163f37a4b655f87bc309',1,'ShipCAD::SubdivisionControlPoint::Color()']]],
+  ['controledge',['ControlEdge',['../classShipCAD_1_1SubdivisionEdge.html#a9543fdb35c1b51844207ebcfeb743197',1,'ShipCAD::SubdivisionEdge']]],
+  ['coordinate',['Coordinate',['../classShipCAD_1_1SubdivisionPoint.html#a5d39b6f7fe221b5848835a0957702c84',1,'ShipCAD::SubdivisionPoint']]],
+  ['crease',['Crease',['../classShipCAD_1_1SubdivisionEdge.html#ae4e748e28975f806703ffbd458bb66a2',1,'ShipCAD::SubdivisionEdge']]],
+  ['curvature',['Curvature',['../classShipCAD_1_1SubdivisionPoint.html#a30f533619dcb24eb00188772c99564b4',1,'ShipCAD::SubdivisionPoint']]],
+  ['curvaturecolor',['CurvatureColor',['../classShipCAD_1_1Spline.html#ac5268eaa6aadac5db072c7fdeb578ed4',1,'ShipCAD::Spline']]],
+  ['curvaturescale',['CurvatureScale',['../classShipCAD_1_1Spline.html#a5e8a93a4b5d164f38773e7edbf7753b3',1,'ShipCAD::Spline']]],
+  ['curve',['Curve',['../classShipCAD_1_1SubdivisionEdge.html#af7e2dfad80e8f8dce7a7159c3b18949c',1,'ShipCAD::SubdivisionEdge']]]
 ];

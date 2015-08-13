@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['mainwindow',['MainWindow',['../classMainWindow.html',1,'']]],
-  ['monofaceshader',['MonoFaceShader',['../classShipCADGeometry_1_1MonoFaceShader.html',1,'ShipCADGeometry']]]
+  ['hydrostaticcalc',['HydrostaticCalc',['../classShipCAD_1_1HydrostaticCalc.html',1,'ShipCAD']]],
+  ['hydrostaticcalcvector',['HydrostaticCalcVector',['../classShipCAD_1_1HydrostaticCalcVector.html',1,'ShipCAD']]],
+  ['hydrostaticsdata',['HydrostaticsData',['../structShipCAD_1_1HydrostaticsData.html',1,'ShipCAD']]]
 ];

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['edgepred',['EdgePred',['../structEdgePred.html',1,'']]],
-  ['entity',['Entity',['../classShipCADGeometry_1_1Entity.html',1,'ShipCADGeometry']]],
-  ['existpointpred',['ExistPointPred',['../structExistPointPred.html',1,'']]],
-  ['extrudepointpred',['ExtrudePointPred',['../structExtrudePointPred.html',1,'']]]
+  ['convert_5ftype_5ft',['convert_type_t',['../unionconvert__type__t.html',1,'']]],
+  ['crosscurvesdata',['CrosscurvesData',['../structShipCAD_1_1CrosscurvesData.html',1,'ShipCAD']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['layer',['Layer',['../classShipCADGeometry_1_1SubdivisionControlFace.html#a7b41fc40b007567fefacc523bd1454f0',1,'ShipCADGeometry::SubdivisionControlFace']]],
-  ['locked',['Locked',['../classShipCADGeometry_1_1SubdivisionControlPoint.html#a1e192709a33919e76207ebce39c4c916',1,'ShipCADGeometry::SubdivisionControlPoint']]]
+  ['layer',['Layer',['../classShipCAD_1_1SubdivisionControlFace.html#af4197bb400705aaea045fbe02921b3ea',1,'ShipCAD::SubdivisionControlFace']]],
+  ['locked',['Locked',['../classShipCAD_1_1SubdivisionControlPoint.html#af7c63177a12f4c60bb4a2a6615482a98',1,'ShipCAD::SubdivisionControlPoint']]]
 ];

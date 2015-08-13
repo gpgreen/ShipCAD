@@ -85,7 +85,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">shipcadlib.h File Reference</div>  </div>
 </div><!--header-->
@@ -93,15 +95,136 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="shipcadlib_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCADlib.html">ShipCADlib</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceShipCAD"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html">ShipCAD</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a67437198ee14f74e6c5277d761894863"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863">ShipCAD::viewport_mode_t</a> { <br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8">ShipCAD::vmWireFrame</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863ab1258f959e2d114750dffb3f9c2e2c0c">ShipCAD::vmShade</a>, 
+<a class="el" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863aaf20984128d2e9697958fa8c329a801a">ShipCAD::vmShadeGauss</a>, 
+<a class="el" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a85babb2fea8446064bbbf526b10bf36b">ShipCAD::vmShadeDevelopable</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a70fcfa9199faab53e43f138ed64ad12f">ShipCAD::vmShadeZebra</a>
+<br/>
+ }</td></tr>
+<tr class="separator:a67437198ee14f74e6c5277d761894863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeeb05810f2e31ef89fd4ac6b6ba9c0a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a">ShipCAD::viewport_type_t</a> { <a class="el" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aa1bc519e3e41c233dd8e94c40af1fd36d">ShipCAD::fvBodyplan</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aa05a0a083efb18429cbb855b2dcbf5e18">ShipCAD::fvProfile</a>, 
+<a class="el" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aab67fb04b0624572e1567bff4caefde27">ShipCAD::fvPlan</a>, 
+<a class="el" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">ShipCAD::fvPerspective</a>
+ }</td></tr>
+<tr class="separator:aeeeb05810f2e31ef89fd4ac6b6ba9c0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f51ebd2e66de5e41c2ffd6f434241e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241e">ShipCAD::camera_type_t</a> { <br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea8dd7ff1f55f46fc3db3ca743a05d93af">ShipCAD::ftWide</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eaa4100f3d3073015697dd72390b55fa44">ShipCAD::ftStandard</a>, 
+<a class="el" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea6f6aa44840629968cfa9815da646a9d0">ShipCAD::ftShortTele</a>, 
+<a class="el" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eae0b0ae77e52d05ac3800353808e16afe">ShipCAD::ftMediumTele</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe">ShipCAD::ftFarTele</a>
+<br/>
+ }</td></tr>
+<tr class="separator:a58f51ebd2e66de5e41c2ffd6f434241e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af34462de5db0247c80b656785e989233"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#af34462de5db0247c80b656785e989233">ShipCAD::HydrostaticType</a> { <a class="el" href="namespaceShipCAD.html#af34462de5db0247c80b656785e989233acfe164530006cd2d42457ec37a0ac24b">ShipCAD::fhShort</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#af34462de5db0247c80b656785e989233affd22dfa116c9ea2aae175feba432961">ShipCAD::fhExtensive</a>
+ }</td></tr>
+<tr class="separator:af34462de5db0247c80b656785e989233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3d04d35d63e8a5e44c63183f79200a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200a">ShipCAD::HydrostaticsMode</a> { <a class="el" href="namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200aab322857f69d00b378f611acbb12bc663">ShipCAD::fhSingleCalculation</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200aaee242838cf07c1950c914a44851804b5">ShipCAD::fhMultipleCalculations</a>
+ }</td></tr>
+<tr class="separator:a1d3d04d35d63e8a5e44c63183f79200a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48b5202490cd6d86939d57c867837c0f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0f">ShipCAD::HydrostaticError</a> { <a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0fa0813d6e8a63bd1d17941b321715da4dd">ShipCAD::feNothingSubmerged</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0fab5378e2d38e12b21bcb9f89b4da7a024">ShipCAD::feMakingWater</a>, 
+<a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0fa94a4bf534382291f1e96f9d98cd8dcf8">ShipCAD::feNotEnoughBuoyance</a>
+ }</td></tr>
+<tr class="separator:a48b5202490cd6d86939d57c867837c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0612ca68b6918148a0d9871184264f93"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93">ShipCAD::HydrostaticsCalculation</a> { <br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93a286a6df9f1d51b98fcbb54f17fbe94d6">ShipCAD::hcAll</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93a10c43915dd92febe1ef5328644ea2c11">ShipCAD::hcVolume</a>, 
+<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93afb6824df148d1417a4db618e6b4dc4f6">ShipCAD::hcMainframe</a>, 
+<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93af80e166aa0cdd03c48f0633f31da8e9f">ShipCAD::hcWaterline</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93aad2786c707b686af79e47765eba073d0">ShipCAD::hcSAC</a>, 
+<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93a3d6d84cee5b8c79bf4d75a5dbc084e45">ShipCAD::hcLateralArea</a>
+<br/>
+ }</td></tr>
+<tr class="separator:a0612ca68b6918148a0d9871184264f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa56834b730aafdf2786ddc9a60a046fd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fd">ShipCAD::intersection_type_t</a> { <br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fda8e5e5dc412191234863fae2f98709477">ShipCAD::fiFree</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fdaf57b8e7252f2c55c001df410276926e3">ShipCAD::fiStation</a>, 
+<a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fdabcf8818401977200b532a1e18ec2df70">ShipCAD::fiButtock</a>, 
+<a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fda44c99d1edb96c2c22b5661d927eb9041">ShipCAD::fiWaterline</a>, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fda5631b7711c628bad5c561953eaac2863">ShipCAD::fiDiagonal</a>
+<br/>
+ }</td></tr>
+<tr class="separator:aa56834b730aafdf2786ddc9a60a046fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6a7a28b4b063771afae92decb602da5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5">ShipCAD::unit_type_t</a> { <a class="el" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f">ShipCAD::fuMetric</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7">ShipCAD::fuImperial</a>
+ }</td></tr>
+<tr class="separator:ac6a7a28b4b063771afae92decb602da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cf77f0900561de9efc572dcbad4dbbd"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd">ShipCAD::hydrostatic_coeff_t</a> { <a class="el" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbdad8361f42820d1f843333d60c0523d71d">ShipCAD::fcProjectSettings</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2">ShipCAD::fcActualData</a>
+ }</td></tr>
+<tr class="separator:a9cf77f0900561de9efc572dcbad4dbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae13c7e36dfb1e2300741a631041cd915"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915">ShipCAD::precision_t</a> { <a class="el" href="namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915a493cc0c95c59b2a1a0ca04b7a337295b">ShipCAD::fpLow</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915af3fadd404d6708aa5759c5c33df67abb">ShipCAD::fpMedium</a>, 
+<a class="el" href="namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915a0ea3ca30ae42b68a60d3a4cd4d08fa17">ShipCAD::fpHigh</a>, 
+<a class="el" href="namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915a1d5c86b4ae0e1bc82af908b35b29f3d6">ShipCAD::fpVeryHigh</a>
+ }</td></tr>
+<tr class="separator:ae13c7e36dfb1e2300741a631041cd915"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66144e3f3a53da01f51c9bdb94fcae31"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a66144e3f3a53da01f51c9bdb94fcae31">ShipCAD::edit_mode_t</a> { <a class="el" href="namespaceShipCAD.html#a66144e3f3a53da01f51c9bdb94fcae31a756e1b357bd617f738749df02e51be25">ShipCAD::emSelectItems</a> = 0
+ }</td></tr>
+<tr class="separator:a66144e3f3a53da01f51c9bdb94fcae31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03171cc921c53a568b778f5131a60deb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deb">ShipCAD::vertex_type_t</a> { <a class="el" href="namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba11889066d8ae7a44f297f45684bb99de">ShipCAD::svRegular</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba79fc4e40055439350070993be28ec8ca">ShipCAD::svCrease</a>, 
+<a class="el" href="namespaceShipCAD.html#a03171cc921c53a568b778f5131a60debaf17373a62a5f899a61ed17d28e103d24">ShipCAD::svDart</a>, 
+<a class="el" href="namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba8d802131f84b0a9edf8a419eded859d0">ShipCAD::svCorner</a>
+ }</td></tr>
+<tr class="separator:a03171cc921c53a568b778f5131a60deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a9d1acfd6a2e1e9078a5dcc36f0c817"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a4a9d1acfd6a2e1e9078a5dcc36f0c817">ShipCAD::subdiv_mode_t</a> { <a class="el" href="namespaceShipCAD.html#a4a9d1acfd6a2e1e9078a5dcc36f0c817a8b220f0a4397af67b1431a98e2f44da0">ShipCAD::fmQuadTriangle</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a4a9d1acfd6a2e1e9078a5dcc36f0c817a7ae33add00d7fe33cdfac27bbddfef84">ShipCAD::fmCatmullClark</a>
+ }</td></tr>
+<tr class="separator:a4a9d1acfd6a2e1e9078a5dcc36f0c817"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaba70dc1c80dc540bef320cb9b720a20"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#aaba70dc1c80dc540bef320cb9b720a20">ShipCAD::assemble_mode_t</a> { <a class="el" href="namespaceShipCAD.html#aaba70dc1c80dc540bef320cb9b720a20aeaaf4833473e9e7c408d2f02c7d112c6">ShipCAD::amRegular</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#aaba70dc1c80dc540bef320cb9b720a20a33b807b55bc385bc5d69ceb0d74d53fc">ShipCAD::amNURBS</a>
+ }</td></tr>
+<tr class="separator:aaba70dc1c80dc540bef320cb9b720a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a742f9cd95e62e207769e17467ecd5bb7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7">ShipCAD::model_view_t</a> { <a class="el" href="namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7a033d1219796735edf6dbe71c266566ad">ShipCAD::mvPort</a> = 0, 
+<a class="el" href="namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7ad45c94ca5dea7f967d58f9864f49c465">ShipCAD::mvBoth</a>
+ }</td></tr>
+<tr class="separator:a742f9cd95e62e207769e17467ecd5bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a8c1484188fed1e735c5a94f64a6817ab"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a8c1484188fed1e735c5a94f64a6817ab">ShipCAD::kFoot</a> = 0.3048f</td></tr>
+<tr class="separator:a8c1484188fed1e735c5a94f64a6817ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6937518d9742e268b279000d1e7a509"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#ad6937518d9742e268b279000d1e7a509">ShipCAD::kLbs</a> = 0.4535924f</td></tr>
+<tr class="separator:ad6937518d9742e268b279000d1e7a509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4319c8e7adfa68048f95c1614984036"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036">ShipCAD::kWeightConversionFactor</a> = (1000/kLbs)/((1/kFoot)*(1/kFoot)*(1/kFoot))</td></tr>
+<tr class="separator:aa4319c8e7adfa68048f95c1614984036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c0de7dc4306d7908bd8c6f7ff69ecdc"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a1c0de7dc4306d7908bd8c6f7ff69ecdc">ShipCAD::kIncrementSize</a> = 25</td></tr>
+<tr class="separator:a1c0de7dc4306d7908bd8c6f7ff69ecdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac88ffd27e117a3e612997a36a5d4616d"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#ac88ffd27e117a3e612997a36a5d4616d">ShipCAD::kDecimals</a> = 4</td></tr>
+<tr class="separator:ac88ffd27e117a3e612997a36a5d4616d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8176e9d12f859826fb131b7febb8c8a"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#ac8176e9d12f859826fb131b7febb8c8a">ShipCAD::kPixelCountMax</a> = 32768</td></tr>
+<tr class="separator:ac8176e9d12f859826fb131b7febb8c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a519c591e5f5e3f60603b3133a4a2094e"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a519c591e5f5e3f60603b3133a4a2094e">ShipCAD::kZBufferScaleFactor</a> = 1.004f</td></tr>
+<tr class="separator:a519c591e5f5e3f60603b3133a4a2094e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80babe3fef93f1117e1c410f8d3c22c2"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a80babe3fef93f1117e1c410f8d3c22c2">ShipCAD::kZoomfactor</a> = 1.02f</td></tr>
+<tr class="separator:a80babe3fef93f1117e1c410f8d3c22c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeba968c9abef53c8d1ff63855076dec"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#afeba968c9abef53c8d1ff63855076dec">ShipCAD::FileBufferBlockSize</a> = 4096</td></tr>
+<tr class="separator:afeba968c9abef53c8d1ff63855076dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76ec58fc6d779982def49fface17b1a4"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceShipCAD.html#a76ec58fc6d779982def49fface17b1a4">ShipCAD::kFileExtension</a></td></tr>
+<tr class="separator:a76ec58fc6d779982def49fface17b1a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 31 2015 22:35:39 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 12 2015 22:51:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

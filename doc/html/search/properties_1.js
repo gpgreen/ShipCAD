@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['build',['Build',['../classShipCADGeometry_1_1Entity.html#a9dc2f1b0245a88b3ed9b9b47f626fdb3',1,'ShipCADGeometry::Entity']]]
+  ['build',['Build',['../classShipCAD_1_1Entity.html#a7518cde7c6a7c576827efd3d65c732e4',1,'ShipCAD::Entity']]]
 ];

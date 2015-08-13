@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['openglwindow',['OpenGLWindow',['../classOpenGLWindow.html',1,'']]]
+  ['kaperresistance',['KAPERResistance',['../structShipCAD_1_1KAPERResistance.html',1,'ShipCAD']]]
 ];

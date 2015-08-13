@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['indexoutofrange',['IndexOutOfRange',['../classShipCADException_1_1IndexOutOfRange.html',1,'ShipCADException']]],
-  ['intersectiondata',['IntersectionData',['../classShipCADGeometry_1_1IntersectionData.html',1,'ShipCADGeometry']]]
+  ['edgepred',['EdgePred',['../structEdgePred.html',1,'']]],
+  ['entity',['Entity',['../classShipCAD_1_1Entity.html',1,'ShipCAD']]],
+  ['existpointpred',['ExistPointPred',['../structExistPointPred.html',1,'']]],
+  ['extrudepointpred',['ExtrudePointPred',['../structExtrudePointPred.html',1,'']]]
 ];

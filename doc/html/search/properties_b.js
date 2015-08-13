@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['selected',['Selected',['../classShipCADGeometry_1_1SubdivisionControlEdge.html#a6e4209c11ad0d122a6c4465790d2b7e3',1,'ShipCADGeometry::SubdivisionControlEdge::Selected()'],['../classShipCADGeometry_1_1SubdivisionControlFace.html#a61b316c367087520d43506a86be7caf5',1,'ShipCADGeometry::SubdivisionControlFace::Selected()'],['../classShipCADGeometry_1_1SubdivisionControlPoint.html#a8ae4af44e0ff44086685a9b3a362dd43',1,'ShipCADGeometry::SubdivisionControlPoint::Selected()']]],
-  ['showcurvature',['ShowCurvature',['../classShipCADGeometry_1_1Spline.html#ad4357d84fc550cf73581a303f7bd9088',1,'ShipCADGeometry::Spline']]],
-  ['showpoints',['ShowPoints',['../classShipCADGeometry_1_1Spline.html#a7e14387674284ab28e1a0e725c5c5b0e',1,'ShipCADGeometry::Spline']]],
-  ['startpoint',['StartPoint',['../classShipCADGeometry_1_1SubdivisionEdge.html#add30db0d6a7aac1c8f081012f3cccf03',1,'ShipCADGeometry::SubdivisionEdge']]]
+  ['selected',['Selected',['../classShipCAD_1_1SubdivisionControlEdge.html#a25279492599975df97efcaa124e09855',1,'ShipCAD::SubdivisionControlEdge::Selected()'],['../classShipCAD_1_1SubdivisionControlFace.html#a7f63b2e34b0a562f769cdd78b36e99b3',1,'ShipCAD::SubdivisionControlFace::Selected()'],['../classShipCAD_1_1SubdivisionControlPoint.html#a54bf97e33f121843af563f2eebe7d3e5',1,'ShipCAD::SubdivisionControlPoint::Selected()']]],
+  ['showcurvature',['ShowCurvature',['../classShipCAD_1_1Spline.html#a9572e31014a04689a2987475c9bff080',1,'ShipCAD::Spline']]],
+  ['showpoints',['ShowPoints',['../classShipCAD_1_1Spline.html#abac1aad3fc0e33ea8ccda1a94bea8467',1,'ShipCAD::Spline']]],
+  ['startpoint',['StartPoint',['../classShipCAD_1_1SubdivisionEdge.html#aa23b3f03ef499cfbd896c21987ad39b4',1,'ShipCAD::SubdivisionEdge']]]
 ];

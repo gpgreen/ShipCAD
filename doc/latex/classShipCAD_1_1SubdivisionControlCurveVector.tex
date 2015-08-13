@@ -1,0 +1,208 @@
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector}{\section{Ship\-C\-A\-D\-:\-:Subdivision\-Control\-Curve\-Vector Class Reference}
+\label{classShipCAD_1_1SubdivisionControlCurveVector}\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+}
+
+
+Vector class to contain \hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} pointers.  
+
+
+
+
+{\ttfamily \#include $<$subdivcontrolcurve.\-h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::vector\\*
+$<$ \hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$ $>$\\*
+\-::iterator \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a33907b10974aed115e0217c836424762}{ccvec\-\_\-iterator}
+\item 
+typedef void \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a141aff5158a297112fec989165732299}{apply\-\_\-fn} (\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$elem)
+\begin{DoxyCompactList}\small\item\em typedef for function used in apply method \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_aed33415ee5279a469d62a4433776df26}{Subdivision\-Control\-Curve\-Vector} (bool owned)
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_adc5d990adac605cc8729f3a9115c91d2}{$\sim$\-Subdivision\-Control\-Curve\-Vector} ()
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a5bfece236c23baff743107b90075fe9c}{clear} ()
+\begin{DoxyCompactList}\small\item\em remove all curves from the vector \end{DoxyCompactList}\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a20adf2059ae6fd4c6a5d08c48093a2bf}{size} ()
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a23b7c48a1e02692f7b12d00084e0faf6}{add} (\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$curve)
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_aad00d00fd6f6202a31afbbd8842ad169}{del} (\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$curve)
+\begin{DoxyCompactList}\small\item\em delete a curve from the vector \end{DoxyCompactList}\item 
+void \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a699ebf520d53380752037a06fee8371d}{apply} (\hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a141aff5158a297112fec989165732299}{apply\-\_\-fn} $\ast$fn)
+\begin{DoxyCompactList}\small\item\em apply a function to each curve in the vector \end{DoxyCompactList}\item 
+\hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a33907b10974aed115e0217c836424762}{ccvec\-\_\-iterator} \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_abeccf7ff2c8be83040d6bf67f3217707}{begin} ()
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a33907b10974aed115e0217c836424762}{ccvec\-\_\-iterator} \hyperlink{classShipCAD_1_1SubdivisionControlCurveVector_a11c8b89feb662d2d76c75b44cb2a9146}{end} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Vector class to contain \hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} pointers. 
+
+
+
+Definition at line 120 of file subdivcontrolcurve.\-h.
+
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_a141aff5158a297112fec989165732299}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!apply\-\_\-fn@{apply\-\_\-fn}}
+\index{apply\-\_\-fn@{apply\-\_\-fn}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{apply\-\_\-fn}]{\setlength{\rightskip}{0pt plus 5cm}typedef void Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector\-::apply\-\_\-fn({\bf Subdivision\-Control\-Curve} $\ast$elem)}}\label{classShipCAD_1_1SubdivisionControlCurveVector_a141aff5158a297112fec989165732299}
+
+
+typedef for function used in apply method 
+
+
+
+Definition at line 146 of file subdivcontrolcurve.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_a33907b10974aed115e0217c836424762}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!ccvec\-\_\-iterator@{ccvec\-\_\-iterator}}
+\index{ccvec\-\_\-iterator@{ccvec\-\_\-iterator}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{ccvec\-\_\-iterator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<${\bf Subdivision\-Control\-Curve}$\ast$$>$\-::iterator {\bf Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector\-::ccvec\-\_\-iterator}}}\label{classShipCAD_1_1SubdivisionControlCurveVector_a33907b10974aed115e0217c836424762}
+
+
+Definition at line 124 of file subdivcontrolcurve.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_aed33415ee5279a469d62a4433776df26}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!Subdivision\-Control\-Curve\-Vector@{Subdivision\-Control\-Curve\-Vector}}
+\index{Subdivision\-Control\-Curve\-Vector@{Subdivision\-Control\-Curve\-Vector}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{Subdivision\-Control\-Curve\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Control\-Curve\-Vector\-::\-Subdivision\-Control\-Curve\-Vector (
+\begin{DoxyParamCaption}
+\item[{bool}]{owned}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionControlCurveVector_aed33415ee5279a469d62a4433776df26}
+
+
+Definition at line 422 of file subdivcontrolcurve.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_adc5d990adac605cc8729f3a9115c91d2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!$\sim$\-Subdivision\-Control\-Curve\-Vector@{$\sim$\-Subdivision\-Control\-Curve\-Vector}}
+\index{$\sim$\-Subdivision\-Control\-Curve\-Vector@{$\sim$\-Subdivision\-Control\-Curve\-Vector}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{$\sim$\-Subdivision\-Control\-Curve\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Control\-Curve\-Vector\-::$\sim$\-Subdivision\-Control\-Curve\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionControlCurveVector_adc5d990adac605cc8729f3a9115c91d2}
+
+
+Definition at line 440 of file subdivcontrolcurve.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_a23b7c48a1e02692f7b12d00084e0faf6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!add@{add}}
+\index{add@{add}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector\-::add (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Control\-Curve} $\ast$}]{curve}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlCurveVector_a23b7c48a1e02692f7b12d00084e0faf6}
+
+
+Definition at line 135 of file subdivcontrolcurve.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_a699ebf520d53380752037a06fee8371d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!apply@{apply}}
+\index{apply@{apply}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector\-::apply (
+\begin{DoxyParamCaption}
+\item[{{\bf apply\-\_\-fn} $\ast$}]{fn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlCurveVector_a699ebf520d53380752037a06fee8371d}
+
+
+apply a function to each curve in the vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fn} & the function to apply to each curve \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 152 of file subdivcontrolcurve.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_abeccf7ff2c8be83040d6bf67f3217707}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!begin@{begin}}
+\index{begin@{begin}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ccvec\-\_\-iterator} Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlCurveVector_abeccf7ff2c8be83040d6bf67f3217707}
+
+
+Definition at line 155 of file subdivcontrolcurve.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_a5bfece236c23baff743107b90075fe9c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Control\-Curve\-Vector\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionControlCurveVector_a5bfece236c23baff743107b90075fe9c}
+
+
+remove all curves from the vector 
+
+
+
+Definition at line 445 of file subdivcontrolcurve.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_aad00d00fd6f6202a31afbbd8842ad169}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!del@{del}}
+\index{del@{del}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{del}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\-Control\-Curve\-Vector\-::del (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Control\-Curve} $\ast$}]{curve}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionControlCurveVector_aad00d00fd6f6202a31afbbd8842ad169}
+
+
+delete a curve from the vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curve} & the curve to find and delete from the vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if vector has curve and it's deleted, false if curve not in list 
+\end{DoxyReturn}
+
+
+Definition at line 454 of file subdivcontrolcurve.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_a11c8b89feb662d2d76c75b44cb2a9146}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!end@{end}}
+\index{end@{end}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ccvec\-\_\-iterator} Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlCurveVector_a11c8b89feb662d2d76c75b44cb2a9146}
+
+
+Definition at line 156 of file subdivcontrolcurve.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlCurveVector_a20adf2059ae6fd4c6a5d08c48093a2bf}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}!size@{size}}
+\index{size@{size}!ShipCAD::SubdivisionControlCurveVector@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlCurveVector_a20adf2059ae6fd4c6a5d08c48093a2bf}
+
+
+Definition at line 133 of file subdivcontrolcurve.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{subdivcontrolcurve_8h}{subdivcontrolcurve.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{subdivcontrolcurve_8cpp}{subdivcontrolcurve.\-cpp}\end{DoxyCompactItemize}

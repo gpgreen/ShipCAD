@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['version_5ft',['version_t',['../namespaceShipCADGeometry.html#aa8b61644e46115e9d63667f213045e97',1,'ShipCADGeometry']]],
-  ['vertex_5ftype_5ft',['vertex_type_t',['../classShipCADGeometry_1_1SubdivisionPoint.html#a03df9289cd8543cd3a567fa6c8e44c43',1,'ShipCADGeometry::SubdivisionPoint']]],
-  ['viewport_5fmode_5ft',['viewport_mode_t',['../classShipCADGeometry_1_1Viewport.html#a32872391303d6fbcc5766df64933cc14',1,'ShipCADGeometry::Viewport']]],
-  ['viewport_5ftype_5ft',['viewport_type_t',['../classShipCADGeometry_1_1Viewport.html#a97a32c07745357d09b8f282c69ea9199',1,'ShipCADGeometry::Viewport']]]
+  ['hydrostatic_5fcoeff_5ft',['hydrostatic_coeff_t',['../namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd',1,'ShipCAD']]],
+  ['hydrostaticerror',['HydrostaticError',['../namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0f',1,'ShipCAD']]],
+  ['hydrostaticscalculation',['HydrostaticsCalculation',['../namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93',1,'ShipCAD']]],
+  ['hydrostaticsmode',['HydrostaticsMode',['../namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200a',1,'ShipCAD']]],
+  ['hydrostatictype',['HydrostaticType',['../namespaceShipCAD.html#af34462de5db0247c80b656785e989233',1,'ShipCAD']]]
 ];

@@ -1,0 +1,173 @@
+\hypertarget{classShipCAD_1_1Flowline}{\section{Ship\-C\-A\-D\-:\-:Flowline Class Reference}
+\label{classShipCAD_1_1Flowline}\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+}
+
+
+{\ttfamily \#include $<$flowline.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-:\-:Flowline\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classShipCAD_1_1Flowline}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1Flowline_a736d6251cea3c3b290416a27159cad96}{Flowline} (Ship\-C\-A\-D $\ast$owner)
+\item 
+virtual \hyperlink{classShipCAD_1_1Flowline_a77555e4dc8db9f99b684ea60e2a1a88e}{$\sim$\-Flowline} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1Flowline_a4e138d0d75b46f8ecb62a60ecf3f4e64}{clear} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1Flowline_abc8e875663d00a645f6d462cde7bff79}{extents} (Q\-Vector3\-D \&min, Q\-Vector3\-D \&max)
+\item 
+virtual void \hyperlink{classShipCAD_1_1Flowline_afce93ff27acf72218b0e394b0d543a0d}{draw} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1LineShader}{Line\-Shader} $\ast$lineshader)
+\item 
+virtual void \hyperlink{classShipCAD_1_1Flowline_a13e27605271592ba288ad9d0b6e2a8c1}{rebuild} ()
+\item 
+bool \hyperlink{classShipCAD_1_1Flowline_aaaf96bde2aff35bd302ebf4e784b6a04}{is\-Visible} ()
+\item 
+void \hyperlink{classShipCAD_1_1Flowline_ad6546bfd621882e9d5067c919e148871}{set\-Visible} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1Flowline_af2daefa9893fef5c56b398d01be529af}{is\-Selected} ()
+\item 
+void \hyperlink{classShipCAD_1_1Flowline_af8205e548dba009fd1a169f0a841dde5}{set\-Selected} (bool set)
+\item 
+void \hyperlink{classShipCAD_1_1Flowline_ad852ac9d0cf1ec68ad7243c19aed6410}{load\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&buf)
+\item 
+void \hyperlink{classShipCAD_1_1Flowline_ae36a33c0140e03676ccc1f90ceb53543}{save\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&buf)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classShipCAD_1_1Flowline}{Flowline} $\ast$ \hyperlink{classShipCAD_1_1Flowline_aadb39af0ba334958a3596b464f81006b}{construct} (Ship\-C\-A\-D $\ast$owner)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 46 of file flowline.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1Flowline_a736d6251cea3c3b290416a27159cad96}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!Flowline@{Flowline}}
+\index{Flowline@{Flowline}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{Flowline}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Flowline\-::\-Flowline (
+\begin{DoxyParamCaption}
+\item[{Ship\-C\-A\-D $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1Flowline_a736d6251cea3c3b290416a27159cad96}
+\hypertarget{classShipCAD_1_1Flowline_a77555e4dc8db9f99b684ea60e2a1a88e}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!$\sim$\-Flowline@{$\sim$\-Flowline}}
+\index{$\sim$\-Flowline@{$\sim$\-Flowline}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{$\sim$\-Flowline}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Flowline\-::$\sim$\-Flowline (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Flowline_a77555e4dc8db9f99b684ea60e2a1a88e}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1Flowline_a4e138d0d75b46f8ecb62a60ecf3f4e64}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\-C\-A\-D\-::\-Flowline\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Flowline_a4e138d0d75b46f8ecb62a60ecf3f4e64}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1Entity_a998d0e5d360371046fd5835ba1e0877a}{Ship\-C\-A\-D\-::\-Entity}.
+
+\hypertarget{classShipCAD_1_1Flowline_aadb39af0ba334958a3596b464f81006b}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!construct@{construct}}
+\index{construct@{construct}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Flowline}$\ast$ Ship\-C\-A\-D\-::\-Flowline\-::construct (
+\begin{DoxyParamCaption}
+\item[{Ship\-C\-A\-D $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1Flowline_aadb39af0ba334958a3596b464f81006b}
+\hypertarget{classShipCAD_1_1Flowline_afce93ff27acf72218b0e394b0d543a0d}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!draw@{draw}}
+\index{draw@{draw}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\-C\-A\-D\-::\-Flowline\-::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp, }
+\item[{{\bf Line\-Shader} $\ast$}]{lineshader}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Flowline_afce93ff27acf72218b0e394b0d543a0d}
+
+
+Implements \hyperlink{classShipCAD_1_1Entity_aa62e306d991140dcd564360f8f6e7539}{Ship\-C\-A\-D\-::\-Entity}.
+
+\hypertarget{classShipCAD_1_1Flowline_abc8e875663d00a645f6d462cde7bff79}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!extents@{extents}}
+\index{extents@{extents}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{extents}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\-C\-A\-D\-::\-Flowline\-::extents (
+\begin{DoxyParamCaption}
+\item[{Q\-Vector3\-D \&}]{min, }
+\item[{Q\-Vector3\-D \&}]{max}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Flowline_abc8e875663d00a645f6d462cde7bff79}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1Entity_a08e8e53770c85002afa45f46e7bf10f8}{Ship\-C\-A\-D\-::\-Entity}.
+
+\hypertarget{classShipCAD_1_1Flowline_af2daefa9893fef5c56b398d01be529af}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!is\-Selected@{is\-Selected}}
+\index{is\-Selected@{is\-Selected}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{is\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Flowline\-::is\-Selected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Flowline_af2daefa9893fef5c56b398d01be529af}
+\hypertarget{classShipCAD_1_1Flowline_aaaf96bde2aff35bd302ebf4e784b6a04}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!is\-Visible@{is\-Visible}}
+\index{is\-Visible@{is\-Visible}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{is\-Visible}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Flowline\-::is\-Visible (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Flowline_aaaf96bde2aff35bd302ebf4e784b6a04}
+\hypertarget{classShipCAD_1_1Flowline_ad852ac9d0cf1ec68ad7243c19aed6410}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!load\-Binary@{load\-Binary}}
+\index{load\-Binary@{load\-Binary}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{load\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Flowline\-::load\-Binary (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-Buffer} \&}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Flowline_ad852ac9d0cf1ec68ad7243c19aed6410}
+\hypertarget{classShipCAD_1_1Flowline_a13e27605271592ba288ad9d0b6e2a8c1}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!rebuild@{rebuild}}
+\index{rebuild@{rebuild}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{rebuild}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\-C\-A\-D\-::\-Flowline\-::rebuild (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Flowline_a13e27605271592ba288ad9d0b6e2a8c1}
+
+
+Implements \hyperlink{classShipCAD_1_1Entity_a2571654319df6ad6841a437be7a75395}{Ship\-C\-A\-D\-::\-Entity}.
+
+\hypertarget{classShipCAD_1_1Flowline_ae36a33c0140e03676ccc1f90ceb53543}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!save\-Binary@{save\-Binary}}
+\index{save\-Binary@{save\-Binary}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{save\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Flowline\-::save\-Binary (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-Buffer} \&}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Flowline_ae36a33c0140e03676ccc1f90ceb53543}
+\hypertarget{classShipCAD_1_1Flowline_af8205e548dba009fd1a169f0a841dde5}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!set\-Selected@{set\-Selected}}
+\index{set\-Selected@{set\-Selected}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{set\-Selected}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Flowline\-::set\-Selected (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Flowline_af8205e548dba009fd1a169f0a841dde5}
+\hypertarget{classShipCAD_1_1Flowline_ad6546bfd621882e9d5067c919e148871}{\index{Ship\-C\-A\-D\-::\-Flowline@{Ship\-C\-A\-D\-::\-Flowline}!set\-Visible@{set\-Visible}}
+\index{set\-Visible@{set\-Visible}!ShipCAD::Flowline@{Ship\-C\-A\-D\-::\-Flowline}}
+\subsubsection[{set\-Visible}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Flowline\-::set\-Visible (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Flowline_ad6546bfd621882e9d5067c919e148871}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{flowline_8h}{flowline.\-h}\end{DoxyCompactItemize}

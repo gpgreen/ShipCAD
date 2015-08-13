@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['joinsplinesegments',['JoinSplineSegments',['../namespaceShipCADUtility.html#a94b88e646569b0c70c6c3dffdf32aaa4',1,'ShipCADUtility']]]
+  ['joinsplinesegments',['JoinSplineSegments',['../namespaceShipCAD.html#a53d65cdf2cebdb1cb67e56417cf203bd',1,'ShipCAD']]]
 ];

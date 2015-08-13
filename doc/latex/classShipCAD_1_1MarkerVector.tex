@@ -1,0 +1,161 @@
+\hypertarget{classShipCAD_1_1MarkerVector}{\section{Ship\-C\-A\-D\-:\-:Marker\-Vector Class Reference}
+\label{classShipCAD_1_1MarkerVector}\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+}
+
+
+Vector class to contain \hyperlink{classShipCAD_1_1Intersection}{Intersection} pointers.  
+
+
+
+
+{\ttfamily \#include $<$marker.\-h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::vector$<$ \hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$ $>$\\*
+\-::iterator \hyperlink{classShipCAD_1_1MarkerVector_a15ac0550091a081f0ef20c3f0b03693b}{mvec\-\_\-iterator}
+\item 
+typedef void \hyperlink{classShipCAD_1_1MarkerVector_a9b5bd2154a62bceb3e4a0bb648fb297b}{apply\-\_\-fn} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$elem)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1MarkerVector_ac7ced9a20366d5975cd5ce96bc3f0c6a}{Marker\-Vector} ()
+\item 
+\hyperlink{classShipCAD_1_1MarkerVector_a2f322ec966c4d1e4f13181e2525ab415}{$\sim$\-Marker\-Vector} ()
+\item 
+void \hyperlink{classShipCAD_1_1MarkerVector_ab79087d8e978267b06ca675e03ecf115}{clear} ()
+\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1MarkerVector_a9b9cfe1d2e6fd99dcc9065328379caa0}{size} ()
+\item 
+void \hyperlink{classShipCAD_1_1MarkerVector_a08fb22690149beded7689a53f5dd57c8}{add} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$i)
+\item 
+void \hyperlink{classShipCAD_1_1MarkerVector_a944398b298cc7c42e30e14b263000629}{del} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$i)
+\item 
+void \hyperlink{classShipCAD_1_1MarkerVector_a595a4606a67df7e1754db3aab428c27c}{apply} (\hyperlink{classShipCAD_1_1MarkerVector_a9b5bd2154a62bceb3e4a0bb648fb297b}{apply\-\_\-fn} $\ast$fn)
+\item 
+\hyperlink{classShipCAD_1_1MarkerVector_a15ac0550091a081f0ef20c3f0b03693b}{mvec\-\_\-iterator} \hyperlink{classShipCAD_1_1MarkerVector_a87a3511e7920311ae12b9fad52c2365d}{begin} ()
+\item 
+\hyperlink{classShipCAD_1_1MarkerVector_a15ac0550091a081f0ef20c3f0b03693b}{mvec\-\_\-iterator} \hyperlink{classShipCAD_1_1MarkerVector_a6a47ae7aab386d549b67191b5cf4c890}{end} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Vector class to contain \hyperlink{classShipCAD_1_1Intersection}{Intersection} pointers. 
+
+
+
+Definition at line 84 of file marker.\-h.
+
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classShipCAD_1_1MarkerVector_a9b5bd2154a62bceb3e4a0bb648fb297b}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!apply\-\_\-fn@{apply\-\_\-fn}}
+\index{apply\-\_\-fn@{apply\-\_\-fn}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{apply\-\_\-fn}]{\setlength{\rightskip}{0pt plus 5cm}typedef void Ship\-C\-A\-D\-::\-Marker\-Vector\-::apply\-\_\-fn({\bf Marker} $\ast$elem)}}\label{classShipCAD_1_1MarkerVector_a9b5bd2154a62bceb3e4a0bb648fb297b}
+
+
+Definition at line 100 of file marker.\-h.
+
+\hypertarget{classShipCAD_1_1MarkerVector_a15ac0550091a081f0ef20c3f0b03693b}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!mvec\-\_\-iterator@{mvec\-\_\-iterator}}
+\index{mvec\-\_\-iterator@{mvec\-\_\-iterator}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{mvec\-\_\-iterator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<${\bf Marker}$\ast$$>$\-::iterator {\bf Ship\-C\-A\-D\-::\-Marker\-Vector\-::mvec\-\_\-iterator}}}\label{classShipCAD_1_1MarkerVector_a15ac0550091a081f0ef20c3f0b03693b}
+
+
+Definition at line 88 of file marker.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1MarkerVector_ac7ced9a20366d5975cd5ce96bc3f0c6a}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!Marker\-Vector@{Marker\-Vector}}
+\index{Marker\-Vector@{Marker\-Vector}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{Marker\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Marker\-Vector\-::\-Marker\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1MarkerVector_ac7ced9a20366d5975cd5ce96bc3f0c6a}
+\hypertarget{classShipCAD_1_1MarkerVector_a2f322ec966c4d1e4f13181e2525ab415}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!$\sim$\-Marker\-Vector@{$\sim$\-Marker\-Vector}}
+\index{$\sim$\-Marker\-Vector@{$\sim$\-Marker\-Vector}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{$\sim$\-Marker\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Marker\-Vector\-::$\sim$\-Marker\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1MarkerVector_a2f322ec966c4d1e4f13181e2525ab415}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1MarkerVector_a08fb22690149beded7689a53f5dd57c8}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!add@{add}}
+\index{add@{add}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Marker\-Vector\-::add (
+\begin{DoxyParamCaption}
+\item[{{\bf Marker} $\ast$}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1MarkerVector_a08fb22690149beded7689a53f5dd57c8}
+
+
+Definition at line 97 of file marker.\-h.
+
+\hypertarget{classShipCAD_1_1MarkerVector_a595a4606a67df7e1754db3aab428c27c}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!apply@{apply}}
+\index{apply@{apply}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Marker\-Vector\-::apply (
+\begin{DoxyParamCaption}
+\item[{{\bf apply\-\_\-fn} $\ast$}]{fn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1MarkerVector_a595a4606a67df7e1754db3aab428c27c}
+
+
+Definition at line 101 of file marker.\-h.
+
+\hypertarget{classShipCAD_1_1MarkerVector_a87a3511e7920311ae12b9fad52c2365d}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!begin@{begin}}
+\index{begin@{begin}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mvec\-\_\-iterator} Ship\-C\-A\-D\-::\-Marker\-Vector\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1MarkerVector_a87a3511e7920311ae12b9fad52c2365d}
+
+
+Definition at line 104 of file marker.\-h.
+
+\hypertarget{classShipCAD_1_1MarkerVector_ab79087d8e978267b06ca675e03ecf115}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Marker\-Vector\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1MarkerVector_ab79087d8e978267b06ca675e03ecf115}
+\hypertarget{classShipCAD_1_1MarkerVector_a944398b298cc7c42e30e14b263000629}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!del@{del}}
+\index{del@{del}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{del}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Marker\-Vector\-::del (
+\begin{DoxyParamCaption}
+\item[{{\bf Marker} $\ast$}]{i}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1MarkerVector_a944398b298cc7c42e30e14b263000629}
+\hypertarget{classShipCAD_1_1MarkerVector_a6a47ae7aab386d549b67191b5cf4c890}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!end@{end}}
+\index{end@{end}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}{\bf mvec\-\_\-iterator} Ship\-C\-A\-D\-::\-Marker\-Vector\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1MarkerVector_a6a47ae7aab386d549b67191b5cf4c890}
+
+
+Definition at line 105 of file marker.\-h.
+
+\hypertarget{classShipCAD_1_1MarkerVector_a9b9cfe1d2e6fd99dcc9065328379caa0}{\index{Ship\-C\-A\-D\-::\-Marker\-Vector@{Ship\-C\-A\-D\-::\-Marker\-Vector}!size@{size}}
+\index{size@{size}!ShipCAD::MarkerVector@{Ship\-C\-A\-D\-::\-Marker\-Vector}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Marker\-Vector\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1MarkerVector_a9b9cfe1d2e6fd99dcc9065328379caa0}
+
+
+Definition at line 95 of file marker.\-h.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{marker_8h}{marker.\-h}\end{DoxyCompactItemize}

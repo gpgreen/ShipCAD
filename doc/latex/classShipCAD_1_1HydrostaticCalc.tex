@@ -1,0 +1,221 @@
+\hypertarget{classShipCAD_1_1HydrostaticCalc}{\section{Ship\-C\-A\-D\-:\-:Hydrostatic\-Calc Class Reference}
+\label{classShipCAD_1_1HydrostaticCalc}\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+}
+
+
+{\ttfamily \#include $<$hydrostaticcalc.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-:\-:Hydrostatic\-Calc\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classShipCAD_1_1HydrostaticCalc}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1HydrostaticCalc_ae0ae227c3c8d4703a37a2a05555733e5}{Hydrostatic\-Calc} (\hyperlink{classShipCAD_1_1ShipCADModel}{Ship\-C\-A\-D\-Model} $\ast$owner)
+\item 
+\hyperlink{classShipCAD_1_1HydrostaticCalc_a1b44080312f590fecf67819a2f2ffb1b}{$\sim$\-Hydrostatic\-Calc} ()
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_a5245d91025105e4bb0a9c2888a5335ec}{clear} ()
+\item 
+const Q\-String \& \hyperlink{classShipCAD_1_1HydrostaticCalc_ad4f7ea3b7be113060b2e0a080e02cb8f}{get\-Error\-String} ()
+\item 
+float \hyperlink{classShipCAD_1_1HydrostaticCalc_a4c6f19ead79b5768676b2a8ae6de5a61}{get\-Trim\-Angle} ()
+\item 
+\hyperlink{classShipCAD_1_1Plane}{Plane} \& \hyperlink{classShipCAD_1_1HydrostaticCalc_a29852abc1e3d6049543cd80449810ffc}{get\-Wl\-Plane} ()
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_a20dce4cc4ee1e7f2c86142a8bff074da}{set\-Calculated} (bool calc)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_a0302cb442ba844cc18acef125a706ecf}{set\-Draft} (float draft)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_a7c42f2e85cca01401ece2684903b7fbd}{add\-Error} (\hyperlink{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0f}{Hydrostatic\-Error} error)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_ab7e95fb64604515d6e461943787a6bd9}{set\-Heeling\-Angle} (float angle)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_a6ac3be35f608cfbbb2d00c62a210a6ea}{set\-Hydrostatic\-Type} (\hyperlink{namespaceShipCAD_af34462de5db0247c80b656785e989233}{Hydrostatic\-Type} ty)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_a411eccef26214d6788ef038c21609f2c}{set\-Trim} (float trim)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_afc31ddaf0eaea47ce63a2400f98aa9c6}{add\-Data} (Q\-String\-List \&strings, \hyperlink{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200a}{Hydrostatics\-Mode} mode, Q\-Char separator)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_afaf6fb388a37fddf2589ebc0a130a7b1}{add\-Header} (Q\-String\-List \&strings)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_ac2bb013bb1d79713746d4d458d8f2e91}{add\-Footer} (Q\-String\-List \&strings)
+\item 
+bool \hyperlink{classShipCAD_1_1HydrostaticCalc_a8c89c1a9f8086eee6efedd41c2ebdcef}{balance} (float displacement, bool freetotrim, \hyperlink{structShipCAD_1_1CrosscurvesData}{Crosscurves\-Data} $\ast$output)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_aad7665f14049585dafe4a574edd0c3f2}{calculate} ()
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_ac0bd3839af8708eefe77ca3291ebac4a}{calculate\-Volume} (\hyperlink{classShipCAD_1_1Plane}{Plane} \&waterline\-\_\-plane)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalc_ae29facc2a65f5317626e7d9bf891c3b7}{show\-Data} (\hyperlink{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200a}{Hydrostatics\-Mode} mode)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} $\ast$ \hyperlink{classShipCAD_1_1HydrostaticCalc_aa2f4609f84ac188e699d6c35c3eb0676}{construct} (\hyperlink{classShipCAD_1_1ShipCADModel}{Ship\-C\-A\-D\-Model} $\ast$owner)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 94 of file hydrostaticcalc.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_ae0ae227c3c8d4703a37a2a05555733e5}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!Hydrostatic\-Calc@{Hydrostatic\-Calc}}
+\index{Hydrostatic\-Calc@{Hydrostatic\-Calc}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{Hydrostatic\-Calc}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::\-Hydrostatic\-Calc (
+\begin{DoxyParamCaption}
+\item[{{\bf Ship\-C\-A\-D\-Model} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1HydrostaticCalc_ae0ae227c3c8d4703a37a2a05555733e5}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a1b44080312f590fecf67819a2f2ffb1b}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!$\sim$\-Hydrostatic\-Calc@{$\sim$\-Hydrostatic\-Calc}}
+\index{$\sim$\-Hydrostatic\-Calc@{$\sim$\-Hydrostatic\-Calc}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{$\sim$\-Hydrostatic\-Calc}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::$\sim$\-Hydrostatic\-Calc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a1b44080312f590fecf67819a2f2ffb1b}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_afc31ddaf0eaea47ce63a2400f98aa9c6}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!add\-Data@{add\-Data}}
+\index{add\-Data@{add\-Data}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{add\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::add\-Data (
+\begin{DoxyParamCaption}
+\item[{Q\-String\-List \&}]{strings, }
+\item[{{\bf Hydrostatics\-Mode}}]{mode, }
+\item[{Q\-Char}]{separator}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_afc31ddaf0eaea47ce63a2400f98aa9c6}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a7c42f2e85cca01401ece2684903b7fbd}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!add\-Error@{add\-Error}}
+\index{add\-Error@{add\-Error}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{add\-Error}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::add\-Error (
+\begin{DoxyParamCaption}
+\item[{{\bf Hydrostatic\-Error}}]{error}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a7c42f2e85cca01401ece2684903b7fbd}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_ac2bb013bb1d79713746d4d458d8f2e91}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!add\-Footer@{add\-Footer}}
+\index{add\-Footer@{add\-Footer}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{add\-Footer}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::add\-Footer (
+\begin{DoxyParamCaption}
+\item[{Q\-String\-List \&}]{strings}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_ac2bb013bb1d79713746d4d458d8f2e91}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_afaf6fb388a37fddf2589ebc0a130a7b1}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!add\-Header@{add\-Header}}
+\index{add\-Header@{add\-Header}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{add\-Header}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::add\-Header (
+\begin{DoxyParamCaption}
+\item[{Q\-String\-List \&}]{strings}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_afaf6fb388a37fddf2589ebc0a130a7b1}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a8c89c1a9f8086eee6efedd41c2ebdcef}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!balance@{balance}}
+\index{balance@{balance}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{balance}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::balance (
+\begin{DoxyParamCaption}
+\item[{float}]{displacement, }
+\item[{bool}]{freetotrim, }
+\item[{{\bf Crosscurves\-Data} $\ast$}]{output}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a8c89c1a9f8086eee6efedd41c2ebdcef}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_aad7665f14049585dafe4a574edd0c3f2}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!calculate@{calculate}}
+\index{calculate@{calculate}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{calculate}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::calculate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_aad7665f14049585dafe4a574edd0c3f2}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_ac0bd3839af8708eefe77ca3291ebac4a}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!calculate\-Volume@{calculate\-Volume}}
+\index{calculate\-Volume@{calculate\-Volume}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{calculate\-Volume}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::calculate\-Volume (
+\begin{DoxyParamCaption}
+\item[{{\bf Plane} \&}]{waterline\-\_\-plane}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_ac0bd3839af8708eefe77ca3291ebac4a}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a5245d91025105e4bb0a9c2888a5335ec}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a5245d91025105e4bb0a9c2888a5335ec}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_aa2f4609f84ac188e699d6c35c3eb0676}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!construct@{construct}}
+\index{construct@{construct}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Hydrostatic\-Calc}$\ast$ Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::construct (
+\begin{DoxyParamCaption}
+\item[{{\bf Ship\-C\-A\-D\-Model} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1HydrostaticCalc_aa2f4609f84ac188e699d6c35c3eb0676}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_ad4f7ea3b7be113060b2e0a080e02cb8f}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!get\-Error\-String@{get\-Error\-String}}
+\index{get\-Error\-String@{get\-Error\-String}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{get\-Error\-String}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-String\& Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::get\-Error\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_ad4f7ea3b7be113060b2e0a080e02cb8f}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a4c6f19ead79b5768676b2a8ae6de5a61}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!get\-Trim\-Angle@{get\-Trim\-Angle}}
+\index{get\-Trim\-Angle@{get\-Trim\-Angle}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{get\-Trim\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::get\-Trim\-Angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a4c6f19ead79b5768676b2a8ae6de5a61}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a29852abc1e3d6049543cd80449810ffc}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!get\-Wl\-Plane@{get\-Wl\-Plane}}
+\index{get\-Wl\-Plane@{get\-Wl\-Plane}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{get\-Wl\-Plane}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane}\& Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::get\-Wl\-Plane (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a29852abc1e3d6049543cd80449810ffc}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a20dce4cc4ee1e7f2c86142a8bff074da}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!set\-Calculated@{set\-Calculated}}
+\index{set\-Calculated@{set\-Calculated}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{set\-Calculated}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::set\-Calculated (
+\begin{DoxyParamCaption}
+\item[{bool}]{calc}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a20dce4cc4ee1e7f2c86142a8bff074da}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a0302cb442ba844cc18acef125a706ecf}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!set\-Draft@{set\-Draft}}
+\index{set\-Draft@{set\-Draft}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{set\-Draft}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::set\-Draft (
+\begin{DoxyParamCaption}
+\item[{float}]{draft}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a0302cb442ba844cc18acef125a706ecf}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_ab7e95fb64604515d6e461943787a6bd9}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!set\-Heeling\-Angle@{set\-Heeling\-Angle}}
+\index{set\-Heeling\-Angle@{set\-Heeling\-Angle}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{set\-Heeling\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::set\-Heeling\-Angle (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_ab7e95fb64604515d6e461943787a6bd9}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a6ac3be35f608cfbbb2d00c62a210a6ea}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!set\-Hydrostatic\-Type@{set\-Hydrostatic\-Type}}
+\index{set\-Hydrostatic\-Type@{set\-Hydrostatic\-Type}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{set\-Hydrostatic\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::set\-Hydrostatic\-Type (
+\begin{DoxyParamCaption}
+\item[{{\bf Hydrostatic\-Type}}]{ty}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a6ac3be35f608cfbbb2d00c62a210a6ea}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_a411eccef26214d6788ef038c21609f2c}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!set\-Trim@{set\-Trim}}
+\index{set\-Trim@{set\-Trim}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{set\-Trim}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::set\-Trim (
+\begin{DoxyParamCaption}
+\item[{float}]{trim}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_a411eccef26214d6788ef038c21609f2c}
+\hypertarget{classShipCAD_1_1HydrostaticCalc_ae29facc2a65f5317626e7d9bf891c3b7}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}!show\-Data@{show\-Data}}
+\index{show\-Data@{show\-Data}!ShipCAD::HydrostaticCalc@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc}}
+\subsubsection[{show\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-::show\-Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Hydrostatics\-Mode}}]{mode}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalc_ae29facc2a65f5317626e7d9bf891c3b7}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{hydrostaticcalc_8h}{hydrostaticcalc.\-h}\end{DoxyCompactItemize}

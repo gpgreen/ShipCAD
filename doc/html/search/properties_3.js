@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['endpoint',['EndPoint',['../classShipCADGeometry_1_1SubdivisionEdge.html#aaec4f19ba8274a3b501a06fedb0658cb',1,'ShipCADGeometry::SubdivisionEdge']]]
+  ['endpoint',['EndPoint',['../classShipCAD_1_1SubdivisionEdge.html#ae9b9ffdb1e43bf851e5545f7d7a1849d',1,'ShipCAD::SubdivisionEdge']]]
 ];

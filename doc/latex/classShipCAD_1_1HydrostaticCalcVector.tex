@@ -1,0 +1,162 @@
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector}{\section{Ship\-C\-A\-D\-:\-:Hydrostatic\-Calc\-Vector Class Reference}
+\label{classShipCAD_1_1HydrostaticCalcVector}\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+}
+
+
+Vector class to contain \hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} pointers.  
+
+
+
+
+{\ttfamily \#include $<$hydrostaticcalc.\-h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::vector\\*
+$<$ \hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} $\ast$ $>$\\*
+\-::iterator \hyperlink{classShipCAD_1_1HydrostaticCalcVector_aecdea2f034955ae53b4d0855332491e5}{hcvec\-\_\-iterator}
+\item 
+typedef void \hyperlink{classShipCAD_1_1HydrostaticCalcVector_aba4bf648866d2fee843a3b1f3b366522}{apply\-\_\-fn} (\hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} $\ast$elem)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1HydrostaticCalcVector_ac84eac37273d6a27caad7b2f94847216}{Hydrostatic\-Calc\-Vector} ()
+\item 
+\hyperlink{classShipCAD_1_1HydrostaticCalcVector_a10eba05b4acd39b164a4ba6e11491958}{$\sim$\-Hydrostatic\-Calc\-Vector} ()
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalcVector_a71af534d81b0b5db486df16087e3a2fa}{clear} ()
+\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1HydrostaticCalcVector_a9feb9efeaffa3b234bdf7f973f1ecc91}{size} ()
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalcVector_a790f16cb4b2651b45339cb27b3504e9b}{add} (\hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} $\ast$c)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalcVector_a019be1da2cf5fd1e4a39a3459796bf10}{del} (\hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} $\ast$c)
+\item 
+void \hyperlink{classShipCAD_1_1HydrostaticCalcVector_a539b31c0a3423f25368144f7050fb67e}{apply} (\hyperlink{classShipCAD_1_1HydrostaticCalcVector_aba4bf648866d2fee843a3b1f3b366522}{apply\-\_\-fn} $\ast$fn)
+\item 
+\hyperlink{classShipCAD_1_1HydrostaticCalcVector_aecdea2f034955ae53b4d0855332491e5}{hcvec\-\_\-iterator} \hyperlink{classShipCAD_1_1HydrostaticCalcVector_a402ad58dee97fecd54c00f15e836a38e}{begin} ()
+\item 
+\hyperlink{classShipCAD_1_1HydrostaticCalcVector_aecdea2f034955ae53b4d0855332491e5}{hcvec\-\_\-iterator} \hyperlink{classShipCAD_1_1HydrostaticCalcVector_a379ea252c1f9faaf0a78c8661fc16589}{end} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Vector class to contain \hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} pointers. 
+
+
+
+Definition at line 147 of file hydrostaticcalc.\-h.
+
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_aba4bf648866d2fee843a3b1f3b366522}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!apply\-\_\-fn@{apply\-\_\-fn}}
+\index{apply\-\_\-fn@{apply\-\_\-fn}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{apply\-\_\-fn}]{\setlength{\rightskip}{0pt plus 5cm}typedef void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::apply\-\_\-fn({\bf Hydrostatic\-Calc} $\ast$elem)}}\label{classShipCAD_1_1HydrostaticCalcVector_aba4bf648866d2fee843a3b1f3b366522}
+
+
+Definition at line 162 of file hydrostaticcalc.\-h.
+
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_aecdea2f034955ae53b4d0855332491e5}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!hcvec\-\_\-iterator@{hcvec\-\_\-iterator}}
+\index{hcvec\-\_\-iterator@{hcvec\-\_\-iterator}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{hcvec\-\_\-iterator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<${\bf Hydrostatic\-Calc}$\ast$$>$\-::iterator {\bf Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::hcvec\-\_\-iterator}}}\label{classShipCAD_1_1HydrostaticCalcVector_aecdea2f034955ae53b4d0855332491e5}
+
+
+Definition at line 150 of file hydrostaticcalc.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_ac84eac37273d6a27caad7b2f94847216}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!Hydrostatic\-Calc\-Vector@{Hydrostatic\-Calc\-Vector}}
+\index{Hydrostatic\-Calc\-Vector@{Hydrostatic\-Calc\-Vector}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{Hydrostatic\-Calc\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::\-Hydrostatic\-Calc\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalcVector_ac84eac37273d6a27caad7b2f94847216}
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a10eba05b4acd39b164a4ba6e11491958}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!$\sim$\-Hydrostatic\-Calc\-Vector@{$\sim$\-Hydrostatic\-Calc\-Vector}}
+\index{$\sim$\-Hydrostatic\-Calc\-Vector@{$\sim$\-Hydrostatic\-Calc\-Vector}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{$\sim$\-Hydrostatic\-Calc\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::$\sim$\-Hydrostatic\-Calc\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalcVector_a10eba05b4acd39b164a4ba6e11491958}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a790f16cb4b2651b45339cb27b3504e9b}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!add@{add}}
+\index{add@{add}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::add (
+\begin{DoxyParamCaption}
+\item[{{\bf Hydrostatic\-Calc} $\ast$}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1HydrostaticCalcVector_a790f16cb4b2651b45339cb27b3504e9b}
+
+
+Definition at line 159 of file hydrostaticcalc.\-h.
+
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a539b31c0a3423f25368144f7050fb67e}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!apply@{apply}}
+\index{apply@{apply}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::apply (
+\begin{DoxyParamCaption}
+\item[{{\bf apply\-\_\-fn} $\ast$}]{fn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1HydrostaticCalcVector_a539b31c0a3423f25368144f7050fb67e}
+
+
+Definition at line 163 of file hydrostaticcalc.\-h.
+
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a402ad58dee97fecd54c00f15e836a38e}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!begin@{begin}}
+\index{begin@{begin}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf hcvec\-\_\-iterator} Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1HydrostaticCalcVector_a402ad58dee97fecd54c00f15e836a38e}
+
+
+Definition at line 166 of file hydrostaticcalc.\-h.
+
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a71af534d81b0b5db486df16087e3a2fa}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalcVector_a71af534d81b0b5db486df16087e3a2fa}
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a019be1da2cf5fd1e4a39a3459796bf10}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!del@{del}}
+\index{del@{del}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{del}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::del (
+\begin{DoxyParamCaption}
+\item[{{\bf Hydrostatic\-Calc} $\ast$}]{c}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1HydrostaticCalcVector_a019be1da2cf5fd1e4a39a3459796bf10}
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a379ea252c1f9faaf0a78c8661fc16589}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!end@{end}}
+\index{end@{end}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}{\bf hcvec\-\_\-iterator} Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1HydrostaticCalcVector_a379ea252c1f9faaf0a78c8661fc16589}
+
+
+Definition at line 167 of file hydrostaticcalc.\-h.
+
+\hypertarget{classShipCAD_1_1HydrostaticCalcVector_a9feb9efeaffa3b234bdf7f973f1ecc91}{\index{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}!size@{size}}
+\index{size@{size}!ShipCAD::HydrostaticCalcVector@{Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1HydrostaticCalcVector_a9feb9efeaffa3b234bdf7f973f1ecc91}
+
+
+Definition at line 157 of file hydrostaticcalc.\-h.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{hydrostaticcalc_8h}{hydrostaticcalc.\-h}\end{DoxyCompactItemize}

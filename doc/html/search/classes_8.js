@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['plane',['Plane',['../classShipCADGeometry_1_1Plane.html',1,'ShipCADGeometry']]],
-  ['pointindexoutofbounds',['PointIndexOutOfBounds',['../classShipCADException_1_1PointIndexOutOfBounds.html',1,'ShipCADException']]],
-  ['pointpred',['PointPred',['../structPointPred.html',1,'']]]
+  ['layerproperties',['LayerProperties',['../structShipCAD_1_1LayerProperties.html',1,'ShipCAD']]],
+  ['lineshader',['LineShader',['../classShipCAD_1_1LineShader.html',1,'ShipCAD']]],
+  ['listindexoutofbounds',['ListIndexOutOfBounds',['../classShipCAD_1_1ListIndexOutOfBounds.html',1,'ShipCAD']]]
 ];

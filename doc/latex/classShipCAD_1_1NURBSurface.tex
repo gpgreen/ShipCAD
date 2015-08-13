@@ -1,0 +1,282 @@
+\hypertarget{classShipCAD_1_1NURBSurface}{\section{Ship\-C\-A\-D\-:\-:N\-U\-R\-B\-Surface Class Reference}
+\label{classShipCAD_1_1NURBSurface}\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+}
+
+
+{\ttfamily \#include $<$nurbsurface.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-:\-:N\-U\-R\-B\-Surface\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classShipCAD_1_1NURBSurface}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1NURBSurface_ac01a08234a1d2a5e44d68a7393ef131c}{N\-U\-R\-B\-Surface} ()
+\item 
+virtual \hyperlink{classShipCAD_1_1NURBSurface_ac15393324ac350b5fd544789f4e55ad0}{$\sim$\-N\-U\-R\-B\-Surface} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1NURBSurface_a5013b0c1e511ea68909eef5d0473d032}{clear} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1NURBSurface_a643231ea9a8f26e528a1d9a0dccf4070}{rebuild} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1NURBSurface_a9ee8f8aea431fe9f465080ec9f5624f9}{draw} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp)
+\item 
+Q\-Vector3\-D \hyperlink{classShipCAD_1_1NURBSurface_a30435ae8689f09400b7754e4d7b3242a}{get\-Point} (size\-\_\-t row, size\-\_\-t col)
+\item 
+void \hyperlink{classShipCAD_1_1NURBSurface_a12217816f19b7de790ae9ed5cc784887}{set\-Col\-Degree} (size\-\_\-t val)
+\item 
+void \hyperlink{classShipCAD_1_1NURBSurface_a1f71f4cdf57f3f93aeaba0e7705d18f4}{set\-Row\-Degree} (size\-\_\-t val)
+\item 
+void \hyperlink{classShipCAD_1_1NURBSurface_aca43db0a1f829e101c4df124a4490031}{set\-Point} (size\-\_\-t row, size\-\_\-t col, const Q\-Vector3\-D \&val)
+\item 
+virtual void \hyperlink{classShipCAD_1_1NURBSurface_aa6fc3d060087593349ce1b5119419433}{set\-Build} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1NURBSurface_ad94a4350cda13ed3971ccf7bedaa1f10}{dump} (std\-::ostream \&os) const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classShipCAD_1_1NURBSurface_aac0a2d528cec007b0fb6a154f3a67672}{\-\_\-col\-\_\-count}
+\item 
+int \hyperlink{classShipCAD_1_1NURBSurface_a251739da98a877b8d68722db5aa59371}{\-\_\-row\-\_\-count}
+\item 
+int \hyperlink{classShipCAD_1_1NURBSurface_a0192ed41981e4a3525f52be71ceb0e7c}{\-\_\-col\-\_\-degree}
+\item 
+int \hyperlink{classShipCAD_1_1NURBSurface_a0c53705ad7cc3004e60398f38909f59e}{\-\_\-row\-\_\-degree}
+\item 
+int \hyperlink{classShipCAD_1_1NURBSurface_a2b0e2649a54a57a9ae6fbeed031b04d0}{\-\_\-col\-\_\-knots}
+\item 
+int \hyperlink{classShipCAD_1_1NURBSurface_a3799680ea0e67d5d6c1a694f378e70ed}{\-\_\-row\-\_\-knots}
+\item 
+std\-::vector$<$ Q\-Vector3\-D $>$ \hyperlink{classShipCAD_1_1NURBSurface_a371421f0aec85ad3cffc3dbeeb0b26e4}{\-\_\-points}
+\item 
+std\-::vector$<$ bool $>$ \hyperlink{classShipCAD_1_1NURBSurface_a6f1765a2698b4ed79f0d110409129c28}{\-\_\-knuckles}
+\item 
+std\-::vector$<$ float $>$ \hyperlink{classShipCAD_1_1NURBSurface_a6de7536d23d408368f2df4470c1514af}{\-\_\-parameters}
+\item 
+std\-::vector$<$ Q\-Vector3\-D $>$ \hyperlink{classShipCAD_1_1NURBSurface_a6fa7cce7b1c78fc8fc89be24cba4d9b0}{\-\_\-derivatives}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 43 of file nurbsurface.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1NURBSurface_ac01a08234a1d2a5e44d68a7393ef131c}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!N\-U\-R\-B\-Surface@{N\-U\-R\-B\-Surface}}
+\index{N\-U\-R\-B\-Surface@{N\-U\-R\-B\-Surface}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{N\-U\-R\-B\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}N\-U\-R\-B\-Surface\-::\-N\-U\-R\-B\-Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1NURBSurface_ac01a08234a1d2a5e44d68a7393ef131c}
+
+
+Definition at line 40 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_ac15393324ac350b5fd544789f4e55ad0}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!$\sim$\-N\-U\-R\-B\-Surface@{$\sim$\-N\-U\-R\-B\-Surface}}
+\index{$\sim$\-N\-U\-R\-B\-Surface@{$\sim$\-N\-U\-R\-B\-Surface}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{$\sim$\-N\-U\-R\-B\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}N\-U\-R\-B\-Surface\-::$\sim$\-N\-U\-R\-B\-Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1NURBSurface_ac15393324ac350b5fd544789f4e55ad0}
+
+
+Definition at line 46 of file nurbsurface.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1NURBSurface_a5013b0c1e511ea68909eef5d0473d032}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void N\-U\-R\-B\-Surface\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1NURBSurface_a5013b0c1e511ea68909eef5d0473d032}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1Entity_a998d0e5d360371046fd5835ba1e0877a}{Ship\-C\-A\-D\-::\-Entity}.
+
+
+
+Definition at line 77 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a9ee8f8aea431fe9f465080ec9f5624f9}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!draw@{draw}}
+\index{draw@{draw}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void N\-U\-R\-B\-Surface\-::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1NURBSurface_a9ee8f8aea431fe9f465080ec9f5624f9}
+
+
+Definition at line 73 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_ad94a4350cda13ed3971ccf7bedaa1f10}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!dump@{dump}}
+\index{dump@{dump}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void N\-U\-R\-B\-Surface\-::dump (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const}}\label{classShipCAD_1_1NURBSurface_ad94a4350cda13ed3971ccf7bedaa1f10}
+
+
+Definition at line 81 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a30435ae8689f09400b7754e4d7b3242a}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!get\-Point@{get\-Point}}
+\index{get\-Point@{get\-Point}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{get\-Point}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D N\-U\-R\-B\-Surface\-::get\-Point (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{row, }
+\item[{size\-\_\-t}]{col}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1NURBSurface_a30435ae8689f09400b7754e4d7b3242a}
+
+
+Definition at line 62 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a643231ea9a8f26e528a1d9a0dccf4070}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!rebuild@{rebuild}}
+\index{rebuild@{rebuild}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{rebuild}]{\setlength{\rightskip}{0pt plus 5cm}void N\-U\-R\-B\-Surface\-::rebuild (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1NURBSurface_a643231ea9a8f26e528a1d9a0dccf4070}
+
+
+Implements \hyperlink{classShipCAD_1_1Entity_a2571654319df6ad6841a437be7a75395}{Ship\-C\-A\-D\-::\-Entity}.
+
+
+
+Definition at line 67 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_aa6fc3d060087593349ce1b5119419433}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!set\-Build@{set\-Build}}
+\index{set\-Build@{set\-Build}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{set\-Build}]{\setlength{\rightskip}{0pt plus 5cm}void N\-U\-R\-B\-Surface\-::set\-Build (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1NURBSurface_aa6fc3d060087593349ce1b5119419433}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1Entity_a1889198398f42bb7f77a2334031c3f33}{Ship\-C\-A\-D\-::\-Entity}.
+
+
+
+Definition at line 51 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a12217816f19b7de790ae9ed5cc784887}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!set\-Col\-Degree@{set\-Col\-Degree}}
+\index{set\-Col\-Degree@{set\-Col\-Degree}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{set\-Col\-Degree}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::set\-Col\-Degree (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1NURBSurface_a12217816f19b7de790ae9ed5cc784887}
+\hypertarget{classShipCAD_1_1NURBSurface_aca43db0a1f829e101c4df124a4490031}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!set\-Point@{set\-Point}}
+\index{set\-Point@{set\-Point}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{set\-Point}]{\setlength{\rightskip}{0pt plus 5cm}void N\-U\-R\-B\-Surface\-::set\-Point (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{row, }
+\item[{size\-\_\-t}]{col, }
+\item[{const Q\-Vector3\-D \&}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1NURBSurface_aca43db0a1f829e101c4df124a4490031}
+
+
+Definition at line 58 of file nurbsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a1f71f4cdf57f3f93aeaba0e7705d18f4}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!set\-Row\-Degree@{set\-Row\-Degree}}
+\index{set\-Row\-Degree@{set\-Row\-Degree}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{set\-Row\-Degree}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::set\-Row\-Degree (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1NURBSurface_a1f71f4cdf57f3f93aeaba0e7705d18f4}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classShipCAD_1_1NURBSurface_aac0a2d528cec007b0fb6a154f3a67672}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-col\-\_\-count@{\-\_\-col\-\_\-count}}
+\index{\-\_\-col\-\_\-count@{\-\_\-col\-\_\-count}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-col\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-col\-\_\-count\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_aac0a2d528cec007b0fb6a154f3a67672}
+
+
+Definition at line 78 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a0192ed41981e4a3525f52be71ceb0e7c}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-col\-\_\-degree@{\-\_\-col\-\_\-degree}}
+\index{\-\_\-col\-\_\-degree@{\-\_\-col\-\_\-degree}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-col\-\_\-degree}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-col\-\_\-degree\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a0192ed41981e4a3525f52be71ceb0e7c}
+
+
+Definition at line 80 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a2b0e2649a54a57a9ae6fbeed031b04d0}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-col\-\_\-knots@{\-\_\-col\-\_\-knots}}
+\index{\-\_\-col\-\_\-knots@{\-\_\-col\-\_\-knots}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-col\-\_\-knots}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-col\-\_\-knots\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a2b0e2649a54a57a9ae6fbeed031b04d0}
+
+
+Definition at line 82 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a6fa7cce7b1c78fc8fc89be24cba4d9b0}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-derivatives@{\-\_\-derivatives}}
+\index{\-\_\-derivatives@{\-\_\-derivatives}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-derivatives}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$Q\-Vector3\-D$>$ Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-derivatives\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a6fa7cce7b1c78fc8fc89be24cba4d9b0}
+
+
+Definition at line 88 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a6f1765a2698b4ed79f0d110409129c28}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-knuckles@{\-\_\-knuckles}}
+\index{\-\_\-knuckles@{\-\_\-knuckles}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-knuckles}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$bool$>$ Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-knuckles\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a6f1765a2698b4ed79f0d110409129c28}
+
+
+Definition at line 86 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a6de7536d23d408368f2df4470c1514af}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-parameters@{\-\_\-parameters}}
+\index{\-\_\-parameters@{\-\_\-parameters}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-parameters}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$float$>$ Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-parameters\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a6de7536d23d408368f2df4470c1514af}
+
+
+Definition at line 87 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a371421f0aec85ad3cffc3dbeeb0b26e4}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-points@{\-\_\-points}}
+\index{\-\_\-points@{\-\_\-points}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$Q\-Vector3\-D$>$ Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-points\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a371421f0aec85ad3cffc3dbeeb0b26e4}
+
+
+Definition at line 85 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a251739da98a877b8d68722db5aa59371}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-row\-\_\-count@{\-\_\-row\-\_\-count}}
+\index{\-\_\-row\-\_\-count@{\-\_\-row\-\_\-count}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-row\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-row\-\_\-count\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a251739da98a877b8d68722db5aa59371}
+
+
+Definition at line 79 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a0c53705ad7cc3004e60398f38909f59e}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-row\-\_\-degree@{\-\_\-row\-\_\-degree}}
+\index{\-\_\-row\-\_\-degree@{\-\_\-row\-\_\-degree}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-row\-\_\-degree}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-row\-\_\-degree\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a0c53705ad7cc3004e60398f38909f59e}
+
+
+Definition at line 81 of file nurbsurface.\-h.
+
+\hypertarget{classShipCAD_1_1NURBSurface_a3799680ea0e67d5d6c1a694f378e70ed}{\index{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}!\-\_\-row\-\_\-knots@{\-\_\-row\-\_\-knots}}
+\index{\-\_\-row\-\_\-knots@{\-\_\-row\-\_\-knots}!ShipCAD::NURBSurface@{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}}
+\subsubsection[{\-\_\-row\-\_\-knots}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface\-::\-\_\-row\-\_\-knots\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1NURBSurface_a3799680ea0e67d5d6c1a694f378e70ed}
+
+
+Definition at line 83 of file nurbsurface.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{nurbsurface_8h}{nurbsurface.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{nurbsurface_8cpp}{nurbsurface.\-cpp}\end{DoxyCompactItemize}

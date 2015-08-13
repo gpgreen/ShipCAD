@@ -1,0 +1,856 @@
+\hypertarget{classShipCAD_1_1SubdivisionLayer}{\section{Ship\-C\-A\-D\-:\-:Subdivision\-Layer Class Reference}
+\label{classShipCAD_1_1SubdivisionLayer}\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+}
+
+
+{\ttfamily \#include $<$subdivlayer.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Layer\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classShipCAD_1_1SubdivisionLayer}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_ad36ec152981983b8a4dc87df39071418}{changed\-Layer\-Data} (size\-\_\-t layerid)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionLayer_a788864a40265b764b8d97d9a9cbbbd13}{Subdivision\-Layer} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
+\item 
+virtual \hyperlink{classShipCAD_1_1SubdivisionLayer_a4e852a07f46e57f28ffedd4a68c2f4c4}{$\sim$\-Subdivision\-Layer} ()
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a45b3af65b8b11dd2bf566a454bc125bd}{delete\-Control\-Face} (\hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$face)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a3c966ebc7e2c1f516f2329324d5658e2}{add\-Control\-Face} (\hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$newface)
+\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionLayer_a75dcc3a9944f799c72d1a87b93d92d89}{number\-Of\-Faces} ()
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionLayer_a2e1538a000268fe5f56bf2bea4973c23}{get\-Face} (size\-\_\-t index)
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_ab2d11ebf60ad6edd818eb0c42971946c}{calculate\-Intersection\-Points} (\hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\-Layer} $\ast$layer)
+\item 
+virtual void \hyperlink{classShipCAD_1_1SubdivisionLayer_a7046d17ba87dd5ce7399f22ae327fc6e}{clear} ()
+\begin{DoxyCompactList}\small\item\em reset this element to default values \end{DoxyCompactList}\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a319ae070f596e92307671cda0a607887}{assign\-Properties} (\hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\-Layer} $\ast$source)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a949c536d7c238f8ba3a33abdde8bfaa3}{move\-Down} ()
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_aef4dff844415352660f8cf90120b240c}{move\-Up} ()
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a2fc3ac326021a97479b821331e295640}{extents} (Q\-Vector3\-D \&min, Q\-Vector3\-D \&max)
+\item 
+\hyperlink{structShipCAD_1_1LayerProperties}{Layer\-Properties} \hyperlink{classShipCAD_1_1SubdivisionLayer_a7d42f81a94b46f0d999a4fa7a48d57d6}{get\-Surface\-Properties} ()
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_afa4ea10cf2e982c9d8dc179feb15a400}{is\-Visible} ()
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_a4cc4c42849feacc4a7af21ce90e2541b}{is\-Symmetric} ()
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_ad1907e05d0f60e9d7f401231198217d2}{is\-Developable} ()
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_a817b83f4da64e030609d77c4984d7fb1}{use\-For\-Intersections} ()
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_ab80cd9444086290d1298b9b2459a9e7b}{use\-In\-Hydrostatics} ()
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_a049e7c5ca442f4b02cdad9935d999e1b}{show\-In\-Linesplan} ()
+\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionLayer_a29642f60a1b67df1a42c16a6bf3b97e9}{get\-Layer\-I\-D} ()
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_ad6cbb87ecaadd6c31635fb86fe1a4b13}{set\-Layer\-I\-D} (size\-\_\-t newid)
+\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionLayer_a9a760dcc67779d111d5e05585e939138}{get\-Layer\-Index} ()
+\item 
+float \hyperlink{classShipCAD_1_1SubdivisionLayer_af65aafc08837eb47eefad5fbbd562d32}{get\-Material\-Density} ()
+\item 
+float \hyperlink{classShipCAD_1_1SubdivisionLayer_a4d26f33298b7d44d41f3e3ee87a2d981}{get\-Thickness} ()
+\item 
+Q\-String \hyperlink{classShipCAD_1_1SubdivisionLayer_affb4df074a7f116ce60f51ad7b7ba230}{get\-Name} ()
+\item 
+Q\-String \hyperlink{classShipCAD_1_1SubdivisionLayer_acb442d69e4dcf6e09b5019b6416d2d58}{get\-Description} ()
+\item 
+Q\-String \hyperlink{classShipCAD_1_1SubdivisionLayer_a46633012876a7e13fac9ed9d7f262136}{get\-D\-X\-F\-Layername} ()
+\item 
+Q\-Color \hyperlink{classShipCAD_1_1SubdivisionLayer_a0a4de50721580a29c716e11196239578}{get\-Color} ()
+\item 
+float \hyperlink{classShipCAD_1_1SubdivisionLayer_a892f5e7c6638537e1a30630fc1a791a2}{get\-Alpha\-Blend} ()
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a6fdfc0d208904d821349eb7380a52411}{set\-Developable} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a6ef8702f5488a9c3c3763e8472c9a568}{set\-Description} (const Q\-String \&val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a3861c77aeb283fbea6efe943ced83f41}{set\-Name} (const Q\-String \&val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_ab3c7c5072ba6cd411404651e8e0dca2f}{set\-Symmetric} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a5494031433242c810e6e307bfef33e6d}{set\-Color} (Q\-Color col)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_ae96292d06a3578f9c7bfbbdec342068a}{set\-Material\-Density} (float val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_ac4068bcc8287698ee23e27246de9212b}{set\-Thickness} (float val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_aa58323da0043db61eaa87672755e96d2}{set\-Show\-In\-Linesplan} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a88897eeb2b600169ca110fc4ec4aef08}{set\-Use\-In\-Hydrostatics} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_aef63325b0ef8b700b96a7cd97c501936}{set\-Use\-For\-Intersections} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a979723de5c5cf0f4ecea8a5f9d0968d7}{set\-Visible} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a060357b84c0549fa7310e45680fed9bd}{load\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&source)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a35b72f27a1d354dcc6f3b844687d91e8}{save\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&destination)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_aafdd381a2cf13c0f37072b6c3f008b05}{save\-To\-D\-X\-F} (std\-::vector$<$ Q\-String $>$ \&strings)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_af86299eea0a5a472d1edfae2706e335a}{load\-From\-Stream} (size\-\_\-t \&lineno, std\-::vector$<$ Q\-String $>$ \&strings)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a502c7889a73015d4295fb922c92c78be}{save\-To\-Stream} (std\-::vector$<$ Q\-String $>$ \&strings)
+\item 
+virtual void \hyperlink{classShipCAD_1_1SubdivisionLayer_a86f8600ffbf3973bc31c99bdb9e5b18d}{draw} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp)
+\item 
+virtual void \hyperlink{classShipCAD_1_1SubdivisionLayer_ab41e005f720a2bba4b2efa74bfd5943e}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
+\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classShipCAD_1_1SubdivisionLayer_a838537201ca31bc92a38585c87eb56e9}{draw\-Layers} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$surface)
+\item 
+static \hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\-Layer} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionLayer_a7d41b9d0ff65032014ec52ff846f32a7}{construct} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_a80009b02c31a01e2de9f93d5982b9a63}{priv\-\_\-dump} (std\-::ostream \&os, const char $\ast$prefix) const 
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionLayer_abea7581d3e0b740de8db1dfd6bc9bf69}{process\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, \hyperlink{structShipCAD_1_1LayerProperties}{Layer\-Properties} \&props)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionLayer_a73e4956d179d6ebd6c062e7e76bca196}{\-\_\-layerid}
+\item 
+Q\-Color \hyperlink{classShipCAD_1_1SubdivisionLayer_a6da22248952737662360fa3b2730a35f}{\-\_\-color}
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_a2d606476aba40bbbfc115c449f46ac26}{\-\_\-visible}
+\item 
+Q\-String \hyperlink{classShipCAD_1_1SubdivisionLayer_a33bbfedf8f0d130d91c74a65a575eb2a}{\-\_\-desc}
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_aaeddcdf1d08d84c76c5453f4a71fbe7a}{\-\_\-symmetric}
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_a81dad738f58f9b4632c1575d0b59ddb0}{\-\_\-developable}
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_a8213aa3e02493472fb11949f595446f2}{\-\_\-use\-\_\-for\-\_\-intersections}
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_ad36d65882f0c46ff1b3ced7d48c173f4}{\-\_\-use\-\_\-in\-\_\-hydrostatics}
+\item 
+bool \hyperlink{classShipCAD_1_1SubdivisionLayer_a373fd987b5f973a995517e7f97fda5ac}{\-\_\-show\-\_\-in\-\_\-linesplan}
+\item 
+float \hyperlink{classShipCAD_1_1SubdivisionLayer_adfdd4e996a5be7147a2eeb682dd93ff8}{\-\_\-material\-\_\-density}
+\item 
+float \hyperlink{classShipCAD_1_1SubdivisionLayer_a00a308fdf03a0c1d9a6fa65f965e7942}{\-\_\-thickness}
+\item 
+unsigned char \hyperlink{classShipCAD_1_1SubdivisionLayer_a1681170da038b0708d1b4dcd2ec89b81}{\-\_\-alphablend}
+\item 
+std\-::vector\\*
+$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \hyperlink{classShipCAD_1_1SubdivisionLayer_a98b25b86a7104e4f987d34506438113f}{\-\_\-patches}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 65 of file subdivlayer.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a788864a40265b764b8d97d9a9cbbbd13}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!Subdivision\-Layer@{Subdivision\-Layer}}
+\index{Subdivision\-Layer@{Subdivision\-Layer}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{Subdivision\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Layer\-::\-Subdivision\-Layer (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1SubdivisionLayer_a788864a40265b764b8d97d9a9cbbbd13}
+
+
+Definition at line 58 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a4e852a07f46e57f28ffedd4a68c2f4c4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!$\sim$\-Subdivision\-Layer@{$\sim$\-Subdivision\-Layer}}
+\index{$\sim$\-Subdivision\-Layer@{$\sim$\-Subdivision\-Layer}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{$\sim$\-Subdivision\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Layer\-::$\sim$\-Subdivision\-Layer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionLayer_a4e852a07f46e57f28ffedd4a68c2f4c4}
+
+
+Definition at line 64 of file subdivlayer.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a3c966ebc7e2c1f516f2329324d5658e2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!add\-Control\-Face@{add\-Control\-Face}}
+\index{add\-Control\-Face@{add\-Control\-Face}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{add\-Control\-Face}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::add\-Control\-Face (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Control\-Face} $\ast$}]{newface}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a3c966ebc7e2c1f516f2329324d5658e2}
+
+
+Definition at line 208 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a319ae070f596e92307671cda0a607887}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!assign\-Properties@{assign\-Properties}}
+\index{assign\-Properties@{assign\-Properties}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{assign\-Properties}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::assign\-Properties (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Layer} $\ast$}]{source}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a319ae070f596e92307671cda0a607887}
+
+
+Definition at line 218 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ab2d11ebf60ad6edd818eb0c42971946c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!calculate\-Intersection\-Points@{calculate\-Intersection\-Points}}
+\index{calculate\-Intersection\-Points@{calculate\-Intersection\-Points}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{calculate\-Intersection\-Points}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\-Layer\-::calculate\-Intersection\-Points (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Layer} $\ast$}]{layer}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_ab2d11ebf60ad6edd818eb0c42971946c}
+
+
+Definition at line 229 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ad36ec152981983b8a4dc87df39071418}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!changed\-Layer\-Data@{changed\-Layer\-Data}}
+\index{changed\-Layer\-Data@{changed\-Layer\-Data}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{changed\-Layer\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::changed\-Layer\-Data (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{layerid}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1SubdivisionLayer_ad36ec152981983b8a4dc87df39071418}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a7046d17ba87dd5ce7399f22ae327fc6e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionLayer_a7046d17ba87dd5ce7399f22ae327fc6e}
+
+
+reset this element to default values 
+
+
+
+Implements \hyperlink{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}{Ship\-C\-A\-D\-::\-Subdivision\-Base}.
+
+
+
+Definition at line 339 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a7d41b9d0ff65032014ec52ff846f32a7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!construct@{construct}}
+\index{construct@{construct}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Layer} $\ast$ Subdivision\-Layer\-::construct (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1SubdivisionLayer_a7d41b9d0ff65032014ec52ff846f32a7}
+
+
+Definition at line 50 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a45b3af65b8b11dd2bf566a454bc125bd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!delete\-Control\-Face@{delete\-Control\-Face}}
+\index{delete\-Control\-Face@{delete\-Control\-Face}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{delete\-Control\-Face}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::delete\-Control\-Face (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Control\-Face} $\ast$}]{face}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a45b3af65b8b11dd2bf566a454bc125bd}
+
+
+Definition at line 356 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a86f8600ffbf3973bc31c99bdb9e5b18d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!draw@{draw}}
+\index{draw@{draw}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionLayer_a86f8600ffbf3973bc31c99bdb9e5b18d}
+
+
+Definition at line 372 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a838537201ca31bc92a38585c87eb56e9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!draw\-Layers@{draw\-Layers}}
+\index{draw\-Layers@{draw\-Layers}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{draw\-Layers}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::draw\-Layers (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp, }
+\item[{{\bf Subdivision\-Surface} $\ast$}]{surface}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1SubdivisionLayer_a838537201ca31bc92a38585c87eb56e9}
+
+
+Definition at line 363 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ab41e005f720a2bba4b2efa74bfd5943e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!dump@{dump}}
+\index{dump@{dump}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::dump (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os, }
+\item[{const char $\ast$}]{prefix = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionLayer_ab41e005f720a2bba4b2efa74bfd5943e}
+
+
+print out the element to a stream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em prefix} & string to prefix on each line output \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\-C\-A\-D\-::\-Subdivision\-Base}.
+
+
+
+Definition at line 533 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a2fc3ac326021a97479b821331e295640}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!extents@{extents}}
+\index{extents@{extents}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{extents}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::extents (
+\begin{DoxyParamCaption}
+\item[{Q\-Vector3\-D \&}]{min, }
+\item[{Q\-Vector3\-D \&}]{max}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a2fc3ac326021a97479b821331e295640}
+
+
+Definition at line 409 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a892f5e7c6638537e1a30630fc1a791a2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Alpha\-Blend@{get\-Alpha\-Blend}}
+\index{get\-Alpha\-Blend@{get\-Alpha\-Blend}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Alpha\-Blend}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::get\-Alpha\-Blend (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a892f5e7c6638537e1a30630fc1a791a2}
+
+
+Definition at line 105 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a0a4de50721580a29c716e11196239578}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Color@{get\-Color}}
+\index{get\-Color@{get\-Color}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::get\-Color (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a0a4de50721580a29c716e11196239578}
+
+
+Definition at line 104 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_acb442d69e4dcf6e09b5019b6416d2d58}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Description@{get\-Description}}
+\index{get\-Description@{get\-Description}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Description}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::get\-Description (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_acb442d69e4dcf6e09b5019b6416d2d58}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a46633012876a7e13fac9ed9d7f262136}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-D\-X\-F\-Layername@{get\-D\-X\-F\-Layername}}
+\index{get\-D\-X\-F\-Layername@{get\-D\-X\-F\-Layername}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-D\-X\-F\-Layername}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::get\-D\-X\-F\-Layername (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a46633012876a7e13fac9ed9d7f262136}
+
+
+Definition at line 103 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a2e1538a000268fe5f56bf2bea4973c23}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Face@{get\-Face}}
+\index{get\-Face@{get\-Face}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Face}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Control\-Face} $\ast$ Subdivision\-Layer\-::get\-Face (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a2e1538a000268fe5f56bf2bea4973c23}
+
+
+Definition at line 83 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a29642f60a1b67df1a42c16a6bf3b97e9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Layer\-I\-D@{get\-Layer\-I\-D}}
+\index{get\-Layer\-I\-D@{get\-Layer\-I\-D}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Layer\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::get\-Layer\-I\-D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a29642f60a1b67df1a42c16a6bf3b97e9}
+
+
+Definition at line 96 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a9a760dcc67779d111d5e05585e939138}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Layer\-Index@{get\-Layer\-Index}}
+\index{get\-Layer\-Index@{get\-Layer\-Index}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Layer\-Index}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Subdivision\-Layer\-::get\-Layer\-Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a9a760dcc67779d111d5e05585e939138}
+
+
+Definition at line 90 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_af65aafc08837eb47eefad5fbbd562d32}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Material\-Density@{get\-Material\-Density}}
+\index{get\-Material\-Density@{get\-Material\-Density}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Material\-Density}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::get\-Material\-Density (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_af65aafc08837eb47eefad5fbbd562d32}
+
+
+Definition at line 99 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_affb4df074a7f116ce60f51ad7b7ba230}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Subdivision\-Layer\-::get\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_affb4df074a7f116ce60f51ad7b7ba230}
+
+
+Definition at line 73 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a7d42f81a94b46f0d999a4fa7a48d57d6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Surface\-Properties@{get\-Surface\-Properties}}
+\index{get\-Surface\-Properties@{get\-Surface\-Properties}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Surface\-Properties}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Layer\-Properties} Subdivision\-Layer\-::get\-Surface\-Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a7d42f81a94b46f0d999a4fa7a48d57d6}
+
+
+Definition at line 115 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a4d26f33298b7d44d41f3e3ee87a2d981}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!get\-Thickness@{get\-Thickness}}
+\index{get\-Thickness@{get\-Thickness}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{get\-Thickness}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::get\-Thickness (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a4d26f33298b7d44d41f3e3ee87a2d981}
+
+
+Definition at line 100 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ad1907e05d0f60e9d7f401231198217d2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!is\-Developable@{is\-Developable}}
+\index{is\-Developable@{is\-Developable}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{is\-Developable}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::is\-Developable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_ad1907e05d0f60e9d7f401231198217d2}
+
+
+Definition at line 92 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a4cc4c42849feacc4a7af21ce90e2541b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!is\-Symmetric@{is\-Symmetric}}
+\index{is\-Symmetric@{is\-Symmetric}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{is\-Symmetric}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::is\-Symmetric (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a4cc4c42849feacc4a7af21ce90e2541b}
+
+
+Definition at line 91 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_afa4ea10cf2e982c9d8dc179feb15a400}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!is\-Visible@{is\-Visible}}
+\index{is\-Visible@{is\-Visible}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{is\-Visible}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::is\-Visible (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_afa4ea10cf2e982c9d8dc179feb15a400}
+
+
+Definition at line 90 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a060357b84c0549fa7310e45680fed9bd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!load\-Binary@{load\-Binary}}
+\index{load\-Binary@{load\-Binary}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{load\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::load\-Binary (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-Buffer} \&}]{source}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a060357b84c0549fa7310e45680fed9bd}
+
+
+Definition at line 428 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_af86299eea0a5a472d1edfae2706e335a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!load\-From\-Stream@{load\-From\-Stream}}
+\index{load\-From\-Stream@{load\-From\-Stream}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{load\-From\-Stream}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::load\-From\-Stream (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t \&}]{lineno, }
+\item[{std\-::vector$<$ Q\-String $>$ \&}]{strings}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_af86299eea0a5a472d1edfae2706e335a}
+
+
+Definition at line 461 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a949c536d7c238f8ba3a33abdde8bfaa3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!move\-Down@{move\-Down}}
+\index{move\-Down@{move\-Down}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{move\-Down}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::move\-Down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a949c536d7c238f8ba3a33abdde8bfaa3}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_aef4dff844415352660f8cf90120b240c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!move\-Up@{move\-Up}}
+\index{move\-Up@{move\-Up}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{move\-Up}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::move\-Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_aef4dff844415352660f8cf90120b240c}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a75dcc3a9944f799c72d1a87b93d92d89}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!number\-Of\-Faces@{number\-Of\-Faces}}
+\index{number\-Of\-Faces@{number\-Of\-Faces}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{number\-Of\-Faces}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::number\-Of\-Faces (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a75dcc3a9944f799c72d1a87b93d92d89}
+
+
+Definition at line 77 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a80009b02c31a01e2de9f93d5982b9a63}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!priv\-\_\-dump@{priv\-\_\-dump}}
+\index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{priv\-\_\-dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::priv\-\_\-dump (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os, }
+\item[{const char $\ast$}]{prefix}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a80009b02c31a01e2de9f93d5982b9a63}
+
+
+Definition at line 540 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_abea7581d3e0b740de8db1dfd6bc9bf69}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!process\-Triangle@{process\-Triangle}}
+\index{process\-Triangle@{process\-Triangle}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{process\-Triangle}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::process\-Triangle (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{p1, }
+\item[{const Q\-Vector3\-D \&}]{p2, }
+\item[{const Q\-Vector3\-D \&}]{p3, }
+\item[{{\bf Layer\-Properties} \&}]{props}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_abea7581d3e0b740de8db1dfd6bc9bf69}
+
+
+Definition at line 95 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a35b72f27a1d354dcc6f3b844687d91e8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!save\-Binary@{save\-Binary}}
+\index{save\-Binary@{save\-Binary}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{save\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::save\-Binary (
+\begin{DoxyParamCaption}
+\item[{{\bf File\-Buffer} \&}]{destination}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a35b72f27a1d354dcc6f3b844687d91e8}
+
+
+Definition at line 509 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_aafdd381a2cf13c0f37072b6c3f008b05}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!save\-To\-D\-X\-F@{save\-To\-D\-X\-F}}
+\index{save\-To\-D\-X\-F@{save\-To\-D\-X\-F}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{save\-To\-D\-X\-F}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::save\-To\-D\-X\-F (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Q\-String $>$ \&}]{strings}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_aafdd381a2cf13c0f37072b6c3f008b05}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a502c7889a73015d4295fb922c92c78be}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!save\-To\-Stream@{save\-To\-Stream}}
+\index{save\-To\-Stream@{save\-To\-Stream}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{save\-To\-Stream}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::save\-To\-Stream (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ Q\-String $>$ \&}]{strings}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a502c7889a73015d4295fb922c92c78be}
+
+
+Definition at line 496 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a5494031433242c810e6e307bfef33e6d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Color@{set\-Color}}
+\index{set\-Color@{set\-Color}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Color (
+\begin{DoxyParamCaption}
+\item[{Q\-Color}]{col}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a5494031433242c810e6e307bfef33e6d}
+
+
+Definition at line 168 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a6ef8702f5488a9c3c3763e8472c9a568}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Description@{set\-Description}}
+\index{set\-Description@{set\-Description}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Description}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::set\-Description (
+\begin{DoxyParamCaption}
+\item[{const Q\-String \&}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a6ef8702f5488a9c3c3763e8472c9a568}
+
+
+Definition at line 107 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a6fdfc0d208904d821349eb7380a52411}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Developable@{set\-Developable}}
+\index{set\-Developable@{set\-Developable}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Developable}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Developable (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a6fdfc0d208904d821349eb7380a52411}
+
+
+Definition at line 144 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ad6cbb87ecaadd6c31635fb86fe1a4b13}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Layer\-I\-D@{set\-Layer\-I\-D}}
+\index{set\-Layer\-I\-D@{set\-Layer\-I\-D}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Layer\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::set\-Layer\-I\-D (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{newid}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_ad6cbb87ecaadd6c31635fb86fe1a4b13}
+
+
+Definition at line 97 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ae96292d06a3578f9c7bfbbdec342068a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Material\-Density@{set\-Material\-Density}}
+\index{set\-Material\-Density@{set\-Material\-Density}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Material\-Density}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::set\-Material\-Density (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_ae96292d06a3578f9c7bfbbdec342068a}
+
+
+Definition at line 111 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a3861c77aeb283fbea6efe943ced83f41}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Name@{set\-Name}}
+\index{set\-Name@{set\-Name}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Name}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Name (
+\begin{DoxyParamCaption}
+\item[{const Q\-String \&}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a3861c77aeb283fbea6efe943ced83f41}
+
+
+Definition at line 152 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_aa58323da0043db61eaa87672755e96d2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Show\-In\-Linesplan@{set\-Show\-In\-Linesplan}}
+\index{set\-Show\-In\-Linesplan@{set\-Show\-In\-Linesplan}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Show\-In\-Linesplan}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Show\-In\-Linesplan (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_aa58323da0043db61eaa87672755e96d2}
+
+
+Definition at line 176 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ab3c7c5072ba6cd411404651e8e0dca2f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Symmetric@{set\-Symmetric}}
+\index{set\-Symmetric@{set\-Symmetric}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Symmetric}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Symmetric (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_ab3c7c5072ba6cd411404651e8e0dca2f}
+
+
+Definition at line 160 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ac4068bcc8287698ee23e27246de9212b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Thickness@{set\-Thickness}}
+\index{set\-Thickness@{set\-Thickness}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Thickness}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::set\-Thickness (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_ac4068bcc8287698ee23e27246de9212b}
+
+
+Definition at line 112 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_aef63325b0ef8b700b96a7cd97c501936}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Use\-For\-Intersections@{set\-Use\-For\-Intersections}}
+\index{set\-Use\-For\-Intersections@{set\-Use\-For\-Intersections}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Use\-For\-Intersections}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Use\-For\-Intersections (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_aef63325b0ef8b700b96a7cd97c501936}
+
+
+Definition at line 192 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a88897eeb2b600169ca110fc4ec4aef08}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Use\-In\-Hydrostatics@{set\-Use\-In\-Hydrostatics}}
+\index{set\-Use\-In\-Hydrostatics@{set\-Use\-In\-Hydrostatics}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Use\-In\-Hydrostatics}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Use\-In\-Hydrostatics (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a88897eeb2b600169ca110fc4ec4aef08}
+
+
+Definition at line 184 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a979723de5c5cf0f4ecea8a5f9d0968d7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!set\-Visible@{set\-Visible}}
+\index{set\-Visible@{set\-Visible}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{set\-Visible}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Layer\-::set\-Visible (
+\begin{DoxyParamCaption}
+\item[{bool}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionLayer_a979723de5c5cf0f4ecea8a5f9d0968d7}
+
+
+Definition at line 200 of file subdivlayer.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a049e7c5ca442f4b02cdad9935d999e1b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!show\-In\-Linesplan@{show\-In\-Linesplan}}
+\index{show\-In\-Linesplan@{show\-In\-Linesplan}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{show\-In\-Linesplan}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::show\-In\-Linesplan (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a049e7c5ca442f4b02cdad9935d999e1b}
+
+
+Definition at line 95 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a817b83f4da64e030609d77c4984d7fb1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!use\-For\-Intersections@{use\-For\-Intersections}}
+\index{use\-For\-Intersections@{use\-For\-Intersections}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{use\-For\-Intersections}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::use\-For\-Intersections (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_a817b83f4da64e030609d77c4984d7fb1}
+
+
+Definition at line 93 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ab80cd9444086290d1298b9b2459a9e7b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!use\-In\-Hydrostatics@{use\-In\-Hydrostatics}}
+\index{use\-In\-Hydrostatics@{use\-In\-Hydrostatics}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{use\-In\-Hydrostatics}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::use\-In\-Hydrostatics (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionLayer_ab80cd9444086290d1298b9b2459a9e7b}
+
+
+Definition at line 94 of file subdivlayer.\-h.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a1681170da038b0708d1b4dcd2ec89b81}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-alphablend@{\-\_\-alphablend}}
+\index{\-\_\-alphablend@{\-\_\-alphablend}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-alphablend}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-alphablend\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a1681170da038b0708d1b4dcd2ec89b81}
+
+
+Definition at line 162 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a6da22248952737662360fa3b2730a35f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-color@{\-\_\-color}}
+\index{\-\_\-color@{\-\_\-color}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a6da22248952737662360fa3b2730a35f}
+
+
+Definition at line 152 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a33bbfedf8f0d130d91c74a65a575eb2a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-desc@{\-\_\-desc}}
+\index{\-\_\-desc@{\-\_\-desc}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-desc}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-desc\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a33bbfedf8f0d130d91c74a65a575eb2a}
+
+
+Definition at line 154 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a81dad738f58f9b4632c1575d0b59ddb0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-developable@{\-\_\-developable}}
+\index{\-\_\-developable@{\-\_\-developable}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-developable}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-developable\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a81dad738f58f9b4632c1575d0b59ddb0}
+
+
+Definition at line 156 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a73e4956d179d6ebd6c062e7e76bca196}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-layerid@{\-\_\-layerid}}
+\index{\-\_\-layerid@{\-\_\-layerid}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-layerid}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-layerid\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a73e4956d179d6ebd6c062e7e76bca196}
+
+
+Definition at line 151 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_adfdd4e996a5be7147a2eeb682dd93ff8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-material\-\_\-density@{\-\_\-material\-\_\-density}}
+\index{\-\_\-material\-\_\-density@{\-\_\-material\-\_\-density}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-material\-\_\-density}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-material\-\_\-density\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_adfdd4e996a5be7147a2eeb682dd93ff8}
+
+
+Definition at line 160 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a98b25b86a7104e4f987d34506438113f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-patches@{\-\_\-patches}}
+\index{\-\_\-patches@{\-\_\-patches}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-patches}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Face}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-patches\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a98b25b86a7104e4f987d34506438113f}
+
+
+Definition at line 163 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a373fd987b5f973a995517e7f97fda5ac}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-show\-\_\-in\-\_\-linesplan@{\-\_\-show\-\_\-in\-\_\-linesplan}}
+\index{\-\_\-show\-\_\-in\-\_\-linesplan@{\-\_\-show\-\_\-in\-\_\-linesplan}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-show\-\_\-in\-\_\-linesplan}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-show\-\_\-in\-\_\-linesplan\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a373fd987b5f973a995517e7f97fda5ac}
+
+
+Definition at line 159 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_aaeddcdf1d08d84c76c5453f4a71fbe7a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-symmetric@{\-\_\-symmetric}}
+\index{\-\_\-symmetric@{\-\_\-symmetric}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-symmetric}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-symmetric\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_aaeddcdf1d08d84c76c5453f4a71fbe7a}
+
+
+Definition at line 155 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a00a308fdf03a0c1d9a6fa65f965e7942}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-thickness@{\-\_\-thickness}}
+\index{\-\_\-thickness@{\-\_\-thickness}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-thickness}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-thickness\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a00a308fdf03a0c1d9a6fa65f965e7942}
+
+
+Definition at line 161 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a8213aa3e02493472fb11949f595446f2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-use\-\_\-for\-\_\-intersections@{\-\_\-use\-\_\-for\-\_\-intersections}}
+\index{\-\_\-use\-\_\-for\-\_\-intersections@{\-\_\-use\-\_\-for\-\_\-intersections}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-use\-\_\-for\-\_\-intersections}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-use\-\_\-for\-\_\-intersections\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a8213aa3e02493472fb11949f595446f2}
+
+
+Definition at line 157 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_ad36d65882f0c46ff1b3ced7d48c173f4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-use\-\_\-in\-\_\-hydrostatics@{\-\_\-use\-\_\-in\-\_\-hydrostatics}}
+\index{\-\_\-use\-\_\-in\-\_\-hydrostatics@{\-\_\-use\-\_\-in\-\_\-hydrostatics}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-use\-\_\-in\-\_\-hydrostatics}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-use\-\_\-in\-\_\-hydrostatics\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_ad36d65882f0c46ff1b3ced7d48c173f4}
+
+
+Definition at line 158 of file subdivlayer.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionLayer_a2d606476aba40bbbfc115c449f46ac26}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Layer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}!\-\_\-visible@{\-\_\-visible}}
+\index{\-\_\-visible@{\-\_\-visible}!ShipCAD::SubdivisionLayer@{Ship\-C\-A\-D\-::\-Subdivision\-Layer}}
+\subsubsection[{\-\_\-visible}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Layer\-::\-\_\-visible\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionLayer_a2d606476aba40bbbfc115c449f46ac26}
+
+
+Definition at line 153 of file subdivlayer.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{subdivlayer_8h}{subdivlayer.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{subdivlayer_8cpp}{subdivlayer.\-cpp}\end{DoxyCompactItemize}

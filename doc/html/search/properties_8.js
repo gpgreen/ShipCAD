@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['normal',['Normal',['../classShipCADGeometry_1_1SubdivisionPoint.html#a547c0cb9b9641fcb9d6a5beb3a86d59c',1,'ShipCADGeometry::SubdivisionPoint']]]
+  ['normal',['Normal',['../classShipCAD_1_1SubdivisionPoint.html#aeaf744ea3deb2bdc55e9e90d3e8b58a2',1,'ShipCAD::SubdivisionPoint']]]
 ];

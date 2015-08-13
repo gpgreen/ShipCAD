@@ -1,0 +1,574 @@
+diff --git a/ShipCADlib/ShipCADlib.pro b/ShipCADlib/ShipCADlib.pro
+index 39c2d21..a2c8a9b 100644
+--- a/ShipCADlib/ShipCADlib.pro
++++ b/ShipCADlib/ShipCADlib.pro
+@@ -30,7 +30,8 @@ SOURCES += shipcadlib.cpp \
+     subdivlayer.cpp \
+     version.cpp \
+     shader.cpp \
+-    projsettings.cpp
++    projsettings.cpp \
++    undoobject.cpp
+ 
+ HEADERS += shipcadlib.h \
+     entity.h \
+@@ -58,7 +59,8 @@ HEADERS += shipcadlib.h \
+     marker.h \
+     flowline.h \
+     visibility.h \
+-    preferences.h
++    preferences.h \
++    undoobject.h
+ 
+ unix:!symbian {
+     maemo5 {
+diff --git a/ShipCADlib/filebuffer.h b/ShipCADlib/filebuffer.h
+index eb6253f..f185c43 100644
+--- a/ShipCADlib/filebuffer.h
++++ b/ShipCADlib/filebuffer.h
+@@ -52,9 +52,12 @@ public:
+     explicit FileBuffer();
+     ~FileBuffer();
+ 
+-    // version
+-    version_t version() {return ShipCADGeometry::k_current_version;}
++    size_t size() {return _data.size();}
+ 
++    // version
++    version_t getVersion() {return ShipCADGeometry::k_current_version;}
++	void setVersion(ShipCADGeometry::version_t v);
++	
+     // save/restore/reset
+     void loadFromFile(const QString& filename);
+     void saveToFile(const QString& filename);
+diff --git a/ShipCADlib/shipcad.cpp b/ShipCADlib/shipcad.cpp
+new file mode 100644
+index 0000000..36dfa15
+--- /dev/null
++++ b/ShipCADlib/shipcad.cpp
+@@ -0,0 +1,123 @@
++/*##############################################################################################
++ *    ShipCAD																				   *
++ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
++ *    Original Copyright header below														   *
++ *																							   *
++ *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
++ *    open source surface-modelling program based on subdivision surfaces and intended for     *
++ *    designing ships.                                                                         *
++ *                                                                                             *
++ *    Copyright © 2005, by Martijn van Engeland                                                *
++ *    e-mail                  : Info@FREEship.org                                              *
++ *    FREE!ship project page  : https://sourceforge.net/projects/freeship                      *
++ *    FREE!ship homepage      : www.FREEship.org                                               *
++ *                                                                                             *
++ *    This program is free software; you can redistribute it and/or modify it under            *
++ *    the terms of the GNU General Public License as published by the                          *
++ *    Free Software Foundation; either version 2 of the License, or (at your option)           *
++ *    any later version.                                                                       *
++ *                                                                                             *
++ *    This program is distributed in the hope that it will be useful, but WITHOUT ANY          *
++ *    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A          *
++ *    PARTICULAR PURPOSE. See the GNU General Public License for more details.                 *
++ *                                                                                             *
++ *    You should have received a copy of the GNU General Public License along with             *
++ *    this program; if not, write to the Free Software Foundation, Inc.,                       *
++ *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
++ *                                                                                             *
++ *#############################################################################################*/
++
++#include "shipcad.h"
++
++ShipCAD::ShipCAD()
++	: _prefs(this), _vis(this), _settings(this)
++{
++	clear();
++}
++
++ShipCAD::~ShipCAD()
++{
++	clear();
++}
++
++void ShipCAD::clear()
++{
++}
++
++void ShipCAD::setFileChanged(bool set)
++{
++	if (set != _file_changed) {
++		_file_changed = set;
++		emit onFileChanged();
++	}
++}
++
++void ShipCAD::loadBinary(FileBuffer& source)
++{
++	// remember the filename because it is erased by the clear method
++	QString tmpstr = _filename;
++	clear();
++	_filename = tmpstr;
++	source.reset();
++	QString hdr;
++	source.load(hdr);
++	if (hdr == "FREE!ship") {
++		int ver, cver;
++		source.load(ver);
++		_file_version = versionFromInt(ver);
++		cver = versionToInt(k_current_version);
++		source.setVersion(_file_version);
++		if (_file_version <= cver) {
++			int n;
++			source.load(n);
++			_precision = static_cast<precision_t>(n);
++			_vis.loadBinary(source);
++			_settings.loadBinary(source, 0);
++			// load the subdivision surface
++			_surface->loadBinary(source);
++			// stations
++			source.load(n);
++			for (int i=0; i<n; i++) {
++				Intersection* intersection = Intersection::construct(this);
++				intersection->loadBinary(source);
++				_stations.add(intersection);
++			}
++			// buttocks
++			source.load(n);
++			for (int i=0; i<n; i++) {
++				Intersection* intersection = Intersection::construct(this);
++				intersection->loadBinary(source);
++				_buttocks.add(intersection);
++			}
++			// waterlines
++			source.load(n);
++			for (int i=0; i<n; i++) {
++				Intersection* intersection = Intersection::construct(this);
++				intersection->loadBinary(source);
++				_waterlines.add(intersection);
++			}
++			if (_file_version >= fv180) {
++				// diagonals
++				source.load(n);
++				for (int i=0; i<n; i++) {
++					Intersection* intersection = Intersection::construct(this);
++					intersection->loadBinary(source);
++					_diagonals.add(intersection);
++				}
++				if (_file_version >= fv191) {
++					// markers
++				}
++			}
++		}
++		else {
++			// version is later than this can handle
++		}
++	}
++	else {
++		// this is not a free ship binary file
++	}
++	_file_changed = false;
++	_surface->setDesiredSubdivisionLevel(Ord(Precision)+1);
++	_surface->rebuild();
++	emit onUpdateGeometryInfo();
++}
+diff --git a/ShipCADlib/shipcad.h b/ShipCADlib/shipcad.h
+index 384c070..3750da7 100644
+--- a/ShipCADlib/shipcad.h
++++ b/ShipCADlib/shipcad.h
+@@ -37,6 +37,9 @@
+ #include "hydrostaticcalc.h"
+ #include "intersection.h"
+ #include "subdivcontrolcurve.h"
++#include "visibility.h"
++#include "projsettings.h"
++#include "preference.h"
+ 
+ namespace ShipCADGeometry {
+ 
+@@ -48,9 +51,6 @@ class SubdivisionFace;
+ class SubdivisionSurface;
+ class SubdivisionLayer;
+ class Viewport;
+-class Preferences;
+-class Visibility;
+-class ProjectSettings;
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
+@@ -113,7 +113,7 @@ public:
+     void clearUndo();
+ 
+ signals:
+-    void fileChanged();
++    void onFileChanged();
+     void updateUndoData();
+     void updateRecentFileList();
+     void changeCursorIncrement();
+@@ -129,7 +129,7 @@ private:
+     precision_t _precision;
+     version_t _file_version;
+     edit_mode_t _edit_mode;
+-    Preferences* _prefs;
++    Preferences _prefs;
+     SubdivisionControlPoint* _active_control_point;
+     bool _file_changed;
+     SubdivisionSurface* _surface;
+@@ -140,13 +140,13 @@ private:
+     IntersectionVector _buttocks;
+     IntersectionVector _diagonals;
+     SubdivisionControlCurveVector _control_curves;
+-    Visibility* _vis;
++    Visibility _vis;
+     // Frame class
+     bool _filename_set;
+     bool _currently_moving;
+     bool _stop_asking_for_file_version;
+     // previous cursor position
+-    ProjectSettings* _settings;
++    ProjectSettings _settings;
+     HydrostaticCalcVector _calculations;
+     // undo objects
+     // delft resisttance
+diff --git a/ShipCADlib/subdivcontrolcurve.cpp b/ShipCADlib/subdivcontrolcurve.cpp
+index db8ef57..3e73c3c 100644
+--- a/ShipCADlib/subdivcontrolcurve.cpp
++++ b/ShipCADlib/subdivcontrolcurve.cpp
+@@ -425,6 +425,7 @@ SubdivisionControlCurveVector::SubdivisionControlCurveVector(bool owned)
+ 	// does nothing
+ }
+ 
++#if 0
+ struct CurvePred 
+ {
+ 	ShipCADGeometry::SubdivisionControlCurve* _querycurve;
+@@ -434,6 +435,7 @@ struct CurvePred
+ 		}
+ 	CurvePred(ShipCADGeometry::SubdivisionControlCurve* querycurve) : _querycurve(querycurve) {}
+ };
++#endif
+ 
+ SubdivisionControlCurveVector::~SubdivisionControlCurveVector()
+ {
+@@ -452,7 +454,7 @@ void SubdivisionControlCurveVector::clear()
+ bool SubdivisionControlCurveVector::del(SubdivisionControlCurve* elem)
+ {
+ 	bool removed = false;
+-    ccvec_iterator i = find_if(_vec.begin(), _vec.end(), CurvePred(elem));
++    ccvec_iterator i = find(_vec.begin(), _vec.end(), elem);
+ 	if (i != _vec.end()) {
+ 		if (_owned)
+ 			delete *i;
+diff --git a/ShipCADlib/subdivsurface.cpp b/ShipCADlib/subdivsurface.cpp
+index e722688..a317c74 100644
+--- a/ShipCADlib/subdivsurface.cpp
++++ b/ShipCADlib/subdivsurface.cpp
+@@ -228,7 +228,7 @@ void SubdivisionSurface::assembleFacesToPatches(vector<SubdivisionLayer*>& layer
+                                                 vector<SubdivisionFace*>& assembledPatches,
+                                                 size_t& nAssembled)
+ {
+-    // BUGBUG: not implemented
++    // TODO: not implemented
+ }
+ 
+ void SubdivisionSurface::calculateGaussCurvature()
+diff --git a/ShipCADlib/undoobject.cpp b/ShipCADlib/undoobject.cpp
+new file mode 100644
+index 0000000..a28402d
+--- /dev/null
++++ b/ShipCADlib/undoobject.cpp
+@@ -0,0 +1,54 @@
++/*##############################################################################################
++ *    ShipCAD																				   *
++ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
++ *    Original Copyright header below														   *
++ *																							   *
++ *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
++ *    open source surface-modelling program based on subdivision surfaces and intended for     *
++ *    designing ships.                                                                         *
++ *                                                                                             *
++ *    Copyright © 2005, by Martijn van Engeland                                                *
++ *    e-mail                  : Info@FREEship.org                                              *
++ *    FREE!ship project page  : https://sourceforge.net/projects/freeship                      *
++ *    FREE!ship homepage      : www.FREEship.org                                               *
++ *                                                                                             *
++ *    This program is free software; you can redistribute it and/or modify it under            *
++ *    the terms of the GNU General Public License as published by the                          *
++ *    Free Software Foundation; either version 2 of the License, or (at your option)           *
++ *    any later version.                                                                       *
++ *                                                                                             *
++ *    This program is distributed in the hope that it will be useful, but WITHOUT ANY          *
++ *    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A          *
++ *    PARTICULAR PURPOSE. See the GNU General Public License for more details.                 *
++ *                                                                                             *
++ *    You should have received a copy of the GNU General Public License along with             *
++ *    this program; if not, write to the Free Software Foundation, Inc.,                       *
++ *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
++ *                                                                                             *
++ *#############################################################################################*/
++
++#include "undoobject.h"
++
++using namespace ShipCADGeometry;
++using namespace std;
++
++UndoObject::UndoObject(ShipCAD* owner)
++    : _owner(owner)
++{
++    // does nothing
++}
++
++size_t UndoObject::getMemory()
++{
++    return sizeof(this) + _undo_text.size() + _filename.size() + _undo_data.size();
++}
++
++void UndoObject::accept()
++{
++    // TODO
++}
++
++void UndoObject::restore()
++{
++    // TODO
++}
+diff --git a/ShipCADlib/undoobject.h b/ShipCADlib/undoobject.h
+new file mode 100644
+index 0000000..07d926e
+--- /dev/null
++++ b/ShipCADlib/undoobject.h
+@@ -0,0 +1,83 @@
++/*##############################################################################################
++ *    ShipCAD																				   *
++ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
++ *    Original Copyright header below														   *
++ *																							   *
++ *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
++ *    open source surface-modelling program based on subdivision surfaces and intended for     *
++ *    designing ships.                                                                         *
++ *                                                                                             *
++ *    Copyright © 2005, by Martijn van Engeland                                                *
++ *    e-mail                  : Info@FREEship.org                                              *
++ *    FREE!ship project page  : https://sourceforge.net/projects/freeship                      *
++ *    FREE!ship homepage      : www.FREEship.org                                               *
++ *                                                                                             *
++ *    This program is free software; you can redistribute it and/or modify it under            *
++ *    the terms of the GNU General Public License as published by the                          *
++ *    Free Software Foundation; either version 2 of the License, or (at your option)           *
++ *    any later version.                                                                       *
++ *                                                                                             *
++ *    This program is distributed in the hope that it will be useful, but WITHOUT ANY          *
++ *    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A          *
++ *    PARTICULAR PURPOSE. See the GNU General Public License for more details.                 *
++ *                                                                                             *
++ *    You should have received a copy of the GNU General Public License along with             *
++ *    this program; if not, write to the Free Software Foundation, Inc.,                       *
++ *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
++ *                                                                                             *
++ *#############################################################################################*/
++
++#ifndef UNDOOBJECT_H_
++#define UNDOOBJECT_H_
++
++#include <QtCore>
++#include <QtGui>
++#include "filebuffer.h"
++
++namespace ShipCADGeometry {
++
++class ShipCAD;
++
++//////////////////////////////////////////////////////////////////////////////////////
++
++class UndoObject : public QObject
++{
++    Q_OBJECT
++public:
++
++    explicit UndoObject(ShipCAD* owner);
++    ~UndoObject() {}
++
++	size_t getMemory();
++	bool isTempRedoObj() {return _is_temp_redo_obj;}
++	QString getTime() {return _time.toString("hh:mm:ss.zzz");}
++	QString& getUndoText() {return _undo_text;}
++
++	void accept();
++	void restore();
++	
++signals:
++
++public slots:
++
++protected:
++
++private:
++
++	ShipCAD* _owner;
++	QString _undo_text;
++	FileBuffer _undo_data;
++	bool _file_changed;
++	bool _filename_set;
++	QString _filename;
++	edit_mode_t _edit_mode;
++	QTime _time;
++	bool _is_temp_redo_obj;
++};
++
++//////////////////////////////////////////////////////////////////////////////////////
++
++};				/* end namespace */
++
++#endif
++
+diff --git a/ShipCADlib/utility.cpp b/ShipCADlib/utility.cpp
+index dfd1f8a..ccc587f 100644
+--- a/ShipCADlib/utility.cpp
++++ b/ShipCADlib/utility.cpp
+@@ -30,6 +30,7 @@
+ #include <cmath>
+ #include <boost/math/constants/constants.hpp>
+ #include "utility.h"
++#include "shipcadlib.h"
+ 
+ using namespace std;
+ using namespace ShipCADGeometry;
+@@ -433,3 +434,18 @@ float ShipCADUtility::ReadFloatFromStr(size_t lineno, const QString& str, size_t
+     return result;
+ }
+ 
++float ShipCADUtility::FindWaterViscosity(float density,
++                                         ShipCADGeometry::ProjectSettings::unit_type_t units)
++{
++	float result;
++	double tmp_density;
++    if (units == ProjectSettings::fuMetric) {
++		result = 1.13902 + ((density - 0.999) / (1.0259-0.999))*(1.18831-1.13902);
++	} else {
++		tmp_density = density / kWeightConversionFactor;
++		result = 1.13902+((tmp_density-0.999)/(1.0259-0.999))*(1.18831-1.13902);
++		result /= (kFoot * kFoot);
++	}
++	return result;
++}
++
+diff --git a/ShipCADlib/utility.h b/ShipCADlib/utility.h
+index 59020d3..c073213 100644
+--- a/ShipCADlib/utility.h
++++ b/ShipCADlib/utility.h
+@@ -36,6 +36,7 @@
+ #include <QString>
+ #include "spline.h"
+ #include "plane.h"
++#include "projsettings.h"
+ 
+ namespace ShipCADUtility {
+ 
+@@ -103,6 +104,15 @@ extern int ReadIntFromStr(size_t lineno, const QString& str, size_t& start);
+ extern bool ReadBoolFromStr(size_t lineno, const QString& str, size_t& start);
+ extern float ReadFloatFromStr(size_t lineno, const QString& str, size_t& start);
+ 
++	/*! \brief find water viscocity based on density
++	 *
++	 * \param density the water density
++	 * \param units 
++	 * \returns the water viscocity
++	 */
++    extern float FindWaterViscosity(float density,
++                                    ShipCADGeometry::ProjectSettings::unit_type_t units);
++	
+ };
+ 
+ #endif
+diff --git a/ShipCADlib/version.cpp b/ShipCADlib/version.cpp
+index 24c36b5..87141c1 100644
+--- a/ShipCADlib/version.cpp
++++ b/ShipCADlib/version.cpp
+@@ -35,6 +35,16 @@ using namespace ShipCADGeometry;
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
++version_t ShipCADGeometry::fromInteger(int vint)
++{
++	return static_cast<version_t>(vint);
++}
++
++int ShipCADGeometry::toInt(version_t v)
++{
++	return static_cast<int>(v);
++}
++
+ QString ShipCADGeometry::versionString(version_t v)
+ {
+     if (v == fv100)
+diff --git a/ShipCADlib/version.h b/ShipCADlib/version.h
+index eff019f..f33dfc8 100644
+--- a/ShipCADlib/version.h
++++ b/ShipCADlib/version.h
+@@ -36,37 +36,41 @@ namespace ShipCADGeometry {
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
+-  enum version_t {
+-    fv100 = 1,
+-    fv110,
+-    fv120,
+-    fv130,
+-    fv140,
+-    fv150,
+-    fv160,
+-    fv165,
+-    fv170,
+-    fv180,
+-    fv190,
+-    fv191,
+-    fv195,
+-    fv198,
+-    fv200,
+-    fv201,
+-    fv210,
+-    fv220,
+-    fv230,
+-    fv240,
+-    fv250,
+-    fv260,
+-  };
++	enum version_t {
++		fv100 = 1,
++		fv110,
++		fv120,
++		fv130,
++		fv140,
++		fv150,
++		fv160,
++		fv165,
++		fv170,
++		fv180,
++		fv190,
++		fv191,
++		fv195,
++		fv198,
++		fv200,
++		fv201,
++		fv210,
++		fv220,
++		fv230,
++		fv240,
++		fv250,
++		fv260,
++	};
+ 
+-  const version_t k_current_version = fv260;
++	const version_t k_current_version = fv260;
+ 
+-  const QString k_released_date = QString("April 21, 2006");
++	const QString k_released_date = QString("April 21, 2006");
+ 
+-  extern QString versionString(version_t v);
++	extern QString versionString(version_t v);
+ 
++	extern version_t versionFromInt(int vint);
++
++	extern int versionToInt(version_t v);
++	
+ };				/* end namespace */
+ 
+ //////////////////////////////////////////////////////////////////////////////////////

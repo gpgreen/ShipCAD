@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['main_2ecpp',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['mainwindow_2ecpp',['mainwindow.cpp',['../mainwindow_8cpp.html',1,'']]],
-  ['mainwindow_2eh',['mainwindow.h',['../mainwindow_8h.html',1,'']]]
+  ['filebuffer_2ecpp',['filebuffer.cpp',['../filebuffer_8cpp.html',1,'']]],
+  ['filebuffer_2eh',['filebuffer.h',['../filebuffer_8h.html',1,'']]],
+  ['flowline_2eh',['flowline.h',['../flowline_8h.html',1,'']]]
 ];

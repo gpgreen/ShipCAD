@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['max',['Max',['../classShipCADGeometry_1_1Entity.html#a9b51589fe54df18ce1ca593de6e8bd1f',1,'ShipCADGeometry::Entity::Max()'],['../classShipCADGeometry_1_1SubdivisionControlFace.html#adb25745071d7a1f7b703c31f8518af41',1,'ShipCADGeometry::SubdivisionControlFace::Max()']]],
-  ['min',['Min',['../classShipCADGeometry_1_1Entity.html#a3bd95518fc98793471c03637679081a8',1,'ShipCADGeometry::Entity::Min()'],['../classShipCADGeometry_1_1SubdivisionControlFace.html#a34f00f0c4a50ea9124173c67041d9746',1,'ShipCADGeometry::SubdivisionControlFace::Min()']]]
+  ['max',['Max',['../classShipCAD_1_1Entity.html#a1ce317d1da352757209465baebce15f8',1,'ShipCAD::Entity::Max()'],['../classShipCAD_1_1SubdivisionControlFace.html#a256f4b52aa41d3140502ce70f98b1fe1',1,'ShipCAD::SubdivisionControlFace::Max()']]],
+  ['min',['Min',['../classShipCAD_1_1Entity.html#ac363c3a8e4d5553b98996d6114b6b148',1,'ShipCAD::Entity::Min()'],['../classShipCAD_1_1SubdivisionControlFace.html#a4d47101c36502d8c3c238af213698280',1,'ShipCAD::SubdivisionControlFace::Min()']]]
 ];

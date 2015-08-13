@@ -1,0 +1,161 @@
+\hypertarget{classShipCAD_1_1IntersectionVector}{\section{Ship\-C\-A\-D\-:\-:Intersection\-Vector Class Reference}
+\label{classShipCAD_1_1IntersectionVector}\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+}
+
+
+Vector class to contain \hyperlink{classShipCAD_1_1Intersection}{Intersection} pointers.  
+
+
+
+
+{\ttfamily \#include $<$intersection.\-h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\-::vector\\*
+$<$ \hyperlink{classShipCAD_1_1Intersection}{Intersection} $\ast$ $>$\-::iterator \hyperlink{classShipCAD_1_1IntersectionVector_a02685a86dd24a49a1664a07172d709ff}{ivec\-\_\-iterator}
+\item 
+typedef void \hyperlink{classShipCAD_1_1IntersectionVector_a15b8a08f6a1b232f9825c6cbbc0fa9a9}{apply\-\_\-fn} (\hyperlink{classShipCAD_1_1Intersection}{Intersection} $\ast$elem)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1IntersectionVector_a35136e558e5a0ec4059f5e051735d5fc}{Intersection\-Vector} ()
+\item 
+\hyperlink{classShipCAD_1_1IntersectionVector_a922662b04f581583d4ef4cd07bc82222}{$\sim$\-Intersection\-Vector} ()
+\item 
+void \hyperlink{classShipCAD_1_1IntersectionVector_afcee2220cc3d3fc2744a75ccdb2b2130}{clear} ()
+\item 
+size\-\_\-t \hyperlink{classShipCAD_1_1IntersectionVector_ae9d4002691a3a50b3f30b845e968a043}{size} ()
+\item 
+void \hyperlink{classShipCAD_1_1IntersectionVector_a4e0eaa374b7b33f5986aa3bbc0a610a3}{add} (\hyperlink{classShipCAD_1_1Intersection}{Intersection} $\ast$i)
+\item 
+void \hyperlink{classShipCAD_1_1IntersectionVector_a387b69c351ab2ad04f218b844c7bf0c4}{del} (\hyperlink{classShipCAD_1_1Intersection}{Intersection} $\ast$i)
+\item 
+void \hyperlink{classShipCAD_1_1IntersectionVector_a531723a46d937398221c94d0727b42b1}{apply} (\hyperlink{classShipCAD_1_1IntersectionVector_a15b8a08f6a1b232f9825c6cbbc0fa9a9}{apply\-\_\-fn} $\ast$fn)
+\item 
+\hyperlink{classShipCAD_1_1IntersectionVector_a02685a86dd24a49a1664a07172d709ff}{ivec\-\_\-iterator} \hyperlink{classShipCAD_1_1IntersectionVector_abab8d5c4cc1150b73094360c826abda9}{begin} ()
+\item 
+\hyperlink{classShipCAD_1_1IntersectionVector_a02685a86dd24a49a1664a07172d709ff}{ivec\-\_\-iterator} \hyperlink{classShipCAD_1_1IntersectionVector_a94cbd7900470502f5be601a39dd93333}{end} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Vector class to contain \hyperlink{classShipCAD_1_1Intersection}{Intersection} pointers. 
+
+
+
+Definition at line 107 of file intersection.\-h.
+
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classShipCAD_1_1IntersectionVector_a15b8a08f6a1b232f9825c6cbbc0fa9a9}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!apply\-\_\-fn@{apply\-\_\-fn}}
+\index{apply\-\_\-fn@{apply\-\_\-fn}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{apply\-\_\-fn}]{\setlength{\rightskip}{0pt plus 5cm}typedef void Ship\-C\-A\-D\-::\-Intersection\-Vector\-::apply\-\_\-fn({\bf Intersection} $\ast$elem)}}\label{classShipCAD_1_1IntersectionVector_a15b8a08f6a1b232f9825c6cbbc0fa9a9}
+
+
+Definition at line 123 of file intersection.\-h.
+
+\hypertarget{classShipCAD_1_1IntersectionVector_a02685a86dd24a49a1664a07172d709ff}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!ivec\-\_\-iterator@{ivec\-\_\-iterator}}
+\index{ivec\-\_\-iterator@{ivec\-\_\-iterator}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{ivec\-\_\-iterator}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<${\bf Intersection}$\ast$$>$\-::iterator {\bf Ship\-C\-A\-D\-::\-Intersection\-Vector\-::ivec\-\_\-iterator}}}\label{classShipCAD_1_1IntersectionVector_a02685a86dd24a49a1664a07172d709ff}
+
+
+Definition at line 111 of file intersection.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1IntersectionVector_a35136e558e5a0ec4059f5e051735d5fc}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!Intersection\-Vector@{Intersection\-Vector}}
+\index{Intersection\-Vector@{Intersection\-Vector}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{Intersection\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Intersection\-Vector\-::\-Intersection\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1IntersectionVector_a35136e558e5a0ec4059f5e051735d5fc}
+\hypertarget{classShipCAD_1_1IntersectionVector_a922662b04f581583d4ef4cd07bc82222}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!$\sim$\-Intersection\-Vector@{$\sim$\-Intersection\-Vector}}
+\index{$\sim$\-Intersection\-Vector@{$\sim$\-Intersection\-Vector}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{$\sim$\-Intersection\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Intersection\-Vector\-::$\sim$\-Intersection\-Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1IntersectionVector_a922662b04f581583d4ef4cd07bc82222}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1IntersectionVector_a4e0eaa374b7b33f5986aa3bbc0a610a3}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!add@{add}}
+\index{add@{add}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Intersection\-Vector\-::add (
+\begin{DoxyParamCaption}
+\item[{{\bf Intersection} $\ast$}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1IntersectionVector_a4e0eaa374b7b33f5986aa3bbc0a610a3}
+
+
+Definition at line 120 of file intersection.\-h.
+
+\hypertarget{classShipCAD_1_1IntersectionVector_a531723a46d937398221c94d0727b42b1}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!apply@{apply}}
+\index{apply@{apply}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Intersection\-Vector\-::apply (
+\begin{DoxyParamCaption}
+\item[{{\bf apply\-\_\-fn} $\ast$}]{fn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1IntersectionVector_a531723a46d937398221c94d0727b42b1}
+
+
+Definition at line 124 of file intersection.\-h.
+
+\hypertarget{classShipCAD_1_1IntersectionVector_abab8d5c4cc1150b73094360c826abda9}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!begin@{begin}}
+\index{begin@{begin}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ivec\-\_\-iterator} Ship\-C\-A\-D\-::\-Intersection\-Vector\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1IntersectionVector_abab8d5c4cc1150b73094360c826abda9}
+
+
+Definition at line 127 of file intersection.\-h.
+
+\hypertarget{classShipCAD_1_1IntersectionVector_afcee2220cc3d3fc2744a75ccdb2b2130}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!clear@{clear}}
+\index{clear@{clear}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Intersection\-Vector\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1IntersectionVector_afcee2220cc3d3fc2744a75ccdb2b2130}
+\hypertarget{classShipCAD_1_1IntersectionVector_a387b69c351ab2ad04f218b844c7bf0c4}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!del@{del}}
+\index{del@{del}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{del}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Intersection\-Vector\-::del (
+\begin{DoxyParamCaption}
+\item[{{\bf Intersection} $\ast$}]{i}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1IntersectionVector_a387b69c351ab2ad04f218b844c7bf0c4}
+\hypertarget{classShipCAD_1_1IntersectionVector_a94cbd7900470502f5be601a39dd93333}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!end@{end}}
+\index{end@{end}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ivec\-\_\-iterator} Ship\-C\-A\-D\-::\-Intersection\-Vector\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1IntersectionVector_a94cbd7900470502f5be601a39dd93333}
+
+
+Definition at line 128 of file intersection.\-h.
+
+\hypertarget{classShipCAD_1_1IntersectionVector_ae9d4002691a3a50b3f30b845e968a043}{\index{Ship\-C\-A\-D\-::\-Intersection\-Vector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}!size@{size}}
+\index{size@{size}!ShipCAD::IntersectionVector@{Ship\-C\-A\-D\-::\-Intersection\-Vector}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Intersection\-Vector\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1IntersectionVector_ae9d4002691a3a50b3f30b845e968a043}
+
+
+Definition at line 118 of file intersection.\-h.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{intersection_8h}{intersection.\-h}\end{DoxyCompactItemize}

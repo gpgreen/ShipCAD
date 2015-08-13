@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 164.835165
+%%BoundingBox: 0 0 500 227.272727
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,7 +19,7 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 3.033333 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 2.200000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
@@ -176,7 +176,7 @@ boxfont setfont
 (OpenGLWindow) cw
 (QWindow) cw
 (QOpenGLFunctions) cw
-(ShipCADGeometry::Viewport) cw
+(ShipCAD::Viewport) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -191,7 +191,7 @@ boundx scalefactor div boundy scalefactor div scale
  (OpenGLWindow) 0.500000 1.000000 box
  (QWindow) 0.000000 2.000000 box
  (QOpenGLFunctions) 1.000000 2.000000 box
- (ShipCADGeometry::Viewport) 0.500000 0.000000 box
+ (ShipCAD::Viewport) 0.500000 0.000000 box
 
 % ----- relations -----
 

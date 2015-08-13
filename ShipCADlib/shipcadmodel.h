@@ -31,6 +31,7 @@
 #define SHIPCADMODEL_H_
 
 #include <vector>
+#include <deque>
 #include <QtCore>
 #include <QtGui>
 #include "shipcadlib.h"
@@ -53,7 +54,8 @@ class SubdivisionFace;
 class SubdivisionSurface;
 class SubdivisionLayer;
 class Viewport;
-
+class UndoObject;
+	
 //////////////////////////////////////////////////////////////////////////////////////
 
 class ShipCADModel : public QObject
@@ -78,7 +80,31 @@ public:
     IntersectionVector& getDiagonals() {return _diagonals;}
     SubdivisionControlCurveVector& getControlCurves() {return _control_curves;}
     Flowline* getFlowline(size_t index);
+
+	edit_mode_t getEditMode() {return _edit_mode;}
+	void setEditMode(edit_mode_t mode);
+
+	/*! \brief name of file
+	 *
+	 * \return the file name
+	 */
     QString getFilename();
+	/*! \brief set the name of the file
+	 *
+	 * \param name name of the file
+	 */
+	void setFilename(const QString& name);
+	/*! \brief get flag for filename set
+	 *
+	 * \return true if filename has been set
+	 */
+	bool isFilenameSet();
+	/*! \brief set flag for filename set
+	 *
+	 * \param set new flag for filename set
+	 */
+	void setFilenameSet(bool flag);
+	
     HydrostaticCalcVector& getHydrostaticCalculations() {return _calculations;}
     size_t getNumberOfLayers();
     SubdivisionLayer* getLayer(size_t index);
@@ -100,9 +126,75 @@ public:
 
     SubdivisionSurface* getSurface();
 
+	/*! \brief file changed flag
+	 *
+	 * \return true if file changed
+	 */
+	bool isFileChanged() {return _file_changed;}	
+	/*! \brief set file changed flag
+	 *
+	 * \param changed new value for flag
+	 */
 	void setFileChanged(bool changed);
 
 	size_t numberOfHydrostaticCalculation();
+
+	// undo
+	/*! \brief add undo object
+	 *
+	 * \param new undo object
+	 */
+	void addUndoObject(UndoObject* newundo);
+	/*! \brief get undo object at index
+	 *
+	 * \param index of undo object
+	 * \return the undo object at index
+	 * \throws range_error
+	 */
+	UndoObject* getUndoObject(size_t index);
+	/*! \brief get undo object at index
+	 *
+	 * \param index of undo object
+	 * \return the undo object at index
+	 * \throws invalid_argument
+	 */
+	void deleteUndoObject(UndoObject* deleted);
+	/*! \brief number of undo objects
+	 *
+	 * \return number of undo objects
+	 */
+	size_t undoCount() {return _undo_list.size();}
+	/*! \brief current undo index position
+	 *
+	 * \return current undo index position
+	 */
+	size_t undoPosition() {return _undo_pos;}
+	/*! \brief previous undo index position
+	 *
+	 * \return previous undo index position
+	 */
+	size_t prevUndoPosition() {return _prev_undo_pos;}
+	/*! \brief set undo index position
+	 *
+	 * \param new index in undo list
+	 * \throws range_error
+	 */
+	void setUndoPosition(size_t index);
+	/*! \brief set previous undo index position
+	 *
+	 * \param new prev undo index
+	 * \throws range_error
+	 */
+	void setPrevUndoPosition(size_t index);
+	/*! \brief get amount of memory used for undo
+	 *
+	 * \return memory used in mb
+	 */
+	size_t getUndoMemory();
+
+	/*! \brief redraw the model
+	 */
+	void redraw();
 	
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);
@@ -154,6 +246,9 @@ private:
     // delft resistance
     // kaper resistance
     HydrostaticCalc* _design_hydrostatics;
+	size_t _undo_pos;
+	size_t _prev_undo_pos;
+	std::deque<UndoObject*> _undo_list;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

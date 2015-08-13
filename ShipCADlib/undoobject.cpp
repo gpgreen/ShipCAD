@@ -28,12 +28,15 @@
  *#############################################################################################*/
 
 #include "undoobject.h"
+#include "shipcadmodel.h"
 
 using namespace ShipCAD;
 using namespace std;
 
-UndoObject::UndoObject(ShipCAD* owner)
-    : _owner(owner)
+UndoObject::UndoObject(ShipCADModel* owner)
+    : _owner(owner), _file_changed(false), _filename_set(false),
+      _edit_mode(), _time(QTime::currentTime()),
+      _is_temp_redo_obj(false)
 {
     // does nothing
 }
@@ -43,12 +46,42 @@ size_t UndoObject::getMemory()
     return sizeof(this) + _undo_text.size() + _filename.size() + _undo_data.size();
 }
 
+// TODO this should be in the ship model object, not here
 void UndoObject::accept()
 {
-    // TODO
+    if (_owner->undoCount() > 0) {
+        UndoObject* last = _owner->getUndoObject(_owner->undoCount() - 1);
+        if (last->isTempRedoObj()) {
+            _owner->deleteUndoObject(last);
+            delete last;
+        }
+    }
+    // delete all undo objects after the current one
+    for (size_t i=_owner->undoCount(); i>_owner->undoPosition()+1; i--) {
+        UndoObject* last = _owner->getUndoObject(i-1);
+        _owner->deleteUndoObject(last);
+        delete last;
+    }
+    _owner->addUndoObject(this);
+    _owner->setUndoPosition(_owner->undoCount());
+    // remove objects from the front of the list until memory is within limits or we have 2 items
+    while (_owner->undoCount() > 2 &&
+           (_owner->getUndoMemory() / (1024*1024)) > _owner->getPreferences().getMaxUndoMemory()) {
+        UndoObject* first = _owner->getUndoObject(0);
+        _owner->deleteUndoObject(first);
+        delete first;
+        _owner->setUndoPosition(_owner->undoPosition()-1);
+        _owner->setPrevUndoPosition(_owner->prevUndoPosition()-1);
+    }
 }
 
+// TODO this should be in the ship model object, not here
 void UndoObject::restore()
 {
-    // TODO
+    _owner->loadBinary(_undo_data);
+	_owner->setFileChanged(_file_changed);
+	_owner->setFilename(_filename);
+	_owner->setEditMode(_edit_mode);
+	_owner->setFilenameSet(_filename_set);
+	_owner->redraw();
 }

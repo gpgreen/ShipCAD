@@ -29,3 +29,7 @@
 
 #include "shipcadlib.h"
 
+using namespace ShipCAD;
+
+const char* kFileExtension = ".fbm";
+

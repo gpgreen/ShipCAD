@@ -34,48 +34,61 @@ namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-const float kFoot = 0.3048;
-const float kLbs = 0.4535924;
+const float kFoot = 0.3048f;
+const float kLbs = 0.4535924f;
 const float kWeightConversionFactor = (1000/kLbs)/((1/kFoot)*(1/kFoot)*(1/kFoot));
 const int kIncrementSize = 25;
 const int kDecimals = 4;
 const int kPixelCountMax = 32768;
-const float kZBufferScaleFactor = 1.004;
-const float kZoomfactor = 1.02;
+const float kZBufferScaleFactor = 1.004f;
+const float kZoomfactor = 1.02f;
 const int FileBufferBlockSize = 4096;
 
+extern const char* kFileExtension;
+	
 //////////////////////////////////////////////////////////////////////////////////////
 
 enum viewport_mode_t {
-    vmWireFrame,
+    vmWireFrame = 0,
     vmShade,
     vmShadeGauss,
     vmShadeDevelopable,
-    vmShadeZebra
+    vmShadeZebra,
 };
+
 enum viewport_type_t {
-    fvBodyplan, fvProfile, fvPlan, fvPerspective
+    fvBodyplan = 0,
+    fvProfile,
+    fvPlan,
+    fvPerspective,
 };
+
 enum camera_type_t {
-  ftWide, ftStandard, ftShortTele, ftMediumTele, ftFarTele
+    ftWide = 0,
+    ftStandard,
+    ftShortTele,
+    ftMediumTele,
+    ftFarTele,
 };
 
 enum HydrostaticType {
-    fhShort,
+    fhShort = 0,
     fhExtensive,
 };
 
 enum HydrostaticsMode {
+    fhSingleCalculation = 0,
+    fhMultipleCalculations,
 };
 
 enum HydrostaticError {
-    feNothingSubmerged,
+    feNothingSubmerged = 0,
     feMakingWater,
     feNotEnoughBuoyance,
 };
 
 enum HydrostaticsCalculation {
-    hcAll,
+    hcAll = 0,
     hcVolume,
     hcMainframe,
     hcWaterline,
@@ -98,39 +111,39 @@ enum unit_type_t {
 
 enum hydrostatic_coeff_t {
     fcProjectSettings = 0,
-    fcActualData
+    fcActualData,
 };
 
 enum precision_t {
-    fpLow,
+    fpLow = 0,
     fpMedium,
     fpHigh,
     fpVeryHigh,
 };
 
 enum edit_mode_t {
-    emSelectItems,
+    emSelectItems = 0,
 };
 
 enum vertex_type_t {
-    svRegular=0,			/**< a regular point, no crease edges */
+    svRegular = 0,			/**< a regular point, no crease edges */
     svCrease,				/**< crease point, exactly 2 crease edges */
     svDart,					/**< dart point, exactly 1 crease edge */
     svCorner				/**< corner point that has more than 2 crease edges */
 };
 
 enum subdiv_mode_t {
-    fmQuadTriangle,
-    fmCatmullClark
+    fmQuadTriangle = 0,
+    fmCatmullClark,
 };
 
 enum assemble_mode_t {
-    amRegular,
-    amNURBS
+    amRegular = 0,
+    amNURBS,
 };
 
 enum model_view_t {
-    mvPort=0,
+    mvPort = 0,
     mvBoth,
 };
 

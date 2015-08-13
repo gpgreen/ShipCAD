@@ -448,3 +448,17 @@ float ShipCAD::FindWaterViscosity(float density, unit_type_t units)
 	return result;
 }
 
+QString ShipCAD::ChangeFileExt(const QString& name, const QString& ext)
+{
+	QString fname = name;
+	int lasti = name.lastIndexOf(".");
+	if (lasti == -1) {
+		fname.append(ext);
+	} else {
+		fname.replace(lasti, name.length() - lasti, ext);
+	}
+	return fname;
+}
+
+
+	

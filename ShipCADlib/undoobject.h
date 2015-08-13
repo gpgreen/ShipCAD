@@ -33,11 +33,11 @@
 #include <QtCore>
 #include <QtGui>
 #include "filebuffer.h"
-#include "shipcadmodel.h"
+#include "shipcadlib.h"
 
 namespace ShipCAD {
 
-class ShipCAD;
+class ShipCADModel;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,7 +46,7 @@ class UndoObject : public QObject
     Q_OBJECT
 public:
 
-    explicit UndoObject(ShipCAD* owner);
+    explicit UndoObject(ShipCADModel* owner);
     ~UndoObject() {}
 
 	size_t getMemory();
@@ -57,15 +57,13 @@ public:
 	void accept();
 	void restore();
 	
-signals:
-
 public slots:
 
 protected:
 
 private:
 
-	ShipCAD* _owner;
+	ShipCADModel* _owner;
 	QString _undo_text;
 	FileBuffer _undo_data;
 	bool _file_changed;

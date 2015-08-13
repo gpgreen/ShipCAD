@@ -27,16 +27,21 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <stdexcept>
 #include "shipcadmodel.h"
 #include "filebuffer.h"
 #include "subdivsurface.h"
+#include "undoobject.h"
+#include "utility.h"
 
+using namespace std;
 using namespace ShipCAD;
 
 ShipCADModel::ShipCADModel()
-	: _prefs(this), _control_curves(true), // control curves are memory managed here
-	  _vis(this), _settings(this)
+	: _prefs(this), _file_changed(false), _control_curves(true), // control curves are memory managed here
+	  _vis(this), _filename_set(false), _settings(this), _undo_pos(0), _prev_undo_pos(0)
 {
+	// set filename from userstring
 	clear();
 }
 
@@ -49,12 +54,84 @@ void ShipCADModel::clear()
 {
 }
 
+void ShipCADModel::setEditMode(edit_mode_t mode)
+{
+	if (mode != _edit_mode) {
+		_edit_mode = mode;
+		redraw();
+	}
+}
+
 void ShipCADModel::setFileChanged(bool set)
 {
 	if (set != _file_changed) {
 		_file_changed = set;
 		emit onFileChanged();
 	}
+}
+
+QString ShipCADModel::getFilename()
+{
+	if (_filename == "") {
+		// return userstring
+	}
+	return ChangeFileExt(_filename, kFileExtension);
+}
+
+void ShipCADModel::setFilename(const QString& name)
+{
+	QString tmp;
+	if (name == "") {
+		// set from userstring
+	}
+	tmp = ChangeFileExt(name, kFileExtension);
+	if (_filename != tmp)
+		_filename = tmp;
+}
+
+void ShipCADModel::addUndoObject(UndoObject* newundo)
+{
+	_undo_list.push_back(newundo);
+	emit updateUndoData();
+}
+
+UndoObject* ShipCADModel::getUndoObject(size_t index)
+{
+	if (index >= _undo_list.size())
+		throw range_error("get undo obj");
+	return _undo_list[index];
+}
+
+void ShipCADModel::deleteUndoObject(UndoObject* deleted)
+{
+	std::deque<UndoObject*>::iterator i = find(_undo_list.begin(), _undo_list.end(), deleted);
+	if (i != _undo_list.end())
+		_undo_list.erase(i);
+	else
+		throw invalid_argument("delete undo obj");
+	emit updateUndoData();
+}
+
+void ShipCADModel::setUndoPosition(size_t index)
+{
+	if (index >= _undo_list.size())
+		throw range_error("set undo pos");
+	_undo_pos = index;
+}
+
+void ShipCADModel::setPrevUndoPosition(size_t index)
+{
+	if (index >= _undo_list.size())
+		throw range_error("set prev undo pos");
+	_prev_undo_pos = index;
+}
+
+size_t ShipCADModel::getUndoMemory()
+{
+	size_t mem_used = 0;
+	for (size_t i=0; i<_undo_list.size(); i++)
+		mem_used += _undo_list[i]->getMemory();
+	return mem_used;
 }
 
 void ShipCADModel::loadBinary(FileBuffer& source)

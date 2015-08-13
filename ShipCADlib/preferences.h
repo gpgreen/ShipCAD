@@ -61,6 +61,12 @@ public:
     void resetColors();
     void save();
 
+	/*! \brief get maximum amount of undo memory
+	 *
+	 * \return max amount of undo memory in mb
+	 */
+	size_t getMaxUndoMemory() {return _max_undo_memory;}
+	
     QColor getStationColor() {return _station_color;}
     QColor getButtockColor() {return _buttock_color;}
     QColor getWaterlineColor() {return _waterline_color;}
@@ -105,7 +111,7 @@ private:
     QString _import_directory;
     QString _export_directory;
     QString _lang_file;
-    int _max_undo_memory;
+    size_t _max_undo_memory;
 
 };
 

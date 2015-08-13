@@ -111,7 +111,19 @@ extern float ReadFloatFromStr(size_t lineno, const QString& str, size_t& start);
  * \returns the water viscosity
  */
 extern float FindWaterViscosity(float density, unit_type_t units);
-	
+
+/*! \brief Append or change the file extension to that given
+ *
+ * The extension is the last . (dot) in the filename and all trailing
+ * characters. This function replaces these characters with the specified
+ * extension, or if there is no dot in the name, appends the extension
+ *
+ * \param name name of file
+ * \param ext extension to add to filename (including starting .)
+ * \return the filename with extension
+ */
+extern QString ChangeFileExt(const QString& name, const QString& ext);
+
 };
 
 #endif

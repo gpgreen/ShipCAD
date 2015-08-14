@@ -57,6 +57,7 @@ public:
 	void setAppendageCoefficient(float coeff);
 	void setBeam(float beam);
 	void setDraft(float draft);
+	void getLength() {return _length;}
 	void setLength(float length);
 	void setMainframeLocation(float loc);
 	void setWaterDensity(float val);

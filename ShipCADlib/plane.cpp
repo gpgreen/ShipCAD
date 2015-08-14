@@ -46,6 +46,14 @@ Plane::Plane(float a, float b, float c, float d)
     _vars[3] = d;
 }
 
+Plane::Plane(const QVector3D& p, const QVector3D& normal)
+{
+	_vars[0] = normal.x();
+	_vars[1] = normal.y();
+	_vars[2] = normal.z();
+	_vars[3] = -p.x() * _vars[0] - p.y() * _vars[1] - p.z() * _vars[2];
+}
+
 Plane::Plane(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
 {
   // calculate normal

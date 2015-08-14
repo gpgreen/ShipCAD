@@ -195,6 +195,12 @@ public:
 	/*! \brief redraw the model
 	 */
 	void redraw();
+
+	/*! \brief ...
+	 *
+	 * \return
+	 */
+	float findLowestHydrostaticsPoint();
 	
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);

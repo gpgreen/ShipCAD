@@ -41,6 +41,7 @@ class Plane
 public:
     explicit Plane();
     explicit Plane(float a, float b, float c, float d);
+	explicit Plane(const QVector3D& p, const QVector3D& normal);
     explicit Plane(const QVector3D& p1,
 		   const QVector3D& p2,
 		   const QVector3D& p3);

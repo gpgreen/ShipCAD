@@ -103,7 +103,7 @@ public:
 	
 	void clear();
 
-	const QString& getErrorString();
+	QString getErrorString();
 	float getTrimAngle();
 	Plane& getWlPlane();
 	void setCalculated(bool calc);

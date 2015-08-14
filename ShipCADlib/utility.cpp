@@ -164,6 +164,11 @@ QVector3D ShipCAD::UnifiedNormal(const QVector3D& p1, const QVector3D& p2, const
 
 }
 
+extern float ShipCAD::DegToRad(float deg)
+{
+    return deg * pi / 180.0;
+}
+
 extern float ShipCAD::RadToDeg(float rad)
 {
     return rad * 180.0 / pi;

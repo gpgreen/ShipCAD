@@ -67,7 +67,7 @@ void Intersection::clear()
     for (size_t i=0; i<_items.size(); i++)
         delete _items[i];
     _items.clear();
-    _build = false;
+    setBuild(false);
     _show_curvature = false;
     _use_hydrostatic_surfaces_only = false;
 }
@@ -76,7 +76,7 @@ void Intersection::setBuild(bool val)
 {
     if (val)
         clear();
-    _build = val;
+	Entity::setBuild(val);
 }
 
 QColor Intersection::getColor()
@@ -114,7 +114,7 @@ void Intersection::draw(Viewport& vp, LineShader* lineshader)
 
 void Intersection::rebuild()
 {
-    _build = false;
+    setBuild(false);
     _owner->getSurface()->intersectPlane(_plane, _use_hydrostatic_surfaces_only, _items);
     // use a low simplification factor to remove only points that are (nearly) on a line
     if (_owner->getProjectSettings().getSimplifyIntersections()) {

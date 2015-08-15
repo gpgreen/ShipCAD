@@ -1480,7 +1480,7 @@ struct SurfIntersectionData
 
 void SubdivisionSurface::calculateIntersections(const Plane& plane,
                                                 vector<SubdivisionControlFace*>& faces,
-                                                vector<Spline*>& destination)
+                                                SplineVector& destination)
 {
     SubdivisionControlFace* ctrlface;
     SubdivisionFace* face, *f2;
@@ -1614,7 +1614,7 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
     while (segments.size() > 0) {
         if (spline == 0) {
             spline = new Spline();
-            destination.push_back(spline);
+            destination.add(spline);
             segment = segments.back();
             spline->add(segment.first.point);
             spline->setKnuckle(0, segment.first.knuckle);
@@ -1728,12 +1728,11 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
         JoinSplineSegments(0.01f, false, destination);
         for (size_t i=destination.size(); i>=1; --i) {
             // remove tiny fragments of very small length
-            spline = destination[i-1];
+            spline = destination.get(i-1);
             if (spline->numberOfPoints()>1) {
                 float parameter = SquaredDistPP(spline->getMin(), spline->getMax());
                 if (parameter < 1E-3) {
-                    delete spline;
-                    destination.erase(destination.begin()+i-1);
+                    destination.del(spline);
                 }
             }
         }
@@ -2135,7 +2134,7 @@ void SubdivisionSurface::initialize(size_t point_start, size_t edge_start)
     _initialized = true;
 }
 
-bool SubdivisionSurface::intersectPlane(const Plane& plane, bool hydrostatics_layers_only, vector<Spline*>& destination)
+bool SubdivisionSurface::intersectPlane(const Plane& plane, bool hydrostatics_layers_only, SplineVector& destination)
 {
     QVector3D min, max;
     bool result = false;

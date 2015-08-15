@@ -38,6 +38,7 @@
 #include <boost/pool/pool.hpp>
 #include "shipcadlib.h"
 #include "plane.h"
+#include "spline.h"
 
 namespace ShipCAD {
 
@@ -54,7 +55,6 @@ class SubdivisionControlCurve;
 class SubdivisionLayer;
 class Viewport;
 class FileBuffer;
-class Spline;
 
 extern bool g_surface_verbose;
 
@@ -98,7 +98,7 @@ public:
 		      const QVector3D& direction);
     void calculateIntersections(const Plane& plane,
                                 std::vector<SubdivisionControlFace*>& faces,
-                                std::vector<Spline*>& destination);
+                                SplineVector& destination);
     void extractAllEdgeLoops(std::vector<std::vector<SubdivisionPoint*> >& destination);
     void extractPointsFromFaces(std::vector<SubdivisionFace*>& selectedfaces,
                                 std::vector<SubdivisionControlPoint*>& points,
@@ -106,7 +106,7 @@ public:
     void extractPointsFromSelection(std::vector<SubdivisionControlPoint*>& selectedpoints,
                                     size_t& lockedpoints);
     void importGrid(coordinate_grid_t& points, SubdivisionLayer* layer);
-    bool intersectPlane(const Plane& plane, bool hydrostatics_layers_only, std::vector<Spline*>& destination);
+    bool intersectPlane(const Plane& plane, bool hydrostatics_layers_only, SplineVector& destination);
     void insertPlane(const Plane& plane, bool add_curves);
     void subdivide();
     void selectionDelete();

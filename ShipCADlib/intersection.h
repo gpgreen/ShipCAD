@@ -36,6 +36,8 @@
 #include "shipcadlib.h"
 #include "entity.h"
 #include "plane.h"
+#include "pointervec.h"
+#include "spline.h"
 
 namespace ShipCAD {
 
@@ -45,7 +47,6 @@ class ShipCADModel;
 class Viewport;
 class LineShader;
 class FileBuffer;
-class Spline;
 
 /*! \brief List of curves intersecting hull
  *
@@ -73,17 +74,14 @@ public:
     QColor getColor();
     Plane getPlane() {return _plane;}
     void setPlane(const Plane& pln);
-    size_t getCount() {return _items.size();}
-    Spline* getItem(size_t index);
     QString getDescription();
     intersection_type_t getIntersectionType();
     void setIntersectionType(intersection_type_t set);
     bool useHydrostaticsSurfacesOnly();
     void setUseHydrostaticsSurfacesOnly(bool set);
 
-    size_t numberOfSplines();
-    Spline* getSpline(size_t index);
-    void add(Spline* sp);
+    SplineVector& getSplines();
+
     void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
     void createStarboardPart();
     void deleteItem(Spline* item);
@@ -102,42 +100,14 @@ protected:
 private:
 
     ShipCADModel* _owner;
-    std::vector<Spline*> _items;
+    SplineVector _items;
     intersection_type_t _intersection_type;
     Plane _plane;
     bool _show_curvature;
     bool _use_hydrostatic_surfaces_only;
 };
 
-/*! \brief Vector class to contain Intersection pointers
- *
- */
-class IntersectionVector
-{
-public:
-
-    typedef std::vector<Intersection*>::iterator ivec_iterator ;
-
-    IntersectionVector();
-    ~IntersectionVector();
-
-    void clear();
-
-    size_t size() {return _vec.size();}
-
-    void add(Intersection* i) {_vec.push_back(i);}
-    void del(Intersection* i);
-
-    typedef void apply_fn(Intersection* elem);
-    void apply(apply_fn* fn)
-      {std::for_each(_vec.begin(), _vec.end(), fn);}
-
-    ivec_iterator begin() {return _vec.begin();}
-    ivec_iterator end() {return _vec.end();}
-
-private:
-    std::vector<Intersection*> _vec;
-};
+typedef PointerVector<Intersection> IntersectionVector;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

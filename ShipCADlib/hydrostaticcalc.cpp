@@ -72,9 +72,10 @@ void CrosscurvesData::clear()
 
 HydrostaticCalc::HydrostaticCalc(ShipCADModel* owner)
 	: _owner(owner), _heeling_angle(0.0), _trim(0.0),
-	  _draft(0.0), _calculated(false), _hydrostatic_type(),
-	  _mainframe(0)
+      _draft(0.0), _calculated(false), _hydrostatic_type(fhShort),
+      _mainframe(Intersection::construct(owner))
 {
+    // does nothing
 }
 
 HydrostaticCalc::~HydrostaticCalc()
@@ -340,12 +341,6 @@ static void CalculateMinMaxData(MinMaxData& mmd, ShipCADModel* owner,
 	}
 }
 
-struct TrimData
-{
-	float trim;
-	float lcb;
-};
-
 struct DraftData
 {
 	float draft;
@@ -355,17 +350,21 @@ struct DraftData
 bool HydrostaticCalc::balance(float displacement, bool freetotrim,
                               CrosscurvesData& output)
 {
-    bool result;
+    if (displacement == 0)
+        return true;
+
+    bool result = false;
 	int max_iterations = 25;
     float max_error = 5e-4f;
     float max_trim_error = 1e-4f;
-	int trim_iteration;
+    int trim_iteration = 0;
 	int displ_iteration;
 	float cos_heel;
 	float sin_heel;
 	float cos_trim;
 	float sin_trim;
-	float error, trim_error;
+    float error = 0;
+    float trim_error = 0;
     float error_difference;
 	float prev_error;
 	Plane wlplane;
@@ -377,13 +376,7 @@ bool HydrostaticCalc::balance(float displacement, bool freetotrim,
 	mmd.calculated = false;
     output.clear();
 
-    if (displacement == 0)
-		return true;
-	result = false;
-	error = 0;
-	trim_iteration = 0;
-	trim_error = 0;
-	do {
+    do {
 		trim_iteration++;
 		cos_heel = cos(DegToRad(-_heeling_angle));
 		sin_heel = sin(DegToRad(-_heeling_angle));
@@ -732,6 +725,7 @@ void HydrostaticCalc::calculate()
         }
     }
 
+    // setup volume calculation using our waterline plane
 	VolumeCalc vc(getWlPlane(), this);
 	vc.run();
 	
@@ -742,8 +736,8 @@ void HydrostaticCalc::calculate()
 
     QVector2D tmpp2d;
 
+    // calculate mainframe properties
     if (_data.volume > 0 && _errors.size() == 0 && (hasCalculation(hcMainframe) || hasCalculation(hcAll))) {
-        // calculate mainframe properties
         _mainframe->setIntersectionType(fiStation);
         _mainframe->setUseHydrostaticsSurfacesOnly(true);
         _mainframe->setPlane(Plane(1,0,0,ps.getMainframeLocation()));
@@ -758,8 +752,8 @@ void HydrostaticCalc::calculate()
         }
     }
 
+    // calculate waterline properties
     if (_data.volume > 0 && _errors.size() == 0 && (hasCalculation(hcWaterline) or hasCalculation(hcAll))) {
-        // calculate waterline properties
         Intersection* waterplane = Intersection::construct(_owner);
         waterplane->setIntersectionType(fiWaterline);
         waterplane->setPlane(_data.waterline_plane);
@@ -767,8 +761,9 @@ void HydrostaticCalc::calculate()
         waterplane->rebuild();
         parameter = -1e6;
         _data.waterplane_entrance_angle = 0;
-        for (size_t j=0; j<waterplane->numberOfSplines(); j++) {
-            Spline* spline = waterplane->getSpline(j);
+        SplineVector& wpsplines = waterplane->getSplines();
+        for (size_t j=0; j<wpsplines.size(); j++) {
+            Spline* spline = wpsplines.get(j);
             // rotate all points back to a horizontal plane
             for (size_t k=0; k<spline->numberOfPoints(); k++) {
                 p1 = spline->getPoint(k);
@@ -794,6 +789,8 @@ void HydrostaticCalc::calculate()
         _data.km_transverse = _data.center_of_buoyancy.z() + _data.waterplane_mom_inertia.x() / _data.volume;
         _data.km_longitudinal = _data.center_of_buoyancy.z() + _data.waterplane_mom_inertia.y() / _data.volume;
     }
+
+    // calculate block and prismatic coefficients
     if (_draft != 0) {
         if (_data.waterplane_area * _draft != 0)
             _data.vert_prism_coefficient = _data.volume / (_data.waterplane_area * _draft);
@@ -813,15 +810,17 @@ void HydrostaticCalc::calculate()
                 _data.prism_coefficient = _data.volume / (_data.mainframe_area * ps.getLength());
         }
     }
+
+    // calculate sectional areas
     if (hasCalculation(hcSAC) || hasCalculation(hcAll)) {
-        // calculate sectional areas
         if (_owner->getStations().size()) {
             StationAreaCalculation sac(_data, _owner);
             for_each(_owner->getStations().begin(), _owner->getStations().end(), sac);
         }
     }
+
+    // calculate lateral area and center of gravity
     if (hasCalculation(hcLateralArea) || hasCalculation(hcAll)) {
-        // calculate lateral area and center of gravity
         Intersection* lateralplane = Intersection::construct(_owner);
         lateralplane->setIntersectionType(fiButtock);
         lateralplane->setUseHydrostaticsSurfacesOnly(true);
@@ -829,6 +828,8 @@ void HydrostaticCalc::calculate()
         lateralplane->calculateArea(_data.waterline_plane, &_data.lateral_area, &_data.lateral_cog, &tmpp2d);
         delete lateralplane;
     }
+
+    // all done!
     setCalculated(true);
 }
 

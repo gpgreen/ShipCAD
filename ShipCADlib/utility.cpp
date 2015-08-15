@@ -310,7 +310,7 @@ static float Minimum(float d1, float d2, float d3, float d4)
 // This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
 void ShipCAD::JoinSplineSegments(float join_error,
                                         bool force_to_one_segment,
-                                        vector<Spline*> list)
+                                        SplineVector& list)
 {
     bool fixedclosed;
     bool matchclosed;
@@ -318,7 +318,7 @@ void ShipCAD::JoinSplineSegments(float join_error,
     // remove any single line segments
     size_t i = 1;
     while (i < list.size()) {
-        Spline* fixed = list[i-1];
+        Spline* fixed = list.get(i-1);
         if (fixed->numberOfPoints() > 1) {
             fixedclosed = fixed->getPoint(0).distanceToPoint(fixed->getPoint(fixed->numberOfPoints()-1)) < 1E-5;
         }
@@ -331,7 +331,7 @@ void ShipCAD::JoinSplineSegments(float join_error,
             for (size_t j=1; j<=list.size(); ++j) {
                 if (i == j)
                     continue;
-                match = list[j-1];
+                match = list.get(j-1);
                 if (match->numberOfPoints() > 1)
                     matchclosed = match->getPoint(0).distanceToPoint(match->getPoint(match->numberOfPoints()-1)) < 1E-5;
                 else
@@ -371,8 +371,7 @@ void ShipCAD::JoinSplineSegments(float join_error,
                     else
                         throw runtime_error("Error in comparing minimum values JoinSplineSegments");
                     // destroy the matching spline
-                    list.erase(list.begin()+matchindex-1);
-                    delete match;
+                    list.del(match);
                     i = 0;  // reset match index to start searching for a new matching spline
                 }
             }

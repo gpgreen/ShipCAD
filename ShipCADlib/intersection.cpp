@@ -46,7 +46,7 @@ using namespace std;
 using namespace ShipCAD;
 
 Intersection::Intersection(ShipCADModel* owner)
-    : _owner(owner)
+    : _owner(owner), _items(true)
 {
     clear();
 }
@@ -64,8 +64,7 @@ Intersection* Intersection::construct(ShipCADModel *owner)
 
 void Intersection::clear()
 {
-    for (size_t i=0; i<_items.size(); i++)
-        delete _items[i];
+    // clear method deletes all memory for splines
     _items.clear();
     setBuild(false);
     _show_curvature = false;
@@ -94,12 +93,23 @@ QColor Intersection::getColor()
     return Qt::white;
 }
 
+struct SplineExtents
+{
+    QVector3D& _min;
+    QVector3D& _max;
+    SplineExtents(QVector3D& min, QVector3D& max)
+        : _min(min), _max(max) {}
+    void operator ()(Spline *s) {
+        s->extents(_min, _max);
+    }
+};
+
 void Intersection::extents(QVector3D& min, QVector3D& max)
 {
     if (!_build)
         rebuild();
-    for (size_t i=0; i<_items.size(); i++)
-        _items[i]->extents(min, max);
+    SplineExtents se(min, max);
+    for_each(_items.begin(), _items.end(), se);
 }
 
 QString Intersection::getDescription()
@@ -112,21 +122,20 @@ void Intersection::draw(Viewport& vp, LineShader* lineshader)
     // TODO
 }
 
+static void Simplify(Spline* s)
+{
+    s->simplify(2.0);
+}
+
 void Intersection::rebuild()
 {
     setBuild(false);
     _owner->getSurface()->intersectPlane(_plane, _use_hydrostatic_surfaces_only, _items);
     // use a low simplification factor to remove only points that are (nearly) on a line
     if (_owner->getProjectSettings().getSimplifyIntersections()) {
-        for (size_t i=0; i<_items.size(); i++)
-            _items[i]->simplify(2.0);
+        _items.apply(Simplify);
     }
     _build = true;
-}
-
-void Intersection::add(Spline* sp)
-{
-    _items.push_back(sp);
 }
 
 void Intersection::calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia)
@@ -141,11 +150,7 @@ void Intersection::createStarboardPart()
 
 void Intersection::deleteItem(Spline* item)
 {
-    vector<Spline*>::iterator i = find(_items.begin(), _items.end(), item);
-    if (i == _items.end())
-        return;
-    delete *i;
-    _items.erase(i);
+    _items.del(item);
 }
 
 void Intersection::loadBinary(FileBuffer& source)
@@ -164,7 +169,7 @@ void Intersection::loadBinary(FileBuffer& source)
     source.load(n);
     for (i=0; i<n; i++) {
         Spline* sp = new Spline();
-        _items.push_back(sp);
+        _items.add(sp);
         // read number of points for this spline
         size_t m;
         source.load(m);
@@ -212,7 +217,7 @@ void Intersection::saveBinary(FileBuffer& dest)
     dest.add(_build);
     dest.add(_items.size());
     for (size_t i=0; i<_items.size(); i++) {
-        Spline* sp = _items[i];
+        Spline* sp = _items.get(i);
         dest.add(sp->numberOfPoints());
         for (size_t j=0; j<sp->numberOfPoints(); j++) {
             QVector3D p = sp->getPoint(j);

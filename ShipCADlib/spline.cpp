@@ -42,9 +42,6 @@
 using namespace ShipCAD;
 using namespace std;
 
-static QVector3D ZERO = QVector3D();
-static QVector3D ONE = QVector3D(1,1,1);
-
 //////////////////////////////////////////////////////////////////////////////////////
 
 Spline::Spline()

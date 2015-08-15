@@ -37,6 +37,7 @@
 #include <QColor>
 #include <QString>
 #include "entity.h"
+#include "pointervec.h"
 
 namespace ShipCAD {
 
@@ -139,6 +140,8 @@ protected:
     std::vector<float> _parameters;
     std::vector<QVector3D> _derivatives;
 };
+
+typedef PointerVector<Spline> SplineVector;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

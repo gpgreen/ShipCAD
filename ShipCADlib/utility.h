@@ -100,7 +100,7 @@ extern QString BoolToStr(bool val);
 
 // This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
 extern void JoinSplineSegments(float join_error, bool force_to_one_segment,
-                               std::vector<Spline*> list);
+                               SplineVector& list);
 
 extern int ReadIntFromStr(size_t lineno, const QString& str, size_t& start);
 extern bool ReadBoolFromStr(size_t lineno, const QString& str, size_t& start);

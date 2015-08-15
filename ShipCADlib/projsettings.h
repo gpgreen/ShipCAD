@@ -51,15 +51,19 @@ public:
     explicit ProjectSettings(ShipCADModel* owner);
     ~ProjectSettings();
 
+    hydrostatic_coeff_t getHydrostaticCoefficients();
 	void setHydrostaticCoefficients(hydrostatic_coeff_t coeff);
 	void setDisableModelCheck(bool val);
 	float getMainframeLocation();
+	float getAppendageCoefficient();
 	void setAppendageCoefficient(float coeff);
+    float getBeam();
 	void setBeam(float beam);
 	void setDraft(float draft);
-	void getLength() {return _length;}
+    float getLength() {return _length;}
 	void setLength(float length);
 	void setMainframeLocation(float loc);
+	float getWaterDensity();
 	void setWaterDensity(float val);
 	void setSavePreview(bool val);
 	void setStartDraft(float val);
@@ -75,6 +79,7 @@ public:
     bool getSimplifyIntersections() {return _simplify_intersections;}
 	void setSimplifyIntersections(bool set);
 	void setUnderWaterColor(QColor& col);
+	unit_type_t getUnits();
 	void setUnits(unit_type_t unit);
 								   
     void loadBinary(FileBuffer& source, QImage* img);

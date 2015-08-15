@@ -28,6 +28,7 @@
  *#############################################################################################*/
 
 #include "plane.h"
+#include "shipcadlib.h"
 
 using namespace ShipCAD;
 
@@ -118,4 +119,16 @@ bool Plane::intersectsBox(const QVector3D& p1, const QVector3D& p2) const
             smax = s;
     }
     return (smin <= 0 && smax >= 0) || (smax <= 0 && smin >= 0);
+}
+
+QVector3D Plane::projectPointOnPlane(const QVector3D& p)
+{
+    float q = _vars[0] * _vars[0] + _vars[1] * _vars[1] + _vars[2] * _vars[2];
+    if (q != 0) {
+        float r = (_vars[0] * p.x() + _vars[1] * p.y() + _vars[2] * p.z() + _vars[3]) / q;
+        return QVector3D(p.x() - _vars[0] * r,
+                p.y() - _vars[1] * r,
+                p.z() - _vars[2] *r);
+    }
+    return ZERO;
 }

@@ -79,6 +79,8 @@ struct HydrostaticsData
 	float prism_coefficient;
 	float vert_prism_coefficient;
 	std::vector<QVector2D> sac;
+
+    void clear();
 };
 
 struct CrosscurvesData
@@ -89,6 +91,8 @@ struct CrosscurvesData
 	float displacement;
 	QVector3D center_of_buoyancy;
 	float kn_sin_phi;
+
+    void clear();
 };
 	
 class HydrostaticCalc : public QObject
@@ -103,22 +107,67 @@ public:
 	
 	void clear();
 
+    ShipCADModel* getOwner() {return _owner;}
+
 	QString getErrorString();
-	float getTrimAngle();
-	Plane& getWlPlane();
+    float getTrimAngle();
+    Plane getWlPlane();
+    bool isCalculated() {return _calculated;}
 	void setCalculated(bool calc);
 	void setDraft(float draft);
-    void addError(HydrostaticError error);
+    HydrostaticsData& getData() {return _data;}
+    /*! \brief does this calculation have this type of error
+     *
+     * \param error the error to check for
+     * \return true if calculation has this error
+     */
+    bool hasError(HydrostaticError error);
+    /*! \brief add this error type to the calculation
+     *
+     * \param error the error to add
+     */
+    void addError(HydrostaticError error) {_errors.push_back(error);}
+    /*! \brief is this type of calculation set
+     *
+     * \param ty type of calculation to check for
+     * \return true if type is part of set
+     */
+    bool hasCalculation(HydrostaticsCalculation ty);
+    /*! \brief set a type of calculation
+     *
+     * \param ty type of calculation to add to set
+     */
+    void addCalculationType(HydrostaticsCalculation ty){_calculations.push_back(ty);}
+    float getHeelingAngle() {return _heeling_angle;}
 	void setHeelingAngle(float angle);
-	void setHydrostaticType(HydrostaticType ty);
+    void setHydrostaticType(HydrostaticType ty);
+    /*! \brief set the trim for this calculation (distance, not angle)
+     *
+     * \param trim the trim of the hull
+     */
 	void setTrim(float trim);
 
 	void addData(QStringList& strings, HydrostaticsMode mode, QChar separator);
 	void addHeader(QStringList& strings);
 	void addFooter(QStringList& strings);
-	bool balance(float displacement, bool freetotrim, CrosscurvesData* output);
+    bool balance(float displacement, bool freetotrim, CrosscurvesData& output);
+    /*! \brief make all calculations specified
+     *
+     * For each type of calculation specified, this method will fill out _data
+     * with the results of that calculation
+     * The calculated flag will also be set
+     */
 	void calculate();
-	void calculateVolume(Plane& waterline_plane);
+    /*! \brief calculate the volume of the ship below plane
+     *
+     * When this method is completed, then _data will have
+     * absolute_draft, errors, leak point, center_of_buoyancy, lcb_perc,
+     * length_waterline, width_waterline, displacement, volume calculated
+     * The calculated flag will also be set
+     *
+     * \param waterline_plane the plane of the waterline
+     */
+    void calculateVolume(const Plane& waterline_plane);
 
 	void showData(HydrostaticsMode mode);
 										

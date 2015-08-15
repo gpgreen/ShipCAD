@@ -102,9 +102,9 @@ void Intersection::extents(QVector3D& min, QVector3D& max)
         _items[i]->extents(min, max);
 }
 
-const QString& Intersection::getDescription()
+QString Intersection::getDescription()
 {
-    // TODO
+    return "";
 }
 
 void Intersection::draw(Viewport& vp, LineShader* lineshader)

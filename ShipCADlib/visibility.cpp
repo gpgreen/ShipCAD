@@ -54,7 +54,7 @@ void Visibility::clear()
     _show_curvature = true;
     _show_control_curves = true;
     _curvature_scale = 1.0;
-    _cursor_increment = 0.1;
+    _cursor_increment = 0.1f;
     _show_hydrostatic_data = true;
     _show_hydro_displacement = true;
     _show_hydro_lateral_area = true;
@@ -86,7 +86,7 @@ void Visibility::loadBinary(FileBuffer &source)
         if (_owner->getFileVersion() >= fv210) {
             source.load(_cursor_increment);
             if (fabs(_cursor_increment)<1e-5)
-                _cursor_increment = 0.1;
+                _cursor_increment = 0.1f;
             emit onChangeCursorIncrement();
             if (_owner->getFileVersion() >= fv220) {
                 source.load(_show_hydrostatic_data);

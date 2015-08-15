@@ -33,3 +33,9 @@ using namespace ShipCAD;
 
 const char* kFileExtension = ".fbm";
 
+const QVector3D ShipCAD::ZERO(0,0,0);
+
+const QVector3D ShipCAD::ONE(1,1,1);
+
+const QVector2D ShipCADZERO2(0,0);
+

@@ -30,6 +30,8 @@
 #ifndef SHIPCADLIB_H
 #define SHIPCADLIB_H
 
+#include <QtGui>
+
 namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -46,6 +48,10 @@ const int FileBufferBlockSize = 4096;
 
 extern const char* kFileExtension;
 	
+extern const QVector3D ZERO;
+extern const QVector3D ONE;
+extern const QVector2D ZERO2;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 enum viewport_mode_t {
@@ -84,7 +90,7 @@ enum HydrostaticsMode {
 enum HydrostaticError {
     feNothingSubmerged = 0,
     feMakingWater,
-    feNotEnoughBuoyance,
+    feNotEnoughBuoyancy,
 };
 
 enum HydrostaticsCalculation {

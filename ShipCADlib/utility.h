@@ -126,6 +126,8 @@ extern float FindWaterViscosity(float density, unit_type_t units);
  */
 extern QString ChangeFileExt(const QString& name, const QString& ext);
 
+extern float VolumeToDisplacement(float volume, float density, float appcoeff, unit_type_t units);
+
 };
 
 #endif

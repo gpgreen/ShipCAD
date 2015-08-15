@@ -72,9 +72,17 @@ public:
 
     QColor getColor();
     Plane getPlane() {return _plane;}
+    void setPlane(const Plane& pln);
     size_t getCount() {return _items.size();}
     Spline* getItem(size_t index);
-    const QString& getDescription();
+    QString getDescription();
+    intersection_type_t getIntersectionType();
+    void setIntersectionType(intersection_type_t set);
+    bool useHydrostaticsSurfacesOnly();
+    void setUseHydrostaticsSurfacesOnly(bool set);
+
+    size_t numberOfSplines();
+    Spline* getSpline(size_t index);
     void add(Spline* sp);
     void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
     void createStarboardPart();

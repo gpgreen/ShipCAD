@@ -47,9 +47,6 @@
 using namespace std;
 using namespace ShipCAD;
 
-static QVector3D ZERO = QVector3D(0,0,0);
-static QVector3D ONE = QVector3D(1,1,1);
-
 static int sDecimals = 4;
 
 bool ShipCAD::g_surface_verbose = true;

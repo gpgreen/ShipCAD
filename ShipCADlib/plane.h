@@ -73,6 +73,13 @@ public:
     // determine if plane intersects a bounding box (p1, p2)
     bool intersectsBox(const QVector3D& p1, const QVector3D& p2) const;
 
+    /*! \brief project a point onto a plane
+     *
+     * \param p the point to project onto this plane
+     * \return the projected point
+     */
+    QVector3D projectPointOnPlane(const QVector3D& p);
+
 private:
 
     float _vars[4];

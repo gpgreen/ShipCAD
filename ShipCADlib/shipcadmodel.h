@@ -43,6 +43,7 @@
 #include "projsettings.h"
 #include "preferences.h"
 #include "marker.h"
+#include "subdivsurface.h"
 
 namespace ShipCAD {
 
@@ -51,7 +52,6 @@ class Flowline;
 class FileBuffer;
 class SubdivisionControlPoint;
 class SubdivisionFace;
-class SubdivisionSurface;
 class SubdivisionLayer;
 class Viewport;
 class UndoObject;
@@ -70,9 +70,8 @@ public:
     Preferences& getPreferences() {return _prefs;}
 
     void buildValidFrameTable(bool close_at_deck);
-    SubdivisionLayer* getActiveLayer();
     // getBackgroundImage()
-    bool getBuild();
+    bool isBuild();
     version_t getFileVersion() {return _file_version;}
     IntersectionVector& getStations() {return _stations;}
     IntersectionVector& getWaterlines() {return _waterlines;}
@@ -106,11 +105,14 @@ public:
 	void setFilenameSet(bool flag);
 	
     HydrostaticCalcVector& getHydrostaticCalculations() {return _calculations;}
-    size_t getNumberOfLayers();
-    SubdivisionLayer* getLayer(size_t index);
-    size_t getNumberOfFlowlines();
-    size_t getNumberOfLockedPoints();
-    size_t getNumberOfViewports();
+
+    SubdivisionLayer* getActiveLayer() {return _surface->getActiveLayer();}
+    size_t numberOfLayers() {return _surface->numberOfLayers();}
+    SubdivisionLayer* getLayer(size_t index) {return _surface->getLayer(index);}
+
+	size_t numberOfFlowlines();
+    size_t numberOfLockedPoints();
+    size_t numberOfViewports();
 
     // marker
     bool isSelectedMarker(Marker* mark);
@@ -119,10 +121,10 @@ public:
     Marker* getMarker(size_t index);
     void deleteMarker(Marker* mark);
     size_t getNumberOfMarkers();
+    bool adjustMarkers();
 
     // viewport? we might want to move this into the gui window class
     void addViewport(Viewport* vp);
-    bool adjustMarkers();
 
     SubdivisionSurface* getSurface();
 

@@ -465,5 +465,11 @@ QString ShipCAD::ChangeFileExt(const QString& name, const QString& ext)
 	return fname;
 }
 
+float ShipCAD::VolumeToDisplacement(float volume, float density, float appcoeff, unit_type_t units)
+{
+    if (units == fuImperial)
+        return volume * appcoeff * density / 2240;
+    return volume * appcoeff * density;
+}
 
 	

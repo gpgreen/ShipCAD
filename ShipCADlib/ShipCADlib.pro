@@ -35,7 +35,9 @@ SOURCES += shipcadlib.cpp \
     shipcadmodel.cpp \
     visibility.cpp \
     intersection.cpp \
-    marker.cpp
+    marker.cpp \
+    hydrostaticcalc.cpp \
+    shipcadlib.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

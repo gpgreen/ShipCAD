@@ -250,11 +250,11 @@ void ProjectSettings::setUnits(unit_type_t unit)
 	if (_units == fuImperial) {
 		unit_conversion_factor = 1 / 0.3048;
         weight_factor = kWeightConversionFactor;
-		thickness_factor = 1 / 25.4;
+        thickness_factor = 1 / 25.4f;
 	} else {
 		unit_conversion_factor = 0.3048;
         weight_factor = 1 / kWeightConversionFactor;
-		thickness_factor = 25.4;
+        thickness_factor = 25.4f;
 	}
 	_water_density *= weight_factor;
     for (size_t i=0; i<_owner->getSurface()->numberOfLayers(); i++) {
@@ -277,7 +277,7 @@ void ProjectSettings::clear()
 	_length = 1.0;
 	_beam = 1.0;
 	_draft = 1.0;
-	_water_density = 1.025;		// 1025 kg/m3 for seawater
+    _water_density = 1.025f;		// 1025 kg/m3 for seawater
 	_appendage_coefficient = 1.0; // default 1.0, typical values for ships to compensate for appendices and shellplate = 1.0005
 	_main_particulars_has_been_set = false;
 	_shade_underwater_ship = true;
@@ -292,12 +292,12 @@ void ProjectSettings::clear()
 	_simplify_intersections = true;
 	_start_draft = 0.0;
 	_end_draft = 1.0;
-	_draft_step = 0.1;
+    _draft_step = 0.1f;
 	_trim = 0.0;
 	_displacements.clear();
 	_min_displacement = 0.0;
 	_max_displacement = 1.0;
-	_displ_increment = 0.1;
+    _displ_increment = 0.1f;
 	_angles.clear();
 	_angles.push_back(0.0);
 	_angles.push_back(2.0);

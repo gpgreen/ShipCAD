@@ -73,7 +73,7 @@ void CrosscurvesData::clear()
 HydrostaticCalc::HydrostaticCalc(ShipCADModel* owner)
 	: _owner(owner), _heeling_angle(0.0), _trim(0.0),
       _draft(0.0), _calculated(false), _hydrostatic_type(fhShort),
-      _mainframe(Intersection::construct(owner))
+      _mainframe(new Intersection(owner))
 {
     // does nothing
 }
@@ -682,10 +682,7 @@ struct StationAreaCalculation
     {
         QVector3D tmp3d;
         QVector2D tmp2d;
-        Intersection *frame = Intersection::construct(owner);
-        frame->setIntersectionType(intersect->getIntersectionType());
-        frame->setPlane(intersect->getPlane());
-        frame->setUseHydrostaticsSurfacesOnly(true);
+        Intersection *frame = new Intersection(owner, intersect->getIntersectionType(), intersect->getPlane(), true);
         float area;
         frame->calculateArea(data.waterline_plane, &area, &tmp3d, &tmp2d);
         delete frame;
@@ -754,10 +751,7 @@ void HydrostaticCalc::calculate()
 
     // calculate waterline properties
     if (_data.volume > 0 && _errors.size() == 0 && (hasCalculation(hcWaterline) or hasCalculation(hcAll))) {
-        Intersection* waterplane = Intersection::construct(_owner);
-        waterplane->setIntersectionType(fiWaterline);
-        waterplane->setPlane(_data.waterline_plane);
-        waterplane->setUseHydrostaticsSurfacesOnly(true);
+        Intersection* waterplane = new Intersection(_owner, fiWaterline, _data.waterline_plane, true);
         waterplane->rebuild();
         parameter = -1e6;
         _data.waterplane_entrance_angle = 0;
@@ -821,10 +815,7 @@ void HydrostaticCalc::calculate()
 
     // calculate lateral area and center of gravity
     if (hasCalculation(hcLateralArea) || hasCalculation(hcAll)) {
-        Intersection* lateralplane = Intersection::construct(_owner);
-        lateralplane->setIntersectionType(fiButtock);
-        lateralplane->setUseHydrostaticsSurfacesOnly(true);
-        lateralplane->setPlane(Plane(0,1,0,0.001));
+        Intersection* lateralplane = new Intersection(_owner, fiButtock, Plane(0,1,0,0.001), true);
         lateralplane->calculateArea(_data.waterline_plane, &_data.lateral_area, &_data.lateral_cog, &tmpp2d);
         delete lateralplane;
     }

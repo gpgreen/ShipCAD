@@ -62,14 +62,14 @@ class Intersection : public Entity
 public:
 
     explicit Intersection(ShipCADModel* owner);
+    explicit Intersection(ShipCADModel *owner, intersection_type_t ty, const Plane& pln, bool use_hydrostatics_only);
     virtual ~Intersection();
-
-    static Intersection* construct(ShipCADModel* owner);
 
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
     virtual void draw(Viewport& vp, LineShader* lineshader);
     virtual void rebuild();
+    virtual void setBuild(bool val);
 
     QColor getColor();
     Plane getPlane() {return _plane;}
@@ -94,8 +94,6 @@ public:
 public slots:
 
 protected:
-
-    virtual void setBuild(bool val);
 
 private:
 

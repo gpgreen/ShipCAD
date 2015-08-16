@@ -45,8 +45,6 @@
 using namespace std;
 using namespace ShipCAD;
 
-const QVector3D ZERO = QVector3D(0,0,0);
-
 //////////////////////////////////////////////////////////////////////////////////////
 
 SubdivisionFace* SubdivisionFace::construct(SubdivisionSurface* owner)

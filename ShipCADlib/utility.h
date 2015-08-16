@@ -92,8 +92,21 @@ extern void ClipTriangle(const QVector3D& p1,
                          std::vector<QVector3D>& front,
                          std::vector<QVector3D>& back);
 
-// calculates the squared distance between 2 points
+/*! \brief squared distance between 2 3D points
+ *
+ * \param p1 first point
+ * \param p2 second point
+ * \return square of distance between points
+ */
 extern float SquaredDistPP(const QVector3D& p1, const QVector3D& p2);
+
+/*! \brief distance between 2 3D points
+ *
+ * \param p1 first point
+ * \param p2 second point
+ * \return distance between points
+ */
+extern float DistPP3D(const QVector3D& p1, const QVector3D& p2);
 
 // returns "0" for false, and "1" for true
 extern QString BoolToStr(bool val);

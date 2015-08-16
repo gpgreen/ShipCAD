@@ -43,8 +43,6 @@
 using namespace std;
 using namespace ShipCAD;
 
-static QVector3D ZERO = QVector3D(0,0,0);
-
 //////////////////////////////////////////////////////////////////////////////////////
 
 SubdivisionLayer* SubdivisionLayer::construct(SubdivisionSurface* owner)

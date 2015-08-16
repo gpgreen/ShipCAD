@@ -54,7 +54,8 @@ bool ShipCAD::g_surface_verbose = true;
 //////////////////////////////////////////////////////////////////////////////////////
 
 SubdivisionSurface::SubdivisionSurface()
-    : _build(false), _show_curvature(true), _show_control_curves(true),
+    : Entity(),
+      _show_curvature(true), _show_control_curves(true),
       _subdivision_mode(fmQuadTriangle), _control_point_size(4),
       _curvature_scale(0.25),
       _crease_color(Qt::green), _crease_edge_color(Qt::red),
@@ -590,6 +591,7 @@ void SubdivisionSurface::setActiveLayer(SubdivisionLayer *layer)
 
 void SubdivisionSurface::setBuild(bool val)
 {
+    Entity::setBuild(val);
     if (!val) {
         clearFaces();
         for (size_t i=1; i<=numberOfControlCurves(); ++i)
@@ -807,6 +809,7 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<Subdivisi
 
 void SubdivisionSurface::clear()
 {
+    Entity::clear();
     _control_curves.clear();
     _control_faces.clear();
     _control_edges.clear();
@@ -1752,6 +1755,11 @@ void SubdivisionSurface::draw(Viewport &vp)
     }
     SubdivisionLayer::drawLayers(vp, this);
     LineShader* lineshader = vp.setLineShader();
+    draw(vp, lineshader);
+}
+
+void SubdivisionSurface::draw(Viewport &vp, LineShader *lineshader)
+{
     if (showControlNet()) {
         for (size_t i=0; i<numberOfControlEdges(); ++i) {
             getControlEdge(i)->draw(vp, lineshader);
@@ -2288,6 +2296,131 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionControlEdge *> &source,
                 sorted.push_back(tmppoints);
         }
     }
+}
+
+void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
+{
+	// checking..
+	if (collapseedge->numberOfFaces() != 2)
+		return;
+	SubdivisionControlFace* face1 = dynamic_cast<SubdivisionControlFace*>(collapseedge->getFace(0));
+	SubdivisionControlFace* face2 = dynamic_cast<SubdivisionControlFace*>(collapseedge->getFace(1));
+	if (face1 == 0 || face2 == 0)
+		return;
+	
+	SubdivisionControlPoint* s,*e;
+	SubdivisionPoint* p1, *p2;
+	
+	if (collapseedge->startPoint()->numberOfEdges() > 2
+		&& collapseedge->endPoint()->numberOfEdges() > 2) {
+		if (collapseedge->getCurve() != 0)
+			collapseedge->getCurve()->deleteEdge(collapseedge);
+		if (collapseedge->isSelected())
+			collapseedge->setSelected(false);
+		s = dynamic_cast<SubdivisionControlPoint*>(collapseedge->startPoint());
+		e = dynamic_cast<SubdivisionControlPoint*>(collapseedge->endPoint());
+		if (s == 0 || e == 0)
+			return;
+		
+		// check faces for consistent ordering of the points (same normal direction)
+		// because inconsistent ordering can lead to access violations
+		p1 = face1->getPoint(face1->numberOfPoints()-1);
+		for (size_t i=0; i<face1->numberOfPoints(); ++i) {
+			p2 = face1->getPoint(i);
+			if ((p1 == collapseedge->startPoint() && p2 == collapseedge->endPoint())
+				|| ((p2 == collapseedge->startPoint() && p1 == collapseedge->endPoint()))) {
+				size_t ind1 = face2->indexOfPoint(p2);
+				size_t ind2 = (ind1 + 1) % face2->numberOfPoints(); // select the next index
+				if (face2->getPoint(ind2) != p1) {
+					face2->flipNormal();
+				}
+				break;
+			}
+			else
+				p1 = p2;
+		}
+	}
+	
+	SubdivisionLayer* layer = face1->getLayer();
+	// remove the control faces from the layers they belong to
+	face1->getLayer()->deleteControlFace(face1);
+	face2->getLayer()->deleteControlFace(face2);
+	size_t ind1 = face1->indexOfPoint(collapseedge->startPoint());
+	size_t ind2 = face1->indexOfPoint(collapseedge->endPoint());
+	if (ind2 < ind1 && fabs(static_cast<float>(ind2 - ind1)) == 1.0f)
+		swap(ind1, ind2);
+	size_t ind3 = face2->indexOfPoint(collapseedge->startPoint());
+	size_t ind4 = face2->indexOfPoint(collapseedge->endPoint());
+	if (ind4 < ind3 && fabs(static_cast<float>(ind4 - ind3)) == 1.0f)
+		swap(ind3, ind4);
+	if (ind1 == 0 && ind2 == face1->numberOfPoints() - 1
+		&& ind3 == 0 && ind4 == face2->numberOfPoints() - 1) {
+		swap(ind1, ind2);
+		swap(ind3, ind4);
+	}
+	if (ind1 == 0 && ind2 == face1->numberOfPoints() - 1)
+		swap(ind1, ind2);
+	if (ind3 == 0 && ind4 == face2->numberOfPoints() - 1)
+		swap(ind3, ind4);
+	// remove all references to face1
+	for (size_t i=0; i<face1->numberOfPoints(); ++i)
+		face1->getPoint(i)->deleteFace(face1);
+	// remove all references to face2
+	for (size_t i=0; i<face2->numberOfPoints(); ++i)
+		face2->getPoint(i)->deleteFace(face2);
+	// add the new face
+	SubdivisionControlFace* newface = SubdivisionControlFace::construct(this);
+	newface->setLayer(layer);
+	addControlFace(newface);
+	for (size_t i=0; i<=ind1; ++i) {
+		newface->addPoint(face1->getPoint(i));
+	}
+	for (size_t i=ind4; i<face2->numberOfPoints(); ++i)
+		newface->addPoint(face2->getPoint(i));
+	for (size_t i=0; i<=ind3; ++i)
+		newface->addPoint(face2->getPoint(i));
+	for (size_t i=ind2; i<face1->numberOfPoints(); ++i)
+		newface->addPoint(face1->getPoint(i));
+	// check all appropriate points are added
+	if (newface->numberOfPoints() != face1->numberOfPoints() + face2->numberOfPoints() - 2)
+		throw runtime_error("wrong number of points in SubdivisionControlEdge::collapse");
+	p1 = newface->getPoint(newface->numberOfPoints() - 1);
+	for (size_t i=0; i<newface->numberOfPoints(); ++i) {
+		p2 = newface->getPoint(i);
+		SubdivisionEdge* edge = edgeExists(p1, p2);
+		if (edge != 0) {
+			if (edge->hasFace(face1))
+				edge->deleteFace(face1);
+			if (edge->hasFace(face2))
+				edge->deleteFace(face2);
+			edge->addFace(newface);
+			if (edge->numberOfFaces() < 2)
+				edge->setCrease(true);
+		}
+		p1 = p2;
+	}
+	// connect the new face to a layer
+	layer->addControlFace(newface);
+	if (collapseedge->isCrease())
+		collapseedge->setCrease(false);
+	collapseedge->startPoint()->deleteEdge(collapseedge);
+	collapseedge->endPoint()->deleteEdge(collapseedge);
+	if (hasControlEdge(collapseedge))
+		removeControlEdge(collapseedge);
+	if (hasControlFace(face1))
+		removeControlFace(face1);
+	if (hasControlFace(face2))
+		removeControlFace(face2);
+	deleteControlFace(face1);
+	deleteControlFace(face2);
+
+	// check if startpoint and endpoint can be collapsed as well
+	if (s->numberOfFaces() > 1 && s->numberOfEdges() == 2)
+		s->collapse();
+	if (e->numberOfFaces() > 1 && e->numberOfEdges() == 2)
+		e->collapse();
+	setBuild(false);
+	// BUGBUG: pascal deletes edge here, but we can't do that...
 }
 
 void SubdivisionSurface::loadBinary(FileBuffer &source)

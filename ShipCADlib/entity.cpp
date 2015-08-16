@@ -30,12 +30,10 @@
 
 #include "entity.h"
 #include "utility.h"
+#include "shipcadlib.h"
 
 using namespace std;
 using namespace ShipCAD;
-
-static QVector3D ZERO = QVector3D();
-static QVector3D ONE = QVector3D(1,1,1);
 
 //////////////////////////////////////////////////////////////////////////////////////
 

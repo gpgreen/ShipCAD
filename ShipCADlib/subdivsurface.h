@@ -39,6 +39,7 @@
 #include "shipcadlib.h"
 #include "plane.h"
 #include "spline.h"
+#include "entity.h"
 
 namespace ShipCAD {
 
@@ -64,7 +65,7 @@ extern bool g_surface_verbose;
 //   "Quad/triangle subdivision" by J. Stam & C. Loop 
 //       http://research.microsoft.com/~cloop/qtEG.pdf
 //   "On C2 triangle/quad subdivision" by Scott Schaeffer & Joe Warren
-class SubdivisionSurface : public QObject
+class SubdivisionSurface : public Entity
 {
     Q_OBJECT
 
@@ -80,7 +81,8 @@ public:
 
     virtual void clear();
     void initialize(size_t point_start, size_t edge_start);
-    void rebuild();
+    virtual void rebuild();
+    virtual void setBuild(bool val);
 
     // modifiers
 
@@ -93,7 +95,7 @@ public:
     void clearSelection();
     void convertToGrid(face_grid_t& input, grid_t& grid);
     void edgeConnect();
-    void extents(QVector3D& min, QVector3D& max);
+    virtual void extents(QVector3D& min, QVector3D& max);
     void extrudeEdges(std::vector<SubdivisionControlEdge*>& edges,
 		      const QVector3D& direction);
     void calculateIntersections(const Plane& plane,
@@ -132,7 +134,7 @@ public:
     SubdivisionControlPoint* addControlPoint();
     // delete a controlpoint singly, not by dumping the pool
     void deleteControlPoint(SubdivisionControlPoint* point);
-
+	
     // selected SubdivisionControlPoint
     size_t numberOfSelectedControlPoints() {return _sel_control_points.size();}
     bool hasSelectedControlPoint(SubdivisionControlPoint* pt);
@@ -158,7 +160,12 @@ public:
     void deleteControlEdge(SubdivisionControlEdge* edge);
     void isolateEdges(std::vector<SubdivisionControlEdge*>& input,
                       std::vector<std::vector<SubdivisionControlPoint*> >& sorted);
-
+	/*! \brief collapse an edge on the surface
+	 *
+	 * \param edge the edge to collapse
+	 */
+	void collapseEdge(SubdivisionControlEdge* edge);
+	
     // selected SubdivisionControlEdge
     size_t numberOfSelectedControlEdges() {return _sel_control_edges.size();}
     void setSelectedControlEdge(SubdivisionControlEdge* edge);
@@ -221,8 +228,6 @@ public:
     SubdivisionLayer* addNewLayer();
 
     // getters/setters
-    bool isBuild() { return _build; }
-    void setBuild(bool val);
     subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
     void setSubdivisionMode(subdiv_mode_t val);
     void setDesiredSubdivisionLevel(int val);
@@ -282,7 +287,8 @@ public:
     void saveToStream(std::vector<QString>& strings);
 
     // drawing
-    virtual void draw(Viewport& vp);
+    virtual void draw(Viewport &vp);
+    virtual void draw(Viewport& vp, LineShader* lineshader);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
@@ -320,7 +326,6 @@ protected:
 
 protected:
 
-    bool _build;
     bool _show_control_net;
     bool _initialized;
     bool _show_interior_edges;
@@ -357,8 +362,6 @@ protected:
     QColor _zebra_color;
 
     Plane _waterline_plane;
-    QVector3D _min;
-    QVector3D _max;
     
     size_t _last_used_layerID;
     // currently active layer, may not be 0

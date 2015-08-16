@@ -33,6 +33,8 @@
 #include "subdivsurface.h"
 #include "undoobject.h"
 #include "utility.h"
+#include "subdivlayer.h"
+#include "subdivface.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -56,6 +58,40 @@ ShipCADModel::~ShipCADModel()
 
 void ShipCADModel::clear()
 {
+}
+
+void ShipCADModel::buildValidFrameTable(bool close_at_deck)
+{
+    // TODO
+}
+
+void ShipCADModel::setBuild(bool set)
+{
+    _surface->setBuild(set);
+    if (!set) {
+        for (size_t i=0; i<getStations().size(); i++)
+            getStations().get(i)->setBuild(false);
+        for (size_t i=0; i<getButtocks().size(); i++)
+            getButtocks().get(i)->setBuild(false);
+        for (size_t i=0; i<getWaterlines().size(); i++)
+            getWaterlines().get(i)->setBuild(false);
+        for (size_t i=0; i<getDiagonals().size(); i++)
+            getDiagonals().get(i)->setBuild(false);
+        for (size_t i=0; i<getHydrostaticCalculations().size(); i++)
+            getHydrostaticCalculations().get(i)->setCalculated(false);
+        // TODO flowlines
+    }
+}
+
+void ShipCADModel::setPrecision(precision_t precision)
+{
+    if (_precision != precision) {
+        _precision = precision;
+        _surface->setDesiredSubdivisionLevel(static_cast<int>(_precision) + 1);
+        setFileChanged(true);
+        setBuild(false);
+        redraw();
+    }
 }
 
 void ShipCADModel::setEditMode(edit_mode_t mode)
@@ -164,21 +200,21 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 			// stations
 			source.load(n);
 			for (int i=0; i<n; i++) {
-                Intersection* intersection = Intersection::construct(this);
+                Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_stations.add(intersection);
 			}
 			// buttocks
 			source.load(n);
 			for (int i=0; i<n; i++) {
-                Intersection* intersection = Intersection::construct(this);
+                Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_buttocks.add(intersection);
 			}
 			// waterlines
 			source.load(n);
 			for (int i=0; i<n; i++) {
-                Intersection* intersection = Intersection::construct(this);
+                Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_waterlines.add(intersection);
 			}
@@ -186,7 +222,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 				// diagonals
 				source.load(n);
 				for (int i=0; i<n; i++) {
-                    Intersection* intersection = Intersection::construct(this);
+                    Intersection* intersection = new Intersection(this);
 					intersection->loadBinary(source);
 					_diagonals.add(intersection);
 				}
@@ -212,4 +248,24 @@ void ShipCADModel::loadBinary(FileBuffer& source)
     _surface->setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
 	_surface->rebuild();
 	emit onUpdateGeometryInfo();
+}
+
+float ShipCADModel::findLowestHydrostaticsPoint()
+{
+    float result = _surface->getMin().z();
+    bool first = true;
+    for (size_t i=0; i<numberOfLayers(); i++) {
+        SubdivisionLayer* layer = getLayer(i);
+        if (layer->useInHydrostatics()) {
+            for (size_t j=0; j<layer->numberOfFaces(); j++) {
+                if (first) {
+                    result = layer->getFace(j)->getMin().z();
+                    first = false;
+                } else if (layer->getFace(j)->getMin().z() < result) {
+                    result = layer->getFace(j)->getMin().z();
+                }
+            }
+        }
+    }
+    return result;
 }

@@ -69,9 +69,26 @@ public:
     ProjectSettings& getProjectSettings() {return _settings;}
     Preferences& getPreferences() {return _prefs;}
 
+    /*! \brief Assembles all stations and builds a 2D bodyplan
+     *
+     * \param close_at_deck
+     */
     void buildValidFrameTable(bool close_at_deck);
     // getBackgroundImage()
     bool isBuild();
+    void setBuild(bool set);
+
+    /*! \brief get precision of model
+     *
+     * \return precision of model
+     */
+    precision_t getPrecision() {return _precision;}
+    /*! \brief set precision of model
+     *
+     * \param precision new precision for model
+     */
+    void setPrecision(precision_t precision);
+
     version_t getFileVersion() {return _file_version;}
     IntersectionVector& getStations() {return _stations;}
     IntersectionVector& getWaterlines() {return _waterlines;}
@@ -139,8 +156,6 @@ public:
 	 */
 	void setFileChanged(bool changed);
 
-	size_t numberOfHydrostaticCalculation();
-
 	// undo
 	/*! \brief add undo object
 	 *
@@ -198,9 +213,9 @@ public:
 	 */
 	void redraw();
 
-	/*! \brief ...
+    /*! \brief get the lowest underwater point of hull
 	 *
-	 * \return
+     * \return lowest point of hull
 	 */
 	float findLowestHydrostaticsPoint();
 	

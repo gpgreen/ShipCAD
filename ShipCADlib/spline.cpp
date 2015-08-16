@@ -50,6 +50,18 @@ Spline::Spline()
     clear();
 }
 
+Spline::Spline(const Spline &copied)
+    : Entity(),
+      _nopoints(copied._nopoints), _fragments(copied._fragments), _show_curvature(copied._show_curvature),
+      _show_points(copied._show_points), _curvature_scale(copied._curvature_scale),
+      _curvature_color(copied._curvature_color)
+{
+    for (size_t i=0; i<copied._points.size(); i++)
+        _points.push_back(copied._points[i]);
+    for (size_t i=0; i<copied._knuckles.size(); i++)
+        _knuckles.push_back(copied._knuckles[i]);
+}
+
 Spline::~Spline()
 {
     // does nothing

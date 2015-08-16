@@ -60,6 +60,7 @@ class Spline : public Entity
 public:
 
     explicit Spline();
+    explicit Spline(const Spline& copied);
     virtual ~Spline();
     
     // altering
@@ -72,6 +73,7 @@ public:
     bool simplify(float criterium);
     virtual void clear();
     virtual void rebuild();
+    void setBuild(bool val);
 
     // geometry ops
     float coord_length(float t1, float t2);
@@ -113,8 +115,6 @@ public:
     void dump(std::ostream& os) const;
 
 protected:
-
-    void setBuild(bool val);
 
     // methods used in simplify
     float weight(size_t index);

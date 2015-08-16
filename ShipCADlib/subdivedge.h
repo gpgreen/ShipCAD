@@ -129,7 +129,6 @@ public:
     virtual ~SubdivisionControlEdge();
 
     // modifiers
-    void collapse();
     SubdivisionControlPoint* insertControlPoint(const QVector3D& p);
     void trace();
 

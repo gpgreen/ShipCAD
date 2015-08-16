@@ -47,8 +47,6 @@ using namespace ShipCAD;
 using namespace std;
 using namespace boost::math::float_constants;
 
-static QVector3D ZERO = QVector3D(0,0,0);
-
 bool ShipCAD::g_point_verbose = true;
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -649,7 +647,7 @@ void SubdivisionControlPoint::collapse()
         if (edge1 != 0 && edge2 != 0) {
             for (size_t i=numberOfEdges(); i>0; --i) {
                 edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[i-1]);
-                edge1->collapse();
+                _owner->collapseEdge(edge1);
             }
         }
         bool edge_collapse = false;

@@ -52,13 +52,15 @@ public:
     explicit IntersectionData() : number_of_intersections(0) {}
     ~IntersectionData() {}
 
-    int number_of_intersections;
+    size_t number_of_intersections;
     std::vector<QVector3D> points;
     std::vector<float> parameters;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief base class for all non-surface drawable elements
+ */
 class Entity : public QObject
 {
     Q_OBJECT
@@ -83,13 +85,12 @@ public:
     QVector3D getMin();
     QVector3D getMax();
     bool isBuild();
-    
+    virtual void setBuild(bool val);
+
     // output
     void dump(std::ostream& os) const;
 
 protected:
-
-    virtual void setBuild(bool val);
 
 protected:
 

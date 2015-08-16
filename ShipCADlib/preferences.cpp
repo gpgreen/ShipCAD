@@ -27,81 +27,26 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef FILEBUFFER_H_
-#define FILEBUFFER_H_
+#include "preferences.h"
+#include "shipcadmodel.h"
 
-#include <vector>
-#include <QFile>
-#include <QObject>
-#include <QVector3D>
-#include <QColor>
-#include <QString>
+using namespace ShipCAD;
 
-#include "version.h"
-#include "plane.h"
-
-namespace ShipCAD {
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-class FileBuffer : public QObject
+Preferences::Preferences(ShipCADModel* owner)
+	: _owner(owner)
 {
-    Q_OBJECT
-public:
+	clear();
+}
 
-    explicit FileBuffer();
-    ~FileBuffer();
+void Preferences::clear()
+{
+	resetColors();
+	_point_size = 2;
+	_max_undo_memory = 20;
+}
 
-    size_t size() {return _data.size();}
-
-    // version
-    version_t getVersion() {return _file_version;}
-    void setVersion(version_t v);
-	
-    // save/restore/reset
-    void loadFromFile(const QString& filename);
-    void saveToFile(const QString& filename);
-    void reset();
-
-    // load/add
-
-    void load(bool& val);
-    void add(bool val);
-
-    void load(float& val);
-    void add(float val);
-
-    void load(int& val);
-    void add(int val);
-
-    void load(size_t& val);
-    void add(size_t val);
-
-    void load(version_t& val);
-    void add(version_t val);
-
-    void load(QVector3D& val);
-    void add(const QVector3D& val);
-
-    void load(QColor& val);
-    void add(const QColor& val);
-
-    void load(QString& val);
-    void add(const QString& val);
-
-    void load(Plane& val);
-    void add(const Plane& val);
-
-private:
-
-    size_t _pos;           // current position in the data vector
-    version_t _file_version;
-    std::vector<unsigned char> _data;   // the data
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-};				/* end namespace */
-
-#endif
+void Preferences::resetColors()
+{
+	// TODO
+}
 

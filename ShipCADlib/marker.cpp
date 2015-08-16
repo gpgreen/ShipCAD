@@ -48,11 +48,6 @@ Marker::Marker(ShipCADModel* owner)
     clear();
 }
 
-Marker::~Marker()
-{
-    _owner->deleteMarker(this);
-}
-
 Marker* Marker::construct(ShipCADModel* owner)
 {
     Marker* m = new Marker(owner);

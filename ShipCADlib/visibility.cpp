@@ -106,3 +106,13 @@ void Visibility::saveBinary(FileBuffer &dest)
 {
     // TODO
 }
+
+void Visibility::decreaseCurvatureScale()
+{
+    _curvature_scale /= 1.1f;
+}
+
+void Visibility::increaseCurvatureScale()
+{
+    _curvature_scale *= 1.1f;
+}

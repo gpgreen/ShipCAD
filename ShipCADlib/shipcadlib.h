@@ -30,6 +30,7 @@
 #ifndef SHIPCADLIB_H
 #define SHIPCADLIB_H
 
+#include <QtCore>
 #include <QtGui>
 
 namespace ShipCAD {
@@ -156,6 +157,14 @@ enum model_view_t {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+extern QString AreaStr(unit_type_t units);
+extern QString LengthStr(unit_type_t units);
+extern QString InertiaStr(unit_type_t units);
+extern QString VolStr(unit_type_t units);
+extern QString DensityStr(unit_type_t units);
+extern QString WeightStr(unit_type_t units);
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 

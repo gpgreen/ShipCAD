@@ -31,11 +31,53 @@
 
 using namespace ShipCAD;
 
-const char* kFileExtension = ".fbm";
+const char* ShipCAD::kFileExtension = ".fbm";
 
 const QVector3D ShipCAD::ZERO(0,0,0);
 
 const QVector3D ShipCAD::ONE(1,1,1);
 
-const QVector2D ShipCADZERO2(0,0);
+const QVector2D ShipCAD::ZERO2(0,0);
+
+QString ShipCAD::AreaStr(unit_type_t units)
+{
+    if (units == fuImperial)
+        return "[ft2]";
+    return "[m2]";
+}
+
+QString ShipCAD::LengthStr(unit_type_t units)
+{
+    if (units == fuImperial)
+        return "[ft]";
+    return "[m]";
+}
+
+QString ShipCAD::InertiaStr(unit_type_t units)
+{
+    if (units == fuImperial)
+        return "[ft4]";
+    return "[m4]";
+}
+
+QString ShipCAD::VolStr(unit_type_t units)
+{
+    if (units == fuImperial)
+        return "[ft3]";
+    return "[m3]";
+}
+
+QString ShipCAD::DensityStr(unit_type_t units)
+{
+    if (units == fuImperial)
+        return "[lbs/ft3]";
+    return "[t/m3]";
+}
+
+QString ShipCAD::WeightStr(unit_type_t units)
+{
+    if (units == fuImperial)
+        return "[tons]";
+    return "[tonnes]";
+}
 

@@ -54,7 +54,7 @@ public:
 	void clear()
 		{
 			if (_owned) {
-				for (size_t i=0; i<=_vec.size(); i++)
+                for (size_t i=0; i<_vec.size(); i++)
 					delete _vec[i];
 			}
 			_vec.clear();

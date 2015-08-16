@@ -60,6 +60,18 @@ void ShipCADModel::clear()
 {
 }
 
+void ShipCADModel::setFilename(const QString& name)
+{
+    QString tmp;
+    if (name.length() == 0) {
+        tmp = ShipCADModel::tr("New model");
+    }
+    tmp = ChangeFileExt(tmp, kFileExtension);
+    if (_filename != tmp) {
+        _filename = tmp;
+    }
+}
+
 void ShipCADModel::buildValidFrameTable(bool close_at_deck)
 {
     // TODO
@@ -116,17 +128,6 @@ QString ShipCADModel::getFilename()
 		// return userstring
 	}
 	return ChangeFileExt(_filename, kFileExtension);
-}
-
-void ShipCADModel::setFilename(const QString& name)
-{
-	QString tmp;
-	if (name == "") {
-		// set from userstring
-	}
-	tmp = ChangeFileExt(name, kFileExtension);
-	if (_filename != tmp)
-		_filename = tmp;
 }
 
 void ShipCADModel::addUndoObject(UndoObject* newundo)
@@ -268,4 +269,36 @@ float ShipCADModel::findLowestHydrostaticsPoint()
         }
     }
     return result;
+}
+
+void ShipCADModel::redraw()
+{
+    // TODO
+}
+
+bool ShipCADModel::isSelectedMarker(Marker* mark)
+{
+    return find(_selected_markers.begin(),
+                _selected_markers.end(), mark) != _selected_markers.end();
+}
+
+void ShipCADModel::setSelectedMarker(Marker* mark)
+{
+    if (!isSelectedMarker(mark))
+        _selected_markers.push_back(mark);
+}
+
+void ShipCADModel::removeSelectedMarker(Marker* mark)
+{
+    vector<Marker*>::iterator i = find(
+                    _selected_markers.begin(),
+                    _selected_markers.end(), mark);
+    if (i != _selected_markers.end())
+        _selected_markers.erase(i);
+}
+
+bool ShipCADModel::adjustMarkers()
+{
+    // TODO
+    return false;
 }

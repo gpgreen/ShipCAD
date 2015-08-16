@@ -107,11 +107,11 @@ public:
 	
 	void clear();
 
-    ShipCADModel* getOwner() {return _owner;}
+    ShipCADModel* getOwner() const {return _owner;}
 
-	QString getErrorString();
-    float getTrimAngle();
-    Plane getWlPlane();
+    QString getErrorString() const;
+    float getTrimAngle() const;
+    Plane getWlPlane() const;
     bool isCalculated() {return _calculated;}
 	void setCalculated(bool calc);
 	void setDraft(float draft);
@@ -121,7 +121,7 @@ public:
      * \param error the error to check for
      * \return true if calculation has this error
      */
-    bool hasError(HydrostaticError error);
+    bool hasError(HydrostaticError error) const;
     /*! \brief add this error type to the calculation
      *
      * \param error the error to add
@@ -132,14 +132,16 @@ public:
      * \param ty type of calculation to check for
      * \return true if type is part of set
      */
-    bool hasCalculation(HydrostaticsCalculation ty);
+    bool hasCalculation(HydrostaticsCalculation ty) const;
     /*! \brief set a type of calculation
      *
      * \param ty type of calculation to add to set
      */
     void addCalculationType(HydrostaticsCalculation ty){_calculations.push_back(ty);}
-    float getHeelingAngle() {return _heeling_angle;}
+
+    float getHeelingAngle() const {return _heeling_angle;}
 	void setHeelingAngle(float angle);
+
     void setHydrostaticType(HydrostaticType ty);
     /*! \brief set the trim for this calculation (distance, not angle)
      *
@@ -147,9 +149,14 @@ public:
      */
 	void setTrim(float trim);
 
+    /*! \brief get all data in a list of strings
+     *
+     * \param strings list to add data to
+     * \param mode how to display the data
+     * \param separator character to separate the data
+     */
 	void addData(QStringList& strings, HydrostaticsMode mode, QChar separator);
-	void addHeader(QStringList& strings);
-	void addFooter(QStringList& strings);
+
     bool balance(float displacement, bool freetotrim, CrosscurvesData& output);
     /*! \brief make all calculations specified
      *
@@ -168,12 +175,13 @@ public:
      * \param waterline_plane the plane of the waterline
      */
     void calculateVolume(const Plane& waterline_plane);
-
-	void showData(HydrostaticsMode mode);
 										
 public slots:
 
 protected:
+
+    void addHeader(QStringList& strings);
+    void addFooter(QStringList& strings, HydrostaticsMode mode);
 
 private:
 

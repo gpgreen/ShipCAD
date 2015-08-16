@@ -477,4 +477,31 @@ float ShipCAD::VolumeToDisplacement(float volume, float density, float appcoeff,
     return volume * appcoeff * density;
 }
 
-	
+static int NumberOfDecimals(float value)
+{
+	value = fabs(value);
+	if (value < 1e-6)
+        value = 1e-6f;
+	double i = log(value)/2.30258;
+    i = i < 0 ? ceil(i) : floor(i);
+    int result = 4 - static_cast<int>(i);
+	if (result < 0)
+		result = 0;
+	if (result > 3)
+		result = 3;
+	return result;
+}
+
+QString ShipCAD::MakeLength(float value, int decimals, int des_length)
+{
+	if (decimals == -1)
+		decimals = NumberOfDecimals(value);
+    QString input = QString("%1").arg(value, 0, 'f', decimals);
+    return input.leftJustified(des_length, ' ');
+}
+
+QString ShipCAD::MakeLength(const QString& value, int des_length)
+{
+    return QString(value).leftJustified(des_length, ' ', true);
+}
+

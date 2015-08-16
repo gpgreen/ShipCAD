@@ -50,14 +50,14 @@ Intersection::Intersection(ShipCADModel* owner)
     : _owner(owner), _items(true), _intersection_type(fiStation),
       _show_curvature(false), _use_hydrostatic_surfaces_only(false)
 {
-    clear();
+    // does nothing
 }
 
 Intersection::Intersection(ShipCADModel *owner, intersection_type_t ty, const Plane& pln, bool use_hydrostatics_only)
     : _owner(owner), _intersection_type(ty), _plane(pln),
       _show_curvature(false), _use_hydrostatic_surfaces_only(use_hydrostatics_only)
 {
-    setBuild(false);
+    // does nothing
 }
 
 Intersection::~Intersection()
@@ -69,9 +69,9 @@ void Intersection::clear()
 {
     // clear method deletes all memory for splines
     _items.clear();
-    setBuild(false);
     _show_curvature = false;
     _use_hydrostatic_surfaces_only = false;
+    Entity::clear();
 }
 
 void Intersection::setBuild(bool val)
@@ -306,7 +306,7 @@ void Intersection::createStarboardPart()
             _items.add(spline);
         }
         // try to connect the splines
-        JoinSplineSegments(0.05, false, _items);
+        JoinSplineSegments(0.05f, false, _items);
     }
     // check if the orientation is counterclockwise
     for (size_t i=_items.size(); i>=1; i--) {

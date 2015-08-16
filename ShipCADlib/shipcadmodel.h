@@ -114,12 +114,14 @@ public:
 	 *
 	 * \return true if filename has been set
 	 */
-	bool isFilenameSet();
+    bool isFilenameSet()
+        {return _filename_set;}
 	/*! \brief set flag for filename set
 	 *
 	 * \param set new flag for filename set
 	 */
-	void setFilenameSet(bool flag);
+    void setFilenameSet(bool flag)
+        {_filename_set=flag;}
 	
     HydrostaticCalcVector& getHydrostaticCalculations() {return _calculations;}
 
@@ -135,15 +137,12 @@ public:
     bool isSelectedMarker(Marker* mark);
     void setSelectedMarker(Marker* mark);
     void removeSelectedMarker(Marker* mark);
-    Marker* getMarker(size_t index);
-    void deleteMarker(Marker* mark);
-    size_t getNumberOfMarkers();
     bool adjustMarkers();
 
     // viewport? we might want to move this into the gui window class
     void addViewport(Viewport* vp);
 
-    SubdivisionSurface* getSurface();
+    SubdivisionSurface* getSurface() {return _surface;}
 
 	/*! \brief file changed flag
 	 *
@@ -210,6 +209,8 @@ public:
 	size_t getUndoMemory();
 
 	/*! \brief redraw the model
+	 *
+	 * TODO this should be in the controller, not here
 	 */
 	void redraw();
 
@@ -272,6 +273,7 @@ private:
 	size_t _undo_pos;
 	size_t _prev_undo_pos;
 	std::deque<UndoObject*> _undo_list;
+    std::vector<Marker*> _selected_markers;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

@@ -52,7 +52,7 @@ class Marker : public Spline
 public:
 
     explicit Marker(ShipCADModel* owner);
-    virtual ~Marker();
+    virtual ~Marker() {}
 
     static Marker* construct(ShipCADModel* owner);
 

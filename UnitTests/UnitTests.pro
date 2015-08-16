@@ -4,4 +4,5 @@ SUBDIRS = \
     subdivpoint \
     subdivcontrolpoint \
     subdivface \
-    subdivcontrolface
+    subdivcontrolface \
+    hydrostaticcalc

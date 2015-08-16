@@ -72,15 +72,21 @@ public:
     virtual void setBuild(bool val);
 
     QColor getColor();
-    Plane getPlane() {return _plane;}
-    void setPlane(const Plane& pln);
+    Plane getPlane()
+        {return _plane;}
+    void setPlane(const Plane& pln)
+        {_plane=pln;}
     QString getDescription();
-    intersection_type_t getIntersectionType();
-    void setIntersectionType(intersection_type_t set);
-    bool useHydrostaticsSurfacesOnly();
-    void setUseHydrostaticsSurfacesOnly(bool set);
+    intersection_type_t getIntersectionType()
+        {return _intersection_type;}
+    void setIntersectionType(intersection_type_t set)
+        {_intersection_type=set;}
+    bool useHydrostaticsSurfacesOnly()
+        {return _use_hydrostatic_surfaces_only;}
+    void setUseHydrostaticsSurfacesOnly(bool set)
+        {_use_hydrostatic_surfaces_only=set;}
 
-    SplineVector& getSplines();
+    SplineVector& getSplines() {return _items;}
 
     void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
     void createStarboardPart();

@@ -51,35 +51,53 @@ public:
     explicit ProjectSettings(ShipCADModel* owner);
     ~ProjectSettings();
 
-    hydrostatic_coeff_t getHydrostaticCoefficients();
+    hydrostatic_coeff_t getHydrostaticCoefficients() {return _hydrostatic_coefficients;}
 	void setHydrostaticCoefficients(hydrostatic_coeff_t coeff);
 	void setDisableModelCheck(bool val);
-	float getMainframeLocation();
-	float getAppendageCoefficient();
+
+    float getAppendageCoefficient() const {return _appendage_coefficient;}
 	void setAppendageCoefficient(float coeff);
-    float getBeam();
+
+    float getBeam() const {return _beam;}
 	void setBeam(float beam);
+
+    float getDraft() const {return _draft;}
 	void setDraft(float draft);
+
     float getLength() {return _length;}
 	void setLength(float length);
-	void setMainframeLocation(float loc);
-	float getWaterDensity();
+
+    float getMainframeLocation() const;
+    void setMainframeLocation(float loc);
+
+    float getWaterDensity() const {return _water_density;}
 	void setWaterDensity(float val);
-	void setSavePreview(bool val);
+
+    void setSavePreview(bool val);
 	void setStartDraft(float val);
 	void setTrim(float val);
 	void setEndDraft(float val);
 	void setDraftStep(float val);
 	void setUseDefaultMainframeLocation(bool use);
+
+    QString getName() const {return _name;}
 	void setName(const QString& name);
+
+    QString getDesigner() const {return _designer;}
 	void setDesigner(const QString& designer);
+
+    QString getComment() const {return _comment;}
 	void setComment(const QString& comment);
+
+    QString getFileCreatedBy() const {return _file_created_by;}
 	void setFileCreatedBy(const QString& createdby);
-	void setShadeUnderwaterShip(bool set);
+
+    void setShadeUnderwaterShip(bool set);
     bool getSimplifyIntersections() {return _simplify_intersections;}
 	void setSimplifyIntersections(bool set);
 	void setUnderWaterColor(QColor& col);
-	unit_type_t getUnits();
+
+    unit_type_t getUnits() const {return _units;}
 	void setUnits(unit_type_t unit);
 								   
     void loadBinary(FileBuffer& source, QImage* img);
@@ -94,6 +112,10 @@ public slots:
 protected:
 
 private:
+
+    // define away
+    ProjectSettings(const ProjectSettings&);
+    ProjectSettings& operator=(const ProjectSettings&);
 
     ShipCADModel* _owner;
 	bool _main_particulars_has_been_set;

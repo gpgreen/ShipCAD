@@ -45,7 +45,7 @@ union convert_type_t {
 };
 
 FileBuffer::FileBuffer()
-    : _pos(0)
+    : _pos(0), _file_version(k_current_version)
 {
     // does nothing
 }
@@ -58,6 +58,11 @@ FileBuffer::~FileBuffer()
 void FileBuffer::reset()
 {
     _pos = 0;
+}
+
+void FileBuffer::setVersion(version_t v)
+{
+    _file_version = v;
 }
 
 void FileBuffer::loadFromFile(const QString &filename)

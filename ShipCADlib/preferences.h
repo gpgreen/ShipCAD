@@ -45,9 +45,7 @@ class Preferences : public QObject
 public:
 
     explicit Preferences(ShipCADModel* owner);
-    ~Preferences();
-
-    static Preferences* construct(ShipCADModel* owner);
+    ~Preferences() {}
 
     QString getExportDirectory();
     QString getImportDirectory();

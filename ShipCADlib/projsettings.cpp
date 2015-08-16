@@ -74,7 +74,7 @@ void ProjectSettings::setDisableModelCheck(bool val)
 	}
 }
 
-float ProjectSettings::getMainframeLocation()
+float ProjectSettings::getMainframeLocation() const
 {
 	if (_use_default_mainframe_location)
 		return _length / 2;

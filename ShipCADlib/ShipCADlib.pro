@@ -13,6 +13,7 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += shipcadlib.cpp \
+    shipcadmodel.cpp \
     entity.cpp \
     filebuffer.cpp \
     plane.cpp \
@@ -32,11 +33,11 @@ SOURCES += shipcadlib.cpp \
     shader.cpp \
     projsettings.cpp \
     undoobject.cpp \
-    shipcadmodel.cpp \
     visibility.cpp \
     intersection.cpp \
     marker.cpp \
-    hydrostaticcalc.cpp
+    hydrostaticcalc.cpp \
+    preferences.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

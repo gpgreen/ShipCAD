@@ -101,20 +101,28 @@ void HydrostaticCalc::clear()
 	_calculations.push_back(hcAll);
 }
 
-QString HydrostaticCalc::getErrorString()
+QString HydrostaticCalc::getErrorString() const
 {
-	// TODO
-    return "";
+	const QString spc(" ");
+	QString result("");
+	if (hasError(feNothingSubmerged))
+		result.append(HydrostaticCalc::tr("There is no submersion")+"\n");
+    if (hasError(feMakingWater))
+		result.append(HydrostaticCalc::tr("The ship is making water at")+spc
+					  +MakeLength(_data.leak.x(),3,7)+", "
+					  +MakeLength(_data.leak.y(),3,7)+", "
+					  +MakeLength(_data.leak.z(),3,7)+"\n");
+    return result;
 }
 
-float HydrostaticCalc::getTrimAngle()
+float HydrostaticCalc::getTrimAngle() const
 {
 	float result = RadToDeg(atan((-_trim * cos(DegToRad(_heeling_angle)))
 								 / _owner->getProjectSettings().getLength()));
 	return result;
 }
 
-Plane HydrostaticCalc::getWlPlane()
+Plane HydrostaticCalc::getWlPlane() const
 {
 	float lowest_value = _owner->findLowestHydrostaticsPoint();
 	QVector3D p1(0.0, 0.0, lowest_value + (_draft - 0.5 * _trim));
@@ -168,29 +176,248 @@ void HydrostaticCalc::setTrim(float trim)
 	}
 }
 
-bool HydrostaticCalc::hasError(HydrostaticError error)
+bool HydrostaticCalc::hasError(HydrostaticError error) const
 {
     return find(_errors.begin(), _errors.end(), error) != _errors.end();
 }
 
-bool HydrostaticCalc::hasCalculation(HydrostaticsCalculation ty)
+bool HydrostaticCalc::hasCalculation(HydrostaticsCalculation ty) const
 {
     return find(_calculations.begin(), _calculations.end(), ty) != _calculations.end();
 }
 
-void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar separator)
+void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar sep)
 {
-	// TODO
+    const QString spc4 = "    ";
+	const QString vb = " | ";
+    LayerProperties total;
+
+    unit_type_t u = _owner->getProjectSettings().getUnits();
+    if (!isCalculated())
+        calculate();
+    if (_errors.size() == 0) {
+        if (mode == fhSingleCalculation) {
+            addHeader(strings);
+            strings.push_back(HydrostaticCalc::tr("Volume properties"));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Displaced volume"),38)+" : "+sep+MakeLength(_data.volume,-1,12)+sep+VolStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Displacement"),38)+" : "+sep+MakeLength(_data.displacement,-1,12)+sep+WeightStr(u));
+            if (_owner->getProjectSettings().getHydrostaticCoefficients() == fcActualData) {
+                strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Total length of submerged body"),38)+" : "+sep+MakeLength(_data.sub_max.x()-_data.sub_min.x(),3,12)+sep+LengthStr(u));
+                strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Total beam of submerged body"),38)+" : "+sep+MakeLength(_data.sub_max.y()-_data.sub_min.y(),3,12)+sep+LengthStr(u));
+            }
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Block coefficient"),38)+" : "+sep+MakeLength(_data.block_coefficient,4,12));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Prismatic coefficient"),38)+" : "+sep+MakeLength(_data.prism_coefficient,4,12));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Vert. prismatic coefficient"),38)+" : "+sep+MakeLength(_data.vert_prism_coefficient,4,12));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Wetted surface area"),38)+" : "+sep+MakeLength(_data.wetted_surface,-1,12)+sep+AreaStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of buoyancy"),38)+" : "+sep+MakeLength(_data.center_of_buoyancy.x(),-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of buoyancy"),38)+" : "+sep+MakeLength(_data.lcb_perc,3,12)+sep+"[%]");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Vertical center of buoyancy"),38)+" : "+sep+MakeLength(_data.center_of_buoyancy.z(),-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship properties"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship section area"),38)+" : "+sep+MakeLength(_data.mainframe_area,-1,12)+sep+AreaStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship coefficient"),38)+" : "+sep+MakeLength(_data.mainframe_coeff,4,12));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane properties"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Length on waterline"),38)+" : "+sep+MakeLength(_data.length_waterline,-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Beam on waterline"),38)+" : "+sep+MakeLength(_data.beam_waterline,-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane area"),38)+" : "+sep+MakeLength(_data.waterplane_area,-1,12)+sep+AreaStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane coefficient"),38)+" : "+sep+MakeLength(_data.waterplane_coeff,4,12));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane center of floatation"),38)+" : "+sep+MakeLength(_data.waterplane_cog.x(),-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Entrance angle"),38)+" : "+sep+MakeLength(_data.waterplane_entrance_angle,-1,12)+sep+"[degr.]");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Transverse moment of inertia"),38)+" : "+sep+MakeLength(_data.waterplane_mom_inertia.x(),-1,12)+sep+InertiaStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal moment of inertia"),38)+" : "+sep+MakeLength(_data.waterplane_mom_inertia.y(),-1,12)+sep+InertiaStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Initial stability"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Transverse metacentric height"),38)+" : "+sep+MakeLength(_data.km_transverse,-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal metacentric height"),38)+" : "+sep+MakeLength(_data.km_longitudinal,-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Lateral plane"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Lateral area"),38)+" : "+sep+MakeLength(_data.lateral_area,-1,12)+sep+AreaStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of effort"),38)+" : "+sep+MakeLength(_data.lateral_cog.x(),-1,12)+sep+LengthStr(u));
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Vertical center of effort"),38)+" : "+sep+MakeLength(_data.lateral_cog.z(),-1,12)+sep+LengthStr(u));
+        } else {
+            if (strings.size() == 0) {
+                addHeader(strings);
+                strings.push_back(" |  Draft |   Trim  |   Lwl   |   Bwl  |   Vol   |  Displ  |   LCB   |   VCB  |   CB   |   AM   |   CM   |   AW   |   CW   |   CP   |    S   |  KMtrv | KMlong | ");
+                if (u == fuImperial)
+                    strings.push_back(" |  [ft]  |   [ft]  |   [ft]  |  [ft]  |  [ft3]  |   [t]   |   [ft]  |  [ft]  |        |  [ft2] |        |  [ft2] |        |        |  [ft2] |  [ft]  |  [ft]  | ");
+                else
+                    strings.push_back(" |  [m]   |   [m]   |   [m]   |   [m]  |   [m3]  |   [t]   |   [m]   |   [m]  |        |  [m2]  |        |  [m2]  |        |        |  [m2]  |   [m]  |   [m]  | ");
+                strings.push_back(" |--------+---------+---------+--------+---------+---------+---------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------| ");
+            }
+            strings.push_back(vb+MakeLength(_draft,3,6)+vb
+							  +MakeLength(_trim,3,7)+vb
+							  +MakeLength(_data.length_waterline,-1,7)+vb
+							  +MakeLength(_data.beam_waterline,-1,6)+vb
+							  +MakeLength(_data.volume,-1,7)+vb
+							  +MakeLength(_data.displacement,-1,7)+vb
+							  +MakeLength(_data.center_of_buoyancy.x(),-1,7)+vb
+							  +MakeLength(_data.center_of_buoyancy.z(),-1,6)+vb
+							  +MakeLength(_data.block_coefficient,4,6)+vb
+							  +MakeLength(_data.mainframe_area,-1,6)+vb
+							  +MakeLength(_data.mainframe_coeff,4,6)+vb
+							  +MakeLength(_data.waterplane_area,-1,6)+vb
+							  +MakeLength(_data.waterplane_coeff,4,6)+vb
+							  +MakeLength(_data.prism_coefficient,4,6)+vb
+							  +MakeLength(_data.wetted_surface,-1,6)+vb
+							  +MakeLength(_data.km_transverse,-1,6)+vb
+							  +MakeLength(_data.km_longitudinal,-1,6)+vb);
+        }
+    } else {
+        strings.push_back(getErrorString());
+    }
+    if (mode == fhSingleCalculation) {
+		// check if any layers are present to show
+		size_t n = 0;
+		for (size_t i=0; i<_owner->numberOfLayers(); i++)
+            if (_owner->getLayer(i)->numberOfFaces() > 0)
+				n++;
+		if (n > 0) {
+			strings.push_back("");
+			strings.push_back("");
+			strings.push_back(HydrostaticCalc::tr("The following layer properties are calculated for both sides of the ship")+":");
+            strings.push_back("|"+MakeLength("",10)
+							  +MakeLength(HydrostaticCalc::tr("Layer"),14)+vb
+							  +MakeLength(HydrostaticCalc::tr("Area"),6)+vb
+							  +MakeLength(HydrostaticCalc::tr("Thickness"),9)+vb
+							  +MakeLength(HydrostaticCalc::tr("Weight"),8)+vb
+							  +" COG X  |  COG Y  |  COG Z  |");
+			strings.push_back(vb+MakeLength("",23)
+							  +vb+MakeLength(AreaStr(u),6)
+							  +vb+MakeLength("",9)
+							  +vb+MakeLength(WeightStr(u),8)
+							  +vb+MakeLength(LengthStr(u),7)
+							  +vb+MakeLength(LengthStr(u),7)
+							  +vb+MakeLength(LengthStr(u),7)+" |");
+			strings.push_back("|-------------------------|--------|-----------|----------|---------|---------|---------|");
+			for (size_t i=0; i<_owner->numberOfLayers(); i++) {
+                LayerProperties p = _owner->getLayer(i)->getSurfaceProperties();
+				if (u == fuImperial)
+					p.weight /= (12*2240);
+				else
+					p.weight /= 1000;
+                QString str(_owner->getLayer(i)->getName());
+                if (str.length() > 23)
+                    str.truncate(23);
+                strings.push_back("| "+MakeLength(str, 23)
+                                  +vb+MakeLength(p.surface_area,-1,6)
+                                  +vb+MakeLength(_owner->getLayer(i)->getThickness(),3,9)
+                                  +vb+MakeLength(p.weight,3,8)
+                                  +vb+MakeLength(p.surface_center_of_gravity.x(),3,7)
+                                  +vb+MakeLength(p.surface_center_of_gravity.y(),3,7)
+                                  +vb+MakeLength(p.surface_center_of_gravity.z(),3,7) + " |");
+                total.surface_area += p.surface_area;
+                total.surface_center_of_gravity += p.weight * p.surface_center_of_gravity;
+			}
+            if (n > 1) {
+                // if more than 1 layer added, the show the properties of all layers together
+                strings.push_back("|-------------------------|--------|-----------|----------|---------|---------|---------|");
+                if (total.weight != 0) {
+                    total.surface_center_of_gravity += total.surface_center_of_gravity / total.weight;
+                }
+                const QString spc3("   ");
+                strings.push_back("  "+MakeLength(HydrostaticCalc::tr("Total"),23)
+                                  +spc3+MakeLength(total.surface_area,-1,6)
+                                  +spc3+MakeLength("",9)
+                                  +spc3+MakeLength(total.weight,3,8)
+                                  +spc3+MakeLength(total.surface_center_of_gravity.x(),3,7)
+                                  +spc3+MakeLength(total.surface_center_of_gravity.y(),3,7)
+                                  +spc3+MakeLength(total.surface_center_of_gravity.z(),3,7));
+                // add sectional area data
+                if (_data.sac.size() > 0) {
+                    strings.push_back("");
+                    strings.push_back("");
+                    strings.push_back(HydrostaticCalc::tr("Sectional areas")+":");
+                    strings.push_back("");
+                    strings.push_back(vb+MakeLength(HydrostaticCalc::tr("Location"),9)
+                                      +vb+MakeLength(HydrostaticCalc::tr("Area"),8)+vb);
+                    if (u == fuImperial)
+                        strings.push_back(" |    [ft]   |   [ft2]  |");
+                    else
+                        strings.push_back(" |    [m]    |    [m2]  |");
+                    strings.push_back(" |-----------+----------|");
+                    for (size_t i=0; i<_data.sac.size(); i++) {
+                        float position = _data.sac[i].x();
+                        strings.push_back(vb+MakeLength(position,3,9)
+                                          +vb+MakeLength(_data.sac[i].y(),3,8)
+                                          +vb);
+                    }
+                    strings.push_back(" |-----------+----------|");
+                }
+            }
+		}
+        addFooter(strings, mode);
+    }
 }
 
 void HydrostaticCalc::addHeader(QStringList& strings)
 {
-	// TODO
+	const QString sep(" : ");
+	const QString spc(" ");
+
+    ProjectSettings& ps = _owner->getProjectSettings();
+	unit_type_t u = ps.getUnits();
+	
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Project"),21)+sep
+					  +ps.getName());
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Designer"),21)+sep
+					  +ps.getDesigner());
+	if (ps.getFileCreatedBy().length() != 0)
+		strings.push_back(MakeLength(HydrostaticCalc::tr("Created by"),21)+sep
+						  +ps.getFileCreatedBy());
+	if (ps.getComment().length() != 0)
+		strings.push_back(MakeLength(HydrostaticCalc::tr("Comment"),21)+sep
+						  +ps.getComment());
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Filename"),21)
+					  +sep+_owner->getFilename());
+	strings.push_back("");
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Design length"),21)+sep
+					  +MakeLength(ps.getLength(),-1,10)+spc+LengthStr(u));
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Length over all"),21)+sep
+					  +MakeLength(_data.model_max.x() - _data.model_min.x(),-1,10)
+					  +spc+LengthStr(u));
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Design beam"),21)+sep
+					  +MakeLength(ps.getBeam(),-1,10)+spc+LengthStr(u));
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Beam over all"),21)+sep
+					  +MakeLength(_data.model_max.y(),-1,10)
+					  +spc+LengthStr(u));
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Design draft"),21)+sep
+					  +MakeLength(ps.getDraft(),-1,10)+spc+LengthStr(u));
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Midship location"),21)+sep
+					  +MakeLength(ps.getMainframeLocation(),-1,10)+spc+LengthStr(u));
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Water density"),21)+sep
+					  +MakeLength(ps.getWaterDensity(),3,10)+spc+DensityStr(u));
+	strings.push_back(MakeLength(HydrostaticCalc::tr("Appendage coefficient"),21)+sep
+					  +MakeLength(ps.getAppendageCoefficient(),4,10));
 }
 
-void HydrostaticCalc::addFooter(QStringList& strings)
+void HydrostaticCalc::addFooter(QStringList& strings, HydrostaticsMode mode)
 {
-	// TODO
+    ProjectSettings& ps = _owner->getProjectSettings();
+	strings.push_back(HydrostaticCalc::tr("NOTE 1: Draft (and all other vertical heights) is measured above the lowest point of the hull!")
+					  +" (Z= "+MakeLength(_data.model_min.z(),3,7)
+					  +")");
+	if (ps.getHydrostaticCoefficients() == fcActualData)
+		strings.push_back(HydrostaticCalc::tr("NOTE 2: All calculated coefficients based on actual dimensions of submerged body."));
+	else
+		strings.push_back(HydrostaticCalc::tr("NOTE 2: All calculated coefficients based on project length), draft and beam."));
+	strings.push_back("");
+	if (mode == fhMultipleCalculations) {
+		strings.push_back("Lwl    : "+HydrostaticCalc::tr("Length on waterline"));
+		strings.push_back("Bwl    : "+HydrostaticCalc::tr("Beam on waterline"));
+		strings.push_back("Volume : "+HydrostaticCalc::tr("Displaced volume"));
+		strings.push_back("Displ. : "+HydrostaticCalc::tr("Displacement"));
+		strings.push_back("LCB    : "+HydrostaticCalc::tr("Longitudinal center of buoyancy")
+						  +", "+HydrostaticCalc::tr("measured from the aft perpendicular at X=0.0"));
+		strings.push_back("VCB    : "+HydrostaticCalc::tr("Vertical center of buoyancy")
+						  +", "+HydrostaticCalc::tr("measured from the lowest point of the hull"));
+		strings.push_back("Cb     : "+HydrostaticCalc::tr("Block coefficient"));
+		strings.push_back("Am     : "+HydrostaticCalc::tr("Midship section area"));
+		strings.push_back("Cm     : "+HydrostaticCalc::tr("Midship coefficient"));
+		strings.push_back("Aw     : "+HydrostaticCalc::tr("Waterplane area"));
+		strings.push_back("Cw     : "+HydrostaticCalc::tr("Waterplane coefficient"));
+		strings.push_back("LCF    : "+HydrostaticCalc::tr("Waterplane center of floatation"));
+		strings.push_back("CP     : "+HydrostaticCalc::tr("Prismatic coefficient"));
+		strings.push_back("S      : "+HydrostaticCalc::tr("Wetted surface area"));
+		strings.push_back("KMt    : "+HydrostaticCalc::tr("Transverse metacentric height"));
+		strings.push_back("KMl    : "+HydrostaticCalc::tr("Longitudinal metacentric height"));
+	}
 }
 
 // used in balance
@@ -750,7 +977,7 @@ void HydrostaticCalc::calculate()
     }
 
     // calculate waterline properties
-    if (_data.volume > 0 && _errors.size() == 0 && (hasCalculation(hcWaterline) or hasCalculation(hcAll))) {
+    if (_data.volume > 0 && _errors.size() == 0 && (hasCalculation(hcWaterline) || hasCalculation(hcAll))) {
         Intersection* waterplane = new Intersection(_owner, fiWaterline, _data.waterline_plane, true);
         waterplane->rebuild();
         parameter = -1e6;
@@ -834,11 +1061,3 @@ void HydrostaticCalc::calculateVolume(const Plane& waterline_plane)
 
 	setCalculated(true);
 }
-
-void HydrostaticCalc::showData(HydrostaticsMode mode)
-{
-	// TODO
-}
-
-										
-

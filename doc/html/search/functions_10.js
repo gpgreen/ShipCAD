@@ -30,5 +30,7 @@ var searchData=
   ['resetcolors',['resetColors',['../classShipCAD_1_1Preferences.html#a819790ae129967fedd2fdef27e58fac0',1,'ShipCAD::Preferences']]],
   ['resetdivpoints',['resetDivPoints',['../classShipCAD_1_1SubdivisionControlCurve.html#a34e280e9ba6e6705577d1afd229e9f20',1,'ShipCAD::SubdivisionControlCurve']]],
   ['resizeevent',['resizeEvent',['../classOpenGLWindow.html#ae0e1d4dc039ce114ac615ce1dee38e51',1,'OpenGLWindow::resizeEvent()'],['../classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb',1,'ShipCAD::Viewport::resizeEvent()']]],
-  ['restore',['restore',['../classShipCAD_1_1UndoObject.html#a9cace556c2092492f681654d72e35ba6',1,'ShipCAD::UndoObject']]]
+  ['restore',['restore',['../classShipCAD_1_1UndoObject.html#a9cace556c2092492f681654d72e35ba6',1,'ShipCAD::UndoObject']]],
+  ['rotatepoint',['RotatePoint',['../structVolumeCalc.html#adc01f5f156dccfc889a3ab8585341fa4',1,'VolumeCalc']]],
+  ['run',['run',['../structVolumeCalc.html#a9dc91b671e810b1bd4236565a89caf05',1,'VolumeCalc']]]
 ];

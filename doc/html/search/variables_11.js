@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['vert_5fprism_5fcoefficient',['vert_prism_coefficient',['../structShipCAD_1_1HydrostaticsData.html#a2a7fc6a194bc1e78ecce8ab16512d1eb',1,'ShipCAD::HydrostaticsData']]],
-  ['viscosity',['viscosity',['../structShipCAD_1_1DelftSeriesResistance.html#a08ff900d51b56d7e1726cb4b5a6ffa9b',1,'ShipCAD::DelftSeriesResistance']]],
-  ['volume',['volume',['../structShipCAD_1_1HydrostaticsData.html#acfbee81bded1b067a23cfc8cc9c00855',1,'ShipCAD::HydrostaticsData::volume()'],['../structShipCAD_1_1CrosscurvesData.html#a9bec38a77bf87ab5feb76899e39e4f7b',1,'ShipCAD::CrosscurvesData::volume()']]]
+  ['sac',['sac',['../structShipCAD_1_1HydrostaticsData.html#a503a1f2299db9d5ae923e598b8ee31ba',1,'ShipCAD::HydrostaticsData']]],
+  ['sinheel',['SinHeel',['../structVolumeCalc.html#ac1612ccb79673d6800b89a1acf46a028',1,'VolumeCalc']]],
+  ['sintrim',['SinTrim',['../structVolumeCalc.html#a36511f2f033b5488a4f677586f3e8f97',1,'VolumeCalc']]],
+  ['start_5fspeed',['start_speed',['../structShipCAD_1_1DelftSeriesResistance.html#a040e0d678c7dbc24c29b7da618b4094d',1,'ShipCAD::DelftSeriesResistance']]],
+  ['sub_5fmax',['sub_max',['../structShipCAD_1_1HydrostaticsData.html#ab3a6e316a991426c74673025439f123c',1,'ShipCAD::HydrostaticsData']]],
+  ['sub_5fmin',['sub_min',['../structShipCAD_1_1HydrostaticsData.html#a2d0a1e5f6bf98f8eceb958e5f7e7c73e',1,'ShipCAD::HydrostaticsData']]],
+  ['surface_5farea',['surface_area',['../structShipCAD_1_1LayerProperties.html#aff6dab68937efc1abd7bb5066373f514',1,'ShipCAD::LayerProperties']]],
+  ['surface_5fcenter_5fof_5fgravity',['surface_center_of_gravity',['../structShipCAD_1_1LayerProperties.html#a1b4bc8254c8cb90df594bc7905ce3e22',1,'ShipCAD::LayerProperties']]]
 ];

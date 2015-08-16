@@ -5,6 +5,7 @@ var searchData=
   ['find_5fnext_5fpoint',['find_next_point',['../classShipCAD_1_1Spline.html#a20b39f3a1bd853040df4760cd912ee64',1,'ShipCAD::Spline']]],
   ['findattachedfaces',['findAttachedFaces',['../classShipCAD_1_1SubdivisionControlFace.html#aa6035e53cd1e32a9bd9e9f9800c9f7d4',1,'ShipCAD::SubdivisionControlFace::findAttachedFaces()'],['../classShipCAD_1_1SubdivisionSurface.html#a3163cfd01e0454ecb9dbb088dc76fbc6',1,'ShipCAD::SubdivisionSurface::findAttachedFaces()']]],
   ['finddxfcolorindex',['FindDXFColorIndex',['../namespaceShipCAD.html#a87efc267ae07a84fb1cd55a4562c2907',1,'ShipCAD']]],
+  ['findlowesthydrostaticspoint',['findLowestHydrostaticsPoint',['../classShipCAD_1_1ShipCADModel.html#a8cde3b7ca816132af3c722cd31af3107',1,'ShipCAD::ShipCADModel']]],
   ['findwaterviscosity',['FindWaterViscosity',['../namespaceShipCAD.html#a44025ef38e6ee9f12cbf032660f637b5',1,'ShipCAD']]],
   ['first_5fderive',['first_derive',['../classShipCAD_1_1Spline.html#afe15664ac97d1d3452d5a5cfd023c471',1,'ShipCAD::Spline']]],
   ['flipnormal',['flipNormal',['../classShipCAD_1_1SubdivisionFace.html#a16d5e005d1c7c847ccf9ba72b67142fa',1,'ShipCAD::SubdivisionFace']]],

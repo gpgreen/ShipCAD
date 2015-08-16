@@ -3,7 +3,7 @@ var searchData=
   ['fcactualdata',['fcActualData',['../namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2',1,'ShipCAD']]],
   ['fcprojectsettings',['fcProjectSettings',['../namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbdad8361f42820d1f843333d60c0523d71d',1,'ShipCAD']]],
   ['femakingwater',['feMakingWater',['../namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0fab5378e2d38e12b21bcb9f89b4da7a024',1,'ShipCAD']]],
-  ['fenotenoughbuoyance',['feNotEnoughBuoyance',['../namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0fa94a4bf534382291f1e96f9d98cd8dcf8',1,'ShipCAD']]],
+  ['fenotenoughbuoyancy',['feNotEnoughBuoyancy',['../namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0faabbfd93b3daf55e537540d8d4ac8eb0c',1,'ShipCAD']]],
   ['fenothingsubmerged',['feNothingSubmerged',['../namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0fa0813d6e8a63bd1d17941b321715da4dd',1,'ShipCAD']]],
   ['fhextensive',['fhExtensive',['../namespaceShipCAD.html#af34462de5db0247c80b656785e989233affd22dfa116c9ea2aae175feba432961',1,'ShipCAD']]],
   ['fhmultiplecalculations',['fhMultipleCalculations',['../namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200aaee242838cf07c1950c914a44851804b5',1,'ShipCAD']]],

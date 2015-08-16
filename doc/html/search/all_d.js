@@ -12,12 +12,13 @@ var searchData=
   ['marker',['Marker',['../classShipCAD_1_1Marker.html#a216cf592a0945f6b6923a00c9625e3bf',1,'ShipCAD::Marker']]],
   ['marker_2ecpp',['marker.cpp',['../marker_8cpp.html',1,'']]],
   ['marker_2eh',['marker.h',['../marker_8h.html',1,'']]],
-  ['markervector',['MarkerVector',['../classShipCAD_1_1MarkerVector.html',1,'ShipCAD']]],
-  ['markervector',['MarkerVector',['../classShipCAD_1_1MarkerVector.html#ac7ced9a20366d5975cd5ce96bc3f0c6a',1,'ShipCAD::MarkerVector']]],
+  ['markervector',['MarkerVector',['../namespaceShipCAD.html#a36fff5b53986f6d6976afc749463ef22',1,'ShipCAD']]],
   ['max',['Max',['../classShipCAD_1_1Entity.html#a1ce317d1da352757209465baebce15f8',1,'ShipCAD::Entity::Max()'],['../classShipCAD_1_1SubdivisionControlFace.html#a256f4b52aa41d3140502ce70f98b1fe1',1,'ShipCAD::SubdivisionControlFace::Max()']]],
+  ['max_5fdraft',['max_draft',['../structMinMaxData.html#a10cf6d95b5b6d24b6b2e874e9fb05362',1,'MinMaxData']]],
   ['midpoint',['MidPoint',['../namespaceShipCAD.html#ad1ad66c896fe763fb4603989ff1f1182',1,'ShipCAD']]],
   ['min',['Min',['../classShipCAD_1_1Entity.html#ac363c3a8e4d5553b98996d6114b6b148',1,'ShipCAD::Entity::Min()'],['../classShipCAD_1_1SubdivisionControlFace.html#a4d47101c36502d8c3c238af213698280',1,'ShipCAD::SubdivisionControlFace::Min()']]],
   ['minmax',['MinMax',['../namespaceShipCAD.html#aa5d3fc63603d716d3e24244049e1e510',1,'ShipCAD']]],
+  ['minmaxdata',['MinMaxData',['../structMinMaxData.html',1,'']]],
   ['model_5fmax',['model_max',['../structShipCAD_1_1HydrostaticsData.html#a9319fb2ad054a595b6e3b3fd4059a3ae',1,'ShipCAD::HydrostaticsData']]],
   ['model_5fmin',['model_min',['../structShipCAD_1_1HydrostaticsData.html#acd93669bc08fa097974d41fbaf4dc81f',1,'ShipCAD::HydrostaticsData']]],
   ['model_5fview_5ft',['model_view_t',['../namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7',1,'ShipCAD']]],
@@ -29,6 +30,5 @@ var searchData=
   ['movedown',['moveDown',['../classShipCAD_1_1SubdivisionLayer.html#a949c536d7c238f8ba3a33abdde8bfaa3',1,'ShipCAD::SubdivisionLayer']]],
   ['moveup',['moveUp',['../classShipCAD_1_1SubdivisionLayer.html#aef4dff844415352660f8cf90120b240c',1,'ShipCAD::SubdivisionLayer']]],
   ['mvboth',['mvBoth',['../namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7ad45c94ca5dea7f967d58f9864f49c465',1,'ShipCAD']]],
-  ['mvec_5fiterator',['mvec_iterator',['../classShipCAD_1_1MarkerVector.html#a15ac0550091a081f0ef20c3f0b03693b',1,'ShipCAD::MarkerVector']]],
   ['mvport',['mvPort',['../namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7a033d1219796735edf6dbe71c266566ad',1,'ShipCAD']]]
 ];

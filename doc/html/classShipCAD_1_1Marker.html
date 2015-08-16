@@ -103,7 +103,7 @@ Inheritance diagram for ShipCAD::Marker:</div>
   <img src="classShipCAD_1_1Marker.png" usemap="#ShipCAD::Marker_map" alt=""/>
   <map id="ShipCAD::Marker_map" name="ShipCAD::Marker_map">
 <area href="classShipCAD_1_1Spline.html" alt="ShipCAD::Spline" shape="rect" coords="0,112,111,136"/>
-<area href="classShipCAD_1_1Entity.html" alt="ShipCAD::Entity" shape="rect" coords="0,56,111,80"/>
+<area href="classShipCAD_1_1Entity.html" title="base class for all non-surface drawable elements " alt="ShipCAD::Entity" shape="rect" coords="0,56,111,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -132,6 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_classShipCAD_1_1Spline"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classShipCAD_1_1Spline')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classShipCAD_1_1Spline.html">ShipCAD::Spline</a></td></tr>
 <tr class="memitem:a7ad84ea604562c7c9cb309b4e78e25c5 inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a7ad84ea604562c7c9cb309b4e78e25c5">Spline</a> ()</td></tr>
 <tr class="separator:a7ad84ea604562c7c9cb309b4e78e25c5 inherit pub_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a891b0c893b8124dca341680076854bff inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a891b0c893b8124dca341680076854bff">Spline</a> (const <a class="el" href="classShipCAD_1_1Spline.html">Spline</a> &amp;copied)</td></tr>
+<tr class="separator:a891b0c893b8124dca341680076854bff inherit pub_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c900ca3c99987532e1d0c21ba992968 inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a0c900ca3c99987532e1d0c21ba992968">~Spline</a> ()</td></tr>
 <tr class="separator:a0c900ca3c99987532e1d0c21ba992968 inherit pub_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3d9f4514573be91b316413bf062791a inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#ac3d9f4514573be91b316413bf062791a">add</a> (const QVector3D &amp;p)</td></tr>
@@ -148,6 +150,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a043f418b363a0dc7161b9106a72ef8b4 inherit pub_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b466ad7510032dafb0421f2d834bde6 inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a9b466ad7510032dafb0421f2d834bde6">rebuild</a> ()</td></tr>
 <tr class="separator:a9b466ad7510032dafb0421f2d834bde6 inherit pub_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e932411f0f4463514f80011c58f5e6a inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a6e932411f0f4463514f80011c58f5e6a">setBuild</a> (bool val)</td></tr>
+<tr class="separator:a6e932411f0f4463514f80011c58f5e6a inherit pub_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d4d64a34b1511efc5c41b9e31956a3e inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a9d4d64a34b1511efc5c41b9e31956a3e">coord_length</a> (float t1, float t2)</td></tr>
 <tr class="separator:a9d4d64a34b1511efc5c41b9e31956a3e inherit pub_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae15513771d88f4f545048d4204e98325 inherit pub_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#ae15513771d88f4f545048d4204e98325">chord_length_approximation</a> (float percentage)</td></tr>
@@ -218,8 +222,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_classShipCAD_1_1Spline"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classShipCAD_1_1Spline')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classShipCAD_1_1Spline.html">ShipCAD::Spline</a></td></tr>
-<tr class="memitem:a6e932411f0f4463514f80011c58f5e6a inherit pro_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a6e932411f0f4463514f80011c58f5e6a">setBuild</a> (bool val)</td></tr>
-<tr class="separator:a6e932411f0f4463514f80011c58f5e6a inherit pro_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63165f7cf70338e51b0f16504366031e inherit pro_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a63165f7cf70338e51b0f16504366031e">weight</a> (size_t index)</td></tr>
 <tr class="separator:a63165f7cf70338e51b0f16504366031e inherit pro_methods_classShipCAD_1_1Spline"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20b39f3a1bd853040df4760cd912ee64 inherit pro_methods_classShipCAD_1_1Spline"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Spline.html#a20b39f3a1bd853040df4760cd912ee64">find_next_point</a> (std::vector&lt; float &gt; &amp;weights)</td></tr>
@@ -289,7 +291,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="marker_8h_source.html#l00047">47</a> of file <a class="el" href="marker_8h_source.html">marker.h</a>.</p>
+<p>Definition at line <a class="el" href="marker_8h_source.html#l00048">48</a> of file <a class="el" href="marker_8h_source.html">marker.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a216cf592a0945f6b6923a00c9625e3bf"></a>
 <div class="memitem">
@@ -472,7 +474,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="marker_8h_source.html#l00061">61</a> of file <a class="el" href="marker_8h_source.html">marker.h</a>.</p>
+<p>Definition at line <a class="el" href="marker_8h_source.html#l00062">62</a> of file <a class="el" href="marker_8h_source.html">marker.h</a>.</p>
 
 </div>
 </div>
@@ -572,7 +574,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="marker_8h_source.html#l00062">62</a> of file <a class="el" href="marker_8h_source.html">marker.h</a>.</p>
+<p>Definition at line <a class="el" href="marker_8h_source.html#l00063">63</a> of file <a class="el" href="marker_8h_source.html">marker.h</a>.</p>
 
 </div>
 </div>
@@ -583,7 +585,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 12 2015 22:51:08 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Aug 15 2015 19:42:44 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

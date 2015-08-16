@@ -8,7 +8,7 @@ var searchData=
   ['edit',['edit',['../classShipCAD_1_1Preferences.html#a326180a1551596a3a9f2709d31c9fb10',1,'ShipCAD::Preferences']]],
   ['edit_5fmode_5ft',['edit_mode_t',['../namespaceShipCAD.html#a66144e3f3a53da01f51c9bdb94fcae31',1,'ShipCAD']]],
   ['emselectitems',['emSelectItems',['../namespaceShipCAD.html#a66144e3f3a53da01f51c9bdb94fcae31a756e1b357bd617f738749df02e51be25',1,'ShipCAD']]],
-  ['end',['end',['../classShipCAD_1_1HydrostaticCalcVector.html#a379ea252c1f9faaf0a78c8661fc16589',1,'ShipCAD::HydrostaticCalcVector::end()'],['../classShipCAD_1_1IntersectionVector.html#a94cbd7900470502f5be601a39dd93333',1,'ShipCAD::IntersectionVector::end()'],['../classShipCAD_1_1MarkerVector.html#a6a47ae7aab386d549b67191b5cf4c890',1,'ShipCAD::MarkerVector::end()'],['../classShipCAD_1_1SubdivisionControlCurveVector.html#a11c8b89feb662d2d76c75b44cb2a9146',1,'ShipCAD::SubdivisionControlCurveVector::end()']]],
+  ['end',['end',['../classPointerVector.html#a6182f5429c4c98ba2556d40484aab2f9',1,'PointerVector::end()'],['../classPointerVector.html#a62f1573b2bdffb20efaad8fbff6d7676',1,'PointerVector::end() const ']]],
   ['end_5fspeed',['end_speed',['../structShipCAD_1_1DelftSeriesResistance.html#abd1672b905c07093735775ff455e5a98',1,'ShipCAD::DelftSeriesResistance']]],
   ['endpoint',['endPoint',['../classShipCAD_1_1SubdivisionEdge.html#a69acb7c9d026f05ea727fd80dc7ab6a0',1,'ShipCAD::SubdivisionEdge::endPoint()'],['../classShipCAD_1_1SubdivisionEdge.html#ae9b9ffdb1e43bf851e5545f7d7a1849d',1,'ShipCAD::SubdivisionEdge::EndPoint()']]],
   ['entity',['Entity',['../classShipCAD_1_1Entity.html#a980f368aa07ce358583982821533a54a',1,'ShipCAD::Entity']]],

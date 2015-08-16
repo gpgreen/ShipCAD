@@ -1,0 +1,227 @@
+\hypertarget{classPointerVector}{\section{Pointer\-Vector$<$ T $>$ Class Template Reference}
+\label{classPointerVector}\index{Pointer\-Vector$<$ T $>$@{Pointer\-Vector$<$ T $>$}}
+}
+
+
+{\ttfamily \#include $<$pointervec.\-h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef void \hyperlink{classPointerVector_a578da527d71168684229a721b16e823f}{apply\-\_\-fn} (T $\ast$elem)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPointerVector_a44ef76bb36f22d17606d8af8ef12d499}{Pointer\-Vector} ()
+\item 
+\hyperlink{classPointerVector_ac1c5b843d7862e9db7189d459324e246}{Pointer\-Vector} (bool owned)
+\item 
+\hyperlink{classPointerVector_a5fd5c0d94cdb693be9a8bb5c2b3e305c}{$\sim$\-Pointer\-Vector} ()
+\item 
+void \hyperlink{classPointerVector_a9f708acfaa3ce26d14b02d8e285c8729}{clear} ()
+\item 
+size\-\_\-t \hyperlink{classPointerVector_a65263559ccd6a9eac2904c691453867b}{size} () const 
+\item 
+T $\ast$ \hyperlink{classPointerVector_af28c2517157ddacfb4d92a4fc73c5a92}{get} (size\-\_\-t index)
+\item 
+const T $\ast$ \hyperlink{classPointerVector_a298c14996c9995cc56efc2deadd01fe5}{get} (size\-\_\-t index) const 
+\item 
+void \hyperlink{classPointerVector_abaee9f77dee6ea2523dff64b184c9f54}{add} (T $\ast$elem)
+\item 
+bool \hyperlink{classPointerVector_acb88f3cb0aa36baaebabc0900bb304e6}{del} (T $\ast$elem)
+\item 
+void \hyperlink{classPointerVector_a5e9ccf28859f06f13ad3e2dad9ae1cb6}{apply} (\hyperlink{classPointerVector_a578da527d71168684229a721b16e823f}{apply\-\_\-fn} $\ast$fn)
+\item 
+std\-::vector$<$ T $\ast$ $>$\-::iterator \hyperlink{classPointerVector_a594866129f2e9a3701c1f414ca3299e3}{begin} ()
+\item 
+std\-::vector$<$ T $\ast$ $>$\-::iterator \hyperlink{classPointerVector_a6182f5429c4c98ba2556d40484aab2f9}{end} ()
+\item 
+std\-::vector$<$ T $\ast$ $>$\-::const\-\_\-iterator \hyperlink{classPointerVector_a97ee9f133fa9e61341f33feb3f36f45b}{begin} () const 
+\item 
+std\-::vector$<$ T $\ast$ $>$\-::const\-\_\-iterator \hyperlink{classPointerVector_a62f1573b2bdffb20efaad8fbff6d7676}{end} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$class Pointer\-Vector$<$ T $>$}
+
+
+
+Definition at line 37 of file pointervec.\-h.
+
+
+
+\subsection{Member Typedef Documentation}
+\hypertarget{classPointerVector_a578da527d71168684229a721b16e823f}{\index{Pointer\-Vector@{Pointer\-Vector}!apply\-\_\-fn@{apply\-\_\-fn}}
+\index{apply\-\_\-fn@{apply\-\_\-fn}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{apply\-\_\-fn}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ typedef void {\bf Pointer\-Vector}$<$ T $>$\-::apply\-\_\-fn(T $\ast$elem)}}\label{classPointerVector_a578da527d71168684229a721b16e823f}
+
+
+Definition at line 41 of file pointervec.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPointerVector_a44ef76bb36f22d17606d8af8ef12d499}{\index{Pointer\-Vector@{Pointer\-Vector}!Pointer\-Vector@{Pointer\-Vector}}
+\index{Pointer\-Vector@{Pointer\-Vector}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{Pointer\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ {\bf Pointer\-Vector}$<$ T $>$\-::{\bf Pointer\-Vector} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a44ef76bb36f22d17606d8af8ef12d499}
+
+
+Definition at line 43 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_ac1c5b843d7862e9db7189d459324e246}{\index{Pointer\-Vector@{Pointer\-Vector}!Pointer\-Vector@{Pointer\-Vector}}
+\index{Pointer\-Vector@{Pointer\-Vector}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{Pointer\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ {\bf Pointer\-Vector}$<$ T $>$\-::{\bf Pointer\-Vector} (
+\begin{DoxyParamCaption}
+\item[{bool}]{owned}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_ac1c5b843d7862e9db7189d459324e246}
+
+
+Definition at line 47 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a5fd5c0d94cdb693be9a8bb5c2b3e305c}{\index{Pointer\-Vector@{Pointer\-Vector}!$\sim$\-Pointer\-Vector@{$\sim$\-Pointer\-Vector}}
+\index{$\sim$\-Pointer\-Vector@{$\sim$\-Pointer\-Vector}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{$\sim$\-Pointer\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ {\bf Pointer\-Vector}$<$ T $>$\-::$\sim${\bf Pointer\-Vector} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a5fd5c0d94cdb693be9a8bb5c2b3e305c}
+
+
+Definition at line 51 of file pointervec.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classPointerVector_abaee9f77dee6ea2523dff64b184c9f54}{\index{Pointer\-Vector@{Pointer\-Vector}!add@{add}}
+\index{add@{add}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ void {\bf Pointer\-Vector}$<$ T $>$\-::add (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{elem}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_abaee9f77dee6ea2523dff64b184c9f54}
+
+
+Definition at line 72 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a5e9ccf28859f06f13ad3e2dad9ae1cb6}{\index{Pointer\-Vector@{Pointer\-Vector}!apply@{apply}}
+\index{apply@{apply}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{apply}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ void {\bf Pointer\-Vector}$<$ T $>$\-::apply (
+\begin{DoxyParamCaption}
+\item[{{\bf apply\-\_\-fn} $\ast$}]{fn}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a5e9ccf28859f06f13ad3e2dad9ae1cb6}
+
+
+Definition at line 87 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a594866129f2e9a3701c1f414ca3299e3}{\index{Pointer\-Vector@{Pointer\-Vector}!begin@{begin}}
+\index{begin@{begin}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ std\-::vector$<$T$\ast$$>$\-::iterator {\bf Pointer\-Vector}$<$ T $>$\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a594866129f2e9a3701c1f414ca3299e3}
+
+
+Definition at line 90 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a97ee9f133fa9e61341f33feb3f36f45b}{\index{Pointer\-Vector@{Pointer\-Vector}!begin@{begin}}
+\index{begin@{begin}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ std\-::vector$<$T$\ast$$>$\-::const\-\_\-iterator {\bf Pointer\-Vector}$<$ T $>$\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a97ee9f133fa9e61341f33feb3f36f45b}
+
+
+Definition at line 96 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a9f708acfaa3ce26d14b02d8e285c8729}{\index{Pointer\-Vector@{Pointer\-Vector}!clear@{clear}}
+\index{clear@{clear}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ void {\bf Pointer\-Vector}$<$ T $>$\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a9f708acfaa3ce26d14b02d8e285c8729}
+
+
+Definition at line 54 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_acb88f3cb0aa36baaebabc0900bb304e6}{\index{Pointer\-Vector@{Pointer\-Vector}!del@{del}}
+\index{del@{del}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{del}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ bool {\bf Pointer\-Vector}$<$ T $>$\-::del (
+\begin{DoxyParamCaption}
+\item[{T $\ast$}]{elem}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_acb88f3cb0aa36baaebabc0900bb304e6}
+
+
+Definition at line 74 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a6182f5429c4c98ba2556d40484aab2f9}{\index{Pointer\-Vector@{Pointer\-Vector}!end@{end}}
+\index{end@{end}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ std\-::vector$<$T$\ast$$>$\-::iterator {\bf Pointer\-Vector}$<$ T $>$\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a6182f5429c4c98ba2556d40484aab2f9}
+
+
+Definition at line 93 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a62f1573b2bdffb20efaad8fbff6d7676}{\index{Pointer\-Vector@{Pointer\-Vector}!end@{end}}
+\index{end@{end}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ std\-::vector$<$T$\ast$$>$\-::const\-\_\-iterator {\bf Pointer\-Vector}$<$ T $>$\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a62f1573b2bdffb20efaad8fbff6d7676}
+
+
+Definition at line 99 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_af28c2517157ddacfb4d92a4fc73c5a92}{\index{Pointer\-Vector@{Pointer\-Vector}!get@{get}}
+\index{get@{get}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T$\ast$ {\bf Pointer\-Vector}$<$ T $>$\-::get (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_af28c2517157ddacfb4d92a4fc73c5a92}
+
+
+Definition at line 66 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a298c14996c9995cc56efc2deadd01fe5}{\index{Pointer\-Vector@{Pointer\-Vector}!get@{get}}
+\index{get@{get}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ const T$\ast$ {\bf Pointer\-Vector}$<$ T $>$\-::get (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a298c14996c9995cc56efc2deadd01fe5}
+
+
+Definition at line 69 of file pointervec.\-h.
+
+\hypertarget{classPointerVector_a65263559ccd6a9eac2904c691453867b}{\index{Pointer\-Vector@{Pointer\-Vector}!size@{size}}
+\index{size@{size}!PointerVector@{Pointer\-Vector}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ size\-\_\-t {\bf Pointer\-Vector}$<$ T $>$\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classPointerVector_a65263559ccd6a9eac2904c691453867b}
+
+
+Definition at line 63 of file pointervec.\-h.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{pointervec_8h}{pointervec.\-h}\end{DoxyCompactItemize}

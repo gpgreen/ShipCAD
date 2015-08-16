@@ -5,7 +5,7 @@ var searchData=
   ['edgeexists',['edgeExists',['../classShipCAD_1_1SubdivisionSurface.html#adfdeabdc19eb55a7ba4ab0b607207300',1,'ShipCAD::SubdivisionSurface']]],
   ['edgepred',['EdgePred',['../structEdgePred.html#acb589c134f31d68a9817695c27c0094f',1,'EdgePred']]],
   ['edit',['edit',['../classShipCAD_1_1Preferences.html#a326180a1551596a3a9f2709d31c9fb10',1,'ShipCAD::Preferences']]],
-  ['end',['end',['../classShipCAD_1_1HydrostaticCalcVector.html#a379ea252c1f9faaf0a78c8661fc16589',1,'ShipCAD::HydrostaticCalcVector::end()'],['../classShipCAD_1_1IntersectionVector.html#a94cbd7900470502f5be601a39dd93333',1,'ShipCAD::IntersectionVector::end()'],['../classShipCAD_1_1MarkerVector.html#a6a47ae7aab386d549b67191b5cf4c890',1,'ShipCAD::MarkerVector::end()'],['../classShipCAD_1_1SubdivisionControlCurveVector.html#a11c8b89feb662d2d76c75b44cb2a9146',1,'ShipCAD::SubdivisionControlCurveVector::end()']]],
+  ['end',['end',['../classPointerVector.html#a6182f5429c4c98ba2556d40484aab2f9',1,'PointerVector::end()'],['../classPointerVector.html#a62f1573b2bdffb20efaad8fbff6d7676',1,'PointerVector::end() const ']]],
   ['endpoint',['endPoint',['../classShipCAD_1_1SubdivisionEdge.html#a69acb7c9d026f05ea727fd80dc7ab6a0',1,'ShipCAD::SubdivisionEdge']]],
   ['entity',['Entity',['../classShipCAD_1_1Entity.html#a980f368aa07ce358583982821533a54a',1,'ShipCAD::Entity']]],
   ['event',['event',['../classOpenGLWindow.html#a1e3045cffb900de55b7384f5091c9d94',1,'OpenGLWindow']]],

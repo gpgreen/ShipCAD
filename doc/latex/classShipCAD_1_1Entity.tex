@@ -3,12 +3,17 @@
 }
 
 
+base class for all non-\/surface drawable elements  
+
+
+
+
 {\ttfamily \#include $<$entity.\-h$>$}
 
 Inheritance diagram for Ship\-C\-A\-D\-:\-:Entity\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.589744cm]{classShipCAD_1_1Entity}
+\includegraphics[height=2.382979cm]{classShipCAD_1_1Entity}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -32,12 +37,9 @@ Q\-Vector3\-D \hyperlink{classShipCAD_1_1Entity_a3af98adafb45eb573675a8ccc44fe14
 \item 
 bool \hyperlink{classShipCAD_1_1Entity_a131cd27d923ba1d2658528b679b9a90c}{is\-Build} ()
 \item 
-void \hyperlink{classShipCAD_1_1Entity_a395d7573df06482d9deaecdc87d46944}{dump} (std\-::ostream \&os) const 
-\end{DoxyCompactItemize}
-\subsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
-\item 
 virtual void \hyperlink{classShipCAD_1_1Entity_a1889198398f42bb7f77a2334031c3f33}{set\-Build} (bool val)
+\item 
+void \hyperlink{classShipCAD_1_1Entity_a395d7573df06482d9deaecdc87d46944}{dump} (std\-::ostream \&os) const 
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -72,9 +74,9 @@ Qt\-::\-Pen\-Style \hyperlink{classShipCAD_1_1Entity_a8cbcbada188edd9d39e7c5743d
 
 
 \subsection{Detailed Description}
+base class for all non-\/surface drawable elements 
 
-
-Definition at line 62 of file entity.\-h.
+Definition at line 64 of file entity.\-h.
 
 
 
@@ -88,7 +90,7 @@ Definition at line 62 of file entity.\-h.
 )\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1Entity_a980f368aa07ce358583982821533a54a}
 
 
-Definition at line 42 of file entity.\-cpp.
+Definition at line 40 of file entity.\-cpp.
 
 \hypertarget{classShipCAD_1_1Entity_a0fe3f9f7c8875a85afb214c8ebd75604}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!$\sim$\-Entity@{$\sim$\-Entity}}
 \index{$\sim$\-Entity@{$\sim$\-Entity}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -99,7 +101,7 @@ Definition at line 42 of file entity.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Entity_a0fe3f9f7c8875a85afb214c8ebd75604}
 
 
-Definition at line 75 of file entity.\-h.
+Definition at line 77 of file entity.\-h.
 
 
 
@@ -113,11 +115,11 @@ Definition at line 75 of file entity.\-h.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Entity_a998d0e5d360371046fd5835ba1e0877a}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1Spline_a02967f3eee8b1755eab0d7da55c3c621}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_a2163245dc7153d1590811ab2902d6ee4}{Ship\-C\-A\-D\-::\-Intersection}, \hyperlink{classShipCAD_1_1Marker_ac7c7eea8648562f3fa00a9e10af6ec97}{Ship\-C\-A\-D\-::\-Marker}, \hyperlink{classShipCAD_1_1Flowline_a4e138d0d75b46f8ecb62a60ecf3f4e64}{Ship\-C\-A\-D\-::\-Flowline}, and \hyperlink{classShipCAD_1_1NURBSurface_a5013b0c1e511ea68909eef5d0473d032}{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}.
+Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionSurface_a80ab3bd6372a8465d69f71034a353e06}{Ship\-C\-A\-D\-::\-Subdivision\-Surface}, \hyperlink{classShipCAD_1_1Spline_a02967f3eee8b1755eab0d7da55c3c621}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_a2163245dc7153d1590811ab2902d6ee4}{Ship\-C\-A\-D\-::\-Intersection}, \hyperlink{classShipCAD_1_1Marker_ac7c7eea8648562f3fa00a9e10af6ec97}{Ship\-C\-A\-D\-::\-Marker}, \hyperlink{classShipCAD_1_1Flowline_a4e138d0d75b46f8ecb62a60ecf3f4e64}{Ship\-C\-A\-D\-::\-Flowline}, and \hyperlink{classShipCAD_1_1NURBSurface_a5013b0c1e511ea68909eef5d0473d032}{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}.
 
 
 
-Definition at line 47 of file entity.\-cpp.
+Definition at line 45 of file entity.\-cpp.
 
 \hypertarget{classShipCAD_1_1Entity_aa62e306d991140dcd564360f8f6e7539}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!draw@{draw}}
 \index{draw@{draw}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -129,7 +131,7 @@ Definition at line 47 of file entity.\-cpp.
 )\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classShipCAD_1_1Entity_aa62e306d991140dcd564360f8f6e7539}
 
 
-Implemented in \hyperlink{classShipCAD_1_1Spline_a6424ed433d241f566c15891cc25a74dd}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_a9e346019a52aa0540628b75994ea94a5}{Ship\-C\-A\-D\-::\-Intersection}, \hyperlink{classShipCAD_1_1Flowline_afce93ff27acf72218b0e394b0d543a0d}{Ship\-C\-A\-D\-::\-Flowline}, and \hyperlink{classShipCAD_1_1Marker_a0cca647d9b32dc69b03903b024dc3091}{Ship\-C\-A\-D\-::\-Marker}.
+Implemented in \hyperlink{classShipCAD_1_1SubdivisionSurface_ab1c250ff9fa7acae3ecdca4575f3e259}{Ship\-C\-A\-D\-::\-Subdivision\-Surface}, \hyperlink{classShipCAD_1_1Spline_a6424ed433d241f566c15891cc25a74dd}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_a9e346019a52aa0540628b75994ea94a5}{Ship\-C\-A\-D\-::\-Intersection}, \hyperlink{classShipCAD_1_1Marker_a0cca647d9b32dc69b03903b024dc3091}{Ship\-C\-A\-D\-::\-Marker}, and \hyperlink{classShipCAD_1_1Flowline_afce93ff27acf72218b0e394b0d543a0d}{Ship\-C\-A\-D\-::\-Flowline}.
 
 \hypertarget{classShipCAD_1_1Entity_a395d7573df06482d9deaecdc87d46944}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!dump@{dump}}
 \index{dump@{dump}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -140,7 +142,7 @@ Implemented in \hyperlink{classShipCAD_1_1Spline_a6424ed433d241f566c15891cc25a74
 ) const}}\label{classShipCAD_1_1Entity_a395d7573df06482d9deaecdc87d46944}
 
 
-Definition at line 95 of file entity.\-cpp.
+Definition at line 93 of file entity.\-cpp.
 
 \hypertarget{classShipCAD_1_1Entity_a08e8e53770c85002afa45f46e7bf10f8}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!extents@{extents}}
 \index{extents@{extents}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -152,11 +154,11 @@ Definition at line 95 of file entity.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Entity_a08e8e53770c85002afa45f46e7bf10f8}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1Intersection_af751d515708531ca098321840a92c47b}{Ship\-C\-A\-D\-::\-Intersection}, and \hyperlink{classShipCAD_1_1Flowline_abc8e875663d00a645f6d462cde7bff79}{Ship\-C\-A\-D\-::\-Flowline}.
+Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionSurface_abc1cf0168290242dfbe5dd0d178fa7cb}{Ship\-C\-A\-D\-::\-Subdivision\-Surface}, \hyperlink{classShipCAD_1_1Intersection_af751d515708531ca098321840a92c47b}{Ship\-C\-A\-D\-::\-Intersection}, and \hyperlink{classShipCAD_1_1Flowline_abc8e875663d00a645f6d462cde7bff79}{Ship\-C\-A\-D\-::\-Flowline}.
 
 
 
-Definition at line 57 of file entity.\-cpp.
+Definition at line 55 of file entity.\-cpp.
 
 \hypertarget{classShipCAD_1_1Entity_a3af98adafb45eb573675a8ccc44fe14e}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!get\-Max@{get\-Max}}
 \index{get\-Max@{get\-Max}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -167,7 +169,7 @@ Definition at line 57 of file entity.\-cpp.
 )}}\label{classShipCAD_1_1Entity_a3af98adafb45eb573675a8ccc44fe14e}
 
 
-Definition at line 88 of file entity.\-cpp.
+Definition at line 86 of file entity.\-cpp.
 
 \hypertarget{classShipCAD_1_1Entity_a759d6dedd36bf6562fbf36e816d9a5af}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!get\-Min@{get\-Min}}
 \index{get\-Min@{get\-Min}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -178,7 +180,7 @@ Definition at line 88 of file entity.\-cpp.
 )}}\label{classShipCAD_1_1Entity_a759d6dedd36bf6562fbf36e816d9a5af}
 
 
-Definition at line 81 of file entity.\-cpp.
+Definition at line 79 of file entity.\-cpp.
 
 \hypertarget{classShipCAD_1_1Entity_a131cd27d923ba1d2658528b679b9a90c}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!is\-Build@{is\-Build}}
 \index{is\-Build@{is\-Build}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -189,7 +191,7 @@ Definition at line 81 of file entity.\-cpp.
 )}}\label{classShipCAD_1_1Entity_a131cd27d923ba1d2658528b679b9a90c}
 
 
-Definition at line 65 of file entity.\-cpp.
+Definition at line 63 of file entity.\-cpp.
 
 \hypertarget{classShipCAD_1_1Entity_a2571654319df6ad6841a437be7a75395}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!rebuild@{rebuild}}
 \index{rebuild@{rebuild}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -200,7 +202,7 @@ Definition at line 65 of file entity.\-cpp.
 )\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classShipCAD_1_1Entity_a2571654319df6ad6841a437be7a75395}
 
 
-Implemented in \hyperlink{classShipCAD_1_1Spline_a9b466ad7510032dafb0421f2d834bde6}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_aed30bdca43037f72b85c4d53e234fd6c}{Ship\-C\-A\-D\-::\-Intersection}, \hyperlink{classShipCAD_1_1Flowline_a13e27605271592ba288ad9d0b6e2a8c1}{Ship\-C\-A\-D\-::\-Flowline}, and \hyperlink{classShipCAD_1_1NURBSurface_a643231ea9a8f26e528a1d9a0dccf4070}{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}.
+Implemented in \hyperlink{classShipCAD_1_1SubdivisionSurface_a259856fc21f2bc1eebbc52f10dd59469}{Ship\-C\-A\-D\-::\-Subdivision\-Surface}, \hyperlink{classShipCAD_1_1Spline_a9b466ad7510032dafb0421f2d834bde6}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_aed30bdca43037f72b85c4d53e234fd6c}{Ship\-C\-A\-D\-::\-Intersection}, \hyperlink{classShipCAD_1_1Flowline_a13e27605271592ba288ad9d0b6e2a8c1}{Ship\-C\-A\-D\-::\-Flowline}, and \hyperlink{classShipCAD_1_1NURBSurface_a643231ea9a8f26e528a1d9a0dccf4070}{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}.
 
 \hypertarget{classShipCAD_1_1Entity_a1889198398f42bb7f77a2334031c3f33}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!set\-Build@{set\-Build}}
 \index{set\-Build@{set\-Build}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
@@ -208,14 +210,14 @@ Implemented in \hyperlink{classShipCAD_1_1Spline_a9b466ad7510032dafb0421f2d834bd
 \begin{DoxyParamCaption}
 \item[{bool}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Entity_a1889198398f42bb7f77a2334031c3f33}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Entity_a1889198398f42bb7f77a2334031c3f33}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1Spline_a6e932411f0f4463514f80011c58f5e6a}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_a2b496f9ab21c5fc4a7b97a665b24f2b1}{Ship\-C\-A\-D\-::\-Intersection}, and \hyperlink{classShipCAD_1_1NURBSurface_aa6fc3d060087593349ce1b5119419433}{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}.
+Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionSurface_aec5073750762d1f8c3ab2107a742f4a5}{Ship\-C\-A\-D\-::\-Subdivision\-Surface}, \hyperlink{classShipCAD_1_1Spline_a6e932411f0f4463514f80011c58f5e6a}{Ship\-C\-A\-D\-::\-Spline}, \hyperlink{classShipCAD_1_1Intersection_a2b496f9ab21c5fc4a7b97a665b24f2b1}{Ship\-C\-A\-D\-::\-Intersection}, and \hyperlink{classShipCAD_1_1NURBSurface_aa6fc3d060087593349ce1b5119419433}{Ship\-C\-A\-D\-::\-N\-U\-R\-B\-Surface}.
 
 
 
-Definition at line 70 of file entity.\-cpp.
+Definition at line 68 of file entity.\-cpp.
 
 
 
@@ -225,42 +227,42 @@ Definition at line 70 of file entity.\-cpp.
 \subsubsection[{\-\_\-build}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Entity\-::\-\_\-build\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Entity_a752e3eb309111a7457783e0fdab3d6fe}
 
 
-Definition at line 96 of file entity.\-h.
+Definition at line 97 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a150a19aa958886e9dcf7c4e0e51dcd98}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!\-\_\-color@{\-\_\-color}}
 \index{\-\_\-color@{\-\_\-color}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Entity\-::\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Entity_a150a19aa958886e9dcf7c4e0e51dcd98}
 
 
-Definition at line 100 of file entity.\-h.
+Definition at line 101 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a30e4f9cb421987cebd07737a554275eb}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!\-\_\-max@{\-\_\-max}}
 \index{\-\_\-max@{\-\_\-max}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Entity\-::\-\_\-max\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Entity_a30e4f9cb421987cebd07737a554275eb}
 
 
-Definition at line 98 of file entity.\-h.
+Definition at line 99 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a414d4ff1ee308d47a5052910c3b34f7b}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!\-\_\-min@{\-\_\-min}}
 \index{\-\_\-min@{\-\_\-min}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{\-\_\-min}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Entity\-::\-\_\-min\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Entity_a414d4ff1ee308d47a5052910c3b34f7b}
 
 
-Definition at line 97 of file entity.\-h.
+Definition at line 98 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_ac53123be976cd9739ad1657573d67d97}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!\-\_\-pen\-\_\-style@{\-\_\-pen\-\_\-style}}
 \index{\-\_\-pen\-\_\-style@{\-\_\-pen\-\_\-style}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{\-\_\-pen\-\_\-style}]{\setlength{\rightskip}{0pt plus 5cm}Qt\-::\-Pen\-Style Ship\-C\-A\-D\-::\-Entity\-::\-\_\-pen\-\_\-style\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Entity_ac53123be976cd9739ad1657573d67d97}
 
 
-Definition at line 101 of file entity.\-h.
+Definition at line 102 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a5a9892a0d84d2cfdcd3a5dabf662a595}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!\-\_\-pen\-\_\-width@{\-\_\-pen\-\_\-width}}
 \index{\-\_\-pen\-\_\-width@{\-\_\-pen\-\_\-width}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{\-\_\-pen\-\_\-width}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-Entity\-::\-\_\-pen\-\_\-width\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Entity_a5a9892a0d84d2cfdcd3a5dabf662a595}
 
 
-Definition at line 99 of file entity.\-h.
+Definition at line 100 of file entity.\-h.
 
 
 
@@ -270,42 +272,42 @@ Definition at line 99 of file entity.\-h.
 \subsubsection[{Build}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Entity\-::\-Build\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1Entity_a7518cde7c6a7c576827efd3d65c732e4}
 
 
-Definition at line 65 of file entity.\-h.
+Definition at line 67 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a117b8362d17e9ef352555a85a6f015ff}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!Color@{Color}}
 \index{Color@{Color}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Entity\-::\-Color}}\label{classShipCAD_1_1Entity_a117b8362d17e9ef352555a85a6f015ff}
 
 
-Definition at line 66 of file entity.\-h.
+Definition at line 68 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a1ce317d1da352757209465baebce15f8}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!Max@{Max}}
 \index{Max@{Max}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{Max}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Entity\-::\-Max\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1Entity_a1ce317d1da352757209465baebce15f8}
 
 
-Definition at line 68 of file entity.\-h.
+Definition at line 70 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_ac363c3a8e4d5553b98996d6114b6b148}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!Min@{Min}}
 \index{Min@{Min}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{Min}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Entity\-::\-Min\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1Entity_ac363c3a8e4d5553b98996d6114b6b148}
 
 
-Definition at line 67 of file entity.\-h.
+Definition at line 69 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a8cbcbada188edd9d39e7c5743dc43560}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!penstyle@{penstyle}}
 \index{penstyle@{penstyle}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{penstyle}]{\setlength{\rightskip}{0pt plus 5cm}Qt\-::\-Pen\-Style Ship\-C\-A\-D\-::\-Entity\-::penstyle}}\label{classShipCAD_1_1Entity_a8cbcbada188edd9d39e7c5743dc43560}
 
 
-Definition at line 70 of file entity.\-h.
+Definition at line 72 of file entity.\-h.
 
 \hypertarget{classShipCAD_1_1Entity_a95a1cc38c08e5b64a540727afb99d25a}{\index{Ship\-C\-A\-D\-::\-Entity@{Ship\-C\-A\-D\-::\-Entity}!Pen\-Width@{Pen\-Width}}
 \index{Pen\-Width@{Pen\-Width}!ShipCAD::Entity@{Ship\-C\-A\-D\-::\-Entity}}
 \subsubsection[{Pen\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-Entity\-::\-Pen\-Width}}\label{classShipCAD_1_1Entity_a95a1cc38c08e5b64a540727afb99d25a}
 
 
-Definition at line 69 of file entity.\-h.
+Definition at line 71 of file entity.\-h.
 
 
 

@@ -88,8 +88,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classShipCAD_1_1Intersection-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ShipCAD::Intersection Class Reference</div>  </div>
@@ -106,7 +104,7 @@ Inheritance diagram for ShipCAD::Intersection:</div>
  <div class="center">
   <img src="classShipCAD_1_1Intersection.png" usemap="#ShipCAD::Intersection_map" alt=""/>
   <map id="ShipCAD::Intersection_map" name="ShipCAD::Intersection_map">
-<area href="classShipCAD_1_1Entity.html" alt="ShipCAD::Entity" shape="rect" coords="0,56,135,80"/>
+<area href="classShipCAD_1_1Entity.html" title="base class for all non-surface drawable elements " alt="ShipCAD::Entity" shape="rect" coords="0,56,135,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -114,6 +112,8 @@ Inheritance diagram for ShipCAD::Intersection:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acde7d35483e1e4ee56ecf75eb7a70f66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#acde7d35483e1e4ee56ecf75eb7a70f66">Intersection</a> (<a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *owner)</td></tr>
 <tr class="separator:acde7d35483e1e4ee56ecf75eb7a70f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4f17fe81289d26d2ec329dd9db5c69"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a3a4f17fe81289d26d2ec329dd9db5c69">Intersection</a> (<a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *owner, <a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fd">intersection_type_t</a> ty, const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;pln, bool use_hydrostatics_only)</td></tr>
+<tr class="separator:a3a4f17fe81289d26d2ec329dd9db5c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a064951a970ed8dd11081b2903ab62122"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a064951a970ed8dd11081b2903ab62122">~Intersection</a> ()</td></tr>
 <tr class="separator:a064951a970ed8dd11081b2903ab62122"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2163245dc7153d1590811ab2902d6ee4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a2163245dc7153d1590811ab2902d6ee4">clear</a> ()</td></tr>
@@ -124,18 +124,26 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9e346019a52aa0540628b75994ea94a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed30bdca43037f72b85c4d53e234fd6c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#aed30bdca43037f72b85c4d53e234fd6c">rebuild</a> ()</td></tr>
 <tr class="separator:aed30bdca43037f72b85c4d53e234fd6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b496f9ab21c5fc4a7b97a665b24f2b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a2b496f9ab21c5fc4a7b97a665b24f2b1">setBuild</a> (bool val)</td></tr>
+<tr class="separator:a2b496f9ab21c5fc4a7b97a665b24f2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acae07360e9ccef12a498332ac6dbedd9"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#acae07360e9ccef12a498332ac6dbedd9">getColor</a> ()</td></tr>
 <tr class="separator:acae07360e9ccef12a498332ac6dbedd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0b838a811f8df5c2fa0b0ea44ba4bb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1Plane.html">Plane</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#ac0b838a811f8df5c2fa0b0ea44ba4bb7">getPlane</a> ()</td></tr>
 <tr class="separator:ac0b838a811f8df5c2fa0b0ea44ba4bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a797f11943dee7cf12e3c6b0995b67a60"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a797f11943dee7cf12e3c6b0995b67a60">getCount</a> ()</td></tr>
-<tr class="separator:a797f11943dee7cf12e3c6b0995b67a60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22bce61f4ecfda5ae23351d186bda831"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1Spline.html">Spline</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a22bce61f4ecfda5ae23351d186bda831">getItem</a> (size_t index)</td></tr>
-<tr class="separator:a22bce61f4ecfda5ae23351d186bda831"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dfeca59ddc0235a665475718bae11ae"><td class="memItemLeft" align="right" valign="top">const QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a3dfeca59ddc0235a665475718bae11ae">getDescription</a> ()</td></tr>
-<tr class="separator:a3dfeca59ddc0235a665475718bae11ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8df5b7c6e9ed3e59f2c521df5bf8c5da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a8df5b7c6e9ed3e59f2c521df5bf8c5da">add</a> (<a class="el" href="classShipCAD_1_1Spline.html">Spline</a> *sp)</td></tr>
-<tr class="separator:a8df5b7c6e9ed3e59f2c521df5bf8c5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a582c3dcbe3016c554b6bba094e2854ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a582c3dcbe3016c554b6bba094e2854ce">setPlane</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;pln)</td></tr>
+<tr class="separator:a582c3dcbe3016c554b6bba094e2854ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0434113cfd34c8a3ab11f75976dbf5b"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#ab0434113cfd34c8a3ab11f75976dbf5b">getDescription</a> ()</td></tr>
+<tr class="separator:ab0434113cfd34c8a3ab11f75976dbf5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b93db56e5877226b30871754bba9838"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fd">intersection_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a1b93db56e5877226b30871754bba9838">getIntersectionType</a> ()</td></tr>
+<tr class="separator:a1b93db56e5877226b30871754bba9838"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc12c68675b19f5ae92d4c6ec8db0f62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#adc12c68675b19f5ae92d4c6ec8db0f62">setIntersectionType</a> (<a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fd">intersection_type_t</a> set)</td></tr>
+<tr class="separator:adc12c68675b19f5ae92d4c6ec8db0f62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac5f3018d8b95b57ab40ccafe782bf4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a5ac5f3018d8b95b57ab40ccafe782bf4">useHydrostaticsSurfacesOnly</a> ()</td></tr>
+<tr class="separator:a5ac5f3018d8b95b57ab40ccafe782bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b587bbe80ef146d25e8a1568a84afb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a8b587bbe80ef146d25e8a1568a84afb0">setUseHydrostaticsSurfacesOnly</a> (bool set)</td></tr>
+<tr class="separator:a8b587bbe80ef146d25e8a1568a84afb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0092acbb149bb6a5c2e1f9a4b300c2da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceShipCAD.html#a053b941b2c87049bb9380428d4d5a056">SplineVector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a0092acbb149bb6a5c2e1f9a4b300c2da">getSplines</a> ()</td></tr>
+<tr class="separator:a0092acbb149bb6a5c2e1f9a4b300c2da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade472c721a5cb093c0b464c770c88634"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#ade472c721a5cb093c0b464c770c88634">calculateArea</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;plane, float *area, QVector3D *cog, QVector2D *moment_of_inertia)</td></tr>
 <tr class="separator:ade472c721a5cb093c0b464c770c88634"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0af2af543403b3c69d1d3c786a1c6575"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a0af2af543403b3c69d1d3c786a1c6575">createStarboardPart</a> ()</td></tr>
@@ -161,16 +169,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a131cd27d923ba1d2658528b679b9a90c inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a395d7573df06482d9deaecdc87d46944 inherit pub_methods_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">dump</a> (std::ostream &amp;os) const </td></tr>
 <tr class="separator:a395d7573df06482d9deaecdc87d46944 inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af25c4beb86f658e5ed9058eaf3b419e1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classShipCAD_1_1Intersection.html">Intersection</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#af25c4beb86f658e5ed9058eaf3b419e1">construct</a> (<a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *owner)</td></tr>
-<tr class="separator:af25c4beb86f658e5ed9058eaf3b419e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2b496f9ab21c5fc4a7b97a665b24f2b1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Intersection.html#a2b496f9ab21c5fc4a7b97a665b24f2b1">setBuild</a> (bool val)</td></tr>
-<tr class="separator:a2b496f9ab21c5fc4a7b97a665b24f2b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -205,7 +203,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>List of curves intersecting hull. </p>
 <p>A list of curves from the intersection of the ships hull (represented by a subdivision surface) and a plane This plane can be a orthogonal plane (eg stations, waterlines, buttocks) or a freely oriented 3D plane </p>
 
-<p>Definition at line <a class="el" href="intersection_8h_source.html#l00057">57</a> of file <a class="el" href="intersection_8h_source.html">intersection.h</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8h_source.html#l00058">58</a> of file <a class="el" href="intersection_8h_source.html">intersection.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="acde7d35483e1e4ee56ecf75eb7a70f66"></a>
 <div class="memitem">
@@ -229,7 +227,55 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00048">48</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00049">49</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3a4f17fe81289d26d2ec329dd9db5c69"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Intersection::Intersection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *&#160;</td>
+          <td class="paramname"><em>owner</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fd">intersection_type_t</a>&#160;</td>
+          <td class="paramname"><em>ty</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>pln</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>use_hydrostatics_only</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00056">56</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -254,29 +300,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00054">54</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00063">63</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a8df5b7c6e9ed3e59f2c521df5bf8c5da"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Intersection::add </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classShipCAD_1_1Spline.html">Spline</a> *&#160;</td>
-          <td class="paramname"><em>sp</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00127">127</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ade472c721a5cb093c0b464c770c88634"></a>
 <div class="memitem">
 <div class="memproto">
@@ -313,7 +341,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00132">132</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00259">259</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -340,33 +368,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classShipCAD_1_1Entity.html#a998d0e5d360371046fd5835ba1e0877a">ShipCAD::Entity</a>.</p>
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00065">65</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af25c4beb86f658e5ed9058eaf3b419e1"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classShipCAD_1_1Intersection.html">Intersection</a> * Intersection::construct </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *&#160;</td>
-          <td class="paramname"><em>owner</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00059">59</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00068">68</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -383,7 +385,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00137">137</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00295">295</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -401,7 +403,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00142">142</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00347">347</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -439,7 +441,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classShipCAD_1_1Entity.html#aa62e306d991140dcd564360f8f6e7539">ShipCAD::Entity</a>.</p>
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00110">110</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00123">123</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -477,7 +479,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classShipCAD_1_1Entity.html#a08e8e53770c85002afa45f46e7bf10f8">ShipCAD::Entity</a>.</p>
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00097">97</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00110">110</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -494,41 +496,16 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00082">82</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00084">84</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a797f11943dee7cf12e3c6b0995b67a60"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t ShipCAD::Intersection::getCount </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="intersection_8h_source.html#l00075">75</a> of file <a class="el" href="intersection_8h_source.html">intersection.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3dfeca59ddc0235a665475718bae11ae"></a>
+<a class="anchor" id="ab0434113cfd34c8a3ab11f75976dbf5b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const QString &amp; Intersection::getDescription </td>
+          <td class="memname">QString Intersection::getDescription </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -536,19 +513,18 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00105">105</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00118">118</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a22bce61f4ecfda5ae23351d186bda831"></a>
+<a class="anchor" id="a1b93db56e5877226b30871754bba9838"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classShipCAD_1_1Spline.html">Spline</a>* ShipCAD::Intersection::getItem </td>
+          <td class="memname"><a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fd">intersection_type_t</a> ShipCAD::Intersection::getIntersectionType </td>
           <td>(</td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -577,7 +553,22 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8h_source.html#l00074">74</a> of file <a class="el" href="intersection_8h_source.html">intersection.h</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8h_source.html#l00075">75</a> of file <a class="el" href="intersection_8h_source.html">intersection.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0092acbb149bb6a5c2e1f9a4b300c2da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceShipCAD.html#a053b941b2c87049bb9380428d4d5a056">SplineVector</a>&amp; ShipCAD::Intersection::getSplines </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -595,7 +586,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00151">151</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00352">352</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -622,7 +613,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classShipCAD_1_1Entity.html#a2571654319df6ad6841a437be7a75395">ShipCAD::Entity</a>.</p>
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00115">115</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00133">133</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -640,7 +631,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00206">206</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00407">407</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -658,7 +649,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00249">249</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00450">450</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
 
 </div>
 </div>
@@ -679,14 +670,77 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Reimplemented from <a class="el" href="classShipCAD_1_1Entity.html#a1889198398f42bb7f77a2334031c3f33">ShipCAD::Entity</a>.</p>
 
-<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00075">75</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+<p>Definition at line <a class="el" href="intersection_8cpp_source.html#l00077">77</a> of file <a class="el" href="intersection_8cpp_source.html">intersection.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adc12c68675b19f5ae92d4c6ec8db0f62"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Intersection::setIntersectionType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#aa56834b730aafdf2786ddc9a60a046fd">intersection_type_t</a>&#160;</td>
+          <td class="paramname"><em>set</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a582c3dcbe3016c554b6bba094e2854ce"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Intersection::setPlane </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>pln</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8b587bbe80ef146d25e8a1568a84afb0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Intersection::setUseHydrostaticsSurfacesOnly </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>set</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5ac5f3018d8b95b57ab40ccafe782bf4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShipCAD::Intersection::useHydrostaticsSurfacesOnly </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -697,7 +751,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 12 2015 22:51:08 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Aug 15 2015 19:42:44 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

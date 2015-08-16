@@ -32,6 +32,8 @@ var searchData=
   ['resistance_2eh',['resistance.h',['../resistance_8h.html',1,'']]],
   ['resizeevent',['resizeEvent',['../classOpenGLWindow.html#ae0e1d4dc039ce114ac615ce1dee38e51',1,'OpenGLWindow::resizeEvent()'],['../classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb',1,'ShipCAD::Viewport::resizeEvent()']]],
   ['restore',['restore',['../classShipCAD_1_1UndoObject.html#a9cace556c2092492f681654d72e35ba6',1,'ShipCAD::UndoObject']]],
+  ['rotatepoint',['RotatePoint',['../structVolumeCalc.html#adc01f5f156dccfc889a3ab8585341fa4',1,'VolumeCalc']]],
   ['rudder_5farea',['rudder_area',['../structShipCAD_1_1DelftSeriesResistance.html#a9737974d43a292c58a2e24f7c78c1ffb',1,'ShipCAD::DelftSeriesResistance']]],
-  ['rudder_5fchord_5flength',['rudder_chord_length',['../structShipCAD_1_1DelftSeriesResistance.html#a5a348a92e0ba99368c50f72c81a9b0ff',1,'ShipCAD::DelftSeriesResistance']]]
+  ['rudder_5fchord_5flength',['rudder_chord_length',['../structShipCAD_1_1DelftSeriesResistance.html#a5a348a92e0ba99368c50f72c81a9b0ff',1,'ShipCAD::DelftSeriesResistance']]],
+  ['run',['run',['../structVolumeCalc.html#a9dc91b671e810b1bd4236565a89caf05',1,'VolumeCalc']]]
 ];

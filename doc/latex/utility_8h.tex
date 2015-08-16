@@ -32,6 +32,8 @@ Q\-String \hyperlink{namespaceShipCAD_a83d943939c1d84473bb904360116f7be}{Ship\-C
 \item 
 Q\-Vector3\-D \hyperlink{namespaceShipCAD_a81e47e31f89000550b007c0f9a4d09aa}{Ship\-C\-A\-D\-::\-Unified\-Normal} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3)
 \item 
+float \hyperlink{namespaceShipCAD_ac344c080c66b4394cb988cf88c726029}{Ship\-C\-A\-D\-::\-Deg\-To\-Rad} (float deg)
+\item 
 float \hyperlink{namespaceShipCAD_a3ad1916db38fb61e8a053f944df49cee}{Ship\-C\-A\-D\-::\-Rad\-To\-Deg} (float rad)
 \item 
 bool \hyperlink{namespaceShipCAD_ae1773f0e415446342401a67430a8b643}{Ship\-C\-A\-D\-::\-Point\-In\-Triangle} (const Q\-Vector3\-D \&intercept, const Q\-Vector3\-D \&p0, const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
@@ -41,10 +43,12 @@ void \hyperlink{namespaceShipCAD_a36b9b33181823761bc327d66c36c8d8f}{Ship\-C\-A\-
 void \hyperlink{namespaceShipCAD_a41e6294f71b66bca070c744accbb3ef2}{Ship\-C\-A\-D\-::\-Clip\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, const \hyperlink{classShipCAD_1_1Plane}{Plane} \&plane, std\-::vector$<$ Q\-Vector3\-D $>$ \&front, std\-::vector$<$ Q\-Vector3\-D $>$ \&back)
 \item 
 float \hyperlink{namespaceShipCAD_a6f9f5ac15e7e2821bba27ba06827a4e1}{Ship\-C\-A\-D\-::\-Squared\-Dist\-P\-P} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
-\item 
+\begin{DoxyCompactList}\small\item\em squared distance between 2 3\-D points \end{DoxyCompactList}\item 
+float \hyperlink{namespaceShipCAD_a438e97b711c6878eba3bf7182e68a3c7}{Ship\-C\-A\-D\-::\-Dist\-P\-P3\-D} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
+\begin{DoxyCompactList}\small\item\em distance between 2 3\-D points \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_a45ba7de6922e89cbddf2a4c9c810a2e4}{Ship\-C\-A\-D\-::\-Bool\-To\-Str} (bool val)
 \item 
-void \hyperlink{namespaceShipCAD_a53d65cdf2cebdb1cb67e56417cf203bd}{Ship\-C\-A\-D\-::\-Join\-Spline\-Segments} (float join\-\_\-error, bool force\-\_\-to\-\_\-one\-\_\-segment, std\-::vector$<$ \hyperlink{classShipCAD_1_1Spline}{Spline} $\ast$ $>$ list)
+void \hyperlink{namespaceShipCAD_a2eddf75f0e29363ab81a3fb0e0211848}{Ship\-C\-A\-D\-::\-Join\-Spline\-Segments} (float join\-\_\-error, bool force\-\_\-to\-\_\-one\-\_\-segment, \hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\-Vector} \&list)
 \item 
 int \hyperlink{namespaceShipCAD_a70b238d926183460670b82d9680b5cb9}{Ship\-C\-A\-D\-::\-Read\-Int\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
 \item 
@@ -55,4 +59,6 @@ float \hyperlink{namespaceShipCAD_a696bc38864a736dda734802f3cda4346}{Ship\-C\-A\
 float \hyperlink{namespaceShipCAD_a44025ef38e6ee9f12cbf032660f637b5}{Ship\-C\-A\-D\-::\-Find\-Water\-Viscosity} (float density, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
 \begin{DoxyCompactList}\small\item\em find water viscosity based on density \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_ae416df4a72579eb3a1a418b19551eb53}{Ship\-C\-A\-D\-::\-Change\-File\-Ext} (const Q\-String \&name, const Q\-String \&ext)
-\begin{DoxyCompactList}\small\item\em Append or change the file extension to that given. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Append or change the file extension to that given. \end{DoxyCompactList}\item 
+float \hyperlink{namespaceShipCAD_ad3ca198e79658bf065f1c1c416f23670}{Ship\-C\-A\-D\-::\-Volume\-To\-Displacement} (float volume, float density, float appcoeff, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+\end{DoxyCompactItemize}

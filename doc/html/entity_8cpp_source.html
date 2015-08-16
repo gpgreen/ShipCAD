@@ -120,94 +120,93 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity_8h.html">entity.h</a>&quot;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utility_8h.html">utility.h</a>&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using namespace </span>ShipCAD;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">static</span> QVector3D <a class="code" href="subdivface_8cpp.html#a7ad595cecefd42a42060c532d819934a">ZERO</a> = QVector3D();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">static</span> QVector3D ONE = QVector3D(1,1,1);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="shipcadlib_8h.html">shipcadlib.h</a>&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using namespace </span>ShipCAD;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a980f368aa07ce358583982821533a54a">   42</a></span>&#160;Entity::Entity()</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    clear();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a998d0e5d360371046fd5835ba1e0877a">   47</a></span>&#160;<span class="keywordtype">void</span> Entity::clear()</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    _build = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    _min = <a class="code" href="subdivface_8cpp.html#a7ad595cecefd42a42060c532d819934a">ZERO</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    _max = <a class="code" href="subdivface_8cpp.html#a7ad595cecefd42a42060c532d819934a">ZERO</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    _color = Qt::black;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    _pen_width = 1;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    _pen_style = Qt::SolidLine;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a08e8e53770c85002afa45f46e7bf10f8">   57</a></span>&#160;<span class="keywordtype">void</span> Entity::extents(QVector3D&amp; min, QVector3D&amp; max)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">if</span> (!_build)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        rebuild();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="namespaceShipCAD.html#aa5d3fc63603d716d3e24244049e1e510">MinMax</a>(_min, min, max);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="namespaceShipCAD.html#aa5d3fc63603d716d3e24244049e1e510">MinMax</a>(_max, min, max);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a131cd27d923ba1d2658528b679b9a90c">   65</a></span>&#160;<span class="keywordtype">bool</span> Entity::isBuild()</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> _build;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a1889198398f42bb7f77a2334031c3f33">   70</a></span>&#160;<span class="keywordtype">void</span> Entity::setBuild(<span class="keywordtype">bool</span> val)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span> (val != _build) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        _build = val;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span> (!val) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            _min = <a class="code" href="subdivface_8cpp.html#a7ad595cecefd42a42060c532d819934a">ZERO</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            _max = <a class="code" href="subdivface_8cpp.html#a7ad595cecefd42a42060c532d819934a">ZERO</a>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a759d6dedd36bf6562fbf36e816d9a5af">   81</a></span>&#160;QVector3D Entity::getMin()</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (!_build)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        rebuild();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">return</span> _min;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a3af98adafb45eb573675a8ccc44fe14e">   88</a></span>&#160;QVector3D Entity::getMax()</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">if</span> (!_build)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        rebuild();</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">return</span> _max;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">   95</a></span>&#160;<span class="keywordtype">void</span> Entity::dump(ostream&amp; os)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot; Build:&quot;</span> &lt;&lt; (_build ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;\n Min:[&quot;</span> &lt;&lt; _min.x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _min.y() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _min.z()</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;]\n Max:[&quot;</span> &lt;&lt; _max.x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _max.y() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _max.z()</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;]\n PenWidth:&quot;</span> &lt;&lt; _pen_width</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;\n PenStyle:&quot;</span> &lt;&lt; _pen_style</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;\n Color:[&quot;</span> &lt;&lt; _color.red() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _color.green() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _color.blue()</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="entity_8h.html#ac4a93028d71849f2043dfcd7abce7da3">  106</a></span>&#160;ostream&amp; <a class="code" href="entity_8cpp.html#adfb8ee72b82f31145e1eadb8836c6e40">operator &lt;&lt; </a>(ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a>&amp; entity)</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;{</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    entity.<a class="code" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">dump</a>(os);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> os;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a980f368aa07ce358583982821533a54a">   40</a></span>&#160;Entity::Entity()</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    clear();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a998d0e5d360371046fd5835ba1e0877a">   45</a></span>&#160;<span class="keywordtype">void</span> Entity::clear()</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    _build = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    _min = <a class="code" href="namespaceShipCAD.html#a949bc53a1634b268b43de672807480fb">ZERO</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    _max = <a class="code" href="namespaceShipCAD.html#a949bc53a1634b268b43de672807480fb">ZERO</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    _color = Qt::black;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    _pen_width = 1;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    _pen_style = Qt::SolidLine;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a08e8e53770c85002afa45f46e7bf10f8">   55</a></span>&#160;<span class="keywordtype">void</span> Entity::extents(QVector3D&amp; min, QVector3D&amp; max)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span> (!_build)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        rebuild();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="namespaceShipCAD.html#aa5d3fc63603d716d3e24244049e1e510">MinMax</a>(_min, min, max);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="namespaceShipCAD.html#aa5d3fc63603d716d3e24244049e1e510">MinMax</a>(_max, min, max);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a131cd27d923ba1d2658528b679b9a90c">   63</a></span>&#160;<span class="keywordtype">bool</span> Entity::isBuild()</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">return</span> _build;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a1889198398f42bb7f77a2334031c3f33">   68</a></span>&#160;<span class="keywordtype">void</span> Entity::setBuild(<span class="keywordtype">bool</span> val)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (val != _build) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        _build = val;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> (!val) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            _min = <a class="code" href="namespaceShipCAD.html#a949bc53a1634b268b43de672807480fb">ZERO</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            _max = <a class="code" href="namespaceShipCAD.html#a949bc53a1634b268b43de672807480fb">ZERO</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a759d6dedd36bf6562fbf36e816d9a5af">   79</a></span>&#160;QVector3D Entity::getMin()</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> (!_build)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        rebuild();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">return</span> _min;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a3af98adafb45eb573675a8ccc44fe14e">   86</a></span>&#160;QVector3D Entity::getMax()</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span> (!_build)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        rebuild();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> _max;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">   93</a></span>&#160;<span class="keywordtype">void</span> Entity::dump(ostream&amp; os)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot; Build:&quot;</span> &lt;&lt; (_build ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span>)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;\n Min:[&quot;</span> &lt;&lt; _min.x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _min.y() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _min.z()</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;]\n Max:[&quot;</span> &lt;&lt; _max.x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _max.y() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _max.z()</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;]\n PenWidth:&quot;</span> &lt;&lt; _pen_width</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;\n PenStyle:&quot;</span> &lt;&lt; _pen_style</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;\n Color:[&quot;</span> &lt;&lt; _color.red() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _color.green() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; _color.blue()</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="entity_8h.html#ac4a93028d71849f2043dfcd7abce7da3">  104</a></span>&#160;ostream&amp; <a class="code" href="entity_8cpp.html#adfb8ee72b82f31145e1eadb8836c6e40">operator &lt;&lt; </a>(ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a>&amp; entity)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    entity.<a class="code" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">dump</a>(os);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
 <div class="ttc" id="entity_8h_html"><div class="ttname"><a href="entity_8h.html">entity.h</a></div></div>
-<div class="ttc" id="entity_8cpp_html_adfb8ee72b82f31145e1eadb8836c6e40"><div class="ttname"><a href="entity_8cpp.html#adfb8ee72b82f31145e1eadb8836c6e40">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;os, const ShipCAD::Entity &amp;entity)</div><div class="ttdef"><b>Definition:</b> <a href="entity_8cpp_source.html#l00106">entity.cpp:106</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Entity_html_a395d7573df06482d9deaecdc87d46944"><div class="ttname"><a href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">ShipCAD::Entity::dump</a></div><div class="ttdeci">void dump(std::ostream &amp;os) const </div><div class="ttdef"><b>Definition:</b> <a href="entity_8cpp_source.html#l00095">entity.cpp:95</a></div></div>
+<div class="ttc" id="entity_8cpp_html_adfb8ee72b82f31145e1eadb8836c6e40"><div class="ttname"><a href="entity_8cpp.html#adfb8ee72b82f31145e1eadb8836c6e40">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;os, const ShipCAD::Entity &amp;entity)</div><div class="ttdef"><b>Definition:</b> <a href="entity_8cpp_source.html#l00104">entity.cpp:104</a></div></div>
+<div class="ttc" id="shipcadlib_8h_html"><div class="ttname"><a href="shipcadlib_8h.html">shipcadlib.h</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Entity_html_a395d7573df06482d9deaecdc87d46944"><div class="ttname"><a href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">ShipCAD::Entity::dump</a></div><div class="ttdeci">void dump(std::ostream &amp;os) const </div><div class="ttdef"><b>Definition:</b> <a href="entity_8cpp_source.html#l00093">entity.cpp:93</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_a949bc53a1634b268b43de672807480fb"><div class="ttname"><a href="namespaceShipCAD.html#a949bc53a1634b268b43de672807480fb">ShipCAD::ZERO</a></div><div class="ttdeci">const QVector3D ZERO</div></div>
 <div class="ttc" id="namespaceShipCAD_html_aa5d3fc63603d716d3e24244049e1e510"><div class="ttname"><a href="namespaceShipCAD.html#aa5d3fc63603d716d3e24244049e1e510">ShipCAD::MinMax</a></div><div class="ttdeci">void MinMax(const QVector3D &amp;p, QVector3D &amp;min, QVector3D &amp;max)</div><div class="ttdef"><b>Definition:</b> <a href="utility_8cpp_source.html#l00039">utility.cpp:39</a></div></div>
 <div class="ttc" id="utility_8h_html"><div class="ttname"><a href="utility_8h.html">utility.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Entity_html"><div class="ttname"><a href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a></div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00062">entity.h:62</a></div></div>
-<div class="ttc" id="subdivface_8cpp_html_a7ad595cecefd42a42060c532d819934a"><div class="ttname"><a href="subdivface_8cpp.html#a7ad595cecefd42a42060c532d819934a">ZERO</a></div><div class="ttdeci">const QVector3D ZERO</div><div class="ttdef"><b>Definition:</b> <a href="subdivface_8cpp_source.html#l00048">subdivface.cpp:48</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Entity_html"><div class="ttname"><a href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a></div><div class="ttdoc">base class for all non-surface drawable elements </div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00064">entity.h:64</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 12 2015 22:51:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Aug 15 2015 19:42:43 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

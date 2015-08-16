@@ -12,8 +12,8 @@ var indexSectionsWithContent =
   2: "su",
   3: "befhimnoprsuv",
   4: "abcdefghijlmnopqrstuvw~",
-  5: "_abcdefgiklmnprsuvwz",
-  6: "acfghim",
+  5: "_abcdefghiklmnoprsuvwz",
+  6: "acfghims",
   7: "acehimpsuv",
   8: "aefhmsv",
   9: "abcefilmnopsv"

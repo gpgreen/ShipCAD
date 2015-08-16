@@ -14,6 +14,7 @@ var searchData=
   ['updateundodata',['updateUndoData',['../classShipCAD_1_1ShipCADModel.html#a67e2bacab21ee04409e3b33693b7ae92',1,'ShipCAD::ShipCADModel']]],
   ['updateviews',['updateViews',['../classShipCAD_1_1BackgroundImage.html#ae64647d7f69166b1af28920953f6bfc4',1,'ShipCAD::BackgroundImage']]],
   ['useforintersections',['useForIntersections',['../classShipCAD_1_1SubdivisionLayer.html#a817b83f4da64e030609d77c4984d7fb1',1,'ShipCAD::SubdivisionLayer']]],
+  ['usehydrostaticssurfacesonly',['useHydrostaticsSurfacesOnly',['../classShipCAD_1_1Intersection.html#a5ac5f3018d8b95b57ab40ccafe782bf4',1,'ShipCAD::Intersection']]],
   ['useinhydrostatics',['useInHydrostatics',['../classShipCAD_1_1SubdivisionLayer.html#ab80cd9444086290d1298b9b2459a9e7b',1,'ShipCAD::SubdivisionLayer']]],
   ['utility_2ecpp',['utility.cpp',['../utility_8cpp.html',1,'']]],
   ['utility_2eh',['utility.h',['../utility_8h.html',1,'']]],

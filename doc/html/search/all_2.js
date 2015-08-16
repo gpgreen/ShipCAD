@@ -4,13 +4,13 @@ var searchData=
   ['backgroundimage',['BackgroundImage',['../classShipCAD_1_1BackgroundImage.html#ab37b2469c0bc2558b5eb27b42c5e30eb',1,'ShipCAD::BackgroundImage']]],
   ['backgroundimage',['BackgroundImage',['../classShipCAD_1_1BackgroundImage.html',1,'ShipCAD']]],
   ['backgroundimage_2eh',['backgroundimage.h',['../backgroundimage_8h.html',1,'']]],
-  ['balance',['balance',['../classShipCAD_1_1HydrostaticCalc.html#a8c89c1a9f8086eee6efedd41c2ebdcef',1,'ShipCAD::HydrostaticCalc']]],
+  ['balance',['balance',['../classShipCAD_1_1HydrostaticCalc.html#a7573a510a6b53e56a79f4042e41ee89e',1,'ShipCAD::HydrostaticCalc']]],
   ['beam_5fwaterline',['beam_waterline',['../structShipCAD_1_1HydrostaticsData.html#ab79755f5814572be0dfd3ae3ba214fca',1,'ShipCAD::HydrostaticsData']]],
-  ['begin',['begin',['../classShipCAD_1_1HydrostaticCalcVector.html#a402ad58dee97fecd54c00f15e836a38e',1,'ShipCAD::HydrostaticCalcVector::begin()'],['../classShipCAD_1_1IntersectionVector.html#abab8d5c4cc1150b73094360c826abda9',1,'ShipCAD::IntersectionVector::begin()'],['../classShipCAD_1_1MarkerVector.html#a87a3511e7920311ae12b9fad52c2365d',1,'ShipCAD::MarkerVector::begin()'],['../classShipCAD_1_1SubdivisionControlCurveVector.html#abeccf7ff2c8be83040d6bf67f3217707',1,'ShipCAD::SubdivisionControlCurveVector::begin()']]],
+  ['begin',['begin',['../classPointerVector.html#a594866129f2e9a3701c1f414ca3299e3',1,'PointerVector::begin()'],['../classPointerVector.html#a97ee9f133fa9e61341f33feb3f36f45b',1,'PointerVector::begin() const ']]],
   ['bind',['bind',['../classShipCAD_1_1Shader.html#a00c06ead1e413d5d5ecbced82478f753',1,'ShipCAD::Shader']]],
   ['block_5fcoefficient',['block_coefficient',['../structShipCAD_1_1HydrostaticsData.html#ac59c717b9869f0aacca4305fd81d4882',1,'ShipCAD::HydrostaticsData']]],
   ['booltostr',['BoolToStr',['../namespaceShipCAD.html#a45ba7de6922e89cbddf2a4c9c810a2e4',1,'ShipCAD']]],
   ['build',['Build',['../classShipCAD_1_1Entity.html#a7518cde7c6a7c576827efd3d65c732e4',1,'ShipCAD::Entity']]],
-  ['buildvalidframetable',['buildValidFrameTable',['../classShipCAD_1_1ShipCADModel.html#abb435e62fccca913acb2331f82abce93',1,'ShipCAD::ShipCADModel']]],
+  ['buildvalidframetable',['buildValidFrameTable',['../classShipCAD_1_1ShipCADModel.html#abefac47aa19318b4ae3c82108dfe4585',1,'ShipCAD::ShipCADModel']]],
   ['bwl',['bwl',['../structShipCAD_1_1DelftSeriesResistance.html#a160c7b99be523bcda5301231806af6b3',1,'ShipCAD::DelftSeriesResistance::bwl()'],['../structShipCAD_1_1KAPERResistance.html#ab1cc995ebce998cfc19ef8b1501f328e',1,'ShipCAD::KAPERResistance::bwl()']]]
 ];

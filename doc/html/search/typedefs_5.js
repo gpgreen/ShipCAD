@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ivec_5fiterator',['ivec_iterator',['../classShipCAD_1_1IntersectionVector.html#a02685a86dd24a49a1664a07172d709ff',1,'ShipCAD::IntersectionVector']]]
+  ['intersectionvector',['IntersectionVector',['../namespaceShipCAD.html#a9910f0963197f9df6125398efd4fa139',1,'ShipCAD']]]
 ];

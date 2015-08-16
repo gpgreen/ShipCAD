@@ -19,8 +19,8 @@ var searchData=
   ['viewport_5fmode_5ft',['viewport_mode_t',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863',1,'ShipCAD']]],
   ['viewport_5ftype_5ft',['viewport_type_t',['../namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a',1,'ShipCAD']]],
   ['viscosity',['viscosity',['../structShipCAD_1_1DelftSeriesResistance.html#a08ff900d51b56d7e1726cb4b5a6ffa9b',1,'ShipCAD::DelftSeriesResistance']]],
-  ['visibility',['Visibility',['../classShipCAD_1_1Visibility.html#a7b3d38d4dd65392de8b2bac001afe6e8',1,'ShipCAD::Visibility']]],
   ['visibility',['Visibility',['../classShipCAD_1_1Visibility.html',1,'ShipCAD']]],
+  ['visibility',['Visibility',['../classShipCAD_1_1Visibility.html#a7b3d38d4dd65392de8b2bac001afe6e8',1,'ShipCAD::Visibility']]],
   ['visibility_2ecpp',['visibility.cpp',['../visibility_8cpp.html',1,'']]],
   ['visibility_2eh',['visibility.h',['../visibility_8h.html',1,'']]],
   ['visible',['Visible',['../classShipCAD_1_1SubdivisionControlEdge.html#a8d2d3e419649962262d049bde688caac',1,'ShipCAD::SubdivisionControlEdge::Visible()'],['../classShipCAD_1_1SubdivisionControlFace.html#a7c049d1719ff65b722729b8adca26a7c',1,'ShipCAD::SubdivisionControlFace::Visible()'],['../classShipCAD_1_1SubdivisionControlPoint.html#ab796dbf230e01f51a1031ec69f8f7f66',1,'ShipCAD::SubdivisionControlPoint::Visible()']]],
@@ -29,5 +29,7 @@ var searchData=
   ['vmshadegauss',['vmShadeGauss',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863aaf20984128d2e9697958fa8c329a801a',1,'ShipCAD']]],
   ['vmshadezebra',['vmShadeZebra',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a70fcfa9199faab53e43f138ed64ad12f',1,'ShipCAD']]],
   ['vmwireframe',['vmWireFrame',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8',1,'ShipCAD']]],
-  ['volume',['volume',['../structShipCAD_1_1HydrostaticsData.html#acfbee81bded1b067a23cfc8cc9c00855',1,'ShipCAD::HydrostaticsData::volume()'],['../structShipCAD_1_1CrosscurvesData.html#a9bec38a77bf87ab5feb76899e39e4f7b',1,'ShipCAD::CrosscurvesData::volume()']]]
+  ['volume',['volume',['../structShipCAD_1_1HydrostaticsData.html#acfbee81bded1b067a23cfc8cc9c00855',1,'ShipCAD::HydrostaticsData::volume()'],['../structShipCAD_1_1CrosscurvesData.html#a9bec38a77bf87ab5feb76899e39e4f7b',1,'ShipCAD::CrosscurvesData::volume()']]],
+  ['volumecalc',['VolumeCalc',['../structVolumeCalc.html',1,'VolumeCalc'],['../structVolumeCalc.html#a21a672444dafcae8293fe2b8be4dc071',1,'VolumeCalc::VolumeCalc()']]],
+  ['volumetodisplacement',['VolumeToDisplacement',['../namespaceShipCAD.html#ad3ca198e79658bf065f1c1c416f23670',1,'ShipCAD']]]
 ];

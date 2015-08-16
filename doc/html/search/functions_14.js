@@ -6,5 +6,7 @@ var searchData=
   ['versionstring',['versionString',['../namespaceShipCAD.html#a2901c6bb3e9ddd7efa9bdcc9095cc468',1,'ShipCAD']]],
   ['versiontoint',['versionToInt',['../namespaceShipCAD.html#ad78a3ea3f966f52a2aa9befd3bfc73b0',1,'ShipCAD']]],
   ['viewport',['Viewport',['../classShipCAD_1_1Viewport.html#a9fde8f966d9802dd42254acf0ed05386',1,'ShipCAD::Viewport']]],
-  ['visibility',['Visibility',['../classShipCAD_1_1Visibility.html#a7b3d38d4dd65392de8b2bac001afe6e8',1,'ShipCAD::Visibility']]]
+  ['visibility',['Visibility',['../classShipCAD_1_1Visibility.html#a7b3d38d4dd65392de8b2bac001afe6e8',1,'ShipCAD::Visibility']]],
+  ['volumecalc',['VolumeCalc',['../structVolumeCalc.html#a21a672444dafcae8293fe2b8be4dc071',1,'VolumeCalc']]],
+  ['volumetodisplacement',['VolumeToDisplacement',['../namespaceShipCAD.html#ad3ca198e79658bf065f1c1c416f23670',1,'ShipCAD']]]
 ];

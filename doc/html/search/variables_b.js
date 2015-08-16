@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['mainframe_5farea',['mainframe_area',['../structShipCAD_1_1HydrostaticsData.html#ab2b49d5dea89ae998116c8ff4cac2b53',1,'ShipCAD::HydrostaticsData']]],
-  ['mainframe_5fcoeff',['mainframe_coeff',['../structShipCAD_1_1HydrostaticsData.html#a4208b97fe6110516d71e67708186897a',1,'ShipCAD::HydrostaticsData']]],
-  ['mainframe_5fcog',['mainframe_cog',['../structShipCAD_1_1HydrostaticsData.html#ab726ebe5c185d197a25e4477576266a4',1,'ShipCAD::HydrostaticsData']]],
-  ['model_5fmax',['model_max',['../structShipCAD_1_1HydrostaticsData.html#a9319fb2ad054a595b6e3b3fd4059a3ae',1,'ShipCAD::HydrostaticsData']]],
-  ['model_5fmin',['model_min',['../structShipCAD_1_1HydrostaticsData.html#acd93669bc08fa097974d41fbaf4dc81f',1,'ShipCAD::HydrostaticsData']]]
+  ['lateral_5farea',['lateral_area',['../structShipCAD_1_1HydrostaticsData.html#a1ba65b28e4351a4d97bc64cd11ddab90',1,'ShipCAD::HydrostaticsData']]],
+  ['lateral_5fcog',['lateral_cog',['../structShipCAD_1_1HydrostaticsData.html#adc0c4f2f0c5b110a968e45642dc5eeeb',1,'ShipCAD::HydrostaticsData']]],
+  ['lcb',['lcb',['../structShipCAD_1_1DelftSeriesResistance.html#aca93b2c11316e29b2f98a3bdcdf65bc5',1,'ShipCAD::DelftSeriesResistance::lcb()'],['../structShipCAD_1_1KAPERResistance.html#a3b351285dc50665147ce987e0744b314',1,'ShipCAD::KAPERResistance::lcb()']]],
+  ['lcb_5fperc',['lcb_perc',['../structShipCAD_1_1HydrostaticsData.html#a783b71d811732bbc002b52f21d63c83a',1,'ShipCAD::HydrostaticsData']]],
+  ['leak',['leak',['../structShipCAD_1_1HydrostaticsData.html#a1132babc4274499418c2dc8ea6f86314',1,'ShipCAD::HydrostaticsData']]],
+  ['length_5fwaterline',['length_waterline',['../structShipCAD_1_1HydrostaticsData.html#ae65aa54bcbfb059f11aa174cfaa0447b',1,'ShipCAD::HydrostaticsData']]],
+  ['lowest_5fleak',['lowest_leak',['../structMinMaxData.html#ab422a9e59c6bb2bc9a28bbb002d5b09f',1,'MinMaxData']]],
+  ['lowest_5fpoint',['lowest_point',['../structMinMaxData.html#a3d27ad5adf37db4728e700f914bc2ab3',1,'MinMaxData']]],
+  ['lowest_5fz',['lowest_z',['../structMinMaxData.html#abe1d706394e9836f49ef8cb5dff7bd99',1,'MinMaxData']]],
+  ['lwl',['lwl',['../structShipCAD_1_1DelftSeriesResistance.html#a7232b8ea3003087a4772a650319ec8f2',1,'ShipCAD::DelftSeriesResistance::lwl()'],['../structShipCAD_1_1KAPERResistance.html#a1c2aa0aa33bf7770cd531f1d1ea8b809',1,'ShipCAD::KAPERResistance::lwl()']]]
 ];

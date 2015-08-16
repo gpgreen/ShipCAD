@@ -105,6 +105,7 @@ Inheritance diagram for ShipCAD::SubdivisionSurface:</div>
  <div class="center">
   <img src="classShipCAD_1_1SubdivisionSurface.png" usemap="#ShipCAD::SubdivisionSurface_map" alt=""/>
   <map id="ShipCAD::SubdivisionSurface_map" name="ShipCAD::SubdivisionSurface_map">
+<area href="classShipCAD_1_1Entity.html" title="base class for all non-surface drawable elements " alt="ShipCAD::Entity" shape="rect" coords="0,56,180,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -145,8 +146,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a80ab3bd6372a8465d69f71034a353e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13cfd2714344c9b85aad8d123538db48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a13cfd2714344c9b85aad8d123538db48">initialize</a> (size_t point_start, size_t edge_start)</td></tr>
 <tr class="separator:a13cfd2714344c9b85aad8d123538db48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a259856fc21f2bc1eebbc52f10dd59469"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a259856fc21f2bc1eebbc52f10dd59469">rebuild</a> ()</td></tr>
+<tr class="memitem:a259856fc21f2bc1eebbc52f10dd59469"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a259856fc21f2bc1eebbc52f10dd59469">rebuild</a> ()</td></tr>
 <tr class="separator:a259856fc21f2bc1eebbc52f10dd59469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec5073750762d1f8c3ab2107a742f4a5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aec5073750762d1f8c3ab2107a742f4a5">setBuild</a> (bool val)</td></tr>
+<tr class="separator:aec5073750762d1f8c3ab2107a742f4a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad140279118fab3343a6aee5e544814ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ad140279118fab3343a6aee5e544814ec">assembleFacesToPatches</a> (std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionLayer.html">SubdivisionLayer</a> * &gt; &amp;layers, <a class="el" href="namespaceShipCAD.html#aaba70dc1c80dc540bef320cb9b720a20">assemble_mode_t</a> mode, std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionFace.html">SubdivisionFace</a> * &gt; &amp;assembledPatches, size_t &amp;nAssembled)</td></tr>
 <tr class="separator:ad140279118fab3343a6aee5e544814ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aa7c4fd1fa84170a59e6c0549573c92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a3aa7c4fd1fa84170a59e6c0549573c92">calculateGaussCurvature</a> ()</td></tr>
@@ -157,12 +160,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1deabf43f6a24c34a58889d0361b0959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa0460120d8a093682ca352a47affdb87"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aa0460120d8a093682ca352a47affdb87">edgeConnect</a> ()</td></tr>
 <tr class="separator:aa0460120d8a093682ca352a47affdb87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc1cf0168290242dfbe5dd0d178fa7cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#abc1cf0168290242dfbe5dd0d178fa7cb">extents</a> (QVector3D &amp;min, QVector3D &amp;max)</td></tr>
+<tr class="memitem:abc1cf0168290242dfbe5dd0d178fa7cb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#abc1cf0168290242dfbe5dd0d178fa7cb">extents</a> (QVector3D &amp;min, QVector3D &amp;max)</td></tr>
 <tr class="separator:abc1cf0168290242dfbe5dd0d178fa7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac19570e1402deab738d2231d6bec9650"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ac19570e1402deab738d2231d6bec9650">extrudeEdges</a> (std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html">SubdivisionControlEdge</a> * &gt; &amp;edges, const QVector3D &amp;direction)</td></tr>
 <tr class="separator:ac19570e1402deab738d2231d6bec9650"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a576a4d43e01ca50782ba724f63f1b2bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a576a4d43e01ca50782ba724f63f1b2bd">calculateIntersections</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;plane, std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html">SubdivisionControlFace</a> * &gt; &amp;faces, std::vector&lt; <a class="el" href="classShipCAD_1_1Spline.html">Spline</a> * &gt; &amp;destination)</td></tr>
-<tr class="separator:a576a4d43e01ca50782ba724f63f1b2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fa189058cbdc190d8847c976fd4ae06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a9fa189058cbdc190d8847c976fd4ae06">calculateIntersections</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;plane, std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html">SubdivisionControlFace</a> * &gt; &amp;faces, <a class="el" href="namespaceShipCAD.html#a053b941b2c87049bb9380428d4d5a056">SplineVector</a> &amp;destination)</td></tr>
+<tr class="separator:a9fa189058cbdc190d8847c976fd4ae06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17dccf4965b49427d345bd5acce897c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a17dccf4965b49427d345bd5acce897c5">extractAllEdgeLoops</a> (std::vector&lt; std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionPoint.html">SubdivisionPoint</a> * &gt; &gt; &amp;destination)</td></tr>
 <tr class="separator:a17dccf4965b49427d345bd5acce897c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af62ba549d058dfddd4bfa1b69a577220"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#af62ba549d058dfddd4bfa1b69a577220">extractPointsFromFaces</a> (std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionFace.html">SubdivisionFace</a> * &gt; &amp;selectedfaces, std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html">SubdivisionControlPoint</a> * &gt; &amp;points, size_t &amp;lockedpoints)</td></tr>
@@ -171,8 +174,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af0f0d7bb979c8c8ba04b9be26e7cfe30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa193fd28425e9846908479615e7c5bf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aa193fd28425e9846908479615e7c5bf9">importGrid</a> (<a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a8ed657cb7d4cd34662bd2d3e949d3e3b">coordinate_grid_t</a> &amp;points, <a class="el" href="classShipCAD_1_1SubdivisionLayer.html">SubdivisionLayer</a> *layer)</td></tr>
 <tr class="separator:aa193fd28425e9846908479615e7c5bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7191008f7ec3ef34b578b27e4340927"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ab7191008f7ec3ef34b578b27e4340927">intersectPlane</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;plane, bool hydrostatics_layers_only, std::vector&lt; <a class="el" href="classShipCAD_1_1Spline.html">Spline</a> * &gt; &amp;destination)</td></tr>
-<tr class="separator:ab7191008f7ec3ef34b578b27e4340927"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86961ff2a6421d778814c013c3d2b8d7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a86961ff2a6421d778814c013c3d2b8d7">intersectPlane</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;plane, bool hydrostatics_layers_only, <a class="el" href="namespaceShipCAD.html#a053b941b2c87049bb9380428d4d5a056">SplineVector</a> &amp;destination)</td></tr>
+<tr class="separator:a86961ff2a6421d778814c013c3d2b8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada26b740ea1f317763b6ecd372f13ea2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ada26b740ea1f317763b6ecd372f13ea2">insertPlane</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;plane, bool add_curves)</td></tr>
 <tr class="separator:ada26b740ea1f317763b6ecd372f13ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9970c667fa8e33ff8b35eb6a48b6a2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ad9970c667fa8e33ff8b35eb6a48b6a2e">subdivide</a> ()</td></tr>
@@ -247,6 +250,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae45fc2694977c8fbae54ac2e0e067d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a975c97ca338eb2aaaa3dcc0640611a95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a975c97ca338eb2aaaa3dcc0640611a95">isolateEdges</a> (std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html">SubdivisionControlEdge</a> * &gt; &amp;input, std::vector&lt; std::vector&lt; <a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html">SubdivisionControlPoint</a> * &gt; &gt; &amp;sorted)</td></tr>
 <tr class="separator:a975c97ca338eb2aaaa3dcc0640611a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb0b35c10fe6ab3c348f8435a1ca844d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#acb0b35c10fe6ab3c348f8435a1ca844d">collapseEdge</a> (<a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html">SubdivisionControlEdge</a> *edge)</td></tr>
+<tr class="memdesc:acb0b35c10fe6ab3c348f8435a1ca844d"><td class="mdescLeft">&#160;</td><td class="mdescRight">collapse an edge on the surface  <a href="#acb0b35c10fe6ab3c348f8435a1ca844d">More...</a><br/></td></tr>
+<tr class="separator:acb0b35c10fe6ab3c348f8435a1ca844d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28f394042987ccc30d947ddd98a62574"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a28f394042987ccc30d947ddd98a62574">numberOfSelectedControlEdges</a> ()</td></tr>
 <tr class="separator:a28f394042987ccc30d947ddd98a62574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ceb8323935d0734fe4dc9c324aca16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ae1ceb8323935d0734fe4dc9c324aca16">setSelectedControlEdge</a> (<a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html">SubdivisionControlEdge</a> *edge)</td></tr>
@@ -331,10 +337,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3af3a30b53d867b2b25f9ac9290a264a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bf8f452664e17dae636d4b66a66eba9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1SubdivisionLayer.html">SubdivisionLayer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a5bf8f452664e17dae636d4b66a66eba9">addNewLayer</a> ()</td></tr>
 <tr class="separator:a5bf8f452664e17dae636d4b66a66eba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54b74c879ff3782b264e27a8d4fab368"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a54b74c879ff3782b264e27a8d4fab368">isBuild</a> ()</td></tr>
-<tr class="separator:a54b74c879ff3782b264e27a8d4fab368"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec5073750762d1f8c3ab2107a742f4a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aec5073750762d1f8c3ab2107a742f4a5">setBuild</a> (bool val)</td></tr>
-<tr class="separator:aec5073750762d1f8c3ab2107a742f4a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77ac47de5e6323271f45be37223fe82b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceShipCAD.html#a4a9d1acfd6a2e1e9078a5dcc36f0c817">subdiv_mode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a77ac47de5e6323271f45be37223fe82b">getSubdivisionMode</a> ()</td></tr>
 <tr class="separator:a77ac47de5e6323271f45be37223fe82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a048dce00d2ff87aa5b31319ea41f565a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a048dce00d2ff87aa5b31319ea41f565a">setSubdivisionMode</a> (<a class="el" href="namespaceShipCAD.html#a4a9d1acfd6a2e1e9078a5dcc36f0c817">subdiv_mode_t</a> val)</td></tr>
@@ -431,6 +433,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a51d2d07423cc53fc98012f07ed9525bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfe9cc964dbe05105486b43f2dc6fc4f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#acfe9cc964dbe05105486b43f2dc6fc4f">draw</a> (<a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;vp)</td></tr>
 <tr class="separator:acfe9cc964dbe05105486b43f2dc6fc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1c250ff9fa7acae3ecdca4575f3e259"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ab1c250ff9fa7acae3ecdca4575f3e259">draw</a> (<a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;vp, <a class="el" href="classShipCAD_1_1LineShader.html">LineShader</a> *lineshader)</td></tr>
+<tr class="separator:ab1c250ff9fa7acae3ecdca4575f3e259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ed961bbb7ca5fe94ec5566109d9b015"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a6ed961bbb7ca5fe94ec5566109d9b015">dump</a> (std::ostream &amp;os, const char *prefix=&quot;&quot;) const </td></tr>
 <tr class="separator:a6ed961bbb7ca5fe94ec5566109d9b015"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49109b80a26f29ad52ac109574cf4d5a"><td class="memItemLeft" align="right" valign="top">boost::pool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a49109b80a26f29ad52ac109574cf4d5a">getControlPointPool</a> ()</td></tr>
@@ -449,6 +453,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2bffb2bf9575d934e18ed5087f8d2996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fcdae8e54e98938de00dfa4229d8aa8"><td class="memItemLeft" align="right" valign="top">boost::pool &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a3fcdae8e54e98938de00dfa4229d8aa8">getFacePool</a> ()</td></tr>
 <tr class="separator:a3fcdae8e54e98938de00dfa4229d8aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classShipCAD_1_1Entity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classShipCAD_1_1Entity')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a></td></tr>
+<tr class="memitem:a980f368aa07ce358583982821533a54a inherit pub_methods_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a980f368aa07ce358583982821533a54a">Entity</a> ()</td></tr>
+<tr class="separator:a980f368aa07ce358583982821533a54a inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fe3f9f7c8875a85afb214c8ebd75604 inherit pub_methods_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a0fe3f9f7c8875a85afb214c8ebd75604">~Entity</a> ()</td></tr>
+<tr class="separator:a0fe3f9f7c8875a85afb214c8ebd75604 inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a759d6dedd36bf6562fbf36e816d9a5af inherit pub_methods_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a759d6dedd36bf6562fbf36e816d9a5af">getMin</a> ()</td></tr>
+<tr class="separator:a759d6dedd36bf6562fbf36e816d9a5af inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3af98adafb45eb573675a8ccc44fe14e inherit pub_methods_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a3af98adafb45eb573675a8ccc44fe14e">getMax</a> ()</td></tr>
+<tr class="separator:a3af98adafb45eb573675a8ccc44fe14e inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131cd27d923ba1d2658528b679b9a90c inherit pub_methods_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a131cd27d923ba1d2658528b679b9a90c">isBuild</a> ()</td></tr>
+<tr class="separator:a131cd27d923ba1d2658528b679b9a90c inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a395d7573df06482d9deaecdc87d46944 inherit pub_methods_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">dump</a> (std::ostream &amp;os) const </td></tr>
+<tr class="separator:a395d7573df06482d9deaecdc87d46944 inherit pub_methods_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -472,8 +489,6 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ad360f009ac9c27aad0a88b2df7070414"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ad360f009ac9c27aad0a88b2df7070414">_build</a></td></tr>
-<tr class="separator:ad360f009ac9c27aad0a88b2df7070414"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9bb374cf1368b4a2c779f953bca88a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ab9bb374cf1368b4a2c779f953bca88a8">_show_control_net</a></td></tr>
 <tr class="separator:ab9bb374cf1368b4a2c779f953bca88a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a828f85ee49e1481e95f61b919070842c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a828f85ee49e1481e95f61b919070842c">_initialized</a></td></tr>
@@ -538,10 +553,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a047d5d0575c944d216ada589e30ee3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a762de21a330588c7bfbe081637cab2f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1Plane.html">Plane</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a762de21a330588c7bfbe081637cab2f3">_waterline_plane</a></td></tr>
 <tr class="separator:a762de21a330588c7bfbe081637cab2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1d7164e7bdcebc2584a54f466495053"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ae1d7164e7bdcebc2584a54f466495053">_min</a></td></tr>
-<tr class="separator:ae1d7164e7bdcebc2584a54f466495053"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b21a31f620de3b73100ca83d76002b7"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a9b21a31f620de3b73100ca83d76002b7">_max</a></td></tr>
-<tr class="separator:a9b21a31f620de3b73100ca83d76002b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ba5c4e08110400890eb60140f3e2058"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a0ba5c4e08110400890eb60140f3e2058">_last_used_layerID</a></td></tr>
 <tr class="separator:a0ba5c4e08110400890eb60140f3e2058"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef766e0b62189247c0f3214c56800040"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1SubdivisionLayer.html">SubdivisionLayer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aef766e0b62189247c0f3214c56800040">_active_layer</a></td></tr>
@@ -594,10 +605,39 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a7a7e25c91a06ca2b3f3d27a5ca310f08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f746c1c19594b1baa03e9c49c9ffd0a"><td class="memItemLeft" align="right" valign="top">boost::pool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a2f746c1c19594b1baa03e9c49c9ffd0a">_face_pool</a></td></tr>
 <tr class="separator:a2f746c1c19594b1baa03e9c49c9ffd0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classShipCAD_1_1Entity"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classShipCAD_1_1Entity')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a></td></tr>
+<tr class="memitem:a752e3eb309111a7457783e0fdab3d6fe inherit pro_attribs_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a752e3eb309111a7457783e0fdab3d6fe">_build</a></td></tr>
+<tr class="separator:a752e3eb309111a7457783e0fdab3d6fe inherit pro_attribs_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a414d4ff1ee308d47a5052910c3b34f7b inherit pro_attribs_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a414d4ff1ee308d47a5052910c3b34f7b">_min</a></td></tr>
+<tr class="separator:a414d4ff1ee308d47a5052910c3b34f7b inherit pro_attribs_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30e4f9cb421987cebd07737a554275eb inherit pro_attribs_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a30e4f9cb421987cebd07737a554275eb">_max</a></td></tr>
+<tr class="separator:a30e4f9cb421987cebd07737a554275eb inherit pro_attribs_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9892a0d84d2cfdcd3a5dabf662a595 inherit pro_attribs_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a5a9892a0d84d2cfdcd3a5dabf662a595">_pen_width</a></td></tr>
+<tr class="separator:a5a9892a0d84d2cfdcd3a5dabf662a595 inherit pro_attribs_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a150a19aa958886e9dcf7c4e0e51dcd98 inherit pro_attribs_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a150a19aa958886e9dcf7c4e0e51dcd98">_color</a></td></tr>
+<tr class="separator:a150a19aa958886e9dcf7c4e0e51dcd98 inherit pro_attribs_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac53123be976cd9739ad1657573d67d97 inherit pro_attribs_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">Qt::PenStyle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#ac53123be976cd9739ad1657573d67d97">_pen_style</a></td></tr>
+<tr class="separator:ac53123be976cd9739ad1657573d67d97 inherit pro_attribs_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header properties_classShipCAD_1_1Entity"><td colspan="2" onclick="javascript:toggleInherit('properties_classShipCAD_1_1Entity')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a></td></tr>
+<tr class="memitem:a7518cde7c6a7c576827efd3d65c732e4 inherit properties_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a7518cde7c6a7c576827efd3d65c732e4">Build</a></td></tr>
+<tr class="separator:a7518cde7c6a7c576827efd3d65c732e4 inherit properties_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a117b8362d17e9ef352555a85a6f015ff inherit properties_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a117b8362d17e9ef352555a85a6f015ff">Color</a></td></tr>
+<tr class="separator:a117b8362d17e9ef352555a85a6f015ff inherit properties_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac363c3a8e4d5553b98996d6114b6b148 inherit properties_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#ac363c3a8e4d5553b98996d6114b6b148">Min</a></td></tr>
+<tr class="separator:ac363c3a8e4d5553b98996d6114b6b148 inherit properties_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ce317d1da352757209465baebce15f8 inherit properties_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a1ce317d1da352757209465baebce15f8">Max</a></td></tr>
+<tr class="separator:a1ce317d1da352757209465baebce15f8 inherit properties_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95a1cc38c08e5b64a540727afb99d25a inherit properties_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a95a1cc38c08e5b64a540727afb99d25a">PenWidth</a></td></tr>
+<tr class="separator:a95a1cc38c08e5b64a540727afb99d25a inherit properties_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cbcbada188edd9d39e7c5743dc43560 inherit properties_classShipCAD_1_1Entity"><td class="memItemLeft" align="right" valign="top">Qt::PenStyle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a8cbcbada188edd9d39e7c5743dc43560">penstyle</a></td></tr>
+<tr class="separator:a8cbcbada188edd9d39e7c5743dc43560 inherit properties_classShipCAD_1_1Entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00067">67</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00068">68</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a class="anchor" id="ae53cacefe98ce33992a05f941f4ff4ee"></a>
 <div class="memitem">
@@ -609,7 +649,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00075">75</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00076">76</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -623,7 +663,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00076">76</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00077">77</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -637,7 +677,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00073">73</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00074">74</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -651,7 +691,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00074">74</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00075">75</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -677,7 +717,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00059">59</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00056">56</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -702,7 +742,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00083">83</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00081">81</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -721,7 +761,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00717">717</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00716">716</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -749,7 +789,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00703">703</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00702">702</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -783,7 +823,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00381">381</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00379">379</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -801,7 +841,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00625">625</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00624">624</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -829,7 +869,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00806">806</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00805">805</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -863,7 +903,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00724">724</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00723">723</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -881,7 +921,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00096">96</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00094">94</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -899,7 +939,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00131">131</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00129">129</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -916,7 +956,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00153">153</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00151">151</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -933,7 +973,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00169">169</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00167">167</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -973,7 +1013,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00225">225</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00223">223</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -990,11 +1030,11 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00233">233</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00231">231</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a576a4d43e01ca50782ba724f63f1b2bd"></a>
+<a class="anchor" id="a9fa189058cbdc190d8847c976fd4ae06"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -1013,7 +1053,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classShipCAD_1_1Spline.html">Spline</a> * &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a053b941b2c87049bb9380428d4d5a056">SplineVector</a> &amp;&#160;</td>
           <td class="paramname"><em>destination</em>&#160;</td>
         </tr>
         <tr>
@@ -1095,7 +1135,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00811">811</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Reimplemented from <a class="el" href="classShipCAD_1_1Entity.html#a998d0e5d360371046fd5835ba1e0877a">ShipCAD::Entity</a>.</p>
+
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00810">810</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1133,6 +1175,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="acb0b35c10fe6ab3c348f8435a1ca844d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SubdivisionSurface::collapseEdge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html">SubdivisionControlEdge</a> *&#160;</td>
+          <td class="paramname"><em>edge</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>collapse an edge on the surface </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">edge</td><td>the edge to collapse </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02301">2301</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a6a89be4440e3adfcb0b14c164db891ae"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1157,7 +1225,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01796">1796</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01800">1800</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1203,7 +1271,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00304">304</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00302">302</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1221,7 +1289,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00364">364</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00362">362</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1239,7 +1307,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00159">159</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00157">157</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1257,7 +1325,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00477">477</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00475">475</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1275,7 +1343,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00415">415</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00413">413</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1293,7 +1361,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00460">460</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00458">458</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1367,7 +1435,45 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01746">1746</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01745">1745</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab1c250ff9fa7acae3ecdca4575f3e259"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SubdivisionSurface::draw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;&#160;</td>
+          <td class="paramname"><em>vp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1LineShader.html">LineShader</a> *&#160;</td>
+          <td class="paramname"><em>lineshader</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classShipCAD_1_1Entity.html#aa62e306d991140dcd564360f8f6e7539">ShipCAD::Entity</a>.</p>
+
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01761">1761</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1392,7 +1498,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00249">249</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00254">254</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -1428,7 +1534,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02661">2661</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02790">2790</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1473,7 +1579,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01771">1771</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01775">1775</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1526,6 +1632,9 @@ Protected Attributes</h2></td></tr>
 <a class="anchor" id="abc1cf0168290242dfbe5dd0d178fa7cb"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void SubdivisionSurface::extents </td>
@@ -1545,7 +1654,14 @@ Protected Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classShipCAD_1_1Entity.html#a08e8e53770c85002afa45f46e7bf10f8">ShipCAD::Entity</a>.</p>
 
 <p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01364">1364</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
@@ -1565,7 +1681,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01865">1865</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01869">1869</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1599,7 +1715,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01901">1901</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01905">1905</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1627,7 +1743,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01930">1930</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01934">1934</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1697,7 +1813,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00197">197</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00195">195</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1722,7 +1838,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00214">214</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00221">221</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -1740,7 +1856,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00314">314</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00312">312</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1765,7 +1881,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00270">270</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00275">275</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -1790,7 +1906,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00293">293</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00299">299</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -1808,7 +1924,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00286">286</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00284">284</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1833,7 +1949,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00291">291</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00297">297</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -1851,7 +1967,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00374">374</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00372">372</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1891,7 +2007,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00180">180</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00178">178</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1916,7 +2032,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00292">292</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00298">298</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -1934,7 +2050,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00263">263</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00261">261</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -1959,7 +2075,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00290">290</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00296">296</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -1984,7 +2100,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00241">241</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00246">246</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2009,7 +2125,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00266">266</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00271">271</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2034,7 +2150,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00268">268</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00273">273</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2059,7 +2175,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00262">262</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00267">267</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2084,7 +2200,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00269">269</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00274">274</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2109,7 +2225,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00272">272</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00277">277</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2134,7 +2250,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00231">231</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00236">236</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2159,7 +2275,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00267">267</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00272">272</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2177,7 +2293,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00470">470</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00468">468</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2202,7 +2318,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00263">263</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00268">268</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2227,7 +2343,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00296">296</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00302">302</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2252,7 +2368,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00297">297</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00303">303</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2270,7 +2386,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00402">402</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00400">400</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2295,7 +2411,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00271">271</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00276">276</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2320,7 +2436,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00294">294</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00300">300</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2345,7 +2461,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00264">264</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00269">269</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2370,7 +2486,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00238">238</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00243">243</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2395,7 +2511,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00234">234</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00239">239</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2420,7 +2536,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00233">233</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00238">238</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2438,7 +2554,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00453">453</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00451">451</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2463,7 +2579,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00295">295</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00301">301</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2488,7 +2604,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00265">265</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00270">270</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2513,7 +2629,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00261">261</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00266">266</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2538,7 +2654,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00226">226</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00231">231</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2563,7 +2679,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00236">236</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00241">241</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -2581,7 +2697,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00331">331</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00329">329</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2599,7 +2715,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00270">270</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00268">268</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2617,7 +2733,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00347">347</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00345">345</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2635,7 +2751,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00140">140</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00138">138</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2653,7 +2769,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00409">409</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00407">407</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2671,7 +2787,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00531">531</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00529">529</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2689,7 +2805,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00512">512</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00510">510</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2707,7 +2823,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00550">550</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00548">548</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2725,7 +2841,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00569">569</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00567">567</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2753,7 +2869,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01966">1966</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01970">1970</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2781,7 +2897,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02059">2059</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02063">2063</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2815,7 +2931,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00276">276</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00274">274</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2833,7 +2949,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00337">337</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00335">335</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2851,7 +2967,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00253">253</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00251">251</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2869,7 +2985,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00487">487</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00485">485</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2887,7 +3003,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00392">392</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00390">390</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2905,7 +3021,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00443">443</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00441">441</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2933,7 +3049,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02119">2119</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02123">2123</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -2961,11 +3077,11 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02172">2172</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02176">2176</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab7191008f7ec3ef34b578b27e4340927"></a>
+<a class="anchor" id="a86961ff2a6421d778814c013c3d2b8d7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -2984,7 +3100,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classShipCAD_1_1Spline.html">Spline</a> * &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a053b941b2c87049bb9380428d4d5a056">SplineVector</a> &amp;&#160;</td>
           <td class="paramname"><em>destination</em>&#160;</td>
         </tr>
         <tr>
@@ -2995,32 +3111,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02141">2141</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a54b74c879ff3782b264e27a8d4fab368"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ShipCAD::SubdivisionSurface::isBuild </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00224">224</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02145">2145</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3037,7 +3128,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00387">387</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00385">385</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3065,7 +3156,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02248">2248</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02252">2252</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3090,7 +3181,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00218">218</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00225">225</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3108,7 +3199,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02297">2297</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02426">2426</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3136,7 +3227,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02359">2359</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02488">2488</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3178,7 +3269,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00088">88</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00086">86</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3203,7 +3294,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00197">197</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00204">204</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3228,7 +3319,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00150">150</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00152">152</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3253,7 +3344,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00173">173</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00180">180</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3278,7 +3369,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00124">124</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00126">126</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3303,7 +3394,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00143">143</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00145">145</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3320,7 +3411,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00426">426</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00424">424</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3345,7 +3436,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00211">211</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00218">218</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3362,7 +3453,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00434">434</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00432">432</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3387,7 +3478,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00118">118</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00120">120</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3412,7 +3503,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00205">205</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00212">212</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3437,7 +3528,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00163">163</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00170">170</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3462,7 +3553,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00191">191</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00198">198</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3487,7 +3578,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00137">137</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00139">139</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3504,7 +3595,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00497">497</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00495">495</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3540,13 +3631,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02668">2668</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02797">2797</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
 <a class="anchor" id="a259856fc21f2bc1eebbc52f10dd59469"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void SubdivisionSurface::rebuild </td>
@@ -3555,9 +3649,16 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02414">2414</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Implements <a class="el" href="classShipCAD_1_1Entity.html#a2571654319df6ad6841a437be7a75395">ShipCAD::Entity</a>.</p>
+
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02543">2543</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3575,7 +3676,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00321">321</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00319">319</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3593,7 +3694,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00293">293</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00291">291</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3611,7 +3712,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00354">354</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00352">352</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3629,7 +3730,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00146">146</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00144">144</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3647,7 +3748,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00537">537</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00535">535</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3665,7 +3766,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00518">518</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00516">516</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3683,7 +3784,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00556">556</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00554">554</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3701,7 +3802,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00575">575</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00573">573</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3718,7 +3819,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00582">582</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00580">580</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3736,7 +3837,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02474">2474</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02603">2603</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3754,7 +3855,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02502">2502</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02631">2631</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3771,7 +3872,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02522">2522</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02651">2651</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3813,13 +3914,16 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00588">588</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00586">586</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
 <a class="anchor" id="aec5073750762d1f8c3ab2107a742f4a5"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void SubdivisionSurface::setBuild </td>
@@ -3829,9 +3933,16 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00594">594</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Reimplemented from <a class="el" href="classShipCAD_1_1Entity.html#a1889198398f42bb7f77a2334031c3f33">ShipCAD::Entity</a>.</p>
+
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00592">592</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3857,7 +3968,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00232">232</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00237">237</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3875,7 +3986,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00607">607</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00606">606</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3901,7 +4012,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00257">257</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00262">262</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3927,7 +4038,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00219">219</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00226">226</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3953,7 +4064,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00239">239</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00244">244</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -3971,7 +4082,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00525">525</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00523">523</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -3989,7 +4100,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00506">506</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00504">504</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4007,7 +4118,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00544">544</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00542">542</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4025,7 +4136,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00563">563</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00561">561</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4051,7 +4162,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00253">253</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00258">258</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4077,7 +4188,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00255">255</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00260">260</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4103,7 +4214,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00254">254</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00259">259</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4129,7 +4240,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00252">252</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00257">257</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4155,7 +4266,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00256">256</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00261">261</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4181,7 +4292,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00258">258</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00263">263</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4199,7 +4310,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00617">617</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l00616">616</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4225,7 +4336,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00237">237</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00242">242</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4250,7 +4361,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00245">245</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00250">250</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4275,7 +4386,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00247">247</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00252">252</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4300,7 +4411,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00246">246</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00251">251</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4325,7 +4436,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00244">244</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00249">249</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4350,7 +4461,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00248">248</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00253">253</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4375,7 +4486,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00250">250</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00255">255</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4401,7 +4512,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01805">1805</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01809">1809</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4437,7 +4548,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01836">1836</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01840">1840</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4463,7 +4574,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01851">1851</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l01855">1855</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4480,7 +4591,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02559">2559</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8cpp_source.html#l02688">2688</a> of file <a class="el" href="subdivsurface_8cpp_source.html">subdivsurface.cpp</a>.</p>
 
 </div>
 </div>
@@ -4545,29 +4656,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00365">365</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad360f009ac9c27aad0a88b2df7070414"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ShipCAD::SubdivisionSurface::_build</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00323">323</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00368">368</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4589,7 +4678,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00398">398</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00401">401</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4611,7 +4700,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00396">396</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00399">399</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4633,7 +4722,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00397">397</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00400">400</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4655,7 +4744,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00356">356</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00361">361</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4677,7 +4766,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00374">374</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00377">377</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4699,7 +4788,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00370">370</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00373">373</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4721,7 +4810,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00372">372</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00375">375</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4743,7 +4832,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00336">336</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00341">341</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4765,7 +4854,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00368">368</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00371">371</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4787,7 +4876,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00350">350</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00355">355</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4809,7 +4898,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00395">395</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00398">398</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4831,7 +4920,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00343">343</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00348">348</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4853,7 +4942,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00344">344</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00349">349</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4875,7 +4964,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00348">348</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00353">353</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4897,7 +4986,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00335">335</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00340">340</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4919,7 +5008,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00355">355</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00360">360</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4941,7 +5030,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00338">338</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00343">343</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4963,7 +5052,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00351">351</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00356">356</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -4985,7 +5074,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00334">334</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00339">339</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5007,7 +5096,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00327">327</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00332">332</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5029,7 +5118,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00346">346</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00351">351</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5051,7 +5140,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00401">401</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00404">404</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5073,7 +5162,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00382">382</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00385">385</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5095,7 +5184,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00402">402</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00405">405</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5117,7 +5206,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00378">378</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00381">381</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5139,7 +5228,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00325">325</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00330">330</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5161,7 +5250,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00363">363</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00366">366</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5183,7 +5272,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00352">352</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00357">357</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5205,7 +5294,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00399">399</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00402">402</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5227,7 +5316,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00376">376</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00379">379</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5249,7 +5338,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00354">354</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00359">359</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5271,29 +5360,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00341">341</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9b21a31f620de3b73100ca83d76002b7"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QVector3D ShipCAD::SubdivisionSurface::_max</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00361">361</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00346">346</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5315,29 +5382,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00340">340</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ae1d7164e7bdcebc2584a54f466495053"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QVector3D ShipCAD::SubdivisionSurface::_min</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00360">360</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00345">345</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5359,7 +5404,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00339">339</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00344">344</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5381,7 +5426,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00353">353</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00358">358</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5403,7 +5448,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00400">400</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00403">403</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5425,7 +5470,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00381">381</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00384">384</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5447,7 +5492,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00349">349</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00354">354</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5469,7 +5514,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00392">392</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00395">395</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5491,7 +5536,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00390">390</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00393">393</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5513,7 +5558,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00391">391</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00394">394</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5535,7 +5580,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00389">389</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00392">392</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5557,7 +5602,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00347">347</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00352">352</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5579,7 +5624,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00328">328</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00333">333</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5601,7 +5646,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00331">331</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00336">336</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5623,7 +5668,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00324">324</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00329">329</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5645,7 +5690,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00330">330</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00335">335</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5667,7 +5712,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00326">326</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00331">331</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5689,7 +5734,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00329">329</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00334">334</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5711,7 +5756,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00333">333</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00338">338</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5733,7 +5778,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00345">345</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00350">350</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5755,7 +5800,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00359">359</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00364">364</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5777,7 +5822,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00357">357</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivsurface_8h_source.html#l00362">362</a> of file <a class="el" href="subdivsurface_8h_source.html">subdivsurface.h</a>.</p>
 
 </div>
 </div>
@@ -5788,7 +5833,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 12 2015 22:51:10 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Aug 15 2015 19:42:46 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

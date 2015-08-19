@@ -66,6 +66,7 @@ public:
     explicit ShipCADModel();
     ~ShipCADModel();
 
+    Visibility& getVisibility() {return _vis;}
     ProjectSettings& getProjectSettings() {return _settings;}
     Preferences& getPreferences() {return _prefs;}
 
@@ -75,7 +76,7 @@ public:
      */
     void buildValidFrameTable(bool close_at_deck);
     // getBackgroundImage()
-    bool isBuild();
+    bool isBuild() {return _surface.isBuild();}
     void setBuild(bool set);
 
     /*! \brief get precision of model
@@ -90,6 +91,8 @@ public:
     void setPrecision(precision_t precision);
 
     version_t getFileVersion() {return _file_version;}
+    void setFileVersion(version_t v);
+
     IntersectionVector& getStations() {return _stations;}
     IntersectionVector& getWaterlines() {return _waterlines;}
     IntersectionVector& getButtocks() {return _buttocks;}
@@ -125,9 +128,9 @@ public:
 	
     HydrostaticCalcVector& getHydrostaticCalculations() {return _calculations;}
 
-    SubdivisionLayer* getActiveLayer() {return _surface->getActiveLayer();}
-    size_t numberOfLayers() {return _surface->numberOfLayers();}
-    SubdivisionLayer* getLayer(size_t index) {return _surface->getLayer(index);}
+    SubdivisionLayer* getActiveLayer() {return _surface.getActiveLayer();}
+    size_t numberOfLayers() {return _surface.numberOfLayers();}
+    SubdivisionLayer* getLayer(size_t index) {return _surface.getLayer(index);}
 
 	size_t numberOfFlowlines();
     size_t numberOfLockedPoints();
@@ -142,7 +145,7 @@ public:
     // viewport? we might want to move this into the gui window class
     void addViewport(Viewport* vp);
 
-    SubdivisionSurface* getSurface() {return _surface;}
+    SubdivisionSurface* getSurface() {return &_surface;}
 
 	/*! \brief file changed flag
 	 *
@@ -229,6 +232,13 @@ public:
 	void clear();
     void clearUndo();
 
+    /*! \brief find the bounding box of the model
+     *
+     * \param the minimum corner of the bounding box
+     * \param the maximum corner of the bounding box
+     */
+    void extents(QVector3D& min, QVector3D& max);
+
 signals:
     void onFileChanged();
     void updateUndoData();
@@ -249,7 +259,7 @@ private:
     Preferences _prefs;
     SubdivisionControlPoint* _active_control_point;
     bool _file_changed;
-    SubdivisionSurface* _surface;
+    SubdivisionSurface _surface;
     QString _filename;
     // Edit class
     IntersectionVector _stations;

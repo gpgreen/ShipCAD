@@ -772,7 +772,7 @@ void SubdivisionControlPoint::load_binary(FileBuffer &source)
         source.load(_locked);
 }
 
-void SubdivisionControlPoint::loadFromStream(size_t &lineno, vector<QString> &strings)
+void SubdivisionControlPoint::loadFromStream(size_t &lineno, QStringList &strings)
 {
     // coordinate
     QString str = strings[lineno++].trimmed();
@@ -794,10 +794,10 @@ void SubdivisionControlPoint::loadFromStream(size_t &lineno, vector<QString> &st
         _vtype = fromInt(0);
 }
 
-void SubdivisionControlPoint::saveToStream(std::vector<QString> &strings)
+void SubdivisionControlPoint::saveToStream(QStringList &strings)
 {
     strings.push_back(QString("%1 %2 %3 %4 %5")
-                      // BUGBUG: need to fix length of string
+                      // TODO: need to fix length of string
                       .arg(_coordinate.x())
                       .arg(_coordinate.y())
                       .arg(_coordinate.z())

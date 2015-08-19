@@ -90,7 +90,7 @@ public:
     // persistence
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& destiniation);
-    void saveToDXF(std::vector<QString>& strings);
+    void saveToDXF(QStringList& strings);
 
     // draw
     virtual void draw(Viewport& vp, LineShader* lineshader);

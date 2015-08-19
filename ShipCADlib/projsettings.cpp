@@ -382,7 +382,59 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
 
 void ProjectSettings::saveBinary(FileBuffer& dest)
 {
-	// TODO:
+    if (_owner->getFileVersion() >= fv120) {
+        dest.add(_name);
+        dest.add(_designer);
+        dest.add(_length);
+        dest.add(_beam);
+        dest.add(_draft);
+        dest.add(_main_particulars_has_been_set);
+        dest.add(_water_density);
+        dest.add(_appendage_coefficient);
+        dest.add(_shade_underwater_ship);
+        dest.add(_underwater_color);
+        dest.add(static_cast<int>(_units));
+        if (_owner->getFileVersion() >= fv160) {
+            dest.add(_use_default_mainframe_location);
+            dest.add(_mainframe_location);
+            if (_owner->getFileVersion() >= fv165) {
+                dest.add(_disable_model_check);
+            }
+        }
+        dest.add(_comment);
+        dest.add(_file_created_by);
+        if (_owner->getFileVersion() >= fv210) {
+            dest.add(static_cast<int>(_hydrostatic_coefficients));
+            dest.add(_save_preview);
+            if (_save_preview) {
+                // save the jpg
+            }
+            if (_owner->getFileVersion() >= fv230) {
+                dest.add(_simplify_intersections);
+            }
+            if (_owner->getFileVersion() >= fv250) {
+                dest.add(_start_draft);
+                dest.add(_end_draft);
+                dest.add(_draft_step);
+                dest.add(_trim);
+                dest.add(_displacements.size());
+                for (size_t i=0; i<_displacements.size(); i++)
+                    dest.add(_displacements[i]);
+                dest.add(_min_displacement);
+                dest.add(_max_displacement);
+                dest.add(_displ_increment);
+                dest.add(_use_displ_increments);
+                dest.add(_angles.size());
+                for (size_t i=0; i<_angles.size(); i++)
+                    dest.add(_angles[i]);
+                dest.add(_stab_trims.size());
+                for (size_t i=0; i<_stab_trims.size(); i++)
+                    dest.add(_stab_trims[i]);
+                dest.add(_free_trim);
+                dest.add(_fvcg);
+            }
+        }
+    }
 }
 
 void ProjectSettings::dump(ostream& os) const

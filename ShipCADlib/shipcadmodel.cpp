@@ -41,13 +41,12 @@ using namespace ShipCAD;
 
 ShipCADModel::ShipCADModel()
     : _precision(fpLow), _file_version(k_current_version), _edit_mode(emSelectItems), _prefs(this),
-      _active_control_point(0), _file_changed(false), _surface(0), _filename(""),
+      _active_control_point(0), _file_changed(false), _filename(""),
       _stations(true), _waterlines(true), _buttocks(true), _diagonals(true), _control_curves(true),
       _markers(true), _vis(this), _filename_set(false), _currently_moving(false),
       _stop_asking_for_file_version(false), _settings(this), _calculations(true),
       _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0)
 {
-	// set filename from userstring
 	clear();
 }
 
@@ -58,6 +57,24 @@ ShipCADModel::~ShipCADModel()
 
 void ShipCADModel::clear()
 {
+    _precision = fpLow;
+    _file_version = k_current_version;
+    _file_changed = false;
+    _surface.clear();
+    _filename = ShipCADModel::tr("New model");
+    _vis.clear();
+    _edit_mode = emSelectItems;
+    _active_control_point = 0;
+    _markers.clear();
+    _stations.clear();
+    _buttocks.clear();
+    _waterlines.clear();
+    _diagonals.clear();
+    _calculations.clear();
+    _settings.clear();
+    _filename_set = false;
+    _stop_asking_for_file_version = false;
+    // TODO resistance and background images, flowlines
 }
 
 void ShipCADModel::setFilename(const QString& name)
@@ -77,9 +94,25 @@ void ShipCADModel::buildValidFrameTable(bool close_at_deck)
     // TODO
 }
 
+void ShipCADModel::extents(QVector3D& min, QVector3D& max)
+{
+    if (_surface.numberOfControlFaces()) {
+        _surface.setDrawMirror(true);
+        _vis.setModelView(mvBoth);
+        min = QVector3D(1e6, 1e6, 1e6);
+        max = QVector3D(-1e6, -1e6, -1e6);
+        _surface.extents(min, max);
+        if (_vis.isShowMarkers()) {
+            // extents on markers
+        }
+    } else {
+        // iterate on control points
+    }
+}
+
 void ShipCADModel::setBuild(bool set)
 {
-    _surface->setBuild(set);
+    _surface.setBuild(set);
     if (!set) {
         for (size_t i=0; i<getStations().size(); i++)
             getStations().get(i)->setBuild(false);
@@ -95,11 +128,19 @@ void ShipCADModel::setBuild(bool set)
     }
 }
 
+void ShipCADModel::rebuildModel()
+{
+    setBuild(false);
+    _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
+    _surface.rebuild();
+    // TODO draw
+}
+
 void ShipCADModel::setPrecision(precision_t precision)
 {
     if (_precision != precision) {
         _precision = precision;
-        _surface->setDesiredSubdivisionLevel(static_cast<int>(_precision) + 1);
+        _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision) + 1);
         setFileChanged(true);
         setBuild(false);
         redraw();
@@ -125,7 +166,7 @@ void ShipCADModel::setFileChanged(bool set)
 QString ShipCADModel::getFilename()
 {
 	if (_filename == "") {
-		// return userstring
+        return ShipCADModel::tr("New model");
 	}
 	return ChangeFileExt(_filename, kFileExtension);
 }
@@ -197,7 +238,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 			_vis.loadBinary(source);
 			_settings.loadBinary(source, 0);
 			// load the subdivision surface
-			_surface->loadBinary(source);
+            _surface.loadBinary(source);
 			// stations
 			source.load(n);
 			for (int i=0; i<n; i++) {
@@ -246,14 +287,55 @@ void ShipCADModel::loadBinary(FileBuffer& source)
         // TODO this is not a free ship binary file
 	}
 	_file_changed = false;
-    _surface->setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
-	_surface->rebuild();
+    _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
+    _surface.rebuild();
 	emit onUpdateGeometryInfo();
+}
+
+void ShipCADModel::saveBinary(FileBuffer& dest)
+{
+   dest.add("FREE!ship");
+   dest.add(static_cast<int>(_file_version));
+   dest.add(static_cast<int>(_precision));
+   _vis.saveBinary(dest);
+   _settings.saveBinary(dest);
+   _surface.saveBinary(dest);
+   // save stations
+   dest.add(_stations.size());
+   for (size_t i=0; i<_stations.size(); i++)
+       _stations.get(i)->saveBinary(dest);
+   // save buttocks
+   dest.add(_buttocks.size());
+   for (size_t i=0; i<_buttocks.size(); i++)
+       _buttocks.get(i)->saveBinary(dest);
+   // save waterlines
+   dest.add(_waterlines.size());
+   for (size_t i=0; i<_waterlines.size(); i++)
+       _waterlines.get(i)->saveBinary(dest);
+   if (getFileVersion() >= fv180) {
+       // save diagonals
+       dest.add(_diagonals.size());
+       for (size_t i=0; i<_diagonals.size(); i++)
+           _diagonals.get(i)->saveBinary(dest);
+       if (getFileVersion() >= fv191) {
+           // save markers
+           dest.add(_markers.size());
+           for (size_t i=0; i<_markers.size(); i++)
+               _markers.get(i)->saveBinary(dest);
+           if (getFileVersion() >= fv210) {
+               // add resistance data
+               if (getFileVersion() >= fv250) {
+                   // add background images
+                   // add flowlines
+               }
+           }
+       }
+   }
 }
 
 float ShipCADModel::findLowestHydrostaticsPoint()
 {
-    float result = _surface->getMin().z();
+    float result = _surface.getMin().z();
     bool first = true;
     for (size_t i=0; i<numberOfLayers(); i++) {
         SubdivisionLayer* layer = getLayer(i);
@@ -274,6 +356,14 @@ float ShipCADModel::findLowestHydrostaticsPoint()
 void ShipCADModel::redraw()
 {
     // TODO
+}
+
+void ShipCADModel::setFileVersion(version_t v)
+{
+    if (v != _file_version) {
+        _file_version = v;
+        setFileChanged(true);
+    }
 }
 
 bool ShipCADModel::isSelectedMarker(Marker* mark)
@@ -297,8 +387,8 @@ void ShipCADModel::removeSelectedMarker(Marker* mark)
         _selected_markers.erase(i);
 }
 
+// TODO this is a dialog, doesn't belong here
 bool ShipCADModel::adjustMarkers()
 {
-    // TODO
     return false;
 }

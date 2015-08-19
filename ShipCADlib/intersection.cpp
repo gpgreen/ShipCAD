@@ -42,6 +42,7 @@
 #include "preferences.h"
 #include "subdivsurface.h"
 #include "utility.h"
+#include "visibility.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -117,7 +118,29 @@ void Intersection::extents(QVector3D& min, QVector3D& max)
 
 QString Intersection::getDescription()
 {
-    return "";
+    QString result;
+    switch(_intersection_type) {
+    case fiStation:
+        result = Intersection::tr("Station");
+        break;
+    case fiButtock:
+        result = Intersection::tr("Buttock");
+        break;
+    case fiWaterline:
+        result = Intersection::tr("Waterline");
+        break;
+    case fiDiagonal:
+        result = Intersection::tr("Diagonal");
+        break;
+    default:
+        result = Intersection::tr("Free");
+        break;
+    }
+    if (_intersection_type == fiDiagonal)
+        result += QString(" %1").arg(-getPlane().d() / getPlane().c(), 0, 'f', 3);
+    else
+        result += QString(" %1").arg(-getPlane().d(), 0, 'f', 3);
+    return result;
 }
 
 void Intersection::draw(Viewport& vp, LineShader* lineshader)
@@ -449,6 +472,43 @@ void Intersection::saveBinary(FileBuffer& dest)
 
 void Intersection::saveToDXF(QStringList& strings)
 {
-    // TODO
+    if (!isBuild())
+        rebuild();
+    for (size_t i=0; i<_items.size(); i++) {
+        Spline* spline = _items.get(i);
+        QString layer;
+        switch(_intersection_type) {
+        case fiStation:
+            layer = Intersection::tr("Stations");
+            break;
+        case fiButtock:
+            layer = Intersection::tr("Buttocks");
+            break;
+        case fiWaterline:
+            layer = Intersection::tr("Waterlines");
+            break;
+        case fiDiagonal:
+            layer = Intersection::tr("Diagonals");
+            break;
+        default:
+            layer = Intersection::tr("Layer_0");
+            break;
+        }
+        switch (_owner->getPrecision()) {
+        case fpLow:
+            spline->setFragments(50);
+            break;
+        case fpMedium:
+            spline->setFragments(100);
+            break;
+        case fpHigh:
+            spline->setFragments(150);
+            break;
+        case fpVeryHigh:
+            spline->setFragments(500);
+            break;
+        }
+        spline->saveToDXF(strings, layer, _owner->getVisibility().getModelView() == mvBoth);
+    }
 }
 

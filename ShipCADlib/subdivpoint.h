@@ -246,8 +246,8 @@ public:
     // persistence
     void load_binary(FileBuffer& source);
     void save_binary(FileBuffer& destination);
-    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
-    void saveToStream(std::vector<QString>& strings);
+    void loadFromStream(size_t& lineno, QStringList& strings);
+    void saveToStream(QStringList& strings);
 
     // drawing
     static void drawControlPoints(Viewport& vp, SubdivisionSurface* surface);

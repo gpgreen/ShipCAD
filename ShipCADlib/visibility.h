@@ -59,8 +59,12 @@ public:
     void setShowDiagonals(bool show);
     void setShowFlowlines(bool show);
     void setShowGrid(bool show);
+    model_view_t getModelView() const
+        {return _model_view;}
     void setModelView(model_view_t vw);
     void setShowInteriorEdges(bool show);
+    bool isShowMarkers() const
+        {return _show_markers;}
     void setShowMarkers(bool show);
     void setShowNormals(bool show);
     void setShowStations(bool show);

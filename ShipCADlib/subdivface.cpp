@@ -559,7 +559,7 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
 
 void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, float MinCurvature, float MaxCurvature)
 {
-    // BUGBUG: not implemented
+    // TODO
 }
 
 void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
@@ -586,7 +586,7 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
         _control_edges[i]->draw(_owner->drawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
     // show normals
     if (isSelected() && _owner->showNormals()) {
-        // BUGBUG: showing normals not implemented
+        // TODO showing normals not implemented
     }
 }
 
@@ -816,17 +816,17 @@ void SubdivisionControlFace::saveBinary(FileBuffer &destination)
     destination.add(isSelected());
 }
 
-void SubdivisionControlFace::saveToDXF(vector<QString>& /*strings*/)
+void SubdivisionControlFace::saveToDXF(QStringList& /*strings*/)
 {
     QString layername = getLayer()->getName();
     int colorindex = FindDXFColorIndex(getLayer()->getColor());
     if (numberOfPoints() == 4) {
         // create one polymesh for all childfaces
-        //BUGBUG: we need a SubdivisionGrid and FaceGrid object
+        // TODO we need a SubdivisionGrid and FaceGrid object
     }
 }
 
-void SubdivisionControlFace::saveToStream(vector<QString> &strings)
+void SubdivisionControlFace::saveToStream(QStringList &strings)
 {
     QString facestr;
     facestr.setNum(_points.size());
@@ -844,7 +844,7 @@ void SubdivisionControlFace::saveToStream(vector<QString> &strings)
     strings.push_back(facestr);
 }
 
-void SubdivisionControlFace::loadFromStream(size_t &lineno, vector<QString> &strings)
+void SubdivisionControlFace::loadFromStream(size_t &lineno, QStringList &strings)
 {
     QString str = strings[lineno++].trimmed();
     size_t start = 0;

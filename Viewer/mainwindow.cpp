@@ -145,7 +145,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    cerr << *surface << endl;
 \
     // write it to text file
-    vector<QString> strings;
+    QStringList strings;
     surface->saveToStream(strings);
     ofstream sos("surface.txt");
     for (size_t i=0; i<strings.size(); ++i)
@@ -221,7 +221,7 @@ MainWindow::openFile()
         }
         QTextStream in(&file);
         // read in file line by line
-        vector<QString> lines;
+        QStringList lines;
         do {
             QString line = in.readLine();
             if (line.isNull())

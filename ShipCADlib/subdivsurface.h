@@ -279,12 +279,12 @@ public:
     // persistence
     void saveBinary(FileBuffer& destination);
     void loadBinary(FileBuffer& source);
-    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
+    void loadFromStream(size_t& lineno, QStringList& strings);
     void loadVRMLFile(const QString& filename);
-    void exportFeFFile(std::vector<QString>& strings);
-    void importFeFFile(std::vector<QString>& strings, size_t& lineno);
-    void exportObjFile(bool export_control_net, std::vector<QString>& strings);
-    void saveToStream(std::vector<QString>& strings);
+    void exportFeFFile(QStringList& strings);
+    void importFeFFile(QStringList& strings, size_t& lineno);
+    void exportObjFile(bool export_control_net, QStringList& strings);
+    void saveToStream(QStringList& strings);
 
     // drawing
     virtual void draw(Viewport &vp);

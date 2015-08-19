@@ -539,7 +539,7 @@ void SubdivisionControlEdge::loadBinary(FileBuffer& source)
     setSelected(val);
 }
 
-void SubdivisionControlEdge::loadFromStream(size_t &lineno, std::vector<QString> &strings)
+void SubdivisionControlEdge::loadFromStream(size_t &lineno, QStringList &strings)
 {
     QString str = strings[lineno++].trimmed();
     size_t start = 0;
@@ -559,7 +559,7 @@ void SubdivisionControlEdge::loadFromStream(size_t &lineno, std::vector<QString>
     }
 }
 
-void SubdivisionControlEdge::saveToStream(std::vector<QString> &strings)
+void SubdivisionControlEdge::saveToStream(QStringList &strings)
 {
     SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(_points[0]);
     SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(_points[1]);

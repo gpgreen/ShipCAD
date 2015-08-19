@@ -146,8 +146,8 @@ public:
     // persistence
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& destination);
-    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
-    void saveToStream(std::vector<QString>& strings);
+    void loadFromStream(size_t& lineno, QStringList& strings);
+    void saveToStream(QStringList& strings);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;

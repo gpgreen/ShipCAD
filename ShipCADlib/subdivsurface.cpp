@@ -690,8 +690,13 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<QVector3D
             deleteControlFace(result);
             result = 0;
         }
-        else
+        else {
             _control_faces.push_back(result);
+            if (getActiveLayer() == 0)
+                result->setLayer(getLayer(0));
+            else
+                result->setLayer(getActiveLayer());
+        }
     }
     else
         result = 0;
@@ -1209,7 +1214,7 @@ void SubdivisionSurface::edgeConnect()
     }
 }
 
-void SubdivisionSurface::exportFeFFile(vector<QString>& strings)
+void SubdivisionSurface::exportFeFFile(QStringList& strings)
 {
     // add layer information
     strings.push_back(QString("%1").arg(numberOfLayers()));
@@ -1241,7 +1246,7 @@ void SubdivisionSurface::exportFeFFile(vector<QString>& strings)
         _control_faces[i]->saveToStream(strings);
 }
 
-void SubdivisionSurface::exportObjFile(bool export_control_net, vector<QString>& strings)
+void SubdivisionSurface::exportObjFile(bool export_control_net, QStringList& strings)
 {
     if (!isBuild())
         rebuild();
@@ -1967,7 +1972,7 @@ void SubdivisionSurface::extractPointsFromSelection(vector<SubdivisionControlPoi
     }
 }
 
-void SubdivisionSurface::importFeFFile(vector<QString> &strings, size_t& lineno)
+void SubdivisionSurface::importFeFFile(QStringList &strings, size_t& lineno)
 {
     size_t start;
     SubdivisionLayer* layer;
@@ -2485,7 +2490,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
     emit changeActiveLayer();
 }
 
-void SubdivisionSurface::loadFromStream(size_t& lineno, vector<QString>& strings)
+void SubdivisionSurface::loadFromStream(size_t& lineno, QStringList& strings)
 {
     // first read layerdata
     QString str = strings[lineno++].trimmed();
@@ -2628,7 +2633,7 @@ void SubdivisionSurface::saveBinary(FileBuffer &destination)
         getControlFace(i-1)->saveBinary(destination);
 }
 
-void SubdivisionSurface::saveToStream(vector<QString>& strings)
+void SubdivisionSurface::saveToStream(QStringList& strings)
 {
     // first save layerdata
     strings.push_back(QString("%1").arg(numberOfLayers()));

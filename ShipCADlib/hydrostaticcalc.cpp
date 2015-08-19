@@ -109,9 +109,9 @@ QString HydrostaticCalc::getErrorString() const
 		result.append(HydrostaticCalc::tr("There is no submersion")+"\n");
     if (hasError(feMakingWater))
 		result.append(HydrostaticCalc::tr("The ship is making water at")+spc
-					  +MakeLength(_data.leak.x(),3,7)+", "
-					  +MakeLength(_data.leak.y(),3,7)+", "
-					  +MakeLength(_data.leak.z(),3,7)+"\n");
+                      +QString("%1").arg(_data.leak.x(),0,'f',3)+", "
+                      +QString("%1").arg(_data.leak.y(),0,'f',3)+", "
+                      +QString("%1").arg(_data.leak.z(),0,'f',3)+"\n");
     return result;
 }
 
@@ -212,10 +212,10 @@ void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of buoyancy"),38)+" : "+sep+MakeLength(_data.center_of_buoyancy.x(),-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of buoyancy"),38)+" : "+sep+MakeLength(_data.lcb_perc,3,12)+sep+"[%]");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Vertical center of buoyancy"),38)+" : "+sep+MakeLength(_data.center_of_buoyancy.z(),-1,12)+sep+LengthStr(u));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship properties"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship properties"),38)+" :");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship section area"),38)+" : "+sep+MakeLength(_data.mainframe_area,-1,12)+sep+AreaStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship coefficient"),38)+" : "+sep+MakeLength(_data.mainframe_coeff,4,12));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane properties"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane properties"),38)+" :");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Length on waterline"),38)+" : "+sep+MakeLength(_data.length_waterline,-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Beam on waterline"),38)+" : "+sep+MakeLength(_data.beam_waterline,-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane area"),38)+" : "+sep+MakeLength(_data.waterplane_area,-1,12)+sep+AreaStr(u));
@@ -224,10 +224,10 @@ void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Entrance angle"),38)+" : "+sep+MakeLength(_data.waterplane_entrance_angle,-1,12)+sep+"[degr.]");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Transverse moment of inertia"),38)+" : "+sep+MakeLength(_data.waterplane_mom_inertia.x(),-1,12)+sep+InertiaStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal moment of inertia"),38)+" : "+sep+MakeLength(_data.waterplane_mom_inertia.y(),-1,12)+sep+InertiaStr(u));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Initial stability"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Initial stability"),38)+" :");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Transverse metacentric height"),38)+" : "+sep+MakeLength(_data.km_transverse,-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal metacentric height"),38)+" : "+sep+MakeLength(_data.km_longitudinal,-1,12)+sep+LengthStr(u));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Lateral plane"),38)+":");
+            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Lateral plane"),38)+" :");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Lateral area"),38)+" : "+sep+MakeLength(_data.lateral_area,-1,12)+sep+AreaStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of effort"),38)+" : "+sep+MakeLength(_data.lateral_cog.x(),-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Vertical center of effort"),38)+" : "+sep+MakeLength(_data.lateral_cog.z(),-1,12)+sep+LengthStr(u));
@@ -278,7 +278,7 @@ void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar
 							  +MakeLength(HydrostaticCalc::tr("Thickness"),9)+vb
 							  +MakeLength(HydrostaticCalc::tr("Weight"),8)+vb
 							  +" COG X  |  COG Y  |  COG Z  |");
-			strings.push_back(vb+MakeLength("",23)
+            strings.push_back("| "+MakeLength("",23)
 							  +vb+MakeLength(AreaStr(u),6)
 							  +vb+MakeLength("",9)
 							  +vb+MakeLength(WeightStr(u),8)
@@ -391,8 +391,8 @@ void HydrostaticCalc::addFooter(QStringList& strings, HydrostaticsMode mode)
 {
     ProjectSettings& ps = _owner->getProjectSettings();
 	strings.push_back(HydrostaticCalc::tr("NOTE 1: Draft (and all other vertical heights) is measured above the lowest point of the hull!")
-					  +" (Z= "+MakeLength(_data.model_min.z(),3,7)
-					  +")");
+                      +" (Z="+QString("%1").arg(_data.model_min.z(),0,'f',3)
+                      +")");
 	if (ps.getHydrostaticCoefficients() == fcActualData)
 		strings.push_back(HydrostaticCalc::tr("NOTE 2: All calculated coefficients based on actual dimensions of submerged body."));
 	else
@@ -580,6 +580,9 @@ bool HydrostaticCalc::balance(float displacement, bool freetotrim,
     if (displacement == 0)
         return true;
 
+    if (!_owner->isBuild())
+        _owner->rebuildModel();
+
     bool result = false;
 	int max_iterations = 25;
     float max_error = 5e-4f;
@@ -737,12 +740,10 @@ struct VolumeCalc
         p1 -= new_origin;
         p2 -= new_origin;
         p3 -= new_origin;
-        QVector3D center((p1.x() + p2.x() + p3.x()) / 3,
-                         (p1.y() + p2.y() + p3.y()) / 3,
-                         (p1.z() + p2.z() + p3.z()) / 3);
+        QVector3D center = (p1 + p2 + p3) / 3.0f;
         float volume = ((p1.z() * (p2.x() * p3.y() - p2.y() * p3.x()))
                         + (p1.y() * (p2.z() * p3.x() - p2.x() * p3.z()))
-                        + (p1.x() * (p2.y() * p3.z() - p2.z() * p3.y()))) / 6;
+                        + (p1.x() * (p2.y() * p3.z() - p2.z() * p3.y()))) / 6.0f;
         if (volume != 0) {
             volume_moment = .75 * center * volume;
             data.volume += volume;
@@ -821,6 +822,7 @@ struct VolumeCalc
                         side1 = data.waterline_plane.distance(p1);
                         for (size_t l=0; l<child->numberOfPoints(); l++) {
                             p2 = child->getPoint(l)->getCoordinate();
+                            p2.setY(-p2.y());
                             side2 = data.waterline_plane.distance(p2);
                             if ((side1 < -1e-5 && side2 > 1e-5) || (side1 > 1e-5 && side2 < -1e-5)) {
                                 // the current linesegment between p1-p2 intersects the waterline plane
@@ -853,7 +855,7 @@ struct VolumeCalc
                         } // end of face point loop
                         // calculate volume aft of this face
                         for (size_t l=3; l<points.size(); l++)
-                            ProcessTriangle(points[0], points[l-2], points[l-1]);
+                            ProcessTriangle(points[0], points[l-1], points[l-2]);
                     } // end of symmetric face if
                 } // end of face loop
             } // end of subdiv control face loop
@@ -886,7 +888,7 @@ struct VolumeCalc
             data.center_of_buoyancy = new_origin + data.center_of_buoyancy / data.volume;
             data.center_of_buoyancy = RotatePoint(data.center_of_buoyancy);
             if (data.length_waterline != 0) {
-                data.lcb_perc = 100 * data.center_of_buoyancy.x() - ps.getMainframeLocation() / data.length_waterline;
+                data.lcb_perc = 100 * (data.center_of_buoyancy.x() - ps.getMainframeLocation()) / data.length_waterline;
             }
             // apply appendage coeff
             data.volume *= ps.getAppendageCoefficient();
@@ -925,6 +927,8 @@ void HydrostaticCalc::calculate()
     float parameter;
 
     setCalculated(false);
+    if (!_owner->isBuild())
+        _owner->rebuildModel();
 
     // calculate overall extents of the hull alone
     for (size_t i=0; i<_owner->numberOfLayers(); i++) {
@@ -996,7 +1000,7 @@ void HydrostaticCalc::calculate()
             p1 = spline->value(1);
             if (p1.x() > parameter) {
                 parameter = p1.x();
-                p2 = spline->value(0.99);
+                p2 = spline->value(0.99f);
                 if (p1.x() - p2.x() != 0)
                     _data.waterplane_entrance_angle = RadToDeg(atan((p2.y() - p1.y()) / (p1.x() - p2.x())));
                 else
@@ -1042,7 +1046,7 @@ void HydrostaticCalc::calculate()
 
     // calculate lateral area and center of gravity
     if (hasCalculation(hcLateralArea) || hasCalculation(hcAll)) {
-        Intersection* lateralplane = new Intersection(_owner, fiButtock, Plane(0,1,0,0.001), true);
+        Intersection* lateralplane = new Intersection(_owner, fiButtock, Plane(0,1,0,0.001f), true);
         lateralplane->calculateArea(_data.waterline_plane, &_data.lateral_area, &_data.lateral_cog, &tmpp2d);
         delete lateralplane;
     }
@@ -1055,6 +1059,9 @@ void HydrostaticCalc::calculate()
 void HydrostaticCalc::calculateVolume(const Plane& waterline_plane)
 {
     setCalculated(false);
+
+    if (!_owner->isBuild())
+        _owner->rebuildModel();
 
 	VolumeCalc vc(waterline_plane, this);
 	vc.run();

@@ -118,9 +118,9 @@ public:
     // persistence
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& destination);
-    void saveToDXF(std::vector<QString>& strings);
-    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
-    void saveToStream(std::vector<QString>& strings);
+    void saveToDXF(QStringList& strings);
+    void loadFromStream(size_t& lineno, QStringList& strings);
+    void saveToStream(QStringList& strings);
 
     // draw
     static void drawLayers(Viewport &vp, SubdivisionSurface* surface);

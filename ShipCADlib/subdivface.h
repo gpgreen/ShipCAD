@@ -246,7 +246,7 @@ public:
     void clearControlEdges() {_control_edges.clear();}
 	/*! \brief add a control edge
 	 *
-	 * BUGBUG: this shouldn't exist here, but belongs to
+	 * TODO: this shouldn't exist here, but belongs to
 	 * surface
 	 *
 	 * Using 2 control points, add a control edge to this face. The
@@ -319,9 +319,9 @@ public:
     // persistence
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& destination);
-    void saveToDXF(std::vector<QString>& strings);
-    void saveToStream(std::vector<QString>& strings);
-    void loadFromStream(size_t& lineno, std::vector<QString>& strings);
+    void saveToDXF(QStringList& strings);
+    void saveToStream(QStringList& strings);
+    void loadFromStream(size_t& lineno, QStringList& strings);
 
     // drawing
     virtual void draw(Viewport& vp, LineShader* lineshader);

@@ -686,7 +686,7 @@ void Spline::saveBinary(FileBuffer& destination)
     }
 }
 
-void Spline::saveToDXF(std::vector<QString>& strings, QString layername, bool sendmirror)
+void Spline::saveToDXF(QStringList& strings, QString layername, bool sendmirror)
 {
     int ind = FindDXFColorIndex(_color);
     if (!_build)

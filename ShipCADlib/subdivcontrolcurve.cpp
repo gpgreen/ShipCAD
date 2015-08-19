@@ -392,7 +392,7 @@ void SubdivisionControlCurve::saveBinary(FileBuffer &destination)
     destination.add(isSelected());
 }
 
-void SubdivisionControlCurve::saveToDXF(vector<QString> &strings)
+void SubdivisionControlCurve::saveToDXF(QStringList& strings)
 {
     QString layer("Control_curves");
     _curve->setFragments(_curve->numberOfPoints());

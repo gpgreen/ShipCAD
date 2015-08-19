@@ -87,7 +87,7 @@ public:
     // persistence
     virtual void loadBinary(FileBuffer& source);
     virtual void saveBinary(FileBuffer& destination);
-    void saveToDXF(std::vector<QString>& strings, QString layername,
+    void saveToDXF(QStringList& strings, QString layername,
 		     bool sendmirror);
 
     // drawing

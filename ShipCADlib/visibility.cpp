@@ -104,7 +104,35 @@ void Visibility::loadBinary(FileBuffer &source)
 
 void Visibility::saveBinary(FileBuffer &dest)
 {
-    // TODO
+    dest.add(static_cast<int>(_model_view));
+    dest.add(_show_control_net);
+    dest.add(_show_interior_edges);
+    dest.add(_show_stations);
+    dest.add(_show_buttocks);
+    dest.add(_show_waterlines);
+    dest.add(_show_grid);
+    dest.add(_show_diagonals);
+    dest.add(_show_markers);
+    dest.add(_show_markers);
+    dest.add(_show_curvature);
+    dest.add(_curvature_scale);
+    if (_owner->getFileVersion() >= fv195) {
+        dest.add(_show_control_curves);
+        if (_owner->getFileVersion() >= fv210) {
+            dest.add(_cursor_increment);
+            if (_owner->getFileVersion() >= fv220) {
+                dest.add(_show_hydrostatic_data);
+                dest.add(_show_hydro_displacement);
+                dest.add(_show_hydro_lateral_area);
+                dest.add(_show_hydro_sectional_areas);
+                dest.add(_show_hydro_metacentric_height);
+                dest.add(_show_hydro_lcf);
+                if (_owner->getFileVersion() >= fv250) {
+                    dest.add(_show_flow_lines);
+                }
+            }
+        }
+    }
 }
 
 void Visibility::decreaseCurvatureScale()
@@ -115,4 +143,13 @@ void Visibility::decreaseCurvatureScale()
 void Visibility::increaseCurvatureScale()
 {
     _curvature_scale *= 1.1f;
+}
+
+void Visibility::setModelView(model_view_t vw)
+{
+    if (vw != _model_view) {
+        _model_view = vw;
+        _owner->setFileChanged(true);
+        // TODO owner draw
+    }
 }

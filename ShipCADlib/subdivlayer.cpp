@@ -71,9 +71,7 @@ SubdivisionLayer::~SubdivisionLayer()
 QString SubdivisionLayer::getName()
 {
     if (_desc == "") {
-        // BUGBUG: resource string
-        //QString userstring(33);
-        return QString("default%1%2").arg(' ').arg(_layerid);
+        return QString("%1 %2").arg(SubdivisionLayer::tr("Layer")).arg(_layerid);
     }
     else
         return _desc;
@@ -456,7 +454,7 @@ void SubdivisionLayer::loadBinary(FileBuffer& source)
     }
 }
 
-void SubdivisionLayer::loadFromStream(size_t &lineno, std::vector<QString> &strings)
+void SubdivisionLayer::loadFromStream(size_t &lineno, QStringList &strings)
 {
     // read description
     QString str = strings[lineno++].trimmed();
@@ -491,7 +489,7 @@ void SubdivisionLayer::loadFromStream(size_t &lineno, std::vector<QString> &stri
         _use_in_hydrostatics = true;
 }
 
-void SubdivisionLayer::saveToStream(std::vector<QString> &strings)
+void SubdivisionLayer::saveToStream(QStringList &strings)
 {
     strings.push_back(_desc);
     strings.push_back(QString("%1 %2 %3 %4 %5 %6 %7")

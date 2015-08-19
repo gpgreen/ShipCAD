@@ -198,7 +198,7 @@ void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar
     if (_errors.size() == 0) {
         if (mode == fhSingleCalculation) {
             addHeader(strings);
-            strings.push_back(HydrostaticCalc::tr("Volume properties"));
+            strings.push_back(HydrostaticCalc::tr("Volume properties")+':');
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Displaced volume"),38)+" : "+sep+MakeLength(_data.volume,-1,12)+sep+VolStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Displacement"),38)+" : "+sep+MakeLength(_data.displacement,-1,12)+sep+WeightStr(u));
             if (_owner->getProjectSettings().getHydrostaticCoefficients() == fcActualData) {
@@ -212,10 +212,10 @@ void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of buoyancy"),38)+" : "+sep+MakeLength(_data.center_of_buoyancy.x(),-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of buoyancy"),38)+" : "+sep+MakeLength(_data.lcb_perc,3,12)+sep+"[%]");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Vertical center of buoyancy"),38)+" : "+sep+MakeLength(_data.center_of_buoyancy.z(),-1,12)+sep+LengthStr(u));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship properties"),38)+" :");
+            strings.push_back(HydrostaticCalc::tr("Midship properties")+":");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship section area"),38)+" : "+sep+MakeLength(_data.mainframe_area,-1,12)+sep+AreaStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Midship coefficient"),38)+" : "+sep+MakeLength(_data.mainframe_coeff,4,12));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane properties"),38)+" :");
+            strings.push_back(HydrostaticCalc::tr("Waterplane properties")+":");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Length on waterline"),38)+" : "+sep+MakeLength(_data.length_waterline,-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Beam on waterline"),38)+" : "+sep+MakeLength(_data.beam_waterline,-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Waterplane area"),38)+" : "+sep+MakeLength(_data.waterplane_area,-1,12)+sep+AreaStr(u));
@@ -224,10 +224,10 @@ void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Entrance angle"),38)+" : "+sep+MakeLength(_data.waterplane_entrance_angle,-1,12)+sep+"[degr.]");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Transverse moment of inertia"),38)+" : "+sep+MakeLength(_data.waterplane_mom_inertia.x(),-1,12)+sep+InertiaStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal moment of inertia"),38)+" : "+sep+MakeLength(_data.waterplane_mom_inertia.y(),-1,12)+sep+InertiaStr(u));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Initial stability"),38)+" :");
+            strings.push_back(HydrostaticCalc::tr("Initial stability")+":");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Transverse metacentric height"),38)+" : "+sep+MakeLength(_data.km_transverse,-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal metacentric height"),38)+" : "+sep+MakeLength(_data.km_longitudinal,-1,12)+sep+LengthStr(u));
-            strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Lateral plane"),38)+" :");
+            strings.push_back(HydrostaticCalc::tr("Lateral plane")+":");
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Lateral area"),38)+" : "+sep+MakeLength(_data.lateral_area,-1,12)+sep+AreaStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Longitudinal center of effort"),38)+" : "+sep+MakeLength(_data.lateral_cog.x(),-1,12)+sep+LengthStr(u));
             strings.push_back(spc4+MakeLength(HydrostaticCalc::tr("Vertical center of effort"),38)+" : "+sep+MakeLength(_data.lateral_cog.z(),-1,12)+sep+LengthStr(u));
@@ -391,7 +391,7 @@ void HydrostaticCalc::addFooter(QStringList& strings, HydrostaticsMode mode)
 {
     ProjectSettings& ps = _owner->getProjectSettings();
 	strings.push_back(HydrostaticCalc::tr("NOTE 1: Draft (and all other vertical heights) is measured above the lowest point of the hull!")
-                      +" (Z="+QString("%1").arg(_data.model_min.z(),0,'f',3)
+                      +" (Z= "+QString("%1").arg(_data.model_min.z(),0,'f',3)
                       +")");
 	if (ps.getHydrostaticCoefficients() == fcActualData)
 		strings.push_back(HydrostaticCalc::tr("NOTE 2: All calculated coefficients based on actual dimensions of submerged body."));
@@ -702,7 +702,7 @@ struct VolumeCalc
 		}
 	
 			
-    QVector3D RotatePoint(QVector3D &p)
+    QVector3D RotatePoint(QVector3D& p)
     {
         p.setZ(p.z() - keel.z());
         return QVector3D(p.x() * CosTrim + p.y() * SinHeel * SinTrim + p.z() * CosHeel * SinTrim,
@@ -710,7 +710,7 @@ struct VolumeCalc
                          -p.x() * SinTrim + p.y() * SinHeel * CosTrim + p.z() * CosHeel * CosTrim);
     }
 
-    void CheckSubmergedBody(QVector3D p, float side)
+    void CheckSubmergedBody(QVector3D& p, float side)
     {
         p = RotatePoint(p);
         if (first_submerged_point) {
@@ -785,14 +785,13 @@ struct VolumeCalc
                             else
                                 parameter = -side1 / (side2 - side1);
                             p = p1 + parameter * (p2 - p1);
-                            points.push_back(p);
                             CheckSubmergedBody(p, 0);
+                            points.push_back(p);
                         }
                         if (side2 <= 1e-5) {
                             if (side2 < data.absolute_draft)
                                 data.absolute_draft = side2;
                             // p2 lies also on or under the waterlineplane
-                            points.push_back(p2);
                             if (side2 < -1e-5) {
                                 // point is submerged, check if the model is making water
                                 if (child->getPoint(l)->isBoundaryVertex() && fabs(child->getPoint(l)->getCoordinate().y()) > 1e-4) {
@@ -803,6 +802,7 @@ struct VolumeCalc
                                 }
                             }
                             CheckSubmergedBody(p2, side2);
+                            points.push_back(p2);
                         }
                         p1 = p2;
                         side1 = side2;
@@ -811,7 +811,7 @@ struct VolumeCalc
                     // calculate volume aft of this face
                     if (points.size() > 2)
                         submerged = true;
-                    for (size_t l=3; l<points.size(); l++)
+                    for (size_t l=3; l<=points.size(); l++)
                         ProcessTriangle(points[0], points[l-2], points[l-1]);
                     if (layer->isSymmetric()) {
                         // calculate the starboard side of the model
@@ -831,14 +831,13 @@ struct VolumeCalc
                                 else
                                     parameter = -side1 / (side2 - side1);
                                 p = p1 + parameter * (p2 - p1);
-                                points.push_back(p);
                                 CheckSubmergedBody(p, 0);
+                                points.push_back(p);
                             }
                             if (side2 <= 1e-5) {
                                 if (side2 < data.absolute_draft)
                                     data.absolute_draft = side2;
                                 // p2 lies also on or under the waterlineplane
-                                points.push_back(p2);
                                 if (side2 < -1e-5) {
                                     // point is submerged, check if the model is making water
                                     if (child->getPoint(l)->isBoundaryVertex() && fabs(child->getPoint(l)->getCoordinate().y()) > 1e-4) {
@@ -849,12 +848,13 @@ struct VolumeCalc
                                     }
                                 }
                                 CheckSubmergedBody(p2, side2);
+                                points.push_back(p2);
                             }
                             p1 = p2;
                             side1 = side2;
                         } // end of face point loop
                         // calculate volume aft of this face
-                        for (size_t l=3; l<points.size(); l++)
+                        for (size_t l=3; l<=points.size(); l++)
                             ProcessTriangle(points[0], points[l-1], points[l-2]);
                     } // end of symmetric face if
                 } // end of face loop

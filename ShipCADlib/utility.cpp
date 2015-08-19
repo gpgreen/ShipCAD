@@ -497,7 +497,7 @@ QString ShipCAD::MakeLength(float value, int decimals, int des_length)
 	if (decimals == -1)
 		decimals = NumberOfDecimals(value);
     QString input = QString("%1").arg(value, 0, 'f', decimals);
-    return input.leftJustified(des_length, ' ');
+    return input.rightJustified(des_length, ' ');
 }
 
 QString ShipCAD::MakeLength(const QString& value, int des_length)

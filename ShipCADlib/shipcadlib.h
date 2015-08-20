@@ -47,11 +47,11 @@ const float kZBufferScaleFactor = 1.004f;
 const float kZoomfactor = 1.02f;
 const int FileBufferBlockSize = 4096;
 
-extern const char* kFileExtension;
+extern const char* kFileExtension; /**< default binary file extension */
 	
-extern const QVector3D ZERO;
-extern const QVector3D ONE;
-extern const QVector2D ZERO2;
+extern const QVector3D ZERO; /**< vector(0,0,0) */
+extern const QVector3D ONE;  /**< vector(1,1,1) */
+extern const QVector2D ZERO2; /**< vector(0,0) */
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -78,23 +78,23 @@ enum camera_type_t {
     ftFarTele,
 };
 
-enum HydrostaticType {
+enum hydrostatic_type_t {
     fhShort = 0,
     fhExtensive,
 };
 
-enum HydrostaticsMode {
+enum hydrostatics_mode_t {
     fhSingleCalculation = 0,
     fhMultipleCalculations,
 };
 
-enum HydrostaticError {
+enum hydrostatics_error_t {
     feNothingSubmerged = 0,
     feMakingWater,
     feNotEnoughBuoyancy,
 };
 
-enum HydrostaticsCalculation {
+enum hydrostatics_calc_t {
     hcAll = 0,
     hcVolume,
     hcMainframe,

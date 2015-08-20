@@ -148,7 +148,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QStringList strings;
     surface->saveToStream(strings);
     ofstream sos("surface.txt");
-    for (size_t i=0; i<strings.size(); ++i)
+    for (int i=0; i<strings.size(); ++i)
         sos << strings[i].toStdString() << "\r\n";
     sos.close();
 

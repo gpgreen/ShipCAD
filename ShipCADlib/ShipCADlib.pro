@@ -69,7 +69,8 @@ HEADERS += shipcadlib.h \
     undoobject.h \
     resistance.h \
     backgroundimage.h \
-    pointervec.h
+    pointervec.h \
+    controller.h
 
 unix:!symbian {
     maemo5 {

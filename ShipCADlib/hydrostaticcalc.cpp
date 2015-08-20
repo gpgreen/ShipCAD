@@ -130,7 +130,7 @@ Plane HydrostaticCalc::getWlPlane() const
 				 lowest_value + (_draft + 0.5 * _trim));
 	QVector3D p3(_owner->getProjectSettings().getLength(),
 				 cos(DegToRad(-_heeling_angle)),
-				 lowest_value + (_draft + 0.5 * _trim) - sin(DegToRad(_heeling_angle)));
+                 lowest_value + (_draft + 0.5 * _trim) - sin(DegToRad(-_heeling_angle)));
 	return Plane(p1, p2, p3);
 }
 
@@ -160,7 +160,7 @@ void HydrostaticCalc::setHeelingAngle(float angle)
 	}
 }
 
-void HydrostaticCalc::setHydrostaticType(HydrostaticType ty)
+void HydrostaticCalc::setHydrostaticType(hydrostatic_type_t ty)
 {
 	if (ty != _hydrostatic_type) {
 		_hydrostatic_type = ty;
@@ -176,17 +176,17 @@ void HydrostaticCalc::setTrim(float trim)
 	}
 }
 
-bool HydrostaticCalc::hasError(HydrostaticError error) const
+bool HydrostaticCalc::hasError(hydrostatics_error_t error) const
 {
     return find(_errors.begin(), _errors.end(), error) != _errors.end();
 }
 
-bool HydrostaticCalc::hasCalculation(HydrostaticsCalculation ty) const
+bool HydrostaticCalc::hasCalculation(hydrostatics_calc_t ty) const
 {
     return find(_calculations.begin(), _calculations.end(), ty) != _calculations.end();
 }
 
-void HydrostaticCalc::addData(QStringList& strings, HydrostaticsMode mode, QChar sep)
+void HydrostaticCalc::addData(QStringList& strings, hydrostatics_mode_t mode, QChar sep)
 {
     const QString spc4 = "    ";
 	const QString vb = " | ";
@@ -387,7 +387,7 @@ void HydrostaticCalc::addHeader(QStringList& strings)
 					  +MakeLength(ps.getAppendageCoefficient(),4,10));
 }
 
-void HydrostaticCalc::addFooter(QStringList& strings, HydrostaticsMode mode)
+void HydrostaticCalc::addFooter(QStringList& strings, hydrostatics_mode_t mode)
 {
     ProjectSettings& ps = _owner->getProjectSettings();
 	strings.push_back(HydrostaticCalc::tr("NOTE 1: Draft (and all other vertical heights) is measured above the lowest point of the hull!")
@@ -697,12 +697,14 @@ struct VolumeCalc
 			CosTrim = cos(DegToRad(-hc->getTrimAngle()));
 			SinTrim = sin(DegToRad(-hc->getTrimAngle()));
             keel = QVector3D(0, 0, hc->getOwner()->findLowestHydrostaticsPoint());
+            // in order to calculate the volume enclosed by the underwatership correctly
+            // the origin(0,0,0) is projected onto the waterline plane
 			new_origin = data.waterline_plane.projectPointOnPlane(ZERO);
 			data.absolute_draft = 1000;
 		}
 	
-			
-    QVector3D RotatePoint(QVector3D& p)
+    // rotate a point at heel=0 and trim=0 position to given trim and heel
+    QVector3D RotatePoint(QVector3D p)
     {
         p.setZ(p.z() - keel.z());
         return QVector3D(p.x() * CosTrim + p.y() * SinHeel * SinTrim + p.z() * CosHeel * SinTrim,
@@ -710,7 +712,7 @@ struct VolumeCalc
                          -p.x() * SinTrim + p.y() * SinHeel * CosTrim + p.z() * CosHeel * CosTrim);
     }
 
-    void CheckSubmergedBody(QVector3D& p, float side)
+    void CheckSubmergedBody(QVector3D p, float side)
     {
         p = RotatePoint(p);
         if (first_submerged_point) {
@@ -733,7 +735,7 @@ struct VolumeCalc
         }
     }
 
-    void ProcessTriangle(QVector3D& p1, QVector3D& p2, QVector3D& p3)
+    void ProcessTriangle(QVector3D p1, QVector3D p2, QVector3D p3)
     {
         QVector3D volume_moment;
         // reposition points with respect to the new projected origin
@@ -741,9 +743,9 @@ struct VolumeCalc
         p2 -= new_origin;
         p3 -= new_origin;
         QVector3D center = (p1 + p2 + p3) / 3.0f;
-        float volume = ((p1.z() * (p2.x() * p3.y() - p2.y() * p3.x()))
-                        + (p1.y() * (p2.z() * p3.x() - p2.x() * p3.z()))
-                        + (p1.x() * (p2.y() * p3.z() - p2.z() * p3.y()))) / 6.0f;
+        float volume = (p1.z() * (p2.x() * p3.y() - p2.y() * p3.x())
+                        + p1.y() * (p2.z() * p3.x() - p2.x() * p3.z())
+                        + p1.x() * (p2.y() * p3.z() - p2.z() * p3.y())) / 6.0f;
         if (volume != 0) {
             volume_moment = .75 * center * volume;
             data.volume += volume;
@@ -901,22 +903,17 @@ struct StationAreaCalculation
 {
     HydrostaticsData& data;
     ShipCADModel* owner;
-    size_t index;
     StationAreaCalculation(HydrostaticsData& d, ShipCADModel* o)
-        : data(d), owner(o), index(0) {}
-    // each time this method is called, the station area is calculated
-    // and the index is incremented so that area data goes into the
-    // right place
+        : data(d), owner(o) {}
     void operator() (Intersection* intersect)
     {
         QVector3D tmp3d;
         QVector2D tmp2d;
-        Intersection *frame = new Intersection(owner, intersect->getIntersectionType(), intersect->getPlane(), true);
         float area;
-        frame->calculateArea(data.waterline_plane, &area, &tmp3d, &tmp2d);
-        delete frame;
+        Intersection frame(owner, intersect->getIntersectionType(), intersect->getPlane(), true);
+        frame.calculateArea(data.waterline_plane, &area, &tmp3d, &tmp2d);
         if (area != 0)
-            data.sac.push_back(QVector2D(-frame->getPlane().d(), area));
+            data.sac.push_back(QVector2D(-frame.getPlane().d(), area));
     }
 };
 
@@ -968,7 +965,7 @@ void HydrostaticCalc::calculate()
     if (_data.volume > 0 && _errors.size() == 0 && (hasCalculation(hcMainframe) || hasCalculation(hcAll))) {
         _mainframe->setIntersectionType(fiStation);
         _mainframe->setUseHydrostaticsSurfacesOnly(true);
-        _mainframe->setPlane(Plane(1,0,0,ps.getMainframeLocation()));
+        _mainframe->setPlane(Plane(1,0,0,-ps.getMainframeLocation()));
         _mainframe->calculateArea(_data.waterline_plane, &_data.mainframe_area, &_data.mainframe_cog, &tmpp2d);
         _data.mainframe_cog.setZ(_data.mainframe_cog.z() - _data.model_min.z());
         if (ps.getHydrostaticCoefficients() == fcActualData) {
@@ -982,11 +979,11 @@ void HydrostaticCalc::calculate()
 
     // calculate waterline properties
     if (_data.volume > 0 && _errors.size() == 0 && (hasCalculation(hcWaterline) || hasCalculation(hcAll))) {
-        Intersection* waterplane = new Intersection(_owner, fiWaterline, _data.waterline_plane, true);
-        waterplane->rebuild();
+        Intersection waterplane(_owner, fiWaterline, _data.waterline_plane, true);
+        waterplane.rebuild();
         parameter = -1e6;
         _data.waterplane_entrance_angle = 0;
-        SplineVector& wpsplines = waterplane->getSplines();
+        SplineVector& wpsplines = waterplane.getSplines();
         for (size_t j=0; j<wpsplines.size(); j++) {
             Spline* spline = wpsplines.get(j);
             // rotate all points back to a horizontal plane
@@ -1007,10 +1004,9 @@ void HydrostaticCalc::calculate()
                     _data.waterplane_entrance_angle = -_data.waterplane_entrance_angle;
             }
         }
-        waterplane->calculateArea(_data.waterline_plane, &_data.waterplane_area, &_data.waterplane_cog, &_data.waterplane_mom_inertia);
+        waterplane.calculateArea(_data.waterline_plane, &_data.waterplane_area, &_data.waterplane_cog, &_data.waterplane_mom_inertia);
         if (ps.getBeam() * ps.getLength() != 0)
             _data.waterplane_coeff = _data.waterplane_area / (ps.getBeam() * ps.getLength());
-        delete waterplane;
         _data.km_transverse = _data.center_of_buoyancy.z() + _data.waterplane_mom_inertia.x() / _data.volume;
         _data.km_longitudinal = _data.center_of_buoyancy.z() + _data.waterplane_mom_inertia.y() / _data.volume;
     }
@@ -1046,9 +1042,8 @@ void HydrostaticCalc::calculate()
 
     // calculate lateral area and center of gravity
     if (hasCalculation(hcLateralArea) || hasCalculation(hcAll)) {
-        Intersection* lateralplane = new Intersection(_owner, fiButtock, Plane(0,1,0,0.001f), true);
-        lateralplane->calculateArea(_data.waterline_plane, &_data.lateral_area, &_data.lateral_cog, &tmpp2d);
-        delete lateralplane;
+        Intersection lateralplane(_owner, fiButtock, Plane(0,1,0,0.001f), true);
+        lateralplane.calculateArea(_data.waterline_plane, &_data.lateral_area, &_data.lateral_cog, &tmpp2d);
     }
 
     // all done!

@@ -553,7 +553,7 @@ void SubdivisionControlEdge::loadFromStream(size_t &lineno, QStringList &strings
     _points[1]->addEdge(this);
     // crease
     _crease = ReadBoolFromStr(lineno, str, start);
-    if (start < str.length()) {
+    if (start < static_cast<size_t>(str.length())) {
         // flag to indicate that this edge was selected when the model was saved (for undo-purposes)
         _selected = ReadBoolFromStr(lineno, str, start);
     }

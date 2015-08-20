@@ -45,6 +45,8 @@ class ShipCADModel;
 class Plane;
 class Intersection;
 	
+/*! \brief Structure to hold Hydrostatics Calculation results
+ */
 struct HydrostaticsData
 {
 	QVector3D model_min;
@@ -80,6 +82,8 @@ struct HydrostaticsData
 	float vert_prism_coefficient;
 	std::vector<QVector2D> sac;
 
+    /*! \brief reset all data to default values
+     */
     void clear();
 };
 
@@ -95,6 +99,8 @@ struct CrosscurvesData
     void clear();
 };
 	
+/*! \brief Initialize and execute Hydrostatics Data calculation for a waterplane
+ */
 class HydrostaticCalc : public QObject
 {
     Q_OBJECT
@@ -109,8 +115,15 @@ public:
 
     ShipCADModel* getOwner() const {return _owner;}
 
+    /*! \brief get the errors with current calculation
+     *
+     * \return string with current errors
+     */
     QString getErrorString() const;
-    float getTrimAngle() const;
+    /*! \brief get the waterline plane (from draft, trim, and heeling angle)
+     *
+     * \return the waterline plane
+     */
     Plane getWlPlane() const;
     bool isCalculated() {return _calculated;}
 	void setCalculated(bool calc);
@@ -121,41 +134,53 @@ public:
      * \param error the error to check for
      * \return true if calculation has this error
      */
-    bool hasError(HydrostaticError error) const;
+    bool hasError(hydrostatics_error_t error) const;
     /*! \brief add this error type to the calculation
      *
      * \param error the error to add
      */
-    void addError(HydrostaticError error) {_errors.push_back(error);}
+    void addError(hydrostatics_error_t error) {_errors.push_back(error);}
     /*! \brief is this type of calculation set
      *
      * \param ty type of calculation to check for
      * \return true if type is part of set
      */
-    bool hasCalculation(HydrostaticsCalculation ty) const;
+    bool hasCalculation(hydrostatics_calc_t ty) const;
     /*! \brief set a type of calculation
      *
      * \param ty type of calculation to add to set
      */
-    void addCalculationType(HydrostaticsCalculation ty){_calculations.push_back(ty);}
+    void addCalculationType(hydrostatics_calc_t ty){_calculations.push_back(ty);}
 
+    /*! \brief get the heeling angle for this calculation
+     *
+     * \return the heeling angle in degrees
+     */
     float getHeelingAngle() const {return _heeling_angle;}
 	void setHeelingAngle(float angle);
 
-    void setHydrostaticType(HydrostaticType ty);
+    void setHydrostaticType(hydrostatic_type_t ty);
+    /*! \brief get the trim angle for this calculation
+     *
+     * The trim angle is calculated from the given trim and
+     * waterline plane.
+     *
+     * \return the angle of trim in degrees
+     */
+    float getTrimAngle() const;
     /*! \brief set the trim for this calculation (distance, not angle)
      *
      * \param trim the trim of the hull
      */
 	void setTrim(float trim);
 
-    /*! \brief get all data in a list of strings
+    /*! \brief get all Hydrostatics data in a list of strings
      *
-     * \param strings list to add data to
+     * \param strings target string list for data
      * \param mode how to display the data
      * \param separator character to separate the data
      */
-	void addData(QStringList& strings, HydrostaticsMode mode, QChar separator);
+    void addData(QStringList& strings, hydrostatics_mode_t mode, QChar separator);
 
     bool balance(float displacement, bool freetotrim, CrosscurvesData& output);
     /*! \brief make all calculations specified
@@ -181,7 +206,7 @@ public slots:
 protected:
 
     void addHeader(QStringList& strings);
-    void addFooter(QStringList& strings, HydrostaticsMode mode);
+    void addFooter(QStringList& strings, hydrostatics_mode_t mode);
 
 private:
 
@@ -190,10 +215,10 @@ private:
 	float _trim;
 	float _draft;
 	bool _calculated;
-	std::vector<HydrostaticError> _errors;
-	HydrostaticType _hydrostatic_type;
+    std::vector<hydrostatics_error_t> _errors;
+    hydrostatic_type_t _hydrostatic_type;
 	HydrostaticsData _data;
-	std::vector<HydrostaticsCalculation> _calculations;
+    std::vector<hydrostatics_calc_t> _calculations;
     Intersection* _mainframe;
 	
 };

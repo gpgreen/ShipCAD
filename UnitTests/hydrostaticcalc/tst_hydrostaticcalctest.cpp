@@ -6,6 +6,7 @@
 #include "subdivsurface.h"
 #include "subdivface.h"
 #include "subdivedge.h"
+#include "projsettings.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -22,13 +23,19 @@ private:
 	ShipCADModel* _model;
 						
 private Q_SLOTS:
-    void testCase1();
+    void testCalculateVolume();
+    void testCalculate();
 };
 
 HydrostaticcalcTest::HydrostaticcalcTest()
 {
 	_model = new ShipCADModel();
-	// build a cube with an open top
+    ProjectSettings& ps = _model->getProjectSettings();
+    ps.setLength(1.0);
+    ps.setBeam(1.0);
+    ps.setDraft(0.5);
+
+    // build a 1m x 1m cube with an open top
     SubdivisionSurface* s = _model->getSurface();
 	QVector3D p1(0,0,0);
     QVector3D p2(1,0,0);
@@ -85,23 +92,51 @@ HydrostaticcalcTest::~HydrostaticcalcTest()
     delete _model;
 }
 
-void HydrostaticcalcTest::testCase1()
+void HydrostaticcalcTest::testCalculateVolume()
 {
 	HydrostaticCalc hc(_model);
 
     Plane wl(0,0,1,-.5);
 	hc.calculateVolume(wl);
 	
-    QVERIFY2(true, "Failure");
     QStringList s;
     hc.addData(s, fhSingleCalculation, ' ');
-    QFile of("testcase1.txt");
+    QFile of("testcalculatevolume.txt");
     if (!of.open(QFile::WriteOnly | QFile::Truncate))
         QVERIFY2(false, "Couldn't open data file");
     QTextStream os(&of);
     for (int i=0; i<s.size(); i++)
         os << s[i] << endl;
     of.close();
+
+    QVERIFY2(hc.isCalculated(), "s/b calculated");
+    QVERIFY2(hc.getData().absolute_draft == .5, "draft s/b 0.5");
+    QVERIFY2(hc.getData().volume == .5, "volume s/b .5");
+}
+
+void HydrostaticcalcTest::testCalculate()
+{
+    HydrostaticCalc hc(_model);
+    hc.setDraft(0.5);
+    hc.setHeelingAngle(0.0);
+    hc.setTrim(0.0);
+    hc.addCalculationType(hcAll);
+
+    hc.calculate();
+
+    QStringList s;
+    hc.addData(s, fhSingleCalculation, ' ');
+    QFile of("testcalculate.txt");
+    if (!of.open(QFile::WriteOnly | QFile::Truncate))
+        QVERIFY2(false, "Couldn't open data file");
+    QTextStream os(&of);
+    for (int i=0; i<s.size(); i++)
+        os << s[i] << endl;
+    of.close();
+
+    QVERIFY2(hc.isCalculated(), "s/b calculated");
+    QVERIFY2(hc.getData().absolute_draft == .5, "draft s/b 0.5");
+    QVERIFY2(hc.getData().volume == .5, "volume s/b .5");
 }
 
 QTEST_APPLESS_MAIN(HydrostaticcalcTest)

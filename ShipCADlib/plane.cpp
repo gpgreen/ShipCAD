@@ -59,8 +59,8 @@ Plane::Plane(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
 {
   // calculate normal
   QVector3D n;
-  n.setX((p2.y() - p1.y()) * (p3.x() - p1.x()) - (p2.x() - p1.x()) * (p3.y() - p1.y()));
-  n.setY((p2.x() - p1.x()) * (p3.x() - p1.x()) - (p2.x() - p1.x()) * (p3.x() - p1.x()));
+  n.setX((p2.y() - p1.y()) * (p3.z() - p1.z()) - (p2.z() - p1.z()) * (p3.y() - p1.y()));
+  n.setY((p2.z() - p1.z()) * (p3.x() - p1.x()) - (p2.x() - p1.x()) * (p3.z() - p1.z()));
   n.setZ((p2.x() - p1.x()) * (p3.y() - p1.y()) - (p2.y() - p1.y()) * (p3.x() - p1.x()));
   n.normalize();
   _vars[0] = n.x() / n.length();

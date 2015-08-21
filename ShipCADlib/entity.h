@@ -44,9 +44,10 @@ class LineShader;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class IntersectionData : public QObject
+/*! \brief Structure to record geometry intersections
+ */
+class IntersectionData
 {
-    Q_OBJECT
 public:
 
     explicit IntersectionData() : number_of_intersections(0) {}

@@ -59,9 +59,9 @@ SubdivisionEdge* SubdivisionEdge::construct(SubdivisionSurface* owner)
 }
 
 SubdivisionEdge::SubdivisionEdge(SubdivisionSurface* owner)
-    : SubdivisionBase(owner)
+    : SubdivisionBase(owner), _crease(false), _control_edge(false), _curve(0)
 {
-    clear();
+	// does nothing
 }
 
 SubdivisionEdge::~SubdivisionEdge()
@@ -377,7 +377,6 @@ SubdivisionControlEdge::SubdivisionControlEdge(SubdivisionSurface* owner)
     : SubdivisionEdge(owner), _selected(false), _visible(true)
 {
     _control_edge = true;
-    clear();
 }
 
 SubdivisionControlEdge::~SubdivisionControlEdge()

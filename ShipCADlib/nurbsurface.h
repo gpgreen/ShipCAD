@@ -47,7 +47,7 @@ class NURBSurface : public Entity
 public:
 
     explicit NURBSurface();
-    virtual ~NURBSurface();
+    virtual ~NURBSurface() {}
     
     // altering
     virtual void clear();

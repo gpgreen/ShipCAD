@@ -54,14 +54,19 @@ SubdivisionLayer* SubdivisionLayer::construct(SubdivisionSurface* owner)
 }
 
 SubdivisionLayer::SubdivisionLayer(SubdivisionSurface* owner)
-    : SubdivisionBase(owner)
+    : SubdivisionBase(owner), _layerid(0), _color(_owner->getLayerColor()),
+	  _visible(true), _symmetric(true), _developable(false), _use_for_intersections(true),
+	  _use_in_hydrostatics(true), _show_in_linesplan(true), _material_density(0),
+	  _thickness(0), _alphablend(255)
 {
-    clear();
+	connect(this, SIGNAL(changedLayerData()),
+			owner, SIGNAL(changedLayerData()));
 }
 
 SubdivisionLayer::~SubdivisionLayer()
 {
-  _patches.clear();
+	disconnect(this, SIGNAL(changedLayerData()),
+               _owner, SIGNAL(changedLayerData()));
     if (_owner->getActiveLayer() == this)
         _owner->setActiveLayer(0);
     if (_owner->hasLayer(this))
@@ -141,15 +146,15 @@ void SubdivisionLayer::setDevelopable(bool val)
 {
     if (val != _developable) {
         _developable = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 
 void SubdivisionLayer::setName(const QString& val)
 {
-    if (val.toUpper() != _desc.toUpper()) {
+    if (QString::compare(val, _desc, Qt::CaseInsensitive) != 0) {
         _desc = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 
@@ -157,7 +162,7 @@ void SubdivisionLayer::setSymmetric(bool val)
 {
     if (val != _symmetric) {
         _symmetric = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 
@@ -165,7 +170,7 @@ void SubdivisionLayer::setColor(QColor val)
 {
     if (val != _color) {
         _color = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 
@@ -173,7 +178,7 @@ void SubdivisionLayer::setShowInLinesplan(bool val)
 {
     if (val != _show_in_linesplan) {
         _show_in_linesplan = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 
@@ -181,7 +186,7 @@ void SubdivisionLayer::setUseInHydrostatics(bool val)
 {
     if (val != _use_in_hydrostatics) {
         _use_in_hydrostatics = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 
@@ -189,7 +194,7 @@ void SubdivisionLayer::setUseForIntersections(bool val)
 {
     if (val != _use_for_intersections) {
         _use_for_intersections = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 
@@ -197,7 +202,7 @@ void SubdivisionLayer::setVisible(bool val)
 {
     if (val != _visible) {
         _visible = val;
-        emit changedLayerData(_layerid);
+        emit changedLayerData();
     }
 }
 

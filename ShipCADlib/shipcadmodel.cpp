@@ -47,12 +47,13 @@ ShipCADModel::ShipCADModel()
       _stop_asking_for_file_version(false), _settings(this), _calculations(true),
       _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0)
 {
-	clear();
+	connect(&_surface, SIGNAL(changedLayerData()), SIGNAL(changedLayerData()));
+	connect(&_surface, SIGNAL(changeActiveLayer()), SIGNAL(changeActiveLayer()));
 }
 
 ShipCADModel::~ShipCADModel()
 {
-	clear();
+    // does nothing
 }
 
 void ShipCADModel::clear()
@@ -174,7 +175,6 @@ QString ShipCADModel::getFilename()
 void ShipCADModel::addUndoObject(UndoObject* newundo)
 {
 	_undo_list.push_back(newundo);
-	emit updateUndoData();
 }
 
 UndoObject* ShipCADModel::getUndoObject(size_t index)
@@ -191,7 +191,6 @@ void ShipCADModel::deleteUndoObject(UndoObject* deleted)
 		_undo_list.erase(i);
 	else
 		throw invalid_argument("delete undo obj");
-	emit updateUndoData();
 }
 
 void ShipCADModel::setUndoPosition(size_t index)

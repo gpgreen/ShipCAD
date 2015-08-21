@@ -63,7 +63,7 @@ public:
 
     explicit Intersection(ShipCADModel* owner);
     explicit Intersection(ShipCADModel *owner, intersection_type_t ty, const Plane& pln, bool use_hydrostatics_only);
-    virtual ~Intersection();
+    virtual ~Intersection() {}
 
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);

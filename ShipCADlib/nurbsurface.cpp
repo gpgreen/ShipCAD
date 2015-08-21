@@ -40,12 +40,7 @@ using namespace std;
 NURBSurface::NURBSurface()
     : Entity()
 {
-    clear();
-}
-
-NURBSurface::~NURBSurface()
-{
-    // does nothing
+	// does nothing
 }
 
 void NURBSurface::setBuild(bool val)

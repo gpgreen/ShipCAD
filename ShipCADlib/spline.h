@@ -61,7 +61,7 @@ public:
 
     explicit Spline();
     explicit Spline(const Spline& copied);
-    virtual ~Spline();
+    virtual ~Spline() {}
     
     // altering
     void add(const QVector3D& p);

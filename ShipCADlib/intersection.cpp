@@ -61,18 +61,13 @@ Intersection::Intersection(ShipCADModel *owner, intersection_type_t ty, const Pl
     // does nothing
 }
 
-Intersection::~Intersection()
-{
-    clear();
-}
-
 void Intersection::clear()
 {
+    Entity::clear();
     // clear method deletes all memory for splines
     _items.clear();
     _show_curvature = false;
     _use_hydrostatic_surfaces_only = false;
-    Entity::clear();
 }
 
 void Intersection::setBuild(bool val)

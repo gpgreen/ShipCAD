@@ -58,12 +58,7 @@ SubdivisionFace* SubdivisionFace::construct(SubdivisionSurface* owner)
 SubdivisionFace::SubdivisionFace(SubdivisionSurface* owner)
     : SubdivisionBase(owner)
 {
-    clear();
-}
-
-SubdivisionFace::~SubdivisionFace()
-{
-    // does nothing
+	// does nothing
 }
 
 size_t SubdivisionFace::indexOfPoint(SubdivisionPoint* pt)
@@ -410,9 +405,9 @@ SubdivisionControlFace* SubdivisionControlFace::construct(SubdivisionSurface* ow
 }
 
 SubdivisionControlFace::SubdivisionControlFace(SubdivisionSurface *owner)
-    : SubdivisionFace(owner)
+    : SubdivisionFace(owner), _layer(0), _min(ZERO), _max(ZERO)
 {
-    clear();
+	// does nothing
 }
 
 SubdivisionControlFace::~SubdivisionControlFace()

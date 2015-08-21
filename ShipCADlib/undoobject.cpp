@@ -33,10 +33,12 @@
 using namespace ShipCAD;
 using namespace std;
 
-UndoObject::UndoObject(ShipCADModel* owner)
-    : _owner(owner), _file_changed(false), _filename_set(false),
-      _edit_mode(), _time(QTime::currentTime()),
-      _is_temp_redo_obj(false)
+UndoObject::UndoObject(ShipCADModel* owner, const QString& filename,
+                       edit_mode_t mode, bool file_changed, bool filename_set,
+                       bool is_temp_redo_obj)
+    : _owner(owner), _file_changed(file_changed), _filename_set(filename_set),
+      _filename(filename), _edit_mode(mode), _time(QTime::currentTime()),
+      _is_temp_redo_obj(is_temp_redo_obj)
 {
     // does nothing
 }

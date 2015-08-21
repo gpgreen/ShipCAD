@@ -45,26 +45,21 @@ using namespace std;
 //////////////////////////////////////////////////////////////////////////////////////
 
 Spline::Spline()
-    : Entity()
+    : Entity(), _nopoints(0), _fragments(100), _show_curvature(false), _show_points(false),
+	  _curvature_scale(.10f), _curvature_color(Qt::magenta), _total_length(0)
 {
-    clear();
 }
 
 Spline::Spline(const Spline &copied)
     : Entity(),
       _nopoints(copied._nopoints), _fragments(copied._fragments), _show_curvature(copied._show_curvature),
       _show_points(copied._show_points), _curvature_scale(copied._curvature_scale),
-      _curvature_color(copied._curvature_color)
+      _curvature_color(copied._curvature_color), _total_length(0)
 {
     for (size_t i=0; i<copied._points.size(); i++)
         _points.push_back(copied._points[i]);
     for (size_t i=0; i<copied._knuckles.size(); i++)
         _knuckles.push_back(copied._knuckles[i]);
-}
-
-Spline::~Spline()
-{
-    // does nothing
 }
 
 void Spline::setBuild(bool val)

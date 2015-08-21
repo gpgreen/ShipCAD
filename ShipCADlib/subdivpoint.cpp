@@ -60,14 +60,9 @@ SubdivisionPoint* SubdivisionPoint::construct(SubdivisionSurface* owner)
 }
 
 SubdivisionPoint::SubdivisionPoint(SubdivisionSurface* owner)
-    : SubdivisionBase(owner)
+    : SubdivisionBase(owner), _coordinate(ZERO), _vtype(svRegular)
 {
-    clear();
-}
-
-SubdivisionPoint::~SubdivisionPoint()
-{
-    // does nothing
+	// does nothing
 }
 
 void SubdivisionPoint::clear()
@@ -516,7 +511,7 @@ SubdivisionControlPoint* SubdivisionControlPoint::construct(SubdivisionSurface* 
 SubdivisionControlPoint::SubdivisionControlPoint(SubdivisionSurface *owner)
     : SubdivisionPoint(owner), _locked(false)
 {
-    clear();
+	// does nothing
 }
 
 SubdivisionControlPoint::~SubdivisionControlPoint()

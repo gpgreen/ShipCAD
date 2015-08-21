@@ -67,7 +67,7 @@ public:
 	 * \param owner parent surface
 	 */
     explicit SubdivisionFace(SubdivisionSurface* owner);
-    virtual ~SubdivisionFace();
+    virtual ~SubdivisionFace() {}
     
     // modifiers
 	/*! \brief swap normal vector to other face

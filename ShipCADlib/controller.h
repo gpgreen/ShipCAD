@@ -38,6 +38,12 @@
 
 namespace ShipCAD {
 
+class UndoObject;
+class Intersection;
+class SubdivisionControlPoint;
+class SubdivisionLayer;
+class Marker;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief ShipCAD model controller, contains editing actions
@@ -46,14 +52,32 @@ class Controller : public QObject
 {
 	Q_OBJECT
 public:
-	explicit Controller(ShipCADModel* model);
+    explicit Controller(ShipCADModel* model);
 	~Controller();
 
-	QStringList& getRecentFiles() const;
-	void addRecentFiles(const QString& filename)
-		{ _recent_files.push_back(filename);}
+    const QStringList& getRecentFiles() const;
+    void addRecentFiles(const QString& filename);
 
+signals:
+	/*! \brief signal when undo data is changed
+	 */
+	void updateUndoData();
+	void changedLayerData();
+	void changeActiveLayer();
+							
 public slots:
+    /*! \brief delete the background image
+     */
+    void deleteBackgroundImage();
+    /*! \brief open a background image
+     */
+    void openBackgroundImage();
+    /*! \brief create redo data
+     */
+    UndoObject* createRedoObject();
+    /*! \brief create undo data
+     */
+    UndoObject* createUndoObject(QString& undotext, bool accept);
 	/*! \brief add a new controlcurve
 	 */
 	void addCurve();
@@ -146,7 +170,7 @@ public slots:
 	void importFEF();
 	/*! \brief import a file created with Carlsson's Hulls program
 	 */
-	void importHull();
+    void importHull(const QString& filename, bool quiet);
 	/*! \brief import a partfile and add to current geometry
 	 */
 	void importPart();
@@ -187,7 +211,119 @@ public slots:
 	/*! \brief calculate a range of hydrostatics
 	 */
 	void hydrostaticsDialog();
-	
+    /*! \brief Load a bodyplan and try to fit surface to it
+     */
+    void importFrames();
+    /*! \brief add a new intersection at the specified location
+     */
+    Intersection* addIntersection(intersection_type_t ty, float distance);
+    /*! \brief add an intersection to the appropriate list
+     */
+    void addIntersectionToList(Intersection* inter);
+    /*! \brief the intersection dialog
+     */
+    void intersectionDialog();
+    /*! \brief all connected patches surrounded by creases grouped into new layer
+     */
+    void autoGroupLayer();
+    /*! \brief develop all developable layers
+     */
+    void developLayers();
+    /*! \brief the layer dialog
+     */
+    void layerDialog();
+    /*! \brief delete all empty layers from the model
+     */
+    void deleteEmptyLayers(bool quiet);
+    /*! \brief add a new empty layer
+     */
+    SubdivisionLayer* newLayer();
+    /*! \brief add a marker
+     */
+    void addMarker(Marker* marker);
+    /*! \brief delete all markers from the model
+     */
+    void deleteMarkers();
+    /*! \brief import markers from a textfile
+     */
+    void importMarkers();
+    /*! \brief check the surface for inconsistent normal directions and leaks
+     */
+    void checkModel(bool showResult);
+    /*! \brief start a new model (with a predefined surface)
+     */
+    bool newModel();
+    /*! \brief Affine hullform transformation according to Lackenby
+     */
+    void lackenbyModelTransformation();
+    /*! \brief scale the model and all equivalent data
+     */
+    void scaleModel(QVector3D scale_vector, bool overrideLock, bool adjustMarkers);
+    /*! \brief merge 2 selected edges by removing common controlpoint
+     */
+    void collapsePoint();
+    /*! \brief remove any unused points from the model
+     */
+    void removeUnusedPoint();
+    /*! \brief fill all intersection of visible edges and 3D plane, inserts a point on each of these edges
+     */
+    void insertPlane();
+    /*! \brief calculate the intersection points of 2 layers
+     */
+    void intersectLayerPoint();
+    /*! \brief locks all selected points
+     */
+    void lockPoints();
+    /*! \brief add a new point to the model with no edges/faces attached
+     */
+    SubdivisionControlPoint* newPoint();
+    /*! \brief project all selected points ont a straight line through the first and last
+     */
+    void projectStraightLinePoint();
+    /*! \brief unlock all selected points
+     */
+    void unlockPoints();
+    /*! \brief unlock all points
+     */
+    void unlockAllPoints();
+    /*! \brief show a warning when edit commands are invoked and the model has locked points
+     */
+    bool proceedWhenLockedPoints();
+    /*! \brief restore the state of the model after previous undo
+     */
+    void redo();
+    /*! \brief calculate resistance of yachts according to Delft systematic yacht series
+     */
+    void delftResistance();
+    /*! \brief calculate resistance of slender hulls (canoes) according to John Winters
+     */
+    void kaperResistance();
+    /*! \brief deselect all selected items
+     */
+    void clearSelections();
+    /*! \brief delete all selected items
+     */
+    void deleteSelections();
+    /*! \brief select all items
+     */
+    void selectAll();
+    /*! \brief restore the state of the model before last modification
+     */
+    void undo();
+    /*! \brief clear the undo history
+     */
+    void clearUndo();
+    /*! \brief show the undo history
+     */
+    void showHistoryUndo();
+protected slots:
+	/*! \brief the ShipCAD model file has changed
+	 */
+	void modelFileChanged();
+    /*! \brief the ShipCAD model geometry has changed
+     */
+    void modelGeometryChanged();
+
 private:
 	ShipCADModel* _model;
 	QStringList _recent_files;

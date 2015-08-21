@@ -71,7 +71,7 @@ public:
 	 * Use the static construct method to create points
 	 */
     explicit SubdivisionPoint(SubdivisionSurface* owner);
-    virtual ~SubdivisionPoint();
+    virtual ~SubdivisionPoint() {}
     
     // altering
 
@@ -98,7 +98,6 @@ public:
 	 * \param face the face to delete from this point
 	 */
     void deleteFace(SubdivisionFace* face);
-    void destroy();
     
     // geometry ops
 

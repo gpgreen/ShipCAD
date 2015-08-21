@@ -73,6 +73,12 @@ public:
     float getWaterDensity() const {return _water_density;}
 	void setWaterDensity(float val);
 
+    /*! \brief get the Save Preview setting
+     */
+    bool getSavePreview() const
+        {return _save_preview;}
+    /*! \brief set the Save Preview setting
+     */
     void setSavePreview(bool val);
 	void setStartDraft(float val);
 	void setTrim(float val);

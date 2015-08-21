@@ -240,11 +240,12 @@ public:
     void extents(QVector3D& min, QVector3D& max);
 
 signals:
+	
     void onFileChanged();
-    void updateUndoData();
-    void updateRecentFileList();
     void onChangeCursorIncrement();
     void onUpdateGeometryInfo();
+	void changedLayerData();
+	void changeActiveLayer();
 
 public slots:
 

@@ -43,9 +43,9 @@ using namespace std;
 using namespace ShipCAD;
 
 Marker::Marker(ShipCADModel* owner)
-    : _owner(owner)
+    : _owner(owner), _visible(true)
 {
-    clear();
+	// does nothing
 }
 
 Marker* Marker::construct(ShipCADModel* owner)

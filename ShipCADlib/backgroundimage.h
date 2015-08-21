@@ -42,6 +42,8 @@ class Viewport;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief Background Images for a viewport
+ */
 class BackgroundImage : public QImage
 {
 public:

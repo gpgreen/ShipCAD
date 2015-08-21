@@ -50,11 +50,6 @@ FileBuffer::FileBuffer()
     // does nothing
 }
 
-FileBuffer::~FileBuffer()
-{
-    _data.clear();
-}
-
 void FileBuffer::reset()
 {
     _pos = 0;

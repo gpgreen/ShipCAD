@@ -46,14 +46,22 @@ class UndoObject : public QObject
     Q_OBJECT
 public:
 
-    explicit UndoObject(ShipCADModel* owner);
+    explicit UndoObject(ShipCADModel* owner, const QString& filename,
+                        edit_mode_t mode, bool file_changed, bool filename_set,
+                        bool is_temp_redo_ob);
     ~UndoObject() {}
 
 	size_t getMemory();
-	bool isTempRedoObj() {return _is_temp_redo_obj;}
-	QString getTime() {return _time.toString("hh:mm:ss.zzz");}
-	QString& getUndoText() {return _undo_text;}
-
+	bool isTempRedoObj()
+		{return _is_temp_redo_obj;}
+	void setIsTempRedoObject(bool set)
+		{_is_temp_redo_obj = set;}
+	QString getTime()
+		{return _time.toString("hh:mm:ss.zzz");}
+	QString& getUndoText()
+		{return _undo_text;}
+	FileBuffer& getUndoData()
+        {return _undo_data;}
 	void accept();
 	void restore();
 	

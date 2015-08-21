@@ -55,9 +55,9 @@ SubdivisionControlCurve* SubdivisionControlCurve::construct(SubdivisionSurface* 
 }
 
 SubdivisionControlCurve::SubdivisionControlCurve(SubdivisionSurface* owner)
-    : SubdivisionBase(owner)
+    : SubdivisionBase(owner), _build(false), _curve(0)
 {
-    clear();
+	// does nothing
 }
 
 SubdivisionControlCurve::~SubdivisionControlCurve()

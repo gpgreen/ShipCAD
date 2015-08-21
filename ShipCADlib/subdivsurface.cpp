@@ -75,12 +75,27 @@ SubdivisionSurface::SubdivisionSurface()
       _edge_pool(sizeof(SubdivisionEdge)),
       _face_pool(sizeof(SubdivisionFace))
 {
-    clear();
+    // construct default layer
+	addNewLayer();
 }
 
 SubdivisionSurface::~SubdivisionSurface()
 {
-    clear();
+    _control_curves.clear();
+    _control_faces.clear();
+    _control_edges.clear();
+    _control_points.clear();
+    _layers.clear();
+    _edges.clear();
+    _points.clear();
+    // clear the pools
+    _ccurve_pool.release_memory();
+    _cface_pool.release_memory();
+    _cedge_pool.release_memory();
+    _cpoint_pool.release_memory();
+    _layer_pool.release_memory();
+    _edge_pool.release_memory();
+    _point_pool.release_memory();
 }
 
 SubdivisionControlPoint* SubdivisionSurface::newControlPoint(const QVector3D& p)

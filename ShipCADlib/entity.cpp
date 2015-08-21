@@ -38,8 +38,10 @@ using namespace ShipCAD;
 //////////////////////////////////////////////////////////////////////////////////////
 
 Entity::Entity()
+	: _build(false), _min(ZERO), _max(ZERO), _pen_width(1), _color(Qt::black),
+	  _pen_style(Qt::SolidLine)
 {
-    clear();
+	// does nothing
 }
 
 void Entity::clear()

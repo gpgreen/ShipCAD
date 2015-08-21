@@ -134,7 +134,7 @@ public:
 
 signals:
 
-    void changedLayerData(size_t layerid);
+    void changedLayerData();
 
 protected:
 

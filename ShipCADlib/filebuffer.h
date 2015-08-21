@@ -44,13 +44,15 @@ namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief in-memory buffer of data for a binary file (FREE!Ship format)
+ */
 class FileBuffer : public QObject
 {
     Q_OBJECT
 public:
 
     explicit FileBuffer();
-    ~FileBuffer();
+    ~FileBuffer() {}
 
     size_t size() {return _data.size();}
 

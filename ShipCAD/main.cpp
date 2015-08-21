@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     ShipCADModel* model = new ShipCADModel();
     Controller c(model);
 
-    MainWindow w;
+    MainWindow w(&c);
     w.show();
 
     return a.exec();

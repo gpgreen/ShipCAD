@@ -55,6 +55,8 @@ public:
     explicit Controller(ShipCADModel* model);
 	~Controller();
 
+    ShipCADModel* getModel()
+        {return _model;}
     const QStringList& getRecentFiles() const;
     void addRecentFiles(const QString& filename);
 

@@ -43,16 +43,32 @@ class FileBuffer;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief Settings class for visibility of different features
+ */
 class Visibility : public QObject
 {
     Q_OBJECT
 public:
 
+	/*! \brief constructor
+	 */
     explicit Visibility(ShipCADModel* owner);
+	/*! \brief destructor
+	 */
     ~Visibility() {}
 
     void setCursorIncrement(float val);
     void setCurvatureScale(float val);
+	/*! \brief show visibility of buttocks
+	 *
+	 * \return true if buttocks shown
+	 */
+	bool isShowButtocks() const
+		{ return _show_buttocks;}
+	/*! \brief set visibility of buttocks
+	 *
+	 * \param show visibility of buttocks
+	 */
     void setShowButtocks(bool show);
 	/*! \brief is control net shown
 	 *
@@ -76,11 +92,49 @@ public:
      * \param show visibility of curvature
      */
     void setShowCurvature(bool show);
+    /*! \brief show visibility of diagonals
+     *
+     * \return true if diagonals visible
+     */
+	bool isShowDiagonals() const
+		{return _show_diagonals;}
+	/*! \brief set show diagonals
+	 *
+	 * \param show diagonals
+	 */
     void setShowDiagonals(bool show);
+    /*! \brief show visibility of flowlines
+     *
+     * \return true if flowlines visible
+     */
+	bool isShowFlowlines() const
+		{ return _show_flowlines;}
+	/*! \brief set show flowlines
+	 *
+	 * \param show flowlines
+	 */
     void setShowFlowlines(bool show);
+	/*! \brief is grid shown
+	 *
+	 * \return true if grid shown
+	 */
+	bool isShowGrid() const
+		{return _show_grid;}
+	/*! \brief set visibility of grid
+	 *
+	 * \param show visibility of grid
+	 */
     void setShowGrid(bool show);
+	/*! \brief get model view setting
+	 *
+	 * \brief setting of model view
+	 */
     model_view_t getModelView() const
         {return _model_view;}
+	/*! \brief set model view
+	 *
+	 * \param vw model view setting
+	 */
     void setModelView(model_view_t vw);
 	/*! \brief is interior edges shown
 	 *
@@ -90,14 +144,52 @@ public:
 		{return _show_interior_edges;}
 	/*! \brief set visibility of interior edges
 	 *
-	 * \param show visiblity of interior edges
+	 * \param show visibility of interior edges
 	 */
     void setShowInteriorEdges(bool show);
+	/*! \brief show visibility of markers
+	 *
+	 * \return true if markers visible
+	 */
     bool isShowMarkers() const
         {return _show_markers;}
+	/*! \brief set visiblity of markers
+	 *
+	 * \param show visibility of markers
+	 */
     void setShowMarkers(bool show);
+	/*! \brief show visibility of normals
+	 * 
+	 * \return true if normals visible
+	 */
+	bool isShowNormals() const
+		{return _show_normals;}
+	/*! \brief set visibility of normals
+	 *
+	 * \param show visibility of normals
+	 */
     void setShowNormals(bool show);
+	/*! \brief show visibility of stations
+	 *
+	 * \return true if stations visible
+	 */
+	bool isShowStations() const
+		{return _show_stations;}
+	/*! \brief set visibility of stations
+	 *
+	 * \param show visibility of stations
+	 */
     void setShowStations(bool show);
+	/*! \brief show visiblity of waterlines
+	 *
+	 * \return true if waterlines visible
+	 */
+	bool isShowWaterlines() const
+		{return _show_waterlines;}
+	/*! \brief set visibility of waterlines
+	 *
+	 * \param show visibility of waterlines
+	 */
     void setShowWaterlines(bool show);
     /*! \brief show visibility of control curves
      *
@@ -107,10 +199,20 @@ public:
         {return _show_control_curves;}
     /*! \brief set visibility of control curves
      *
-     * \param show visiblity of control curves
+     * \param show visibility of control curves
      */
     void setShowControlCurves(bool show);
-    void setShowHydrostaticData(bool show);
+	/*! \brief show visibility of hydrostatic data
+	 *
+	 * \return true if hydrostatic data visible
+	 */
+	bool isShowHydroData() const
+		{return _show_hydrostatic_data;}
+    /*! \brief set visibility of Hydrostatic data
+     *
+     * \param show visibility of Hydrostatic data
+     */
+    void setShowHydroData(bool show);
 
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);
@@ -149,7 +251,7 @@ private:
     bool _show_hydro_sectional_areas;
     bool _show_hydro_metacentric_height;
     bool _show_hydro_lcf;
-    bool _show_flow_lines;
+    bool _show_flowlines;
     float _curvature_scale;
     float _cursor_increment;
 };

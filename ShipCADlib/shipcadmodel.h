@@ -239,10 +239,6 @@ public:
      */
     void extents(QVector3D& min, QVector3D& max);
 
-    /*! \brief visibility options have changed
-     */
-    void visibilityOptionsChanged();
-
 signals:
 	
     void onFileChanged();

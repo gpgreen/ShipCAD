@@ -116,233 +116,290 @@ UndoObject* Controller::createRedoObject()
 
 UndoObject* Controller::createUndoObject(QString& undotext, bool accept)
 {
+	// TODO
     return 0;
 }
 
 void Controller::addCurve()
 {
+	// TODO
 }
 
 void Controller::collapseEdges()
 {
+	// TODO
 }
 
 void Controller::connectEdges()
 {
+	// TODO
 }
 
 void Controller::creaseEdges()
 {
+	// TODO
 }
 
 void Controller::extrudeEdges()
 {
+	// TODO
 }
 
 void Controller::splitEdges()
 {
+	// TODO
 }
 
 void Controller::assembleFace()
 {
+	// TODO
 }
 
 void Controller::deleteNegativeFaces()
 {
+	// TODO
 }
 
 void Controller::flipFaces()
 {
+	// TODO
 }
 
 void Controller::mirrorPlaneFace()
 {
+	// TODO
 }
 
 void Controller::newFace()
 {
+	// TODO
 }
 
 void Controller::rotateFaces()
 {
+	// TODO
 }
 
 void Controller::scaleFaces()
 {
+	// TODO
 }
 
 void Controller::moveFaces()
 {
+	// TODO
 }
 
 void Controller::exportFileArchimedes()
 {
+	// TODO
 }
 
 void Controller::exportCoordinates()
 {
+	// TODO
 }
 
 void Controller::export2DPolylinesDXF()
 {
+	// TODO
 }
 
 void Controller::export3DPolylinesDXF()
 {
+	// TODO
 }
 
 void Controller::exportFacesDXF()
 {
+	// TODO
 }
 
 void Controller::exportFEF()
 {
+	// TODO
 }
 
 void Controller::exportGHS()
 {
+	// TODO
 }
 
 void Controller::exportPart()
 {
+	// TODO
 }
 
 void Controller::exportMichlet()
 {
+	// TODO
 }
 
 void Controller::importMichletWaves()
 {
+	// TODO
 }
 
 void Controller::exportObj()
 {
+	// TODO
 }
 
 void Controller::exportOffsets()
 {
+	// TODO
 }
 
 void Controller::exportSTL()
 {
+	// TODO
 }
 
 void Controller::importCarene()
 {
+	// TODO
 }
 
 void Controller::importChines()
 {
+	// TODO
 }
 
 void Controller::importFEF()
 {
+	// TODO
 }
 
 void Controller::importHull()
 {
+	// TODO
 }
 
 void Controller::importPart()
 {
+	// TODO
 }
 
 void Controller::importPolycad()
 {
+	// TODO
 }
 
 void Controller::importSurface()
 {
+	// TODO
 }
 
 void Controller::importVRML()
 {
+	// TODO
 }
 
 void Controller::loadFile()
 {
+	// TODO
 }
 
 void Controller::loadFile(const QString& filename)
 {
+	// TODO
 }
 
 void Controller::saveFile()
 {
+	// TODO
 }
 
 void Controller::saveAsFile()
 {
+	// TODO
 }
 
 void Controller::addFlowline(const QVector2D& source, viewport_type_t view)
 {
+	// TODO
 }
 
-void Controller::calculateHydrostatics(float draft, float heel_angle, float trim)
+void Controller::calculateHydrostatics()
 {
+	// TODO
 }
 
 void Controller::crossCurvesHydrostatics()
 {
+	// TODO
 }
 
 void Controller::hydrostaticsDialog()
 {
+	// TODO
 }
 
 void Controller::importFrames()
 {
+	// TODO
 }
 
 Intersection* Controller::addIntersection(intersection_type_t ty, float distance)
 {
+	// TODO
     return 0;
 }
 
 void Controller::addIntersectionToList(Intersection* inter)
 {
+	// TODO
 }
 
 void Controller::intersectionDialog()
 {
+	// TODO
 }
 
 void Controller::autoGroupLayer()
 {
+	// TODO
 }
 
 void Controller::developLayers()
 {
+	// TODO
 }
 
 void Controller::layerDialog()
 {
+	// TODO
 }
 
-void Controller::deleteEmptyLayers(bool quiet)
+void Controller::deleteEmptyLayers()
 {
+	// TODO
 }
 
 SubdivisionLayer* Controller::newLayer()
 {
+	// TODO
     return 0;
 }
 
 void Controller::addMarker(Marker* marker)
 {
+	// TODO
 }
 
 void Controller::deleteMarkers()
 {
+	// TODO
 }
 
 void Controller::importMarkers()
 {
+	// TODO
 }
 
-void Controller::checkModel(bool showResult)
+void Controller::checkModel()
 {
+	// TODO
 }
 
 bool Controller::newModel()
@@ -352,95 +409,299 @@ bool Controller::newModel()
 
 void Controller::lackenbyModelTransformation()
 {
+	// TODO
 }
 
-void Controller::scaleModel(QVector3D scale_vector, bool overrideLock, bool adjustMarkers)
+void Controller::scaleModel()
 {
+	// TODO
 }
 
 void Controller::collapsePoint()
 {
+	// TODO
 }
 
 void Controller::removeUnusedPoint()
 {
+	// TODO
 }
 
 void Controller::insertPlane()
 {
+	// TODO
 }
 
 void Controller::intersectLayerPoint()
 {
+	// TODO
 }
 
 void Controller::lockPoints()
 {
+	// TODO
 }
 
 SubdivisionControlPoint* Controller::newPoint()
 {
+	// TODO
     return 0;
 }
 
 void Controller::projectStraightLinePoint()
 {
+	// TODO
 }
 
 void Controller::unlockPoints()
 {
+	// TODO
 }
 
 void Controller::unlockAllPoints()
 {
+	// TODO
 }
 
 bool Controller::proceedWhenLockedPoints()
 {
+	// TODO
     return false;
 }
 
 void Controller::redo()
 {
+	// TODO
 }
 
 void Controller::delftResistance()
 {
+	// TODO
 }
 
 void Controller::kaperResistance()
 {
+	// TODO
 }
 
 void Controller::clearSelections()
 {
+	// TODO
 }
 
 void Controller::deleteSelections()
 {
+	// TODO
 }
 
 void Controller::selectAll()
 {
+	// TODO
 }
 
 void Controller::undo()
 {
+	// TODO
 }
 
 void Controller::clearUndo()
 {
+	// TODO
 }
 
 void Controller::showHistoryUndo()
 {
+	// TODO
 }
 
 void Controller::modelFileChanged()
 {
+	// TODO
     emit changedModel();
 }
 
 void Controller::modelGeometryChanged()
 {
+	// TODO
+}
+
+void
+Controller::showControlNet(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowControlNet() != val) {
+        vis.setShowControlNet(val);
+		emit onUpdateVisibilityInfo();
+        cout << "surface control net visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showInteriorEdges(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowInteriorEdges() != val) {
+        vis.setShowInteriorEdges(val);
+		emit onUpdateVisibilityInfo();
+        cout << "surface interior edges visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showGrid(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowGrid() != val) {
+        vis.setShowGrid(val);
+		emit onUpdateVisibilityInfo();
+        cout << "grid visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showControlCurves(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowControlCurves() != val) {
+        vis.setShowControlCurves(val);
+		emit onUpdateVisibilityInfo();
+        cout << "surface control curves visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showCurvature(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowCurvature() != val) {
+        vis.setShowCurvature(val);
+		emit onUpdateVisibilityInfo();
+        cout << "surface curvature visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showNormals(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowNormals() != val) {
+        vis.setShowNormals(val);
+		emit onUpdateVisibilityInfo();
+        cout << "surface normals visible: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showBothSides(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if ((vis.getModelView() == mvBoth && !val) || (vis.getModelView() == mvPort && val)) {
+        vis.setModelView(val ? mvBoth : mvPort);
+		emit onUpdateVisibilityInfo();
+        cout << "show both sides: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showMarkers(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowMarkers() != val) {
+        vis.setShowMarkers(val);
+		emit onUpdateVisibilityInfo();
+        cout << "show markers: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::shadeUnderwater(bool val)
+{
+	// TODO
+}
+
+void
+Controller::showStations(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowStations() != val) {
+        vis.setShowStations(val);
+		emit onUpdateVisibilityInfo();
+        cout << "show stations: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showButtocks(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowButtocks() != val) {
+        vis.setShowButtocks(val);
+		emit onUpdateVisibilityInfo();
+        cout << "show buttocks: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showWaterlines(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowWaterlines() != val) {
+        vis.setShowWaterlines(val);
+		emit onUpdateVisibilityInfo();
+        cout << "show waterlines: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showDiagonals(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowDiagonals() != val) {
+        vis.setShowDiagonals(val);
+		emit onUpdateVisibilityInfo();
+        cout << "show diagonals: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showHydroData(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowHydroData() != val) {
+        vis.setShowHydroData(val);
+		emit onUpdateVisibilityInfo();
+        cout << "show hydro features: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::showFlowlines(bool val)
+{
+    Visibility& vis = _model->getVisibility();
+    if (vis.isShowFlowlines() != val) {
+        vis.setShowFlowlines(val);
+		emit onUpdateVisibilityInfo();
+        cout << "show flowlines: " << (val ? 'y' : 'n') << endl;
+    }
+}
+
+void
+Controller::addCylinder()
+{
+	// TODO
+	cout << "add cylinder" << endl;
+}
+
+void
+Controller::keelAndRudderWizard()
+{
+	// TODO
+	cout << "keel and rudder wizard" << endl;
+}
+
+void
+Controller::setActiveLayerColor()
+{
+	// TODO
+	cout << "set active layer color" << endl;
 }

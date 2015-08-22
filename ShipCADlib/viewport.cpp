@@ -351,6 +351,6 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
     }
     _prev_pos = event->pos();
     // are we getting mouse clicks in the gl window?
-    cout << "mouse move: " << event->pos().x() << "," << event->pos().y() << endl;
+    //cout << "mouse move: " << event->pos().x() << "," << event->pos().y() << endl;
 }
 

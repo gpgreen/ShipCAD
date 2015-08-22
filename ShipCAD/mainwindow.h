@@ -72,7 +72,7 @@ private:
     void addDefaultViewports();
     /*! \brief create the Recent files menu
      */
-    void createRecentFiles();
+    void createRecentFilesMenu();
 
 private slots:
 
@@ -95,7 +95,6 @@ private slots:
     /*! \brief show preference dialog
      */
     void showPreferences();
-
     /*! \brief use wireframe shading
      */
     void wireFrame();
@@ -111,27 +110,6 @@ private slots:
     /*! \brief use zebra curvature shading
      */
     void shadeZebra();
-    /*! \brief control net visibility
-     */
-    void showControlNet(bool val);
-    /*! \brief interior edges
-     */
-    void showInteriorEdges(bool val);
-    /*! \brief show control curves
-     */
-    void showControlCurves(bool val);
-    /*! \brief show curve curvature
-     */
-    void showCurvature(bool val);
-    /*! \brief show surface normals
-     */
-    void showNormals(bool val);
-    /*! \brief show both sides of hull
-     */
-    void showBothSides(bool val);
-    /*! \brief underwater color change shading
-     */
-    void shadeUnderwater(bool val);
     /*! \brief model has changed
      */
     void modelChanged();

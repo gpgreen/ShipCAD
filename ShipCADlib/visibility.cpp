@@ -60,7 +60,7 @@ void Visibility::clear()
     _show_hydro_lateral_area = true;
     _show_hydro_metacentric_height = true;
     _show_hydro_lcf = true;
-    _show_flow_lines = true;
+    _show_flowlines = true;
     emit onChangeCursorIncrement();
 }
 
@@ -95,7 +95,7 @@ void Visibility::loadBinary(FileBuffer &source)
                 source.load(_show_hydro_metacentric_height);
                 source.load(_show_hydro_lcf);
                 if (_owner->getFileVersion() >= fv250) {
-                    source.load(_show_flow_lines);
+                    source.load(_show_flowlines);
                 }
             }
         }
@@ -128,7 +128,7 @@ void Visibility::saveBinary(FileBuffer &dest)
                 dest.add(_show_hydro_metacentric_height);
                 dest.add(_show_hydro_lcf);
                 if (_owner->getFileVersion() >= fv250) {
-                    dest.add(_show_flow_lines);
+                    dest.add(_show_flowlines);
                 }
             }
         }
@@ -139,14 +139,12 @@ void Visibility::decreaseCurvatureScale()
 {
     _curvature_scale /= 1.1f;
     _owner->setFileChanged(true);
-    _owner->visibilityOptionsChanged();
 }
 
 void Visibility::increaseCurvatureScale()
 {
     _curvature_scale *= 1.1f;
     _owner->setFileChanged(true);
-    _owner->visibilityOptionsChanged();
 }
 
 void Visibility::setModelView(model_view_t vw)
@@ -155,7 +153,6 @@ void Visibility::setModelView(model_view_t vw)
         _model_view = vw;
         _owner->getSurface()->setDrawMirror(vw == mvBoth);
         _owner->setFileChanged(true);
-        _owner->visibilityOptionsChanged();
     }
 }
 
@@ -165,7 +162,6 @@ void Visibility::setShowControlNet(bool show)
 		_show_control_net = show;
         _owner->getSurface()->setShowControlNet(show);
         _owner->setFileChanged(true);
-        _owner->visibilityOptionsChanged();
     }
 }
 
@@ -175,7 +171,6 @@ void Visibility::setShowInteriorEdges(bool show)
 		_show_interior_edges = show;
         _owner->getSurface()->setShowInteriorEdges(show);
         _owner->setFileChanged(true);
-        _owner->visibilityOptionsChanged();
     }
 }
 
@@ -185,7 +180,6 @@ void Visibility::setShowControlCurves(bool show)
         _show_control_curves = show;
         _owner->getSurface()->setShowControlCurves(show);
         _owner->setFileChanged(true);
-        _owner->visibilityOptionsChanged();
     }
 }
 
@@ -195,7 +189,79 @@ void Visibility::setShowCurvature(bool show)
         _show_curvature = show;
         _owner->getSurface()->setShowCurvature(show);
         _owner->setFileChanged(true);
-        _owner->visibilityOptionsChanged();
+    }
+}
+
+void Visibility::setShowNormals(bool show)
+{
+    if (show != _show_normals) {
+        _show_normals = show;
+        _owner->getSurface()->setShowNormals(show);
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowMarkers(bool show)
+{
+    if (show != _show_markers) {
+        _show_markers = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowStations(bool show)
+{
+    if (show != _show_stations) {
+        _show_stations = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowGrid(bool show)
+{
+    if (show != _show_grid) {
+        _show_grid = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowButtocks(bool show)
+{
+    if (show != _show_buttocks) {
+        _show_buttocks = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowWaterlines(bool show)
+{
+    if (show != _show_waterlines) {
+        _show_waterlines = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowDiagonals(bool show)
+{
+    if (show != _show_diagonals) {
+        _show_diagonals = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowHydroData(bool show)
+{
+    if (show != _show_hydrostatic_data) {
+        _show_hydrostatic_data = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowFlowlines(bool show)
+{
+    if (show != _show_flowlines) {
+        _show_flowlines = show;
+        _owner->setFileChanged(true);
     }
 }
 

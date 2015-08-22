@@ -44,10 +44,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     _controller(c), _menu_recent_files(0)
 {
     ui->setupUi(this);
-    addDefaultViewports();
-    createRecentFiles();
     createToolBars();
     createStatusBar();
+    createRecentFilesMenu();
 
     // connect controller signals
     connect(_controller, SIGNAL(updateUndoData()), SLOT(updateUndoData()));
@@ -88,30 +87,87 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     // connect project actions
 
     // connect edit actions
+    connect(ui->actionUndo, SIGNAL(triggered()), _controller, SLOT(undo()));
+    connect(ui->actionRedo, SIGNAL(triggered()), _controller, SLOT(redo()));
+    connect(ui->actionDelete, SIGNAL(triggered()), _controller, SLOT(deleteSelections()));
+    connect(ui->actionUndo_history, SIGNAL(triggered()), _controller, SLOT(showHistoryUndo()));
 
     // connect point actions
+    connect(ui->actionAdd, SIGNAL(triggered()), _controller, SLOT(newPoint()));
+    connect(ui->actionAlign, SIGNAL(triggered()), _controller, SLOT(projectStraightLinePoint()));
+    connect(ui->actionPointCollapse, SIGNAL(triggered()), _controller, SLOT(collapsePoint()));
+    connect(ui->actionInsert_plane, SIGNAL(triggered()), _controller, SLOT(insertPlane()));
+    connect(ui->actionIntersect_layers, SIGNAL(triggered()), _controller, SLOT(intersectLayerPoint()));
+    connect(ui->actionLock_points, SIGNAL(triggered()), _controller, SLOT(lockPoints()));
+    connect(ui->actionUnlock_points, SIGNAL(triggered()), _controller, SLOT(unlockPoints()));
+    connect(ui->actionUnlock_all_points, SIGNAL(triggered()), _controller, SLOT(unlockAllPoints()));
 
     // connect edge actions
+    connect(ui->actionEdgeExtrude, SIGNAL(triggered()), _controller, SLOT(extrudeEdges()));
+    connect(ui->actionEdgeSplit, SIGNAL(triggered()), _controller, SLOT(splitEdges()));
+    connect(ui->actionEdgeCollapse, SIGNAL(triggered()), _controller, SLOT(collapseEdges()));
+    connect(ui->actionEdgeInsert, SIGNAL(triggered()), _controller, SLOT(connectEdges()));
+    connect(ui->actionEdgeCrease, SIGNAL(triggered()), _controller, SLOT(creaseEdges()));
+
+    // connect curve actions
+    connect(ui->actionCurveNew, SIGNAL(triggered()), _controller, SLOT(addCurve()));
 
     // connect face actions
+    connect(ui->actionFaceNew, SIGNAL(triggered()),  _controller, SLOT(newFace()));
+    connect(ui->actionFaceInvert, SIGNAL(triggered()), _controller, SLOT(flipFaces()));
 
     // connect layer actions
+    connect(ui->actionActive_layer_color, SIGNAL(triggered()), _controller, SLOT(setActiveLayerColor()));
+    connect(ui->actionLayerAuto_group, SIGNAL(triggered()), _controller, SLOT(autoGroupLayer()));
+    connect(ui->actionLayerNew, SIGNAL(triggered()), _controller, SLOT(newLayer()));
+    connect(ui->actionLayerDelete_empty, SIGNAL(triggered()), _controller, SLOT(deleteEmptyLayers()));
+    connect(ui->actionLayerDialog, SIGNAL(triggered()), _controller, SLOT(layerDialog()));
 
     // connect visibility actions
-    connect(ui->actionShowControl_net, SIGNAL(triggered(bool)), SLOT(showControlNet(bool)));
-    connect(ui->actionShowInterior_edges, SIGNAL(triggered(bool)), SLOT(showInteriorEdges(bool)));
-    connect(ui->actionShowControl_curves, SIGNAL(triggered(bool)), SLOT(showControlCurves(bool)));
-    connect(ui->actionShowCurvature, SIGNAL(triggered(bool)), SLOT(showCurvature(bool)));
-    connect(ui->actionShowNormals, SIGNAL(triggered(bool)), SLOT(showNormals(bool)));
-    connect(ui->actionShow_both_sides, SIGNAL(triggered(bool)), SLOT(showBothSides(bool)));
+    connect(ui->actionShowControl_net, SIGNAL(triggered(bool)), _controller, SLOT(showControlNet(bool)));
+    connect(ui->actionShow_both_sides, SIGNAL(triggered(bool)), _controller, SLOT(showBothSides(bool)));
+    connect(ui->actionShowControl_curves, SIGNAL(triggered(bool)), _controller, SLOT(showControlCurves(bool)));
+    connect(ui->actionShowInterior_edges, SIGNAL(triggered(bool)), _controller, SLOT(showInteriorEdges(bool)));
+    connect(ui->actionShowGrid, SIGNAL(triggered(bool)), _controller, SLOT(showGrid(bool)));
+    connect(ui->actionShowStations, SIGNAL(triggered(bool)), _controller, SLOT(showStations(bool)));
+    connect(ui->actionShowButtocks, SIGNAL(triggered(bool)), _controller, SLOT(showButtocks(bool)));
+    connect(ui->actionShowWaterlines, SIGNAL(triggered(bool)), _controller, SLOT(showWaterlines(bool)));
+    connect(ui->actionShowDiagonals, SIGNAL(triggered(bool)), _controller, SLOT(showDiagonals(bool)));
+    connect(ui->actionShowHydrostatic_features, SIGNAL(triggered(bool)), _controller, SLOT(showHydroData(bool)));
+    connect(ui->actionShowFlowlines, SIGNAL(triggered(bool)), _controller, SLOT(showFlowlines(bool)));
+    connect(ui->actionShowNormals, SIGNAL(triggered(bool)), _controller, SLOT(showNormals(bool)));
+    connect(ui->actionShowCurvature, SIGNAL(triggered(bool)), _controller, SLOT(showCurvature(bool)));
+    connect(ui->actionShowMarkers, SIGNAL(triggered(bool)), _controller, SLOT(showMarkers(bool)));
+    // inc/dec curvature
 
     // connect selection actions
+    connect(ui->actionSelect_all, SIGNAL(triggered()), _controller, SLOT(selectAll()));
+    connect(ui->actionDeselect_all, SIGNAL(triggered()), _controller, SLOT(clearSelections()));
 
     // connect tools actions
+    connect(ui->actionImportMarkers, SIGNAL(triggered()), _controller, SLOT(importMarkers()));
+    connect(ui->actionDelete_all_markers, SIGNAL(triggered()), _controller, SLOT(deleteMarkers()));
+    connect(ui->actionCheck_model, SIGNAL(triggered()), _controller, SLOT(checkModel()));
+    connect(ui->actionRemove_negative, SIGNAL(triggered()), _controller, SLOT(deleteNegativeFaces()));
+    connect(ui->actionRemove_unused_points, SIGNAL(triggered()), _controller, SLOT(removeUnusedPoint()));
+    connect(ui->actionDevelop_plates, SIGNAL(triggered()), _controller, SLOT(developLayers()));
+    connect(ui->actionKeel_and_rudder_wizard, SIGNAL(triggered()), _controller, SLOT(keelAndRudderWizard()));
+    connect(ui->actionAdd_cylinder, SIGNAL(triggered()), _controller, SLOT(addCylinder()));
 
     // connect transform actions
+    connect(ui->actionScale, SIGNAL(triggered()), _controller, SLOT(scaleModel()));
+    connect(ui->actionMove, SIGNAL(triggered()), _controller, SLOT(moveFaces()));
+    connect(ui->actionRotate, SIGNAL(triggered()), _controller, SLOT(rotateFaces()));
+    connect(ui->actionMirror, SIGNAL(triggered()), _controller, SLOT(mirrorPlaneFace()));
+    connect(ui->actionLackenby, SIGNAL(triggered()), _controller, SLOT(lackenbyModelTransformation()));
 
     // connect calculations actions
+    connect(ui->actionDelft_yacht_series, SIGNAL(triggered()), _controller, SLOT(delftResistance()));
+    connect(ui->actionKAPER, SIGNAL(triggered()), _controller, SLOT(kaperResistance()));
+    connect(ui->actionIntersections, SIGNAL(triggered()), _controller, SLOT(intersectionDialog()));
+    connect(ui->actionDesign_Hydrostatics, SIGNAL(triggered()), _controller, SLOT(calculateHydrostatics()));
+    connect(ui->actionHydrostatics, SIGNAL(triggered()), _controller, SLOT(hydrostaticsDialog()));
+    connect(ui->actionCross_curves, SIGNAL(triggered()), _controller, SLOT(crossCurvesHydrostatics()));
 
     // connect window actions
 
@@ -119,6 +175,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
 
     // set action status
     updateVisibilityActions();
+
+    // show default viewports
+    addDefaultViewports();
 
     ui->statusBar->showMessage(tr("Ready"));
 }
@@ -129,6 +188,22 @@ MainWindow::~MainWindow()
         delete _viewports[i].second;
     }
     delete ui;
+}
+
+void MainWindow::createToolBars()
+{
+
+}
+
+void MainWindow::createStatusBar()
+{
+    QLabel* _undo_info = new QLabel(tr("undo memory:"));
+    _undo_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    QLabel* _geom_info = new QLabel(tr("faces: 0"));
+    _geom_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+    ui->statusBar->addPermanentWidget(_undo_info);
+    ui->statusBar->addPermanentWidget(_geom_info);
 }
 
 void MainWindow::addDefaultViewports()
@@ -160,19 +235,19 @@ void MainWindow::updateVisibilityActions()
     Visibility& vis = _controller->getModel()->getVisibility();
 
     ui->actionShowControl_net->setChecked(vis.isShowControlNet());
-    //ui->actionShow_both_sides->setChecked(vis.drawMirror());
+    ui->actionShow_both_sides->setChecked(vis.getModelView() == mvBoth);
     ui->actionShowControl_curves->setChecked(vis.isShowControlCurves());
     ui->actionShowInterior_edges->setChecked(vis.isShowInteriorEdges());
-    //ui->actionShowGrid->setChecked(vis.isShowControlCurves());
-    //ui->actionShowStations->setChecked(vis.isShowStations());
-    //ui->actionShowButtocks->setChecked(vis.isShowButtocks());
-    //ui->actionShowWaterlines->setChecked(vis.isShowWaterlines());
-    //ui->actionShowDiagonals->setChecked(vis.isShowDiagonals());
-    //ui->actionShowHydrostatic_features->setChecked(vis.isShowHydrostaticFeatures());
-    //ui->actionShowFlowlines->setChecked(vis.isShowFlowlines());
-    //ui->actionShowNormals->setChecked(vis.isShowNormals());
+    ui->actionShowGrid->setChecked(vis.isShowGrid());
+    ui->actionShowStations->setChecked(vis.isShowStations());
+    ui->actionShowButtocks->setChecked(vis.isShowButtocks());
+    ui->actionShowWaterlines->setChecked(vis.isShowWaterlines());
+    ui->actionShowDiagonals->setChecked(vis.isShowDiagonals());
+    ui->actionShowHydrostatic_features->setChecked(vis.isShowHydroData());
+    ui->actionShowFlowlines->setChecked(vis.isShowFlowlines());
+    ui->actionShowNormals->setChecked(vis.isShowNormals());
     ui->actionShowCurvature->setChecked(vis.isShowCurvature());
-    //ui->actionShowMarkers->setChecked(vis.isShowMarkers());
+    ui->actionShowMarkers->setChecked(vis.isShowMarkers());
 
 //    ui->actionShade_Underwater->setChecked(s->shadeUnderWater());
     emit viewportRender();
@@ -181,7 +256,7 @@ void MainWindow::updateVisibilityActions()
 
 
 // add the menu entry to the file menu, and create all the actions...
-void MainWindow::createRecentFiles()
+void MainWindow::createRecentFilesMenu()
 {
     _menu_recent_files = new QMenu(tr("Recent files"), this);
     ui->menuFile->addMenu(_menu_recent_files);
@@ -297,104 +372,12 @@ MainWindow::shadeZebra()
     cout << "Viewport mode shade zebra" << endl;
 }
 
-void
-MainWindow::showControlNet(bool val)
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-    if (vis.isShowControlNet() != val) {
-        vis.setShowControlNet(val);
-        cout << "surface control net visible: " << (val ? 'y' : 'n') << endl;
-    }
-    ui->actionShowControl_net->setChecked(val);
-}
-
-void
-MainWindow::showInteriorEdges(bool val)
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-    if (vis.isShowInteriorEdges() != val) {
-        vis.setShowInteriorEdges(val);
-        cout << "surface interior edges visible: " << (val ? 'y' : 'n') << endl;
-    }
-    ui->actionShowInterior_edges->setChecked(val);
-}
-
-void
-MainWindow::showControlCurves(bool val)
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-    if (vis.isShowControlCurves() != val) {
-        vis.setShowControlCurves(val);
-        cout << "surface control curves visible: " << (val ? 'y' : 'n') << endl;
-    }
-    ui->actionShowControl_curves->setChecked(val);
-}
-
-void
-MainWindow::showCurvature(bool val)
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-    if (vis.isShowCurvature() != val) {
-        vis.setShowCurvature(val);
-        cout << "surface curvature visible: " << (val ? 'y' : 'n') << endl;
-    }
-    ui->actionShowCurvature->setChecked(val);
-}
-
-void
-MainWindow::showNormals(bool val)
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-    SubdivisionSurface* s = _controller->getModel()->getSurface();
-    if (s->showNormals() != val) {
-        s->setShowNormals(val);
-        cout << "surface normals visible: " << (val ? 'y' : 'n') << endl;
-    }
-    ui->actionShowNormals->setChecked(val);
-}
-
-void
-MainWindow::showBothSides(bool val)
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-    SubdivisionSurface* s = _controller->getModel()->getSurface();
-    if (s->drawMirror() != val) {
-        s->setDrawMirror(val);
-        emit viewportRender();
-        cout << "surface draw mirror: " << (val ? 'y' : 'n') << endl;
-    }
-//    ui->actionShowControl_net->setChecked(val);
-}
-
-void
-MainWindow::shadeUnderwater(bool val)
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-    SubdivisionSurface* s = _controller->getModel()->getSurface();
-    if (s->shadeUnderWater() != val) {
-        s->setShadeUnderWater(val);
-        emit viewportRender();
-        cout << "surface shade underwater: " << (val ? 'y' : 'n') << endl;
-    }
-}
-
 void MainWindow::modelChanged()
 {
+    if (_controller->getModel()->isFileChanged())
+        setWindowTitle(tr("ShipCAD") + tr(" (modified)"));
+    else
+        setWindowTitle(tr("ShipCAD"));
     cout << "model changed" << endl;
 }
 
-void MainWindow::createToolBars()
-{
-
-}
-
-void MainWindow::createStatusBar()
-{
-    QLabel* _undo_info = new QLabel(tr("undo memory:"));
-    _undo_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    QLabel* _geom_info = new QLabel(tr("faces: 0"));
-    _geom_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-
-    ui->statusBar->addPermanentWidget(_undo_info);
-    ui->statusBar->addPermanentWidget(_geom_info);
-}

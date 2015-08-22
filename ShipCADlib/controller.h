@@ -228,14 +228,14 @@ public slots:
 	void saveAsFile();
 	/*! \brief 
 	 */
-        void addFlowline(const QVector2D& source, viewport_type_t view);
+	void addFlowline(const QVector2D& source, viewport_type_t view);
 	/*! \brief calculate hydrostatics
 	 *
 	 * \param draft draft of calculation
 	 * \param heel_angle angle of heel for calculation
 	 * \param trim trim for calculation
 	 */
-	void calculateHydrostatics(float draft, float heel_angle, float trim);
+	void calculateHydrostatics();
 	/*! \brief calculate crosscurves
 	 */
 	void crossCurvesHydrostatics();
@@ -265,7 +265,7 @@ public slots:
     void layerDialog();
     /*! \brief delete all empty layers from the model
      */
-    void deleteEmptyLayers(bool quiet);
+    void deleteEmptyLayers();
     /*! \brief add a new empty layer
      */
     SubdivisionLayer* newLayer();
@@ -280,7 +280,7 @@ public slots:
     void importMarkers();
     /*! \brief check the surface for inconsistent normal directions and leaks
      */
-    void checkModel(bool showResult);
+    void checkModel();
     /*! \brief start a new model (with a predefined surface)
      */
     bool newModel();
@@ -289,7 +289,7 @@ public slots:
     void lackenbyModelTransformation();
     /*! \brief scale the model and all equivalent data
      */
-    void scaleModel(QVector3D scale_vector, bool overrideLock, bool adjustMarkers);
+    void scaleModel();
     /*! \brief merge 2 selected edges by removing common controlpoint
      */
     void collapsePoint();
@@ -347,7 +347,61 @@ public slots:
     /*! \brief show the undo history
      */
     void showHistoryUndo();
-
+    /*! \brief control net visibility
+     */
+    void showControlNet(bool val);
+    /*! \brief interior edges
+     */
+    void showInteriorEdges(bool val);
+    /*! \brief show control curves
+     */
+    void showControlCurves(bool val);
+    /*! \brief show curve curvature
+     */
+    void showCurvature(bool val);
+    /*! \brief show surface normals
+     */
+    void showNormals(bool val);
+    /*! \brief show both sides of hull
+     */
+    void showBothSides(bool val);
+    /*! \brief show markers
+     */
+    void showMarkers(bool val);
+    /*! \brief underwater color change shading
+     */
+    void shadeUnderwater(bool val);
+    /*! \brief show stations
+     */
+    void showStations(bool val);
+    /*! \brief show buttocks
+     */
+    void showButtocks(bool);
+    /*! \brief show grid
+     */
+    void showGrid(bool val);
+    /*! \brief show waterlines
+     */
+    void showWaterlines(bool);
+    /*! \brief show diagonals
+     */
+    void showDiagonals(bool);
+    /*! \brief show Hydrostatic features
+     */
+    void showHydroData(bool);
+    /*! \brief show flowlines
+     */
+    void showFlowlines(bool);
+	/*! \brief dialog to create keels and rudders
+	 */
+	void keelAndRudderWizard();
+	/*! \brief add a cylinder to model
+	 */
+	void addCylinder();
+	/*! \brief set active layer color
+	 */
+	void setActiveLayerColor();
+							  
 private slots:
 
 	/*! \brief the ShipCAD model file has changed

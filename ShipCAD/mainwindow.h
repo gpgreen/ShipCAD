@@ -34,6 +34,7 @@
 #include <QMainWindow>
 #include <QAction>
 #include <QMenu>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -134,8 +135,12 @@ private slots:
     /*! \brief model has changed
      */
     void modelChanged();
+    void createToolBars();
+    void createStatusBar();
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
+    QLabel* _undo_info;
+    QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */
     std::vector<std::pair<QWidget*, ShipCAD::Viewport*> > _viewports; /**< collection of QWidget<->Viewport pairs */
     std::vector<QAction*> _recent_file_actions; /**< actions for each recent file */

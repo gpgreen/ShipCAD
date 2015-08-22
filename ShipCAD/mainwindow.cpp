@@ -46,6 +46,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     ui->setupUi(this);
     addDefaultViewports();
     createRecentFiles();
+    createToolBars();
+    createStatusBar();
 
     // connect controller signals
     connect(_controller, SIGNAL(updateUndoData()), SLOT(updateUndoData()));
@@ -117,6 +119,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
 
     // set action status
     updateVisibilityActions();
+
+    ui->statusBar->showMessage(tr("Ready"));
 }
 
 MainWindow::~MainWindow()
@@ -377,4 +381,20 @@ MainWindow::shadeUnderwater(bool val)
 void MainWindow::modelChanged()
 {
     cout << "model changed" << endl;
+}
+
+void MainWindow::createToolBars()
+{
+
+}
+
+void MainWindow::createStatusBar()
+{
+    QLabel* _undo_info = new QLabel(tr("undo memory:"));
+    _undo_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    QLabel* _geom_info = new QLabel(tr("faces: 0"));
+    _geom_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+    ui->statusBar->addPermanentWidget(_undo_info);
+    ui->statusBar->addPermanentWidget(_geom_info);
 }

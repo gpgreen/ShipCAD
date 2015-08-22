@@ -51,23 +51,52 @@ class Marker;
 class Controller : public QObject
 {
 	Q_OBJECT
+
 public:
+
+    /*! \brief constructor
+     */
     explicit Controller(ShipCADModel* model);
+    /*! \brief destructor
+     */
 	~Controller();
 
+    /*! \brief get the model this is controlling
+     */
     ShipCADModel* getModel()
         {return _model;}
+    /*! \brief get the list of recent files
+     */
     const QStringList& getRecentFiles() const;
+    /*! \brief add a filename to the list of recent files
+     */
     void addRecentFiles(const QString& filename);
 
 signals:
+
 	/*! \brief signal when undo data is changed
 	 */
 	void updateUndoData();
+    /*! \brief signal when layer data changes
+     */
 	void changedLayerData();
+    /*! \brief signal when active layer changes
+     */
 	void changeActiveLayer();
-							
+    /*! \brief signal when list of recent files changes
+     */
+    void changeRecentFiles();
+    /*! \brief signal when selection of items changes
+     */
+    void changeSelectedItems();
+	/*! \brief signal when model has changed
+	 */
+	void changedModel();
+
+    void onUpdateVisibilityInfo();
+
 public slots:
+
     /*! \brief delete the background image
      */
     void deleteBackgroundImage();
@@ -172,7 +201,7 @@ public slots:
 	void importFEF();
 	/*! \brief import a file created with Carlsson's Hulls program
 	 */
-    void importHull(const QString& filename, bool quiet);
+    void importHull();
 	/*! \brief import a partfile and add to current geometry
 	 */
 	void importPart();
@@ -206,7 +235,7 @@ public slots:
 	 * \param heel_angle angle of heel for calculation
 	 * \param trim trim for calculation
 	 */
-	void calculuteHydrostatics(float draft, float heel_angle, float trim);
+	void calculateHydrostatics(float draft, float heel_angle, float trim);
 	/*! \brief calculate crosscurves
 	 */
 	void crossCurvesHydrostatics();
@@ -318,7 +347,9 @@ public slots:
     /*! \brief show the undo history
      */
     void showHistoryUndo();
-protected slots:
+
+private slots:
+
 	/*! \brief the ShipCAD model file has changed
 	 */
 	void modelFileChanged();
@@ -327,8 +358,8 @@ protected slots:
     void modelGeometryChanged();
 
 private:
-	ShipCADModel* _model;
-	QStringList _recent_files;
+    ShipCADModel* _model; /**< the model this is controlling */
+    QStringList _recent_files; /**< the list of recent file names */
 };
 	
 //////////////////////////////////////////////////////////////////////////////////////

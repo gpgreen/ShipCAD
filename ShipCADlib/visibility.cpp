@@ -138,18 +138,64 @@ void Visibility::saveBinary(FileBuffer &dest)
 void Visibility::decreaseCurvatureScale()
 {
     _curvature_scale /= 1.1f;
+    _owner->setFileChanged(true);
+    _owner->visibilityOptionsChanged();
 }
 
 void Visibility::increaseCurvatureScale()
 {
     _curvature_scale *= 1.1f;
+    _owner->setFileChanged(true);
+    _owner->visibilityOptionsChanged();
 }
 
 void Visibility::setModelView(model_view_t vw)
 {
     if (vw != _model_view) {
         _model_view = vw;
+        _owner->getSurface()->setDrawMirror(vw == mvBoth);
         _owner->setFileChanged(true);
-        // TODO owner draw
+        _owner->visibilityOptionsChanged();
     }
 }
+
+void Visibility::setShowControlNet(bool show)
+{
+	if (show != _show_control_net) {
+		_show_control_net = show;
+        _owner->getSurface()->setShowControlNet(show);
+        _owner->setFileChanged(true);
+        _owner->visibilityOptionsChanged();
+    }
+}
+
+void Visibility::setShowInteriorEdges(bool show)
+{
+	if (show != _show_interior_edges) {
+		_show_interior_edges = show;
+        _owner->getSurface()->setShowInteriorEdges(show);
+        _owner->setFileChanged(true);
+        _owner->visibilityOptionsChanged();
+    }
+}
+
+void Visibility::setShowControlCurves(bool show)
+{
+    if (show != _show_control_curves) {
+        _show_control_curves = show;
+        _owner->getSurface()->setShowControlCurves(show);
+        _owner->setFileChanged(true);
+        _owner->visibilityOptionsChanged();
+    }
+}
+
+void Visibility::setShowCurvature(bool show)
+{
+    if (show != _show_curvature) {
+        _show_curvature = show;
+        _owner->getSurface()->setShowCurvature(show);
+        _owner->setFileChanged(true);
+        _owner->visibilityOptionsChanged();
+    }
+}
+

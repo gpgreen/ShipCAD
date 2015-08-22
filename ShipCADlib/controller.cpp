@@ -43,6 +43,7 @@ Controller::Controller(ShipCADModel* model)
     connect(_model, SIGNAL(onUpdateGeometryInfo()), SLOT(modelGeometryChanged()));
     connect(_model, SIGNAL(changeActiveLayer()), SIGNAL(changeActiveLayer()));
     connect(_model, SIGNAL(changedLayerData()), SIGNAL(changedLayerData()));
+    connect(_model, SIGNAL(onUpdateVisibilityInfo()), SIGNAL(onUpdateVisibilityInfo()));
 }
 
 Controller::~Controller()
@@ -59,7 +60,7 @@ void Controller::addRecentFiles(const QString& filename)
 {
 	bool already_present = false;
 	QString basename(ChangeFileExt(filename, ""));
-	for (size_t i=0; i<_recent_files.size(); i++) {
+    for (int i=0; i<_recent_files.size(); i++) {
 		if (QString::compare(basename, _recent_files[i], Qt::CaseInsensitive) == 0) {
 			already_present = true;
 			_recent_files.removeAt(i);
@@ -73,6 +74,7 @@ void Controller::addRecentFiles(const QString& filename)
 		}
 		_recent_files.push_front(filename);
 	}
+    emit changeRecentFiles();
 }
 
 void Controller::deleteBackgroundImage()
@@ -237,7 +239,7 @@ void Controller::importFEF()
 {
 }
 
-void Controller::importHull(const QString& filename, bool quiet)
+void Controller::importHull()
 {
 }
 
@@ -277,7 +279,7 @@ void Controller::addFlowline(const QVector2D& source, viewport_type_t view)
 {
 }
 
-void Controller::calculuteHydrostatics(float draft, float heel_angle, float trim)
+void Controller::calculateHydrostatics(float draft, float heel_angle, float trim)
 {
 }
 
@@ -436,6 +438,7 @@ void Controller::showHistoryUndo()
 
 void Controller::modelFileChanged()
 {
+    emit changedModel();
 }
 
 void Controller::modelGeometryChanged()

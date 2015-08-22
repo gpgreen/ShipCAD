@@ -391,3 +391,8 @@ bool ShipCADModel::adjustMarkers()
 {
     return false;
 }
+
+void ShipCADModel::visibilityOptionsChanged()
+{
+    emit onUpdateVisibilityInfo();
+}

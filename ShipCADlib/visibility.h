@@ -54,7 +54,27 @@ public:
     void setCursorIncrement(float val);
     void setCurvatureScale(float val);
     void setShowButtocks(bool show);
+	/*! \brief is control net shown
+	 *
+	 * \return true if control net shown
+	 */
+	bool isShowControlNet() const
+		{return _show_control_net;}
+	/*! \brief set visibility of control net
+	 *
+	 * \param show visiblity of control net
+	 */
     void setShowControlNet(bool show);
+    /*! \brief show visibility of curvature
+     *
+     * \return true if curvature visible
+     */
+    bool isShowCurvature() const
+        {return _show_curvature;}
+    /*! \brief set show curvature
+     *
+     * \param show visibility of curvature
+     */
     void setShowCurvature(bool show);
     void setShowDiagonals(bool show);
     void setShowFlowlines(bool show);
@@ -62,6 +82,16 @@ public:
     model_view_t getModelView() const
         {return _model_view;}
     void setModelView(model_view_t vw);
+	/*! \brief is interior edges shown
+	 *
+	 * \return true if interior edges shown
+	 */
+    bool isShowInteriorEdges() const
+		{return _show_interior_edges;}
+	/*! \brief set visibility of interior edges
+	 *
+	 * \param show visiblity of interior edges
+	 */
     void setShowInteriorEdges(bool show);
     bool isShowMarkers() const
         {return _show_markers;}
@@ -69,6 +99,16 @@ public:
     void setShowNormals(bool show);
     void setShowStations(bool show);
     void setShowWaterlines(bool show);
+    /*! \brief show visibility of control curves
+     *
+     * \return true if control curves shown
+     */
+    bool isShowControlCurves() const
+        {return _show_control_curves;}
+    /*! \brief set visibility of control curves
+     *
+     * \param show visiblity of control curves
+     */
     void setShowControlCurves(bool show);
     void setShowHydrostaticData(bool show);
 

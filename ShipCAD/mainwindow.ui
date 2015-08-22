@@ -22,24 +22,57 @@
      <x>0</x>
      <y>0</y>
      <width>1079</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuImport">
+     <property name="title">
+      <string>Import</string>
+     </property>
+     <addaction name="actionImportPart"/>
+     <addaction name="actionImportCarlson"/>
+     <addaction name="actionImportFEF"/>
+     <addaction name="actionImportSurface"/>
+     <addaction name="actionImportChines"/>
+     <addaction name="actionImportCarene"/>
+     <addaction name="actionImportVRML"/>
+     <addaction name="actionImportPolyCad"/>
+     <addaction name="separator"/>
+     <addaction name="actionImportMichlet_waves"/>
+    </widget>
+    <widget class="QMenu" name="menuExport">
+     <property name="title">
+      <string>Export</string>
+     </property>
+     <addaction name="actionExportPart"/>
+     <addaction name="actionExportIGES"/>
+     <addaction name="actionExportDXF_3D_mesh"/>
+     <addaction name="actionExportDXF_2D_Polylines"/>
+     <addaction name="actionExportDXF_3D_Polylines"/>
+     <addaction name="actionExportWavefront"/>
+     <addaction name="actionExportSTL"/>
+     <addaction name="actionExportFEF"/>
+     <addaction name="actionExportOffsets"/>
+     <addaction name="actionExportCoordinates"/>
+     <addaction name="separator"/>
+     <addaction name="actionExportMichlet"/>
+     <addaction name="actionExportArchimedes"/>
+     <addaction name="actionExportGHS"/>
+    </widget>
     <addaction name="actionFileNew"/>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
-    <addaction name="actionImport"/>
-    <addaction name="actionExport"/>
+    <addaction name="menuImport"/>
+    <addaction name="menuExport"/>
     <addaction name="actionExit"/>
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="separator"/>
-    <addaction name="actionRecent_files"/>
    </widget>
    <widget class="QMenu" name="menuProject">
     <property name="title">
@@ -75,11 +108,11 @@
     <property name="title">
      <string>Edge</string>
     </property>
-    <addaction name="actionExtrude"/>
-    <addaction name="actionSplit"/>
+    <addaction name="actionEdgeExtrude"/>
+    <addaction name="actionEdgeSplit"/>
     <addaction name="actionEdgeCollapse"/>
-    <addaction name="actionInsert"/>
-    <addaction name="actionCrease"/>
+    <addaction name="actionEdgeInsert"/>
+    <addaction name="actionEdgeCrease"/>
    </widget>
    <widget class="QMenu" name="menuCurve">
     <property name="title">
@@ -92,17 +125,39 @@
      <string>Face</string>
     </property>
     <addaction name="actionFaceNew"/>
-    <addaction name="actionInvert"/>
+    <addaction name="actionFaceInvert"/>
    </widget>
    <widget class="QMenu" name="menuLayer">
     <property name="title">
      <string>Layer</string>
     </property>
+    <addaction name="actionActive_layer_color"/>
+    <addaction name="actionLayerAuto_group"/>
+    <addaction name="actionLayerNew"/>
+    <addaction name="actionLayerDelete_empty"/>
+    <addaction name="actionLayerDialog"/>
    </widget>
    <widget class="QMenu" name="menuVisibility">
     <property name="title">
      <string>Visibility</string>
     </property>
+    <addaction name="actionShowControl_net"/>
+    <addaction name="actionShow_both_sides"/>
+    <addaction name="actionShowControl_curves"/>
+    <addaction name="actionShowInterior_edges"/>
+    <addaction name="actionShowGrid"/>
+    <addaction name="actionShowStations"/>
+    <addaction name="actionShowButtocks"/>
+    <addaction name="actionShowWaterlines"/>
+    <addaction name="actionShowDiagonals"/>
+    <addaction name="actionShowHydrostatic_features"/>
+    <addaction name="actionShowFlowlines"/>
+    <addaction name="actionShowNormals"/>
+    <addaction name="actionShowCurvature"/>
+    <addaction name="actionShowMarkers"/>
+    <addaction name="separator"/>
+    <addaction name="actionDecr_Curvature_Scale"/>
+    <addaction name="actionIncr_Curvature_Scale"/>
    </widget>
    <widget class="QMenu" name="menuSelection">
     <property name="title">
@@ -115,16 +170,47 @@
     <property name="title">
      <string>Tools</string>
     </property>
+    <widget class="QMenu" name="menuMarkers">
+     <property name="title">
+      <string>Markers</string>
+     </property>
+     <addaction name="actionImportMarkers"/>
+     <addaction name="actionDelete_all_markers"/>
+    </widget>
+    <addaction name="actionCheck_model"/>
+    <addaction name="actionRemove_negative"/>
+    <addaction name="actionRemove_unused_points"/>
+    <addaction name="actionDevelop_plates"/>
+    <addaction name="actionKeel_and_rudder_wizard"/>
+    <addaction name="menuMarkers"/>
+    <addaction name="actionAdd_cylinder"/>
    </widget>
    <widget class="QMenu" name="menuTransform">
     <property name="title">
      <string>Transform</string>
     </property>
+    <addaction name="actionScale"/>
+    <addaction name="actionMove"/>
+    <addaction name="actionRotate"/>
+    <addaction name="actionMirror"/>
+    <addaction name="actionLackenby"/>
    </widget>
    <widget class="QMenu" name="menuCalculations">
     <property name="title">
      <string>Calculations</string>
     </property>
+    <widget class="QMenu" name="menuResistance">
+     <property name="title">
+      <string>Resistance</string>
+     </property>
+     <addaction name="actionDelft_yacht_series"/>
+     <addaction name="actionKAPER"/>
+    </widget>
+    <addaction name="actionIntersections"/>
+    <addaction name="actionDesign_Hydrostatics"/>
+    <addaction name="actionHydrostatics"/>
+    <addaction name="actionCross_curves"/>
+    <addaction name="menuResistance"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -175,23 +261,19 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
   </action>
   <action name="actionSave_As">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Save As</string>
-   </property>
-  </action>
-  <action name="actionImport">
-   <property name="text">
-    <string>Import</string>
-   </property>
-  </action>
-  <action name="actionExport">
-   <property name="text">
-    <string>Export</string>
    </property>
   </action>
   <action name="actionExit">
@@ -210,138 +292,774 @@
    </property>
   </action>
   <action name="actionProject_settings">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Project settings</string>
    </property>
   </action>
   <action name="actionLinesplans">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Linesplans</string>
    </property>
   </action>
   <action name="actionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Undo</string>
    </property>
   </action>
   <action name="actionRedo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Redo</string>
    </property>
   </action>
   <action name="actionDelete">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Delete</string>
    </property>
   </action>
   <action name="actionUndo_history">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Undo history</string>
    </property>
   </action>
   <action name="actionAdd">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Add</string>
    </property>
   </action>
   <action name="actionAlign">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Align</string>
    </property>
   </action>
   <action name="actionPointCollapse">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Collapse</string>
    </property>
   </action>
   <action name="actionInsert_plane">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Insert plane</string>
    </property>
   </action>
   <action name="actionIntersect_layers">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Intersect layers</string>
    </property>
   </action>
   <action name="actionLock_points">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Lock points</string>
    </property>
   </action>
   <action name="actionUnlock_points">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Unlock points</string>
    </property>
   </action>
   <action name="actionUnlock_all_points">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Unlock all points</string>
    </property>
   </action>
-  <action name="actionExtrude">
+  <action name="actionEdgeExtrude">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Extrude</string>
    </property>
   </action>
-  <action name="actionSplit">
+  <action name="actionEdgeSplit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Split</string>
    </property>
   </action>
   <action name="actionEdgeCollapse">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Collapse</string>
    </property>
   </action>
-  <action name="actionInsert">
+  <action name="actionEdgeInsert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Insert</string>
    </property>
   </action>
-  <action name="actionCrease">
+  <action name="actionEdgeCrease">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Crease</string>
    </property>
   </action>
   <action name="actionFaceNew">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>New</string>
    </property>
   </action>
-  <action name="actionInvert">
+  <action name="actionFaceInvert">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Invert</string>
    </property>
   </action>
   <action name="actionSelect_all">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Select all</string>
    </property>
   </action>
   <action name="actionDeselect_all">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Deselect all</string>
    </property>
   </action>
   <action name="actionNew_window">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>New window</string>
    </property>
   </action>
   <action name="actionTile">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Tile</string>
    </property>
   </action>
   <action name="actionCascade">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Cascade</string>
    </property>
   </action>
   <action name="actionCurveNew">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>New</string>
+   </property>
+  </action>
+  <action name="actionImportPart">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Part</string>
+   </property>
+  </action>
+  <action name="actionImportCarlson">
+   <property name="text">
+    <string>Carlson .hul file</string>
+   </property>
+  </action>
+  <action name="actionImportFEF">
+   <property name="text">
+    <string>FEF file</string>
+   </property>
+  </action>
+  <action name="actionImportSurface">
+   <property name="text">
+    <string>Surface</string>
+   </property>
+  </action>
+  <action name="actionImportChines">
+   <property name="text">
+    <string>Chines</string>
+   </property>
+  </action>
+  <action name="actionImportCarene">
+   <property name="text">
+    <string>Carene XYZ file</string>
+   </property>
+  </action>
+  <action name="actionImportVRML">
+   <property name="text">
+    <string>VRML</string>
+   </property>
+  </action>
+  <action name="actionImportPolyCad">
+   <property name="text">
+    <string>PolyCad</string>
+   </property>
+  </action>
+  <action name="actionImportMichlet_waves">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Michlet waves</string>
+   </property>
+  </action>
+  <action name="actionExportPart">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Part</string>
+   </property>
+  </action>
+  <action name="actionExportIGES">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>IGES</string>
+   </property>
+  </action>
+  <action name="actionExportDXF_3D_mesh">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>DXF 3D mesh</string>
+   </property>
+  </action>
+  <action name="actionExportDXF_2D_Polylines">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>DXF 2D Polylines</string>
+   </property>
+  </action>
+  <action name="actionExportDXF_3D_Polylines">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>DXF 3D Polylines</string>
+   </property>
+  </action>
+  <action name="actionExportWavefront">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Wavefront file (.OBJ)</string>
+   </property>
+  </action>
+  <action name="actionExportSTL">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>STL</string>
+   </property>
+  </action>
+  <action name="actionExportFEF">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>FEF file</string>
+   </property>
+  </action>
+  <action name="actionExportOffsets">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Offsets</string>
+   </property>
+  </action>
+  <action name="actionExportCoordinates">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Coordinates</string>
+   </property>
+  </action>
+  <action name="actionExportMichlet">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Michlet</string>
+   </property>
+  </action>
+  <action name="actionExportArchimedes">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Archimedes</string>
+   </property>
+  </action>
+  <action name="actionExportGHS">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>GHS</string>
+   </property>
+  </action>
+  <action name="actionActive_layer_color">
+   <property name="text">
+    <string>Active layer color</string>
+   </property>
+  </action>
+  <action name="actionLayerAuto_group">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Auto group</string>
+   </property>
+  </action>
+  <action name="actionLayerNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionLayerDelete_empty">
+   <property name="text">
+    <string>Delete empty</string>
+   </property>
+  </action>
+  <action name="actionLayerDialog">
+   <property name="text">
+    <string>Dialog</string>
+   </property>
+  </action>
+  <action name="actionControl_net">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Control net</string>
+   </property>
+  </action>
+  <action name="actionControl_curves">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Control curves</string>
+   </property>
+  </action>
+  <action name="actionInterior_edges">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Interior edges</string>
+   </property>
+  </action>
+  <action name="actionShow_both_sides">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show both sides</string>
+   </property>
+  </action>
+  <action name="actionGrid">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Grid</string>
+   </property>
+  </action>
+  <action name="actionStations">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Stations</string>
+   </property>
+  </action>
+  <action name="actionButtocks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Buttocks</string>
+   </property>
+  </action>
+  <action name="actionWaterlines">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Waterlines</string>
+   </property>
+  </action>
+  <action name="actionDiagonals">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Diagonals</string>
+   </property>
+  </action>
+  <action name="actionHydrostatic_features">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hydrostatic features</string>
+   </property>
+  </action>
+  <action name="actionFlowlines">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Flowlines</string>
+   </property>
+  </action>
+  <action name="actionNormals">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Normals</string>
+   </property>
+  </action>
+  <action name="actionCurvature">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Curvature</string>
+   </property>
+  </action>
+  <action name="actionMarkers">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Markers</string>
+   </property>
+  </action>
+  <action name="actionDecr_Curvature_Scale">
+   <property name="text">
+    <string>Decr Curvature Scale</string>
+   </property>
+  </action>
+  <action name="actionIncr_Curvature_Scale">
+   <property name="text">
+    <string>Incr Curvature Scale</string>
+   </property>
+  </action>
+  <action name="actionCheck_model">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Check model</string>
+   </property>
+  </action>
+  <action name="actionRemove_negative">
+   <property name="text">
+    <string>Remove negative</string>
+   </property>
+  </action>
+  <action name="actionRemove_unused_points">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Remove unused points</string>
+   </property>
+  </action>
+  <action name="actionDevelop_plates">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Develop plates</string>
+   </property>
+  </action>
+  <action name="actionKeel_and_rudder_wizard">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Keel and rudder wizard</string>
+   </property>
+  </action>
+  <action name="actionAdd_cylinder">
+   <property name="text">
+    <string>Add cylinder</string>
+   </property>
+  </action>
+  <action name="actionImportMarkers">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionDelete_all_markers">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Delete all markers</string>
+   </property>
+  </action>
+  <action name="actionScale">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Scale</string>
+   </property>
+  </action>
+  <action name="actionMove">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Move</string>
+   </property>
+  </action>
+  <action name="actionRotate">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Rotate</string>
+   </property>
+  </action>
+  <action name="actionMirror">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Mirror</string>
+   </property>
+  </action>
+  <action name="actionLackenby">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Lackenby</string>
+   </property>
+  </action>
+  <action name="actionIntersections">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Intersections</string>
+   </property>
+  </action>
+  <action name="actionDesign_Hydrostatics">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Design Hydrostatics</string>
+   </property>
+  </action>
+  <action name="actionHydrostatics">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Hydrostatics</string>
+   </property>
+  </action>
+  <action name="actionCross_curves">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Cross curves</string>
+   </property>
+  </action>
+  <action name="actionDelft_yacht_series">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Delft yacht series</string>
+   </property>
+  </action>
+  <action name="actionKAPER">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>KAPER</string>
+   </property>
+  </action>
+  <action name="actionShowControl_net">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Control net</string>
+   </property>
+  </action>
+  <action name="actionShowControl_curves">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Control curves</string>
+   </property>
+  </action>
+  <action name="actionShowInterior_edges">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Interior edges</string>
+   </property>
+  </action>
+  <action name="actionShowGrid">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Grid</string>
+   </property>
+  </action>
+  <action name="actionShowStations">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Stations</string>
+   </property>
+  </action>
+  <action name="actionShowButtocks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Buttocks</string>
+   </property>
+  </action>
+  <action name="actionShowWaterlines">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Waterlines</string>
+   </property>
+  </action>
+  <action name="actionShowDiagonals">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Diagonals</string>
+   </property>
+  </action>
+  <action name="actionShowHydrostatic_features">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hydrostatic features</string>
+   </property>
+  </action>
+  <action name="actionShowFlowlines">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Flowlines</string>
+   </property>
+  </action>
+  <action name="actionShowNormals">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Normals</string>
+   </property>
+  </action>
+  <action name="actionShowCurvature">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Curvature</string>
+   </property>
+  </action>
+  <action name="actionShowMarkers">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Markers</string>
    </property>
   </action>
  </widget>

@@ -27,6 +27,8 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <QFileDialog>
+
 #include "controller.h"
 #include "shipcadmodel.h"
 #include "utility.h"
@@ -297,7 +299,22 @@ void Controller::importVRML()
 
 void Controller::loadFile()
 {
+    cout << "loadFile" << endl;
 	// TODO
+    // get the filename
+    QString filename = QFileDialog::getOpenFileName(0, tr("Open File"));
+    if (filename.length() == 0)
+        return;
+    FileBuffer source;
+    source.loadFromFile(filename);
+    _model->loadBinary(source);
+    _model->getSurface()->clearSelection();
+    // TODO clear selected flowlines
+    // TODO clear selected markers
+    _model->setFilenameSet(true);
+    // stop asking for file version
+    addRecentFiles(filename);
+    _model->setFileChanged(false);
 }
 
 void Controller::loadFile(const QString& filename)

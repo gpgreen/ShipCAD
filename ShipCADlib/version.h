@@ -67,10 +67,6 @@ namespace ShipCAD {
 
 	extern QString versionString(version_t v);
 
-	extern version_t versionFromInt(int vint);
-
-	extern int versionToInt(version_t v);
-	
 };				/* end namespace */
 
 //////////////////////////////////////////////////////////////////////////////////////

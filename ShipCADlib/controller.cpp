@@ -27,7 +27,9 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <QCoreApplication>
 #include <QFileDialog>
+#include <QSettings>
 
 #include "controller.h"
 #include "shipcadmodel.h"
@@ -40,6 +42,11 @@ using namespace std;
 Controller::Controller(ShipCADModel* model)
         : _model(model)
 {
+    // initialize settings
+    QCoreApplication::setOrganizationName("bit-builder");
+    QCoreApplication::setOrganizationDomain("bit-builder.com");
+    QCoreApplication::setApplicationName("ShipCAD");
+	
     // setup signals and slots
     connect(_model, SIGNAL(onFileChanged()), SLOT(modelFileChanged()));
     connect(_model, SIGNAL(onUpdateGeometryInfo()), SLOT(modelGeometryChanged()));
@@ -300,9 +307,14 @@ void Controller::importVRML()
 void Controller::loadFile()
 {
     cout << "loadFile" << endl;
-	// TODO
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/opendir")) {
+        lastdir = settings.value("file/opendir").toString();
+    }
     // get the filename
-    QString filename = QFileDialog::getOpenFileName(0, tr("Open File"));
+    QString filename = QFileDialog::getOpenFileName(0, tr("Open File"), lastdir);
     if (filename.length() == 0)
         return;
     FileBuffer source;
@@ -313,6 +325,9 @@ void Controller::loadFile()
     // TODO clear selected markers
     _model->setFilenameSet(true);
     // stop asking for file version
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    settings.setValue("file/opendir", filepath);
     addRecentFiles(filename);
     _model->setFileChanged(false);
 }

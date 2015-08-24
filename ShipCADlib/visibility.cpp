@@ -67,7 +67,7 @@ void Visibility::clear()
 void Visibility::loadBinary(FileBuffer &source)
 {
     clear();
-    int i;
+    size_t i;
     source.load(i);
     _model_view = static_cast<model_view_t>(i);
     source.load(_show_control_net);
@@ -91,6 +91,7 @@ void Visibility::loadBinary(FileBuffer &source)
             if (_owner->getFileVersion() >= fv220) {
                 source.load(_show_hydrostatic_data);
                 source.load(_show_hydro_displacement);
+				source.load(_show_hydro_lateral_area);
                 source.load(_show_hydro_sectional_areas);
                 source.load(_show_hydro_metacentric_height);
                 source.load(_show_hydro_lcf);
@@ -104,7 +105,7 @@ void Visibility::loadBinary(FileBuffer &source)
 
 void Visibility::saveBinary(FileBuffer &dest)
 {
-    dest.add(static_cast<int>(_model_view));
+    dest.add(static_cast<size_t>(_model_view));
     dest.add(_show_control_net);
     dest.add(_show_interior_edges);
     dest.add(_show_stations);

@@ -43,13 +43,14 @@ using namespace ShipCAD;
 //////////////////////////////////////////////////////////////////////////////////////
 
 ProjectSettings::ProjectSettings(ShipCADModel* owner)
-	: _owner(owner)
+	: _owner(owner), _preview_img(0)
 {
 	clear();
 }
 
 ProjectSettings::~ProjectSettings()
 {
+	delete _preview_img;
 }
 
 static void hc_set(HydrostaticCalc* elem)
@@ -288,6 +289,8 @@ void ProjectSettings::clear()
 	_mainframe_location = 0.0;
 	_disable_model_check = false;
 	_save_preview = true;
+	delete _preview_img;
+	_preview_img = 0;
 	_hydrostatic_coefficients = fcActualData;
 	_simplify_intersections = true;
 	_start_draft = 0.0;
@@ -328,7 +331,7 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
     source.load(_appendage_coefficient);
     source.load(_shade_underwater_ship);
     source.load(_underwater_color);
-    int n;
+    size_t n;
     source.load(n);
     _units = static_cast<unit_type_t>(n);
     source.load(_use_default_mainframe_location);
@@ -342,7 +345,8 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
         _hydrostatic_coefficients = static_cast<hydrostatic_coeff_t>(n);
         source.load(_save_preview);
         if (_save_preview) {
-            // TODO load image
+            _preview_img = new JPEGImage();
+			source.load(*_preview_img);
         }
         if (_owner->getFileVersion() >= fv230) {
             source.load(_simplify_intersections);
@@ -353,7 +357,7 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
             source.load(_draft_step);
             source.load(_trim);
             source.load(n);
-            for (int i=0; i<n; i++) {
+            for (size_t i=0; i<n; i++) {
                 float f;
                 source.load(f);
                 _displacements.push_back(f);
@@ -363,13 +367,15 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
             source.load(_displ_increment);
             source.load(_use_displ_increments);
             source.load(n);
-            for (int i=0; i<n; i++) {
+            _angles.clear();
+            for (size_t i=0; i<n; i++) {
                 float f;
                 source.load(f);
                 _angles.push_back(f);
             }
             source.load(n);
-            for (int i=0; i<n; i++) {
+            _stab_trims.clear();
+            for (size_t i=0; i<n; i++) {
                 float f;
                 source.load(f);
                 _stab_trims.push_back(f);
@@ -393,7 +399,7 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
         dest.add(_appendage_coefficient);
         dest.add(_shade_underwater_ship);
         dest.add(_underwater_color);
-        dest.add(static_cast<int>(_units));
+        dest.add(static_cast<size_t>(_units));
         if (_owner->getFileVersion() >= fv160) {
             dest.add(_use_default_mainframe_location);
             dest.add(_mainframe_location);
@@ -404,7 +410,7 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
         dest.add(_comment);
         dest.add(_file_created_by);
         if (_owner->getFileVersion() >= fv210) {
-            dest.add(static_cast<int>(_hydrostatic_coefficients));
+            dest.add(static_cast<quint8>(_hydrostatic_coefficients));
             dest.add(_save_preview);
             if (_save_preview) {
                 // save the jpg

@@ -6,7 +6,9 @@
 
 include(../common.pri)
 
-QT       += opengl
+QT       += opengl gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ShipCADlib
 TEMPLATE = lib

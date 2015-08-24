@@ -42,6 +42,14 @@
 
 namespace ShipCAD {
 
+	struct JPEGImage 
+	{
+		size_t width;
+		size_t height;
+		size_t size;
+		std::vector<quint8> data;
+	};
+	
 //////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief in-memory buffer of data for a binary file (FREE!Ship format)
@@ -67,6 +75,12 @@ public:
 
     // load/add
 
+	void load(JPEGImage& img);
+	void add(const JPEGImage& img);
+	
+	void load(quint8& val);
+	void add(quint8 val);
+	
     void load(bool& val);
     void add(bool val);
 
@@ -78,9 +92,6 @@ public:
 
     void load(size_t& val);
     void add(size_t val);
-
-    void load(version_t& val);
-    void add(version_t val);
 
     void load(QVector3D& val);
     void add(const QVector3D& val);
@@ -98,7 +109,7 @@ private:
 
     size_t _pos;           // current position in the data vector
     version_t _file_version;
-    std::vector<unsigned char> _data;   // the data
+    std::vector<quint8> _data;   // the data
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

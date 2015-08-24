@@ -225,13 +225,13 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 	QString hdr;
 	source.load(hdr);
 	if (hdr == "FREE!ship") {
-		int ver, cver;
-		source.load(ver);
-		_file_version = versionFromInt(ver);
-		cver = versionToInt(k_current_version);
+                quint8 v, cver;
+		source.load(v);
+		_file_version = static_cast<version_t>(v);
+		cver = static_cast<quint8>(k_current_version);
 		source.setVersion(_file_version);
 		if (_file_version <= cver) {
-			int n;
+			size_t n;
 			source.load(n);
 			_precision = static_cast<precision_t>(n);
 			_vis.loadBinary(source);
@@ -294,8 +294,8 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 void ShipCADModel::saveBinary(FileBuffer& dest)
 {
    dest.add("FREE!ship");
-   dest.add(static_cast<int>(_file_version));
-   dest.add(static_cast<int>(_precision));
+   dest.add(static_cast<quint8>(_file_version));
+   dest.add(static_cast<size_t>(_precision));
    _vis.saveBinary(dest);
    _settings.saveBinary(dest);
    _surface.saveBinary(dest);

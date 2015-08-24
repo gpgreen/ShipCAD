@@ -27,8 +27,10 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <QFile>
+#include <QDataStream>
 #include <iostream>
-#include <fstream>
+#include <stdexcept>
 
 #include "filebuffer.h"
 #include "utility.h"
@@ -38,7 +40,7 @@ using namespace ShipCAD;
 
 // structure used to convert values from/to bytes
 union convert_type_t {
-    unsigned char d[8];
+    unsigned char d[4];
     int ival;
     size_t uval;
     float fval;
@@ -64,40 +66,59 @@ void FileBuffer::loadFromFile(const QString &filename)
 {
     _pos = 0;
     _data.clear();
-    ifstream ifile(filename.toStdString().c_str());
-    unsigned char byte;
-    while (ifile) {
-        ifile >> byte;
+	QFile file(filename);
+	if (!file.open(QIODevice::ReadOnly))
+		return;
+	QDataStream in(&file);
+    quint8 byte;
+    while (!in.atEnd()) {
+        in >> byte;
         _data.push_back(byte);
     }
-    ifile.close();
+    file.close();
     cout << "Read " << _data.size() << " bytes from '" << filename.toStdString() << "'" << endl;
 }
 
 void FileBuffer::saveToFile(const QString &filename)
 {
-    ofstream ofile(filename.toStdString().c_str());
-    for (size_t i=0; i<_data.size() && ofile; ++i)
-        ofile << _data[i];
-    ofile.close();
+	QFile file(filename);
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+		return;
+	QDataStream out(&file);
+    for (size_t i=0; i<_data.size(); ++i)
+        out << _data[i];
+    file.close();
     cout << "Wrote " << _data.size() << " bytes to '" << filename.toStdString() << "'" << endl;
 }
 
-void FileBuffer::load(version_t& val)
+void FileBuffer::load(JPEGImage& img)
 {
-    convert_type_t ct;
-    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
-        ct.d[i] = _data[_pos];
-    val = static_cast<version_t>(ct.ival);
+    load(img.width);
+    load(img.height);
+    load(img.size);
+	for (size_t i=0; i<img.size; i++, _pos++)
+        img.data.push_back(_data[_pos]);
 }
 
-void FileBuffer::add(version_t val)
+void FileBuffer::add(const JPEGImage& img)
 {
-    _data.push_back(static_cast<version_t>(val));
+	throw runtime_error("not implemented");
+}
+	
+void FileBuffer::load(quint8& val)
+{
+	cout << "pos:" << _pos << endl;
+	val = _data[_pos++];
+}
+
+void FileBuffer::add(quint8 val)
+{
+    _data.push_back(val);
 }
 
 void FileBuffer::load(bool& val)
 {
+	cout << "pos:" << _pos << endl;
     convert_type_t ct;
     ct.d[0] = _data[_pos++];
     val = (ct.d[0] == 0) ? false : true;
@@ -110,6 +131,7 @@ void FileBuffer::add(bool val)
 
 void FileBuffer::load(float& val)
 {
+	cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -126,6 +148,7 @@ void FileBuffer::add(float val)
 
 void FileBuffer::load(int& val)
 {
+	cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -134,19 +157,20 @@ void FileBuffer::load(int& val)
 
 void FileBuffer::add(const QColor& c)
 {
-    convert_type_t ct;
-    ct.ival = FindDXFColorIndex(c);
-    for (int i=0; i<4; ++i)
-        _data.push_back(ct.d[i]);
+	_data.push_back(static_cast<quint8>(c.red()));
+	_data.push_back(static_cast<quint8>(c.green()));
+	_data.push_back(static_cast<quint8>(c.blue()));
+	_data.push_back(static_cast<quint8>(c.alpha()));
 }
 
 void FileBuffer::load(QColor& val)
 {
-    convert_type_t ct;
-    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
-        ct.d[i] = _data[_pos];
-    int index = ct.ival;
-    val = QColorFromDXFIndex(index);
+	cout << "pos:" << _pos << endl;
+	quint8 r = _data[_pos++];
+	quint8 g = _data[_pos++];
+	quint8 b = _data[_pos++];
+	quint8 a = _data[_pos++];
+    val = QColor(r, g, b, a);
 }
 
 void FileBuffer::add(int val)
@@ -159,10 +183,11 @@ void FileBuffer::add(int val)
 
 void FileBuffer::load(size_t& val)
 {
-    convert_type_t ct;
+	cout << "pos:" << _pos << endl;
+	quint8 d[4];
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
-        ct.d[i] = _data[_pos];
-    val = ct.uval;
+        d[i] = _data[_pos];
+    val = *reinterpret_cast<size_t*>(&d);
 }
 
 void FileBuffer::add(size_t val)
@@ -175,6 +200,7 @@ void FileBuffer::add(size_t val)
 
 void FileBuffer::load(QVector3D& val)
 {
+	cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -203,9 +229,11 @@ void FileBuffer::add(const QVector3D& val)
 
 void FileBuffer::load(QString& val)
 {
+	cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
+	cout << "len:" << ct.ival << endl;
     char *buf = new char [ct.ival];
     for (int i=0; _pos<_data.size() && i<ct.ival; ++i,++_pos)
         buf[i] = _data[_pos];
@@ -228,6 +256,7 @@ void FileBuffer::add(const QString& val)
 
 void FileBuffer::load(Plane& val)
 {
+	cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];

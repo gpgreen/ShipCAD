@@ -41,8 +41,8 @@ using namespace ShipCAD;
 // structure used to convert values from/to bytes
 union convert_type_t {
     unsigned char d[4];
-    int ival;
-    size_t uval;
+    qint32 ival;
+    quint32 uval;
     float fval;
 };
 
@@ -183,11 +183,11 @@ void FileBuffer::add(int val)
 
 void FileBuffer::load(size_t& val)
 {
+	convert_type_t ct;
 	cout << "pos:" << _pos << endl;
-	quint8 d[4];
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
-        d[i] = _data[_pos];
-    val = *reinterpret_cast<size_t*>(&d);
+        ct.d[i] = _data[_pos];
+    val = ct.uval;
 }
 
 void FileBuffer::add(size_t val)

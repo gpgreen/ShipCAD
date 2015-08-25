@@ -414,7 +414,7 @@ void Intersection::loadBinary(FileBuffer& source)
             } else {
                 source.load(p);
             }
-            sp->setPoint(j, p);
+            sp->add(p);
             bool b;
             source.load(b);
             sp->setKnuckle(j, b);

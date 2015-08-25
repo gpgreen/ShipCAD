@@ -269,9 +269,12 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 				}
 				if (_file_version >= fv191) {
 					// markers
-                    Marker* marker = new Marker(this);
-                    marker->loadBinary(source);
-                    _markers.add(marker);
+                    source.load(n);
+                    for (int i=0; i<n; i++) {
+                        Marker* marker = new Marker(this);
+                        marker->loadBinary(source);
+                        _markers.add(marker);
+                    }
                     if (_file_version >= fv210) {
                         // resistance and Kaper
                     }

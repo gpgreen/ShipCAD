@@ -531,11 +531,10 @@ void SubdivisionControlEdge::loadBinary(FileBuffer& source)
     source.load(index);
     _points[1] = _owner->getControlPoint(index);
     _points[1]->addEdge(this);
-    bool val;
-    source.load(val);
-    setCrease(val);
-    source.load(val);
-    setSelected(val);
+    source.load(_crease);
+    source.load(_selected);
+    if (_selected)
+        _owner->setSelectedControlEdge(this);
 }
 
 void SubdivisionControlEdge::loadFromStream(size_t &lineno, QStringList &strings)
@@ -555,6 +554,8 @@ void SubdivisionControlEdge::loadFromStream(size_t &lineno, QStringList &strings
     if (start < static_cast<size_t>(str.length())) {
         // flag to indicate that this edge was selected when the model was saved (for undo-purposes)
         _selected = ReadBoolFromStr(lineno, str, start);
+        if (_selected)
+            _owner->setSelectedControlEdge(this);
     }
 }
 

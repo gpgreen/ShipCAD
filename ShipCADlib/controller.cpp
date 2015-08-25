@@ -317,6 +317,10 @@ void Controller::loadFile()
     QString filename = QFileDialog::getOpenFileName(0, tr("Open File"), lastdir);
     if (filename.length() == 0)
         return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    settings.setValue("file/opendir", filepath);
+    addRecentFiles(filename);
     FileBuffer source;
     source.loadFromFile(filename);
     _model->loadBinary(source);
@@ -325,10 +329,6 @@ void Controller::loadFile()
     // TODO clear selected markers
     _model->setFilenameSet(true);
     // stop asking for file version
-    QFileInfo fi(filename);
-    QString filepath = fi.filePath();
-    settings.setValue("file/opendir", filepath);
-    addRecentFiles(filename);
     _model->setFileChanged(false);
 }
 

@@ -2446,7 +2446,7 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 void SubdivisionSurface::loadBinary(FileBuffer &source)
 {
     // first load layerdata
-    size_t n;
+    quint32 n;
     source.load(n);
     if (n != 0) {
         // delete current layers and load new ones
@@ -2468,7 +2468,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
     // read control points
     source.load(n);
     _control_points.reserve(n);
-    for (size_t i=1; i<=n; ++i) {
+    for (size_t i=0; i<n; ++i) {
         SubdivisionControlPoint* point = SubdivisionControlPoint::construct(this);
         _control_points.push_back(point);
         point->load_binary(source);
@@ -2476,7 +2476,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
     // read control edges
     source.load(n);
     _control_edges.reserve(n);
-    for (size_t i=1; i<=n; ++i) {
+    for (size_t i=0; i<n; ++i) {
         SubdivisionControlEdge* edge = SubdivisionControlEdge::construct(this);
         _control_edges.push_back(edge);
         edge->loadBinary(source);
@@ -2485,7 +2485,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
         // load control curves
         source.load(n);
         _control_curves.reserve(n);
-        for (size_t i=1; i<=n; ++i) {
+        for (size_t i=0; i<n; ++i) {
             SubdivisionControlCurve* curve = SubdivisionControlCurve::construct(this);
             _control_curves.push_back(curve);
             curve->loadBinary(source);
@@ -2494,7 +2494,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
     // read control faces
     source.load(n);
     _control_faces.reserve(n);
-    for (size_t i=1; i<=n; ++i) {
+    for (size_t i=0; i<n; ++i) {
         SubdivisionControlFace* face = SubdivisionControlFace::construct(this);
         _control_faces.push_back(face);
         face->loadBinary(source);
@@ -2624,28 +2624,28 @@ void SubdivisionSurface::saveBinary(FileBuffer &destination)
 {
     // first save layerdata
     destination.add(numberOfLayers());
-    for (size_t i=1; i<=numberOfLayers(); ++i)
-        getLayer(i-1)->saveBinary(destination);
+    for (size_t i=0; i<numberOfLayers(); ++i)
+        getLayer(i)->saveBinary(destination);
     // save index of active layer
     destination.add(getActiveLayer()->getLayerIndex());
     // first sort controlpoints for faster access of function
     sort(_control_points.begin(), _control_points.end());
     destination.add(numberOfControlPoints());
-    for (size_t i=1; i<=numberOfControlPoints(); ++i)
-        getControlPoint(i-1)->save_binary(destination);
+    for (size_t i=0; i<numberOfControlPoints(); ++i)
+        getControlPoint(i)->save_binary(destination);
     // save control edges
     destination.add(numberOfControlEdges());
-    for (size_t i=1; i<=numberOfControlEdges(); ++i)
-        getControlEdge(i-1)->saveBinary(destination);
+    for (size_t i=0; i<numberOfControlEdges(); ++i)
+        getControlEdge(i)->saveBinary(destination);
     if (destination.getVersion() >= fv195) {
         destination.add(numberOfControlCurves());
-        for (size_t i=1; i<=numberOfControlCurves(); ++i)
-            getControlCurve(i-1)->saveBinary(destination);
+        for (size_t i=0; i<numberOfControlCurves(); ++i)
+            getControlCurve(i)->saveBinary(destination);
     }
     // save control faces
     destination.add(numberOfControlFaces());
-    for (size_t i=1; i<=numberOfControlFaces(); ++i)
-        getControlFace(i-1)->saveBinary(destination);
+    for (size_t i=0; i<numberOfControlFaces(); ++i)
+        getControlFace(i)->saveBinary(destination);
 }
 
 void SubdivisionSurface::saveToStream(QStringList& strings)

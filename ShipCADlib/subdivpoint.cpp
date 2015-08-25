@@ -756,7 +756,7 @@ void SubdivisionControlPoint::collapse()
 void SubdivisionControlPoint::load_binary(FileBuffer &source)
 {
     source.load(_coordinate);
-    int i;
+    quint32 i;
     source.load(i);
     _vtype = fromInt(i);
     bool sel;

@@ -67,9 +67,9 @@ void Visibility::clear()
 void Visibility::loadBinary(FileBuffer &source)
 {
     clear();
-    size_t i;
-    source.load(i);
-    _model_view = static_cast<model_view_t>(i);
+    quint32 n;
+    source.load(n);
+    _model_view = static_cast<model_view_t>(n);
     source.load(_show_control_net);
     source.load(_show_interior_edges);
     source.load(_show_stations);
@@ -105,7 +105,7 @@ void Visibility::loadBinary(FileBuffer &source)
 
 void Visibility::saveBinary(FileBuffer &dest)
 {
-    dest.add(static_cast<size_t>(_model_view));
+    dest.add(static_cast<quint32>(_model_view));
     dest.add(_show_control_net);
     dest.add(_show_interior_edges);
     dest.add(_show_stations);

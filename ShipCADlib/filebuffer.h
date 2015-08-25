@@ -44,9 +44,9 @@ namespace ShipCAD {
 
 	struct JPEGImage 
 	{
-		size_t width;
-		size_t height;
-		size_t size;
+        quint32 width;
+        quint32 height;
+        quint32 size;
 		std::vector<quint8> data;
 	};
 	
@@ -87,12 +87,17 @@ public:
     void load(float& val);
     void add(float val);
 
-    void load(int& val);
-    void add(int val);
+    void load(qint32& val);
+    void add(qint32 val);
 
-    void load(size_t& val);
-    void add(size_t val);
-
+    void load(quint32& val);
+    void add(quint32 val);
+	/*! \brief save value, (check that it fits in 32 bits)
+	 *
+	 * \param val integer to save
+	 * \throws range_error if val is greater than 32bit unsigned
+	 */
+	void add(size_t val);
     void load(QVector3D& val);
     void add(const QVector3D& val);
 

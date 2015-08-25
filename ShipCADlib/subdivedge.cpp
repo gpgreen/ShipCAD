@@ -522,7 +522,7 @@ SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(const QVecto
 
 void SubdivisionControlEdge::loadBinary(FileBuffer& source)
 {
-    size_t index;
+    quint32 index;
     // read startpoint
     source.load(index);
     _points[0] = _owner->getControlPoint(index);

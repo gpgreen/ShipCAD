@@ -369,23 +369,22 @@ void Intersection::deleteItem(Spline* item)
 
 void Intersection::loadBinary(FileBuffer& source)
 {
-    size_t i;
+    quint32 n;
     QVector3D p;
-    source.load(i);
-    _intersection_type = static_cast<intersection_type_t>(i);
+    source.load(n);
+    _intersection_type = static_cast<intersection_type_t>(n);
     if (_owner->getFileVersion() >= fv191)
         source.load(_show_curvature);
     else
         _show_curvature = false;
     source.load(_plane);
     source.load(_build);
-    size_t n;
     source.load(n);
-    for (i=0; i<n; i++) {
+    for (size_t i=0; i<n; i++) {
         Spline* sp = new Spline();
         _items.add(sp);
         // read number of points for this spline
-        size_t m;
+        quint32 m;
         source.load(m);
         for (size_t j=0; j<m; j++) {
             float x, y, z;
@@ -424,7 +423,7 @@ void Intersection::loadBinary(FileBuffer& source)
 
 void Intersection::saveBinary(FileBuffer& dest)
 {
-    dest.add(static_cast<int>(_intersection_type));
+    dest.add(static_cast<quint32>(_intersection_type));
     if (_owner->getFileVersion() >= fv191)
         dest.add(_show_curvature);
     dest.add(_plane);

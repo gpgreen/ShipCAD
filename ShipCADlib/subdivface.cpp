@@ -741,7 +741,7 @@ void SubdivisionControlFace::clearChildren()
 void SubdivisionControlFace::loadBinary(FileBuffer &source)
 {
     // read controlpoint data
-    size_t n, index;
+    quint32 n, index;
     SubdivisionControlPoint* p1;
     source.load(n);
     _points.clear();
@@ -752,9 +752,9 @@ void SubdivisionControlFace::loadBinary(FileBuffer &source)
         p1->addFace(this);
     }
     // read layer index
-    size_t ind;
+    quint32 ind;
     source.load(ind);
-    if (ind >= 0 && ind < _owner->numberOfLayers())
+    if (ind < _owner->numberOfLayers())
         _layer = _owner->getLayer(ind);
     else
         _layer = _owner->getLayer(0); // reference to an invalid layer, assign to owners default layer

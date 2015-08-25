@@ -331,7 +331,7 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
     source.load(_appendage_coefficient);
     source.load(_shade_underwater_ship);
     source.load(_underwater_color);
-    size_t n;
+    quint32 n;
     source.load(n);
     _units = static_cast<unit_type_t>(n);
     source.load(_use_default_mainframe_location);
@@ -399,7 +399,7 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
         dest.add(_appendage_coefficient);
         dest.add(_shade_underwater_ship);
         dest.add(_underwater_color);
-        dest.add(static_cast<size_t>(_units));
+        dest.add(static_cast<quint32>(_units));
         if (_owner->getFileVersion() >= fv160) {
             dest.add(_use_default_mainframe_location);
             dest.add(_mainframe_location);

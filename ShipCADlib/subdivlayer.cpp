@@ -431,7 +431,9 @@ void SubdivisionLayer::extents(QVector3D& min, QVector3D& max)
 void SubdivisionLayer::loadBinary(FileBuffer& source)
 {
     source.load(_desc);
-    source.load(_layerid);
+    quint32 n;
+    source.load(n);
+    _layerid = n;
     if (_layerid > _owner->lastUsedLayerID())
         _owner->setLastUsedLayerID(_layerid);
     source.load(_color);
@@ -452,7 +454,7 @@ void SubdivisionLayer::loadBinary(FileBuffer& source)
             if (source.getVersion() >= fv201) {
                 source.load(_show_in_linesplan);
                 if (source.getVersion() >= fv260) {
-                    int i;
+                    quint32 i;
                     source.load(i);
                     _alphablend = i;
                 }

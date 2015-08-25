@@ -225,13 +225,13 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 	QString hdr;
 	source.load(hdr);
 	if (hdr == "FREE!ship") {
-                quint8 v, cver;
+		quint8 v, cver;
 		source.load(v);
 		_file_version = static_cast<version_t>(v);
 		cver = static_cast<quint8>(k_current_version);
 		source.setVersion(_file_version);
 		if (_file_version <= cver) {
-			size_t n;
+			quint32 n;
 			source.load(n);
 			_precision = static_cast<precision_t>(n);
 			_vis.loadBinary(source);
@@ -240,21 +240,21 @@ void ShipCADModel::loadBinary(FileBuffer& source)
             _surface.loadBinary(source);
 			// stations
 			source.load(n);
-			for (int i=0; i<n; i++) {
+			for (size_t i=0; i<n; i++) {
                 Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_stations.add(intersection);
 			}
 			// buttocks
 			source.load(n);
-			for (int i=0; i<n; i++) {
+			for (size_t i=0; i<n; i++) {
                 Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_buttocks.add(intersection);
 			}
 			// waterlines
 			source.load(n);
-			for (int i=0; i<n; i++) {
+			for (size_t i=0; i<n; i++) {
                 Intersection* intersection = new Intersection(this);
 				intersection->loadBinary(source);
 				_waterlines.add(intersection);
@@ -262,7 +262,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 			if (_file_version >= fv180) {
 				// diagonals
 				source.load(n);
-				for (int i=0; i<n; i++) {
+				for (size_t i=0; i<n; i++) {
                     Intersection* intersection = new Intersection(this);
 					intersection->loadBinary(source);
 					_diagonals.add(intersection);
@@ -270,7 +270,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 				if (_file_version >= fv191) {
 					// markers
                     source.load(n);
-                    for (int i=0; i<n; i++) {
+                    for (size_t i=0; i<n; i++) {
                         Marker* marker = new Marker(this);
                         marker->loadBinary(source);
                         _markers.add(marker);
@@ -298,7 +298,7 @@ void ShipCADModel::saveBinary(FileBuffer& dest)
 {
    dest.add("FREE!ship");
    dest.add(static_cast<quint8>(_file_version));
-   dest.add(static_cast<size_t>(_precision));
+   dest.add(static_cast<quint32>(_precision));
    _vis.saveBinary(dest);
    _settings.saveBinary(dest);
    _surface.saveBinary(dest);

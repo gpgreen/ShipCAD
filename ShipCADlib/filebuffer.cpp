@@ -69,6 +69,7 @@ void FileBuffer::loadFromFile(const QString &filename)
 	QFile file(filename);
 	if (!file.open(QIODevice::ReadOnly))
 		return;
+	_data.reserve(file.size());
 	QDataStream in(&file);
     quint8 byte;
     while (!in.atEnd()) {
@@ -146,13 +147,48 @@ void FileBuffer::add(float val)
         _data.push_back(ct.d[i]);
 }
 
-void FileBuffer::load(int& val)
+void FileBuffer::load(qint32& val)
 {
 	cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
     val = ct.ival;
+}
+
+void FileBuffer::add(qint32 val)
+{
+    convert_type_t ct;
+    ct.ival = val;
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
+}
+
+void FileBuffer::load(quint32& val)
+{
+	convert_type_t ct;
+	cout << "pos:" << _pos << endl;
+    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
+        ct.d[i] = _data[_pos];
+    val = ct.uval;
+}
+
+void FileBuffer::add(quint32 val)
+{
+    convert_type_t ct;
+    ct.uval = val;
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
+}
+
+void FileBuffer::add(size_t val)
+{
+	if (val > 0xffffffff)
+		throw range_error("integer overflow");
+    convert_type_t ct;
+    ct.uval = val;
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
 }
 
 void FileBuffer::add(const QColor& c)
@@ -171,31 +207,6 @@ void FileBuffer::load(QColor& val)
 	quint8 b = _data[_pos++];
 	quint8 a = _data[_pos++];
     val = QColor(r, g, b, a);
-}
-
-void FileBuffer::add(int val)
-{
-    convert_type_t ct;
-    ct.ival = val;
-    for (int i=0; i<4; ++i)
-        _data.push_back(ct.d[i]);
-}
-
-void FileBuffer::load(size_t& val)
-{
-	convert_type_t ct;
-	cout << "pos:" << _pos << endl;
-    for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
-        ct.d[i] = _data[_pos];
-    val = ct.uval;
-}
-
-void FileBuffer::add(size_t val)
-{
-    convert_type_t ct;
-    ct.uval = val;
-    for (int i=0; i<4; ++i)
-        _data.push_back(ct.d[i]);
 }
 
 void FileBuffer::load(QVector3D& val)

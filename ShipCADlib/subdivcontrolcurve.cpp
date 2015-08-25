@@ -349,7 +349,7 @@ void SubdivisionControlCurve::insertEdgePoint(SubdivisionPoint *p1,
 
 void SubdivisionControlCurve::loadBinary(FileBuffer &source)
 {
-    size_t n, ind;
+    quint32 n, ind;
     source.load(n);
     SubdivisionControlPoint* p1 = 0;
     for (size_t i=1; i<=n; ++i) {

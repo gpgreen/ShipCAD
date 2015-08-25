@@ -658,16 +658,20 @@ void Spline::loadBinary(FileBuffer& source)
 {
     source.load(_show_curvature);
     source.load(_curvature_scale);
-    int n;
+	quint32 n;
     source.load(n);
-    for (int i=0; i<n; ++i) {
+    _nopoints = n;
+    _points.reserve(n);
+    _knuckles.reserve(n);
+    for (size_t i=0; i<n; ++i) {
         QVector3D p;
         source.load(p);
-        add(p);
+        _points.push_back(p);
         bool k;
         source.load(k);
-        _knuckles[i] = k;
+        _knuckles.push_back(k);
     }
+    setBuild(false);
 }
 
 void Spline::saveBinary(FileBuffer& destination)

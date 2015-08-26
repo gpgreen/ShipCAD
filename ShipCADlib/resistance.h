@@ -39,6 +39,7 @@ struct DelftSeriesResistance
 {
     float start_speed;
     float end_speed;
+    float step_speed;
     float bwl;
     float cp;
     float displacement;

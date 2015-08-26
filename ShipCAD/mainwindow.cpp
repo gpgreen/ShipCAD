@@ -32,6 +32,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "viewport.h"
+#include "shipcadlib.h"
 #include "shipcadmodel.h"
 #include "controller.h"
 
@@ -220,12 +221,27 @@ void MainWindow::addDefaultViewports()
         // put it in window container
         QWidget* container = QWidget::createWindowContainer(vp);
         container->setMinimumSize(320,200);
-        // put it in display area
-        ui->displayLayout->addWidget(container, row, col++);
-        if (col == 2) {
-            col = 0;
-            row++;
+        switch (i) {
+        case 0:
+            row = 0; col = 0;
+            vp->setViewportType(fvPerspective);
+            break;
+        case 1:
+            row = 0; col = 1;
+            vp->setViewportType(fvProfile);
+            break;
+        case 2:
+            row = 1; col = 0;
+            vp->setViewportType(fvPlan);
+            break;
+        case 3:
+            row = 1; col = 1;
+            vp->setViewportType(fvBodyplan);
+            break;
         }
+
+        // put it in display area
+        ui->displayLayout->addWidget(container, row, col);
         _viewports.push_back(make_pair(container, vp));
     }
 }

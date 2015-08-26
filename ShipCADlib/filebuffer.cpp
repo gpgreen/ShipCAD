@@ -302,7 +302,8 @@ void FileBuffer::add(const Plane& val)
 
 void FileBuffer::load(DelftSeriesResistance* buf)
 {
-	char * vbuf = (char *)buf;
+    cout << "pos:" << _pos << " sz:" << sizeof(DelftSeriesResistance) << endl;
+    char * vbuf = (char *)buf;
 	for (size_t i=0; i<sizeof(DelftSeriesResistance); i++)
 		vbuf[i] = _data[_pos++];
 }
@@ -316,7 +317,8 @@ void FileBuffer::add(const DelftSeriesResistance* buf)
 
 void FileBuffer::load(KAPERResistance* buf)
 {
-	char * vbuf = (char *)buf;
+    cout << "pos:" << _pos << " sz:" << sizeof(KAPERResistance) << endl;
+    char * vbuf = (char *)buf;
 	for (size_t i=0; i<sizeof(KAPERResistance); i++)
 		vbuf[i] = _data[_pos++];
 }

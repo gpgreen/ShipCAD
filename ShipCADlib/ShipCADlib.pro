@@ -40,7 +40,8 @@ SOURCES += shipcadlib.cpp \
     marker.cpp \
     hydrostaticcalc.cpp \
     preferences.cpp \
-    controller.cpp
+    controller.cpp \
+    flowline.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

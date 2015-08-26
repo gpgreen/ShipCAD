@@ -28,6 +28,7 @@
  *#############################################################################################*/
 
 #include <stdexcept>
+#include <cstring>
 #include "shipcadmodel.h"
 #include "filebuffer.h"
 #include "subdivsurface.h"
@@ -35,6 +36,7 @@
 #include "utility.h"
 #include "subdivlayer.h"
 #include "subdivface.h"
+#include "flowline.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -45,8 +47,10 @@ ShipCADModel::ShipCADModel()
       _stations(true), _waterlines(true), _buttocks(true), _diagonals(true), _control_curves(true),
       _markers(true), _vis(this), _filename_set(false), _currently_moving(false),
       _stop_asking_for_file_version(false), _settings(this), _calculations(true),
-      _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0)
+      _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0), _flowlines(true)
 {
+	memset(&_delft_resistance, 0, sizeof(DelftSeriesResistance));
+	memset(&_kaper_resistance, 0, sizeof(KAPERResistance));
 	connect(&_surface, SIGNAL(changedLayerData()), SIGNAL(changedLayerData()));
 	connect(&_surface, SIGNAL(changeActiveLayer()), SIGNAL(changeActiveLayer()));
 }
@@ -76,6 +80,8 @@ void ShipCADModel::clear()
     _filename_set = false;
     _stop_asking_for_file_version = false;
     // TODO resistance and background images, flowlines
+    _selected_flowlines.clear();
+    _flowlines.clear();
 }
 
 void ShipCADModel::setFilename(const QString& name)
@@ -276,63 +282,79 @@ void ShipCADModel::loadBinary(FileBuffer& source)
                         _markers.add(marker);
                     }
                     if (_file_version >= fv210) {
-                        // resistance and Kaper
+                        source.load(&_delft_resistance);
+                        source.load(&_kaper_resistance);
+                        if (_file_version >= fv250) {
+                            source.load(n);
+                            for (size_t i=0; i<n; i++) {
+                                // background images
+                            }
+                            source.load(n);
+                            for (size_t i=0; i<n; i++) {
+                                Flowline* flow = Flowline::construct(this);
+                                _flowlines.add(flow);
+                                flow->loadBinary(source);
+                            }
+                        }
                     }
                 }
-			}
-		}
-		else {
+            }
+        }
+        else {
             // TODO version is later than this can handle
-		}
-	}
-	else {
+        }
+    }
+    else {
         // TODO this is not a free ship binary file
-	}
-	_file_changed = false;
+    }
+    _file_changed = false;
     _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
     _surface.rebuild();
-	emit onUpdateGeometryInfo();
+    emit onUpdateGeometryInfo();
 }
 
 void ShipCADModel::saveBinary(FileBuffer& dest)
 {
-   dest.add("FREE!ship");
-   dest.add(static_cast<quint8>(_file_version));
-   dest.add(static_cast<quint32>(_precision));
-   _vis.saveBinary(dest);
-   _settings.saveBinary(dest);
-   _surface.saveBinary(dest);
-   // save stations
-   dest.add(_stations.size());
-   for (size_t i=0; i<_stations.size(); i++)
-       _stations.get(i)->saveBinary(dest);
-   // save buttocks
-   dest.add(_buttocks.size());
-   for (size_t i=0; i<_buttocks.size(); i++)
-       _buttocks.get(i)->saveBinary(dest);
-   // save waterlines
-   dest.add(_waterlines.size());
-   for (size_t i=0; i<_waterlines.size(); i++)
-       _waterlines.get(i)->saveBinary(dest);
-   if (getFileVersion() >= fv180) {
-       // save diagonals
-       dest.add(_diagonals.size());
-       for (size_t i=0; i<_diagonals.size(); i++)
-           _diagonals.get(i)->saveBinary(dest);
-       if (getFileVersion() >= fv191) {
-           // save markers
-           dest.add(_markers.size());
-           for (size_t i=0; i<_markers.size(); i++)
-               _markers.get(i)->saveBinary(dest);
-           if (getFileVersion() >= fv210) {
-               // add resistance data
-               if (getFileVersion() >= fv250) {
-                   // add background images
-                   // add flowlines
-               }
-           }
-       }
-   }
+    dest.add("FREE!ship");
+    dest.add(static_cast<quint8>(_file_version));
+    dest.add(static_cast<quint32>(_precision));
+    _vis.saveBinary(dest);
+    _settings.saveBinary(dest);
+    _surface.saveBinary(dest);
+    // save stations
+    dest.add(_stations.size());
+    for (size_t i=0; i<_stations.size(); i++)
+        _stations.get(i)->saveBinary(dest);
+    // save buttocks
+    dest.add(_buttocks.size());
+    for (size_t i=0; i<_buttocks.size(); i++)
+        _buttocks.get(i)->saveBinary(dest);
+    // save waterlines
+    dest.add(_waterlines.size());
+    for (size_t i=0; i<_waterlines.size(); i++)
+        _waterlines.get(i)->saveBinary(dest);
+    if (getFileVersion() >= fv180) {
+        // save diagonals
+        dest.add(_diagonals.size());
+        for (size_t i=0; i<_diagonals.size(); i++)
+            _diagonals.get(i)->saveBinary(dest);
+        if (getFileVersion() >= fv191) {
+            // save markers
+            dest.add(_markers.size());
+            for (size_t i=0; i<_markers.size(); i++)
+                _markers.get(i)->saveBinary(dest);
+            if (getFileVersion() >= fv210) {
+                dest.add(&_delft_resistance);
+                dest.add(&_kaper_resistance);
+                if (getFileVersion() >= fv250) {
+                    // add background images
+                    dest.add(_flowlines.size());
+                    for (size_t i=0; i<_flowlines.size(); i++)
+                        _flowlines.get(i)->saveBinary(dest);
+                }
+            }
+        }
+    }
 }
 
 float ShipCADModel::findLowestHydrostaticsPoint()
@@ -383,8 +405,8 @@ void ShipCADModel::setSelectedMarker(Marker* mark)
 void ShipCADModel::removeSelectedMarker(Marker* mark)
 {
     vector<Marker*>::iterator i = find(
-                    _selected_markers.begin(),
-                    _selected_markers.end(), mark);
+        _selected_markers.begin(),
+        _selected_markers.end(), mark);
     if (i != _selected_markers.end())
         _selected_markers.erase(i);
 }
@@ -393,5 +415,26 @@ void ShipCADModel::removeSelectedMarker(Marker* mark)
 bool ShipCADModel::adjustMarkers()
 {
     return false;
+}
+
+bool ShipCADModel::isSelectedFlowline(const Flowline* flow) const
+{
+    return find(_selected_flowlines.begin(), _selected_flowlines.end(), flow) !=
+        _selected_flowlines.end();
+}
+
+void ShipCADModel::setSelectedFlowline(const Flowline* flow)
+{
+    if (!isSelectedFlowline(flow))
+        _selected_flowlines.push_back(flow);
+}
+
+void ShipCADModel::removeSelectedFlowline(const Flowline* flow)
+{
+    vector<const Flowline*>::iterator i = find(_selected_flowlines.begin(),
+                                               _selected_flowlines.end(),
+                                               flow);
+    if (i != _selected_flowlines.end())
+        _selected_flowlines.erase(i);
 }
 

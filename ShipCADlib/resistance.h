@@ -34,6 +34,7 @@ namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+    
 struct DelftSeriesResistance
 {
     float start_speed;
@@ -54,7 +55,11 @@ struct DelftSeriesResistance
     float wl_area;
     bool estimate_wet_surf;
     bool extract;
-};
+}
+#ifdef __GNUG__
+__attribute__ ((aligned (4)));
+#endif
+;
 
 struct KAPERResistance
 {
@@ -68,7 +73,11 @@ struct KAPERResistance
     float at_ax;
     float entrance_angle;
     bool extract;
-};
+}
+#ifdef __GNUG__
+__attribute__ ((aligned (4)));
+#endif
+;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

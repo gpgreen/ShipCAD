@@ -44,18 +44,18 @@
 #include "preferences.h"
 #include "marker.h"
 #include "subdivsurface.h"
+#include "resistance.h"
+#include "flowline.h"
 
 namespace ShipCAD {
 
-class Marker;
-class Flowline;
 class FileBuffer;
 class SubdivisionControlPoint;
 class SubdivisionFace;
 class SubdivisionLayer;
 class Viewport;
 class UndoObject;
-	
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 class ShipCADModel : public QObject
@@ -142,6 +142,24 @@ public:
     void removeSelectedMarker(Marker* mark);
     bool adjustMarkers();
 
+    // flowlines
+    /*! \brief is the flowline selected
+     *
+     * \param flow flowline to check
+     * \return true if flowline selected
+     */
+    bool isSelectedFlowline(const Flowline* flow) const;
+    /*! \brief set a flowline as selected
+     *
+     * \param flow set this flowline as selected
+     */
+    void setSelectedFlowline(const Flowline* flow);
+    /*! \brief deselect a flowline
+     *
+     * \param flow deselect this flowline
+     */
+    void removeSelectedFlowline(const Flowline* flow);
+    
     // viewport? we might want to move this into the gui window class
     void addViewport(Viewport* vp);
 
@@ -279,13 +297,15 @@ private:
     ProjectSettings _settings;
     HydrostaticCalcVector _calculations;
     // undo objects
-    // delft resistance
-    // kaper resistance
+    DelftSeriesResistance _delft_resistance;
+	KAPERResistance _kaper_resistance;
     HydrostaticCalc* _design_hydrostatics;
 	size_t _undo_pos;
 	size_t _prev_undo_pos;
 	std::deque<UndoObject*> _undo_list;
     std::vector<Marker*> _selected_markers;
+    std::vector<const Flowline*> _selected_flowlines;
+    FlowlineVector _flowlines;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

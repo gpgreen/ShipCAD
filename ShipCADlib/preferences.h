@@ -47,10 +47,10 @@ public:
     explicit Preferences(ShipCADModel* owner);
     ~Preferences() {}
 
-    QString getExportDirectory();
-    QString getImportDirectory();
-    QString getOpenDirectory();
-    QString getSaveDirectory();
+    QString getExportDirectory() const;
+    QString getImportDirectory() const;
+    QString getOpenDirectory() const;
+    QString getSaveDirectory() const;
 
     void setViewportColor(QColor col);
 
@@ -63,18 +63,21 @@ public:
 	 *
 	 * \return max amount of undo memory in mb
 	 */
-	size_t getMaxUndoMemory() {return _max_undo_memory;}
-	
-    QColor getStationColor() {return _station_color;}
-    QColor getButtockColor() {return _buttock_color;}
-    QColor getWaterlineColor() {return _waterline_color;}
-    QColor getDiagonalColor() {return _diagonal_color;}
+	size_t getMaxUndoMemory() const
+        {return _max_undo_memory;}
+
+    QColor getSelectColor() const 
+        {return _select_color;}
+    QColor getStationColor() const
+        {return _station_color;}
+    QColor getButtockColor() const
+        {return _buttock_color;}
+    QColor getWaterlineColor() const
+        {return _waterline_color;}
+    QColor getDiagonalColor() const
+        {return _diagonal_color;}
 
     void clear();
-
-public slots:
-
-protected:
 
 private:
 

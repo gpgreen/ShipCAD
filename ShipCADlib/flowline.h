@@ -33,14 +33,17 @@
 #include <QtCore>
 #include <QtGui>
 #include "entity.h"
+#include "shipcadlib.h"
+#include "pointervec.h"
 
 namespace ShipCAD {
 
-class ShipCAD;
+class ShipCADModel;
 class Viewport;
 class LineShader;
 class FileBuffer;
-	
+class Spline;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Flowline : public Entity
@@ -49,34 +52,35 @@ class Flowline : public Entity
 
 public:
 
-    explicit Flowline(ShipCAD* owner);
+    explicit Flowline(ShipCADModel* owner);
     virtual ~Flowline();
 
-	static Flowline* construct(ShipCAD* owner);
+    static Flowline* construct(ShipCADModel* owner);
 	
     virtual void clear();
-    virtual void extents(QVector3D& min, QVector3D& max);
     virtual void draw(Viewport& vp, LineShader* lineshader);
     virtual void rebuild();
+    virtual void setBuild(bool val);
 
-	bool isVisible();
-	void setVisible(bool set);
-	bool isSelected();
+    bool isVisible() const;
+    bool isSelected() const;
 	void setSelected(bool set);
 
-	void loadBinary(FileBuffer& buf);
-	void saveBinary(FileBuffer& buf);
+    QColor getColor() const;
+    
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& dest);
 									
-public slots:
-
-protected:
-
 private:
 
-	ShipCAD* _owner;
-	bool _visible;
-	bool _selected;
+    ShipCADModel* _owner;
+    QVector2D _projection_point;
+    viewport_type_t _projection_vw;
+    bool _method_new;
+    Spline* _flowline;
 };
+
+typedef PointerVector<Flowline> FlowlineVector;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

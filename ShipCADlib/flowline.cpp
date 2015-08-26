@@ -27,106 +27,118 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef FILEBUFFER_H_
-#define FILEBUFFER_H_
+#include "flowline.h"
+#include "shipcadmodel.h"
+#include "filebuffer.h"
 
-#include <vector>
-#include <QFile>
-#include <QObject>
-#include <QVector3D>
-#include <QColor>
-#include <QString>
+using namespace ShipCAD;
 
-#include "version.h"
-#include "plane.h"
-#include "resistance.h"
-
-namespace ShipCAD {
-
-	struct JPEGImage 
-	{
-        quint32 width;
-        quint32 height;
-        quint32 size;
-		std::vector<quint8> data;
-	};
-	
-//////////////////////////////////////////////////////////////////////////////////////
-
-/*! \brief in-memory buffer of data for a binary file (FREE!Ship format)
- */
-class FileBuffer : public QObject
+Flowline::Flowline(ShipCADModel* owner)
+    : _owner(owner), _projection_point(ZERO2), _projection_vw(fvProfile), _method_new(false),
+      _flowline(0)
 {
-    Q_OBJECT
-public:
+    _flowline = new Spline();
+}
 
-    explicit FileBuffer();
-    ~FileBuffer() {}
+Flowline::~Flowline()
+{
+    delete _flowline;
+}
 
-    size_t size() {return _data.size();}
+Flowline* Flowline::construct(ShipCADModel* owner)
+{
+    Flowline* f = new Flowline(owner);
+    return f;
+}
 
-    // version
-    version_t getVersion() {return _file_version;}
-    void setVersion(version_t v);
-	
-    // save/restore/reset
-    void loadFromFile(const QString& filename);
-    void saveToFile(const QString& filename);
-    void reset();
+void Flowline::clear()
+{
+    _projection_point = ZERO2;
+    _projection_vw = fvProfile;
+    _method_new = false;
+    _flowline->clear();
+}
 
-    // load/add
+void Flowline::draw(Viewport& vp, LineShader* lineshader)
+{
+    // TODO
+}
 
-	void load(JPEGImage& img);
-	void add(const JPEGImage& img);
-	
-	void load(quint8& val);
-	void add(quint8 val);
-	
-    void load(bool& val);
-    void add(bool val);
+void Flowline::setBuild(bool val)
+{
+    Entity::setBuild(val);
+    if (!val)
+        clear();
+}
 
-    void load(float& val);
-    void add(float val);
+void Flowline::rebuild()
+{
+    // TODO
+}
 
-    void load(qint32& val);
-    void add(qint32 val);
+bool Flowline::isVisible() const
+{
+    return _owner->getVisibility().isShowFlowlines();
+}
 
-    void load(quint32& val);
-    void add(quint32 val);
-	/*! \brief save value, (check that it fits in 32 bits)
-	 *
-	 * \param val integer to save
-	 * \throws range_error if val is greater than 32bit unsigned
-	 */
-	void add(size_t val);
-    void load(QVector3D& val);
-    void add(const QVector3D& val);
+bool Flowline::isSelected() const
+{
+    return _owner->isSelectedFlowline(this);
+}
 
-    void load(QColor& val);
-    void add(const QColor& val);
+void Flowline::setSelected(bool set)
+{
+    if (set)
+        _owner->setSelectedFlowline(this);
+    else
+        _owner->removeSelectedFlowline(this);
+}
 
-    void load(QString& val);
-    void add(const QString& val);
+QColor Flowline::getColor() const
+{
+    if (isSelected())
+        return _owner->getPreferences().getSelectColor();
+    else if (_method_new)
+        return Qt::red;
+    return Qt::blue;
+}
 
-    void load(Plane& val);
-    void add(const Plane& val);
+void Flowline::loadBinary(FileBuffer& source)
+{
+    quint32 n;
+    float f;
+    bool b;
+    QVector3D p;
+    source.load(f);
+    _projection_point.setX(f);
+    source.load(f);
+    _projection_point.setY(f);
+    source.load(n);
+    _projection_vw = static_cast<viewport_type_t>(n);
+    source.load(_build);
+    source.load(b);
+    if (b)
+        _owner->setSelectedFlowline(this);
+    source.load(n);
+    for (size_t i=0; i<n; i++) {
+        source.load(p);
+        _flowline->add(p);
+        source.load(b);
+        _flowline->setKnuckle(i, b);
+    }
+}
 
-	void load(DelftSeriesResistance* buf);
-	void add(const DelftSeriesResistance* buf);
-
-	void load(KAPERResistance* buf);
-	void add(const KAPERResistance* buf);
-
-private:
-
-    size_t _pos;           // current position in the data vector
-    version_t _file_version;
-    std::vector<quint8> _data;   // the data
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-};				/* end namespace */
-
-#endif
+void Flowline::saveBinary(FileBuffer& dest)
+{
+    dest.add(_projection_point.x());
+    dest.add(_projection_point.y());
+    dest.add(static_cast<quint32>(_projection_vw));
+    dest.add(_build);
+    dest.add(isSelected());
+    dest.add(_flowline->numberOfPoints());
+    for (size_t i=0; i<_flowline->numberOfPoints(); i++) {
+        dest.add(_flowline->getPoint(i));
+        dest.add(_flowline->isKnuckle(i));
+    }
+}
 

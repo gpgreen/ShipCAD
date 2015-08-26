@@ -299,3 +299,31 @@ void FileBuffer::add(const Plane& val)
     for (int i=0; i<4; ++i)
         _data.push_back(ct.d[i]);
 }
+
+void FileBuffer::load(DelftSeriesResistance* buf)
+{
+	char * vbuf = (char *)buf;
+	for (size_t i=0; i<sizeof(DelftSeriesResistance); i++)
+		vbuf[i] = _data[_pos++];
+}
+
+void FileBuffer::add(const DelftSeriesResistance* buf)
+{
+	const char * vbuf = (const char *)&buf;
+	for (size_t i=0; i<sizeof(DelftSeriesResistance); i++)
+		_data.push_back(vbuf[i]);
+}
+
+void FileBuffer::load(KAPERResistance* buf)
+{
+	char * vbuf = (char *)buf;
+	for (size_t i=0; i<sizeof(KAPERResistance); i++)
+		vbuf[i] = _data[_pos++];
+}
+
+void FileBuffer::add(const KAPERResistance* buf)
+{
+	const char * vbuf = (const char *)&buf;
+	for (size_t i=0; i<sizeof(KAPERResistance); i++)
+		_data.push_back(vbuf[i]);
+}

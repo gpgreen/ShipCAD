@@ -743,11 +743,9 @@ struct VolumeCalc
         p2 -= new_origin;
         p3 -= new_origin;
         QVector3D center = (p1 + p2 + p3) / 3.0f;
-        float volume = (p1.z() * (p2.x() * p3.y() - p2.y() * p3.x())
-                        + p1.y() * (p2.z() * p3.x() - p2.x() * p3.z())
-                        + p1.x() * (p2.y() * p3.z() - p2.z() * p3.y())) / 6.0f;
+        float volume = QVector3D::dotProduct(p1, QVector3D::crossProduct(p2, p3)) / 6.0f;
         if (volume != 0) {
-            volume_moment = .75 * center * volume;
+            volume_moment = .75 * volume * center;
             data.volume += volume;
             data.center_of_buoyancy += volume_moment;
         }

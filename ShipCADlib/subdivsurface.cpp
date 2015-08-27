@@ -81,13 +81,6 @@ SubdivisionSurface::SubdivisionSurface()
 
 SubdivisionSurface::~SubdivisionSurface()
 {
-    _control_curves.clear();
-    _control_faces.clear();
-    _control_edges.clear();
-    _control_points.clear();
-    _layers.clear();
-    _edges.clear();
-    _points.clear();
     // clear the pools
     _ccurve_pool.release_memory();
     _cface_pool.release_memory();

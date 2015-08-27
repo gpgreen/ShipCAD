@@ -209,9 +209,7 @@ void SubdivisionLayer::setVisible(bool val)
 void SubdivisionLayer::addControlFace(SubdivisionControlFace* face)
 {
     // disconnect from current layer
-    if (face->getLayer() == this)
-        return;
-    if (face->getLayer() != 0)
+    if (face->getLayer() != 0 && face->getLayer() != this)
         face->getLayer()->deleteControlFace(face);
     if (find(_patches.begin(), _patches.end(), face) == _patches.end())
         _patches.push_back(face);

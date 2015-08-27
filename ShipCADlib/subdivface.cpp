@@ -688,8 +688,7 @@ void SubdivisionControlFace::setLayer(SubdivisionLayer *layer)
     }
     _layer = layer;
     if (layer != 0)
-        // connect to the new layer
-        _layer->addControlFace(this);
+        layer->addControlFace(this);
 }
 
 void SubdivisionControlFace::calcExtents()

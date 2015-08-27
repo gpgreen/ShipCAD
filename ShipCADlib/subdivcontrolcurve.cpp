@@ -55,7 +55,7 @@ SubdivisionControlCurve* SubdivisionControlCurve::construct(SubdivisionSurface* 
 }
 
 SubdivisionControlCurve::SubdivisionControlCurve(SubdivisionSurface* owner)
-    : SubdivisionBase(owner), _build(false), _curve(0)
+    : SubdivisionBase(owner), _build(false), _curve(new Spline())
 {
 	// does nothing
 }
@@ -82,6 +82,7 @@ SubdivisionControlCurve::~SubdivisionControlCurve()
         if (edge != 0)
             edge->setCurve(0);
     }
+    delete _curve;
 }
 
 void SubdivisionControlCurve::setSelected(bool val)

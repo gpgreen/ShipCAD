@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
- *    Original Copyright header below														   *
- *																							   *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -27,90 +27,68 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef BACKGROUNDIMAGE_H
-#define BACKGROUNDIMAGE_H
+#include "backgroundimage.h"
+#include "filebuffer.h"
 
-#include <vector>
-#include <QtCore>
-#include <QtGui>
-#include "shipcadlib.h"
-#include "pointervec.h"
+using namespace ShipCAD;
+using namespace std;
 
-namespace ShipCAD {
-
-class ShipCADModel;
-class FileBuffer;
-class Viewport;
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-/*! \brief struct to hold jpeg image as stored in Free!Ship
- */
-struct JPEGImage 
+BackgroundImage::BackgroundImage(ShipCADModel* owner)
+    : _owner(owner), _assigned_view(fvPerspective), _quality(100),
+      _origin(ZERO2), _scale(10), _transparent(false), _blending_value(255),
+      _transparent_color(Qt::black), _visible(true), _tolerance(3)
 {
-    quint32 width;
-    quint32 height;
-    quint32 size;
-    std::vector<quint8> data;
-};
-	
-//////////////////////////////////////////////////////////////////////////////////////
+    // does nothing
+}
 
-/*! \brief Background Images for a viewport
- */
-class BackgroundImage : public QImage
+BackgroundImage::~BackgroundImage()
 {
-public:
+    // does nothing
+}
 
-    explicit BackgroundImage(ShipCADModel* owner);
-    ~BackgroundImage();
+void BackgroundImage::loadBinary(FileBuffer& source)
+{
+    quint32 n;
+    source.load(n);
+    _assigned_view = static_cast<viewport_type_t>(n);
+    source.load(_visible);
+    source.load(_quality);
+    float f;
+    source.load(f);
+    _origin.setX(f);
+    source.load(f);
+    _origin.setY(f);
+    source.load(_scale);
+    source.load(_blending_value);
+    source.load(_transparent);
+    source.load(_transparent_color);
+    source.load(_tolerance);
+    source.load(_image);
+}
 
-    void clear();
+void BackgroundImage::saveBinary(FileBuffer& dest)
+{
+    dest.add(static_cast<quint32>(_assigned_view));
+    dest.add(_visible);
+    dest.add(_quality);
+    dest.add(_origin.x());
+    dest.add(_origin.y());
+    dest.add(_scale);
+    dest.add(_blending_value);
+    dest.add(_transparent);
+    dest.add(_transparent_color);
+    dest.add(_tolerance);
+    dest.add(_image);
+}
 
-    void loadBinary(FileBuffer& source);
-    void saveBinary(FileBuffer& dest);
+void BackgroundImage::updateData(Viewport& vp)
+{
+    // TODO
+}
 
-    void updateData(Viewport& vp);
-    void updateViews();
+void BackgroundImage::updateViews()
+{
+    // TODO
+}
 
-    viewport_type_t getAssignedView() const
-        { return _assigned_view; }
-    int getBlendingValue() const
-        { return _blending_value; }
-    QVector3D getOrigin() const
-        { return _origin; }
-    int getQuality() const
-        { return _quality; }
-    float getScale() const
-        { return _scale; }
-    int getTolerance() const
-        { return _tolerance; }
-    QColor getTransparentColor() const
-        { return _transparent_color; }
-    const JPEGImage& getImage() const
-        { return _image; }
-    
-private:
-
-    ShipCADModel* _owner;
-    viewport_type_t _assigned_view;
-    int _quality;
-    QVector3D _origin;
-    float _scale;
-    bool _transparent;
-    int _blending_value;
-    QColor _transparent_color;
-    bool _visible;
-    int _tolerance;
-    JPEGImage _image;
-};
-
-typedef PointerVector<BackgroundImage> BackgroundImageVector;
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-};				/* end namespace */
-
-
-#endif // BACKGROUNDIMAGE_H
 

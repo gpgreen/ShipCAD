@@ -56,6 +56,11 @@ struct DelftSeriesResistance
     float wl_area;
     bool estimate_wet_surf;
     bool extract;
+    // The original Pascal code apparently
+    // wrote 4 byte aligned structures
+    // put in some padding here to match
+    // so that loadBinary/saveBinary works
+    quint8 padding[2];
 }
 #ifdef __GNUG__
 __attribute__ ((aligned (4)));
@@ -74,6 +79,11 @@ struct KAPERResistance
     float at_ax;
     float entrance_angle;
     bool extract;
+    // The original Pascal code apparently
+    // wrote 4 byte aligned structures
+    // put in some padding here to match
+    // so that loadBinary/saveBinary works
+    quint8 padding[3];
 }
 #ifdef __GNUG__
 __attribute__ ((aligned (4)));

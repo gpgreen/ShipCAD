@@ -41,7 +41,8 @@ SOURCES += shipcadlib.cpp \
     hydrostaticcalc.cpp \
     preferences.cpp \
     controller.cpp \
-    flowline.cpp
+    flowline.cpp \
+    backgroundimage.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \

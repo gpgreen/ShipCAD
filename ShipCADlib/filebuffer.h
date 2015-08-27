@@ -43,14 +43,8 @@
 
 namespace ShipCAD {
 
-	struct JPEGImage 
-	{
-        quint32 width;
-        quint32 height;
-        quint32 size;
-		std::vector<quint8> data;
-	};
-	
+struct JPEGImage;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief in-memory buffer of data for a binary file (FREE!Ship format)

@@ -46,6 +46,7 @@
 #include "subdivsurface.h"
 #include "resistance.h"
 #include "flowline.h"
+#include "backgroundimage.h"
 
 namespace ShipCAD {
 
@@ -306,6 +307,7 @@ private:
     std::vector<Marker*> _selected_markers;
     std::vector<const Flowline*> _selected_flowlines;
     FlowlineVector _flowlines;
+    BackgroundImageVector _background_images;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

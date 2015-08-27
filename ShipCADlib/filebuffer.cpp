@@ -34,6 +34,7 @@
 
 #include "filebuffer.h"
 #include "utility.h"
+#include "backgroundimage.h"
 
 using namespace std;
 using namespace ShipCAD;

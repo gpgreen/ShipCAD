@@ -47,7 +47,8 @@ ShipCADModel::ShipCADModel()
       _stations(true), _waterlines(true), _buttocks(true), _diagonals(true), _control_curves(true),
       _markers(true), _vis(this), _filename_set(false), _currently_moving(false),
       _stop_asking_for_file_version(false), _settings(this), _calculations(true),
-      _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0), _flowlines(true)
+      _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0), _flowlines(true),
+      _background_images(true)
 {
 	memset(&_delft_resistance, 0, sizeof(DelftSeriesResistance));
 	memset(&_kaper_resistance, 0, sizeof(KAPERResistance));
@@ -79,9 +80,9 @@ void ShipCADModel::clear()
     _settings.clear();
     _filename_set = false;
     _stop_asking_for_file_version = false;
-    // TODO resistance and background images, flowlines
     _selected_flowlines.clear();
     _flowlines.clear();
+    _background_images.clear();
 }
 
 void ShipCADModel::setFilename(const QString& name)
@@ -110,10 +111,10 @@ void ShipCADModel::extents(QVector3D& min, QVector3D& max)
         max = QVector3D(-1e6, -1e6, -1e6);
         _surface.extents(min, max);
         if (_vis.isShowMarkers()) {
-            // extents on markers
+            // TODO extents on markers
         }
     } else {
-        // iterate on control points
+        // TODO iterate on control points
     }
 }
 
@@ -287,7 +288,9 @@ void ShipCADModel::loadBinary(FileBuffer& source)
                         if (_file_version >= fv250) {
                             source.load(n);
                             for (size_t i=0; i<n; i++) {
-                                // background images
+                                BackgroundImage* img = new BackgroundImage(this);
+                                _background_images.add(img);
+                                img->loadBinary(source);
                             }
                             source.load(n);
                             for (size_t i=0; i<n; i++) {
@@ -347,7 +350,9 @@ void ShipCADModel::saveBinary(FileBuffer& dest)
                 dest.add(&_delft_resistance);
                 dest.add(&_kaper_resistance);
                 if (getFileVersion() >= fv250) {
-                    // add background images
+                    dest.add(_background_images.size());
+                    for (size_t i=0; i<_background_images.size(); i++)
+                        _background_images.get(i)->saveBinary(dest);
                     dest.add(_flowlines.size());
                     for (size_t i=0; i<_flowlines.size(); i++)
                         _flowlines.get(i)->saveBinary(dest);

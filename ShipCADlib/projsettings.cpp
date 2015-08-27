@@ -36,6 +36,7 @@
 #include "subdivlayer.h"
 #include "subdivsurface.h"
 #include "filebuffer.h"
+#include "backgroundimage.h"
 
 using namespace std;
 using namespace ShipCAD;

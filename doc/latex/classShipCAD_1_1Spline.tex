@@ -18,7 +18,7 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Spline\-:\begin{figure}[H]
 \item 
 \hyperlink{classShipCAD_1_1Spline_a891b0c893b8124dca341680076854bff}{Spline} (const \hyperlink{classShipCAD_1_1Spline}{Spline} \&copied)
 \item 
-virtual \hyperlink{classShipCAD_1_1Spline_a0c900ca3c99987532e1d0c21ba992968}{$\sim$\-Spline} ()
+virtual \hyperlink{classShipCAD_1_1Spline_a20cddb0145346150b4ca30b63ef47c9b}{$\sim$\-Spline} ()
 \item 
 void \hyperlink{classShipCAD_1_1Spline_ac3d9f4514573be91b316413bf062791a}{add} (const Q\-Vector3\-D \&p)
 \item 
@@ -56,7 +56,7 @@ virtual void \hyperlink{classShipCAD_1_1Spline_ae90c8807fb8058d6309f47db64e2d40e
 \item 
 virtual void \hyperlink{classShipCAD_1_1Spline_abaf1c6eebdfe8abd41287c1fcb38a808}{save\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&destination)
 \item 
-void \hyperlink{classShipCAD_1_1Spline_a347502f38c64a12fc19a95e19aad5d7d}{save\-To\-D\-X\-F} (std\-::vector$<$ Q\-String $>$ \&strings, Q\-String layername, bool sendmirror)
+void \hyperlink{classShipCAD_1_1Spline_a03ddf553749e09aa03a38ff5ce0e0b31}{save\-To\-D\-X\-F} (Q\-String\-List \&strings, Q\-String layername, bool sendmirror)
 \item 
 virtual void \hyperlink{classShipCAD_1_1Spline_a6424ed433d241f566c15891cc25a74dd}{draw} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1LineShader}{Line\-Shader} $\ast$lineshader)
 \item 
@@ -169,16 +169,16 @@ Definition at line 47 of file spline.\-cpp.
 
 Definition at line 53 of file spline.\-cpp.
 
-\hypertarget{classShipCAD_1_1Spline_a0c900ca3c99987532e1d0c21ba992968}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!$\sim$\-Spline@{$\sim$\-Spline}}
+\hypertarget{classShipCAD_1_1Spline_a20cddb0145346150b4ca30b63ef47c9b}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!$\sim$\-Spline@{$\sim$\-Spline}}
 \index{$\sim$\-Spline@{$\sim$\-Spline}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
-\subsubsection[{$\sim$\-Spline}]{\setlength{\rightskip}{0pt plus 5cm}Spline\-::$\sim$\-Spline (
+\subsubsection[{$\sim$\-Spline}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Spline\-::$\sim$\-Spline (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1Spline_a0c900ca3c99987532e1d0c21ba992968}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Spline_a20cddb0145346150b4ca30b63ef47c9b}
 
 
-Definition at line 65 of file spline.\-cpp.
+Definition at line 64 of file spline.\-h.
 
 
 
@@ -192,7 +192,7 @@ Definition at line 65 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_ac3d9f4514573be91b316413bf062791a}
 
 
-Definition at line 396 of file spline.\-cpp.
+Definition at line 391 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ab8f0b98595ccbd62e754fe92354a207b}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!add\-\_\-to\-\_\-output@{add\-\_\-to\-\_\-output}}
 \index{add\-\_\-to\-\_\-output@{add\-\_\-to\-\_\-output}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -205,7 +205,7 @@ Definition at line 396 of file spline.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Spline_ab8f0b98595ccbd62e754fe92354a207b}
 
 
-Definition at line 617 of file spline.\-cpp.
+Definition at line 612 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ae15513771d88f4f545048d4204e98325}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!chord\-\_\-length\-\_\-approximation@{chord\-\_\-length\-\_\-approximation}}
 \index{chord\-\_\-length\-\_\-approximation@{chord\-\_\-length\-\_\-approximation}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -216,7 +216,7 @@ Definition at line 617 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_ae15513771d88f4f545048d4204e98325}
 
 
-Definition at line 424 of file spline.\-cpp.
+Definition at line 419 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a02967f3eee8b1755eab0d7da55c3c621}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!clear@{clear}}
 \index{clear@{clear}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -235,7 +235,7 @@ Reimplemented in \hyperlink{classShipCAD_1_1Marker_ac7c7eea8648562f3fa00a9e10af6
 
 
 
-Definition at line 739 of file spline.\-cpp.
+Definition at line 738 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a9d4d64a34b1511efc5c41b9e31956a3e}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!coord\-\_\-length@{coord\-\_\-length}}
 \index{coord\-\_\-length@{coord\-\_\-length}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -247,7 +247,7 @@ Definition at line 739 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_a9d4d64a34b1511efc5c41b9e31956a3e}
 
 
-Definition at line 404 of file spline.\-cpp.
+Definition at line 399 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a5681a27480f934a73462e53b2b4e2461}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!curvature@{curvature}}
 \index{curvature@{curvature}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -259,7 +259,7 @@ Definition at line 404 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_a5681a27480f934a73462e53b2b4e2461}
 
 
-Definition at line 472 of file spline.\-cpp.
+Definition at line 467 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a120c5530571f138daad61426053220f3}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!delete\-\_\-point@{delete\-\_\-point}}
 \index{delete\-\_\-point@{delete\-\_\-point}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -270,7 +270,7 @@ Definition at line 472 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_a120c5530571f138daad61426053220f3}
 
 
-Definition at line 494 of file spline.\-cpp.
+Definition at line 489 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a6424ed433d241f566c15891cc25a74dd}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!draw@{draw}}
 \index{draw@{draw}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -290,7 +290,7 @@ Reimplemented in \hyperlink{classShipCAD_1_1Marker_a0cca647d9b32dc69b03903b024dc
 
 
 
-Definition at line 532 of file spline.\-cpp.
+Definition at line 527 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a156ffe855d149ad445b178078ee4451c}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!dump@{dump}}
 \index{dump@{dump}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -301,7 +301,7 @@ Definition at line 532 of file spline.\-cpp.
 ) const}}\label{classShipCAD_1_1Spline_a156ffe855d149ad445b178078ee4451c}
 
 
-Definition at line 798 of file spline.\-cpp.
+Definition at line 797 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a20b39f3a1bd853040df4760cd912ee64}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!find\-\_\-next\-\_\-point@{find\-\_\-next\-\_\-point}}
 \index{find\-\_\-next\-\_\-point@{find\-\_\-next\-\_\-point}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -312,7 +312,7 @@ Definition at line 798 of file spline.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Spline_a20b39f3a1bd853040df4760cd912ee64}
 
 
-Definition at line 333 of file spline.\-cpp.
+Definition at line 328 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_afe15664ac97d1d3452d5a5cfd023c471}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!first\-\_\-derive@{first\-\_\-derive}}
 \index{first\-\_\-derive@{first\-\_\-derive}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -323,7 +323,7 @@ Definition at line 333 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_afe15664ac97d1d3452d5a5cfd023c471}
 
 
-Definition at line 504 of file spline.\-cpp.
+Definition at line 499 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ae2e47ccb73a45e0f0d2df2484ba509ae}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!get\-Curvature\-Color@{get\-Curvature\-Color}}
 \index{get\-Curvature\-Color@{get\-Curvature\-Color}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -356,7 +356,7 @@ Definition at line 103 of file spline.\-h.
 )}}\label{classShipCAD_1_1Spline_a489b034b416be54fe323ad021620f820}
 
 
-Definition at line 90 of file spline.\-cpp.
+Definition at line 85 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ac617856776bb267bdab050b56de4ec74}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!get\-Parameter@{get\-Parameter}}
 \index{get\-Parameter@{get\-Parameter}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -367,7 +367,7 @@ Definition at line 90 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_ac617856776bb267bdab050b56de4ec74}
 
 
-Definition at line 124 of file spline.\-cpp.
+Definition at line 119 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ad316be28cfd23e518f9e761c46644440}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!get\-Point@{get\-Point}}
 \index{get\-Point@{get\-Point}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -378,7 +378,7 @@ Definition at line 124 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_ad316be28cfd23e518f9e761c46644440}
 
 
-Definition at line 134 of file spline.\-cpp.
+Definition at line 129 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_aa1ea6446e0b59d5cce88580242cd25b6}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!insert@{insert}}
 \index{insert@{insert}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -390,7 +390,7 @@ Definition at line 134 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_aa1ea6446e0b59d5cce88580242cd25b6}
 
 
-Definition at line 520 of file spline.\-cpp.
+Definition at line 515 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_aa8e588b92d23c74bb6ec120624b49e54}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!insert\-\_\-spline@{insert\-\_\-spline}}
 \index{insert\-\_\-spline@{insert\-\_\-spline}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -404,7 +404,7 @@ Definition at line 520 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_aa8e588b92d23c74bb6ec120624b49e54}
 
 
-Definition at line 589 of file spline.\-cpp.
+Definition at line 584 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_afd932e0c63a3b03200ecdc7c656be8e4}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!intersect\-\_\-plane@{intersect\-\_\-plane}}
 \index{intersect\-\_\-plane@{intersect\-\_\-plane}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -416,7 +416,7 @@ Definition at line 589 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_afd932e0c63a3b03200ecdc7c656be8e4}
 
 
-Definition at line 624 of file spline.\-cpp.
+Definition at line 619 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a26293a4ee636c2b968c45731425d5c94}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!invert\-\_\-direction@{invert\-\_\-direction}}
 \index{invert\-\_\-direction@{invert\-\_\-direction}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -427,7 +427,7 @@ Definition at line 624 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_a26293a4ee636c2b968c45731425d5c94}
 
 
-Definition at line 651 of file spline.\-cpp.
+Definition at line 646 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a90a954f52321f3b1b27b43991e9997a5}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!is\-Knuckle@{is\-Knuckle}}
 \index{is\-Knuckle@{is\-Knuckle}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -438,7 +438,7 @@ Definition at line 651 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_a90a954f52321f3b1b27b43991e9997a5}
 
 
-Definition at line 95 of file spline.\-cpp.
+Definition at line 90 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ae90c8807fb8058d6309f47db64e2d40e}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!load\-Binary@{load\-Binary}}
 \index{load\-Binary@{load\-Binary}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -453,7 +453,7 @@ Reimplemented in \hyperlink{classShipCAD_1_1Marker_a0f2aa7cd6bae40784c077b89d5eb
 
 
 
-Definition at line 662 of file spline.\-cpp.
+Definition at line 657 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ae22e067eaf100aca4cd4262e283ec089}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!number\-Of\-Points@{number\-Of\-Points}}
 \index{number\-Of\-Points@{number\-Of\-Points}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -479,7 +479,7 @@ Implements \hyperlink{classShipCAD_1_1Entity_a2571654319df6ad6841a437be7a75395}{
 
 
 
-Definition at line 144 of file spline.\-cpp.
+Definition at line 139 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_abaf1c6eebdfe8abd41287c1fcb38a808}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!save\-Binary@{save\-Binary}}
 \index{save\-Binary@{save\-Binary}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -494,20 +494,20 @@ Reimplemented in \hyperlink{classShipCAD_1_1Marker_abceb4cbb5b038eb88d0f7f26507b
 
 
 
-Definition at line 678 of file spline.\-cpp.
+Definition at line 677 of file spline.\-cpp.
 
-\hypertarget{classShipCAD_1_1Spline_a347502f38c64a12fc19a95e19aad5d7d}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!save\-To\-D\-X\-F@{save\-To\-D\-X\-F}}
+\hypertarget{classShipCAD_1_1Spline_a03ddf553749e09aa03a38ff5ce0e0b31}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!save\-To\-D\-X\-F@{save\-To\-D\-X\-F}}
 \index{save\-To\-D\-X\-F@{save\-To\-D\-X\-F}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
 \subsubsection[{save\-To\-D\-X\-F}]{\setlength{\rightskip}{0pt plus 5cm}void Spline\-::save\-To\-D\-X\-F (
 \begin{DoxyParamCaption}
-\item[{std\-::vector$<$ Q\-String $>$ \&}]{strings, }
+\item[{Q\-String\-List \&}]{strings, }
 \item[{Q\-String}]{layername, }
 \item[{bool}]{sendmirror}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Spline_a347502f38c64a12fc19a95e19aad5d7d}
+)}}\label{classShipCAD_1_1Spline_a03ddf553749e09aa03a38ff5ce0e0b31}
 
 
-Definition at line 689 of file spline.\-cpp.
+Definition at line 688 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_abe04c117432e350f3a9f66395d2d3037}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!second\-\_\-derive@{second\-\_\-derive}}
 \index{second\-\_\-derive@{second\-\_\-derive}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -518,7 +518,7 @@ Definition at line 689 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_abe04c117432e350f3a9f66395d2d3037}
 
 
-Definition at line 264 of file spline.\-cpp.
+Definition at line 259 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a6e932411f0f4463514f80011c58f5e6a}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!set\-Build@{set\-Build}}
 \index{set\-Build@{set\-Build}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -533,7 +533,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1Entity_a1889198398f42bb7f77a233403
 
 
 
-Definition at line 70 of file spline.\-cpp.
+Definition at line 65 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ac40c22712433f98d657ecaed459d03a0}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!set\-Curvature\-Color@{set\-Curvature\-Color}}
 \index{set\-Curvature\-Color@{set\-Curvature\-Color}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -566,7 +566,7 @@ Definition at line 104 of file spline.\-h.
 )}}\label{classShipCAD_1_1Spline_aaae6e558fad0833cde71f9ed38e4fb96}
 
 
-Definition at line 82 of file spline.\-cpp.
+Definition at line 77 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ad4f075e2e8f1d3ac7c2d22b5be75bbad}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!set\-Knuckle@{set\-Knuckle}}
 \index{set\-Knuckle@{set\-Knuckle}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -578,7 +578,7 @@ Definition at line 82 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_ad4f075e2e8f1d3ac7c2d22b5be75bbad}
 
 
-Definition at line 102 of file spline.\-cpp.
+Definition at line 97 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_ae02af8d5473f952644ac5103d7beebf2}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!set\-Point@{set\-Point}}
 \index{set\-Point@{set\-Point}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -590,7 +590,7 @@ Definition at line 102 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_ae02af8d5473f952644ac5103d7beebf2}
 
 
-Definition at line 113 of file spline.\-cpp.
+Definition at line 108 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_aae0f5ce3bc2aa58759abd32f3462bf16}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!set\-Show\-Curvature@{set\-Show\-Curvature}}
 \index{set\-Show\-Curvature@{set\-Show\-Curvature}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -623,7 +623,7 @@ Definition at line 99 of file spline.\-h.
 )}}\label{classShipCAD_1_1Spline_a043f418b363a0dc7161b9106a72ef8b4}
 
 
-Definition at line 353 of file spline.\-cpp.
+Definition at line 348 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a589d6d945e0fbb905ea94907cd216165}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!value@{value}}
 \index{value@{value}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -634,7 +634,7 @@ Definition at line 353 of file spline.\-cpp.
 )}}\label{classShipCAD_1_1Spline_a589d6d945e0fbb905ea94907cd216165}
 
 
-Definition at line 755 of file spline.\-cpp.
+Definition at line 754 of file spline.\-cpp.
 
 \hypertarget{classShipCAD_1_1Spline_a63165f7cf70338e51b0f16504366031e}{\index{Ship\-C\-A\-D\-::\-Spline@{Ship\-C\-A\-D\-::\-Spline}!weight@{weight}}
 \index{weight@{weight}!ShipCAD::Spline@{Ship\-C\-A\-D\-::\-Spline}}
@@ -645,7 +645,7 @@ Definition at line 755 of file spline.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Spline_a63165f7cf70338e51b0f16504366031e}
 
 
-Definition at line 300 of file spline.\-cpp.
+Definition at line 295 of file spline.\-cpp.
 
 
 

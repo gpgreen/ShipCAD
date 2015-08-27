@@ -1,25 +1,4 @@
 var searchData=
 [
-  ['shader_2ecpp',['shader.cpp',['../shader_8cpp.html',1,'']]],
-  ['shader_2eh',['shader.h',['../shader_8h.html',1,'']]],
-  ['shipcadlib_2ecpp',['shipcadlib.cpp',['../shipcadlib_8cpp.html',1,'']]],
-  ['shipcadlib_2eh',['shipcadlib.h',['../shipcadlib_8h.html',1,'']]],
-  ['shipcadmodel_2ecpp',['shipcadmodel.cpp',['../shipcadmodel_8cpp.html',1,'']]],
-  ['shipcadmodel_2eh',['shipcadmodel.h',['../shipcadmodel_8h.html',1,'']]],
-  ['spline_2ecpp',['spline.cpp',['../spline_8cpp.html',1,'']]],
-  ['spline_2eh',['spline.h',['../spline_8h.html',1,'']]],
-  ['subdivbase_2ecpp',['subdivbase.cpp',['../subdivbase_8cpp.html',1,'']]],
-  ['subdivbase_2eh',['subdivbase.h',['../subdivbase_8h.html',1,'']]],
-  ['subdivcontrolcurve_2ecpp',['subdivcontrolcurve.cpp',['../subdivcontrolcurve_8cpp.html',1,'']]],
-  ['subdivcontrolcurve_2eh',['subdivcontrolcurve.h',['../subdivcontrolcurve_8h.html',1,'']]],
-  ['subdivedge_2ecpp',['subdivedge.cpp',['../subdivedge_8cpp.html',1,'']]],
-  ['subdivedge_2eh',['subdivedge.h',['../subdivedge_8h.html',1,'']]],
-  ['subdivface_2ecpp',['subdivface.cpp',['../subdivface_8cpp.html',1,'']]],
-  ['subdivface_2eh',['subdivface.h',['../subdivface_8h.html',1,'']]],
-  ['subdivlayer_2ecpp',['subdivlayer.cpp',['../subdivlayer_8cpp.html',1,'']]],
-  ['subdivlayer_2eh',['subdivlayer.h',['../subdivlayer_8h.html',1,'']]],
-  ['subdivpoint_2ecpp',['subdivpoint.cpp',['../subdivpoint_8cpp.html',1,'']]],
-  ['subdivpoint_2eh',['subdivpoint.h',['../subdivpoint_8h.html',1,'']]],
-  ['subdivsurface_2ecpp',['subdivsurface.cpp',['../subdivsurface_8cpp.html',1,'']]],
-  ['subdivsurface_2eh',['subdivsurface.h',['../subdivsurface_8h.html',1,'']]]
+  ['resistance_2eh',['resistance.h',['../resistance_8h.html',1,'']]]
 ];

@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -94,6 +94,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>Background Images for a viewport.  
+ <a href="classShipCAD_1_1BackgroundImage.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ShipCAD::BackgroundImage:</div>
@@ -106,24 +109,43 @@ Inheritance diagram for ShipCAD::BackgroundImage:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab37b2469c0bc2558b5eb27b42c5e30eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#ab37b2469c0bc2558b5eb27b42c5e30eb">BackgroundImage</a> (ShipCAD *owner)</td></tr>
-<tr class="separator:ab37b2469c0bc2558b5eb27b42c5e30eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77cbf94a033f736a6c7366cf1e956573"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a77cbf94a033f736a6c7366cf1e956573">~BackgroundImage</a> ()</td></tr>
-<tr class="separator:a77cbf94a033f736a6c7366cf1e956573"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3b395941e8580f3921b0f9a40be71d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#ae3b395941e8580f3921b0f9a40be71d8">loadBinary</a> (FileBuf &amp;source)</td></tr>
-<tr class="separator:ae3b395941e8580f3921b0f9a40be71d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5069ad93b2885d264620d36327956e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#ad5069ad93b2885d264620d36327956e9">saveBinary</a> (FileBuf &amp;dest)</td></tr>
-<tr class="separator:ad5069ad93b2885d264620d36327956e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a856b8b55eafdb018792411f2edca81ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a856b8b55eafdb018792411f2edca81ef">updateData</a> (<a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;vp)</td></tr>
-<tr class="separator:a856b8b55eafdb018792411f2edca81ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae64647d7f69166b1af28920953f6bfc4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#ae64647d7f69166b1af28920953f6bfc4">updateViews</a> ()</td></tr>
-<tr class="separator:ae64647d7f69166b1af28920953f6bfc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ee3fc5f44c47b757f23baaeacd78553"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a9ee3fc5f44c47b757f23baaeacd78553">BackgroundImage</a> (<a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *owner)</td></tr>
+<tr class="separator:a9ee3fc5f44c47b757f23baaeacd78553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac36cf427a30ec243f55a2808488a3c7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#ac36cf427a30ec243f55a2808488a3c7e">~BackgroundImage</a> ()</td></tr>
+<tr class="separator:ac36cf427a30ec243f55a2808488a3c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c25ab668820b7ba0ab59a061c28d2a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a9c25ab668820b7ba0ab59a061c28d2a0">clear</a> ()</td></tr>
+<tr class="separator:a9c25ab668820b7ba0ab59a061c28d2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72abed6b5cdbd287ec41c817acf84de9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a72abed6b5cdbd287ec41c817acf84de9">loadBinary</a> (<a class="el" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a> &amp;source)</td></tr>
+<tr class="separator:a72abed6b5cdbd287ec41c817acf84de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6df7f94af9d32579888394b2f86f40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a5b6df7f94af9d32579888394b2f86f40">saveBinary</a> (<a class="el" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a> &amp;dest)</td></tr>
+<tr class="separator:a5b6df7f94af9d32579888394b2f86f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebee3507d92cb5d6ca486c15313e0beb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#aebee3507d92cb5d6ca486c15313e0beb">updateData</a> (<a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;vp)</td></tr>
+<tr class="separator:aebee3507d92cb5d6ca486c15313e0beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47bb9eeb69dbe6062392749ecaef2eb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a47bb9eeb69dbe6062392749ecaef2eb7">updateViews</a> ()</td></tr>
+<tr class="separator:a47bb9eeb69dbe6062392749ecaef2eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed6b7b2a8a9d647c82a1e0c1fc52b9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a">viewport_type_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a4ed6b7b2a8a9d647c82a1e0c1fc52b9e">getAssignedView</a> () const </td></tr>
+<tr class="separator:a4ed6b7b2a8a9d647c82a1e0c1fc52b9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d654832400b02adeab512df7ef969c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a85d654832400b02adeab512df7ef969c">getBlendingValue</a> () const </td></tr>
+<tr class="separator:a85d654832400b02adeab512df7ef969c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886fe351723011ea9ba85ccf055412d0"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a886fe351723011ea9ba85ccf055412d0">getOrigin</a> () const </td></tr>
+<tr class="separator:a886fe351723011ea9ba85ccf055412d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2f1eaa1a63c102b137f9aa7e2750a66"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#ad2f1eaa1a63c102b137f9aa7e2750a66">getQuality</a> () const </td></tr>
+<tr class="separator:ad2f1eaa1a63c102b137f9aa7e2750a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ebc90fd74efd91c77d27434031044d"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a66ebc90fd74efd91c77d27434031044d">getScale</a> () const </td></tr>
+<tr class="separator:a66ebc90fd74efd91c77d27434031044d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1435bf5a160f1ed1a0fd96debac70a87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a1435bf5a160f1ed1a0fd96debac70a87">getTolerance</a> () const </td></tr>
+<tr class="separator:a1435bf5a160f1ed1a0fd96debac70a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62aae7fd8eb0551f214d483c7e52f30f"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a62aae7fd8eb0551f214d483c7e52f30f">getTransparentColor</a> () const </td></tr>
+<tr class="separator:a62aae7fd8eb0551f214d483c7e52f30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a758e87c8ab9c85cfde9662ebc10831ce"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structShipCAD_1_1JPEGImage.html">JPEGImage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1BackgroundImage.html#a758e87c8ab9c85cfde9662ebc10831ce">getImage</a> () const </td></tr>
+<tr class="separator:a758e87c8ab9c85cfde9662ebc10831ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00045">45</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+<div class="textblock"><p>Background Images for a viewport. </p>
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00061">61</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ab37b2469c0bc2558b5eb27b42c5e30eb"></a>
+<a class="anchor" id="a9ee3fc5f44c47b757f23baaeacd78553"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -131,9 +153,9 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ShipCAD::BackgroundImage::BackgroundImage </td>
+          <td class="memname">BackgroundImage::BackgroundImage </td>
           <td>(</td>
-          <td class="paramtype">ShipCAD *&#160;</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *&#160;</td>
           <td class="paramname"><em>owner</em></td><td>)</td>
           <td></td>
         </tr>
@@ -145,14 +167,34 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="backgroundimage_8cpp_source.html#l00036">36</a> of file <a class="el" href="backgroundimage_8cpp_source.html">backgroundimage.cpp</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="a77cbf94a033f736a6c7366cf1e956573"></a>
+<a class="anchor" id="ac36cf427a30ec243f55a2808488a3c7e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ShipCAD::BackgroundImage::~BackgroundImage </td>
+          <td class="memname">BackgroundImage::~BackgroundImage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8cpp_source.html#l00044">44</a> of file <a class="el" href="backgroundimage_8cpp_source.html">backgroundimage.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a9c25ab668820b7ba0ab59a061c28d2a0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::BackgroundImage::clear </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -162,45 +204,248 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ae3b395941e8580f3921b0f9a40be71d8"></a>
+<a class="anchor" id="a4ed6b7b2a8a9d647c82a1e0c1fc52b9e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a">viewport_type_t</a> ShipCAD::BackgroundImage::getAssignedView </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00076">76</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a85d654832400b02adeab512df7ef969c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShipCAD::BackgroundImage::getBlendingValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00078">78</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a758e87c8ab9c85cfde9662ebc10831ce"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structShipCAD_1_1JPEGImage.html">JPEGImage</a>&amp; ShipCAD::BackgroundImage::getImage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00090">90</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a886fe351723011ea9ba85ccf055412d0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QVector3D ShipCAD::BackgroundImage::getOrigin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00080">80</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad2f1eaa1a63c102b137f9aa7e2750a66"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShipCAD::BackgroundImage::getQuality </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00082">82</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a66ebc90fd74efd91c77d27434031044d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float ShipCAD::BackgroundImage::getScale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00084">84</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1435bf5a160f1ed1a0fd96debac70a87"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShipCAD::BackgroundImage::getTolerance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00086">86</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a62aae7fd8eb0551f214d483c7e52f30f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QColor ShipCAD::BackgroundImage::getTransparentColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="backgroundimage_8h_source.html#l00088">88</a> of file <a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a72abed6b5cdbd287ec41c817acf84de9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ShipCAD::BackgroundImage::loadBinary </td>
+          <td class="memname">void BackgroundImage::loadBinary </td>
           <td>(</td>
-          <td class="paramtype">FileBuf &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a> &amp;&#160;</td>
           <td class="paramname"><em>source</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="backgroundimage_8cpp_source.html#l00049">49</a> of file <a class="el" href="backgroundimage_8cpp_source.html">backgroundimage.cpp</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="ad5069ad93b2885d264620d36327956e9"></a>
+<a class="anchor" id="a5b6df7f94af9d32579888394b2f86f40"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ShipCAD::BackgroundImage::saveBinary </td>
+          <td class="memname">void BackgroundImage::saveBinary </td>
           <td>(</td>
-          <td class="paramtype">FileBuf &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a> &amp;&#160;</td>
           <td class="paramname"><em>dest</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="backgroundimage_8cpp_source.html#l00069">69</a> of file <a class="el" href="backgroundimage_8cpp_source.html">backgroundimage.cpp</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="a856b8b55eafdb018792411f2edca81ef"></a>
+<a class="anchor" id="aebee3507d92cb5d6ca486c15313e0beb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ShipCAD::BackgroundImage::updateData </td>
+          <td class="memname">void BackgroundImage::updateData </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;&#160;</td>
           <td class="paramname"><em>vp</em></td><td>)</td>
@@ -209,14 +454,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="backgroundimage_8cpp_source.html#l00084">84</a> of file <a class="el" href="backgroundimage_8cpp_source.html">backgroundimage.cpp</a>.</p>
+
 </div>
 </div>
-<a class="anchor" id="ae64647d7f69166b1af28920953f6bfc4"></a>
+<a class="anchor" id="a47bb9eeb69dbe6062392749ecaef2eb7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ShipCAD::BackgroundImage::updateViews </td>
+          <td class="memname">void BackgroundImage::updateViews </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -224,15 +471,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Definition at line <a class="el" href="backgroundimage_8cpp_source.html#l00089">89</a> of file <a class="el" href="backgroundimage_8cpp_source.html">backgroundimage.cpp</a>.</p>
+
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>ShipCADlib/<a class="el" href="backgroundimage_8h_source.html">backgroundimage.h</a></li>
+<li>ShipCADlib/<a class="el" href="backgroundimage_8cpp_source.html">backgroundimage.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2015 19:42:44 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 26 2015 23:07:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

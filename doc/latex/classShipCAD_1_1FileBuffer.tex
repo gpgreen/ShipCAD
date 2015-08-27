@@ -3,6 +3,11 @@
 }
 
 
+in-\/memory buffer of data for a binary file (F\-R\-E\-E!\-Ship format)  
+
+
+
+
 {\ttfamily \#include $<$filebuffer.\-h$>$}
 
 Inheritance diagram for Ship\-C\-A\-D\-:\-:File\-Buffer\-:\begin{figure}[H]
@@ -16,19 +21,27 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:File\-Buffer\-:\begin{figure}[H]
 \item 
 \hyperlink{classShipCAD_1_1FileBuffer_ab243cfcb8a68ce791103594e974ee9ba}{File\-Buffer} ()
 \item 
-\hyperlink{classShipCAD_1_1FileBuffer_ac92d5e7d145ea18fc6a3a6a18c788ebb}{$\sim$\-File\-Buffer} ()
+\hyperlink{classShipCAD_1_1FileBuffer_a397c9a755598f9939eb30460b605d44c}{$\sim$\-File\-Buffer} ()
 \item 
 size\-\_\-t \hyperlink{classShipCAD_1_1FileBuffer_a51dc1007457d999ce374afd6a6ae29f8}{size} ()
 \item 
 \hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} \hyperlink{classShipCAD_1_1FileBuffer_a06f87b30f5fd091cc5c270964ea16770}{get\-Version} ()
 \item 
-void \hyperlink{classShipCAD_1_1FileBuffer_a8769c7659ea5c015e004529517cf8fcb}{set\-Version} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} v)
+void \hyperlink{classShipCAD_1_1FileBuffer_a66c14f8f21b9f77febd154aee9565f0b}{set\-Version} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} v)
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_a7d5d6ac5aa85545999186f4745a77093}{load\-From\-File} (const Q\-String \&filename)
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_a175d7a153228b5cba5db062a2afd5026}{save\-To\-File} (const Q\-String \&filename)
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_af59c26297994b38aabc4bc678d04c246}{reset} ()
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_a86223c54bcf111ef205c9d651e0b9a66}{load} (\hyperlink{structShipCAD_1_1JPEGImage}{J\-P\-E\-G\-Image} \&img)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_a9a5d46b2c6d568ee2cdef110d4773e73}{add} (const \hyperlink{structShipCAD_1_1JPEGImage}{J\-P\-E\-G\-Image} \&img)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_ab196d459581b5c877ebea2f567e9bda8}{load} (quint8 \&val)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_afb11c583e5d3a7a580e5f88004d6c7e3}{add} (quint8 val)
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_ad1aebcc97e364569934c66eec5a87485}{load} (bool \&val)
 \item 
@@ -38,18 +51,16 @@ void \hyperlink{classShipCAD_1_1FileBuffer_a525306d68a017ef67ec13c3e8901a8ff}{lo
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_a7909794ac33ad5f695bb670940db99ba}{add} (float val)
 \item 
-void \hyperlink{classShipCAD_1_1FileBuffer_a557fd80268788313b97149797dc710f8}{load} (int \&val)
+void \hyperlink{classShipCAD_1_1FileBuffer_ad7fc82d31f73f0350715fb63db2fc271}{load} (qint32 \&val)
 \item 
-void \hyperlink{classShipCAD_1_1FileBuffer_a475ac244828b4ec9bf6e19f1d65e9443}{add} (int val)
+void \hyperlink{classShipCAD_1_1FileBuffer_ad5ff9b7299df09feb365250c69e6da9a}{add} (qint32 val)
 \item 
-void \hyperlink{classShipCAD_1_1FileBuffer_a10729a5ec1869b76101e52db5a0e3ea7}{load} (size\-\_\-t \&val)
+void \hyperlink{classShipCAD_1_1FileBuffer_a19fcd1363671552150de3d6ee3297f2c}{load} (quint32 \&val)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_a1dd1963dd35caff15333f21cc2195b34}{add} (quint32 val)
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_aa22983fa24559f6d0d119d89036100af}{add} (size\-\_\-t val)
-\item 
-void \hyperlink{classShipCAD_1_1FileBuffer_a20977e9b9504c3c5f4cb32adf9ef4659}{load} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} \&val)
-\item 
-void \hyperlink{classShipCAD_1_1FileBuffer_a02d5339844191112062d92c9ac74ec96}{add} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} val)
-\item 
+\begin{DoxyCompactList}\small\item\em save value, (check that it fits in 32 bits) \end{DoxyCompactList}\item 
 void \hyperlink{classShipCAD_1_1FileBuffer_a7255342a053689ebafda9317cc586c57}{load} (Q\-Vector3\-D \&val)
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_a0642733d14682981c12f6aeaef9bb884}{add} (const Q\-Vector3\-D \&val)
@@ -65,13 +76,21 @@ void \hyperlink{classShipCAD_1_1FileBuffer_aea305be34bc316cc5b849fb291499012}{ad
 void \hyperlink{classShipCAD_1_1FileBuffer_a4ae77da0ea26a1ed6de262ff7f3d606f}{load} (\hyperlink{classShipCAD_1_1Plane}{Plane} \&val)
 \item 
 void \hyperlink{classShipCAD_1_1FileBuffer_ae947c5bac13749a8b0d833bfa7979d0d}{add} (const \hyperlink{classShipCAD_1_1Plane}{Plane} \&val)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_acfa1ad9b776baa948d1724bd56b4e18d}{load} (\hyperlink{structShipCAD_1_1DelftSeriesResistance}{Delft\-Series\-Resistance} $\ast$buf)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_a63b2793d04b55d67ef7a307e664b3416}{add} (const \hyperlink{structShipCAD_1_1DelftSeriesResistance}{Delft\-Series\-Resistance} $\ast$buf)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_aec2753a3f1fb3aab1303a8dfde26bb1c}{load} (\hyperlink{structShipCAD_1_1KAPERResistance}{K\-A\-P\-E\-R\-Resistance} $\ast$buf)
+\item 
+void \hyperlink{classShipCAD_1_1FileBuffer_a1189100c2022918351d730590d107c33}{add} (const \hyperlink{structShipCAD_1_1KAPERResistance}{K\-A\-P\-E\-R\-Resistance} $\ast$buf)
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+in-\/memory buffer of data for a binary file (F\-R\-E\-E!\-Ship format) 
 
-
-Definition at line 47 of file filebuffer.\-h.
+Definition at line 52 of file filebuffer.\-h.
 
 
 
@@ -85,22 +104,44 @@ Definition at line 47 of file filebuffer.\-h.
 )\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1FileBuffer_ab243cfcb8a68ce791103594e974ee9ba}
 
 
-Definition at line 47 of file filebuffer.\-cpp.
+Definition at line 50 of file filebuffer.\-cpp.
 
-\hypertarget{classShipCAD_1_1FileBuffer_ac92d5e7d145ea18fc6a3a6a18c788ebb}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!$\sim$\-File\-Buffer@{$\sim$\-File\-Buffer}}
+\hypertarget{classShipCAD_1_1FileBuffer_a397c9a755598f9939eb30460b605d44c}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!$\sim$\-File\-Buffer@{$\sim$\-File\-Buffer}}
 \index{$\sim$\-File\-Buffer@{$\sim$\-File\-Buffer}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
-\subsubsection[{$\sim$\-File\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}File\-Buffer\-::$\sim$\-File\-Buffer (
+\subsubsection[{$\sim$\-File\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-File\-Buffer\-::$\sim$\-File\-Buffer (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1FileBuffer_ac92d5e7d145ea18fc6a3a6a18c788ebb}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1FileBuffer_a397c9a755598f9939eb30460b605d44c}
 
 
-Definition at line 53 of file filebuffer.\-cpp.
+Definition at line 58 of file filebuffer.\-h.
 
 
 
 \subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1FileBuffer_a9a5d46b2c6d568ee2cdef110d4773e73}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
+\index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
+\begin{DoxyParamCaption}
+\item[{const {\bf J\-P\-E\-G\-Image} \&}]{img}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_a9a5d46b2c6d568ee2cdef110d4773e73}
+
+
+Definition at line 105 of file filebuffer.\-cpp.
+
+\hypertarget{classShipCAD_1_1FileBuffer_afb11c583e5d3a7a580e5f88004d6c7e3}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
+\index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
+\begin{DoxyParamCaption}
+\item[{quint8}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_afb11c583e5d3a7a580e5f88004d6c7e3}
+
+
+Definition at line 116 of file filebuffer.\-cpp.
+
 \hypertarget{classShipCAD_1_1FileBuffer_a7cb4395eae7ffa405290c3bed9890bee}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
 \subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
@@ -110,7 +151,7 @@ Definition at line 53 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a7cb4395eae7ffa405290c3bed9890bee}
 
 
-Definition at line 106 of file filebuffer.\-cpp.
+Definition at line 129 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a7909794ac33ad5f695bb670940db99ba}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -121,18 +162,29 @@ Definition at line 106 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a7909794ac33ad5f695bb670940db99ba}
 
 
-Definition at line 119 of file filebuffer.\-cpp.
+Definition at line 143 of file filebuffer.\-cpp.
 
-\hypertarget{classShipCAD_1_1FileBuffer_a475ac244828b4ec9bf6e19f1d65e9443}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
+\hypertarget{classShipCAD_1_1FileBuffer_ad5ff9b7299df09feb365250c69e6da9a}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
 \subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
 \begin{DoxyParamCaption}
-\item[{int}]{val}
+\item[{qint32}]{val}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1FileBuffer_a475ac244828b4ec9bf6e19f1d65e9443}
+)}}\label{classShipCAD_1_1FileBuffer_ad5ff9b7299df09feb365250c69e6da9a}
 
 
-Definition at line 152 of file filebuffer.\-cpp.
+Definition at line 160 of file filebuffer.\-cpp.
+
+\hypertarget{classShipCAD_1_1FileBuffer_a1dd1963dd35caff15333f21cc2195b34}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
+\index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
+\begin{DoxyParamCaption}
+\item[{quint32}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_a1dd1963dd35caff15333f21cc2195b34}
+
+
+Definition at line 177 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_aa22983fa24559f6d0d119d89036100af}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -143,18 +195,21 @@ Definition at line 152 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_aa22983fa24559f6d0d119d89036100af}
 
 
-Definition at line 168 of file filebuffer.\-cpp.
-
-\hypertarget{classShipCAD_1_1FileBuffer_a02d5339844191112062d92c9ac74ec96}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
-\index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
-\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
-\begin{DoxyParamCaption}
-\item[{{\bf version\-\_\-t}}]{val}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1FileBuffer_a02d5339844191112062d92c9ac74ec96}
+save value, (check that it fits in 32 bits) 
 
 
-Definition at line 94 of file filebuffer.\-cpp.
+\begin{DoxyParams}{Parameters}
+{\em val} & integer to save \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em range\-\_\-error} & if val is greater than 32bit unsigned \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 185 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a0642733d14682981c12f6aeaef9bb884}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -165,7 +220,7 @@ Definition at line 94 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a0642733d14682981c12f6aeaef9bb884}
 
 
-Definition at line 190 of file filebuffer.\-cpp.
+Definition at line 228 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a3611327a77cc938e987ecda018d0d936}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -176,7 +231,7 @@ Definition at line 190 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a3611327a77cc938e987ecda018d0d936}
 
 
-Definition at line 135 of file filebuffer.\-cpp.
+Definition at line 195 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_aea305be34bc316cc5b849fb291499012}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -187,7 +242,7 @@ Definition at line 135 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_aea305be34bc316cc5b849fb291499012}
 
 
-Definition at line 217 of file filebuffer.\-cpp.
+Definition at line 257 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_ae947c5bac13749a8b0d833bfa7979d0d}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
 \index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -198,7 +253,29 @@ Definition at line 217 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_ae947c5bac13749a8b0d833bfa7979d0d}
 
 
-Definition at line 246 of file filebuffer.\-cpp.
+Definition at line 287 of file filebuffer.\-cpp.
+
+\hypertarget{classShipCAD_1_1FileBuffer_a63b2793d04b55d67ef7a307e664b3416}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
+\index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
+\begin{DoxyParamCaption}
+\item[{const {\bf Delft\-Series\-Resistance} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_a63b2793d04b55d67ef7a307e664b3416}
+
+
+Definition at line 312 of file filebuffer.\-cpp.
+
+\hypertarget{classShipCAD_1_1FileBuffer_a1189100c2022918351d730590d107c33}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!add@{add}}
+\index{add@{add}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::add (
+\begin{DoxyParamCaption}
+\item[{const {\bf K\-A\-P\-E\-R\-Resistance} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_a1189100c2022918351d730590d107c33}
+
+
+Definition at line 327 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a06f87b30f5fd091cc5c270964ea16770}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!get\-Version@{get\-Version}}
 \index{get\-Version@{get\-Version}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -209,7 +286,29 @@ Definition at line 246 of file filebuffer.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1FileBuffer_a06f87b30f5fd091cc5c270964ea16770}
 
 
-Definition at line 58 of file filebuffer.\-h.
+Definition at line 63 of file filebuffer.\-h.
+
+\hypertarget{classShipCAD_1_1FileBuffer_a86223c54bcf111ef205c9d651e0b9a66}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
+\index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::load (
+\begin{DoxyParamCaption}
+\item[{{\bf J\-P\-E\-G\-Image} \&}]{img}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_a86223c54bcf111ef205c9d651e0b9a66}
+
+
+Definition at line 96 of file filebuffer.\-cpp.
+
+\hypertarget{classShipCAD_1_1FileBuffer_ab196d459581b5c877ebea2f567e9bda8}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
+\index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::load (
+\begin{DoxyParamCaption}
+\item[{quint8 \&}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_ab196d459581b5c877ebea2f567e9bda8}
+
+
+Definition at line 110 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_ad1aebcc97e364569934c66eec5a87485}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -220,7 +319,7 @@ Definition at line 58 of file filebuffer.\-h.
 )}}\label{classShipCAD_1_1FileBuffer_ad1aebcc97e364569934c66eec5a87485}
 
 
-Definition at line 99 of file filebuffer.\-cpp.
+Definition at line 121 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a525306d68a017ef67ec13c3e8901a8ff}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -231,40 +330,29 @@ Definition at line 99 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a525306d68a017ef67ec13c3e8901a8ff}
 
 
-Definition at line 111 of file filebuffer.\-cpp.
+Definition at line 134 of file filebuffer.\-cpp.
 
-\hypertarget{classShipCAD_1_1FileBuffer_a557fd80268788313b97149797dc710f8}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
+\hypertarget{classShipCAD_1_1FileBuffer_ad7fc82d31f73f0350715fb63db2fc271}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
 \subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::load (
 \begin{DoxyParamCaption}
-\item[{int \&}]{val}
+\item[{qint32 \&}]{val}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1FileBuffer_a557fd80268788313b97149797dc710f8}
+)}}\label{classShipCAD_1_1FileBuffer_ad7fc82d31f73f0350715fb63db2fc271}
 
 
-Definition at line 127 of file filebuffer.\-cpp.
+Definition at line 151 of file filebuffer.\-cpp.
 
-\hypertarget{classShipCAD_1_1FileBuffer_a10729a5ec1869b76101e52db5a0e3ea7}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
+\hypertarget{classShipCAD_1_1FileBuffer_a19fcd1363671552150de3d6ee3297f2c}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
 \subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::load (
 \begin{DoxyParamCaption}
-\item[{size\-\_\-t \&}]{val}
+\item[{quint32 \&}]{val}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1FileBuffer_a10729a5ec1869b76101e52db5a0e3ea7}
+)}}\label{classShipCAD_1_1FileBuffer_a19fcd1363671552150de3d6ee3297f2c}
 
 
-Definition at line 160 of file filebuffer.\-cpp.
-
-\hypertarget{classShipCAD_1_1FileBuffer_a20977e9b9504c3c5f4cb32adf9ef4659}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
-\index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
-\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::load (
-\begin{DoxyParamCaption}
-\item[{{\bf version\-\_\-t} \&}]{val}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1FileBuffer_a20977e9b9504c3c5f4cb32adf9ef4659}
-
-
-Definition at line 86 of file filebuffer.\-cpp.
+Definition at line 168 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a7255342a053689ebafda9317cc586c57}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -275,7 +363,7 @@ Definition at line 86 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a7255342a053689ebafda9317cc586c57}
 
 
-Definition at line 176 of file filebuffer.\-cpp.
+Definition at line 213 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a3329cf81740c79967acc24bc0ac3c9a3}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -286,7 +374,7 @@ Definition at line 176 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a3329cf81740c79967acc24bc0ac3c9a3}
 
 
-Definition at line 143 of file filebuffer.\-cpp.
+Definition at line 203 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a82c790d09c8e85c0f9d218efd9c93605}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -297,7 +385,7 @@ Definition at line 143 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a82c790d09c8e85c0f9d218efd9c93605}
 
 
-Definition at line 204 of file filebuffer.\-cpp.
+Definition at line 242 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a4ae77da0ea26a1ed6de262ff7f3d606f}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
 \index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -308,7 +396,29 @@ Definition at line 204 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a4ae77da0ea26a1ed6de262ff7f3d606f}
 
 
-Definition at line 229 of file filebuffer.\-cpp.
+Definition at line 269 of file filebuffer.\-cpp.
+
+\hypertarget{classShipCAD_1_1FileBuffer_acfa1ad9b776baa948d1724bd56b4e18d}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
+\index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::load (
+\begin{DoxyParamCaption}
+\item[{{\bf Delft\-Series\-Resistance} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_acfa1ad9b776baa948d1724bd56b4e18d}
+
+
+Definition at line 304 of file filebuffer.\-cpp.
+
+\hypertarget{classShipCAD_1_1FileBuffer_aec2753a3f1fb3aab1303a8dfde26bb1c}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load@{load}}
+\index{load@{load}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::load (
+\begin{DoxyParamCaption}
+\item[{{\bf K\-A\-P\-E\-R\-Resistance} $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1FileBuffer_aec2753a3f1fb3aab1303a8dfde26bb1c}
+
+
+Definition at line 319 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a7d5d6ac5aa85545999186f4745a77093}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!load\-From\-File@{load\-From\-File}}
 \index{load\-From\-File@{load\-From\-File}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -319,7 +429,7 @@ Definition at line 229 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a7d5d6ac5aa85545999186f4745a77093}
 
 
-Definition at line 63 of file filebuffer.\-cpp.
+Definition at line 66 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_af59c26297994b38aabc4bc678d04c246}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!reset@{reset}}
 \index{reset@{reset}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -330,7 +440,7 @@ Definition at line 63 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_af59c26297994b38aabc4bc678d04c246}
 
 
-Definition at line 58 of file filebuffer.\-cpp.
+Definition at line 56 of file filebuffer.\-cpp.
 
 \hypertarget{classShipCAD_1_1FileBuffer_a175d7a153228b5cba5db062a2afd5026}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!save\-To\-File@{save\-To\-File}}
 \index{save\-To\-File@{save\-To\-File}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
@@ -341,15 +451,19 @@ Definition at line 58 of file filebuffer.\-cpp.
 )}}\label{classShipCAD_1_1FileBuffer_a175d7a153228b5cba5db062a2afd5026}
 
 
-Definition at line 77 of file filebuffer.\-cpp.
+Definition at line 84 of file filebuffer.\-cpp.
 
-\hypertarget{classShipCAD_1_1FileBuffer_a8769c7659ea5c015e004529517cf8fcb}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!set\-Version@{set\-Version}}
+\hypertarget{classShipCAD_1_1FileBuffer_a66c14f8f21b9f77febd154aee9565f0b}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!set\-Version@{set\-Version}}
 \index{set\-Version@{set\-Version}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
-\subsubsection[{set\-Version}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-File\-Buffer\-::set\-Version (
+\subsubsection[{set\-Version}]{\setlength{\rightskip}{0pt plus 5cm}void File\-Buffer\-::set\-Version (
 \begin{DoxyParamCaption}
 \item[{{\bf version\-\_\-t}}]{v}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1FileBuffer_a8769c7659ea5c015e004529517cf8fcb}
+)}}\label{classShipCAD_1_1FileBuffer_a66c14f8f21b9f77febd154aee9565f0b}
+
+
+Definition at line 61 of file filebuffer.\-cpp.
+
 \hypertarget{classShipCAD_1_1FileBuffer_a51dc1007457d999ce374afd6a6ae29f8}{\index{Ship\-C\-A\-D\-::\-File\-Buffer@{Ship\-C\-A\-D\-::\-File\-Buffer}!size@{size}}
 \index{size@{size}!ShipCAD::FileBuffer@{Ship\-C\-A\-D\-::\-File\-Buffer}}
 \subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-File\-Buffer\-::size (
@@ -359,7 +473,7 @@ Definition at line 77 of file filebuffer.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1FileBuffer_a51dc1007457d999ce374afd6a6ae29f8}
 
 
-Definition at line 55 of file filebuffer.\-h.
+Definition at line 60 of file filebuffer.\-h.
 
 
 

@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -126,432 +126,497 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="subdivlayer_8h.html">subdivlayer.h</a>&quot;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="subdivsurface_8h.html">subdivsurface.h</a>&quot;</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="filebuffer_8h.html">filebuffer.h</a>&quot;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using namespace </span>ShipCAD;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a55001252531c21f4ccc89d8df9c6b184">   45</a></span>&#160;ProjectSettings::ProjectSettings(<a class="code" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* owner)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    : _owner(owner)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">clear</a>();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a4c74ba587e58e538083072285937aa4c">   51</a></span>&#160;<a class="code" href="classShipCAD_1_1ProjectSettings.html#a4c74ba587e58e538083072285937aa4c">ProjectSettings::~ProjectSettings</a>()</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> hc_set(<a class="code" href="classShipCAD_1_1HydrostaticCalc.html">HydrostaticCalc</a>* elem)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    elem-&gt;<a class="code" href="classShipCAD_1_1HydrostaticCalc.html#a0deeafff07f3bb77184df959bbd91266">setCalculated</a>(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#ab729e778076b560d876f09955212256d">   60</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#ab729e778076b560d876f09955212256d">ProjectSettings::setHydrostaticCoefficients</a>(<a class="code" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd">hydrostatic_coeff_t</a> coeff)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;{</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (coeff != _hydrostatic_coefficients) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        _hydrostatic_coefficients = coeff;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#aafc30dd7d6b9db4ccfc7bf1c4e2b3b11">getHydrostaticCalculations</a>().<a class="code" href="classPointerVector.html#a5e9ccf28859f06f13ad3e2dad9ae1cb6">apply</a>(hc_set);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#ab9f9f88bba11a2093204affd18df17ab">   69</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#ab9f9f88bba11a2093204affd18df17ab">ProjectSettings::setDisableModelCheck</a>(<span class="keywordtype">bool</span> val)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;{</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (val != _disable_model_check) {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        _disable_model_check = val;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a4dddaf7fe8bdbc0724c524244dd56497">   77</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a4dddaf7fe8bdbc0724c524244dd56497">ProjectSettings::getMainframeLocation</a>()</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span> (_use_default_mainframe_location)</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> _length / 2;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> _mainframe_location;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a31fdcc5990fb3c61161fe783b5ed4939">   85</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a31fdcc5990fb3c61161fe783b5ed4939">ProjectSettings::setAppendageCoefficient</a>(<span class="keywordtype">float</span> coeff)</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;{</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span> (fabs(coeff - _appendage_coefficient) &gt; 1e-5) {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        _appendage_coefficient = coeff;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#ac90d2a093ae0af951fd117d7f6981e92">   93</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#ac90d2a093ae0af951fd117d7f6981e92">ProjectSettings::setBeam</a>(<span class="keywordtype">float</span> beam)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span> (fabs(beam - _beam) &gt; 1e-5) {</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        _beam = beam;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        _main_particulars_has_been_set = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;}</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a16a64f2a4a9b6359ac46b0a85f90a4ae">  102</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a16a64f2a4a9b6359ac46b0a85f90a4ae">ProjectSettings::setDraft</a>(<span class="keywordtype">float</span> draft)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">if</span> (fabs(draft - _draft) &gt; 1e-5) {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        _draft = draft;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        _main_particulars_has_been_set = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#aad72cb11575e7a1ae0cda2c50f8de2ad">  111</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#aad72cb11575e7a1ae0cda2c50f8de2ad">ProjectSettings::setLength</a>(<span class="keywordtype">float</span> length)</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">if</span> (fabs(length - _length) &gt; 1e-5) {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        _length = length;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        _main_particulars_has_been_set = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#acac72dbc1dc2f68c1d32981ac9a27603">  120</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#acac72dbc1dc2f68c1d32981ac9a27603">ProjectSettings::setMainframeLocation</a>(<span class="keywordtype">float</span> loc)</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;{</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">if</span> (fabs(loc - _mainframe_location) &gt; 1e-5) {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        _mainframe_location = loc;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#af4de74cc452581cf8f7e02431ba3e45a">  128</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#af4de74cc452581cf8f7e02431ba3e45a">ProjectSettings::setWaterDensity</a>(<span class="keywordtype">float</span> val)</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;{</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _water_density) &gt; 1e-6) {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        _water_density = val;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a3590a9b52236a4aeb9991ea03c518871">  136</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a3590a9b52236a4aeb9991ea03c518871">ProjectSettings::setSavePreview</a>(<span class="keywordtype">bool</span> val)</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;{</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">if</span> (val != _save_preview) {</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        _save_preview = val;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    }</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a9e389573e2266b099f49452d68edf24f">  144</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e389573e2266b099f49452d68edf24f">ProjectSettings::setStartDraft</a>(<span class="keywordtype">float</span> val)</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;{</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _start_draft) &gt; 1e-5) {</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        _start_draft = val;</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    }</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#afdab155f3ca324b3c200a97c9ade1ff6">  152</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#afdab155f3ca324b3c200a97c9ade1ff6">ProjectSettings::setTrim</a>(<span class="keywordtype">float</span> val)</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;{</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _trim) &gt; 1e-5) {</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        _trim = val;</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    }</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a45e70a08ac47cdf30971a7386af702a9">  160</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a45e70a08ac47cdf30971a7386af702a9">ProjectSettings::setEndDraft</a>(<span class="keywordtype">float</span> val)</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;{</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _end_draft) &gt; 1e-5) {</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        _end_draft = val;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    }</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a45081194c5e105780429b0f214bab186">  168</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a45081194c5e105780429b0f214bab186">ProjectSettings::setDraftStep</a>(<span class="keywordtype">float</span> val)</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _draft_step) &gt; 1e-5) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        _draft_step = val;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    }</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;}</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a7c0f0e54fb2fb94a70b823fca6a6a58d">  176</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a7c0f0e54fb2fb94a70b823fca6a6a58d">ProjectSettings::setUseDefaultMainframeLocation</a>(<span class="keywordtype">bool</span> use)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;{</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">if</span> (use != _use_default_mainframe_location) {</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        _use_default_mainframe_location = use;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    }</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;}</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;</div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#acaa6149ff4c93c829a72a3a3d2ff5239">  184</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#acaa6149ff4c93c829a72a3a3d2ff5239">ProjectSettings::setName</a>(<span class="keyword">const</span> QString&amp; name)</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;{</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">if</span> (_name != name) {</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        _name = name;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
-<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#abde123a71eba642ff1dbd62d547aa684">  192</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#abde123a71eba642ff1dbd62d547aa684">ProjectSettings::setDesigner</a>(<span class="keyword">const</span> QString&amp; designer)</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;{</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">if</span> (_designer != designer) {</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        _designer = designer;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a64e942847dd0838f04dc4ec32e9bc30e">  200</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a64e942847dd0838f04dc4ec32e9bc30e">ProjectSettings::setComment</a>(<span class="keyword">const</span> QString&amp; comment)</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;{</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">if</span> (_comment != comment) {</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        _comment = comment;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
-<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a326e18ff53ba0f916d4d8cfab5a2d17f">  208</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a326e18ff53ba0f916d4d8cfab5a2d17f">ProjectSettings::setFileCreatedBy</a>(<span class="keyword">const</span> QString&amp; createdby)</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;{</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <span class="keywordflow">if</span> (_file_created_by != createdby) {</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        _file_created_by = createdby;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    }</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;}</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a0f40362f42e6dfd4147d69573c00988f">  216</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a0f40362f42e6dfd4147d69573c00988f">ProjectSettings::setShadeUnderwaterShip</a>(<span class="keywordtype">bool</span> set)</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;{</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">if</span> (_shade_underwater_ship != set) {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        _shade_underwater_ship = set;</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    }</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
-<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a138264f53da99f6a1765ea7aec95096a">  224</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a138264f53da99f6a1765ea7aec95096a">ProjectSettings::setSimplifyIntersections</a>(<span class="keywordtype">bool</span> set)</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;{</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordflow">if</span> (_simplify_intersections != set) {</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        _simplify_intersections = set;</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        <span class="comment">// TODO: station,buttock,waterline,diagonal,calcs</span></div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    }</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;}</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
-<div class="line"><a name="l00232"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a06b1260b284a988fb62b49f7ab4d5bf3">  232</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a06b1260b284a988fb62b49f7ab4d5bf3">ProjectSettings::setUnderWaterColor</a>(QColor&amp; col)</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;{</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">if</span> (_underwater_color != col) {</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        _underwater_color = col;</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;}</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
-<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a2310573735d3c0ad17ca290bca083f99">  240</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a2310573735d3c0ad17ca290bca083f99">ProjectSettings::setUnits</a>(<a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5">unit_type_t</a> unit)</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;{</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordtype">double</span> unit_conversion_factor;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    QVector3D scale_vector;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">float</span> weight_factor;</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">float</span> thickness_factor;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordflow">if</span> (unit == _units)</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    _units = unit;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">if</span> (_units == <a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7">fuImperial</a>) {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        unit_conversion_factor = 1 / 0.3048;</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        weight_factor = <a class="code" href="namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036">kWeightConversionFactor</a>;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        thickness_factor = 1 / 25.4f;</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        unit_conversion_factor = 0.3048;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        weight_factor = 1 / <a class="code" href="namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036">kWeightConversionFactor</a>;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        thickness_factor = 25.4f;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    _water_density *= weight_factor;</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">getSurface</a>()-&gt;<a class="code" href="classShipCAD_1_1SubdivisionSurface.html#ad9d00dfc848975306c43305e13e57ebe">numberOfLayers</a>(); i++) {</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <a class="code" href="classShipCAD_1_1SubdivisionLayer.html">SubdivisionLayer</a> *layer = _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">getSurface</a>()-&gt;<a class="code" href="classShipCAD_1_1SubdivisionSurface.html#a24b230e51a0c5fb3e7f51d0e2340eb9f">getLayer</a>(i);</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#ae96292d06a3578f9c7bfbbdec342068a">setMaterialDensity</a>(layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#af65aafc08837eb47eefad5fbbd562d32">getMaterialDensity</a>() * weight_factor);</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#ac4068bcc8287698ee23e27246de9212b">setThickness</a>(layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#a4d26f33298b7d44d41f3e3ee87a2d981">getThickness</a>() * thickness_factor);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    }</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    scale_vector.setX(unit_conversion_factor);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    scale_vector.setY(unit_conversion_factor);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    scale_vector.setZ(unit_conversion_factor);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="comment">// TODO: owner-&gt;edit-&gt;model_scale</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;}</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
-<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">  271</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">ProjectSettings::clear</a>()</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;{</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    _name = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    _designer = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    _comment = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    _file_created_by = <span class="stringliteral">&quot;&quot;</span>;</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    _length = 1.0;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    _beam = 1.0;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    _draft = 1.0;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    _water_density = 1.025f;        <span class="comment">// 1025 kg/m3 for seawater</span></div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    _appendage_coefficient = 1.0; <span class="comment">// default 1.0, typical values for ships to compensate for appendices and shellplate = 1.0005</span></div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    _main_particulars_has_been_set = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    _shade_underwater_ship = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="comment">// TODO:</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="comment">//  _underwater_color = _owner-&gt;getPreferences()-&gt;getUnderwaterColor();</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    _units = <a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f">fuMetric</a>;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    _use_default_mainframe_location = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    _mainframe_location = 0.0;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    _disable_model_check = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    _save_preview = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    _hydrostatic_coefficients = <a class="code" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2">fcActualData</a>;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    _simplify_intersections = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    _start_draft = 0.0;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    _end_draft = 1.0;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    _draft_step = 0.1f;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    _trim = 0.0;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    _displacements.clear();</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    _min_displacement = 0.0;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    _max_displacement = 1.0;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    _displ_increment = 0.1f;</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    _angles.clear();</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    _angles.push_back(0.0);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    _angles.push_back(2.0);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    _angles.push_back(5.0);</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    _angles.push_back(10.0);</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    _angles.push_back(15.0);</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    _angles.push_back(20.0);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    _angles.push_back(30.0);</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    _angles.push_back(40.0);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    _angles.push_back(50.0);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    _angles.push_back(60.0);</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    _stab_trims.clear();</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    _stab_trims.push_back(0.0);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    _free_trim = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    _fvcg = 1.0;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;}</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;</div>
-<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#af6012d62299292d0757955b14c6bd854">  318</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#af6012d62299292d0757955b14c6bd854">ProjectSettings::loadBinary</a>(<a class="code" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a>&amp; source, QImage* img)</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;{</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">clear</a>();</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_name);</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_designer);</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_length);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_beam);</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_draft);</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_main_particulars_has_been_set);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_water_density);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_appendage_coefficient);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_shade_underwater_ship);</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_underwater_color);</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">int</span> n;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(n);</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    _units = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5">unit_type_t</a><span class="keyword">&gt;</span>(n);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_use_default_mainframe_location);</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_mainframe_location);</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_disable_model_check);</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_comment);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_file_created_by);</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    _save_preview = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa067802fee608eba024414f07e484bd69">fv210</a>) {</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(n);</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        _hydrostatic_coefficients = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd">hydrostatic_coeff_t</a><span class="keyword">&gt;</span>(n);</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_save_preview);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keywordflow">if</span> (_save_preview) {</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            <span class="comment">// TODO load image</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        }</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694faa40c53f1a6f1cb3feb2bfa7617bd7fdf">fv230</a>) {</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_simplify_intersections);</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        }</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa528cae12d19cf6d3b76e6f2b6ef25a61">fv250</a>) {</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_start_draft);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_end_draft);</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_draft_step);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_trim);</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(n);</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;n; i++) {</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;                <span class="keywordtype">float</span> f;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(f);</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                _displacements.push_back(f);</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            }</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_min_displacement);</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_max_displacement);</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_displ_increment);</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_use_displ_increments);</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(n);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;n; i++) {</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                <span class="keywordtype">float</span> f;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(f);</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;                _angles.push_back(f);</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            }</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(n);</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;n; i++) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="backgroundimage_8h.html">backgroundimage.h</a>&quot;</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">using namespace </span>ShipCAD;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a55001252531c21f4ccc89d8df9c6b184">   46</a></span>&#160;ProjectSettings::ProjectSettings(<a class="code" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* owner)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    : _owner(owner), _preview_img(0)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">clear</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a4c74ba587e58e538083072285937aa4c">   52</a></span>&#160;<a class="code" href="classShipCAD_1_1ProjectSettings.html#a4c74ba587e58e538083072285937aa4c">ProjectSettings::~ProjectSettings</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">delete</span> _preview_img;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> hc_set(<a class="code" href="classShipCAD_1_1HydrostaticCalc.html">HydrostaticCalc</a>* elem)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    elem-&gt;<a class="code" href="classShipCAD_1_1HydrostaticCalc.html#a0deeafff07f3bb77184df959bbd91266">setCalculated</a>(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#ab729e778076b560d876f09955212256d">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#ab729e778076b560d876f09955212256d">ProjectSettings::setHydrostaticCoefficients</a>(<a class="code" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd">hydrostatic_coeff_t</a> coeff)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> (coeff != _hydrostatic_coefficients) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        _hydrostatic_coefficients = coeff;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#aafc30dd7d6b9db4ccfc7bf1c4e2b3b11">getHydrostaticCalculations</a>().<a class="code" href="classPointerVector.html#a5e9ccf28859f06f13ad3e2dad9ae1cb6">apply</a>(hc_set);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#ab9f9f88bba11a2093204affd18df17ab">   71</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#ab9f9f88bba11a2093204affd18df17ab">ProjectSettings::setDisableModelCheck</a>(<span class="keywordtype">bool</span> val)</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> (val != _disable_model_check) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        _disable_model_check = val;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a194fe12f81ed80e691e8a89c88d91a0b">   79</a></span>&#160;<span class="keywordtype">float</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a194fe12f81ed80e691e8a89c88d91a0b">ProjectSettings::getMainframeLocation</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> (_use_default_mainframe_location)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">return</span> _length / 2;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> _mainframe_location;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a31fdcc5990fb3c61161fe783b5ed4939">   87</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a31fdcc5990fb3c61161fe783b5ed4939">ProjectSettings::setAppendageCoefficient</a>(<span class="keywordtype">float</span> coeff)</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">if</span> (fabs(coeff - _appendage_coefficient) &gt; 1e-5) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        _appendage_coefficient = coeff;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#ac90d2a093ae0af951fd117d7f6981e92">   95</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#ac90d2a093ae0af951fd117d7f6981e92">ProjectSettings::setBeam</a>(<span class="keywordtype">float</span> beam)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;{</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">if</span> (fabs(beam - _beam) &gt; 1e-5) {</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        _beam = beam;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        _main_particulars_has_been_set = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a16a64f2a4a9b6359ac46b0a85f90a4ae">  104</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a16a64f2a4a9b6359ac46b0a85f90a4ae">ProjectSettings::setDraft</a>(<span class="keywordtype">float</span> draft)</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span> (fabs(draft - _draft) &gt; 1e-5) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        _draft = draft;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        _main_particulars_has_been_set = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#aad72cb11575e7a1ae0cda2c50f8de2ad">  113</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#aad72cb11575e7a1ae0cda2c50f8de2ad">ProjectSettings::setLength</a>(<span class="keywordtype">float</span> length)</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordflow">if</span> (fabs(length - _length) &gt; 1e-5) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        _length = length;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        _main_particulars_has_been_set = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#acac72dbc1dc2f68c1d32981ac9a27603">  122</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#acac72dbc1dc2f68c1d32981ac9a27603">ProjectSettings::setMainframeLocation</a>(<span class="keywordtype">float</span> loc)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;{</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">if</span> (fabs(loc - _mainframe_location) &gt; 1e-5) {</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        _mainframe_location = loc;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#af4de74cc452581cf8f7e02431ba3e45a">  130</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#af4de74cc452581cf8f7e02431ba3e45a">ProjectSettings::setWaterDensity</a>(<span class="keywordtype">float</span> val)</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;{</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _water_density) &gt; 1e-6) {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        _water_density = val;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    }</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a3590a9b52236a4aeb9991ea03c518871">  138</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a3590a9b52236a4aeb9991ea03c518871">ProjectSettings::setSavePreview</a>(<span class="keywordtype">bool</span> val)</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;{</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordflow">if</span> (val != _save_preview) {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        _save_preview = val;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    }</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;</div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a9e389573e2266b099f49452d68edf24f">  146</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e389573e2266b099f49452d68edf24f">ProjectSettings::setStartDraft</a>(<span class="keywordtype">float</span> val)</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;{</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _start_draft) &gt; 1e-5) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        _start_draft = val;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;</div>
+<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#afdab155f3ca324b3c200a97c9ade1ff6">  154</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#afdab155f3ca324b3c200a97c9ade1ff6">ProjectSettings::setTrim</a>(<span class="keywordtype">float</span> val)</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _trim) &gt; 1e-5) {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        _trim = val;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a45e70a08ac47cdf30971a7386af702a9">  162</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a45e70a08ac47cdf30971a7386af702a9">ProjectSettings::setEndDraft</a>(<span class="keywordtype">float</span> val)</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;{</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _end_draft) &gt; 1e-5) {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        _end_draft = val;</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;}</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a45081194c5e105780429b0f214bab186">  170</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a45081194c5e105780429b0f214bab186">ProjectSettings::setDraftStep</a>(<span class="keywordtype">float</span> val)</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;{</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span> (fabs(val - _draft_step) &gt; 1e-5) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        _draft_step = val;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    }</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a7c0f0e54fb2fb94a70b823fca6a6a58d">  178</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a7c0f0e54fb2fb94a70b823fca6a6a58d">ProjectSettings::setUseDefaultMainframeLocation</a>(<span class="keywordtype">bool</span> use)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;{</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">if</span> (use != _use_default_mainframe_location) {</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        _use_default_mainframe_location = use;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div>
+<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#acaa6149ff4c93c829a72a3a3d2ff5239">  186</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#acaa6149ff4c93c829a72a3a3d2ff5239">ProjectSettings::setName</a>(<span class="keyword">const</span> QString&amp; name)</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;{</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordflow">if</span> (_name != name) {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        _name = name;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;}</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
+<div class="line"><a name="l00194"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#abde123a71eba642ff1dbd62d547aa684">  194</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#abde123a71eba642ff1dbd62d547aa684">ProjectSettings::setDesigner</a>(<span class="keyword">const</span> QString&amp; designer)</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;{</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">if</span> (_designer != designer) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        _designer = designer;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    }</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;}</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a64e942847dd0838f04dc4ec32e9bc30e">  202</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a64e942847dd0838f04dc4ec32e9bc30e">ProjectSettings::setComment</a>(<span class="keyword">const</span> QString&amp; comment)</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;{</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">if</span> (_comment != comment) {</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        _comment = comment;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a326e18ff53ba0f916d4d8cfab5a2d17f">  210</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a326e18ff53ba0f916d4d8cfab5a2d17f">ProjectSettings::setFileCreatedBy</a>(<span class="keyword">const</span> QString&amp; createdby)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;{</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">if</span> (_file_created_by != createdby) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        _file_created_by = createdby;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;}</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a0f40362f42e6dfd4147d69573c00988f">  218</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a0f40362f42e6dfd4147d69573c00988f">ProjectSettings::setShadeUnderwaterShip</a>(<span class="keywordtype">bool</span> set)</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;{</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">if</span> (_shade_underwater_ship != set) {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        _shade_underwater_ship = set;</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;}</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a138264f53da99f6a1765ea7aec95096a">  226</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a138264f53da99f6a1765ea7aec95096a">ProjectSettings::setSimplifyIntersections</a>(<span class="keywordtype">bool</span> set)</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keywordflow">if</span> (_simplify_intersections != set) {</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        _simplify_intersections = set;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="comment">// TODO: station,buttock,waterline,diagonal,calcs</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;}</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
+<div class="line"><a name="l00234"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a06b1260b284a988fb62b49f7ab4d5bf3">  234</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a06b1260b284a988fb62b49f7ab4d5bf3">ProjectSettings::setUnderWaterColor</a>(QColor&amp; col)</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;{</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordflow">if</span> (_underwater_color != col) {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        _underwater_color = col;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">setFileChanged</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;}</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
+<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a2310573735d3c0ad17ca290bca083f99">  242</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a2310573735d3c0ad17ca290bca083f99">ProjectSettings::setUnits</a>(<a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5">unit_type_t</a> unit)</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;{</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordtype">double</span> unit_conversion_factor;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    QVector3D scale_vector;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordtype">float</span> weight_factor;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">float</span> thickness_factor;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">if</span> (unit == _units)</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    _units = unit;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordflow">if</span> (_units == <a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7">fuImperial</a>) {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        unit_conversion_factor = 1 / 0.3048;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        weight_factor = <a class="code" href="namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036">kWeightConversionFactor</a>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        thickness_factor = 1 / 25.4f;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        unit_conversion_factor = 0.3048;</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        weight_factor = 1 / <a class="code" href="namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036">kWeightConversionFactor</a>;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        thickness_factor = 25.4f;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    _water_density *= weight_factor;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">getSurface</a>()-&gt;<a class="code" href="classShipCAD_1_1SubdivisionSurface.html#ad9d00dfc848975306c43305e13e57ebe">numberOfLayers</a>(); i++) {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <a class="code" href="classShipCAD_1_1SubdivisionLayer.html">SubdivisionLayer</a> *layer = _owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">getSurface</a>()-&gt;<a class="code" href="classShipCAD_1_1SubdivisionSurface.html#a24b230e51a0c5fb3e7f51d0e2340eb9f">getLayer</a>(i);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#ae96292d06a3578f9c7bfbbdec342068a">setMaterialDensity</a>(layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#af65aafc08837eb47eefad5fbbd562d32">getMaterialDensity</a>() * weight_factor);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#ac4068bcc8287698ee23e27246de9212b">setThickness</a>(layer-&gt;<a class="code" href="classShipCAD_1_1SubdivisionLayer.html#a4d26f33298b7d44d41f3e3ee87a2d981">getThickness</a>() * thickness_factor);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    scale_vector.setX(unit_conversion_factor);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    scale_vector.setY(unit_conversion_factor);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    scale_vector.setZ(unit_conversion_factor);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="comment">// TODO: owner-&gt;edit-&gt;model_scale</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;}</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
+<div class="line"><a name="l00273"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">  273</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">ProjectSettings::clear</a>()</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;{</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    _name = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    _designer = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    _comment = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    _file_created_by = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    _length = 1.0;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    _beam = 1.0;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    _draft = 1.0;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    _water_density = 1.025f;        <span class="comment">// 1025 kg/m3 for seawater</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    _appendage_coefficient = 1.0; <span class="comment">// default 1.0, typical values for ships to compensate for appendices and shellplate = 1.0005</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    _main_particulars_has_been_set = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    _shade_underwater_ship = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="comment">// TODO:</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="comment">//  _underwater_color = _owner-&gt;getPreferences()-&gt;getUnderwaterColor();</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    _units = <a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f">fuMetric</a>;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    _use_default_mainframe_location = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    _mainframe_location = 0.0;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    _disable_model_check = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    _save_preview = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keyword">delete</span> _preview_img;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    _preview_img = 0;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    _hydrostatic_coefficients = <a class="code" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2">fcActualData</a>;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    _simplify_intersections = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    _start_draft = 0.0;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    _end_draft = 1.0;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    _draft_step = 0.1f;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    _trim = 0.0;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    _displacements.clear();</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    _min_displacement = 0.0;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    _max_displacement = 1.0;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    _displ_increment = 0.1f;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    _angles.clear();</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    _angles.push_back(0.0);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    _angles.push_back(2.0);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    _angles.push_back(5.0);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    _angles.push_back(10.0);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    _angles.push_back(15.0);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    _angles.push_back(20.0);</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    _angles.push_back(30.0);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    _angles.push_back(40.0);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    _angles.push_back(50.0);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    _angles.push_back(60.0);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    _stab_trims.clear();</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    _stab_trims.push_back(0.0);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    _free_trim = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    _fvcg = 1.0;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;}</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;</div>
+<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#af6012d62299292d0757955b14c6bd854">  322</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#af6012d62299292d0757955b14c6bd854">ProjectSettings::loadBinary</a>(<a class="code" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a>&amp; source, QImage* img)</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;{</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">clear</a>();</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_name);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_designer);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_length);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_beam);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_draft);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_main_particulars_has_been_set);</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_water_density);</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_appendage_coefficient);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_shade_underwater_ship);</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_underwater_color);</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    quint32 n;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(n);</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    _units = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5">unit_type_t</a><span class="keyword">&gt;</span>(n);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_use_default_mainframe_location);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_mainframe_location);</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_disable_model_check);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_comment);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_file_created_by);</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    _save_preview = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa067802fee608eba024414f07e484bd69">fv210</a>) {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(n);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        _hydrostatic_coefficients = <span class="keyword">static_cast&lt;</span><a class="code" href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd">hydrostatic_coeff_t</a><span class="keyword">&gt;</span>(n);</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_save_preview);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordflow">if</span> (_save_preview) {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            _preview_img = <span class="keyword">new</span> <a class="code" href="structShipCAD_1_1JPEGImage.html">JPEGImage</a>();</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(*_preview_img);</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        }</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694faa40c53f1a6f1cb3feb2bfa7617bd7fdf">fv230</a>) {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_simplify_intersections);</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa528cae12d19cf6d3b76e6f2b6ef25a61">fv250</a>) {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_start_draft);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_end_draft);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_draft_step);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_trim);</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(n);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;n; i++) {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                <span class="keywordtype">float</span> f;</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(f);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                _displacements.push_back(f);</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            }</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_min_displacement);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_max_displacement);</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_displ_increment);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_use_displ_increments);</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(n);</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            _angles.clear();</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;n; i++) {</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                <span class="keywordtype">float</span> f;</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(f);</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                _stab_trims.push_back(f);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(f);</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                _angles.push_back(f);</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;            }</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_free_trim);</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">load</a>(_fvcg);</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;        }</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    }</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;}</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
-<div class="line"><a name="l00383"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#aebda4677da789819020d1ea1623ec035">  383</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#aebda4677da789819020d1ea1623ec035">ProjectSettings::saveBinary</a>(<a class="code" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a>&amp; dest)</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;{</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="comment">// TODO:</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;}</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;</div>
-<div class="line"><a name="l00388"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">  388</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">ProjectSettings::dump</a>(ostream&amp; os)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="comment">// TODO: dump this</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;}</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;</div>
-<div class="line"><a name="l00393"></a><span class="lineno"><a class="line" href="projsettings_8h.html#aed3b5193eb9bb31a9404fcece05c1f3f">  393</a></span>&#160;ostream&amp; <a class="code" href="projsettings_8cpp.html#a7649d06c4b1d941b82103ea29a9e8199">operator &lt;&lt; </a>(ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html">ShipCAD::ProjectSettings</a>&amp; settings)</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;{</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    settings.<a class="code" href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">dump</a>(os);</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">return</span> os;</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;}</div>
-<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_a17ecfdd29efc03ed2580b89f5da955c8"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">ShipCAD::ShipCADModel::getFileVersion</a></div><div class="ttdeci">version_t getFileVersion()</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00092">shipcadmodel.h:92</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_aa4319c8e7adfa68048f95c1614984036"><div class="ttname"><a href="namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036">ShipCAD::kWeightConversionFactor</a></div><div class="ttdeci">const float kWeightConversionFactor</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00041">shipcadlib.h:41</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_aad72cb11575e7a1ae0cda2c50f8de2ad"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#aad72cb11575e7a1ae0cda2c50f8de2ad">ShipCAD::ProjectSettings::setLength</a></div><div class="ttdeci">void setLength(float length)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00111">projsettings.cpp:111</a></div></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(n);</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;            _stab_trims.clear();</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;n; i++) {</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                <span class="keywordtype">float</span> f;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;                source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(f);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                _stab_trims.push_back(f);</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_free_trim);</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;            source.<a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(_fvcg);</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        }</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    }</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;}</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;</div>
+<div class="line"><a name="l00390"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#aebda4677da789819020d1ea1623ec035">  390</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#aebda4677da789819020d1ea1623ec035">ProjectSettings::saveBinary</a>(<a class="code" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a>&amp; dest)</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;{</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa83a7d69d5da0a112f916ff1688f8d6dd">fv120</a>) {</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_name);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_designer);</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_length);</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_beam);</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_draft);</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_main_particulars_has_been_set);</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_water_density);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_appendage_coefficient);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_shade_underwater_ship);</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_underwater_color);</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(static_cast&lt;quint32&gt;(_units));</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa6128c9d19a96365fd8083d38b10de79c">fv160</a>) {</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_use_default_mainframe_location);</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_mainframe_location);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fac5c1f75352cbf5b41a4f5986c3b6b1b6">fv165</a>) {</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_disable_model_check);</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;            }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        }</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_comment);</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_file_created_by);</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa067802fee608eba024414f07e484bd69">fv210</a>) {</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(static_cast&lt;quint8&gt;(_hydrostatic_coefficients));</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;            dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_save_preview);</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;            <span class="keywordflow">if</span> (_save_preview) {</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                <span class="comment">// save the jpg</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;            }</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;            <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694faa40c53f1a6f1cb3feb2bfa7617bd7fdf">fv230</a>) {</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_simplify_intersections);</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;            }</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;            <span class="keywordflow">if</span> (_owner-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">getFileVersion</a>() &gt;= <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa528cae12d19cf6d3b76e6f2b6ef25a61">fv250</a>) {</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_start_draft);</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_end_draft);</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_draft_step);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_trim);</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_displacements.size());</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;_displacements.size(); i++)</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                    dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_displacements[i]);</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_min_displacement);</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_max_displacement);</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_displ_increment);</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_use_displ_increments);</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_angles.size());</div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;_angles.size(); i++)</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;                    dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_angles[i]);</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_stab_trims.size());</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;_stab_trims.size(); i++)</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                    dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_stab_trims[i]);</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_free_trim);</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;                dest.<a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(_fvcg);</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;            }</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        }</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    }</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;}</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;</div>
+<div class="line"><a name="l00447"></a><span class="lineno"><a class="line" href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">  447</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">ProjectSettings::dump</a>(ostream&amp; os)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="comment">// TODO: dump this</span></div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;}</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;</div>
+<div class="line"><a name="l00452"></a><span class="lineno"><a class="line" href="projsettings_8h.html#aed3b5193eb9bb31a9404fcece05c1f3f">  452</a></span>&#160;ostream&amp; <a class="code" href="projsettings_8cpp.html#a7649d06c4b1d941b82103ea29a9e8199">operator &lt;&lt; </a>(ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classShipCAD_1_1ProjectSettings.html">ShipCAD::ProjectSettings</a>&amp; settings)</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;{</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    settings.<a class="code" href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">dump</a>(os);</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    <span class="keywordflow">return</span> os;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;}</div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_a17ecfdd29efc03ed2580b89f5da955c8"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#a17ecfdd29efc03ed2580b89f5da955c8">ShipCAD::ShipCADModel::getFileVersion</a></div><div class="ttdeci">version_t getFileVersion()</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00094">shipcadmodel.h:94</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_aa4319c8e7adfa68048f95c1614984036"><div class="ttname"><a href="namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036">ShipCAD::kWeightConversionFactor</a></div><div class="ttdeci">const float kWeightConversionFactor</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00042">shipcadlib.h:42</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_aad72cb11575e7a1ae0cda2c50f8de2ad"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#aad72cb11575e7a1ae0cda2c50f8de2ad">ShipCAD::ProjectSettings::setLength</a></div><div class="ttdeci">void setLength(float length)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00113">projsettings.cpp:113</a></div></div>
 <div class="ttc" id="hydrostaticcalc_8h_html"><div class="ttname"><a href="hydrostaticcalc_8h.html">hydrostaticcalc.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a3590a9b52236a4aeb9991ea03c518871"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a3590a9b52236a4aeb9991ea03c518871">ShipCAD::ProjectSettings::setSavePreview</a></div><div class="ttdeci">void setSavePreview(bool val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00136">projsettings.cpp:136</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_abde123a71eba642ff1dbd62d547aa684"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#abde123a71eba642ff1dbd62d547aa684">ShipCAD::ProjectSettings::setDesigner</a></div><div class="ttdeci">void setDesigner(const QString &amp;designer)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00192">projsettings.cpp:192</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_afdab155f3ca324b3c200a97c9ade1ff6"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#afdab155f3ca324b3c200a97c9ade1ff6">ShipCAD::ProjectSettings::setTrim</a></div><div class="ttdeci">void setTrim(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00152">projsettings.cpp:152</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a3590a9b52236a4aeb9991ea03c518871"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a3590a9b52236a4aeb9991ea03c518871">ShipCAD::ProjectSettings::setSavePreview</a></div><div class="ttdeci">void setSavePreview(bool val)</div><div class="ttdoc">set the Save Preview setting </div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00138">projsettings.cpp:138</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_abde123a71eba642ff1dbd62d547aa684"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#abde123a71eba642ff1dbd62d547aa684">ShipCAD::ProjectSettings::setDesigner</a></div><div class="ttdeci">void setDesigner(const QString &amp;designer)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00194">projsettings.cpp:194</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_afdab155f3ca324b3c200a97c9ade1ff6"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#afdab155f3ca324b3c200a97c9ade1ff6">ShipCAD::ProjectSettings::setTrim</a></div><div class="ttdeci">void setTrim(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00154">projsettings.cpp:154</a></div></div>
 <div class="ttc" id="projsettings_8h_html"><div class="ttname"><a href="projsettings_8h.html">projsettings.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a4dddaf7fe8bdbc0724c524244dd56497"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a4dddaf7fe8bdbc0724c524244dd56497">ShipCAD::ProjectSettings::getMainframeLocation</a></div><div class="ttdeci">float getMainframeLocation()</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00077">projsettings.cpp:77</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a31fdcc5990fb3c61161fe783b5ed4939"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a31fdcc5990fb3c61161fe783b5ed4939">ShipCAD::ProjectSettings::setAppendageCoefficient</a></div><div class="ttdeci">void setAppendageCoefficient(float coeff)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00085">projsettings.cpp:85</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_acac72dbc1dc2f68c1d32981ac9a27603"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#acac72dbc1dc2f68c1d32981ac9a27603">ShipCAD::ProjectSettings::setMainframeLocation</a></div><div class="ttdeci">void setMainframeLocation(float loc)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00120">projsettings.cpp:120</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a06b1260b284a988fb62b49f7ab4d5bf3"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a06b1260b284a988fb62b49f7ab4d5bf3">ShipCAD::ProjectSettings::setUnderWaterColor</a></div><div class="ttdeci">void setUnderWaterColor(QColor &amp;col)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00232">projsettings.cpp:232</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_af3a6fa23a7318acbda7b0066b53d694fa83a7d69d5da0a112f916ff1688f8d6dd"><div class="ttname"><a href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa83a7d69d5da0a112f916ff1688f8d6dd">ShipCAD::fv120</a></div><div class="ttdef"><b>Definition:</b> <a href="version_8h_source.html#l00042">version.h:42</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a31fdcc5990fb3c61161fe783b5ed4939"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a31fdcc5990fb3c61161fe783b5ed4939">ShipCAD::ProjectSettings::setAppendageCoefficient</a></div><div class="ttdeci">void setAppendageCoefficient(float coeff)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00087">projsettings.cpp:87</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_acac72dbc1dc2f68c1d32981ac9a27603"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#acac72dbc1dc2f68c1d32981ac9a27603">ShipCAD::ProjectSettings::setMainframeLocation</a></div><div class="ttdeci">void setMainframeLocation(float loc)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00122">projsettings.cpp:122</a></div></div>
+<div class="ttc" id="classShipCAD_1_1FileBuffer_html_a9a5d46b2c6d568ee2cdef110d4773e73"><div class="ttname"><a href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">ShipCAD::FileBuffer::add</a></div><div class="ttdeci">void add(const JPEGImage &amp;img)</div><div class="ttdef"><b>Definition:</b> <a href="filebuffer_8cpp_source.html#l00105">filebuffer.cpp:105</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a06b1260b284a988fb62b49f7ab4d5bf3"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a06b1260b284a988fb62b49f7ab4d5bf3">ShipCAD::ProjectSettings::setUnderWaterColor</a></div><div class="ttdeci">void setUnderWaterColor(QColor &amp;col)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00234">projsettings.cpp:234</a></div></div>
 <div class="ttc" id="classShipCAD_1_1SubdivisionLayer_html_ae96292d06a3578f9c7bfbbdec342068a"><div class="ttname"><a href="classShipCAD_1_1SubdivisionLayer.html#ae96292d06a3578f9c7bfbbdec342068a">ShipCAD::SubdivisionLayer::setMaterialDensity</a></div><div class="ttdeci">void setMaterialDensity(float val)</div><div class="ttdef"><b>Definition:</b> <a href="subdivlayer_8h_source.html#l00111">subdivlayer.h:111</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a9e0ce44e6aea8e57608baee2a3b05827"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">ShipCAD::ProjectSettings::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00271">projsettings.cpp:271</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a9e0ce44e6aea8e57608baee2a3b05827"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a9e0ce44e6aea8e57608baee2a3b05827">ShipCAD::ProjectSettings::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00273">projsettings.cpp:273</a></div></div>
 <div class="ttc" id="shipcadlib_8h_html"><div class="ttname"><a href="shipcadlib_8h.html">shipcadlib.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_acaa6149ff4c93c829a72a3a3d2ff5239"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#acaa6149ff4c93c829a72a3a3d2ff5239">ShipCAD::ProjectSettings::setName</a></div><div class="ttdeci">void setName(const QString &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00184">projsettings.cpp:184</a></div></div>
-<div class="ttc" id="classShipCAD_1_1SubdivisionSurface_html_a24b230e51a0c5fb3e7f51d0e2340eb9f"><div class="ttname"><a href="classShipCAD_1_1SubdivisionSurface.html#a24b230e51a0c5fb3e7f51d0e2340eb9f">ShipCAD::SubdivisionSurface::getLayer</a></div><div class="ttdeci">SubdivisionLayer * getLayer(size_t index)</div><div class="ttdef"><b>Definition:</b> <a href="subdivsurface_8cpp_source.html#l00400">subdivsurface.cpp:400</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a45081194c5e105780429b0f214bab186"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a45081194c5e105780429b0f214bab186">ShipCAD::ProjectSettings::setDraftStep</a></div><div class="ttdeci">void setDraftStep(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00168">projsettings.cpp:168</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a16a64f2a4a9b6359ac46b0a85f90a4ae"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a16a64f2a4a9b6359ac46b0a85f90a4ae">ShipCAD::ProjectSettings::setDraft</a></div><div class="ttdeci">void setDraft(float draft)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00102">projsettings.cpp:102</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_acaa6149ff4c93c829a72a3a3d2ff5239"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#acaa6149ff4c93c829a72a3a3d2ff5239">ShipCAD::ProjectSettings::setName</a></div><div class="ttdeci">void setName(const QString &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00186">projsettings.cpp:186</a></div></div>
+<div class="ttc" id="classShipCAD_1_1SubdivisionSurface_html_a24b230e51a0c5fb3e7f51d0e2340eb9f"><div class="ttname"><a href="classShipCAD_1_1SubdivisionSurface.html#a24b230e51a0c5fb3e7f51d0e2340eb9f">ShipCAD::SubdivisionSurface::getLayer</a></div><div class="ttdeci">SubdivisionLayer * getLayer(size_t index)</div><div class="ttdef"><b>Definition:</b> <a href="subdivsurface_8cpp_source.html#l00408">subdivsurface.cpp:408</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a45081194c5e105780429b0f214bab186"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a45081194c5e105780429b0f214bab186">ShipCAD::ProjectSettings::setDraftStep</a></div><div class="ttdeci">void setDraftStep(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00170">projsettings.cpp:170</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a16a64f2a4a9b6359ac46b0a85f90a4ae"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a16a64f2a4a9b6359ac46b0a85f90a4ae">ShipCAD::ProjectSettings::setDraft</a></div><div class="ttdeci">void setDraft(float draft)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00104">projsettings.cpp:104</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_af3a6fa23a7318acbda7b0066b53d694faa40c53f1a6f1cb3feb2bfa7617bd7fdf"><div class="ttname"><a href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694faa40c53f1a6f1cb3feb2bfa7617bd7fdf">ShipCAD::fv230</a></div><div class="ttdef"><b>Definition:</b> <a href="version_8h_source.html#l00058">version.h:58</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f"><div class="ttname"><a href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f">ShipCAD::fuMetric</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00114">shipcadlib.h:114</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_ab729e778076b560d876f09955212256d"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#ab729e778076b560d876f09955212256d">ShipCAD::ProjectSettings::setHydrostaticCoefficients</a></div><div class="ttdeci">void setHydrostaticCoefficients(hydrostatic_coeff_t coeff)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00060">projsettings.cpp:60</a></div></div>
-<div class="ttc" id="classShipCAD_1_1HydrostaticCalc_html"><div class="ttname"><a href="classShipCAD_1_1HydrostaticCalc.html">ShipCAD::HydrostaticCalc</a></div><div class="ttdef"><b>Definition:</b> <a href="hydrostaticcalc_8h_source.html#l00098">hydrostaticcalc.h:98</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_ac6a7a28b4b063771afae92decb602da5"><div class="ttname"><a href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5">ShipCAD::unit_type_t</a></div><div class="ttdeci">unit_type_t</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00113">shipcadlib.h:113</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a7c0f0e54fb2fb94a70b823fca6a6a58d"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a7c0f0e54fb2fb94a70b823fca6a6a58d">ShipCAD::ProjectSettings::setUseDefaultMainframeLocation</a></div><div class="ttdeci">void setUseDefaultMainframeLocation(bool use)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00176">projsettings.cpp:176</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html">ShipCAD::ProjectSettings</a></div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8h_source.html#l00046">projsettings.h:46</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7"><div class="ttname"><a href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7">ShipCAD::fuImperial</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00115">shipcadlib.h:115</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a9caa9e15bc03de5b6092c419a58a87e8"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">ShipCAD::ProjectSettings::dump</a></div><div class="ttdeci">void dump(std::ostream &amp;os) const </div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00388">projsettings.cpp:388</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2"><div class="ttname"><a href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2">ShipCAD::fcActualData</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00120">shipcadlib.h:120</a></div></div>
-<div class="ttc" id="classShipCAD_1_1HydrostaticCalc_html_a0deeafff07f3bb77184df959bbd91266"><div class="ttname"><a href="classShipCAD_1_1HydrostaticCalc.html#a0deeafff07f3bb77184df959bbd91266">ShipCAD::HydrostaticCalc::setCalculated</a></div><div class="ttdeci">void setCalculated(bool calc)</div><div class="ttdef"><b>Definition:</b> <a href="hydrostaticcalc_8cpp_source.html#l00129">hydrostaticcalc.cpp:129</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f"><div class="ttname"><a href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f">ShipCAD::fuMetric</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00115">shipcadlib.h:115</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_ab729e778076b560d876f09955212256d"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#ab729e778076b560d876f09955212256d">ShipCAD::ProjectSettings::setHydrostaticCoefficients</a></div><div class="ttdeci">void setHydrostaticCoefficients(hydrostatic_coeff_t coeff)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00062">projsettings.cpp:62</a></div></div>
+<div class="ttc" id="structShipCAD_1_1JPEGImage_html"><div class="ttname"><a href="structShipCAD_1_1JPEGImage.html">ShipCAD::JPEGImage</a></div><div class="ttdoc">struct to hold jpeg image as stored in Free!Ship </div><div class="ttdef"><b>Definition:</b> <a href="backgroundimage_8h_source.html#l00049">backgroundimage.h:49</a></div></div>
+<div class="ttc" id="classShipCAD_1_1HydrostaticCalc_html"><div class="ttname"><a href="classShipCAD_1_1HydrostaticCalc.html">ShipCAD::HydrostaticCalc</a></div><div class="ttdoc">Initialize and execute Hydrostatics Data calculation for a waterplane. </div><div class="ttdef"><b>Definition:</b> <a href="hydrostaticcalc_8h_source.html#l00104">hydrostaticcalc.h:104</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_ac6a7a28b4b063771afae92decb602da5"><div class="ttname"><a href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5">ShipCAD::unit_type_t</a></div><div class="ttdeci">unit_type_t</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00114">shipcadlib.h:114</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a7c0f0e54fb2fb94a70b823fca6a6a58d"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a7c0f0e54fb2fb94a70b823fca6a6a58d">ShipCAD::ProjectSettings::setUseDefaultMainframeLocation</a></div><div class="ttdeci">void setUseDefaultMainframeLocation(bool use)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00178">projsettings.cpp:178</a></div></div>
+<div class="ttc" id="backgroundimage_8h_html"><div class="ttname"><a href="backgroundimage_8h.html">backgroundimage.h</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html">ShipCAD::ProjectSettings</a></div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8h_source.html#l00047">projsettings.h:47</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7"><div class="ttname"><a href="namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7">ShipCAD::fuImperial</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00116">shipcadlib.h:116</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a9caa9e15bc03de5b6092c419a58a87e8"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a9caa9e15bc03de5b6092c419a58a87e8">ShipCAD::ProjectSettings::dump</a></div><div class="ttdeci">void dump(std::ostream &amp;os) const </div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00447">projsettings.cpp:447</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2"><div class="ttname"><a href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2">ShipCAD::fcActualData</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00121">shipcadlib.h:121</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_af3a6fa23a7318acbda7b0066b53d694fa6128c9d19a96365fd8083d38b10de79c"><div class="ttname"><a href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa6128c9d19a96365fd8083d38b10de79c">ShipCAD::fv160</a></div><div class="ttdef"><b>Definition:</b> <a href="version_8h_source.html#l00046">version.h:46</a></div></div>
+<div class="ttc" id="classShipCAD_1_1HydrostaticCalc_html_a0deeafff07f3bb77184df959bbd91266"><div class="ttname"><a href="classShipCAD_1_1HydrostaticCalc.html#a0deeafff07f3bb77184df959bbd91266">ShipCAD::HydrostaticCalc::setCalculated</a></div><div class="ttdeci">void setCalculated(bool calc)</div><div class="ttdef"><b>Definition:</b> <a href="hydrostaticcalc_8cpp_source.html#l00137">hydrostaticcalc.cpp:137</a></div></div>
 <div class="ttc" id="classPointerVector_html_a5e9ccf28859f06f13ad3e2dad9ae1cb6"><div class="ttname"><a href="classPointerVector.html#a5e9ccf28859f06f13ad3e2dad9ae1cb6">PointerVector::apply</a></div><div class="ttdeci">void apply(apply_fn *fn)</div><div class="ttdef"><b>Definition:</b> <a href="pointervec_8h_source.html#l00087">pointervec.h:87</a></div></div>
 <div class="ttc" id="classShipCAD_1_1SubdivisionLayer_html_ac4068bcc8287698ee23e27246de9212b"><div class="ttname"><a href="classShipCAD_1_1SubdivisionLayer.html#ac4068bcc8287698ee23e27246de9212b">ShipCAD::SubdivisionLayer::setThickness</a></div><div class="ttdeci">void setThickness(float val)</div><div class="ttdef"><b>Definition:</b> <a href="subdivlayer_8h_source.html#l00112">subdivlayer.h:112</a></div></div>
 <div class="ttc" id="classShipCAD_1_1SubdivisionLayer_html_a4d26f33298b7d44d41f3e3ee87a2d981"><div class="ttname"><a href="classShipCAD_1_1SubdivisionLayer.html#a4d26f33298b7d44d41f3e3ee87a2d981">ShipCAD::SubdivisionLayer::getThickness</a></div><div class="ttdeci">float getThickness()</div><div class="ttdef"><b>Definition:</b> <a href="subdivlayer_8h_source.html#l00100">subdivlayer.h:100</a></div></div>
 <div class="ttc" id="subdivsurface_8h_html"><div class="ttname"><a href="subdivsurface_8h.html">subdivsurface.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1FileBuffer_html_ad1aebcc97e364569934c66eec5a87485"><div class="ttname"><a href="classShipCAD_1_1FileBuffer.html#ad1aebcc97e364569934c66eec5a87485">ShipCAD::FileBuffer::load</a></div><div class="ttdeci">void load(bool &amp;val)</div><div class="ttdef"><b>Definition:</b> <a href="filebuffer_8cpp_source.html#l00099">filebuffer.cpp:99</a></div></div>
 <div class="ttc" id="filebuffer_8h_html"><div class="ttname"><a href="filebuffer_8h.html">filebuffer.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a0f40362f42e6dfd4147d69573c00988f"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a0f40362f42e6dfd4147d69573c00988f">ShipCAD::ProjectSettings::setShadeUnderwaterShip</a></div><div class="ttdeci">void setShadeUnderwaterShip(bool set)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00216">projsettings.cpp:216</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a2310573735d3c0ad17ca290bca083f99"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a2310573735d3c0ad17ca290bca083f99">ShipCAD::ProjectSettings::setUnits</a></div><div class="ttdeci">void setUnits(unit_type_t unit)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00240">projsettings.cpp:240</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_aafc30dd7d6b9db4ccfc7bf1c4e2b3b11"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#aafc30dd7d6b9db4ccfc7bf1c4e2b3b11">ShipCAD::ShipCADModel::getHydrostaticCalculations</a></div><div class="ttdeci">HydrostaticCalcVector &amp; getHydrostaticCalculations()</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00124">shipcadmodel.h:124</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a4c74ba587e58e538083072285937aa4c"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a4c74ba587e58e538083072285937aa4c">ShipCAD::ProjectSettings::~ProjectSettings</a></div><div class="ttdeci">~ProjectSettings()</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00051">projsettings.cpp:51</a></div></div>
-<div class="ttc" id="projsettings_8cpp_html_a7649d06c4b1d941b82103ea29a9e8199"><div class="ttname"><a href="projsettings_8cpp.html#a7649d06c4b1d941b82103ea29a9e8199">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;os, const ShipCAD::ProjectSettings &amp;settings)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00393">projsettings.cpp:393</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_ac90d2a093ae0af951fd117d7f6981e92"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#ac90d2a093ae0af951fd117d7f6981e92">ShipCAD::ProjectSettings::setBeam</a></div><div class="ttdeci">void setBeam(float beam)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00093">projsettings.cpp:93</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a326e18ff53ba0f916d4d8cfab5a2d17f"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a326e18ff53ba0f916d4d8cfab5a2d17f">ShipCAD::ProjectSettings::setFileCreatedBy</a></div><div class="ttdeci">void setFileCreatedBy(const QString &amp;createdby)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00208">projsettings.cpp:208</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a0f40362f42e6dfd4147d69573c00988f"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a0f40362f42e6dfd4147d69573c00988f">ShipCAD::ProjectSettings::setShadeUnderwaterShip</a></div><div class="ttdeci">void setShadeUnderwaterShip(bool set)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00218">projsettings.cpp:218</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a2310573735d3c0ad17ca290bca083f99"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a2310573735d3c0ad17ca290bca083f99">ShipCAD::ProjectSettings::setUnits</a></div><div class="ttdeci">void setUnits(unit_type_t unit)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00242">projsettings.cpp:242</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_aafc30dd7d6b9db4ccfc7bf1c4e2b3b11"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#aafc30dd7d6b9db4ccfc7bf1c4e2b3b11">ShipCAD::ShipCADModel::getHydrostaticCalculations</a></div><div class="ttdeci">HydrostaticCalcVector &amp; getHydrostaticCalculations()</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00130">shipcadmodel.h:130</a></div></div>
+<div class="ttc" id="classShipCAD_1_1FileBuffer_html_a86223c54bcf111ef205c9d651e0b9a66"><div class="ttname"><a href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">ShipCAD::FileBuffer::load</a></div><div class="ttdeci">void load(JPEGImage &amp;img)</div><div class="ttdef"><b>Definition:</b> <a href="filebuffer_8cpp_source.html#l00096">filebuffer.cpp:96</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a4c74ba587e58e538083072285937aa4c"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a4c74ba587e58e538083072285937aa4c">ShipCAD::ProjectSettings::~ProjectSettings</a></div><div class="ttdeci">~ProjectSettings()</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00052">projsettings.cpp:52</a></div></div>
+<div class="ttc" id="projsettings_8cpp_html_a7649d06c4b1d941b82103ea29a9e8199"><div class="ttname"><a href="projsettings_8cpp.html#a7649d06c4b1d941b82103ea29a9e8199">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;os, const ShipCAD::ProjectSettings &amp;settings)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00452">projsettings.cpp:452</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_ac90d2a093ae0af951fd117d7f6981e92"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#ac90d2a093ae0af951fd117d7f6981e92">ShipCAD::ProjectSettings::setBeam</a></div><div class="ttdeci">void setBeam(float beam)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00095">projsettings.cpp:95</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a326e18ff53ba0f916d4d8cfab5a2d17f"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a326e18ff53ba0f916d4d8cfab5a2d17f">ShipCAD::ProjectSettings::setFileCreatedBy</a></div><div class="ttdeci">void setFileCreatedBy(const QString &amp;createdby)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00210">projsettings.cpp:210</a></div></div>
 <div class="ttc" id="subdivlayer_8h_html"><div class="ttname"><a href="subdivlayer_8h.html">subdivlayer.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_af4de74cc452581cf8f7e02431ba3e45a"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#af4de74cc452581cf8f7e02431ba3e45a">ShipCAD::ProjectSettings::setWaterDensity</a></div><div class="ttdeci">void setWaterDensity(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00128">projsettings.cpp:128</a></div></div>
-<div class="ttc" id="classShipCAD_1_1FileBuffer_html"><div class="ttname"><a href="classShipCAD_1_1FileBuffer.html">ShipCAD::FileBuffer</a></div><div class="ttdef"><b>Definition:</b> <a href="filebuffer_8h_source.html#l00047">filebuffer.h:47</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a9e389573e2266b099f49452d68edf24f"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a9e389573e2266b099f49452d68edf24f">ShipCAD::ProjectSettings::setStartDraft</a></div><div class="ttdeci">void setStartDraft(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00144">projsettings.cpp:144</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_af4de74cc452581cf8f7e02431ba3e45a"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#af4de74cc452581cf8f7e02431ba3e45a">ShipCAD::ProjectSettings::setWaterDensity</a></div><div class="ttdeci">void setWaterDensity(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00130">projsettings.cpp:130</a></div></div>
+<div class="ttc" id="classShipCAD_1_1FileBuffer_html"><div class="ttname"><a href="classShipCAD_1_1FileBuffer.html">ShipCAD::FileBuffer</a></div><div class="ttdoc">in-memory buffer of data for a binary file (FREE!Ship format) </div><div class="ttdef"><b>Definition:</b> <a href="filebuffer_8h_source.html#l00052">filebuffer.h:52</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a9e389573e2266b099f49452d68edf24f"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a9e389573e2266b099f49452d68edf24f">ShipCAD::ProjectSettings::setStartDraft</a></div><div class="ttdeci">void setStartDraft(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00146">projsettings.cpp:146</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a194fe12f81ed80e691e8a89c88d91a0b"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a194fe12f81ed80e691e8a89c88d91a0b">ShipCAD::ProjectSettings::getMainframeLocation</a></div><div class="ttdeci">float getMainframeLocation() const </div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00079">projsettings.cpp:79</a></div></div>
 <div class="ttc" id="classShipCAD_1_1SubdivisionLayer_html_af65aafc08837eb47eefad5fbbd562d32"><div class="ttname"><a href="classShipCAD_1_1SubdivisionLayer.html#af65aafc08837eb47eefad5fbbd562d32">ShipCAD::SubdivisionLayer::getMaterialDensity</a></div><div class="ttdeci">float getMaterialDensity()</div><div class="ttdef"><b>Definition:</b> <a href="subdivlayer_8h_source.html#l00099">subdivlayer.h:99</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a45e70a08ac47cdf30971a7386af702a9"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a45e70a08ac47cdf30971a7386af702a9">ShipCAD::ProjectSettings::setEndDraft</a></div><div class="ttdeci">void setEndDraft(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00160">projsettings.cpp:160</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_af6012d62299292d0757955b14c6bd854"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#af6012d62299292d0757955b14c6bd854">ShipCAD::ProjectSettings::loadBinary</a></div><div class="ttdeci">void loadBinary(FileBuffer &amp;source, QImage *img)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00318">projsettings.cpp:318</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_aebda4677da789819020d1ea1623ec035"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#aebda4677da789819020d1ea1623ec035">ShipCAD::ProjectSettings::saveBinary</a></div><div class="ttdeci">void saveBinary(FileBuffer &amp;dest)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00383">projsettings.cpp:383</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a138264f53da99f6a1765ea7aec95096a"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a138264f53da99f6a1765ea7aec95096a">ShipCAD::ProjectSettings::setSimplifyIntersections</a></div><div class="ttdeci">void setSimplifyIntersections(bool set)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00224">projsettings.cpp:224</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a45e70a08ac47cdf30971a7386af702a9"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a45e70a08ac47cdf30971a7386af702a9">ShipCAD::ProjectSettings::setEndDraft</a></div><div class="ttdeci">void setEndDraft(float val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00162">projsettings.cpp:162</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_af6012d62299292d0757955b14c6bd854"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#af6012d62299292d0757955b14c6bd854">ShipCAD::ProjectSettings::loadBinary</a></div><div class="ttdeci">void loadBinary(FileBuffer &amp;source, QImage *img)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00322">projsettings.cpp:322</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_aebda4677da789819020d1ea1623ec035"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#aebda4677da789819020d1ea1623ec035">ShipCAD::ProjectSettings::saveBinary</a></div><div class="ttdeci">void saveBinary(FileBuffer &amp;dest)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00390">projsettings.cpp:390</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a138264f53da99f6a1765ea7aec95096a"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a138264f53da99f6a1765ea7aec95096a">ShipCAD::ProjectSettings::setSimplifyIntersections</a></div><div class="ttdeci">void setSimplifyIntersections(bool set)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00226">projsettings.cpp:226</a></div></div>
 <div class="ttc" id="utility_8h_html"><div class="ttname"><a href="utility_8h.html">utility.h</a></div></div>
 <div class="ttc" id="classShipCAD_1_1SubdivisionSurface_html_ad9d00dfc848975306c43305e13e57ebe"><div class="ttname"><a href="classShipCAD_1_1SubdivisionSurface.html#ad9d00dfc848975306c43305e13e57ebe">ShipCAD::SubdivisionSurface::numberOfLayers</a></div><div class="ttdeci">size_t numberOfLayers()</div><div class="ttdef"><b>Definition:</b> <a href="subdivsurface_8h_source.html#l00218">subdivsurface.h:218</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_a6941ad7a2b167419e844823fa8461019"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">ShipCAD::ShipCADModel::getSurface</a></div><div class="ttdeci">SubdivisionSurface * getSurface()</div></div>
+<div class="ttc" id="namespaceShipCAD_html_af3a6fa23a7318acbda7b0066b53d694fac5c1f75352cbf5b41a4f5986c3b6b1b6"><div class="ttname"><a href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fac5c1f75352cbf5b41a4f5986c3b6b1b6">ShipCAD::fv165</a></div><div class="ttdef"><b>Definition:</b> <a href="version_8h_source.html#l00047">version.h:47</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_a6941ad7a2b167419e844823fa8461019"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">ShipCAD::ShipCADModel::getSurface</a></div><div class="ttdeci">SubdivisionSurface * getSurface()</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00167">shipcadmodel.h:167</a></div></div>
 <div class="ttc" id="classShipCAD_1_1SubdivisionLayer_html"><div class="ttname"><a href="classShipCAD_1_1SubdivisionLayer.html">ShipCAD::SubdivisionLayer</a></div><div class="ttdef"><b>Definition:</b> <a href="subdivlayer_8h_source.html#l00065">subdivlayer.h:65</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a64e942847dd0838f04dc4ec32e9bc30e"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a64e942847dd0838f04dc4ec32e9bc30e">ShipCAD::ProjectSettings::setComment</a></div><div class="ttdeci">void setComment(const QString &amp;comment)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00200">projsettings.cpp:200</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_a64e942847dd0838f04dc4ec32e9bc30e"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#a64e942847dd0838f04dc4ec32e9bc30e">ShipCAD::ProjectSettings::setComment</a></div><div class="ttdeci">void setComment(const QString &amp;comment)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00202">projsettings.cpp:202</a></div></div>
 <div class="ttc" id="shipcadmodel_8h_html"><div class="ttname"><a href="shipcadmodel_8h.html">shipcadmodel.h</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_af3a6fa23a7318acbda7b0066b53d694fa528cae12d19cf6d3b76e6f2b6ef25a61"><div class="ttname"><a href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa528cae12d19cf6d3b76e6f2b6ef25a61">ShipCAD::fv250</a></div><div class="ttdef"><b>Definition:</b> <a href="version_8h_source.html#l00060">version.h:60</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ShipCADModel_html"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html">ShipCAD::ShipCADModel</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00061">shipcadmodel.h:61</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a9cf77f0900561de9efc572dcbad4dbbd"><div class="ttname"><a href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd">ShipCAD::hydrostatic_coeff_t</a></div><div class="ttdeci">hydrostatic_coeff_t</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00118">shipcadlib.h:118</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_a98ebcb64c5c759cbd0ae6e817b7168b2"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">ShipCAD::ShipCADModel::setFileChanged</a></div><div class="ttdeci">void setFileChanged(bool changed)</div><div class="ttdoc">set file changed flag </div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8cpp_source.html#l00105">shipcadmodel.cpp:105</a></div></div>
-<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_ab9f9f88bba11a2093204affd18df17ab"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#ab9f9f88bba11a2093204affd18df17ab">ShipCAD::ProjectSettings::setDisableModelCheck</a></div><div class="ttdeci">void setDisableModelCheck(bool val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00069">projsettings.cpp:69</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html">ShipCAD::ShipCADModel</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00062">shipcadmodel.h:62</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_a9cf77f0900561de9efc572dcbad4dbbd"><div class="ttname"><a href="namespaceShipCAD.html#a9cf77f0900561de9efc572dcbad4dbbd">ShipCAD::hydrostatic_coeff_t</a></div><div class="ttdeci">hydrostatic_coeff_t</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00119">shipcadlib.h:119</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_a98ebcb64c5c759cbd0ae6e817b7168b2"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#a98ebcb64c5c759cbd0ae6e817b7168b2">ShipCAD::ShipCADModel::setFileChanged</a></div><div class="ttdeci">void setFileChanged(bool changed)</div><div class="ttdoc">set file changed flag </div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8cpp_source.html#l00166">shipcadmodel.cpp:166</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ProjectSettings_html_ab9f9f88bba11a2093204affd18df17ab"><div class="ttname"><a href="classShipCAD_1_1ProjectSettings.html#ab9f9f88bba11a2093204affd18df17ab">ShipCAD::ProjectSettings::setDisableModelCheck</a></div><div class="ttdeci">void setDisableModelCheck(bool val)</div><div class="ttdef"><b>Definition:</b> <a href="projsettings_8cpp_source.html#l00071">projsettings.cpp:71</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_af3a6fa23a7318acbda7b0066b53d694fa067802fee608eba024414f07e484bd69"><div class="ttname"><a href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694fa067802fee608eba024414f07e484bd69">ShipCAD::fv210</a></div><div class="ttdef"><b>Definition:</b> <a href="version_8h_source.html#l00056">version.h:56</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2015 19:42:43 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 26 2015 23:07:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

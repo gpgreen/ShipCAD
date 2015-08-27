@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,18 +106,22 @@ Inheritance diagram for ShipCAD::UndoObject:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7e10bcda08f733484069f9ed44345752"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a7e10bcda08f733484069f9ed44345752">UndoObject</a> (<a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *owner)</td></tr>
-<tr class="separator:a7e10bcda08f733484069f9ed44345752"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7822f20d55e4647ad4e4508b3e3f229b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a7822f20d55e4647ad4e4508b3e3f229b">UndoObject</a> (<a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *owner, const QString &amp;filename, <a class="el" href="namespaceShipCAD.html#a66144e3f3a53da01f51c9bdb94fcae31">edit_mode_t</a> mode, bool file_changed, bool filename_set, bool is_temp_redo_ob)</td></tr>
+<tr class="separator:a7822f20d55e4647ad4e4508b3e3f229b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfeebd1cd99df71bea798fafe15c474f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#abfeebd1cd99df71bea798fafe15c474f">~UndoObject</a> ()</td></tr>
 <tr class="separator:abfeebd1cd99df71bea798fafe15c474f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74cc90d84599a153a37e13ab35018ff6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a74cc90d84599a153a37e13ab35018ff6">getMemory</a> ()</td></tr>
 <tr class="separator:a74cc90d84599a153a37e13ab35018ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f949591bc4031ed4af67ce493e42d2e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a9f949591bc4031ed4af67ce493e42d2e">isTempRedoObj</a> ()</td></tr>
 <tr class="separator:a9f949591bc4031ed4af67ce493e42d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecb1ca66c7c37fa2e1ef4ef2894bc9a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#aecb1ca66c7c37fa2e1ef4ef2894bc9a4">setIsTempRedoObject</a> (bool set)</td></tr>
+<tr class="separator:aecb1ca66c7c37fa2e1ef4ef2894bc9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d71ab49eb2b14834a0263a4292fb851"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a6d71ab49eb2b14834a0263a4292fb851">getTime</a> ()</td></tr>
 <tr class="separator:a6d71ab49eb2b14834a0263a4292fb851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc895eabc12ece513bd763551f505a2e"><td class="memItemLeft" align="right" valign="top">QString &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#abc895eabc12ece513bd763551f505a2e">getUndoText</a> ()</td></tr>
 <tr class="separator:abc895eabc12ece513bd763551f505a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a160e77df4c6ae2bdefc5257aa8e6d85b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a160e77df4c6ae2bdefc5257aa8e6d85b">getUndoData</a> ()</td></tr>
+<tr class="separator:a160e77df4c6ae2bdefc5257aa8e6d85b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93bad349f284a0ff1cece56aa931f9e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a93bad349f284a0ff1cece56aa931f9e3">accept</a> ()</td></tr>
 <tr class="separator:a93bad349f284a0ff1cece56aa931f9e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cace556c2092492f681654d72e35ba6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1UndoObject.html#a9cace556c2092492f681654d72e35ba6">restore</a> ()</td></tr>
@@ -127,7 +131,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p>Definition at line <a class="el" href="undoobject_8h_source.html#l00044">44</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a7e10bcda08f733484069f9ed44345752"></a>
+<a class="anchor" id="a7822f20d55e4647ad4e4508b3e3f229b"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -138,8 +142,42 @@ Public Member Functions</h2></td></tr>
           <td class="memname">UndoObject::UndoObject </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *&#160;</td>
-          <td class="paramname"><em>owner</em></td><td>)</td>
+          <td class="paramname"><em>owner</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a66144e3f3a53da01f51c9bdb94fcae31">edit_mode_t</a>&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>file_changed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>filename_set</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_temp_redo_ob</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -174,7 +212,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00050">50</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
+<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00052">52</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
 
 </div>
 </div>
@@ -192,7 +230,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="undoobject_8cpp_source.html#l00050">50</a> of file <a class="el" href="undoobject_8cpp_source.html">undoobject.cpp</a>.</p>
+<p>Definition at line <a class="el" href="undoobject_8cpp_source.html#l00052">52</a> of file <a class="el" href="undoobject_8cpp_source.html">undoobject.cpp</a>.</p>
 
 </div>
 </div>
@@ -209,7 +247,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="undoobject_8cpp_source.html#l00044">44</a> of file <a class="el" href="undoobject_8cpp_source.html">undoobject.cpp</a>.</p>
+<p>Definition at line <a class="el" href="undoobject_8cpp_source.html#l00046">46</a> of file <a class="el" href="undoobject_8cpp_source.html">undoobject.cpp</a>.</p>
 
 </div>
 </div>
@@ -234,7 +272,32 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00054">54</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
+<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00059">59</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a160e77df4c6ae2bdefc5257aa8e6d85b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classShipCAD_1_1FileBuffer.html">FileBuffer</a>&amp; ShipCAD::UndoObject::getUndoData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00063">63</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
 
 </div>
 </div>
@@ -259,7 +322,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00055">55</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
+<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00061">61</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
 
 </div>
 </div>
@@ -284,7 +347,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00053">53</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
+<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00055">55</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
 
 </div>
 </div>
@@ -301,7 +364,33 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="undoobject_8cpp_source.html#l00079">79</a> of file <a class="el" href="undoobject_8cpp_source.html">undoobject.cpp</a>.</p>
+<p>Definition at line <a class="el" href="undoobject_8cpp_source.html#l00081">81</a> of file <a class="el" href="undoobject_8cpp_source.html">undoobject.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aecb1ca66c7c37fa2e1ef4ef2894bc9a4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::UndoObject::setIsTempRedoObject </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>set</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="undoobject_8h_source.html#l00057">57</a> of file <a class="el" href="undoobject_8h_source.html">undoobject.h</a>.</p>
 
 </div>
 </div>
@@ -312,7 +401,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2015 19:42:46 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 26 2015 23:07:10 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

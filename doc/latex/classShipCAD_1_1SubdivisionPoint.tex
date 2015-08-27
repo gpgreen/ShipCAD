@@ -21,7 +21,7 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Point\-:\begin{figure}[H
 \item 
 \hyperlink{classShipCAD_1_1SubdivisionPoint_aed60af1f2fcbc89bad438a6a131a9f52}{Subdivision\-Point} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-virtual \hyperlink{classShipCAD_1_1SubdivisionPoint_a218f451cd47873d61a4a987ec0cb3e6a}{$\sim$\-Subdivision\-Point} ()
+virtual \hyperlink{classShipCAD_1_1SubdivisionPoint_afb71299c7ed96801a4f209d865aadf06}{$\sim$\-Subdivision\-Point} ()
 \item 
 virtual void \hyperlink{classShipCAD_1_1SubdivisionPoint_aef22d2b6cb48e57ce69652eeb7a69711}{clear} ()
 \begin{DoxyCompactList}\small\item\em Reset contents of the Point to default values. \end{DoxyCompactList}\item 
@@ -33,8 +33,6 @@ void \hyperlink{classShipCAD_1_1SubdivisionPoint_a5c1e66b5a28923dca99fe856ce1dff
 \begin{DoxyCompactList}\small\item\em delete an Edge \end{DoxyCompactList}\item 
 void \hyperlink{classShipCAD_1_1SubdivisionPoint_a7ed94fd26e20c2e30d1f36be6b1a9b29}{delete\-Face} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
 \begin{DoxyCompactList}\small\item\em delete a Face \end{DoxyCompactList}\item 
-void \hyperlink{classShipCAD_1_1SubdivisionPoint_a6037d6e3e78c9cc0d7909a4e55737ad6}{destroy} ()
-\item 
 float \hyperlink{classShipCAD_1_1SubdivisionPoint_aa07a859d70f97e57fc5318fc64a9d897}{get\-Curvature} ()
 \begin{DoxyCompactList}\small\item\em find the curvature of the surface at this point \end{DoxyCompactList}\item 
 Q\-Vector3\-D \hyperlink{classShipCAD_1_1SubdivisionPoint_a0c9e47af796dacd9542d065bbd0d0fcf}{averaging} ()
@@ -146,16 +144,16 @@ Use the static construct method to create points
 
 Definition at line 62 of file subdivpoint.\-cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionPoint_a218f451cd47873d61a4a987ec0cb3e6a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!$\sim$\-Subdivision\-Point@{$\sim$\-Subdivision\-Point}}
+\hypertarget{classShipCAD_1_1SubdivisionPoint_afb71299c7ed96801a4f209d865aadf06}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!$\sim$\-Subdivision\-Point@{$\sim$\-Subdivision\-Point}}
 \index{$\sim$\-Subdivision\-Point@{$\sim$\-Subdivision\-Point}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
-\subsubsection[{$\sim$\-Subdivision\-Point}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Point\-::$\sim$\-Subdivision\-Point (
+\subsubsection[{$\sim$\-Subdivision\-Point}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Subdivision\-Point\-::$\sim$\-Subdivision\-Point (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionPoint_a218f451cd47873d61a4a987ec0cb3e6a}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionPoint_afb71299c7ed96801a4f209d865aadf06}
 
 
-Definition at line 68 of file subdivpoint.\-cpp.
+Definition at line 74 of file subdivpoint.\-h.
 
 
 
@@ -178,7 +176,7 @@ add an Edge
 \end{DoxyParams}
 
 
-Definition at line 301 of file subdivpoint.\-cpp.
+Definition at line 296 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a077ca16509feb6db73fa40a0098b72b4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!add\-Face@{add\-Face}}
 \index{add\-Face@{add\-Face}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -198,7 +196,7 @@ add a Face
 \end{DoxyParams}
 
 
-Definition at line 307 of file subdivpoint.\-cpp.
+Definition at line 302 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a72061d495903d8265f33bada30a0c416}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!Angle\-\_\-\-V\-V\-\_\-3\-D@{Angle\-\_\-\-V\-V\-\_\-3\-D}}
 \index{Angle\-\_\-\-V\-V\-\_\-3\-D@{Angle\-\_\-\-V\-V\-\_\-3\-D}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -211,7 +209,7 @@ Definition at line 307 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionPoint_a72061d495903d8265f33bada30a0c416}
 
 
-Definition at line 118 of file subdivpoint.\-cpp.
+Definition at line 113 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a0c9e47af796dacd9542d065bbd0d0fcf}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!averaging@{averaging}}
 \index{averaging@{averaging}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -231,7 +229,7 @@ coordinates of the calculated point
 \end{DoxyReturn}
 
 
-Definition at line 313 of file subdivpoint.\-cpp.
+Definition at line 308 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a92632ddbe28fb6901e445b60eab8d3ee}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!calculate\-Vertex\-Point@{calculate\-Vertex\-Point}}
 \index{calculate\-Vertex\-Point@{calculate\-Vertex\-Point}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -251,7 +249,7 @@ new point that is a copy of this one
 \end{DoxyReturn}
 
 
-Definition at line 396 of file subdivpoint.\-cpp.
+Definition at line 391 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_aef22d2b6cb48e57ce69652eeb7a69711}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!clear@{clear}}
 \index{clear@{clear}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -270,7 +268,7 @@ Implements \hyperlink{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df
 
 
 
-Definition at line 73 of file subdivpoint.\-cpp.
+Definition at line 68 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a8e907cca747b0483374d4fdde8eb4ad1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!construct@{construct}}
 \index{construct@{construct}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -312,7 +310,7 @@ delete an Edge
 \end{DoxyParams}
 
 
-Definition at line 409 of file subdivpoint.\-cpp.
+Definition at line 404 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a7ed94fd26e20c2e30d1f36be6b1a9b29}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!delete\-Face@{delete\-Face}}
 \index{delete\-Face@{delete\-Face}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -332,15 +330,8 @@ delete a Face
 \end{DoxyParams}
 
 
-Definition at line 417 of file subdivpoint.\-cpp.
+Definition at line 412 of file subdivpoint.\-cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionPoint_a6037d6e3e78c9cc0d7909a4e55737ad6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!destroy@{destroy}}
-\index{destroy@{destroy}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
-\subsubsection[{destroy}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Point\-::destroy (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionPoint_a6037d6e3e78c9cc0d7909a4e55737ad6}
 \hypertarget{classShipCAD_1_1SubdivisionPoint_aed72cf5e8dc67e980010d195f3a376a3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!dump@{dump}}
 \index{dump@{dump}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
 \subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Point\-::dump (
@@ -370,7 +361,7 @@ Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a4a9d6e45291
 
 
 
-Definition at line 473 of file subdivpoint.\-cpp.
+Definition at line 468 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_ad6ef4b07ee0d97756395c7bac4082f42}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!from\-Int@{from\-Int}}
 \index{from\-Int@{from\-Int}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -395,7 +386,7 @@ vertex type
 \end{DoxyReturn}
 
 
-Definition at line 81 of file subdivpoint.\-cpp.
+Definition at line 76 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a0cf49d3e181eb00c08119721b33275bc}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Coordinate@{get\-Coordinate}}
 \index{get\-Coordinate@{get\-Coordinate}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -406,7 +397,7 @@ Definition at line 81 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a0cf49d3e181eb00c08119721b33275bc}
 
 
-Definition at line 113 of file subdivpoint.\-cpp.
+Definition at line 108 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_aa07a859d70f97e57fc5318fc64a9d897}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Curvature@{get\-Curvature}}
 \index{get\-Curvature@{get\-Curvature}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -426,7 +417,7 @@ the curvature of the surface at this point
 \end{DoxyReturn}
 
 
-Definition at line 134 of file subdivpoint.\-cpp.
+Definition at line 129 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a518c4e3dc5de74950c87ff0f733716ba}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Edge@{get\-Edge}}
 \index{get\-Edge@{get\-Edge}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -437,7 +428,7 @@ Definition at line 134 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a518c4e3dc5de74950c87ff0f733716ba}
 
 
-Definition at line 94 of file subdivpoint.\-cpp.
+Definition at line 89 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a673d2a2c94f52e5523a012959417dcc3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Face@{get\-Face}}
 \index{get\-Face@{get\-Face}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -448,7 +439,7 @@ Definition at line 94 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a673d2a2c94f52e5523a012959417dcc3}
 
 
-Definition at line 101 of file subdivpoint.\-cpp.
+Definition at line 96 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a8406682549c10ec9e1a184132f6ed2f0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Index@{get\-Index}}
 \index{get\-Index@{get\-Index}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -470,7 +461,7 @@ Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a13c569f0894
 
 
 
-Definition at line 108 of file subdivpoint.\-cpp.
+Definition at line 103 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a0eb743069fe2ee2e99cdf7417b2400d5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Limit\-Point@{get\-Limit\-Point}}
 \index{get\-Limit\-Point@{get\-Limit\-Point}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -481,7 +472,7 @@ Definition at line 108 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a0eb743069fe2ee2e99cdf7417b2400d5}
 
 
-Definition at line 218 of file subdivpoint.\-cpp.
+Definition at line 213 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a8dd5facd4006480baea4a7f4487094f5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Normal@{get\-Normal}}
 \index{get\-Normal@{get\-Normal}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -501,7 +492,7 @@ coordinates of the normal vector
 \end{DoxyReturn}
 
 
-Definition at line 443 of file subdivpoint.\-cpp.
+Definition at line 438 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a3ccd55795bf99f25b1ad8f937de9670a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!get\-Vertex\-Type@{get\-Vertex\-Type}}
 \index{get\-Vertex\-Type@{get\-Vertex\-Type}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -512,7 +503,7 @@ Definition at line 443 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionPoint_a3ccd55795bf99f25b1ad8f937de9670a}
 
 
-Definition at line 173 of file subdivpoint.\-h.
+Definition at line 172 of file subdivpoint.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_ada0d082be616958c024bb1743d392e2f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!has\-Edge@{has\-Edge}}
 \index{has\-Edge@{has\-Edge}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -523,7 +514,7 @@ Definition at line 173 of file subdivpoint.\-h.
 )}}\label{classShipCAD_1_1SubdivisionPoint_ada0d082be616958c024bb1743d392e2f}
 
 
-Definition at line 433 of file subdivpoint.\-cpp.
+Definition at line 428 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a720d2fc986ba8a365e8722e0e3e28be5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!has\-Face@{has\-Face}}
 \index{has\-Face@{has\-Face}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -534,7 +525,7 @@ Definition at line 433 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a720d2fc986ba8a365e8722e0e3e28be5}
 
 
-Definition at line 438 of file subdivpoint.\-cpp.
+Definition at line 433 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a354475f80700fee46dcb46f8602c5345}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!index\-Of\-Face@{index\-Of\-Face}}
 \index{index\-Of\-Face@{index\-Of\-Face}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -545,7 +536,7 @@ Definition at line 438 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a354475f80700fee46dcb46f8602c5345}
 
 
-Definition at line 425 of file subdivpoint.\-cpp.
+Definition at line 420 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_afbcf1244015a92be04faed20163699f7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!is\-Boundary\-Vertex@{is\-Boundary\-Vertex}}
 \index{is\-Boundary\-Vertex@{is\-Boundary\-Vertex}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -556,7 +547,7 @@ Definition at line 425 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_afbcf1244015a92be04faed20163699f7}
 
 
-Definition at line 157 of file subdivpoint.\-cpp.
+Definition at line 152 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a88243019864c79766266cee627671183}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!is\-Regular\-N\-U\-R\-B\-S\-Point@{is\-Regular\-N\-U\-R\-B\-S\-Point}}
 \index{is\-Regular\-N\-U\-R\-B\-S\-Point@{is\-Regular\-N\-U\-R\-B\-S\-Point}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -567,7 +558,7 @@ Definition at line 157 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a88243019864c79766266cee627671183}
 
 
-Definition at line 265 of file subdivpoint.\-cpp.
+Definition at line 260 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a6a0b4b628563cda2b2979ce6222e8a20}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!is\-Regular\-Point@{is\-Regular\-Point}}
 \index{is\-Regular\-Point@{is\-Regular\-Point}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -578,7 +569,7 @@ Definition at line 265 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_a6a0b4b628563cda2b2979ce6222e8a20}
 
 
-Definition at line 176 of file subdivpoint.\-cpp.
+Definition at line 171 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_afc9659ec83083e7725ce14a12a74d2f0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!number\-Of\-Curves@{number\-Of\-Curves}}
 \index{number\-Of\-Curves@{number\-Of\-Curves}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -589,7 +580,7 @@ Definition at line 176 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionPoint_afc9659ec83083e7725ce14a12a74d2f0}
 
 
-Definition at line 167 of file subdivpoint.\-cpp.
+Definition at line 162 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a0bc218bf0b1982a6d622535c2653200e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!number\-Of\-Edges@{number\-Of\-Edges}}
 \index{number\-Of\-Edges@{number\-Of\-Edges}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -600,7 +591,7 @@ Definition at line 167 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionPoint_a0bc218bf0b1982a6d622535c2653200e}
 
 
-Definition at line 164 of file subdivpoint.\-h.
+Definition at line 163 of file subdivpoint.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_aac07ee9bc037a35a244ab179cf7bd344}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!number\-Of\-Faces@{number\-Of\-Faces}}
 \index{number\-Of\-Faces@{number\-Of\-Faces}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -611,7 +602,7 @@ Definition at line 164 of file subdivpoint.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionPoint_aac07ee9bc037a35a244ab179cf7bd344}
 
 
-Definition at line 165 of file subdivpoint.\-h.
+Definition at line 164 of file subdivpoint.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_aa2d85a086268f335eefeaef0b48a96a1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!priv\-\_\-dump@{priv\-\_\-dump}}
 \index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -623,7 +614,7 @@ Definition at line 165 of file subdivpoint.\-h.
 ) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionPoint_aa2d85a086268f335eefeaef0b48a96a1}
 
 
-Definition at line 481 of file subdivpoint.\-cpp.
+Definition at line 476 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a98ab99a0ccc4709a40e05b36147c0f55}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!set\-Coordinate@{set\-Coordinate}}
 \index{set\-Coordinate@{set\-Coordinate}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -638,7 +629,7 @@ Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a54a5233e02e
 
 
 
-Definition at line 296 of file subdivpoint.\-cpp.
+Definition at line 291 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a614259dfa2470bbbd7b8cc73039ad501}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!set\-Vertex\-Type@{set\-Vertex\-Type}}
 \index{set\-Vertex\-Type@{set\-Vertex\-Type}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
@@ -649,7 +640,7 @@ Definition at line 296 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionPoint_a614259dfa2470bbbd7b8cc73039ad501}
 
 
-Definition at line 174 of file subdivpoint.\-h.
+Definition at line 173 of file subdivpoint.\-h.
 
 
 
@@ -659,28 +650,28 @@ Definition at line 174 of file subdivpoint.\-h.
 \subsubsection[{\-\_\-coordinate}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Subdivision\-Point\-::\-\_\-coordinate\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionPoint_a42bb8f729c7d79e594bda17f92ddb26b}
 3\-D coordinates of this point 
 
-Definition at line 198 of file subdivpoint.\-h.
+Definition at line 197 of file subdivpoint.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a17c5a46dc6c130259e96f49719ef3ee9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!\-\_\-edges@{\-\_\-edges}}
 \index{\-\_\-edges@{\-\_\-edges}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
 \subsubsection[{\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Edge}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Point\-::\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionPoint_a17c5a46dc6c130259e96f49719ef3ee9}
 list of edges attached to this point 
 
-Definition at line 197 of file subdivpoint.\-h.
+Definition at line 196 of file subdivpoint.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_ace13688b5e2ad09c8d3f37cc0eaaaa52}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!\-\_\-faces@{\-\_\-faces}}
 \index{\-\_\-faces@{\-\_\-faces}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
 \subsubsection[{\-\_\-faces}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Face}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Point\-::\-\_\-faces\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionPoint_ace13688b5e2ad09c8d3f37cc0eaaaa52}
 list of faces attached to this point 
 
-Definition at line 196 of file subdivpoint.\-h.
+Definition at line 195 of file subdivpoint.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionPoint_a37f4626c2c18a4838f693464d93ad291}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Point}!\-\_\-vtype@{\-\_\-vtype}}
 \index{\-\_\-vtype@{\-\_\-vtype}!ShipCAD::SubdivisionPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Point}}
 \subsubsection[{\-\_\-vtype}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex\-\_\-type\-\_\-t} Ship\-C\-A\-D\-::\-Subdivision\-Point\-::\-\_\-vtype\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionPoint_a37f4626c2c18a4838f693464d93ad291}
 vertex type of this point 
 
-Definition at line 199 of file subdivpoint.\-h.
+Definition at line 198 of file subdivpoint.\-h.
 
 
 

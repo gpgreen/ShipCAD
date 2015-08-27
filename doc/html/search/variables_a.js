@@ -6,7 +6,7 @@ var searchData=
   ['keel',['keel',['../structVolumeCalc.html#a07e433d13508d3342e7f6a50604c40d3',1,'VolumeCalc']]],
   ['keel_5farea',['keel_area',['../structShipCAD_1_1DelftSeriesResistance.html#ab1bf49519c2ed054b7699898d7f5aead',1,'ShipCAD::DelftSeriesResistance']]],
   ['keel_5fchord_5flength',['keel_chord_length',['../structShipCAD_1_1DelftSeriesResistance.html#a986244b5c6944f01dbdae5d54b895c84',1,'ShipCAD::DelftSeriesResistance']]],
-  ['kfileextension',['kFileExtension',['../shipcadlib_8cpp.html#a2190c83945b3d198f3b36308a23dc30b',1,'kFileExtension():&#160;shipcadlib.cpp'],['../namespaceShipCAD.html#a76ec58fc6d779982def49fface17b1a4',1,'ShipCAD::kFileExtension()']]],
+  ['kfileextension',['kFileExtension',['../namespaceShipCAD.html#a6461e4d91e555f0c732b53f8998b325d',1,'ShipCAD']]],
   ['kfoot',['kFoot',['../namespaceShipCAD.html#a8c1484188fed1e735c5a94f64a6817ab',1,'ShipCAD']]],
   ['kincrementsize',['kIncrementSize',['../namespaceShipCAD.html#a1c0de7dc4306d7908bd8c6f7ff69ecdc',1,'ShipCAD']]],
   ['klbs',['kLbs',['../namespaceShipCAD.html#ad6937518d9742e268b279000d1e7a509',1,'ShipCAD']]],

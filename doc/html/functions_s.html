@@ -108,7 +108,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,13 +130,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>save_binary()
 : <a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html#a7de1a32ae9e845478ec1bd5eaec17cd1">ShipCAD::SubdivisionControlPoint</a>
 </li>
+<li>saveAsFile()
+: <a class="el" href="classShipCAD_1_1Controller.html#aca904c26a74e79801deabfa8d863c92d">ShipCAD::Controller</a>
+</li>
 <li>saveBinary()
-: <a class="el" href="classShipCAD_1_1BackgroundImage.html#ad5069ad93b2885d264620d36327956e9">ShipCAD::BackgroundImage</a>
-, <a class="el" href="classShipCAD_1_1Flowline.html#ae36a33c0140e03676ccc1f90ceb53543">ShipCAD::Flowline</a>
+: <a class="el" href="classShipCAD_1_1BackgroundImage.html#a5b6df7f94af9d32579888394b2f86f40">ShipCAD::BackgroundImage</a>
+, <a class="el" href="classShipCAD_1_1Flowline.html#aeb29f59014b7df1e44dd6bda92dbc95d">ShipCAD::Flowline</a>
 , <a class="el" href="classShipCAD_1_1Intersection.html#a41ce3a17845a7808d052713ae57dbe63">ShipCAD::Intersection</a>
 , <a class="el" href="classShipCAD_1_1Marker.html#abceb4cbb5b038eb88d0f7f26507be15c">ShipCAD::Marker</a>
 , <a class="el" href="classShipCAD_1_1ProjectSettings.html#aebda4677da789819020d1ea1623ec035">ShipCAD::ProjectSettings</a>
-, <a class="el" href="classShipCAD_1_1ShipCADModel.html#ab2b308baf2e93b80533218145472928f">ShipCAD::ShipCADModel</a>
+, <a class="el" href="classShipCAD_1_1ShipCADModel.html#a64c7c4ddffffdd1be2f27eb4210af2b7">ShipCAD::ShipCADModel</a>
 , <a class="el" href="classShipCAD_1_1Spline.html#abaf1c6eebdfe8abd41287c1fcb38a808">ShipCAD::Spline</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionControlCurve.html#a3ef4c7ce3e2d9a2fe4f90ebf35ffc033">ShipCAD::SubdivisionControlCurve</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html#a572f4331ef0ab6f241583fc8d36cb93e">ShipCAD::SubdivisionControlEdge</a>
@@ -145,28 +148,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a6e6254ecc6fcbdadf1ff4f646caa1d59">ShipCAD::SubdivisionSurface</a>
 , <a class="el" href="classShipCAD_1_1Visibility.html#adaf76df822f6f03a93a1b827c81fe58f">ShipCAD::Visibility</a>
 </li>
+<li>saveFile()
+: <a class="el" href="classShipCAD_1_1Controller.html#a4dbd04dffa55a42ec77f15d45909d55c">ShipCAD::Controller</a>
+</li>
 <li>savePart()
 : <a class="el" href="classShipCAD_1_1ShipCADModel.html#a0d8f9cb2ce8038f6e65d90e8cab275e7">ShipCAD::ShipCADModel</a>
 </li>
 <li>saveToDXF()
 : <a class="el" href="classShipCAD_1_1Intersection.html#a00a6d7ad7e82e43bd0287fa88dd87cf3">ShipCAD::Intersection</a>
-, <a class="el" href="classShipCAD_1_1Spline.html#a347502f38c64a12fc19a95e19aad5d7d">ShipCAD::Spline</a>
-, <a class="el" href="classShipCAD_1_1SubdivisionControlCurve.html#a22726dc4edf385c5b4b5fead84d4c3de">ShipCAD::SubdivisionControlCurve</a>
-, <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#ab2aaada5c28682e4f17bc47261203cee">ShipCAD::SubdivisionControlFace</a>
-, <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#aafdd381a2cf13c0f37072b6c3f008b05">ShipCAD::SubdivisionLayer</a>
+, <a class="el" href="classShipCAD_1_1Spline.html#a03ddf553749e09aa03a38ff5ce0e0b31">ShipCAD::Spline</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionControlCurve.html#a7313375d402d6ad959f1f9c2609d693b">ShipCAD::SubdivisionControlCurve</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#aecc7636c397ca5669cf7ddb995feac03">ShipCAD::SubdivisionControlFace</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a77255d96b114ad6303f7c410e61fbf6b">ShipCAD::SubdivisionLayer</a>
 </li>
 <li>saveToFile()
 : <a class="el" href="classShipCAD_1_1FileBuffer.html#a175d7a153228b5cba5db062a2afd5026">ShipCAD::FileBuffer</a>
 </li>
 <li>saveToStream()
-: <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html#a21c0e8b4d4cd138ddd0bbcc707775040">ShipCAD::SubdivisionControlEdge</a>
-, <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#aa75c77ee2e007015851930a604744aa0">ShipCAD::SubdivisionControlFace</a>
-, <a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html#a60cc866bff57473700fbea4e17adcb4d">ShipCAD::SubdivisionControlPoint</a>
-, <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a502c7889a73015d4295fb922c92c78be">ShipCAD::SubdivisionLayer</a>
-, <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a51d2d07423cc53fc98012f07ed9525bc">ShipCAD::SubdivisionSurface</a>
+: <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html#a9228cf5bb5b09daf26eb4022f09337f0">ShipCAD::SubdivisionControlEdge</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#a8a618958b27b97dd6da2473e130d7a8e">ShipCAD::SubdivisionControlFace</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html#aa9175d20a34a9b3e964efbb436ac3dbc">ShipCAD::SubdivisionControlPoint</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a8bc4a8a9d73a8dd6e48a17a0757d5302">ShipCAD::SubdivisionLayer</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a77328f442672d72b4f9f1053b2cb2871">ShipCAD::SubdivisionSurface</a>
+</li>
+<li>scaleFaces()
+: <a class="el" href="classShipCAD_1_1Controller.html#a5f14267f3c2906bfaf755536efaeea18">ShipCAD::Controller</a>
+</li>
+<li>scaleModel()
+: <a class="el" href="classShipCAD_1_1Controller.html#aca7415d01ad863a7dabc8260d9f868fe">ShipCAD::Controller</a>
 </li>
 <li>second_derive()
 : <a class="el" href="classShipCAD_1_1Spline.html#abe04c117432e350f3a9f66395d2d3037">ShipCAD::Spline</a>
+</li>
+<li>selectAll()
+: <a class="el" href="classShipCAD_1_1Controller.html#a97a0dfdd229e0d7e0e7d5995dd9095a3">ShipCAD::Controller</a>
 </li>
 <li>Selected
 : <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html#a25279492599975df97efcaa124e09855">ShipCAD::SubdivisionControlEdge</a>
@@ -184,6 +199,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>setActiveLayer()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a69bafa71111e562a52a089be99b47871">ShipCAD::SubdivisionSurface</a>
+</li>
+<li>setActiveLayerColor()
+: <a class="el" href="classShipCAD_1_1Controller.html#aa471985ce00a517249c2b476db9d4ac6">ShipCAD::Controller</a>
 </li>
 <li>setAngle()
 : <a class="el" href="classShipCAD_1_1Viewport.html#a00ba2139fa06701b65de70d5c657f5d6">ShipCAD::Viewport</a>
@@ -203,6 +221,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>setBuild()
 : <a class="el" href="classShipCAD_1_1Entity.html#a1889198398f42bb7f77a2334031c3f33">ShipCAD::Entity</a>
+, <a class="el" href="classShipCAD_1_1Flowline.html#ad148400a3e53b2368b37c2c7f50ec1b7">ShipCAD::Flowline</a>
 , <a class="el" href="classShipCAD_1_1Intersection.html#a2b496f9ab21c5fc4a7b97a665b24f2b1">ShipCAD::Intersection</a>
 , <a class="el" href="classShipCAD_1_1NURBSurface.html#aa6fc3d060087593349ce1b5119419433">ShipCAD::NURBSurface</a>
 , <a class="el" href="classShipCAD_1_1ShipCADModel.html#ab221977f2a8bd4d51d6ee777be0d7b8a">ShipCAD::ShipCADModel</a>
@@ -301,6 +320,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setFilenameSet()
 : <a class="el" href="classShipCAD_1_1ShipCADModel.html#a960f3e97ef2aa847c9bb7cdc7731cd39">ShipCAD::ShipCADModel</a>
 </li>
+<li>setFileVersion()
+: <a class="el" href="classShipCAD_1_1ShipCADModel.html#a44ac7a48c0c01cae73bf723120071e72">ShipCAD::ShipCADModel</a>
+</li>
 <li>setFragments()
 : <a class="el" href="classShipCAD_1_1Spline.html#aaae6e558fad0833cde71f9ed38e4fb96">ShipCAD::Spline</a>
 </li>
@@ -311,10 +333,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classShipCAD_1_1ProjectSettings.html#ab729e778076b560d876f09955212256d">ShipCAD::ProjectSettings</a>
 </li>
 <li>setHydrostaticType()
-: <a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ab1b677a71d5f37f3fbbbacf3f27c7f43">ShipCAD::HydrostaticCalc</a>
+: <a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a61df8d7421f2900cbc18a6565963c66e">ShipCAD::HydrostaticCalc</a>
 </li>
 <li>setIntersectionType()
 : <a class="el" href="classShipCAD_1_1Intersection.html#adc12c68675b19f5ae92d4c6ec8db0f62">ShipCAD::Intersection</a>
+</li>
+<li>setIsTempRedoObject()
+: <a class="el" href="classShipCAD_1_1UndoObject.html#aecb1ca66c7c37fa2e1ef4ef2894bc9a4">ShipCAD::UndoObject</a>
 </li>
 <li>setKnuckle()
 : <a class="el" href="classShipCAD_1_1Spline.html#ad4f075e2e8f1d3ac7c2d22b5be75bbad">ShipCAD::Spline</a>
@@ -348,7 +373,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classShipCAD_1_1Shader.html#a7d7fe16e4eb06ad1eb19e22b38cff96e">ShipCAD::Shader</a>
 </li>
 <li>setModelView()
-: <a class="el" href="classShipCAD_1_1Visibility.html#a394466c98ad68161f7ab904db897e85f">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#a017115fc25ec3a7363033dcca873f38f">ShipCAD::Visibility</a>
 </li>
 <li>setMonoFaceShader()
 : <a class="el" href="classShipCAD_1_1Viewport.html#a5f3c02f4e24d614d4340816d6de50b0b">ShipCAD::Viewport</a>
@@ -383,7 +408,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classShipCAD_1_1ProjectSettings.html#a3590a9b52236a4aeb9991ea03c518871">ShipCAD::ProjectSettings</a>
 </li>
 <li>setSelected()
-: <a class="el" href="classShipCAD_1_1Flowline.html#af8205e548dba009fd1a169f0a841dde5">ShipCAD::Flowline</a>
+: <a class="el" href="classShipCAD_1_1Flowline.html#a4ade2663ee4102e0eff8920eeeaf8b37">ShipCAD::Flowline</a>
 , <a class="el" href="classShipCAD_1_1Marker.html#ad3bbb4a01e11e3d2885f56599a77a3d1">ShipCAD::Marker</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionControlCurve.html#abaf7f7cfec21eedacf55b1654f3e7f2f">ShipCAD::SubdivisionControlCurve</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html#ae247e08eec97952d1835df03c8269829">ShipCAD::SubdivisionControlEdge</a>
@@ -402,8 +427,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setSelectedControlPoint()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a65cc43d93da8ed72af631e893057c773">ShipCAD::SubdivisionSurface</a>
 </li>
+<li>setSelectedFlowline()
+: <a class="el" href="classShipCAD_1_1ShipCADModel.html#af61065a1e9050cff7cb91c8312082e2a">ShipCAD::ShipCADModel</a>
+</li>
 <li>setSelectedMarker()
-: <a class="el" href="classShipCAD_1_1ShipCADModel.html#af638ed4ab8e64e89b0217cf727b48698">ShipCAD::ShipCADModel</a>
+: <a class="el" href="classShipCAD_1_1ShipCADModel.html#afd7e984f4070d08cb16264c1b731580f">ShipCAD::ShipCADModel</a>
 </li>
 <li>setShadeUnderWater()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a797d9b728f794b7f2fc61f1c51dacc06">ShipCAD::SubdivisionSurface</a>
@@ -412,52 +440,52 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classShipCAD_1_1ProjectSettings.html#a0f40362f42e6dfd4147d69573c00988f">ShipCAD::ProjectSettings</a>
 </li>
 <li>setShowButtocks()
-: <a class="el" href="classShipCAD_1_1Visibility.html#a2ea3576dccadf48e83dd39ff1baef582">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#a8e7776fdc776e8fa96b7e9bce1cffdce">ShipCAD::Visibility</a>
 </li>
 <li>setShowControlCurves()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aabf54bc152176697a82c0eb6e47f5981">ShipCAD::SubdivisionSurface</a>
-, <a class="el" href="classShipCAD_1_1Visibility.html#aa61a014bafbe78997d961df0956ffc2d">ShipCAD::Visibility</a>
+, <a class="el" href="classShipCAD_1_1Visibility.html#a760ef76f6db721925ee95cefaae966de">ShipCAD::Visibility</a>
 </li>
 <li>setShowControlNet()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#af5380f1a7932b23a5fbf400c85542381">ShipCAD::SubdivisionSurface</a>
-, <a class="el" href="classShipCAD_1_1Visibility.html#a1328ed03510bc763298e607c6114345a">ShipCAD::Visibility</a>
+, <a class="el" href="classShipCAD_1_1Visibility.html#a7498435ee6955772713b113a63279260">ShipCAD::Visibility</a>
 </li>
 <li>setShowCurvature()
 : <a class="el" href="classShipCAD_1_1Spline.html#aae0f5ce3bc2aa58759abd32f3462bf16">ShipCAD::Spline</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#abf6fe62614aadf1cdd4f26fb4d3fc441">ShipCAD::SubdivisionSurface</a>
-, <a class="el" href="classShipCAD_1_1Visibility.html#acfa3dd5d3888a202a9a400bc14ca661f">ShipCAD::Visibility</a>
+, <a class="el" href="classShipCAD_1_1Visibility.html#a72fa3ed8c721fffe65b29c61329a1d35">ShipCAD::Visibility</a>
 </li>
 <li>setShowDiagonals()
-: <a class="el" href="classShipCAD_1_1Visibility.html#a5219985a9dde8fe4b78a76587b592495">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#a02ff571862dacdbec3248a80ec42eb4f">ShipCAD::Visibility</a>
 </li>
 <li>setShowFlowlines()
-: <a class="el" href="classShipCAD_1_1Visibility.html#af62123197cccb5568a26da2b213c98a5">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#a805b3f5f4a8d7c6b578a79c2539cf192">ShipCAD::Visibility</a>
 </li>
 <li>setShowGrid()
-: <a class="el" href="classShipCAD_1_1Visibility.html#addb6766903b4794f30ff10617c99cc6f">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#a57b601879f10927beb3d466c211e6ee6">ShipCAD::Visibility</a>
 </li>
-<li>setShowHydrostaticData()
-: <a class="el" href="classShipCAD_1_1Visibility.html#af08d5445e61405be1ed67f24c1fa85eb">ShipCAD::Visibility</a>
+<li>setShowHydroData()
+: <a class="el" href="classShipCAD_1_1Visibility.html#afc3530bd2d3fc1e71fa699aace76e4ea">ShipCAD::Visibility</a>
 </li>
 <li>setShowInLinesplan()
 : <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#aa58323da0043db61eaa87672755e96d2">ShipCAD::SubdivisionLayer</a>
 </li>
 <li>setShowInteriorEdges()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a5a4e5acd1bfc4d845d28513dd2dbc0cd">ShipCAD::SubdivisionSurface</a>
-, <a class="el" href="classShipCAD_1_1Visibility.html#a1812f546ea73152745826ee4a76d7062">ShipCAD::Visibility</a>
+, <a class="el" href="classShipCAD_1_1Visibility.html#a2ce6cd0c56750e6638b5e195e6bc5590">ShipCAD::Visibility</a>
 </li>
 <li>setShowMarkers()
-: <a class="el" href="classShipCAD_1_1Visibility.html#aa81c24a60b066729bbf76872649f570f">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#a04cd6f732b4334070aef1f43b457d472">ShipCAD::Visibility</a>
 </li>
 <li>setShowNormals()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a678530145785bd366316b35d2bd0ab67">ShipCAD::SubdivisionSurface</a>
-, <a class="el" href="classShipCAD_1_1Visibility.html#abbbc7bb99302c255b2fadf985e0825ee">ShipCAD::Visibility</a>
+, <a class="el" href="classShipCAD_1_1Visibility.html#a78971bef725cdc53fa600589d68b628a">ShipCAD::Visibility</a>
 </li>
 <li>setShowStations()
-: <a class="el" href="classShipCAD_1_1Visibility.html#a8e7e5e4ae03b0eabc9416db946ad374e">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#a41a2754fcdbe69609b837fc9be26135e">ShipCAD::Visibility</a>
 </li>
 <li>setShowWaterlines()
-: <a class="el" href="classShipCAD_1_1Visibility.html#a7c9736ba8f06683f0a5ea9ccaeb1b5d3">ShipCAD::Visibility</a>
+: <a class="el" href="classShipCAD_1_1Visibility.html#ac07b5944afd8a44c569aef09ee893450">ShipCAD::Visibility</a>
 </li>
 <li>setSimplifyIntersections()
 : <a class="el" href="classShipCAD_1_1ProjectSettings.html#a138264f53da99f6a1765ea7aec95096a">ShipCAD::ProjectSettings</a>
@@ -504,7 +532,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a88897eeb2b600169ca110fc4ec4aef08">ShipCAD::SubdivisionLayer</a>
 </li>
 <li>setVersion()
-: <a class="el" href="classShipCAD_1_1FileBuffer.html#a8769c7659ea5c015e004529517cf8fcb">ShipCAD::FileBuffer</a>
+: <a class="el" href="classShipCAD_1_1FileBuffer.html#a66c14f8f21b9f77febd154aee9565f0b">ShipCAD::FileBuffer</a>
 </li>
 <li>setVertexType()
 : <a class="el" href="classShipCAD_1_1SubdivisionPoint.html#a614259dfa2470bbbd7b8cc73039ad501">ShipCAD::SubdivisionPoint</a>
@@ -519,8 +547,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classShipCAD_1_1Viewport.html#a554a3455c39ee5652b13c9b24c3c962e">ShipCAD::Viewport</a>
 </li>
 <li>setVisible()
-: <a class="el" href="classShipCAD_1_1Flowline.html#ad6546bfd621882e9d5067c919e148871">ShipCAD::Flowline</a>
-, <a class="el" href="classShipCAD_1_1Marker.html#af21b0bac028e01ce02ea97bf6f83cccc">ShipCAD::Marker</a>
+: <a class="el" href="classShipCAD_1_1Marker.html#af21b0bac028e01ce02ea97bf6f83cccc">ShipCAD::Marker</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionControlCurve.html#ac536de424624a4ae312029fe643f4b61">ShipCAD::SubdivisionControlCurve</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a979723de5c5cf0f4ecea8a5f9d0968d7">ShipCAD::SubdivisionLayer</a>
 </li>
@@ -544,6 +571,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>shadeUnderwater()
 : <a class="el" href="classMainWindow.html#adecb2e29c0d3df68517a570dc9e352bd">MainWindow</a>
+, <a class="el" href="classShipCAD_1_1Controller.html#af090412ce033ebbe20c148f3236b8c8e">ShipCAD::Controller</a>
 </li>
 <li>shadeUnderWater()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#adfb570208c96bf8bc3426a43fda5fe9f">ShipCAD::SubdivisionSurface</a>
@@ -554,40 +582,72 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>ShipCADModel()
 : <a class="el" href="classShipCAD_1_1ShipCADModel.html#abede72e53058c2ecf8dc2c4b2a7c8014">ShipCAD::ShipCADModel</a>
 </li>
+<li>showBothSides()
+: <a class="el" href="classShipCAD_1_1Controller.html#a798c513f6454b27141c93bb7a9681394">ShipCAD::Controller</a>
+</li>
+<li>showButtocks()
+: <a class="el" href="classShipCAD_1_1Controller.html#abf2b642e176da1fd768eaf7952fc80bf">ShipCAD::Controller</a>
+</li>
 <li>showControlCurves()
 : <a class="el" href="classMainWindow.html#ac7ec359ed2a0f3c66ba5d2a788613832">MainWindow</a>
+, <a class="el" href="classShipCAD_1_1Controller.html#a2c3339b26ab0856a66720e370523d80c">ShipCAD::Controller</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ac94824bf3a085f9785bc49e659077156">ShipCAD::SubdivisionSurface</a>
 </li>
 <li>showControlNet()
 : <a class="el" href="classMainWindow.html#a93b8868bdce207842de4747008f5e03e">MainWindow</a>
+, <a class="el" href="classShipCAD_1_1Controller.html#a81d04dc566ba580aa225c5369767220f">ShipCAD::Controller</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a1886c21030a3c5c85797603d2d00c906">ShipCAD::SubdivisionSurface</a>
 </li>
 <li>showCurvature()
 : <a class="el" href="classMainWindow.html#a65462f395b206a9a680a5521082b6344">MainWindow</a>
-, <a class="el" href="classShipCAD_1_1Spline.html#a2c232b5ca5da62ba07ec9aa8ede3fd17">ShipCAD::Spline</a>
+, <a class="el" href="classShipCAD_1_1Controller.html#a9ba96a9070361816f926d8b0d2becd38">ShipCAD::Controller</a>
 </li>
 <li>ShowCurvature
 : <a class="el" href="classShipCAD_1_1Spline.html#a9572e31014a04689a2987475c9bff080">ShipCAD::Spline</a>
 </li>
 <li>showCurvature()
-: <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ac7c4656b21e0aaa01525be5b7be84024">ShipCAD::SubdivisionSurface</a>
+: <a class="el" href="classShipCAD_1_1Spline.html#a2c232b5ca5da62ba07ec9aa8ede3fd17">ShipCAD::Spline</a>
+, <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ac7c4656b21e0aaa01525be5b7be84024">ShipCAD::SubdivisionSurface</a>
 </li>
-<li>showData()
-: <a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a3abffc6366d88b203346c324b2281680">ShipCAD::HydrostaticCalc</a>
+<li>showDiagonals()
+: <a class="el" href="classShipCAD_1_1Controller.html#aa6729abfadacef4f98c6dbe7d4c1a7e6">ShipCAD::Controller</a>
+</li>
+<li>showFlowlines()
+: <a class="el" href="classShipCAD_1_1Controller.html#a74187705f2260e641293b2f369757f98">ShipCAD::Controller</a>
+</li>
+<li>showGrid()
+: <a class="el" href="classShipCAD_1_1Controller.html#ace6b3dde2f577bb95873ece93bcc9a5a">ShipCAD::Controller</a>
+</li>
+<li>showHistoryUndo()
+: <a class="el" href="classShipCAD_1_1Controller.html#a32103fdef0de00b63eba1ef4282c5598">ShipCAD::Controller</a>
+</li>
+<li>showHydroData()
+: <a class="el" href="classShipCAD_1_1Controller.html#a29d2c68605ec90055ae0aa27761f2b08">ShipCAD::Controller</a>
 </li>
 <li>showInLinesplan()
 : <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a049e7c5ca442f4b02cdad9935d999e1b">ShipCAD::SubdivisionLayer</a>
 </li>
 <li>showInteriorEdges()
 : <a class="el" href="classMainWindow.html#aa0401a2a6241ff56390b1825f4e0e508">MainWindow</a>
+, <a class="el" href="classShipCAD_1_1Controller.html#a3f722582d47e27a34deb467156056f3b">ShipCAD::Controller</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a84834b65650ff350e993c00dccabab46">ShipCAD::SubdivisionSurface</a>
+</li>
+<li>showMarkers()
+: <a class="el" href="classShipCAD_1_1Controller.html#a89d94deb40f340ce439d53c781f72bcf">ShipCAD::Controller</a>
 </li>
 <li>showNormals()
 : <a class="el" href="classMainWindow.html#a8edd7fa619d2ed66b94f6a498f5af59c">MainWindow</a>
+, <a class="el" href="classShipCAD_1_1Controller.html#adb1d1402849db292b29ec78ba89639d9">ShipCAD::Controller</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a57a2abe37fef2cee7ca6c15ae5173672">ShipCAD::SubdivisionSurface</a>
 </li>
 <li>ShowPoints
 : <a class="el" href="classShipCAD_1_1Spline.html#abac1aad3fc0e33ea8ccda1a94bea8467">ShipCAD::Spline</a>
+</li>
+<li>showStations()
+: <a class="el" href="classShipCAD_1_1Controller.html#a429e378ef93bf0ec59c7dac048d4b100">ShipCAD::Controller</a>
+</li>
+<li>showWaterlines()
+: <a class="el" href="classShipCAD_1_1Controller.html#a634c01cbbf932acc8115357f3967bd9e">ShipCAD::Controller</a>
 </li>
 <li>simplify()
 : <a class="el" href="classShipCAD_1_1Spline.html#a043f418b363a0dc7161b9106a72ef8b4">ShipCAD::Spline</a>
@@ -601,6 +661,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>size()
 : <a class="el" href="classPointerVector.html#a65263559ccd6a9eac2904c691453867b">PointerVector&lt; T &gt;</a>
 , <a class="el" href="classShipCAD_1_1FileBuffer.html#a51dc1007457d999ce374afd6a6ae29f8">ShipCAD::FileBuffer</a>
+, <a class="el" href="structShipCAD_1_1JPEGImage.html#a7e28010a6fb1d0c2926f8381b2e29931">ShipCAD::JPEGImage</a>
 </li>
 <li>sortEdges()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a2b270b878bb810d51bd7adf689db5366">ShipCAD::SubdivisionSurface</a>
@@ -610,6 +671,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>SplineExtents()
 : <a class="el" href="structSplineExtents.html#ade9a787a7d276d68eef2450f93c932eb">SplineExtents</a>
+</li>
+<li>splitEdges()
+: <a class="el" href="classShipCAD_1_1Controller.html#a0737f31baec832fa23070d3d2accce20">ShipCAD::Controller</a>
 </li>
 <li>start_speed
 : <a class="el" href="structShipCAD_1_1DelftSeriesResistance.html#a040e0d678c7dbc24c29b7da618b4094d">ShipCAD::DelftSeriesResistance</a>
@@ -622,6 +686,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>StationAreaCalculation()
 : <a class="el" href="structStationAreaCalculation.html#aeca509dbb47e4d9eca53b5e0c959dd79">StationAreaCalculation</a>
+</li>
+<li>step_speed
+: <a class="el" href="structShipCAD_1_1DelftSeriesResistance.html#a0e3ee6d984afd4ddf1cf483261904574">ShipCAD::DelftSeriesResistance</a>
 </li>
 <li>sub_max
 : <a class="el" href="structShipCAD_1_1HydrostaticsData.html#ab3a6e316a991426c74673025439f123c">ShipCAD::HydrostaticsData</a>
@@ -671,7 +738,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="structShipCAD_1_1LayerProperties.html#a1b4bc8254c8cb90df594bc7905ce3e22">ShipCAD::LayerProperties</a>
 </li>
 <li>SurfIntersectionData()
-: <a class="el" href="structSurfIntersectionData.html#a873573cfa09f308be70a6c7f77b85829">SurfIntersectionData</a>
+: <a class="el" href="structSurfIntersectionData.html#a03090412914ee528d438e2a209ba0b84">SurfIntersectionData</a>
 </li>
 <li>swapData()
 : <a class="el" href="classShipCAD_1_1SubdivisionEdge.html#ad19ddea08367fa2307e131132e36c008">ShipCAD::SubdivisionEdge</a>
@@ -680,7 +747,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2015 19:42:46 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 26 2015 23:07:10 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

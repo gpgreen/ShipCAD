@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['viewport',['Viewport',['../classShipCAD_1_1Viewport.html',1,'ShipCAD']]],
-  ['visibility',['Visibility',['../classShipCAD_1_1Visibility.html',1,'ShipCAD']]],
-  ['volumecalc',['VolumeCalc',['../structVolumeCalc.html',1,'']]]
+  ['undoobject',['UndoObject',['../classShipCAD_1_1UndoObject.html',1,'ShipCAD']]]
 ];

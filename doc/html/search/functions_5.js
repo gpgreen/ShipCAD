@@ -8,7 +8,8 @@ var searchData=
   ['findlowesthydrostaticspoint',['findLowestHydrostaticsPoint',['../classShipCAD_1_1ShipCADModel.html#a8cde3b7ca816132af3c722cd31af3107',1,'ShipCAD::ShipCADModel']]],
   ['findwaterviscosity',['FindWaterViscosity',['../namespaceShipCAD.html#a44025ef38e6ee9f12cbf032660f637b5',1,'ShipCAD']]],
   ['first_5fderive',['first_derive',['../classShipCAD_1_1Spline.html#afe15664ac97d1d3452d5a5cfd023c471',1,'ShipCAD::Spline']]],
+  ['flipfaces',['flipFaces',['../classShipCAD_1_1Controller.html#a6314812b2170bdbbf17e79374e745005',1,'ShipCAD::Controller']]],
   ['flipnormal',['flipNormal',['../classShipCAD_1_1SubdivisionFace.html#a16d5e005d1c7c847ccf9ba72b67142fa',1,'ShipCAD::SubdivisionFace']]],
-  ['flowline',['Flowline',['../classShipCAD_1_1Flowline.html#a736d6251cea3c3b290416a27159cad96',1,'ShipCAD::Flowline']]],
+  ['flowline',['Flowline',['../classShipCAD_1_1Flowline.html#aee316a748229f5abafac72ebe3af1e41',1,'ShipCAD::Flowline']]],
   ['fromint',['fromInt',['../classShipCAD_1_1SubdivisionPoint.html#ad6ef4b07ee0d97756395c7bac4082f42',1,'ShipCAD::SubdivisionPoint']]]
 ];

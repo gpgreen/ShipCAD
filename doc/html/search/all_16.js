@@ -5,9 +5,7 @@ var searchData=
   ['version_2ecpp',['version.cpp',['../version_8cpp.html',1,'']]],
   ['version_2eh',['version.h',['../version_8h.html',1,'']]],
   ['version_5ft',['version_t',['../namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694f',1,'ShipCAD']]],
-  ['versionfromint',['versionFromInt',['../namespaceShipCAD.html#aaacff40f3706c270a66e4c8296d17ebd',1,'ShipCAD']]],
   ['versionstring',['versionString',['../namespaceShipCAD.html#a2901c6bb3e9ddd7efa9bdcc9095cc468',1,'ShipCAD']]],
-  ['versiontoint',['versionToInt',['../namespaceShipCAD.html#ad78a3ea3f966f52a2aa9befd3bfc73b0',1,'ShipCAD']]],
   ['vert_5fprism_5fcoefficient',['vert_prism_coefficient',['../structShipCAD_1_1HydrostaticsData.html#a2a7fc6a194bc1e78ecce8ab16512d1eb',1,'ShipCAD::HydrostaticsData']]],
   ['vertex_5ftype_5ft',['vertex_type_t',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deb',1,'ShipCAD']]],
   ['vertexindex',['VertexIndex',['../classShipCAD_1_1SubdivisionPoint.html#ad4ec233273e3bc788d2dd6736530d645',1,'ShipCAD::SubdivisionPoint']]],
@@ -29,6 +27,7 @@ var searchData=
   ['vmshadegauss',['vmShadeGauss',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863aaf20984128d2e9697958fa8c329a801a',1,'ShipCAD']]],
   ['vmshadezebra',['vmShadeZebra',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a70fcfa9199faab53e43f138ed64ad12f',1,'ShipCAD']]],
   ['vmwireframe',['vmWireFrame',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8',1,'ShipCAD']]],
+  ['volstr',['VolStr',['../namespaceShipCAD.html#a0758fd8275aafe6ad813d2a361281bf2',1,'ShipCAD']]],
   ['volume',['volume',['../structShipCAD_1_1HydrostaticsData.html#acfbee81bded1b067a23cfc8cc9c00855',1,'ShipCAD::HydrostaticsData::volume()'],['../structShipCAD_1_1CrosscurvesData.html#a9bec38a77bf87ab5feb76899e39e4f7b',1,'ShipCAD::CrosscurvesData::volume()']]],
   ['volumecalc',['VolumeCalc',['../structVolumeCalc.html',1,'VolumeCalc'],['../structVolumeCalc.html#a21a672444dafcae8293fe2b8be4dc071',1,'VolumeCalc::VolumeCalc()']]],
   ['volumetodisplacement',['VolumeToDisplacement',['../namespaceShipCAD.html#ad3ca198e79658bf065f1c1c416f23670',1,'ShipCAD']]]

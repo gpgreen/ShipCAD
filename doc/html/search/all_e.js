@@ -2,6 +2,10 @@ var searchData=
 [
   ['new_5forigin',['new_origin',['../structVolumeCalc.html#aed779c2eace630d0d41239df4d371407',1,'VolumeCalc']]],
   ['newcontrolpoint',['newControlPoint',['../classShipCAD_1_1SubdivisionSurface.html#a251b711125d50aa51875451976e8a8d7',1,'ShipCAD::SubdivisionSurface']]],
+  ['newface',['newFace',['../classShipCAD_1_1Controller.html#ad2bc80eb2e8445e335709804120e80f8',1,'ShipCAD::Controller']]],
+  ['newlayer',['newLayer',['../classShipCAD_1_1Controller.html#afe6e433ecde6d13e02f409e56b6d258b',1,'ShipCAD::Controller']]],
+  ['newmodel',['newModel',['../classShipCAD_1_1Controller.html#a129f26196db49a371b747f9e58358b88',1,'ShipCAD::Controller']]],
+  ['newpoint',['newPoint',['../classShipCAD_1_1Controller.html#ae4a1962572812591a48c25703bc70027',1,'ShipCAD::Controller']]],
   ['normal',['Normal',['../classShipCAD_1_1SubdivisionPoint.html#aeaf744ea3deb2bdc55e9e90d3e8b58a2',1,'ShipCAD::SubdivisionPoint']]],
   ['number_5fof_5fintersections',['number_of_intersections',['../classShipCAD_1_1IntersectionData.html#a5b42e3b8b81d18963f9a07609b402628',1,'ShipCAD::IntersectionData']]],
   ['numberofchildren',['numberOfChildren',['../classShipCAD_1_1SubdivisionControlFace.html#aa4a26c00b8b77c0a9d78640fe465eeb1',1,'ShipCAD::SubdivisionControlFace']]],
@@ -23,8 +27,8 @@ var searchData=
   ['numberofselectedlockedpoints',['numberOfSelectedLockedPoints',['../classShipCAD_1_1SubdivisionSurface.html#a2583bc0013b5725ac0902062d1c8bcea',1,'ShipCAD::SubdivisionSurface']]],
   ['numberofsubdivpoints',['numberOfSubdivPoints',['../classShipCAD_1_1SubdivisionControlCurve.html#a7b68fcef6035edcb10fedc996d10272f',1,'ShipCAD::SubdivisionControlCurve']]],
   ['numberofviewports',['numberOfViewports',['../classShipCAD_1_1ShipCADModel.html#a099d0530e99261318f6332220a331010',1,'ShipCAD::ShipCADModel']]],
-  ['nurbsurface',['NURBSurface',['../classShipCAD_1_1NURBSurface.html',1,'ShipCAD']]],
   ['nurbsurface',['NURBSurface',['../classShipCAD_1_1NURBSurface.html#ac01a08234a1d2a5e44d68a7393ef131c',1,'ShipCAD::NURBSurface']]],
+  ['nurbsurface',['NURBSurface',['../classShipCAD_1_1NURBSurface.html',1,'ShipCAD']]],
   ['nurbsurface_2ecpp',['nurbsurface.cpp',['../nurbsurface_8cpp.html',1,'']]],
   ['nurbsurface_2eh',['nurbsurface.h',['../nurbsurface_8h.html',1,'']]]
 ];

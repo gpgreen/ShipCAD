@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,11 +95,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>Structure to hold Hydrostatics Calculation results.  
+ <a href="structShipCAD_1_1HydrostaticsData.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7ea81ac589a3b24424b4176c734c7a37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structShipCAD_1_1HydrostaticsData.html#a7ea81ac589a3b24424b4176c734c7a37">clear</a> ()</td></tr>
+<tr class="memdesc:a7ea81ac589a3b24424b4176c734c7a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">reset all data to default values  <a href="#a7ea81ac589a3b24424b4176c734c7a37">More...</a><br/></td></tr>
 <tr class="separator:a7ea81ac589a3b24424b4176c734c7a37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -170,8 +174,9 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a503a1f2299db9d5ae923e598b8ee31ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00048">48</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<div class="textblock"><p>Structure to hold Hydrostatics Calculation results. </p>
+
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00050">50</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a7ea81ac589a3b24424b4176c734c7a37"></a>
 <div class="memitem">
@@ -185,6 +190,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>reset all data to default values </p>
 
 <p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00045">45</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
@@ -201,7 +208,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00057">57</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00059">59</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -215,7 +222,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00063">63</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00065">65</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -229,7 +236,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00064">64</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00066">66</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -243,7 +250,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00060">60</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00062">62</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -257,7 +264,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00059">59</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00061">61</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -271,7 +278,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00076">76</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00078">78</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -285,7 +292,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00075">75</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00077">77</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +306,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00077">77</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00079">79</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -313,7 +320,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00078">78</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00080">80</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -327,7 +334,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00061">61</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00063">63</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -341,7 +348,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00066">66</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00068">68</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -355,7 +362,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00062">62</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00064">64</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -369,7 +376,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00067">67</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00069">69</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -383,7 +390,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00069">69</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00071">71</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -397,7 +404,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00068">68</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00070">70</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -411,7 +418,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00051">51</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00053">53</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -425,7 +432,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00050">50</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00052">52</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +446,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00079">79</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00081">81</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -453,7 +460,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00081">81</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00083">83</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -467,7 +474,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00055">55</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00057">57</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -481,7 +488,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00054">54</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00056">56</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -495,7 +502,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00080">80</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00082">82</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -509,7 +516,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00058">58</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00060">60</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -523,7 +530,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00056">56</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00058">58</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -537,7 +544,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00070">70</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00072">72</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -551,7 +558,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00073">73</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00075">75</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -565,7 +572,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00071">71</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00073">73</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -579,7 +586,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00072">72</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00074">74</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -593,7 +600,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00074">74</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00076">76</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -607,7 +614,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00065">65</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00067">67</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -621,7 +628,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00053">53</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00055">55</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -635,7 +642,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00052">52</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00054">54</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -646,7 +653,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2015 19:42:44 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 26 2015 23:07:08 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

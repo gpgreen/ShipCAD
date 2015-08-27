@@ -4,10 +4,14 @@
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+struct \hyperlink{structShipCAD_1_1JPEGImage}{J\-P\-E\-G\-Image}
+\begin{DoxyCompactList}\small\item\em struct to hold jpeg image as stored in Free!\-Ship \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1BackgroundImage}{Background\-Image}
-\item 
+\begin{DoxyCompactList}\small\item\em Background Images for a viewport. \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1Controller}{Controller}
+\begin{DoxyCompactList}\small\item\em \hyperlink{namespaceShipCAD}{Ship\-C\-A\-D} model controller, contains editing actions. \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1IntersectionData}{Intersection\-Data}
-\item 
+\begin{DoxyCompactList}\small\item\em Structure to record geometry intersections. \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1Entity}{Entity}
 \begin{DoxyCompactList}\small\item\em base class for all non-\/surface drawable elements \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1ListIndexOutOfBounds}{List\-Index\-Out\-Of\-Bounds}
@@ -17,15 +21,15 @@ class \hyperlink{classShipCAD_1_1PointIndexOutOfBounds}{Point\-Index\-Out\-Of\-B
 class \hyperlink{classShipCAD_1_1IndexOutOfRange}{Index\-Out\-Of\-Range}
 \item 
 class \hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer}
-\item 
+\begin{DoxyCompactList}\small\item\em in-\/memory buffer of data for a binary file (F\-R\-E\-E!\-Ship format) \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1Flowline}{Flowline}
 \item 
 struct \hyperlink{structShipCAD_1_1HydrostaticsData}{Hydrostatics\-Data}
-\item 
+\begin{DoxyCompactList}\small\item\em Structure to hold Hydrostatics Calculation results. \end{DoxyCompactList}\item 
 struct \hyperlink{structShipCAD_1_1CrosscurvesData}{Crosscurves\-Data}
 \item 
 class \hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc}
-\item 
+\begin{DoxyCompactList}\small\item\em Initialize and execute Hydrostatics Data calculation for a waterplane. \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1Intersection}{Intersection}
 \begin{DoxyCompactList}\small\item\em List of curves intersecting hull. \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1Marker}{Marker}
@@ -79,9 +83,14 @@ class \hyperlink{classShipCAD_1_1UndoObject}{Undo\-Object}
 class \hyperlink{classShipCAD_1_1Viewport}{Viewport}
 \item 
 class \hyperlink{classShipCAD_1_1Visibility}{Visibility}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Settings class for visibility of different features. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classPointerVector}{Pointer\-Vector}\\*
+$<$ \hyperlink{classShipCAD_1_1BackgroundImage}{Background\-Image} $>$ \hyperlink{namespaceShipCAD_ac421659cf582dda585c31351043a79d3}{Background\-Image\-Vector}
+\item 
+typedef \hyperlink{classPointerVector}{Pointer\-Vector}$<$ \hyperlink{classShipCAD_1_1Flowline}{Flowline} $>$ \hyperlink{namespaceShipCAD_a266f1cbe13c1087079b277baa825b85d}{Flowline\-Vector}
 \item 
 typedef \hyperlink{classPointerVector}{Pointer\-Vector}\\*
 $<$ \hyperlink{classShipCAD_1_1HydrostaticCalc}{Hydrostatic\-Calc} $>$ \hyperlink{namespaceShipCAD_a0c7b012d8868cbb43871cf0bf303ccc6}{Hydrostatic\-Calc\-Vector}
@@ -123,27 +132,27 @@ enum \hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241e}{camera\-\_\-
 \hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe}{ft\-Far\-Tele}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_af34462de5db0247c80b656785e989233}{Hydrostatic\-Type} \{ \hyperlink{namespaceShipCAD_af34462de5db0247c80b656785e989233acfe164530006cd2d42457ec37a0ac24b}{fh\-Short} = 0, 
-\hyperlink{namespaceShipCAD_af34462de5db0247c80b656785e989233affd22dfa116c9ea2aae175feba432961}{fh\-Extensive}
+enum \hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2}{hydrostatic\-\_\-type\-\_\-t} \{ \hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2acfe164530006cd2d42457ec37a0ac24b}{fh\-Short} = 0, 
+\hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2affd22dfa116c9ea2aae175feba432961}{fh\-Extensive}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200a}{Hydrostatics\-Mode} \{ \hyperlink{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200aab322857f69d00b378f611acbb12bc663}{fh\-Single\-Calculation} = 0, 
-\hyperlink{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200aaee242838cf07c1950c914a44851804b5}{fh\-Multiple\-Calculations}
+enum \hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3}{hydrostatics\-\_\-mode\-\_\-t} \{ \hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3ab322857f69d00b378f611acbb12bc663}{fh\-Single\-Calculation} = 0, 
+\hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3aee242838cf07c1950c914a44851804b5}{fh\-Multiple\-Calculations}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0f}{Hydrostatic\-Error} \{ \hyperlink{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0fa0813d6e8a63bd1d17941b321715da4dd}{fe\-Nothing\-Submerged} = 0, 
-\hyperlink{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0fab5378e2d38e12b21bcb9f89b4da7a024}{fe\-Making\-Water}, 
-\hyperlink{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0faabbfd93b3daf55e537540d8d4ac8eb0c}{fe\-Not\-Enough\-Buoyancy}
+enum \hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0}{hydrostatics\-\_\-error\-\_\-t} \{ \hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0a0813d6e8a63bd1d17941b321715da4dd}{fe\-Nothing\-Submerged} = 0, 
+\hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0ab5378e2d38e12b21bcb9f89b4da7a024}{fe\-Making\-Water}, 
+\hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0aabbfd93b3daf55e537540d8d4ac8eb0c}{fe\-Not\-Enough\-Buoyancy}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93}{Hydrostatics\-Calculation} \{ \\*
-\hyperlink{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a286a6df9f1d51b98fcbb54f17fbe94d6}{hc\-All} = 0, 
-\hyperlink{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a10c43915dd92febe1ef5328644ea2c11}{hc\-Volume}, 
-\hyperlink{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93afb6824df148d1417a4db618e6b4dc4f6}{hc\-Mainframe}, 
-\hyperlink{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93af80e166aa0cdd03c48f0633f31da8e9f}{hc\-Waterline}, 
+enum \hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fce}{hydrostatics\-\_\-calc\-\_\-t} \{ \\*
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea286a6df9f1d51b98fcbb54f17fbe94d6}{hc\-All} = 0, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea10c43915dd92febe1ef5328644ea2c11}{hc\-Volume}, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceafb6824df148d1417a4db618e6b4dc4f6}{hc\-Mainframe}, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaf80e166aa0cdd03c48f0633f31da8e9f}{hc\-Waterline}, 
 \\*
-\hyperlink{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93aad2786c707b686af79e47765eba073d0}{hc\-S\-A\-C}, 
-\hyperlink{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a3d6d84cee5b8c79bf4d75a5dbc084e45}{hc\-Lateral\-Area}
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaad2786c707b686af79e47765eba073d0}{hc\-S\-A\-C}, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea3d6d84cee5b8c79bf4d75a5dbc084e45}{hc\-Lateral\-Area}
  \}
 \item 
 enum \hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{intersection\-\_\-type\-\_\-t} \{ \\*
@@ -191,7 +200,7 @@ enum \hyperlink{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7}{model\-\_\-v
  \}
 \item 
 enum \hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} \{ \\*
-\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694fa51d8bd5c8f27b04aab10ca53548e859c}{fv100} = 1, 
+\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694fa51d8bd5c8f27b04aab10ca53548e859c}{fv100} = 0, 
 \hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694faf700cb210a7e4b37d5d0d8652005d595}{fv110}, 
 \hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694fa83a7d69d5da0a112f916ff1688f8d6dd}{fv120}, 
 \hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694facb0b30e3da58984c321a7b65246a08f9}{fv130}, 
@@ -223,6 +232,18 @@ enum \hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+Q\-String \hyperlink{namespaceShipCAD_a2d7cf2fbcca4bd1dd75fd9ceb4ff0fa9}{Area\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+\item 
+Q\-String \hyperlink{namespaceShipCAD_aef3e2265fc686fbe6b50b081dcc4e6ff}{Length\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+\item 
+Q\-String \hyperlink{namespaceShipCAD_a01d1e42109b5645919c004f6d7a30b68}{Inertia\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+\item 
+Q\-String \hyperlink{namespaceShipCAD_a0758fd8275aafe6ad813d2a361281bf2}{Vol\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+\item 
+Q\-String \hyperlink{namespaceShipCAD_af977e4008c66d1a323d105f27622991b}{Density\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+\item 
+Q\-String \hyperlink{namespaceShipCAD_a62749df66958d1389c3cc6f6f03d42fb}{Weight\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+\item 
 void \hyperlink{namespaceShipCAD_aa5d3fc63603d716d3e24244049e1e510}{Min\-Max} (const Q\-Vector3\-D \&p, Q\-Vector3\-D \&min, Q\-Vector3\-D \&max)
 \item 
 float \hyperlink{namespaceShipCAD_a69361fa79b1f818e21306f6266ee45d3}{Distancepoint\-To\-Line} (const Q\-Vector3\-D \&p, const Q\-Vector3\-D \&l1, const Q\-Vector3\-D \&l2)
@@ -234,8 +255,6 @@ Q\-Vector3\-D \hyperlink{namespaceShipCAD_ad1ad66c896fe763fb4603989ff1f1182}{Mid
 int \hyperlink{namespaceShipCAD_a87efc267ae07a84fb1cd55a4562c2907}{Find\-D\-X\-F\-Color\-Index} (Q\-Color color)
 \item 
 Q\-Color \hyperlink{namespaceShipCAD_a9956eca83968462fc4c48c376a10d577}{Q\-Color\-From\-D\-X\-F\-Index} (int index)
-\item 
-Q\-String \hyperlink{namespaceShipCAD_a83d943939c1d84473bb904360116f7be}{truncate} (float val, int max\-\_\-length)
 \item 
 Q\-Vector3\-D \hyperlink{namespaceShipCAD_a81e47e31f89000550b007c0f9a4d09aa}{Unified\-Normal} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3)
 \item 
@@ -269,11 +288,13 @@ Q\-String \hyperlink{namespaceShipCAD_ae416df4a72579eb3a1a418b19551eb53}{Change\
 \begin{DoxyCompactList}\small\item\em Append or change the file extension to that given. \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_ad3ca198e79658bf065f1c1c416f23670}{Volume\-To\-Displacement} (float volume, float density, float appcoeff, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
 \item 
+Q\-String \hyperlink{namespaceShipCAD_ae378a523725f5718c9f2b55103f08dcb}{Make\-Length} (float value, int decimals, int des\-\_\-length)
+\begin{DoxyCompactList}\small\item\em Create a formatted string from a float value. \end{DoxyCompactList}\item 
+Q\-String \hyperlink{namespaceShipCAD_ab520595d533b1626c8be82c0efd24e6d}{Make\-Length} (const Q\-String \&value, int des\-\_\-length)
+\begin{DoxyCompactList}\small\item\em Create a string of a given length. \end{DoxyCompactList}\item 
+Q\-String \hyperlink{namespaceShipCAD_a83d943939c1d84473bb904360116f7be}{truncate} (float val, int max\-\_\-length)
+\begin{DoxyCompactList}\small\item\em convert a float value to a string with max number of decimals \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_a2901c6bb3e9ddd7efa9bdcc9095cc468}{version\-String} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} v)
-\item 
-\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} \hyperlink{namespaceShipCAD_aaacff40f3706c270a66e4c8296d17ebd}{version\-From\-Int} (int vint)
-\item 
-int \hyperlink{namespaceShipCAD_ad78a3ea3f966f52a2aa9befd3bfc73b0}{version\-To\-Int} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} v)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -296,7 +317,7 @@ const float \hyperlink{namespaceShipCAD_a80babe3fef93f1117e1c410f8d3c22c2}{k\-Zo
 \item 
 const int \hyperlink{namespaceShipCAD_afeba968c9abef53c8d1ff63855076dec}{File\-Buffer\-Block\-Size} = 4096
 \item 
-const char $\ast$ \hyperlink{namespaceShipCAD_a76ec58fc6d779982def49fface17b1a4}{k\-File\-Extension}
+const char $\ast$ \hyperlink{namespaceShipCAD_a6461e4d91e555f0c732b53f8998b325d}{k\-File\-Extension} = \char`\"{}.fbm\char`\"{}
 \item 
 const Q\-Vector3\-D \hyperlink{namespaceShipCAD_a949bc53a1634b268b43de672807480fb}{Z\-E\-R\-O}
 \item 
@@ -317,19 +338,33 @@ const Q\-String \hyperlink{namespaceShipCAD_a833fc6d39d2f0fd7fa31d0a691b0b726}{k
 
 
 \subsection{Typedef Documentation}
+\hypertarget{namespaceShipCAD_ac421659cf582dda585c31351043a79d3}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Background\-Image\-Vector@{Background\-Image\-Vector}}
+\index{Background\-Image\-Vector@{Background\-Image\-Vector}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Background\-Image\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Pointer\-Vector}$<${\bf Background\-Image}$>$ {\bf Ship\-C\-A\-D\-::\-Background\-Image\-Vector}}}\label{namespaceShipCAD_ac421659cf582dda585c31351043a79d3}
+
+
+Definition at line 108 of file backgroundimage.\-h.
+
+\hypertarget{namespaceShipCAD_a266f1cbe13c1087079b277baa825b85d}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Flowline\-Vector@{Flowline\-Vector}}
+\index{Flowline\-Vector@{Flowline\-Vector}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Flowline\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Pointer\-Vector}$<${\bf Flowline}$>$ {\bf Ship\-C\-A\-D\-::\-Flowline\-Vector}}}\label{namespaceShipCAD_a266f1cbe13c1087079b277baa825b85d}
+
+
+Definition at line 83 of file flowline.\-h.
+
 \hypertarget{namespaceShipCAD_a0c7b012d8868cbb43871cf0bf303ccc6}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Hydrostatic\-Calc\-Vector@{Hydrostatic\-Calc\-Vector}}
 \index{Hydrostatic\-Calc\-Vector@{Hydrostatic\-Calc\-Vector}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Hydrostatic\-Calc\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Pointer\-Vector}$<${\bf Hydrostatic\-Calc}$>$ {\bf Ship\-C\-A\-D\-::\-Hydrostatic\-Calc\-Vector}}}\label{namespaceShipCAD_a0c7b012d8868cbb43871cf0bf303ccc6}
 
 
-Definition at line 193 of file hydrostaticcalc.\-h.
+Definition at line 226 of file hydrostaticcalc.\-h.
 
 \hypertarget{namespaceShipCAD_a9910f0963197f9df6125398efd4fa139}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Intersection\-Vector@{Intersection\-Vector}}
 \index{Intersection\-Vector@{Intersection\-Vector}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Intersection\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Pointer\-Vector}$<${\bf Intersection}$>$ {\bf Ship\-C\-A\-D\-::\-Intersection\-Vector}}}\label{namespaceShipCAD_a9910f0963197f9df6125398efd4fa139}
 
 
-Definition at line 108 of file intersection.\-h.
+Definition at line 114 of file intersection.\-h.
 
 \hypertarget{namespaceShipCAD_a36fff5b53986f6d6976afc749463ef22}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Marker\-Vector@{Marker\-Vector}}
 \index{Marker\-Vector@{Marker\-Vector}!ShipCAD@{Ship\-C\-A\-D}}
@@ -369,7 +404,7 @@ Definition at line 116 of file subdivcontrolcurve.\-h.
 \end{Desc}
 
 
-Definition at line 146 of file shipcadlib.\-h.
+Definition at line 147 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241e}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!camera\-\_\-type\-\_\-t@{camera\-\_\-type\-\_\-t}}
 \index{camera\-\_\-type\-\_\-t@{camera\-\_\-type\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -391,7 +426,7 @@ Definition at line 146 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 72 of file shipcadlib.\-h.
+Definition at line 73 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a66144e3f3a53da01f51c9bdb94fcae31}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!edit\-\_\-mode\-\_\-t@{edit\-\_\-mode\-\_\-t}}
 \index{edit\-\_\-mode\-\_\-t@{edit\-\_\-mode\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -405,7 +440,7 @@ Definition at line 72 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 130 of file shipcadlib.\-h.
+Definition at line 131 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a9cf77f0900561de9efc572dcbad4dbbd}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hydrostatic\-\_\-coeff\-\_\-t@{hydrostatic\-\_\-coeff\-\_\-t}}
 \index{hydrostatic\-\_\-coeff\-\_\-t@{hydrostatic\-\_\-coeff\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -421,81 +456,81 @@ Definition at line 130 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 118 of file shipcadlib.\-h.
+Definition at line 119 of file shipcadlib.\-h.
 
-\hypertarget{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0f}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Hydrostatic\-Error@{Hydrostatic\-Error}}
-\index{Hydrostatic\-Error@{Hydrostatic\-Error}!ShipCAD@{Ship\-C\-A\-D}}
-\subsubsection[{Hydrostatic\-Error}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::\-Hydrostatic\-Error}}}\label{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0f}
-\begin{Desc}
-\item[Enumerator]\par
-\begin{description}
-\index{fe\-Nothing\-Submerged@{fe\-Nothing\-Submerged}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fe\-Nothing\-Submerged@{fe\-Nothing\-Submerged}}\item[{\em 
-\hypertarget{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0fa0813d6e8a63bd1d17941b321715da4dd}{fe\-Nothing\-Submerged}\label{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0fa0813d6e8a63bd1d17941b321715da4dd}
-}]\index{fe\-Making\-Water@{fe\-Making\-Water}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fe\-Making\-Water@{fe\-Making\-Water}}\item[{\em 
-\hypertarget{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0fab5378e2d38e12b21bcb9f89b4da7a024}{fe\-Making\-Water}\label{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0fab5378e2d38e12b21bcb9f89b4da7a024}
-}]\index{fe\-Not\-Enough\-Buoyancy@{fe\-Not\-Enough\-Buoyancy}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fe\-Not\-Enough\-Buoyancy@{fe\-Not\-Enough\-Buoyancy}}\item[{\em 
-\hypertarget{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0faabbfd93b3daf55e537540d8d4ac8eb0c}{fe\-Not\-Enough\-Buoyancy}\label{namespaceShipCAD_a48b5202490cd6d86939d57c867837c0faabbfd93b3daf55e537540d8d4ac8eb0c}
-}]\end{description}
-\end{Desc}
-
-
-Definition at line 90 of file shipcadlib.\-h.
-
-\hypertarget{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Hydrostatics\-Calculation@{Hydrostatics\-Calculation}}
-\index{Hydrostatics\-Calculation@{Hydrostatics\-Calculation}!ShipCAD@{Ship\-C\-A\-D}}
-\subsubsection[{Hydrostatics\-Calculation}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::\-Hydrostatics\-Calculation}}}\label{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93}
-\begin{Desc}
-\item[Enumerator]\par
-\begin{description}
-\index{hc\-All@{hc\-All}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-All@{hc\-All}}\item[{\em 
-\hypertarget{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a286a6df9f1d51b98fcbb54f17fbe94d6}{hc\-All}\label{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a286a6df9f1d51b98fcbb54f17fbe94d6}
-}]\index{hc\-Volume@{hc\-Volume}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Volume@{hc\-Volume}}\item[{\em 
-\hypertarget{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a10c43915dd92febe1ef5328644ea2c11}{hc\-Volume}\label{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a10c43915dd92febe1ef5328644ea2c11}
-}]\index{hc\-Mainframe@{hc\-Mainframe}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Mainframe@{hc\-Mainframe}}\item[{\em 
-\hypertarget{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93afb6824df148d1417a4db618e6b4dc4f6}{hc\-Mainframe}\label{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93afb6824df148d1417a4db618e6b4dc4f6}
-}]\index{hc\-Waterline@{hc\-Waterline}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Waterline@{hc\-Waterline}}\item[{\em 
-\hypertarget{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93af80e166aa0cdd03c48f0633f31da8e9f}{hc\-Waterline}\label{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93af80e166aa0cdd03c48f0633f31da8e9f}
-}]\index{hc\-S\-A\-C@{hc\-S\-A\-C}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-S\-A\-C@{hc\-S\-A\-C}}\item[{\em 
-\hypertarget{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93aad2786c707b686af79e47765eba073d0}{hc\-S\-A\-C}\label{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93aad2786c707b686af79e47765eba073d0}
-}]\index{hc\-Lateral\-Area@{hc\-Lateral\-Area}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Lateral\-Area@{hc\-Lateral\-Area}}\item[{\em 
-\hypertarget{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a3d6d84cee5b8c79bf4d75a5dbc084e45}{hc\-Lateral\-Area}\label{namespaceShipCAD_a0612ca68b6918148a0d9871184264f93a3d6d84cee5b8c79bf4d75a5dbc084e45}
-}]\end{description}
-\end{Desc}
-
-
-Definition at line 96 of file shipcadlib.\-h.
-
-\hypertarget{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200a}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Hydrostatics\-Mode@{Hydrostatics\-Mode}}
-\index{Hydrostatics\-Mode@{Hydrostatics\-Mode}!ShipCAD@{Ship\-C\-A\-D}}
-\subsubsection[{Hydrostatics\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::\-Hydrostatics\-Mode}}}\label{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200a}
-\begin{Desc}
-\item[Enumerator]\par
-\begin{description}
-\index{fh\-Single\-Calculation@{fh\-Single\-Calculation}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fh\-Single\-Calculation@{fh\-Single\-Calculation}}\item[{\em 
-\hypertarget{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200aab322857f69d00b378f611acbb12bc663}{fh\-Single\-Calculation}\label{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200aab322857f69d00b378f611acbb12bc663}
-}]\index{fh\-Multiple\-Calculations@{fh\-Multiple\-Calculations}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fh\-Multiple\-Calculations@{fh\-Multiple\-Calculations}}\item[{\em 
-\hypertarget{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200aaee242838cf07c1950c914a44851804b5}{fh\-Multiple\-Calculations}\label{namespaceShipCAD_a1d3d04d35d63e8a5e44c63183f79200aaee242838cf07c1950c914a44851804b5}
-}]\end{description}
-\end{Desc}
-
-
-Definition at line 85 of file shipcadlib.\-h.
-
-\hypertarget{namespaceShipCAD_af34462de5db0247c80b656785e989233}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Hydrostatic\-Type@{Hydrostatic\-Type}}
-\index{Hydrostatic\-Type@{Hydrostatic\-Type}!ShipCAD@{Ship\-C\-A\-D}}
-\subsubsection[{Hydrostatic\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::\-Hydrostatic\-Type}}}\label{namespaceShipCAD_af34462de5db0247c80b656785e989233}
+\hypertarget{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hydrostatic\-\_\-type\-\_\-t@{hydrostatic\-\_\-type\-\_\-t}}
+\index{hydrostatic\-\_\-type\-\_\-t@{hydrostatic\-\_\-type\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{hydrostatic\-\_\-type\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::hydrostatic\-\_\-type\-\_\-t}}}\label{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2}
 \begin{Desc}
 \item[Enumerator]\par
 \begin{description}
 \index{fh\-Short@{fh\-Short}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fh\-Short@{fh\-Short}}\item[{\em 
-\hypertarget{namespaceShipCAD_af34462de5db0247c80b656785e989233acfe164530006cd2d42457ec37a0ac24b}{fh\-Short}\label{namespaceShipCAD_af34462de5db0247c80b656785e989233acfe164530006cd2d42457ec37a0ac24b}
+\hypertarget{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2acfe164530006cd2d42457ec37a0ac24b}{fh\-Short}\label{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2acfe164530006cd2d42457ec37a0ac24b}
 }]\index{fh\-Extensive@{fh\-Extensive}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fh\-Extensive@{fh\-Extensive}}\item[{\em 
-\hypertarget{namespaceShipCAD_af34462de5db0247c80b656785e989233affd22dfa116c9ea2aae175feba432961}{fh\-Extensive}\label{namespaceShipCAD_af34462de5db0247c80b656785e989233affd22dfa116c9ea2aae175feba432961}
+\hypertarget{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2affd22dfa116c9ea2aae175feba432961}{fh\-Extensive}\label{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2affd22dfa116c9ea2aae175feba432961}
 }]\end{description}
 \end{Desc}
 
 
-Definition at line 80 of file shipcadlib.\-h.
+Definition at line 81 of file shipcadlib.\-h.
+
+\hypertarget{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fce}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hydrostatics\-\_\-calc\-\_\-t@{hydrostatics\-\_\-calc\-\_\-t}}
+\index{hydrostatics\-\_\-calc\-\_\-t@{hydrostatics\-\_\-calc\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{hydrostatics\-\_\-calc\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::hydrostatics\-\_\-calc\-\_\-t}}}\label{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fce}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{hc\-All@{hc\-All}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-All@{hc\-All}}\item[{\em 
+\hypertarget{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea286a6df9f1d51b98fcbb54f17fbe94d6}{hc\-All}\label{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea286a6df9f1d51b98fcbb54f17fbe94d6}
+}]\index{hc\-Volume@{hc\-Volume}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Volume@{hc\-Volume}}\item[{\em 
+\hypertarget{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea10c43915dd92febe1ef5328644ea2c11}{hc\-Volume}\label{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea10c43915dd92febe1ef5328644ea2c11}
+}]\index{hc\-Mainframe@{hc\-Mainframe}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Mainframe@{hc\-Mainframe}}\item[{\em 
+\hypertarget{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceafb6824df148d1417a4db618e6b4dc4f6}{hc\-Mainframe}\label{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceafb6824df148d1417a4db618e6b4dc4f6}
+}]\index{hc\-Waterline@{hc\-Waterline}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Waterline@{hc\-Waterline}}\item[{\em 
+\hypertarget{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaf80e166aa0cdd03c48f0633f31da8e9f}{hc\-Waterline}\label{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaf80e166aa0cdd03c48f0633f31da8e9f}
+}]\index{hc\-S\-A\-C@{hc\-S\-A\-C}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-S\-A\-C@{hc\-S\-A\-C}}\item[{\em 
+\hypertarget{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaad2786c707b686af79e47765eba073d0}{hc\-S\-A\-C}\label{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaad2786c707b686af79e47765eba073d0}
+}]\index{hc\-Lateral\-Area@{hc\-Lateral\-Area}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hc\-Lateral\-Area@{hc\-Lateral\-Area}}\item[{\em 
+\hypertarget{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea3d6d84cee5b8c79bf4d75a5dbc084e45}{hc\-Lateral\-Area}\label{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea3d6d84cee5b8c79bf4d75a5dbc084e45}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 97 of file shipcadlib.\-h.
+
+\hypertarget{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hydrostatics\-\_\-error\-\_\-t@{hydrostatics\-\_\-error\-\_\-t}}
+\index{hydrostatics\-\_\-error\-\_\-t@{hydrostatics\-\_\-error\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{hydrostatics\-\_\-error\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::hydrostatics\-\_\-error\-\_\-t}}}\label{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{fe\-Nothing\-Submerged@{fe\-Nothing\-Submerged}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fe\-Nothing\-Submerged@{fe\-Nothing\-Submerged}}\item[{\em 
+\hypertarget{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0a0813d6e8a63bd1d17941b321715da4dd}{fe\-Nothing\-Submerged}\label{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0a0813d6e8a63bd1d17941b321715da4dd}
+}]\index{fe\-Making\-Water@{fe\-Making\-Water}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fe\-Making\-Water@{fe\-Making\-Water}}\item[{\em 
+\hypertarget{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0ab5378e2d38e12b21bcb9f89b4da7a024}{fe\-Making\-Water}\label{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0ab5378e2d38e12b21bcb9f89b4da7a024}
+}]\index{fe\-Not\-Enough\-Buoyancy@{fe\-Not\-Enough\-Buoyancy}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fe\-Not\-Enough\-Buoyancy@{fe\-Not\-Enough\-Buoyancy}}\item[{\em 
+\hypertarget{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0aabbfd93b3daf55e537540d8d4ac8eb0c}{fe\-Not\-Enough\-Buoyancy}\label{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0aabbfd93b3daf55e537540d8d4ac8eb0c}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 91 of file shipcadlib.\-h.
+
+\hypertarget{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!hydrostatics\-\_\-mode\-\_\-t@{hydrostatics\-\_\-mode\-\_\-t}}
+\index{hydrostatics\-\_\-mode\-\_\-t@{hydrostatics\-\_\-mode\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{hydrostatics\-\_\-mode\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ship\-C\-A\-D\-::hydrostatics\-\_\-mode\-\_\-t}}}\label{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{fh\-Single\-Calculation@{fh\-Single\-Calculation}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fh\-Single\-Calculation@{fh\-Single\-Calculation}}\item[{\em 
+\hypertarget{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3ab322857f69d00b378f611acbb12bc663}{fh\-Single\-Calculation}\label{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3ab322857f69d00b378f611acbb12bc663}
+}]\index{fh\-Multiple\-Calculations@{fh\-Multiple\-Calculations}!Ship\-C\-A\-D@{Ship\-C\-A\-D}}\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!fh\-Multiple\-Calculations@{fh\-Multiple\-Calculations}}\item[{\em 
+\hypertarget{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3aee242838cf07c1950c914a44851804b5}{fh\-Multiple\-Calculations}\label{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3aee242838cf07c1950c914a44851804b5}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 86 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!intersection\-\_\-type\-\_\-t@{intersection\-\_\-type\-\_\-t}}
 \index{intersection\-\_\-type\-\_\-t@{intersection\-\_\-type\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -517,7 +552,7 @@ Definition at line 80 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 105 of file shipcadlib.\-h.
+Definition at line 106 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!model\-\_\-view\-\_\-t@{model\-\_\-view\-\_\-t}}
 \index{model\-\_\-view\-\_\-t@{model\-\_\-view\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -533,7 +568,7 @@ Definition at line 105 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 151 of file shipcadlib.\-h.
+Definition at line 152 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!precision\-\_\-t@{precision\-\_\-t}}
 \index{precision\-\_\-t@{precision\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -553,7 +588,7 @@ Definition at line 151 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 123 of file shipcadlib.\-h.
+Definition at line 124 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!subdiv\-\_\-mode\-\_\-t@{subdiv\-\_\-mode\-\_\-t}}
 \index{subdiv\-\_\-mode\-\_\-t@{subdiv\-\_\-mode\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -569,7 +604,7 @@ Definition at line 123 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 141 of file shipcadlib.\-h.
+Definition at line 142 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!unit\-\_\-type\-\_\-t@{unit\-\_\-type\-\_\-t}}
 \index{unit\-\_\-type\-\_\-t@{unit\-\_\-type\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -585,7 +620,7 @@ Definition at line 141 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 113 of file shipcadlib.\-h.
+Definition at line 114 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!version\-\_\-t@{version\-\_\-t}}
 \index{version\-\_\-t@{version\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -661,7 +696,7 @@ Definition at line 39 of file version.\-h.
 \end{Desc}
 
 
-Definition at line 134 of file shipcadlib.\-h.
+Definition at line 135 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a67437198ee14f74e6c5277d761894863}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!viewport\-\_\-mode\-\_\-t@{viewport\-\_\-mode\-\_\-t}}
 \index{viewport\-\_\-mode\-\_\-t@{viewport\-\_\-mode\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -683,7 +718,7 @@ Definition at line 134 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 57 of file shipcadlib.\-h.
+Definition at line 58 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0a}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!viewport\-\_\-type\-\_\-t@{viewport\-\_\-type\-\_\-t}}
 \index{viewport\-\_\-type\-\_\-t@{viewport\-\_\-type\-\_\-t}!ShipCAD@{Ship\-C\-A\-D}}
@@ -703,11 +738,22 @@ Definition at line 57 of file shipcadlib.\-h.
 \end{Desc}
 
 
-Definition at line 65 of file shipcadlib.\-h.
+Definition at line 66 of file shipcadlib.\-h.
 
 
 
 \subsection{Function Documentation}
+\hypertarget{namespaceShipCAD_a2d7cf2fbcca4bd1dd75fd9ceb4ff0fa9}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Area\-Str@{Area\-Str}}
+\index{Area\-Str@{Area\-Str}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Area\-Str}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Area\-Str (
+\begin{DoxyParamCaption}
+\item[{{\bf unit\-\_\-type\-\_\-t}}]{units}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_a2d7cf2fbcca4bd1dd75fd9ceb4ff0fa9}
+
+
+Definition at line 42 of file shipcadlib.\-cpp.
+
 \hypertarget{namespaceShipCAD_a45ba7de6922e89cbddf2a4c9c810a2e4}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Bool\-To\-Str@{Bool\-To\-Str}}
 \index{Bool\-To\-Str@{Bool\-To\-Str}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Bool\-To\-Str}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Bool\-To\-Str (
@@ -792,6 +838,17 @@ Definition at line 274 of file utility.\-cpp.
 
 Definition at line 167 of file utility.\-cpp.
 
+\hypertarget{namespaceShipCAD_af977e4008c66d1a323d105f27622991b}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Density\-Str@{Density\-Str}}
+\index{Density\-Str@{Density\-Str}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Density\-Str}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Density\-Str (
+\begin{DoxyParamCaption}
+\item[{{\bf unit\-\_\-type\-\_\-t}}]{units}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_af977e4008c66d1a323d105f27622991b}
+
+
+Definition at line 70 of file shipcadlib.\-cpp.
+
 \hypertarget{namespaceShipCAD_a69361fa79b1f818e21306f6266ee45d3}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Distancepoint\-To\-Line@{Distancepoint\-To\-Line}}
 \index{Distancepoint\-To\-Line@{Distancepoint\-To\-Line}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Distancepoint\-To\-Line}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Distancepoint\-To\-Line (
@@ -868,6 +925,17 @@ the water viscosity
 
 Definition at line 447 of file utility.\-cpp.
 
+\hypertarget{namespaceShipCAD_a01d1e42109b5645919c004f6d7a30b68}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Inertia\-Str@{Inertia\-Str}}
+\index{Inertia\-Str@{Inertia\-Str}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Inertia\-Str}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Inertia\-Str (
+\begin{DoxyParamCaption}
+\item[{{\bf unit\-\_\-type\-\_\-t}}]{units}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_a01d1e42109b5645919c004f6d7a30b68}
+
+
+Definition at line 56 of file shipcadlib.\-cpp.
+
 \hypertarget{namespaceShipCAD_a83f7c2b40959a0d02a2cc1085b0d07ee}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Interpolate@{Interpolate}}
 \index{Interpolate@{Interpolate}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Interpolate}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Interpolate (
@@ -893,6 +961,72 @@ Definition at line 56 of file utility.\-cpp.
 
 
 Definition at line 317 of file utility.\-cpp.
+
+\hypertarget{namespaceShipCAD_aef3e2265fc686fbe6b50b081dcc4e6ff}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Length\-Str@{Length\-Str}}
+\index{Length\-Str@{Length\-Str}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Length\-Str}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Length\-Str (
+\begin{DoxyParamCaption}
+\item[{{\bf unit\-\_\-type\-\_\-t}}]{units}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_aef3e2265fc686fbe6b50b081dcc4e6ff}
+
+
+Definition at line 49 of file shipcadlib.\-cpp.
+
+\hypertarget{namespaceShipCAD_ae378a523725f5718c9f2b55103f08dcb}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Make\-Length@{Make\-Length}}
+\index{Make\-Length@{Make\-Length}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Make\-Length}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Make\-Length (
+\begin{DoxyParamCaption}
+\item[{float}]{value, }
+\item[{int}]{decimals, }
+\item[{int}]{des\-\_\-length}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_ae378a523725f5718c9f2b55103f08dcb}
+
+
+Create a formatted string from a float value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & the floating point value \\
+\hline
+{\em decimals} & \\
+\hline
+{\em des\-\_\-length} & the finished length of the string, add leading spaces to fill out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the fixed length string 
+\end{DoxyReturn}
+
+
+Definition at line 495 of file utility.\-cpp.
+
+\hypertarget{namespaceShipCAD_ab520595d533b1626c8be82c0efd24e6d}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Make\-Length@{Make\-Length}}
+\index{Make\-Length@{Make\-Length}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Make\-Length}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Make\-Length (
+\begin{DoxyParamCaption}
+\item[{const Q\-String \&}]{value, }
+\item[{int}]{des\-\_\-length}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_ab520595d533b1626c8be82c0efd24e6d}
+
+
+Create a string of a given length. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & the string to start with \\
+\hline
+{\em des\-\_\-length} & the finished length of the string, add leading spaces to fill out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the fixed length string 
+\end{DoxyReturn}
+
+
+Definition at line 503 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_ad1ad66c896fe763fb4603989ff1f1182}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Mid\-Point@{Mid\-Point}}
 \index{Mid\-Point@{Mid\-Point}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1030,6 +1164,20 @@ Definition at line 287 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_a83d943939c1d84473bb904360116f7be}
 
 
+convert a float value to a string with max number of decimals 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & the floating point value \\
+\hline
+{\em max\-\_\-length} & the maximum number of decimals to show in the string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the string with the converted floating point number 
+\end{DoxyReturn}
+
+
 Definition at line 148 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a81e47e31f89000550b007c0f9a4d09aa}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Unified\-Normal@{Unified\-Normal}}
@@ -1045,17 +1193,6 @@ Definition at line 148 of file utility.\-cpp.
 
 Definition at line 157 of file utility.\-cpp.
 
-\hypertarget{namespaceShipCAD_aaacff40f3706c270a66e4c8296d17ebd}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!version\-From\-Int@{version\-From\-Int}}
-\index{version\-From\-Int@{version\-From\-Int}!ShipCAD@{Ship\-C\-A\-D}}
-\subsubsection[{version\-From\-Int}]{\setlength{\rightskip}{0pt plus 5cm}{\bf version\-\_\-t} Ship\-C\-A\-D\-::version\-From\-Int (
-\begin{DoxyParamCaption}
-\item[{int}]{vint}
-\end{DoxyParamCaption}
-)}}\label{namespaceShipCAD_aaacff40f3706c270a66e4c8296d17ebd}
-
-
-Definition at line 38 of file version.\-cpp.
-
 \hypertarget{namespaceShipCAD_a2901c6bb3e9ddd7efa9bdcc9095cc468}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!version\-String@{version\-String}}
 \index{version\-String@{version\-String}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{version\-String}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::version\-String (
@@ -1065,18 +1202,18 @@ Definition at line 38 of file version.\-cpp.
 )}}\label{namespaceShipCAD_a2901c6bb3e9ddd7efa9bdcc9095cc468}
 
 
-Definition at line 48 of file version.\-cpp.
+Definition at line 38 of file version.\-cpp.
 
-\hypertarget{namespaceShipCAD_ad78a3ea3f966f52a2aa9befd3bfc73b0}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!version\-To\-Int@{version\-To\-Int}}
-\index{version\-To\-Int@{version\-To\-Int}!ShipCAD@{Ship\-C\-A\-D}}
-\subsubsection[{version\-To\-Int}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::version\-To\-Int (
+\hypertarget{namespaceShipCAD_a0758fd8275aafe6ad813d2a361281bf2}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Vol\-Str@{Vol\-Str}}
+\index{Vol\-Str@{Vol\-Str}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Vol\-Str}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Vol\-Str (
 \begin{DoxyParamCaption}
-\item[{{\bf version\-\_\-t}}]{v}
+\item[{{\bf unit\-\_\-type\-\_\-t}}]{units}
 \end{DoxyParamCaption}
-)}}\label{namespaceShipCAD_ad78a3ea3f966f52a2aa9befd3bfc73b0}
+)}}\label{namespaceShipCAD_a0758fd8275aafe6ad813d2a361281bf2}
 
 
-Definition at line 43 of file version.\-cpp.
+Definition at line 63 of file shipcadlib.\-cpp.
 
 \hypertarget{namespaceShipCAD_ad3ca198e79658bf065f1c1c416f23670}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Volume\-To\-Displacement@{Volume\-To\-Displacement}}
 \index{Volume\-To\-Displacement@{Volume\-To\-Displacement}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1092,6 +1229,17 @@ Definition at line 43 of file version.\-cpp.
 
 Definition at line 473 of file utility.\-cpp.
 
+\hypertarget{namespaceShipCAD_a62749df66958d1389c3cc6f6f03d42fb}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Weight\-Str@{Weight\-Str}}
+\index{Weight\-Str@{Weight\-Str}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Weight\-Str}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Weight\-Str (
+\begin{DoxyParamCaption}
+\item[{{\bf unit\-\_\-type\-\_\-t}}]{units}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_a62749df66958d1389c3cc6f6f03d42fb}
+
+
+Definition at line 77 of file shipcadlib.\-cpp.
+
 
 
 \subsection{Variable Documentation}
@@ -1100,7 +1248,7 @@ Definition at line 473 of file utility.\-cpp.
 \subsubsection[{File\-Buffer\-Block\-Size}]{\setlength{\rightskip}{0pt plus 5cm}const int Ship\-C\-A\-D\-::\-File\-Buffer\-Block\-Size = 4096}}\label{namespaceShipCAD_afeba968c9abef53c8d1ff63855076dec}
 
 
-Definition at line 47 of file shipcadlib.\-h.
+Definition at line 48 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_ad5a157bd082e37a863f05b7c54a1d7cc}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!g\-\_\-edge\-\_\-verbose@{g\-\_\-edge\-\_\-verbose}}
 \index{g\-\_\-edge\-\_\-verbose@{g\-\_\-edge\-\_\-verbose}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1142,12 +1290,12 @@ Definition at line 66 of file version.\-h.
 \subsubsection[{k\-Decimals}]{\setlength{\rightskip}{0pt plus 5cm}const int Ship\-C\-A\-D\-::k\-Decimals = 4}}\label{namespaceShipCAD_ac88ffd27e117a3e612997a36a5d4616d}
 
 
-Definition at line 43 of file shipcadlib.\-h.
+Definition at line 44 of file shipcadlib.\-h.
 
-\hypertarget{namespaceShipCAD_a76ec58fc6d779982def49fface17b1a4}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-File\-Extension@{k\-File\-Extension}}
+\hypertarget{namespaceShipCAD_a6461e4d91e555f0c732b53f8998b325d}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-File\-Extension@{k\-File\-Extension}}
 \index{k\-File\-Extension@{k\-File\-Extension}!ShipCAD@{Ship\-C\-A\-D}}
-\subsubsection[{k\-File\-Extension}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Ship\-C\-A\-D\-::k\-File\-Extension}}\label{namespaceShipCAD_a76ec58fc6d779982def49fface17b1a4}
-
+\subsubsection[{k\-File\-Extension}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Ship\-C\-A\-D\-::k\-File\-Extension = \char`\"{}.fbm\char`\"{}}}\label{namespaceShipCAD_a6461e4d91e555f0c732b53f8998b325d}
+default binary file extension 
 
 Definition at line 34 of file shipcadlib.\-cpp.
 
@@ -1156,56 +1304,57 @@ Definition at line 34 of file shipcadlib.\-cpp.
 \subsubsection[{k\-Foot}]{\setlength{\rightskip}{0pt plus 5cm}const float Ship\-C\-A\-D\-::k\-Foot = 0.\-3048f}}\label{namespaceShipCAD_a8c1484188fed1e735c5a94f64a6817ab}
 
 
-Definition at line 39 of file shipcadlib.\-h.
+Definition at line 40 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a1c0de7dc4306d7908bd8c6f7ff69ecdc}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-Increment\-Size@{k\-Increment\-Size}}
 \index{k\-Increment\-Size@{k\-Increment\-Size}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{k\-Increment\-Size}]{\setlength{\rightskip}{0pt plus 5cm}const int Ship\-C\-A\-D\-::k\-Increment\-Size = 25}}\label{namespaceShipCAD_a1c0de7dc4306d7908bd8c6f7ff69ecdc}
 
 
-Definition at line 42 of file shipcadlib.\-h.
+Definition at line 43 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_ad6937518d9742e268b279000d1e7a509}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-Lbs@{k\-Lbs}}
 \index{k\-Lbs@{k\-Lbs}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{k\-Lbs}]{\setlength{\rightskip}{0pt plus 5cm}const float Ship\-C\-A\-D\-::k\-Lbs = 0.\-4535924f}}\label{namespaceShipCAD_ad6937518d9742e268b279000d1e7a509}
 
 
-Definition at line 40 of file shipcadlib.\-h.
+Definition at line 41 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_ac8176e9d12f859826fb131b7febb8c8a}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-Pixel\-Count\-Max@{k\-Pixel\-Count\-Max}}
 \index{k\-Pixel\-Count\-Max@{k\-Pixel\-Count\-Max}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{k\-Pixel\-Count\-Max}]{\setlength{\rightskip}{0pt plus 5cm}const int Ship\-C\-A\-D\-::k\-Pixel\-Count\-Max = 32768}}\label{namespaceShipCAD_ac8176e9d12f859826fb131b7febb8c8a}
 
 
-Definition at line 44 of file shipcadlib.\-h.
+Definition at line 45 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_aa4319c8e7adfa68048f95c1614984036}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-Weight\-Conversion\-Factor@{k\-Weight\-Conversion\-Factor}}
 \index{k\-Weight\-Conversion\-Factor@{k\-Weight\-Conversion\-Factor}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{k\-Weight\-Conversion\-Factor}]{\setlength{\rightskip}{0pt plus 5cm}const float Ship\-C\-A\-D\-::k\-Weight\-Conversion\-Factor = (1000/{\bf k\-Lbs})/((1/{\bf k\-Foot})$\ast$(1/{\bf k\-Foot})$\ast$(1/{\bf k\-Foot}))}}\label{namespaceShipCAD_aa4319c8e7adfa68048f95c1614984036}
 
 
-Definition at line 41 of file shipcadlib.\-h.
+Definition at line 42 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a519c591e5f5e3f60603b3133a4a2094e}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-Z\-Buffer\-Scale\-Factor@{k\-Z\-Buffer\-Scale\-Factor}}
 \index{k\-Z\-Buffer\-Scale\-Factor@{k\-Z\-Buffer\-Scale\-Factor}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{k\-Z\-Buffer\-Scale\-Factor}]{\setlength{\rightskip}{0pt plus 5cm}const float Ship\-C\-A\-D\-::k\-Z\-Buffer\-Scale\-Factor = 1.\-004f}}\label{namespaceShipCAD_a519c591e5f5e3f60603b3133a4a2094e}
 
 
-Definition at line 45 of file shipcadlib.\-h.
+Definition at line 46 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_a80babe3fef93f1117e1c410f8d3c22c2}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-Zoomfactor@{k\-Zoomfactor}}
 \index{k\-Zoomfactor@{k\-Zoomfactor}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{k\-Zoomfactor}]{\setlength{\rightskip}{0pt plus 5cm}const float Ship\-C\-A\-D\-::k\-Zoomfactor = 1.\-02f}}\label{namespaceShipCAD_a80babe3fef93f1117e1c410f8d3c22c2}
 
 
-Definition at line 46 of file shipcadlib.\-h.
+Definition at line 47 of file shipcadlib.\-h.
 
 \hypertarget{namespaceShipCAD_ad454d484187a50b115d2e77055617816}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!O\-N\-E@{O\-N\-E}}
 \index{O\-N\-E@{O\-N\-E}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{O\-N\-E}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Vector3\-D Ship\-C\-A\-D\-::\-O\-N\-E}}\label{namespaceShipCAD_ad454d484187a50b115d2e77055617816}
-\hypertarget{namespaceShipCAD_a949bc53a1634b268b43de672807480fb}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Z\-E\-R\-O@{Z\-E\-R\-O}}
+vector(1,1,1) \hypertarget{namespaceShipCAD_a949bc53a1634b268b43de672807480fb}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Z\-E\-R\-O@{Z\-E\-R\-O}}
 \index{Z\-E\-R\-O@{Z\-E\-R\-O}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Z\-E\-R\-O}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Vector3\-D Ship\-C\-A\-D\-::\-Z\-E\-R\-O}}\label{namespaceShipCAD_a949bc53a1634b268b43de672807480fb}
-\hypertarget{namespaceShipCAD_ab47218dccdf4c94d5989b2e5b13d8603}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Z\-E\-R\-O2@{Z\-E\-R\-O2}}
+vector(0,0,0) \hypertarget{namespaceShipCAD_ab47218dccdf4c94d5989b2e5b13d8603}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Z\-E\-R\-O2@{Z\-E\-R\-O2}}
 \index{Z\-E\-R\-O2@{Z\-E\-R\-O2}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Z\-E\-R\-O2}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Vector2\-D Ship\-C\-A\-D\-::\-Z\-E\-R\-O2}}\label{namespaceShipCAD_ab47218dccdf4c94d5989b2e5b13d8603}
+vector(0,0) 

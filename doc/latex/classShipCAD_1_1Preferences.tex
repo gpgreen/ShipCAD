@@ -14,17 +14,17 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Preferences\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1Preferences_a42c4f0ca1f224941059ab63064e97643}{Preferences} (\hyperlink{classShipCAD_1_1ShipCADModel}{Ship\-C\-A\-D\-Model} $\ast$owner)
+\hyperlink{classShipCAD_1_1Preferences_afd469134e34b7e1982efeb1e402fce3b}{Preferences} (\hyperlink{classShipCAD_1_1ShipCADModel}{Ship\-C\-A\-D\-Model} $\ast$owner)
 \item 
 \hyperlink{classShipCAD_1_1Preferences_ab38e15f8965b1cd69b80369bb16a0995}{$\sim$\-Preferences} ()
 \item 
-Q\-String \hyperlink{classShipCAD_1_1Preferences_a364d0a7ee05937265ce16f788209d3b2}{get\-Export\-Directory} ()
+Q\-String \hyperlink{classShipCAD_1_1Preferences_a9673a7bf93112ff78b6c8ca5d7cc3a4b}{get\-Export\-Directory} () const 
 \item 
-Q\-String \hyperlink{classShipCAD_1_1Preferences_ae13135dc55b70c1eb897ef7fc9b2141e}{get\-Import\-Directory} ()
+Q\-String \hyperlink{classShipCAD_1_1Preferences_a275aac8dc6e72c021ad00ff68f2fba54}{get\-Import\-Directory} () const 
 \item 
-Q\-String \hyperlink{classShipCAD_1_1Preferences_acffe4077f56c31be66bad278b4d4a2ad}{get\-Open\-Directory} ()
+Q\-String \hyperlink{classShipCAD_1_1Preferences_ab1ac99acb5ceb37b5cf7f6b21f376f27}{get\-Open\-Directory} () const 
 \item 
-Q\-String \hyperlink{classShipCAD_1_1Preferences_adcf851de96cfb795773711e1b81ed859}{get\-Save\-Directory} ()
+Q\-String \hyperlink{classShipCAD_1_1Preferences_a5ee1cbf3c572b9253cfe958055e0eb43}{get\-Save\-Directory} () const 
 \item 
 void \hyperlink{classShipCAD_1_1Preferences_ad120b46e68a08d7682aaeb351b4c179d}{set\-Viewport\-Color} (Q\-Color col)
 \item 
@@ -32,26 +32,23 @@ void \hyperlink{classShipCAD_1_1Preferences_a326180a1551596a3a9f2709d31c9fb10}{e
 \item 
 void \hyperlink{classShipCAD_1_1Preferences_a70c1b8f3b9e117d67c3cd50c33f66f3a}{load} ()
 \item 
-void \hyperlink{classShipCAD_1_1Preferences_a819790ae129967fedd2fdef27e58fac0}{reset\-Colors} ()
+void \hyperlink{classShipCAD_1_1Preferences_a2e7e496b3417148240994e51281b0858}{reset\-Colors} ()
 \item 
 void \hyperlink{classShipCAD_1_1Preferences_ab3f40207c39fe262a7ae16ca22b297b2}{save} ()
 \item 
-size\-\_\-t \hyperlink{classShipCAD_1_1Preferences_a0515b279b2bf1bbebeb902544d2b15fd}{get\-Max\-Undo\-Memory} ()
+size\-\_\-t \hyperlink{classShipCAD_1_1Preferences_a8ddfbabd8be21f6390f3750600047a87}{get\-Max\-Undo\-Memory} () const 
 \begin{DoxyCompactList}\small\item\em get maximum amount of undo memory \end{DoxyCompactList}\item 
-Q\-Color \hyperlink{classShipCAD_1_1Preferences_af4788e1a2fb21981e1c828f918a6aa64}{get\-Station\-Color} ()
+Q\-Color \hyperlink{classShipCAD_1_1Preferences_af54f177e516849e7f8212841db9b1ed8}{get\-Select\-Color} () const 
 \item 
-Q\-Color \hyperlink{classShipCAD_1_1Preferences_a4250fdc214a6f7fd4e694a8d7ce2a64a}{get\-Buttock\-Color} ()
+Q\-Color \hyperlink{classShipCAD_1_1Preferences_a39e4abd32055512f8009f4c8ab5cd379}{get\-Station\-Color} () const 
 \item 
-Q\-Color \hyperlink{classShipCAD_1_1Preferences_a9d02feb9d74677ef2fabc718ae22c05d}{get\-Waterline\-Color} ()
+Q\-Color \hyperlink{classShipCAD_1_1Preferences_aa34f502af478c340ff359c76b90620c0}{get\-Buttock\-Color} () const 
 \item 
-Q\-Color \hyperlink{classShipCAD_1_1Preferences_aca988ba7652207d09eadbdc805b16c0f}{get\-Diagonal\-Color} ()
+Q\-Color \hyperlink{classShipCAD_1_1Preferences_a518043b34395026be6ebcf8f4e6e6591}{get\-Waterline\-Color} () const 
 \item 
-void \hyperlink{classShipCAD_1_1Preferences_ad7a470973484fc81e15f28c98c22074d}{clear} ()
-\end{DoxyCompactItemize}
-\subsection*{Static Public Member Functions}
-\begin{DoxyCompactItemize}
+Q\-Color \hyperlink{classShipCAD_1_1Preferences_a238b56f29c89be9c2d9533cb9db21552}{get\-Diagonal\-Color} () const 
 \item 
-static \hyperlink{classShipCAD_1_1Preferences}{Preferences} $\ast$ \hyperlink{classShipCAD_1_1Preferences_ab5b00454ce36fa2afb8ca278bfd7424c}{construct} (\hyperlink{classShipCAD_1_1ShipCADModel}{Ship\-C\-A\-D\-Model} $\ast$owner)
+void \hyperlink{classShipCAD_1_1Preferences_ae2139f76ba4038b4e713ca75dcb8157e}{clear} ()
 \end{DoxyCompactItemize}
 
 
@@ -63,37 +60,42 @@ Definition at line 42 of file preferences.\-h.
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1Preferences_a42c4f0ca1f224941059ab63064e97643}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!Preferences@{Preferences}}
+\hypertarget{classShipCAD_1_1Preferences_afd469134e34b7e1982efeb1e402fce3b}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!Preferences@{Preferences}}
 \index{Preferences@{Preferences}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
-\subsubsection[{Preferences}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Preferences\-::\-Preferences (
+\subsubsection[{Preferences}]{\setlength{\rightskip}{0pt plus 5cm}Preferences\-::\-Preferences (
 \begin{DoxyParamCaption}
 \item[{{\bf Ship\-C\-A\-D\-Model} $\ast$}]{owner}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1Preferences_a42c4f0ca1f224941059ab63064e97643}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1Preferences_afd469134e34b7e1982efeb1e402fce3b}
+
+
+Definition at line 35 of file preferences.\-cpp.
+
 \hypertarget{classShipCAD_1_1Preferences_ab38e15f8965b1cd69b80369bb16a0995}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!$\sim$\-Preferences@{$\sim$\-Preferences}}
 \index{$\sim$\-Preferences@{$\sim$\-Preferences}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{$\sim$\-Preferences}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Preferences\-::$\sim$\-Preferences (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Preferences_ab38e15f8965b1cd69b80369bb16a0995}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_ab38e15f8965b1cd69b80369bb16a0995}
+
+
+Definition at line 48 of file preferences.\-h.
+
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1Preferences_ad7a470973484fc81e15f28c98c22074d}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!clear@{clear}}
+\hypertarget{classShipCAD_1_1Preferences_ae2139f76ba4038b4e713ca75dcb8157e}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!clear@{clear}}
 \index{clear@{clear}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
-\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Preferences\-::clear (
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Preferences\-::clear (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Preferences_ad7a470973484fc81e15f28c98c22074d}
-\hypertarget{classShipCAD_1_1Preferences_ab5b00454ce36fa2afb8ca278bfd7424c}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!construct@{construct}}
-\index{construct@{construct}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
-\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Preferences}$\ast$ Ship\-C\-A\-D\-::\-Preferences\-::construct (
-\begin{DoxyParamCaption}
-\item[{{\bf Ship\-C\-A\-D\-Model} $\ast$}]{owner}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1Preferences_ab5b00454ce36fa2afb8ca278bfd7424c}
+)}}\label{classShipCAD_1_1Preferences_ae2139f76ba4038b4e713ca75dcb8157e}
+
+
+Definition at line 41 of file preferences.\-cpp.
+
 \hypertarget{classShipCAD_1_1Preferences_a326180a1551596a3a9f2709d31c9fb10}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!edit@{edit}}
 \index{edit@{edit}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{edit}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Preferences\-::edit (
@@ -101,49 +103,49 @@ Definition at line 42 of file preferences.\-h.
 {}
 \end{DoxyParamCaption}
 )}}\label{classShipCAD_1_1Preferences_a326180a1551596a3a9f2709d31c9fb10}
-\hypertarget{classShipCAD_1_1Preferences_a4250fdc214a6f7fd4e694a8d7ce2a64a}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Buttock\-Color@{get\-Buttock\-Color}}
+\hypertarget{classShipCAD_1_1Preferences_aa34f502af478c340ff359c76b90620c0}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Buttock\-Color@{get\-Buttock\-Color}}
 \index{get\-Buttock\-Color@{get\-Buttock\-Color}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Buttock\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Preferences\-::get\-Buttock\-Color (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_a4250fdc214a6f7fd4e694a8d7ce2a64a}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_aa34f502af478c340ff359c76b90620c0}
 
 
-Definition at line 71 of file preferences.\-h.
+Definition at line 73 of file preferences.\-h.
 
-\hypertarget{classShipCAD_1_1Preferences_aca988ba7652207d09eadbdc805b16c0f}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Diagonal\-Color@{get\-Diagonal\-Color}}
+\hypertarget{classShipCAD_1_1Preferences_a238b56f29c89be9c2d9533cb9db21552}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Diagonal\-Color@{get\-Diagonal\-Color}}
 \index{get\-Diagonal\-Color@{get\-Diagonal\-Color}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Diagonal\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Preferences\-::get\-Diagonal\-Color (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_aca988ba7652207d09eadbdc805b16c0f}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_a238b56f29c89be9c2d9533cb9db21552}
 
 
-Definition at line 73 of file preferences.\-h.
+Definition at line 77 of file preferences.\-h.
 
-\hypertarget{classShipCAD_1_1Preferences_a364d0a7ee05937265ce16f788209d3b2}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Export\-Directory@{get\-Export\-Directory}}
+\hypertarget{classShipCAD_1_1Preferences_a9673a7bf93112ff78b6c8ca5d7cc3a4b}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Export\-Directory@{get\-Export\-Directory}}
 \index{get\-Export\-Directory@{get\-Export\-Directory}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Export\-Directory}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Preferences\-::get\-Export\-Directory (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Preferences_a364d0a7ee05937265ce16f788209d3b2}
-\hypertarget{classShipCAD_1_1Preferences_ae13135dc55b70c1eb897ef7fc9b2141e}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Import\-Directory@{get\-Import\-Directory}}
+) const}}\label{classShipCAD_1_1Preferences_a9673a7bf93112ff78b6c8ca5d7cc3a4b}
+\hypertarget{classShipCAD_1_1Preferences_a275aac8dc6e72c021ad00ff68f2fba54}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Import\-Directory@{get\-Import\-Directory}}
 \index{get\-Import\-Directory@{get\-Import\-Directory}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Import\-Directory}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Preferences\-::get\-Import\-Directory (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Preferences_ae13135dc55b70c1eb897ef7fc9b2141e}
-\hypertarget{classShipCAD_1_1Preferences_a0515b279b2bf1bbebeb902544d2b15fd}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Max\-Undo\-Memory@{get\-Max\-Undo\-Memory}}
+) const}}\label{classShipCAD_1_1Preferences_a275aac8dc6e72c021ad00ff68f2fba54}
+\hypertarget{classShipCAD_1_1Preferences_a8ddfbabd8be21f6390f3750600047a87}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Max\-Undo\-Memory@{get\-Max\-Undo\-Memory}}
 \index{get\-Max\-Undo\-Memory@{get\-Max\-Undo\-Memory}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Max\-Undo\-Memory}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Preferences\-::get\-Max\-Undo\-Memory (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_a0515b279b2bf1bbebeb902544d2b15fd}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_a8ddfbabd8be21f6390f3750600047a87}
 
 
 get maximum amount of undo memory 
@@ -153,43 +155,54 @@ max amount of undo memory in mb
 \end{DoxyReturn}
 
 
-Definition at line 68 of file preferences.\-h.
+Definition at line 66 of file preferences.\-h.
 
-\hypertarget{classShipCAD_1_1Preferences_acffe4077f56c31be66bad278b4d4a2ad}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Open\-Directory@{get\-Open\-Directory}}
+\hypertarget{classShipCAD_1_1Preferences_ab1ac99acb5ceb37b5cf7f6b21f376f27}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Open\-Directory@{get\-Open\-Directory}}
 \index{get\-Open\-Directory@{get\-Open\-Directory}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Open\-Directory}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Preferences\-::get\-Open\-Directory (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Preferences_acffe4077f56c31be66bad278b4d4a2ad}
-\hypertarget{classShipCAD_1_1Preferences_adcf851de96cfb795773711e1b81ed859}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Save\-Directory@{get\-Save\-Directory}}
+) const}}\label{classShipCAD_1_1Preferences_ab1ac99acb5ceb37b5cf7f6b21f376f27}
+\hypertarget{classShipCAD_1_1Preferences_a5ee1cbf3c572b9253cfe958055e0eb43}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Save\-Directory@{get\-Save\-Directory}}
 \index{get\-Save\-Directory@{get\-Save\-Directory}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Save\-Directory}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Preferences\-::get\-Save\-Directory (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Preferences_adcf851de96cfb795773711e1b81ed859}
-\hypertarget{classShipCAD_1_1Preferences_af4788e1a2fb21981e1c828f918a6aa64}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Station\-Color@{get\-Station\-Color}}
+) const}}\label{classShipCAD_1_1Preferences_a5ee1cbf3c572b9253cfe958055e0eb43}
+\hypertarget{classShipCAD_1_1Preferences_af54f177e516849e7f8212841db9b1ed8}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Select\-Color@{get\-Select\-Color}}
+\index{get\-Select\-Color@{get\-Select\-Color}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
+\subsubsection[{get\-Select\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Preferences\-::get\-Select\-Color (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_af54f177e516849e7f8212841db9b1ed8}
+
+
+Definition at line 69 of file preferences.\-h.
+
+\hypertarget{classShipCAD_1_1Preferences_a39e4abd32055512f8009f4c8ab5cd379}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Station\-Color@{get\-Station\-Color}}
 \index{get\-Station\-Color@{get\-Station\-Color}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Station\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Preferences\-::get\-Station\-Color (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_af4788e1a2fb21981e1c828f918a6aa64}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_a39e4abd32055512f8009f4c8ab5cd379}
 
 
-Definition at line 70 of file preferences.\-h.
+Definition at line 71 of file preferences.\-h.
 
-\hypertarget{classShipCAD_1_1Preferences_a9d02feb9d74677ef2fabc718ae22c05d}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Waterline\-Color@{get\-Waterline\-Color}}
+\hypertarget{classShipCAD_1_1Preferences_a518043b34395026be6ebcf8f4e6e6591}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!get\-Waterline\-Color@{get\-Waterline\-Color}}
 \index{get\-Waterline\-Color@{get\-Waterline\-Color}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{get\-Waterline\-Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Preferences\-::get\-Waterline\-Color (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_a9d02feb9d74677ef2fabc718ae22c05d}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Preferences_a518043b34395026be6ebcf8f4e6e6591}
 
 
-Definition at line 72 of file preferences.\-h.
+Definition at line 75 of file preferences.\-h.
 
 \hypertarget{classShipCAD_1_1Preferences_a70c1b8f3b9e117d67c3cd50c33f66f3a}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!load@{load}}
 \index{load@{load}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
@@ -198,13 +211,17 @@ Definition at line 72 of file preferences.\-h.
 {}
 \end{DoxyParamCaption}
 )}}\label{classShipCAD_1_1Preferences_a70c1b8f3b9e117d67c3cd50c33f66f3a}
-\hypertarget{classShipCAD_1_1Preferences_a819790ae129967fedd2fdef27e58fac0}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!reset\-Colors@{reset\-Colors}}
+\hypertarget{classShipCAD_1_1Preferences_a2e7e496b3417148240994e51281b0858}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!reset\-Colors@{reset\-Colors}}
 \index{reset\-Colors@{reset\-Colors}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
-\subsubsection[{reset\-Colors}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Preferences\-::reset\-Colors (
+\subsubsection[{reset\-Colors}]{\setlength{\rightskip}{0pt plus 5cm}void Preferences\-::reset\-Colors (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Preferences_a819790ae129967fedd2fdef27e58fac0}
+)}}\label{classShipCAD_1_1Preferences_a2e7e496b3417148240994e51281b0858}
+
+
+Definition at line 48 of file preferences.\-cpp.
+
 \hypertarget{classShipCAD_1_1Preferences_ab3f40207c39fe262a7ae16ca22b297b2}{\index{Ship\-C\-A\-D\-::\-Preferences@{Ship\-C\-A\-D\-::\-Preferences}!save@{save}}
 \index{save@{save}!ShipCAD::Preferences@{Ship\-C\-A\-D\-::\-Preferences}}
 \subsubsection[{save}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Preferences\-::save (
@@ -221,6 +238,7 @@ Definition at line 72 of file preferences.\-h.
 )}}\label{classShipCAD_1_1Preferences_ad120b46e68a08d7682aaeb351b4c179d}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{preferences_8h}{preferences.\-h}\end{DoxyCompactItemize}
+Ship\-C\-A\-Dlib/\hyperlink{preferences_8h}{preferences.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{preferences_8cpp}{preferences.\-cpp}\end{DoxyCompactItemize}

@@ -8,6 +8,7 @@ var searchData=
   ['mainwindow',['MainWindow',['../classMainWindow.html',1,'MainWindow'],['../classMainWindow.html#a8b244be8b7b7db1b08de2a2acb9409db',1,'MainWindow::MainWindow()']]],
   ['mainwindow_2ecpp',['mainwindow.cpp',['../mainwindow_8cpp.html',1,'']]],
   ['mainwindow_2eh',['mainwindow.h',['../mainwindow_8h.html',1,'']]],
+  ['makelength',['MakeLength',['../namespaceShipCAD.html#ae378a523725f5718c9f2b55103f08dcb',1,'ShipCAD::MakeLength(float value, int decimals, int des_length)'],['../namespaceShipCAD.html#ab520595d533b1626c8be82c0efd24e6d',1,'ShipCAD::MakeLength(const QString &amp;value, int des_length)']]],
   ['marker',['Marker',['../classShipCAD_1_1Marker.html',1,'ShipCAD']]],
   ['marker',['Marker',['../classShipCAD_1_1Marker.html#a216cf592a0945f6b6923a00c9625e3bf',1,'ShipCAD::Marker']]],
   ['marker_2ecpp',['marker.cpp',['../marker_8cpp.html',1,'']]],
@@ -19,6 +20,7 @@ var searchData=
   ['min',['Min',['../classShipCAD_1_1Entity.html#ac363c3a8e4d5553b98996d6114b6b148',1,'ShipCAD::Entity::Min()'],['../classShipCAD_1_1SubdivisionControlFace.html#a4d47101c36502d8c3c238af213698280',1,'ShipCAD::SubdivisionControlFace::Min()']]],
   ['minmax',['MinMax',['../namespaceShipCAD.html#aa5d3fc63603d716d3e24244049e1e510',1,'ShipCAD']]],
   ['minmaxdata',['MinMaxData',['../structMinMaxData.html',1,'']]],
+  ['mirrorplaneface',['mirrorPlaneFace',['../classShipCAD_1_1Controller.html#a2f7c4f8e0759c8f59cd0b2d008e2776b',1,'ShipCAD::Controller']]],
   ['model_5fmax',['model_max',['../structShipCAD_1_1HydrostaticsData.html#a9319fb2ad054a595b6e3b3fd4059a3ae',1,'ShipCAD::HydrostaticsData']]],
   ['model_5fmin',['model_min',['../structShipCAD_1_1HydrostaticsData.html#acd93669bc08fa097974d41fbaf4dc81f',1,'ShipCAD::HydrostaticsData']]],
   ['model_5fview_5ft',['model_view_t',['../namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7',1,'ShipCAD']]],
@@ -28,6 +30,7 @@ var searchData=
   ['mousepressevent',['mousePressEvent',['../classShipCAD_1_1Viewport.html#a0dddc5b05c7308f8818a726b16a7d9eb',1,'ShipCAD::Viewport']]],
   ['mousereleaseevent',['mouseReleaseEvent',['../classShipCAD_1_1Viewport.html#a7cb6994a92d40990b58be272953b9120',1,'ShipCAD::Viewport']]],
   ['movedown',['moveDown',['../classShipCAD_1_1SubdivisionLayer.html#a949c536d7c238f8ba3a33abdde8bfaa3',1,'ShipCAD::SubdivisionLayer']]],
+  ['movefaces',['moveFaces',['../classShipCAD_1_1Controller.html#ac7aabbfcf700269dc82610c73a129c03',1,'ShipCAD::Controller']]],
   ['moveup',['moveUp',['../classShipCAD_1_1SubdivisionLayer.html#aef4dff844415352660f8cf90120b240c',1,'ShipCAD::SubdivisionLayer']]],
   ['mvboth',['mvBoth',['../namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7ad45c94ca5dea7f967d58f9864f49c465',1,'ShipCAD']]],
   ['mvport',['mvPort',['../namespaceShipCAD.html#a742f9cd95e62e207769e17467ecd5bb7a033d1219796735edf6dbe71c266566ad',1,'ShipCAD']]]

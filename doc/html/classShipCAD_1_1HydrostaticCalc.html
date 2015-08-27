@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,11 +89,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classShipCAD_1_1HydrostaticCalc-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ShipCAD::HydrostaticCalc Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Initialize and execute Hydrostatics Data calculation for a waterplane.  
+ <a href="classShipCAD_1_1HydrostaticCalc.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -113,14 +117,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a382835ae6396b82371b605d662fd1696"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09403d93ebe095a41b6a29ba9b740b65"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a09403d93ebe095a41b6a29ba9b740b65">clear</a> ()</td></tr>
 <tr class="separator:a09403d93ebe095a41b6a29ba9b740b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8e8d247720b9c9f2fe972ffd293622d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#af8e8d247720b9c9f2fe972ffd293622d">getOwner</a> ()</td></tr>
-<tr class="separator:af8e8d247720b9c9f2fe972ffd293622d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a013287ed3253b83f8fb59499b5d315d2"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a013287ed3253b83f8fb59499b5d315d2">getErrorString</a> ()</td></tr>
-<tr class="separator:a013287ed3253b83f8fb59499b5d315d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafeb5f9407ac6852db5c9ec5e9ad3651"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#aafeb5f9407ac6852db5c9ec5e9ad3651">getTrimAngle</a> ()</td></tr>
-<tr class="separator:aafeb5f9407ac6852db5c9ec5e9ad3651"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9cefaad770c509cc8b6074efe53b98f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1Plane.html">Plane</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ac9cefaad770c509cc8b6074efe53b98f">getWlPlane</a> ()</td></tr>
-<tr class="separator:ac9cefaad770c509cc8b6074efe53b98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1dc0e446e711461bb3747326efd8df6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ac1dc0e446e711461bb3747326efd8df6">getOwner</a> () const </td></tr>
+<tr class="separator:ac1dc0e446e711461bb3747326efd8df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc3e3da906e630cf6b763bd3559c630"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#abfc3e3da906e630cf6b763bd3559c630">getErrorString</a> () const </td></tr>
+<tr class="memdesc:abfc3e3da906e630cf6b763bd3559c630"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the errors with current calculation  <a href="#abfc3e3da906e630cf6b763bd3559c630">More...</a><br/></td></tr>
+<tr class="separator:abfc3e3da906e630cf6b763bd3559c630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157563b0f0258d21a9be615e092d5b21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1Plane.html">Plane</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a157563b0f0258d21a9be615e092d5b21">getWlPlane</a> () const </td></tr>
+<tr class="memdesc:a157563b0f0258d21a9be615e092d5b21"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the waterline plane (from draft, trim, and heeling angle)  <a href="#a157563b0f0258d21a9be615e092d5b21">More...</a><br/></td></tr>
+<tr class="separator:a157563b0f0258d21a9be615e092d5b21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a875b9708e91db4a8f06ddbcc8a22d830"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a875b9708e91db4a8f06ddbcc8a22d830">isCalculated</a> ()</td></tr>
 <tr class="separator:a875b9708e91db4a8f06ddbcc8a22d830"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0deeafff07f3bb77184df959bbd91266"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a0deeafff07f3bb77184df959bbd91266">setCalculated</a> (bool calc)</td></tr>
@@ -129,33 +133,34 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6528fe532bbb1121c73972906d108835"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabcae04d59358b87b9d5fb4ffda83f1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structShipCAD_1_1HydrostaticsData.html">HydrostaticsData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#aabcae04d59358b87b9d5fb4ffda83f1a">getData</a> ()</td></tr>
 <tr class="separator:aabcae04d59358b87b9d5fb4ffda83f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7c148428c589c5cf063cac7cb27f2af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ad7c148428c589c5cf063cac7cb27f2af">hasError</a> (<a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0f">HydrostaticError</a> error)</td></tr>
-<tr class="memdesc:ad7c148428c589c5cf063cac7cb27f2af"><td class="mdescLeft">&#160;</td><td class="mdescRight">does this calculation have this type of error  <a href="#ad7c148428c589c5cf063cac7cb27f2af">More...</a><br/></td></tr>
-<tr class="separator:ad7c148428c589c5cf063cac7cb27f2af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c42f2e85cca01401ece2684903b7fbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a7c42f2e85cca01401ece2684903b7fbd">addError</a> (<a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0f">HydrostaticError</a> error)</td></tr>
-<tr class="memdesc:a7c42f2e85cca01401ece2684903b7fbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">add this error type to the calculation  <a href="#a7c42f2e85cca01401ece2684903b7fbd">More...</a><br/></td></tr>
-<tr class="separator:a7c42f2e85cca01401ece2684903b7fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabd9daccfec478a2babfab8792ab3ac3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#aabd9daccfec478a2babfab8792ab3ac3">hasCalculation</a> (<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93">HydrostaticsCalculation</a> ty)</td></tr>
-<tr class="memdesc:aabd9daccfec478a2babfab8792ab3ac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">is this type of calculation set  <a href="#aabd9daccfec478a2babfab8792ab3ac3">More...</a><br/></td></tr>
-<tr class="separator:aabd9daccfec478a2babfab8792ab3ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcd0de12b0a4a045c062c788ce0fc534"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#adcd0de12b0a4a045c062c788ce0fc534">addCalculationType</a> (<a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93">HydrostaticsCalculation</a> ty)</td></tr>
-<tr class="memdesc:adcd0de12b0a4a045c062c788ce0fc534"><td class="mdescLeft">&#160;</td><td class="mdescRight">set a type of calculation  <a href="#adcd0de12b0a4a045c062c788ce0fc534">More...</a><br/></td></tr>
-<tr class="separator:adcd0de12b0a4a045c062c788ce0fc534"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac82abf7bbe837140a831d782d89c7c56"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ac82abf7bbe837140a831d782d89c7c56">getHeelingAngle</a> ()</td></tr>
-<tr class="separator:ac82abf7bbe837140a831d782d89c7c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ae6f41fd9799cb17a855a9b4f89c5fb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a8ae6f41fd9799cb17a855a9b4f89c5fb">hasError</a> (<a class="el" href="namespaceShipCAD.html#a1d801b982c24bce0cf10ffd4b995dda0">hydrostatics_error_t</a> error) const </td></tr>
+<tr class="memdesc:a8ae6f41fd9799cb17a855a9b4f89c5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">does this calculation have this type of error  <a href="#a8ae6f41fd9799cb17a855a9b4f89c5fb">More...</a><br/></td></tr>
+<tr class="separator:a8ae6f41fd9799cb17a855a9b4f89c5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6415cb7c8e13ded4537292dd3a06688"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ad6415cb7c8e13ded4537292dd3a06688">addError</a> (<a class="el" href="namespaceShipCAD.html#a1d801b982c24bce0cf10ffd4b995dda0">hydrostatics_error_t</a> error)</td></tr>
+<tr class="memdesc:ad6415cb7c8e13ded4537292dd3a06688"><td class="mdescLeft">&#160;</td><td class="mdescRight">add this error type to the calculation  <a href="#ad6415cb7c8e13ded4537292dd3a06688">More...</a><br/></td></tr>
+<tr class="separator:ad6415cb7c8e13ded4537292dd3a06688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb8e8e29d28e2da0e75e30c0636f034b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#adb8e8e29d28e2da0e75e30c0636f034b">hasCalculation</a> (<a class="el" href="namespaceShipCAD.html#ac9ff7fc96a52fceafa83edc0d5d06fce">hydrostatics_calc_t</a> ty) const </td></tr>
+<tr class="memdesc:adb8e8e29d28e2da0e75e30c0636f034b"><td class="mdescLeft">&#160;</td><td class="mdescRight">is this type of calculation set  <a href="#adb8e8e29d28e2da0e75e30c0636f034b">More...</a><br/></td></tr>
+<tr class="separator:adb8e8e29d28e2da0e75e30c0636f034b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32379831790fd88d422c6783b1b70ef7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a32379831790fd88d422c6783b1b70ef7">addCalculationType</a> (<a class="el" href="namespaceShipCAD.html#ac9ff7fc96a52fceafa83edc0d5d06fce">hydrostatics_calc_t</a> ty)</td></tr>
+<tr class="memdesc:a32379831790fd88d422c6783b1b70ef7"><td class="mdescLeft">&#160;</td><td class="mdescRight">set a type of calculation  <a href="#a32379831790fd88d422c6783b1b70ef7">More...</a><br/></td></tr>
+<tr class="separator:a32379831790fd88d422c6783b1b70ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b27fef68486f663fd325ef316032a03"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a7b27fef68486f663fd325ef316032a03">getHeelingAngle</a> () const </td></tr>
+<tr class="memdesc:a7b27fef68486f663fd325ef316032a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the heeling angle for this calculation  <a href="#a7b27fef68486f663fd325ef316032a03">More...</a><br/></td></tr>
+<tr class="separator:a7b27fef68486f663fd325ef316032a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6bf118e2e5e89a8e8d7ea7675fdee22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ae6bf118e2e5e89a8e8d7ea7675fdee22">setHeelingAngle</a> (float angle)</td></tr>
 <tr class="separator:ae6bf118e2e5e89a8e8d7ea7675fdee22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1b677a71d5f37f3fbbbacf3f27c7f43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ab1b677a71d5f37f3fbbbacf3f27c7f43">setHydrostaticType</a> (<a class="el" href="namespaceShipCAD.html#af34462de5db0247c80b656785e989233">HydrostaticType</a> ty)</td></tr>
-<tr class="separator:ab1b677a71d5f37f3fbbbacf3f27c7f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61df8d7421f2900cbc18a6565963c66e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a61df8d7421f2900cbc18a6565963c66e">setHydrostaticType</a> (<a class="el" href="namespaceShipCAD.html#afea51c7ee52940acebde29bf44206fe2">hydrostatic_type_t</a> ty)</td></tr>
+<tr class="separator:a61df8d7421f2900cbc18a6565963c66e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd19708f7ebadb4321af93565ffc184"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#aecd19708f7ebadb4321af93565ffc184">getTrimAngle</a> () const </td></tr>
+<tr class="memdesc:aecd19708f7ebadb4321af93565ffc184"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the trim angle for this calculation  <a href="#aecd19708f7ebadb4321af93565ffc184">More...</a><br/></td></tr>
+<tr class="separator:aecd19708f7ebadb4321af93565ffc184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace579596fa77d8e3ea4f854ca033ed83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ace579596fa77d8e3ea4f854ca033ed83">setTrim</a> (float trim)</td></tr>
 <tr class="memdesc:ace579596fa77d8e3ea4f854ca033ed83"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the trim for this calculation (distance, not angle)  <a href="#ace579596fa77d8e3ea4f854ca033ed83">More...</a><br/></td></tr>
 <tr class="separator:ace579596fa77d8e3ea4f854ca033ed83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37baaf9ea5104a689db1ee395350424f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a37baaf9ea5104a689db1ee395350424f">addData</a> (QStringList &amp;strings, <a class="el" href="namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200a">HydrostaticsMode</a> mode, QChar separator)</td></tr>
-<tr class="separator:a37baaf9ea5104a689db1ee395350424f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95e0e1aa5d11f49cb0f0553ba45af085"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a95e0e1aa5d11f49cb0f0553ba45af085">addHeader</a> (QStringList &amp;strings)</td></tr>
-<tr class="separator:a95e0e1aa5d11f49cb0f0553ba45af085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52ee7d687ac5c4ad0afa363adaa70a9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a52ee7d687ac5c4ad0afa363adaa70a9e">addFooter</a> (QStringList &amp;strings)</td></tr>
-<tr class="separator:a52ee7d687ac5c4ad0afa363adaa70a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a919bce0b984cbef1c59534d6e9fec46f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a919bce0b984cbef1c59534d6e9fec46f">addData</a> (QStringList &amp;strings, <a class="el" href="namespaceShipCAD.html#a2c84d37615dd30be37ed0253501fb9a3">hydrostatics_mode_t</a> mode, QChar separator)</td></tr>
+<tr class="memdesc:a919bce0b984cbef1c59534d6e9fec46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">get all Hydrostatics data in a list of strings  <a href="#a919bce0b984cbef1c59534d6e9fec46f">More...</a><br/></td></tr>
+<tr class="separator:a919bce0b984cbef1c59534d6e9fec46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7573a510a6b53e56a79f4042e41ee89e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a7573a510a6b53e56a79f4042e41ee89e">balance</a> (float displacement, bool freetotrim, <a class="el" href="structShipCAD_1_1CrosscurvesData.html">CrosscurvesData</a> &amp;output)</td></tr>
 <tr class="separator:a7573a510a6b53e56a79f4042e41ee89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0c8f5dc5c576e6e9eae5fb27fd5bdd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ab0c8f5dc5c576e6e9eae5fb27fd5bdd0">calculate</a> ()</td></tr>
@@ -164,17 +169,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad37fd32bf358c96b6653c6c92fd92c20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#ad37fd32bf358c96b6653c6c92fd92c20">calculateVolume</a> (const <a class="el" href="classShipCAD_1_1Plane.html">Plane</a> &amp;waterline_plane)</td></tr>
 <tr class="memdesc:ad37fd32bf358c96b6653c6c92fd92c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the volume of the ship below plane  <a href="#ad37fd32bf358c96b6653c6c92fd92c20">More...</a><br/></td></tr>
 <tr class="separator:ad37fd32bf358c96b6653c6c92fd92c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3abffc6366d88b203346c324b2281680"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a3abffc6366d88b203346c324b2281680">showData</a> (<a class="el" href="namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200a">HydrostaticsMode</a> mode)</td></tr>
-<tr class="separator:a3abffc6366d88b203346c324b2281680"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a527c0f0526a159e3d7cb7ddd4925c295"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classShipCAD_1_1HydrostaticCalc.html">HydrostaticCalc</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a527c0f0526a159e3d7cb7ddd4925c295">construct</a> (<a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a> *owner)</td></tr>
 <tr class="separator:a527c0f0526a159e3d7cb7ddd4925c295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a95e0e1aa5d11f49cb0f0553ba45af085"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#a95e0e1aa5d11f49cb0f0553ba45af085">addHeader</a> (QStringList &amp;strings)</td></tr>
+<tr class="separator:a95e0e1aa5d11f49cb0f0553ba45af085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4077ad7205ef509d3a54edb8e04b8b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1HydrostaticCalc.html#aa4077ad7205ef509d3a54edb8e04b8b7">addFooter</a> (QStringList &amp;strings, <a class="el" href="namespaceShipCAD.html#a2c84d37615dd30be37ed0253501fb9a3">hydrostatics_mode_t</a> mode)</td></tr>
+<tr class="separator:aa4077ad7205ef509d3a54edb8e04b8b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00098">98</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<div class="textblock"><p>Initialize and execute Hydrostatics Data calculation for a waterplane. </p>
+
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00104">104</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a56877acf4c33b3cab96ce381217c7a3b"></a>
 <div class="memitem">
@@ -220,7 +231,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="adcd0de12b0a4a045c062c788ce0fc534"></a>
+<a class="anchor" id="a32379831790fd88d422c6783b1b70ef7"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -230,7 +241,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void ShipCAD::HydrostaticCalc::addCalculationType </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93">HydrostaticsCalculation</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#ac9ff7fc96a52fceafa83edc0d5d06fce">hydrostatics_calc_t</a>&#160;</td>
           <td class="paramname"><em>ty</em></td><td>)</td>
           <td></td>
         </tr>
@@ -250,11 +261,11 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00140">140</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00153">153</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a37baaf9ea5104a689db1ee395350424f"></a>
+<a class="anchor" id="a919bce0b984cbef1c59534d6e9fec46f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -267,7 +278,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200a">HydrostaticsMode</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a2c84d37615dd30be37ed0253501fb9a3">hydrostatics_mode_t</a>&#160;</td>
           <td class="paramname"><em>mode</em>, </td>
         </tr>
         <tr>
@@ -284,11 +295,21 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00181">181</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>get all Hydrostatics data in a list of strings </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">strings</td><td>target string list for data </td></tr>
+    <tr><td class="paramname">mode</td><td>how to display the data </td></tr>
+    <tr><td class="paramname">separator</td><td>character to separate the data </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00189">189</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a7c42f2e85cca01401ece2684903b7fbd"></a>
+<a class="anchor" id="ad6415cb7c8e13ded4537292dd3a06688"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -298,7 +319,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void ShipCAD::HydrostaticCalc::addError </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0f">HydrostaticError</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a1d801b982c24bce0cf10ffd4b995dda0">hydrostatics_error_t</a>&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
           <td></td>
         </tr>
@@ -318,31 +339,52 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00129">129</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00142">142</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a52ee7d687ac5c4ad0afa363adaa70a9e"></a>
+<a class="anchor" id="aa4077ad7205ef509d3a54edb8e04b8b7"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void HydrostaticCalc::addFooter </td>
           <td>(</td>
           <td class="paramtype">QStringList &amp;&#160;</td>
-          <td class="paramname"><em>strings</em></td><td>)</td>
+          <td class="paramname"><em>strings</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a2c84d37615dd30be37ed0253501fb9a3">hydrostatics_mode_t</a>&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00191">191</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00390">390</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
 <a class="anchor" id="a95e0e1aa5d11f49cb0f0553ba45af085"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void HydrostaticCalc::addHeader </td>
@@ -352,9 +394,14 @@ Static Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00186">186</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00349">349</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -388,7 +435,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00350">350</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00577">577</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -408,7 +455,7 @@ Static Public Member Functions</h2></td></tr>
 <p>make all calculations specified </p>
 <p>For each type of calculation specified, this method will fill out _data with the results of that calculation The calculated flag will also be set </p>
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00694">694</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00918">918</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -435,7 +482,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00828">828</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l01052">1052</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -503,11 +550,11 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00118">118</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00131">131</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a013287ed3253b83f8fb59499b5d315d2"></a>
+<a class="anchor" id="abfc3e3da906e630cf6b763bd3559c630"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -515,16 +562,19 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">QString HydrostaticCalc::getErrorString </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>get the errors with current calculation </p>
+<dl class="section return"><dt>Returns</dt><dd>string with current errors </dd></dl>
 
 <p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00104">104</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac82abf7bbe837140a831d782d89c7c56"></a>
+<a class="anchor" id="a7b27fef68486f663fd325ef316032a03"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -535,7 +585,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">float ShipCAD::HydrostaticCalc::getHeelingAngle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -545,11 +595,14 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00141">141</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>get the heeling angle for this calculation </p>
+<dl class="section return"><dt>Returns</dt><dd>the heeling angle in degrees </dd></dl>
+
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00159">159</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="af8e8d247720b9c9f2fe972ffd293622d"></a>
+<a class="anchor" id="ac1dc0e446e711461bb3747326efd8df6"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -560,7 +613,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname"><a class="el" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* ShipCAD::HydrostaticCalc::getOwner </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -570,11 +623,11 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00110">110</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00116">116</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aafeb5f9407ac6852db5c9ec5e9ad3651"></a>
+<a class="anchor" id="aecd19708f7ebadb4321af93565ffc184"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -582,16 +635,20 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">float HydrostaticCalc::getTrimAngle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00110">110</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>get the trim angle for this calculation </p>
+<p>The trim angle is calculated from the given trim and waterline plane.</p>
+<dl class="section return"><dt>Returns</dt><dd>the angle of trim in degrees </dd></dl>
+
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00118">118</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac9cefaad770c509cc8b6074efe53b98f"></a>
+<a class="anchor" id="a157563b0f0258d21a9be615e092d5b21"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -599,25 +656,28 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname"><a class="el" href="classShipCAD_1_1Plane.html">Plane</a> HydrostaticCalc::getWlPlane </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00117">117</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>get the waterline plane (from draft, trim, and heeling angle) </p>
+<dl class="section return"><dt>Returns</dt><dd>the waterline plane </dd></dl>
+
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00125">125</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aabd9daccfec478a2babfab8792ab3ac3"></a>
+<a class="anchor" id="adb8e8e29d28e2da0e75e30c0636f034b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool HydrostaticCalc::hasCalculation </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a0612ca68b6918148a0d9871184264f93">HydrostaticsCalculation</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#ac9ff7fc96a52fceafa83edc0d5d06fce">hydrostatics_calc_t</a>&#160;</td>
           <td class="paramname"><em>ty</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -631,20 +691,20 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if type is part of set </dd></dl>
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00176">176</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00184">184</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad7c148428c589c5cf063cac7cb27f2af"></a>
+<a class="anchor" id="a8ae6f41fd9799cb17a855a9b4f89c5fb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool HydrostaticCalc::hasError </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a48b5202490cd6d86939d57c867837c0f">HydrostaticError</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a1d801b982c24bce0cf10ffd4b995dda0">hydrostatics_error_t</a>&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -658,7 +718,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if calculation has this error </dd></dl>
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00171">171</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00179">179</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -683,7 +743,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00115">115</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8h_source.html#l00128">128</a> of file <a class="el" href="hydrostaticcalc_8h_source.html">hydrostaticcalc.h</a>.</p>
 
 </div>
 </div>
@@ -701,7 +761,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00129">129</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00137">137</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -719,7 +779,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00139">139</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00147">147</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -737,25 +797,25 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00147">147</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00155">155</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab1b677a71d5f37f3fbbbacf3f27c7f43"></a>
+<a class="anchor" id="a61df8d7421f2900cbc18a6565963c66e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void HydrostaticCalc::setHydrostaticType </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#af34462de5db0247c80b656785e989233">HydrostaticType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#afea51c7ee52940acebde29bf44206fe2">hydrostatic_type_t</a>&#160;</td>
           <td class="paramname"><em>ty</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00155">155</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00163">163</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -781,25 +841,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00163">163</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a3abffc6366d88b203346c324b2281680"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void HydrostaticCalc::showData </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceShipCAD.html#a1d3d04d35d63e8a5e44c63183f79200a">HydrostaticsMode</a>&#160;</td>
-          <td class="paramname"><em>mode</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00838">838</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
+<p>Definition at line <a class="el" href="hydrostaticcalc_8cpp_source.html#l00171">171</a> of file <a class="el" href="hydrostaticcalc_8cpp_source.html">hydrostaticcalc.cpp</a>.</p>
 
 </div>
 </div>
@@ -810,7 +852,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2015 19:42:44 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 26 2015 23:07:08 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

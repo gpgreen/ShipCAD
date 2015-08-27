@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -133,102 +133,103 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classShipCAD_1_1Preferences.html#a42c4f0ca1f224941059ab63064e97643">Preferences</a>(<a class="code" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* owner);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classShipCAD_1_1Preferences.html#ab38e15f8965b1cd69b80369bb16a0995">~Preferences</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classShipCAD_1_1Preferences.html#afd469134e34b7e1982efeb1e402fce3b">Preferences</a>(<a class="code" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* owner);</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#ab38e15f8965b1cd69b80369bb16a0995">   48</a></span>&#160;    <a class="code" href="classShipCAD_1_1Preferences.html#ab38e15f8965b1cd69b80369bb16a0995">~Preferences</a>() {}</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">static</span> <a class="code" href="classShipCAD_1_1Preferences.html">Preferences</a>* <a class="code" href="classShipCAD_1_1Preferences.html#ab5b00454ce36fa2afb8ca278bfd7424c">construct</a>(<a class="code" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* owner);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#a364d0a7ee05937265ce16f788209d3b2">getExportDirectory</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#ae13135dc55b70c1eb897ef7fc9b2141e">getImportDirectory</a>();</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#acffe4077f56c31be66bad278b4d4a2ad">getOpenDirectory</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#adcf851de96cfb795773711e1b81ed859">getSaveDirectory</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#a9673a7bf93112ff78b6c8ca5d7cc3a4b">getExportDirectory</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#a275aac8dc6e72c021ad00ff68f2fba54">getImportDirectory</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#ab1ac99acb5ceb37b5cf7f6b21f376f27">getOpenDirectory</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    QString <a class="code" href="classShipCAD_1_1Preferences.html#a5ee1cbf3c572b9253cfe958055e0eb43">getSaveDirectory</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#ad120b46e68a08d7682aaeb351b4c179d">setViewportColor</a>(QColor col);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#ad120b46e68a08d7682aaeb351b4c179d">setViewportColor</a>(QColor col);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#a326180a1551596a3a9f2709d31c9fb10">edit</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#a70c1b8f3b9e117d67c3cd50c33f66f3a">load</a>();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#a819790ae129967fedd2fdef27e58fac0">resetColors</a>();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#ab3f40207c39fe262a7ae16ca22b297b2">save</a>();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#a0515b279b2bf1bbebeb902544d2b15fd">   68</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classShipCAD_1_1Preferences.html#a0515b279b2bf1bbebeb902544d2b15fd">getMaxUndoMemory</a>() {<span class="keywordflow">return</span> _max_undo_memory;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#af4788e1a2fb21981e1c828f918a6aa64">   70</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#af4788e1a2fb21981e1c828f918a6aa64">getStationColor</a>() {<span class="keywordflow">return</span> _station_color;}</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#a4250fdc214a6f7fd4e694a8d7ce2a64a">   71</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#a4250fdc214a6f7fd4e694a8d7ce2a64a">getButtockColor</a>() {<span class="keywordflow">return</span> _buttock_color;}</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#a9d02feb9d74677ef2fabc718ae22c05d">   72</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#a9d02feb9d74677ef2fabc718ae22c05d">getWaterlineColor</a>() {<span class="keywordflow">return</span> _waterline_color;}</div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#aca988ba7652207d09eadbdc805b16c0f">   73</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#aca988ba7652207d09eadbdc805b16c0f">getDiagonalColor</a>() {<span class="keywordflow">return</span> _diagonal_color;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#ad7a470973484fc81e15f28c98c22074d">clear</a>();</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">public</span> slots:</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* _owner;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">int</span> _point_size;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    QColor _buttock_color;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    QColor _waterline_color;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    QColor _station_color;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    QColor _diagonal_color;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    QColor _edge_color;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    QColor _crease_color;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    QColor _crease_edge_color;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    QColor _grid_color;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    QColor _grid_font_color;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    QColor _crease_point_color;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    QColor _regular_point_color;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    QColor _corner_point_color;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    QColor _dart_point_color;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    QColor _select_color;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    QColor _layer_color;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    QColor _normal_color;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    QColor _underwater_color;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    QColor _viewport_color;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    QColor _leakpoint_color;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    QColor _marker_color;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    QColor _curvature_plot_color;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QColor _control_curve_color;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    QColor _hydrostatics_font_color;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    QColor _zebra_stripe_color;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    QString _open_directory;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    QString _save_directory;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    QString _import_directory;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    QString _export_directory;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    QString _lang_file;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">size_t</span> _max_undo_memory;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;};              <span class="comment">/* end namespace */</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#endif // PREFERENCES_H</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor"></span></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_ab38e15f8965b1cd69b80369bb16a0995"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ab38e15f8965b1cd69b80369bb16a0995">ShipCAD::Preferences::~Preferences</a></div><div class="ttdeci">~Preferences()</div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_a4250fdc214a6f7fd4e694a8d7ce2a64a"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a4250fdc214a6f7fd4e694a8d7ce2a64a">ShipCAD::Preferences::getButtockColor</a></div><div class="ttdeci">QColor getButtockColor()</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00071">preferences.h:71</a></div></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#a326180a1551596a3a9f2709d31c9fb10">edit</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#a70c1b8f3b9e117d67c3cd50c33f66f3a">load</a>();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#a2e7e496b3417148240994e51281b0858">resetColors</a>();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#ab3f40207c39fe262a7ae16ca22b297b2">save</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#a8ddfbabd8be21f6390f3750600047a87">   66</a></span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classShipCAD_1_1Preferences.html#a8ddfbabd8be21f6390f3750600047a87">getMaxUndoMemory</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">        </span>{<span class="keywordflow">return</span> _max_undo_memory;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#af54f177e516849e7f8212841db9b1ed8">   69</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#af54f177e516849e7f8212841db9b1ed8">getSelectColor</a>()<span class="keyword"> const </span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">        </span>{<span class="keywordflow">return</span> _select_color;}</div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#a39e4abd32055512f8009f4c8ab5cd379">   71</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#a39e4abd32055512f8009f4c8ab5cd379">getStationColor</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keyword">        </span>{<span class="keywordflow">return</span> _station_color;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#aa34f502af478c340ff359c76b90620c0">   73</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#aa34f502af478c340ff359c76b90620c0">getButtockColor</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">        </span>{<span class="keywordflow">return</span> _buttock_color;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#a518043b34395026be6ebcf8f4e6e6591">   75</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#a518043b34395026be6ebcf8f4e6e6591">getWaterlineColor</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">        </span>{<span class="keywordflow">return</span> _waterline_color;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Preferences.html#a238b56f29c89be9c2d9533cb9db21552">   77</a></span>&#160;    QColor <a class="code" href="classShipCAD_1_1Preferences.html#a238b56f29c89be9c2d9533cb9db21552">getDiagonalColor</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">        </span>{<span class="keywordflow">return</span> _diagonal_color;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Preferences.html#ae2139f76ba4038b4e713ca75dcb8157e">clear</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="classShipCAD_1_1ShipCADModel.html">ShipCADModel</a>* _owner;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">int</span> _point_size;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    QColor _buttock_color;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    QColor _waterline_color;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    QColor _station_color;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    QColor _diagonal_color;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    QColor _edge_color;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    QColor _crease_color;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    QColor _crease_edge_color;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    QColor _grid_color;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    QColor _grid_font_color;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    QColor _crease_point_color;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    QColor _regular_point_color;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    QColor _corner_point_color;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    QColor _dart_point_color;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    QColor _select_color;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    QColor _layer_color;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    QColor _normal_color;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    QColor _underwater_color;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    QColor _viewport_color;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    QColor _leakpoint_color;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    QColor _marker_color;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    QColor _curvature_plot_color;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    QColor _control_curve_color;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    QColor _hydrostatics_font_color;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    QColor _zebra_stripe_color;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    QString _open_directory;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    QString _save_directory;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    QString _import_directory;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    QString _export_directory;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    QString _lang_file;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">size_t</span> _max_undo_memory;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;};              <span class="comment">/* end namespace */</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#endif // PREFERENCES_H</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor"></span></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_ab38e15f8965b1cd69b80369bb16a0995"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ab38e15f8965b1cd69b80369bb16a0995">ShipCAD::Preferences::~Preferences</a></div><div class="ttdeci">~Preferences()</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00048">preferences.h:48</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a238b56f29c89be9c2d9533cb9db21552"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a238b56f29c89be9c2d9533cb9db21552">ShipCAD::Preferences::getDiagonalColor</a></div><div class="ttdeci">QColor getDiagonalColor() const </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00077">preferences.h:77</a></div></div>
 <div class="ttc" id="classShipCAD_1_1Preferences_html"><div class="ttname"><a href="classShipCAD_1_1Preferences.html">ShipCAD::Preferences</a></div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00042">preferences.h:42</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_acffe4077f56c31be66bad278b4d4a2ad"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#acffe4077f56c31be66bad278b4d4a2ad">ShipCAD::Preferences::getOpenDirectory</a></div><div class="ttdeci">QString getOpenDirectory()</div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a5ee1cbf3c572b9253cfe958055e0eb43"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a5ee1cbf3c572b9253cfe958055e0eb43">ShipCAD::Preferences::getSaveDirectory</a></div><div class="ttdeci">QString getSaveDirectory() const </div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a9673a7bf93112ff78b6c8ca5d7cc3a4b"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a9673a7bf93112ff78b6c8ca5d7cc3a4b">ShipCAD::Preferences::getExportDirectory</a></div><div class="ttdeci">QString getExportDirectory() const </div></div>
 <div class="ttc" id="classShipCAD_1_1Preferences_html_a326180a1551596a3a9f2709d31c9fb10"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a326180a1551596a3a9f2709d31c9fb10">ShipCAD::Preferences::edit</a></div><div class="ttdeci">void edit()</div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_a9d02feb9d74677ef2fabc718ae22c05d"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a9d02feb9d74677ef2fabc718ae22c05d">ShipCAD::Preferences::getWaterlineColor</a></div><div class="ttdeci">QColor getWaterlineColor()</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00072">preferences.h:72</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_adcf851de96cfb795773711e1b81ed859"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#adcf851de96cfb795773711e1b81ed859">ShipCAD::Preferences::getSaveDirectory</a></div><div class="ttdeci">QString getSaveDirectory()</div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_af4788e1a2fb21981e1c828f918a6aa64"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#af4788e1a2fb21981e1c828f918a6aa64">ShipCAD::Preferences::getStationColor</a></div><div class="ttdeci">QColor getStationColor()</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00070">preferences.h:70</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_a0515b279b2bf1bbebeb902544d2b15fd"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a0515b279b2bf1bbebeb902544d2b15fd">ShipCAD::Preferences::getMaxUndoMemory</a></div><div class="ttdeci">size_t getMaxUndoMemory()</div><div class="ttdoc">get maximum amount of undo memory </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00068">preferences.h:68</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_aca988ba7652207d09eadbdc805b16c0f"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#aca988ba7652207d09eadbdc805b16c0f">ShipCAD::Preferences::getDiagonalColor</a></div><div class="ttdeci">QColor getDiagonalColor()</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00073">preferences.h:73</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_a819790ae129967fedd2fdef27e58fac0"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a819790ae129967fedd2fdef27e58fac0">ShipCAD::Preferences::resetColors</a></div><div class="ttdeci">void resetColors()</div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_ad7a470973484fc81e15f28c98c22074d"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ad7a470973484fc81e15f28c98c22074d">ShipCAD::Preferences::clear</a></div><div class="ttdeci">void clear()</div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_ab5b00454ce36fa2afb8ca278bfd7424c"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ab5b00454ce36fa2afb8ca278bfd7424c">ShipCAD::Preferences::construct</a></div><div class="ttdeci">static Preferences * construct(ShipCADModel *owner)</div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a275aac8dc6e72c021ad00ff68f2fba54"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a275aac8dc6e72c021ad00ff68f2fba54">ShipCAD::Preferences::getImportDirectory</a></div><div class="ttdeci">QString getImportDirectory() const </div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_af54f177e516849e7f8212841db9b1ed8"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#af54f177e516849e7f8212841db9b1ed8">ShipCAD::Preferences::getSelectColor</a></div><div class="ttdeci">QColor getSelectColor() const </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00069">preferences.h:69</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_ae2139f76ba4038b4e713ca75dcb8157e"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ae2139f76ba4038b4e713ca75dcb8157e">ShipCAD::Preferences::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8cpp_source.html#l00041">preferences.cpp:41</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a8ddfbabd8be21f6390f3750600047a87"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a8ddfbabd8be21f6390f3750600047a87">ShipCAD::Preferences::getMaxUndoMemory</a></div><div class="ttdeci">size_t getMaxUndoMemory() const </div><div class="ttdoc">get maximum amount of undo memory </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00066">preferences.h:66</a></div></div>
 <div class="ttc" id="classShipCAD_1_1Preferences_html_a70c1b8f3b9e117d67c3cd50c33f66f3a"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a70c1b8f3b9e117d67c3cd50c33f66f3a">ShipCAD::Preferences::load</a></div><div class="ttdeci">void load()</div></div>
 <div class="ttc" id="classShipCAD_1_1Preferences_html_ad120b46e68a08d7682aaeb351b4c179d"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ad120b46e68a08d7682aaeb351b4c179d">ShipCAD::Preferences::setViewportColor</a></div><div class="ttdeci">void setViewportColor(QColor col)</div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_ae13135dc55b70c1eb897ef7fc9b2141e"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ae13135dc55b70c1eb897ef7fc9b2141e">ShipCAD::Preferences::getImportDirectory</a></div><div class="ttdeci">QString getImportDirectory()</div></div>
-<div class="ttc" id="classShipCAD_1_1ShipCADModel_html"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html">ShipCAD::ShipCADModel</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00061">shipcadmodel.h:61</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_a42c4f0ca1f224941059ab63064e97643"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a42c4f0ca1f224941059ab63064e97643">ShipCAD::Preferences::Preferences</a></div><div class="ttdeci">Preferences(ShipCADModel *owner)</div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a518043b34395026be6ebcf8f4e6e6591"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a518043b34395026be6ebcf8f4e6e6591">ShipCAD::Preferences::getWaterlineColor</a></div><div class="ttdeci">QColor getWaterlineColor() const </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00075">preferences.h:75</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a39e4abd32055512f8009f4c8ab5cd379"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a39e4abd32055512f8009f4c8ab5cd379">ShipCAD::Preferences::getStationColor</a></div><div class="ttdeci">QColor getStationColor() const </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00071">preferences.h:71</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_a2e7e496b3417148240994e51281b0858"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a2e7e496b3417148240994e51281b0858">ShipCAD::Preferences::resetColors</a></div><div class="ttdeci">void resetColors()</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8cpp_source.html#l00048">preferences.cpp:48</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html">ShipCAD::ShipCADModel</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00062">shipcadmodel.h:62</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_ab1ac99acb5ceb37b5cf7f6b21f376f27"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ab1ac99acb5ceb37b5cf7f6b21f376f27">ShipCAD::Preferences::getOpenDirectory</a></div><div class="ttdeci">QString getOpenDirectory() const </div></div>
 <div class="ttc" id="classShipCAD_1_1Preferences_html_ab3f40207c39fe262a7ae16ca22b297b2"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ab3f40207c39fe262a7ae16ca22b297b2">ShipCAD::Preferences::save</a></div><div class="ttdeci">void save()</div></div>
-<div class="ttc" id="classShipCAD_1_1Preferences_html_a364d0a7ee05937265ce16f788209d3b2"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#a364d0a7ee05937265ce16f788209d3b2">ShipCAD::Preferences::getExportDirectory</a></div><div class="ttdeci">QString getExportDirectory()</div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_afd469134e34b7e1982efeb1e402fce3b"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#afd469134e34b7e1982efeb1e402fce3b">ShipCAD::Preferences::Preferences</a></div><div class="ttdeci">Preferences(ShipCADModel *owner)</div><div class="ttdef"><b>Definition:</b> <a href="preferences_8cpp_source.html#l00035">preferences.cpp:35</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_aa34f502af478c340ff359c76b90620c0"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#aa34f502af478c340ff359c76b90620c0">ShipCAD::Preferences::getButtockColor</a></div><div class="ttdeci">QColor getButtockColor() const </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00073">preferences.h:73</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2015 19:42:43 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Aug 26 2015 23:07:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

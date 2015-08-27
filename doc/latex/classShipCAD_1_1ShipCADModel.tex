@@ -16,13 +16,15 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Ship\-C\-A\-D\-Model\-:\begin{figure}
 \item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_ab1aed79b8aa1de37e47b73895d0109a2}{on\-File\-Changed} ()
 \item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_a67e2bacab21ee04409e3b33693b7ae92}{update\-Undo\-Data} ()
-\item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_a0a93194fdd11a446daaf5e5354d8928a}{update\-Recent\-File\-List} ()
-\item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_a6220a9a190b01f64ff47fedc55bdf8f4}{on\-Change\-Cursor\-Increment} ()
 \item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_a182524b67e4bd1fcfbf87a23dd9e2002}{on\-Update\-Geometry\-Info} ()
+\item 
+void \hyperlink{classShipCAD_1_1ShipCADModel_adaa7b692532a8e09fbb06d24979882f3}{on\-Update\-Visibility\-Info} ()
+\item 
+void \hyperlink{classShipCAD_1_1ShipCADModel_a7becf2a008e66bdac7f77c8c7026c713}{changed\-Layer\-Data} ()
+\item 
+void \hyperlink{classShipCAD_1_1ShipCADModel_a8aee085180cb37bf822fb856a270a3b3}{change\-Active\-Layer} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -30,6 +32,8 @@ void \hyperlink{classShipCAD_1_1ShipCADModel_a182524b67e4bd1fcfbf87a23dd9e2002}{
 \hyperlink{classShipCAD_1_1ShipCADModel_abede72e53058c2ecf8dc2c4b2a7c8014}{Ship\-C\-A\-D\-Model} ()
 \item 
 \hyperlink{classShipCAD_1_1ShipCADModel_a69faa69f492a5aad941990319e5e88c0}{$\sim$\-Ship\-C\-A\-D\-Model} ()
+\item 
+\hyperlink{classShipCAD_1_1Visibility}{Visibility} \& \hyperlink{classShipCAD_1_1ShipCADModel_a50cca4c783baeba58c8068c9b8a5d6a4}{get\-Visibility} ()
 \item 
 \hyperlink{classShipCAD_1_1ProjectSettings}{Project\-Settings} \& \hyperlink{classShipCAD_1_1ShipCADModel_a94a8eed8ac8ff4ad8287a0a1113e3271}{get\-Project\-Settings} ()
 \item 
@@ -46,6 +50,8 @@ void \hyperlink{classShipCAD_1_1ShipCADModel_ab221977f2a8bd4d51d6ee777be0d7b8a}{
 void \hyperlink{classShipCAD_1_1ShipCADModel_a6133fe12cd13b6ce24424e19a8b1e433}{set\-Precision} (\hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915}{precision\-\_\-t} precision)
 \begin{DoxyCompactList}\small\item\em set precision of model \end{DoxyCompactList}\item 
 \hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} \hyperlink{classShipCAD_1_1ShipCADModel_a17ecfdd29efc03ed2580b89f5da955c8}{get\-File\-Version} ()
+\item 
+void \hyperlink{classShipCAD_1_1ShipCADModel_a44ac7a48c0c01cae73bf723120071e72}{set\-File\-Version} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} v)
 \item 
 \hyperlink{namespaceShipCAD_a9910f0963197f9df6125398efd4fa139}{Intersection\-Vector} \& \hyperlink{classShipCAD_1_1ShipCADModel_a86da3ca66e90403ead21ccc67f584c52}{get\-Stations} ()
 \item 
@@ -85,20 +91,20 @@ size\-\_\-t \hyperlink{classShipCAD_1_1ShipCADModel_afb8cc5aaf19a6c1c687550fd9de
 \item 
 size\-\_\-t \hyperlink{classShipCAD_1_1ShipCADModel_a099d0530e99261318f6332220a331010}{number\-Of\-Viewports} ()
 \item 
-bool \hyperlink{classShipCAD_1_1ShipCADModel_a80076525a0aa65782988c3ddf97f37ce}{is\-Selected\-Marker} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$mark)
+bool \hyperlink{classShipCAD_1_1ShipCADModel_ada688a626562a513c03f0a19c6233eae}{is\-Selected\-Marker} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$mark)
 \item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_af638ed4ab8e64e89b0217cf727b48698}{set\-Selected\-Marker} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$mark)
+void \hyperlink{classShipCAD_1_1ShipCADModel_afd7e984f4070d08cb16264c1b731580f}{set\-Selected\-Marker} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$mark)
 \item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_a6801637e1f13a22b1ef3fc50e389f51e}{remove\-Selected\-Marker} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$mark)
+void \hyperlink{classShipCAD_1_1ShipCADModel_a7fb06b0a1fa75ef02597752fc3f691a2}{remove\-Selected\-Marker} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$mark)
 \item 
-\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$ \hyperlink{classShipCAD_1_1ShipCADModel_aedbe32ff0770186f6c565e2a978fcf14}{get\-Marker} (size\-\_\-t index)
+bool \hyperlink{classShipCAD_1_1ShipCADModel_a64493dfc69513b4d9425e3736e41b596}{adjust\-Markers} ()
 \item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_a8c8e92902f8e90e77258c9a872e1dee8}{delete\-Marker} (\hyperlink{classShipCAD_1_1Marker}{Marker} $\ast$mark)
-\item 
-size\-\_\-t \hyperlink{classShipCAD_1_1ShipCADModel_a998b89ce2d09ff41318dc1b379c1740c}{get\-Number\-Of\-Markers} ()
-\item 
-bool \hyperlink{classShipCAD_1_1ShipCADModel_aa4deb5e9df2dcebf4576e79520cb1b9e}{adjust\-Markers} ()
-\item 
+bool \hyperlink{classShipCAD_1_1ShipCADModel_a9276e43cb3f7917782f91a7cf3faa215}{is\-Selected\-Flowline} (const \hyperlink{classShipCAD_1_1Flowline}{Flowline} $\ast$flow) const 
+\begin{DoxyCompactList}\small\item\em is the flowline selected \end{DoxyCompactList}\item 
+void \hyperlink{classShipCAD_1_1ShipCADModel_af61065a1e9050cff7cb91c8312082e2a}{set\-Selected\-Flowline} (const \hyperlink{classShipCAD_1_1Flowline}{Flowline} $\ast$flow)
+\begin{DoxyCompactList}\small\item\em set a flowline as selected \end{DoxyCompactList}\item 
+void \hyperlink{classShipCAD_1_1ShipCADModel_ad16bba5c648dec8cddfe23ed9b07615a}{remove\-Selected\-Flowline} (const \hyperlink{classShipCAD_1_1Flowline}{Flowline} $\ast$flow)
+\begin{DoxyCompactList}\small\item\em deselect a flowline \end{DoxyCompactList}\item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_a6d868bbb71f72c46e6827adeed8afc4b}{add\-Viewport} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
 \item 
 \hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$ \hyperlink{classShipCAD_1_1ShipCADModel_a6941ad7a2b167419e844823fa8461019}{get\-Surface} ()
@@ -125,28 +131,30 @@ void \hyperlink{classShipCAD_1_1ShipCADModel_a27acd2ab4c6486a23db0b054962381bd}{
 \begin{DoxyCompactList}\small\item\em set previous undo index position \end{DoxyCompactList}\item 
 size\-\_\-t \hyperlink{classShipCAD_1_1ShipCADModel_a0ab3edfdc89a6e297343d7c31b21658c}{get\-Undo\-Memory} ()
 \begin{DoxyCompactList}\small\item\em get amount of memory used for undo \end{DoxyCompactList}\item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_a02282b43bfacc1cc4030bb226b814446}{redraw} ()
+void \hyperlink{classShipCAD_1_1ShipCADModel_af06c21c121f42e1ac4e5510d8c9ed3cd}{redraw} ()
 \begin{DoxyCompactList}\small\item\em redraw the model \end{DoxyCompactList}\item 
 float \hyperlink{classShipCAD_1_1ShipCADModel_a8cde3b7ca816132af3c722cd31af3107}{find\-Lowest\-Hydrostatics\-Point} ()
 \begin{DoxyCompactList}\small\item\em get the lowest underwater point of hull \end{DoxyCompactList}\item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_ad3e49bc04c73dc221e48d15974b68f41}{load\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&source)
 \item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_ab2b308baf2e93b80533218145472928f}{save\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&dest)
+void \hyperlink{classShipCAD_1_1ShipCADModel_a64c7c4ddffffdd1be2f27eb4210af2b7}{save\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&dest)
 \item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_a0d8f9cb2ce8038f6e65d90e8cab275e7}{save\-Part} (std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ faces)
 \item 
-void \hyperlink{classShipCAD_1_1ShipCADModel_a15aa59d80a4a09ec8e3c18efcb1db27f}{rebuild\-Model} ()
+void \hyperlink{classShipCAD_1_1ShipCADModel_a2e03bcc700adfcf768e257c91f5b0df9}{rebuild\-Model} ()
 \item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_ad2f9dfd32667e9ac690de184b7e576f1}{clear} ()
 \item 
 void \hyperlink{classShipCAD_1_1ShipCADModel_a9d693b6b2180ce94e88224df49b909a2}{clear\-Undo} ()
-\end{DoxyCompactItemize}
+\item 
+void \hyperlink{classShipCAD_1_1ShipCADModel_a7ab84a738b747c4fcb2c3627e56d4bd0}{extents} (Q\-Vector3\-D \&min, Q\-Vector3\-D \&max)
+\begin{DoxyCompactList}\small\item\em find the bounding box of the model \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 61 of file shipcadmodel.\-h.
+Definition at line 62 of file shipcadmodel.\-h.
 
 
 
@@ -160,7 +168,7 @@ Definition at line 61 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1ShipCADModel_abede72e53058c2ecf8dc2c4b2a7c8014}
 
 
-Definition at line 42 of file shipcadmodel.\-cpp.
+Definition at line 44 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a69faa69f492a5aad941990319e5e88c0}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!$\sim$\-Ship\-C\-A\-D\-Model@{$\sim$\-Ship\-C\-A\-D\-Model}}
 \index{$\sim$\-Ship\-C\-A\-D\-Model@{$\sim$\-Ship\-C\-A\-D\-Model}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -171,7 +179,7 @@ Definition at line 42 of file shipcadmodel.\-cpp.
 )}}\label{classShipCAD_1_1ShipCADModel_a69faa69f492a5aad941990319e5e88c0}
 
 
-Definition at line 54 of file shipcadmodel.\-cpp.
+Definition at line 59 of file shipcadmodel.\-cpp.
 
 
 
@@ -194,7 +202,7 @@ add undo object
 \end{DoxyParams}
 
 
-Definition at line 132 of file shipcadmodel.\-cpp.
+Definition at line 182 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a6d868bbb71f72c46e6827adeed8afc4b}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!add\-Viewport@{add\-Viewport}}
 \index{add\-Viewport@{add\-Viewport}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -203,13 +211,17 @@ Definition at line 132 of file shipcadmodel.\-cpp.
 \item[{{\bf Viewport} $\ast$}]{vp}
 \end{DoxyParamCaption}
 )}}\label{classShipCAD_1_1ShipCADModel_a6d868bbb71f72c46e6827adeed8afc4b}
-\hypertarget{classShipCAD_1_1ShipCADModel_aa4deb5e9df2dcebf4576e79520cb1b9e}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!adjust\-Markers@{adjust\-Markers}}
+\hypertarget{classShipCAD_1_1ShipCADModel_a64493dfc69513b4d9425e3736e41b596}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!adjust\-Markers@{adjust\-Markers}}
 \index{adjust\-Markers@{adjust\-Markers}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{adjust\-Markers}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::adjust\-Markers (
+\subsubsection[{adjust\-Markers}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Model\-::adjust\-Markers (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_aa4deb5e9df2dcebf4576e79520cb1b9e}
+)}}\label{classShipCAD_1_1ShipCADModel_a64493dfc69513b4d9425e3736e41b596}
+
+
+Definition at line 420 of file shipcadmodel.\-cpp.
+
 \hypertarget{classShipCAD_1_1ShipCADModel_abefac47aa19318b4ae3c82108dfe4585}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!build\-Valid\-Frame\-Table@{build\-Valid\-Frame\-Table}}
 \index{build\-Valid\-Frame\-Table@{build\-Valid\-Frame\-Table}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{build\-Valid\-Frame\-Table}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::build\-Valid\-Frame\-Table (
@@ -228,8 +240,22 @@ Assembles all stations and builds a 2\-D bodyplan.
 \end{DoxyParams}
 
 
-Definition at line 63 of file shipcadmodel.\-cpp.
+Definition at line 100 of file shipcadmodel.\-cpp.
 
+\hypertarget{classShipCAD_1_1ShipCADModel_a8aee085180cb37bf822fb856a270a3b3}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!change\-Active\-Layer@{change\-Active\-Layer}}
+\index{change\-Active\-Layer@{change\-Active\-Layer}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{change\-Active\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::change\-Active\-Layer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1ShipCADModel_a8aee085180cb37bf822fb856a270a3b3}
+\hypertarget{classShipCAD_1_1ShipCADModel_a7becf2a008e66bdac7f77c8c7026c713}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!changed\-Layer\-Data@{changed\-Layer\-Data}}
+\index{changed\-Layer\-Data@{changed\-Layer\-Data}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{changed\-Layer\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::changed\-Layer\-Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1ShipCADModel_a7becf2a008e66bdac7f77c8c7026c713}
 \hypertarget{classShipCAD_1_1ShipCADModel_ad2f9dfd32667e9ac690de184b7e576f1}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!clear@{clear}}
 \index{clear@{clear}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::clear (
@@ -239,7 +265,7 @@ Definition at line 63 of file shipcadmodel.\-cpp.
 )}}\label{classShipCAD_1_1ShipCADModel_ad2f9dfd32667e9ac690de184b7e576f1}
 
 
-Definition at line 59 of file shipcadmodel.\-cpp.
+Definition at line 64 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a9d693b6b2180ce94e88224df49b909a2}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!clear\-Undo@{clear\-Undo}}
 \index{clear\-Undo@{clear\-Undo}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -248,13 +274,6 @@ Definition at line 59 of file shipcadmodel.\-cpp.
 {}
 \end{DoxyParamCaption}
 )}}\label{classShipCAD_1_1ShipCADModel_a9d693b6b2180ce94e88224df49b909a2}
-\hypertarget{classShipCAD_1_1ShipCADModel_a8c8e92902f8e90e77258c9a872e1dee8}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!delete\-Marker@{delete\-Marker}}
-\index{delete\-Marker@{delete\-Marker}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{delete\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::delete\-Marker (
-\begin{DoxyParamCaption}
-\item[{{\bf Marker} $\ast$}]{mark}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a8c8e92902f8e90e77258c9a872e1dee8}
 \hypertarget{classShipCAD_1_1ShipCADModel_a0c14ab36acacc74411446a65ffadaa06}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!delete\-Undo\-Object@{delete\-Undo\-Object}}
 \index{delete\-Undo\-Object@{delete\-Undo\-Object}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{delete\-Undo\-Object}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::delete\-Undo\-Object (
@@ -281,7 +300,30 @@ the undo object at index
 \end{DoxyExceptions}
 
 
-Definition at line 145 of file shipcadmodel.\-cpp.
+Definition at line 194 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_a7ab84a738b747c4fcb2c3627e56d4bd0}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!extents@{extents}}
+\index{extents@{extents}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{extents}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::extents (
+\begin{DoxyParamCaption}
+\item[{Q\-Vector3\-D \&}]{min, }
+\item[{Q\-Vector3\-D \&}]{max}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1ShipCADModel_a7ab84a738b747c4fcb2c3627e56d4bd0}
+
+
+find the bounding box of the model 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the} & minimum corner of the bounding box \\
+\hline
+{\em the} & maximum corner of the bounding box \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 105 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a8cde3b7ca816132af3c722cd31af3107}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!find\-Lowest\-Hydrostatics\-Point@{find\-Lowest\-Hydrostatics\-Point}}
 \index{find\-Lowest\-Hydrostatics\-Point@{find\-Lowest\-Hydrostatics\-Point}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -299,7 +341,7 @@ lowest point of hull
 \end{DoxyReturn}
 
 
-Definition at line 253 of file shipcadmodel.\-cpp.
+Definition at line 365 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a5aa1e9aa14350f2e0980112a81613ca6}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Active\-Layer@{get\-Active\-Layer}}
 \index{get\-Active\-Layer@{get\-Active\-Layer}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -310,7 +352,7 @@ Definition at line 253 of file shipcadmodel.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a5aa1e9aa14350f2e0980112a81613ca6}
 
 
-Definition at line 126 of file shipcadmodel.\-h.
+Definition at line 132 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a8908d7adff0b1aa1ed118103c02c5402}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Buttocks@{get\-Buttocks}}
 \index{get\-Buttocks@{get\-Buttocks}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -321,7 +363,7 @@ Definition at line 126 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a8908d7adff0b1aa1ed118103c02c5402}
 
 
-Definition at line 95 of file shipcadmodel.\-h.
+Definition at line 99 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_ac631aaf60a936bb5b22bcab59cb7d6a4}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Control\-Curves@{get\-Control\-Curves}}
 \index{get\-Control\-Curves@{get\-Control\-Curves}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -332,7 +374,7 @@ Definition at line 95 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_ac631aaf60a936bb5b22bcab59cb7d6a4}
 
 
-Definition at line 97 of file shipcadmodel.\-h.
+Definition at line 101 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a19864f7628c596553f7c89247715b10a}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Diagonals@{get\-Diagonals}}
 \index{get\-Diagonals@{get\-Diagonals}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -343,7 +385,7 @@ Definition at line 97 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a19864f7628c596553f7c89247715b10a}
 
 
-Definition at line 96 of file shipcadmodel.\-h.
+Definition at line 100 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a355525c21cd0a9a4a88846b5587a236c}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Edit\-Mode@{get\-Edit\-Mode}}
 \index{get\-Edit\-Mode@{get\-Edit\-Mode}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -354,7 +396,7 @@ Definition at line 96 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a355525c21cd0a9a4a88846b5587a236c}
 
 
-Definition at line 100 of file shipcadmodel.\-h.
+Definition at line 104 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a7cdd359f050f81975d1992a7d161ce87}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Filename@{get\-Filename}}
 \index{get\-Filename@{get\-Filename}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -372,7 +414,7 @@ the file name
 \end{DoxyReturn}
 
 
-Definition at line 113 of file shipcadmodel.\-cpp.
+Definition at line 174 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a17ecfdd29efc03ed2580b89f5da955c8}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-File\-Version@{get\-File\-Version}}
 \index{get\-File\-Version@{get\-File\-Version}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -383,7 +425,7 @@ Definition at line 113 of file shipcadmodel.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a17ecfdd29efc03ed2580b89f5da955c8}
 
 
-Definition at line 92 of file shipcadmodel.\-h.
+Definition at line 94 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_afc5654f671a17dd6672230648842975e}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Flowline@{get\-Flowline}}
 \index{get\-Flowline@{get\-Flowline}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -401,7 +443,7 @@ Definition at line 92 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_aafc30dd7d6b9db4ccfc7bf1c4e2b3b11}
 
 
-Definition at line 124 of file shipcadmodel.\-h.
+Definition at line 130 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_ae13e425deb59f7b4f0c95cc02230f097}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Layer@{get\-Layer}}
 \index{get\-Layer@{get\-Layer}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -412,22 +454,8 @@ Definition at line 124 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_ae13e425deb59f7b4f0c95cc02230f097}
 
 
-Definition at line 128 of file shipcadmodel.\-h.
+Definition at line 134 of file shipcadmodel.\-h.
 
-\hypertarget{classShipCAD_1_1ShipCADModel_aedbe32ff0770186f6c565e2a978fcf14}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Marker@{get\-Marker}}
-\index{get\-Marker@{get\-Marker}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{get\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Marker}$\ast$ Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::get\-Marker (
-\begin{DoxyParamCaption}
-\item[{size\-\_\-t}]{index}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_aedbe32ff0770186f6c565e2a978fcf14}
-\hypertarget{classShipCAD_1_1ShipCADModel_a998b89ce2d09ff41318dc1b379c1740c}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Number\-Of\-Markers@{get\-Number\-Of\-Markers}}
-\index{get\-Number\-Of\-Markers@{get\-Number\-Of\-Markers}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{get\-Number\-Of\-Markers}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::get\-Number\-Of\-Markers (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a998b89ce2d09ff41318dc1b379c1740c}
 \hypertarget{classShipCAD_1_1ShipCADModel_a949318726227fe0ba274b34d2ea4528a}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Precision@{get\-Precision}}
 \index{get\-Precision@{get\-Precision}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{get\-Precision}]{\setlength{\rightskip}{0pt plus 5cm}{\bf precision\-\_\-t} Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::get\-Precision (
@@ -444,7 +472,7 @@ precision of model
 \end{DoxyReturn}
 
 
-Definition at line 85 of file shipcadmodel.\-h.
+Definition at line 87 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_aa6af8872deba5b401ac575a85901a265}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Preferences@{get\-Preferences}}
 \index{get\-Preferences@{get\-Preferences}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -455,7 +483,7 @@ Definition at line 85 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_aa6af8872deba5b401ac575a85901a265}
 
 
-Definition at line 70 of file shipcadmodel.\-h.
+Definition at line 72 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a94a8eed8ac8ff4ad8287a0a1113e3271}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Project\-Settings@{get\-Project\-Settings}}
 \index{get\-Project\-Settings@{get\-Project\-Settings}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -466,7 +494,7 @@ Definition at line 70 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a94a8eed8ac8ff4ad8287a0a1113e3271}
 
 
-Definition at line 69 of file shipcadmodel.\-h.
+Definition at line 71 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a86da3ca66e90403ead21ccc67f584c52}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Stations@{get\-Stations}}
 \index{get\-Stations@{get\-Stations}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -477,7 +505,7 @@ Definition at line 69 of file shipcadmodel.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a86da3ca66e90403ead21ccc67f584c52}
 
 
-Definition at line 93 of file shipcadmodel.\-h.
+Definition at line 97 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a6941ad7a2b167419e844823fa8461019}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Surface@{get\-Surface}}
 \index{get\-Surface@{get\-Surface}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -485,7 +513,11 @@ Definition at line 93 of file shipcadmodel.\-h.
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a6941ad7a2b167419e844823fa8461019}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a6941ad7a2b167419e844823fa8461019}
+
+
+Definition at line 167 of file shipcadmodel.\-h.
+
 \hypertarget{classShipCAD_1_1ShipCADModel_a0ab3edfdc89a6e297343d7c31b21658c}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Undo\-Memory@{get\-Undo\-Memory}}
 \index{get\-Undo\-Memory@{get\-Undo\-Memory}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{get\-Undo\-Memory}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-Model\-::get\-Undo\-Memory (
@@ -502,7 +534,7 @@ memory used in mb
 \end{DoxyReturn}
 
 
-Definition at line 169 of file shipcadmodel.\-cpp.
+Definition at line 217 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a0acb4ae206e2caee0f87ebd229b7c90b}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Undo\-Object@{get\-Undo\-Object}}
 \index{get\-Undo\-Object@{get\-Undo\-Object}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -530,7 +562,18 @@ the undo object at index
 \end{DoxyExceptions}
 
 
-Definition at line 138 of file shipcadmodel.\-cpp.
+Definition at line 187 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_a50cca4c783baeba58c8068c9b8a5d6a4}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Visibility@{get\-Visibility}}
+\index{get\-Visibility@{get\-Visibility}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{get\-Visibility}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Visibility}\& Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::get\-Visibility (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a50cca4c783baeba58c8068c9b8a5d6a4}
+
+
+Definition at line 70 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a6c147a75fa02e43145de346efb9542fd}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!get\-Waterlines@{get\-Waterlines}}
 \index{get\-Waterlines@{get\-Waterlines}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -541,7 +584,7 @@ Definition at line 138 of file shipcadmodel.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a6c147a75fa02e43145de346efb9542fd}
 
 
-Definition at line 94 of file shipcadmodel.\-h.
+Definition at line 98 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a0c7a15b80b5013066fd77f46e57850ef}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!is\-Build@{is\-Build}}
 \index{is\-Build@{is\-Build}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -549,7 +592,11 @@ Definition at line 94 of file shipcadmodel.\-h.
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a0c7a15b80b5013066fd77f46e57850ef}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a0c7a15b80b5013066fd77f46e57850ef}
+
+
+Definition at line 80 of file shipcadmodel.\-h.
+
 \hypertarget{classShipCAD_1_1ShipCADModel_a2cf41d2e7463763c81c7850fe953437e}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!is\-File\-Changed@{is\-File\-Changed}}
 \index{is\-File\-Changed@{is\-File\-Changed}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{is\-File\-Changed}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::is\-File\-Changed (
@@ -566,7 +613,7 @@ true if file changed
 \end{DoxyReturn}
 
 
-Definition at line 152 of file shipcadmodel.\-h.
+Definition at line 173 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_af63013461d2ef6ee7221d72a42949d7c}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!is\-Filename\-Set@{is\-Filename\-Set}}
 \index{is\-Filename\-Set@{is\-Filename\-Set}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -574,7 +621,7 @@ Definition at line 152 of file shipcadmodel.\-h.
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_af63013461d2ef6ee7221d72a42949d7c}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_af63013461d2ef6ee7221d72a42949d7c}
 
 
 get flag for filename set 
@@ -582,13 +629,44 @@ get flag for filename set
 \begin{DoxyReturn}{Returns}
 true if filename has been set 
 \end{DoxyReturn}
-\hypertarget{classShipCAD_1_1ShipCADModel_a80076525a0aa65782988c3ddf97f37ce}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!is\-Selected\-Marker@{is\-Selected\-Marker}}
+
+
+Definition at line 121 of file shipcadmodel.\-h.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_a9276e43cb3f7917782f91a7cf3faa215}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!is\-Selected\-Flowline@{is\-Selected\-Flowline}}
+\index{is\-Selected\-Flowline@{is\-Selected\-Flowline}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{is\-Selected\-Flowline}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Model\-::is\-Selected\-Flowline (
+\begin{DoxyParamCaption}
+\item[{const {\bf Flowline} $\ast$}]{flow}
+\end{DoxyParamCaption}
+) const}}\label{classShipCAD_1_1ShipCADModel_a9276e43cb3f7917782f91a7cf3faa215}
+
+
+is the flowline selected 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flow} & flowline to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if flowline selected 
+\end{DoxyReturn}
+
+
+Definition at line 425 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_ada688a626562a513c03f0a19c6233eae}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!is\-Selected\-Marker@{is\-Selected\-Marker}}
 \index{is\-Selected\-Marker@{is\-Selected\-Marker}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{is\-Selected\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::is\-Selected\-Marker (
+\subsubsection[{is\-Selected\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-Model\-::is\-Selected\-Marker (
 \begin{DoxyParamCaption}
 \item[{{\bf Marker} $\ast$}]{mark}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a80076525a0aa65782988c3ddf97f37ce}
+)}}\label{classShipCAD_1_1ShipCADModel_ada688a626562a513c03f0a19c6233eae}
+
+
+Definition at line 398 of file shipcadmodel.\-cpp.
+
 \hypertarget{classShipCAD_1_1ShipCADModel_ad3e49bc04c73dc221e48d15974b68f41}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!load\-Binary@{load\-Binary}}
 \index{load\-Binary@{load\-Binary}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{load\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::load\-Binary (
@@ -598,7 +676,7 @@ true if filename has been set
 )}}\label{classShipCAD_1_1ShipCADModel_ad3e49bc04c73dc221e48d15974b68f41}
 
 
-Definition at line 177 of file shipcadmodel.\-cpp.
+Definition at line 225 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_afdb9bccb1cf9e3bf8aa853d81ff11d39}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!number\-Of\-Flowlines@{number\-Of\-Flowlines}}
 \index{number\-Of\-Flowlines@{number\-Of\-Flowlines}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -616,7 +694,7 @@ Definition at line 177 of file shipcadmodel.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_afb23b08b1014fc176ff864b8f154a84b}
 
 
-Definition at line 127 of file shipcadmodel.\-h.
+Definition at line 133 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_afb8cc5aaf19a6c1c687550fd9de1739e}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!number\-Of\-Locked\-Points@{number\-Of\-Locked\-Points}}
 \index{number\-Of\-Locked\-Points@{number\-Of\-Locked\-Points}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -653,6 +731,13 @@ Definition at line 127 of file shipcadmodel.\-h.
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1ShipCADModel_a182524b67e4bd1fcfbf87a23dd9e2002}
+\hypertarget{classShipCAD_1_1ShipCADModel_adaa7b692532a8e09fbb06d24979882f3}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!on\-Update\-Visibility\-Info@{on\-Update\-Visibility\-Info}}
+\index{on\-Update\-Visibility\-Info@{on\-Update\-Visibility\-Info}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{on\-Update\-Visibility\-Info}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::on\-Update\-Visibility\-Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1ShipCADModel_adaa7b692532a8e09fbb06d24979882f3}
 \hypertarget{classShipCAD_1_1ShipCADModel_a5d2116df534ab1347961c6ab9748d1f1}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!prev\-Undo\-Position@{prev\-Undo\-Position}}
 \index{prev\-Undo\-Position@{prev\-Undo\-Position}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{prev\-Undo\-Position}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::prev\-Undo\-Position (
@@ -669,40 +754,76 @@ previous undo index position
 \end{DoxyReturn}
 
 
-Definition at line 193 of file shipcadmodel.\-h.
+Definition at line 214 of file shipcadmodel.\-h.
 
-\hypertarget{classShipCAD_1_1ShipCADModel_a15aa59d80a4a09ec8e3c18efcb1db27f}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!rebuild\-Model@{rebuild\-Model}}
+\hypertarget{classShipCAD_1_1ShipCADModel_a2e03bcc700adfcf768e257c91f5b0df9}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!rebuild\-Model@{rebuild\-Model}}
 \index{rebuild\-Model@{rebuild\-Model}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{rebuild\-Model}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::rebuild\-Model (
+\subsubsection[{rebuild\-Model}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::rebuild\-Model (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a15aa59d80a4a09ec8e3c18efcb1db27f}
-\hypertarget{classShipCAD_1_1ShipCADModel_a02282b43bfacc1cc4030bb226b814446}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!redraw@{redraw}}
+)}}\label{classShipCAD_1_1ShipCADModel_a2e03bcc700adfcf768e257c91f5b0df9}
+
+
+Definition at line 139 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_af06c21c121f42e1ac4e5510d8c9ed3cd}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!redraw@{redraw}}
 \index{redraw@{redraw}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{redraw}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::redraw (
+\subsubsection[{redraw}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::redraw (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a02282b43bfacc1cc4030bb226b814446}
+)}}\label{classShipCAD_1_1ShipCADModel_af06c21c121f42e1ac4e5510d8c9ed3cd}
 
 
 redraw the model 
 
-\hypertarget{classShipCAD_1_1ShipCADModel_a6801637e1f13a22b1ef3fc50e389f51e}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!remove\-Selected\-Marker@{remove\-Selected\-Marker}}
+T\-O\-D\-O this should be in the controller, not here 
+
+Definition at line 385 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_ad16bba5c648dec8cddfe23ed9b07615a}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!remove\-Selected\-Flowline@{remove\-Selected\-Flowline}}
+\index{remove\-Selected\-Flowline@{remove\-Selected\-Flowline}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{remove\-Selected\-Flowline}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::remove\-Selected\-Flowline (
+\begin{DoxyParamCaption}
+\item[{const {\bf Flowline} $\ast$}]{flow}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1ShipCADModel_ad16bba5c648dec8cddfe23ed9b07615a}
+
+
+deselect a flowline 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flow} & deselect this flowline \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 437 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_a7fb06b0a1fa75ef02597752fc3f691a2}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!remove\-Selected\-Marker@{remove\-Selected\-Marker}}
 \index{remove\-Selected\-Marker@{remove\-Selected\-Marker}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{remove\-Selected\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::remove\-Selected\-Marker (
+\subsubsection[{remove\-Selected\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::remove\-Selected\-Marker (
 \begin{DoxyParamCaption}
 \item[{{\bf Marker} $\ast$}]{mark}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a6801637e1f13a22b1ef3fc50e389f51e}
-\hypertarget{classShipCAD_1_1ShipCADModel_ab2b308baf2e93b80533218145472928f}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!save\-Binary@{save\-Binary}}
+)}}\label{classShipCAD_1_1ShipCADModel_a7fb06b0a1fa75ef02597752fc3f691a2}
+
+
+Definition at line 410 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_a64c7c4ddffffdd1be2f27eb4210af2b7}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!save\-Binary@{save\-Binary}}
 \index{save\-Binary@{save\-Binary}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{save\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::save\-Binary (
+\subsubsection[{save\-Binary}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::save\-Binary (
 \begin{DoxyParamCaption}
 \item[{{\bf File\-Buffer} \&}]{dest}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_ab2b308baf2e93b80533218145472928f}
+)}}\label{classShipCAD_1_1ShipCADModel_a64c7c4ddffffdd1be2f27eb4210af2b7}
+
+
+Definition at line 319 of file shipcadmodel.\-cpp.
+
 \hypertarget{classShipCAD_1_1ShipCADModel_a0d8f9cb2ce8038f6e65d90e8cab275e7}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!save\-Part@{save\-Part}}
 \index{save\-Part@{save\-Part}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{save\-Part}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::save\-Part (
@@ -719,7 +840,7 @@ redraw the model
 )}}\label{classShipCAD_1_1ShipCADModel_ab221977f2a8bd4d51d6ee777be0d7b8a}
 
 
-Definition at line 68 of file shipcadmodel.\-cpp.
+Definition at line 121 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a2636160d900b8d8b00802ae78ee87925}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Edit\-Mode@{set\-Edit\-Mode}}
 \index{set\-Edit\-Mode@{set\-Edit\-Mode}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -730,7 +851,7 @@ Definition at line 68 of file shipcadmodel.\-cpp.
 )}}\label{classShipCAD_1_1ShipCADModel_a2636160d900b8d8b00802ae78ee87925}
 
 
-Definition at line 97 of file shipcadmodel.\-cpp.
+Definition at line 158 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a98ebcb64c5c759cbd0ae6e817b7168b2}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-File\-Changed@{set\-File\-Changed}}
 \index{set\-File\-Changed@{set\-File\-Changed}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -750,7 +871,7 @@ set file changed flag
 \end{DoxyParams}
 
 
-Definition at line 105 of file shipcadmodel.\-cpp.
+Definition at line 166 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a07daf75d876f80296f841f5c8d2327cb}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Filename@{set\-Filename}}
 \index{set\-Filename@{set\-Filename}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -770,7 +891,7 @@ set the name of the file
 \end{DoxyParams}
 
 
-Definition at line 121 of file shipcadmodel.\-cpp.
+Definition at line 88 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a960f3e97ef2aa847c9bb7cdc7731cd39}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Filename\-Set@{set\-Filename\-Set}}
 \index{set\-Filename\-Set@{set\-Filename\-Set}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -778,7 +899,7 @@ Definition at line 121 of file shipcadmodel.\-cpp.
 \begin{DoxyParamCaption}
 \item[{bool}]{flag}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_a960f3e97ef2aa847c9bb7cdc7731cd39}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ShipCADModel_a960f3e97ef2aa847c9bb7cdc7731cd39}
 
 
 set flag for filename set 
@@ -788,6 +909,21 @@ set flag for filename set
 {\em set} & new flag for filename set \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line 127 of file shipcadmodel.\-h.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_a44ac7a48c0c01cae73bf723120071e72}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-File\-Version@{set\-File\-Version}}
+\index{set\-File\-Version@{set\-File\-Version}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{set\-File\-Version}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::set\-File\-Version (
+\begin{DoxyParamCaption}
+\item[{{\bf version\-\_\-t}}]{v}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1ShipCADModel_a44ac7a48c0c01cae73bf723120071e72}
+
+
+Definition at line 390 of file shipcadmodel.\-cpp.
+
 \hypertarget{classShipCAD_1_1ShipCADModel_a6133fe12cd13b6ce24424e19a8b1e433}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Precision@{set\-Precision}}
 \index{set\-Precision@{set\-Precision}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{set\-Precision}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::set\-Precision (
@@ -806,7 +942,7 @@ set precision of model
 \end{DoxyParams}
 
 
-Definition at line 86 of file shipcadmodel.\-cpp.
+Definition at line 147 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a27acd2ab4c6486a23db0b054962381bd}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Prev\-Undo\-Position@{set\-Prev\-Undo\-Position}}
 \index{set\-Prev\-Undo\-Position@{set\-Prev\-Undo\-Position}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -831,15 +967,39 @@ set previous undo index position
 \end{DoxyExceptions}
 
 
-Definition at line 162 of file shipcadmodel.\-cpp.
+Definition at line 210 of file shipcadmodel.\-cpp.
 
-\hypertarget{classShipCAD_1_1ShipCADModel_af638ed4ab8e64e89b0217cf727b48698}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Selected\-Marker@{set\-Selected\-Marker}}
+\hypertarget{classShipCAD_1_1ShipCADModel_af61065a1e9050cff7cb91c8312082e2a}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Selected\-Flowline@{set\-Selected\-Flowline}}
+\index{set\-Selected\-Flowline@{set\-Selected\-Flowline}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
+\subsubsection[{set\-Selected\-Flowline}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::set\-Selected\-Flowline (
+\begin{DoxyParamCaption}
+\item[{const {\bf Flowline} $\ast$}]{flow}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1ShipCADModel_af61065a1e9050cff7cb91c8312082e2a}
+
+
+set a flowline as selected 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flow} & set this flowline as selected \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 431 of file shipcadmodel.\-cpp.
+
+\hypertarget{classShipCAD_1_1ShipCADModel_afd7e984f4070d08cb16264c1b731580f}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Selected\-Marker@{set\-Selected\-Marker}}
 \index{set\-Selected\-Marker@{set\-Selected\-Marker}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{set\-Selected\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::set\-Selected\-Marker (
+\subsubsection[{set\-Selected\-Marker}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::set\-Selected\-Marker (
 \begin{DoxyParamCaption}
 \item[{{\bf Marker} $\ast$}]{mark}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1ShipCADModel_af638ed4ab8e64e89b0217cf727b48698}
+)}}\label{classShipCAD_1_1ShipCADModel_afd7e984f4070d08cb16264c1b731580f}
+
+
+Definition at line 404 of file shipcadmodel.\-cpp.
+
 \hypertarget{classShipCAD_1_1ShipCADModel_aa466832784532e736a1c2a16681a6d04}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!set\-Undo\-Position@{set\-Undo\-Position}}
 \index{set\-Undo\-Position@{set\-Undo\-Position}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
 \subsubsection[{set\-Undo\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-Model\-::set\-Undo\-Position (
@@ -863,7 +1023,7 @@ set undo index position
 \end{DoxyExceptions}
 
 
-Definition at line 155 of file shipcadmodel.\-cpp.
+Definition at line 203 of file shipcadmodel.\-cpp.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a1d7ffa7d873dc1f43d21a62054ae356c}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!undo\-Count@{undo\-Count}}
 \index{undo\-Count@{undo\-Count}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -881,7 +1041,7 @@ number of undo objects
 \end{DoxyReturn}
 
 
-Definition at line 183 of file shipcadmodel.\-h.
+Definition at line 204 of file shipcadmodel.\-h.
 
 \hypertarget{classShipCAD_1_1ShipCADModel_a28d6c179e54a1e19997a0da2a38e4ca5}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!undo\-Position@{undo\-Position}}
 \index{undo\-Position@{undo\-Position}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
@@ -899,22 +1059,8 @@ current undo index position
 \end{DoxyReturn}
 
 
-Definition at line 188 of file shipcadmodel.\-h.
+Definition at line 209 of file shipcadmodel.\-h.
 
-\hypertarget{classShipCAD_1_1ShipCADModel_a0a93194fdd11a446daaf5e5354d8928a}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!update\-Recent\-File\-List@{update\-Recent\-File\-List}}
-\index{update\-Recent\-File\-List@{update\-Recent\-File\-List}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{update\-Recent\-File\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::update\-Recent\-File\-List (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1ShipCADModel_a0a93194fdd11a446daaf5e5354d8928a}
-\hypertarget{classShipCAD_1_1ShipCADModel_a67e2bacab21ee04409e3b33693b7ae92}{\index{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}!update\-Undo\-Data@{update\-Undo\-Data}}
-\index{update\-Undo\-Data@{update\-Undo\-Data}!ShipCAD::ShipCADModel@{Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model}}
-\subsubsection[{update\-Undo\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Ship\-C\-A\-D\-Model\-::update\-Undo\-Data (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1ShipCADModel_a67e2bacab21ee04409e3b33693b7ae92}
 
 
 The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}

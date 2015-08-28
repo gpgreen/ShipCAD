@@ -83,9 +83,10 @@ public:
     virtual void rebuild() = 0;
 
     // getters/setters
-    QVector3D getMin();
-    QVector3D getMax();
-    bool isBuild();
+    QVector3D getMin() const;
+    QVector3D getMax() const;
+    bool isBuild() const
+        {return _build;}
     virtual void setBuild(bool val);
 
     // output

@@ -182,6 +182,7 @@ void FileBuffer::add(quint32 val)
         _data.push_back(ct.d[i]);
 }
 
+#ifndef _WIN32
 void FileBuffer::add(size_t val)
 {
 	if (val > 0xffffffff)
@@ -191,6 +192,7 @@ void FileBuffer::add(size_t val)
     for (int i=0; i<4; ++i)
         _data.push_back(ct.d[i]);
 }
+#endif
 
 void FileBuffer::add(const QColor& c)
 {

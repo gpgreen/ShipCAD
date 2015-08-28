@@ -87,12 +87,15 @@ public:
 
     void load(quint32& val);
     void add(quint32 val);
+
+#ifndef _WIN32
 	/*! \brief save value, (check that it fits in 32 bits)
 	 *
 	 * \param val integer to save
 	 * \throws range_error if val is greater than 32bit unsigned
 	 */
 	void add(size_t val);
+#endif
     void load(QVector3D& val);
     void add(const QVector3D& val);
 

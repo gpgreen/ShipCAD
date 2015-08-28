@@ -5,4 +5,5 @@ SUBDIRS = \
     subdivcontrolpoint \
     subdivface \
     subdivcontrolface \
-    hydrostaticcalc
+    hydrostaticcalc \
+    spline

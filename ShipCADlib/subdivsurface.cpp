@@ -30,6 +30,7 @@
 #include <iostream>
 #include <algorithm>
 #include <stdexcept>
+#include <fstream>
 
 #include "subdivsurface.h"
 #include "subdivpoint.h"
@@ -1740,6 +1741,12 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
         if (!addedge)
             spline = 0;
     }
+    ofstream os("splines.txt");
+    std::vector<Spline*>::iterator i = destination.begin();
+    for( ; i!=destination.end(); i++)
+        (*i)->dump(os);
+    os.flush();
+    os.close();
     if (destination.size() > 1) {
         JoinSplineSegments(0.01f, false, destination);
         for (size_t i=destination.size(); i>=1; --i) {

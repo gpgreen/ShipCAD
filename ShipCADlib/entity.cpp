@@ -62,11 +62,6 @@ void Entity::extents(QVector3D& min, QVector3D& max)
     MinMax(_max, min, max);
 }
 
-bool Entity::isBuild()
-{
-    return _build;
-}
-
 void Entity::setBuild(bool val)
 {
     if (val != _build) {
@@ -78,17 +73,17 @@ void Entity::setBuild(bool val)
     }
 }
 
-QVector3D Entity::getMin()
+QVector3D Entity::getMin() const
 {
     if (!_build)
-        rebuild();
+        const_cast<Entity*>(this)->rebuild();
     return _min;
 }
 
-QVector3D Entity::getMax()
+QVector3D Entity::getMax() const
 {
     if (!_build)
-        rebuild();
+        const_cast<Entity*>(this)->rebuild();
     return _max;
 }
 

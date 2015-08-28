@@ -48,27 +48,53 @@ class LineShader;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief Represents a spline
+ */
 class Spline : public Entity
 {
     Q_OBJECT
-    Q_PROPERTY(size_t Fragments READ getFragments WRITE setFragments)
-    Q_PROPERTY(bool ShowCurvature READ showCurvature WRITE setShowCurvature)
-    Q_PROPERTY(bool ShowPoints MEMBER _show_points)
-    Q_PROPERTY(float CurvatureScale READ getCurvatureScale WRITE setCurvatureScale)
-    Q_PROPERTY(QColor CurvatureColor READ getCurvatureColor WRITE setCurvatureColor)
 
 public:
 
+    /*! \brief constructor
+     */
     explicit Spline();
+    /*! \brief copy constructor
+     */
     explicit Spline(const Spline& copied);
+    /*! \brief destructor
+     */
     virtual ~Spline() {}
     
     // altering
+    /*! \brief add a point to the spline
+     *
+     * \param p coordinates of point to add
+     */
     void add(const QVector3D& p);
+    /*! \brief delete a point from the spline
+     *
+     * \param index delete point at index
+     */
     void delete_point(size_t index);
+    /*! \brief insert a point at the index
+     *
+     * \param index where to add the new point
+     * \param p coordinates of new point
+     */
     void insert(size_t index, const QVector3D& p);
+    /*! \brief insert a copy of a spline at the index
+     *
+     * \param index where to insert a copy of the spline
+     * \param invert if true, invert the direction of the copied spline
+     * \param duplicate_point if true, the point at index and the first point
+     * of the copied spline are the same, so don't add it in
+     * \param source the spline to copy into this spline at the index
+     */
     void insert_spline(size_t index, bool invert, bool duplicate_point, 
 		       const Spline& source);
+    /*! \brief invert the direction of this spline
+     */
     void invert_direction();
     bool simplify(float criterium);
     virtual void clear();
@@ -76,19 +102,19 @@ public:
     void setBuild(bool val);
 
     // geometry ops
-    float coord_length(float t1, float t2);
-    float chord_length_approximation(float percentage);
-    float curvature(float parameter, QVector3D& normal);
-    QVector3D first_derive(float parameter);
-    QVector3D second_derive(float parameter);
-    bool intersect_plane(const Plane& plane, IntersectionData& output);
-    QVector3D value(float parameter);
+    float coord_length(float t1, float t2) const;
+    float chord_length_approximation(float percentage) const;
+    float curvature(float parameter, QVector3D& normal) const;
+    QVector3D first_derive(float parameter) const;
+    QVector3D second_derive(float parameter) const;
+    bool intersect_plane(const Plane& plane, IntersectionData& output) const;
+    QVector3D value(float parameter) const;
 
     // persistence
-    virtual void loadBinary(FileBuffer& source);
-    virtual void saveBinary(FileBuffer& destination);
+    void loadBinary(FileBuffer& source);
+    void saveBinary(FileBuffer& destination) const;
     void saveToDXF(QStringList& strings, QString layername,
-		     bool sendmirror);
+             bool sendmirror) const;
 
     // drawing
     //int distance_to_cursor(int x, int y, Viewport& vp) const;
@@ -96,35 +122,41 @@ public:
 
     // getters/setters
 
-    bool showCurvature() {return _show_curvature;}
-    void setShowCurvature(bool val) {_show_curvature = val;}
-    QColor getCurvatureColor() {return _curvature_color;}
-    void setCurvatureColor(const QColor& val) {_curvature_color=val;}
-    float getCurvatureScale() {return _curvature_scale;}
-    void setCurvatureScale(float val) {_curvature_scale=val;}
-    float getParameter(size_t index);
-    QVector3D getPoint(size_t index);
+    bool showCurvature() const
+        {return _show_curvature;}
+    void setShowCurvature(bool val)
+        {_show_curvature = val;}
+    QColor getCurvatureColor() const
+        {return _curvature_color;}
+    void setCurvatureColor(const QColor& val)
+        {_curvature_color=val;}
+    float getCurvatureScale() const
+        {return _curvature_scale;}
+    void setCurvatureScale(float val)
+        {_curvature_scale=val;}
+    float getParameter(size_t index) const;
+    QVector3D getPoint(size_t index) const
+        {return _points[index];}
     void setPoint(size_t index, const QVector3D& p);
-    int getFragments();
+    int getFragments() const
+        {return _fragments;}
     void setFragments(size_t val);
-    bool isKnuckle(size_t index);
+    bool isKnuckle(size_t index) const
+        {return _knuckles[index];}
     void setKnuckle(size_t index, bool val);
-    size_t numberOfPoints() { return _nopoints; }
+    size_t numberOfPoints() const
+        { return _nopoints; }
 
     // output
     void dump(std::ostream& os) const;
 
-protected:
+private:
 
     // methods used in simplify
     float weight(size_t index);
     std::vector<float>::iterator find_next_point(std::vector<float>& weights);
 
-    // method used in intersect_plane
-    void add_to_output(const QVector3D& p, float parameter, 
-		       IntersectionData& output);
-
-protected:
+private:
 
     size_t _nopoints;
     size_t _fragments;

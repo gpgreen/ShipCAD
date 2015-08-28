@@ -30,6 +30,7 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+#include <stdexcept>
 
 #include "spline.h"
 #include "plane.h"
@@ -37,7 +38,6 @@
 #include "filebuffer.h"
 #include "utility.h"
 #include "shader.h"
-#include "exception.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -74,24 +74,19 @@ void Spline::setBuild(bool val)
     Entity::setBuild(val);
 }
 
+float Spline::getParameter(size_t index) const
+{
+    if (!isBuild())
+        const_cast<Spline*>(this)->rebuild();
+    return _parameters[index];
+}
+
 void Spline::setFragments(size_t val)
 {
     if (val != _fragments) {
         _fragments = val;
         setBuild(false);
     }
-}
-
-int Spline::getFragments()
-{
-    return _fragments;
-}
-
-bool Spline::isKnuckle(size_t index)
-{
-    if (index < _nopoints)
-        return _knuckles[index];
-    throw ListIndexOutOfBounds(__FILE__);
 }
 
 void Spline::setKnuckle(size_t index, bool val)
@@ -101,7 +96,7 @@ void Spline::setKnuckle(size_t index, bool val)
         setBuild(false);
     } 
     else {
-        throw ListIndexOutOfBounds(__FILE__);
+        throw out_of_range(__FILE__);
     }
 }
 
@@ -112,27 +107,7 @@ void Spline::setPoint(size_t index, const QVector3D& p)
         setBuild(false);
     } 
     else {
-        throw PointIndexOutOfBounds(__FILE__);
-    }
-}
-
-float Spline::getParameter(size_t index)
-{
-    if (index < _nopoints) {
-        return _parameters[index];
-    } 
-    else {
-        throw ListIndexOutOfBounds(__FILE__);
-    }
-}
-
-QVector3D Spline::getPoint(size_t index)
-{
-    if (index < _nopoints) {
-        return _points[index];
-    } 
-    else {
-        throw PointIndexOutOfBounds(__FILE__);
+        throw out_of_range(__FILE__);
     }
 }
 
@@ -256,13 +231,13 @@ void Spline::rebuild()
     }
 }
 
-QVector3D Spline::second_derive(float parameter)
+QVector3D Spline::second_derive(float parameter) const
 {
     QVector3D result = ZERO;
     if (_nopoints < 2)
         return result;
     if (!_build)
-        rebuild();
+        const_cast<Spline*>(this)->rebuild();
     if (_nopoints < 2)
         return result;
 
@@ -396,11 +371,11 @@ void Spline::add(const QVector3D& p)
     setBuild(false);
 }
 
-float Spline::coord_length(float t1, float t2)
+float Spline::coord_length(float t1, float t2) const
 {
     float result = 0.0;
     if (!_build)
-        rebuild();
+        const_cast<Spline*>(this)->rebuild();
     if (!_build)
         return result;
 
@@ -416,7 +391,7 @@ float Spline::coord_length(float t1, float t2)
     return result;
 }
 
-float Spline::chord_length_approximation(float percentage)
+float Spline::chord_length_approximation(float percentage) const
 {
     float result, length, total_length;
     float t1, t2;
@@ -464,7 +439,7 @@ float Spline::chord_length_approximation(float percentage)
     return result;
 }
 
-float Spline::curvature(float parameter, QVector3D& normal)
+float Spline::curvature(float parameter, QVector3D& normal) const
 {
     float result;
 
@@ -496,7 +471,7 @@ void Spline::delete_point(size_t index)
     }
 }
 
-QVector3D Spline::first_derive(float parameter)
+QVector3D Spline::first_derive(float parameter) const
 {
 
     float t1 = parameter - 1E-3;
@@ -521,7 +496,7 @@ void Spline::insert(size_t index, const QVector3D& p)
         setBuild(false);
     }
     else
-        throw IndexOutOfRange(__FILE__);
+        throw out_of_range(__FILE__);
 }
 
 void Spline::draw(Viewport& vp, LineShader* lineshader)
@@ -609,14 +584,14 @@ void Spline::insert_spline(size_t index, bool invert, bool duplicate_point,
     _nopoints += nonewpoints;
 }
 
-void Spline::add_to_output(const QVector3D& p, float parameter, IntersectionData& output)
+static void add_to_output(const QVector3D& p, float parameter, IntersectionData& output)
 {
     output.number_of_intersections++;
     output.points.push_back(p);
     output.parameters.push_back(parameter);
 }
 
-bool Spline::intersect_plane(const Plane& plane, IntersectionData& output)
+bool Spline::intersect_plane(const Plane& plane, IntersectionData& output) const
 {
     output.number_of_intersections = 0;
     float t1 = 0;
@@ -674,7 +649,7 @@ void Spline::loadBinary(FileBuffer& source)
     setBuild(false);
 }
 
-void Spline::saveBinary(FileBuffer& destination)
+void Spline::saveBinary(FileBuffer& destination) const
 {
     destination.add(_show_curvature);
     destination.add(_curvature_scale);
@@ -685,11 +660,11 @@ void Spline::saveBinary(FileBuffer& destination)
     }
 }
 
-void Spline::saveToDXF(QStringList& strings, QString layername, bool sendmirror)
+void Spline::saveToDXF(QStringList& strings, QString layername, bool sendmirror) const
 {
     int ind = FindDXFColorIndex(_color);
     if (!_build)
-        rebuild();
+        const_cast<Spline*>(this)->rebuild();
     vector<float> params;
     for (size_t i=2; i<_nopoints; ++i) {
         if (_knuckles[i-1]) {
@@ -751,13 +726,13 @@ void Spline::clear()
     _derivatives.clear();
 }
 
-QVector3D Spline::value(float parameter)
+QVector3D Spline::value(float parameter) const
 {
     QVector3D result;
     if (_nopoints < 2)
         return result;
     if (!_build)
-        rebuild();
+        const_cast<Spline*>(this)->rebuild();
     if (_nopoints < 2)
         return result;
 

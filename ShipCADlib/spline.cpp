@@ -118,11 +118,11 @@ void Spline::rebuild()
     // attempt to eliminate double points
     _total_length = 0;
     for (size_t i=1; i<_nopoints; ++i) {
-        _total_length += sqrt(_points[i].distanceToPoint(_points[i-1]));
+        _total_length += sqrt(_points[i-1].distanceToPoint(_points[i]));
     }
     vector<QVector3D> u;
     QVector3D un, qn;
-    float sig, p;
+    float p;
 
     if (_nopoints > 1) {
         _derivatives.clear();
@@ -132,8 +132,9 @@ void Spline::rebuild()
         u.reserve(_nopoints);
 
         if (fabs(_total_length) <  1E-5) {
+            // zero arc length, use uniform parameterization
             for (size_t i=0; i<_nopoints; ++i) {
-                _parameters.push_back(i / static_cast<float>(_nopoints));
+                _parameters.push_back(i / static_cast<float>(_nopoints-1));
             }
         } 
         else {
@@ -151,47 +152,48 @@ void Spline::rebuild()
 
         for (size_t i=1; i<_nopoints-1; ++i) {
             if (_knuckles[i]) {
-                u[i-1] = ZERO;
+                u.push_back(ZERO);
                 _derivatives.push_back(ZERO);
             } 
             else {
                 if (fabs(_parameters[i+1] - _parameters[i-1]) < 1e-5
-                        || fabs(_parameters[i] - _parameters[i-1]) < 1e-5
-                        || fabs(_parameters[i+1] - _parameters[i]) < 1e-5) {
+					|| fabs(_parameters[i] - _parameters[i-1]) < 1e-5
+					|| fabs(_parameters[i+1] - _parameters[i]) < 1e-5) {
+                    u.push_back(ZERO);
                     _derivatives.push_back(ZERO);
                 } 
                 else {
-                    sig = (_parameters[i] - _parameters[i-1])
-                            / (_parameters[i+1] - _parameters[i-1]);
+                    float sig = (_parameters[i] - _parameters[i-1])
+						/ (_parameters[i+1] - _parameters[i-1]);
                     // first x-value
                     p = sig * _derivatives[i-1].x() + 2.0;
                     QVector3D p1;
                     QVector3D p2;
                     p1.setX((sig - 1.0) / p);
                     p2.setX( (6.0 * ((_points[i+1].x() - _points[i].x())
-                              / (_parameters[i+1] - _parameters[i])
-                             - (_points[i].x() - _points[i-1].x())
-                            / (_parameters[i] - _parameters[i-1]))
-                            / (_parameters[i+1] - _parameters[i-1])
-                            - sig * u[i-1].x()) / p);
+									 / (_parameters[i+1] - _parameters[i])
+									 - (_points[i].x() - _points[i-1].x())
+									 / (_parameters[i] - _parameters[i-1]))
+							  / (_parameters[i+1] - _parameters[i-1])
+							  - sig * u[i-1].x()) / p);
                     // then y-value
                     p = sig * _derivatives[i-1].y() + 2.0;
                     p1.setY((sig - 1.0) / p);
                     p2.setY( (6.0 * ((_points[i+1].y() - _points[i].y())
-                              / (_parameters[i+1] - _parameters[i])
-                             - (_points[i].y() - _points[i-1].y())
-                            / (_parameters[i] - _parameters[i-1]))
-                            / (_parameters[i+1] - _parameters[i-1])
-                            - sig * u[i-1].y()) / p);
+									 / (_parameters[i+1] - _parameters[i])
+									 - (_points[i].y() - _points[i-1].y())
+									 / (_parameters[i] - _parameters[i-1]))
+							  / (_parameters[i+1] - _parameters[i-1])
+							  - sig * u[i-1].y()) / p);
                     // then z-value
                     p = sig * _derivatives[i-1].z() + 2.0;
                     p1.setZ((sig - 1.0) / p);
                     p2.setZ( (6.0 * ((_points[i+1].z() - _points[i].z())
-                              / (_parameters[i+1] - _parameters[i])
-                             - (_points[i].z() - _points[i-1].z())
-                            / (_parameters[i] - _parameters[i-1]))
-                            / (_parameters[i+1] - _parameters[i-1])
-                            - sig * u[i-1].z()) / p);
+									 / (_parameters[i+1] - _parameters[i])
+									 - (_points[i].z() - _points[i-1].z())
+									 / (_parameters[i] - _parameters[i-1]))
+							  / (_parameters[i+1] - _parameters[i-1])
+							  - sig * u[i-1].z()) / p);
                     _derivatives.push_back(p1);
                     u.push_back(p2);
                 }
@@ -267,7 +269,7 @@ QVector3D Spline::second_derive(float parameter) const
     return result;
 }
 
-float Spline::weight(size_t index)
+float Spline::weight(size_t index, float total_length)
 {
     float result;
     float length, dist;
@@ -286,7 +288,7 @@ float Spline::weight(size_t index)
         else {
             dist = DistancepointToLine(p2,p1,p3);
             if (dist < 1E-2) {
-                if (length*length/_total_length > 0.01)
+                if (length*length/total_length > 0.01)
                     result = 1E10;
                 else
                     result = 1E8 * dist * dist * length;
@@ -312,7 +314,7 @@ vector<float>::iterator Spline::find_next_point(vector<float>& weights)
     result = i;
     while (i<weights.end() && minval > 0) {
         if (*i < minval) {
-	    minval = *i;
+			minval = *i;
             result = i;
         }
         i++;
@@ -322,45 +324,51 @@ vector<float>::iterator Spline::find_next_point(vector<float>& weights)
 
 bool Spline::simplify(float criterium)
 {
-  vector<float> weights;
-  weights.reserve(_nopoints);
-    bool result = false;
+    if (!isBuild())
+        rebuild();
 
     if (_nopoints < 3)
         return true;
 
+	vector<float> weights;
+	weights.reserve(_nopoints);
+
     float total_length = _total_length * _total_length;
     if (total_length == 0)
-        return result;
+        return false;
 
     for (size_t i=0; i<_nopoints; ++i)
-        weights.push_back(weight(i)/total_length);
+        weights.push_back(weight(i, total_length)/total_length);
 
     vector<float>::iterator index;
     do {
         index = find_next_point(weights);
-	vector<float>::iterator last = weights.end();
-	last--;
+		vector<float>::iterator last = weights.end();
+		last--;
         if (index == weights.end() || _nopoints < 3 || index == last)
-	  break;
-	if (*index < criterium) {
-	  size_t j = index - weights.begin();
-	  weights.erase(index);
-	  _points.erase(_points.begin()+j);
-	  _knuckles.erase(_knuckles.begin()+j);
-	  _nopoints--;
-	  if (j > 0 && j < _nopoints)
-	    weights[j] = weights[j]/total_length;
-	}
-	else
-	  break;
+			break;
+		if (*index < criterium) {
+			// use int as we want to test for negative below
+			int j = index - weights.begin();
+			weights.erase(index);
+			_points.erase(_points.begin()+j);
+			_knuckles.erase(_knuckles.begin()+j);
+			_nopoints--;
+            if (j-1 >= 0 && j-1 < static_cast<int>(_nopoints))
+                weights[j-1] = weight(j-1, total_length)/total_length;
+            if (j >= 0 && j < static_cast<int>(_nopoints))
+                weights[j] = weight(j, total_length)/total_length;
+            if (j+1 >= 0 && j+1 < static_cast<int>(_nopoints))
+                weights[j+1] = weight(j+1, total_length)/total_length;
+		}
+		else
+			break;
     }
     while (index != weights.end());
-    result = true;
 
     setBuild(false);
 
-    return result;
+    return true;
 }
 
 void Spline::add(const QVector3D& p)
@@ -557,7 +565,7 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
 }
 
 void Spline::insert_spline(size_t index, bool invert, bool duplicate_point, 
-			   const Spline& source)
+						   const Spline& source)
 {
     setBuild(false);
     int nonewpoints;
@@ -586,6 +594,10 @@ void Spline::insert_spline(size_t index, bool invert, bool duplicate_point,
 
 static void add_to_output(const QVector3D& p, float parameter, IntersectionData& output)
 {
+    // if the new point is very close to the last point, don't add it
+    // this will be the case if intersection is at the end point of a line segment
+    if (output.number_of_intersections > 0 && fabs(parameter - output.parameters.back()) < 1E-6)
+        return;
     output.number_of_intersections++;
     output.points.push_back(p);
     output.parameters.push_back(parameter);
@@ -605,9 +617,14 @@ bool Spline::intersect_plane(const Plane& plane, IntersectionData& output) const
         float s2 = plane.distance(p2);
         if (fabs(s2) < 1E-6)
             add_to_output(p2, t2, output);
-        if ((s1 < 0 && s2 > 0) || (s2 < 0 && s1 > 0)) {
+        if (s1 < 0 && s2 > 0) {
             // intersection found
             float t = s1 / (s2 - s1);
+            t = t1 - t * (t2 - t1);
+            add_to_output(value(t), t, output);
+        } else if (s2 < 0 && s1 > 0) {
+            // intersection found
+            float t = -s1 / (s2 - s1);
             t = t1 + t * (t2 - t1);
             add_to_output(value(t), t, output);
         }
@@ -691,22 +708,22 @@ void Spline::saveToDXF(QStringList& strings, QString layername, bool sendmirror)
     }
     strings.push_back("0\r\nSEQEND");
     if (sendmirror) {
-      // send the starboard side too
-      strings.push_back("0\r\nPOLYLINE");
-      strings.push_back(QString("8\r\n%1").arg(layername));   // layername
-      strings.push_back(QString("62\r\n%1").arg(ind));      // color by layer
-      strings.push_back("70\r\n10");    // not closed
-      strings.push_back("66\r\n1");     // vertices follow
-      for (size_t i=0; i<params.size(); ++i) {
-        QVector3D p = value(params[i]);
-        strings.push_back("0\r\nVERTEX");
-        strings.push_back(QString("8\r\n%1").arg(layername));
-        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
-        strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
-        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
-        strings.push_back("70\r\n32");    // 3D polyline mesh vertex
-      }
-      strings.push_back("0\r\nSEQEND");
+		// send the starboard side too
+		strings.push_back("0\r\nPOLYLINE");
+		strings.push_back(QString("8\r\n%1").arg(layername));   // layername
+		strings.push_back(QString("62\r\n%1").arg(ind));      // color by layer
+		strings.push_back("70\r\n10");    // not closed
+		strings.push_back("66\r\n1");     // vertices follow
+		for (size_t i=0; i<params.size(); ++i) {
+			QVector3D p = value(params[i]);
+			strings.push_back("0\r\nVERTEX");
+			strings.push_back(QString("8\r\n%1").arg(layername));
+			strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
+			strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
+			strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+			strings.push_back("70\r\n32");    // 3D polyline mesh vertex
+		}
+		strings.push_back("0\r\nSEQEND");
     }
 }
 
@@ -763,8 +780,8 @@ QVector3D Spline::value(float parameter) const
         //b = (parameter - _parameters[lo]) / h;
         b = 1 - a;
         result = a * _points[lo] + b * _points[hi] + ((a * a * a - a) * _derivatives[lo]
-                + (b * b * b - b) * _derivatives[hi])
-                * (h * h) / 6.0;
+													  + (b * b * b - b) * _derivatives[hi])
+			* (h * h) / 6.0;
     }
     return result;
 }
@@ -787,10 +804,10 @@ void Spline::dump(ostream& os) const
            << "]\t" << (_knuckles[i] ? 't' : 'f');
         if (_parameters.size() > i && _derivatives.size() > i) {
             os << "\t" << _parameters[i]
-                  << "\t[" << _derivatives[i].x()
-                  << "," << _derivatives[i].y()
-                  << "," << _derivatives[i].z()
-                  << "]";
+			   << "\t[" << _derivatives[i].x()
+			   << "," << _derivatives[i].y()
+			   << "," << _derivatives[i].z()
+			   << "]";
         }
         os << endl;
     }

@@ -87,8 +87,8 @@ public:
      *
      * \param index where to insert a copy of the spline
      * \param invert if true, invert the direction of the copied spline
-     * \param duplicate_point if true, the point at index and the first point
-     * of the copied spline are the same, so don't add it in
+     * \param duplicate_point if true, then the last point of the copied
+	 * spline is not inserted into this spline
      * \param source the spline to copy into this spline at the index
      */
     void insert_spline(size_t index, bool invert, bool duplicate_point, 
@@ -96,6 +96,11 @@ public:
     /*! \brief invert the direction of this spline
      */
     void invert_direction();
+	/*! \brief simplify the spline by removing points
+	 *
+	 * \param criterium remove each point that is weighted less than this
+	 * \return true if spline is simplified or already simplified
+	 */
     bool simplify(float criterium);
     virtual void clear();
     virtual void rebuild();
@@ -153,7 +158,7 @@ public:
 private:
 
     // methods used in simplify
-    float weight(size_t index);
+    float weight(size_t index, float total_length);
     std::vector<float>::iterator find_next_point(std::vector<float>& weights);
 
 private:

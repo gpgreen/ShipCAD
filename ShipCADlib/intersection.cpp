@@ -136,19 +136,19 @@ QString Intersection::getDescription()
     QString result;
     switch(_intersection_type) {
     case fiStation:
-        result = Intersection::tr("Station");
+        result = tr("Station");
         break;
     case fiButtock:
-        result = Intersection::tr("Buttock");
+        result = tr("Buttock");
         break;
     case fiWaterline:
-        result = Intersection::tr("Waterline");
+        result = tr("Waterline");
         break;
     case fiDiagonal:
-        result = Intersection::tr("Diagonal");
+        result = tr("Diagonal");
         break;
     default:
-        result = Intersection::tr("Free");
+        result = tr("Free");
         break;
     }
     if (_intersection_type == fiDiagonal)
@@ -186,11 +186,13 @@ struct CalculateSplineArea
     QVector3D* _cog;
     QVector3D* _moi;
     intersection_type_t _intersection_type;
-    Plane _plane;
-    CalculateSplineArea(float* area, QVector3D* cog, QVector3D* mom_inertia, intersection_type_t ty, const Plane& pln)
-        : _area(area), _cog(cog), _moi(mom_inertia), _intersection_type(ty), _plane(pln)
+    Plane _wl_plane;
+    Plane _int_plane;
+    CalculateSplineArea(float* area, QVector3D* cog, QVector3D* mom_inertia, intersection_type_t ty, const Plane& wlpln,
+                        const Plane& intersection_plane)
+        : _area(area), _cog(cog), _moi(mom_inertia), _intersection_type(ty), _wl_plane(wlpln), _int_plane(intersection_plane)
     {}
-    QVector2D ProjectTo2D(QVector3D& p)
+    QVector2D ProjectTo2D(const QVector3D& p)
     {
         QVector2D result;
         switch (_intersection_type) {
@@ -227,7 +229,7 @@ struct CalculateSplineArea
         spline->setFragments(500);
         parameters.push_back(0.0);
         parameters.push_back(1.0);
-        if (spline->intersect_plane(_plane, intersection_data)) {
+        if (_intersection_type != fiWaterline && spline->intersect_plane(_wl_plane, intersection_data)) {
             parameters.reserve(intersection_data.number_of_intersections+2);
             for (size_t i=0; i<intersection_data.parameters.size(); i++)
                 parameters.push_back(intersection_data.parameters[i]);
@@ -235,12 +237,12 @@ struct CalculateSplineArea
         sort(parameters.begin(), parameters.end());
         if (parameters.size()) {
             float t1 = 0;
-            for (size_t i=2; i<parameters.size(); i++) {
-                float t2 = parameters[i-1];
+            for (size_t i=1; i<parameters.size(); i++) {
+                float t2 = parameters[i];
                 float t = 0.5 * (t1 + t2);
                 QVector3D p = spline->value(t);
                 // check on which side of the plane this point is
-                float side = _plane.distance(p);
+                float side = _wl_plane.distance(p);
                 if (side < 0 || _intersection_type == fiWaterline) {
                     // the point lies at the back of the plane, include this area
                     QVector2D p1 = ZERO2;
@@ -267,7 +269,7 @@ struct CalculateSplineArea
                 momi.setY(fabs(momi.y()));
                 switch (_intersection_type) {
                 case fiStation:
-                    spline_cog.setX(-_plane.d());
+                    spline_cog.setX(-_int_plane.d());
                     spline_cog.setY(c.x());
                     spline_cog.setZ(c.y());
                     _moi->setX(0);
@@ -276,7 +278,7 @@ struct CalculateSplineArea
                     break;
                 case fiButtock:
                     spline_cog.setX(c.x());
-                    spline_cog.setY(-_plane.d());
+                    spline_cog.setY(-_int_plane.d());
                     spline_cog.setZ(c.y());
                     _moi->setX(momi.x());
                     _moi->setY(0);
@@ -285,7 +287,7 @@ struct CalculateSplineArea
                 case fiWaterline:
                     spline_cog.setX(c.x());
                     spline_cog.setY(c.y());
-                    spline_cog.setZ(-_plane.d());
+                    spline_cog.setZ(-_int_plane.d());
                     _moi->setX(momi.x());
                     _moi->setY(momi.y());
                     _moi->setZ(0);
@@ -298,7 +300,7 @@ struct CalculateSplineArea
     }
 };
 
-void Intersection::calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia)
+void Intersection::calculateArea(const Plane& wlplane, float* area, QVector3D* cog, QVector2D* moment_of_inertia)
 {
     *area = 0;
     *cog = ZERO;
@@ -308,7 +310,7 @@ void Intersection::calculateArea(const Plane& plane, float* area, QVector3D* cog
         rebuild();
     if (_items.size() > 0) {
         createStarboardPart();  // this ensures correct winding order
-        CalculateSplineArea calc(area, cog, &tmpmoi, _intersection_type, plane);
+        CalculateSplineArea calc(area, cog, &tmpmoi, _intersection_type, wlplane, _plane);
         for_each(_items.begin(), _items.end(), calc);
         if (*area != 0) {
             *cog = *cog / *area;
@@ -497,19 +499,19 @@ void Intersection::saveToDXF(QStringList& strings)
         QString layer;
         switch(_intersection_type) {
         case fiStation:
-            layer = Intersection::tr("Stations");
+            layer = tr("Stations");
             break;
         case fiButtock:
-            layer = Intersection::tr("Buttocks");
+            layer = tr("Buttocks");
             break;
         case fiWaterline:
-            layer = Intersection::tr("Waterlines");
+            layer = tr("Waterlines");
             break;
         case fiDiagonal:
-            layer = Intersection::tr("Diagonals");
+            layer = tr("Diagonals");
             break;
         default:
-            layer = Intersection::tr("Layer_0");
+            layer = tr("Layer_0");
             break;
         }
         switch (_owner->getPrecision()) {

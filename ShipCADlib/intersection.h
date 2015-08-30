@@ -72,9 +72,21 @@ public:
     virtual void rebuild();
     virtual void setBuild(bool val);
 
+    /* \brief get the color of the intersection
+     *
+     * \return the intersection color
+     */
     QColor getColor();
+    /*! \brief get the intersection plane
+     *
+     * \return the intersection plane
+     */
     Plane getPlane()
         {return _plane;}
+    /*! \brief set the intersection plane
+     *
+     * \param pln the new intersection plane
+     */
     void setPlane(const Plane& pln);
     
     QString getDescription();
@@ -87,7 +99,14 @@ public:
 
     SplineVector& getSplines() {return _items;}
 
-    void calculateArea(const Plane& plane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
+    /*! \brief calculate area, center of gravity, moment of inertia of intersection
+     *
+     * \param wlplane the waterline plane to use for hydrostatic area
+     * \param area calculated area
+     * \param cog calculated center of gravity
+     * \param moment_of_inertia calculated moment of inertia
+     */
+    void calculateArea(const Plane& wlplane, float* area, QVector3D* cog, QVector2D* moment_of_inertia);
     void createStarboardPart();
     void deleteItem(Spline* item);
 

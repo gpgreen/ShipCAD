@@ -11,6 +11,7 @@
 #include "subdivface.h"
 #include "subdivedge.h"
 #include "projsettings.h"
+#include "utility.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -28,6 +29,7 @@ private Q_SLOTS:
     void testConstructWL();
     void testConstructSta();
     void testArea();
+    void testDXF();
 };
 
 IntersectionTest::IntersectionTest()
@@ -147,17 +149,48 @@ void IntersectionTest::testArea()
 {
     Plane wlhalfcube(0,0,1,-0.5);
     Plane xhalfcube(1,0,0,-.5);
+    Plane bhalfcube(0,1,0,-.25);
 
-    Intersection i(_model, fiWaterline, wlhalfcube, true);
     float area;
     QVector3D cog;
     QVector2D moi;
+
+    Intersection i(_model, fiWaterline, wlhalfcube, true);
     i.calculateArea(wlhalfcube, &area, &cog, &moi);
-    //QVERIFY(area == 1.0);
+    QVERIFY(FuzzyCompare(area, 1.0, 1E-2));
+    QVERIFY(FuzzyCompare(cog.x(),.5,1E-2));
+    QVERIFY(FuzzyCompare(cog.y(),0,1E-2));
+    QVERIFY(FuzzyCompare(cog.z(),.5,1E-2));
 
     Intersection i1(_model, fiStation, xhalfcube, true);
     i1.calculateArea(wlhalfcube, &area, &cog, &moi);
-    //QVERIFY(area == 0.5);
+    QVERIFY(FuzzyCompare(area, 0.5, 1E-2));
+    QVERIFY(FuzzyCompare(cog.x(),.5,1E-2));
+    QVERIFY(FuzzyCompare(cog.y(),0,1E-2));
+    QVERIFY(FuzzyCompare(cog.z(),.25,1E-2));
+
+    Intersection i2(_model, fiButtock, bhalfcube, true);
+    i2.calculateArea(wlhalfcube, &area, &cog, &moi);
+    QVERIFY(FuzzyCompare(area, 0.5, 1E-2));
+    QVERIFY(FuzzyCompare(cog.x(),.5,1E-2));
+    QVERIFY(FuzzyCompare(cog.y(),.25,1E-2));
+    QVERIFY(FuzzyCompare(cog.z(),.25,1E-2));
+}
+
+void IntersectionTest::testDXF()
+{
+    Plane wlhalfcube(0,0,1,-0.5);
+    Plane xhalfcube(1,0,0,-.5);
+    Plane bhalfcube(0,1,0,-.25);
+
+    Intersection wl(_model, fiWaterline, wlhalfcube, true);
+    QStringList dxf;
+    wl.saveToDXF(dxf);
+    ofstream os("wl_intersection.dxf");
+    for (int i=0; i<dxf.size(); i++)
+        os << dxf[i].toStdString() << "\r\n";
+    os.close();
+    QVERIFY(dxf.size() > 0);
 }
 
 QTEST_APPLESS_MAIN(IntersectionTest)

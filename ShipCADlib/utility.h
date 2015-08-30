@@ -164,6 +164,14 @@ namespace ShipCAD {
 	 */
 	extern QString truncate(float val, int max_length);
 
+    /*! \brief compare 2 floats, if they are sufficiently close, return true
+     *
+     * \param val1 first value to compare
+     * \param val2 second value to compare
+     * \param error if absolute difference between the 2 values is less than this, then equal
+     * \return true if values are sufficiently equal
+     */
+    extern bool FuzzyCompare(float val1, float val2, float error);
 };
 
 #endif

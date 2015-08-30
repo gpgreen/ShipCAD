@@ -504,3 +504,7 @@ QString ShipCAD::MakeLength(const QString& value, int des_length)
     return QString(value).leftJustified(des_length, ' ', true);
 }
 
+bool ShipCAD::FuzzyCompare(float val1, float val2, float error)
+{
+    return fabs(val1 - val2) < error;
+}

@@ -72,8 +72,10 @@ void Intersection::clear()
 
 void Intersection::setBuild(bool val)
 {
-    if (val)
-        clear();
+    if (val != isBuild()) {
+        if (!val)
+            clear();
+    }
 	Entity::setBuild(val);
 }
 
@@ -90,6 +92,24 @@ QColor Intersection::getColor()
         return _owner->getPreferences().getDiagonalColor();
     }
     return Qt::white;
+}
+
+void Intersection::setPlane(const Plane& pln)
+{
+    _plane = pln;
+    setBuild(false);
+}
+
+void Intersection::setIntersectionType(intersection_type_t set)
+{
+    _intersection_type = set;
+    setBuild(false);
+}
+
+void Intersection::setUseHydrostaticsSurfacesOnly(bool set)
+{
+    _use_hydrostatic_surfaces_only = set;
+    setBuild(false);
 }
 
 struct SplineExtents
@@ -156,17 +176,18 @@ void Intersection::rebuild()
     if (_owner->getProjectSettings().getSimplifyIntersections()) {
         _items.apply(Simplify);
     }
-    _build = true;
+    setBuild(true);
+    extents(_min, _max);
 }
 
 struct CalculateSplineArea
 {
     float* _area;
     QVector3D* _cog;
-    QVector2D* _moi;
+    QVector3D* _moi;
     intersection_type_t _intersection_type;
     Plane _plane;
-    CalculateSplineArea(float* area, QVector3D* cog, QVector2D* mom_inertia, intersection_type_t ty, const Plane& pln)
+    CalculateSplineArea(float* area, QVector3D* cog, QVector3D* mom_inertia, intersection_type_t ty, const Plane& pln)
         : _area(area), _cog(cog), _moi(mom_inertia), _intersection_type(ty), _plane(pln)
     {}
     QVector2D ProjectTo2D(QVector3D& p)
@@ -193,9 +214,8 @@ struct CalculateSplineArea
         bool closed_spline;
         IntersectionData intersection_data;
         vector<float> parameters;
-        *_area = 0;
-        *_cog = ZERO;
-        *_moi = ZERO2;
+        float spline_area = 0;
+        QVector3D spline_cog = ZERO;
         QVector2D c = ZERO2;
         QVector2D momi = c;
         closed_spline = DistPP3D(spline->getPoint(0), spline->getPoint(spline->numberOfPoints()-1)) < 1e-4;
@@ -205,13 +225,12 @@ struct CalculateSplineArea
             spline->setKnuckle(spline->numberOfPoints()-2, true);
         }
         spline->setFragments(500);
-        parameters.push_back(0);
+        parameters.push_back(0.0);
         parameters.push_back(1.0);
-        if (_intersection_type != fiWaterline) {
-            if (spline->intersect_plane(_plane, intersection_data)) {
-                for (size_t i=0; i<intersection_data.number_of_intersections; i++)
-                    parameters.push_back(intersection_data.parameters[i]);
-            }
+        if (spline->intersect_plane(_plane, intersection_data)) {
+            parameters.reserve(intersection_data.number_of_intersections+2);
+            for (size_t i=0; i<intersection_data.parameters.size(); i++)
+                parameters.push_back(intersection_data.parameters[i]);
         }
         sort(parameters.begin(), parameters.end());
         if (parameters.size()) {
@@ -231,7 +250,7 @@ struct CalculateSplineArea
                         QVector2D p2 = ProjectTo2D(p);
                         if (j > 0) {
                             float delta = 0.5 * (p2.x() + p1.x()) * (p2.y() - p1.y());
-                            *_area += delta;
+                            spline_area += delta;
                             c.setX(c.x() + delta * .25 * (p2.x() + p1.x()));
                             c.setY(c.y() + delta * .5 * (p2.y() + p1.y()));
                             momi.setX(momi.x() + (1/12.) * (p1.y()+p2.y())*(p1.y()*p1.y()+p2.y()*p2.y())*(p2.x()-p1.x()));
@@ -242,35 +261,40 @@ struct CalculateSplineArea
                 }
                 t1 = t2;
             }
-            if (_area != 0) {
-                c /= *_area;
+            if (spline_area != 0) {
+                c /= spline_area;
                 momi.setX(fabs(momi.x()));
                 momi.setY(fabs(momi.y()));
                 switch (_intersection_type) {
                 case fiStation:
-                    _cog->setX(-_plane.d());
-                    _cog->setY(c.x());
-                    _cog->setZ(c.y());
+                    spline_cog.setX(-_plane.d());
+                    spline_cog.setY(c.x());
+                    spline_cog.setZ(c.y());
                     _moi->setX(0);
                     _moi->setY(momi.x());
+                    _moi->setZ(momi.y());
                     break;
                 case fiButtock:
-                    _cog->setX(c.x());
-                    _cog->setY(-_plane.d());
-                    _cog->setZ(c.y());
+                    spline_cog.setX(c.x());
+                    spline_cog.setY(-_plane.d());
+                    spline_cog.setZ(c.y());
                     _moi->setX(momi.x());
                     _moi->setY(0);
+                    _moi->setZ(momi.y());
                     break;
                 case fiWaterline:
-                    _cog->setX(c.x());
-                    _cog->setY(c.y());
-                    _cog->setZ(-_plane.d());
+                    spline_cog.setX(c.x());
+                    spline_cog.setY(c.y());
+                    spline_cog.setZ(-_plane.d());
                     _moi->setX(momi.x());
                     _moi->setY(momi.y());
+                    _moi->setZ(0);
                     break;
                 }
             }
         }
+        *_area += spline_area;
+        *_cog += spline_area * spline_cog;
     }
 };
 
@@ -279,18 +303,18 @@ void Intersection::calculateArea(const Plane& plane, float* area, QVector3D* cog
     *area = 0;
     *cog = ZERO;
     *moment_of_inertia = ZERO2;
-    QVector2D momi;
+    QVector3D tmpmoi;
     if (!isBuild())
         rebuild();
     if (_items.size() > 0) {
         createStarboardPart();  // this ensures correct winding order
-        CalculateSplineArea calc(area, cog, moment_of_inertia, _intersection_type, plane);
+        CalculateSplineArea calc(area, cog, &tmpmoi, _intersection_type, plane);
         for_each(_items.begin(), _items.end(), calc);
         if (*area != 0) {
             *cog = *cog / *area;
             if (_intersection_type == fiWaterline) {
-                moment_of_inertia->setX(moment_of_inertia->x() - cog->y() * cog->y() * *area);
-                moment_of_inertia->setY(moment_of_inertia->y() - cog->x() * cog->x() * *area);
+                moment_of_inertia->setX(tmpmoi.x() - cog->y() * cog->y() * *area);
+                moment_of_inertia->setY(tmpmoi.y() - cog->x() * cog->x() * *area);
             }
         }
     }
@@ -330,7 +354,7 @@ void Intersection::createStarboardPart()
     for (size_t i=_items.size(); i>=1; i--) {
         Spline* spline = _items.get(i-1);
         float area = 0;
-        QVector3D p1 = spline->getPoint(spline->numberOfPoints()-1);
+        QVector3D p1 = spline->getLastPoint();
         for (size_t j=0; j<500; j++) {
             QVector3D p2 = spline->value(j/500.);
             float delta;

@@ -142,6 +142,10 @@ public:
     float getParameter(size_t index) const;
     QVector3D getPoint(size_t index) const
         {return _points[index];}
+    QVector3D getFirstPoint() const
+        {return _points.front();}
+    QVector3D getLastPoint() const
+        {return _points.back();}
     void setPoint(size_t index, const QVector3D& p);
     int getFragments() const
         {return _fragments;}

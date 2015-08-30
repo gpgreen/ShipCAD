@@ -6,4 +6,5 @@ SUBDIRS = \
     subdivface \
     subdivcontrolface \
     hydrostaticcalc \
-    spline
+    spline \
+    intersection

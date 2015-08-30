@@ -326,7 +326,7 @@ void ShipCAD::JoinSplineSegments(float join_error,
     while (i < list.size()) {
         Spline* fixed = list.get(i-1);
         if (fixed->numberOfPoints() > 1) {
-            fixedclosed = fixed->getPoint(0).distanceToPoint(fixed->getPoint(fixed->numberOfPoints()-1)) < 1E-5;
+            fixedclosed = fixed->getFirstPoint().distanceToPoint(fixed->getLastPoint()) < 1E-5;
         }
         else
             fixedclosed = false;
@@ -339,14 +339,14 @@ void ShipCAD::JoinSplineSegments(float join_error,
                     continue;
                 match = list.get(j-1);
                 if (match->numberOfPoints() > 1)
-                    matchclosed = match->getPoint(0).distanceToPoint(match->getPoint(match->numberOfPoints()-1)) < 1E-5;
+                    matchclosed = match->getFirstPoint().distanceToPoint(match->getLastPoint()) < 1E-5;
                 else
                     matchclosed = false;
                 if (match->numberOfPoints() > 1 && !matchclosed) {
-                    float d1 = SquaredDistPP(fixed->getPoint(0), match->getPoint(0));
-                    float d2 = SquaredDistPP(fixed->getPoint(0), match->getPoint(match->numberOfPoints()-1));
-                    float d3 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(0));
-                    float d4 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(match->numberOfPoints()-1));
+                    float d1 = SquaredDistPP(fixed->getFirstPoint(), match->getFirstPoint());
+                    float d2 = SquaredDistPP(fixed->getFirstPoint(), match->getLastPoint());
+                    float d3 = SquaredDistPP(fixed->getLastPoint(), match->getFirstPoint());
+                    float d4 = SquaredDistPP(fixed->getLastPoint(), match->getLastPoint());
                     float min = Minimum(d1, d2, d3, d4);
                     if (min < nearestdist) {
                         nearestdist = min;
@@ -359,10 +359,10 @@ void ShipCAD::JoinSplineSegments(float join_error,
             }
             if (nearest != 0) {
                 match = nearest;
-                float d1 = SquaredDistPP(fixed->getPoint(0), match->getPoint(0));
-                float d2 = SquaredDistPP(fixed->getPoint(0), match->getPoint(match->numberOfPoints()-1));
-                float d3 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(0));
-                float d4 = SquaredDistPP(fixed->getPoint(fixed->numberOfPoints()-1), match->getPoint(match->numberOfPoints()-1));
+                float d1 = SquaredDistPP(fixed->getFirstPoint(), match->getFirstPoint());
+                float d2 = SquaredDistPP(fixed->getFirstPoint(), match->getLastPoint());
+                float d3 = SquaredDistPP(fixed->getLastPoint(), match->getFirstPoint());
+                float d4 = SquaredDistPP(fixed->getLastPoint(), match->getLastPoint());
                 float min = Minimum(d1, d2, d3, d4);
                 if (min < join_error || force_to_one_segment) {
                     // the splines do touch each other on one of their ends
@@ -376,7 +376,6 @@ void ShipCAD::JoinSplineSegments(float join_error,
                         fixed->insert_spline(fixed->numberOfPoints(), true, true, *match);
                     else
                         throw runtime_error("Error in comparing minimum values JoinSplineSegments");
-                    // destroy the matching spline
                     list.del(match);
                     i = 0;  // reset match index to start searching for a new matching spline
                 }

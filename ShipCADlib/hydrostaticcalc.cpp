@@ -1002,7 +1002,8 @@ void HydrostaticCalc::calculate()
                     _data.waterplane_entrance_angle = -_data.waterplane_entrance_angle;
             }
         }
-        waterplane.calculateArea(_data.waterline_plane, &_data.waterplane_area, &_data.waterplane_cog, &_data.waterplane_mom_inertia);
+        waterplane.calculateArea(_data.waterline_plane, &_data.waterplane_area,
+                                 &_data.waterplane_cog, &_data.waterplane_mom_inertia);
         if (ps.getBeam() * ps.getLength() != 0)
             _data.waterplane_coeff = _data.waterplane_area / (ps.getBeam() * ps.getLength());
         _data.km_transverse = _data.center_of_buoyancy.z() + _data.waterplane_mom_inertia.x() / _data.volume;

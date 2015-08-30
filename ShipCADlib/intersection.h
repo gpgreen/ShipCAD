@@ -62,7 +62,8 @@ class Intersection : public Entity
 public:
 
     explicit Intersection(ShipCADModel* owner);
-    explicit Intersection(ShipCADModel *owner, intersection_type_t ty, const Plane& pln, bool use_hydrostatics_only);
+    explicit Intersection(ShipCADModel *owner, intersection_type_t ty,
+                          const Plane& pln, bool use_hydrostatics_only);
     virtual ~Intersection() {}
 
     virtual void clear();
@@ -74,17 +75,15 @@ public:
     QColor getColor();
     Plane getPlane()
         {return _plane;}
-    void setPlane(const Plane& pln)
-        {_plane=pln;}
+    void setPlane(const Plane& pln);
+    
     QString getDescription();
     intersection_type_t getIntersectionType()
         {return _intersection_type;}
-    void setIntersectionType(intersection_type_t set)
-        {_intersection_type=set;}
+    void setIntersectionType(intersection_type_t set);
     bool useHydrostaticsSurfacesOnly()
         {return _use_hydrostatic_surfaces_only;}
-    void setUseHydrostaticsSurfacesOnly(bool set)
-        {_use_hydrostatic_surfaces_only=set;}
+    void setUseHydrostaticsSurfacesOnly(bool set);
 
     SplineVector& getSplines() {return _items;}
 

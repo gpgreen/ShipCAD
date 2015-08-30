@@ -56,9 +56,13 @@ bool ShipCAD::g_surface_verbose = true;
 
 SubdivisionSurface::SubdivisionSurface()
     : Entity(),
+      _show_control_net(true), _initialized(false), _show_interior_edges(false),
+      _draw_mirror(false), _shade_under_water(false), _show_normals(true),
       _show_curvature(true), _show_control_curves(true),
-      _subdivision_mode(fmQuadTriangle), _control_point_size(4),
-      _curvature_scale(0.25),
+      _subdivision_mode(fmQuadTriangle), _desired_subdiv_level(1),
+      _current_subdiv_level(-1), _control_point_size(4),
+      _curvature_scale(0.25), _min_gaus_curvature(0), _max_gaus_curvature(0),
+      _main_frame_location(1E10),
       _crease_color(Qt::green), _crease_edge_color(Qt::red),
       _underwater_color(Qt::gray),
       _edge_color(Qt::darkGray), _selected_color(Qt::yellow),
@@ -66,7 +70,7 @@ SubdivisionSurface::SubdivisionSurface()
       _corner_point_color(QColor(0, 255, 255)), _dart_point_color(QColor(0xc0, 0x80, 0x00)),
       _layer_color(QColor(0, 255, 255)), _normal_color(QColor(0xc0, 0xc0, 0xc0)), _leak_color(Qt::red),
       _curvature_color(Qt::white), _control_curve_color(Qt::red),
-      _zebra_color(Qt::black),
+      _zebra_color(Qt::black), _last_used_layerID(0), _active_layer(0),
       _cpoint_pool(sizeof(SubdivisionControlPoint)),
       _cedge_pool(sizeof(SubdivisionControlEdge)),
       _cface_pool(sizeof(SubdivisionControlFace)),
@@ -1514,15 +1518,15 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
     // first is start point, second is end point
     vector<pair<SurfIntersectionData, SurfIntersectionData> > segments;
 
-    for (size_t i=1; i<=faces.size(); ++i) {
-        ctrlface = faces[i-1];
-        for (size_t j=1; j<=ctrlface->numberOfChildren(); ++j) {
-            face = ctrlface->getChild(j-1);
+    for (size_t i=0; i<faces.size(); ++i) {
+        ctrlface = faces[i];
+        for (size_t j=0; j<ctrlface->numberOfChildren(); ++j) {
+            face = ctrlface->getChild(j);
             intarray.clear();
             p1 = face->getPoint(face->numberOfPoints()-1);
             side1 = plane.distance(p1->getCoordinate());
-            for (size_t k=1; k<=face->numberOfPoints(); ++k) {
-                p2 = face->getPoint(k-1);
+            for (size_t k=0; k<face->numberOfPoints(); ++k) {
+                p2 = face->getPoint(k);
                 side2 = plane.distance(p2->getCoordinate());
                 bool addedge = false;
                 if ((side1 < -1E-5 && side2 > 1E-5) || (side1 > 1E5 && side2 < -1E-5)) {
@@ -1553,10 +1557,10 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                             if (edge->numberOfFaces() == 1)
                                 addedge = true;
                             else {
-                                for (size_t n=1; n<=edge->numberOfFaces(); ++n) {
-                                    f2 = edge->getFace(n-1);
-                                    for (size_t m=1; m<=f2->numberOfPoints(); ++m) {
-                                        p3 = f2->getPoint(m-1);
+                                for (size_t n=0; n<edge->numberOfFaces(); ++n) {
+                                    f2 = edge->getFace(n);
+                                    for (size_t m=0; m<f2->numberOfPoints(); ++m) {
+                                        p3 = f2->getPoint(m);
                                         float parameter = plane.distance(p3->getCoordinate());
                                         if (fabs(parameter) > 1E-5) {
                                             addedge = true;
@@ -1578,11 +1582,11 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                                     ep.edge = edge;
                                     if (!edge->isCrease()) {
                                         sp.knuckle = p1->getVertexType() != svRegular;
-                                        ep.knuckle = sp.knuckle;
+                                        ep.knuckle = p2->getVertexType() != svRegular;
                                     }
                                     else {
                                         sp.knuckle = p1->getVertexType() == svCorner;
-                                        ep.knuckle = sp.knuckle;
+                                        ep.knuckle = p2->getVertexType() == svCorner;
                                     }
                                     segments.push_back(make_pair(sp, ep));
                                 }
@@ -1604,10 +1608,10 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                     if (intarray.front().point.distanceToPoint(intarray.back().point) < 1E-4) {
                         intarray.pop_back();
                     }
-                    size_t k = 2;
-                    while (k <= intarray.size()) {
-                        if (intarray[k-1].edge == intarray[k-2].edge) {
-                            if (intarray[k-1].point.distanceToPoint(intarray[k-2].point) < 1E-4) {
+                    size_t k = 1;
+                    while (k < intarray.size()) {
+                        if (intarray[k].edge == intarray[k-1].edge) {
+                            if (intarray[k].point.distanceToPoint(intarray[k-1].point) < 1E-4) {
                                 intarray.erase(intarray.begin()+k-1);
                             }
                             else
@@ -1616,8 +1620,8 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                         else
                             ++k;
                     }
-                    for (size_t l=2; l<=intarray.size(); ++l) {
-                        segments.push_back(make_pair(intarray[l-2], intarray[l-1]));
+                    for (size_t l=1; l<intarray.size(); ++l) {
+                        segments.push_back(make_pair(intarray[l-1], intarray[l]));
                     }
                 }
             }
@@ -1642,9 +1646,9 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
             segments.pop_back();
         }
         addedge = false;
-        size_t j = 1;
-        while (j <= segments.size()) {
-            segment = segments[j-1];
+        size_t j = 0;
+        while (j < segments.size()) {
+            segment = segments[j];
             if (endp.edge == segment.first.edge) {
                 addedge = endp.point.distanceToPoint(segment.first.point) < 1E-4;
                 if (addedge) {
@@ -1731,8 +1735,8 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                 }
             }
             if (addedge) {
-                segments.pop_back();
-                j = 1;
+                segments.erase(segments.begin()+j);
+                j = 0;
                 addedge = false;
             }
             else
@@ -1741,12 +1745,6 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
         if (!addedge)
             spline = 0;
     }
-    ofstream os("splines.txt");
-    std::vector<Spline*>::iterator i = destination.begin();
-    for( ; i!=destination.end(); i++)
-        (*i)->dump(os);
-    os.flush();
-    os.close();
     if (destination.size() > 1) {
         JoinSplineSegments(0.01f, false, destination);
         for (size_t i=destination.size(); i>=1; --i) {
@@ -1755,7 +1753,7 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
             if (spline->numberOfPoints()>1) {
                 float parameter = SquaredDistPP(spline->getMin(), spline->getMax());
                 if (parameter < 1E-3) {
-                    destination.del(spline);
+                    destination.del(spline); // destination should own the pointer to delete it
                 }
             }
         }

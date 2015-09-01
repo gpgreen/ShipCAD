@@ -255,8 +255,13 @@ struct CalculateSplineArea
                             spline_area += delta;
                             c.setX(c.x() + delta * .25 * (p2.x() + p1.x()));
                             c.setY(c.y() + delta * .5 * (p2.y() + p1.y()));
-                            momi.setX(momi.x() + (1/12.) * (p1.y()+p2.y())*(p1.y()*p1.y()+p2.y()*p2.y())*(p2.x()-p1.x()));
-                            momi.setY(momi.y() + (1/12.) * (p2.x()*p2.x()*(3*p2.y()+p1.y())+2*p1.x()*p2.x()*(p1.y()+p2.y())+p1.x()*p1.x()*(3*p1.y()+p2.y()))*(p2.x()-p1.x()));
+                            momi.setX(momi.x() + (1.0/12.0) * (p1.y() + p2.y())
+                                      * (p1.y() * p1.y() + p2.y() * p2.y())
+                                      * (p2.x() - p1.x()));
+                            momi.setY(momi.y() + (1.0/12.0) *
+                                      (p2.x() * p2.x() * (3 * p2.y() + p1.y())
+                                       + 2 * p1.x() * p2.x() * (p1.y() + p2.y())
+                                       + p1.x() * p1.x() * (3 * p1.y() + p2.y())) * (p2.x() - p1.x()));
                         }
                         p1 = p2;
                     }

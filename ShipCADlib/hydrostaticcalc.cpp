@@ -999,6 +999,8 @@ void HydrostaticCalc::calculate()
                 if (p1.x() - p2.x() != 0)
                     _data.waterplane_entrance_angle = RadToDeg(atan((p2.y() - p1.y()) / (p1.x() - p2.x())));
                 else
+                    _data.waterplane_entrance_angle = 90.0;
+                if (p2.y() < p1.y())
                     _data.waterplane_entrance_angle = -_data.waterplane_entrance_angle;
             }
         }
@@ -1041,8 +1043,9 @@ void HydrostaticCalc::calculate()
 
     // calculate lateral area and center of gravity
     if (hasCalculation(hcLateralArea) || hasCalculation(hcAll)) {
-        Intersection lateralplane(_owner, fiButtock, Plane(0,1,0,0.001f), true);
+        Intersection lateralplane(_owner, fiButtock, Plane(0,1,0,-0.001f), true);
         lateralplane.calculateArea(_data.waterline_plane, &_data.lateral_area, &_data.lateral_cog, &tmpp2d);
+        _data.lateral_cog.setZ(_data.lateral_cog.z() - _data.model_min.z());
     }
 
     // all done!

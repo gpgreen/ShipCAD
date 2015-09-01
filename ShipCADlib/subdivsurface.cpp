@@ -1529,10 +1529,10 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                 p2 = face->getPoint(k);
                 side2 = plane.distance(p2->getCoordinate());
                 bool addedge = false;
-                if ((side1 < -1E-5 && side2 > 1E-5) || (side1 > 1E5 && side2 < -1E-5)) {
+                if ((side1 < -1E-5 && side2 > 1E-5) || (side1 > 1E-5 && side2 < -1E-5)) {
                     // regular intersection of edge
                     // add the edge to the list
-                    float parameter = side1 / (side2 - side1);
+                    float parameter = -side1 / (side2 - side1);
                     QVector3D output = p1->getCoordinate()
                             + parameter * (p2->getCoordinate() - p1->getCoordinate());
                     intarray.push_back(SurfIntersectionData(output));
@@ -1608,21 +1608,21 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
                     if (intarray.front().point.distanceToPoint(intarray.back().point) < 1E-4) {
                         intarray.pop_back();
                     }
-                    size_t k = 1;
-                    while (k < intarray.size()) {
-                        if (intarray[k].edge == intarray[k-1].edge) {
-                            if (intarray[k].point.distanceToPoint(intarray[k-1].point) < 1E-4) {
-                                intarray.erase(intarray.begin()+k-1);
-                            }
-                            else
-                                ++k;
+                }
+                size_t k = 1;
+                while (k < intarray.size()) {
+                    if (intarray[k].edge == intarray[k-1].edge) {
+                        if (intarray[k].point.distanceToPoint(intarray[k-1].point) < 1E-4) {
+                            intarray.erase(intarray.begin()+k-1);
                         }
                         else
                             ++k;
                     }
-                    for (size_t l=1; l<intarray.size(); ++l) {
-                        segments.push_back(make_pair(intarray[l-1], intarray[l]));
-                    }
+                    else
+                        ++k;
+                }
+                for (size_t l=1; l<intarray.size(); ++l) {
+                    segments.push_back(make_pair(intarray[l-1], intarray[l]));
                 }
             }
         }

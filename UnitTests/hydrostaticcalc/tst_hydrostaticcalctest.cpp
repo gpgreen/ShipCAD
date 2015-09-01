@@ -86,6 +86,8 @@ HydrostaticcalcTest::HydrostaticcalcTest()
         SubdivisionControlEdge* e = s->getControlEdge(i);
         e->setCrease(true);
     }
+    // set resolution to medium
+    _model->setPrecision(fpMedium);
 }
 HydrostaticcalcTest::~HydrostaticcalcTest()
 {

@@ -226,6 +226,7 @@ public:
     void setLastUsedLayerID(size_t newid) {_last_used_layerID = newid;}
     size_t requestNewLayerID();
     SubdivisionLayer* addNewLayer();
+    QString getDefaultLayerName();
 
     // getters/setters
     subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}

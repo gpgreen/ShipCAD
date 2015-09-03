@@ -53,13 +53,6 @@ extern bool g_edge_verbose;
 
 class SubdivisionEdge : public SubdivisionBase
 {
-    Q_OBJECT
-    Q_PROPERTY(SubdivisionPoint* StartPoint READ startPoint)
-    Q_PROPERTY(SubdivisionPoint* EndPoint READ endPoint)
-    Q_PROPERTY(bool Crease READ isCrease WRITE setCrease)
-    Q_PROPERTY(size_t Index READ getIndex)
-    Q_PROPERTY(SubdivisionControlCurve* Curve READ getCurve WRITE setCurve)
-    Q_PROPERTY(bool ControlEdge READ isControlEdge WRITE setControlEdge)
 public:
 
     explicit SubdivisionEdge(SubdivisionSurface* owner);
@@ -118,11 +111,6 @@ protected:
 
 class SubdivisionControlEdge : public SubdivisionEdge
 {
-    Q_OBJECT
-    Q_PROPERTY(QColor Color READ getColor)
-    Q_PROPERTY(bool Visible READ isVisible)
-    Q_PROPERTY(bool Selected READ isSelected WRITE setSelected)
-
 public:
 
     explicit SubdivisionControlEdge(SubdivisionSurface* owner);

@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -40,49 +40,130 @@
 
 namespace ShipCAD {
 
-	extern void MinMax(const QVector3D& p, QVector3D& min, QVector3D& max);
-
-	extern float DistancepointToLine(const QVector3D& p, const QVector3D& l1, const QVector3D& l2);
-
-	extern QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float param);
-
-	extern QVector3D MidPoint(const QVector3D& p1, const QVector3D& p2);
-
-    // convert a color to a DXF color index
-	extern int FindDXFColorIndex(QColor color);
-
-    // convert a DXF color index to a QColor
-	extern QColor QColorFromDXFIndex(int index);
+    /*! \brief find the min and max coordinates from a point
+     *
+     * given a point, see if that point coordinates are smaller or larger
+     * in each axis compared to the min and max parameters
+     *
+     * \param p the point to check for new min/max
+     * \param min the current minimum vector
+     * \param max the current maximum vector
+     */
+    void MinMax(const QVector3D& p, QVector3D& min, QVector3D& max);
+    /*! \brief find the distance from a point to the line
+     *
+     * \param p the point
+     * \param l1 the first point on the line
+     * \param l2 a second point on the line
+     * \return the nearest distance from the point to the line
+     */
+    float DistancepointToLine(const QVector3D& p, const QVector3D& l1, const QVector3D& l2);
+    /*! \brief linearly interpolate a point between 2 points
+     *
+     * \param p1 first point
+     * \param p2 second point
+     * \param the ratio of the returned point along p1->p2 from p1
+     * \return the interpolated point
+     */
+    QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float param);
+    /*! \brief get the midpoint between 2 points (interpolate 50%)
+     *
+     * \param p1 the first point
+     * \param p2 the second point
+     * \return point halfway between p1 and p2
+     */
+    QVector3D MidPoint(const QVector3D& p1, const QVector3D& p2);
+    /*! \brief convert a QColor to a DXF color index
+     *
+     * \param color the color to convert
+     * \return the DXF index of the color
+     */
+    int FindDXFColorIndex(QColor color);
+    /*! \brief get a QColor from a DXF color index
+     *
+     * \param index the DXF index (0-255)
+     * \return the QColor corresponding to the DXF color index
+     * \throws std::range_error if index is not a DXF color index
+     */
+    QColor QColorFromDXFIndex(int index);
 
     // calculate the normal of a plane defined by points p1,p2,p3 and scale to unit-length
-	extern QVector3D UnifiedNormal(const QVector3D& p1, const QVector3D& p2, 
-								   const QVector3D& p3);
+    /*! \brief find the unit normal of a plane defined by 3 points
+     *
+     * \param p1 first point on plane
+     * \param p2 second point on plane
+     * \param p3 third point on plane
+     * \return unit normal of plane
+     */
+    QVector3D UnifiedNormal(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3);
 
-	extern float DegToRad(float deg);
+    /*! \brief convert degrees to radians
+     *
+     * \param deg degree value to convert
+     * \return value in radians
+     */
+    float DegToRad(float deg);
 
-	extern float RadToDeg(float rad);
+    /*! \brief convert radians to degrees
+     *
+     * \param rad radian value to convert
+     * \return value in degrees
+     */
+    float RadToDeg(float rad);
 
-    // this function calculates if a point lies inside a triangle
-    // assuming it lies on the plane determined by the triangle
-	extern bool PointInTriangle(const QVector3D& intercept,
-								const QVector3D& p0,
-								const QVector3D& p1,
-								const QVector3D& p2);
+    /*! \brief find if point lies inside a triangle and on the plane of the triangle
+     *
+     * \param intercept the point to check
+     * \param p0 first vertex point on plane
+     * \param p1 second vertex point on plane
+     * \param p2 third vertex point on plane
+     * \return true if intercept is on triangular face
+     */
+    bool PointInTriangle(const QVector3D& intercept,
+                                    const QVector3D& p0,
+                                    const QVector3D& p1,
+                                    const QVector3D& p2);
 
-    // clip a triangle given the 3 distances from a plane, 
-    // returns 2 sets of coordinates, front of the plane, and back of the plane
-	extern void ClipTriangle(const QVector3D& p1,
-							 const QVector3D& p2,
-							 const QVector3D& p3,
-							 float s1,
-							 float s2,
-							 float s3,
-							 std::vector<QVector3D>& front,
-							 std::vector<QVector3D>& back);
+    /*! \brief clip a triangle given vertex point distances from a plane
+     *
+     * 3 points each with a distance to a plane are converted into 2 lists of points
+     * that are in front of the plane, or those in back of the plane. If the plane cuts
+     * through the triangle, then an intersection point on each side of the plane is added
+     * to the lists
+     *
+     * \param p1 first vertex point
+     * \param p2 second vertex point
+     * \param p3 third vertex point
+     * \param s1 first vertex point distance to plane
+     * \param s2 second vertex point distance to plane
+     * \param s3 third vertex point distance to plane
+     * \param front result list of points in front of plane
+     * \param back result list of points in back of plane
+     */
+    void ClipTriangle(const QVector3D& p1,
+                      const QVector3D& p2,
+                      const QVector3D& p3,
+                     float s1,
+                     float s2,
+                     float s3,
+                     std::vector<QVector3D>& front,
+                     std::vector<QVector3D>& back);
 
-    // clip a triangle given a plane, returns 2 sets of coordinates, front of the plane, and
-    // back of the plane
-	extern void ClipTriangle(const QVector3D& p1,
+    /*! \brief clip a triangle given a plane
+     *
+     * 3 points and a plane are converted into 2 lists of points
+     * that are in front of the plane, or those in back of the plane. If the plane cuts
+     * through the triangle, then an intersection point on each side of the plane is added
+     * to the lists
+     *
+     * \param p1 first vertex point
+     * \param p2 second vertex point
+     * \param p3 third vertex point
+     * \param plane the plane to check against
+     * \param front result list of points in front of plane
+     * \param back result list of points in back of plane
+     */
+    void ClipTriangle(const QVector3D& p1,
 							 const QVector3D& p2,
 							 const QVector3D& p3,
 							 const Plane& plane,
@@ -95,7 +176,7 @@ namespace ShipCAD {
 	 * \param p2 second point
 	 * \return square of distance between points
 	 */
-	extern float SquaredDistPP(const QVector3D& p1, const QVector3D& p2);
+    float SquaredDistPP(const QVector3D& p1, const QVector3D& p2);
 
     /*! \brief distance between 2 3D points
 	 *
@@ -103,26 +184,59 @@ namespace ShipCAD {
 	 * \param p2 second point
 	 * \return distance between points
 	 */
-	extern float DistPP3D(const QVector3D& p1, const QVector3D& p2);
+    float DistPP3D(const QVector3D& p1, const QVector3D& p2);
 
-    // returns "0" for false, and "1" for true
-	extern QString BoolToStr(bool val);
+    /*! \brief convert a bool to a string for serialization
+     *
+     * \param val boolean value
+     * \return QString containing "0" or "1" depending on value
+     */
+    QString BoolToStr(bool val);
 
-    // This procedure takes a lot of linesegments and tries to connect them into as few as possible splines
-	extern void JoinSplineSegments(float join_error, bool force_to_one_segment,
+    /*! \brief join a set of linesegments and connect them into as few as possible splines
+     *
+     * \param join_error points closer than this are joined together
+     * \param force_to_one_segment true if splines should be joined even if end points are farther apart
+     * then join_error
+     * \param list of splines to join together
+     */
+    void JoinSplineSegments(float join_error, bool force_to_one_segment,
 								   SplineVector& list);
 
-	extern int ReadIntFromStr(size_t lineno, const QString& str, size_t& start);
-	extern bool ReadBoolFromStr(size_t lineno, const QString& str, size_t& start);
-	extern float ReadFloatFromStr(size_t lineno, const QString& str, size_t& start);
+    /*! \brief convert a string to an integer value
+     *
+     * \param lineno indicates which line of the file we are on for errors
+     * \param str QString to extract integer
+     * \param start where to start extracting integer
+     * \return integer value extracted from string, start will be incremented to after integer
+     */
+    int ReadIntFromStr(size_t lineno, const QString& str, size_t& start);
+
+    /*! \brief convert a string to an boolean value
+     *
+     * \param lineno indicates which line of the file we are on for errors
+     * \param str QString to extract boolean
+     * \param start where to start extracting boolean
+     * \return boolean value extracted from string, start will be incremented to after integer
+     */
+    bool ReadBoolFromStr(size_t lineno, const QString& str, size_t& start);
+
+    /*! \brief convert a string to an float value
+     *
+     * \param lineno indicates which line of the file we are on for errors
+     * \param str QString to extract float
+     * \param start where to start extracting float
+     * \return float value extracted from string, start will be incremented to after float
+     */
+    float ReadFloatFromStr(size_t lineno, const QString& str, size_t& start);
 
     /*! \brief find water viscosity based on density
 	 *
 	 * \param density the water density
-	 * \param units
+     * \param units (imperial or metric)
 	 * \returns the water viscosity
 	 */
-	extern float FindWaterViscosity(float density, unit_type_t units);
+    float FindWaterViscosity(float density, unit_type_t units);
 
     /*! \brief Append or change the file extension to that given
 	 *
@@ -134,9 +248,17 @@ namespace ShipCAD {
 	 * \param ext extension to add to filename (including starting .)
 	 * \return the filename with extension
 	 */
-	extern QString ChangeFileExt(const QString& name, const QString& ext);
+    QString ChangeFileExt(const QString& name, const QString& ext);
 
-	extern float VolumeToDisplacement(float volume, float density, float appcoeff, unit_type_t units);
+    /*! \brief convert volume to displacement given density, appendage coefficient and unit type
+     *
+     * \param volume to convert
+     * \param density the density of water
+     * \param appcoeff the appendage coefficient
+     * \param units (imperial or metric)
+     * \return displacement
+     */
+    float VolumeToDisplacement(float volume, float density, float appcoeff, unit_type_t units);
 
 	/*! \brief Create a formatted string from a float value
 	 *
@@ -145,7 +267,7 @@ namespace ShipCAD {
 	 * \param des_length the finished length of the string, add leading spaces to fill out
 	 * \return the fixed length string
 	 */
-	extern QString MakeLength(float value, int decimals, int des_length);
+    QString MakeLength(float value, int decimals, int des_length);
 
 	/*! \brief Create a string of a given length
 	 *
@@ -153,16 +275,15 @@ namespace ShipCAD {
 	 * \param des_length the finished length of the string, add leading spaces to fill out
 	 * \return the fixed length string
 	 */
-	extern QString MakeLength(const QString& value, int des_length);
+    QString MakeLength(const QString& value, int des_length);
 
-    // convert a float to a string with a max number of specified decimals
 	/*! \brief convert a float value to a string with max number of decimals
 	 *
 	 * \param val the floating point value
 	 * \param max_length the maximum number of decimals to show in the string
 	 * \return the string with the converted floating point number
 	 */
-	extern QString truncate(float val, int max_length);
+    QString truncate(float val, int max_length);
 
     /*! \brief compare 2 floats, if they are sufficiently close, return true
      *
@@ -171,7 +292,7 @@ namespace ShipCAD {
      * \param error if absolute difference between the 2 values is less than this, then equal
      * \return true if values are sufficiently equal
      */
-    extern bool FuzzyCompare(float val1, float val2, float error);
+    bool FuzzyCompare(float val1, float val2, float error);
 };
 
 #endif

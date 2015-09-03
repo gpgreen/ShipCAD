@@ -15,11 +15,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+        pointdialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+        pointdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+        pointdialog.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/release/ -lShipCADlib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/debug/ -lShipCADlib

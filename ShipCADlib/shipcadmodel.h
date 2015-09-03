@@ -80,6 +80,20 @@ public:
     bool isBuild() {return _surface.isBuild();}
     void setBuild(bool set);
 
+    /*! \brief get the active control point
+     *
+     * \return the active control point or 0
+     */
+    SubdivisionControlPoint* getActiveControlPoint() const
+        {return _active_control_point;}
+
+    /*! \brief set the active control point
+     *
+     * \param pt the new active control point or 0
+     */
+    void setActiveControlPoint(SubdivisionControlPoint* pt)
+        {_active_control_point = pt;}
+
     /*! \brief get precision of model
      *
      * \return precision of model

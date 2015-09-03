@@ -391,7 +391,7 @@ QVector3D SubdivisionPoint::averaging()
 SubdivisionPoint* SubdivisionPoint::calculateVertexPoint()
 {
     SubdivisionPoint* result = SubdivisionPoint::construct(_owner);
-    result->setProperty("VertexType", _vtype);
+    result->setVertexType(_vtype);
     result->setCoordinate(getCoordinate());
     for (size_t i=0; i<_edges.size(); ++i) {
         SubdivisionEdge* edge = _edges[i];

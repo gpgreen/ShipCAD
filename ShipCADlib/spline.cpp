@@ -340,6 +340,9 @@ bool Spline::simplify(float criterium)
     for (size_t i=0; i<_nopoints; ++i)
         weights.push_back(weight(i, total_length)/total_length);
 
+    // BUGBUG: using an iterator, but logic erases
+    // element from vector which will invalidate the iterator
+    // need to fix....
     vector<float>::iterator index;
     do {
         index = find_next_point(weights);

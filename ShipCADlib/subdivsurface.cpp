@@ -596,6 +596,11 @@ size_t SubdivisionSurface::requestNewLayerID()
     return _last_used_layerID;
 }
 
+QString SubdivisionSurface::getDefaultLayerName()
+{
+    return tr("Layer");
+}
+
 void SubdivisionSurface::setActiveLayer(SubdivisionLayer *layer)
 {
     _active_layer = layer;

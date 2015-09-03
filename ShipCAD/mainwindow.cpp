@@ -31,6 +31,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "pointdialog.h"
 #include "viewport.h"
 #include "shipcadlib.h"
 #include "shipcadmodel.h"
@@ -41,7 +42,7 @@ using namespace std;
 
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
+    ui(new Ui::MainWindow), _pointdialog(0),
     _controller(c), _menu_recent_files(0)
 {
     ui->setupUi(this);
@@ -56,6 +57,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(changeActiveLayer()), SLOT(changeActiveLayer()));
     connect(_controller, SIGNAL(changedModel()), SLOT(modelChanged()));
     connect(_controller, SIGNAL(onUpdateVisibilityInfo()), SLOT(updateVisibilityActions()));
+    //emit updateControlPointValue();
+    connect(_controller, SIGNAL(showControlPointDialog(bool)), SLOT(showControlPointDialog(bool)));
+    connect(_controller, SIGNAL(modelLoaded()), SLOT(enableActions()));
 
     // connect file actions
     connect(ui->actionFileNew, SIGNAL(triggered()), _controller, SLOT(newModel()));
@@ -83,6 +87,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionExportWavefront, SIGNAL(triggered()), _controller, SLOT(exportObj()));
     connect(ui->actionExportOffsets, SIGNAL(triggered()), _controller, SLOT(exportOffsets()));
     connect(ui->actionExportSTL, SIGNAL(triggered()), _controller, SLOT(exportSTL()));
+    connect(ui->actionExportIGES, SIGNAL(triggered()), _controller, SLOT(exportIGES()));
     connect(ui->actionPreferences, SIGNAL(triggered()), SLOT(showPreferences()));
 
     // connect project actions
@@ -270,6 +275,50 @@ void MainWindow::updateVisibilityActions()
     cout << "updateVisibilityActions" << endl;
 }
 
+void MainWindow::enableActions()
+{
+    // file actions
+    ui->actionSave_As->setEnabled(true);
+    ui->actionExportArchimedes->setEnabled(true);
+    ui->actionExportCoordinates->setEnabled(true);
+    ui->actionExportDXF_2D_Polylines->setEnabled(true);
+    ui->actionExportDXF_3D_mesh->setEnabled(true);
+    ui->actionExportDXF_3D_Polylines->setEnabled(true);
+    ui->actionExportFEF->setEnabled(true);
+    ui->actionExportGHS->setEnabled(true);
+    ui->actionExportPart->setEnabled(true);
+    ui->actionExportMichlet->setEnabled(true);
+    ui->actionExportWavefront->setEnabled(true);
+    ui->actionExportOffsets->setEnabled(true);
+    ui->actionExportSTL->setEnabled(true);
+    ui->actionExportIGES->setEnabled(true);
+
+    // edit actions
+
+    // point actions
+    ui->actionAdd->setEnabled(true);
+    ui->actionAlign->setEnabled(true);
+    ui->actionPointCollapse->setEnabled(true);
+    ui->actionInsert_plane->setEnabled(true);
+    ui->actionIntersect_layers->setEnabled(true);
+    ui->actionLock_points->setEnabled(true);
+    ui->actionUnlock_points->setEnabled(true);
+    ui->actionUnlock_all_points->setEnabled(true);
+
+    // edge actions
+
+    // face actions
+
+    // layer actions
+
+    // selection actions
+
+    // tools actions
+
+    // transform actions
+
+    // calculations actions
+}
 
 // add the menu entry to the file menu, and create all the actions...
 void MainWindow::createRecentFilesMenu()
@@ -390,10 +439,19 @@ MainWindow::shadeZebra()
 
 void MainWindow::modelChanged()
 {
-    if (_controller->getModel()->isFileChanged())
+    bool changed = _controller->getModel()->isFileChanged();
+    if (changed)
         setWindowTitle(tr("ShipCAD") + tr(" (modified)"));
     else
         setWindowTitle(tr("ShipCAD"));
     cout << "model changed" << endl;
+    ui->actionSave->setEnabled(changed);
 }
 
+void MainWindow::showControlPointDialog(bool show)
+{
+    if (_pointdialog == 0) {
+        _pointdialog = new PointDialog(this);
+    }
+    _pointdialog->setActive(show);
+}

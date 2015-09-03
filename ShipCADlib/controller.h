@@ -89,9 +89,21 @@ signals:
     /*! \brief signal when selection of items changes
      */
     void changeSelectedItems();
-	/*! \brief signal when model has changed
+    /*! \brief signal when model has changes
 	 */
 	void changedModel();
+
+    /*! \brief signal when new model loaded
+     */
+    void modelLoaded();
+
+    /*! \brief show or disable control point dialog
+     */
+    void showControlPointDialog(bool);
+
+    /*! \brief update the control point values
+     */
+    void updateControlPointValue();
 
     void onUpdateVisibilityInfo();
 
@@ -190,6 +202,9 @@ public slots:
 	/*! \brief export surface to STL file
 	 */
 	void exportSTL();
+    /*! \brief export an IGES file
+     */
+    void exportIGES();
 	/*! \brief import a Carene XYZ file, create multi-chine boat with developable surfaces
 	 */
 	void importCarene();
@@ -307,7 +322,7 @@ public slots:
     void lockPoints();
     /*! \brief add a new point to the model with no edges/faces attached
      */
-    SubdivisionControlPoint* newPoint();
+    void newPoint();
     /*! \brief project all selected points ont a straight line through the first and last
      */
     void projectStraightLinePoint();

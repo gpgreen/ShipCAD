@@ -45,6 +45,8 @@ class Viewport;
 class Controller;
 }
 
+class PointDialog;
+
 /*! \brief GUI Main window for ShipCAD
  */
 class MainWindow : public QMainWindow
@@ -76,6 +78,9 @@ private:
 
 private slots:
 
+    /*! \brief enable action items when a model has been loaded
+     */
+    void enableActions();
     void updateVisibilityActions();
     /*! \brief the list of recent files has been changed
      */
@@ -115,8 +120,15 @@ private slots:
     void modelChanged();
     void createToolBars();
     void createStatusBar();
+    /*! \brief show or no show the control point dialog
+     *
+     * \param show true if dialog should be shown, false if hidden
+     */
+    void showControlPointDialog(bool show);
+
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
+    PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

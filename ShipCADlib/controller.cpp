@@ -35,6 +35,7 @@
 #include "shipcadmodel.h"
 #include "utility.h"
 #include "undoobject.h"
+#include "subdivpoint.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -244,6 +245,11 @@ void Controller::exportMichlet()
 	// TODO
 }
 
+void Controller::exportIGES()
+{
+
+}
+
 void Controller::importMichletWaves()
 {
 	// TODO
@@ -330,6 +336,7 @@ void Controller::loadFile()
     _model->setFilenameSet(true);
     // stop asking for file version
     _model->setFileChanged(false);
+    emit modelLoaded();
 }
 
 void Controller::loadFile(const QString& filename)
@@ -474,10 +481,16 @@ void Controller::lockPoints()
 	// TODO
 }
 
-SubdivisionControlPoint* Controller::newPoint()
+void Controller::newPoint()
 {
-	// TODO
-    return 0;
+    SubdivisionControlPoint* pt = SubdivisionControlPoint::construct(_model->getSurface());
+    pt->setCoordinate(ZERO);
+    _model->getSurface()->addControlPoint(pt);
+    _model->setActiveControlPoint(pt);
+    _model->setFileChanged(true);
+    _model->redraw();
+    emit showControlPointDialog(true);
+    emit updateControlPointValue();
 }
 
 void Controller::projectStraightLinePoint()

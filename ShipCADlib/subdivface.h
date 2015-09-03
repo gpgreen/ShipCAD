@@ -55,11 +55,6 @@ class MonoFaceShader;
 
 class SubdivisionFace : public SubdivisionBase
 {
-    Q_OBJECT
-    Q_PROPERTY(float Area READ getArea)
-    Q_PROPERTY(QVector3D FaceCenter READ getFaceCenter)
-    Q_PROPERTY(QVector3D FaceNormal READ getFaceNormal)
-
 public:
 
 	/*! \brief Constructor
@@ -207,15 +202,6 @@ protected:
 
 class SubdivisionControlFace : public SubdivisionFace
 {
-    Q_OBJECT
-    Q_PROPERTY(QColor Color READ getColor)
-    Q_PROPERTY(size_t FaceIndex READ getIndex)
-    Q_PROPERTY(SubdivisionLayer* Layer READ getLayer WRITE setLayer)
-    Q_PROPERTY(QVector3D Max READ getMax)
-    Q_PROPERTY(QVector3D Min READ getMin)
-    Q_PROPERTY(bool Selected READ isSelected WRITE setSelected)
-    Q_PROPERTY(bool Visible READ isVisible)
-
 public:
 
 	/*! \brief Constructor

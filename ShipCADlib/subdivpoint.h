@@ -56,14 +56,6 @@ extern bool g_point_verbose;
 	 */
 class SubdivisionPoint : public SubdivisionBase
 {
-    Q_OBJECT
-    Q_PROPERTY(QVector3D Coordinate READ getCoordinate WRITE setCoordinate)
-    Q_PROPERTY(float Curvature READ getCurvature)
-    Q_PROPERTY(bool IsBoundaryVertex READ isBoundaryVertex)
-    Q_PROPERTY(QVector3D Normal READ getNormal)
-    Q_PROPERTY(size_t VertexIndex READ getIndex)
-    Q_PROPERTY(vertex_type_t VertexType READ getVertexType WRITE setVertexType)
-
 public:
 
 	/*! \brief Constructor
@@ -207,12 +199,6 @@ protected:
 	 */
 class SubdivisionControlPoint : public SubdivisionPoint
 {
-    Q_OBJECT
-    Q_PROPERTY(QColor Color READ getColor)
-    Q_PROPERTY(bool Locked READ isLocked WRITE setLocked)
-    Q_PROPERTY(bool Selected READ isSelected WRITE setSelected)
-    Q_PROPERTY(bool Visible READ isVisible)
-    Q_PROPERTY(bool IsLeak READ isLeak)
 public:
 
 	/*! \brief Constructor

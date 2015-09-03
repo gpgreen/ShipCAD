@@ -31,7 +31,6 @@
 #define SUBDIVBASE_H_
 
 #include <iosfwd>
-#include <QObject>
 
 namespace ShipCAD {
 
@@ -43,11 +42,8 @@ class Viewport;
 /*! \brief the base class for all subdivision points, edges and faces
  *
  */
-class SubdivisionBase : public QObject
+class SubdivisionBase
 {
-    Q_OBJECT
-    Q_PROPERTY(SubdivisionSurface* Owner READ getOwner)
-
 public:
 
 	/*! \brief Constructor

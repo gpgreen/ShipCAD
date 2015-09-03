@@ -58,14 +58,13 @@ struct LayerProperties
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-// SubdivisionLayer is a layer-type class
-//
-// All individual controlfaces can be assigned to a layer. Properties such as color,
-// visibility etc. are common for all controlfaces belonging the the same layer
+/*! \brief add SubdivisionControlFaces can be assigned to a layer
+ *
+ * Each layer has common properties for displaying and calculations for faces belonging
+ * to that layer
+ */
 class SubdivisionLayer : public SubdivisionBase
 {
-    Q_OBJECT
-
 public:
 
     explicit SubdivisionLayer(SubdivisionSurface* owner);
@@ -131,10 +130,6 @@ public:
 
     // makers
     static SubdivisionLayer* construct(SubdivisionSurface* owner);
-
-signals:
-
-    void changedLayerData();
 
 protected:
 

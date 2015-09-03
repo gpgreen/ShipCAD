@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -59,14 +59,11 @@ SubdivisionLayer::SubdivisionLayer(SubdivisionSurface* owner)
 	  _use_in_hydrostatics(true), _show_in_linesplan(true), _material_density(0),
 	  _thickness(0), _alphablend(255)
 {
-	connect(this, SIGNAL(changedLayerData()),
-			owner, SIGNAL(changedLayerData()));
+    // does nothing
 }
 
 SubdivisionLayer::~SubdivisionLayer()
 {
-	disconnect(this, SIGNAL(changedLayerData()),
-               _owner, SIGNAL(changedLayerData()));
     if (_owner->getActiveLayer() == this)
         _owner->setActiveLayer(0);
     if (_owner->hasLayer(this))
@@ -76,7 +73,7 @@ SubdivisionLayer::~SubdivisionLayer()
 QString SubdivisionLayer::getName()
 {
     if (_desc == "") {
-        return QString("%1 %2").arg(SubdivisionLayer::tr("Layer")).arg(_layerid);
+        return QString("%1_%2").arg(_owner->getDefaultLayerName()).arg(_layerid);
     }
     else
         return _desc;
@@ -146,7 +143,7 @@ void SubdivisionLayer::setDevelopable(bool val)
 {
     if (val != _developable) {
         _developable = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 
@@ -154,7 +151,7 @@ void SubdivisionLayer::setName(const QString& val)
 {
     if (QString::compare(val, _desc, Qt::CaseInsensitive) != 0) {
         _desc = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 
@@ -162,7 +159,7 @@ void SubdivisionLayer::setSymmetric(bool val)
 {
     if (val != _symmetric) {
         _symmetric = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 
@@ -170,7 +167,7 @@ void SubdivisionLayer::setColor(QColor val)
 {
     if (val != _color) {
         _color = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 
@@ -178,7 +175,7 @@ void SubdivisionLayer::setShowInLinesplan(bool val)
 {
     if (val != _show_in_linesplan) {
         _show_in_linesplan = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 
@@ -186,7 +183,7 @@ void SubdivisionLayer::setUseInHydrostatics(bool val)
 {
     if (val != _use_in_hydrostatics) {
         _use_in_hydrostatics = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 
@@ -194,7 +191,7 @@ void SubdivisionLayer::setUseForIntersections(bool val)
 {
     if (val != _use_for_intersections) {
         _use_for_intersections = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 
@@ -202,7 +199,7 @@ void SubdivisionLayer::setVisible(bool val)
 {
     if (val != _visible) {
         _visible = val;
-        emit changedLayerData();
+        //emit changedLayerData();
     }
 }
 

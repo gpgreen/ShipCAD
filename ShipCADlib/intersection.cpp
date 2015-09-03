@@ -220,10 +220,10 @@ struct CalculateSplineArea
         QVector3D spline_cog = ZERO;
         QVector2D c = ZERO2;
         QVector2D momi = c;
-        closed_spline = DistPP3D(spline->getPoint(0), spline->getPoint(spline->numberOfPoints()-1)) < 1e-4;
+        closed_spline = DistPP3D(spline->getFirstPoint(), spline->getLastPoint()) < 1e-4;
         if (!closed_spline) {
             // make it closed
-            spline->add(spline->getPoint(0));
+            spline->add(spline->getFirstPoint());
             spline->setKnuckle(spline->numberOfPoints()-2, true);
         }
         spline->setFragments(500);

@@ -7,6 +7,7 @@
 #include "subdivface.h"
 #include "subdivedge.h"
 #include "projsettings.h"
+#include "utility.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -112,8 +113,8 @@ void HydrostaticcalcTest::testCalculateVolume()
     of.close();
 
     QVERIFY2(hc.isCalculated(), "s/b calculated");
-    QVERIFY2(hc.getData().absolute_draft == .5, "draft s/b 0.5");
-    QVERIFY2(hc.getData().volume == .5, "volume s/b .5");
+    QVERIFY2(FuzzyCompare(hc.getData().absolute_draft, .5, 1E-2), "draft s/b 0.5");
+    QVERIFY2(FuzzyCompare(hc.getData().volume, .5, 1E-2), "volume s/b .5");
 }
 
 void HydrostaticcalcTest::testCalculate()
@@ -137,8 +138,37 @@ void HydrostaticcalcTest::testCalculate()
     of.close();
 
     QVERIFY2(hc.isCalculated(), "s/b calculated");
-    QVERIFY2(hc.getData().absolute_draft == .5, "draft s/b 0.5");
-    QVERIFY2(hc.getData().volume == .5, "volume s/b .5");
+    QVERIFY(hc.getData().model_min == ZERO);
+    QVERIFY(hc.getData().model_max == QVector3D(1,.5,1));
+    QVERIFY(qFuzzyCompare(hc.getData().wl_min, QVector3D(0,-.5,.5)));
+    QVERIFY(qFuzzyCompare(hc.getData().wl_max, QVector3D(1,.5,.5)));
+    QVERIFY(qFuzzyCompare(hc.getData().sub_min, QVector3D(0,-.5,0)));
+    QVERIFY(qFuzzyCompare(hc.getData().sub_max, QVector3D(1,.5,.5)));
+    QVERIFY2(FuzzyCompare(hc.getData().absolute_draft, .5, 1E-2), "draft s/b 0.5");
+    QVERIFY2(FuzzyCompare(hc.getData().volume, .5, 1E-2), "volume s/b .5");
+    QVERIFY(FuzzyCompare(hc.getData().displacement, .5125, 1E-2));
+    QVERIFY(qFuzzyCompare(hc.getData().center_of_buoyancy, QVector3D(0.5,0,.25)));
+    QVERIFY(FuzzyCompare(hc.getData().lcb_perc, 0, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().length_waterline, 1, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().beam_waterline, 1, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().block_coefficient, 1, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().wetted_surface, 4, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().mainframe_area, .5, 1E-2));
+    //QVERIFY(qFuzzyCompare(hc.getData().mainframe_cog, QVector3D(0.5,0,.25)));
+    QVERIFY(FuzzyCompare(hc.getData().mainframe_coeff, 1, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().waterplane_area, 1, 1E-2));
+    //QVERIFY(qFuzzyCompare(hc.getData().waterplane_cog, QVector3D(0.5,0,.5)));
+    QVERIFY(FuzzyCompare(hc.getData().waterplane_entrance_angle, -90, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().waterplane_coeff, 1, 1E-2));
+    //QVERIFY(qFuzzyCompare(hc.getData().waterplane_mom_inertia, QVector2D(0.04166,-.08333)));
+    QVERIFY(FuzzyCompare(hc.getData().km_transverse, 0.3333, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().km_longitudinal, 0.0833, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().lateral_area, .5, 1E-2));
+    //QVERIFY(qFuzzyCompare(hc.getData().lateral_cog, QVector3D(0.5,0.001,.25)));
+    QVERIFY(FuzzyCompare(hc.getData().prism_coefficient, 1, 1E-2));
+    QVERIFY(FuzzyCompare(hc.getData().vert_prism_coefficient, 1, 1E-2));
+    QVERIFY(hc.getData().sac.size() == 0);
+    QVERIFY(!hc.hasError(feNothingSubmerged) && !hc.hasError(feNotEnoughBuoyancy) && !hc.hasError(feMakingWater));
 }
 
 QTEST_APPLESS_MAIN(HydrostaticcalcTest)

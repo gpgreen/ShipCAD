@@ -55,9 +55,6 @@ class FileBuffer;
 // The resulting curve therefore lies on the surface, and can be used in the fairing process
 class SubdivisionControlCurve : public SubdivisionBase
 {
-    Q_OBJECT
-    //Q_PROPERTY(SubdivisionSurface* Owner READ getOwner)
-
 public:
 
     explicit SubdivisionControlCurve(SubdivisionSurface* owner);

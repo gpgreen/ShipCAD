@@ -78,9 +78,14 @@ private:
 
 private slots:
 
+    /*! \brief new model loaded
+     */
+    void modelLoaded();
+
     /*! \brief enable action items when a model has been loaded
      */
     void enableActions();
+
     void updateVisibilityActions();
     /*! \brief the list of recent files has been changed
      */
@@ -125,7 +130,6 @@ private slots:
      * \param show true if dialog should be shown, false if hidden
      */
     void showControlPointDialog(bool show);
-
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */

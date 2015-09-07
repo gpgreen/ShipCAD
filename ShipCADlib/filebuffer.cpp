@@ -109,7 +109,7 @@ void FileBuffer::add(const JPEGImage& img)
 	
 void FileBuffer::load(quint8& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
 	val = _data[_pos++];
 }
 
@@ -120,7 +120,7 @@ void FileBuffer::add(quint8 val)
 
 void FileBuffer::load(bool& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
     convert_type_t ct;
     ct.d[0] = _data[_pos++];
     val = (ct.d[0] == 0) ? false : true;
@@ -133,7 +133,7 @@ void FileBuffer::add(bool val)
 
 void FileBuffer::load(float& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -150,7 +150,7 @@ void FileBuffer::add(float val)
 
 void FileBuffer::load(qint32& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -168,7 +168,7 @@ void FileBuffer::add(qint32 val)
 void FileBuffer::load(quint32& val)
 {
 	convert_type_t ct;
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
     val = ct.uval;
@@ -204,7 +204,7 @@ void FileBuffer::add(const QColor& c)
 
 void FileBuffer::load(QColor& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
 	quint8 r = _data[_pos++];
 	quint8 g = _data[_pos++];
 	quint8 b = _data[_pos++];
@@ -214,7 +214,7 @@ void FileBuffer::load(QColor& val)
 
 void FileBuffer::load(QVector3D& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -243,7 +243,7 @@ void FileBuffer::add(const QVector3D& val)
 
 void FileBuffer::load(QString& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -270,7 +270,7 @@ void FileBuffer::add(const QString& val)
 
 void FileBuffer::load(Plane& val)
 {
-	cout << "pos:" << _pos << endl;
+    //cout << "pos:" << _pos << endl;
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
@@ -305,7 +305,7 @@ void FileBuffer::add(const Plane& val)
 
 void FileBuffer::load(DelftSeriesResistance* buf)
 {
-    cout << "pos:" << _pos << " sz:" << sizeof(DelftSeriesResistance) << endl;
+    //cout << "pos:" << _pos << " sz:" << sizeof(DelftSeriesResistance) << endl;
     char * vbuf = (char *)buf;
 	for (size_t i=0; i<sizeof(DelftSeriesResistance); i++)
 		vbuf[i] = _data[_pos++];
@@ -320,7 +320,7 @@ void FileBuffer::add(const DelftSeriesResistance* buf)
 
 void FileBuffer::load(KAPERResistance* buf)
 {
-    cout << "pos:" << _pos << " sz:" << sizeof(KAPERResistance) << endl;
+    //cout << "pos:" << _pos << " sz:" << sizeof(KAPERResistance) << endl;
     char * vbuf = (char *)buf;
 	for (size_t i=0; i<sizeof(KAPERResistance); i++)
 		vbuf[i] = _data[_pos++];

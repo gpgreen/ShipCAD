@@ -103,9 +103,13 @@ signals:
 
     /*! \brief update the control point values
      */
-    void updateControlPointValue();
+    void updateControlPointValue(ShipCAD::SubdivisionControlPoint* pt);
 
     void onUpdateVisibilityInfo();
+
+    /*! \brief the ShipCAD model geometry has changed
+     */
+    void modelGeometryChanged();
 
 public slots:
 
@@ -416,15 +420,24 @@ public slots:
 	/*! \brief set active layer color
 	 */
 	void setActiveLayerColor();
-							  
+
+    /*! \brief corner point selected/deselected
+     * \param sel true if corner point has been selected, false if deselected
+     */
+    void cornerPointSelected(bool sel);
+
+    /*! \brief control point dialog changed point coordinates
+     * \param x current x value
+     * \param y current y value
+     * \param z current z value
+     */
+    void dialogUpdatedPointCoord(float x, float y, float z);
+
 private slots:
 
 	/*! \brief the ShipCAD model file has changed
 	 */
 	void modelFileChanged();
-    /*! \brief the ShipCAD model geometry has changed
-     */
-    void modelGeometryChanged();
 
 private:
     ShipCADModel* _model; /**< the model this is controlling */

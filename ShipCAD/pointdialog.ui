@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
+    <width>200</width>
     <height>148</height>
    </rect>
   </property>
@@ -26,10 +26,20 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditX"/>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="spinBoxX"/>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxX">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -43,10 +53,20 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditY"/>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="spinBoxY"/>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxY">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -60,14 +80,34 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditZ"/>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="spinBoxZ"/>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxZ">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="decimals">
+          <number>4</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkBoxCornerPoint">
+     <property name="layoutDirection">
+      <enum>Qt::RightToLeft</enum>
+     </property>
+     <property name="text">
+      <string>Corner Point</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

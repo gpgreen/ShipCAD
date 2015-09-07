@@ -36,6 +36,7 @@
 #include "utility.h"
 #include "undoobject.h"
 #include "subdivpoint.h"
+#include "subdivedge.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -50,7 +51,7 @@ Controller::Controller(ShipCADModel* model)
 	
     // setup signals and slots
     connect(_model, SIGNAL(onFileChanged()), SLOT(modelFileChanged()));
-    connect(_model, SIGNAL(onUpdateGeometryInfo()), SLOT(modelGeometryChanged()));
+    connect(_model, SIGNAL(onUpdateGeometryInfo()), SIGNAL(modelGeometryChanged()));
     connect(_model, SIGNAL(changeActiveLayer()), SIGNAL(changeActiveLayer()));
     connect(_model, SIGNAL(changedLayerData()), SIGNAL(changedLayerData()));
     connect(_model, SIGNAL(onUpdateVisibilityInfo()), SIGNAL(onUpdateVisibilityInfo()));
@@ -490,7 +491,7 @@ void Controller::newPoint()
     _model->setFileChanged(true);
     _model->redraw();
     emit showControlPointDialog(true);
-    emit updateControlPointValue();
+    emit updateControlPointValue(pt);
 }
 
 void Controller::projectStraightLinePoint()
@@ -563,11 +564,6 @@ void Controller::modelFileChanged()
 {
 	// TODO
     emit changedModel();
-}
-
-void Controller::modelGeometryChanged()
-{
-	// TODO
 }
 
 void
@@ -749,4 +745,48 @@ Controller::setActiveLayerColor()
 {
 	// TODO
 	cout << "set active layer color" << endl;
+}
+
+void Controller::cornerPointSelected(bool sel)
+{
+    cout << "corner point selected:" << (sel ? 'y' : 'n') << endl;
+    if (_model->getActiveControlPoint() != 0) {
+        SubdivisionControlPoint* ap = _model->getActiveControlPoint();
+        // count the number of crease edges connected to this point
+        vertex_type_t oldtype = ap->getVertexType();
+        if (ap->getVertexType() == svCorner) {
+            size_t n = 0;
+            for (size_t i=0; i<ap->numberOfEdges(); i++) {
+                if (ap->getEdge(i)->isCrease())
+                    n++;
+            }
+            // count the number of incident crease edges
+            if (n == 0)
+                ap->setVertexType(svRegular);
+            else if (n == 1)
+                ap->setVertexType(svDart);
+            else if (n == 2)
+                ap->setVertexType(svCrease);
+        } else
+            ap->setVertexType(svCorner);
+        if (ap->getVertexType() != oldtype) {
+            // create an undo object
+            emit updateControlPointValue(ap);
+            emit modelGeometryChanged();
+        }
+    }
+}
+
+void Controller::dialogUpdatedPointCoord(float x, float y, float z)
+{
+    cout << "point coord changed: (" << x << "," << y << "," << z << ")" << endl;
+    if (_model->getActiveControlPoint() != 0) {
+        SubdivisionControlPoint* ap = _model->getActiveControlPoint();
+        QVector3D newcoord(x, y, z);
+        if (ap->getCoordinate().distanceToPoint(newcoord) > 1e-4) {
+            ap->setCoordinate(newcoord);
+            // create an undo object
+            emit modelGeometryChanged();
+        }
+    }
 }

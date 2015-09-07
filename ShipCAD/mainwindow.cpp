@@ -59,7 +59,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(onUpdateVisibilityInfo()), SLOT(updateVisibilityActions()));
     //emit updateControlPointValue();
     connect(_controller, SIGNAL(showControlPointDialog(bool)), SLOT(showControlPointDialog(bool)));
-    connect(_controller, SIGNAL(modelLoaded()), SLOT(enableActions()));
+    connect(_controller, SIGNAL(modelLoaded()), SLOT(modelLoaded()));
+    connect(_controller, SIGNAL(modelGeometryChanged()), SIGNAL(viewportRender()));
 
     // connect file actions
     connect(ui->actionFileNew, SIGNAL(triggered()), _controller, SLOT(newModel()));
@@ -182,9 +183,6 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     // set action status
     updateVisibilityActions();
 
-    // show default viewports
-    addDefaultViewports();
-
     ui->statusBar->showMessage(tr("Ready"));
 }
 
@@ -221,7 +219,8 @@ void MainWindow::addDefaultViewports()
         // make the viewport
         Viewport* vp = new Viewport();
         // connect the render signal to the viewport
-        connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
+        //connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
+        connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
         vp->setSurface(model->getSurface());
         // put it in window container
         QWidget* container = QWidget::createWindowContainer(vp);
@@ -249,6 +248,7 @@ void MainWindow::addDefaultViewports()
         ui->displayLayout->addWidget(container, row, col);
         _viewports.push_back(make_pair(container, vp));
     }
+    cout << "addDefaultViewports" << endl;
 }
 
 void MainWindow::updateVisibilityActions()
@@ -273,6 +273,14 @@ void MainWindow::updateVisibilityActions()
 //    ui->actionShade_Underwater->setChecked(s->shadeUnderWater());
     emit viewportRender();
     cout << "updateVisibilityActions" << endl;
+}
+
+void MainWindow::modelLoaded()
+{
+    cout << "modelLoaded" << endl;
+    addDefaultViewports();
+    enableActions();
+    updateVisibilityActions();
 }
 
 void MainWindow::enableActions()
@@ -318,6 +326,8 @@ void MainWindow::enableActions()
     // transform actions
 
     // calculations actions
+
+    cout << "enableActions" << endl;
 }
 
 // add the menu entry to the file menu, and create all the actions...
@@ -452,6 +462,12 @@ void MainWindow::showControlPointDialog(bool show)
 {
     if (_pointdialog == 0) {
         _pointdialog = new PointDialog(this);
+        connect(_pointdialog, SIGNAL(cornerPointSelect(bool)), _controller, SLOT(cornerPointSelected(bool)));
+        connect(_pointdialog, SIGNAL(pointCoordChange(float,float,float)),
+                _controller, SLOT(dialogUpdatedPointCoord(float,float,float)));
+        connect(_controller, SIGNAL(updateControlPointValue(ShipCAD::SubdivisionControlPoint*)),
+                _pointdialog, SLOT(controllerUpdatedPoint(ShipCAD::SubdivisionControlPoint*)));
     }
     _pointdialog->setActive(show);
+    cout << "show control point dialog:" << (show ? "t" : "f") << endl;
 }

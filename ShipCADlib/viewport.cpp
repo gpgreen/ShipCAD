@@ -177,18 +177,55 @@ void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
     // build the vertex transformation matrix from the perspective
     // and the angle, elevation
 
+    float aspect_ratio = width() / static_cast<float>(height());
+    float hi;
     _proj = QMatrix4x4();
-    _proj.perspective(RadToDeg(_field_of_view), width() / static_cast<float>(height()), 0.1f, 100.0f);
-
     QMatrix4x4 model;
-    // find the camera location
-    model.rotate(_elevation, 1, 0, 0);
-    model.rotate(_angle, 0, 0, 1);
-    _camera_location = model.map(QVector3D(_max3d.x() + _distance, 0, 0));
-
-    // perspective view matrix
     QMatrix4x4 view;
-    view.lookAt(_camera_location, _midpoint, QVector3D(0,0,1));
+    switch (_view_type) {
+    case fvPerspective:
+        _proj.perspective(RadToDeg(_field_of_view), aspect_ratio, 0.1f, 100.0f);
+
+        // find the camera location
+        model.rotate(_elevation, 1, 0, 0);
+        model.rotate(_angle, 0, 0, 1);
+        _camera_location = model.map(QVector3D(_max3d.x() + _distance, 0, 0));
+
+        // view matrix
+        view.lookAt(_camera_location, _midpoint, QVector3D(0,0,1));
+        break;
+    case fvProfile:
+        hi = _midpoint.x() / aspect_ratio;
+        _proj.ortho(-_midpoint.x(), _midpoint.x(), -hi, hi, 0.1f, 100.0f);
+
+        // find the camera location
+        _camera_location = QVector3D(_midpoint.x(), _min3d.y() - 20, _midpoint.z());
+
+        // view matrix
+        view.lookAt(_camera_location, QVector3D(_midpoint.x(), 0, _midpoint.z()), QVector3D(0,0,1));
+        break;
+    case fvPlan:
+        hi = _midpoint.x() / aspect_ratio;
+        _proj.ortho(-_midpoint.x(), _midpoint.x(), -hi, hi, 0.1f, 100.0f);
+
+        // find the camera location
+        _camera_location = QVector3D(_midpoint.x(), _midpoint.y(), _max3d.z() + 20);
+        
+        // view matrix
+        view.lookAt(_camera_location, QVector3D(_midpoint.x(), _midpoint.y(), 0), QVector3D(0,1,0));
+        break;
+    case fvBodyplan:
+        hi = _midpoint.z() * aspect_ratio;
+        _proj.ortho(-hi, hi, -_midpoint.z(), _midpoint.z(), 0.1f, 100.0f);
+
+        // find the camera location
+        _camera_location = QVector3D(_max3d.x() + 20, 0, _midpoint.z());
+
+        // perspective view matrix
+        view.lookAt(_camera_location, QVector3D(0, 0, _midpoint.z()), QVector3D(0,0,1));
+        break;
+    }
+    
     _view = view;
 
     // final matrix

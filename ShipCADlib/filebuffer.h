@@ -88,7 +88,9 @@ public:
     void load(quint32& val);
     void add(quint32 val);
 
-#ifndef _WIN32
+#if defined(_WIN32) && !defined(_WIN64)
+    // don't define a size_t add, taken care of by quint32 add
+#else
 	/*! \brief save value, (check that it fits in 32 bits)
 	 *
 	 * \param val integer to save

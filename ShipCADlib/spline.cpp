@@ -214,7 +214,7 @@ void Spline::rebuild()
         _derivatives.push_back(p3);
 
         // back substitution
-        for (int k=_nopoints-1; k>=1; --k) {
+        for (size_t k=_nopoints-1; k>=1; --k) {
             _derivatives[k-1] = _derivatives[k-1] * _derivatives[k] + u[k-1];
         }
     } // end _nopoints > 1
@@ -243,7 +243,7 @@ QVector3D Spline::second_derive(float parameter) const
     if (_nopoints < 2)
         return result;
 
-    int lo, hi, k;
+    size_t lo, hi, k;
 
     if (_nopoints == 2) {
         lo = 0;
@@ -571,7 +571,7 @@ void Spline::insert_spline(size_t index, bool invert, bool duplicate_point,
 						   const Spline& source)
 {
     setBuild(false);
-    int nonewpoints;
+    size_t nonewpoints;
     if (duplicate_point)
         nonewpoints = source._nopoints-1;
     else
@@ -640,8 +640,8 @@ bool Spline::intersect_plane(const Plane& plane, IntersectionData& output) const
 
 void Spline::invert_direction()
 {
-    int mid = _nopoints / 2;
-    for (int i=0; i<mid; ++i) {
+    size_t mid = _nopoints / 2;
+    for (size_t i=0; i<mid; ++i) {
         swap(_points[i], _points[_nopoints - i - 1]);
         bool tmp = _knuckles[i];
         _knuckles[i] = _knuckles[_nopoints - i - 1];
@@ -756,7 +756,7 @@ QVector3D Spline::value(float parameter) const
     if (_nopoints < 2)
         return result;
 
-    int lo, hi;
+    size_t lo, hi;
     if (_nopoints == 2) {
         lo = 0;
         hi = 1;
@@ -765,7 +765,7 @@ QVector3D Spline::value(float parameter) const
         lo = 0;
         hi = _nopoints - 1;
         do {
-            int k = (lo + hi) / 2;
+            size_t k = (lo + hi) / 2;
             if (_parameters[k] < parameter)
                 lo = k;
             else

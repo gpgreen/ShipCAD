@@ -147,7 +147,7 @@ public:
     QVector3D getLastPoint() const
         {return _points.back();}
     void setPoint(size_t index, const QVector3D& p);
-    int getFragments() const
+    size_t getFragments() const
         {return _fragments;}
     void setFragments(size_t val);
     bool isKnuckle(size_t index) const

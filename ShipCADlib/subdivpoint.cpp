@@ -218,8 +218,8 @@ QVector3D SubdivisionPoint::getLimitPoint()
     SubdivisionPoint* p = 0;
     if (_vtype == svDart || _vtype == svRegular) {
         result = ZERO;
-        int n = _faces.size();
-        for (int i=0; i<n; ++i) {
+        size_t n = _faces.size();
+        for (size_t i=0; i<n; ++i) {
             SubdivisionFace* face = _faces[i];
             size_t ind = face->indexOfPoint(this);
             p30 = face->getPoint((ind + 1) % face->numberOfPoints());

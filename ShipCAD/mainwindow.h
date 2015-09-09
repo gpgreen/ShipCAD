@@ -42,6 +42,7 @@ class MainWindow;
 
 namespace ShipCAD {
 class Viewport;
+class ViewportContainer;
 class Controller;
 }
 
@@ -125,18 +126,20 @@ private slots:
     void modelChanged();
     void createToolBars();
     void createStatusBar();
+
     /*! \brief show or no show the control point dialog
      *
      * \param show true if dialog should be shown, false if hidden
      */
     void showControlPointDialog(bool show);
+
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */
-    std::vector<std::pair<QWidget*, ShipCAD::Viewport*> > _viewports; /**< collection of QWidget<->Viewport pairs */
+    std::vector<std::pair<ShipCAD::ViewportContainer*, ShipCAD::Viewport*> > _viewports; /**< collection of ViewportContainer<->Viewport pairs */
     std::vector<QAction*> _recent_file_actions; /**< actions for each recent file */
     QMenu* _menu_recent_files; /**< the menu for recent files */
 };

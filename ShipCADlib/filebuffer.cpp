@@ -247,7 +247,7 @@ void FileBuffer::load(QString& val)
     convert_type_t ct;
     for (int i=0; _pos<_data.size() && i<4; ++i,++_pos)
         ct.d[i] = _data[_pos];
-	cout << "len:" << ct.ival << endl;
+    //cout << "len:" << ct.ival << endl;
     char *buf = new char [ct.ival];
     for (int i=0; _pos<_data.size() && i<ct.ival; ++i,++_pos)
         buf[i] = _data[_pos];

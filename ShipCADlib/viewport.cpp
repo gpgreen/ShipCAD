@@ -342,10 +342,6 @@ Viewport::convertMouseCoordToWorld(int mx, int my)
     cout << "mouse lb release model coord: " << pos.x()
          << "," << pos.y()
          << "," << pos.z() << endl;
-    // lets find the distance from the 1,1,0 point
-    QVector3D p1(1,1,0);
-    float dist = p1.distanceToLine(pos, dir);
-    cout << "mouse pos distance to 1,1,0: " << dist << endl;
 }
 
 void

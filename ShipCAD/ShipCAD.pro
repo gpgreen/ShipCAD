@@ -16,10 +16,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        pointdialog.cpp
+        pointdialog.cpp \
+    viewportcontainer.cpp
 
 HEADERS  += mainwindow.h \
-        pointdialog.h
+        pointdialog.h \
+    viewportcontainer.h
 
 FORMS    += mainwindow.ui \
         pointdialog.ui

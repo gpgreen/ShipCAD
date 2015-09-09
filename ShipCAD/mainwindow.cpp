@@ -36,6 +36,7 @@
 #include "shipcadlib.h"
 #include "shipcadmodel.h"
 #include "controller.h"
+#include "viewportcontainer.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -222,9 +223,7 @@ void MainWindow::addDefaultViewports()
         //connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
         connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
         vp->setSurface(model->getSurface());
-        // put it in window container
-        QWidget* container = QWidget::createWindowContainer(vp);
-        container->setMinimumSize(320,200);
+        ViewportContainer* vpcontainer = new ViewportContainer(vp, this);
         switch (i) {
         case 0:
             row = 0; col = 0;
@@ -245,8 +244,8 @@ void MainWindow::addDefaultViewports()
         }
 
         // put it in display area
-        ui->displayLayout->addWidget(container, row, col);
-        _viewports.push_back(make_pair(container, vp));
+        ui->displayLayout->addWidget(vpcontainer, row, col);
+        _viewports.push_back(make_pair(vpcontainer, vp));
     }
     cout << "addDefaultViewports" << endl;
 }
@@ -471,3 +470,4 @@ void MainWindow::showControlPointDialog(bool show)
     _pointdialog->setActive(show);
     cout << "show control point dialog:" << (show ? "t" : "f") << endl;
 }
+

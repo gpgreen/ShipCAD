@@ -231,6 +231,11 @@ void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
     // final matrix
     _matrix = _proj * _view;
 
+    // inverted matrix
+    bool invertable;
+    _matrixInv = _matrix.inverted(&invertable);
+    if (!invertable)
+        throw runtime_error("view matrix not invertable");
     cout << "angle: " << _angle << " elev: " << _elevation << endl;
     renderLater();
 }
@@ -311,8 +316,18 @@ MonoFaceShader* Viewport::setMonoFaceShader()
 void
 Viewport::convertMouseCoordToWorld(int mx, int my)
 {
-    float x = mx;
-    float y = my;
+    float x = (2.0f * mx) / width() - 1.0f;
+    float y = 1.0f - (2.0f * my) / height();
+    float z = 1.0f;
+    QVector3D ray_nds(x, y, z);
+
+    QVector4D ray_clip(ray_nds.x(), ray_nds.y(), -1.0, 1.0);
+    QVector4D ray_eye = _matrixInv * ray_clip;
+
+    cout << "mouse in world:" << ray_eye.w() << "," << ray_eye.x() << "," << ray_eye.y() << "," << ray_eye.z() << endl;
+
+    x = mx;
+    y = my;
 
     QVector3D view = _midpoint - _camera_location;
     view.normalize();
@@ -342,6 +357,7 @@ Viewport::convertMouseCoordToWorld(int mx, int my)
     cout << "mouse lb release model coord: " << pos.x()
          << "," << pos.y()
          << "," << pos.z() << endl;
+
 }
 
 void

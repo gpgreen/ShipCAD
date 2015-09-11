@@ -99,6 +99,7 @@ private:
     QMatrix4x4 _matrix;     // the final view matrix = proj * view
     QMatrix4x4 _view;       // the view matrix
     QMatrix4x4 _proj;       // the projection matrix
+    QMatrix4x4 _matrixInv;  // the inverted view matrix
     float _field_of_view;	/* vertical field of view in radians */
     float _angle;           /* view angle */
     float _elevation;		/* view angle */

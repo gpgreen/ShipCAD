@@ -80,6 +80,16 @@ public:
      */
     QVector3D projectPointOnPlane(const QVector3D& p);
 
+    /*! \brief intersect a line with this plane
+     *
+     * \param pt point on line
+     * \param n direction of line
+     * \param coplanar will be true if line lies in the plane
+     * \param intpt intersection point
+     * \return true if line and plane are parallel
+     */
+    bool intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplanar, QVector3D& intpt);
+    
 private:
 
     float _vars[4];

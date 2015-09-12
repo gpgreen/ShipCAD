@@ -132,3 +132,22 @@ QVector3D Plane::projectPointOnPlane(const QVector3D& p)
     }
     return ZERO;
 }
+
+bool Plane::intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplanar, QVector3D& intpt)
+{
+    bool parallel = false;
+    coplanar = false;
+    float dotp = QVector3D::dotProduct(n, QVector3D(_vars[0], _vars[1], _vars[2]));
+    if (dotp == 0.0) {
+        parallel = true;
+        // check and see if coplanar
+        if (distance(pt) <= 1E-5)
+            coplanar = true;
+    } else {
+        float s1 = -(_vars[0] * pt.x() + _vars[1] * pt.y() + _vars[2] * pt.z() + _vars[3]) / dotp;
+        intpt = pt + s1 * n;
+    }
+    return parallel;
+}
+
+    

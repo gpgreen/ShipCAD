@@ -44,7 +44,7 @@ Viewport::Viewport()
       _field_of_view(atan(35.0/50.0)),
       _angle(20), _elevation(20),
       _zoom(1.0), _panX(0), _panY(0),
-      _distance(0), _scale(1.0), _margin(0),
+      _distance(0), _scale(1.0), _margin(5),
       _current_shader(0), _surface(0)
 {
     // does nothing else
@@ -229,14 +229,14 @@ void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
     _view = view;
 
     // final matrix
-    _matrix = _proj * _view;
+    _world = _proj * _view;
 
     // inverted matrix
     bool invertable;
-    _matrixInv = _matrix.inverted(&invertable);
+    _worldInv = _world.inverted(&invertable);
     if (!invertable)
-        throw runtime_error("view matrix not invertable");
-    cout << "angle: " << _angle << " elev: " << _elevation << endl;
+        throw runtime_error("world matrix not invertable");
+
     renderLater();
 }
 
@@ -293,7 +293,7 @@ LineShader* Viewport::setLineShader()
     if (_current_shader != 0)
         _current_shader->release();
     shader->bind();
-    shader->setMatrix(_matrix);
+    shader->setMatrix(_world);
     _current_shader = shader;
     //cerr << "set line shader\n";
     return dynamic_cast<LineShader*>(_current_shader);
@@ -307,7 +307,7 @@ MonoFaceShader* Viewport::setMonoFaceShader()
     if (_current_shader != 0)
         _current_shader->release();
     shader->bind();
-    shader->setMatrix(_matrix);
+    shader->setMatrix(_world);
     _current_shader = shader;
     //cerr << "set mono face shader\n";
     return dynamic_cast<MonoFaceShader*>(_current_shader);
@@ -318,46 +318,31 @@ Viewport::convertMouseCoordToWorld(int mx, int my)
 {
     float x = (2.0f * mx) / width() - 1.0f;
     float y = 1.0f - (2.0f * my) / height();
-    float z = 1.0f;
-    QVector3D ray_nds(x, y, z);
 
-    QVector4D ray_clip(ray_nds.x(), ray_nds.y(), -1.0, 1.0);
-    QVector4D ray_eye = _matrixInv * ray_clip;
+    QVector4D from = _worldInv * QVector4D(x, y, -1.0, 1.0);
+    QVector4D to = _worldInv * QVector4D(x, y, 1.0, 1.0);
 
-    cout << "mouse in world:" << ray_eye.w() << "," << ray_eye.x() << "," << ray_eye.y() << "," << ray_eye.z() << endl;
+    from /= from.w();
+    to /= to.w();
+    
+    cout << "from:" << from.x() << "," << from.y() << "," << from.z() << endl;
+    cout << "to:" << to.x() << "," << to.y() << "," << to.z() << endl;
 
-    x = mx;
-    y = my;
-
-    QVector3D view = _midpoint - _camera_location;
-    view.normalize();
-    QVector3D h = QVector3D::crossProduct(view, QVector3D(0,0,1));
-    h.normalize();
-    QVector3D v = QVector3D::crossProduct(h, view);
-    v.normalize();
-
-    float vlength = tan(_field_of_view / 2.0f) * 0.1f;
-    float hlength = vlength * width() / height();
-    v *= vlength;
-    h *= hlength;
-
-    // translate mouse coordinates so that origin lies in the center of the viewport
-    x -= width() / 2.0f;
-    y -= height() / 2.0f;
-
-    // scale mouse coordinates so that half the viewport width and height becomes 1
-    x /= width() / 2.0f;
-    y /= height() / 2.0f;
-
-    // linear combination to compute intersection of picking ray with viewport plane
-    QVector3D pos = _camera_location + view * 0.1f + h * x + v * y;
-    QVector3D dir = pos - _camera_location;
-    dir.normalize();
-
-    cout << "mouse lb release model coord: " << pos.x()
-         << "," << pos.y()
-         << "," << pos.z() << endl;
-
+    // find the intersection with the xz plane if possible
+    Plane xz(0,1,0,0);
+    bool coplanar;
+    QVector3D dir = to.toVector3D() - from.toVector3D();
+    QVector3D intpt;
+    if (!xz.intersectLine(from.toVector3D(), dir, coplanar, intpt))
+        cout << "xz plane intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
+    else
+        cout << "parallel to xz plane" << endl;
+    // find the intersection with the yz plane if possible
+    Plane yz(1,0,0,0);
+    if (!yz.intersectLine(from.toVector3D(), dir, coplanar, intpt))
+        cout << "yz plane intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
+    else
+        cout << "parallel to yz plane" << endl;
 }
 
 void

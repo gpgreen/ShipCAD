@@ -42,7 +42,7 @@ using namespace ShipCAD;
 Shader::Shader(Viewport* vp)
   : _viewport(vp), _program(0)
 {
-  // does nothing
+    // does nothing
 }
 
 Shader::~Shader()
@@ -55,37 +55,37 @@ void Shader::initialize(const char* vertexShaderSource,
             vector<string> uniforms,
             vector<string> attributes)
 {
-  _program = new QOpenGLShaderProgram(_viewport);
-  _program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
-  _program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
-  if (!_program->link())
-      cerr << "OpenGL Link failed - Log:\n" << _program->log().toStdString() << endl;
+    _program = new QOpenGLShaderProgram(_viewport);
+    _program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexShaderSource);
+    _program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentShaderSource);
+    if (!_program->link())
+        cerr << "OpenGL Link failed - Log:\n" << _program->log().toStdString() << endl;
 
-  addUniform("matrix");
+    addUniform("matrix");
 
-  for (size_t i=0; i<uniforms.size(); ++i)
-    addUniform(uniforms[i]);
-  for (size_t i=0; i<attributes.size(); ++i)
-    addAttribute(attributes[i]);
+    for (size_t i=0; i<uniforms.size(); ++i)
+        addUniform(uniforms[i]);
+    for (size_t i=0; i<attributes.size(); ++i)
+        addAttribute(attributes[i]);
 }
 
 void Shader::addUniform(const string& name)
 {
-  _uniforms[name] = _program->uniformLocation(name.c_str());
-  if (_uniforms[name] == -1)
-    throw runtime_error("bad uniform");
+    _uniforms[name] = _program->uniformLocation(name.c_str());
+    if (_uniforms[name] == -1)
+        throw runtime_error("bad uniform");
 }
 
 void Shader::addAttribute(const string& name)
 {
-  _attributes[name] = _program->attributeLocation(name.c_str());
-  if (_attributes[name] == -1)
-    throw runtime_error("bad attribute");
+    _attributes[name] = _program->attributeLocation(name.c_str());
+    if (_attributes[name] == -1)
+        throw runtime_error("bad attribute");
 }
 
 void Shader::setMatrix(const QMatrix4x4& matrix)
 {
-  _program->setUniformValue(_uniforms["matrix"], matrix);
+    _program->setUniformValue(_uniforms["matrix"], matrix);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////

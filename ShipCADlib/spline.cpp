@@ -581,13 +581,13 @@ void Spline::insert_spline(size_t index, bool invert, bool duplicate_point,
     _points.insert(_points.begin()+index, nonewpoints, ZERO);
     _knuckles.insert(_knuckles.begin()+index, nonewpoints, false);
     if (invert) {
-        for (int i=0; i<nonewpoints; ++i) {
+        for (size_t i=0; i<nonewpoints; ++i) {
             _points[i+index] = source._points[nonewpoints-i-1];
             _knuckles[i+index] = source._knuckles[nonewpoints-i-1];
         }
     }
     else {
-        for (int i=0; i<nonewpoints; ++i) {
+        for (size_t i=0; i<nonewpoints; ++i) {
             _points[i+index] = source._points[i];
             _knuckles[i+index] = source._knuckles[i];
         }

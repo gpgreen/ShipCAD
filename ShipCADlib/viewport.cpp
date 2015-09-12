@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -28,6 +28,7 @@
  *#############################################################################################*/
 
 #include "viewport.h"
+#include "viewportview.h"
 #include "shader.h"
 #include "entity.h"
 #include "subdivsurface.h"
@@ -38,20 +39,17 @@ using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-Viewport::Viewport()
-    : _mode(vmWireFrame), _view_type(fvPerspective),
-      _camera(ftStandard),
-      _field_of_view(atan(35.0/50.0)),
-      _angle(20), _elevation(20),
-      _zoom(1.0), _panX(0), _panY(0),
-      _distance(0), _scale(1.0), _margin(5),
-      _current_shader(0), _surface(0)
+Viewport::Viewport(viewport_type_t vtype)
+    : _mode(vmWireFrame), _view_type(vtype),
+      _view(0), _current_shader(0), _surface(0)
 {
-    // does nothing else
+    _view = ViewportView::construct(vtype, this);
 }
 
 Viewport::~Viewport()
 {
+    delete _view;
+    
     map<string, Shader*>::iterator i = _shaders.begin();
     while (i != _shaders.end()) {
         delete (*i).second;
@@ -76,195 +74,50 @@ void Viewport::setViewportMode(viewport_mode_t mode)
 
 void Viewport::setCameraType(camera_type_t val)
 {
-    if (val != _camera) {
-        float film = 35.0;
-        float dist;
-        if (val == ftWide)
-            dist = 20;
-        else if (val == ftStandard)
-            dist = 50;
-        else if (val == ftShortTele)
-            dist = 90;
-        else if (val == ftMediumTele)
-            dist = 130;
-        else if (val == ftFarTele)
-            dist = 200;
-        else
-            dist = 50;
-        _camera = val;
-        _field_of_view = atan(film/dist);
-        initializeViewport(_min3d, _max3d);
-    }
+    if (_view_type != fvPerspective)
+        return;
+    ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
+    view->setCameraType(val);
+    _view->initializeViewport(_min3d, _max3d, width(), height());
+    renderLater();
 }
 
 void Viewport::setViewportType(viewport_type_t ty)
 {
     if (ty != _view_type) {
+        delete _view;
+        _view = ViewportView::construct(ty, this);
         _view_type = ty;
-        _zoom = 1.0;
-        _panX = 0;
-        _panY = 0;
-        switch (ty) {
-        case fvBodyplan:
-            _angle = 0;
-            _elevation = 0;
-            break;
-        case fvProfile:
-            _angle = 90;
-            _elevation = 0;
-            break;
-        case fvPlan:
-            _angle = 90;
-            _elevation = 90;
-            break;
-        case fvPerspective:
-            _angle = 20;
-            _elevation = 20;
-            break;
-        }
-        initializeViewport(_min3d, _max3d);
+        _view->initializeViewport(_min3d, _max3d, width(), height());
+        renderLater();
     }
 }
 
 void Viewport::setAngle(float val)
 {
-    if (val != _angle) {
-        _angle = val;
-        initializeViewport(_min3d, _max3d);
-    }
+    if (_view_type != fvPerspective)
+        return;
+    ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
+    view->setAngle(val);
+    _view->initializeViewport(_min3d, _max3d, width(), height());
+    renderLater();
 }
 
 void Viewport::setElevation(float val)
 {
-    if (val != _elevation) {
-        _elevation = val;
-        initializeViewport(_min3d, _max3d);
-    }
+    if (_view_type != fvPerspective)
+        return;
+    ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
+    view->setElevation(val);
+    _view->initializeViewport(_min3d, _max3d, width(), height());
+    renderLater();
 }
 
 void Viewport::resizeEvent(QResizeEvent *event)
 {
     cout << "vp resize event: " << event->size().width()
          << "," << event->size().height() << endl;
-    initializeViewport(_min3d, _max3d);
-}
-
-// this procedure initializes the viewport and sets the scale in such a way
-// that the model completely fills the viewport
-void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
-{
-    // calculate the midpoint of the bounding box, which is used as the center of the
-    // model for rotating the model
-    _midpoint = 0.5 * (_min3d + _max3d);
-    // calculate the distance of the camera to the center of the model, following from
-    // the field of view from the camera
-    float dist = sqrt((_max3d.y() - _min3d.y()) * (_max3d.y() - _min3d.y())
-                      + (_max3d.z() - _min3d.z()) * (_max3d.z() - _min3d.z()));
-    if (dist == 0)
-        dist = 1E-2f;
-    if (_view_type == fvPerspective) {
-        if (atan(_field_of_view) != 0) {
-            _distance = 1.5 * dist / atan(_field_of_view);
-            if (_distance > 1E5)
-                _distance = 1E5;
-        }
-        else
-            _distance = 1E5;
-    }
-    else
-        _distance = 1E8;
-
-    // build the vertex transformation matrix from the perspective
-    // and the angle, elevation
-
-    float aspect_ratio = width() / static_cast<float>(height());
-    float hi, margin;
-    _proj = QMatrix4x4();
-    QMatrix4x4 model;
-    QMatrix4x4 view;
-    switch (_view_type) {
-    case fvPerspective:
-        // create projection
-        _proj.perspective(RadToDeg(_field_of_view), aspect_ratio, 0.1f, 100.0f);
-
-        // find the camera location
-        model.rotate(_elevation, 1, 0, 0);
-        model.rotate(_angle, 0, 0, 1);
-        _camera_location = model.map(QVector3D(_max3d.x() + _distance, 0, 0));
-
-        // view matrix
-        view.lookAt(_camera_location, _midpoint, QVector3D(0,0,1));
-        break;
-    case fvProfile:
-        // find view extents using aspect ratio
-        if (_midpoint.x() / aspect_ratio >= _midpoint.z()) {
-            margin = _midpoint.x() * .01 * _margin;
-            hi = _midpoint.x() / aspect_ratio + margin;
-            _proj.ortho(-_midpoint.x() - margin, _midpoint.x() + margin, -hi, hi, 0.1f, 100.0f);
-        }
-        else {
-            margin = _midpoint.z() * .01 * _margin;
-            hi = _midpoint.z() + margin;
-            _proj.ortho(-hi, hi, -_midpoint.z() - margin, _midpoint.z() + margin, 0.1f, 100.0f);
-        }
-
-        // find the camera location
-        _camera_location = QVector3D(_midpoint.x(), _min3d.y() - 40, _midpoint.z());
-
-        // view matrix
-        view.lookAt(_camera_location, QVector3D(_midpoint.x(), 0, _midpoint.z()), QVector3D(0,0,1));
-        break;
-    case fvPlan:
-        // find view extents using aspect ratio
-        if (_midpoint.x() / aspect_ratio >= _midpoint.y() * 2) {
-            margin = _midpoint.x() * .01 * _margin;
-            hi = _midpoint.x() / aspect_ratio + margin;
-            _proj.ortho(-_midpoint.x() - margin, _midpoint.x() + margin, -hi, hi, 0.1f, 100.0f);
-        }
-        else {
-            margin = _midpoint.y() * 2 * .01 * _margin;
-            hi = _midpoint.y() * 2 * aspect_ratio + margin;
-            _proj.ortho(-hi, hi, -_midpoint.y() * 2 - margin, _midpoint.y() * 2 + margin, 0.1f, 100.0f);
-        }
-
-        // find the camera location
-        _camera_location = QVector3D(_midpoint.x(), _midpoint.y(), _max3d.z() + 40);
-        
-        // view matrix
-        view.lookAt(_camera_location, QVector3D(_midpoint.x(), _midpoint.y(), 0), QVector3D(0,1,0));
-        break;
-    case fvBodyplan:
-        // find view extents using aspect ratio
-        if (_midpoint.y() * 2 / aspect_ratio >= _midpoint.z()) {
-            margin = _midpoint.y() * 2 * .01 * _margin;
-            hi = _midpoint.y() * 2 / aspect_ratio + margin;
-            _proj.ortho(-_midpoint.y() * 2 - margin, _midpoint.y() * 2 + margin, -hi, hi, 0.1f, 100.0f);
-        }
-        else {
-            margin = _midpoint.z() * .01 * _margin;
-            hi = _midpoint.z() * aspect_ratio + margin;
-            _proj.ortho(-hi, hi, -_midpoint.z() - margin, _midpoint.z() + margin, 0.1f, 100.0f);
-        }
-
-        // find the camera location
-        _camera_location = QVector3D(_max3d.x() + 40, 0, _midpoint.z());
-
-        // perspective view matrix
-        view.lookAt(_camera_location, QVector3D(0, 0, _midpoint.z()), QVector3D(0,0,1));
-        break;
-    }
-    
-    _view = view;
-
-    // final matrix
-    _world = _proj * _view;
-
-    // inverted matrix
-    bool invertable;
-    _worldInv = _world.inverted(&invertable);
-    if (!invertable)
-        throw runtime_error("world matrix not invertable");
-
+    _view->initializeViewport(_min3d, _max3d, width(), height());
     renderLater();
 }
 
@@ -279,13 +132,8 @@ void Viewport::setSurface(SubdivisionSurface* surface)
     if (_surface == 0)
         return;
     _surface->extents(_min3d, _max3d);
-
-    // add margin to max/min
-    QVector3D diff = 0.01 * _margin * (_max3d - _min3d);
-    _min3d -= diff;
-    _max3d += diff;
-
-    initializeViewport(_min3d, _max3d);
+    _view->initializeViewport(_min3d, _max3d, width(), height());
+    renderLater();
 }
 
 void Viewport::addShader(const string &name, Shader *shader)
@@ -321,7 +169,7 @@ LineShader* Viewport::setLineShader()
     if (_current_shader != 0)
         _current_shader->release();
     shader->bind();
-    shader->setMatrix(_world);
+    shader->setMatrix(_view->getWorld());
     _current_shader = shader;
     //cerr << "set line shader\n";
     return dynamic_cast<LineShader*>(_current_shader);
@@ -335,42 +183,10 @@ MonoFaceShader* Viewport::setMonoFaceShader()
     if (_current_shader != 0)
         _current_shader->release();
     shader->bind();
-    shader->setMatrix(_world);
+    shader->setMatrix(_view->getWorld());
     _current_shader = shader;
     //cerr << "set mono face shader\n";
     return dynamic_cast<MonoFaceShader*>(_current_shader);
-}
-
-void
-Viewport::convertMouseCoordToWorld(int mx, int my)
-{
-    float x = (2.0f * mx) / width() - 1.0f;
-    float y = 1.0f - (2.0f * my) / height();
-
-    QVector4D from = _worldInv * QVector4D(x, y, -1.0, 1.0);
-    QVector4D to = _worldInv * QVector4D(x, y, 1.0, 1.0);
-
-    from /= from.w();
-    to /= to.w();
-    
-    cout << "from:" << from.x() << "," << from.y() << "," << from.z() << endl;
-    cout << "to:" << to.x() << "," << to.y() << "," << to.z() << endl;
-
-    // find the intersection with the xz plane if possible
-    Plane xz(0,1,0,0);
-    bool coplanar;
-    QVector3D dir = to.toVector3D() - from.toVector3D();
-    QVector3D intpt;
-    if (!xz.intersectLine(from.toVector3D(), dir, coplanar, intpt))
-        cout << "xz plane intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
-    else
-        cout << "parallel to xz plane" << endl;
-    // find the intersection with the yz plane if possible
-    Plane yz(1,0,0,0);
-    if (!yz.intersectLine(from.toVector3D(), dir, coplanar, intpt))
-        cout << "yz plane intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
-    else
-        cout << "parallel to yz plane" << endl;
 }
 
 void
@@ -385,9 +201,18 @@ Viewport::mousePressEvent(QMouseEvent *event)
 void
 Viewport::mouseReleaseEvent(QMouseEvent *event)
 {
+    bool view_changed = false;
     // for mouse release, the button released won't be in the set
     if (_prev_buttons.testFlag(Qt::LeftButton) && !event->buttons().testFlag(Qt::LeftButton)) {
-        convertMouseCoordToWorld(event->pos().x(), event->pos().y());
+        view_changed = _view->leftMouseRelease(event->pos(), width(), height());
+    }
+    else if (_prev_buttons.testFlag(Qt::RightButton) && !event->buttons().testFlag(Qt::RightButton)) {
+        view_changed = _view->rightMouseRelease(event->pos(), width(), height());
+    }
+
+    if (view_changed) {
+        _view->initializeViewport(_min3d, _max3d, width(), height());
+        renderLater();
     }
     _prev_buttons = event->buttons();
     // are we getting mouse clicks in the gl window?
@@ -397,22 +222,43 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
 void
 Viewport::mouseMoveEvent(QMouseEvent *event)
 {
-    if (_view_type == fvPerspective && event->buttons().testFlag(Qt::MidButton)) {
-        // dragging the perspective around with middle button
-        _angle -= (event->pos().x() - _prev_pos.x()) / 2.0f;
-        while (_angle > 180)
-            _angle -= 360;
-        while (_angle < -180)
-            _angle += 360;
-        _elevation += -(event->pos().y() - _prev_pos.y()) / 2.0f;
-        while (_elevation > 180)
-            _elevation -= 360;
-        while (_elevation < -180)
-            _elevation += 360;
-        initializeViewport(_min3d, _max3d);
+    bool view_changed = false;
+
+    if (event->buttons().testFlag(Qt::LeftButton)) {
+        view_changed = _view->leftMouseMove(event->pos() - _prev_pos, width(), height());
     }
+    else if (event->buttons().testFlag(Qt::MidButton)) {
+        view_changed = _view->middleMouseMove(event->pos() - _prev_pos, width(), height());
+    }
+    else if (event->buttons().testFlag(Qt::RightButton)) {
+        view_changed = _view->rightMouseMove(event->pos() - _prev_pos, width(), height());
+    }
+
+    if (view_changed) {
+        _view->initializeViewport(_min3d, _max3d, width(), height());
+        renderLater();
+    }
+
     _prev_pos = event->pos();
     // are we getting mouse clicks in the gl window?
     //cout << "mouse move: " << event->pos().x() << "," << event->pos().y() << endl;
 }
 
+void Viewport::wheelEvent(QWheelEvent *event)
+{
+    //QPoint num_pixels = event->pixelDelta();
+    QPoint num_degrees = event->angleDelta() / 8;
+
+    bool view_changed;
+    
+    //if (!num_pixels.isNull())
+    //view_changed = _view->wheelWithPixels(num_pixels, width(), height());
+    if (!num_degrees.isNull())
+        view_changed = _view->wheelWithDegrees(num_degrees, width(), height());
+
+    if (view_changed) {
+        _view->initializeViewport(_min3d, _max3d, width(), height());
+        renderLater();
+    }
+        
+}

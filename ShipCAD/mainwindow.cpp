@@ -216,32 +216,34 @@ void MainWindow::addDefaultViewports()
     ShipCADModel* model = _controller->getModel();
     int row = 0;
     int col = 0;
+    viewport_type_t ty;
     for (int i=0; i<4; i++) {
+        switch (i) {
+        case 0:
+            row = 0; col = 0;
+            ty = fvPerspective;
+            break;
+        case 1:
+            row = 0; col = 1;
+            ty = fvProfile;
+            break;
+        case 2:
+            row = 1; col = 0;
+            ty = fvPlan;
+            break;
+        case 3:
+            row = 1; col = 1;
+            ty = fvBodyplan;
+            break;
+        }
+
         // make the viewport
-        Viewport* vp = new Viewport();
+        Viewport* vp = new Viewport(ty);
         // connect the render signal to the viewport
         //connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
         connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
         vp->setSurface(model->getSurface());
         ViewportContainer* vpcontainer = new ViewportContainer(vp, this);
-        switch (i) {
-        case 0:
-            row = 0; col = 0;
-            vp->setViewportType(fvPerspective);
-            break;
-        case 1:
-            row = 0; col = 1;
-            vp->setViewportType(fvProfile);
-            break;
-        case 2:
-            row = 1; col = 0;
-            vp->setViewportType(fvPlan);
-            break;
-        case 3:
-            row = 1; col = 1;
-            vp->setViewportType(fvBodyplan);
-            break;
-        }
 
         // put it in display area
         ui->displayLayout->addWidget(vpcontainer, row, col);

@@ -37,9 +37,21 @@
 namespace ShipCAD {
 
 class Viewport;
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+/*! \brief a pick ray (line)
+ */
+struct PickRay 
+{
+    QVector3D pt;
+    QVector3D dir;
+};
     
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief Abstract class to calculate view, world matrices and operations using those for a viewport
+ */
 class ViewportView
 {
 public:
@@ -47,7 +59,30 @@ public:
     explicit ViewportView(Viewport* vp);
     virtual ~ViewportView() {}
 
+    static ViewportView* construct(viewport_type_t ty, Viewport* vp);
+    
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height) = 0;
+
+    const QMatrix4x4& getWorld() const
+        {return _world;}
+    const QMatrix4x4& getWorldInv() const
+        {return _worldInv;}
+
+    virtual bool leftMouseRelease(QPoint pos, int w, int h);
+    virtual bool rightMouseRelease(QPoint pos, int w, int h);
+    virtual bool leftMouseMove(QPoint rel, int w, int h);
+    virtual bool middleMouseMove(QPoint rel, int w, int h);
+    virtual bool rightMouseMove(QPoint rel, int w, int h);
+    virtual bool wheelWithDegrees(QPoint degrees, int w, int h);
+    
+    /*! \brief given mouse coordinates, find a pick ray for this view
+     *
+     * \param pos the mouse coordinates
+     * \param width the viewport width in pixels
+     * \param height the viewport height in pixels
+     * \raturn the world coordinate system PickRay corresponding to the mouse coordinages
+     */
+    virtual PickRay convertMouseCoordToWorld(QPoint pos, int width, int height) const;
     
 protected:
 
@@ -71,6 +106,8 @@ protected:
         
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief class to calculate view, world matrices and operations using those for a Perspective viewport
+ */
 class ViewportViewPerspective : public ViewportView
 {
 public:
@@ -86,6 +123,8 @@ public:
         {_elevation=val;}
     void setCameraType(camera_type_t val);
 
+    virtual bool middleMouseMove(QPoint rel, int w, int h);
+
 private:
         
     camera_type_t _camera;
@@ -97,6 +136,8 @@ private:
         
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief class to calculate view, world matrices and operations using those for a Plan viewport
+ */
 class ViewportViewPlan : public ViewportView
 {
 public:
@@ -112,6 +153,8 @@ private:
         
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief class to calculate view, world matrices and operations using those for a Profile viewport
+ */
 class ViewportViewProfile : public ViewportView
 {
 public:
@@ -127,6 +170,8 @@ private:
         
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief class to calculate view, world matrices and operations using those for a Bodyplan viewport
+ */
 class ViewportViewBodyplan : public ViewportView
 {
 public:

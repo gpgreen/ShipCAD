@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -44,7 +44,8 @@ class SubdivisionSurface;
 class Shader;
 class LineShader;
 class MonoFaceShader;
-
+class ViewportView;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Viewport : public OpenGLWindow
@@ -52,7 +53,7 @@ class Viewport : public OpenGLWindow
     Q_OBJECT
 public:
 
-    explicit Viewport();
+    explicit Viewport(viewport_type_t vtype);
     ~Viewport();
 
     void initialize();
@@ -61,8 +62,6 @@ public:
     viewport_mode_t getViewportMode() const {return _mode;}
 
     viewport_type_t getViewportType() const {return _view_type;}
-
-    camera_type_t getCameraType() const {return _camera;}
 
     SubdivisionSurface* getSurface() {return _surface;}
 
@@ -85,34 +84,18 @@ public slots:
 
 protected:
 
-    void initializeViewport(const QVector3D& min, const QVector3D& max);
-    void convertMouseCoordToWorld(int mx, int my);
     virtual void mousePressEvent(QMouseEvent *);
     virtual void mouseReleaseEvent(QMouseEvent *);
     virtual void mouseMoveEvent(QMouseEvent *);
-
+    virtual void wheelEvent(QWheelEvent *);
+    
 private:
 
     viewport_mode_t _mode;
     viewport_type_t _view_type;
-    camera_type_t _camera;
-    QMatrix4x4 _world;      // the final view matrix = proj * view
-    QMatrix4x4 _worldInv;   // the inverted world matrix
-    QMatrix4x4 _view;       // the view matrix
-    QMatrix4x4 _proj;       // the projection matrix
-    float _field_of_view;	/* vertical field of view in radians */
-    float _angle;           /* view angle */
-    float _elevation;		/* view angle */
-    float _zoom;            /* view magnification */
-    float _panX;
-    float _panY;
-    float _distance;
-    float _scale;
-    float _margin;
+    ViewportView* _view;
     QVector3D _min3d;
     QVector3D _max3d;
-    QVector3D _midpoint;    // middle of model, used as rotation point
-    QVector3D _camera_location;
     QPoint _prev_pos;		// last position of mouse
     Qt::MouseButtons _prev_buttons; // last capture of button state
     std::map<std::string, Shader*> _shaders;

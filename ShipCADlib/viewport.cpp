@@ -178,12 +178,13 @@ void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
     // and the angle, elevation
 
     float aspect_ratio = width() / static_cast<float>(height());
-    float hi;
+    float hi, margin;
     _proj = QMatrix4x4();
     QMatrix4x4 model;
     QMatrix4x4 view;
     switch (_view_type) {
     case fvPerspective:
+        // create projection
         _proj.perspective(RadToDeg(_field_of_view), aspect_ratio, 0.1f, 100.0f);
 
         // find the camera location
@@ -195,31 +196,58 @@ void Viewport::initializeViewport(const QVector3D& min, const QVector3D& max)
         view.lookAt(_camera_location, _midpoint, QVector3D(0,0,1));
         break;
     case fvProfile:
-        hi = _midpoint.x() / aspect_ratio;
-        _proj.ortho(-_midpoint.x(), _midpoint.x(), -hi, hi, 0.1f, 100.0f);
+        // find view extents using aspect ratio
+        if (_midpoint.x() / aspect_ratio >= _midpoint.z()) {
+            margin = _midpoint.x() * .01 * _margin;
+            hi = _midpoint.x() / aspect_ratio + margin;
+            _proj.ortho(-_midpoint.x() - margin, _midpoint.x() + margin, -hi, hi, 0.1f, 100.0f);
+        }
+        else {
+            margin = _midpoint.z() * .01 * _margin;
+            hi = _midpoint.z() + margin;
+            _proj.ortho(-hi, hi, -_midpoint.z() - margin, _midpoint.z() + margin, 0.1f, 100.0f);
+        }
 
         // find the camera location
-        _camera_location = QVector3D(_midpoint.x(), _min3d.y() - 20, _midpoint.z());
+        _camera_location = QVector3D(_midpoint.x(), _min3d.y() - 40, _midpoint.z());
 
         // view matrix
         view.lookAt(_camera_location, QVector3D(_midpoint.x(), 0, _midpoint.z()), QVector3D(0,0,1));
         break;
     case fvPlan:
-        hi = _midpoint.x() / aspect_ratio;
-        _proj.ortho(-_midpoint.x(), _midpoint.x(), -hi, hi, 0.1f, 100.0f);
+        // find view extents using aspect ratio
+        if (_midpoint.x() / aspect_ratio >= _midpoint.y() * 2) {
+            margin = _midpoint.x() * .01 * _margin;
+            hi = _midpoint.x() / aspect_ratio + margin;
+            _proj.ortho(-_midpoint.x() - margin, _midpoint.x() + margin, -hi, hi, 0.1f, 100.0f);
+        }
+        else {
+            margin = _midpoint.y() * 2 * .01 * _margin;
+            hi = _midpoint.y() * 2 * aspect_ratio + margin;
+            _proj.ortho(-hi, hi, -_midpoint.y() * 2 - margin, _midpoint.y() * 2 + margin, 0.1f, 100.0f);
+        }
 
         // find the camera location
-        _camera_location = QVector3D(_midpoint.x(), _midpoint.y(), _max3d.z() + 20);
+        _camera_location = QVector3D(_midpoint.x(), _midpoint.y(), _max3d.z() + 40);
         
         // view matrix
         view.lookAt(_camera_location, QVector3D(_midpoint.x(), _midpoint.y(), 0), QVector3D(0,1,0));
         break;
     case fvBodyplan:
-        hi = _midpoint.z() * aspect_ratio;
-        _proj.ortho(-hi, hi, -_midpoint.z(), _midpoint.z(), 0.1f, 100.0f);
+        // find view extents using aspect ratio
+        if (_midpoint.y() * 2 / aspect_ratio >= _midpoint.z()) {
+            margin = _midpoint.y() * 2 * .01 * _margin;
+            hi = _midpoint.y() * 2 / aspect_ratio + margin;
+            _proj.ortho(-_midpoint.y() * 2 - margin, _midpoint.y() * 2 + margin, -hi, hi, 0.1f, 100.0f);
+        }
+        else {
+            margin = _midpoint.z() * .01 * _margin;
+            hi = _midpoint.z() * aspect_ratio + margin;
+            _proj.ortho(-hi, hi, -_midpoint.z() - margin, _midpoint.z() + margin, 0.1f, 100.0f);
+        }
 
         // find the camera location
-        _camera_location = QVector3D(_max3d.x() + 20, 0, _midpoint.z());
+        _camera_location = QVector3D(_max3d.x() + 40, 0, _midpoint.z());
 
         // perspective view matrix
         view.lookAt(_camera_location, QVector3D(0, 0, _midpoint.z()), QVector3D(0,0,1));

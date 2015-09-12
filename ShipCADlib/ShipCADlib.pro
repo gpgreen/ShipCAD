@@ -21,6 +21,7 @@ SOURCES += shipcadlib.cpp \
     plane.cpp \
     spline.cpp \
     viewport.cpp \
+    viewportview.cpp \
     openglwindow.cpp \
     utility.cpp \
     subdivbase.cpp \
@@ -50,6 +51,7 @@ HEADERS += shipcadlib.h \
     plane.h \
     spline.h \
     viewport.h \
+    viewportview.h \
     utility.h \
     exception.h \
     openglwindow.h \

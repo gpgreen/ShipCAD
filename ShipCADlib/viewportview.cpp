@@ -70,6 +70,14 @@ void ViewportView::finishSetup()
         throw runtime_error("world matrix not invertable");
 }
 
+void ViewportView::resetView()
+{
+    _zoom = 1.0;
+    _panX = 0;
+    _panY = 0;
+    _scale = 1.0;
+}
+
 bool ViewportView::leftMouseRelease(QPoint pos, int w, int h)
 {
     convertMouseCoordToWorld(pos, w, h);
@@ -166,6 +174,14 @@ ViewportViewPerspective::ViewportViewPerspective(Viewport* vp)
       _angle(20), _elevation(20), _distance(0)
 {
     // does nothing
+}
+
+void ViewportViewPerspective::resetView()
+{
+    ViewportView::resetView();
+    _panZ = 0;
+    _angle = 20.0;
+    _elevation = 20.0;
 }
 
 bool ViewportViewPerspective::middleMouseMove(QPoint cur, QPoint prev, int w, int h)

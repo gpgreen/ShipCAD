@@ -272,3 +272,12 @@ void Viewport::wheelEvent(QWheelEvent *event)
     }
         
 }
+
+void Viewport::keyPressEvent(QKeyEvent *event)
+{
+    if (event->modifiers().testFlag(Qt::ControlModifier) && event->key() == Qt::Key_A) {
+        _view->resetView();
+        _view->initializeViewport(_min3d, _max3d, width(), height());
+        renderLater();
+    }
+}

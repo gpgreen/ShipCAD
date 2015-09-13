@@ -60,7 +60,8 @@ public:
     virtual ~ViewportView() {}
 
     static ViewportView* construct(viewport_type_t ty, Viewport* vp);
-    
+
+    virtual void resetView();
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height) = 0;
 
     const QMatrix4x4& getWorld() const
@@ -116,7 +117,8 @@ public:
     virtual ~ViewportViewPerspective() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
-
+    virtual void resetView();
+    
     void setAngle(float val)
         {_angle = val;}
     void setElevation(float val)

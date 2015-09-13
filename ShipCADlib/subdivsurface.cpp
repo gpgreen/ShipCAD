@@ -60,7 +60,7 @@ SubdivisionSurface::SubdivisionSurface()
       _draw_mirror(false), _shade_under_water(false), _show_normals(true),
       _show_curvature(true), _show_control_curves(true),
       _subdivision_mode(fmQuadTriangle), _desired_subdiv_level(1),
-      _current_subdiv_level(-1), _control_point_size(4),
+      _current_subdiv_level(-1), _control_point_size(2),
       _curvature_scale(0.25), _min_gaus_curvature(0), _max_gaus_curvature(0),
       _main_frame_location(1E10),
       _crease_color(Qt::green), _crease_edge_color(Qt::red),

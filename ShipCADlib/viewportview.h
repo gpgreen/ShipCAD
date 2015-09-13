@@ -70,9 +70,9 @@ public:
 
     virtual bool leftMouseRelease(QPoint pos, int w, int h);
     virtual bool rightMouseRelease(QPoint pos, int w, int h);
-    virtual bool leftMouseMove(QPoint rel, int w, int h);
-    virtual bool middleMouseMove(QPoint rel, int w, int h);
-    virtual bool rightMouseMove(QPoint rel, int w, int h);
+    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool middleMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool wheelWithDegrees(QPoint degrees, int w, int h);
     
     /*! \brief given mouse coordinates, find a pick ray for this view
@@ -123,10 +123,12 @@ public:
         {_elevation=val;}
     void setCameraType(camera_type_t val);
 
-    virtual bool middleMouseMove(QPoint rel, int w, int h);
+    virtual bool middleMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
 
 private:
-        
+
+    float _panZ;
     camera_type_t _camera;
     float _field_of_view;	/* vertical field of view in radians */
     float _angle;           /* view angle */
@@ -147,6 +149,8 @@ public:
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
 
+    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
+
 private:
         
 };
@@ -163,6 +167,7 @@ public:
     virtual ~ViewportViewProfile() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
+    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
 
 private:
         
@@ -180,6 +185,7 @@ public:
     virtual ~ViewportViewBodyplan() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
+    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
 
 private:
         

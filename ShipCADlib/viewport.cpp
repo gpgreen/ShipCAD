@@ -27,6 +27,8 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <QApplication>
+
 #include "viewport.h"
 #include "viewportview.h"
 #include "shader.h"
@@ -41,7 +43,7 @@ using namespace ShipCAD;
 
 Viewport::Viewport(viewport_type_t vtype)
     : _mode(vmWireFrame), _view_type(vtype),
-      _view(0), _current_shader(0), _surface(0)
+      _view(0), _in_drag(false), _current_shader(0), _surface(0)
 {
     _view = ViewportView::construct(vtype, this);
 }
@@ -194,6 +196,8 @@ Viewport::mousePressEvent(QMouseEvent *event)
 {
     _prev_pos = event->pos();
     _prev_buttons = event->buttons();
+    _drag_start = event->pos();
+    _in_drag = true;
     // are we getting mouse clicks in the gl window?
     cout << "mouse press: " << event->pos().x() << "," << event->pos().y() << endl;
 }
@@ -201,6 +205,8 @@ Viewport::mousePressEvent(QMouseEvent *event)
 void
 Viewport::mouseReleaseEvent(QMouseEvent *event)
 {
+    _in_drag = false;
+    
     bool view_changed = false;
     // for mouse release, the button released won't be in the set
     if (_prev_buttons.testFlag(Qt::LeftButton) && !event->buttons().testFlag(Qt::LeftButton)) {
@@ -224,14 +230,18 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
 {
     bool view_changed = false;
 
+    // check for actual dragging
+    if (!_in_drag || (_in_drag && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance()))
+        return;
+
     if (event->buttons().testFlag(Qt::LeftButton)) {
-        view_changed = _view->leftMouseMove(event->pos() - _prev_pos, width(), height());
+        view_changed = _view->leftMouseMove(event->pos(), _prev_pos, width(), height());
     }
     else if (event->buttons().testFlag(Qt::MidButton)) {
-        view_changed = _view->middleMouseMove(event->pos() - _prev_pos, width(), height());
+        view_changed = _view->middleMouseMove(event->pos(), _prev_pos, width(), height());
     }
     else if (event->buttons().testFlag(Qt::RightButton)) {
-        view_changed = _view->rightMouseMove(event->pos() - _prev_pos, width(), height());
+        view_changed = _view->rightMouseMove(event->pos(), _prev_pos, width(), height());
     }
 
     if (view_changed) {
@@ -249,7 +259,7 @@ void Viewport::wheelEvent(QWheelEvent *event)
     //QPoint num_pixels = event->pixelDelta();
     QPoint num_degrees = event->angleDelta() / 8;
 
-    bool view_changed;
+    bool view_changed = false;
     
     //if (!num_pixels.isNull())
     //view_changed = _view->wheelWithPixels(num_pixels, width(), height());

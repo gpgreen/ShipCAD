@@ -97,6 +97,8 @@ private:
     QVector3D _min3d;
     QVector3D _max3d;
     QPoint _prev_pos;		// last position of mouse
+    QPoint _drag_start;
+    bool _in_drag;
     Qt::MouseButtons _prev_buttons; // last capture of button state
     std::map<std::string, Shader*> _shaders;
     Shader* _current_shader;

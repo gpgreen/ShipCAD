@@ -487,11 +487,13 @@ void Controller::newPoint()
     SubdivisionControlPoint* pt = SubdivisionControlPoint::construct(_model->getSurface());
     pt->setCoordinate(ZERO);
     _model->getSurface()->addControlPoint(pt);
+    _model->getSurface()->setSelectedControlPoint(pt);
     _model->setActiveControlPoint(pt);
     _model->setFileChanged(true);
     _model->redraw();
     emit showControlPointDialog(true);
     emit updateControlPointValue(pt);
+    emit modelGeometryChanged();
 }
 
 void Controller::projectStraightLinePoint()

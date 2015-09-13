@@ -82,17 +82,17 @@ bool ViewportView::rightMouseRelease(QPoint pos, int w, int h)
     return false;
 }
 
-bool ViewportView::middleMouseMove(QPoint rel, int w, int h)
+bool ViewportView::middleMouseMove(QPoint cur, QPoint prev, int w, int h)
 {
     return false;
 }
 
-bool ViewportView::leftMouseMove(QPoint rel, int w, int h)
+bool ViewportView::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
 {
     return false;
 }
 
-bool ViewportView::rightMouseMove(QPoint rel, int w, int h)
+bool ViewportView::rightMouseMove(QPoint cur, QPoint prev, int w, int h)
 {
     return false;
 }
@@ -104,7 +104,7 @@ bool ViewportView::wheelWithDegrees(QPoint degrees, int w, int h)
     if (degrees.y() != 0) {
         // zoom is in units of 15 degrees
         _zoom += (degrees.y() / 150.0);
-        cout << "new zoom:" << _zoom << endl;
+        cout << "zoom:" << _zoom << endl;
         zoomed = true;
     }
     
@@ -126,7 +126,8 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
 
     ray.pt = from.toVector3D();
     ray.dir = to.toVector3D() - from.toVector3D();
-    
+    ray.dir.normalize();
+
     cout << "from:" << from.x() << "," << from.y() << "," << from.z() << endl;
     cout << "to:" << to.x() << "," << to.y() << "," << to.z() << endl;
 
@@ -135,25 +136,25 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
     bool coplanar;
     QVector3D intpt;
     if (!xz.intersectLine(ray.pt, ray.dir, coplanar, intpt))
-        cout << "xz plane intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
+        cout << "xz intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
     else
-        cout << "parallel to xz plane" << endl;
+        cout << "parallel to xz" << endl;
     if (coplanar)
         cout << "coplanar" << endl;
     // find the intersection with the yz plane if possible
     Plane yz(1,0,0,0);
     if (!yz.intersectLine(ray.pt, ray.dir, coplanar, intpt))
-        cout << "yz plane intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
+        cout << "yz intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
     else
-        cout << "parallel to yz plane" << endl;
+        cout << "parallel to yz" << endl;
     if (coplanar)
         cout << "coplanar" << endl;
     // find the intersection with the xy plane if possible
     Plane xy(0,0,1,0);
     if (!xy.intersectLine(ray.pt, ray.dir, coplanar, intpt))
-        cout << "xy plane intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
+        cout << "xy intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
     else
-        cout << "parallel to xy plane" << endl;
+        cout << "parallel to xy" << endl;
     if (coplanar)
         cout << "coplanar" << endl;
 
@@ -161,14 +162,15 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
 }
 
 ViewportViewPerspective::ViewportViewPerspective(Viewport* vp)
-    : ViewportView(vp), _camera(ftStandard), _field_of_view(atan(35.0/50.0)),
+    : ViewportView(vp), _panZ(0.0), _camera(ftStandard), _field_of_view(atan(35.0/50.0)),
       _angle(20), _elevation(20), _distance(0)
 {
     // does nothing
 }
 
-bool ViewportViewPerspective::middleMouseMove(QPoint rel, int w, int h)
+bool ViewportViewPerspective::middleMouseMove(QPoint cur, QPoint prev, int w, int h)
 {
+    QPoint rel = cur - prev;
     // dragging the perspective around with middle button
     _angle -= rel.x() / 2.0f;
     while (_angle > 180)
@@ -183,6 +185,26 @@ bool ViewportViewPerspective::middleMouseMove(QPoint rel, int w, int h)
     return true;
 }
 
+bool ViewportViewPerspective::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+{
+    PickRay pr1 = convertMouseCoordToWorld(cur, w, h);
+    PickRay pr2 = convertMouseCoordToWorld(prev, w, h);
+
+    // make plane at midpoint, normal to pick ray
+    Plane n(_midpoint, pr1.dir);
+
+    // intersect pick rays and this plane
+    QVector3D chg = n.projectPointOnPlane(pr1.pt) - n.projectPointOnPlane(pr2.pt);
+    
+    _panX -= chg.x()*100;
+    _panY -= chg.y()*100;
+    _panZ -= chg.z()*100;
+
+    cout << "perspective pan:" << _panX << "," << _panY << "," << _panZ << endl;
+    
+    return true;
+}
+
 void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const QVector3D& surfmax, int width, int height)
 {
     // add margin to max/min
@@ -193,6 +215,12 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     // calculate the midpoint of the bounding box, which is used as the center of the
     // model for rotating the model
     _midpoint = 0.5 * (min + max);
+
+    QVector3D panpoint = _midpoint;
+    panpoint.setX(panpoint.x() + _panX);
+    panpoint.setY(panpoint.y() + _panY);
+    panpoint.setZ(panpoint.z() + _panZ);
+
     // calculate the distance of the camera to the center of the model, following from
     // the field of view from the camera
     float dist = sqrt((max.y() - min.y()) * (max.y() - min.y())
@@ -214,19 +242,19 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     float hi, margin;
     _proj = QMatrix4x4();
 
-    QMatrix4x4 model;
-
     // create projection
-    _proj.perspective(RadToDeg(_field_of_view) / _zoom, aspect_ratio, 0.1f, 100.0f);
+    _proj.perspective(RadToDeg(_field_of_view) / _zoom, aspect_ratio, 0.1f, 40.0f);
     
     // find the camera location
+    QMatrix4x4 model;
+    model.translate(_panX, _panY, _panZ);
     model.rotate(_elevation, 1, 0, 0);
     model.rotate(_angle, 0, 0, 1);
     _camera_location = model.map(QVector3D(max.x() + _distance, 0, 0));
     
     // view matrix
     QMatrix4x4 view;
-    view.lookAt(_camera_location, _midpoint, QVector3D(0,0,1));
+    view.lookAt(_camera_location, panpoint, QVector3D(0,0,1));
     
     _view = view;
 
@@ -267,9 +295,9 @@ void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D&
     // model for rotating the model
     _midpoint = 0.5 * (min + max);
 
-    // calculate the distance of the camera to the center of the model, following from
-    // the field of view from the camera
-
+    QVector3D panpoint = _midpoint;
+    panpoint.setX(panpoint.x() + _panX);
+    panpoint.setY(panpoint.y() + _panY);
 
     float aspect_ratio = width / static_cast<float>(height);
     float hi, margin;
@@ -281,25 +309,40 @@ void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D&
         margin = _midpoint.x() * .01 * _margin;
         hi = (_midpoint.x() / aspect_ratio + margin) / _zoom;
         float x = (_midpoint.x() + margin) / _zoom;
-        _proj.ortho(-x, x, -hi, hi, 0.1f, 100.0f);
+        _proj.ortho(-x, x, -hi, hi, 0.1f, 40.0f);
     }
     else {
         margin = _midpoint.y() * 2 * .01 * _margin;
         hi = (_midpoint.y() * 2 * aspect_ratio + margin) / _zoom;
         float y = (_midpoint.y() * 2 + margin) / _zoom;
-        _proj.ortho(-hi, hi, -y, y, 0.1f, 100.0f);
+        _proj.ortho(-hi, hi, -y, y, 0.1f, 40.0f);
     }
     
     // find the camera location
-    _camera_location = QVector3D(_midpoint.x(), _midpoint.y(), max.z() + 40);
+    _camera_location = QVector3D(panpoint.x(), panpoint.y(), max.z() + 20);
     
     // view matrix
     QMatrix4x4 view;
-    view.lookAt(_camera_location, QVector3D(_midpoint.x(), _midpoint.y(), 0), QVector3D(0,1,0));
+    view.lookAt(_camera_location, QVector3D(panpoint.x(), panpoint.y(), 0), QVector3D(0,1,0));
     
     _view = view;
 
     finishSetup();
+}
+
+bool ViewportViewPlan::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+{
+    PickRay pr1 = convertMouseCoordToWorld(cur, w, h);
+    PickRay pr2 = convertMouseCoordToWorld(prev, w, h);
+
+    QVector3D chg = pr1.pt - pr2.pt;
+    
+    _panX -= chg.x();
+    _panY -= chg.y();
+
+    cout << "plan pan:" << _panX << "," << _panY << endl;
+    
+    return true;
 }
 
 ViewportViewProfile::ViewportViewProfile(Viewport* vp)
@@ -314,9 +357,9 @@ void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector
     // model for rotating the model
     _midpoint = 0.5 * (min + max);
 
-    // calculate the distance of the camera to the center of the model, following from
-    // the field of view from the camera
-
+    QVector3D panpoint = _midpoint;
+    panpoint.setX(panpoint.x() + _panX);
+    panpoint.setZ(panpoint.z() + _panY);
 
     float aspect_ratio = width / static_cast<float>(height);
     float hi, margin;
@@ -327,25 +370,40 @@ void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector
         margin = _midpoint.x() * .01 * _margin;
         hi = (_midpoint.x() / aspect_ratio + margin) / _zoom;
         float x = (_midpoint.x() + margin) / _zoom;
-        _proj.ortho(-x, x, -hi, hi, 0.1f, 100.0f);
+        _proj.ortho(-x, x, -hi, hi, 0.1f, 40.0f);
     }
     else {
         margin = _midpoint.z() * .01 * _margin;
         hi = (_midpoint.z() * aspect_ratio + margin) / _zoom;
         float z = (_midpoint.z() + margin) / _zoom;
-        _proj.ortho(-hi, hi, -z, z, 0.1f, 100.0f);
+        _proj.ortho(-hi, hi, -z, z, 0.1f, 40.0f);
     }
     
     // find the camera location
-    _camera_location = QVector3D(_midpoint.x(), min.y() - 40, _midpoint.z());
+    _camera_location = QVector3D(panpoint.x(), min.y() - 20, panpoint.z());
 
     // view matrix
     QMatrix4x4 view;
-    view.lookAt(_camera_location, QVector3D(_midpoint.x(), 0, _midpoint.z()), QVector3D(0,0,1));
+    view.lookAt(_camera_location, QVector3D(panpoint.x(), 0, panpoint.z()), QVector3D(0,0,1));
     
     _view = view;
 
     finishSetup();
+}
+
+bool ViewportViewProfile::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+{
+    PickRay pr1 = convertMouseCoordToWorld(cur, w, h);
+    PickRay pr2 = convertMouseCoordToWorld(prev, w, h);
+
+    QVector3D chg = pr1.pt - pr2.pt;
+    
+    _panX -= chg.x();
+    _panY -= chg.z();
+
+    cout << "profile pan:" << _panX << "," << _panY << endl;
+    
+    return true;
 }
 
 ViewportViewBodyplan::ViewportViewBodyplan(Viewport* vp)
@@ -360,10 +418,6 @@ void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVecto
     // model for rotating the model
     _midpoint = 0.5 * (min + max);
 
-    // calculate the distance of the camera to the center of the model, following from
-    // the field of view from the camera
-
-
     float aspect_ratio = width / static_cast<float>(height);
     float hi, margin;
 
@@ -373,25 +427,40 @@ void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVecto
         margin = _midpoint.y() * 2 * .01 * _margin;
         hi = (_midpoint.y() * 2 / aspect_ratio + margin) / _zoom;
         float y = (_midpoint.y() * 2 + margin) / _zoom;
-        _proj.ortho(-y, y, -hi, hi, 0.1f, 100.0f);
+        _proj.ortho(-y, y, -hi, hi, 0.1f, 40.0f);
     }
     else {
         margin = _midpoint.z() * .01 * _margin;
         hi = (_midpoint.z() * aspect_ratio + margin) / _zoom;
         float z = (_midpoint.z() + margin) / _zoom;
-        _proj.ortho(-hi, hi, -z, z, 0.1f, 100.0f);
+        _proj.ortho(-hi, hi, -z, z, 0.1f, 40.0f);
     }
     
     // find the camera location
-    _camera_location = QVector3D(max.x() + 40, 0, _midpoint.z());
+    _camera_location = QVector3D(max.x() + 20, _panX, _midpoint.z() + _panY);
     
     // view matrix
     QMatrix4x4 view;
-    view.lookAt(_camera_location, QVector3D(0, 0, _midpoint.z()), QVector3D(0,0,1));
+    view.lookAt(_camera_location, QVector3D(0, _panX, _midpoint.z() + _panY), QVector3D(0,0,1));
     
     _view = view;
 
     finishSetup();
+}
+
+bool ViewportViewBodyplan::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+{
+    PickRay pr1 = convertMouseCoordToWorld(cur, w, h);
+    PickRay pr2 = convertMouseCoordToWorld(prev, w, h);
+
+    QVector3D chg = pr1.pt - pr2.pt;
+    
+    _panX -= chg.y();
+    _panY -= chg.z();
+
+    cout << "bodyplan pan:" << _panX << "," << _panY << endl;
+    
+    return true;
 }
 
 

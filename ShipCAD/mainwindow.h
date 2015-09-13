@@ -106,6 +106,11 @@ private slots:
     /*! \brief show preference dialog
      */
     void showPreferences();
+
+    /*! \brief selected items has changed
+     */
+    void changeSelectedItems();
+
     /*! \brief use wireframe shading
      */
     void wireFrame();

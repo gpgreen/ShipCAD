@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -56,7 +56,8 @@ class SubdivisionControlCurve;
 class SubdivisionLayer;
 class Viewport;
 class FileBuffer;
-
+class PickRay;
+    
 extern bool g_surface_verbose;
 
 // This is the subdivision surface used for modelling the hull.
@@ -84,6 +85,9 @@ public:
     virtual void rebuild();
     virtual void setBuild(bool val);
 
+    // selecting
+    std::vector<SubdivisionBase*> shootPickRay(Viewport& vp, const PickRay& ray);
+    
     // modifiers
 
     // tries to assemble quads into as few as possible rectangular patches
@@ -277,6 +281,9 @@ public:
     QColor getLayerColor() {return _layer_color;}
     QColor getCurvatureColor() {return _curvature_color;}
 
+    void setUnderWaterColor(const QColor& c) 
+        {_underwater_color = c;}
+    
     // persistence
     void saveBinary(FileBuffer& destination);
     void loadBinary(FileBuffer& source);
@@ -307,7 +314,6 @@ signals:
 
     void changedLayerData();
     void changeActiveLayer();
-    void selectItem(SubdivisionBase*);
 
 protected:
 

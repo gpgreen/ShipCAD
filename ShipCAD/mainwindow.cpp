@@ -62,6 +62,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(showControlPointDialog(bool)), SLOT(showControlPointDialog(bool)));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelLoaded()));
     connect(_controller, SIGNAL(modelGeometryChanged()), SIGNAL(viewportRender()));
+    connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
 
     // connect file actions
     connect(ui->actionFileNew, SIGNAL(triggered()), _controller, SLOT(newModel()));
@@ -238,7 +239,7 @@ void MainWindow::addDefaultViewports()
         }
 
         // make the viewport
-        Viewport* vp = new Viewport(ty);
+        Viewport* vp = new Viewport(_controller, ty);
         // connect the render signal to the viewport
         //connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
         connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
@@ -321,6 +322,7 @@ void MainWindow::enableActions()
     // layer actions
 
     // selection actions
+    ui->actionSelect_all->setEnabled(true);
 
     // tools actions
 
@@ -473,3 +475,12 @@ void MainWindow::showControlPointDialog(bool show)
     cout << "show control point dialog:" << (show ? "t" : "f") << endl;
 }
 
+void MainWindow::changeSelectedItems()
+{
+    if (_controller->getModel()->countSelectedItems() > 0) {
+        ui->actionDeselect_all->setEnabled(true);
+    } else {
+        ui->actionDeselect_all->setEnabled(false);
+    }
+    cout << "changeSelectedItems" << endl;
+}

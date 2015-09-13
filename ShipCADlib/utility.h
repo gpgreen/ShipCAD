@@ -58,6 +58,7 @@ namespace ShipCAD {
      * \return the nearest distance from the point to the line
      */
     float DistancepointToLine(const QVector3D& p, const QVector3D& l1, const QVector3D& l2);
+
     /*! \brief linearly interpolate a point between 2 points
      *
      * \param p1 first point

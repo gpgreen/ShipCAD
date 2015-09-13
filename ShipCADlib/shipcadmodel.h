@@ -118,6 +118,16 @@ public:
 	edit_mode_t getEditMode() {return _edit_mode;}
 	void setEditMode(edit_mode_t mode);
 
+    /*! \brief count the number of currently selected items
+     *
+     * \return number of selected items
+     */
+    size_t countSelectedItems();
+
+    /*! \brief clear all selected items
+     */
+    void clearSelectedItems();
+
 	/*! \brief name of file
 	 *
 	 * \return the file name
@@ -246,7 +256,7 @@ public:
 
 	/*! \brief redraw the model
 	 *
-	 * TODO this should be in the controller, not here
+     * all this does is issue the geometry changed signal
 	 */
 	void redraw();
 

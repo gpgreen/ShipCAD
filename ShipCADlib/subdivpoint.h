@@ -46,6 +46,7 @@ class SubdivisionFace;
 class SubdivisionEdge;
 class FileBuffer;
 class Viewport;
+struct PickRay;
 
 extern bool g_point_verbose;
 
@@ -243,6 +244,9 @@ public:
     // makers
     static SubdivisionControlPoint* construct(SubdivisionSurface* owner);
 
+    // distance
+    float distanceFromPickRay(Viewport& vp, const PickRay& ray) const;
+    
 protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;

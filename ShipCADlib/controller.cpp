@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -37,6 +37,8 @@
 #include "undoobject.h"
 #include "subdivpoint.h"
 #include "subdivedge.h"
+#include "viewport.h"
+#include "viewportview.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -86,6 +88,30 @@ void Controller::addRecentFiles(const QString& filename)
 		_recent_files.push_front(filename);
 	}
     emit changeRecentFiles();
+}
+
+bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
+{
+    bool scene_changed = false;
+    vector<SubdivisionBase*> picks = getModel()->getSurface()->shootPickRay(vp, ray);
+    if (picks.size() > 0) {
+        for (size_t i=0; i<picks.size(); i++) {
+            // is this a point?
+            SubdivisionControlPoint* cp = dynamic_cast<SubdivisionControlPoint*>(picks[i]);
+            if (cp != 0) {
+                cp->setSelected(true);
+                scene_changed = true;
+                cout << "control point selected" << endl;
+            }
+        }
+    }
+    if (scene_changed) {
+        // TODO file changed, undo
+        getModel()->setFileChanged(true);
+        emit changeSelectedItems();
+        emit modelGeometryChanged();
+    }
+    return scene_changed;
 }
 
 void Controller::deleteBackgroundImage()
@@ -490,7 +516,6 @@ void Controller::newPoint()
     _model->getSurface()->setSelectedControlPoint(pt);
     _model->setActiveControlPoint(pt);
     _model->setFileChanged(true);
-    _model->redraw();
     emit showControlPointDialog(true);
     emit updateControlPointValue(pt);
     emit modelGeometryChanged();
@@ -534,7 +559,10 @@ void Controller::kaperResistance()
 
 void Controller::clearSelections()
 {
-	// TODO
+    _model->clearSelectedItems();
+    // TODO undo....
+    emit modelGeometryChanged();
+	emit changeSelectedItems();
 }
 
 void Controller::deleteSelections()

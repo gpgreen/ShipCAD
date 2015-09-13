@@ -69,6 +69,8 @@ public:
     const QMatrix4x4& getWorldInv() const
         {return _worldInv;}
 
+    virtual bool leftMousePick(QPoint pos, int w, int h);
+    virtual bool rightMousePick(QPoint pos, int w, int h);
     virtual bool leftMouseRelease(QPoint pos, int w, int h);
     virtual bool rightMouseRelease(QPoint pos, int w, int h);
     virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);

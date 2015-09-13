@@ -39,6 +39,7 @@
 #include "subdivcontrolcurve.h"
 #include "subdivlayer.h"
 #include "viewport.h"
+#include "viewportview.h"
 #include "filebuffer.h"
 #include "utility.h"
 #include "shader.h"
@@ -850,7 +851,7 @@ void SubdivisionControlPoint::drawControlPoints(Viewport& vp,
                 }
             }
         }
-        glPointSize(surface->getControlPointSize()+4.0);
+        glPointSize(surface->getControlPointSize()*2);
         if (selPoints.size() > 0)
             shader->renderPoints(selPoints, surface->getSelectedColor());
         glPointSize(surface->getControlPointSize());
@@ -867,6 +868,16 @@ void SubdivisionControlPoint::drawControlPoints(Viewport& vp,
         if (creasePoints.size() > 0)
             shader->renderPoints(creasePoints, surface->getCreasePointColor());
     }
+}
+
+float SubdivisionControlPoint::distanceFromPickRay(
+    Viewport& vp, const PickRay& ray) const
+{
+    QVector3D pt(_coordinate);
+    if (vp.getViewportType() == fvBodyplan
+        && pt.x() <= _owner->getMainframeLocation())
+        pt.setY(-pt.y());
+    return pt.distanceToLine(ray.pt, ray.dir);
 }
 
 void SubdivisionControlPoint::dump(ostream& os, const char* prefix) const

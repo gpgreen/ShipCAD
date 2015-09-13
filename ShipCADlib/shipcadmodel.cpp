@@ -139,9 +139,26 @@ void ShipCADModel::setBuild(bool set)
 void ShipCADModel::rebuildModel()
 {
     setBuild(false);
+
+    // get visibility settings
+    Visibility& v = getVisibility();
+    _surface.setShowControlNet(v.isShowControlNet());
+    _surface.setShowInteriorEdges(v.isShowInteriorEdges());
+    _surface.setDrawMirror(v.getModelView() == mvBoth);
+    _surface.setShowNormals(v.isShowNormals());
+    _surface.setShowCurvature(v.isShowCurvature());
+    _surface.setShowControlCurves(v.isShowControlCurves());
+
+    // project settings
+    ProjectSettings& ps = getProjectSettings();
+    _surface.setShadeUnderWater(ps.isShadeUnderwaterShip());
+    _surface.setMainframeLocation(ps.getMainframeLocation());
+    _surface.setUnderWaterColor(ps.getUnderWaterColor());
+
     _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
     _surface.rebuild();
-    // TODO draw
+
+    emit onUpdateGeometryInfo();
 }
 
 void ShipCADModel::setPrecision(precision_t precision)
@@ -151,7 +168,7 @@ void ShipCADModel::setPrecision(precision_t precision)
         _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision) + 1);
         setFileChanged(true);
         setBuild(false);
-        redraw();
+        emit onUpdateGeometryInfo();
     }
 }
 
@@ -159,8 +176,25 @@ void ShipCADModel::setEditMode(edit_mode_t mode)
 {
 	if (mode != _edit_mode) {
 		_edit_mode = mode;
-		redraw();
+        emit onUpdateGeometryInfo();
 	}
+}
+
+size_t ShipCADModel::countSelectedItems()
+{
+    size_t count = 0;
+    SubdivisionSurface* s = getSurface();
+    count += s->numberOfSelectedControlCurves()
+            + s->numberOfSelectedControlEdges()
+            + s->numberOfSelectedControlFaces()
+            + s->numberOfSelectedControlPoints();
+    return count;
+}
+
+void ShipCADModel::clearSelectedItems()
+{
+    getSurface()->clearSelection();
+    setFileChanged(true);
 }
 
 void ShipCADModel::setFileChanged(bool set)
@@ -311,8 +345,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
         // TODO this is not a free ship binary file
     }
     _file_changed = false;
-    _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
-    _surface.rebuild();
+    rebuildModel();
     emit onUpdateGeometryInfo();
 }
 
@@ -384,7 +417,7 @@ float ShipCADModel::findLowestHydrostaticsPoint()
 
 void ShipCADModel::redraw()
 {
-    // TODO
+    emit onUpdateGeometryInfo();
 }
 
 void ShipCADModel::setFileVersion(version_t v)

@@ -99,9 +99,13 @@ public:
     QString getFileCreatedBy() const {return _file_created_by;}
 	void setFileCreatedBy(const QString& createdby);
 
+    bool isShadeUnderwaterShip() const 
+        {return _shade_underwater_ship;}
     void setShadeUnderwaterShip(bool set);
     bool getSimplifyIntersections() {return _simplify_intersections;}
 	void setSimplifyIntersections(bool set);
+    QColor getUnderWaterColor() const
+        { return _underwater_color;}
 	void setUnderWaterColor(QColor& col);
 
     unit_type_t getUnits() const {return _units;}

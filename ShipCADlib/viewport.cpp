@@ -32,6 +32,7 @@
 #include "viewport.h"
 #include "viewportview.h"
 #include "shader.h"
+#include "controller.h"
 #include "entity.h"
 #include "subdivsurface.h"
 #include "utility.h"
@@ -41,9 +42,9 @@ using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-Viewport::Viewport(viewport_type_t vtype)
-    : _mode(vmWireFrame), _view_type(vtype),
-      _view(0), _in_drag(false), _current_shader(0), _surface(0)
+Viewport::Viewport(Controller* ctl, viewport_type_t vtype)
+    : _ctl(ctl), _mode(vmWireFrame), _view_type(vtype),
+      _view(0), _drag_state(0), _current_shader(0), _surface(0)
 {
     _view = ViewportView::construct(vtype, this);
 }
@@ -191,13 +192,17 @@ MonoFaceShader* Viewport::setMonoFaceShader()
     return dynamic_cast<MonoFaceShader*>(_current_shader);
 }
 
+// keep track of drag state as fallows:
+// _drag_state = 0      no dragging, move or pick in progress
+// _drag_state = 1      button has been pressed, not moved far enough for a drag
+// _drag_state = 2      button has been pressed, and dragging
 void
 Viewport::mousePressEvent(QMouseEvent *event)
 {
     _prev_pos = event->pos();
     _prev_buttons = event->buttons();
     _drag_start = event->pos();
-    _in_drag = true;
+    _drag_state = 1;
     // are we getting mouse clicks in the gl window?
     cout << "mouse press: " << event->pos().x() << "," << event->pos().y() << endl;
 }
@@ -205,15 +210,19 @@ Viewport::mousePressEvent(QMouseEvent *event)
 void
 Viewport::mouseReleaseEvent(QMouseEvent *event)
 {
-    _in_drag = false;
-    
     bool view_changed = false;
     // for mouse release, the button released won't be in the set
     if (_prev_buttons.testFlag(Qt::LeftButton) && !event->buttons().testFlag(Qt::LeftButton)) {
-        view_changed = _view->leftMouseRelease(event->pos(), width(), height());
+        if (_drag_state == 1)
+            view_changed = _view->leftMousePick(event->pos(), width(), height());
+        else
+            view_changed = _view->leftMouseRelease(event->pos(), width(), height());
     }
     else if (_prev_buttons.testFlag(Qt::RightButton) && !event->buttons().testFlag(Qt::RightButton)) {
-        view_changed = _view->rightMouseRelease(event->pos(), width(), height());
+        if (_drag_state == 1)
+            view_changed = _view->rightMousePick(event->pos(), width(), height());
+        else
+            view_changed = _view->rightMouseRelease(event->pos(), width(), height());
     }
 
     if (view_changed) {
@@ -223,6 +232,7 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
     _prev_buttons = event->buttons();
     // are we getting mouse clicks in the gl window?
     cout << "mouse release: " << event->pos().x() << "," << event->pos().y() << endl;
+    _drag_state = 0;
 }
 
 void
@@ -231,9 +241,12 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
     bool view_changed = false;
 
     // check for actual dragging
-    if (!_in_drag || (_in_drag && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance()))
+    if ((_drag_state < 1 || _drag_state > 2)
+        || (_drag_state == 1 && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance()))
         return;
 
+    _drag_state = 2;
+    
     if (event->buttons().testFlag(Qt::LeftButton)) {
         view_changed = _view->leftMouseMove(event->pos(), _prev_pos, width(), height());
     }
@@ -280,4 +293,9 @@ void Viewport::keyPressEvent(QKeyEvent *event)
         _view->initializeViewport(_min3d, _max3d, width(), height());
         renderLater();
     }
+}
+
+bool Viewport::shootPickRay(PickRay& ray)
+{
+    return _ctl->shootPickRay(*this, ray);
 }

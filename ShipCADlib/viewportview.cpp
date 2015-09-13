@@ -78,6 +78,19 @@ void ViewportView::resetView()
     _scale = 1.0;
 }
 
+bool ViewportView::leftMousePick(QPoint pos, int w, int h)
+{
+    bool scene_changed = false;
+    PickRay ray = convertMouseCoordToWorld(pos, w, h);
+    scene_changed = _vp->shootPickRay(ray);
+    return scene_changed;
+}
+
+bool ViewportView::rightMousePick(QPoint pos, int w, int h)
+{
+    return false;
+}
+
 bool ViewportView::leftMouseRelease(QPoint pos, int w, int h)
 {
     convertMouseCoordToWorld(pos, w, h);
@@ -90,22 +103,22 @@ bool ViewportView::rightMouseRelease(QPoint pos, int w, int h)
     return false;
 }
 
-bool ViewportView::middleMouseMove(QPoint cur, QPoint prev, int w, int h)
+bool ViewportView::middleMouseMove(QPoint /*cur*/, QPoint /*prev*/, int /*w*/, int /*h*/)
 {
     return false;
 }
 
-bool ViewportView::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+bool ViewportView::leftMouseMove(QPoint /*cur*/, QPoint /*prev*/, int /*w*/, int /*h*/)
 {
     return false;
 }
 
-bool ViewportView::rightMouseMove(QPoint cur, QPoint prev, int w, int h)
+bool ViewportView::rightMouseMove(QPoint /*cur*/, QPoint /*prev*/, int /*w*/, int /*h*/)
 {
     return false;
 }
 
-bool ViewportView::wheelWithDegrees(QPoint degrees, int w, int h)
+bool ViewportView::wheelWithDegrees(QPoint degrees, int /*w*/, int /*h*/)
 {
     bool zoomed = false;
     
@@ -121,8 +134,6 @@ bool ViewportView::wheelWithDegrees(QPoint degrees, int w, int h)
 
 ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h) const
 {
-    PickRay ray;
-    
     float x = (2.0f * pos.x()) / w - 1.0f;
     float y = 1.0f - (2.0f * pos.y()) / h;
 
@@ -132,10 +143,12 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
     from /= from.w();
     to /= to.w();
 
+    PickRay ray;
     ray.pt = from.toVector3D();
     ray.dir = to.toVector3D() - from.toVector3D();
     ray.dir.normalize();
 
+#if 0
     cout << "from:" << from.x() << "," << from.y() << "," << from.z() << endl;
     cout << "to:" << to.x() << "," << to.y() << "," << to.z() << endl;
 
@@ -165,6 +178,7 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
         cout << "parallel to xy" << endl;
     if (coplanar)
         cout << "coplanar" << endl;
+#endif
 
     return ray;
 }

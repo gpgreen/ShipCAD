@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -41,6 +41,7 @@
 #include "spline.h"
 #include "subdivlayer.h"
 #include "viewport.h"
+#include "viewportview.h"
 #include "filebuffer.h"
 #include "utility.h"
 #include "version.h"
@@ -621,6 +622,19 @@ void SubdivisionSurface::setBuild(bool val)
     }
 }
 
+std::vector<SubdivisionBase*>
+SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
+{
+    vector<SubdivisionBase*> picks;
+    // check control points
+    for (size_t i=0; i<numberOfControlPoints(); i++) {
+        SubdivisionControlPoint* cp = getControlPoint(i);
+        if (cp->distanceFromPickRay(vp, ray) < 1E-2)
+            picks.push_back(cp);
+    }
+    return picks;
+}
+
 void SubdivisionSurface::setDesiredSubdivisionLevel(int val)
 {
     if (val > 4)
@@ -894,7 +908,6 @@ void SubdivisionSurface::clearSelection()
     _sel_control_edges.clear();
     _sel_control_faces.clear();
     _sel_control_points.clear();
-    emit selectItem(0);
 }
 
 bool SubdivisionSurface::validFace(SubdivisionFace* face,

@@ -307,8 +307,8 @@ void SubdivisionEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshade
         vertices << p1;
         vertices << p2;
         if (draw_mirror) {
-            p1.setY(p1.y());
-            p2.setY(p2.y());
+            p1.setY(-p1.y());
+            p2.setY(-p2.y());
             vertices << p1;
             vertices << p2;
         }
@@ -675,7 +675,7 @@ void SubdivisionControlEdge::draw(Viewport& vp, LineShader* lineshader)
         }
     }
     else {
-        // viewport is not vmWireFrame
+        // viewport is not vmWireFrame, drawing to Z buffer
         glLineWidth(1);
         vertices << p1;
         vertices << p2;

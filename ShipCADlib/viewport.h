@@ -45,6 +45,8 @@ class Shader;
 class LineShader;
 class MonoFaceShader;
 class ViewportView;
+class Controller;
+struct PickRay;
     
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -53,7 +55,7 @@ class Viewport : public OpenGLWindow
     Q_OBJECT
 public:
 
-    explicit Viewport(viewport_type_t vtype);
+    explicit Viewport(Controller* ctl, viewport_type_t vtype);
     ~Viewport();
 
     void initialize();
@@ -72,6 +74,8 @@ public:
     LineShader* setLineShader();
     MonoFaceShader* setMonoFaceShader();
 
+    bool shootPickRay(PickRay& ray);
+                                   
 public slots:
 
     void setViewportMode(viewport_mode_t mode);
@@ -92,6 +96,12 @@ protected:
     
 private:
 
+    // define away copy constructor and assigment operator
+    Viewport(const Viewport&);
+    Viewport& operator=(const Viewport&);
+
+    // members
+    Controller* _ctl;
     viewport_mode_t _mode;
     viewport_type_t _view_type;
     ViewportView* _view;
@@ -99,7 +109,7 @@ private:
     QVector3D _max3d;
     QPoint _prev_pos;		// last position of mouse
     QPoint _drag_start;
-    bool _in_drag;
+    int _drag_state;
     Qt::MouseButtons _prev_buttons; // last capture of button state
     std::map<std::string, Shader*> _shaders;
     Shader* _current_shader;

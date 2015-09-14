@@ -826,27 +826,30 @@ void SubdivisionControlPoint::drawControlPoints(Viewport& vp,
     if (vp.getViewportMode() == vmWireFrame) {
         for (size_t i=0; i<surface->numberOfControlPoints(); ++i) {
             SubdivisionControlPoint* pt = surface->getControlPoint(i);
+            QVector3D p = pt->getCoordinate();
+            if (vp.getViewportType() == fvBodyplan && p.x() <= surface->getMainframeLocation())
+                p.setY(-p.y());
             if (!pt->isVisible())
                 continue;
             if (pt->isSelected())
-                selPoints << pt->getCoordinate();
+                selPoints << p;
             else if (pt->isLocked())
-                lockPoints << pt->getCoordinate();
+                lockPoints << p;
             else if (pt->isLeak())
-                leakPoints << pt->getCoordinate();
+                leakPoints << p;
             else {
                 switch (pt->getVertexType()) {
                 case svRegular:
-                    regularPoints << pt->getCoordinate();
+                    regularPoints << p;
                     break;
                 case svDart:
-                    dartPoints << pt->getCoordinate();
+                    dartPoints << p;
                     break;
                 case svCrease:
-                    creasePoints << pt->getCoordinate();
+                    creasePoints << p;
                     break;
                 case svCorner:
-                    cornerPoints << pt->getCoordinate();
+                    cornerPoints << p;
                     break;
                 }
             }

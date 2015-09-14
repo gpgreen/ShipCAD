@@ -93,16 +93,38 @@ void Controller::addRecentFiles(const QString& filename)
 bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
 {
     bool scene_changed = false;
-    vector<SubdivisionBase*> picks = getModel()->getSurface()->shootPickRay(vp, ray);
+    vector<SubdivisionBase*> filtered;
+    multimap<float, SubdivisionBase*> picks = getModel()->getSurface()->shootPickRay(vp, ray);
     if (picks.size() > 0) {
-        for (size_t i=0; i<picks.size(); i++) {
+        multimap<float, SubdivisionBase*>::iterator it, itlow;
+        itlow = picks.lower_bound(0);
+        float last = 0;
+        bool first = true;
+        for (it=itlow; it!=picks.end(); ++it) {
+            float s = (*it).first;
+            // check to see if next element is farther away than first, since this is multimap, we
+            // can several at the same distance from the ray origin
+            if (!first) {
+                if (s > last)
+                    break;
+            } else
+                first = false;
+            filtered.push_back((*it).second);
+            last = s;
+        }
+    }
+    if (filtered.size() > 0) {
+        if (filtered.size() == 1) {
             // is this a point?
-            SubdivisionControlPoint* cp = dynamic_cast<SubdivisionControlPoint*>(picks[i]);
+            SubdivisionControlPoint* cp = dynamic_cast<SubdivisionControlPoint*>(filtered[0]);
             if (cp != 0) {
                 cp->setSelected(true);
                 scene_changed = true;
                 cout << "control point selected" << endl;
             }
+        } else {
+            // need to discriminate against these elements
+            throw runtime_error("multiple elements picked");
         }
     }
     if (scene_changed) {

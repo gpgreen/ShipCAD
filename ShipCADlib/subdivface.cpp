@@ -700,20 +700,20 @@ void SubdivisionControlFace::calcExtents()
         _min = ZERO;
     _max = _min;
     if (_children.size() > 0) {
-        for (size_t i=1; i<=_children.size(); ++i) {
-            SubdivisionFace* face = _children[i-1];
-            for (size_t j=1; j<=face->numberOfPoints(); ++j) {
-                if (i == 1 && j == 1) {
-                    _min = face->getPoint(j - 1)->getCoordinate();
+        for (size_t i=0; i<_children.size(); ++i) {
+            SubdivisionFace* face = _children[i];
+            for (size_t j=0; j<face->numberOfPoints(); ++j) {
+                if (i == 0 && j == 0) {
+                    _min = face->getPoint(j)->getCoordinate();
                     _max = _min;
                 }
-                MinMax(face->getPoint(j - 1)->getCoordinate(), _min, _max);
+                MinMax(face->getPoint(j)->getCoordinate(), _min, _max);
             }
         }
     }
     else {
-        for (size_t i=2; i<=numberOfPoints(); ++i) {
-            MinMax(getPoint(i - 1)->getCoordinate(), _min, _max);
+        for (size_t i=1; i<numberOfPoints(); ++i) {
+            MinMax(getPoint(i)->getCoordinate(), _min, _max);
         }
     }
 }

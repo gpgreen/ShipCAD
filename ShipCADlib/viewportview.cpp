@@ -33,6 +33,7 @@
 #include "viewportview.h"
 #include "viewport.h"
 #include "utility.h"
+#include "subdivsurface.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -86,7 +87,7 @@ bool ViewportView::leftMousePick(QPoint pos, int w, int h)
     return scene_changed;
 }
 
-bool ViewportView::rightMousePick(QPoint pos, int w, int h)
+bool ViewportView::rightMousePick(QPoint /*pos*/, int /*w*/, int /*h*/)
 {
     return false;
 }
@@ -185,7 +186,7 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
 
 ViewportViewPerspective::ViewportViewPerspective(Viewport* vp)
     : ViewportView(vp), _panZ(0.0), _camera(ftStandard), _field_of_view(atan(35.0/50.0)),
-      _angle(20), _elevation(20), _distance(0)
+      _angle(-30), _elevation(30), _distance(0)
 {
     // does nothing
 }
@@ -194,11 +195,11 @@ void ViewportViewPerspective::resetView()
 {
     ViewportView::resetView();
     _panZ = 0;
-    _angle = 20.0;
-    _elevation = 20.0;
+    _angle = -30.0;
+    _elevation = 30.0;
 }
 
-bool ViewportViewPerspective::middleMouseMove(QPoint cur, QPoint prev, int w, int h)
+bool ViewportViewPerspective::middleMouseMove(QPoint cur, QPoint prev, int /*w*/, int /*h*/)
 {
     QPoint rel = cur - prev;
     // dragging the perspective around with middle button
@@ -207,11 +208,12 @@ bool ViewportViewPerspective::middleMouseMove(QPoint cur, QPoint prev, int w, in
         _angle -= 360;
     while (_angle < -180)
         _angle += 360;
-    _elevation += -rel.y() / 2.0f;
+    _elevation += rel.y() / 2.0f;
     while (_elevation > 180)
         _elevation -= 360;
     while (_elevation < -180)
         _elevation += 360;
+    cout << "angle:" << _angle << " elev:" << _elevation << endl;
     return true;
 }
 
@@ -268,8 +270,9 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     // build the vertex transformation matrix from the perspective
     // and the angle, elevation
 
-    float aspect_ratio = width / static_cast<float>(height);
-    float hi, margin;
+    float aspect_ratio = 1.0;
+    if (height != 0)
+        aspect_ratio = width / static_cast<float>(height);
     _proj = QMatrix4x4();
 
     // create projection
@@ -278,7 +281,7 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     // find the camera location
     QMatrix4x4 model;
     model.translate(_panX, _panY, _panZ);
-    model.rotate(_elevation, 1, 0, 0);
+    model.rotate(-_elevation, 1, 0, 0);
     model.rotate(_angle, 0, 0, 1);
     _camera_location = model.map(QVector3D(max.x() + _distance, 0, 0));
     
@@ -321,30 +324,34 @@ ViewportViewPlan::ViewportViewPlan(Viewport* vp)
 
 void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height)
 {
-    // calculate the midpoint of the bounding box, which is used as the center of the
-    // model for rotating the model
+    bool show_both = _vp->getSurface()->drawMirror();
+    float breadth = max.y() - min.y();
+
+    // calculate the midpoint of the bounding box
     _midpoint = 0.5 * (min + max);
 
-    QVector3D panpoint = _midpoint;
+    QVector3D panpoint(_midpoint);
     panpoint.setX(panpoint.x() + _panX);
     panpoint.setY(panpoint.y() + _panY);
 
-    float aspect_ratio = width / static_cast<float>(height);
+    float aspect_ratio = 1.0;
+    if (height != 0)
+        aspect_ratio = width / static_cast<float>(height);
     float hi, margin;
 
     _proj = QMatrix4x4();
 
     // find view extents using aspect ratio
-    if (_midpoint.x() / aspect_ratio >= _midpoint.y() * 2) {
+    if (_midpoint.x() / aspect_ratio >= breadth) {
         margin = _midpoint.x() * .01 * _margin;
         hi = (_midpoint.x() / aspect_ratio + margin) / _zoom;
         float x = (_midpoint.x() + margin) / _zoom;
         _proj.ortho(-x, x, -hi, hi, 0.1f, 40.0f);
     }
     else {
-        margin = _midpoint.y() * 2 * .01 * _margin;
-        hi = (_midpoint.y() * 2 * aspect_ratio + margin) / _zoom;
-        float y = (_midpoint.y() * 2 + margin) / _zoom;
+        margin = breadth * .01 * _margin;
+        hi = (breadth * aspect_ratio + margin) / _zoom;
+        float y = (breadth + margin) / _zoom;
         _proj.ortho(-hi, hi, -y, y, 0.1f, 40.0f);
     }
     
@@ -391,7 +398,9 @@ void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector
     panpoint.setX(panpoint.x() + _panX);
     panpoint.setZ(panpoint.z() + _panY);
 
-    float aspect_ratio = width / static_cast<float>(height);
+    float aspect_ratio = 1.0;
+    if (height != 0)
+        aspect_ratio = width / static_cast<float>(height);
     float hi, margin;
 
     _proj = QMatrix4x4();
@@ -448,7 +457,9 @@ void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVecto
     // model for rotating the model
     _midpoint = 0.5 * (min + max);
 
-    float aspect_ratio = width / static_cast<float>(height);
+    float aspect_ratio = 1.0;
+    if (height != 0)
+        aspect_ratio = width / static_cast<float>(height);
     float hi, margin;
 
     _proj = QMatrix4x4();

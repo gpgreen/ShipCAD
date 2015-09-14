@@ -622,15 +622,17 @@ void SubdivisionSurface::setBuild(bool val)
     }
 }
 
-std::vector<SubdivisionBase*>
+std::multimap<float, SubdivisionBase*>
 SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
 {
-    vector<SubdivisionBase*> picks;
+    multimap<float,SubdivisionBase*> picks;
     // check control points
     for (size_t i=0; i<numberOfControlPoints(); i++) {
         SubdivisionControlPoint* cp = getControlPoint(i);
-        if (cp->distanceFromPickRay(vp, ray) < 1E-2)
-            picks.push_back(cp);
+        if (cp->distanceFromPickRay(vp, ray) < 1E-2) {
+            float s = ray.pt.distanceToPoint(cp->getCoordinate());
+            picks.insert(make_pair(s,cp));
+        }
     }
     return picks;
 }
@@ -2589,31 +2591,31 @@ void SubdivisionSurface::rebuild()
         _build = true;
         while (_current_subdiv_level < _desired_subdiv_level)
             subdivide();
-        for (size_t i=1; i<=numberOfControlFaces(); ++i) {
-            getControlFace(i-1)->calcExtents();
-            if (i == 1) {
-                _min = getControlFace(i-1)->getMin();
-                _max = getControlFace(i-1)->getMax();
+        for (size_t i=0; i<numberOfControlFaces(); ++i) {
+            getControlFace(i)->calcExtents();
+            if (i == 0) {
+                _min = getControlFace(i)->getMin();
+                _max = getControlFace(i)->getMax();
             }
             else {
-                MinMax(getControlFace(i-1)->getMin(), _min, _max);
-                MinMax(getControlFace(i-1)->getMax(), _min, _max);
+                MinMax(getControlFace(i)->getMin(), _min, _max);
+                MinMax(getControlFace(i)->getMax(), _min, _max);
             }
         }
-        for (size_t i=1; i<=numberOfControlCurves(); ++i) {
-            SubdivisionControlCurve* curve= getControlCurve(i-1);
+        for (size_t i=0; i<numberOfControlCurves(); ++i) {
+            SubdivisionControlCurve* curve = getControlCurve(i);
             curve->getSpline()->clear();
-            for (size_t j=1; j<=curve->numberOfSubdivPoints(); ++j) {
-                SubdivisionPoint* point = curve->getSubdivPoint(j-1);
+            for (size_t j=0; j<curve->numberOfSubdivPoints(); ++j) {
+                SubdivisionPoint* point = curve->getSubdivPoint(j);
                 curve->getSpline()->add(point->getCoordinate());
-                if (j > 1 && j < curve->numberOfSubdivPoints()) {
+                if (j > 0 && j < curve->numberOfSubdivPoints()) {
                     if (point->getVertexType() == svCorner)
-                        curve->getSpline()->setKnuckle(j-1, true);
+                        curve->getSpline()->setKnuckle(j, true);
                     else {
-                        SubdivisionEdge* edge1 = edgeExists(curve->getSubdivPoint(j-2), curve->getSubdivPoint(j-1));
-                        SubdivisionEdge* edge2 = edgeExists(curve->getSubdivPoint(j-1), curve->getSubdivPoint(j));
+                        SubdivisionEdge* edge1 = edgeExists(curve->getSubdivPoint(j-1), curve->getSubdivPoint(j));
+                        SubdivisionEdge* edge2 = edgeExists(curve->getSubdivPoint(j), curve->getSubdivPoint(j-1));
                         if (!edge1->isCrease() && !edge2->isCrease())
-                            curve->getSpline()->setKnuckle(j-1, point->getVertexType() == svCrease);
+                            curve->getSpline()->setKnuckle(j, point->getVertexType() == svCrease);
                     }
                 }
                 curve->setBuild(true);
@@ -2621,13 +2623,13 @@ void SubdivisionSurface::rebuild()
         }
     }
     else if (numberOfControlPoints() > 0) {
-        for (size_t i=1; i<=numberOfControlPoints(); ++i) {
-            if (i == 1) {
-                _min = getControlPoint(i-1)->getCoordinate();
+        for (size_t i=0; i<numberOfControlPoints(); ++i) {
+            if (i == 0) {
+                _min = getControlPoint(i)->getCoordinate();
                 _max = _min;
             }
             else
-                MinMax(getControlPoint(i-1)->getCoordinate(), _min, _max);
+                MinMax(getControlPoint(i)->getCoordinate(), _min, _max);
         }
     }
     else {

@@ -153,6 +153,7 @@ void Visibility::setModelView(model_view_t vw)
     if (vw != _model_view) {
         _model_view = vw;
         _owner->getSurface()->setDrawMirror(vw == mvBoth);
+        _owner->setBuild(false); // rebuild the model
         _owner->setFileChanged(true);
     }
 }

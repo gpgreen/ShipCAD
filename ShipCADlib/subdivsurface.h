@@ -32,6 +32,7 @@
 
 #include <iosfwd>
 #include <vector>
+#include <map>
 #include <QObject>
 #include <QColor>
 #include <QVector3D>
@@ -86,7 +87,7 @@ public:
     virtual void setBuild(bool val);
 
     // selecting
-    std::vector<SubdivisionBase*> shootPickRay(Viewport& vp, const PickRay& ray);
+    std::multimap<float, SubdivisionBase*> shootPickRay(Viewport& vp, const PickRay& ray);
     
     // modifiers
 

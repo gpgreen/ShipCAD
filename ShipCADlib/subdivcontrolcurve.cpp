@@ -226,6 +226,7 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
         return;
     bool sel = isSelected();
     Spline* curve = getSpline();
+    curve->setProperty("Color", _owner->getControlCurveColor());
     curve->setShowCurvature(sel && _owner->showCurvature());
     if (curve->showCurvature())
         curve->setFragments(600);
@@ -234,7 +235,6 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
     curve->setCurvatureColor(_owner->getCurvatureColor());
     curve->setCurvatureScale(_owner->getCurvatureScale());
     QVector<QVector3D> vertices;
-    // BUGBUG: not implemented yet
     if (!_owner->showControlNet() && sel) {
         // draw controlpoints and edges
         for (size_t i=2; i<=_points.size(); ++i) {

@@ -57,6 +57,7 @@ class SubdivisionControlCurve;
 class SubdivisionLayer;
 class Viewport;
 class FileBuffer;
+class Preferences;
 class PickRay;
     
 extern bool g_surface_verbose;
@@ -411,6 +412,8 @@ protected:
     boost::pool<> _point_pool;
     boost::pool<> _edge_pool;
     boost::pool<> _face_pool;
+
+    friend class Preferences;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

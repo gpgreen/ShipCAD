@@ -29,6 +29,7 @@
 
 #include "preferences.h"
 #include "shipcadmodel.h"
+#include "subdivsurface.h"
 
 using namespace ShipCAD;
 
@@ -73,3 +74,22 @@ void Preferences::resetColors()
     _zebra_stripe_color = QColor(230, 230, 230);
 }
 
+void Preferences::setSurfaceColors(SubdivisionSurface& surface)
+{
+    surface._crease_color = _crease_color;
+    surface._crease_edge_color = _crease_edge_color;
+    surface._underwater_color = _underwater_color;
+    surface._edge_color = _edge_color;
+    surface._selected_color = _select_color;
+    surface._crease_point_color = _crease_point_color;
+    surface._regular_point_color = _regular_point_color;
+    surface._corner_point_color = _corner_point_color;
+    surface._dart_point_color = _dart_point_color;
+    surface._layer_color = _layer_color;
+    surface._normal_color = _normal_color;
+    surface._leak_color = _leakpoint_color;
+    surface._curvature_color = _curvature_plot_color;
+    surface._control_curve_color = _control_curve_color;
+    surface._zebra_color = _zebra_stripe_color;
+    
+}

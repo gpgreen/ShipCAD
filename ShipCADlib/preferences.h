@@ -36,7 +36,8 @@
 namespace ShipCAD {
 
 class ShipCADModel;
-
+class SubdivisionSurface;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Preferences : public QObject
@@ -59,6 +60,8 @@ public:
     void resetColors();
     void save();
 
+    void setSurfaceColors(SubdivisionSurface& surface);
+    
 	/*! \brief get maximum amount of undo memory
 	 *
 	 * \return max amount of undo memory in mb
@@ -66,18 +69,54 @@ public:
 	size_t getMaxUndoMemory() const
         {return _max_undo_memory;}
 
-    QColor getSelectColor() const 
-        {return _select_color;}
-    QColor getStationColor() const
-        {return _station_color;}
     QColor getButtockColor() const
         {return _buttock_color;}
     QColor getWaterlineColor() const
         {return _waterline_color;}
+    QColor getStationColor() const
+        {return _station_color;}
     QColor getDiagonalColor() const
         {return _diagonal_color;}
+    QColor getEdgeColor() const
+        {return _edge_color;}
+    QColor getCreaseColor() const
+        {return _crease_color;}
+    QColor getCreaseEdgeColor() const
+        {return _crease_edge_color;}
+    QColor getGridColor() const
+        {return _grid_color;}
+    QColor getGridFontColor() const
+        {return _grid_font_color;}
+    QColor getCreasePointColor() const
+        {return _crease_point_color;}
+    QColor getRegularPointColor() const
+        {return _regular_point_color;}
+    QColor getCornerPointColor() const
+        {return _corner_point_color;}
+    QColor getDartPointColor() const
+        {return _dart_point_color;}
+    QColor getSelectColor() const 
+        {return _select_color;}
+    QColor getLayerColor() const
+        {return _layer_color;}
+    QColor getNormalColor() const
+        {return _normal_color;}
+    QColor getUnderwaterColor() const
+        {return _underwater_color;}
+    QColor getViewportColor() const
+        {return _viewport_color;}
+    QColor getLeakPointColor() const
+        {return _leakpoint_color;}
     QColor getMarkerColor() const
         {return _marker_color;}
+    QColor getCurvaturePlotColor() const
+        {return _curvature_plot_color;}
+    QColor getControlCurveColor() const
+        {return _control_curve_color;}
+    QColor getHydrostaticsFontColor() const
+        {return _hydrostatics_font_color;}
+    QColor getZebraStripeColor() const
+        {return _zebra_stripe_color;}
 
     void clear();
 

@@ -141,6 +141,9 @@ void ShipCADModel::rebuildModel()
 {
     setBuild(false);
 
+    // get preferences setttings
+    _prefs.setSurfaceColors(_surface);
+
     // get visibility settings
     Visibility& v = getVisibility();
     _surface.setShowControlNet(v.isShowControlNet());

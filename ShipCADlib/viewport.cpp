@@ -134,8 +134,11 @@ void Viewport::addShader(const string &name, Shader *shader)
 
 void Viewport::render()
 {
+    QColor vpcolor = _ctl->getModel()->getPreferences().getViewportColor();
+    
     glViewport(0, 0, width(), height());
-
+    
+    glClearColor(vpcolor.redF(), vpcolor.greenF(), vpcolor.blueF(), 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     _ctl->getModel()->draw(*this);

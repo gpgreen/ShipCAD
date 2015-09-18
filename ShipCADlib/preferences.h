@@ -76,6 +76,8 @@ public:
         {return _waterline_color;}
     QColor getDiagonalColor() const
         {return _diagonal_color;}
+    QColor getMarkerColor() const
+        {return _marker_color;}
 
     void clear();
 

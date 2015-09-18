@@ -552,7 +552,7 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
     monoshader->renderMesh(getColor(), vertices, normals);
 }
 
-void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, float MinCurvature, float MaxCurvature)
+void SubdivisionControlFace::drawCurvatureFaces(Viewport &/*vp*/, float /*MinCurvature*/, float /*MaxCurvature*/)
 {
     // TODO
 }

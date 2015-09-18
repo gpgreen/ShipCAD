@@ -37,6 +37,7 @@
 #include "subdivlayer.h"
 #include "subdivface.h"
 #include "flowline.h"
+#include "viewport.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -254,6 +255,17 @@ size_t ShipCADModel::getUndoMemory()
 	for (size_t i=0; i<_undo_list.size(); i++)
 		mem_used += _undo_list[i]->getMemory();
 	return mem_used;
+}
+
+void ShipCADModel::draw(Viewport& vp)
+{
+    // draw markers
+    if (_vis.isShowMarkers() && vp.getViewportMode() == vmWireFrame) {
+        LineShader* lineshader = vp.setLineShader();
+        for (size_t i=0; i<_markers.size(); i++)
+            _markers.get(i)->draw(vp, lineshader);
+    }
+    getSurface()->draw(vp);
 }
 
 void ShipCADModel::loadBinary(FileBuffer& source)

@@ -59,9 +59,9 @@ public:
     virtual void clear();
     virtual void draw(Viewport& vp, LineShader* lineshader);
 
-    bool isVisible() {return _visible;}
+    bool isVisible() const {return _visible;}
     void setVisible(bool set) {_visible=set;}
-	bool isSelected();
+    bool isSelected();
 	void setSelected(bool set);
 
     void loadBinary(FileBuffer& source);

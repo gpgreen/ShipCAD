@@ -243,7 +243,6 @@ void MainWindow::addDefaultViewports()
         // connect the render signal to the viewport
         //connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
         connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
-        vp->setSurface(model->getSurface());
         ViewportContainer* vpcontainer = new ViewportContainer(vp, this);
 
         // put it in display area

@@ -272,6 +272,8 @@ public:
 
     void rebuildModel();
 
+    void draw(Viewport& vp);
+    
 	void clear();
     void clearUndo();
 

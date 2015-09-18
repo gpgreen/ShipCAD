@@ -44,7 +44,7 @@ using namespace ShipCAD;
 
 Viewport::Viewport(Controller* ctl, viewport_type_t vtype)
     : _ctl(ctl), _mode(vmWireFrame), _view_type(vtype),
-      _view(0), _drag_state(0), _current_shader(0), _surface(0)
+      _view(0), _drag_state(0), _current_shader(0)
 {
     _view = ViewportView::construct(vtype, this);
 }
@@ -81,8 +81,7 @@ void Viewport::setCameraType(camera_type_t val)
         return;
     ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
     view->setCameraType(val);
-    _view->initializeViewport(_min3d, _max3d, width(), height());
-    renderLater();
+    update();
 }
 
 void Viewport::setViewportType(viewport_type_t ty)
@@ -91,8 +90,7 @@ void Viewport::setViewportType(viewport_type_t ty)
         delete _view;
         _view = ViewportView::construct(ty, this);
         _view_type = ty;
-        _view->initializeViewport(_min3d, _max3d, width(), height());
-        renderLater();
+        update();
     }
 }
 
@@ -102,8 +100,7 @@ void Viewport::setAngle(float val)
         return;
     ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
     view->setAngle(val);
-    _view->initializeViewport(_min3d, _max3d, width(), height());
-    renderLater();
+    update();
 }
 
 void Viewport::setElevation(float val)
@@ -112,30 +109,21 @@ void Viewport::setElevation(float val)
         return;
     ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
     view->setElevation(val);
-    _view->initializeViewport(_min3d, _max3d, width(), height());
-    renderLater();
+    update();
 }
 
 void Viewport::resizeEvent(QResizeEvent *event)
 {
     cout << "vp resize event: " << event->size().width()
          << "," << event->size().height() << endl;
-    _view->initializeViewport(_min3d, _max3d, width(), height());
-    renderLater();
+    update();
 }
 
-void Viewport::add(Entity* entity)
+void Viewport::update()
 {
-    _entities.push_back(entity);
-}
-
-void Viewport::setSurface(SubdivisionSurface* surface)
-{
-    _surface = surface;
-    if (_surface == 0)
-        return;
-    _surface->extents(_min3d, _max3d);
-    _view->initializeViewport(_min3d, _max3d, width(), height());
+    QVector3D min, max;
+    _ctl->getModel()->getSurface()->extents(min, max);
+    _view->initializeViewport(min, max, width(), height());
     renderLater();
 }
 
@@ -150,12 +138,7 @@ void Viewport::render()
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    LineShader* lineshader = setLineShader();
-
-    for (size_t i=0; i<_entities.size(); ++i)
-        _entities[i]->draw(*this, lineshader);
-
-    _surface->draw(*this);
+    _ctl->getModel()->draw(*this);
 
     // need to release the shader, otherwise doesn't draw right
     if (_current_shader != 0) {
@@ -225,10 +208,8 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
             view_changed = _view->rightMouseRelease(event->pos(), width(), height());
     }
 
-    if (view_changed) {
-        _view->initializeViewport(_min3d, _max3d, width(), height());
-        renderLater();
-    }
+    if (view_changed)
+        update();
     _prev_buttons = event->buttons();
     // are we getting mouse clicks in the gl window?
     cout << "mouse release: " << event->pos().x() << "," << event->pos().y() << endl;
@@ -257,10 +238,8 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
         view_changed = _view->rightMouseMove(event->pos(), _prev_pos, width(), height());
     }
 
-    if (view_changed) {
-        _view->initializeViewport(_min3d, _max3d, width(), height());
-        renderLater();
-    }
+    if (view_changed)
+        update();
 
     _prev_pos = event->pos();
     // are we getting mouse clicks in the gl window?
@@ -279,10 +258,8 @@ void Viewport::wheelEvent(QWheelEvent *event)
     if (!num_degrees.isNull())
         view_changed = _view->wheelWithDegrees(num_degrees, width(), height());
 
-    if (view_changed) {
-        _view->initializeViewport(_min3d, _max3d, width(), height());
-        renderLater();
-    }
+    if (view_changed)
+        update();
         
 }
 
@@ -290,8 +267,7 @@ void Viewport::keyPressEvent(QKeyEvent *event)
 {
     if (event->modifiers().testFlag(Qt::ControlModifier) && event->key() == Qt::Key_A) {
         _view->resetView();
-        _view->initializeViewport(_min3d, _max3d, width(), height());
-        renderLater();
+        update();
     }
 }
 

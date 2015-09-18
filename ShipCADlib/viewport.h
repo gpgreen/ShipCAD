@@ -39,7 +39,6 @@
 
 namespace ShipCAD {
 
-class Entity;
 class SubdivisionSurface;
 class Shader;
 class LineShader;
@@ -61,13 +60,11 @@ public:
     void initialize();
     void render();
 
+    Controller* getController() {return _ctl;}
+
     viewport_mode_t getViewportMode() const {return _mode;}
 
     viewport_type_t getViewportType() const {return _view_type;}
-
-    SubdivisionSurface* getSurface() {return _surface;}
-
-    void add(Entity* entity);
 
     void addShader(const std::string& name, Shader* shader);
 
@@ -81,13 +78,13 @@ public slots:
     void setViewportMode(viewport_mode_t mode);
     void setViewportType(viewport_type_t ty);
     void setCameraType(camera_type_t val);
-    void setSurface(SubdivisionSurface* surface);
     void setAngle(float val);
     void setElevation(float val);
     virtual void resizeEvent(QResizeEvent *event);
 
 protected:
 
+    virtual void update();
     virtual void mousePressEvent(QMouseEvent *);
     virtual void mouseReleaseEvent(QMouseEvent *);
     virtual void mouseMoveEvent(QMouseEvent *);
@@ -105,16 +102,12 @@ private:
     viewport_mode_t _mode;
     viewport_type_t _view_type;
     ViewportView* _view;
-    QVector3D _min3d;
-    QVector3D _max3d;
     QPoint _prev_pos;		// last position of mouse
     QPoint _drag_start;
     int _drag_state;
     Qt::MouseButtons _prev_buttons; // last capture of button state
     std::map<std::string, Shader*> _shaders;
     Shader* _current_shader;
-    std::vector<Entity*> _entities;
-    SubdivisionSurface* _surface;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

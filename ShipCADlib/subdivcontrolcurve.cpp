@@ -226,7 +226,7 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
         return;
     bool sel = isSelected();
     Spline* curve = getSpline();
-    curve->setProperty("Color", _owner->getControlCurveColor());
+    curve->setColor(_owner->getControlCurveColor());
     curve->setShowCurvature(sel && _owner->showCurvature());
     if (curve->showCurvature())
         curve->setFragments(600);
@@ -251,6 +251,10 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
     }
     vertices.clear();
     if (vp.getViewportType() == fvBodyplan && !_owner->drawMirror()) {
+
+        vector<QVector3D> parray1;
+        vector<QVector3D> parray2;
+
         // draw mainframe location
         Plane mfl(1, 0, 0, -_owner->getMainframeLocation());
         IntersectionData output;
@@ -272,38 +276,44 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
             size_t fragm = (parameters[i-1] - parameters[i-2]) * curve->getFragments();
             if (fragm < 10)
                 fragm = 10;
+            for (size_t j=0; j<fragm; j++) {
+                float t = parameters[i-1] + (parameters[i] - parameters[i-1]) * j / (fragm - 1);
+                QVector3D p = curve->value(t);
+                p.setY(p.y() * scale);
+                parray1.push_back(p);
+            }
             if (curve->showCurvature()) {
-                for (size_t j=1; j<=fragm; ++j) {
-                    float t = parameters[i-2] + (parameters[i-1] - parameters[i-2]) * (j - 1) / (fragm - 1);
+                for (size_t j=0; j<fragm; ++j) {
+                    float t = parameters[i-2] + (parameters[i-1] - parameters[i-2]) * j / (fragm - 1);
                     QVector3D normal;
-                    p3d = curve->value(t);
                     float c = curve->curvature(t, normal);
-                    p3d.setY(p3d.y() * scale);
                     normal.setY(normal.y() * scale);
-                    QVector3D p3d2 = p3d - (c * 2 * curve->getCurvatureScale() * normal);
-                    vertices << p3d;
-                    vertices << p3d2;
+                    QVector3D p3d2 = parray1[j] - (c * 2 * curve->getCurvatureScale() * normal);
+                    parray2.push_back(p3d2);
+                }
+                for (size_t j=1; j<=fragm; j++) {
                     if ((j % 4) == 0 || j == 1 || j == fragm) {
                         // draw normal lines
-                        curvelines << p3d;
-                        curvelines << p3d2;
+                        vertices << parray1[j-1];
+                        vertices << parray2[j-1];
                     }
-                    vertices << p3d2;
                 }
-                for (int j=0; j<curvelines.size(); ++j)
-                    vertices << curvelines[j];
+                for (size_t j=1; j<parray2.size(); j++) {
+                    vertices << parray2[j-1];
+                    vertices << parray2[j];
+                }
+                glLineWidth(1);
+                lineshader->renderLines(vertices, curve->getCurvatureColor());
             }
             else {
-                vertices.clear();
-                for (size_t j=1; j<=fragm; ++j) {
-                    float t = parameters[i-2] + (parameters[i-1] - parameters[i-2]) * (j - 1) / (fragm - 1);
-                    p3d = curve->value(t);
-                    p3d.setY(p3d.y() * scale);
-                    vertices << p3d;
+                for (size_t j=1; j<=parray1.size(); ++j) {
+                    vertices << parray1[j-1];
+                    vertices << parray1[j];
                 }
+                glLineWidth(1);
+                lineshader->renderLines(vertices, getColor());
             }
         }
-        lineshader->renderLines(vertices, curve->getCurvatureColor());
     }
     else {
         curve->draw(vp, lineshader);

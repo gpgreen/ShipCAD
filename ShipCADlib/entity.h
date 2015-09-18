@@ -65,12 +65,6 @@ public:
 class Entity : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool Build READ isBuild)
-    Q_PROPERTY(QColor Color MEMBER _color)
-    Q_PROPERTY(QVector3D Min READ getMin)
-    Q_PROPERTY(QVector3D Max READ getMax)
-    Q_PROPERTY(int PenWidth MEMBER _pen_width)
-    Q_PROPERTY(Qt::PenStyle penstyle MEMBER _pen_style)
 
 public:
 
@@ -83,6 +77,14 @@ public:
     virtual void rebuild() = 0;
 
     // getters/setters
+    QColor getColor() const
+        {return _color;}
+    void setColor(const QColor& col)
+        {_color = col;}
+    int getPenWidth() const
+        {return _pen_width;}
+    void setPenWidth(int w)
+        {_pen_width=w;}
     QVector3D getMin() const;
     QVector3D getMax() const;
     bool isBuild() const

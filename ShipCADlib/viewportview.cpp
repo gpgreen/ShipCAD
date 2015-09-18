@@ -34,6 +34,7 @@
 #include "viewport.h"
 #include "utility.h"
 #include "subdivsurface.h"
+#include "controller.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -324,7 +325,6 @@ ViewportViewPlan::ViewportViewPlan(Viewport* vp)
 
 void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height)
 {
-    bool show_both = _vp->getSurface()->drawMirror();
     float breadth = max.y() - min.y();
 
     // calculate the midpoint of the bounding box

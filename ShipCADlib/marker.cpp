@@ -62,7 +62,92 @@ void Marker::clear()
 
 void Marker::draw(Viewport& vp, LineShader* lineshader)
 {
-    // TODO
+    if (!isVisible())
+        return;
+    if (isSelected())
+        setColor(_owner->getPreferences().getSelectColor());
+    else
+        setColor(_owner->getPreferences().getMarkerColor());
+    setFragments(250);
+    QVector<QVector3D> vertices;
+    QVector3D p3d;
+    if (vp.getViewportType() == fvBodyplan && _owner->getVisibility().getModelView() != mvBoth) {
+
+        vector<float> params;
+        vector<QVector3D> parray1;
+        vector<QVector3D> parray2;
+
+        Plane pln(1,0,0,-_owner->getProjectSettings().getMainframeLocation());
+        params.push_back(0);
+        params.push_back(1);
+
+        IntersectionData output;
+        if (intersect_plane(pln, output)) {
+            params.insert(params.end(), output.parameters.begin(), output.parameters.end());
+            sort(params.begin(), params.end());
+        }
+
+        for (size_t i=1; i<params.size(); i++) {
+            p3d = value(0.5 * params[i-1] + params[i]);
+            float scale = 1;
+            if (p3d.x() < _owner->getProjectSettings().getMainframeLocation())
+                scale = -1;
+            size_t fragm = floor((params[i] - params[i-1])*getFragments());
+            if (fragm < 10)
+                fragm = 10;
+            for (size_t j=0; j<fragm; j++) {
+                float t = params[i-1] + (params[i] - params[i-1]) * j / (fragm - 1);
+                QVector3D p = value(t);
+                p.setY(p.y() * scale);
+                parray1.push_back(p);
+            }
+            if (showCurvature()) {
+                for (size_t j=0; j<fragm; j++) {
+                    float t = params[i-1] + (params[i] - params[i-1]) * j / (fragm - 1);
+                    QVector3D normal;
+                    float c = curvature(t, normal);
+                    normal.setY(normal.y() * scale);
+                    QVector3D p2 = parray1[j] - (c * 2 * getCurvatureScale() * normal);
+                    parray2.push_back(p2);
+                }
+                for (size_t j=1; j<=fragm; j++) {
+                    if ((j % 4) == 0 || j == 1 || j == fragm) {
+                        vertices << parray1[j-1];
+                        vertices << parray2[j-1];
+                    }
+                }
+                for (size_t j=1; j<parray2.size(); j++) {
+                    vertices << parray2[j-1];
+                    vertices << parray2[j];
+                }
+                glLineWidth(1);
+                lineshader->renderLines(vertices, getCurvatureColor());
+            } else { // end show curvature
+                for (size_t j=1; j<parray1.size(); j++) {
+                    vertices << parray1[j-1];
+                    vertices << parray1[j];
+                }
+                glLineWidth(1);
+                lineshader->renderLines(vertices, getColor());
+            }
+        }
+        vertices.clear();
+        for (size_t i=0; i<numberOfPoints(); i++) {
+            p3d = getPoint(i);
+            if (p3d.x() < _owner->getProjectSettings().getMainframeLocation())
+                p3d.setY(-p3d.y());
+            vertices << p3d;
+        }
+        glPointSize(3);
+        lineshader->renderPoints(vertices, getColor());
+    } else { // end bodyplan
+        Spline::draw(vp, lineshader);
+        for (size_t i=0; i<numberOfPoints(); i++) {
+            vertices << getPoint(i);
+        }
+        glPointSize(3);
+        lineshader->renderPoints(vertices, getColor());
+    }
 }
 
 bool Marker::isSelected()

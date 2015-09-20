@@ -42,7 +42,7 @@ namespace ShipCAD {
 class SubdivisionSurface;
 class Shader;
 class LineShader;
-class MonoFaceShader;
+class FaceShader;
 class ViewportView;
 class Controller;
 struct PickRay;
@@ -69,8 +69,9 @@ public:
     void addShader(const std::string& name, Shader* shader);
 
     LineShader* setLineShader();
-    MonoFaceShader* setMonoFaceShader();
-
+    FaceShader* setMonoFaceShader();
+    FaceShader* setLightedFaceShader();
+    
     bool shootPickRay(PickRay& ray);
                                    
 public slots:
@@ -81,6 +82,7 @@ public slots:
     void setAngle(float val);
     void setElevation(float val);
     virtual void resizeEvent(QResizeEvent *event);
+    bool contextMenu(QMouseEvent *event);
 
 protected:
 

@@ -297,6 +297,8 @@ public slots:
 
 protected:
 
+    void drawGrid(Viewport& vp, LineShader* lineshader);
+
 private:
 
     std::vector<Viewport*> _viewports;

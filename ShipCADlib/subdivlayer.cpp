@@ -380,9 +380,10 @@ void SubdivisionLayer::draw(Viewport& vp)
                                                _owner->getMaxGausCurvature());
         }
         else {
-            MonoFaceShader* monoshader = vp.setMonoFaceShader();
+//            FaceShader* faceshader = vp.setMonoFaceShader();
+            FaceShader* faceshader = vp.setLightedFaceShader();
             for (size_t i=0; i<numberOfFaces(); ++i)
-                getFace(i)->drawFaces(vp, monoshader);
+                getFace(i)->drawFaces(vp, faceshader);
         }
     }
     else {

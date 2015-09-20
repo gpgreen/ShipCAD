@@ -567,7 +567,66 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
     lineshader->renderLines(vertices, _color);
 }
 
-void Spline::insert_spline(size_t index, bool invert, bool duplicate_point, 
+void Spline::drawStarboard(Viewport& vp, LineShader* lineshader)
+{
+    if (!_build)
+        rebuild();
+
+    QVector3D p1;
+    QVector3D p2;
+    QVector3D normal;
+    vector<QVector3D> parray1;
+    vector<QVector3D> parray2;
+    QVector<QVector3D> vertices;
+
+    for (size_t i=0; i<_fragments; ++i) {
+        p1 = value(i / static_cast<float>(_fragments));
+        p1.setY(-p1.y());
+        parray1.push_back(p1);
+    }
+    if (_show_curvature) {
+        glLineWidth(1);
+        for (size_t i=0; i<_fragments; ++i) {
+            float c = curvature(i / static_cast<float>(_fragments), normal);
+            normal.setY(-normal.y());
+            p2 = parray1[i] - (c * 2 * _curvature_scale * normal);
+            parray2.push_back(p2);
+        }
+        for (size_t i=1; i<=_fragments; ++i) {
+            if (i % 4 == 0 || i == 1 || i == _fragments) {
+                vertices << parray1[i-1];
+                vertices << parray2[i-1];
+            }
+        }
+        for (size_t i=1; i<parray2.size(); ++i) {
+            vertices << parray2[i-1];
+            vertices << parray2[i];
+        }
+        lineshader->renderLines(vertices, _curvature_color);
+    }
+    if (_show_points) {
+        //vp.setFont("small fonts");
+        //vp.setFontSize(7);
+        //vp.setFontColor(Qt::black);
+        //vp.setBrushStyle(Qt::clear);
+        //vp.setColor(Qt::white);
+        vertices.clear();
+        for (size_t i=0; i<_nopoints; ++i) {
+            vertices << _points[i];
+            //vp.text(pt.x() + 2, pt.y(), IntToStr(i));
+        }
+        lineshader->renderPoints(vertices, QColor(Qt::white));
+    }
+    vertices.clear();
+    glLineWidth(1);
+    for (size_t i=1; i<parray1.size(); ++i) {
+        vertices << parray1[i-1];
+        vertices << parray1[i];
+    }
+    lineshader->renderLines(vertices, _color);
+}
+
+void Spline::insert_spline(size_t index, bool invert, bool duplicate_point,
 						   const Spline& source)
 {
     setBuild(false);

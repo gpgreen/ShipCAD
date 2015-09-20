@@ -436,7 +436,7 @@ SubdivisionControlFace::~SubdivisionControlFace()
     _owner->setBuild(false);
 }
 
-void SubdivisionControlFace::drawFaces(Viewport &vp, MonoFaceShader* monoshader)
+void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
 {
     // make the vertex and color buffers
     QVector<QVector3D> vertices;

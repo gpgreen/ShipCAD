@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -89,7 +89,24 @@ public:
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class MonoFaceShader : public Shader
+class FaceShader : public Shader
+{
+    Q_OBJECT
+
+public:
+
+    explicit FaceShader(Viewport* vp)
+        : Shader(vp) {}
+    virtual ~FaceShader() {}
+
+    virtual void renderMesh(QColor meshColor,
+                            QVector<QVector3D>& vertices,
+                            QVector<QVector3D>& normals) = 0;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class MonoFaceShader : public FaceShader
 {
     Q_OBJECT
 
@@ -97,6 +114,23 @@ public:
 
     explicit MonoFaceShader(Viewport* vp);
     virtual ~MonoFaceShader() {}
+
+    virtual void renderMesh(QColor meshColor,
+                            QVector<QVector3D>& vertices,
+                            QVector<QVector3D>& normals);
+
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class LightedFaceShader : public FaceShader
+{
+    Q_OBJECT
+
+public:
+
+    explicit LightedFaceShader(Viewport* vp);
+    virtual ~LightedFaceShader() {}
 
     virtual void renderMesh(QColor meshColor,
                             QVector<QVector3D>& vertices,

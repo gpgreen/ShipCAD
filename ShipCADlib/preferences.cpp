@@ -76,6 +76,8 @@ void Preferences::resetColors()
 
 void Preferences::setSurfaceColors(SubdivisionSurface& surface)
 {
+    surface._control_point_size = _point_size;
+
     surface._crease_color = _crease_color;
     surface._crease_edge_color = _crease_edge_color;
     surface._underwater_color = _underwater_color;

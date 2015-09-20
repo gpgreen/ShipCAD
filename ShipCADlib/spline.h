@@ -124,6 +124,7 @@ public:
     // drawing
     //int distance_to_cursor(int x, int y, Viewport& vp) const;
     virtual void draw(Viewport& vp, LineShader* lineshader);
+    virtual void drawStarboard(Viewport& vp, LineShader* lineshader);
 
     // getters/setters
 

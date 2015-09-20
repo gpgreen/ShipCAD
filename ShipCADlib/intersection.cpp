@@ -160,7 +160,43 @@ QString Intersection::getDescription()
 
 void Intersection::draw(Viewport& vp, LineShader* lineshader)
 {
-    // TODO
+    if (vp.getViewportMode() == vmWireFrame) {
+        if (!isBuild())
+            rebuild();
+        for (size_t i=0; i<_items.size(); i++) {
+            Spline* spline = _items.get(i);
+            spline->setColor(getColor());
+            spline->setPenStyle(Qt::SolidLine);
+            if (_intersection_type == fiStation && (vp.getViewportType() == fvProfile || vp.getViewportType() == fvPlan))
+                spline->setPenStyle(Qt::DotLine);
+            if (_intersection_type == fiButtock && (vp.getViewportType() == fvBodyplan || vp.getViewportType() == fvPlan))
+                spline->setPenStyle(Qt::DotLine);
+            if (_intersection_type == fiWaterline && (vp.getViewportType() == fvProfile || vp.getViewportType() == fvBodyplan))
+                spline->setPenStyle(Qt::DotLine);
+            if (spline->getPenStyle() == Qt::DotLine)
+                spline->setColor(QColor(0xc0, 0xc0, 0xc0)); // silver
+            spline->setCurvatureColor(_owner->getPreferences().getCurvaturePlotColor());
+            spline->setCurvatureScale(_owner->getVisibility().getCurvatureScale());
+            spline->setShowCurvature(_owner->getVisibility().isShowCurvature() && isShowCurvature());
+            // draw portside
+            bool drawit = _intersection_type == fiButtock || _intersection_type == fiWaterline || _intersection_type == fiDiagonal;
+            if (_intersection_type == fiStation)
+                drawit = vp.getViewportType() != fvBodyplan
+                        || _owner->getVisibility().getModelView() == mvBoth
+                        || spline->getMax().x() >= _owner->getProjectSettings().getMainframeLocation();
+            if (drawit) {
+                spline->draw(vp, lineshader);
+            }
+            drawit = false;
+            if (_owner->getVisibility().getModelView() == mvBoth)
+                drawit = true;
+            else if (vp.getViewportType() == fvBodyplan && spline->getMax().x() <= _owner->getProjectSettings().getMainframeLocation())
+                drawit = true;
+            if (drawit) {
+                spline->drawStarboard(vp, lineshader);
+            }
+        }
+    }
 }
 
 static void Simplify(Spline* s)

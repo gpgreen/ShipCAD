@@ -51,7 +51,7 @@ class SubdivisionControlEdge;
 class Viewport;
 class LineShader;
 class FileBuffer;
-class MonoFaceShader;
+class FaceShader;
 
 class SubdivisionFace : public SubdivisionBase
 {
@@ -311,7 +311,7 @@ public:
 
     // drawing
     virtual void draw(Viewport& vp, LineShader* lineshader);
-    virtual void drawFaces(Viewport& vp, MonoFaceShader* monoshader);
+    virtual void drawFaces(Viewport& vp, FaceShader* monoshader);
     virtual void drawCurvatureFaces(Viewport& vp, float MinCurvature, float MaxCurvature);
 
     // output

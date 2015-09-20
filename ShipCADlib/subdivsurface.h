@@ -7,7 +7,7 @@
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
  *                                                                                             *
- *    Copyright © 2005, by Martijn van Engeland                                                *
+ *    Copyright © 2005, by Martijn van Engeland                                               *
  *    e-mail                  : Info@FREEship.org                                              *
  *    FREE!ship project page  : https://sourceforge.net/projects/freeship                      *
  *    FREE!ship homepage      : www.FREEship.org                                               *
@@ -58,7 +58,7 @@ class SubdivisionLayer;
 class Viewport;
 class FileBuffer;
 class Preferences;
-class PickRay;
+struct PickRay;
     
 extern bool g_surface_verbose;
 
@@ -285,7 +285,7 @@ public:
 
     void setUnderWaterColor(const QColor& c) 
         {_underwater_color = c;}
-    
+
     // persistence
     void saveBinary(FileBuffer& destination);
     void loadBinary(FileBuffer& source);

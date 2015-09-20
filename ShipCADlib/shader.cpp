@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -90,7 +90,7 @@ void Shader::setMatrix(const QMatrix4x4& matrix)
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-static const char *vertexShaderSource =
+static const char *LineShaderVertexSource =
     "attribute highp vec4 posAttr;\n"
     "uniform highp mat4 matrix;\n"
     "uniform lowp vec4 sourceColor;\n"
@@ -100,7 +100,7 @@ static const char *vertexShaderSource =
     "   gl_Position = matrix * posAttr;\n"
     "}\n";
 
-static const char *fragmentShaderSource =
+static const char *LineShaderFragmentSource =
     "varying mediump vec4 color;\n"
     "void main() {\n"
     "   gl_FragColor = color;\n"
@@ -114,7 +114,7 @@ LineShader::LineShader(Viewport* vp)
     vector<string> unis;
     unis.push_back("sourceColor");
     attrs.push_back("posAttr");
-    initialize(vertexShaderSource, fragmentShaderSource, unis, attrs);
+    initialize(LineShaderVertexSource, LineShaderFragmentSource, unis, attrs);
 }
 
 void LineShader::renderPoints(QVector<QVector3D>& points, QColor color)
@@ -151,38 +151,38 @@ void LineShader::renderLines(QVector<QVector3D>& vertices, QColor lineColor)
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-static const char* VertexShadervmShade =
-        "attribute highp vec4 vertex;"
-        "attribute mediump vec3 normal;"
-        "uniform mediump mat4 matrix;"
-        "uniform lowp vec4 sourceColor;"
-        "varying mediump vec4 color;"
-        "void main(void)"
-        "{"
-        "    vec3 toLight = normalize(vec3(0.0, 0.3, 1.0));"
-        "    float angle = max(dot(normal, toLight), 0.0);"
-        "    vec3 col = sourceColor.rgb;"
-        "    color = vec4(col * 0.2 + col * 0.8 * angle, 1.0);"
-        "    color = clamp(color, 0.0, 1.0);"
-        "    gl_Position = matrix * vertex;"
-        "}";
+static const char* MonoShaderVertexSource =
+	"attribute highp vec4 vertex;"
+	"attribute mediump vec3 normal;"
+	"uniform mediump mat4 matrix;"
+	"uniform lowp vec4 sourceColor;"
+	"varying mediump vec4 color;"
+	"void main(void)"
+	"{"
+	"    vec3 toLight = normalize(vec3(0.0, 0.3, 1.0));"
+	"    float angle = max(dot(normal, toLight), 0.0);"
+	"    vec3 col = sourceColor.rgb;"
+	"    color = vec4(col * 0.2 + col * 0.8 * angle, 1.0);"
+	"    color = clamp(color, 0.0, 1.0);"
+	"    gl_Position = matrix * vertex;"
+	"}";
 
-static const char* FragmentShadervmShade =
-        "varying mediump vec4 color;"
-        "void main(void)"
-        "{"
-        "    gl_FragColor = color;"
-        "}";
+static const char* MonoShaderFragmentSource =
+	"varying mediump vec4 color;"
+	"void main(void)"
+	"{"
+	"    gl_FragColor = color;"
+	"}";
 
 MonoFaceShader::MonoFaceShader(Viewport* vp)
-  : Shader(vp)
+  : FaceShader(vp)
 {
     vector<string> attrs;
     vector<string> unis;
     unis.push_back("sourceColor");
     attrs.push_back("vertex");
     attrs.push_back("normal");
-    initialize(VertexShadervmShade, FragmentShadervmShade, unis, attrs);
+    initialize(MonoShaderVertexSource, MonoShaderFragmentSource, unis, attrs);
 }
 
 void MonoFaceShader::renderMesh(QColor meshColor,
@@ -197,6 +197,72 @@ void MonoFaceShader::renderMesh(QColor meshColor,
                   meshColor.greenF(),
                   meshColor.blueF(),
                   1.0f);
+
+    GLuint normalAttr = _attributes["normal"];
+    GLuint vertexAttr = _attributes["vertex"];
+
+    _program->setAttributeArray(vertexAttr, vertices.constData());
+    _program->setAttributeArray(normalAttr, normals.constData());
+    _program->enableAttributeArray(normalAttr);
+    _program->enableAttributeArray(vertexAttr);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    _program->disableAttributeArray(normalAttr);
+    _program->disableAttributeArray(vertexAttr);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+static const char* LightedShaderVertexSource =
+	"attribute vec4 vertex;"
+	"attribute vec3 normal;"
+	"uniform mat4 matrix;"
+	"varying vec3 vnormal;"
+	"varying vec3 vertex_to_light_vector;"
+	"void main(void)"
+	"{"
+	"    gl_Position = matrix * vertex;"
+	"    vnormal = vec3(matrix * vec4(normal.xyz, 1.0));"
+	"    vertex_to_light_vector = vec3(gl_LightSource[0].position - gl_Position);"
+	"}";
+
+static const char* LightedShaderFragmentSource =
+	"uniform vec4 sourceColor;"
+	"uniform vec4 diffuseColor;"
+	"varying vec3 vnormal;"
+	"varying vec3 vertex_to_light_vector;"
+	"void main(void)"
+	"{"
+	"    vec3 normalized_normal = normalize(vnormal);"
+	"    vec3 normalized_vertex_to_light = normalize(vertex_to_light_vector);"
+	"    float DiffuseTerm = clamp(dot(normalized_normal, normalized_vertex_to_light), 0.0, 1.0);"
+	"    gl_FragColor = sourceColor + diffuseColor * DiffuseTerm;"
+	"}";
+
+LightedFaceShader::LightedFaceShader(Viewport* vp)
+  : FaceShader(vp)
+{
+    vector<string> attrs;
+    vector<string> unis;
+    unis.push_back("sourceColor");
+	unis.push_back("diffuseColor");
+    attrs.push_back("vertex");
+    attrs.push_back("normal");
+    initialize(LightedShaderVertexSource, LightedShaderFragmentSource, unis, attrs);
+}
+
+void LightedFaceShader::renderMesh(QColor meshColor,
+                                QVector<QVector3D>& vertices,
+                                QVector<QVector3D>& normals)
+{
+    if (vertices.size() != normals.size())
+        throw runtime_error("vertex and normal array not same size LightedFaceShader::renderMesh");
+
+    _program->setUniformValue(_uniforms["sourceColor"],
+                  meshColor.redF(),
+                  meshColor.greenF(),
+                  meshColor.blueF(),
+                  1.0f);
+    _program->setUniformValue(_uniforms["diffuseColor"],1.0f,0.0f,0.0f,1.0f);
 
     GLuint normalAttr = _attributes["normal"];
     GLuint vertexAttr = _attributes["vertex"];

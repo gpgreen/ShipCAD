@@ -67,6 +67,9 @@ void Viewport::initialize()
 
     MonoFaceShader* monofaceshader = new MonoFaceShader(this);
     addShader("monofaceshader", monofaceshader);
+
+    LightedFaceShader* lightedfaceshader = new LightedFaceShader(this);
+    addShader("lightedfaceshader", lightedfaceshader);
 }
 
 void Viewport::setViewportMode(viewport_mode_t mode)
@@ -134,13 +137,24 @@ void Viewport::addShader(const string &name, Shader *shader)
 
 void Viewport::render()
 {
-    QColor vpcolor = _ctl->getModel()->getPreferences().getViewportColor();
     
     glViewport(0, 0, width(), height());
     
+ 	// setup the lighting
+    float ltcolor[] = {0, .3, 1.0};
+    glEnable( GL_LIGHTING );
+    glEnable( GL_LIGHT0 );
+    glLightfv(GL_LIGHT0, GL_POSITION, ltcolor);
+
+    // set to shade
+    setViewportMode(vmShade);
+    
+    // set the color of the background
+    QColor vpcolor = _ctl->getModel()->getPreferences().getViewportColor();
     glClearColor(vpcolor.redF(), vpcolor.greenF(), vpcolor.blueF(), 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
+    // draw the model
     _ctl->getModel()->draw(*this);
 
     // need to release the shader, otherwise doesn't draw right
@@ -164,7 +178,7 @@ LineShader* Viewport::setLineShader()
     return dynamic_cast<LineShader*>(_current_shader);
 }
 
-MonoFaceShader* Viewport::setMonoFaceShader()
+FaceShader* Viewport::setMonoFaceShader()
 {
     Shader* shader = _shaders["monofaceshader"];
     if (shader == _current_shader)
@@ -175,7 +189,26 @@ MonoFaceShader* Viewport::setMonoFaceShader()
     shader->setMatrix(_view->getWorld());
     _current_shader = shader;
     //cerr << "set mono face shader\n";
-    return dynamic_cast<MonoFaceShader*>(_current_shader);
+    return dynamic_cast<FaceShader*>(_current_shader);
+}
+
+FaceShader* Viewport::setLightedFaceShader()
+{
+    Shader* shader = _shaders["lightedfaceshader"];
+    if (shader == _current_shader)
+        return dynamic_cast<LightedFaceShader*>(_current_shader);
+    if (_current_shader != 0)
+        _current_shader->release();
+    shader->bind();
+    shader->setMatrix(_view->getWorld());
+    _current_shader = shader;
+    //cerr << "set lighted face shader\n";
+    return dynamic_cast<FaceShader*>(_current_shader);
+}
+
+bool Viewport::contextMenu(QMouseEvent *event)
+{
+    return false;
 }
 
 // keep track of drag state as fallows:
@@ -206,7 +239,7 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
     }
     else if (_prev_buttons.testFlag(Qt::RightButton) && !event->buttons().testFlag(Qt::RightButton)) {
         if (_drag_state == 1)
-            view_changed = _view->rightMousePick(event->pos(), width(), height());
+            view_changed = contextMenu(event);
         else
             view_changed = _view->rightMouseRelease(event->pos(), width(), height());
     }

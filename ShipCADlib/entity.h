@@ -81,10 +81,17 @@ public:
         {return _color;}
     void setColor(const QColor& col)
         {_color = col;}
+
     int getPenWidth() const
         {return _pen_width;}
     void setPenWidth(int w)
         {_pen_width=w;}
+
+    Qt::PenStyle getPenStyle() const
+        {return _pen_style;}
+    void setPenStyle(Qt::PenStyle style)
+        {_pen_style = style;}
+
     QVector3D getMin() const;
     QVector3D getMax() const;
     bool isBuild() const

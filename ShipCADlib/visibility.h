@@ -58,8 +58,21 @@ public:
     ~Visibility() {}
 
     void setCursorIncrement(float val);
+
+    /*! \brief get curvature scale
+     *
+     * \return curvature scale
+     */
+    float getCurvatureScale() const
+        {return _curvature_scale;}
+
+    /*! \brief set curvature scale
+     *
+     * \param scale curvature scale
+     */
     void setCurvatureScale(float val);
-	/*! \brief show visibility of buttocks
+
+    /*! \brief show visibility of buttocks
 	 *
 	 * \return true if buttocks shown
 	 */

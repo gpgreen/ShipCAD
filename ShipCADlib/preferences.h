@@ -62,6 +62,13 @@ public:
 
     void setSurfaceColors(SubdivisionSurface& surface);
     
+    /*! \brief get point size
+     *
+     * \return size of points
+     */
+    int getPointSize() const
+        {return _point_size;}
+
 	/*! \brief get maximum amount of undo memory
 	 *
 	 * \return max amount of undo memory in mb

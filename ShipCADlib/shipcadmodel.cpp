@@ -158,7 +158,10 @@ void ShipCADModel::rebuildModel()
     _surface.setShadeUnderWater(ps.isShadeUnderwaterShip());
     _surface.setMainframeLocation(ps.getMainframeLocation());
     _surface.setUnderWaterColor(ps.getUnderWaterColor());
-
+    if (ps.isShadeUnderwaterShip()) {
+        Plane pln(0, 0, 1.0f, -(findLowestHydrostaticsPoint() + ps.getDraft()));
+        _surface.setWaterlinePlane(pln);
+    }
     _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
     _surface.rebuild();
 
@@ -260,15 +263,108 @@ size_t ShipCADModel::getUndoMemory()
 	return mem_used;
 }
 
+void ShipCADModel::drawGrid(Viewport& vp, LineShader* lineshader)
+{
+
+}
+
+struct draw_intersection
+{
+    Viewport& _vp;
+    LineShader* _ls;
+    draw_intersection(Viewport& vp, LineShader* lineshader)
+        : _vp(vp), _ls(lineshader)
+    {}
+    void operator()(Intersection* itsection)
+    {
+        itsection->draw(_vp, _ls);
+    }
+};
+
 void ShipCADModel::draw(Viewport& vp)
 {
+    LineShader* lineshader = vp.setLineShader();
+    draw_intersection di(vp, lineshader);
+    // draw intersection lines BEFORE the surface is drawn
+    // so that the controlnet appears on top
+    // but the intersections that should be drawn last depends on the view
+    if (vp.getViewportType() != fvPerspective) {
+        if (_vis.isShowGrid())
+            drawGrid(vp, lineshader);
+        else {
+            if (vp.getViewportType() != fvBodyplan && _vis.isShowStations()) {
+                for_each(_stations.begin(), _stations.end(), di);
+            }
+            if (vp.getViewportType() != fvProfile && _vis.isShowButtocks()) {
+                for_each(_buttocks.begin(), _buttocks.end(), di);
+            }
+            if (vp.getViewportType() != fvPlan && _vis.isShowWaterlines()) {
+                for_each(_waterlines.begin(), _waterlines.end(), di);
+            }
+            if (_vis.isShowDiagonals()) {
+                for_each(_diagonals.begin(), _diagonals.end(), di);
+            }
+        }
+        if (vp.getViewportType() == fvBodyplan && _vis.isShowStations()) {
+            for_each(_stations.begin(), _stations.end(), di);
+        }
+        if (vp.getViewportType() == fvProfile && _vis.isShowButtocks()) {
+            for_each(_buttocks.begin(), _buttocks.end(), di);
+        }
+        if (vp.getViewportType() == fvPlan && _vis.isShowWaterlines()) {
+            for_each(_waterlines.begin(), _waterlines.end(), di);
+        }
+        if (vp.getViewportType() != fvBodyplan && _vis.isShowDiagonals()) {
+            for_each(_diagonals.begin(), _diagonals.end(), di);
+        }
+    } else {
+        if (_vis.isShowStations()) {
+            for_each(_stations.begin(), _stations.end(), di);
+        }
+        if (_vis.isShowButtocks()) {
+            for_each(_buttocks.begin(), _buttocks.end(), di);
+        }
+        if (_vis.isShowWaterlines()) {
+            for_each(_waterlines.begin(), _waterlines.end(), di);
+        }
+        if (_vis.isShowDiagonals()) {
+            for_each(_diagonals.begin(), _diagonals.end(), di);
+        }
+    }
     // draw markers
     if (_vis.isShowMarkers() && vp.getViewportMode() == vmWireFrame) {
-        LineShader* lineshader = vp.setLineShader();
         for (size_t i=0; i<_markers.size(); i++)
             _markers.get(i)->draw(vp, lineshader);
     }
     getSurface()->draw(vp);
+    if (vp.getViewportType() != fvPerspective && vp.getViewportMode() != vmWireFrame && _vis.isShowGrid()) {
+        // shaded viewport is a special case when visibility.drawgrid is true
+        LineShader* lineshader1 = vp.setLineShader();
+        draw_intersection di1(vp, lineshader1);
+        if (_vis.isShowStations()) {
+            for_each(_stations.begin(), _stations.end(), di);
+        }
+        if (_vis.isShowButtocks()) {
+            for_each(_buttocks.begin(), _buttocks.end(), di);
+        }
+        if (_vis.isShowWaterlines()) {
+            for_each(_waterlines.begin(), _waterlines.end(), di);
+        }
+        if (_vis.isShowDiagonals()) {
+            for_each(_diagonals.begin(), _diagonals.end(), di);
+        }
+    }
+    if (vp.getViewportMode() == vmWireFrame && _vis.isShowHydroData()) {
+        // TODO
+    }
+    if (_vis.isShowFlowlines()) {
+        // TODO
+    }
+    if (vp.getViewportMode() == vmShadeGauss && getSurface()->numberOfControlFaces() > 0
+            && (getSurface()->getMaxGausCurvature() - getSurface()->getMinGausCurvature()) > 1E-7) {
+        // Draw legend with gaussian curvature values
+        //TODO
+    }
 }
 
 void ShipCADModel::loadBinary(FileBuffer& source)

@@ -89,6 +89,13 @@ public:
      */
     void setPlane(const Plane& pln);
     
+    /*! \brief show intersection curvature
+     *
+     * \return true if intersection curvature shown
+     */
+    bool isShowCurvature() const
+        {return _show_curvature;}
+
     QString getDescription();
     intersection_type_t getIntersectionType()
         {return _intersection_type;}

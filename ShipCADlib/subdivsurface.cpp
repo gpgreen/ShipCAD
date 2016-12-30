@@ -45,6 +45,8 @@
 #include "filebuffer.h"
 #include "utility.h"
 #include "version.h"
+#include "controlfacegrid.h"
+#include "pointgrid.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -188,7 +190,6 @@ SubdivisionLayer* SubdivisionSurface::addNewLayer()
     return result;
 }
 
-// used in assembleFacesToPatches
 SubdivisionControlFace* SubdivisionSurface::getControlFace(SubdivisionPoint* p1,
                                                            SubdivisionPoint* p2,
                                                            SubdivisionPoint* p3,
@@ -196,8 +197,8 @@ SubdivisionControlFace* SubdivisionSurface::getControlFace(SubdivisionPoint* p1,
 {
     SubdivisionFace* face;
     SubdivisionControlFace* cface = 0;
-    for (size_t i=1; i<=p1->numberOfFaces(); ++i) {
-        face = p1->getFace(i-1);
+    for (size_t i=0; i<p1->numberOfFaces(); ++i) {
+        face = p1->getFace(i);
         if (p2->hasFace(face) && p3->hasFace(face) && p4->hasFace(face)) {
             cface = dynamic_cast<SubdivisionControlFace*>(face);
             break;
@@ -233,13 +234,551 @@ void SubdivisionSurface::findAttachedFaces(vector<SubdivisionControlFace*>& foun
     }
 }
 
-// tries to assemble quads into as few as possible rectangular patches
-void SubdivisionSurface::assembleFacesToPatches(vector<SubdivisionLayer*>& layers,
-                                                assemble_mode_t mode,
-                                                vector<SubdivisionFace*>& assembledPatches,
-                                                size_t& nAssembled)
+SubdivisionControlFace* SubdivisionSurface::findCornerFace(
+    vector<SubdivisionControlFace*>& ctrlfaces)
 {
-    // TODO: not implemented
+    SubdivisionControlFace* result = 0;
+    for (size_t i=0; i<ctrlfaces.size(); i++) {
+        SubdivisionControlFace* face = ctrlfaces[i];
+        size_t j = 0;
+        while (j < face->numberOfPoints() && result == 0) {
+            SubdivisionPoint* p = face->getPoint(j++);
+            int nfaces = 1;
+            for (size_t k=0; k<p->numberOfFaces(); ++k) {
+                SubdivisionControlFace* face2 = dynamic_cast<SubdivisionControlFace*>(p->getFace(k));
+                if (face2 != face) {
+                    vector<SubdivisionControlFace*>::iterator index = find(
+                        ctrlfaces.begin(), ctrlfaces.end(), face2);
+                    if (index != ctrlfaces.end()) {
+                        nfaces++;
+                        break;
+                    }
+                }
+            }
+            if (nfaces == 1)
+                result = face;
+        }
+    }
+    if (result == 0)
+        result = ctrlfaces.back();
+    return result;
+}
+
+bool SubdivisionSurface::validFace(SubdivisionFace* face,
+                                   vector<SubdivisionFace*>& faces,
+                                   vector<SubdivisionFace*>& tmpfaces)
+{
+    bool result = false;
+    if (face->numberOfPoints() == 4) {
+        vector<SubdivisionFace*>::iterator index = find(faces.begin(), faces.end(), face);
+        if (index != faces.end()) {
+            result = true;
+            vector<SubdivisionFace*>::iterator tindex = find(
+                tmpfaces.begin(), tmpfaces.end(), face);
+            if (tindex != tmpfaces.end())
+                return false;
+            if (tmpfaces.size() > 0) {
+                SubdivisionFace* tmp = tmpfaces.back();
+                int n = 0;
+                for (size_t j=0; j<face->numberOfPoints(); ++j) {
+                    if (tmp->indexOfPoint(face->getPoint(j)) != tmp->numberOfPoints())
+                        n++;
+                }
+                result = n > 1;
+            }
+        }
+    }
+    return result;
+}
+
+bool SubdivisionSurface::validFace(SubdivisionControlFace* face,
+                                   vector<SubdivisionControlFace*>& faces,
+                                   vector<SubdivisionControlFace*>& tmpfaces)
+{
+    bool result = false;
+    if (face->numberOfPoints() == 4) {
+        vector<SubdivisionControlFace*>::iterator index = find(
+            faces.begin(), faces.end(), face);
+        if (index != faces.end()) {
+            result = true;
+            vector<SubdivisionControlFace*>::iterator tindex = find(
+                tmpfaces.begin(), tmpfaces.end(), face);
+            if (tindex != tmpfaces.end())
+                return false;
+            if (tmpfaces.size() > 0) {
+                SubdivisionControlFace* tmp = tmpfaces.back();
+                int n = 0;
+                for (size_t j=0; j<face->numberOfPoints(); ++j) {
+                    if (tmp->indexOfPoint(face->getPoint(j)) != tmp->numberOfPoints())
+                        n++;
+                }
+                result = n > 1;
+            }
+        }
+    }
+    return result;
+}
+
+void SubdivisionSurface::doAssembleSpecial(struct PointGrid& grid,
+                                           size_t& cols, size_t& rows,
+                                           assemble_mode_t mode,
+                                           vector<SubdivisionControlFace*>& checkfaces,
+                                           vector<SubdivisionControlFace*>& faces)
+{
+    bool searchbottom = true;
+    bool searchtop = true;
+    bool searchleft = true;
+    bool searchright = true;
+    int counter = 0;
+    if (mode == amNURBS) {
+        if (!grid.getPoint(0,0)->isRegularNURBSPoint(checkfaces)) {
+            searchleft = false;
+            searchtop = false;
+        }
+        if (!grid.getPoint(rows-1,0)->isRegularNURBSPoint(checkfaces)) {
+            searchleft = false;
+            searchbottom = false;
+        }
+        if (!grid.getPoint(rows-1,cols-1)->isRegularNURBSPoint(checkfaces)) {
+            searchright = false;
+            searchbottom = false;
+        }
+        if (!grid.getPoint(0,cols-1)->isRegularNURBSPoint(checkfaces)) {
+            searchright = false;
+            searchtop = false;
+        }
+    }
+    SubdivisionControlFace* face = 0;
+    SubdivisionEdge* edge1, *edge2;
+    while ((searchbottom || searchtop || searchright || searchleft) && faces.size() > 0) {
+        if (++counter > 4)
+            counter = 1;
+        vector<SubdivisionControlFace*> tmpfaces;
+        if (counter == 1 && searchbottom) {
+            for (size_t i=2; i<=cols; i++) {
+                SubdivisionEdge* edge = edgeExists(
+                    grid.getPoint(rows-1,i-2),
+                    grid.getPoint(rows-1,i-1));
+                if (edge != 0 && !edge->isCrease()) {
+                    for (size_t j=0; j<edge->numberOfFaces(); j++) {
+                        face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
+                        if (validFace(face, faces, tmpfaces)) {
+                            tmpfaces.push_back(face);
+                            break;
+                        }
+                    }
+                }
+                if (tmpfaces.size() != i-1)
+                    break;
+            }
+            if (tmpfaces.size() == cols - 1) {
+                // search was successful
+                grid.setRows(rows+1);
+                for (size_t i=1; i<=tmpfaces.size(); i++) {
+                    face = tmpfaces[i-1];
+                    vector<SubdivisionControlFace*>::iterator index = find(
+                        faces.begin(), faces.end(), face);
+                    if (index != faces.end())
+                        faces.erase(index);
+                    size_t idx = face->indexOfPoint(grid.getPoint(rows-1,i));
+                    idx = (idx + 1) % face->numberOfPoints();
+                    if (face->getPoint(idx) == grid.getPoint(rows-1,i-1)) {
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(rows, i-1, face->getPoint(idx));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(rows, i, face->getPoint(idx));
+                    } else {
+                        idx = face->indexOfPoint(grid.getPoint(rows-1,i-1));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        if (face->getPoint(idx) == grid.getPoint(rows-1,i)) {
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(rows, i, face->getPoint(idx));
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(rows, i-1, face->getPoint(idx));
+                        }
+                    }
+                }
+                // check if the boundary edges do not switch between crease or not crease
+                bool dataOK = true;
+                if (mode == amNURBS) {
+                    edge1 = edgeExists(grid.getPoint(rows, 0),
+                                       grid.getPoint(rows-1, 0));
+                    edge2 = edgeExists(grid.getPoint(rows-1, 0),
+                                       grid.getPoint(rows-2, 0));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    edge1 = edgeExists(grid.getPoint(rows,cols-1),
+                                       grid.getPoint(rows-1, cols-1));
+                    edge2 = edgeExists(grid.getPoint(rows-1,cols-1),
+                                       grid.getPoint(rows-2, cols-1));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    if (!dataOK) {
+                        // do not add the current row
+                        for (size_t i=1; i<=tmpfaces.size(); i++)
+                            faces.push_back(tmpfaces[i-1]);
+                        searchbottom = false;
+                    } else {
+                        rows++;
+                    }
+                } else {
+                    searchbottom = false;
+                }
+            }
+        } else if (counter == 2 && searchright) {
+            for (size_t i=2; i<=rows; i++) {
+                SubdivisionEdge* edge = edgeExists(
+                    grid.getPoint(i-1,cols-1),
+                    grid.getPoint(i-2,cols-1));
+                if (edge != 0 && !edge->isCrease()) {
+                    for (size_t j=0; j<edge->numberOfFaces(); j++) {
+                        face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
+                        if (validFace(face, faces, tmpfaces)) {
+                            tmpfaces.push_back(face);
+                            break;
+                        }
+                    }
+                }
+                if (tmpfaces.size() != i-1)
+                    break;
+            }
+            if (tmpfaces.size() == rows - 1) {
+                // search was successful
+                grid.setCols(cols+1);
+                for (size_t i=1; i<=tmpfaces.size(); i++) {
+                    face = tmpfaces[i-1];
+                    vector<SubdivisionControlFace*>::iterator index = find(
+                        faces.begin(), faces.end(), face);
+                    if (index != faces.end())
+                        faces.erase(index);
+                    size_t idx = face->indexOfPoint(grid.getPoint(i-1,cols-1));
+                    idx = (idx + 1) % face->numberOfPoints();
+                    if (face->getPoint(idx) == grid.getPoint(i,cols-1)) {
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(i, cols, face->getPoint(idx));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(i-1, cols, face->getPoint(idx));
+                    } else {
+                        idx = face->indexOfPoint(grid.getPoint(i,cols-1));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        if (face->getPoint(idx) == grid.getPoint(i-1,cols-1)) {
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(i-1, cols, face->getPoint(idx));
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(i, cols, face->getPoint(idx));
+                        }
+                    }
+                }
+                // check if the boundary edges do not switch between crease or not crease
+                bool dataOK = true;
+                if (mode == amNURBS) {
+                    edge1 = edgeExists(grid.getPoint(0, cols),
+                                       grid.getPoint(0, cols-1));
+                    edge2 = edgeExists(grid.getPoint(0, cols-1),
+                                       grid.getPoint(0, cols-2));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    edge1 = edgeExists(grid.getPoint(rows-1, cols),
+                                       grid.getPoint(rows-1, cols-1));
+                    edge2 = edgeExists(grid.getPoint(rows-1, cols-1),
+                                       grid.getPoint(rows-1, cols-2));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    if (!dataOK) {
+                        // do not add the current row
+                        for (size_t i=1; i<=tmpfaces.size(); i++)
+                            faces.push_back(tmpfaces[i-1]);
+                        searchright = false;
+                    } else {
+                        cols++;
+                    }
+                } else {
+                    searchright = false;
+                }
+            }
+        } else if (counter == 3 && searchtop) {
+            for (size_t i=2; i<=cols; i++) {
+                SubdivisionEdge* edge = edgeExists(
+                    grid.getPoint(0, i-2),
+                    grid.getPoint(0, i-1));
+                if (edge != 0 && !edge->isCrease()) {
+                    for (size_t j=0; j<edge->numberOfFaces(); j++) {
+                        face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
+                        if (validFace(face, faces, tmpfaces)) {
+                            tmpfaces.push_back(face);
+                            break;
+                        }
+                    }
+                }
+                if (tmpfaces.size() != i-1)
+                    break;
+            }
+            if (tmpfaces.size() == cols - 1) {
+                // search was successful
+                grid.setRows(rows+1);
+                for (size_t i=rows; i>=1; i--) {
+                    for (size_t j=1; j<=cols; j++) {
+                        grid.setPoint(i,j-1,grid.getPoint(i-1,j-1));
+                    }
+                }
+                for (size_t i=1; i<=cols; i++)
+                    grid.setPoint(0, i-1, 0);
+                for (size_t i=1; i<=tmpfaces.size(); i++) {
+                    face = tmpfaces[i-1];
+                    vector<SubdivisionControlFace*>::iterator index = find(
+                        faces.begin(), faces.end(), face);
+                    if (index != faces.end())
+                        faces.erase(index);
+                    size_t idx = face->indexOfPoint(grid.getPoint(1,i-1));
+                    idx = (idx + 1) % face->numberOfPoints();
+                    if (face->getPoint(idx) == grid.getPoint(1,i)) {
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(0, i, face->getPoint(idx));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(0, i-1, face->getPoint(idx));
+                    } else {
+                        idx = face->indexOfPoint(grid.getPoint(1,i));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        if (face->getPoint(idx) == grid.getPoint(1,i-1)) {
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(0, i-1, face->getPoint(idx));
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(0, i, face->getPoint(idx));
+                        }
+                    }
+                }
+                // check if the boundary edges do not switch between crease or not crease
+                bool dataOK = true;
+                if (mode == amNURBS) {
+                    edge1 = edgeExists(grid.getPoint(0, 0),
+                                       grid.getPoint(1, 0));
+                    edge2 = edgeExists(grid.getPoint(1, 0),
+                                       grid.getPoint(2, 0));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    edge1 = edgeExists(grid.getPoint(0, cols-1),
+                                       grid.getPoint(1, cols-1));
+                    edge2 = edgeExists(grid.getPoint(1, cols-1),
+                                       grid.getPoint(2, cols-1));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    for (size_t i=2; i<=cols-1; i++) {
+                        if (!grid.getPoint(0,i-1)->isRegularNURBSPoint(checkfaces))
+                            dataOK = false;
+                    }
+                    if (!dataOK) {
+                        // do not add the current row
+                        for (size_t i=1; i<=tmpfaces.size(); i++)
+                            faces.push_back(tmpfaces[i-1]);
+                        searchtop = false;
+                        for (size_t i=1; i<=rows; i++) {
+                            for (size_t j=1; j<=cols; j++) {
+                                grid.setPoint(i-1,j-1,grid.getPoint(i,j-1));
+                            }
+                        }
+                    } else {
+                        rows++;
+                    }
+                } else {
+                    searchtop = false;
+                }
+            }
+        } else if (counter == 4 && searchleft) {
+            for (size_t i=2; i<=rows; i++) {
+                SubdivisionEdge* edge = edgeExists(
+                    grid.getPoint(i-2, 0),
+                    grid.getPoint(i-1, 0));
+                if (edge != 0 && !edge->isCrease()) {
+                    for (size_t j=0; j<edge->numberOfFaces(); j++) {
+                        face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
+                        if (validFace(face, faces, tmpfaces)) {
+                            tmpfaces.push_back(face);
+                            break;
+                        }
+                    }
+                }
+                if (tmpfaces.size() != i-1)
+                    break;
+            }
+            if (tmpfaces.size() == rows - 1) {
+                // search was successful
+                grid.setCols(cols+1);
+                for (size_t i=1; i<=rows; i++) {
+                    for (size_t j=cols; j>=1; j--)
+                        grid.setPoint(i-1,j,grid.getPoint(i-1,j-1));
+                }
+                for (size_t i=1; i<=tmpfaces.size(); i++) {
+                    face = tmpfaces[i-1];
+                    vector<SubdivisionControlFace*>::iterator index = find(faces.begin(), faces.end(), face);
+                    if (index != faces.end())
+                        faces.erase(index);
+                    size_t idx = face->indexOfPoint(grid.getPoint(i,1));
+                    idx = (idx + 1) % face->numberOfPoints();
+                    if (face->getPoint(idx) == grid.getPoint(i-1,1)) {
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(i-1, 0, face->getPoint(idx));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        grid.setPoint(i, 0, face->getPoint(idx));
+                    } else {
+                        idx = face->indexOfPoint(grid.getPoint(i-1,1));
+                        idx = (idx + 1) % face->numberOfPoints();
+                        if (face->getPoint(idx) == grid.getPoint(i,1)) {
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(i, 0, face->getPoint(idx));
+                            idx = (idx + 1) % face->numberOfPoints();
+                            grid.setPoint(i-1, 0, face->getPoint(idx));
+                        }
+                    }
+                }
+                // check if the boundary edges do not switch between crease or not crease
+                bool dataOK = true;
+                if (mode == amNURBS) {
+                    edge1 = edgeExists(grid.getPoint(0, 0),
+                                       grid.getPoint(0, 1));
+                    edge2 = edgeExists(grid.getPoint(0, 1),
+                                       grid.getPoint(0, 2));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    edge1 = edgeExists(grid.getPoint(rows-1, 0),
+                                       grid.getPoint(rows-1, 1));
+                    edge2 = edgeExists(grid.getPoint(rows-1, 1),
+                                       grid.getPoint(rows-1, 2));
+                    if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
+                        dataOK = false;
+                    for (size_t i=2; i<=rows-1; i++) {
+                        if (!grid.getPoint(i-2,0)->isRegularNURBSPoint(checkfaces))
+                            dataOK = false;
+                    }
+                    if (!dataOK) {
+                        // do not add the current row
+                        for (size_t i=1; i<=tmpfaces.size(); i++)
+                            faces.push_back(tmpfaces[i-1]);
+                        searchleft = false;
+                        for (size_t i=1; i<=rows; i++) {
+                            for (size_t j=1; j<=cols; j++) {
+                                grid.setPoint(i-1,j-1,grid.getPoint(i-1,j));
+                            }
+                        }
+                    } else {
+                        cols++;
+                    }
+                } else {
+                    searchleft = false;
+                }
+            }
+        }
+        if (mode == amNURBS) {
+            if (!grid.getPoint(0,0)->isRegularNURBSPoint(checkfaces)) {
+                searchleft = false;
+                searchtop = false;
+            }
+            if (!grid.getPoint(rows-1,0)->isRegularNURBSPoint(checkfaces)) {
+                searchleft = false;
+                searchbottom = false;
+            }
+            if (!grid.getPoint(rows-1,cols-1)->isRegularNURBSPoint(checkfaces)) {
+                searchright = false;
+                searchbottom = false;
+            }
+            if (!grid.getPoint(0,cols-1)->isRegularNURBSPoint(checkfaces)) {
+                searchright = false;
+                searchtop = false;
+            }
+        }
+    }
+}
+
+void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
+                                       vector<SubdivisionControlFace*>& ctrlfaces,
+                                       vector<ControlFaceGrid>& assembled)
+{
+    size_t rows, cols;
+    int errind;
+    
+    vector<SubdivisionControlFace*> checkfaces(ctrlfaces.size());
+    for (size_t i=0; i<ctrlfaces.size(); i++)
+        checkfaces.push_back(ctrlfaces[i]);
+    while (ctrlfaces.size() > 0) {
+        // find a corner face
+        SubdivisionControlFace* face = findCornerFace(ctrlfaces);
+        errind++;
+        if (face != 0) {
+
+            ControlFaceGrid newfacegrid;
+            PointGrid grid;
+            
+            vector<SubdivisionControlFace*>::iterator index = find(
+                ctrlfaces.begin(), ctrlfaces.end(), face);
+            if (index != ctrlfaces.end())
+                ctrlfaces.erase(index);
+            if (face->numberOfPoints() == 4) {
+                cols = 2;
+                rows = 2;
+                grid.setRows(2);
+                grid.setCols(2);
+                grid.setPoint(0,1,face->getPoint(0));
+                grid.setPoint(0,0,face->getPoint(1));
+                grid.setPoint(1,0,face->getPoint(2));
+                grid.setPoint(1,1,face->getPoint(3));
+                doAssembleSpecial(grid, cols, rows, mode, checkfaces, ctrlfaces);
+
+                newfacegrid.setRows(rows - 1);
+                newfacegrid.setCols(cols - 1);
+                for (size_t i=2; i<=rows; i++) {
+                    for (size_t j=2; j<=cols; j++) {
+                        SubdivisionControlFace* face = getControlFace(
+                            grid.getPoint(i-2, j-1),
+                            grid.getPoint(i-2, j-2),
+                            grid.getPoint(i-1, j-2),
+                            grid.getPoint(i-1, j-1));
+                        if (face != 0)
+                            newfacegrid.setFace(i-2, j-2, face);
+                        // elseraise exception
+                    }
+                }
+                assembled.push_back(newfacegrid);
+            } else {
+                newfacegrid.setRows(1);
+                newfacegrid.setCols(1);
+                newfacegrid.setFace(0, 0, face);
+                assembled.push_back(newfacegrid);
+            }
+        }
+    }
+}
+
+// tries to assemble quads into as few as possible rectangular patches
+void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
+                                                vector<ControlFaceGrid>& assembledPatches)
+{
+    vector<SubdivisionControlFace*> todo;
+    vector<vector<SubdivisionControlFace*>* > done;
+
+    // use all visible faces
+    for (size_t i=0; i<numberOfLayers(); i++) {
+        SubdivisionLayer* layer = getLayer(i);
+        if (layer->isVisible()) {
+            for (size_t j=0; j<layer->numberOfFaces(); j++)
+                todo.push_back(layer->getFace(j));
+        }
+    }
+    if (todo.size() > 0) {
+        while (todo.size() > 0) {
+            SubdivisionControlFace* face = todo.back();
+            todo.erase(todo.end());
+            vector<SubdivisionControlFace*>* current = new vector<SubdivisionControlFace*>();
+            current->push_back(face);
+            findAttachedFaces(*current, todo, face);
+            done.push_back(current);
+        }
+        // assign all groups to different layers
+        for (size_t i=0; i<done.size(); i++) {
+            vector<SubdivisionControlFace*>* current = done[i];
+            if (current->size() > 0)
+                assembleFaces(mode, *current, assembledPatches);
+            delete current;
+        }
+    }
 }
 
 void SubdivisionSurface::calculateGaussCurvature()
@@ -912,35 +1451,6 @@ void SubdivisionSurface::clearSelection()
     _sel_control_points.clear();
 }
 
-bool SubdivisionSurface::validFace(SubdivisionFace* face,
-                                   vector<SubdivisionFace*>& faces,
-                                   vector<SubdivisionFace*>& tmpfaces)
-{
-    bool result = false;
-    if (face->numberOfPoints() == 4) {
-        vector<SubdivisionFace*>::iterator i = find(faces.begin(), faces.end(), face);
-        if (i != faces.end()) {
-            result = true;
-            for (size_t i=1; i<=tmpfaces.size(); ++i) {
-                if (tmpfaces[i-1] == face) {
-                    return false;
-                }
-            }
-            if (tmpfaces.size() > 0) {
-                // must also be connected to previous face
-                SubdivisionFace* tmp = tmpfaces.back();
-                size_t n = 0;
-                for (size_t j=1; j<=face->numberOfPoints(); ++j) {
-                    if (tmp->indexOfPoint(face->getPoint(j-1)))
-                        ++n;
-                }
-                result = n > 1;
-            }
-        }
-    }
-    return result;
-}
-
 void SubdivisionSurface::doAssemble(grid_t& grid, 
                                     size_t& cols,
                                     size_t& rows,
@@ -979,8 +1489,8 @@ void SubdivisionSurface::doAssemble(grid_t& grid,
             if (tmpfaces.size() == cols - 1) {
                 // search was successfull
                 for (size_t i=1; i<=tmpfaces.size(); ++i) {
-		  vector<SubdivisionPoint*> newrow;
-		  newrow.reserve(cols);
+                    vector<SubdivisionPoint*> newrow;
+                    newrow.reserve(cols);
                     for (size_t j=0; j<cols; ++j)
                         newrow.push_back(static_cast<SubdivisionPoint*>(0));
                     grid.push_back(newrow);
@@ -2346,7 +2856,8 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 	if (face1 == 0 || face2 == 0)
 		return;
 	
-	SubdivisionControlPoint* s,*e;
+    SubdivisionControlPoint* s = 0;
+    SubdivisionControlPoint* e = 0;
 	SubdivisionPoint* p1, *p2;
 	
 	if (collapseedge->startPoint()->numberOfEdges() > 2
@@ -2453,9 +2964,9 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 	deleteControlFace(face2);
 
 	// check if startpoint and endpoint can be collapsed as well
-	if (s->numberOfFaces() > 1 && s->numberOfEdges() == 2)
+    if (s != 0 && s->numberOfFaces() > 1 && s->numberOfEdges() == 2)
 		s->collapse();
-	if (e->numberOfFaces() > 1 && e->numberOfEdges() == 2)
+    if (e != 0 && e->numberOfFaces() > 1 && e->numberOfEdges() == 2)
 		e->collapse();
 	setBuild(false);
 	// BUGBUG: pascal deletes edge here, but we can't do that...

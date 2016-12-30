@@ -63,7 +63,8 @@ SubdivisionFace::SubdivisionFace(SubdivisionSurface* owner)
 
 size_t SubdivisionFace::indexOfPoint(SubdivisionPoint* pt)
 {
-    return _owner->indexOfPoint(pt);
+    vector<SubdivisionPoint*>::iterator i = find(_points.begin(), _points.end(), pt);
+    return i - _points.begin();
 }
 
 void SubdivisionFace::insertPoint(size_t index, SubdivisionPoint *point)

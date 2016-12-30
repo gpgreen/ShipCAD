@@ -18,8 +18,6 @@ ShipCADModel:
   a lot of methods
 Spline:
   draw doesn't do show points
-SubdivisionSurface:
-  assembleFacesToPatches
 NurbSurface:
   all methods
 Flowline:

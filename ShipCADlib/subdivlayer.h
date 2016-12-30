@@ -54,6 +54,8 @@ struct LayerProperties
     float surface_area;
     float weight;
     QVector3D surface_center_of_gravity;
+    LayerProperties() : surface_area(0), weight(0) 
+        {}
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

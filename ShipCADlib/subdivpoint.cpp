@@ -289,6 +289,37 @@ bool SubdivisionPoint::isRegularNURBSPoint(vector<SubdivisionFace*>& faces)
     return result;
 }
 
+bool SubdivisionPoint::isRegularNURBSPoint(vector<SubdivisionControlFace*>& faces)
+{
+    bool result = false;
+    if (_vtype == svRegular || _vtype == svDart)
+        result = (_faces.size() == 4);
+    else if (_vtype == svCrease) {
+        if (_faces.size() != 0) {
+            int n = 0;
+            for (size_t i=0; i<_faces.size(); ++i) {
+                if (find(faces.begin(), faces.end(), _faces[i]) != faces.end())
+                    n++;
+            }
+            result = (n == 2);
+            if (n == 2 && _faces.size() != 4)
+                result = true;
+        }
+        else {
+            // boundary edge ?
+            bool boundary = false;
+            for (size_t i=0; i<_edges.size(); ++i) {
+                boundary = boundary || _edges[i]->numberOfFaces() == 1;
+            }
+            if (boundary)
+                result = _faces.size() == 2;
+            else
+                result = _faces.size() == 4;
+        }
+    }
+    return result;
+}
+
 void SubdivisionPoint::setCoordinate(const QVector3D& val)
 {
     _coordinate = val;

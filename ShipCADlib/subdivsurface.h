@@ -59,6 +59,8 @@ class Viewport;
 class FileBuffer;
 class Preferences;
 struct PickRay;
+struct ControlFaceGrid;
+struct PointGrid;
     
 extern bool g_surface_verbose;
 
@@ -93,10 +95,8 @@ public:
     // modifiers
 
     // tries to assemble quads into as few as possible rectangular patches
-    void assembleFacesToPatches(std::vector<SubdivisionLayer*>& layers,
-                                assemble_mode_t mode,
-                                std::vector<SubdivisionFace*>& assembledPatches,
-                                size_t& nAssembled);
+    void assembleFacesToPatches(assemble_mode_t mode,
+                                std::vector<ControlFaceGrid>& assembledPatches);
     void calculateGaussCurvature();
     void clearSelection();
     void convertToGrid(face_grid_t& input, grid_t& grid);
@@ -321,14 +321,31 @@ protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;
     SubdivisionControlPoint* newControlPoint(const QVector3D& p);
+    // used in assembleFacesToPatches
     void findAttachedFaces(std::vector<SubdivisionControlFace*>& found_list,
                            std::vector<SubdivisionControlFace*>& todo_list,
                            SubdivisionControlFace* face);
+    SubdivisionControlFace* findCornerFace(std::vector<SubdivisionControlFace*>& ctrlfaces);
+    // used in doAssemble
     bool validFace(SubdivisionFace* face,
                    std::vector<SubdivisionFace*>& faces,
                    std::vector<SubdivisionFace*>& tmpfaces);
+    // used in doAssembleSpecial
+    bool validFace(SubdivisionControlFace* face,
+                   std::vector<SubdivisionControlFace*>& faces,
+                   std::vector<SubdivisionControlFace*>& tmpfaces);
+    // used in convertToGrid
     void doAssemble(grid_t& grid, size_t& cols, size_t& rows,
                     std::vector<SubdivisionFace*>& faces);
+    // used in assembleFaces
+    void doAssembleSpecial(struct PointGrid& grid, size_t& cols, size_t& rows,
+                           assemble_mode_t mode,
+                           std::vector<SubdivisionControlFace*>& checkfaces,
+                           std::vector<SubdivisionControlFace*>& faces);
+    // used in assembleFacesToPatches
+    void assembleFaces(assemble_mode_t mode,
+                       std::vector<SubdivisionControlFace*>& ctrlfaces,
+                       std::vector<ControlFaceGrid>& assembled);
     void sortEdges(std::vector<SubdivisionEdge*>& edges);
     std::vector<SubdivisionPoint*> sortEdges(bool always_true, std::vector<SubdivisionEdge*>& edges);
     std::vector<SubdivisionControlPoint*> sortEdges(std::vector<SubdivisionControlEdge*>& edges);

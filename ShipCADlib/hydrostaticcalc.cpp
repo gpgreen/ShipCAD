@@ -595,7 +595,7 @@ bool HydrostaticCalc::balance(float displacement, bool freetotrim,
 	float sin_trim;
     float error = 0;
     float trim_error = 0;
-    float error_difference;
+    float error_difference = 0;
 	float prev_error;
 	Plane wlplane;
 	MinMaxData mmd;

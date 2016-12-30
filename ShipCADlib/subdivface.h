@@ -142,10 +142,10 @@ public:
 	 * or the number of face points is less than 3
 	 */
     SubdivisionPoint* calculateFacePoint();
-	/*! \brief get index of point in parent surface
+	/*! \brief get index of point for this face
 	 *
-	 * \param pt point to find in parent surface
-	 * \return index of that point in parent surface
+	 * \param pt point to find in face
+	 * \return index of that point in face, same as numberOfPoints if point not in face
 	 */
     size_t indexOfPoint(SubdivisionPoint* pt);
 	/*! \brief calculate the area of this face

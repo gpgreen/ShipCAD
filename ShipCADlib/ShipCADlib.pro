@@ -77,7 +77,9 @@ HEADERS += shipcadlib.h \
     resistance.h \
     backgroundimage.h \
     pointervec.h \
-    controller.h
+    controller.h \
+    pointgrid.h \
+    controlfacegrid.h
 
 unix:!symbian {
     maemo5 {

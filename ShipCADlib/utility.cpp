@@ -333,7 +333,6 @@ void ShipCAD::JoinSplineSegments(float join_error,
         if (fixed->numberOfPoints() > 1 && !fixedclosed) {
             float nearestdist = 1E30f;
             nearest = 0;
-            int matchindex = -1;
             for (size_t j=1; j<=list.size(); ++j) {
                 if (i == j)
                     continue;
@@ -351,7 +350,6 @@ void ShipCAD::JoinSplineSegments(float join_error,
                     if (min < nearestdist) {
                         nearestdist = min;
                         nearest = match;
-                        matchindex = j;
                         if (min < 1E-5)
                             break;
                     }

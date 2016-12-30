@@ -44,6 +44,7 @@ namespace ShipCAD {
 
 class SubdivisionFace;
 class SubdivisionEdge;
+class SubdivisionControlFace;
 class FileBuffer;
 class Viewport;
 struct PickRay;
@@ -159,6 +160,7 @@ public:
     bool isRegularPoint();
     QVector3D getLimitPoint();
     bool isRegularNURBSPoint(std::vector<SubdivisionFace*>& faces);
+    bool isRegularNURBSPoint(std::vector<SubdivisionControlFace*>& faces);
     size_t indexOfFace(SubdivisionFace* face);
     bool hasEdge(SubdivisionEdge* edge);
     bool hasFace(SubdivisionFace* face);

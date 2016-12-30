@@ -35,8 +35,6 @@ $<$ std\-::vector$<$ Q\-Vector3\-D $>$ $>$ \hyperlink{classShipCAD_1_1Subdivisio
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_a5598e484d5deddfa353ddc4f02d3b004}{changed\-Layer\-Data} ()
 \item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_aad7f3abd89252d503b7d21ca306436d4}{change\-Active\-Layer} ()
-\item 
-void \hyperlink{classShipCAD_1_1SubdivisionSurface_a83bf6f16944165a6e96a1f9387b783e7}{select\-Item} (\hyperlink{classShipCAD_1_1SubdivisionBase}{Subdivision\-Base} $\ast$)
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -53,7 +51,10 @@ virtual void \hyperlink{classShipCAD_1_1SubdivisionSurface_a259856fc21f2bc1eebbc
 \item 
 virtual void \hyperlink{classShipCAD_1_1SubdivisionSurface_aec5073750762d1f8c3ab2107a742f4a5}{set\-Build} (bool val)
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionSurface_ad140279118fab3343a6aee5e544814ec}{assemble\-Faces\-To\-Patches} (std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\-Layer} $\ast$ $>$ \&layers, \hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20}{assemble\-\_\-mode\-\_\-t} mode, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \&assembled\-Patches, size\-\_\-t \&n\-Assembled)
+std\-::multimap$<$ float, \\*
+\hyperlink{classShipCAD_1_1SubdivisionBase}{Subdivision\-Base} $\ast$ $>$ \hyperlink{classShipCAD_1_1SubdivisionSurface_ae04c14926cffce82e2ca6f0566484684}{shoot\-Pick\-Ray} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, const \hyperlink{structShipCAD_1_1PickRay}{Pick\-Ray} \&ray)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionSurface_ab14892e66e800a795e1af3dcc781af02}{assemble\-Faces\-To\-Patches} (\hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20}{assemble\-\_\-mode\-\_\-t} mode, std\-::vector$<$ \hyperlink{structShipCAD_1_1ControlFaceGrid}{Control\-Face\-Grid} $>$ \&assembled\-Patches)
 \item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_a3aa7c4fd1fa84170a59e6c0549573c92}{calculate\-Gauss\-Curvature} ()
 \item 
@@ -239,6 +240,8 @@ size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionSurface_a3af3a30b53d867b2b25f9
 \item 
 \hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\-Layer} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionSurface_a5bf8f452664e17dae636d4b66a66eba9}{add\-New\-Layer} ()
 \item 
+Q\-String \hyperlink{classShipCAD_1_1SubdivisionSurface_aaefc455563a01176551f61e583f0555f}{get\-Default\-Layer\-Name} ()
+\item 
 \hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817}{subdiv\-\_\-mode\-\_\-t} \hyperlink{classShipCAD_1_1SubdivisionSurface_a77ac47de5e6323271f45be37223fe82b}{get\-Subdivision\-Mode} ()
 \item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_a048dce00d2ff87aa5b31319ea41f565a}{set\-Subdivision\-Mode} (\hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817}{subdiv\-\_\-mode\-\_\-t} val)
@@ -317,6 +320,8 @@ Q\-Color \hyperlink{classShipCAD_1_1SubdivisionSurface_a2a5e9c50d43e72829e02a8c0
 \item 
 Q\-Color \hyperlink{classShipCAD_1_1SubdivisionSurface_aa39747141685b52d3987cf6c9f4e2aa8}{get\-Curvature\-Color} ()
 \item 
+void \hyperlink{classShipCAD_1_1SubdivisionSurface_a0b6eee9984eefa4b0c3d1f229eb474ed}{set\-Under\-Water\-Color} (const Q\-Color \&c)
+\item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_a6e6254ecc6fcbdadf1ff4f646caa1d59}{save\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&destination)
 \item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_ac8ad644e0c19ac180fd4a7368fa410a6}{load\-Binary} (\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \&source)
@@ -364,9 +369,17 @@ void \hyperlink{classShipCAD_1_1SubdivisionSurface_a5c88eb988cc6a439242264bc54a6
 \item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_a3163cfd01e0454ecb9dbb088dc76fbc6}{find\-Attached\-Faces} (std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&found\-\_\-list, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&todo\-\_\-list, \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$face)
 \item 
+\hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionSurface_a817d44176e659c2ccb4835d8240582db}{find\-Corner\-Face} (std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&ctrlfaces)
+\item 
 bool \hyperlink{classShipCAD_1_1SubdivisionSurface_a5b6204bb0648f2e85cbf07ffbac4bd42}{valid\-Face} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \&faces, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \&tmpfaces)
 \item 
+bool \hyperlink{classShipCAD_1_1SubdivisionSurface_a9235b2787dfaaaa3d5f843c8046d1a9e}{valid\-Face} (\hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$face, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&faces, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&tmpfaces)
+\item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_ac322d8008ea13bc3ca3fd1baeab7e1b3}{do\-Assemble} (\hyperlink{classShipCAD_1_1SubdivisionSurface_a69d4a3ca038ee247d0abcffa6125df95}{grid\-\_\-t} \&grid, size\-\_\-t \&cols, size\-\_\-t \&rows, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \&faces)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionSurface_a976e9b68dcbec8f6b424429a7e3c7e50}{do\-Assemble\-Special} (struct \hyperlink{structShipCAD_1_1PointGrid}{Point\-Grid} \&grid, size\-\_\-t \&cols, size\-\_\-t \&rows, \hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20}{assemble\-\_\-mode\-\_\-t} mode, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&checkfaces, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&faces)
+\item 
+void \hyperlink{classShipCAD_1_1SubdivisionSurface_ab16b7b0697217616046ded3849af1f52}{assemble\-Faces} (\hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20}{assemble\-\_\-mode\-\_\-t} mode, std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-Face} $\ast$ $>$ \&ctrlfaces, std\-::vector$<$ \hyperlink{structShipCAD_1_1ControlFaceGrid}{Control\-Face\-Grid} $>$ \&assembled)
 \item 
 void \hyperlink{classShipCAD_1_1SubdivisionSurface_a2b270b878bb810d51bd7adf689db5366}{sort\-Edges} (std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \&edges)
 \item 
@@ -494,13 +507,17 @@ boost\-::pool \hyperlink{classShipCAD_1_1SubdivisionSurface_a7a7e25c91a06ca2b3f3
 \item 
 boost\-::pool \hyperlink{classShipCAD_1_1SubdivisionSurface_a2f746c1c19594b1baa03e9c49c9ffd0a}{\-\_\-face\-\_\-pool}
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classShipCAD_1_1SubdivisionSurface_aac5731b90dac5ab98f6153447ce63674}{Preferences}
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 68 of file subdivsurface.\-h.
+Definition at line 73 of file subdivsurface.\-h.
 
 
 
@@ -510,28 +527,28 @@ Definition at line 68 of file subdivsurface.\-h.
 \subsubsection[{control\-\_\-grid\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<$std\-::vector$<${\bf Subdivision\-Control\-Point}$\ast$$>$ $>$ {\bf Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::control\-\_\-grid\-\_\-t}}}\label{classShipCAD_1_1SubdivisionSurface_ae53cacefe98ce33992a05f941f4ff4ee}
 
 
-Definition at line 76 of file subdivsurface.\-h.
+Definition at line 81 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8ed657cb7d4cd34662bd2d3e949d3e3b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!coordinate\-\_\-grid\-\_\-t@{coordinate\-\_\-grid\-\_\-t}}
 \index{coordinate\-\_\-grid\-\_\-t@{coordinate\-\_\-grid\-\_\-t}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{coordinate\-\_\-grid\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<$std\-::vector$<$Q\-Vector3\-D$>$ $>$ {\bf Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::coordinate\-\_\-grid\-\_\-t}}}\label{classShipCAD_1_1SubdivisionSurface_a8ed657cb7d4cd34662bd2d3e949d3e3b}
 
 
-Definition at line 77 of file subdivsurface.\-h.
+Definition at line 82 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a26a7d7b71acd662b1014ab39af4ee343}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!face\-\_\-grid\-\_\-t@{face\-\_\-grid\-\_\-t}}
 \index{face\-\_\-grid\-\_\-t@{face\-\_\-grid\-\_\-t}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{face\-\_\-grid\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<$std\-::vector$<${\bf Subdivision\-Control\-Face}$\ast$$>$ $>$ {\bf Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::face\-\_\-grid\-\_\-t}}}\label{classShipCAD_1_1SubdivisionSurface_a26a7d7b71acd662b1014ab39af4ee343}
 
 
-Definition at line 74 of file subdivsurface.\-h.
+Definition at line 79 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a69d4a3ca038ee247d0abcffa6125df95}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!grid\-\_\-t@{grid\-\_\-t}}
 \index{grid\-\_\-t@{grid\-\_\-t}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{grid\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef std\-::vector$<$std\-::vector$<${\bf Subdivision\-Point}$\ast$$>$ $>$ {\bf Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::grid\-\_\-t}}}\label{classShipCAD_1_1SubdivisionSurface_a69d4a3ca038ee247d0abcffa6125df95}
 
 
-Definition at line 75 of file subdivsurface.\-h.
+Definition at line 80 of file subdivsurface.\-h.
 
 
 
@@ -545,7 +562,7 @@ Definition at line 75 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1SubdivisionSurface_a507ea9cd5354e1d14fe24d52da505934}
 
 
-Definition at line 56 of file subdivsurface.\-cpp.
+Definition at line 60 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a4f1b66a4d9e9f8ac3dbd956e2113a594}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!$\sim$\-Subdivision\-Surface@{$\sim$\-Subdivision\-Surface}}
 \index{$\sim$\-Subdivision\-Surface@{$\sim$\-Subdivision\-Surface}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -556,7 +573,7 @@ Definition at line 56 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionSurface_a4f1b66a4d9e9f8ac3dbd956e2113a594}
 
 
-Definition at line 82 of file subdivsurface.\-cpp.
+Definition at line 90 of file subdivsurface.\-cpp.
 
 
 
@@ -570,7 +587,7 @@ Definition at line 82 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa01ccc2ce7417960ca13075e38eb98e6}
 
 
-Definition at line 729 of file subdivsurface.\-cpp.
+Definition at line 1294 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a976358235d20a0fdc83248948bb9cf48}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Edge@{add\-Control\-Edge}}
 \index{add\-Control\-Edge@{add\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -582,7 +599,7 @@ Definition at line 729 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a976358235d20a0fdc83248948bb9cf48}
 
 
-Definition at line 715 of file subdivsurface.\-cpp.
+Definition at line 1280 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_acfec50abf57a44ed47038ecc55f5a600}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Edge@{add\-Control\-Edge}}
 \index{add\-Control\-Edge@{add\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -600,7 +617,7 @@ Definition at line 715 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_abbbb7422a86771451034d2fb7a76bb26}
 
 
-Definition at line 387 of file subdivsurface.\-cpp.
+Definition at line 932 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a7c83a514f43b868b5fa286f3bc05a41e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Face@{add\-Control\-Face}}
 \index{add\-Control\-Face@{add\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -611,7 +628,7 @@ Definition at line 387 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a7c83a514f43b868b5fa286f3bc05a41e}
 
 
-Definition at line 632 of file subdivsurface.\-cpp.
+Definition at line 1197 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a957b534788873921249cd1cc058b9d7e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Face@{add\-Control\-Face}}
 \index{add\-Control\-Face@{add\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -623,7 +640,7 @@ Definition at line 632 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a957b534788873921249cd1cc058b9d7e}
 
 
-Definition at line 818 of file subdivsurface.\-cpp.
+Definition at line 1383 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a07d8ca69ed3d45f6e54407fcca8264b2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Face@{add\-Control\-Face}}
 \index{add\-Control\-Face@{add\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -636,7 +653,7 @@ Definition at line 818 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a07d8ca69ed3d45f6e54407fcca8264b2}
 
 
-Definition at line 736 of file subdivsurface.\-cpp.
+Definition at line 1301 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af644edd0d4ba993dbab280f036b37171}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Point@{add\-Control\-Point}}
 \index{add\-Control\-Point@{add\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -647,7 +664,7 @@ Definition at line 736 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_af644edd0d4ba993dbab280f036b37171}
 
 
-Definition at line 102 of file subdivsurface.\-cpp.
+Definition at line 110 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a7ac8b717bcb728da2334cc2f16c8b428}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Point@{add\-Control\-Point}}
 \index{add\-Control\-Point@{add\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -658,7 +675,7 @@ Definition at line 102 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a7ac8b717bcb728da2334cc2f16c8b428}
 
 
-Definition at line 137 of file subdivsurface.\-cpp.
+Definition at line 145 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a7eccf33cb39ef12f56553352da34da62}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-Control\-Point@{add\-Control\-Point}}
 \index{add\-Control\-Point@{add\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -669,7 +686,7 @@ Definition at line 137 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a7eccf33cb39ef12f56553352da34da62}
 
 
-Definition at line 159 of file subdivsurface.\-cpp.
+Definition at line 167 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5bf8f452664e17dae636d4b66a66eba9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!add\-New\-Layer@{add\-New\-Layer}}
 \index{add\-New\-Layer@{add\-New\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -680,21 +697,32 @@ Definition at line 159 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a5bf8f452664e17dae636d4b66a66eba9}
 
 
-Definition at line 175 of file subdivsurface.\-cpp.
+Definition at line 183 of file subdivsurface.\-cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionSurface_ad140279118fab3343a6aee5e544814ec}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!assemble\-Faces\-To\-Patches@{assemble\-Faces\-To\-Patches}}
+\hypertarget{classShipCAD_1_1SubdivisionSurface_ab16b7b0697217616046ded3849af1f52}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!assemble\-Faces@{assemble\-Faces}}
+\index{assemble\-Faces@{assemble\-Faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{assemble\-Faces}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Surface\-::assemble\-Faces (
+\begin{DoxyParamCaption}
+\item[{{\bf assemble\-\_\-mode\-\_\-t}}]{mode, }
+\item[{std\-::vector$<$ {\bf Subdivision\-Control\-Face} $\ast$ $>$ \&}]{ctrlfaces, }
+\item[{std\-::vector$<$ {\bf Control\-Face\-Grid} $>$ \&}]{assembled}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ab16b7b0697217616046ded3849af1f52}
+
+
+Definition at line 691 of file subdivsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionSurface_ab14892e66e800a795e1af3dcc781af02}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!assemble\-Faces\-To\-Patches@{assemble\-Faces\-To\-Patches}}
 \index{assemble\-Faces\-To\-Patches@{assemble\-Faces\-To\-Patches}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{assemble\-Faces\-To\-Patches}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Surface\-::assemble\-Faces\-To\-Patches (
 \begin{DoxyParamCaption}
-\item[{std\-::vector$<$ {\bf Subdivision\-Layer} $\ast$ $>$ \&}]{layers, }
 \item[{{\bf assemble\-\_\-mode\-\_\-t}}]{mode, }
-\item[{std\-::vector$<$ {\bf Subdivision\-Face} $\ast$ $>$ \&}]{assembled\-Patches, }
-\item[{size\-\_\-t \&}]{n\-Assembled}
+\item[{std\-::vector$<$ {\bf Control\-Face\-Grid} $>$ \&}]{assembled\-Patches}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionSurface_ad140279118fab3343a6aee5e544814ec}
+)}}\label{classShipCAD_1_1SubdivisionSurface_ab14892e66e800a795e1af3dcc781af02}
 
 
-Definition at line 231 of file subdivsurface.\-cpp.
+Definition at line 751 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3aa7c4fd1fa84170a59e6c0549573c92}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!calculate\-Gauss\-Curvature@{calculate\-Gauss\-Curvature}}
 \index{calculate\-Gauss\-Curvature@{calculate\-Gauss\-Curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -705,7 +733,7 @@ Definition at line 231 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a3aa7c4fd1fa84170a59e6c0549573c92}
 
 
-Definition at line 239 of file subdivsurface.\-cpp.
+Definition at line 784 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a9fa189058cbdc190d8847c976fd4ae06}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!calculate\-Intersections@{calculate\-Intersections}}
 \index{calculate\-Intersections@{calculate\-Intersections}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -718,7 +746,7 @@ Definition at line 239 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a9fa189058cbdc190d8847c976fd4ae06}
 
 
-Definition at line 1497 of file subdivsurface.\-cpp.
+Definition at line 2032 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aad7f3abd89252d503b7d21ca306436d4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!change\-Active\-Layer@{change\-Active\-Layer}}
 \index{change\-Active\-Layer@{change\-Active\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -747,7 +775,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1Entity_a998d0e5d360371046fd5835ba1
 
 
 
-Definition at line 823 of file subdivsurface.\-cpp.
+Definition at line 1388 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abf11847b9df1bc590c6c51d292430dd5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!clear\-Faces@{clear\-Faces}}
 \index{clear\-Faces@{clear\-Faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -758,7 +786,7 @@ Definition at line 823 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_abf11847b9df1bc590c6c51d292430dd5}
 
 
-Definition at line 863 of file subdivsurface.\-cpp.
+Definition at line 1428 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2a984cc9ae8c78153113552cfb6321d5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!clear\-Selection@{clear\-Selection}}
 \index{clear\-Selection@{clear\-Selection}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -769,7 +797,7 @@ Definition at line 863 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a2a984cc9ae8c78153113552cfb6321d5}
 
 
-Definition at line 881 of file subdivsurface.\-cpp.
+Definition at line 1446 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_acb0b35c10fe6ab3c348f8435a1ca844d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!collapse\-Edge@{collapse\-Edge}}
 \index{collapse\-Edge@{collapse\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -789,7 +817,7 @@ collapse an edge on the surface
 \end{DoxyParams}
 
 
-Definition at line 2314 of file subdivsurface.\-cpp.
+Definition at line 2849 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a6a89be4440e3adfcb0b14c164db891ae}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!control\-Edge\-Exists@{control\-Edge\-Exists}}
 \index{control\-Edge\-Exists@{control\-Edge\-Exists}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -801,7 +829,7 @@ Definition at line 2314 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a6a89be4440e3adfcb0b14c164db891ae}
 
 
-Definition at line 1813 of file subdivsurface.\-cpp.
+Definition at line 2348 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a1deabf43f6a24c34a58889d0361b0959}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!convert\-To\-Grid@{convert\-To\-Grid}}
 \index{convert\-To\-Grid@{convert\-To\-Grid}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -813,7 +841,7 @@ Definition at line 1813 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a1deabf43f6a24c34a58889d0361b0959}
 
 
-Definition at line 1145 of file subdivsurface.\-cpp.
+Definition at line 1680 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ae45fc2694977c8fbae54ac2e0e067d1f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!delete\-Control\-Edge@{delete\-Control\-Edge}}
 \index{delete\-Control\-Edge@{delete\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -824,7 +852,7 @@ Definition at line 1145 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ae45fc2694977c8fbae54ac2e0e067d1f}
 
 
-Definition at line 310 of file subdivsurface.\-cpp.
+Definition at line 855 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a394c490440fb20c37abfc2f38d6e50fd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!delete\-Control\-Face@{delete\-Control\-Face}}
 \index{delete\-Control\-Face@{delete\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -835,7 +863,7 @@ Definition at line 310 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a394c490440fb20c37abfc2f38d6e50fd}
 
 
-Definition at line 370 of file subdivsurface.\-cpp.
+Definition at line 915 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ad4f874132a137e89a39e60572748dab0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!delete\-Control\-Point@{delete\-Control\-Point}}
 \index{delete\-Control\-Point@{delete\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -846,7 +874,7 @@ Definition at line 370 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ad4f874132a137e89a39e60572748dab0}
 
 
-Definition at line 165 of file subdivsurface.\-cpp.
+Definition at line 173 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abb5beb9a6fc413e8d713e18fb39bf2ba}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!delete\-Edge@{delete\-Edge}}
 \index{delete\-Edge@{delete\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -857,7 +885,7 @@ Definition at line 165 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_abb5beb9a6fc413e8d713e18fb39bf2ba}
 
 
-Definition at line 483 of file subdivsurface.\-cpp.
+Definition at line 1028 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3f0dac49106056562a8b675c61918abe}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!delete\-Layer@{delete\-Layer}}
 \index{delete\-Layer@{delete\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -868,7 +896,7 @@ Definition at line 483 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a3f0dac49106056562a8b675c61918abe}
 
 
-Definition at line 421 of file subdivsurface.\-cpp.
+Definition at line 966 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a4117039bfd819cb28ab5cb04296fdcd7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!delete\-Point@{delete\-Point}}
 \index{delete\-Point@{delete\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -879,7 +907,7 @@ Definition at line 421 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a4117039bfd819cb28ab5cb04296fdcd7}
 
 
-Definition at line 466 of file subdivsurface.\-cpp.
+Definition at line 1011 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac322d8008ea13bc3ca3fd1baeab7e1b3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!do\-Assemble@{do\-Assemble}}
 \index{do\-Assemble@{do\-Assemble}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -893,7 +921,23 @@ Definition at line 466 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ac322d8008ea13bc3ca3fd1baeab7e1b3}
 
 
-Definition at line 919 of file subdivsurface.\-cpp.
+Definition at line 1454 of file subdivsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionSurface_a976e9b68dcbec8f6b424429a7e3c7e50}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!do\-Assemble\-Special@{do\-Assemble\-Special}}
+\index{do\-Assemble\-Special@{do\-Assemble\-Special}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{do\-Assemble\-Special}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Surface\-::do\-Assemble\-Special (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Point\-Grid} \&}]{grid, }
+\item[{size\-\_\-t \&}]{cols, }
+\item[{size\-\_\-t \&}]{rows, }
+\item[{{\bf assemble\-\_\-mode\-\_\-t}}]{mode, }
+\item[{std\-::vector$<$ {\bf Subdivision\-Control\-Face} $\ast$ $>$ \&}]{checkfaces, }
+\item[{std\-::vector$<$ {\bf Subdivision\-Control\-Face} $\ast$ $>$ \&}]{faces}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a976e9b68dcbec8f6b424429a7e3c7e50}
+
+
+Definition at line 322 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_acfe9cc964dbe05105486b43f2dc6fc4f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!draw@{draw}}
 \index{draw@{draw}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -904,7 +948,7 @@ Definition at line 919 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionSurface_acfe9cc964dbe05105486b43f2dc6fc4f}
 
 
-Definition at line 1758 of file subdivsurface.\-cpp.
+Definition at line 2293 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ab1c250ff9fa7acae3ecdca4575f3e259}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!draw@{draw}}
 \index{draw@{draw}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -920,7 +964,7 @@ Implements \hyperlink{classShipCAD_1_1Entity_aa62e306d991140dcd564360f8f6e7539}{
 
 
 
-Definition at line 1774 of file subdivsurface.\-cpp.
+Definition at line 2309 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a94d284672cca1fb619ef5c064bcd175b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!draw\-Mirror@{draw\-Mirror}}
 \index{draw\-Mirror@{draw\-Mirror}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -931,7 +975,7 @@ Definition at line 1774 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a94d284672cca1fb619ef5c064bcd175b}
 
 
-Definition at line 254 of file subdivsurface.\-h.
+Definition at line 261 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a6ed961bbb7ca5fe94ec5566109d9b015}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!dump@{dump}}
 \index{dump@{dump}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -943,7 +987,7 @@ Definition at line 254 of file subdivsurface.\-h.
 ) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionSurface_a6ed961bbb7ca5fe94ec5566109d9b015}
 
 
-Definition at line 2803 of file subdivsurface.\-cpp.
+Definition at line 3339 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa0460120d8a093682ca352a47affdb87}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!edge\-Connect@{edge\-Connect}}
 \index{edge\-Connect@{edge\-Connect}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -954,7 +998,7 @@ Definition at line 2803 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa0460120d8a093682ca352a47affdb87}
 
 
-Definition at line 1190 of file subdivsurface.\-cpp.
+Definition at line 1725 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_adfdeabdc19eb55a7ba4ab0b607207300}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!edge\-Exists@{edge\-Exists}}
 \index{edge\-Exists@{edge\-Exists}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -966,7 +1010,7 @@ Definition at line 1190 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_adfdeabdc19eb55a7ba4ab0b607207300}
 
 
-Definition at line 1788 of file subdivsurface.\-cpp.
+Definition at line 2323 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac6f3ca7c8c09acd6bc9c72ae063002bf}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!export\-Fe\-F\-File@{export\-Fe\-F\-File}}
 \index{export\-Fe\-F\-File@{export\-Fe\-F\-File}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -977,7 +1021,7 @@ Definition at line 1788 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ac6f3ca7c8c09acd6bc9c72ae063002bf}
 
 
-Definition at line 1225 of file subdivsurface.\-cpp.
+Definition at line 1760 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8859af0a44d7f858d0febbd58efd2820}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!export\-Obj\-File@{export\-Obj\-File}}
 \index{export\-Obj\-File@{export\-Obj\-File}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -989,7 +1033,7 @@ Definition at line 1225 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a8859af0a44d7f858d0febbd58efd2820}
 
 
-Definition at line 1257 of file subdivsurface.\-cpp.
+Definition at line 1792 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abc1cf0168290242dfbe5dd0d178fa7cb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!extents@{extents}}
 \index{extents@{extents}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1005,7 +1049,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1Entity_a08e8e53770c85002afa45f46e7
 
 
 
-Definition at line 1377 of file subdivsurface.\-cpp.
+Definition at line 1912 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a17dccf4965b49427d345bd5acce897c5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!extract\-All\-Edge\-Loops@{extract\-All\-Edge\-Loops}}
 \index{extract\-All\-Edge\-Loops@{extract\-All\-Edge\-Loops}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1016,7 +1060,7 @@ Definition at line 1377 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a17dccf4965b49427d345bd5acce897c5}
 
 
-Definition at line 1882 of file subdivsurface.\-cpp.
+Definition at line 2417 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af62ba549d058dfddd4bfa1b69a577220}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!extract\-Points\-From\-Faces@{extract\-Points\-From\-Faces}}
 \index{extract\-Points\-From\-Faces@{extract\-Points\-From\-Faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1029,7 +1073,7 @@ Definition at line 1882 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_af62ba549d058dfddd4bfa1b69a577220}
 
 
-Definition at line 1918 of file subdivsurface.\-cpp.
+Definition at line 2453 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af0f0d7bb979c8c8ba04b9be26e7cfe30}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!extract\-Points\-From\-Selection@{extract\-Points\-From\-Selection}}
 \index{extract\-Points\-From\-Selection@{extract\-Points\-From\-Selection}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1041,7 +1085,7 @@ Definition at line 1918 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_af0f0d7bb979c8c8ba04b9be26e7cfe30}
 
 
-Definition at line 1947 of file subdivsurface.\-cpp.
+Definition at line 2482 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac19570e1402deab738d2231d6bec9650}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!extrude\-Edges@{extrude\-Edges}}
 \index{extrude\-Edges@{extrude\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1053,7 +1097,7 @@ Definition at line 1947 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ac19570e1402deab738d2231d6bec9650}
 
 
-Definition at line 1415 of file subdivsurface.\-cpp.
+Definition at line 1950 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3163cfd01e0454ecb9dbb088dc76fbc6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!find\-Attached\-Faces@{find\-Attached\-Faces}}
 \index{find\-Attached\-Faces@{find\-Attached\-Faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1066,7 +1110,18 @@ Definition at line 1415 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a3163cfd01e0454ecb9dbb088dc76fbc6}
 
 
-Definition at line 203 of file subdivsurface.\-cpp.
+Definition at line 210 of file subdivsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionSurface_a817d44176e659c2ccb4835d8240582db}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!find\-Corner\-Face@{find\-Corner\-Face}}
+\index{find\-Corner\-Face@{find\-Corner\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{find\-Corner\-Face}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Control\-Face} $\ast$ Subdivision\-Surface\-::find\-Corner\-Face (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Subdivision\-Control\-Face} $\ast$ $>$ \&}]{ctrlfaces}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a817d44176e659c2ccb4835d8240582db}
+
+
+Definition at line 237 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a490d7a6fef79ba56fd36395208b46ba5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Active\-Layer@{get\-Active\-Layer}}
 \index{get\-Active\-Layer@{get\-Active\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1077,7 +1132,7 @@ Definition at line 203 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a490d7a6fef79ba56fd36395208b46ba5}
 
 
-Definition at line 221 of file subdivsurface.\-h.
+Definition at line 227 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a732c53d18277a4093ff7df12c0b08634}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Curve@{get\-Control\-Curve}}
 \index{get\-Control\-Curve@{get\-Control\-Curve}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1088,7 +1143,7 @@ Definition at line 221 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a732c53d18277a4093ff7df12c0b08634}
 
 
-Definition at line 320 of file subdivsurface.\-cpp.
+Definition at line 865 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5b35353f739d224d8aa40ff19333ba98}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Curve\-Color@{get\-Control\-Curve\-Color}}
 \index{get\-Control\-Curve\-Color@{get\-Control\-Curve\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1099,7 +1154,7 @@ Definition at line 320 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a5b35353f739d224d8aa40ff19333ba98}
 
 
-Definition at line 275 of file subdivsurface.\-h.
+Definition at line 282 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a647c0e4a20cfd823cc578431c2799c04}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Curve\-Pool@{get\-Control\-Curve\-Pool}}
 \index{get\-Control\-Curve\-Pool@{get\-Control\-Curve\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1110,7 +1165,7 @@ Definition at line 275 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a647c0e4a20cfd823cc578431c2799c04}
 
 
-Definition at line 299 of file subdivsurface.\-h.
+Definition at line 309 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac7d6762dc83f1f114c1d7f4e67d8f8eb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Edge@{get\-Control\-Edge}}
 \index{get\-Control\-Edge@{get\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1121,7 +1176,7 @@ Definition at line 299 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ac7d6762dc83f1f114c1d7f4e67d8f8eb}
 
 
-Definition at line 292 of file subdivsurface.\-cpp.
+Definition at line 837 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa9ed4c00847b5c04f99b27f754df481b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Edge\-Pool@{get\-Control\-Edge\-Pool}}
 \index{get\-Control\-Edge\-Pool@{get\-Control\-Edge\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1132,7 +1187,7 @@ Definition at line 292 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_aa9ed4c00847b5c04f99b27f754df481b}
 
 
-Definition at line 297 of file subdivsurface.\-h.
+Definition at line 307 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a392f052a12118427919b910e99663d92}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Face@{get\-Control\-Face}}
 \index{get\-Control\-Face@{get\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1143,7 +1198,7 @@ Definition at line 297 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a392f052a12118427919b910e99663d92}
 
 
-Definition at line 380 of file subdivsurface.\-cpp.
+Definition at line 925 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a536574cc453e4790a769a3e7d47b7ff1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Face@{get\-Control\-Face}}
 \index{get\-Control\-Face@{get\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1157,7 +1212,7 @@ Definition at line 380 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a536574cc453e4790a769a3e7d47b7ff1}
 
 
-Definition at line 186 of file subdivsurface.\-cpp.
+Definition at line 193 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ab9199097e998971add79f7dccbd262c3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Face\-Pool@{get\-Control\-Face\-Pool}}
 \index{get\-Control\-Face\-Pool@{get\-Control\-Face\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1168,7 +1223,7 @@ Definition at line 186 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ab9199097e998971add79f7dccbd262c3}
 
 
-Definition at line 298 of file subdivsurface.\-h.
+Definition at line 308 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8aa8d3fdfc5e81ba4a39858a69228652}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Point@{get\-Control\-Point}}
 \index{get\-Control\-Point@{get\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1179,7 +1234,7 @@ Definition at line 298 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a8aa8d3fdfc5e81ba4a39858a69228652}
 
 
-Definition at line 269 of file subdivsurface.\-cpp.
+Definition at line 814 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a49109b80a26f29ad52ac109574cf4d5a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Point\-Pool@{get\-Control\-Point\-Pool}}
 \index{get\-Control\-Point\-Pool@{get\-Control\-Point\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1190,7 +1245,7 @@ Definition at line 269 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a49109b80a26f29ad52ac109574cf4d5a}
 
 
-Definition at line 296 of file subdivsurface.\-h.
+Definition at line 306 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a521c5ea29e765a0cf7bc0ec0268b499c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Control\-Point\-Size@{get\-Control\-Point\-Size}}
 \index{get\-Control\-Point\-Size@{get\-Control\-Point\-Size}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1201,7 +1256,7 @@ Definition at line 296 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a521c5ea29e765a0cf7bc0ec0268b499c}
 
 
-Definition at line 246 of file subdivsurface.\-h.
+Definition at line 253 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af64e951c070d6c88f70c399bc13809d1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Corner\-Point\-Color@{get\-Corner\-Point\-Color}}
 \index{get\-Corner\-Point\-Color@{get\-Corner\-Point\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1212,7 +1267,7 @@ Definition at line 246 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_af64e951c070d6c88f70c399bc13809d1}
 
 
-Definition at line 271 of file subdivsurface.\-h.
+Definition at line 278 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a6aad1f3725f8033bb85403a01c252006}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Crease\-Color@{get\-Crease\-Color}}
 \index{get\-Crease\-Color@{get\-Crease\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1223,7 +1278,7 @@ Definition at line 271 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a6aad1f3725f8033bb85403a01c252006}
 
 
-Definition at line 273 of file subdivsurface.\-h.
+Definition at line 280 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a50b5868db7d2c5d6cce75fa2b52be60f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Crease\-Edge\-Color@{get\-Crease\-Edge\-Color}}
 \index{get\-Crease\-Edge\-Color@{get\-Crease\-Edge\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1234,7 +1289,7 @@ Definition at line 273 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a50b5868db7d2c5d6cce75fa2b52be60f}
 
 
-Definition at line 267 of file subdivsurface.\-h.
+Definition at line 274 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a82c8cb1c6c448be7554bcb42e0099660}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Crease\-Point\-Color@{get\-Crease\-Point\-Color}}
 \index{get\-Crease\-Point\-Color@{get\-Crease\-Point\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1245,7 +1300,7 @@ Definition at line 267 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a82c8cb1c6c448be7554bcb42e0099660}
 
 
-Definition at line 274 of file subdivsurface.\-h.
+Definition at line 281 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa39747141685b52d3987cf6c9f4e2aa8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Curvature\-Color@{get\-Curvature\-Color}}
 \index{get\-Curvature\-Color@{get\-Curvature\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1256,7 +1311,7 @@ Definition at line 274 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_aa39747141685b52d3987cf6c9f4e2aa8}
 
 
-Definition at line 277 of file subdivsurface.\-h.
+Definition at line 284 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8dfd63bd3bd8ddf35491b12003a8b7ce}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Curvature\-Scale@{get\-Curvature\-Scale}}
 \index{get\-Curvature\-Scale@{get\-Curvature\-Scale}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1267,7 +1322,7 @@ Definition at line 277 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a8dfd63bd3bd8ddf35491b12003a8b7ce}
 
 
-Definition at line 236 of file subdivsurface.\-h.
+Definition at line 243 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac355dfe572889755c24d1c8cd3145aea}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Dart\-Point\-Color@{get\-Dart\-Point\-Color}}
 \index{get\-Dart\-Point\-Color@{get\-Dart\-Point\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1278,7 +1333,18 @@ Definition at line 236 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ac355dfe572889755c24d1c8cd3145aea}
 
 
-Definition at line 272 of file subdivsurface.\-h.
+Definition at line 279 of file subdivsurface.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionSurface_aaefc455563a01176551f61e583f0555f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Default\-Layer\-Name@{get\-Default\-Layer\-Name}}
+\index{get\-Default\-Layer\-Name@{get\-Default\-Layer\-Name}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{get\-Default\-Layer\-Name}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Subdivision\-Surface\-::get\-Default\-Layer\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionSurface_aaefc455563a01176551f61e583f0555f}
+
+
+Definition at line 1139 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a67e69fc54ca38627596efc49b6d82e7f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Edge@{get\-Edge}}
 \index{get\-Edge@{get\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1289,7 +1355,7 @@ Definition at line 272 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a67e69fc54ca38627596efc49b6d82e7f}
 
 
-Definition at line 476 of file subdivsurface.\-cpp.
+Definition at line 1021 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a40dd77bdff5cf86b4a6eca7ff5a2e643}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Edge\-Color@{get\-Edge\-Color}}
 \index{get\-Edge\-Color@{get\-Edge\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1300,7 +1366,7 @@ Definition at line 476 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a40dd77bdff5cf86b4a6eca7ff5a2e643}
 
 
-Definition at line 268 of file subdivsurface.\-h.
+Definition at line 275 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2bffb2bf9575d934e18ed5087f8d2996}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Edge\-Pool@{get\-Edge\-Pool}}
 \index{get\-Edge\-Pool@{get\-Edge\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1311,7 +1377,7 @@ Definition at line 268 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a2bffb2bf9575d934e18ed5087f8d2996}
 
 
-Definition at line 302 of file subdivsurface.\-h.
+Definition at line 312 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3fcdae8e54e98938de00dfa4229d8aa8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Face\-Pool@{get\-Face\-Pool}}
 \index{get\-Face\-Pool@{get\-Face\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1322,7 +1388,7 @@ Definition at line 302 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a3fcdae8e54e98938de00dfa4229d8aa8}
 
 
-Definition at line 303 of file subdivsurface.\-h.
+Definition at line 313 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a24b230e51a0c5fb3e7f51d0e2340eb9f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Layer@{get\-Layer}}
 \index{get\-Layer@{get\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1333,7 +1399,7 @@ Definition at line 303 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a24b230e51a0c5fb3e7f51d0e2340eb9f}
 
 
-Definition at line 408 of file subdivsurface.\-cpp.
+Definition at line 953 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2a5e9c50d43e72829e02a8c0be31c260}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Layer\-Color@{get\-Layer\-Color}}
 \index{get\-Layer\-Color@{get\-Layer\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1344,7 +1410,7 @@ Definition at line 408 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a2a5e9c50d43e72829e02a8c0be31c260}
 
 
-Definition at line 276 of file subdivsurface.\-h.
+Definition at line 283 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a7e80bac4f91557a620fc1843f77b9953}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Layer\-Pool@{get\-Layer\-Pool}}
 \index{get\-Layer\-Pool@{get\-Layer\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1355,7 +1421,7 @@ Definition at line 276 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a7e80bac4f91557a620fc1843f77b9953}
 
 
-Definition at line 300 of file subdivsurface.\-h.
+Definition at line 310 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac3131c3badeb6b11cb8a5ec5ceef0961}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Leak\-Color@{get\-Leak\-Color}}
 \index{get\-Leak\-Color@{get\-Leak\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1366,7 +1432,7 @@ Definition at line 300 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ac3131c3badeb6b11cb8a5ec5ceef0961}
 
 
-Definition at line 269 of file subdivsurface.\-h.
+Definition at line 276 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8b33594cec15c0ec7aa03eb9d53327bb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Mainframe\-Location@{get\-Mainframe\-Location}}
 \index{get\-Mainframe\-Location@{get\-Mainframe\-Location}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1377,7 +1443,7 @@ Definition at line 269 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a8b33594cec15c0ec7aa03eb9d53327bb}
 
 
-Definition at line 243 of file subdivsurface.\-h.
+Definition at line 250 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5189aba41418c44faae76b39284917c2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Max\-Gaus\-Curvature@{get\-Max\-Gaus\-Curvature}}
 \index{get\-Max\-Gaus\-Curvature@{get\-Max\-Gaus\-Curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1388,7 +1454,7 @@ Definition at line 243 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a5189aba41418c44faae76b39284917c2}
 
 
-Definition at line 239 of file subdivsurface.\-h.
+Definition at line 246 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ae511889be6115d7461808eda144947a8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Min\-Gaus\-Curvature@{get\-Min\-Gaus\-Curvature}}
 \index{get\-Min\-Gaus\-Curvature@{get\-Min\-Gaus\-Curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1399,7 +1465,7 @@ Definition at line 239 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ae511889be6115d7461808eda144947a8}
 
 
-Definition at line 238 of file subdivsurface.\-h.
+Definition at line 245 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af07192c8cfc3429ad6da80a1da802a6c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Point@{get\-Point}}
 \index{get\-Point@{get\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1410,7 +1476,7 @@ Definition at line 238 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_af07192c8cfc3429ad6da80a1da802a6c}
 
 
-Definition at line 459 of file subdivsurface.\-cpp.
+Definition at line 1004 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8a8dbbc32fcdc5a08c462cd86c224649}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Point\-Pool@{get\-Point\-Pool}}
 \index{get\-Point\-Pool@{get\-Point\-Pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1421,7 +1487,7 @@ Definition at line 459 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a8a8dbbc32fcdc5a08c462cd86c224649}
 
 
-Definition at line 301 of file subdivsurface.\-h.
+Definition at line 311 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_afdf406376421eb43a34f53392fbcf5b1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Regular\-Point\-Color@{get\-Regular\-Point\-Color}}
 \index{get\-Regular\-Point\-Color@{get\-Regular\-Point\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1432,7 +1498,7 @@ Definition at line 301 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_afdf406376421eb43a34f53392fbcf5b1}
 
 
-Definition at line 270 of file subdivsurface.\-h.
+Definition at line 277 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a4d307277e2a96d86b3d3e7788c2aac0a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Selected\-Color@{get\-Selected\-Color}}
 \index{get\-Selected\-Color@{get\-Selected\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1443,7 +1509,7 @@ Definition at line 270 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a4d307277e2a96d86b3d3e7788c2aac0a}
 
 
-Definition at line 266 of file subdivsurface.\-h.
+Definition at line 273 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a77ac47de5e6323271f45be37223fe82b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Subdivision\-Mode@{get\-Subdivision\-Mode}}
 \index{get\-Subdivision\-Mode@{get\-Subdivision\-Mode}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1454,7 +1520,7 @@ Definition at line 266 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a77ac47de5e6323271f45be37223fe82b}
 
 
-Definition at line 231 of file subdivsurface.\-h.
+Definition at line 238 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5f4515130c512327b01e6aea577d0876}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!get\-Waterline\-Plane@{get\-Waterline\-Plane}}
 \index{get\-Waterline\-Plane@{get\-Waterline\-Plane}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1465,7 +1531,7 @@ Definition at line 231 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a5f4515130c512327b01e6aea577d0876}
 
 
-Definition at line 241 of file subdivsurface.\-h.
+Definition at line 248 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_acc30feeff1a889b9b291dcab3987b30a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Control\-Curve@{has\-Control\-Curve}}
 \index{has\-Control\-Curve@{has\-Control\-Curve}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1476,7 +1542,7 @@ Definition at line 241 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_acc30feeff1a889b9b291dcab3987b30a}
 
 
-Definition at line 337 of file subdivsurface.\-cpp.
+Definition at line 882 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a9856bef9e5b2de9be4a3118fa80d0f16}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Control\-Edge@{has\-Control\-Edge}}
 \index{has\-Control\-Edge@{has\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1487,7 +1553,7 @@ Definition at line 337 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a9856bef9e5b2de9be4a3118fa80d0f16}
 
 
-Definition at line 276 of file subdivsurface.\-cpp.
+Definition at line 821 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ad6e00013faf6c373bfc1421adb941ba4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Control\-Face@{has\-Control\-Face}}
 \index{has\-Control\-Face@{has\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1498,7 +1564,7 @@ Definition at line 276 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ad6e00013faf6c373bfc1421adb941ba4}
 
 
-Definition at line 353 of file subdivsurface.\-cpp.
+Definition at line 898 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a62abb29703f608a75559452d25db9a33}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Control\-Point@{has\-Control\-Point}}
 \index{has\-Control\-Point@{has\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1509,7 +1575,7 @@ Definition at line 353 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a62abb29703f608a75559452d25db9a33}
 
 
-Definition at line 146 of file subdivsurface.\-cpp.
+Definition at line 154 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aef9fe9a74054b54292f7f64e0589743c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Layer@{has\-Layer}}
 \index{has\-Layer@{has\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1520,7 +1586,7 @@ Definition at line 146 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aef9fe9a74054b54292f7f64e0589743c}
 
 
-Definition at line 415 of file subdivsurface.\-cpp.
+Definition at line 960 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_acdfbfb4870bf517cd075fdf51a0de997}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Selected\-Control\-Curve@{has\-Selected\-Control\-Curve}}
 \index{has\-Selected\-Control\-Curve@{has\-Selected\-Control\-Curve}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1531,7 +1597,7 @@ Definition at line 415 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_acdfbfb4870bf517cd075fdf51a0de997}
 
 
-Definition at line 537 of file subdivsurface.\-cpp.
+Definition at line 1082 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3f7856ea95b0c881a1171845c1dc817e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Selected\-Control\-Edge@{has\-Selected\-Control\-Edge}}
 \index{has\-Selected\-Control\-Edge@{has\-Selected\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1542,7 +1608,7 @@ Definition at line 537 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a3f7856ea95b0c881a1171845c1dc817e}
 
 
-Definition at line 518 of file subdivsurface.\-cpp.
+Definition at line 1063 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aab0e513988645c868676831ae0093a25}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Selected\-Control\-Face@{has\-Selected\-Control\-Face}}
 \index{has\-Selected\-Control\-Face@{has\-Selected\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1553,7 +1619,7 @@ Definition at line 518 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aab0e513988645c868676831ae0093a25}
 
 
-Definition at line 556 of file subdivsurface.\-cpp.
+Definition at line 1101 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aafd696ac2c5353ac5593acdbe8b1fb2e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!has\-Selected\-Control\-Point@{has\-Selected\-Control\-Point}}
 \index{has\-Selected\-Control\-Point@{has\-Selected\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1564,7 +1630,7 @@ Definition at line 556 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aafd696ac2c5353ac5593acdbe8b1fb2e}
 
 
-Definition at line 575 of file subdivsurface.\-cpp.
+Definition at line 1120 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa3f1904bcec3f104cf465e3bed799406}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!import\-Fe\-F\-File@{import\-Fe\-F\-File}}
 \index{import\-Fe\-F\-File@{import\-Fe\-F\-File}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1576,7 +1642,7 @@ Definition at line 575 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa3f1904bcec3f104cf465e3bed799406}
 
 
-Definition at line 1983 of file subdivsurface.\-cpp.
+Definition at line 2518 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa193fd28425e9846908479615e7c5bf9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!import\-Grid@{import\-Grid}}
 \index{import\-Grid@{import\-Grid}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1588,7 +1654,7 @@ Definition at line 1983 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa193fd28425e9846908479615e7c5bf9}
 
 
-Definition at line 2076 of file subdivsurface.\-cpp.
+Definition at line 2611 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a83c515916e068cbed7f7afd7bf11d84a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!index\-Of\-Control\-Curve@{index\-Of\-Control\-Curve}}
 \index{index\-Of\-Control\-Curve@{index\-Of\-Control\-Curve}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1606,7 +1672,7 @@ Definition at line 2076 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ae2f4e931f0134f8637e0aa769dba1d32}
 
 
-Definition at line 282 of file subdivsurface.\-cpp.
+Definition at line 827 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aee61b8795a0f16c47df83f0ef0abd2e7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!index\-Of\-Control\-Face@{index\-Of\-Control\-Face}}
 \index{index\-Of\-Control\-Face@{index\-Of\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1617,7 +1683,7 @@ Definition at line 282 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aee61b8795a0f16c47df83f0ef0abd2e7}
 
 
-Definition at line 343 of file subdivsurface.\-cpp.
+Definition at line 888 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ae0dda53669e5767da6434b3e2f751916}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!index\-Of\-Control\-Point@{index\-Of\-Control\-Point}}
 \index{index\-Of\-Control\-Point@{index\-Of\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1628,7 +1694,7 @@ Definition at line 343 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ae0dda53669e5767da6434b3e2f751916}
 
 
-Definition at line 259 of file subdivsurface.\-cpp.
+Definition at line 804 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa3d68eacb2fafd9dab6d40c3230ed991}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!index\-Of\-Edge@{index\-Of\-Edge}}
 \index{index\-Of\-Edge@{index\-Of\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1639,7 +1705,7 @@ Definition at line 259 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa3d68eacb2fafd9dab6d40c3230ed991}
 
 
-Definition at line 493 of file subdivsurface.\-cpp.
+Definition at line 1038 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_accb1e8604e44f491f84e9fb77d1ab5c7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!index\-Of\-Layer@{index\-Of\-Layer}}
 \index{index\-Of\-Layer@{index\-Of\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1650,7 +1716,7 @@ Definition at line 493 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_accb1e8604e44f491f84e9fb77d1ab5c7}
 
 
-Definition at line 398 of file subdivsurface.\-cpp.
+Definition at line 943 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a1bde01d6b5972c302ad387cf1247f0fa}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!index\-Of\-Point@{index\-Of\-Point}}
 \index{index\-Of\-Point@{index\-Of\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1661,7 +1727,7 @@ Definition at line 398 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a1bde01d6b5972c302ad387cf1247f0fa}
 
 
-Definition at line 449 of file subdivsurface.\-cpp.
+Definition at line 994 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a13cfd2714344c9b85aad8d123538db48}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!initialize@{initialize}}
 \index{initialize@{initialize}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1673,7 +1739,7 @@ Definition at line 449 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a13cfd2714344c9b85aad8d123538db48}
 
 
-Definition at line 2136 of file subdivsurface.\-cpp.
+Definition at line 2671 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ada26b740ea1f317763b6ecd372f13ea2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!insert\-Plane@{insert\-Plane}}
 \index{insert\-Plane@{insert\-Plane}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1685,7 +1751,7 @@ Definition at line 2136 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ada26b740ea1f317763b6ecd372f13ea2}
 
 
-Definition at line 2189 of file subdivsurface.\-cpp.
+Definition at line 2724 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a86961ff2a6421d778814c013c3d2b8d7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!intersect\-Plane@{intersect\-Plane}}
 \index{intersect\-Plane@{intersect\-Plane}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1698,7 +1764,7 @@ Definition at line 2189 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a86961ff2a6421d778814c013c3d2b8d7}
 
 
-Definition at line 2158 of file subdivsurface.\-cpp.
+Definition at line 2693 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa6e07e073f76fb31d013103c8709f923}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!is\-Gauss\-Curvature\-Calculated@{is\-Gauss\-Curvature\-Calculated}}
 \index{is\-Gauss\-Curvature\-Calculated@{is\-Gauss\-Curvature\-Calculated}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1709,7 +1775,7 @@ Definition at line 2158 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa6e07e073f76fb31d013103c8709f923}
 
 
-Definition at line 393 of file subdivsurface.\-cpp.
+Definition at line 938 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a975c97ca338eb2aaaa3dcc0640611a95}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!isolate\-Edges@{isolate\-Edges}}
 \index{isolate\-Edges@{isolate\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1721,7 +1787,7 @@ Definition at line 393 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a975c97ca338eb2aaaa3dcc0640611a95}
 
 
-Definition at line 2265 of file subdivsurface.\-cpp.
+Definition at line 2800 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a46966d7372d20e563fddc48d6bbcab8a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!last\-Used\-Layer\-I\-D@{last\-Used\-Layer\-I\-D}}
 \index{last\-Used\-Layer\-I\-D@{last\-Used\-Layer\-I\-D}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1732,7 +1798,7 @@ Definition at line 2265 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a46966d7372d20e563fddc48d6bbcab8a}
 
 
-Definition at line 225 of file subdivsurface.\-h.
+Definition at line 231 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac8ad644e0c19ac180fd4a7368fa410a6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!load\-Binary@{load\-Binary}}
 \index{load\-Binary@{load\-Binary}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1743,7 +1809,7 @@ Definition at line 225 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ac8ad644e0c19ac180fd4a7368fa410a6}
 
 
-Definition at line 2439 of file subdivsurface.\-cpp.
+Definition at line 2975 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa7aebfa4567458829323752a96195060}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!load\-From\-Stream@{load\-From\-Stream}}
 \index{load\-From\-Stream@{load\-From\-Stream}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1755,7 +1821,7 @@ Definition at line 2439 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa7aebfa4567458829323752a96195060}
 
 
-Definition at line 2501 of file subdivsurface.\-cpp.
+Definition at line 3037 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_add8d612c82f170869f81042520f62499}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!load\-V\-R\-M\-L\-File@{load\-V\-R\-M\-L\-File}}
 \index{load\-V\-R\-M\-L\-File@{load\-V\-R\-M\-L\-File}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1773,7 +1839,7 @@ Definition at line 2501 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a251b711125d50aa51875451976e8a8d7}
 
 
-Definition at line 94 of file subdivsurface.\-cpp.
+Definition at line 102 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a076772817afcb44926a3d898754261ce}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Control\-Curves@{number\-Of\-Control\-Curves}}
 \index{number\-Of\-Control\-Curves@{number\-Of\-Control\-Curves}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1784,7 +1850,7 @@ Definition at line 94 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a076772817afcb44926a3d898754261ce}
 
 
-Definition at line 204 of file subdivsurface.\-h.
+Definition at line 210 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2fd710a2e2fa0272b8c8f498b8fc4f56}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Control\-Edges@{number\-Of\-Control\-Edges}}
 \index{number\-Of\-Control\-Edges@{number\-Of\-Control\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1795,7 +1861,7 @@ Definition at line 204 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a2fd710a2e2fa0272b8c8f498b8fc4f56}
 
 
-Definition at line 152 of file subdivsurface.\-h.
+Definition at line 158 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2fb486ba7285a42ae7fdab6e6c289fc5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Control\-Faces@{number\-Of\-Control\-Faces}}
 \index{number\-Of\-Control\-Faces@{number\-Of\-Control\-Faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1806,7 +1872,7 @@ Definition at line 152 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a2fb486ba7285a42ae7fdab6e6c289fc5}
 
 
-Definition at line 180 of file subdivsurface.\-h.
+Definition at line 186 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a4e184650893ca2ac7e367778ec70c45f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Control\-Points@{number\-Of\-Control\-Points}}
 \index{number\-Of\-Control\-Points@{number\-Of\-Control\-Points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1817,7 +1883,7 @@ Definition at line 180 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a4e184650893ca2ac7e367778ec70c45f}
 
 
-Definition at line 126 of file subdivsurface.\-h.
+Definition at line 132 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a74c607d9835c69a00b7730fad5384037}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Edges@{number\-Of\-Edges}}
 \index{number\-Of\-Edges@{number\-Of\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1828,7 +1894,7 @@ Definition at line 126 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a74c607d9835c69a00b7730fad5384037}
 
 
-Definition at line 145 of file subdivsurface.\-h.
+Definition at line 151 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a9f67bb8bbd3a8f61a2b4abacc0cf10e4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Faces@{number\-Of\-Faces}}
 \index{number\-Of\-Faces@{number\-Of\-Faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1839,7 +1905,7 @@ Definition at line 145 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a9f67bb8bbd3a8f61a2b4abacc0cf10e4}
 
 
-Definition at line 432 of file subdivsurface.\-cpp.
+Definition at line 977 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ad9d00dfc848975306c43305e13e57ebe}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Layers@{number\-Of\-Layers}}
 \index{number\-Of\-Layers@{number\-Of\-Layers}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1850,7 +1916,7 @@ Definition at line 432 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ad9d00dfc848975306c43305e13e57ebe}
 
 
-Definition at line 218 of file subdivsurface.\-h.
+Definition at line 224 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a771f0f1881a2da57dde8cb88a8fc9059}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Locked\-Points@{number\-Of\-Locked\-Points}}
 \index{number\-Of\-Locked\-Points@{number\-Of\-Locked\-Points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1861,7 +1927,7 @@ Definition at line 218 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a771f0f1881a2da57dde8cb88a8fc9059}
 
 
-Definition at line 440 of file subdivsurface.\-cpp.
+Definition at line 985 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a404ffc0c4d13a3a00edb83ad439ee59e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Points@{number\-Of\-Points}}
 \index{number\-Of\-Points@{number\-Of\-Points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1872,7 +1938,7 @@ Definition at line 440 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a404ffc0c4d13a3a00edb83ad439ee59e}
 
 
-Definition at line 120 of file subdivsurface.\-h.
+Definition at line 126 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a174e6e97b72c037693369e3716522ced}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Selected\-Control\-Curves@{number\-Of\-Selected\-Control\-Curves}}
 \index{number\-Of\-Selected\-Control\-Curves@{number\-Of\-Selected\-Control\-Curves}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1883,7 +1949,7 @@ Definition at line 120 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a174e6e97b72c037693369e3716522ced}
 
 
-Definition at line 212 of file subdivsurface.\-h.
+Definition at line 218 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a28f394042987ccc30d947ddd98a62574}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Selected\-Control\-Edges@{number\-Of\-Selected\-Control\-Edges}}
 \index{number\-Of\-Selected\-Control\-Edges@{number\-Of\-Selected\-Control\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1894,7 +1960,7 @@ Definition at line 212 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a28f394042987ccc30d947ddd98a62574}
 
 
-Definition at line 170 of file subdivsurface.\-h.
+Definition at line 176 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a084a7f6b226f8d5991f7c99607d0ddb0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Selected\-Control\-Faces@{number\-Of\-Selected\-Control\-Faces}}
 \index{number\-Of\-Selected\-Control\-Faces@{number\-Of\-Selected\-Control\-Faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1905,7 +1971,7 @@ Definition at line 170 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a084a7f6b226f8d5991f7c99607d0ddb0}
 
 
-Definition at line 198 of file subdivsurface.\-h.
+Definition at line 204 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac15e844f2feb644d71b1de3a886f6970}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Selected\-Control\-Points@{number\-Of\-Selected\-Control\-Points}}
 \index{number\-Of\-Selected\-Control\-Points@{number\-Of\-Selected\-Control\-Points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1916,7 +1982,7 @@ Definition at line 198 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ac15e844f2feb644d71b1de3a886f6970}
 
 
-Definition at line 139 of file subdivsurface.\-h.
+Definition at line 145 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2583bc0013b5725ac0902062d1c8bcea}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!number\-Of\-Selected\-Locked\-Points@{number\-Of\-Selected\-Locked\-Points}}
 \index{number\-Of\-Selected\-Locked\-Points@{number\-Of\-Selected\-Locked\-Points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1927,7 +1993,7 @@ Definition at line 139 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a2583bc0013b5725ac0902062d1c8bcea}
 
 
-Definition at line 503 of file subdivsurface.\-cpp.
+Definition at line 1048 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5c88eb988cc6a439242264bc54a6e3e1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!priv\-\_\-dump@{priv\-\_\-dump}}
 \index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1939,7 +2005,7 @@ Definition at line 503 of file subdivsurface.\-cpp.
 ) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a5c88eb988cc6a439242264bc54a6e3e1}
 
 
-Definition at line 2810 of file subdivsurface.\-cpp.
+Definition at line 3346 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a259856fc21f2bc1eebbc52f10dd59469}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!rebuild@{rebuild}}
 \index{rebuild@{rebuild}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1954,7 +2020,7 @@ Implements \hyperlink{classShipCAD_1_1Entity_a2571654319df6ad6841a437be7a75395}{
 
 
 
-Definition at line 2556 of file subdivsurface.\-cpp.
+Definition at line 3092 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abd51f7744580144550fabc086ea991b4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Control\-Curve@{remove\-Control\-Curve}}
 \index{remove\-Control\-Curve@{remove\-Control\-Curve}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1965,7 +2031,7 @@ Definition at line 2556 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_abd51f7744580144550fabc086ea991b4}
 
 
-Definition at line 327 of file subdivsurface.\-cpp.
+Definition at line 872 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3aac4d6c8ad638234f88fb8b1ffa00cb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Control\-Edge@{remove\-Control\-Edge}}
 \index{remove\-Control\-Edge@{remove\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1976,7 +2042,7 @@ Definition at line 327 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a3aac4d6c8ad638234f88fb8b1ffa00cb}
 
 
-Definition at line 299 of file subdivsurface.\-cpp.
+Definition at line 844 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a9cce3014753c0b74517b1747a80f6c2c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Control\-Face@{remove\-Control\-Face}}
 \index{remove\-Control\-Face@{remove\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1987,7 +2053,7 @@ Definition at line 299 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a9cce3014753c0b74517b1747a80f6c2c}
 
 
-Definition at line 360 of file subdivsurface.\-cpp.
+Definition at line 905 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa20b9227481180329e03de8897c52933}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Control\-Point@{remove\-Control\-Point}}
 \index{remove\-Control\-Point@{remove\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -1998,7 +2064,7 @@ Definition at line 360 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aa20b9227481180329e03de8897c52933}
 
 
-Definition at line 152 of file subdivsurface.\-cpp.
+Definition at line 160 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a1666628c8232ba11d386641fa7980ed7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Selected\-Control\-Curve@{remove\-Selected\-Control\-Curve}}
 \index{remove\-Selected\-Control\-Curve@{remove\-Selected\-Control\-Curve}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2009,7 +2075,7 @@ Definition at line 152 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a1666628c8232ba11d386641fa7980ed7}
 
 
-Definition at line 543 of file subdivsurface.\-cpp.
+Definition at line 1088 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a579077d742f9afc4e1d4ad20ef5a2184}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Selected\-Control\-Edge@{remove\-Selected\-Control\-Edge}}
 \index{remove\-Selected\-Control\-Edge@{remove\-Selected\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2020,7 +2086,7 @@ Definition at line 543 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a579077d742f9afc4e1d4ad20ef5a2184}
 
 
-Definition at line 524 of file subdivsurface.\-cpp.
+Definition at line 1069 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aef09d950b0970bd825a984effeee6224}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Selected\-Control\-Face@{remove\-Selected\-Control\-Face}}
 \index{remove\-Selected\-Control\-Face@{remove\-Selected\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2031,7 +2097,7 @@ Definition at line 524 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_aef09d950b0970bd825a984effeee6224}
 
 
-Definition at line 562 of file subdivsurface.\-cpp.
+Definition at line 1107 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5be891c06dc5e441511fbdb73d71efeb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!remove\-Selected\-Control\-Point@{remove\-Selected\-Control\-Point}}
 \index{remove\-Selected\-Control\-Point@{remove\-Selected\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2042,7 +2108,7 @@ Definition at line 562 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a5be891c06dc5e441511fbdb73d71efeb}
 
 
-Definition at line 581 of file subdivsurface.\-cpp.
+Definition at line 1126 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3af3a30b53d867b2b25f9ac9290a264a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!request\-New\-Layer\-I\-D@{request\-New\-Layer\-I\-D}}
 \index{request\-New\-Layer\-I\-D@{request\-New\-Layer\-I\-D}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2053,7 +2119,7 @@ Definition at line 581 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a3af3a30b53d867b2b25f9ac9290a264a}
 
 
-Definition at line 588 of file subdivsurface.\-cpp.
+Definition at line 1133 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a6e6254ecc6fcbdadf1ff4f646caa1d59}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!save\-Binary@{save\-Binary}}
 \index{save\-Binary@{save\-Binary}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2064,7 +2130,7 @@ Definition at line 588 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a6e6254ecc6fcbdadf1ff4f646caa1d59}
 
 
-Definition at line 2616 of file subdivsurface.\-cpp.
+Definition at line 3152 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a77328f442672d72b4f9f1053b2cb2871}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!save\-To\-Stream@{save\-To\-Stream}}
 \index{save\-To\-Stream@{save\-To\-Stream}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2075,7 +2141,7 @@ Definition at line 2616 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a77328f442672d72b4f9f1053b2cb2871}
 
 
-Definition at line 2644 of file subdivsurface.\-cpp.
+Definition at line 3180 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a99bda5b49300775eda1df60451412686}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!selection\-Delete@{selection\-Delete}}
 \index{selection\-Delete@{selection\-Delete}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2086,15 +2152,8 @@ Definition at line 2644 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a99bda5b49300775eda1df60451412686}
 
 
-Definition at line 2664 of file subdivsurface.\-cpp.
+Definition at line 3200 of file subdivsurface.\-cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionSurface_a83bf6f16944165a6e96a1f9387b783e7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!select\-Item@{select\-Item}}
-\index{select\-Item@{select\-Item}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
-\subsubsection[{select\-Item}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::select\-Item (
-\begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Base} $\ast$}]{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [signal]}}}\label{classShipCAD_1_1SubdivisionSurface_a83bf6f16944165a6e96a1f9387b783e7}
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a69bafa71111e562a52a089be99b47871}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Active\-Layer@{set\-Active\-Layer}}
 \index{set\-Active\-Layer@{set\-Active\-Layer}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{set\-Active\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Surface\-::set\-Active\-Layer (
@@ -2104,7 +2163,7 @@ Definition at line 2664 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a69bafa71111e562a52a089be99b47871}
 
 
-Definition at line 594 of file subdivsurface.\-cpp.
+Definition at line 1144 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aec5073750762d1f8c3ab2107a742f4a5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Build@{set\-Build}}
 \index{set\-Build@{set\-Build}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2119,7 +2178,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1Entity_a1889198398f42bb7f77a233403
 
 
 
-Definition at line 600 of file subdivsurface.\-cpp.
+Definition at line 1150 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af0de3c1d862ddb2466effbcff0189845}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Curvature\-Scale@{set\-Curvature\-Scale}}
 \index{set\-Curvature\-Scale@{set\-Curvature\-Scale}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2130,7 +2189,7 @@ Definition at line 600 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_af0de3c1d862ddb2466effbcff0189845}
 
 
-Definition at line 237 of file subdivsurface.\-h.
+Definition at line 244 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a53271216c1be89154c08d2b2841f9a60}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Desired\-Subdivision\-Level@{set\-Desired\-Subdivision\-Level}}
 \index{set\-Desired\-Subdivision\-Level@{set\-Desired\-Subdivision\-Level}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2141,7 +2200,7 @@ Definition at line 237 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a53271216c1be89154c08d2b2841f9a60}
 
 
-Definition at line 614 of file subdivsurface.\-cpp.
+Definition at line 1179 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3605a409a102a18714e9ad7d028e7f33}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Draw\-Mirror@{set\-Draw\-Mirror}}
 \index{set\-Draw\-Mirror@{set\-Draw\-Mirror}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2152,7 +2211,7 @@ Definition at line 614 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a3605a409a102a18714e9ad7d028e7f33}
 
 
-Definition at line 262 of file subdivsurface.\-h.
+Definition at line 269 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aa72a8cf7c5bddaaf24ec41ad3480fe70}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Last\-Used\-Layer\-I\-D@{set\-Last\-Used\-Layer\-I\-D}}
 \index{set\-Last\-Used\-Layer\-I\-D@{set\-Last\-Used\-Layer\-I\-D}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2163,7 +2222,7 @@ Definition at line 262 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_aa72a8cf7c5bddaaf24ec41ad3480fe70}
 
 
-Definition at line 226 of file subdivsurface.\-h.
+Definition at line 232 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a81d5637d3b405da5975eb8e86d058bcd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Mainframe\-Location@{set\-Mainframe\-Location}}
 \index{set\-Mainframe\-Location@{set\-Mainframe\-Location}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2174,7 +2233,7 @@ Definition at line 226 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a81d5637d3b405da5975eb8e86d058bcd}
 
 
-Definition at line 244 of file subdivsurface.\-h.
+Definition at line 251 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5614a6ea5e1b67ec516328d64574cd9e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Selected\-Control\-Curve@{set\-Selected\-Control\-Curve}}
 \index{set\-Selected\-Control\-Curve@{set\-Selected\-Control\-Curve}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2185,7 +2244,7 @@ Definition at line 244 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a5614a6ea5e1b67ec516328d64574cd9e}
 
 
-Definition at line 531 of file subdivsurface.\-cpp.
+Definition at line 1076 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ae1ceb8323935d0734fe4dc9c324aca16}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Selected\-Control\-Edge@{set\-Selected\-Control\-Edge}}
 \index{set\-Selected\-Control\-Edge@{set\-Selected\-Control\-Edge}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2196,7 +2255,7 @@ Definition at line 531 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ae1ceb8323935d0734fe4dc9c324aca16}
 
 
-Definition at line 512 of file subdivsurface.\-cpp.
+Definition at line 1057 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ab21694a435e0c0dd6139de28ae543254}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Selected\-Control\-Face@{set\-Selected\-Control\-Face}}
 \index{set\-Selected\-Control\-Face@{set\-Selected\-Control\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2207,7 +2266,7 @@ Definition at line 512 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ab21694a435e0c0dd6139de28ae543254}
 
 
-Definition at line 550 of file subdivsurface.\-cpp.
+Definition at line 1095 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a65cc43d93da8ed72af631e893057c773}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Selected\-Control\-Point@{set\-Selected\-Control\-Point}}
 \index{set\-Selected\-Control\-Point@{set\-Selected\-Control\-Point}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2218,7 +2277,7 @@ Definition at line 550 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a65cc43d93da8ed72af631e893057c773}
 
 
-Definition at line 569 of file subdivsurface.\-cpp.
+Definition at line 1114 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a797d9b728f794b7f2fc61f1c51dacc06}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Shade\-Under\-Water@{set\-Shade\-Under\-Water}}
 \index{set\-Shade\-Under\-Water@{set\-Shade\-Under\-Water}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2229,7 +2288,7 @@ Definition at line 569 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a797d9b728f794b7f2fc61f1c51dacc06}
 
 
-Definition at line 258 of file subdivsurface.\-h.
+Definition at line 265 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aabf54bc152176697a82c0eb6e47f5981}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Show\-Control\-Curves@{set\-Show\-Control\-Curves}}
 \index{set\-Show\-Control\-Curves@{set\-Show\-Control\-Curves}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2240,7 +2299,7 @@ Definition at line 258 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_aabf54bc152176697a82c0eb6e47f5981}
 
 
-Definition at line 260 of file subdivsurface.\-h.
+Definition at line 267 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af5380f1a7932b23a5fbf400c85542381}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Show\-Control\-Net@{set\-Show\-Control\-Net}}
 \index{set\-Show\-Control\-Net@{set\-Show\-Control\-Net}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2251,7 +2310,7 @@ Definition at line 260 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_af5380f1a7932b23a5fbf400c85542381}
 
 
-Definition at line 259 of file subdivsurface.\-h.
+Definition at line 266 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abf6fe62614aadf1cdd4f26fb4d3fc441}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Show\-Curvature@{set\-Show\-Curvature}}
 \index{set\-Show\-Curvature@{set\-Show\-Curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2262,7 +2321,7 @@ Definition at line 259 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_abf6fe62614aadf1cdd4f26fb4d3fc441}
 
 
-Definition at line 257 of file subdivsurface.\-h.
+Definition at line 264 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5a4e5acd1bfc4d845d28513dd2dbc0cd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Show\-Interior\-Edges@{set\-Show\-Interior\-Edges}}
 \index{set\-Show\-Interior\-Edges@{set\-Show\-Interior\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2273,7 +2332,7 @@ Definition at line 257 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a5a4e5acd1bfc4d845d28513dd2dbc0cd}
 
 
-Definition at line 261 of file subdivsurface.\-h.
+Definition at line 268 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a678530145785bd366316b35d2bd0ab67}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Show\-Normals@{set\-Show\-Normals}}
 \index{set\-Show\-Normals@{set\-Show\-Normals}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2284,7 +2343,7 @@ Definition at line 261 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a678530145785bd366316b35d2bd0ab67}
 
 
-Definition at line 263 of file subdivsurface.\-h.
+Definition at line 270 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a048dce00d2ff87aa5b31319ea41f565a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Subdivision\-Mode@{set\-Subdivision\-Mode}}
 \index{set\-Subdivision\-Mode@{set\-Subdivision\-Mode}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2295,7 +2354,18 @@ Definition at line 263 of file subdivsurface.\-h.
 )}}\label{classShipCAD_1_1SubdivisionSurface_a048dce00d2ff87aa5b31319ea41f565a}
 
 
-Definition at line 624 of file subdivsurface.\-cpp.
+Definition at line 1189 of file subdivsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionSurface_a0b6eee9984eefa4b0c3d1f229eb474ed}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Under\-Water\-Color@{set\-Under\-Water\-Color}}
+\index{set\-Under\-Water\-Color@{set\-Under\-Water\-Color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{set\-Under\-Water\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::set\-Under\-Water\-Color (
+\begin{DoxyParamCaption}
+\item[{const Q\-Color \&}]{c}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a0b6eee9984eefa4b0c3d1f229eb474ed}
+
+
+Definition at line 286 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ae063d1a2be4e227aaefb8a3578d3f52f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!set\-Waterline\-Plane@{set\-Waterline\-Plane}}
 \index{set\-Waterline\-Plane@{set\-Waterline\-Plane}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2306,7 +2376,7 @@ Definition at line 624 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ae063d1a2be4e227aaefb8a3578d3f52f}
 
 
-Definition at line 242 of file subdivsurface.\-h.
+Definition at line 249 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_adfb570208c96bf8bc3426a43fda5fe9f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!shade\-Under\-Water@{shade\-Under\-Water}}
 \index{shade\-Under\-Water@{shade\-Under\-Water}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2317,7 +2387,19 @@ Definition at line 242 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_adfb570208c96bf8bc3426a43fda5fe9f}
 
 
-Definition at line 250 of file subdivsurface.\-h.
+Definition at line 257 of file subdivsurface.\-h.
+
+\hypertarget{classShipCAD_1_1SubdivisionSurface_ae04c14926cffce82e2ca6f0566484684}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!shoot\-Pick\-Ray@{shoot\-Pick\-Ray}}
+\index{shoot\-Pick\-Ray@{shoot\-Pick\-Ray}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{shoot\-Pick\-Ray}]{\setlength{\rightskip}{0pt plus 5cm}std\-::multimap$<$ float, {\bf Subdivision\-Base} $\ast$ $>$ Subdivision\-Surface\-::shoot\-Pick\-Ray (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp, }
+\item[{const {\bf Pick\-Ray} \&}]{ray}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1SubdivisionSurface_ae04c14926cffce82e2ca6f0566484684}
+
+
+Definition at line 1165 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac94824bf3a085f9785bc49e659077156}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!show\-Control\-Curves@{show\-Control\-Curves}}
 \index{show\-Control\-Curves@{show\-Control\-Curves}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2328,7 +2410,7 @@ Definition at line 250 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ac94824bf3a085f9785bc49e659077156}
 
 
-Definition at line 252 of file subdivsurface.\-h.
+Definition at line 259 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a1886c21030a3c5c85797603d2d00c906}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!show\-Control\-Net@{show\-Control\-Net}}
 \index{show\-Control\-Net@{show\-Control\-Net}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2339,7 +2421,7 @@ Definition at line 252 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a1886c21030a3c5c85797603d2d00c906}
 
 
-Definition at line 251 of file subdivsurface.\-h.
+Definition at line 258 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac7c4656b21e0aaa01525be5b7be84024}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!show\-Curvature@{show\-Curvature}}
 \index{show\-Curvature@{show\-Curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2350,7 +2432,7 @@ Definition at line 251 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_ac7c4656b21e0aaa01525be5b7be84024}
 
 
-Definition at line 249 of file subdivsurface.\-h.
+Definition at line 256 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a84834b65650ff350e993c00dccabab46}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!show\-Interior\-Edges@{show\-Interior\-Edges}}
 \index{show\-Interior\-Edges@{show\-Interior\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2361,7 +2443,7 @@ Definition at line 249 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a84834b65650ff350e993c00dccabab46}
 
 
-Definition at line 253 of file subdivsurface.\-h.
+Definition at line 260 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a57a2abe37fef2cee7ca6c15ae5173672}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!show\-Normals@{show\-Normals}}
 \index{show\-Normals@{show\-Normals}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2372,7 +2454,7 @@ Definition at line 253 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionSurface_a57a2abe37fef2cee7ca6c15ae5173672}
 
 
-Definition at line 255 of file subdivsurface.\-h.
+Definition at line 262 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2b270b878bb810d51bd7adf689db5366}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!sort\-Edges@{sort\-Edges}}
 \index{sort\-Edges@{sort\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2383,7 +2465,7 @@ Definition at line 255 of file subdivsurface.\-h.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a2b270b878bb810d51bd7adf689db5366}
 
 
-Definition at line 1822 of file subdivsurface.\-cpp.
+Definition at line 2357 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abbabb02057a2e66d2a37ec84696788e9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!sort\-Edges@{sort\-Edges}}
 \index{sort\-Edges@{sort\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2395,7 +2477,7 @@ Definition at line 1822 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_abbabb02057a2e66d2a37ec84696788e9}
 
 
-Definition at line 1853 of file subdivsurface.\-cpp.
+Definition at line 2388 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8650bf95c9eb2de0e0b1342bfacbe82a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!sort\-Edges@{sort\-Edges}}
 \index{sort\-Edges@{sort\-Edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2406,7 +2488,7 @@ Definition at line 1853 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a8650bf95c9eb2de0e0b1342bfacbe82a}
 
 
-Definition at line 1868 of file subdivsurface.\-cpp.
+Definition at line 2403 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ad9970c667fa8e33ff8b35eb6a48b6a2e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!subdivide@{subdivide}}
 \index{subdivide@{subdivide}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2417,7 +2499,7 @@ Definition at line 1868 of file subdivsurface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionSurface_ad9970c667fa8e33ff8b35eb6a48b6a2e}
 
 
-Definition at line 2701 of file subdivsurface.\-cpp.
+Definition at line 3237 of file subdivsurface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a5b6204bb0648f2e85cbf07ffbac4bd42}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!valid\-Face@{valid\-Face}}
 \index{valid\-Face@{valid\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
@@ -2430,7 +2512,30 @@ Definition at line 2701 of file subdivsurface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a5b6204bb0648f2e85cbf07ffbac4bd42}
 
 
-Definition at line 890 of file subdivsurface.\-cpp.
+Definition at line 267 of file subdivsurface.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionSurface_a9235b2787dfaaaa3d5f843c8046d1a9e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!valid\-Face@{valid\-Face}}
+\index{valid\-Face@{valid\-Face}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{valid\-Face}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\-Surface\-::valid\-Face (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\-Control\-Face} $\ast$}]{face, }
+\item[{std\-::vector$<$ {\bf Subdivision\-Control\-Face} $\ast$ $>$ \&}]{faces, }
+\item[{std\-::vector$<$ {\bf Subdivision\-Control\-Face} $\ast$ $>$ \&}]{tmpfaces}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a9235b2787dfaaaa3d5f843c8046d1a9e}
+
+
+Definition at line 294 of file subdivsurface.\-cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{classShipCAD_1_1SubdivisionSurface_aac5731b90dac5ab98f6153447ce63674}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!Preferences@{Preferences}}
+\index{Preferences@{Preferences}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
+\subsubsection[{Preferences}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Preferences}\hspace{0.3cm}{\ttfamily [friend]}}}\label{classShipCAD_1_1SubdivisionSurface_aac5731b90dac5ab98f6153447ce63674}
+
+
+Definition at line 433 of file subdivsurface.\-h.
 
 
 
@@ -2440,378 +2545,378 @@ Definition at line 890 of file subdivsurface.\-cpp.
 \subsubsection[{\-\_\-active\-\_\-layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Layer}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-active\-\_\-layer\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aef766e0b62189247c0f3214c56800040}
 
 
-Definition at line 368 of file subdivsurface.\-h.
+Definition at line 394 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ae20f94c83bac02bae90a905379765b0a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-ccurve\-\_\-pool@{\-\_\-ccurve\-\_\-pool}}
 \index{\-\_\-ccurve\-\_\-pool@{\-\_\-ccurve\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-ccurve\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-ccurve\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ae20f94c83bac02bae90a905379765b0a}
 
 
-Definition at line 401 of file subdivsurface.\-h.
+Definition at line 427 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a413da68890d958a7994d09e0906be102}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-cedge\-\_\-pool@{\-\_\-cedge\-\_\-pool}}
 \index{\-\_\-cedge\-\_\-pool@{\-\_\-cedge\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-cedge\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-cedge\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a413da68890d958a7994d09e0906be102}
 
 
-Definition at line 399 of file subdivsurface.\-h.
+Definition at line 425 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a6bb58101a0ee9c4f06e1fdf86f0cded1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-cface\-\_\-pool@{\-\_\-cface\-\_\-pool}}
 \index{\-\_\-cface\-\_\-pool@{\-\_\-cface\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-cface\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-cface\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a6bb58101a0ee9c4f06e1fdf86f0cded1}
 
 
-Definition at line 400 of file subdivsurface.\-h.
+Definition at line 426 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_af0385bc183e805c1adc23750747a43d7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-control\-\_\-curve\-\_\-color@{\-\_\-control\-\_\-curve\-\_\-color}}
 \index{\-\_\-control\-\_\-curve\-\_\-color@{\-\_\-control\-\_\-curve\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-control\-\_\-curve\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-control\-\_\-curve\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_af0385bc183e805c1adc23750747a43d7}
 
 
-Definition at line 361 of file subdivsurface.\-h.
+Definition at line 387 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a72da0f8a60e186e10b88f48950a490e9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-control\-\_\-curves@{\-\_\-control\-\_\-curves}}
 \index{\-\_\-control\-\_\-curves@{\-\_\-control\-\_\-curves}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-control\-\_\-curves}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Curve}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-control\-\_\-curves\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a72da0f8a60e186e10b88f48950a490e9}
 
 
-Definition at line 377 of file subdivsurface.\-h.
+Definition at line 403 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac6b2950f05e07f5a7814b278a9dc1513}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-control\-\_\-edges@{\-\_\-control\-\_\-edges}}
 \index{\-\_\-control\-\_\-edges@{\-\_\-control\-\_\-edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-control\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Edge}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-control\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ac6b2950f05e07f5a7814b278a9dc1513}
 
 
-Definition at line 373 of file subdivsurface.\-h.
+Definition at line 399 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a69c240904f61f8181a57559d4fa548c0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-control\-\_\-faces@{\-\_\-control\-\_\-faces}}
 \index{\-\_\-control\-\_\-faces@{\-\_\-control\-\_\-faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-control\-\_\-faces}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Face}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-control\-\_\-faces\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a69c240904f61f8181a57559d4fa548c0}
 
 
-Definition at line 375 of file subdivsurface.\-h.
+Definition at line 401 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a7ad820b9d312c8ecde939b5345690d35}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-control\-\_\-point\-\_\-size@{\-\_\-control\-\_\-point\-\_\-size}}
 \index{\-\_\-control\-\_\-point\-\_\-size@{\-\_\-control\-\_\-point\-\_\-size}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-control\-\_\-point\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-control\-\_\-point\-\_\-size\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a7ad820b9d312c8ecde939b5345690d35}
 
 
-Definition at line 341 of file subdivsurface.\-h.
+Definition at line 367 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a906d5981dc482ede1bb3c7256e750945}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-control\-\_\-points@{\-\_\-control\-\_\-points}}
 \index{\-\_\-control\-\_\-points@{\-\_\-control\-\_\-points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-control\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Point}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-control\-\_\-points\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a906d5981dc482ede1bb3c7256e750945}
 
 
-Definition at line 371 of file subdivsurface.\-h.
+Definition at line 397 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aba9fae36ed19b802707c748396c1fd63}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-corner\-\_\-point\-\_\-color@{\-\_\-corner\-\_\-point\-\_\-color}}
 \index{\-\_\-corner\-\_\-point\-\_\-color@{\-\_\-corner\-\_\-point\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-corner\-\_\-point\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-corner\-\_\-point\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aba9fae36ed19b802707c748396c1fd63}
 
 
-Definition at line 355 of file subdivsurface.\-h.
+Definition at line 381 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abd895a11906e0d5b5f8f4a5fc090b428}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-cpoint\-\_\-pool@{\-\_\-cpoint\-\_\-pool}}
 \index{\-\_\-cpoint\-\_\-pool@{\-\_\-cpoint\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-cpoint\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-cpoint\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_abd895a11906e0d5b5f8f4a5fc090b428}
 
 
-Definition at line 398 of file subdivsurface.\-h.
+Definition at line 424 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aaa3b772931e04f8650db2d005ae05d6a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-crease\-\_\-color@{\-\_\-crease\-\_\-color}}
 \index{\-\_\-crease\-\_\-color@{\-\_\-crease\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-crease\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-crease\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aaa3b772931e04f8650db2d005ae05d6a}
 
 
-Definition at line 348 of file subdivsurface.\-h.
+Definition at line 374 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a6106aee9d086aa377d9a3a6a6291b54c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-crease\-\_\-edge\-\_\-color@{\-\_\-crease\-\_\-edge\-\_\-color}}
 \index{\-\_\-crease\-\_\-edge\-\_\-color@{\-\_\-crease\-\_\-edge\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-crease\-\_\-edge\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-crease\-\_\-edge\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a6106aee9d086aa377d9a3a6a6291b54c}
 
 
-Definition at line 349 of file subdivsurface.\-h.
+Definition at line 375 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a9602182d9a123dc267d34a2cd1b45ed7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-crease\-\_\-point\-\_\-color@{\-\_\-crease\-\_\-point\-\_\-color}}
 \index{\-\_\-crease\-\_\-point\-\_\-color@{\-\_\-crease\-\_\-point\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-crease\-\_\-point\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-crease\-\_\-point\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a9602182d9a123dc267d34a2cd1b45ed7}
 
 
-Definition at line 353 of file subdivsurface.\-h.
+Definition at line 379 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a9e5424746eced5d0a06ccbe4055bd06f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-current\-\_\-subdiv\-\_\-level@{\-\_\-current\-\_\-subdiv\-\_\-level}}
 \index{\-\_\-current\-\_\-subdiv\-\_\-level@{\-\_\-current\-\_\-subdiv\-\_\-level}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-current\-\_\-subdiv\-\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-current\-\_\-subdiv\-\_\-level\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a9e5424746eced5d0a06ccbe4055bd06f}
 
 
-Definition at line 340 of file subdivsurface.\-h.
+Definition at line 366 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a05a83d21996abb065abe7f3109f35a73}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-curvature\-\_\-color@{\-\_\-curvature\-\_\-color}}
 \index{\-\_\-curvature\-\_\-color@{\-\_\-curvature\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-curvature\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-curvature\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a05a83d21996abb065abe7f3109f35a73}
 
 
-Definition at line 360 of file subdivsurface.\-h.
+Definition at line 386 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_acf241b41a8ca897306decbbab8e44c69}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-curvature\-\_\-scale@{\-\_\-curvature\-\_\-scale}}
 \index{\-\_\-curvature\-\_\-scale@{\-\_\-curvature\-\_\-scale}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-curvature\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-curvature\-\_\-scale\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_acf241b41a8ca897306decbbab8e44c69}
 
 
-Definition at line 343 of file subdivsurface.\-h.
+Definition at line 369 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a45054fd2d0065a342828bcd675e91307}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-dart\-\_\-point\-\_\-color@{\-\_\-dart\-\_\-point\-\_\-color}}
 \index{\-\_\-dart\-\_\-point\-\_\-color@{\-\_\-dart\-\_\-point\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-dart\-\_\-point\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-dart\-\_\-point\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a45054fd2d0065a342828bcd675e91307}
 
 
-Definition at line 356 of file subdivsurface.\-h.
+Definition at line 382 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aeec20f09be87e6d57d88f903853ca96f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-desired\-\_\-subdiv\-\_\-level@{\-\_\-desired\-\_\-subdiv\-\_\-level}}
 \index{\-\_\-desired\-\_\-subdiv\-\_\-level@{\-\_\-desired\-\_\-subdiv\-\_\-level}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-desired\-\_\-subdiv\-\_\-level}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-desired\-\_\-subdiv\-\_\-level\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aeec20f09be87e6d57d88f903853ca96f}
 
 
-Definition at line 339 of file subdivsurface.\-h.
+Definition at line 365 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a4ee73ae98bddfe1819419afd1d5ba029}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-draw\-\_\-mirror@{\-\_\-draw\-\_\-mirror}}
 \index{\-\_\-draw\-\_\-mirror@{\-\_\-draw\-\_\-mirror}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-draw\-\_\-mirror}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-draw\-\_\-mirror\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a4ee73ae98bddfe1819419afd1d5ba029}
 
 
-Definition at line 332 of file subdivsurface.\-h.
+Definition at line 358 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aced3b075062f92e55b3a89729cad3fd2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-edge\-\_\-color@{\-\_\-edge\-\_\-color}}
 \index{\-\_\-edge\-\_\-color@{\-\_\-edge\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-edge\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-edge\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aced3b075062f92e55b3a89729cad3fd2}
 
 
-Definition at line 351 of file subdivsurface.\-h.
+Definition at line 377 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a7a7e25c91a06ca2b3f3d27a5ca310f08}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-edge\-\_\-pool@{\-\_\-edge\-\_\-pool}}
 \index{\-\_\-edge\-\_\-pool@{\-\_\-edge\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-edge\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-edge\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a7a7e25c91a06ca2b3f3d27a5ca310f08}
 
 
-Definition at line 404 of file subdivsurface.\-h.
+Definition at line 430 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a709c44779394f03c06c16adba6187ecd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-edges@{\-\_\-edges}}
 \index{\-\_\-edges@{\-\_\-edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Edge}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a709c44779394f03c06c16adba6187ecd}
 
 
-Definition at line 385 of file subdivsurface.\-h.
+Definition at line 411 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a2f746c1c19594b1baa03e9c49c9ffd0a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-face\-\_\-pool@{\-\_\-face\-\_\-pool}}
 \index{\-\_\-face\-\_\-pool@{\-\_\-face\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-face\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-face\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a2f746c1c19594b1baa03e9c49c9ffd0a}
 
 
-Definition at line 405 of file subdivsurface.\-h.
+Definition at line 431 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a20cbcc689f7b2f8af21f502748521185}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-gaus\-\_\-curvature@{\-\_\-gaus\-\_\-curvature}}
 \index{\-\_\-gaus\-\_\-curvature@{\-\_\-gaus\-\_\-curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-gaus\-\_\-curvature}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$float$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-gaus\-\_\-curvature\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a20cbcc689f7b2f8af21f502748521185}
 
 
-Definition at line 381 of file subdivsurface.\-h.
+Definition at line 407 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a828f85ee49e1481e95f61b919070842c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-initialized@{\-\_\-initialized}}
 \index{\-\_\-initialized@{\-\_\-initialized}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-initialized}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-initialized\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a828f85ee49e1481e95f61b919070842c}
 
 
-Definition at line 330 of file subdivsurface.\-h.
+Definition at line 356 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a0ba5c4e08110400890eb60140f3e2058}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-last\-\_\-used\-\_\-layer\-I\-D@{\-\_\-last\-\_\-used\-\_\-layer\-I\-D}}
 \index{\-\_\-last\-\_\-used\-\_\-layer\-I\-D@{\-\_\-last\-\_\-used\-\_\-layer\-I\-D}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-last\-\_\-used\-\_\-layer\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-last\-\_\-used\-\_\-layer\-I\-D\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a0ba5c4e08110400890eb60140f3e2058}
 
 
-Definition at line 366 of file subdivsurface.\-h.
+Definition at line 392 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a0833012e177dfd6cdb71174cb7baed17}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-layer\-\_\-color@{\-\_\-layer\-\_\-color}}
 \index{\-\_\-layer\-\_\-color@{\-\_\-layer\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-layer\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-layer\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a0833012e177dfd6cdb71174cb7baed17}
 
 
-Definition at line 357 of file subdivsurface.\-h.
+Definition at line 383 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a953485df23e6f7393868b436384debef}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-layer\-\_\-pool@{\-\_\-layer\-\_\-pool}}
 \index{\-\_\-layer\-\_\-pool@{\-\_\-layer\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-layer\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-layer\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a953485df23e6f7393868b436384debef}
 
 
-Definition at line 402 of file subdivsurface.\-h.
+Definition at line 428 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a87c6c8b63f203d788b8f4b361c814c96}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-layers@{\-\_\-layers}}
 \index{\-\_\-layers@{\-\_\-layers}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-layers}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Layer}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-layers\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a87c6c8b63f203d788b8f4b361c814c96}
 
 
-Definition at line 379 of file subdivsurface.\-h.
+Definition at line 405 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aacd1616b97a4425cc9b1051e01785596}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-leak\-\_\-color@{\-\_\-leak\-\_\-color}}
 \index{\-\_\-leak\-\_\-color@{\-\_\-leak\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-leak\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-leak\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aacd1616b97a4425cc9b1051e01785596}
 
 
-Definition at line 359 of file subdivsurface.\-h.
+Definition at line 385 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3ea08aa45ad221a1b485010ce5e8dee7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-main\-\_\-frame\-\_\-location@{\-\_\-main\-\_\-frame\-\_\-location}}
 \index{\-\_\-main\-\_\-frame\-\_\-location@{\-\_\-main\-\_\-frame\-\_\-location}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-main\-\_\-frame\-\_\-location}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-main\-\_\-frame\-\_\-location\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a3ea08aa45ad221a1b485010ce5e8dee7}
 
 
-Definition at line 346 of file subdivsurface.\-h.
+Definition at line 372 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a1658374385131656d359ff373d2cb08c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-max\-\_\-gaus\-\_\-curvature@{\-\_\-max\-\_\-gaus\-\_\-curvature}}
 \index{\-\_\-max\-\_\-gaus\-\_\-curvature@{\-\_\-max\-\_\-gaus\-\_\-curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-max\-\_\-gaus\-\_\-curvature}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-max\-\_\-gaus\-\_\-curvature\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a1658374385131656d359ff373d2cb08c}
 
 
-Definition at line 345 of file subdivsurface.\-h.
+Definition at line 371 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac343c30f7e4e6a5926fdfed7da3f9385}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-min\-\_\-gaus\-\_\-curvature@{\-\_\-min\-\_\-gaus\-\_\-curvature}}
 \index{\-\_\-min\-\_\-gaus\-\_\-curvature@{\-\_\-min\-\_\-gaus\-\_\-curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-min\-\_\-gaus\-\_\-curvature}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-min\-\_\-gaus\-\_\-curvature\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ac343c30f7e4e6a5926fdfed7da3f9385}
 
 
-Definition at line 344 of file subdivsurface.\-h.
+Definition at line 370 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a62cbe24451a794c0da3660ed0f1066ca}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-normal\-\_\-color@{\-\_\-normal\-\_\-color}}
 \index{\-\_\-normal\-\_\-color@{\-\_\-normal\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-normal\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-normal\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a62cbe24451a794c0da3660ed0f1066ca}
 
 
-Definition at line 358 of file subdivsurface.\-h.
+Definition at line 384 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a98af3f1b9fa4412756cadf4fe561f062}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-point\-\_\-pool@{\-\_\-point\-\_\-pool}}
 \index{\-\_\-point\-\_\-pool@{\-\_\-point\-\_\-pool}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-point\-\_\-pool}]{\setlength{\rightskip}{0pt plus 5cm}boost\-::pool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-point\-\_\-pool\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a98af3f1b9fa4412756cadf4fe561f062}
 
 
-Definition at line 403 of file subdivsurface.\-h.
+Definition at line 429 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ab03b7f4694a63eeb3ebb831484cb1bff}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-points@{\-\_\-points}}
 \index{\-\_\-points@{\-\_\-points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Point}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-points\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ab03b7f4694a63eeb3ebb831484cb1bff}
 
 
-Definition at line 384 of file subdivsurface.\-h.
+Definition at line 410 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_afee1585e376c34aa9b3be47f3a174cdb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-regular\-\_\-point\-\_\-color@{\-\_\-regular\-\_\-point\-\_\-color}}
 \index{\-\_\-regular\-\_\-point\-\_\-color@{\-\_\-regular\-\_\-point\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-regular\-\_\-point\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-regular\-\_\-point\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_afee1585e376c34aa9b3be47f3a174cdb}
 
 
-Definition at line 354 of file subdivsurface.\-h.
+Definition at line 380 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aeac6a33f098ee8dadfc9482edc1a60a5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-sel\-\_\-control\-\_\-curves@{\-\_\-sel\-\_\-control\-\_\-curves}}
 \index{\-\_\-sel\-\_\-control\-\_\-curves@{\-\_\-sel\-\_\-control\-\_\-curves}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-sel\-\_\-control\-\_\-curves}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Curve}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-sel\-\_\-control\-\_\-curves\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aeac6a33f098ee8dadfc9482edc1a60a5}
 
 
-Definition at line 395 of file subdivsurface.\-h.
+Definition at line 421 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a27011a827021fda5a4f2bb8828e157ca}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-sel\-\_\-control\-\_\-edges@{\-\_\-sel\-\_\-control\-\_\-edges}}
 \index{\-\_\-sel\-\_\-control\-\_\-edges@{\-\_\-sel\-\_\-control\-\_\-edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-sel\-\_\-control\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Edge}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-sel\-\_\-control\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a27011a827021fda5a4f2bb8828e157ca}
 
 
-Definition at line 393 of file subdivsurface.\-h.
+Definition at line 419 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a612889fd7e746cca042c63b2ab2cd110}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-sel\-\_\-control\-\_\-faces@{\-\_\-sel\-\_\-control\-\_\-faces}}
 \index{\-\_\-sel\-\_\-control\-\_\-faces@{\-\_\-sel\-\_\-control\-\_\-faces}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-sel\-\_\-control\-\_\-faces}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Face}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-sel\-\_\-control\-\_\-faces\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a612889fd7e746cca042c63b2ab2cd110}
 
 
-Definition at line 394 of file subdivsurface.\-h.
+Definition at line 420 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_aefa02ffcdf17a06acd80f4274e509981}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-sel\-\_\-control\-\_\-points@{\-\_\-sel\-\_\-control\-\_\-points}}
 \index{\-\_\-sel\-\_\-control\-\_\-points@{\-\_\-sel\-\_\-control\-\_\-points}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-sel\-\_\-control\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Control\-Point}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-sel\-\_\-control\-\_\-points\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_aefa02ffcdf17a06acd80f4274e509981}
 
 
-Definition at line 392 of file subdivsurface.\-h.
+Definition at line 418 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a3cfcbbe769216c753330f71e57a4cf4d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-selected\-\_\-color@{\-\_\-selected\-\_\-color}}
 \index{\-\_\-selected\-\_\-color@{\-\_\-selected\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-selected\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-selected\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a3cfcbbe769216c753330f71e57a4cf4d}
 
 
-Definition at line 352 of file subdivsurface.\-h.
+Definition at line 378 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ac3294d41679de31e588d603e3428565e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-shade\-\_\-under\-\_\-water@{\-\_\-shade\-\_\-under\-\_\-water}}
 \index{\-\_\-shade\-\_\-under\-\_\-water@{\-\_\-shade\-\_\-under\-\_\-water}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-shade\-\_\-under\-\_\-water}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-shade\-\_\-under\-\_\-water\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ac3294d41679de31e588d603e3428565e}
 
 
-Definition at line 333 of file subdivsurface.\-h.
+Definition at line 359 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ae240b2177e0af0bd1512c94b524f22dd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-show\-\_\-control\-\_\-curves@{\-\_\-show\-\_\-control\-\_\-curves}}
 \index{\-\_\-show\-\_\-control\-\_\-curves@{\-\_\-show\-\_\-control\-\_\-curves}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-show\-\_\-control\-\_\-curves}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-show\-\_\-control\-\_\-curves\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ae240b2177e0af0bd1512c94b524f22dd}
 
 
-Definition at line 336 of file subdivsurface.\-h.
+Definition at line 362 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_ab9bb374cf1368b4a2c779f953bca88a8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-show\-\_\-control\-\_\-net@{\-\_\-show\-\_\-control\-\_\-net}}
 \index{\-\_\-show\-\_\-control\-\_\-net@{\-\_\-show\-\_\-control\-\_\-net}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-show\-\_\-control\-\_\-net}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-show\-\_\-control\-\_\-net\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_ab9bb374cf1368b4a2c779f953bca88a8}
 
 
-Definition at line 329 of file subdivsurface.\-h.
+Definition at line 355 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_abe2167085eac50c986b074635b610462}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-show\-\_\-curvature@{\-\_\-show\-\_\-curvature}}
 \index{\-\_\-show\-\_\-curvature@{\-\_\-show\-\_\-curvature}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-show\-\_\-curvature}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-show\-\_\-curvature\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_abe2167085eac50c986b074635b610462}
 
 
-Definition at line 335 of file subdivsurface.\-h.
+Definition at line 361 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a4458d02152bd97495938586c89e6d9e2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-show\-\_\-interior\-\_\-edges@{\-\_\-show\-\_\-interior\-\_\-edges}}
 \index{\-\_\-show\-\_\-interior\-\_\-edges@{\-\_\-show\-\_\-interior\-\_\-edges}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-show\-\_\-interior\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-show\-\_\-interior\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a4458d02152bd97495938586c89e6d9e2}
 
 
-Definition at line 331 of file subdivsurface.\-h.
+Definition at line 357 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a0cc840743e7afcd136ab864ace158a17}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-show\-\_\-normals@{\-\_\-show\-\_\-normals}}
 \index{\-\_\-show\-\_\-normals@{\-\_\-show\-\_\-normals}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-show\-\_\-normals}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-show\-\_\-normals\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a0cc840743e7afcd136ab864ace158a17}
 
 
-Definition at line 334 of file subdivsurface.\-h.
+Definition at line 360 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a0af5c881dfa24574962f42d80da997ee}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-subdivision\-\_\-mode@{\-\_\-subdivision\-\_\-mode}}
 \index{\-\_\-subdivision\-\_\-mode@{\-\_\-subdivision\-\_\-mode}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-subdivision\-\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf subdiv\-\_\-mode\-\_\-t} Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-subdivision\-\_\-mode\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a0af5c881dfa24574962f42d80da997ee}
 
 
-Definition at line 338 of file subdivsurface.\-h.
+Definition at line 364 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a8a64eabb53fa0facaa6e59579305328b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-underwater\-\_\-color@{\-\_\-underwater\-\_\-color}}
 \index{\-\_\-underwater\-\_\-color@{\-\_\-underwater\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-underwater\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-underwater\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a8a64eabb53fa0facaa6e59579305328b}
 
 
-Definition at line 350 of file subdivsurface.\-h.
+Definition at line 376 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a762de21a330588c7bfbe081637cab2f3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-waterline\-\_\-plane@{\-\_\-waterline\-\_\-plane}}
 \index{\-\_\-waterline\-\_\-plane@{\-\_\-waterline\-\_\-plane}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-waterline\-\_\-plane}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane} Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-waterline\-\_\-plane\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a762de21a330588c7bfbe081637cab2f3}
 
 
-Definition at line 364 of file subdivsurface.\-h.
+Definition at line 390 of file subdivsurface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionSurface_a047d5d0575c944d216ada589e30ee3bd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Surface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}!\-\_\-zebra\-\_\-color@{\-\_\-zebra\-\_\-color}}
 \index{\-\_\-zebra\-\_\-color@{\-\_\-zebra\-\_\-color}!ShipCAD::SubdivisionSurface@{Ship\-C\-A\-D\-::\-Subdivision\-Surface}}
 \subsubsection[{\-\_\-zebra\-\_\-color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Surface\-::\-\_\-zebra\-\_\-color\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionSurface_a047d5d0575c944d216ada589e30ee3bd}
 
 
-Definition at line 362 of file subdivsurface.\-h.
+Definition at line 388 of file subdivsurface.\-h.
 
 
 

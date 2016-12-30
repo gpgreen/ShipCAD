@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,7 +89,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#properties">Properties</a> &#124;
 <a href="classShipCAD_1_1Entity-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ShipCAD::Entity Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -109,7 +108,7 @@ Inheritance diagram for ShipCAD::Entity:</div>
 <area href="classShipCAD_1_1Flowline.html" alt="ShipCAD::Flowline" shape="rect" coords="0,112,180,136"/>
 <area href="classShipCAD_1_1Intersection.html" title="List of curves intersecting hull. " alt="ShipCAD::Intersection" shape="rect" coords="190,112,370,136"/>
 <area href="classShipCAD_1_1NURBSurface.html" alt="ShipCAD::NURBSurface" shape="rect" coords="380,112,560,136"/>
-<area href="classShipCAD_1_1Spline.html" alt="ShipCAD::Spline" shape="rect" coords="570,112,750,136"/>
+<area href="classShipCAD_1_1Spline.html" title="Represents a spline. " alt="ShipCAD::Spline" shape="rect" coords="570,112,750,136"/>
 <area href="classShipCAD_1_1SubdivisionSurface.html" alt="ShipCAD::SubdivisionSurface" shape="rect" coords="760,112,940,136"/>
 <area href="classShipCAD_1_1Marker.html" alt="ShipCAD::Marker" shape="rect" coords="570,168,750,192"/>
 </map>
@@ -129,12 +128,24 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa62e306d991140dcd564360f8f6e7539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2571654319df6ad6841a437be7a75395"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a2571654319df6ad6841a437be7a75395">rebuild</a> ()=0</td></tr>
 <tr class="separator:a2571654319df6ad6841a437be7a75395"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a759d6dedd36bf6562fbf36e816d9a5af"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a759d6dedd36bf6562fbf36e816d9a5af">getMin</a> ()</td></tr>
-<tr class="separator:a759d6dedd36bf6562fbf36e816d9a5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3af98adafb45eb573675a8ccc44fe14e"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a3af98adafb45eb573675a8ccc44fe14e">getMax</a> ()</td></tr>
-<tr class="separator:a3af98adafb45eb573675a8ccc44fe14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a131cd27d923ba1d2658528b679b9a90c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a131cd27d923ba1d2658528b679b9a90c">isBuild</a> ()</td></tr>
-<tr class="separator:a131cd27d923ba1d2658528b679b9a90c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2761283b2ea370bf308969131ed8e1f"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#ac2761283b2ea370bf308969131ed8e1f">getColor</a> () const </td></tr>
+<tr class="separator:ac2761283b2ea370bf308969131ed8e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e0e5f174d287e807b5409b1aa5704bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a5e0e5f174d287e807b5409b1aa5704bc">setColor</a> (const QColor &amp;col)</td></tr>
+<tr class="separator:a5e0e5f174d287e807b5409b1aa5704bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf44d10747d8e1588030ef1e46155dfc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#acf44d10747d8e1588030ef1e46155dfc">getPenWidth</a> () const </td></tr>
+<tr class="separator:acf44d10747d8e1588030ef1e46155dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8146f974735c90ea6a44a0cb5fba98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a1b8146f974735c90ea6a44a0cb5fba98">setPenWidth</a> (int w)</td></tr>
+<tr class="separator:a1b8146f974735c90ea6a44a0cb5fba98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5912853854b82c79f47dd9117cc3d9bc"><td class="memItemLeft" align="right" valign="top">Qt::PenStyle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a5912853854b82c79f47dd9117cc3d9bc">getPenStyle</a> () const </td></tr>
+<tr class="separator:a5912853854b82c79f47dd9117cc3d9bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50f556f934efd5517c984b09a2e17773"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a50f556f934efd5517c984b09a2e17773">setPenStyle</a> (Qt::PenStyle style)</td></tr>
+<tr class="separator:a50f556f934efd5517c984b09a2e17773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4227afa7a356a667224cfba69a24e5"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a7c4227afa7a356a667224cfba69a24e5">getMin</a> () const </td></tr>
+<tr class="separator:a7c4227afa7a356a667224cfba69a24e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e95df651ae01a48242604262b051b3"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#ad9e95df651ae01a48242604262b051b3">getMax</a> () const </td></tr>
+<tr class="separator:ad9e95df651ae01a48242604262b051b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2f54a1745c95aa0871a8c57c114809e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#ab2f54a1745c95aa0871a8c57c114809e">isBuild</a> () const </td></tr>
+<tr class="separator:ab2f54a1745c95aa0871a8c57c114809e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1889198398f42bb7f77a2334031c3f33"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a1889198398f42bb7f77a2334031c3f33">setBuild</a> (bool val)</td></tr>
 <tr class="separator:a1889198398f42bb7f77a2334031c3f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a395d7573df06482d9deaecdc87d46944"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">dump</a> (std::ostream &amp;os) const </td></tr>
@@ -154,21 +165,6 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a150a19aa958886e9dcf7c4e0e51dcd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac53123be976cd9739ad1657573d67d97"><td class="memItemLeft" align="right" valign="top">Qt::PenStyle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#ac53123be976cd9739ad1657573d67d97">_pen_style</a></td></tr>
 <tr class="separator:ac53123be976cd9739ad1657573d67d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
-Properties</h2></td></tr>
-<tr class="memitem:a7518cde7c6a7c576827efd3d65c732e4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a7518cde7c6a7c576827efd3d65c732e4">Build</a></td></tr>
-<tr class="separator:a7518cde7c6a7c576827efd3d65c732e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a117b8362d17e9ef352555a85a6f015ff"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a117b8362d17e9ef352555a85a6f015ff">Color</a></td></tr>
-<tr class="separator:a117b8362d17e9ef352555a85a6f015ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac363c3a8e4d5553b98996d6114b6b148"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#ac363c3a8e4d5553b98996d6114b6b148">Min</a></td></tr>
-<tr class="separator:ac363c3a8e4d5553b98996d6114b6b148"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ce317d1da352757209465baebce15f8"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a1ce317d1da352757209465baebce15f8">Max</a></td></tr>
-<tr class="separator:a1ce317d1da352757209465baebce15f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95a1cc38c08e5b64a540727afb99d25a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a95a1cc38c08e5b64a540727afb99d25a">PenWidth</a></td></tr>
-<tr class="separator:a95a1cc38c08e5b64a540727afb99d25a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cbcbada188edd9d39e7c5743dc43560"><td class="memItemLeft" align="right" valign="top">Qt::PenStyle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Entity.html#a8cbcbada188edd9d39e7c5743dc43560">penstyle</a></td></tr>
-<tr class="separator:a8cbcbada188edd9d39e7c5743dc43560"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>base class for all non-surface drawable elements </p>
@@ -221,7 +217,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00078">78</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00072">72</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -247,7 +243,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a80ab3bd6372a8465d69f71034a353e06">ShipCAD::SubdivisionSurface</a>, <a class="el" href="classShipCAD_1_1Spline.html#a02967f3eee8b1755eab0d7da55c3c621">ShipCAD::Spline</a>, <a class="el" href="classShipCAD_1_1Intersection.html#a2163245dc7153d1590811ab2902d6ee4">ShipCAD::Intersection</a>, <a class="el" href="classShipCAD_1_1Flowline.html#ac3bbbbd3d853214bb9c9feeb7a12314d">ShipCAD::Flowline</a>, <a class="el" href="classShipCAD_1_1Marker.html#ac7c7eea8648562f3fa00a9e10af6ec97">ShipCAD::Marker</a>, and <a class="el" href="classShipCAD_1_1NURBSurface.html#a5013b0c1e511ea68909eef5d0473d032">ShipCAD::NURBSurface</a>.</p>
+<p>Reimplemented in <a class="el" href="classShipCAD_1_1Spline.html#a02967f3eee8b1755eab0d7da55c3c621">ShipCAD::Spline</a>, <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a80ab3bd6372a8465d69f71034a353e06">ShipCAD::SubdivisionSurface</a>, <a class="el" href="classShipCAD_1_1Intersection.html#a2163245dc7153d1590811ab2902d6ee4">ShipCAD::Intersection</a>, <a class="el" href="classShipCAD_1_1Flowline.html#ac3bbbbd3d853214bb9c9feeb7a12314d">ShipCAD::Flowline</a>, <a class="el" href="classShipCAD_1_1Marker.html#ac7c7eea8648562f3fa00a9e10af6ec97">ShipCAD::Marker</a>, and <a class="el" href="classShipCAD_1_1NURBSurface.html#a5013b0c1e511ea68909eef5d0473d032">ShipCAD::NURBSurface</a>.</p>
 
 <p>Definition at line <a class="el" href="entity_8cpp_source.html#l00047">47</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
 
@@ -303,7 +299,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00095">95</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
+<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00090">90</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
 
 </div>
 </div>
@@ -345,7 +341,32 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3af98adafb45eb573675a8ccc44fe14e"></a>
+<a class="anchor" id="ac2761283b2ea370bf308969131ed8e1f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QColor ShipCAD::Entity::getColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00080">80</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad9e95df651ae01a48242604262b051b3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -353,16 +374,16 @@ Properties</h2></td></tr>
           <td class="memname">QVector3D Entity::getMax </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00088">88</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
+<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00083">83</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a759d6dedd36bf6562fbf36e816d9a5af"></a>
+<a class="anchor" id="a7c4227afa7a356a667224cfba69a24e5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -370,29 +391,87 @@ Properties</h2></td></tr>
           <td class="memname">QVector3D Entity::getMin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00081">81</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
+<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00076">76</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a131cd27d923ba1d2658528b679b9a90c"></a>
+<a class="anchor" id="a5912853854b82c79f47dd9117cc3d9bc"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Entity::isBuild </td>
+          <td class="memname">Qt::PenStyle ShipCAD::Entity::getPenStyle </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00065">65</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00090">90</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acf44d10747d8e1588030ef1e46155dfc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ShipCAD::Entity::getPenWidth </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00085">85</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab2f54a1745c95aa0871a8c57c114809e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ShipCAD::Entity::isBuild </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00097">97</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -417,7 +496,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a259856fc21f2bc1eebbc52f10dd59469">ShipCAD::SubdivisionSurface</a>, <a class="el" href="classShipCAD_1_1Spline.html#a9b466ad7510032dafb0421f2d834bde6">ShipCAD::Spline</a>, <a class="el" href="classShipCAD_1_1Intersection.html#aed30bdca43037f72b85c4d53e234fd6c">ShipCAD::Intersection</a>, <a class="el" href="classShipCAD_1_1Flowline.html#a28e5d73316c6d2c8005428669a9e9b97">ShipCAD::Flowline</a>, and <a class="el" href="classShipCAD_1_1NURBSurface.html#a643231ea9a8f26e528a1d9a0dccf4070">ShipCAD::NURBSurface</a>.</p>
+<p>Implemented in <a class="el" href="classShipCAD_1_1Spline.html#a9b466ad7510032dafb0421f2d834bde6">ShipCAD::Spline</a>, <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a259856fc21f2bc1eebbc52f10dd59469">ShipCAD::SubdivisionSurface</a>, <a class="el" href="classShipCAD_1_1Intersection.html#aed30bdca43037f72b85c4d53e234fd6c">ShipCAD::Intersection</a>, <a class="el" href="classShipCAD_1_1Flowline.html#a28e5d73316c6d2c8005428669a9e9b97">ShipCAD::Flowline</a>, and <a class="el" href="classShipCAD_1_1NURBSurface.html#a643231ea9a8f26e528a1d9a0dccf4070">ShipCAD::NURBSurface</a>.</p>
 
 </div>
 </div>
@@ -443,9 +522,87 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aec5073750762d1f8c3ab2107a742f4a5">ShipCAD::SubdivisionSurface</a>, <a class="el" href="classShipCAD_1_1Spline.html#a6e932411f0f4463514f80011c58f5e6a">ShipCAD::Spline</a>, <a class="el" href="classShipCAD_1_1Intersection.html#a2b496f9ab21c5fc4a7b97a665b24f2b1">ShipCAD::Intersection</a>, <a class="el" href="classShipCAD_1_1NURBSurface.html#aa6fc3d060087593349ce1b5119419433">ShipCAD::NURBSurface</a>, and <a class="el" href="classShipCAD_1_1Flowline.html#ad148400a3e53b2368b37c2c7f50ec1b7">ShipCAD::Flowline</a>.</p>
+<p>Reimplemented in <a class="el" href="classShipCAD_1_1Spline.html#a6e932411f0f4463514f80011c58f5e6a">ShipCAD::Spline</a>, <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#aec5073750762d1f8c3ab2107a742f4a5">ShipCAD::SubdivisionSurface</a>, <a class="el" href="classShipCAD_1_1Intersection.html#a2b496f9ab21c5fc4a7b97a665b24f2b1">ShipCAD::Intersection</a>, <a class="el" href="classShipCAD_1_1NURBSurface.html#aa6fc3d060087593349ce1b5119419433">ShipCAD::NURBSurface</a>, and <a class="el" href="classShipCAD_1_1Flowline.html#ad148400a3e53b2368b37c2c7f50ec1b7">ShipCAD::Flowline</a>.</p>
 
-<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00070">70</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
+<p>Definition at line <a class="el" href="entity_8cpp_source.html#l00065">65</a> of file <a class="el" href="entity_8cpp_source.html">entity.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5e0e5f174d287e807b5409b1aa5704bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Entity::setColor </td>
+          <td>(</td>
+          <td class="paramtype">const QColor &amp;&#160;</td>
+          <td class="paramname"><em>col</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00082">82</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a50f556f934efd5517c984b09a2e17773"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Entity::setPenStyle </td>
+          <td>(</td>
+          <td class="paramtype">Qt::PenStyle&#160;</td>
+          <td class="paramname"><em>style</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00092">92</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1b8146f974735c90ea6a44a0cb5fba98"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Entity::setPenWidth </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00087">87</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -468,7 +625,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00098">98</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00108">108</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -490,7 +647,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00102">102</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00112">112</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -512,7 +669,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00100">100</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00110">110</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -534,7 +691,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00099">99</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00109">109</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -556,7 +713,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00103">103</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00113">113</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -578,116 +735,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00101">101</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Property Documentation</h2>
-<a class="anchor" id="a7518cde7c6a7c576827efd3d65c732e4"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ShipCAD::Entity::Build</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00068">68</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a117b8362d17e9ef352555a85a6f015ff"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QColor ShipCAD::Entity::Color</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00069">69</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a1ce317d1da352757209465baebce15f8"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QVector3D ShipCAD::Entity::Max</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00071">71</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac363c3a8e4d5553b98996d6114b6b148"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QVector3D ShipCAD::Entity::Min</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00070">70</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8cbcbada188edd9d39e7c5743dc43560"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Qt::PenStyle ShipCAD::Entity::penstyle</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00073">73</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a95a1cc38c08e5b64a540727afb99d25a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ShipCAD::Entity::PenWidth</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="entity_8h_source.html#l00072">72</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
+<p>Definition at line <a class="el" href="entity_8h_source.html#l00111">111</a> of file <a class="el" href="entity_8h_source.html">entity.h</a>.</p>
 
 </div>
 </div>
@@ -698,7 +746,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 26 2015 23:07:08 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 30 2016 01:20:55 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

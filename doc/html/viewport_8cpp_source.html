@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,10 +89,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="viewport_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*##############################################################################################</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *    ShipCAD</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *    Copyright 2015, by Greg Green &lt;ggreen@bit-builder.com&gt;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *    Original Copyright header below</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> *    ShipCAD                                                                                  *</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> *    Copyright 2015, by Greg Green &lt;ggreen@bit-builder.com&gt;                                   *</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> *    Original Copyright header below                                                          *</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *                                                                                             *</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> *    open source surface-modelling program based on subdivision surfaces and intended for     *</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> *    designing ships.                                                                         *</span></div>
@@ -117,385 +117,360 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> *                                                                                             *</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> *#############################################################################################*/</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="viewport_8h.html">viewport.h</a>&quot;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="shader_8h.html">shader.h</a>&quot;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity_8h.html">entity.h</a>&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="subdivsurface_8h.html">subdivsurface.h</a>&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utility_8h.html">utility.h</a>&quot;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">using namespace </span>ShipCAD;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a9fde8f966d9802dd42254acf0ed05386">   41</a></span>&#160;Viewport::Viewport()</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    : _mode(<a class="code" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8">vmWireFrame</a>), _view_type(<a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">fvPerspective</a>),</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      _camera(<a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eaa4100f3d3073015697dd72390b55fa44">ftStandard</a>),</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      _field_of_view(atan(35.0/50.0)),</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      _angle(20), _elevation(20),</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      _zoom(1.0), _panX(0), _panY(0),</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      _distance(0), _scale(1.0), _margin(0),</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      _current_shader(0), _surface(0)</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// does nothing else</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a1e18a1ff4a52be33ef63d25034561850">   53</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#a1e18a1ff4a52be33ef63d25034561850">Viewport::~Viewport</a>()</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    map&lt;string, Shader*&gt;::iterator i = _shaders.begin();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">while</span> (i != _shaders.end()) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">delete</span> (*i).second;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        ++i;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a9c35de3f7c9d7c860c494081b48309b3">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a9c35de3f7c9d7c860c494081b48309b3">Viewport::initialize</a>()</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>* lineshader = <span class="keyword">new</span> <a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">addShader</a>(<span class="stringliteral">&quot;lineshader&quot;</span>, lineshader);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>* monofaceshader = <span class="keyword">new</span> <a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">addShader</a>(<span class="stringliteral">&quot;monofaceshader&quot;</span>, monofaceshader);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;QApplication&gt;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="viewport_8h.html">viewport.h</a>&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="viewportview_8h.html">viewportview.h</a>&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="shader_8h.html">shader.h</a>&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="controller_8h.html">controller.h</a>&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity_8h.html">entity.h</a>&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="subdivsurface_8h.html">subdivsurface.h</a>&quot;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utility_8h.html">utility.h</a>&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">using namespace </span>ShipCAD;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#ad946e1cfc34e84610f9d89f3b62baf9d">   45</a></span>&#160;Viewport::Viewport(<a class="code" href="classShipCAD_1_1Controller.html">Controller</a>* ctl, <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a">viewport_type_t</a> vtype)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    : _ctl(ctl), _mode(<a class="code" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8">vmWireFrame</a>), _view_type(vtype),</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      _view(0), _drag_state(0), _current_shader(0)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    _view = <a class="code" href="classShipCAD_1_1ViewportView.html#aec2ef49c2d2ecf9099dfbf32cd645144">ViewportView::construct</a>(vtype, <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a1e18a1ff4a52be33ef63d25034561850">   52</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#a1e18a1ff4a52be33ef63d25034561850">Viewport::~Viewport</a>()</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">delete</span> _view;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    map&lt;string, Shader*&gt;::iterator i = _shaders.begin();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">while</span> (i != _shaders.end()) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">delete</span> (*i).second;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        ++i;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a9c35de3f7c9d7c860c494081b48309b3">   63</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a9c35de3f7c9d7c860c494081b48309b3">Viewport::initialize</a>()</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>* lineshader = <span class="keyword">new</span> <a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">addShader</a>(<span class="stringliteral">&quot;lineshader&quot;</span>, lineshader);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>* monofaceshader = <span class="keyword">new</span> <a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">addShader</a>(<span class="stringliteral">&quot;monofaceshader&quot;</span>, monofaceshader);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a578ac5ee96e36638739517fa21bf70c0">   71</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a578ac5ee96e36638739517fa21bf70c0">Viewport::setViewportMode</a>(<a class="code" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863">viewport_mode_t</a> mode)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    _mode = mode;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classOpenGLWindow.html#abea9e50147496e5110b86f03122fbece">renderLater</a>();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a5f90a885e0204b32ff9795c4b79f824b">   77</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a5f90a885e0204b32ff9795c4b79f824b">Viewport::setCameraType</a>(<a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241e">camera_type_t</a> val)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordflow">if</span> (val != _camera) {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordtype">float</span> film = 35.0;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordtype">float</span> dist;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="keywordflow">if</span> (val == <a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea8dd7ff1f55f46fc3db3ca743a05d93af">ftWide</a>)</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            dist = 20;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (val == <a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eaa4100f3d3073015697dd72390b55fa44">ftStandard</a>)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            dist = 50;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (val == <a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea6f6aa44840629968cfa9815da646a9d0">ftShortTele</a>)</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            dist = 90;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (val == <a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eae0b0ae77e52d05ac3800353808e16afe">ftMediumTele</a>)</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            dist = 130;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (val == <a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe">ftFarTele</a>)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            dist = 200;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            dist = 50;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        _camera = val;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        _field_of_view = atan(film/dist);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">initializeViewport</a>(_min3d, _max3d);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="classShipCAD_1_1LightedFaceShader.html">LightedFaceShader</a>* lightedfaceshader = <span class="keyword">new</span> <a class="code" href="classShipCAD_1_1LightedFaceShader.html">LightedFaceShader</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">addShader</a>(<span class="stringliteral">&quot;lightedfaceshader&quot;</span>, lightedfaceshader);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a578ac5ee96e36638739517fa21bf70c0">   75</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a578ac5ee96e36638739517fa21bf70c0">Viewport::setViewportMode</a>(<a class="code" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863">viewport_mode_t</a> mode)</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    _mode = mode;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="classOpenGLWindow.html#abea9e50147496e5110b86f03122fbece">renderLater</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a5f90a885e0204b32ff9795c4b79f824b">   81</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a5f90a885e0204b32ff9795c4b79f824b">Viewport::setCameraType</a>(<a class="code" href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241e">camera_type_t</a> val)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (_view_type != <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">fvPerspective</a>)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="classShipCAD_1_1ViewportViewPerspective.html">ViewportViewPerspective</a>* view = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1ViewportViewPerspective.html">ViewportViewPerspective</a>*<span class="keyword">&gt;</span>(_view);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    view-&gt;<a class="code" href="classShipCAD_1_1ViewportViewPerspective.html#ab1a56bd7cb986e2c3163bcacd201d32d">setCameraType</a>(val);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a554a3455c39ee5652b13c9b24c3c962e">   90</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a554a3455c39ee5652b13c9b24c3c962e">Viewport::setViewportType</a>(<a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a">viewport_type_t</a> ty)</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;{</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">if</span> (ty != _view_type) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keyword">delete</span> _view;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        _view = <a class="code" href="classShipCAD_1_1ViewportView.html#aec2ef49c2d2ecf9099dfbf32cd645144">ViewportView::construct</a>(ty, <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        _view_type = ty;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a554a3455c39ee5652b13c9b24c3c962e">  100</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a554a3455c39ee5652b13c9b24c3c962e">Viewport::setViewportType</a>(<a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a">viewport_type_t</a> ty)</div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a00ba2139fa06701b65de70d5c657f5d6">  100</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a00ba2139fa06701b65de70d5c657f5d6">Viewport::setAngle</a>(<span class="keywordtype">float</span> val)</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">if</span> (ty != _view_type) {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        _view_type = ty;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        _zoom = 1.0;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        _panX = 0;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        _panY = 0;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">switch</span> (ty) {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aa1bc519e3e41c233dd8e94c40af1fd36d">fvBodyplan</a>:</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            _angle = 0;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            _elevation = 0;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aa05a0a083efb18429cbb855b2dcbf5e18">fvProfile</a>:</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            _angle = 90;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            _elevation = 0;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aab67fb04b0624572e1567bff4caefde27">fvPlan</a>:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            _angle = 90;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            _elevation = 90;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">fvPerspective</a>:</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            _angle = 20;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            _elevation = 20;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        }</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">initializeViewport</a>(_min3d, _max3d);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a00ba2139fa06701b65de70d5c657f5d6">  129</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a00ba2139fa06701b65de70d5c657f5d6">Viewport::setAngle</a>(<span class="keywordtype">float</span> val)</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;{</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">if</span> (val != _angle) {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        _angle = val;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">initializeViewport</a>(_min3d, _max3d);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a4bda4b742dc477ed5dc2ab6ac7fe92bc">  137</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a4bda4b742dc477ed5dc2ab6ac7fe92bc">Viewport::setElevation</a>(<span class="keywordtype">float</span> val)</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    <span class="keywordflow">if</span> (val != _elevation) {</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        _elevation = val;</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">initializeViewport</a>(_min3d, _max3d);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;}</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb">  145</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb">Viewport::resizeEvent</a>(QResizeEvent *event)</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;{</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;vp resize event: &quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;size().width()</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;size().height() &lt;&lt; endl;</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">initializeViewport</a>(_min3d, _max3d);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;}</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">// this procedure initializes the viewport and sets the scale in such a way</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment">// that the model completely fills the viewport</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">  154</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">Viewport::initializeViewport</a>(<span class="keyword">const</span> QVector3D&amp; min, <span class="keyword">const</span> QVector3D&amp; max)</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;{</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="comment">// calculate the midpoint of the bounding box, which is used as the center of the</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="comment">// model for rotating the model</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    _midpoint = 0.5 * (_min3d + _max3d);</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="comment">// calculate the distance of the camera to the center of the model, following from</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">// the field of view from the camera</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordtype">float</span> dist = sqrt((_max3d.y() - _min3d.y()) * (_max3d.y() - _min3d.y())</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                      + (_max3d.z() - _min3d.z()) * (_max3d.z() - _min3d.z()));</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordflow">if</span> (dist == 0)</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;        dist = 1E-2f;</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordflow">if</span> (_view_type == <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">fvPerspective</a>) {</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordflow">if</span> (atan(_field_of_view) != 0) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            _distance = 1.5 * dist / atan(_field_of_view);</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordflow">if</span> (_distance &gt; 1E5)</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                _distance = 1E5;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        }</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            _distance = 1E5;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    }</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        _distance = 1E8;</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="comment">// build the vertex transformation matrix from the perspective</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="comment">// and the angle, elevation</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    _proj = QMatrix4x4();</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    _proj.perspective(<a class="code" href="namespaceShipCAD.html#a3ad1916db38fb61e8a053f944df49cee">RadToDeg</a>(_field_of_view), width() / static_cast&lt;float&gt;(height()), 0.1f, 100.0f);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    QMatrix4x4 model;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="comment">// find the camera location</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    model.rotate(_elevation, 1, 0, 0);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    model.rotate(_angle, 0, 0, 1);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    _camera_location = model.map(QVector3D(_max3d.x() + _distance, 0, 0));</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="comment">// perspective view matrix</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    QMatrix4x4 view;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    view.lookAt(_camera_location, _midpoint, QVector3D(0,0,1));</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    _view = view;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="comment">// final matrix</span></div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    _matrix = _proj * _view;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;angle: &quot;</span> &lt;&lt; _angle &lt;&lt; <span class="stringliteral">&quot; elev: &quot;</span> &lt;&lt; _elevation &lt;&lt; endl;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <a class="code" href="classOpenGLWindow.html#abea9e50147496e5110b86f03122fbece">renderLater</a>();</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
-<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a3626f44e62e08918de5939970cdc531c">  201</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a3626f44e62e08918de5939970cdc531c">Viewport::add</a>(<a class="code" href="classShipCAD_1_1Entity.html">Entity</a>* entity)</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;{</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    _entities.push_back(entity);</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;}</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;</div>
-<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a4bb2b85a12d7dd14e44b5d5c199cbda7">  206</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a4bb2b85a12d7dd14e44b5d5c199cbda7">Viewport::setSurface</a>(<a class="code" href="classShipCAD_1_1SubdivisionSurface.html">SubdivisionSurface</a>* surface)</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;{</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    _surface = surface;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">if</span> (_surface == 0)</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    _surface-&gt;<a class="code" href="classShipCAD_1_1SubdivisionSurface.html#abc1cf0168290242dfbe5dd0d178fa7cb">extents</a>(_min3d, _max3d);</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="comment">// add margin to max/min</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    QVector3D diff = 0.01 * _margin * (_max3d - _min3d);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    _min3d -= diff;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    _max3d += diff;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">initializeViewport</a>(_min3d, _max3d);</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div>
-<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">  221</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">Viewport::addShader</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <a class="code" href="classShipCAD_1_1Shader.html">Shader</a> *shader)</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;{</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    _shaders[name] = shader;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;}</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
-<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a9e81b526db3c2b508322c29b9fda5845">  226</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a9e81b526db3c2b508322c29b9fda5845">Viewport::render</a>()</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    glViewport(0, 0, width(), height());</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    glClear(GL_COLOR_BUFFER_BIT);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>* lineshader = <a class="code" href="classShipCAD_1_1Viewport.html#a0720a01f8650dc4acf89aad0649d9196">setLineShader</a>();</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i=0; i&lt;_entities.size(); ++i)</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        _entities[i]-&gt;draw(*<span class="keyword">this</span>, lineshader);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    _surface-&gt;<a class="code" href="classShipCAD_1_1SubdivisionSurface.html#acfe9cc964dbe05105486b43f2dc6fc4f">draw</a>(*<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="comment">// need to release the shader, otherwise doesn&#39;t draw right</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">if</span> (_current_shader != 0) {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        _current_shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">release</a>();</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        _current_shader = 0;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a0720a01f8650dc4acf89aad0649d9196">  246</a></span>&#160;<a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>* <a class="code" href="classShipCAD_1_1Viewport.html#a0720a01f8650dc4acf89aad0649d9196">Viewport::setLineShader</a>()</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;{</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="classShipCAD_1_1Shader.html">Shader</a>* shader = _shaders[<span class="stringliteral">&quot;lineshader&quot;</span>];</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">if</span> (shader == _current_shader)</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">if</span> (_current_shader != 0)</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        _current_shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">release</a>();</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a00c06ead1e413d5d5ecbced82478f753">bind</a>();</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a7d7fe16e4eb06ad1eb19e22b38cff96e">setMatrix</a>(_matrix);</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    _current_shader = shader;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="comment">//cerr &lt;&lt; &quot;set line shader\n&quot;;</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;}</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">if</span> (_view_type != <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">fvPerspective</a>)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="classShipCAD_1_1ViewportViewPerspective.html">ViewportViewPerspective</a>* view = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1ViewportViewPerspective.html">ViewportViewPerspective</a>*<span class="keyword">&gt;</span>(_view);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    view-&gt;<a class="code" href="classShipCAD_1_1ViewportViewPerspective.html#ad6d853a15bc9015d43e4c052471f2cb1">setAngle</a>(val);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a4bda4b742dc477ed5dc2ab6ac7fe92bc">  109</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a4bda4b742dc477ed5dc2ab6ac7fe92bc">Viewport::setElevation</a>(<span class="keywordtype">float</span> val)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordflow">if</span> (_view_type != <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">fvPerspective</a>)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="classShipCAD_1_1ViewportViewPerspective.html">ViewportViewPerspective</a>* view = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1ViewportViewPerspective.html">ViewportViewPerspective</a>*<span class="keyword">&gt;</span>(_view);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    view-&gt;<a class="code" href="classShipCAD_1_1ViewportViewPerspective.html#ad09e4532f81905f9ea90545b0b6d4856">setElevation</a>(val);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb">  118</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb">Viewport::resizeEvent</a>(QResizeEvent *event)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;{</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;vp resize event: &quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;size().width()</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;size().height() &lt;&lt; endl;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">  125</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">Viewport::update</a>()</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    QVector3D min, max;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    _ctl-&gt;<a class="code" href="classShipCAD_1_1Controller.html#a7868a3bac4ed86abff1fe5a0fabb4abd">getModel</a>()-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">getSurface</a>()-&gt;<a class="code" href="classShipCAD_1_1SubdivisionSurface.html#abc1cf0168290242dfbe5dd0d178fa7cb">extents</a>(min, max);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#ad1c89a6e34b7b3795a7f21e67181dc0f">initializeViewport</a>(min, max, width(), height());</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="classOpenGLWindow.html#abea9e50147496e5110b86f03122fbece">renderLater</a>();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;}</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">  133</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">Viewport::addShader</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp;name, <a class="code" href="classShipCAD_1_1Shader.html">Shader</a> *shader)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;{</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    _shaders[name] = shader;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a9e81b526db3c2b508322c29b9fda5845">  138</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a9e81b526db3c2b508322c29b9fda5845">Viewport::render</a>()</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;{</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    glViewport(0, 0, width(), height());</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="comment">// setup the lighting</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordtype">float</span> ltcolor[] = {0, .3, 1.0};</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    glEnable( GL_LIGHTING );</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    glEnable( GL_LIGHT0 );</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    glLightfv(GL_LIGHT0, GL_POSITION, ltcolor);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="comment">// set to shade</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <a class="code" href="classShipCAD_1_1Viewport.html#a578ac5ee96e36638739517fa21bf70c0">setViewportMode</a>(<a class="code" href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863ab1258f959e2d114750dffb3f9c2e2c0c">vmShade</a>);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="comment">// set the color of the background</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    QColor vpcolor = _ctl-&gt;<a class="code" href="classShipCAD_1_1Controller.html#a7868a3bac4ed86abff1fe5a0fabb4abd">getModel</a>()-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#aa6af8872deba5b401ac575a85901a265">getPreferences</a>().<a class="code" href="classShipCAD_1_1Preferences.html#ab511ccb47da78b8fb580c16aa027b4fa">getViewportColor</a>();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    glClearColor(vpcolor.redF(), vpcolor.greenF(), vpcolor.blueF(), 1.0);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    glClear(GL_COLOR_BUFFER_BIT);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="comment">// draw the model</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    _ctl-&gt;<a class="code" href="classShipCAD_1_1Controller.html#a7868a3bac4ed86abff1fe5a0fabb4abd">getModel</a>()-&gt;<a class="code" href="classShipCAD_1_1ShipCADModel.html#abf593b803e96a1fd8e56f36b3b6d0954">draw</a>(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <span class="comment">// need to release the shader, otherwise doesn&#39;t draw right</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">if</span> (_current_shader != 0) {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        _current_shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">release</a>();</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        _current_shader = 0;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;}</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a0720a01f8650dc4acf89aad0649d9196">  167</a></span>&#160;<a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>* <a class="code" href="classShipCAD_1_1Viewport.html#a0720a01f8650dc4acf89aad0649d9196">Viewport::setLineShader</a>()</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;{</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <a class="code" href="classShipCAD_1_1Shader.html">Shader</a>* shader = _shaders[<span class="stringliteral">&quot;lineshader&quot;</span>];</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">if</span> (shader == _current_shader)</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span> (_current_shader != 0)</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        _current_shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">release</a>();</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a00c06ead1e413d5d5ecbced82478f753">bind</a>();</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a7d7fe16e4eb06ad1eb19e22b38cff96e">setMatrix</a>(_view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#a0be1613b2ae2087da00811f2bdb0bd45">getWorld</a>());</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    _current_shader = shader;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="comment">//cerr &lt;&lt; &quot;set line shader\n&quot;;</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1LineShader.html">LineShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;</div>
+<div class="line"><a name="l00181"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#ad6be617bdcab76cd2f44b0528371cd5d">  181</a></span>&#160;<a class="code" href="classShipCAD_1_1FaceShader.html">FaceShader</a>* <a class="code" href="classShipCAD_1_1Viewport.html#ad6be617bdcab76cd2f44b0528371cd5d">Viewport::setMonoFaceShader</a>()</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;{</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <a class="code" href="classShipCAD_1_1Shader.html">Shader</a>* shader = _shaders[<span class="stringliteral">&quot;monofaceshader&quot;</span>];</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keywordflow">if</span> (shader == _current_shader)</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">if</span> (_current_shader != 0)</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        _current_shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">release</a>();</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a00c06ead1e413d5d5ecbced82478f753">bind</a>();</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a7d7fe16e4eb06ad1eb19e22b38cff96e">setMatrix</a>(_view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#a0be1613b2ae2087da00811f2bdb0bd45">getWorld</a>());</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    _current_shader = shader;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="comment">//cerr &lt;&lt; &quot;set mono face shader\n&quot;;</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1FaceShader.html">FaceShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a03cc2ed85178b9735c80b11dceb470b5">  195</a></span>&#160;<a class="code" href="classShipCAD_1_1FaceShader.html">FaceShader</a>* <a class="code" href="classShipCAD_1_1Viewport.html#a03cc2ed85178b9735c80b11dceb470b5">Viewport::setLightedFaceShader</a>()</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;{</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="classShipCAD_1_1Shader.html">Shader</a>* shader = _shaders[<span class="stringliteral">&quot;lightedfaceshader&quot;</span>];</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">if</span> (shader == _current_shader)</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1LightedFaceShader.html">LightedFaceShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordflow">if</span> (_current_shader != 0)</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        _current_shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">release</a>();</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a00c06ead1e413d5d5ecbced82478f753">bind</a>();</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a7d7fe16e4eb06ad1eb19e22b38cff96e">setMatrix</a>(_view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#a0be1613b2ae2087da00811f2bdb0bd45">getWorld</a>());</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    _current_shader = shader;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="comment">//cerr &lt;&lt; &quot;set lighted face shader\n&quot;;</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1FaceShader.html">FaceShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;}</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;</div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#ab247f28eb569e160142901b6eef265a3">  209</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classShipCAD_1_1Viewport.html#ab247f28eb569e160142901b6eef265a3">Viewport::contextMenu</a>(QMouseEvent *event)</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;{</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="comment">// keep track of drag state as fallows:</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="comment">// _drag_state = 0      no dragging, move or pick in progress</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;<span class="comment">// _drag_state = 1      button has been pressed, not moved far enough for a drag</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="comment">// _drag_state = 2      button has been pressed, and dragging</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a0dddc5b05c7308f8818a726b16a7d9eb">  219</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#a0dddc5b05c7308f8818a726b16a7d9eb">Viewport::mousePressEvent</a>(QMouseEvent *event)</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;{</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    _prev_pos = <span class="keyword">event</span>-&gt;pos();</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    _prev_buttons = <span class="keyword">event</span>-&gt;buttons();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    _drag_start = <span class="keyword">event</span>-&gt;pos();</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    _drag_state = 1;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="comment">// are we getting mouse clicks in the gl window?</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;mouse press: &quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().y() &lt;&lt; endl;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;}</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a7cb6994a92d40990b58be272953b9120">  230</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#a7cb6994a92d40990b58be272953b9120">Viewport::mouseReleaseEvent</a>(QMouseEvent *event)</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;{</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordtype">bool</span> view_changed = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="comment">// for mouse release, the button released won&#39;t be in the set</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">if</span> (_prev_buttons.testFlag(Qt::LeftButton) &amp;&amp; !<span class="keyword">event</span>-&gt;buttons().testFlag(Qt::LeftButton)) {</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        <span class="keywordflow">if</span> (_drag_state == 1)</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            view_changed = _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#ac1226ebc09cbc0ee33a53fc6fec9cd09">leftMousePick</a>(event-&gt;pos(), width(), height());</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            view_changed = _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#ad74e96e8fef750466b2771f8fc48900a">leftMouseRelease</a>(event-&gt;pos(), width(), height());</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (_prev_buttons.testFlag(Qt::RightButton) &amp;&amp; !<span class="keyword">event</span>-&gt;buttons().testFlag(Qt::RightButton)) {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">if</span> (_drag_state == 1)</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            view_changed = <a class="code" href="classShipCAD_1_1Viewport.html#ab247f28eb569e160142901b6eef265a3">contextMenu</a>(event);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            view_changed = _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#aaeff27f9b32dc7ee98dbfc14b7eca804">rightMouseRelease</a>(event-&gt;pos(), width(), height());</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    }</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordflow">if</span> (view_changed)</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    _prev_buttons = <span class="keyword">event</span>-&gt;buttons();</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="comment">// are we getting mouse clicks in the gl window?</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;mouse release: &quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().y() &lt;&lt; endl;</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    _drag_state = 0;</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#ab98dde7bb1d923b8cfc9a0c3cb249c2c">  256</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#ab98dde7bb1d923b8cfc9a0c3cb249c2c">Viewport::mouseMoveEvent</a>(QMouseEvent *event)</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;{</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">bool</span> view_changed = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
-<div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a5f3c02f4e24d614d4340816d6de50b0b">  260</a></span>&#160;<a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>* <a class="code" href="classShipCAD_1_1Viewport.html#a5f3c02f4e24d614d4340816d6de50b0b">Viewport::setMonoFaceShader</a>()</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;{</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <a class="code" href="classShipCAD_1_1Shader.html">Shader</a>* shader = _shaders[<span class="stringliteral">&quot;monofaceshader&quot;</span>];</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">if</span> (shader == _current_shader)</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">if</span> (_current_shader != 0)</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        _current_shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">release</a>();</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a00c06ead1e413d5d5ecbced82478f753">bind</a>();</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    shader-&gt;<a class="code" href="classShipCAD_1_1Shader.html#a7d7fe16e4eb06ad1eb19e22b38cff96e">setMatrix</a>(_matrix);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    _current_shader = shader;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="comment">//cerr &lt;&lt; &quot;set mono face shader\n&quot;;</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">dynamic_cast&lt;</span><a class="code" href="classShipCAD_1_1MonoFaceShader.html">MonoFaceShader</a>*<span class="keyword">&gt;</span>(_current_shader);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;}</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a64a528202f47e6b10402f3aac161f85a">  275</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#a64a528202f47e6b10402f3aac161f85a">Viewport::convertMouseCoordToWorld</a>(<span class="keywordtype">int</span> mx, <span class="keywordtype">int</span> my)</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;{</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordtype">float</span> x = mx;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordtype">float</span> y = my;</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="comment">// check for actual dragging</span></div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="keywordflow">if</span> ((_drag_state &lt; 1 || _drag_state &gt; 2)</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        || (_drag_state == 1 &amp;&amp; (event-&gt;pos() - _drag_start).manhattanLength() &lt; QApplication::startDragDistance()))</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    _drag_state = 2;</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordflow">if</span> (event-&gt;buttons().testFlag(Qt::LeftButton)) {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        view_changed = _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#a2dc46f8d032d707308cf853c70bc965a">leftMouseMove</a>(event-&gt;pos(), _prev_pos, width(), height());</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event-&gt;buttons().testFlag(Qt::MidButton)) {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        view_changed = _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#a44baf7aad8a3ba7ded04395a8765caf9">middleMouseMove</a>(event-&gt;pos(), _prev_pos, width(), height());</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event-&gt;buttons().testFlag(Qt::RightButton)) {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        view_changed = _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#a537210f7c2872e7b8921341660e85347">rightMouseMove</a>(event-&gt;pos(), _prev_pos, width(), height());</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    }</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">if</span> (view_changed)</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    QVector3D view = _midpoint - _camera_location;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    view.normalize();</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    QVector3D h = QVector3D::crossProduct(view, QVector3D(0,0,1));</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    h.normalize();</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    QVector3D v = QVector3D::crossProduct(h, view);</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    v.normalize();</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordtype">float</span> vlength = tan(_field_of_view / 2.0f) * 0.1f;</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordtype">float</span> hlength = vlength * width() / height();</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    v *= vlength;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    h *= hlength;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="comment">// translate mouse coordinates so that origin lies in the center of the viewport</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    x -= width() / 2.0f;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    y -= height() / 2.0f;</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="comment">// scale mouse coordinates so that half the viewport width and height becomes 1</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    x /= width() / 2.0f;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    y /= height() / 2.0f;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="comment">// linear combination to compute intersection of picking ray with viewport plane</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    QVector3D pos = _camera_location + view * 0.1f + h * x + v * y;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    QVector3D dir = pos - _camera_location;</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    dir.normalize();</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;mouse lb release model coord: &quot;</span> &lt;&lt; pos.x()</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; pos.y()</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; pos.z() &lt;&lt; endl;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="comment">// lets find the distance from the 1,1,0 point</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    QVector3D p1(1,1,0);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordtype">float</span> dist = p1.distanceToLine(pos, dir);</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;mouse pos distance to 1,1,0: &quot;</span> &lt;&lt; dist &lt;&lt; endl;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;}</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a0dddc5b05c7308f8818a726b16a7d9eb">  315</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#a0dddc5b05c7308f8818a726b16a7d9eb">Viewport::mousePressEvent</a>(QMouseEvent *event)</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;{</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    _prev_pos = <span class="keyword">event</span>-&gt;pos();</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    _prev_buttons = <span class="keyword">event</span>-&gt;buttons();</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="comment">// are we getting mouse clicks in the gl window?</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;mouse press: &quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().y() &lt;&lt; endl;</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;}</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a7cb6994a92d40990b58be272953b9120">  324</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#a7cb6994a92d40990b58be272953b9120">Viewport::mouseReleaseEvent</a>(QMouseEvent *event)</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;{</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="comment">// for mouse release, the button released won&#39;t be in the set</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keywordflow">if</span> (_prev_buttons.testFlag(Qt::LeftButton) &amp;&amp; !<span class="keyword">event</span>-&gt;buttons().testFlag(Qt::LeftButton)) {</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#a64a528202f47e6b10402f3aac161f85a">convertMouseCoordToWorld</a>(event-&gt;pos().x(), <span class="keyword">event</span>-&gt;pos().y());</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    }</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    _prev_buttons = <span class="keyword">event</span>-&gt;buttons();</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="comment">// are we getting mouse clicks in the gl window?</span></div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    cout &lt;&lt; <span class="stringliteral">&quot;mouse release: &quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().x() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span> &lt;&lt; <span class="keyword">event</span>-&gt;pos().y() &lt;&lt; endl;</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;}</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="keywordtype">void</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#ab98dde7bb1d923b8cfc9a0c3cb249c2c">  336</a></span>&#160;<a class="code" href="classShipCAD_1_1Viewport.html#ab98dde7bb1d923b8cfc9a0c3cb249c2c">Viewport::mouseMoveEvent</a>(QMouseEvent *event)</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;{</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keywordflow">if</span> (_view_type == <a class="code" href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">fvPerspective</a> &amp;&amp; event-&gt;buttons().testFlag(Qt::MidButton)) {</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        <span class="comment">// dragging the perspective around with middle button</span></div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        _angle -= (<span class="keyword">event</span>-&gt;pos().x() - _prev_pos.x()) / 2.0f;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keywordflow">while</span> (_angle &gt; 180)</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            _angle -= 360;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="keywordflow">while</span> (_angle &lt; -180)</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            _angle += 360;</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        _elevation += -(<span class="keyword">event</span>-&gt;pos().y() - _prev_pos.y()) / 2.0f;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keywordflow">while</span> (_elevation &gt; 180)</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            _elevation -= 360;</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keywordflow">while</span> (_elevation &lt; -180)</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            _elevation += 360;</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">initializeViewport</a>(_min3d, _max3d);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    _prev_pos = <span class="keyword">event</span>-&gt;pos();</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="comment">// are we getting mouse clicks in the gl window?</span></div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="comment">//cout &lt;&lt; &quot;mouse move: &quot; &lt;&lt; event-&gt;pos().x() &lt;&lt; &quot;,&quot; &lt;&lt; event-&gt;pos().y() &lt;&lt; endl;</span></div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;}</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    _prev_pos = <span class="keyword">event</span>-&gt;pos();</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="comment">// are we getting mouse clicks in the gl window?</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="comment">//cout &lt;&lt; &quot;mouse move: &quot; &lt;&lt; event-&gt;pos().x() &lt;&lt; &quot;,&quot; &lt;&lt; event-&gt;pos().y() &lt;&lt; endl;</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;}</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;</div>
+<div class="line"><a name="l00285"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#a9ac4c18fa3454cddc5e73322c3d1afd8">  285</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#a9ac4c18fa3454cddc5e73322c3d1afd8">Viewport::wheelEvent</a>(QWheelEvent *event)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;{</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="comment">//QPoint num_pixels = event-&gt;pixelDelta();</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    QPoint num_degrees = <span class="keyword">event</span>-&gt;angleDelta() / 8;</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="keywordtype">bool</span> view_changed = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="comment">//if (!num_pixels.isNull())</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="comment">//view_changed = _view-&gt;wheelWithPixels(num_pixels, width(), height());</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">if</span> (!num_degrees.isNull())</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        view_changed = _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#a77ce1c6a0216a791ee2ae79dd6674cde">wheelWithDegrees</a>(num_degrees, width(), height());</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordflow">if</span> (view_changed)</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;}</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
+<div class="line"><a name="l00302"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#acc401d8a0d84810a9d695e3621e29b4e">  302</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1Viewport.html#acc401d8a0d84810a9d695e3621e29b4e">Viewport::keyPressEvent</a>(QKeyEvent *event)</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;{</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keywordflow">if</span> (event-&gt;modifiers().testFlag(Qt::ControlModifier) &amp;&amp; <span class="keyword">event</span>-&gt;key() == Qt::Key_A) {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        _view-&gt;<a class="code" href="classShipCAD_1_1ViewportView.html#ab70e778772325a67610d983f630c2c3d">resetView</a>();</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <a class="code" href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">update</a>();</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    }</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;}</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;</div>
+<div class="line"><a name="l00310"></a><span class="lineno"><a class="line" href="classShipCAD_1_1Viewport.html#aa9af80400534f46e5420916a2895ead5">  310</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classShipCAD_1_1Viewport.html#aa9af80400534f46e5420916a2895ead5">Viewport::shootPickRay</a>(<a class="code" href="structShipCAD_1_1PickRay.html">PickRay</a>&amp; ray)</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;{</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">return</span> _ctl-&gt;<a class="code" href="classShipCAD_1_1Controller.html#ae09ac41e86659fab53e236f27f2ca761">shootPickRay</a>(*<span class="keyword">this</span>, ray);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
 <div class="ttc" id="entity_8h_html"><div class="ttname"><a href="entity_8h.html">entity.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a886ac5965b63039799827da89bf3de20"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">ShipCAD::Viewport::addShader</a></div><div class="ttdeci">void addShader(const std::string &amp;name, Shader *shader)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00221">viewport.cpp:221</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_aeeeb05810f2e31ef89fd4ac6b6ba9c0aa1bc519e3e41c233dd8e94c40af1fd36d"><div class="ttname"><a href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aa1bc519e3e41c233dd8e94c40af1fd36d">ShipCAD::fvBodyplan</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00067">shipcadlib.h:67</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a9e81b526db3c2b508322c29b9fda5845"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a9e81b526db3c2b508322c29b9fda5845">ShipCAD::Viewport::render</a></div><div class="ttdeci">void render()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00226">viewport.cpp:226</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a0720a01f8650dc4acf89aad0649d9196"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a0720a01f8650dc4acf89aad0649d9196">ShipCAD::Viewport::setLineShader</a></div><div class="ttdeci">LineShader * setLineShader()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00246">viewport.cpp:246</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a58f51ebd2e66de5e41c2ffd6f434241ea6f6aa44840629968cfa9815da646a9d0"><div class="ttname"><a href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea6f6aa44840629968cfa9815da646a9d0">ShipCAD::ftShortTele</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00076">shipcadlib.h:76</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a886ac5965b63039799827da89bf3de20"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a886ac5965b63039799827da89bf3de20">ShipCAD::Viewport::addShader</a></div><div class="ttdeci">void addShader(const std::string &amp;name, Shader *shader)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00133">viewport.cpp:133</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a9e81b526db3c2b508322c29b9fda5845"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a9e81b526db3c2b508322c29b9fda5845">ShipCAD::Viewport::render</a></div><div class="ttdeci">void render()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00138">viewport.cpp:138</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_aa9af80400534f46e5420916a2895ead5"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#aa9af80400534f46e5420916a2895ead5">ShipCAD::Viewport::shootPickRay</a></div><div class="ttdeci">bool shootPickRay(PickRay &amp;ray)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00310">viewport.cpp:310</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a0720a01f8650dc4acf89aad0649d9196"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a0720a01f8650dc4acf89aad0649d9196">ShipCAD::Viewport::setLineShader</a></div><div class="ttdeci">LineShader * setLineShader()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00167">viewport.cpp:167</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_ad6be617bdcab76cd2f44b0528371cd5d"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#ad6be617bdcab76cd2f44b0528371cd5d">ShipCAD::Viewport::setMonoFaceShader</a></div><div class="ttdeci">FaceShader * setMonoFaceShader()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00181">viewport.cpp:181</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Controller_html"><div class="ttname"><a href="classShipCAD_1_1Controller.html">ShipCAD::Controller</a></div><div class="ttdoc">ShipCAD model controller, contains editing actions. </div><div class="ttdef"><b>Definition:</b> <a href="controller_8h_source.html#l00053">controller.h:53</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_aa6af8872deba5b401ac575a85901a265"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#aa6af8872deba5b401ac575a85901a265">ShipCAD::ShipCADModel::getPreferences</a></div><div class="ttdeci">Preferences &amp; getPreferences()</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00072">shipcadmodel.h:72</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_ad1c89a6e34b7b3795a7f21e67181dc0f"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#ad1c89a6e34b7b3795a7f21e67181dc0f">ShipCAD::ViewportView::initializeViewport</a></div><div class="ttdeci">virtual void initializeViewport(const QVector3D &amp;min, const QVector3D &amp;max, int width, int height)=0</div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_ad74e96e8fef750466b2771f8fc48900a"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#ad74e96e8fef750466b2771f8fc48900a">ShipCAD::ViewportView::leftMouseRelease</a></div><div class="ttdeci">virtual bool leftMouseRelease(QPoint pos, int w, int h)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00096">viewportview.cpp:96</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1"><div class="ttname"><a href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1">ShipCAD::fvPerspective</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00070">shipcadlib.h:70</a></div></div>
 <div class="ttc" id="classShipCAD_1_1Shader_html_a7d7fe16e4eb06ad1eb19e22b38cff96e"><div class="ttname"><a href="classShipCAD_1_1Shader.html#a7d7fe16e4eb06ad1eb19e22b38cff96e">ShipCAD::Shader::setMatrix</a></div><div class="ttdeci">void setMatrix(const QMatrix4x4 &amp;matrix)</div><div class="ttdef"><b>Definition:</b> <a href="shader_8cpp_source.html#l00086">shader.cpp:86</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a00ba2139fa06701b65de70d5c657f5d6"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a00ba2139fa06701b65de70d5c657f5d6">ShipCAD::Viewport::setAngle</a></div><div class="ttdeci">void setAngle(float val)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00129">viewport.cpp:129</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a58f51ebd2e66de5e41c2ffd6f434241eae0b0ae77e52d05ac3800353808e16afe"><div class="ttname"><a href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eae0b0ae77e52d05ac3800353808e16afe">ShipCAD::ftMediumTele</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00077">shipcadlib.h:77</a></div></div>
-<div class="ttc" id="classShipCAD_1_1SubdivisionSurface_html_abc1cf0168290242dfbe5dd0d178fa7cb"><div class="ttname"><a href="classShipCAD_1_1SubdivisionSurface.html#abc1cf0168290242dfbe5dd0d178fa7cb">ShipCAD::SubdivisionSurface::extents</a></div><div class="ttdeci">virtual void extents(QVector3D &amp;min, QVector3D &amp;max)</div><div class="ttdef"><b>Definition:</b> <a href="subdivsurface_8cpp_source.html#l01377">subdivsurface.cpp:1377</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a3626f44e62e08918de5939970cdc531c"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a3626f44e62e08918de5939970cdc531c">ShipCAD::Viewport::add</a></div><div class="ttdeci">void add(Entity *entity)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00201">viewport.cpp:201</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_acef72369540d8e4d479eeadf5fdc3674"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#acef72369540d8e4d479eeadf5fdc3674">ShipCAD::Viewport::initializeViewport</a></div><div class="ttdeci">void initializeViewport(const QVector3D &amp;min, const QVector3D &amp;max)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00154">viewport.cpp:154</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a3ad1916db38fb61e8a053f944df49cee"><div class="ttname"><a href="namespaceShipCAD.html#a3ad1916db38fb61e8a053f944df49cee">ShipCAD::RadToDeg</a></div><div class="ttdeci">float RadToDeg(float rad)</div><div class="ttdef"><b>Definition:</b> <a href="utility_8cpp_source.html#l00172">utility.cpp:172</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a00ba2139fa06701b65de70d5c657f5d6"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a00ba2139fa06701b65de70d5c657f5d6">ShipCAD::Viewport::setAngle</a></div><div class="ttdeci">void setAngle(float val)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00100">viewport.cpp:100</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_a2dc46f8d032d707308cf853c70bc965a"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#a2dc46f8d032d707308cf853c70bc965a">ShipCAD::ViewportView::leftMouseMove</a></div><div class="ttdeci">virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00113">viewportview.cpp:113</a></div></div>
+<div class="ttc" id="classShipCAD_1_1SubdivisionSurface_html_abc1cf0168290242dfbe5dd0d178fa7cb"><div class="ttname"><a href="classShipCAD_1_1SubdivisionSurface.html#abc1cf0168290242dfbe5dd0d178fa7cb">ShipCAD::SubdivisionSurface::extents</a></div><div class="ttdeci">virtual void extents(QVector3D &amp;min, QVector3D &amp;max)</div><div class="ttdef"><b>Definition:</b> <a href="subdivsurface_8cpp_source.html#l01912">subdivsurface.cpp:1912</a></div></div>
+<div class="ttc" id="classShipCAD_1_1FaceShader_html"><div class="ttname"><a href="classShipCAD_1_1FaceShader.html">ShipCAD::FaceShader</a></div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00092">shader.h:92</a></div></div>
 <div class="ttc" id="viewport_8h_html"><div class="ttname"><a href="viewport_8h.html">viewport.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a578ac5ee96e36638739517fa21bf70c0"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a578ac5ee96e36638739517fa21bf70c0">ShipCAD::Viewport::setViewportMode</a></div><div class="ttdeci">void setViewportMode(viewport_mode_t mode)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00071">viewport.cpp:71</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a578ac5ee96e36638739517fa21bf70c0"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a578ac5ee96e36638739517fa21bf70c0">ShipCAD::Viewport::setViewportMode</a></div><div class="ttdeci">void setViewportMode(viewport_mode_t mode)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00075">viewport.cpp:75</a></div></div>
 <div class="ttc" id="classOpenGLWindow_html_abea9e50147496e5110b86f03122fbece"><div class="ttname"><a href="classOpenGLWindow.html#abea9e50147496e5110b86f03122fbece">OpenGLWindow::renderLater</a></div><div class="ttdeci">void renderLater()</div><div class="ttdef"><b>Definition:</b> <a href="openglwindow_8cpp_source.html#l00112">openglwindow.cpp:112</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a5f3c02f4e24d614d4340816d6de50b0b"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a5f3c02f4e24d614d4340816d6de50b0b">ShipCAD::Viewport::setMonoFaceShader</a></div><div class="ttdeci">MonoFaceShader * setMonoFaceShader()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00260">viewport.cpp:260</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a5f90a885e0204b32ff9795c4b79f824b"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a5f90a885e0204b32ff9795c4b79f824b">ShipCAD::Viewport::setCameraType</a></div><div class="ttdeci">void setCameraType(camera_type_t val)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00077">viewport.cpp:77</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a5f90a885e0204b32ff9795c4b79f824b"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a5f90a885e0204b32ff9795c4b79f824b">ShipCAD::Viewport::setCameraType</a></div><div class="ttdeci">void setCameraType(camera_type_t val)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00081">viewport.cpp:81</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_ab70e778772325a67610d983f630c2c3d"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#ab70e778772325a67610d983f630c2c3d">ShipCAD::ViewportView::resetView</a></div><div class="ttdeci">virtual void resetView()</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00075">viewportview.cpp:75</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportViewPerspective_html_ab1a56bd7cb986e2c3163bcacd201d32d"><div class="ttname"><a href="classShipCAD_1_1ViewportViewPerspective.html#ab1a56bd7cb986e2c3163bcacd201d32d">ShipCAD::ViewportViewPerspective::setCameraType</a></div><div class="ttdeci">void setCameraType(camera_type_t val)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00298">viewportview.cpp:298</a></div></div>
 <div class="ttc" id="classShipCAD_1_1Shader_html_a0f41d7628964320846101cf5938a928e"><div class="ttname"><a href="classShipCAD_1_1Shader.html#a0f41d7628964320846101cf5938a928e">ShipCAD::Shader::release</a></div><div class="ttdeci">void release()</div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00065">shader.h:65</a></div></div>
 <div class="ttc" id="subdivsurface_8h_html"><div class="ttname"><a href="subdivsurface_8h.html">subdivsurface.h</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a554a3455c39ee5652b13c9b24c3c962e"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a554a3455c39ee5652b13c9b24c3c962e">ShipCAD::Viewport::setViewportType</a></div><div class="ttdeci">void setViewportType(viewport_type_t ty)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00100">viewport.cpp:100</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a58f51ebd2e66de5e41c2ffd6f434241ea8dd7ff1f55f46fc3db3ca743a05d93af"><div class="ttname"><a href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea8dd7ff1f55f46fc3db3ca743a05d93af">ShipCAD::ftWide</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00074">shipcadlib.h:74</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a554a3455c39ee5652b13c9b24c3c962e"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a554a3455c39ee5652b13c9b24c3c962e">ShipCAD::Viewport::setViewportType</a></div><div class="ttdeci">void setViewportType(viewport_type_t ty)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00090">viewport.cpp:90</a></div></div>
 <div class="ttc" id="shader_8h_html"><div class="ttname"><a href="shader_8h.html">shader.h</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_a44baf7aad8a3ba7ded04395a8765caf9"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#a44baf7aad8a3ba7ded04395a8765caf9">ShipCAD::ViewportView::middleMouseMove</a></div><div class="ttdeci">virtual bool middleMouseMove(QPoint cur, QPoint prev, int w, int h)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00108">viewportview.cpp:108</a></div></div>
+<div class="ttc" id="viewportview_8h_html"><div class="ttname"><a href="viewportview_8h.html">viewportview.h</a></div></div>
+<div class="ttc" id="structShipCAD_1_1PickRay_html"><div class="ttname"><a href="structShipCAD_1_1PickRay.html">ShipCAD::PickRay</a></div><div class="ttdoc">a pick ray (line) </div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8h_source.html#l00045">viewportview.h:45</a></div></div>
+<div class="ttc" id="classShipCAD_1_1LightedFaceShader_html"><div class="ttname"><a href="classShipCAD_1_1LightedFaceShader.html">ShipCAD::LightedFaceShader</a></div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00126">shader.h:126</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a03cc2ed85178b9735c80b11dceb470b5"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a03cc2ed85178b9735c80b11dceb470b5">ShipCAD::Viewport::setLightedFaceShader</a></div><div class="ttdeci">FaceShader * setLightedFaceShader()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00195">viewport.cpp:195</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_aec2ef49c2d2ecf9099dfbf32cd645144"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#aec2ef49c2d2ecf9099dfbf32cd645144">ShipCAD::ViewportView::construct</a></div><div class="ttdeci">static ViewportView * construct(viewport_type_t ty, Viewport *vp)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00049">viewportview.cpp:49</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_a58f51ebd2e66de5e41c2ffd6f434241e"><div class="ttname"><a href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241e">ShipCAD::camera_type_t</a></div><div class="ttdeci">camera_type_t</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00073">shipcadlib.h:73</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_ab98dde7bb1d923b8cfc9a0c3cb249c2c"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#ab98dde7bb1d923b8cfc9a0c3cb249c2c">ShipCAD::Viewport::mouseMoveEvent</a></div><div class="ttdeci">virtual void mouseMoveEvent(QMouseEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00336">viewport.cpp:336</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Controller_html_ae09ac41e86659fab53e236f27f2ca761"><div class="ttname"><a href="classShipCAD_1_1Controller.html#ae09ac41e86659fab53e236f27f2ca761">ShipCAD::Controller::shootPickRay</a></div><div class="ttdeci">bool shootPickRay(Viewport &amp;vp, const PickRay &amp;ray)</div><div class="ttdoc">shoot a pick ray, change items to selected </div><div class="ttdef"><b>Definition:</b> <a href="controller_8cpp_source.html#l00093">controller.cpp:93</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_ab98dde7bb1d923b8cfc9a0c3cb249c2c"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#ab98dde7bb1d923b8cfc9a0c3cb249c2c">ShipCAD::Viewport::mouseMoveEvent</a></div><div class="ttdeci">virtual void mouseMoveEvent(QMouseEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00256">viewport.cpp:256</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8"><div class="ttname"><a href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8">ShipCAD::vmWireFrame</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00059">shipcadlib.h:59</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_aeeeb05810f2e31ef89fd4ac6b6ba9c0a"><div class="ttname"><a href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0a">ShipCAD::viewport_type_t</a></div><div class="ttdeci">viewport_type_t</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00066">shipcadlib.h:66</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a0dddc5b05c7308f8818a726b16a7d9eb"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a0dddc5b05c7308f8818a726b16a7d9eb">ShipCAD::Viewport::mousePressEvent</a></div><div class="ttdeci">virtual void mousePressEvent(QMouseEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00315">viewport.cpp:315</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_a0be1613b2ae2087da00811f2bdb0bd45"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#a0be1613b2ae2087da00811f2bdb0bd45">ShipCAD::ViewportView::getWorld</a></div><div class="ttdeci">const QMatrix4x4 &amp; getWorld() const </div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8h_source.html#l00067">viewportview.h:67</a></div></div>
+<div class="ttc" id="namespaceShipCAD_html_a67437198ee14f74e6c5277d761894863ab1258f959e2d114750dffb3f9c2e2c0c"><div class="ttname"><a href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863ab1258f959e2d114750dffb3f9c2e2c0c">ShipCAD::vmShade</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00060">shipcadlib.h:60</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a0dddc5b05c7308f8818a726b16a7d9eb"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a0dddc5b05c7308f8818a726b16a7d9eb">ShipCAD::Viewport::mousePressEvent</a></div><div class="ttdeci">virtual void mousePressEvent(QMouseEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00219">viewport.cpp:219</a></div></div>
 <div class="ttc" id="classShipCAD_1_1Shader_html"><div class="ttname"><a href="classShipCAD_1_1Shader.html">ShipCAD::Shader</a></div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00045">shader.h:45</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a1e18a1ff4a52be33ef63d25034561850"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a1e18a1ff4a52be33ef63d25034561850">ShipCAD::Viewport::~Viewport</a></div><div class="ttdeci">~Viewport()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00053">viewport.cpp:53</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_a537210f7c2872e7b8921341660e85347"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#a537210f7c2872e7b8921341660e85347">ShipCAD::ViewportView::rightMouseMove</a></div><div class="ttdeci">virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00118">viewportview.cpp:118</a></div></div>
+<div class="ttc" id="controller_8h_html"><div class="ttname"><a href="controller_8h.html">controller.h</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a9ac4c18fa3454cddc5e73322c3d1afd8"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a9ac4c18fa3454cddc5e73322c3d1afd8">ShipCAD::Viewport::wheelEvent</a></div><div class="ttdeci">virtual void wheelEvent(QWheelEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00285">viewport.cpp:285</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportViewPerspective_html_ad6d853a15bc9015d43e4c052471f2cb1"><div class="ttname"><a href="classShipCAD_1_1ViewportViewPerspective.html#ad6d853a15bc9015d43e4c052471f2cb1">ShipCAD::ViewportViewPerspective::setAngle</a></div><div class="ttdeci">void setAngle(float val)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8h_source.html#l00124">viewportview.h:124</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a1e18a1ff4a52be33ef63d25034561850"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a1e18a1ff4a52be33ef63d25034561850">ShipCAD::Viewport::~Viewport</a></div><div class="ttdeci">~Viewport()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00052">viewport.cpp:52</a></div></div>
 <div class="ttc" id="utility_8h_html"><div class="ttname"><a href="utility_8h.html">utility.h</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_aeeeb05810f2e31ef89fd4ac6b6ba9c0aa05a0a083efb18429cbb855b2dcbf5e18"><div class="ttname"><a href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aa05a0a083efb18429cbb855b2dcbf5e18">ShipCAD::fvProfile</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00068">shipcadlib.h:68</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_a6941ad7a2b167419e844823fa8461019"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#a6941ad7a2b167419e844823fa8461019">ShipCAD::ShipCADModel::getSurface</a></div><div class="ttdeci">SubdivisionSurface * getSurface()</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8h_source.html#l00191">shipcadmodel.h:191</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ShipCADModel_html_abf593b803e96a1fd8e56f36b3b6d0954"><div class="ttname"><a href="classShipCAD_1_1ShipCADModel.html#abf593b803e96a1fd8e56f36b3b6d0954">ShipCAD::ShipCADModel::draw</a></div><div class="ttdeci">void draw(Viewport &amp;vp)</div><div class="ttdef"><b>Definition:</b> <a href="shipcadmodel_8cpp_source.html#l00284">shipcadmodel.cpp:284</a></div></div>
 <div class="ttc" id="namespaceShipCAD_html_a67437198ee14f74e6c5277d761894863"><div class="ttname"><a href="namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863">ShipCAD::viewport_mode_t</a></div><div class="ttdeci">viewport_mode_t</div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00058">shipcadlib.h:58</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_aeeeb05810f2e31ef89fd4ac6b6ba9c0aab67fb04b0624572e1567bff4caefde27"><div class="ttname"><a href="namespaceShipCAD.html#aeeeb05810f2e31ef89fd4ac6b6ba9c0aab67fb04b0624572e1567bff4caefde27">ShipCAD::fvPlan</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00069">shipcadlib.h:69</a></div></div>
-<div class="ttc" id="classShipCAD_1_1SubdivisionSurface_html_acfe9cc964dbe05105486b43f2dc6fc4f"><div class="ttname"><a href="classShipCAD_1_1SubdivisionSurface.html#acfe9cc964dbe05105486b43f2dc6fc4f">ShipCAD::SubdivisionSurface::draw</a></div><div class="ttdeci">virtual void draw(Viewport &amp;vp)</div><div class="ttdef"><b>Definition:</b> <a href="subdivsurface_8cpp_source.html#l01758">subdivsurface.cpp:1758</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportViewPerspective_html_ad09e4532f81905f9ea90545b0b6d4856"><div class="ttname"><a href="classShipCAD_1_1ViewportViewPerspective.html#ad09e4532f81905f9ea90545b0b6d4856">ShipCAD::ViewportViewPerspective::setElevation</a></div><div class="ttdeci">void setElevation(float val)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8h_source.html#l00126">viewportview.h:126</a></div></div>
 <div class="ttc" id="classShipCAD_1_1LineShader_html"><div class="ttname"><a href="classShipCAD_1_1LineShader.html">ShipCAD::LineShader</a></div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00077">shader.h:77</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a4eeeb100fd88487215bb7794bdf5e0cb"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb">ShipCAD::Viewport::resizeEvent</a></div><div class="ttdeci">virtual void resizeEvent(QResizeEvent *event)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00145">viewport.cpp:145</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Entity_html"><div class="ttname"><a href="classShipCAD_1_1Entity.html">ShipCAD::Entity</a></div><div class="ttdoc">base class for all non-surface drawable elements </div><div class="ttdef"><b>Definition:</b> <a href="entity_8h_source.html#l00065">entity.h:65</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Controller_html_a7868a3bac4ed86abff1fe5a0fabb4abd"><div class="ttname"><a href="classShipCAD_1_1Controller.html#a7868a3bac4ed86abff1fe5a0fabb4abd">ShipCAD::Controller::getModel</a></div><div class="ttdeci">ShipCADModel * getModel()</div><div class="ttdoc">get the model this is controlling </div><div class="ttdef"><b>Definition:</b> <a href="controller_8h_source.html#l00069">controller.h:69</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a4eeeb100fd88487215bb7794bdf5e0cb"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a4eeeb100fd88487215bb7794bdf5e0cb">ShipCAD::Viewport::resizeEvent</a></div><div class="ttdeci">virtual void resizeEvent(QResizeEvent *event)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00118">viewport.cpp:118</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportViewPerspective_html"><div class="ttname"><a href="classShipCAD_1_1ViewportViewPerspective.html">ShipCAD::ViewportViewPerspective</a></div><div class="ttdoc">class to calculate view, world matrices and operations using those for a Perspective viewport ...</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8h_source.html#l00114">viewportview.h:114</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_ac1226ebc09cbc0ee33a53fc6fec9cd09"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#ac1226ebc09cbc0ee33a53fc6fec9cd09">ShipCAD::ViewportView::leftMousePick</a></div><div class="ttdeci">virtual bool leftMousePick(QPoint pos, int w, int h)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00083">viewportview.cpp:83</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_acc401d8a0d84810a9d695e3621e29b4e"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#acc401d8a0d84810a9d695e3621e29b4e">ShipCAD::Viewport::keyPressEvent</a></div><div class="ttdeci">virtual void keyPressEvent(QKeyEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00302">viewport.cpp:302</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_ab247f28eb569e160142901b6eef265a3"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#ab247f28eb569e160142901b6eef265a3">ShipCAD::Viewport::contextMenu</a></div><div class="ttdeci">bool contextMenu(QMouseEvent *event)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00209">viewport.cpp:209</a></div></div>
 <div class="ttc" id="classShipCAD_1_1Shader_html_a00c06ead1e413d5d5ecbced82478f753"><div class="ttname"><a href="classShipCAD_1_1Shader.html#a00c06ead1e413d5d5ecbced82478f753">ShipCAD::Shader::bind</a></div><div class="ttdeci">void bind()</div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00064">shader.h:64</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a64a528202f47e6b10402f3aac161f85a"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a64a528202f47e6b10402f3aac161f85a">ShipCAD::Viewport::convertMouseCoordToWorld</a></div><div class="ttdeci">void convertMouseCoordToWorld(int mx, int my)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00275">viewport.cpp:275</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a7cb6994a92d40990b58be272953b9120"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a7cb6994a92d40990b58be272953b9120">ShipCAD::Viewport::mouseReleaseEvent</a></div><div class="ttdeci">virtual void mouseReleaseEvent(QMouseEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00324">viewport.cpp:324</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a4bda4b742dc477ed5dc2ab6ac7fe92bc"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a4bda4b742dc477ed5dc2ab6ac7fe92bc">ShipCAD::Viewport::setElevation</a></div><div class="ttdeci">void setElevation(float val)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00137">viewport.cpp:137</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a4bb2b85a12d7dd14e44b5d5c199cbda7"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a4bb2b85a12d7dd14e44b5d5c199cbda7">ShipCAD::Viewport::setSurface</a></div><div class="ttdeci">void setSurface(SubdivisionSurface *surface)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00206">viewport.cpp:206</a></div></div>
-<div class="ttc" id="classShipCAD_1_1Viewport_html_a9c35de3f7c9d7c860c494081b48309b3"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a9c35de3f7c9d7c860c494081b48309b3">ShipCAD::Viewport::initialize</a></div><div class="ttdeci">void initialize()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00062">viewport.cpp:62</a></div></div>
-<div class="ttc" id="classShipCAD_1_1MonoFaceShader_html"><div class="ttname"><a href="classShipCAD_1_1MonoFaceShader.html">ShipCAD::MonoFaceShader</a></div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00092">shader.h:92</a></div></div>
-<div class="ttc" id="classShipCAD_1_1SubdivisionSurface_html"><div class="ttname"><a href="classShipCAD_1_1SubdivisionSurface.html">ShipCAD::SubdivisionSurface</a></div><div class="ttdef"><b>Definition:</b> <a href="subdivsurface_8h_source.html#l00068">subdivsurface.h:68</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe"><div class="ttname"><a href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe">ShipCAD::ftFarTele</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00078">shipcadlib.h:78</a></div></div>
-<div class="ttc" id="namespaceShipCAD_html_a58f51ebd2e66de5e41c2ffd6f434241eaa4100f3d3073015697dd72390b55fa44"><div class="ttname"><a href="namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eaa4100f3d3073015697dd72390b55fa44">ShipCAD::ftStandard</a></div><div class="ttdef"><b>Definition:</b> <a href="shipcadlib_8h_source.html#l00075">shipcadlib.h:75</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a7cb6994a92d40990b58be272953b9120"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a7cb6994a92d40990b58be272953b9120">ShipCAD::Viewport::mouseReleaseEvent</a></div><div class="ttdeci">virtual void mouseReleaseEvent(QMouseEvent *)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00230">viewport.cpp:230</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a4bda4b742dc477ed5dc2ab6ac7fe92bc"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a4bda4b742dc477ed5dc2ab6ac7fe92bc">ShipCAD::Viewport::setElevation</a></div><div class="ttdeci">void setElevation(float val)</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00109">viewport.cpp:109</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a9c35de3f7c9d7c860c494081b48309b3"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a9c35de3f7c9d7c860c494081b48309b3">ShipCAD::Viewport::initialize</a></div><div class="ttdeci">void initialize()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00063">viewport.cpp:63</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Viewport_html_a7997e0e684a4f8b5709f4d98be6cebb4"><div class="ttname"><a href="classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4">ShipCAD::Viewport::update</a></div><div class="ttdeci">virtual void update()</div><div class="ttdef"><b>Definition:</b> <a href="viewport_8cpp_source.html#l00125">viewport.cpp:125</a></div></div>
+<div class="ttc" id="classShipCAD_1_1MonoFaceShader_html"><div class="ttname"><a href="classShipCAD_1_1MonoFaceShader.html">ShipCAD::MonoFaceShader</a></div><div class="ttdef"><b>Definition:</b> <a href="shader_8h_source.html#l00109">shader.h:109</a></div></div>
+<div class="ttc" id="classShipCAD_1_1Preferences_html_ab511ccb47da78b8fb580c16aa027b4fa"><div class="ttname"><a href="classShipCAD_1_1Preferences.html#ab511ccb47da78b8fb580c16aa027b4fa">ShipCAD::Preferences::getViewportColor</a></div><div class="ttdeci">QColor getViewportColor() const </div><div class="ttdef"><b>Definition:</b> <a href="preferences_8h_source.html#l00113">preferences.h:113</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_aaeff27f9b32dc7ee98dbfc14b7eca804"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#aaeff27f9b32dc7ee98dbfc14b7eca804">ShipCAD::ViewportView::rightMouseRelease</a></div><div class="ttdeci">virtual bool rightMouseRelease(QPoint pos, int w, int h)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00102">viewportview.cpp:102</a></div></div>
+<div class="ttc" id="classShipCAD_1_1ViewportView_html_a77ce1c6a0216a791ee2ae79dd6674cde"><div class="ttname"><a href="classShipCAD_1_1ViewportView.html#a77ce1c6a0216a791ee2ae79dd6674cde">ShipCAD::ViewportView::wheelWithDegrees</a></div><div class="ttdeci">virtual bool wheelWithDegrees(QPoint degrees, int w, int h)</div><div class="ttdef"><b>Definition:</b> <a href="viewportview_8cpp_source.html#l00123">viewportview.cpp:123</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 26 2015 23:07:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 30 2016 01:20:52 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

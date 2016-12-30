@@ -12,6 +12,8 @@ var searchData=
   ['unit_5ftype_5ft',['unit_type_t',['../namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5',1,'ShipCAD']]],
   ['unlockallpoints',['unlockAllPoints',['../classShipCAD_1_1Controller.html#af983f99c449cd485a6362768a64d3c1e',1,'ShipCAD::Controller']]],
   ['unlockpoints',['unlockPoints',['../classShipCAD_1_1Controller.html#a7038d511c9398f34ec9df3d0a1311b14',1,'ShipCAD::Controller']]],
+  ['update',['update',['../classShipCAD_1_1Viewport.html#a7997e0e684a4f8b5709f4d98be6cebb4',1,'ShipCAD::Viewport']]],
+  ['updatecontrolpointvalue',['updateControlPointValue',['../classShipCAD_1_1Controller.html#a35f446710a96c227f1794eacaef7ba6a',1,'ShipCAD::Controller']]],
   ['updatedata',['updateData',['../classShipCAD_1_1BackgroundImage.html#aebee3507d92cb5d6ca486c15313e0beb',1,'ShipCAD::BackgroundImage']]],
   ['updateundodata',['updateUndoData',['../classShipCAD_1_1Controller.html#ade17d53952bf5a977dfec2e68f4fffb9',1,'ShipCAD::Controller']]],
   ['updateviews',['updateViews',['../classShipCAD_1_1BackgroundImage.html#a47bb9eeb69dbe6062392749ecaef2eb7',1,'ShipCAD::BackgroundImage']]],

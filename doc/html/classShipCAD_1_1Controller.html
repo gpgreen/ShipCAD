@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -203,6 +203,9 @@ Public Slots</h2></td></tr>
 <tr class="memitem:a11a8473f84eeed35f9f48c119da16351"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a11a8473f84eeed35f9f48c119da16351">exportSTL</a> ()</td></tr>
 <tr class="memdesc:a11a8473f84eeed35f9f48c119da16351"><td class="mdescLeft">&#160;</td><td class="mdescRight">export surface to STL file  <a href="#a11a8473f84eeed35f9f48c119da16351">More...</a><br/></td></tr>
 <tr class="separator:a11a8473f84eeed35f9f48c119da16351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff36c67432f7527fccad4b0b90c226a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#aff36c67432f7527fccad4b0b90c226a9">exportIGES</a> ()</td></tr>
+<tr class="memdesc:aff36c67432f7527fccad4b0b90c226a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">export an IGES file  <a href="#aff36c67432f7527fccad4b0b90c226a9">More...</a><br/></td></tr>
+<tr class="separator:aff36c67432f7527fccad4b0b90c226a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef735cfaf32fe83bf1091f9323e7061b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#aef735cfaf32fe83bf1091f9323e7061b">importCarene</a> ()</td></tr>
 <tr class="memdesc:aef735cfaf32fe83bf1091f9323e7061b"><td class="mdescLeft">&#160;</td><td class="mdescRight">import a Carene XYZ file, create multi-chine boat with developable surfaces  <a href="#aef735cfaf32fe83bf1091f9323e7061b">More...</a><br/></td></tr>
 <tr class="separator:aef735cfaf32fe83bf1091f9323e7061b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -313,9 +316,9 @@ Public Slots</h2></td></tr>
 <tr class="memitem:ad447a70b9f88ca1b9a81492fc3b86e2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#ad447a70b9f88ca1b9a81492fc3b86e2b">lockPoints</a> ()</td></tr>
 <tr class="memdesc:ad447a70b9f88ca1b9a81492fc3b86e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">locks all selected points  <a href="#ad447a70b9f88ca1b9a81492fc3b86e2b">More...</a><br/></td></tr>
 <tr class="separator:ad447a70b9f88ca1b9a81492fc3b86e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4a1962572812591a48c25703bc70027"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html">SubdivisionControlPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#ae4a1962572812591a48c25703bc70027">newPoint</a> ()</td></tr>
-<tr class="memdesc:ae4a1962572812591a48c25703bc70027"><td class="mdescLeft">&#160;</td><td class="mdescRight">add a new point to the model with no edges/faces attached  <a href="#ae4a1962572812591a48c25703bc70027">More...</a><br/></td></tr>
-<tr class="separator:ae4a1962572812591a48c25703bc70027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0770afe637ab88118b6957f20ceb8942"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a0770afe637ab88118b6957f20ceb8942">newPoint</a> ()</td></tr>
+<tr class="memdesc:a0770afe637ab88118b6957f20ceb8942"><td class="mdescLeft">&#160;</td><td class="mdescRight">add a new point to the model with no edges/faces attached  <a href="#a0770afe637ab88118b6957f20ceb8942">More...</a><br/></td></tr>
+<tr class="separator:a0770afe637ab88118b6957f20ceb8942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf39d00fed33f46dea7d5f6a8b5839f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#aaf39d00fed33f46dea7d5f6a8b5839f1">projectStraightLinePoint</a> ()</td></tr>
 <tr class="memdesc:aaf39d00fed33f46dea7d5f6a8b5839f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">project all selected points ont a straight line through the first and last  <a href="#aaf39d00fed33f46dea7d5f6a8b5839f1">More...</a><br/></td></tr>
 <tr class="separator:aaf39d00fed33f46dea7d5f6a8b5839f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -409,6 +412,12 @@ Public Slots</h2></td></tr>
 <tr class="memitem:aa471985ce00a517249c2b476db9d4ac6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#aa471985ce00a517249c2b476db9d4ac6">setActiveLayerColor</a> ()</td></tr>
 <tr class="memdesc:aa471985ce00a517249c2b476db9d4ac6"><td class="mdescLeft">&#160;</td><td class="mdescRight">set active layer color  <a href="#aa471985ce00a517249c2b476db9d4ac6">More...</a><br/></td></tr>
 <tr class="separator:aa471985ce00a517249c2b476db9d4ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b83cea66e4de67cd7fd11df307b948d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a5b83cea66e4de67cd7fd11df307b948d">cornerPointSelected</a> (bool sel)</td></tr>
+<tr class="memdesc:a5b83cea66e4de67cd7fd11df307b948d"><td class="mdescLeft">&#160;</td><td class="mdescRight">corner point selected/deselected  <a href="#a5b83cea66e4de67cd7fd11df307b948d">More...</a><br/></td></tr>
+<tr class="separator:a5b83cea66e4de67cd7fd11df307b948d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36de0343e95626e62e9683bcfc47a1ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a36de0343e95626e62e9683bcfc47a1ee">dialogUpdatedPointCoord</a> (float x, float y, float z)</td></tr>
+<tr class="memdesc:a36de0343e95626e62e9683bcfc47a1ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">control point dialog changed point coordinates  <a href="#a36de0343e95626e62e9683bcfc47a1ee">More...</a><br/></td></tr>
+<tr class="separator:a36de0343e95626e62e9683bcfc47a1ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
@@ -428,10 +437,22 @@ Signals</h2></td></tr>
 <tr class="memdesc:ae28eabc4c698e3bc8732a004d2ab4034"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal when selection of items changes  <a href="#ae28eabc4c698e3bc8732a004d2ab4034">More...</a><br/></td></tr>
 <tr class="separator:ae28eabc4c698e3bc8732a004d2ab4034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3418d01b682177521f463bc6fdb7d802"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a3418d01b682177521f463bc6fdb7d802">changedModel</a> ()</td></tr>
-<tr class="memdesc:a3418d01b682177521f463bc6fdb7d802"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal when model has changed  <a href="#a3418d01b682177521f463bc6fdb7d802">More...</a><br/></td></tr>
+<tr class="memdesc:a3418d01b682177521f463bc6fdb7d802"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal when model has changes  <a href="#a3418d01b682177521f463bc6fdb7d802">More...</a><br/></td></tr>
 <tr class="separator:a3418d01b682177521f463bc6fdb7d802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61d8a1d0d26a123ef81527ba32932bd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a61d8a1d0d26a123ef81527ba32932bd2">modelLoaded</a> ()</td></tr>
+<tr class="memdesc:a61d8a1d0d26a123ef81527ba32932bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal when new model loaded  <a href="#a61d8a1d0d26a123ef81527ba32932bd2">More...</a><br/></td></tr>
+<tr class="separator:a61d8a1d0d26a123ef81527ba32932bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24cda66f9ccc1c9bc24f8885bcf97255"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a24cda66f9ccc1c9bc24f8885bcf97255">showControlPointDialog</a> (bool)</td></tr>
+<tr class="memdesc:a24cda66f9ccc1c9bc24f8885bcf97255"><td class="mdescLeft">&#160;</td><td class="mdescRight">show or disable control point dialog  <a href="#a24cda66f9ccc1c9bc24f8885bcf97255">More...</a><br/></td></tr>
+<tr class="separator:a24cda66f9ccc1c9bc24f8885bcf97255"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35f446710a96c227f1794eacaef7ba6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a35f446710a96c227f1794eacaef7ba6a">updateControlPointValue</a> (<a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html">ShipCAD::SubdivisionControlPoint</a> *pt)</td></tr>
+<tr class="memdesc:a35f446710a96c227f1794eacaef7ba6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the control point values  <a href="#a35f446710a96c227f1794eacaef7ba6a">More...</a><br/></td></tr>
+<tr class="separator:a35f446710a96c227f1794eacaef7ba6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73e29a9ddf9e059a5168343099b42ea0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a73e29a9ddf9e059a5168343099b42ea0">onUpdateVisibilityInfo</a> ()</td></tr>
 <tr class="separator:a73e29a9ddf9e059a5168343099b42ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55a195bee957f58a12e1d401c119d910"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#a55a195bee957f58a12e1d401c119d910">modelGeometryChanged</a> ()</td></tr>
+<tr class="memdesc:a55a195bee957f58a12e1d401c119d910"><td class="mdescLeft">&#160;</td><td class="mdescRight">the <a class="el" href="namespaceShipCAD.html">ShipCAD</a> model geometry has changed  <a href="#a55a195bee957f58a12e1d401c119d910">More...</a><br/></td></tr>
+<tr class="separator:a55a195bee957f58a12e1d401c119d910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -450,11 +471,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aea72d61d10bd8eb70572438696ada3d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#aea72d61d10bd8eb70572438696ada3d3">addRecentFiles</a> (const QString &amp;filename)</td></tr>
 <tr class="memdesc:aea72d61d10bd8eb70572438696ada3d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">add a filename to the list of recent files  <a href="#aea72d61d10bd8eb70572438696ada3d3">More...</a><br/></td></tr>
 <tr class="separator:aea72d61d10bd8eb70572438696ada3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae09ac41e86659fab53e236f27f2ca761"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1Controller.html#ae09ac41e86659fab53e236f27f2ca761">shootPickRay</a> (<a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;vp, const <a class="el" href="structShipCAD_1_1PickRay.html">PickRay</a> &amp;ray)</td></tr>
+<tr class="memdesc:ae09ac41e86659fab53e236f27f2ca761"><td class="mdescLeft">&#160;</td><td class="mdescRight">shoot a pick ray, change items to selected  <a href="#ae09ac41e86659fab53e236f27f2ca761">More...</a><br/></td></tr>
+<tr class="separator:ae09ac41e86659fab53e236f27f2ca761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="namespaceShipCAD.html">ShipCAD</a> model controller, contains editing actions. </p>
 
-<p>Definition at line <a class="el" href="controller_8h_source.html#l00051">51</a> of file <a class="el" href="controller_8h_source.html">controller.h</a>.</p>
+<p>Definition at line <a class="el" href="controller_8h_source.html#l00053">53</a> of file <a class="el" href="controller_8h_source.html">controller.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a969bc231a8d15189a717acbca9146deb"></a>
 <div class="memitem">
@@ -480,7 +504,7 @@ Public Member Functions</h2></td></tr>
 
 <p>constructor </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00042">42</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00046">46</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -499,7 +523,7 @@ Public Member Functions</h2></td></tr>
 
 <p>destructor </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00058">58</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00062">62</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +551,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add a new controlcurve </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00132">132</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00182">182</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -554,7 +578,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add a cylinder to model </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00721">721</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00782">782</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -590,7 +614,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00350">350</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00406">406</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -628,7 +652,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add a new intersection at the specified location </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00375">375</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00431">431</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -656,7 +680,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add an intersection to the appropriate list </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00381">381</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00437">437</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -684,7 +708,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add a marker </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00417">417</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00473">473</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -704,7 +728,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add a filename to the list of recent files </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00068">68</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00072">72</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -731,7 +755,7 @@ Public Member Functions</h2></td></tr>
 
 <p>assemble </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00162">162</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00212">212</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +782,7 @@ Public Member Functions</h2></td></tr>
 
 <p>all connected patches surrounded by creases grouped into new layer </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00391">391</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00447">447</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -793,7 +817,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00355">355</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00411">411</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -868,7 +892,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>signal when model has changed </p>
+<p>signal when model has changes </p>
 
 </div>
 </div>
@@ -945,7 +969,7 @@ Public Member Functions</h2></td></tr>
 
 <p>check the surface for inconsistent normal directions and leaks </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00432">432</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00488">488</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -972,7 +996,7 @@ Public Member Functions</h2></td></tr>
 
 <p>deselect all selected items </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00519">519</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00582">582</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -999,7 +1023,7 @@ Public Member Functions</h2></td></tr>
 
 <p>clear the undo history </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00539">539</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00605">605</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1026,7 +1050,7 @@ Public Member Functions</h2></td></tr>
 
 <p>remove an edge by replacing the two connected faces with one face </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00137">137</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00187">187</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1053,7 +1077,7 @@ Public Member Functions</h2></td></tr>
 
 <p>merge 2 selected edges by removing common controlpoint </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00452">452</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00508">508</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1080,7 +1104,41 @@ Public Member Functions</h2></td></tr>
 
 <p>create a new edge by connecting 2 points belonging to the same face </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00142">142</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00192">192</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5b83cea66e4de67cd7fd11df307b948d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controller::cornerPointSelected </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>sel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>corner point selected/deselected </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sel</td><td>true if corner point has been selected, false if deselected </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00802">802</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1107,7 +1165,7 @@ Public Member Functions</h2></td></tr>
 
 <p>switch selected edges between normal or crease edges </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00147">147</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00197">197</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1134,7 +1192,7 @@ Public Member Functions</h2></td></tr>
 
 <p>create redo data </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00099">99</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00149">149</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1172,7 +1230,7 @@ Public Member Functions</h2></td></tr>
 
 <p>create undo data </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00126">126</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00176">176</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1199,7 +1257,7 @@ Public Member Functions</h2></td></tr>
 
 <p>calculate crosscurves </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00360">360</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00416">416</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1226,7 +1284,7 @@ Public Member Functions</h2></td></tr>
 
 <p>delete the background image </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00089">89</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00139">139</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1253,7 +1311,7 @@ Public Member Functions</h2></td></tr>
 
 <p>delete all empty layers from the model </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00406">406</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00462">462</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1280,7 +1338,7 @@ Public Member Functions</h2></td></tr>
 
 <p>delete all markers from the model </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00422">422</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00478">478</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1307,7 +1365,7 @@ Public Member Functions</h2></td></tr>
 
 <p>delete all faces on the starboard side of the hull </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00167">167</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00217">217</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1334,7 +1392,7 @@ Public Member Functions</h2></td></tr>
 
 <p>delete all selected items </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00524">524</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00590">590</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1361,7 +1419,7 @@ Public Member Functions</h2></td></tr>
 
 <p>calculate resistance of yachts according to Delft systematic yacht series </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00509">509</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00572">572</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1388,7 +1446,59 @@ Public Member Functions</h2></td></tr>
 
 <p>develop all developable layers </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00396">396</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00452">452</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a36de0343e95626e62e9683bcfc47a1ee"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controller::dialogUpdatedPointCoord </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>control point dialog changed point coordinates </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>current x value </td></tr>
+    <tr><td class="paramname">y</td><td>current y value </td></tr>
+    <tr><td class="paramname">z</td><td>current z value </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00832">832</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1415,7 +1525,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export intersections to DXF file as 2D polylines </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00212">212</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00262">262</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1441,7 +1551,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>export all lines to a 3D DXF file as polylines </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00217">217</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00267">267</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1468,7 +1578,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export coordinates of controlpoints to a textfile </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00207">207</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00257">257</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1495,7 +1605,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export all faces to a 3D DXF file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00222">222</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00272">272</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1522,7 +1632,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export Freeship exchange format (FEF) file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00227">227</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00277">277</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1549,7 +1659,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export stations to archimedes </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00202">202</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00252">252</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1576,7 +1686,34 @@ Public Member Functions</h2></td></tr>
 
 <p>export GHS file format </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00232">232</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00282">282</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aff36c67432f7527fccad4b0b90c226a9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Controller::exportIGES </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>export an IGES file </p>
+
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00297">297</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1603,7 +1740,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export file for CFD program Michlet </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00242">242</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00292">292</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1630,7 +1767,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export model as wavefront .obj file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00252">252</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00307">307</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1657,7 +1794,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export intersections as a textfile of 3D points </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00257">257</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00312">312</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1684,7 +1821,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export geometry as a part file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00237">237</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00287">287</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1711,7 +1848,7 @@ Public Member Functions</h2></td></tr>
 
 <p>export surface to STL file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00262">262</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00317">317</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1738,7 +1875,7 @@ Public Member Functions</h2></td></tr>
 
 <p>extrude selected boundary edge </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00152">152</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00202">202</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1765,7 +1902,7 @@ Public Member Functions</h2></td></tr>
 
 <p>invert normal-direction of all selected faces </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00172">172</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00222">222</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1792,7 +1929,7 @@ Public Member Functions</h2></td></tr>
 
 <p>get the model this is controlling </p>
 
-<p>Definition at line <a class="el" href="controller_8h_source.html#l00066">66</a> of file <a class="el" href="controller_8h_source.html">controller.h</a>.</p>
+<p>Definition at line <a class="el" href="controller_8h_source.html#l00069">69</a> of file <a class="el" href="controller_8h_source.html">controller.h</a>.</p>
 
 </div>
 </div>
@@ -1811,7 +1948,7 @@ Public Member Functions</h2></td></tr>
 
 <p>get the list of recent files </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00063">63</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00067">67</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1838,7 +1975,7 @@ Public Member Functions</h2></td></tr>
 
 <p>calculate a range of hydrostatics </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00365">365</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00421">421</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1865,7 +2002,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a Carene XYZ file, create multi-chine boat with developable surfaces </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00267">267</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00322">322</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1892,7 +2029,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import chines from a textfile and fit a surface through them </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00272">272</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00327">327</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1919,7 +2056,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a Freeship exchange format (FEF) file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00277">277</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00332">332</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1946,7 +2083,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Load a bodyplan and try to fit surface to it. </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00370">370</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00426">426</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -1973,7 +2110,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a file created with Carlsson's Hulls program </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00282">282</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00337">337</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2000,7 +2137,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import markers from a textfile </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00427">427</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00483">483</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2027,7 +2164,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import file from CFD program Michlet </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00247">247</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00302">302</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2054,7 +2191,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a partfile and add to current geometry </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00287">287</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00342">342</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2081,7 +2218,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a polycad file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00292">292</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00347">347</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2108,7 +2245,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a number of curves and fit a surface </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00297">297</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00352">352</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2135,7 +2272,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a VRML 1.0 file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00302">302</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00357">357</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2162,7 +2299,7 @@ Public Member Functions</h2></td></tr>
 
 <p>fill all intersection of visible edges and 3D plane, inserts a point on each of these edges </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00462">462</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00518">518</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2189,7 +2326,7 @@ Public Member Functions</h2></td></tr>
 
 <p>the intersection dialog </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00386">386</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00442">442</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2216,7 +2353,7 @@ Public Member Functions</h2></td></tr>
 
 <p>calculate the intersection points of 2 layers </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00467">467</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00523">523</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2243,7 +2380,7 @@ Public Member Functions</h2></td></tr>
 
 <p>calculate resistance of slender hulls (canoes) according to John Winters </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00514">514</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00577">577</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2270,7 +2407,7 @@ Public Member Functions</h2></td></tr>
 
 <p>dialog to create keels and rudders </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00728">728</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00789">789</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2297,7 +2434,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Affine hullform transformation according to Lackenby. </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00442">442</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00498">498</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2324,7 +2461,7 @@ Public Member Functions</h2></td></tr>
 
 <p>the layer dialog </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00401">401</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00457">457</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2351,7 +2488,7 @@ Public Member Functions</h2></td></tr>
 
 <p>import a FREE!Ship file </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00307">307</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00362">362</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2379,7 +2516,7 @@ Public Member Functions</h2></td></tr>
 
 <p>load a FREE!Ship file by name </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00335">335</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00391">391</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2406,7 +2543,7 @@ Public Member Functions</h2></td></tr>
 
 <p>locks all selected points </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00472">472</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00528">528</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2433,7 +2570,57 @@ Public Member Functions</h2></td></tr>
 
 <p>mirror all selected faces on a plane </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00177">177</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00227">227</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a55a195bee957f58a12e1d401c119d910"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Controller::modelGeometryChanged </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the <a class="el" href="namespaceShipCAD.html">ShipCAD</a> model geometry has changed </p>
+
+</div>
+</div>
+<a class="anchor" id="a61d8a1d0d26a123ef81527ba32932bd2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Controller::modelLoaded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>signal when new model loaded </p>
 
 </div>
 </div>
@@ -2460,7 +2647,7 @@ Public Member Functions</h2></td></tr>
 
 <p>move selected faces </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00197">197</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00247">247</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2487,7 +2674,7 @@ Public Member Functions</h2></td></tr>
 
 <p>create a new control face from selected control points </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00182">182</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00232">232</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2514,7 +2701,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add a new empty layer </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00411">411</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00467">467</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2541,11 +2728,11 @@ Public Member Functions</h2></td></tr>
 
 <p>start a new model (with a predefined surface) </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00437">437</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00493">493</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae4a1962572812591a48c25703bc70027"></a>
+<a class="anchor" id="a0770afe637ab88118b6957f20ceb8942"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -2553,7 +2740,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html">SubdivisionControlPoint</a> * Controller::newPoint </td>
+          <td class="memname">void Controller::newPoint </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -2568,7 +2755,7 @@ Public Member Functions</h2></td></tr>
 
 <p>add a new point to the model with no edges/faces attached </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00477">477</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00533">533</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2618,7 +2805,7 @@ Public Member Functions</h2></td></tr>
 
 <p>open a background image </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00094">94</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00144">144</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2645,7 +2832,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show a warning when edit commands are invoked and the model has locked points </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00498">498</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00561">561</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2672,7 +2859,7 @@ Public Member Functions</h2></td></tr>
 
 <p>project all selected points ont a straight line through the first and last </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00483">483</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00546">546</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2699,7 +2886,7 @@ Public Member Functions</h2></td></tr>
 
 <p>restore the state of the model after previous undo </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00504">504</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00567">567</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2726,7 +2913,7 @@ Public Member Functions</h2></td></tr>
 
 <p>remove any unused points from the model </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00457">457</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00513">513</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2753,7 +2940,7 @@ Public Member Functions</h2></td></tr>
 
 <p>rotate selected faces around an axis </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00187">187</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00237">237</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2780,7 +2967,7 @@ Public Member Functions</h2></td></tr>
 
 <p>save a FREE!Ship file, asking for name </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00345">345</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00401">401</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2807,7 +2994,7 @@ Public Member Functions</h2></td></tr>
 
 <p>save a FREE!Ship file without asking for filename </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00340">340</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00396">396</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2834,7 +3021,7 @@ Public Member Functions</h2></td></tr>
 
 <p>scale selected faces </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00192">192</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00242">242</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2861,7 +3048,7 @@ Public Member Functions</h2></td></tr>
 
 <p>scale the model and all equivalent data </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00447">447</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00503">503</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2888,7 +3075,7 @@ Public Member Functions</h2></td></tr>
 
 <p>select all items </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00529">529</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00595">595</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2915,7 +3102,7 @@ Public Member Functions</h2></td></tr>
 
 <p>set active layer color </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00735">735</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00796">796</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2943,7 +3130,45 @@ Public Member Functions</h2></td></tr>
 
 <p>underwater color change shading </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00649">649</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00710">710</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae09ac41e86659fab53e236f27f2ca761"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Controller::shootPickRay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1Viewport.html">Viewport</a> &amp;&#160;</td>
+          <td class="paramname"><em>vp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structShipCAD_1_1PickRay.html">PickRay</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>shoot a pick ray, change items to selected </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vp</td><td>the viewport that has the pick ray </td></tr>
+    <tr><td class="paramname">ray</td><td>the pick ray </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if pick ray found items and selected them, false if nohting picked </dd></dl>
+
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00093">93</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2971,7 +3196,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show both sides of hull </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00627">627</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00688">688</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -2999,7 +3224,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show buttocks </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00666">666</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00727">727</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3027,7 +3252,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show control curves </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00594">594</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00655">655</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3055,7 +3280,33 @@ Public Member Functions</h2></td></tr>
 
 <p>control net visibility </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00561">561</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00622">622</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a24cda66f9ccc1c9bc24f8885bcf97255"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Controller::showControlPointDialog </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>show or disable control point dialog </p>
 
 </div>
 </div>
@@ -3083,7 +3334,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show curve curvature </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00605">605</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00666">666</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3111,7 +3362,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show diagonals </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00688">688</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00749">749</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3139,7 +3390,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show flowlines </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00710">710</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00771">771</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3167,7 +3418,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show grid </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00583">583</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00644">644</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3194,7 +3445,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show the undo history </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00544">544</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00610">610</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3222,7 +3473,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show Hydrostatic features </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00699">699</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00760">760</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3250,7 +3501,7 @@ Public Member Functions</h2></td></tr>
 
 <p>interior edges </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00572">572</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00633">633</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3278,7 +3529,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show markers </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00638">638</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00699">699</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3306,7 +3557,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show surface normals </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00616">616</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00677">677</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3334,7 +3585,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show stations </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00655">655</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00716">716</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3362,7 +3613,7 @@ Public Member Functions</h2></td></tr>
 
 <p>show waterlines </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00677">677</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00738">738</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3389,7 +3640,7 @@ Public Member Functions</h2></td></tr>
 
 <p>create new controlpoints by splitting control edge into two </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00157">157</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00207">207</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3416,7 +3667,7 @@ Public Member Functions</h2></td></tr>
 
 <p>restore the state of the model before last modification </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00534">534</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00600">600</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3443,7 +3694,7 @@ Public Member Functions</h2></td></tr>
 
 <p>unlock all points </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00493">493</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00556">556</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
 
 </div>
 </div>
@@ -3470,7 +3721,33 @@ Public Member Functions</h2></td></tr>
 
 <p>unlock all selected points </p>
 
-<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00488">488</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+<p>Definition at line <a class="el" href="controller_8cpp_source.html#l00551">551</a> of file <a class="el" href="controller_8cpp_source.html">controller.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a35f446710a96c227f1794eacaef7ba6a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ShipCAD::Controller::updateControlPointValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html">ShipCAD::SubdivisionControlPoint</a> *&#160;</td>
+          <td class="paramname"><em>pt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>update the control point values </p>
 
 </div>
 </div>
@@ -3506,7 +3783,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 26 2015 23:07:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 30 2016 01:20:55 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

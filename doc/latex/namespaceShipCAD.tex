@@ -8,6 +8,8 @@ struct \hyperlink{structShipCAD_1_1JPEGImage}{J\-P\-E\-G\-Image}
 \begin{DoxyCompactList}\small\item\em struct to hold jpeg image as stored in Free!\-Ship \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1BackgroundImage}{Background\-Image}
 \begin{DoxyCompactList}\small\item\em Background Images for a viewport. \end{DoxyCompactList}\item 
+struct \hyperlink{structShipCAD_1_1ControlFaceGrid}{Control\-Face\-Grid}
+\item 
 class \hyperlink{classShipCAD_1_1Controller}{Controller}
 \begin{DoxyCompactList}\small\item\em \hyperlink{namespaceShipCAD}{Ship\-C\-A\-D} model controller, contains editing actions. \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1IntersectionData}{Intersection\-Data}
@@ -38,6 +40,8 @@ class \hyperlink{classShipCAD_1_1NURBSurface}{N\-U\-R\-B\-Surface}
 \item 
 class \hyperlink{classShipCAD_1_1Plane}{Plane}
 \item 
+struct \hyperlink{structShipCAD_1_1PointGrid}{Point\-Grid}
+\item 
 class \hyperlink{classShipCAD_1_1Preferences}{Preferences}
 \item 
 class \hyperlink{classShipCAD_1_1ProjectSettings}{Project\-Settings}
@@ -50,12 +54,16 @@ class \hyperlink{classShipCAD_1_1Shader}{Shader}
 \item 
 class \hyperlink{classShipCAD_1_1LineShader}{Line\-Shader}
 \item 
+class \hyperlink{classShipCAD_1_1FaceShader}{Face\-Shader}
+\item 
 class \hyperlink{classShipCAD_1_1MonoFaceShader}{Mono\-Face\-Shader}
+\item 
+class \hyperlink{classShipCAD_1_1LightedFaceShader}{Lighted\-Face\-Shader}
 \item 
 class \hyperlink{classShipCAD_1_1ShipCADModel}{Ship\-C\-A\-D\-Model}
 \item 
 class \hyperlink{classShipCAD_1_1Spline}{Spline}
-\item 
+\begin{DoxyCompactList}\small\item\em Represents a spline. \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1SubdivisionBase}{Subdivision\-Base}
 \begin{DoxyCompactList}\small\item\em the base class for all subdivision points, edges and faces \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve}
@@ -71,7 +79,7 @@ class \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\-Control\-F
 struct \hyperlink{structShipCAD_1_1LayerProperties}{Layer\-Properties}
 \item 
 class \hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\-Layer}
-\item 
+\begin{DoxyCompactList}\small\item\em add Subdivision\-Control\-Faces can be assigned to a layer \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\-Point}
 \begin{DoxyCompactList}\small\item\em 3\-D Point \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Subdivision\-Control\-Point}
@@ -82,6 +90,18 @@ class \hyperlink{classShipCAD_1_1UndoObject}{Undo\-Object}
 \item 
 class \hyperlink{classShipCAD_1_1Viewport}{Viewport}
 \item 
+struct \hyperlink{structShipCAD_1_1PickRay}{Pick\-Ray}
+\begin{DoxyCompactList}\small\item\em a pick ray (line) \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1ViewportView}{Viewport\-View}
+\begin{DoxyCompactList}\small\item\em Abstract class to calculate view, world matrices and operations using those for a viewport. \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1ViewportViewPerspective}{Viewport\-View\-Perspective}
+\begin{DoxyCompactList}\small\item\em class to calculate view, world matrices and operations using those for a Perspective viewport \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1ViewportViewPlan}{Viewport\-View\-Plan}
+\begin{DoxyCompactList}\small\item\em class to calculate view, world matrices and operations using those for a Plan viewport \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1ViewportViewProfile}{Viewport\-View\-Profile}
+\begin{DoxyCompactList}\small\item\em class to calculate view, world matrices and operations using those for a Profile viewport \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1ViewportViewBodyplan}{Viewport\-View\-Bodyplan}
+\begin{DoxyCompactList}\small\item\em class to calculate view, world matrices and operations using those for a Bodyplan viewport \end{DoxyCompactList}\item 
 class \hyperlink{classShipCAD_1_1Visibility}{Visibility}
 \begin{DoxyCompactList}\small\item\em Settings class for visibility of different features. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Typedefs}
@@ -245,55 +265,57 @@ Q\-String \hyperlink{namespaceShipCAD_af977e4008c66d1a323d105f27622991b}{Density
 Q\-String \hyperlink{namespaceShipCAD_a62749df66958d1389c3cc6f6f03d42fb}{Weight\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
 \item 
 void \hyperlink{namespaceShipCAD_aa5d3fc63603d716d3e24244049e1e510}{Min\-Max} (const Q\-Vector3\-D \&p, Q\-Vector3\-D \&min, Q\-Vector3\-D \&max)
-\item 
+\begin{DoxyCompactList}\small\item\em find the min and max coordinates from a point \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_a69361fa79b1f818e21306f6266ee45d3}{Distancepoint\-To\-Line} (const Q\-Vector3\-D \&p, const Q\-Vector3\-D \&l1, const Q\-Vector3\-D \&l2)
-\item 
+\begin{DoxyCompactList}\small\item\em find the distance from a point to the line \end{DoxyCompactList}\item 
 Q\-Vector3\-D \hyperlink{namespaceShipCAD_a83f7c2b40959a0d02a2cc1085b0d07ee}{Interpolate} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, float param)
-\item 
+\begin{DoxyCompactList}\small\item\em linearly interpolate a point between 2 points \end{DoxyCompactList}\item 
 Q\-Vector3\-D \hyperlink{namespaceShipCAD_ad1ad66c896fe763fb4603989ff1f1182}{Mid\-Point} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
-\item 
+\begin{DoxyCompactList}\small\item\em get the midpoint between 2 points (interpolate 50\%) \end{DoxyCompactList}\item 
 int \hyperlink{namespaceShipCAD_a87efc267ae07a84fb1cd55a4562c2907}{Find\-D\-X\-F\-Color\-Index} (Q\-Color color)
-\item 
+\begin{DoxyCompactList}\small\item\em convert a Q\-Color to a D\-X\-F color index \end{DoxyCompactList}\item 
 Q\-Color \hyperlink{namespaceShipCAD_a9956eca83968462fc4c48c376a10d577}{Q\-Color\-From\-D\-X\-F\-Index} (int index)
-\item 
+\begin{DoxyCompactList}\small\item\em get a Q\-Color from a D\-X\-F color index \end{DoxyCompactList}\item 
 Q\-Vector3\-D \hyperlink{namespaceShipCAD_a81e47e31f89000550b007c0f9a4d09aa}{Unified\-Normal} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3)
-\item 
+\begin{DoxyCompactList}\small\item\em find the unit normal of a plane defined by 3 points \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_ac344c080c66b4394cb988cf88c726029}{Deg\-To\-Rad} (float deg)
-\item 
+\begin{DoxyCompactList}\small\item\em convert degrees to radians \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_a3ad1916db38fb61e8a053f944df49cee}{Rad\-To\-Deg} (float rad)
-\item 
+\begin{DoxyCompactList}\small\item\em convert radians to degrees \end{DoxyCompactList}\item 
 bool \hyperlink{namespaceShipCAD_ae1773f0e415446342401a67430a8b643}{Point\-In\-Triangle} (const Q\-Vector3\-D \&intercept, const Q\-Vector3\-D \&p0, const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
-\item 
+\begin{DoxyCompactList}\small\item\em find if point lies inside a triangle and on the plane of the triangle \end{DoxyCompactList}\item 
 void \hyperlink{namespaceShipCAD_a36b9b33181823761bc327d66c36c8d8f}{Clip\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, float s1, float s2, float s3, std\-::vector$<$ Q\-Vector3\-D $>$ \&front, std\-::vector$<$ Q\-Vector3\-D $>$ \&back)
-\item 
+\begin{DoxyCompactList}\small\item\em clip a triangle given vertex point distances from a plane \end{DoxyCompactList}\item 
 void \hyperlink{namespaceShipCAD_a41e6294f71b66bca070c744accbb3ef2}{Clip\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, const \hyperlink{classShipCAD_1_1Plane}{Plane} \&plane, std\-::vector$<$ Q\-Vector3\-D $>$ \&front, std\-::vector$<$ Q\-Vector3\-D $>$ \&back)
-\item 
+\begin{DoxyCompactList}\small\item\em clip a triangle given a plane \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_a6f9f5ac15e7e2821bba27ba06827a4e1}{Squared\-Dist\-P\-P} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
 \begin{DoxyCompactList}\small\item\em squared distance between 2 3\-D points \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_a438e97b711c6878eba3bf7182e68a3c7}{Dist\-P\-P3\-D} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
 \begin{DoxyCompactList}\small\item\em distance between 2 3\-D points \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_a45ba7de6922e89cbddf2a4c9c810a2e4}{Bool\-To\-Str} (bool val)
-\item 
+\begin{DoxyCompactList}\small\item\em convert a bool to a string for serialization \end{DoxyCompactList}\item 
 void \hyperlink{namespaceShipCAD_a2eddf75f0e29363ab81a3fb0e0211848}{Join\-Spline\-Segments} (float join\-\_\-error, bool force\-\_\-to\-\_\-one\-\_\-segment, \hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\-Vector} \&list)
-\item 
+\begin{DoxyCompactList}\small\item\em join a set of linesegments and connect them into as few as possible splines \end{DoxyCompactList}\item 
 int \hyperlink{namespaceShipCAD_a70b238d926183460670b82d9680b5cb9}{Read\-Int\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
-\item 
+\begin{DoxyCompactList}\small\item\em convert a string to an integer value \end{DoxyCompactList}\item 
 bool \hyperlink{namespaceShipCAD_af343b5a2dfd09b32b9451d35e0676384}{Read\-Bool\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
-\item 
+\begin{DoxyCompactList}\small\item\em convert a string to an boolean value \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_a696bc38864a736dda734802f3cda4346}{Read\-Float\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
-\item 
+\begin{DoxyCompactList}\small\item\em convert a string to an float value \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_a44025ef38e6ee9f12cbf032660f637b5}{Find\-Water\-Viscosity} (float density, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
 \begin{DoxyCompactList}\small\item\em find water viscosity based on density \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_ae416df4a72579eb3a1a418b19551eb53}{Change\-File\-Ext} (const Q\-String \&name, const Q\-String \&ext)
 \begin{DoxyCompactList}\small\item\em Append or change the file extension to that given. \end{DoxyCompactList}\item 
 float \hyperlink{namespaceShipCAD_ad3ca198e79658bf065f1c1c416f23670}{Volume\-To\-Displacement} (float volume, float density, float appcoeff, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
-\item 
+\begin{DoxyCompactList}\small\item\em convert volume to displacement given density, appendage coefficient and unit type \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_ae378a523725f5718c9f2b55103f08dcb}{Make\-Length} (float value, int decimals, int des\-\_\-length)
 \begin{DoxyCompactList}\small\item\em Create a formatted string from a float value. \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_ab520595d533b1626c8be82c0efd24e6d}{Make\-Length} (const Q\-String \&value, int des\-\_\-length)
 \begin{DoxyCompactList}\small\item\em Create a string of a given length. \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_a83d943939c1d84473bb904360116f7be}{truncate} (float val, int max\-\_\-length)
 \begin{DoxyCompactList}\small\item\em convert a float value to a string with max number of decimals \end{DoxyCompactList}\item 
+bool \hyperlink{namespaceShipCAD_ae1b7d6603b6c5a2969befdbd629f2e8b}{Fuzzy\-Compare} (float val1, float val2, float error)
+\begin{DoxyCompactList}\small\item\em compare 2 floats, if they are sufficiently close, return true \end{DoxyCompactList}\item 
 Q\-String \hyperlink{namespaceShipCAD_a2901c6bb3e9ddd7efa9bdcc9095cc468}{version\-String} (\hyperlink{namespaceShipCAD_af3a6fa23a7318acbda7b0066b53d694f}{version\-\_\-t} v)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
@@ -364,7 +386,7 @@ Definition at line 226 of file hydrostaticcalc.\-h.
 \subsubsection[{Intersection\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Pointer\-Vector}$<${\bf Intersection}$>$ {\bf Ship\-C\-A\-D\-::\-Intersection\-Vector}}}\label{namespaceShipCAD_a9910f0963197f9df6125398efd4fa139}
 
 
-Definition at line 114 of file intersection.\-h.
+Definition at line 139 of file intersection.\-h.
 
 \hypertarget{namespaceShipCAD_a36fff5b53986f6d6976afc749463ef22}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Marker\-Vector@{Marker\-Vector}}
 \index{Marker\-Vector@{Marker\-Vector}!ShipCAD@{Ship\-C\-A\-D}}
@@ -378,14 +400,14 @@ Definition at line 80 of file marker.\-h.
 \subsubsection[{Spline\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Pointer\-Vector}$<${\bf Spline}$>$ {\bf Ship\-C\-A\-D\-::\-Spline\-Vector}}}\label{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}
 
 
-Definition at line 144 of file spline.\-h.
+Definition at line 186 of file spline.\-h.
 
 \hypertarget{namespaceShipCAD_aa9dd7a826ae5254e377dac43ea19da80}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Subdivision\-Control\-Curve\-Vector@{Subdivision\-Control\-Curve\-Vector}}
 \index{Subdivision\-Control\-Curve\-Vector@{Subdivision\-Control\-Curve\-Vector}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{Subdivision\-Control\-Curve\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Pointer\-Vector}$<${\bf Subdivision\-Control\-Curve}$>$ {\bf Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve\-Vector}}}\label{namespaceShipCAD_aa9dd7a826ae5254e377dac43ea19da80}
 
 
-Definition at line 116 of file subdivcontrolcurve.\-h.
+Definition at line 113 of file subdivcontrolcurve.\-h.
 
 
 
@@ -763,6 +785,18 @@ Definition at line 42 of file shipcadlib.\-cpp.
 )}}\label{namespaceShipCAD_a45ba7de6922e89cbddf2a4c9c810a2e4}
 
 
+convert a bool to a string for serialization 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & boolean value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Q\-String containing \char`\"{}0\char`\"{} or \char`\"{}1\char`\"{} depending on value 
+\end{DoxyReturn}
+
+
 Definition at line 299 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_ae416df4a72579eb3a1a418b19551eb53}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Change\-File\-Ext@{Change\-File\-Ext}}
@@ -791,7 +825,7 @@ the filename with extension
 \end{DoxyReturn}
 
 
-Definition at line 461 of file utility.\-cpp.
+Definition at line 458 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a36b9b33181823761bc327d66c36c8d8f}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Clip\-Triangle@{Clip\-Triangle}}
 \index{Clip\-Triangle@{Clip\-Triangle}!ShipCAD@{Ship\-C\-A\-D}}
@@ -807,6 +841,31 @@ Definition at line 461 of file utility.\-cpp.
 \item[{std\-::vector$<$ Q\-Vector3\-D $>$ \&}]{back}
 \end{DoxyParamCaption}
 )}}\label{namespaceShipCAD_a36b9b33181823761bc327d66c36c8d8f}
+
+
+clip a triangle given vertex point distances from a plane 
+
+3 points each with a distance to a plane are converted into 2 lists of points that are in front of the plane, or those in back of the plane. If the plane cuts through the triangle, then an intersection point on each side of the plane is added to the lists
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & first vertex point \\
+\hline
+{\em p2} & second vertex point \\
+\hline
+{\em p3} & third vertex point \\
+\hline
+{\em s1} & first vertex point distance to plane \\
+\hline
+{\em s2} & second vertex point distance to plane \\
+\hline
+{\em s3} & third vertex point distance to plane \\
+\hline
+{\em front} & result list of points in front of plane \\
+\hline
+{\em back} & result list of points in back of plane \\
+\hline
+\end{DoxyParams}
 
 
 Definition at line 204 of file utility.\-cpp.
@@ -825,6 +884,27 @@ Definition at line 204 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_a41e6294f71b66bca070c744accbb3ef2}
 
 
+clip a triangle given a plane 
+
+3 points and a plane are converted into 2 lists of points that are in front of the plane, or those in back of the plane. If the plane cuts through the triangle, then an intersection point on each side of the plane is added to the lists
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & first vertex point \\
+\hline
+{\em p2} & second vertex point \\
+\hline
+{\em p3} & third vertex point \\
+\hline
+{\em plane} & the plane to check against \\
+\hline
+{\em front} & result list of points in front of plane \\
+\hline
+{\em back} & result list of points in back of plane \\
+\hline
+\end{DoxyParams}
+
+
 Definition at line 274 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_ac344c080c66b4394cb988cf88c726029}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Deg\-To\-Rad@{Deg\-To\-Rad}}
@@ -834,6 +914,18 @@ Definition at line 274 of file utility.\-cpp.
 \item[{float}]{deg}
 \end{DoxyParamCaption}
 )}}\label{namespaceShipCAD_ac344c080c66b4394cb988cf88c726029}
+
+
+convert degrees to radians 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deg} & degree value to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in radians 
+\end{DoxyReturn}
 
 
 Definition at line 167 of file utility.\-cpp.
@@ -858,6 +950,22 @@ Definition at line 70 of file shipcadlib.\-cpp.
 \item[{const Q\-Vector3\-D \&}]{l2}
 \end{DoxyParamCaption}
 )}}\label{namespaceShipCAD_a69361fa79b1f818e21306f6266ee45d3}
+
+
+find the distance from a point to the line 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & the point \\
+\hline
+{\em l1} & the first point on the line \\
+\hline
+{\em l2} & a second point on the line \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the nearest distance from the point to the line 
+\end{DoxyReturn}
 
 
 Definition at line 49 of file utility.\-cpp.
@@ -897,6 +1005,18 @@ Definition at line 293 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_a87efc267ae07a84fb1cd55a4562c2907}
 
 
+convert a Q\-Color to a D\-X\-F color index 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & the color to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the D\-X\-F index of the color 
+\end{DoxyReturn}
+
+
 Definition at line 121 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a44025ef38e6ee9f12cbf032660f637b5}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Find\-Water\-Viscosity@{Find\-Water\-Viscosity}}
@@ -915,7 +1035,7 @@ find water viscosity based on density
 \begin{DoxyParams}{Parameters}
 {\em density} & the water density \\
 \hline
-{\em units} & \\
+{\em units} & (imperial or metric) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -923,7 +1043,36 @@ the water viscosity
 \end{DoxyReturn}
 
 
-Definition at line 447 of file utility.\-cpp.
+Definition at line 444 of file utility.\-cpp.
+
+\hypertarget{namespaceShipCAD_ae1b7d6603b6c5a2969befdbd629f2e8b}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Fuzzy\-Compare@{Fuzzy\-Compare}}
+\index{Fuzzy\-Compare@{Fuzzy\-Compare}!ShipCAD@{Ship\-C\-A\-D}}
+\subsubsection[{Fuzzy\-Compare}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Fuzzy\-Compare (
+\begin{DoxyParamCaption}
+\item[{float}]{val1, }
+\item[{float}]{val2, }
+\item[{float}]{error}
+\end{DoxyParamCaption}
+)}}\label{namespaceShipCAD_ae1b7d6603b6c5a2969befdbd629f2e8b}
+
+
+compare 2 floats, if they are sufficiently close, return true 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val1} & first value to compare \\
+\hline
+{\em val2} & second value to compare \\
+\hline
+{\em error} & if absolute difference between the 2 values is less than this, then equal \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if values are sufficiently equal 
+\end{DoxyReturn}
+
+
+Definition at line 505 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a01d1e42109b5645919c004f6d7a30b68}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Inertia\-Str@{Inertia\-Str}}
 \index{Inertia\-Str@{Inertia\-Str}!ShipCAD@{Ship\-C\-A\-D}}
@@ -947,6 +1096,22 @@ Definition at line 56 of file shipcadlib.\-cpp.
 )}}\label{namespaceShipCAD_a83f7c2b40959a0d02a2cc1085b0d07ee}
 
 
+linearly interpolate a point between 2 points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & first point \\
+\hline
+{\em p2} & second point \\
+\hline
+{\em the} & ratio of the returned point along p1-\/$>$p2 from p1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the interpolated point 
+\end{DoxyReturn}
+
+
 Definition at line 56 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a2eddf75f0e29363ab81a3fb0e0211848}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Join\-Spline\-Segments@{Join\-Spline\-Segments}}
@@ -958,6 +1123,19 @@ Definition at line 56 of file utility.\-cpp.
 \item[{{\bf Spline\-Vector} \&}]{list}
 \end{DoxyParamCaption}
 )}}\label{namespaceShipCAD_a2eddf75f0e29363ab81a3fb0e0211848}
+
+
+join a set of linesegments and connect them into as few as possible splines 
+
+
+\begin{DoxyParams}{Parameters}
+{\em join\-\_\-error} & points closer than this are joined together \\
+\hline
+{\em force\-\_\-to\-\_\-one\-\_\-segment} & true if splines should be joined even if end points are farther apart then join\-\_\-error \\
+\hline
+{\em list} & of splines to join together \\
+\hline
+\end{DoxyParams}
 
 
 Definition at line 317 of file utility.\-cpp.
@@ -1000,7 +1178,7 @@ the fixed length string
 \end{DoxyReturn}
 
 
-Definition at line 495 of file utility.\-cpp.
+Definition at line 492 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_ab520595d533b1626c8be82c0efd24e6d}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Make\-Length@{Make\-Length}}
 \index{Make\-Length@{Make\-Length}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1026,7 +1204,7 @@ the fixed length string
 \end{DoxyReturn}
 
 
-Definition at line 503 of file utility.\-cpp.
+Definition at line 500 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_ad1ad66c896fe763fb4603989ff1f1182}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Mid\-Point@{Mid\-Point}}
 \index{Mid\-Point@{Mid\-Point}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1036,6 +1214,20 @@ Definition at line 503 of file utility.\-cpp.
 \item[{const Q\-Vector3\-D \&}]{p2}
 \end{DoxyParamCaption}
 )}}\label{namespaceShipCAD_ad1ad66c896fe763fb4603989ff1f1182}
+
+
+get the midpoint between 2 points (interpolate 50\%) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & the first point \\
+\hline
+{\em p2} & the second point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+point halfway between p1 and p2 
+\end{DoxyReturn}
 
 
 Definition at line 62 of file utility.\-cpp.
@@ -1049,6 +1241,21 @@ Definition at line 62 of file utility.\-cpp.
 \item[{Q\-Vector3\-D \&}]{max}
 \end{DoxyParamCaption}
 )}}\label{namespaceShipCAD_aa5d3fc63603d716d3e24244049e1e510}
+
+
+find the min and max coordinates from a point 
+
+given a point, see if that point coordinates are smaller or larger in each axis compared to the min and max parameters
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & the point to check for new min/max \\
+\hline
+{\em min} & the current minimum vector \\
+\hline
+{\em max} & the current maximum vector \\
+\hline
+\end{DoxyParams}
 
 
 Definition at line 39 of file utility.\-cpp.
@@ -1065,6 +1272,24 @@ Definition at line 39 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_ae1773f0e415446342401a67430a8b643}
 
 
+find if point lies inside a triangle and on the plane of the triangle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intercept} & the point to check \\
+\hline
+{\em p0} & first vertex point on plane \\
+\hline
+{\em p1} & second vertex point on plane \\
+\hline
+{\em p2} & third vertex point on plane \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if intercept is on triangular face 
+\end{DoxyReturn}
+
+
 Definition at line 193 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a9956eca83968462fc4c48c376a10d577}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Q\-Color\-From\-D\-X\-F\-Index@{Q\-Color\-From\-D\-X\-F\-Index}}
@@ -1076,6 +1301,23 @@ Definition at line 193 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_a9956eca83968462fc4c48c376a10d577}
 
 
+get a Q\-Color from a D\-X\-F color index 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the D\-X\-F index (0-\/255) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the Q\-Color corresponding to the D\-X\-F color index 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\-::range\-\_\-error} & if index is not a D\-X\-F color index \\
+\hline
+\end{DoxyExceptions}
+
+
 Definition at line 141 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a3ad1916db38fb61e8a053f944df49cee}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Rad\-To\-Deg@{Rad\-To\-Deg}}
@@ -1085,6 +1327,18 @@ Definition at line 141 of file utility.\-cpp.
 \item[{float}]{rad}
 \end{DoxyParamCaption}
 )}}\label{namespaceShipCAD_a3ad1916db38fb61e8a053f944df49cee}
+
+
+convert radians to degrees 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rad} & radian value to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in degrees 
+\end{DoxyReturn}
 
 
 Definition at line 172 of file utility.\-cpp.
@@ -1100,7 +1354,23 @@ Definition at line 172 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_af343b5a2dfd09b32b9451d35e0676384}
 
 
-Definition at line 410 of file utility.\-cpp.
+convert a string to an boolean value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lineno} & indicates which line of the file we are on for errors \\
+\hline
+{\em str} & Q\-String to extract boolean \\
+\hline
+{\em start} & where to start extracting boolean \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean value extracted from string, start will be incremented to after integer 
+\end{DoxyReturn}
+
+
+Definition at line 407 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a696bc38864a736dda734802f3cda4346}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Read\-Float\-From\-Str@{Read\-Float\-From\-Str}}
 \index{Read\-Float\-From\-Str@{Read\-Float\-From\-Str}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1113,7 +1383,23 @@ Definition at line 410 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_a696bc38864a736dda734802f3cda4346}
 
 
-Definition at line 426 of file utility.\-cpp.
+convert a string to an float value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lineno} & indicates which line of the file we are on for errors \\
+\hline
+{\em str} & Q\-String to extract float \\
+\hline
+{\em start} & where to start extracting float \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float value extracted from string, start will be incremented to after float 
+\end{DoxyReturn}
+
+
+Definition at line 423 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a70b238d926183460670b82d9680b5cb9}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Read\-Int\-From\-Str@{Read\-Int\-From\-Str}}
 \index{Read\-Int\-From\-Str@{Read\-Int\-From\-Str}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1126,7 +1412,23 @@ Definition at line 426 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_a70b238d926183460670b82d9680b5cb9}
 
 
-Definition at line 389 of file utility.\-cpp.
+convert a string to an integer value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lineno} & indicates which line of the file we are on for errors \\
+\hline
+{\em str} & Q\-String to extract integer \\
+\hline
+{\em start} & where to start extracting integer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer value extracted from string, start will be incremented to after integer 
+\end{DoxyReturn}
+
+
+Definition at line 386 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a6f9f5ac15e7e2821bba27ba06827a4e1}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Squared\-Dist\-P\-P@{Squared\-Dist\-P\-P}}
 \index{Squared\-Dist\-P\-P@{Squared\-Dist\-P\-P}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1191,6 +1493,22 @@ Definition at line 148 of file utility.\-cpp.
 )}}\label{namespaceShipCAD_a81e47e31f89000550b007c0f9a4d09aa}
 
 
+find the unit normal of a plane defined by 3 points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & first point on plane \\
+\hline
+{\em p2} & second point on plane \\
+\hline
+{\em p3} & third point on plane \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+unit normal of plane 
+\end{DoxyReturn}
+
+
 Definition at line 157 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a2901c6bb3e9ddd7efa9bdcc9095cc468}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!version\-String@{version\-String}}
@@ -1227,7 +1545,25 @@ Definition at line 63 of file shipcadlib.\-cpp.
 )}}\label{namespaceShipCAD_ad3ca198e79658bf065f1c1c416f23670}
 
 
-Definition at line 473 of file utility.\-cpp.
+convert volume to displacement given density, appendage coefficient and unit type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em volume} & to convert \\
+\hline
+{\em density} & the density of water \\
+\hline
+{\em appcoeff} & the appendage coefficient \\
+\hline
+{\em units} & (imperial or metric) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+displacement 
+\end{DoxyReturn}
+
+
+Definition at line 470 of file utility.\-cpp.
 
 \hypertarget{namespaceShipCAD_a62749df66958d1389c3cc6f6f03d42fb}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!Weight\-Str@{Weight\-Str}}
 \index{Weight\-Str@{Weight\-Str}!ShipCAD@{Ship\-C\-A\-D}}
@@ -1262,14 +1598,14 @@ Definition at line 49 of file subdivedge.\-cpp.
 \subsubsection[{g\-\_\-point\-\_\-verbose}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::g\-\_\-point\-\_\-verbose = true}}\label{namespaceShipCAD_ae059a88fbc18c56ceee2fd1cd7f2aad0}
 
 
-Definition at line 50 of file subdivpoint.\-cpp.
+Definition at line 51 of file subdivpoint.\-cpp.
 
 \hypertarget{namespaceShipCAD_a45538d3cd2c9293bf0bd4b09a23670ac}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!g\-\_\-surface\-\_\-verbose@{g\-\_\-surface\-\_\-verbose}}
 \index{g\-\_\-surface\-\_\-verbose@{g\-\_\-surface\-\_\-verbose}!ShipCAD@{Ship\-C\-A\-D}}
 \subsubsection[{g\-\_\-surface\-\_\-verbose}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::g\-\_\-surface\-\_\-verbose = true}}\label{namespaceShipCAD_a45538d3cd2c9293bf0bd4b09a23670ac}
 
 
-Definition at line 52 of file subdivsurface.\-cpp.
+Definition at line 56 of file subdivsurface.\-cpp.
 
 \hypertarget{namespaceShipCAD_aa3415e1acf9bdb19e24f31f5138d6a60}{\index{Ship\-C\-A\-D@{Ship\-C\-A\-D}!k\-\_\-current\-\_\-version@{k\-\_\-current\-\_\-version}}
 \index{k\-\_\-current\-\_\-version@{k\-\_\-current\-\_\-version}!ShipCAD@{Ship\-C\-A\-D}}

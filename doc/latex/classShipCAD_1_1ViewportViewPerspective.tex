@@ -1,0 +1,183 @@
+\hypertarget{classShipCAD_1_1ViewportViewPerspective}{\section{Ship\-C\-A\-D\-:\-:Viewport\-View\-Perspective Class Reference}
+\label{classShipCAD_1_1ViewportViewPerspective}\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+}
+
+
+class to calculate view, world matrices and operations using those for a Perspective viewport  
+
+
+
+
+{\ttfamily \#include $<$viewportview.\-h$>$}
+
+Inheritance diagram for Ship\-C\-A\-D\-:\-:Viewport\-View\-Perspective\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classShipCAD_1_1ViewportViewPerspective}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1ViewportViewPerspective_a670a0691b0d02fadd13bf210026efcf1}{Viewport\-View\-Perspective} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
+\item 
+virtual \hyperlink{classShipCAD_1_1ViewportViewPerspective_a3424a48490558e39959161ee9b5da692}{$\sim$\-Viewport\-View\-Perspective} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1ViewportViewPerspective_af96ca2b448d261206e360b1304510a65}{initialize\-Viewport} (const Q\-Vector3\-D \&min, const Q\-Vector3\-D \&max, int width, int height)
+\item 
+virtual void \hyperlink{classShipCAD_1_1ViewportViewPerspective_ab3cc69a6cdb3271cc9e79ec16aa37a33}{reset\-View} ()
+\item 
+void \hyperlink{classShipCAD_1_1ViewportViewPerspective_ad6d853a15bc9015d43e4c052471f2cb1}{set\-Angle} (float val)
+\item 
+void \hyperlink{classShipCAD_1_1ViewportViewPerspective_ad09e4532f81905f9ea90545b0b6d4856}{set\-Elevation} (float val)
+\item 
+void \hyperlink{classShipCAD_1_1ViewportViewPerspective_ab1a56bd7cb986e2c3163bcacd201d32d}{set\-Camera\-Type} (\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241e}{camera\-\_\-type\-\_\-t} val)
+\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportViewPerspective_a1de2fd402609b54c79c2d70390ba4a64}{middle\-Mouse\-Move} (Q\-Point cur, Q\-Point prev, int w, int h)
+\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportViewPerspective_a11f5f04a95646a701743804c4d7c1d10}{left\-Mouse\-Move} (Q\-Point cur, Q\-Point prev, int w, int h)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+class to calculate view, world matrices and operations using those for a Perspective viewport 
+
+Definition at line 114 of file viewportview.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_a670a0691b0d02fadd13bf210026efcf1}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!Viewport\-View\-Perspective@{Viewport\-View\-Perspective}}
+\index{Viewport\-View\-Perspective@{Viewport\-View\-Perspective}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{Viewport\-View\-Perspective}]{\setlength{\rightskip}{0pt plus 5cm}Viewport\-View\-Perspective\-::\-Viewport\-View\-Perspective (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} $\ast$}]{vp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1ViewportViewPerspective_a670a0691b0d02fadd13bf210026efcf1}
+
+
+Definition at line 188 of file viewportview.\-cpp.
+
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_a3424a48490558e39959161ee9b5da692}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!$\sim$\-Viewport\-View\-Perspective@{$\sim$\-Viewport\-View\-Perspective}}
+\index{$\sim$\-Viewport\-View\-Perspective@{$\sim$\-Viewport\-View\-Perspective}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{$\sim$\-Viewport\-View\-Perspective}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective\-::$\sim$\-Viewport\-View\-Perspective (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewPerspective_a3424a48490558e39959161ee9b5da692}
+
+
+Definition at line 119 of file viewportview.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_af96ca2b448d261206e360b1304510a65}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!initialize\-Viewport@{initialize\-Viewport}}
+\index{initialize\-Viewport@{initialize\-Viewport}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{initialize\-Viewport}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-View\-Perspective\-::initialize\-Viewport (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{min, }
+\item[{const Q\-Vector3\-D \&}]{max, }
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewPerspective_af96ca2b448d261206e360b1304510a65}
+
+
+Implements \hyperlink{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}{Ship\-C\-A\-D\-::\-Viewport\-View}.
+
+
+
+Definition at line 241 of file viewportview.\-cpp.
+
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_a11f5f04a95646a701743804c4d7c1d10}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!left\-Mouse\-Move@{left\-Mouse\-Move}}
+\index{left\-Mouse\-Move@{left\-Mouse\-Move}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{left\-Mouse\-Move}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-Perspective\-::left\-Mouse\-Move (
+\begin{DoxyParamCaption}
+\item[{Q\-Point}]{cur, }
+\item[{Q\-Point}]{prev, }
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewPerspective_a11f5f04a95646a701743804c4d7c1d10}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}{Ship\-C\-A\-D\-::\-Viewport\-View}.
+
+
+
+Definition at line 221 of file viewportview.\-cpp.
+
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_a1de2fd402609b54c79c2d70390ba4a64}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!middle\-Mouse\-Move@{middle\-Mouse\-Move}}
+\index{middle\-Mouse\-Move@{middle\-Mouse\-Move}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{middle\-Mouse\-Move}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-Perspective\-::middle\-Mouse\-Move (
+\begin{DoxyParamCaption}
+\item[{Q\-Point}]{cur, }
+\item[{Q\-Point}]{prev, }
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewPerspective_a1de2fd402609b54c79c2d70390ba4a64}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1ViewportView_a44baf7aad8a3ba7ded04395a8765caf9}{Ship\-C\-A\-D\-::\-Viewport\-View}.
+
+
+
+Definition at line 203 of file viewportview.\-cpp.
+
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_ab3cc69a6cdb3271cc9e79ec16aa37a33}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!reset\-View@{reset\-View}}
+\index{reset\-View@{reset\-View}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{reset\-View}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-View\-Perspective\-::reset\-View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewPerspective_ab3cc69a6cdb3271cc9e79ec16aa37a33}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1ViewportView_ab70e778772325a67610d983f630c2c3d}{Ship\-C\-A\-D\-::\-Viewport\-View}.
+
+
+
+Definition at line 195 of file viewportview.\-cpp.
+
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_ad6d853a15bc9015d43e4c052471f2cb1}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!set\-Angle@{set\-Angle}}
+\index{set\-Angle@{set\-Angle}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{set\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective\-::set\-Angle (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ViewportViewPerspective_ad6d853a15bc9015d43e4c052471f2cb1}
+
+
+Definition at line 124 of file viewportview.\-h.
+
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_ab1a56bd7cb986e2c3163bcacd201d32d}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!set\-Camera\-Type@{set\-Camera\-Type}}
+\index{set\-Camera\-Type@{set\-Camera\-Type}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{set\-Camera\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-View\-Perspective\-::set\-Camera\-Type (
+\begin{DoxyParamCaption}
+\item[{{\bf camera\-\_\-type\-\_\-t}}]{val}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1ViewportViewPerspective_ab1a56bd7cb986e2c3163bcacd201d32d}
+
+
+Definition at line 298 of file viewportview.\-cpp.
+
+\hypertarget{classShipCAD_1_1ViewportViewPerspective_ad09e4532f81905f9ea90545b0b6d4856}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}!set\-Elevation@{set\-Elevation}}
+\index{set\-Elevation@{set\-Elevation}!ShipCAD::ViewportViewPerspective@{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}}
+\subsubsection[{set\-Elevation}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective\-::set\-Elevation (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ViewportViewPerspective_ad09e4532f81905f9ea90545b0b6d4856}
+
+
+Definition at line 126 of file viewportview.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Ship\-C\-A\-Dlib/\hyperlink{viewportview_8h}{viewportview.\-h}\item 
+Ship\-C\-A\-Dlib/\hyperlink{viewportview_8cpp}{viewportview.\-cpp}\end{DoxyCompactItemize}

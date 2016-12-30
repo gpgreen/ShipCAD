@@ -39,7 +39,9 @@ float \hyperlink{classShipCAD_1_1Plane_a6851b997a300848fcb37b33407165c44}{distan
 bool \hyperlink{classShipCAD_1_1Plane_a76d5f22d213962e8ab0880fae3e919df}{intersects\-Box} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2) const 
 \item 
 Q\-Vector3\-D \hyperlink{classShipCAD_1_1Plane_af92620c1adaa989aa79cdcc13ce380da}{project\-Point\-On\-Plane} (const Q\-Vector3\-D \&p)
-\begin{DoxyCompactList}\small\item\em project a point onto a plane \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em project a point onto a plane \end{DoxyCompactList}\item 
+bool \hyperlink{classShipCAD_1_1Plane_a8e9d8144407bbad413e14984a5fbed09}{intersect\-Line} (const Q\-Vector3\-D \&pt, const Q\-Vector3\-D \&n, bool \&coplanar, Q\-Vector3\-D \&intpt)
+\begin{DoxyCompactList}\small\item\em intersect a line with this plane \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -168,6 +170,38 @@ Definition at line 56 of file plane.\-h.
 
 
 Definition at line 72 of file plane.\-cpp.
+
+\hypertarget{classShipCAD_1_1Plane_a8e9d8144407bbad413e14984a5fbed09}{\index{Ship\-C\-A\-D\-::\-Plane@{Ship\-C\-A\-D\-::\-Plane}!intersect\-Line@{intersect\-Line}}
+\index{intersect\-Line@{intersect\-Line}!ShipCAD::Plane@{Ship\-C\-A\-D\-::\-Plane}}
+\subsubsection[{intersect\-Line}]{\setlength{\rightskip}{0pt plus 5cm}bool Plane\-::intersect\-Line (
+\begin{DoxyParamCaption}
+\item[{const Q\-Vector3\-D \&}]{pt, }
+\item[{const Q\-Vector3\-D \&}]{n, }
+\item[{bool \&}]{coplanar, }
+\item[{Q\-Vector3\-D \&}]{intpt}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Plane_a8e9d8144407bbad413e14984a5fbed09}
+
+
+intersect a line with this plane 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & point on line \\
+\hline
+{\em n} & direction of line \\
+\hline
+{\em coplanar} & will be true if line lies in the plane \\
+\hline
+{\em intpt} & intersection point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if line and plane are parallel 
+\end{DoxyReturn}
+
+
+Definition at line 136 of file plane.\-cpp.
 
 \hypertarget{classShipCAD_1_1Plane_a76d5f22d213962e8ab0880fae3e919df}{\index{Ship\-C\-A\-D\-::\-Plane@{Ship\-C\-A\-D\-::\-Plane}!intersects\-Box@{intersects\-Box}}
 \index{intersects\-Box@{intersects\-Box}!ShipCAD::Plane@{Ship\-C\-A\-D\-::\-Plane}}

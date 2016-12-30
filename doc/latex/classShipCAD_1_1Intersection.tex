@@ -38,23 +38,25 @@ virtual void \hyperlink{classShipCAD_1_1Intersection_a2b496f9ab21c5fc4a7b97a665b
 Q\-Color \hyperlink{classShipCAD_1_1Intersection_acae07360e9ccef12a498332ac6dbedd9}{get\-Color} ()
 \item 
 \hyperlink{classShipCAD_1_1Plane}{Plane} \hyperlink{classShipCAD_1_1Intersection_ac0b838a811f8df5c2fa0b0ea44ba4bb7}{get\-Plane} ()
-\item 
-void \hyperlink{classShipCAD_1_1Intersection_a582c3dcbe3016c554b6bba094e2854ce}{set\-Plane} (const \hyperlink{classShipCAD_1_1Plane}{Plane} \&pln)
-\item 
+\begin{DoxyCompactList}\small\item\em get the intersection plane \end{DoxyCompactList}\item 
+void \hyperlink{classShipCAD_1_1Intersection_a72f2a58ec72cd3a38cf0d59a84650fb5}{set\-Plane} (const \hyperlink{classShipCAD_1_1Plane}{Plane} \&pln)
+\begin{DoxyCompactList}\small\item\em set the intersection plane \end{DoxyCompactList}\item 
+bool \hyperlink{classShipCAD_1_1Intersection_a03df44a32b35481bf362af342f8b1aef}{is\-Show\-Curvature} () const 
+\begin{DoxyCompactList}\small\item\em show intersection curvature \end{DoxyCompactList}\item 
 Q\-String \hyperlink{classShipCAD_1_1Intersection_ab0434113cfd34c8a3ab11f75976dbf5b}{get\-Description} ()
 \item 
 \hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{intersection\-\_\-type\-\_\-t} \hyperlink{classShipCAD_1_1Intersection_a1b93db56e5877226b30871754bba9838}{get\-Intersection\-Type} ()
 \item 
-void \hyperlink{classShipCAD_1_1Intersection_adc12c68675b19f5ae92d4c6ec8db0f62}{set\-Intersection\-Type} (\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{intersection\-\_\-type\-\_\-t} set)
+void \hyperlink{classShipCAD_1_1Intersection_af7b14b73d2fa77157fe7a46fce5490dd}{set\-Intersection\-Type} (\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{intersection\-\_\-type\-\_\-t} set)
 \item 
 bool \hyperlink{classShipCAD_1_1Intersection_a5ac5f3018d8b95b57ab40ccafe782bf4}{use\-Hydrostatics\-Surfaces\-Only} ()
 \item 
-void \hyperlink{classShipCAD_1_1Intersection_a8b587bbe80ef146d25e8a1568a84afb0}{set\-Use\-Hydrostatics\-Surfaces\-Only} (bool set)
+void \hyperlink{classShipCAD_1_1Intersection_a7dccd8a9562004bb88edd94588395600}{set\-Use\-Hydrostatics\-Surfaces\-Only} (bool set)
 \item 
 \hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\-Vector} \& \hyperlink{classShipCAD_1_1Intersection_a0092acbb149bb6a5c2e1f9a4b300c2da}{get\-Splines} ()
 \item 
-void \hyperlink{classShipCAD_1_1Intersection_ade472c721a5cb093c0b464c770c88634}{calculate\-Area} (const \hyperlink{classShipCAD_1_1Plane}{Plane} \&plane, float $\ast$area, Q\-Vector3\-D $\ast$cog, Q\-Vector2\-D $\ast$moment\-\_\-of\-\_\-inertia)
-\item 
+void \hyperlink{classShipCAD_1_1Intersection_a9e5c13aed9e318f7a5edf02214cfc6f9}{calculate\-Area} (const \hyperlink{classShipCAD_1_1Plane}{Plane} \&wlplane, float $\ast$area, Q\-Vector3\-D $\ast$cog, Q\-Vector2\-D $\ast$moment\-\_\-of\-\_\-inertia)
+\begin{DoxyCompactList}\small\item\em calculate area, center of gravity, moment of inertia of intersection \end{DoxyCompactList}\item 
 void \hyperlink{classShipCAD_1_1Intersection_a0af2af543403b3c69d1d3c786a1c6575}{create\-Starboard\-Part} ()
 \item 
 void \hyperlink{classShipCAD_1_1Intersection_ada420a69dc8141794aa617f966cbe2b2}{delete\-Item} (\hyperlink{classShipCAD_1_1Spline}{Spline} $\ast$item)
@@ -112,24 +114,39 @@ Definition at line 57 of file intersection.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Intersection_a017d0a1000ca2e9eca3537def58b3988}
 
 
-Definition at line 66 of file intersection.\-h.
+Definition at line 67 of file intersection.\-h.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1Intersection_ade472c721a5cb093c0b464c770c88634}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!calculate\-Area@{calculate\-Area}}
+\hypertarget{classShipCAD_1_1Intersection_a9e5c13aed9e318f7a5edf02214cfc6f9}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!calculate\-Area@{calculate\-Area}}
 \index{calculate\-Area@{calculate\-Area}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
 \subsubsection[{calculate\-Area}]{\setlength{\rightskip}{0pt plus 5cm}void Intersection\-::calculate\-Area (
 \begin{DoxyParamCaption}
-\item[{const {\bf Plane} \&}]{plane, }
+\item[{const {\bf Plane} \&}]{wlplane, }
 \item[{float $\ast$}]{area, }
 \item[{Q\-Vector3\-D $\ast$}]{cog, }
 \item[{Q\-Vector2\-D $\ast$}]{moment\-\_\-of\-\_\-inertia}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Intersection_ade472c721a5cb093c0b464c770c88634}
+)}}\label{classShipCAD_1_1Intersection_a9e5c13aed9e318f7a5edf02214cfc6f9}
 
 
-Definition at line 277 of file intersection.\-cpp.
+calculate area, center of gravity, moment of inertia of intersection 
+
+
+\begin{DoxyParams}{Parameters}
+{\em wlplane} & the waterline plane to use for hydrostatic area \\
+\hline
+{\em area} & calculated area \\
+\hline
+{\em cog} & calculated center of gravity \\
+\hline
+{\em moment\-\_\-of\-\_\-inertia} & calculated moment of inertia \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 344 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_a2163245dc7153d1590811ab2902d6ee4}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!clear@{clear}}
 \index{clear@{clear}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -155,7 +172,7 @@ Definition at line 64 of file intersection.\-cpp.
 )}}\label{classShipCAD_1_1Intersection_a0af2af543403b3c69d1d3c786a1c6575}
 
 
-Definition at line 313 of file intersection.\-cpp.
+Definition at line 380 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_ada420a69dc8141794aa617f966cbe2b2}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!delete\-Item@{delete\-Item}}
 \index{delete\-Item@{delete\-Item}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -166,7 +183,7 @@ Definition at line 313 of file intersection.\-cpp.
 )}}\label{classShipCAD_1_1Intersection_ada420a69dc8141794aa617f966cbe2b2}
 
 
-Definition at line 365 of file intersection.\-cpp.
+Definition at line 432 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_a9e346019a52aa0540628b75994ea94a5}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!draw@{draw}}
 \index{draw@{draw}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -182,7 +199,7 @@ Implements \hyperlink{classShipCAD_1_1Entity_aa62e306d991140dcd564360f8f6e7539}{
 
 
 
-Definition at line 141 of file intersection.\-cpp.
+Definition at line 161 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_af751d515708531ca098321840a92c47b}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!extents@{extents}}
 \index{extents@{extents}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -198,7 +215,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1Entity_a08e8e53770c85002afa45f46e7
 
 
 
-Definition at line 106 of file intersection.\-cpp.
+Definition at line 126 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_acae07360e9ccef12a498332ac6dbedd9}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!get\-Color@{get\-Color}}
 \index{get\-Color@{get\-Color}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -209,7 +226,7 @@ Definition at line 106 of file intersection.\-cpp.
 )}}\label{classShipCAD_1_1Intersection_acae07360e9ccef12a498332ac6dbedd9}
 
 
-Definition at line 80 of file intersection.\-cpp.
+Definition at line 82 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_ab0434113cfd34c8a3ab11f75976dbf5b}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!get\-Description@{get\-Description}}
 \index{get\-Description@{get\-Description}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -220,7 +237,7 @@ Definition at line 80 of file intersection.\-cpp.
 )}}\label{classShipCAD_1_1Intersection_ab0434113cfd34c8a3ab11f75976dbf5b}
 
 
-Definition at line 114 of file intersection.\-cpp.
+Definition at line 134 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_a1b93db56e5877226b30871754bba9838}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!get\-Intersection\-Type@{get\-Intersection\-Type}}
 \index{get\-Intersection\-Type@{get\-Intersection\-Type}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -231,7 +248,7 @@ Definition at line 114 of file intersection.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_a1b93db56e5877226b30871754bba9838}
 
 
-Definition at line 80 of file intersection.\-h.
+Definition at line 100 of file intersection.\-h.
 
 \hypertarget{classShipCAD_1_1Intersection_ac0b838a811f8df5c2fa0b0ea44ba4bb7}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!get\-Plane@{get\-Plane}}
 \index{get\-Plane@{get\-Plane}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -242,7 +259,14 @@ Definition at line 80 of file intersection.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_ac0b838a811f8df5c2fa0b0ea44ba4bb7}
 
 
-Definition at line 75 of file intersection.\-h.
+get the intersection plane 
+
+\begin{DoxyReturn}{Returns}
+the intersection plane 
+\end{DoxyReturn}
+
+
+Definition at line 84 of file intersection.\-h.
 
 \hypertarget{classShipCAD_1_1Intersection_a0092acbb149bb6a5c2e1f9a4b300c2da}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!get\-Splines@{get\-Splines}}
 \index{get\-Splines@{get\-Splines}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -253,7 +277,25 @@ Definition at line 75 of file intersection.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_a0092acbb149bb6a5c2e1f9a4b300c2da}
 
 
-Definition at line 89 of file intersection.\-h.
+Definition at line 107 of file intersection.\-h.
+
+\hypertarget{classShipCAD_1_1Intersection_a03df44a32b35481bf362af342f8b1aef}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!is\-Show\-Curvature@{is\-Show\-Curvature}}
+\index{is\-Show\-Curvature@{is\-Show\-Curvature}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
+\subsubsection[{is\-Show\-Curvature}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Intersection\-::is\-Show\-Curvature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_a03df44a32b35481bf362af342f8b1aef}
+
+
+show intersection curvature 
+
+\begin{DoxyReturn}{Returns}
+true if intersection curvature shown 
+\end{DoxyReturn}
+
+
+Definition at line 96 of file intersection.\-h.
 
 \hypertarget{classShipCAD_1_1Intersection_a3e87aa28a1e1d721fe657a73d5466f3b}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!load\-Binary@{load\-Binary}}
 \index{load\-Binary@{load\-Binary}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -264,7 +306,7 @@ Definition at line 89 of file intersection.\-h.
 )}}\label{classShipCAD_1_1Intersection_a3e87aa28a1e1d721fe657a73d5466f3b}
 
 
-Definition at line 370 of file intersection.\-cpp.
+Definition at line 437 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_aed30bdca43037f72b85c4d53e234fd6c}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!rebuild@{rebuild}}
 \index{rebuild@{rebuild}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -279,7 +321,7 @@ Implements \hyperlink{classShipCAD_1_1Entity_a2571654319df6ad6841a437be7a75395}{
 
 
 
-Definition at line 151 of file intersection.\-cpp.
+Definition at line 207 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_a41ce3a17845a7808d052713ae57dbe63}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!save\-Binary@{save\-Binary}}
 \index{save\-Binary@{save\-Binary}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -290,7 +332,7 @@ Definition at line 151 of file intersection.\-cpp.
 )}}\label{classShipCAD_1_1Intersection_a41ce3a17845a7808d052713ae57dbe63}
 
 
-Definition at line 424 of file intersection.\-cpp.
+Definition at line 491 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_a00a6d7ad7e82e43bd0287fa88dd87cf3}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!save\-To\-D\-X\-F@{save\-To\-D\-X\-F}}
 \index{save\-To\-D\-X\-F@{save\-To\-D\-X\-F}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -301,7 +343,7 @@ Definition at line 424 of file intersection.\-cpp.
 )}}\label{classShipCAD_1_1Intersection_a00a6d7ad7e82e43bd0287fa88dd87cf3}
 
 
-Definition at line 467 of file intersection.\-cpp.
+Definition at line 534 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_a2b496f9ab21c5fc4a7b97a665b24f2b1}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!set\-Build@{set\-Build}}
 \index{set\-Build@{set\-Build}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -318,38 +360,47 @@ Reimplemented from \hyperlink{classShipCAD_1_1Entity_a1889198398f42bb7f77a233403
 
 Definition at line 73 of file intersection.\-cpp.
 
-\hypertarget{classShipCAD_1_1Intersection_adc12c68675b19f5ae92d4c6ec8db0f62}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!set\-Intersection\-Type@{set\-Intersection\-Type}}
+\hypertarget{classShipCAD_1_1Intersection_af7b14b73d2fa77157fe7a46fce5490dd}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!set\-Intersection\-Type@{set\-Intersection\-Type}}
 \index{set\-Intersection\-Type@{set\-Intersection\-Type}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
-\subsubsection[{set\-Intersection\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Intersection\-::set\-Intersection\-Type (
+\subsubsection[{set\-Intersection\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Intersection\-::set\-Intersection\-Type (
 \begin{DoxyParamCaption}
 \item[{{\bf intersection\-\_\-type\-\_\-t}}]{set}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_adc12c68675b19f5ae92d4c6ec8db0f62}
+)}}\label{classShipCAD_1_1Intersection_af7b14b73d2fa77157fe7a46fce5490dd}
 
 
-Definition at line 82 of file intersection.\-h.
+Definition at line 103 of file intersection.\-cpp.
 
-\hypertarget{classShipCAD_1_1Intersection_a582c3dcbe3016c554b6bba094e2854ce}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!set\-Plane@{set\-Plane}}
+\hypertarget{classShipCAD_1_1Intersection_a72f2a58ec72cd3a38cf0d59a84650fb5}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!set\-Plane@{set\-Plane}}
 \index{set\-Plane@{set\-Plane}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
-\subsubsection[{set\-Plane}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Intersection\-::set\-Plane (
+\subsubsection[{set\-Plane}]{\setlength{\rightskip}{0pt plus 5cm}void Intersection\-::set\-Plane (
 \begin{DoxyParamCaption}
 \item[{const {\bf Plane} \&}]{pln}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_a582c3dcbe3016c554b6bba094e2854ce}
+)}}\label{classShipCAD_1_1Intersection_a72f2a58ec72cd3a38cf0d59a84650fb5}
 
 
-Definition at line 77 of file intersection.\-h.
+set the intersection plane 
 
-\hypertarget{classShipCAD_1_1Intersection_a8b587bbe80ef146d25e8a1568a84afb0}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!set\-Use\-Hydrostatics\-Surfaces\-Only@{set\-Use\-Hydrostatics\-Surfaces\-Only}}
+
+\begin{DoxyParams}{Parameters}
+{\em pln} & the new intersection plane \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 97 of file intersection.\-cpp.
+
+\hypertarget{classShipCAD_1_1Intersection_a7dccd8a9562004bb88edd94588395600}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!set\-Use\-Hydrostatics\-Surfaces\-Only@{set\-Use\-Hydrostatics\-Surfaces\-Only}}
 \index{set\-Use\-Hydrostatics\-Surfaces\-Only@{set\-Use\-Hydrostatics\-Surfaces\-Only}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
-\subsubsection[{set\-Use\-Hydrostatics\-Surfaces\-Only}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Intersection\-::set\-Use\-Hydrostatics\-Surfaces\-Only (
+\subsubsection[{set\-Use\-Hydrostatics\-Surfaces\-Only}]{\setlength{\rightskip}{0pt plus 5cm}void Intersection\-::set\-Use\-Hydrostatics\-Surfaces\-Only (
 \begin{DoxyParamCaption}
 \item[{bool}]{set}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_a8b587bbe80ef146d25e8a1568a84afb0}
+)}}\label{classShipCAD_1_1Intersection_a7dccd8a9562004bb88edd94588395600}
 
 
-Definition at line 86 of file intersection.\-h.
+Definition at line 109 of file intersection.\-cpp.
 
 \hypertarget{classShipCAD_1_1Intersection_a5ac5f3018d8b95b57ab40ccafe782bf4}{\index{Ship\-C\-A\-D\-::\-Intersection@{Ship\-C\-A\-D\-::\-Intersection}!use\-Hydrostatics\-Surfaces\-Only@{use\-Hydrostatics\-Surfaces\-Only}}
 \index{use\-Hydrostatics\-Surfaces\-Only@{use\-Hydrostatics\-Surfaces\-Only}!ShipCAD::Intersection@{Ship\-C\-A\-D\-::\-Intersection}}
@@ -360,7 +411,7 @@ Definition at line 86 of file intersection.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Intersection_a5ac5f3018d8b95b57ab40ccafe782bf4}
 
 
-Definition at line 84 of file intersection.\-h.
+Definition at line 103 of file intersection.\-h.
 
 
 

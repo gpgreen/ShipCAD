@@ -8,7 +8,7 @@
 Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Control\-Face\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.000000cm]{classShipCAD_1_1SubdivisionControlFace}
+\includegraphics[height=3.000000cm]{classShipCAD_1_1SubdivisionControlFace}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -82,7 +82,7 @@ void \hyperlink{classShipCAD_1_1SubdivisionControlFace_ae06e29e54f93c529875bbd66
 \item 
 virtual void \hyperlink{classShipCAD_1_1SubdivisionControlFace_ac253493bccd91108d936b651e72b46f8}{draw} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1LineShader}{Line\-Shader} $\ast$lineshader)
 \item 
-virtual void \hyperlink{classShipCAD_1_1SubdivisionControlFace_aef1327fd3e623b190d67dcb461a3e950}{draw\-Faces} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1MonoFaceShader}{Mono\-Face\-Shader} $\ast$monoshader)
+virtual void \hyperlink{classShipCAD_1_1SubdivisionControlFace_a38631a5e4c99d1d183d61a0fe3fb47ed}{draw\-Faces} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1FaceShader}{Face\-Shader} $\ast$monoshader)
 \item 
 virtual void \hyperlink{classShipCAD_1_1SubdivisionControlFace_aaf9226150996743d8d2ea560083ad1d8}{draw\-Curvature\-Faces} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, float Min\-Curvature, float Max\-Curvature)
 \item 
@@ -115,29 +115,12 @@ std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} 
 \item 
 std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ $>$ \hyperlink{classShipCAD_1_1SubdivisionControlFace_a33d7e2ecd5f42edf5492efb83df3856b}{\-\_\-control\-\_\-edges}
 \end{DoxyCompactItemize}
-\subsection*{Properties}
-\begin{DoxyCompactItemize}
-\item 
-Q\-Color \hyperlink{classShipCAD_1_1SubdivisionControlFace_a7fbca8373f94937bcde294cbd41c70e4}{Color}
-\item 
-size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionControlFace_a003c8c3987b10f6f2217a95ef97ba47d}{Face\-Index}
-\item 
-\hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\-Layer} \hyperlink{classShipCAD_1_1SubdivisionControlFace_af4197bb400705aaea045fbe02921b3ea}{Layer}
-\item 
-Q\-Vector3\-D \hyperlink{classShipCAD_1_1SubdivisionControlFace_a256f4b52aa41d3140502ce70f98b1fe1}{Max}
-\item 
-Q\-Vector3\-D \hyperlink{classShipCAD_1_1SubdivisionControlFace_a4d47101c36502d8c3c238af213698280}{Min}
-\item 
-bool \hyperlink{classShipCAD_1_1SubdivisionControlFace_a7f63b2e34b0a562f769cdd78b36e99b3}{Selected}
-\item 
-bool \hyperlink{classShipCAD_1_1SubdivisionControlFace_a7c049d1719ff65b722729b8adca26a7c}{Visible}
-\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 208 of file subdivface.\-h.
+Definition at line 203 of file subdivface.\-h.
 
 
 
@@ -160,7 +143,7 @@ Constructor.
 \end{DoxyParams}
 
 
-Definition at line 407 of file subdivface.\-cpp.
+Definition at line 408 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a7b092e764ec2708674afdb210196f761}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!$\sim$\-Subdivision\-Control\-Face@{$\sim$\-Subdivision\-Control\-Face}}
 \index{$\sim$\-Subdivision\-Control\-Face@{$\sim$\-Subdivision\-Control\-Face}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -171,7 +154,7 @@ Definition at line 407 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionControlFace_a7b092e764ec2708674afdb210196f761}
 
 
-Definition at line 413 of file subdivface.\-cpp.
+Definition at line 414 of file subdivface.\-cpp.
 
 
 
@@ -189,7 +172,7 @@ get min/max coordinate amongst all children
 
 For each child face, update the min and max value for this face. 
 
-Definition at line 694 of file subdivface.\-cpp.
+Definition at line 695 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_ad20ed50df8ddd91c4aa04eb482ab0fa0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!children\-Begin@{children\-Begin}}
 \index{children\-Begin@{children\-Begin}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -200,7 +183,7 @@ Definition at line 694 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_ad20ed50df8ddd91c4aa04eb482ab0fa0}
 
 
-Definition at line 316 of file subdivface.\-h.
+Definition at line 302 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_acff2f413eceb70e345640c4519fb50bb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!children\-End@{children\-End}}
 \index{children\-End@{children\-End}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -211,7 +194,7 @@ Definition at line 316 of file subdivface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_acff2f413eceb70e345640c4519fb50bb}
 
 
-Definition at line 317 of file subdivface.\-h.
+Definition at line 303 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_ad168e31f0ef2537b3cd0f58b0c1c54e2}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!clear@{clear}}
 \index{clear@{clear}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -230,7 +213,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionFace_a413ae7e76f559780c
 
 
 
-Definition at line 721 of file subdivface.\-cpp.
+Definition at line 722 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a1501212af025c7e33ede929d50a76651}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!clear\-Children@{clear\-Children}}
 \index{clear\-Children@{clear\-Children}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -245,7 +228,7 @@ remove all child faces and edges
 
 Remove all child faces and edges and also remove them from the parent surface face and edge pools 
 
-Definition at line 730 of file subdivface.\-cpp.
+Definition at line 731 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a390a79e26ced82b4a879aebd0c1dc862}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!clear\-Control\-Edges@{clear\-Control\-Edges}}
 \index{clear\-Control\-Edges@{clear\-Control\-Edges}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -260,7 +243,7 @@ remove all control edges of this face
 
 
 
-Definition at line 246 of file subdivface.\-h.
+Definition at line 232 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a4117f55ab3ec27bebd933f2992bc5dcd}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!construct@{construct}}
 \index{construct@{construct}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -271,7 +254,7 @@ Definition at line 246 of file subdivface.\-h.
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1SubdivisionControlFace_a4117f55ab3ec27bebd933f2992bc5dcd}
 
 
-Definition at line 399 of file subdivface.\-cpp.
+Definition at line 400 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_ac253493bccd91108d936b651e72b46f8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!draw@{draw}}
 \index{draw@{draw}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -283,7 +266,7 @@ Definition at line 399 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionControlFace_ac253493bccd91108d936b651e72b46f8}
 
 
-Definition at line 560 of file subdivface.\-cpp.
+Definition at line 561 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aaf9226150996743d8d2ea560083ad1d8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!draw\-Curvature\-Faces@{draw\-Curvature\-Faces}}
 \index{draw\-Curvature\-Faces@{draw\-Curvature\-Faces}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -296,19 +279,19 @@ Definition at line 560 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionControlFace_aaf9226150996743d8d2ea560083ad1d8}
 
 
-Definition at line 555 of file subdivface.\-cpp.
+Definition at line 556 of file subdivface.\-cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_aef1327fd3e623b190d67dcb461a3e950}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!draw\-Faces@{draw\-Faces}}
+\hypertarget{classShipCAD_1_1SubdivisionControlFace_a38631a5e4c99d1d183d61a0fe3fb47ed}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!draw\-Faces@{draw\-Faces}}
 \index{draw\-Faces@{draw\-Faces}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
 \subsubsection[{draw\-Faces}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Control\-Face\-::draw\-Faces (
 \begin{DoxyParamCaption}
 \item[{{\bf Viewport} \&}]{vp, }
-\item[{{\bf Mono\-Face\-Shader} $\ast$}]{monoshader}
+\item[{{\bf Face\-Shader} $\ast$}]{monoshader}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionControlFace_aef1327fd3e623b190d67dcb461a3e950}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionControlFace_a38631a5e4c99d1d183d61a0fe3fb47ed}
 
 
-Definition at line 439 of file subdivface.\-cpp.
+Definition at line 440 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a947868fba3e9bb6c587847fb9245c9ff}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!dump@{dump}}
 \index{dump@{dump}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -335,7 +318,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionFace_aa5bd261ae5fc0a1c7
 
 
 
-Definition at line 964 of file subdivface.\-cpp.
+Definition at line 965 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aa6035e53cd1e32a9bd9e9f9800c9f7d4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!find\-Attached\-Faces@{find\-Attached\-Faces}}
 \index{find\-Attached\-Faces@{find\-Attached\-Faces}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -347,7 +330,7 @@ Definition at line 964 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_aa6035e53cd1e32a9bd9e9f9800c9f7d4}
 
 
-Definition at line 926 of file subdivface.\-cpp.
+Definition at line 927 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a2c25793e1bed9472121e9126bacac3ce}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Child@{get\-Child}}
 \index{get\-Child@{get\-Child}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -358,7 +341,7 @@ Definition at line 926 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a2c25793e1bed9472121e9126bacac3ce}
 
 
-Definition at line 625 of file subdivface.\-cpp.
+Definition at line 626 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a8a350fe4fec2ee93228ed9400a6f145c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Color@{get\-Color}}
 \index{get\-Color@{get\-Color}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -369,7 +352,7 @@ Definition at line 625 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a8a350fe4fec2ee93228ed9400a6f145c}
 
 
-Definition at line 632 of file subdivface.\-cpp.
+Definition at line 633 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_accfc3e8e3d79a2303126e44e6fdb1728}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Control\-Edge@{get\-Control\-Edge}}
 \index{get\-Control\-Edge@{get\-Control\-Edge}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -380,7 +363,7 @@ Definition at line 632 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_accfc3e8e3d79a2303126e44e6fdb1728}
 
 
-Definition at line 640 of file subdivface.\-cpp.
+Definition at line 641 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a37af31abc48d84d607c15158ad7c6a2a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Edge@{get\-Edge}}
 \index{get\-Edge@{get\-Edge}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -391,7 +374,7 @@ Definition at line 640 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a37af31abc48d84d607c15158ad7c6a2a}
 
 
-Definition at line 661 of file subdivface.\-cpp.
+Definition at line 662 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a72f906db976c6530f0f2d4c03701ad15}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Index@{get\-Index}}
 \index{get\-Index@{get\-Index}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -402,7 +385,7 @@ Definition at line 661 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a72f906db976c6530f0f2d4c03701ad15}
 
 
-Definition at line 668 of file subdivface.\-cpp.
+Definition at line 669 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a0eff0f187a3c95f0541fb29eda112cd6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Layer@{get\-Layer}}
 \index{get\-Layer@{get\-Layer}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -413,7 +396,7 @@ Definition at line 668 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_a0eff0f187a3c95f0541fb29eda112cd6}
 
 
-Definition at line 300 of file subdivface.\-h.
+Definition at line 286 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a4855077b5641cc8e644250d30cdd2629}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Max@{get\-Max}}
 \index{get\-Max@{get\-Max}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -424,7 +407,7 @@ Definition at line 300 of file subdivface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_a4855077b5641cc8e644250d30cdd2629}
 
 
-Definition at line 314 of file subdivface.\-h.
+Definition at line 300 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_af78d2fd0849815610be193c99f04f5d7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!get\-Min@{get\-Min}}
 \index{get\-Min@{get\-Min}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -435,7 +418,7 @@ Definition at line 314 of file subdivface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_af78d2fd0849815610be193c99f04f5d7}
 
 
-Definition at line 313 of file subdivface.\-h.
+Definition at line 299 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_af585a1c8300791375b2df87fe2ebc4f5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!insert\-Control\-Edge@{insert\-Control\-Edge}}
 \index{insert\-Control\-Edge@{insert\-Control\-Edge}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -465,7 +448,7 @@ new control edge or 0 if no edge exists between these 2 points
 \end{DoxyReturn}
 
 
-Definition at line 588 of file subdivface.\-cpp.
+Definition at line 589 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_ab56a2d4c3fccb7a578def71d286ee03c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!is\-Selected@{is\-Selected}}
 \index{is\-Selected@{is\-Selected}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -476,7 +459,7 @@ Definition at line 588 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_ab56a2d4c3fccb7a578def71d286ee03c}
 
 
-Definition at line 656 of file subdivface.\-cpp.
+Definition at line 657 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a2a722717e127bac12e3b81f4664fc568}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!is\-Visible@{is\-Visible}}
 \index{is\-Visible@{is\-Visible}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -487,7 +470,7 @@ Definition at line 656 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a2a722717e127bac12e3b81f4664fc568}
 
 
-Definition at line 673 of file subdivface.\-cpp.
+Definition at line 674 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aa5ba43707787cde6e99cd645708e9200}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!load\-Binary@{load\-Binary}}
 \index{load\-Binary@{load\-Binary}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -498,7 +481,7 @@ Definition at line 673 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_aa5ba43707787cde6e99cd645708e9200}
 
 
-Definition at line 740 of file subdivface.\-cpp.
+Definition at line 741 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_ae06e29e54f93c529875bbd66b32ad3e7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!load\-From\-Stream@{load\-From\-Stream}}
 \index{load\-From\-Stream@{load\-From\-Stream}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -510,7 +493,7 @@ Definition at line 740 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_ae06e29e54f93c529875bbd66b32ad3e7}
 
 
-Definition at line 841 of file subdivface.\-cpp.
+Definition at line 842 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aa4a26c00b8b77c0a9d78640fe465eeb1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!number\-Of\-Children@{number\-Of\-Children}}
 \index{number\-Of\-Children@{number\-Of\-Children}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -521,7 +504,7 @@ Definition at line 841 of file subdivface.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_aa4a26c00b8b77c0a9d78640fe465eeb1}
 
 
-Definition at line 303 of file subdivface.\-h.
+Definition at line 289 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a11fd0577b7d09f1724be612af0c903a8}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!number\-Of\-Control\-Edges@{number\-Of\-Control\-Edges}}
 \index{number\-Of\-Control\-Edges@{number\-Of\-Control\-Edges}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -532,7 +515,7 @@ Definition at line 303 of file subdivface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_a11fd0577b7d09f1724be612af0c903a8}
 
 
-Definition at line 306 of file subdivface.\-h.
+Definition at line 292 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a03ddd0f14ecc3631d1a7a2653ab0df7f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!number\-Of\-Edges@{number\-Of\-Edges}}
 \index{number\-Of\-Edges@{number\-Of\-Edges}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -543,7 +526,7 @@ Definition at line 306 of file subdivface.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlFace_a03ddd0f14ecc3631d1a7a2653ab0df7f}
 
 
-Definition at line 308 of file subdivface.\-h.
+Definition at line 294 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a224ce57a8d9d631eef63cccd8e0113f9}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!priv\-\_\-dump@{priv\-\_\-dump}}
 \index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -555,7 +538,7 @@ Definition at line 308 of file subdivface.\-h.
 ) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_a224ce57a8d9d631eef63cccd8e0113f9}
 
 
-Definition at line 971 of file subdivface.\-cpp.
+Definition at line 972 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a1c5253075cbe1f05ba004bee4edb8698}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!remove\-References@{remove\-References}}
 \index{remove\-References@{remove\-References}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -570,7 +553,7 @@ Removes this face and all edges from points.
 
 For each point in the face, remove this face from the point. For each edge in the face, remove the face from that edge. When done, the points and edges no longer reference this face 
 
-Definition at line 784 of file subdivface.\-cpp.
+Definition at line 785 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a562b877e868dbd86ffe2c864232e1b78}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!save\-Binary@{save\-Binary}}
 \index{save\-Binary@{save\-Binary}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -581,7 +564,7 @@ Definition at line 784 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a562b877e868dbd86ffe2c864232e1b78}
 
 
-Definition at line 797 of file subdivface.\-cpp.
+Definition at line 798 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aecc7636c397ca5669cf7ddb995feac03}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!save\-To\-D\-X\-F@{save\-To\-D\-X\-F}}
 \index{save\-To\-D\-X\-F@{save\-To\-D\-X\-F}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -592,7 +575,7 @@ Definition at line 797 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_aecc7636c397ca5669cf7ddb995feac03}
 
 
-Definition at line 813 of file subdivface.\-cpp.
+Definition at line 814 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a8a618958b27b97dd6da2473e130d7a8e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!save\-To\-Stream@{save\-To\-Stream}}
 \index{save\-To\-Stream@{save\-To\-Stream}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -603,7 +586,7 @@ Definition at line 813 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a8a618958b27b97dd6da2473e130d7a8e}
 
 
-Definition at line 823 of file subdivface.\-cpp.
+Definition at line 824 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a23631dfffd1c3ad7fc59537a4684fa01}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!set\-Layer@{set\-Layer}}
 \index{set\-Layer@{set\-Layer}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -614,7 +597,7 @@ Definition at line 823 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a23631dfffd1c3ad7fc59537a4684fa01}
 
 
-Definition at line 680 of file subdivface.\-cpp.
+Definition at line 681 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a2ce580378cd200faec6a24d9d794c68e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!set\-Selected@{set\-Selected}}
 \index{set\-Selected@{set\-Selected}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -625,7 +608,7 @@ Definition at line 680 of file subdivface.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlFace_a2ce580378cd200faec6a24d9d794c68e}
 
 
-Definition at line 647 of file subdivface.\-cpp.
+Definition at line 648 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aa17b5bb33ad87a4fa1e618156c171c64}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!subdivide@{subdivide}}
 \index{subdivide@{subdivide}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -654,7 +637,7 @@ subdivide the face
 \end{DoxyParams}
 
 
-Definition at line 884 of file subdivface.\-cpp.
+Definition at line 885 of file subdivface.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a768d000d2891ca110d6eb804abf80351}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!trace@{trace}}
 \index{trace@{trace}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
@@ -669,7 +652,7 @@ select all control faces connected to this one
 
 Select all control faces connected to this one on the same layer, that are not separated by a crease edge 
 
-Definition at line 953 of file subdivface.\-cpp.
+Definition at line 954 of file subdivface.\-cpp.
 
 
 
@@ -679,94 +662,42 @@ Definition at line 953 of file subdivface.\-cpp.
 \subsubsection[{\-\_\-children}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Face}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-\_\-children\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_a116749a1de58ad46f68ad7e92031e673}
 subdivided faces 
 
-Definition at line 349 of file subdivface.\-h.
+Definition at line 335 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a33d7e2ecd5f42edf5492efb83df3856b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!\-\_\-control\-\_\-edges@{\-\_\-control\-\_\-edges}}
 \index{\-\_\-control\-\_\-edges@{\-\_\-control\-\_\-edges}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
 \subsubsection[{\-\_\-control\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Edge}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-\_\-control\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_a33d7e2ecd5f42edf5492efb83df3856b}
 control edges (may be of \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} type if this face has been subdivided 
 
-Definition at line 351 of file subdivface.\-h.
+Definition at line 337 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a390f626d9999ab3ce48878b223ea1693}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!\-\_\-edges@{\-\_\-edges}}
 \index{\-\_\-edges@{\-\_\-edges}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
 \subsubsection[{\-\_\-edges}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Edge}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-\_\-edges\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_a390f626d9999ab3ce48878b223ea1693}
 subdivided internal edges 
 
-Definition at line 350 of file subdivface.\-h.
+Definition at line 336 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aee1990d4db7127ba59117a65c1a6ce7e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!\-\_\-layer@{\-\_\-layer}}
 \index{\-\_\-layer@{\-\_\-layer}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
 \subsubsection[{\-\_\-layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Layer}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-\_\-layer\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_aee1990d4db7127ba59117a65c1a6ce7e}
 which layer this face belongs to 
 
-Definition at line 346 of file subdivface.\-h.
+Definition at line 332 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_a22411574593283209772872bc740535b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!\-\_\-max@{\-\_\-max}}
 \index{\-\_\-max@{\-\_\-max}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
 \subsubsection[{\-\_\-max}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-\_\-max\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_a22411574593283209772872bc740535b}
 maximum coordinate of this face 
 
-Definition at line 348 of file subdivface.\-h.
+Definition at line 334 of file subdivface.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlFace_aac4f577da0f5203059901c5e09814e1d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!\-\_\-min@{\-\_\-min}}
 \index{\-\_\-min@{\-\_\-min}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
 \subsubsection[{\-\_\-min}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-\_\-min\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlFace_aac4f577da0f5203059901c5e09814e1d}
 minimum coordinate of this face 
 
-Definition at line 347 of file subdivface.\-h.
-
-
-
-\subsection{Property Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_a7fbca8373f94937bcde294cbd41c70e4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!Color@{Color}}
-\index{Color@{Color}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
-\subsubsection[{Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-Color\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlFace_a7fbca8373f94937bcde294cbd41c70e4}
-
-
-Definition at line 211 of file subdivface.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_a003c8c3987b10f6f2217a95ef97ba47d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!Face\-Index@{Face\-Index}}
-\index{Face\-Index@{Face\-Index}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
-\subsubsection[{Face\-Index}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-Face\-Index\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlFace_a003c8c3987b10f6f2217a95ef97ba47d}
-
-
-Definition at line 212 of file subdivface.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_af4197bb400705aaea045fbe02921b3ea}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!Layer@{Layer}}
-\index{Layer@{Layer}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
-\subsubsection[{Layer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Layer} Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-Layer\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCAD_1_1SubdivisionControlFace_af4197bb400705aaea045fbe02921b3ea}
-
-
-Definition at line 213 of file subdivface.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_a256f4b52aa41d3140502ce70f98b1fe1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!Max@{Max}}
-\index{Max@{Max}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
-\subsubsection[{Max}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-Max\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlFace_a256f4b52aa41d3140502ce70f98b1fe1}
-
-
-Definition at line 214 of file subdivface.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_a4d47101c36502d8c3c238af213698280}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!Min@{Min}}
-\index{Min@{Min}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
-\subsubsection[{Min}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-Min\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlFace_a4d47101c36502d8c3c238af213698280}
-
-
-Definition at line 215 of file subdivface.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_a7f63b2e34b0a562f769cdd78b36e99b3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!Selected@{Selected}}
-\index{Selected@{Selected}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
-\subsubsection[{Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-Selected\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCAD_1_1SubdivisionControlFace_a7f63b2e34b0a562f769cdd78b36e99b3}
-
-
-Definition at line 216 of file subdivface.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlFace_a7c049d1719ff65b722729b8adca26a7c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}!Visible@{Visible}}
-\index{Visible@{Visible}!ShipCAD::SubdivisionControlFace@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}}
-\subsubsection[{Visible}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face\-::\-Visible\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlFace_a7c049d1719ff65b722729b8adca26a7c}
-
-
-Definition at line 217 of file subdivface.\-h.
+Definition at line 333 of file subdivface.\-h.
 
 
 

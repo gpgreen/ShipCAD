@@ -20,18 +20,18 @@ void \hyperlink{classShipCAD_1_1Viewport_a554a3455c39ee5652b13c9b24c3c962e}{set\
 \item 
 void \hyperlink{classShipCAD_1_1Viewport_a5f90a885e0204b32ff9795c4b79f824b}{set\-Camera\-Type} (\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241e}{camera\-\_\-type\-\_\-t} val)
 \item 
-void \hyperlink{classShipCAD_1_1Viewport_a4bb2b85a12d7dd14e44b5d5c199cbda7}{set\-Surface} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$surface)
-\item 
 void \hyperlink{classShipCAD_1_1Viewport_a00ba2139fa06701b65de70d5c657f5d6}{set\-Angle} (float val)
 \item 
 void \hyperlink{classShipCAD_1_1Viewport_a4bda4b742dc477ed5dc2ab6ac7fe92bc}{set\-Elevation} (float val)
 \item 
 virtual void \hyperlink{classShipCAD_1_1Viewport_a4eeeb100fd88487215bb7794bdf5e0cb}{resize\-Event} (Q\-Resize\-Event $\ast$\hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event})
+\item 
+bool \hyperlink{classShipCAD_1_1Viewport_ab247f28eb569e160142901b6eef265a3}{context\-Menu} (Q\-Mouse\-Event $\ast$\hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event})
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1Viewport_a9fde8f966d9802dd42254acf0ed05386}{Viewport} ()
+\hyperlink{classShipCAD_1_1Viewport_ad946e1cfc34e84610f9d89f3b62baf9d}{Viewport} (\hyperlink{classShipCAD_1_1Controller}{Controller} $\ast$ctl, \hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0a}{viewport\-\_\-type\-\_\-t} vtype)
 \item 
 \hyperlink{classShipCAD_1_1Viewport_a1e18a1ff4a52be33ef63d25034561850}{$\sim$\-Viewport} ()
 \item 
@@ -39,55 +39,58 @@ void \hyperlink{classShipCAD_1_1Viewport_a9c35de3f7c9d7c860c494081b48309b3}{init
 \item 
 void \hyperlink{classShipCAD_1_1Viewport_a9e81b526db3c2b508322c29b9fda5845}{render} ()
 \item 
+\hyperlink{classShipCAD_1_1Controller}{Controller} $\ast$ \hyperlink{classShipCAD_1_1Viewport_a4a12f9e56634caca61077572fe6b15f9}{get\-Controller} ()
+\item 
 \hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863}{viewport\-\_\-mode\-\_\-t} \hyperlink{classShipCAD_1_1Viewport_a205e5082395c6d01660ffc179c57b83e}{get\-Viewport\-Mode} () const 
 \item 
 \hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0a}{viewport\-\_\-type\-\_\-t} \hyperlink{classShipCAD_1_1Viewport_a5f261a1925f09917013e8e532688326a}{get\-Viewport\-Type} () const 
-\item 
-\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241e}{camera\-\_\-type\-\_\-t} \hyperlink{classShipCAD_1_1Viewport_a93c3c8909dc820efd3d0c6211d38d9ec}{get\-Camera\-Type} () const 
-\item 
-\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$ \hyperlink{classShipCAD_1_1Viewport_a0aa9a0ac30a40ebf933977028a25c565}{get\-Surface} ()
-\item 
-void \hyperlink{classShipCAD_1_1Viewport_a3626f44e62e08918de5939970cdc531c}{add} (\hyperlink{classShipCAD_1_1Entity}{Entity} $\ast$entity)
 \item 
 void \hyperlink{classShipCAD_1_1Viewport_a886ac5965b63039799827da89bf3de20}{add\-Shader} (const std\-::string \&name, \hyperlink{classShipCAD_1_1Shader}{Shader} $\ast$shader)
 \item 
 \hyperlink{classShipCAD_1_1LineShader}{Line\-Shader} $\ast$ \hyperlink{classShipCAD_1_1Viewport_a0720a01f8650dc4acf89aad0649d9196}{set\-Line\-Shader} ()
 \item 
-\hyperlink{classShipCAD_1_1MonoFaceShader}{Mono\-Face\-Shader} $\ast$ \hyperlink{classShipCAD_1_1Viewport_a5f3c02f4e24d614d4340816d6de50b0b}{set\-Mono\-Face\-Shader} ()
+\hyperlink{classShipCAD_1_1FaceShader}{Face\-Shader} $\ast$ \hyperlink{classShipCAD_1_1Viewport_ad6be617bdcab76cd2f44b0528371cd5d}{set\-Mono\-Face\-Shader} ()
+\item 
+\hyperlink{classShipCAD_1_1FaceShader}{Face\-Shader} $\ast$ \hyperlink{classShipCAD_1_1Viewport_a03cc2ed85178b9735c80b11dceb470b5}{set\-Lighted\-Face\-Shader} ()
+\item 
+bool \hyperlink{classShipCAD_1_1Viewport_aa9af80400534f46e5420916a2895ead5}{shoot\-Pick\-Ray} (\hyperlink{structShipCAD_1_1PickRay}{Pick\-Ray} \&ray)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classShipCAD_1_1Viewport_acef72369540d8e4d479eeadf5fdc3674}{initialize\-Viewport} (const Q\-Vector3\-D \&min, const Q\-Vector3\-D \&max)
-\item 
-void \hyperlink{classShipCAD_1_1Viewport_a64a528202f47e6b10402f3aac161f85a}{convert\-Mouse\-Coord\-To\-World} (int mx, int my)
+virtual void \hyperlink{classShipCAD_1_1Viewport_a7997e0e684a4f8b5709f4d98be6cebb4}{update} ()
 \item 
 virtual void \hyperlink{classShipCAD_1_1Viewport_a0dddc5b05c7308f8818a726b16a7d9eb}{mouse\-Press\-Event} (Q\-Mouse\-Event $\ast$)
 \item 
 virtual void \hyperlink{classShipCAD_1_1Viewport_a7cb6994a92d40990b58be272953b9120}{mouse\-Release\-Event} (Q\-Mouse\-Event $\ast$)
 \item 
 virtual void \hyperlink{classShipCAD_1_1Viewport_ab98dde7bb1d923b8cfc9a0c3cb249c2c}{mouse\-Move\-Event} (Q\-Mouse\-Event $\ast$)
+\item 
+virtual void \hyperlink{classShipCAD_1_1Viewport_a9ac4c18fa3454cddc5e73322c3d1afd8}{wheel\-Event} (Q\-Wheel\-Event $\ast$)
+\item 
+virtual void \hyperlink{classShipCAD_1_1Viewport_acc401d8a0d84810a9d695e3621e29b4e}{key\-Press\-Event} (Q\-Key\-Event $\ast$)
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 50 of file viewport.\-h.
+Definition at line 52 of file viewport.\-h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1Viewport_a9fde8f966d9802dd42254acf0ed05386}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!Viewport@{Viewport}}
+\hypertarget{classShipCAD_1_1Viewport_ad946e1cfc34e84610f9d89f3b62baf9d}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!Viewport@{Viewport}}
 \index{Viewport@{Viewport}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
 \subsubsection[{Viewport}]{\setlength{\rightskip}{0pt plus 5cm}Viewport\-::\-Viewport (
 \begin{DoxyParamCaption}
-{}
+\item[{{\bf Controller} $\ast$}]{ctl, }
+\item[{{\bf viewport\-\_\-type\-\_\-t}}]{vtype}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1Viewport_a9fde8f966d9802dd42254acf0ed05386}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1Viewport_ad946e1cfc34e84610f9d89f3b62baf9d}
 
 
-Definition at line 41 of file viewport.\-cpp.
+Definition at line 45 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a1e18a1ff4a52be33ef63d25034561850}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!$\sim$\-Viewport@{$\sim$\-Viewport}}
 \index{$\sim$\-Viewport@{$\sim$\-Viewport}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -98,22 +101,11 @@ Definition at line 41 of file viewport.\-cpp.
 )}}\label{classShipCAD_1_1Viewport_a1e18a1ff4a52be33ef63d25034561850}
 
 
-Definition at line 53 of file viewport.\-cpp.
+Definition at line 52 of file viewport.\-cpp.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1Viewport_a3626f44e62e08918de5939970cdc531c}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!add@{add}}
-\index{add@{add}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
-\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::add (
-\begin{DoxyParamCaption}
-\item[{{\bf Entity} $\ast$}]{entity}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Viewport_a3626f44e62e08918de5939970cdc531c}
-
-
-Definition at line 201 of file viewport.\-cpp.
-
 \hypertarget{classShipCAD_1_1Viewport_a886ac5965b63039799827da89bf3de20}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!add\-Shader@{add\-Shader}}
 \index{add\-Shader@{add\-Shader}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
 \subsubsection[{add\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::add\-Shader (
@@ -124,41 +116,29 @@ Definition at line 201 of file viewport.\-cpp.
 )}}\label{classShipCAD_1_1Viewport_a886ac5965b63039799827da89bf3de20}
 
 
-Definition at line 221 of file viewport.\-cpp.
+Definition at line 133 of file viewport.\-cpp.
 
-\hypertarget{classShipCAD_1_1Viewport_a64a528202f47e6b10402f3aac161f85a}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!convert\-Mouse\-Coord\-To\-World@{convert\-Mouse\-Coord\-To\-World}}
-\index{convert\-Mouse\-Coord\-To\-World@{convert\-Mouse\-Coord\-To\-World}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
-\subsubsection[{convert\-Mouse\-Coord\-To\-World}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::convert\-Mouse\-Coord\-To\-World (
+\hypertarget{classShipCAD_1_1Viewport_ab247f28eb569e160142901b6eef265a3}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!context\-Menu@{context\-Menu}}
+\index{context\-Menu@{context\-Menu}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
+\subsubsection[{context\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-::context\-Menu (
 \begin{DoxyParamCaption}
-\item[{int}]{mx, }
-\item[{int}]{my}
+\item[{Q\-Mouse\-Event $\ast$}]{event}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Viewport_a64a528202f47e6b10402f3aac161f85a}
+)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_ab247f28eb569e160142901b6eef265a3}
 
 
-Definition at line 275 of file viewport.\-cpp.
+Definition at line 209 of file viewport.\-cpp.
 
-\hypertarget{classShipCAD_1_1Viewport_a93c3c8909dc820efd3d0c6211d38d9ec}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!get\-Camera\-Type@{get\-Camera\-Type}}
-\index{get\-Camera\-Type@{get\-Camera\-Type}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
-\subsubsection[{get\-Camera\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf camera\-\_\-type\-\_\-t} Ship\-C\-A\-D\-::\-Viewport\-::get\-Camera\-Type (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Viewport_a93c3c8909dc820efd3d0c6211d38d9ec}
-
-
-Definition at line 65 of file viewport.\-h.
-
-\hypertarget{classShipCAD_1_1Viewport_a0aa9a0ac30a40ebf933977028a25c565}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!get\-Surface@{get\-Surface}}
-\index{get\-Surface@{get\-Surface}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
-\subsubsection[{get\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Surface}$\ast$ Ship\-C\-A\-D\-::\-Viewport\-::get\-Surface (
+\hypertarget{classShipCAD_1_1Viewport_a4a12f9e56634caca61077572fe6b15f9}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!get\-Controller@{get\-Controller}}
+\index{get\-Controller@{get\-Controller}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
+\subsubsection[{get\-Controller}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Controller}$\ast$ Ship\-C\-A\-D\-::\-Viewport\-::get\-Controller (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Viewport_a0aa9a0ac30a40ebf933977028a25c565}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Viewport_a4a12f9e56634caca61077572fe6b15f9}
 
 
-Definition at line 67 of file viewport.\-h.
+Definition at line 63 of file viewport.\-h.
 
 \hypertarget{classShipCAD_1_1Viewport_a205e5082395c6d01660ffc179c57b83e}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!get\-Viewport\-Mode@{get\-Viewport\-Mode}}
 \index{get\-Viewport\-Mode@{get\-Viewport\-Mode}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -169,7 +149,7 @@ Definition at line 67 of file viewport.\-h.
 ) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Viewport_a205e5082395c6d01660ffc179c57b83e}
 
 
-Definition at line 61 of file viewport.\-h.
+Definition at line 65 of file viewport.\-h.
 
 \hypertarget{classShipCAD_1_1Viewport_a5f261a1925f09917013e8e532688326a}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!get\-Viewport\-Type@{get\-Viewport\-Type}}
 \index{get\-Viewport\-Type@{get\-Viewport\-Type}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -180,7 +160,7 @@ Definition at line 61 of file viewport.\-h.
 ) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1Viewport_a5f261a1925f09917013e8e532688326a}
 
 
-Definition at line 63 of file viewport.\-h.
+Definition at line 67 of file viewport.\-h.
 
 \hypertarget{classShipCAD_1_1Viewport_a9c35de3f7c9d7c860c494081b48309b3}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!initialize@{initialize}}
 \index{initialize@{initialize}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -195,19 +175,18 @@ Reimplemented from \hyperlink{classOpenGLWindow_aed4e2ee22e113b2f7e7d1eba4ef1b96
 
 
 
-Definition at line 62 of file viewport.\-cpp.
+Definition at line 63 of file viewport.\-cpp.
 
-\hypertarget{classShipCAD_1_1Viewport_acef72369540d8e4d479eeadf5fdc3674}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!initialize\-Viewport@{initialize\-Viewport}}
-\index{initialize\-Viewport@{initialize\-Viewport}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
-\subsubsection[{initialize\-Viewport}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::initialize\-Viewport (
+\hypertarget{classShipCAD_1_1Viewport_acc401d8a0d84810a9d695e3621e29b4e}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!key\-Press\-Event@{key\-Press\-Event}}
+\index{key\-Press\-Event@{key\-Press\-Event}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
+\subsubsection[{key\-Press\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::key\-Press\-Event (
 \begin{DoxyParamCaption}
-\item[{const Q\-Vector3\-D \&}]{min, }
-\item[{const Q\-Vector3\-D \&}]{max}
+\item[{Q\-Key\-Event $\ast$}]{event}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1Viewport_acef72369540d8e4d479eeadf5fdc3674}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Viewport_acc401d8a0d84810a9d695e3621e29b4e}
 
 
-Definition at line 154 of file viewport.\-cpp.
+Definition at line 302 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_ab98dde7bb1d923b8cfc9a0c3cb249c2c}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!mouse\-Move\-Event@{mouse\-Move\-Event}}
 \index{mouse\-Move\-Event@{mouse\-Move\-Event}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -218,7 +197,7 @@ Definition at line 154 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Viewport_ab98dde7bb1d923b8cfc9a0c3cb249c2c}
 
 
-Definition at line 336 of file viewport.\-cpp.
+Definition at line 256 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a0dddc5b05c7308f8818a726b16a7d9eb}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!mouse\-Press\-Event@{mouse\-Press\-Event}}
 \index{mouse\-Press\-Event@{mouse\-Press\-Event}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -229,7 +208,7 @@ Definition at line 336 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Viewport_a0dddc5b05c7308f8818a726b16a7d9eb}
 
 
-Definition at line 315 of file viewport.\-cpp.
+Definition at line 219 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a7cb6994a92d40990b58be272953b9120}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!mouse\-Release\-Event@{mouse\-Release\-Event}}
 \index{mouse\-Release\-Event@{mouse\-Release\-Event}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -240,7 +219,7 @@ Definition at line 315 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Viewport_a7cb6994a92d40990b58be272953b9120}
 
 
-Definition at line 324 of file viewport.\-cpp.
+Definition at line 230 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a9e81b526db3c2b508322c29b9fda5845}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!render@{render}}
 \index{render@{render}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -255,7 +234,7 @@ Reimplemented from \hyperlink{classOpenGLWindow_ac9e094864803a0b29364f42c2a47fa8
 
 
 
-Definition at line 226 of file viewport.\-cpp.
+Definition at line 138 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a4eeeb100fd88487215bb7794bdf5e0cb}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!resize\-Event@{resize\-Event}}
 \index{resize\-Event@{resize\-Event}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -266,7 +245,7 @@ Definition at line 226 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_a4eeeb100fd88487215bb7794bdf5e0cb}
 
 
-Definition at line 145 of file viewport.\-cpp.
+Definition at line 118 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a00ba2139fa06701b65de70d5c657f5d6}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Angle@{set\-Angle}}
 \index{set\-Angle@{set\-Angle}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -277,7 +256,7 @@ Definition at line 145 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_a00ba2139fa06701b65de70d5c657f5d6}
 
 
-Definition at line 129 of file viewport.\-cpp.
+Definition at line 100 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a5f90a885e0204b32ff9795c4b79f824b}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Camera\-Type@{set\-Camera\-Type}}
 \index{set\-Camera\-Type@{set\-Camera\-Type}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -288,7 +267,7 @@ Definition at line 129 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_a5f90a885e0204b32ff9795c4b79f824b}
 
 
-Definition at line 77 of file viewport.\-cpp.
+Definition at line 81 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a4bda4b742dc477ed5dc2ab6ac7fe92bc}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Elevation@{set\-Elevation}}
 \index{set\-Elevation@{set\-Elevation}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -299,7 +278,18 @@ Definition at line 77 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_a4bda4b742dc477ed5dc2ab6ac7fe92bc}
 
 
-Definition at line 137 of file viewport.\-cpp.
+Definition at line 109 of file viewport.\-cpp.
+
+\hypertarget{classShipCAD_1_1Viewport_a03cc2ed85178b9735c80b11dceb470b5}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Lighted\-Face\-Shader@{set\-Lighted\-Face\-Shader}}
+\index{set\-Lighted\-Face\-Shader@{set\-Lighted\-Face\-Shader}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
+\subsubsection[{set\-Lighted\-Face\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Face\-Shader} $\ast$ Viewport\-::set\-Lighted\-Face\-Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Viewport_a03cc2ed85178b9735c80b11dceb470b5}
+
+
+Definition at line 195 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a0720a01f8650dc4acf89aad0649d9196}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Line\-Shader@{set\-Line\-Shader}}
 \index{set\-Line\-Shader@{set\-Line\-Shader}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -310,29 +300,18 @@ Definition at line 137 of file viewport.\-cpp.
 )}}\label{classShipCAD_1_1Viewport_a0720a01f8650dc4acf89aad0649d9196}
 
 
-Definition at line 246 of file viewport.\-cpp.
+Definition at line 167 of file viewport.\-cpp.
 
-\hypertarget{classShipCAD_1_1Viewport_a5f3c02f4e24d614d4340816d6de50b0b}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Mono\-Face\-Shader@{set\-Mono\-Face\-Shader}}
+\hypertarget{classShipCAD_1_1Viewport_ad6be617bdcab76cd2f44b0528371cd5d}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Mono\-Face\-Shader@{set\-Mono\-Face\-Shader}}
 \index{set\-Mono\-Face\-Shader@{set\-Mono\-Face\-Shader}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
-\subsubsection[{set\-Mono\-Face\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mono\-Face\-Shader} $\ast$ Viewport\-::set\-Mono\-Face\-Shader (
+\subsubsection[{set\-Mono\-Face\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Face\-Shader} $\ast$ Viewport\-::set\-Mono\-Face\-Shader (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1Viewport_a5f3c02f4e24d614d4340816d6de50b0b}
+)}}\label{classShipCAD_1_1Viewport_ad6be617bdcab76cd2f44b0528371cd5d}
 
 
-Definition at line 260 of file viewport.\-cpp.
-
-\hypertarget{classShipCAD_1_1Viewport_a4bb2b85a12d7dd14e44b5d5c199cbda7}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Surface@{set\-Surface}}
-\index{set\-Surface@{set\-Surface}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
-\subsubsection[{set\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::set\-Surface (
-\begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Surface} $\ast$}]{surface}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_a4bb2b85a12d7dd14e44b5d5c199cbda7}
-
-
-Definition at line 206 of file viewport.\-cpp.
+Definition at line 181 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a578ac5ee96e36638739517fa21bf70c0}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Viewport\-Mode@{set\-Viewport\-Mode}}
 \index{set\-Viewport\-Mode@{set\-Viewport\-Mode}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -343,7 +322,7 @@ Definition at line 206 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_a578ac5ee96e36638739517fa21bf70c0}
 
 
-Definition at line 71 of file viewport.\-cpp.
+Definition at line 75 of file viewport.\-cpp.
 
 \hypertarget{classShipCAD_1_1Viewport_a554a3455c39ee5652b13c9b24c3c962e}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!set\-Viewport\-Type@{set\-Viewport\-Type}}
 \index{set\-Viewport\-Type@{set\-Viewport\-Type}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
@@ -354,7 +333,40 @@ Definition at line 71 of file viewport.\-cpp.
 )\hspace{0.3cm}{\ttfamily [slot]}}}\label{classShipCAD_1_1Viewport_a554a3455c39ee5652b13c9b24c3c962e}
 
 
-Definition at line 100 of file viewport.\-cpp.
+Definition at line 90 of file viewport.\-cpp.
+
+\hypertarget{classShipCAD_1_1Viewport_aa9af80400534f46e5420916a2895ead5}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!shoot\-Pick\-Ray@{shoot\-Pick\-Ray}}
+\index{shoot\-Pick\-Ray@{shoot\-Pick\-Ray}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
+\subsubsection[{shoot\-Pick\-Ray}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-::shoot\-Pick\-Ray (
+\begin{DoxyParamCaption}
+\item[{{\bf Pick\-Ray} \&}]{ray}
+\end{DoxyParamCaption}
+)}}\label{classShipCAD_1_1Viewport_aa9af80400534f46e5420916a2895ead5}
+
+
+Definition at line 310 of file viewport.\-cpp.
+
+\hypertarget{classShipCAD_1_1Viewport_a7997e0e684a4f8b5709f4d98be6cebb4}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!update@{update}}
+\index{update@{update}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Viewport_a7997e0e684a4f8b5709f4d98be6cebb4}
+
+
+Definition at line 125 of file viewport.\-cpp.
+
+\hypertarget{classShipCAD_1_1Viewport_a9ac4c18fa3454cddc5e73322c3d1afd8}{\index{Ship\-C\-A\-D\-::\-Viewport@{Ship\-C\-A\-D\-::\-Viewport}!wheel\-Event@{wheel\-Event}}
+\index{wheel\-Event@{wheel\-Event}!ShipCAD::Viewport@{Ship\-C\-A\-D\-::\-Viewport}}
+\subsubsection[{wheel\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-::wheel\-Event (
+\begin{DoxyParamCaption}
+\item[{Q\-Wheel\-Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1Viewport_a9ac4c18fa3454cddc5e73322c3d1afd8}
+
+
+Definition at line 285 of file viewport.\-cpp.
 
 
 

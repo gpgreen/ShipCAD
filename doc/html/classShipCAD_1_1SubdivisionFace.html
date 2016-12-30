@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,7 +91,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#properties">Properties</a> &#124;
 <a href="classShipCAD_1_1SubdivisionFace-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ShipCAD::SubdivisionFace Class Reference</div>  </div>
@@ -105,8 +104,8 @@ Inheritance diagram for ShipCAD::SubdivisionFace:</div>
  <div class="center">
   <img src="classShipCAD_1_1SubdivisionFace.png" usemap="#ShipCAD::SubdivisionFace_map" alt=""/>
   <map id="ShipCAD::SubdivisionFace_map" name="ShipCAD::SubdivisionFace_map">
-<area href="classShipCAD_1_1SubdivisionBase.html" title="the base class for all subdivision points, edges and faces " alt="ShipCAD::SubdivisionBase" shape="rect" coords="0,56,205,80"/>
-<area href="classShipCAD_1_1SubdivisionControlFace.html" alt="ShipCAD::SubdivisionControlFace" shape="rect" coords="0,168,205,192"/>
+<area href="classShipCAD_1_1SubdivisionBase.html" title="the base class for all subdivision points, edges and faces " alt="ShipCAD::SubdivisionBase" shape="rect" coords="0,0,205,24"/>
+<area href="classShipCAD_1_1SubdivisionControlFace.html" alt="ShipCAD::SubdivisionControlFace" shape="rect" coords="0,112,205,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -145,7 +144,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aeb9c6f01f3896dc39819265922a04892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get point on center of face for subdivision.  <a href="#aeb9c6f01f3896dc39819265922a04892">More...</a><br/></td></tr>
 <tr class="separator:aeb9c6f01f3896dc39819265922a04892"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b32525b95c836e065cb124a61caec61"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionFace.html#a8b32525b95c836e065cb124a61caec61">indexOfPoint</a> (<a class="el" href="classShipCAD_1_1SubdivisionPoint.html">SubdivisionPoint</a> *pt)</td></tr>
-<tr class="memdesc:a8b32525b95c836e065cb124a61caec61"><td class="mdescLeft">&#160;</td><td class="mdescRight">get index of point in parent surface  <a href="#a8b32525b95c836e065cb124a61caec61">More...</a><br/></td></tr>
+<tr class="memdesc:a8b32525b95c836e065cb124a61caec61"><td class="mdescLeft">&#160;</td><td class="mdescRight">get index of point for this face  <a href="#a8b32525b95c836e065cb124a61caec61">More...</a><br/></td></tr>
 <tr class="separator:a8b32525b95c836e065cb124a61caec61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace99f0fe3b54e57912e5391e0aff84ea"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionFace.html#ace99f0fe3b54e57912e5391e0aff84ea">getArea</a> ()</td></tr>
 <tr class="memdesc:ace99f0fe3b54e57912e5391e0aff84ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the area of this face  <a href="#ace99f0fe3b54e57912e5391e0aff84ea">More...</a><br/></td></tr>
@@ -196,18 +195,6 @@ Protected Attributes</h2></td></tr>
 <tr class="inherit_header pro_attribs_classShipCAD_1_1SubdivisionBase"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classShipCAD_1_1SubdivisionBase')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classShipCAD_1_1SubdivisionBase.html">ShipCAD::SubdivisionBase</a></td></tr>
 <tr class="memitem:a164481259436bf18bc22a0626ab66c09 inherit pro_attribs_classShipCAD_1_1SubdivisionBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html">SubdivisionSurface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionBase.html#a164481259436bf18bc22a0626ab66c09">_owner</a></td></tr>
 <tr class="separator:a164481259436bf18bc22a0626ab66c09 inherit pro_attribs_classShipCAD_1_1SubdivisionBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
-Properties</h2></td></tr>
-<tr class="memitem:a88e0042b53b3830a523dfb782f3af6d5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionFace.html#a88e0042b53b3830a523dfb782f3af6d5">Area</a></td></tr>
-<tr class="separator:a88e0042b53b3830a523dfb782f3af6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8daac1b66fdaee14e3f8fb443106162e"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionFace.html#a8daac1b66fdaee14e3f8fb443106162e">FaceCenter</a></td></tr>
-<tr class="separator:a8daac1b66fdaee14e3f8fb443106162e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c07f86c9225ad2c463b259288fca94"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionFace.html#a44c07f86c9225ad2c463b259288fca94">FaceNormal</a></td></tr>
-<tr class="separator:a44c07f86c9225ad2c463b259288fca94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header properties_classShipCAD_1_1SubdivisionBase"><td colspan="2" onclick="javascript:toggleInherit('properties_classShipCAD_1_1SubdivisionBase')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="classShipCAD_1_1SubdivisionBase.html">ShipCAD::SubdivisionBase</a></td></tr>
-<tr class="memitem:aa18f308b1a32286b3d29adcd6cb39ebf inherit properties_classShipCAD_1_1SubdivisionBase"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classShipCAD_1_1SubdivisionSurface.html">SubdivisionSurface</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShipCAD_1_1SubdivisionBase.html#aa18f308b1a32286b3d29adcd6cb39ebf">Owner</a></td></tr>
-<tr class="separator:aa18f308b1a32286b3d29adcd6cb39ebf inherit properties_classShipCAD_1_1SubdivisionBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -268,7 +255,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00070">70</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00065">65</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
 
 </div>
 </div>
@@ -295,7 +282,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00151">151</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00152">152</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -316,7 +303,7 @@ Properties</h2></td></tr>
 <p>When subdividing a face, each edge is split, and a point is put in the center of the face, then all are connected and new faces created. If the face is a triangle and we are not using fvCatmullClark, then a center point is not created. The face is then divided into triangles, instead of quadrilateral faces. In that case this returns a null point</p>
 <dl class="section return"><dt>Returns</dt><dd>the point at center of face, or 0 if triangle and not using fvCatmullClark, or the number of face points is less than 3 </dd></dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00157">157</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00158">158</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -347,7 +334,7 @@ Properties</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#ad168e31f0ef2537b3cd0f58b0c1c54e2">ShipCAD::SubdivisionControlFace</a>.</p>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00175">175</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00176">176</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -422,7 +409,7 @@ Properties</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#a947868fba3e9bb6c587847fb9245c9ff">ShipCAD::SubdivisionControlFace</a>.</p>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00379">379</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00380">380</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +490,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00189">189</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00190">190</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -522,7 +509,7 @@ Properties</h2></td></tr>
 
 <p>swap normal vector to other face </p>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00180">180</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00181">181</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -541,7 +528,7 @@ Properties</h2></td></tr>
 
 <p>calculate the area of this face </p>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00090">90</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00091">91</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +548,7 @@ Properties</h2></td></tr>
 <p>get coordinates of the center of the face </p>
 <dl class="section return"><dt>Returns</dt><dd>coordinates of the face center </dd></dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00100">100</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00101">101</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -581,7 +568,7 @@ Properties</h2></td></tr>
 <p>get coordinates of the face normal </p>
 <dl class="section return"><dt>Returns</dt><dd>coordinates of the face normal </dd></dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00113">113</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00114">114</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -608,7 +595,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the point at index </dd></dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00144">144</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00145">145</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -635,7 +622,7 @@ Properties</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the point is part of the face </dd></dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00139">139</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00140">140</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -653,14 +640,14 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>get index of point in parent surface </p>
+<p>get index of point for this face </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pt</td><td>point to find in parent surface </td></tr>
+    <tr><td class="paramname">pt</td><td>point to find in face </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>index of that point in parent surface </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>index of that point in face, same as numberOfPoints if point not in face </dd></dl>
 
 <p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00064">64</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
@@ -699,7 +686,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00069">69</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00070">70</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -727,7 +714,7 @@ Properties</h2></td></tr>
 <p>number of points for this face </p>
 <dl class="section return"><dt>Returns</dt><dd>number of points for this face </dd></dl>
 
-<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00125">125</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00120">120</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
 
 </div>
 </div>
@@ -763,7 +750,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00386">386</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00387">387</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -842,7 +829,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00254">254</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8cpp_source.html#l00255">255</a> of file <a class="el" href="subdivface_8cpp_source.html">subdivface.cpp</a>.</p>
 
 </div>
 </div>
@@ -866,74 +853,7 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 <p>points belonging to this face </p>
 
-<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00203">203</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Property Documentation</h2>
-<a class="anchor" id="a88e0042b53b3830a523dfb782f3af6d5"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float ShipCAD::SubdivisionFace::Area</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00059">59</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a8daac1b66fdaee14e3f8fb443106162e"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QVector3D ShipCAD::SubdivisionFace::FaceCenter</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00060">60</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a44c07f86c9225ad2c463b259288fca94"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QVector3D ShipCAD::SubdivisionFace::FaceNormal</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00061">61</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
+<p>Definition at line <a class="el" href="subdivface_8h_source.html#l00198">198</a> of file <a class="el" href="subdivface_8h_source.html">subdivface.h</a>.</p>
 
 </div>
 </div>
@@ -944,7 +864,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 26 2015 23:07:09 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 30 2016 01:21:01 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 73.059361
+%%BoundingBox: 0 0 500 54.794521
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 6.843750 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 9.125000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 4 def
+/rows 3 def
 /cols 5 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -174,7 +174,6 @@
 boxfont setfont
 1 boundaspect scale
 (ShipCAD::SubdivisionBase) cw
-(QObject) cw
 (ShipCAD::SubdivisionControlCurve) cw
 (ShipCAD::SubdivisionEdge) cw
 (ShipCAD::SubdivisionFace) cw
@@ -195,7 +194,6 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- classes -----
 
  (ShipCAD::SubdivisionBase) 2.000000 2.000000 box
- (QObject) 2.000000 3.000000 box
  (ShipCAD::SubdivisionControlCurve) 0.000000 1.000000 box
  (ShipCAD::SubdivisionEdge) 1.000000 1.000000 box
  (ShipCAD::SubdivisionFace) 2.000000 1.000000 box
@@ -207,10 +205,6 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- relations -----
 
-solid
-0 2.000000 2.000000 out
-solid
-1 2.000000 3.000000 in
 solid
 1 2.000000 1.250000 out
 solid

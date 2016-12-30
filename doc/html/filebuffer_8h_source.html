@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -174,37 +174,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(quint32&amp; val);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(quint32 val);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keywordtype">size_t</span> val);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(QVector3D&amp; val);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> QVector3D&amp; val);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(QColor&amp; val);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> QColor&amp; val);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(QString&amp; val);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> QString&amp; val);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(<a class="code" href="classShipCAD_1_1Plane.html">Plane</a>&amp; val);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> <a class="code" href="classShipCAD_1_1Plane.html">Plane</a>&amp; val);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(<a class="code" href="structShipCAD_1_1DelftSeriesResistance.html">DelftSeriesResistance</a>* buf);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> <a class="code" href="structShipCAD_1_1DelftSeriesResistance.html">DelftSeriesResistance</a>* buf);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(<a class="code" href="structShipCAD_1_1KAPERResistance.html">KAPERResistance</a>* buf);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> <a class="code" href="structShipCAD_1_1KAPERResistance.html">KAPERResistance</a>* buf);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#if defined(_WIN32) &amp;&amp; !defined(_WIN64)</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor"></span>    <span class="comment">// don&#39;t define a size_t add, taken care of by quint32 add</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keywordtype">size_t</span> val);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor"></span>    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(QVector3D&amp; val);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> QVector3D&amp; val);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(QColor&amp; val);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> QColor&amp; val);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(QString&amp; val);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> QString&amp; val);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(<a class="code" href="classShipCAD_1_1Plane.html">Plane</a>&amp; val);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> <a class="code" href="classShipCAD_1_1Plane.html">Plane</a>&amp; val);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(<a class="code" href="structShipCAD_1_1DelftSeriesResistance.html">DelftSeriesResistance</a>* buf);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> <a class="code" href="structShipCAD_1_1DelftSeriesResistance.html">DelftSeriesResistance</a>* buf);</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">size_t</span> _pos;           <span class="comment">// current position in the data vector</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694f">version_t</a> _file_version;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    std::vector&lt;quint8&gt; _data;   <span class="comment">// the data</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;};</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a86223c54bcf111ef205c9d651e0b9a66">load</a>(<a class="code" href="structShipCAD_1_1KAPERResistance.html">KAPERResistance</a>* buf);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">add</a>(<span class="keyword">const</span> <a class="code" href="structShipCAD_1_1KAPERResistance.html">KAPERResistance</a>* buf);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;};              <span class="comment">/* end namespace */</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">size_t</span> _pos;           <span class="comment">// current position in the data vector</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <a class="code" href="namespaceShipCAD.html#af3a6fa23a7318acbda7b0066b53d694f">version_t</a> _file_version;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    std::vector&lt;quint8&gt; _data;   <span class="comment">// the data</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;};</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;};              <span class="comment">/* end namespace */</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor"></span></div>
 <div class="ttc" id="classShipCAD_1_1FileBuffer_html_af59c26297994b38aabc4bc678d04c246"><div class="ttname"><a href="classShipCAD_1_1FileBuffer.html#af59c26297994b38aabc4bc678d04c246">ShipCAD::FileBuffer::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition:</b> <a href="filebuffer_8cpp_source.html#l00056">filebuffer.cpp:56</a></div></div>
 <div class="ttc" id="resistance_8h_html"><div class="ttname"><a href="resistance_8h.html">resistance.h</a></div></div>
 <div class="ttc" id="classShipCAD_1_1FileBuffer_html_a9a5d46b2c6d568ee2cdef110d4773e73"><div class="ttname"><a href="classShipCAD_1_1FileBuffer.html#a9a5d46b2c6d568ee2cdef110d4773e73">ShipCAD::FileBuffer::add</a></div><div class="ttdeci">void add(const JPEGImage &amp;img)</div><div class="ttdef"><b>Definition:</b> <a href="filebuffer_8cpp_source.html#l00105">filebuffer.cpp:105</a></div></div>
@@ -227,7 +233,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 26 2015 23:07:07 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 30 2016 01:20:51 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

@@ -16,7 +16,7 @@ var indexSectionsWithContent =
   6: "abcfghims",
   7: "acehimpsuv",
   8: "aefhmsv",
-  9: "abcefilmnopsv",
+  9: "p",
   10: "c"
 };
 
@@ -31,7 +31,7 @@ var indexSectionNames =
   6: "typedefs",
   7: "enums",
   8: "enumvalues",
-  9: "properties",
+  9: "related",
   10: "defines"
 };
 

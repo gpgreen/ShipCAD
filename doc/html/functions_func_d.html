@@ -72,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_type.html"><span>Typedefs</span></a></li>
-      <li><a href="functions_prop.html"><span>Properties</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -107,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -184,11 +184,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>developLayers()
 : <a class="el" href="classShipCAD_1_1Controller.html#a3e7966e9726ba79f9978e691ce096964">ShipCAD::Controller</a>
 </li>
+<li>dialogUpdatedPointCoord()
+: <a class="el" href="classShipCAD_1_1Controller.html#a36de0343e95626e62e9683bcfc47a1ee">ShipCAD::Controller</a>
+</li>
 <li>distance()
 : <a class="el" href="classShipCAD_1_1Plane.html#a6851b997a300848fcb37b33407165c44">ShipCAD::Plane</a>
 </li>
+<li>distanceFromPickRay()
+: <a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html#af6148a12f92a65efe935e70394c1a4ca">ShipCAD::SubdivisionControlPoint</a>
+</li>
 <li>doAssemble()
 : <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#ac322d8008ea13bc3ca3fd1baeab7e1b3">ShipCAD::SubdivisionSurface</a>
+</li>
+<li>doAssembleSpecial()
+: <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a976e9b68dcbec8f6b424429a7e3c7e50">ShipCAD::SubdivisionSurface</a>
 </li>
 <li>draw()
 : <a class="el" href="classShipCAD_1_1Entity.html#aa62e306d991140dcd564360f8f6e7539">ShipCAD::Entity</a>
@@ -196,6 +205,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="classShipCAD_1_1Intersection.html#a9e346019a52aa0540628b75994ea94a5">ShipCAD::Intersection</a>
 , <a class="el" href="classShipCAD_1_1Marker.html#a0cca647d9b32dc69b03903b024dc3091">ShipCAD::Marker</a>
 , <a class="el" href="classShipCAD_1_1NURBSurface.html#a9ee8f8aea431fe9f465080ec9f5624f9">ShipCAD::NURBSurface</a>
+, <a class="el" href="classShipCAD_1_1ShipCADModel.html#abf593b803e96a1fd8e56f36b3b6d0954">ShipCAD::ShipCADModel</a>
 , <a class="el" href="classShipCAD_1_1Spline.html#a6424ed433d241f566c15891cc25a74dd">ShipCAD::Spline</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionControlCurve.html#a4d7d8e87dc582529e763039ffe593360">ShipCAD::SubdivisionControlCurve</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionControlEdge.html#a6b86017a5ea7fe487f6017071406e8c4">ShipCAD::SubdivisionControlEdge</a>
@@ -204,6 +214,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a86f8600ffbf3973bc31c99bdb9e5b18d">ShipCAD::SubdivisionLayer</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#acfe9cc964dbe05105486b43f2dc6fc4f">ShipCAD::SubdivisionSurface</a>
 </li>
+<li>draw_intersection()
+: <a class="el" href="structdraw__intersection.html#a4471bc736f3a58dc15f577144772601b">draw_intersection</a>
+</li>
 <li>drawControlPoints()
 : <a class="el" href="classShipCAD_1_1SubdivisionControlPoint.html#a761599371138b34be2c7a2cac3699e2c">ShipCAD::SubdivisionControlPoint</a>
 </li>
@@ -211,7 +224,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#aaf9226150996743d8d2ea560083ad1d8">ShipCAD::SubdivisionControlFace</a>
 </li>
 <li>drawFaces()
-: <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#aef1327fd3e623b190d67dcb461a3e950">ShipCAD::SubdivisionControlFace</a>
+: <a class="el" href="classShipCAD_1_1SubdivisionControlFace.html#a38631a5e4c99d1d183d61a0fe3fb47ed">ShipCAD::SubdivisionControlFace</a>
+</li>
+<li>drawGrid()
+: <a class="el" href="classShipCAD_1_1ShipCADModel.html#a04d6e146dff42232658531c64d064217">ShipCAD::ShipCADModel</a>
 </li>
 <li>drawLayers()
 : <a class="el" href="classShipCAD_1_1SubdivisionLayer.html#a838537201ca31bc92a38585c87eb56e9">ShipCAD::SubdivisionLayer</a>
@@ -219,6 +235,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>drawMirror()
 : <a class="el" href="classMainWindow.html#afb7953f1fdcb7c5a77efa6fb4d2c3cd5">MainWindow</a>
 , <a class="el" href="classShipCAD_1_1SubdivisionSurface.html#a94d284672cca1fb619ef5c064bcd175b">ShipCAD::SubdivisionSurface</a>
+</li>
+<li>drawStarboard()
+: <a class="el" href="classShipCAD_1_1Spline.html#aa1dcf2a9cff6d17afd926219e3791f9f">ShipCAD::Spline</a>
 </li>
 <li>dump()
 : <a class="el" href="classShipCAD_1_1Entity.html#a395d7573df06482d9deaecdc87d46944">ShipCAD::Entity</a>
@@ -240,7 +259,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Aug 26 2015 23:07:10 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Dec 30 2016 01:21:04 for ShipCAD by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

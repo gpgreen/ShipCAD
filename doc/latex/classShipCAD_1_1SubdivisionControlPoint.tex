@@ -13,7 +13,7 @@ Control point.
 Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Control\-Point\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.000000cm]{classShipCAD_1_1SubdivisionControlPoint}
+\includegraphics[height=3.000000cm]{classShipCAD_1_1SubdivisionControlPoint}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -52,7 +52,9 @@ void \hyperlink{classShipCAD_1_1SubdivisionControlPoint_aba97c3c0d7ebfcd98458931
 void \hyperlink{classShipCAD_1_1SubdivisionControlPoint_aa9175d20a34a9b3e964efbb436ac3dbc}{save\-To\-Stream} (Q\-String\-List \&strings)
 \item 
 virtual void \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a4a9d6e45291c27f19f0d76c9b9d19048}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
-\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\item 
+float \hyperlink{classShipCAD_1_1SubdivisionControlPoint_af6148a12f92a65efe935e70394c1a4ca}{distance\-From\-Pick\-Ray} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, const \hyperlink{structShipCAD_1_1PickRay}{Pick\-Ray} \&ray) const 
+\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -70,19 +72,6 @@ void \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a01e1eff38ecb4393948db0d
 \item 
 bool \hyperlink{classShipCAD_1_1SubdivisionControlPoint_acf4dc0c2a3d4c52847c68a8a412669f5}{\-\_\-locked}
 \end{DoxyCompactItemize}
-\subsection*{Properties}
-\begin{DoxyCompactItemize}
-\item 
-Q\-Color \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a8c7a97ce5194163f37a4b655f87bc309}{Color}
-\item 
-bool \hyperlink{classShipCAD_1_1SubdivisionControlPoint_af7c63177a12f4c60bb4a2a6615482a98}{Locked}
-\item 
-bool \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a54bf97e33f121843af563f2eebe7d3e5}{Selected}
-\item 
-bool \hyperlink{classShipCAD_1_1SubdivisionControlPoint_ab796dbf230e01f51a1031ec69f8f7f66}{Visible}
-\item 
-bool \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a33a15d8a83f43369313d57a854046ff7}{Is\-Leak}
-\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -90,7 +79,7 @@ Control point.
 
 Subdivision Surfaces consist of control points which define the surface contour 
 
-Definition at line 208 of file subdivpoint.\-h.
+Definition at line 203 of file subdivpoint.\-h.
 
 
 
@@ -115,7 +104,7 @@ New points should be created with the static construct method
 \end{DoxyParams}
 
 
-Definition at line 511 of file subdivpoint.\-cpp.
+Definition at line 543 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_aed35211e2f60cd5ed1de628d732e4791}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!$\sim$\-Subdivision\-Control\-Point@{$\sim$\-Subdivision\-Control\-Point}}
 \index{$\sim$\-Subdivision\-Control\-Point@{$\sim$\-Subdivision\-Control\-Point}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -126,7 +115,7 @@ Definition at line 511 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionControlPoint_aed35211e2f60cd5ed1de628d732e4791}
 
 
-Definition at line 517 of file subdivpoint.\-cpp.
+Definition at line 549 of file subdivpoint.\-cpp.
 
 
 
@@ -140,7 +129,7 @@ Definition at line 517 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_a3c11cf5f0a22b44cbc8674a5d82942b0}
 
 
-Definition at line 619 of file subdivpoint.\-cpp.
+Definition at line 651 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_adc189f3e5cff85ecd1a59356e0f7d63d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!construct@{construct}}
 \index{construct@{construct}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -151,7 +140,19 @@ Definition at line 619 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1SubdivisionControlPoint_adc189f3e5cff85ecd1a59356e0f7d63d}
 
 
-Definition at line 503 of file subdivpoint.\-cpp.
+Definition at line 535 of file subdivpoint.\-cpp.
+
+\hypertarget{classShipCAD_1_1SubdivisionControlPoint_af6148a12f92a65efe935e70394c1a4ca}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!distance\-From\-Pick\-Ray@{distance\-From\-Pick\-Ray}}
+\index{distance\-From\-Pick\-Ray@{distance\-From\-Pick\-Ray}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
+\subsubsection[{distance\-From\-Pick\-Ray}]{\setlength{\rightskip}{0pt plus 5cm}float Subdivision\-Control\-Point\-::distance\-From\-Pick\-Ray (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp, }
+\item[{const {\bf Pick\-Ray} \&}]{ray}
+\end{DoxyParamCaption}
+) const}}\label{classShipCAD_1_1SubdivisionControlPoint_af6148a12f92a65efe935e70394c1a4ca}
+
+
+Definition at line 907 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a761599371138b34be2c7a2cac3699e2c}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!draw\-Control\-Points@{draw\-Control\-Points}}
 \index{draw\-Control\-Points@{draw\-Control\-Points}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -163,7 +164,7 @@ Definition at line 503 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1SubdivisionControlPoint_a761599371138b34be2c7a2cac3699e2c}
 
 
-Definition at line 812 of file subdivpoint.\-cpp.
+Definition at line 844 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a4a9d6e45291c27f19f0d76c9b9d19048}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!dump@{dump}}
 \index{dump@{dump}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -190,7 +191,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionPoint_aed72cf5e8dc67e98
 
 
 
-Definition at line 872 of file subdivpoint.\-cpp.
+Definition at line 917 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_ad3af0386e8bb679a2037054ddbdb6a20}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!get\-Color@{get\-Color}}
 \index{get\-Color@{get\-Color}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -201,7 +202,7 @@ Definition at line 872 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_ad3af0386e8bb679a2037054ddbdb6a20}
 
 
-Definition at line 524 of file subdivpoint.\-cpp.
+Definition at line 556 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a13c569f0894ba6193a3abf894bc4b517}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!get\-Index@{get\-Index}}
 \index{get\-Index@{get\-Index}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -223,7 +224,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionPoint_a8406682549c10ec9
 
 
 
-Definition at line 546 of file subdivpoint.\-cpp.
+Definition at line 578 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a1d9150cdde6105519de95a94689faa51}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!is\-Leak@{is\-Leak}}
 \index{is\-Leak@{is\-Leak}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -234,7 +235,7 @@ Definition at line 546 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_a1d9150cdde6105519de95a94689faa51}
 
 
-Definition at line 590 of file subdivpoint.\-cpp.
+Definition at line 622 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_aacd7add9e1a79cc7e96c1ac6de568ad1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!is\-Locked@{is\-Locked}}
 \index{is\-Locked@{is\-Locked}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -245,7 +246,7 @@ Definition at line 590 of file subdivpoint.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionControlPoint_aacd7add9e1a79cc7e96c1ac6de568ad1}
 
 
-Definition at line 236 of file subdivpoint.\-h.
+Definition at line 225 of file subdivpoint.\-h.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_af446fc02c7dc2e20383e741f71f4c358}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!is\-Selected@{is\-Selected}}
 \index{is\-Selected@{is\-Selected}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -256,7 +257,7 @@ Definition at line 236 of file subdivpoint.\-h.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_af446fc02c7dc2e20383e741f71f4c358}
 
 
-Definition at line 551 of file subdivpoint.\-cpp.
+Definition at line 583 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_ad739bf09eb693c8956101d0576736239}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!is\-Visible@{is\-Visible}}
 \index{is\-Visible@{is\-Visible}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -267,7 +268,7 @@ Definition at line 551 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_ad739bf09eb693c8956101d0576736239}
 
 
-Definition at line 556 of file subdivpoint.\-cpp.
+Definition at line 588 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a989c801ca1c836ca73f77c68d719f546}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!load\-\_\-binary@{load\-\_\-binary}}
 \index{load\-\_\-binary@{load\-\_\-binary}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -278,7 +279,7 @@ Definition at line 556 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_a989c801ca1c836ca73f77c68d719f546}
 
 
-Definition at line 756 of file subdivpoint.\-cpp.
+Definition at line 788 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_aba97c3c0d7ebfcd98458931645ffacd0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!load\-From\-Stream@{load\-From\-Stream}}
 \index{load\-From\-Stream@{load\-From\-Stream}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -290,7 +291,7 @@ Definition at line 756 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_aba97c3c0d7ebfcd98458931645ffacd0}
 
 
-Definition at line 770 of file subdivpoint.\-cpp.
+Definition at line 802 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a01e1eff38ecb4393948db0d9883cad84}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!priv\-\_\-dump@{priv\-\_\-dump}}
 \index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -302,7 +303,7 @@ Definition at line 770 of file subdivpoint.\-cpp.
 ) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlPoint_a01e1eff38ecb4393948db0d9883cad84}
 
 
-Definition at line 880 of file subdivpoint.\-cpp.
+Definition at line 925 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a7de1a32ae9e845478ec1bd5eaec17cd1}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!save\-\_\-binary@{save\-\_\-binary}}
 \index{save\-\_\-binary@{save\-\_\-binary}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -313,7 +314,7 @@ Definition at line 880 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_a7de1a32ae9e845478ec1bd5eaec17cd1}
 
 
-Definition at line 803 of file subdivpoint.\-cpp.
+Definition at line 835 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_aa9175d20a34a9b3e964efbb436ac3dbc}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!save\-To\-Stream@{save\-To\-Stream}}
 \index{save\-To\-Stream@{save\-To\-Stream}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -324,7 +325,7 @@ Definition at line 803 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_aa9175d20a34a9b3e964efbb436ac3dbc}
 
 
-Definition at line 792 of file subdivpoint.\-cpp.
+Definition at line 824 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a54a5233e02ef34a174c24d5dcf3c6407}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!set\-Coordinate@{set\-Coordinate}}
 \index{set\-Coordinate@{set\-Coordinate}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -339,7 +340,7 @@ Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionPoint_a98ab99a0ccc4709a
 
 
 
-Definition at line 613 of file subdivpoint.\-cpp.
+Definition at line 645 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a5f2cde3c54ca44c4b4d3ded0e3bc4ded}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!set\-Locked@{set\-Locked}}
 \index{set\-Locked@{set\-Locked}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -350,7 +351,7 @@ Definition at line 613 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_a5f2cde3c54ca44c4b4d3ded0e3bc4ded}
 
 
-Definition at line 607 of file subdivpoint.\-cpp.
+Definition at line 639 of file subdivpoint.\-cpp.
 
 \hypertarget{classShipCAD_1_1SubdivisionControlPoint_a5642f57c7f17e78c27ad6edb0fdb7f65}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!set\-Selected@{set\-Selected}}
 \index{set\-Selected@{set\-Selected}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
@@ -361,7 +362,7 @@ Definition at line 607 of file subdivpoint.\-cpp.
 )}}\label{classShipCAD_1_1SubdivisionControlPoint_a5642f57c7f17e78c27ad6edb0fdb7f65}
 
 
-Definition at line 595 of file subdivpoint.\-cpp.
+Definition at line 627 of file subdivpoint.\-cpp.
 
 
 
@@ -371,45 +372,7 @@ Definition at line 595 of file subdivpoint.\-cpp.
 \subsubsection[{\-\_\-locked}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point\-::\-\_\-locked\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionControlPoint_acf4dc0c2a3d4c52847c68a8a412669f5}
 whether point is locked 
 
-Definition at line 266 of file subdivpoint.\-h.
-
-
-
-\subsection{Property Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionControlPoint_a8c7a97ce5194163f37a4b655f87bc309}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!Color@{Color}}
-\index{Color@{Color}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
-\subsubsection[{Color}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Color Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point\-::\-Color\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlPoint_a8c7a97ce5194163f37a4b655f87bc309}
-
-
-Definition at line 211 of file subdivpoint.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlPoint_a33a15d8a83f43369313d57a854046ff7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!Is\-Leak@{Is\-Leak}}
-\index{Is\-Leak@{Is\-Leak}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
-\subsubsection[{Is\-Leak}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point\-::\-Is\-Leak\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlPoint_a33a15d8a83f43369313d57a854046ff7}
-
-
-Definition at line 215 of file subdivpoint.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlPoint_af7c63177a12f4c60bb4a2a6615482a98}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!Locked@{Locked}}
-\index{Locked@{Locked}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
-\subsubsection[{Locked}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point\-::\-Locked\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCAD_1_1SubdivisionControlPoint_af7c63177a12f4c60bb4a2a6615482a98}
-
-
-Definition at line 212 of file subdivpoint.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlPoint_a54bf97e33f121843af563f2eebe7d3e5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!Selected@{Selected}}
-\index{Selected@{Selected}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
-\subsubsection[{Selected}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point\-::\-Selected\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}}\label{classShipCAD_1_1SubdivisionControlPoint_a54bf97e33f121843af563f2eebe7d3e5}
-
-
-Definition at line 213 of file subdivpoint.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionControlPoint_ab796dbf230e01f51a1031ec69f8f7f66}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}!Visible@{Visible}}
-\index{Visible@{Visible}!ShipCAD::SubdivisionControlPoint@{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}}
-\subsubsection[{Visible}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point\-::\-Visible\hspace{0.3cm}{\ttfamily [read]}}}\label{classShipCAD_1_1SubdivisionControlPoint_ab796dbf230e01f51a1031ec69f8f7f66}
-
-
-Definition at line 214 of file subdivpoint.\-h.
+Definition at line 258 of file subdivpoint.\-h.
 
 
 

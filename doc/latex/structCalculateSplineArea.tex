@@ -4,9 +4,9 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structCalculateSplineArea_aee1b91c5b5c4e58b697aa65984864e48}{Calculate\-Spline\-Area} (float $\ast$area, Q\-Vector3\-D $\ast$cog, Q\-Vector2\-D $\ast$mom\-\_\-inertia, \hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{intersection\-\_\-type\-\_\-t} ty, const \hyperlink{classShipCAD_1_1Plane}{Plane} \&pln)
+\hyperlink{structCalculateSplineArea_a9a8b34be2a02d20258755dd9b125c9b6}{Calculate\-Spline\-Area} (float $\ast$area, Q\-Vector3\-D $\ast$cog, Q\-Vector3\-D $\ast$mom\-\_\-inertia, \hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{intersection\-\_\-type\-\_\-t} ty, const \hyperlink{classShipCAD_1_1Plane}{Plane} \&wlpln, const \hyperlink{classShipCAD_1_1Plane}{Plane} \&intersection\-\_\-plane)
 \item 
-Q\-Vector2\-D \hyperlink{structCalculateSplineArea_aa1d72cbd764c437d829a04a7c4c14d9b}{Project\-To2\-D} (Q\-Vector3\-D \&p)
+Q\-Vector2\-D \hyperlink{structCalculateSplineArea_a03a0bdc26538e48bf5ca311a3b4ba23a}{Project\-To2\-D} (const Q\-Vector3\-D \&p)
 \item 
 void \hyperlink{structCalculateSplineArea_a55da994c2b32cad71e5c8c8f21b09ce0}{operator()} (\hyperlink{classShipCAD_1_1Spline}{Spline} $\ast$spline)
 \end{DoxyCompactItemize}
@@ -17,36 +17,39 @@ float $\ast$ \hyperlink{structCalculateSplineArea_a2b059a1a694d22a63c94bde86a8ec
 \item 
 Q\-Vector3\-D $\ast$ \hyperlink{structCalculateSplineArea_abe01c8bb84cfb1900fa06e9e16fcc575}{\-\_\-cog}
 \item 
-Q\-Vector2\-D $\ast$ \hyperlink{structCalculateSplineArea_a5d4eebaf188d12a2f30ed7f28bf3d57f}{\-\_\-moi}
+Q\-Vector3\-D $\ast$ \hyperlink{structCalculateSplineArea_afcd9ae27bc3f89b4fa995f7f1cfd2746}{\-\_\-moi}
 \item 
 \hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{intersection\-\_\-type\-\_\-t} \hyperlink{structCalculateSplineArea_aae716b66f114f0217e68efc79ca9cc91}{\-\_\-intersection\-\_\-type}
 \item 
-\hyperlink{classShipCAD_1_1Plane}{Plane} \hyperlink{structCalculateSplineArea_ab6c7f0e103a21db017e7330a31e9f984}{\-\_\-plane}
+\hyperlink{classShipCAD_1_1Plane}{Plane} \hyperlink{structCalculateSplineArea_a0f3126c4f34b545eea5bbce5f340f21c}{\-\_\-wl\-\_\-plane}
+\item 
+\hyperlink{classShipCAD_1_1Plane}{Plane} \hyperlink{structCalculateSplineArea_a4d0feb7db0aca705a54f2f612290e970}{\-\_\-int\-\_\-plane}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 162 of file intersection.\-cpp.
+Definition at line 219 of file intersection.\-cpp.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{structCalculateSplineArea_aee1b91c5b5c4e58b697aa65984864e48}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!Calculate\-Spline\-Area@{Calculate\-Spline\-Area}}
+\hypertarget{structCalculateSplineArea_a9a8b34be2a02d20258755dd9b125c9b6}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!Calculate\-Spline\-Area@{Calculate\-Spline\-Area}}
 \index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!CalculateSplineArea@{Calculate\-Spline\-Area}}
 \subsubsection[{Calculate\-Spline\-Area}]{\setlength{\rightskip}{0pt plus 5cm}Calculate\-Spline\-Area\-::\-Calculate\-Spline\-Area (
 \begin{DoxyParamCaption}
 \item[{float $\ast$}]{area, }
 \item[{Q\-Vector3\-D $\ast$}]{cog, }
-\item[{Q\-Vector2\-D $\ast$}]{mom\-\_\-inertia, }
+\item[{Q\-Vector3\-D $\ast$}]{mom\-\_\-inertia, }
 \item[{{\bf intersection\-\_\-type\-\_\-t}}]{ty, }
-\item[{const {\bf Plane} \&}]{pln}
+\item[{const {\bf Plane} \&}]{wlpln, }
+\item[{const {\bf Plane} \&}]{intersection\-\_\-plane}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{structCalculateSplineArea_aee1b91c5b5c4e58b697aa65984864e48}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{structCalculateSplineArea_a9a8b34be2a02d20258755dd9b125c9b6}
 
 
-Definition at line 169 of file intersection.\-cpp.
+Definition at line 227 of file intersection.\-cpp.
 
 
 
@@ -60,18 +63,18 @@ Definition at line 169 of file intersection.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{structCalculateSplineArea_a55da994c2b32cad71e5c8c8f21b09ce0}
 
 
-Definition at line 191 of file intersection.\-cpp.
+Definition at line 250 of file intersection.\-cpp.
 
-\hypertarget{structCalculateSplineArea_aa1d72cbd764c437d829a04a7c4c14d9b}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!Project\-To2\-D@{Project\-To2\-D}}
+\hypertarget{structCalculateSplineArea_a03a0bdc26538e48bf5ca311a3b4ba23a}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!Project\-To2\-D@{Project\-To2\-D}}
 \index{Project\-To2\-D@{Project\-To2\-D}!CalculateSplineArea@{Calculate\-Spline\-Area}}
 \subsubsection[{Project\-To2\-D}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector2\-D Calculate\-Spline\-Area\-::\-Project\-To2\-D (
 \begin{DoxyParamCaption}
-\item[{Q\-Vector3\-D \&}]{p}
+\item[{const Q\-Vector3\-D \&}]{p}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{structCalculateSplineArea_aa1d72cbd764c437d829a04a7c4c14d9b}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{structCalculateSplineArea_a03a0bdc26538e48bf5ca311a3b4ba23a}
 
 
-Definition at line 172 of file intersection.\-cpp.
+Definition at line 231 of file intersection.\-cpp.
 
 
 
@@ -81,35 +84,42 @@ Definition at line 172 of file intersection.\-cpp.
 \subsubsection[{\-\_\-area}]{\setlength{\rightskip}{0pt plus 5cm}float$\ast$ Calculate\-Spline\-Area\-::\-\_\-area}}\label{structCalculateSplineArea_a2b059a1a694d22a63c94bde86a8ecd6b}
 
 
-Definition at line 164 of file intersection.\-cpp.
+Definition at line 221 of file intersection.\-cpp.
 
 \hypertarget{structCalculateSplineArea_abe01c8bb84cfb1900fa06e9e16fcc575}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!\-\_\-cog@{\-\_\-cog}}
 \index{\-\_\-cog@{\-\_\-cog}!CalculateSplineArea@{Calculate\-Spline\-Area}}
 \subsubsection[{\-\_\-cog}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D$\ast$ Calculate\-Spline\-Area\-::\-\_\-cog}}\label{structCalculateSplineArea_abe01c8bb84cfb1900fa06e9e16fcc575}
 
 
-Definition at line 165 of file intersection.\-cpp.
+Definition at line 222 of file intersection.\-cpp.
+
+\hypertarget{structCalculateSplineArea_a4d0feb7db0aca705a54f2f612290e970}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!\-\_\-int\-\_\-plane@{\-\_\-int\-\_\-plane}}
+\index{\-\_\-int\-\_\-plane@{\-\_\-int\-\_\-plane}!CalculateSplineArea@{Calculate\-Spline\-Area}}
+\subsubsection[{\-\_\-int\-\_\-plane}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane} Calculate\-Spline\-Area\-::\-\_\-int\-\_\-plane}}\label{structCalculateSplineArea_a4d0feb7db0aca705a54f2f612290e970}
+
+
+Definition at line 226 of file intersection.\-cpp.
 
 \hypertarget{structCalculateSplineArea_aae716b66f114f0217e68efc79ca9cc91}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!\-\_\-intersection\-\_\-type@{\-\_\-intersection\-\_\-type}}
 \index{\-\_\-intersection\-\_\-type@{\-\_\-intersection\-\_\-type}!CalculateSplineArea@{Calculate\-Spline\-Area}}
 \subsubsection[{\-\_\-intersection\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf intersection\-\_\-type\-\_\-t} Calculate\-Spline\-Area\-::\-\_\-intersection\-\_\-type}}\label{structCalculateSplineArea_aae716b66f114f0217e68efc79ca9cc91}
 
 
-Definition at line 167 of file intersection.\-cpp.
+Definition at line 224 of file intersection.\-cpp.
 
-\hypertarget{structCalculateSplineArea_a5d4eebaf188d12a2f30ed7f28bf3d57f}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!\-\_\-moi@{\-\_\-moi}}
+\hypertarget{structCalculateSplineArea_afcd9ae27bc3f89b4fa995f7f1cfd2746}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!\-\_\-moi@{\-\_\-moi}}
 \index{\-\_\-moi@{\-\_\-moi}!CalculateSplineArea@{Calculate\-Spline\-Area}}
-\subsubsection[{\-\_\-moi}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector2\-D$\ast$ Calculate\-Spline\-Area\-::\-\_\-moi}}\label{structCalculateSplineArea_a5d4eebaf188d12a2f30ed7f28bf3d57f}
+\subsubsection[{\-\_\-moi}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D$\ast$ Calculate\-Spline\-Area\-::\-\_\-moi}}\label{structCalculateSplineArea_afcd9ae27bc3f89b4fa995f7f1cfd2746}
 
 
-Definition at line 166 of file intersection.\-cpp.
+Definition at line 223 of file intersection.\-cpp.
 
-\hypertarget{structCalculateSplineArea_ab6c7f0e103a21db017e7330a31e9f984}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!\-\_\-plane@{\-\_\-plane}}
-\index{\-\_\-plane@{\-\_\-plane}!CalculateSplineArea@{Calculate\-Spline\-Area}}
-\subsubsection[{\-\_\-plane}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane} Calculate\-Spline\-Area\-::\-\_\-plane}}\label{structCalculateSplineArea_ab6c7f0e103a21db017e7330a31e9f984}
+\hypertarget{structCalculateSplineArea_a0f3126c4f34b545eea5bbce5f340f21c}{\index{Calculate\-Spline\-Area@{Calculate\-Spline\-Area}!\-\_\-wl\-\_\-plane@{\-\_\-wl\-\_\-plane}}
+\index{\-\_\-wl\-\_\-plane@{\-\_\-wl\-\_\-plane}!CalculateSplineArea@{Calculate\-Spline\-Area}}
+\subsubsection[{\-\_\-wl\-\_\-plane}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane} Calculate\-Spline\-Area\-::\-\_\-wl\-\_\-plane}}\label{structCalculateSplineArea_a0f3126c4f34b545eea5bbce5f340f21c}
 
 
-Definition at line 168 of file intersection.\-cpp.
+Definition at line 225 of file intersection.\-cpp.
 
 
 

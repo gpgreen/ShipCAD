@@ -39,6 +39,8 @@
 #include "utility.h"
 #include "filebuffer.h"
 #include "viewport.h"
+#include "controlfacegrid.h"
+#include "pointgrid.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -527,6 +529,77 @@ void SubdivisionLayer::saveBinary(FileBuffer& destination)
                     destination.add(_alphablend);
                 }
             }
+        }
+    }
+}
+
+void SubdivisionLayer::saveToDXF(QStringList& strings)
+{
+    if (!isVisible())
+        return;
+    vector<ControlFaceGrid> assembled;
+    getOwner()->assembleFacesToPatches(amRegular, assembled);
+    if (assembled.size() == 0)
+        return;
+    for (size_t i=0; i<assembled.size(); ++i) {
+        ControlFaceGrid assface = assembled[i];
+        if ((assface.cols() > 1 && assface.rows() >= 1) ||
+            (assface.cols() >= 1 && assface.rows() > 1) ||
+            (assface.cols() == 1 && assface.rows() == 1 && assface.getFace(0,0)->numberOfPoints() == 4)) {
+            PointGrid grid;
+            getOwner()->convertToGrid(assface, grid);
+            if (grid.cols() > 0 && grid.rows() > 0) {
+                strings.push_back(QString("0\r\nPOLYLINE"));
+                strings.push_back(QString("8\r\n%1").arg(getName()));
+                strings.push_back(QString("62\r\n%1").arg(FindDXFColorIndex(getColor())));
+                strings.push_back(QString("66\r\n1"));
+                strings.push_back(QString("70\r\n16"));
+                strings.push_back(QString("71\r\n%1").arg(grid.rows()));
+                strings.push_back(QString("72\r\n%1").arg(grid.cols()));
+                for (size_t j=0; j<grid.rows(); j++) {
+                    for (size_t k=0; k<grid.cols(); k++) {
+                        strings.push_back(QString("0\r\nVERTEX"));
+                        strings.push_back(QString("8\r\n%1").arg(getName()));
+                        QVector3D p = grid.getPoint(j, k)->getCoordinate();
+                        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
+                        strings.push_back(QString("20\r\n%1").arg(truncate(p.y(), 4)));
+                        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                        strings.push_back(QString("70\r\n64")); // polygon mesh vertex
+                    }
+                }
+                strings.push_back(QString("0\r\nSEQEND"));
+                if (isSymmetric() && getOwner()->drawMirror()) {
+                    strings.push_back(QString("0\r\nPOLYLINE"));
+                    strings.push_back(QString("8\r\n%1").arg(getName()));
+                    strings.push_back(QString("62\r\n%1").arg(FindDXFColorIndex(getColor())));
+                    strings.push_back(QString("66\r\n1"));
+                    strings.push_back(QString("70\r\n16"));
+                    strings.push_back(QString("71\r\n%1").arg(grid.cols()));
+                    strings.push_back(QString("72\r\n%1").arg(grid.rows()));
+                    for (size_t j=0; j<grid.rows(); j++) {
+                        for (size_t k=0; k<grid.cols(); k++) {
+                            strings.push_back(QString("0\r\nVERTEX"));
+                            strings.push_back(QString("8\r\n%1").arg(getName()));
+                            QVector3D p = grid.getPoint(j, k)->getCoordinate();
+                            strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
+                            strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
+                            strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                            strings.push_back(QString("70\r\n64")); // polygon mesh vertex
+                        }
+                    }
+                    strings.push_back(QString("0\r\nSEQEND"));
+                }
+            } else {
+                for (size_t j=0; j<assface.rows(); j++) {
+                    for (size_t k=0; k<assface.cols(); k++) {
+                        SubdivisionControlFace* face = assface.getFace(j, k);
+                        if (face != 0)
+                            face->saveToDXF(strings);
+                    }
+                }
+            }
+        } else if (assface.rows() == 1 && assface.cols() == 1) {
+            assface.getFace(0, 0)->saveToDXF(strings);
         }
     }
 }

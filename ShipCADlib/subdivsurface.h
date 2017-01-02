@@ -76,9 +76,6 @@ class SubdivisionSurface : public Entity
 
 public:
 
-    typedef std::vector<std::vector<SubdivisionControlFace*> > face_grid_t;
-    typedef std::vector<std::vector<SubdivisionPoint*> > grid_t;
-    typedef std::vector<std::vector<SubdivisionControlPoint*> > control_grid_t;
     typedef std::vector<std::vector<QVector3D> > coordinate_grid_t;
 
     explicit SubdivisionSurface();
@@ -99,7 +96,7 @@ public:
                                 std::vector<ControlFaceGrid>& assembledPatches);
     void calculateGaussCurvature();
     void clearSelection();
-    void convertToGrid(face_grid_t& input, grid_t& grid);
+    void convertToGrid(ControlFaceGrid& input, PointGrid& grid);
     void edgeConnect();
     virtual void extents(QVector3D& min, QVector3D& max);
     void extrudeEdges(std::vector<SubdivisionControlEdge*>& edges,
@@ -335,10 +332,10 @@ protected:
                    std::vector<SubdivisionControlFace*>& faces,
                    std::vector<SubdivisionControlFace*>& tmpfaces);
     // used in convertToGrid
-    void doAssemble(grid_t& grid, size_t& cols, size_t& rows,
+    void doAssemble(PointGrid& grid, size_t& cols, size_t& rows,
                     std::vector<SubdivisionFace*>& faces);
     // used in assembleFaces
-    void doAssembleSpecial(struct PointGrid& grid, size_t& cols, size_t& rows,
+    void doAssembleSpecial(PointGrid& grid, size_t& cols, size_t& rows,
                            assemble_mode_t mode,
                            std::vector<SubdivisionControlFace*>& checkfaces,
                            std::vector<SubdivisionControlFace*>& faces);

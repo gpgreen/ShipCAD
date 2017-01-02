@@ -41,6 +41,8 @@
 #include "filebuffer.h"
 #include "utility.h"
 #include "shader.h"
+#include "controlfacegrid.h"
+#include "pointgrid.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -811,13 +813,100 @@ void SubdivisionControlFace::saveBinary(FileBuffer &destination)
     destination.add(isSelected());
 }
 
-void SubdivisionControlFace::saveToDXF(QStringList& /*strings*/)
+void SubdivisionControlFace::saveToDXF(QStringList& strings)
 {
     QString layername = getLayer()->getName();
     int colorindex = FindDXFColorIndex(getLayer()->getColor());
     if (numberOfPoints() == 4) {
         // create one polymesh for all childfaces
-        // TODO we need a SubdivisionGrid and FaceGrid object
+        ControlFaceGrid facedata;
+        facedata.setRows(1);
+        facedata.setCols(1);
+        facedata.setFace(0, 0, this);
+        PointGrid grid;
+        _owner->convertToGrid(facedata, grid);
+        if (grid.rows() > 0 && grid.cols() > 0) {
+            strings.push_back(QString("0\r\nPOLYLINE"));
+            strings.push_back(QString("8\r\n%1").arg(layername));
+            strings.push_back(QString("62\r\n%1").arg(colorindex));
+            strings.push_back(QString("66\r\n1"));
+            strings.push_back(QString("70\r\n16"));
+            strings.push_back(QString("71\r\n%1").arg(grid.cols()));
+            strings.push_back(QString("72\r\n%1").arg(grid.rows()));
+            for (size_t i=0; i<grid.rows(); i++) {
+                for (size_t j=0; j<grid.cols(); j++) {
+                    strings.push_back(QString("0\r\nVERTEX"));
+                    strings.push_back(QString("8\r\n%1").arg(layername));
+                    QVector3D p = grid.getPoint(i, j)->getCoordinate();
+                    strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
+                    strings.push_back(QString("20\r\n%1").arg(truncate(p.y(), 4)));
+                    strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                    strings.push_back(QString("70\r\n64")); // polygon mesh vertex
+                }
+            }
+            strings.push_back(QString("0\r\nSEQEND"));
+            if (getLayer()->isSymmetric() && getOwner()->drawMirror()) {
+                strings.push_back(QString("0\r\nPOLYLINE"));
+                strings.push_back(QString("8\r\n%1").arg(layername));
+                strings.push_back(QString("62\r\n%1").arg(colorindex));
+                strings.push_back(QString("66\r\n1"));
+                strings.push_back(QString("70\r\n16"));
+                strings.push_back(QString("71\r\n%1").arg(grid.cols()));
+                strings.push_back(QString("72\r\n%1").arg(grid.rows()));
+                for (size_t i=0; i<grid.rows(); i++) {
+                    for (size_t j=0; j<grid.cols(); j++) {
+                        strings.push_back(QString("0\r\nVERTEX"));
+                        strings.push_back(QString("8\r\n%1").arg(layername));
+                        QVector3D p = grid.getPoint(i, j)->getCoordinate();
+                        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
+                        strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
+                        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                        strings.push_back(QString("70\r\n64")); // polygon mesh vertex
+                    }
+                }
+                strings.push_back(QString("0\r\nSEQEND"));
+            }
+        }
+    } else {
+        // send all child faces as 3D faces
+        for (size_t j=0; j<_children.size(); j++) {
+            SubdivisionFace* face = _children[j];
+            strings.push_back(QString("0\r\n3DFACE"));
+            strings.push_back(QString("8\r\n%1").arg(layername));
+            strings.push_back(QString("62\r\n%1").arg(colorindex));
+            for (size_t k=0; k<face->numberOfPoints(); ++k) {
+                QVector3D p = face->getPoint(k)->getCoordinate();
+                strings.push_back(QString("%1\r\n%2").arg(10+k).arg(truncate(p.x(), 4)));
+                strings.push_back(QString("%1\r\n%2").arg(20+k).arg(truncate(p.y(), 4)));
+                strings.push_back(QString("%1\r\n%2").arg(30+k).arg(truncate(p.z(), 4)));
+            }
+            if (face->numberOfPoints() == 3) {
+                QVector3D p = face->getPoint(2)->getCoordinate();
+                // 4th point is same as third
+                strings.push_back(QString("13\r\n%1").arg(truncate(p.x(), 4)));
+                strings.push_back(QString("23\r\n%1").arg(truncate(p.y(), 4)));
+                strings.push_back(QString("33\r\n%1").arg(truncate(p.z(), 4)));
+            }
+            if (getLayer()->isSymmetric() && getOwner()->drawMirror()) {
+                // send starboard side also
+                strings.push_back(QString("0\r\n3DFACE"));
+                strings.push_back(QString("8\r\n%1").arg(layername));
+                strings.push_back(QString("62\r\n%1").arg(colorindex));
+                for (size_t k=face->numberOfPoints(); k!=0; --k) {
+                    QVector3D p = face->getPoint(k-1)->getCoordinate();
+                    strings.push_back(QString("%1\r\n%2").arg(10+k).arg(truncate(p.x(), 4)));
+                    strings.push_back(QString("%1\r\n%2").arg(20+k).arg(truncate(-p.y(), 4)));
+                    strings.push_back(QString("%1\r\n%2").arg(30+k).arg(truncate(p.z(), 4)));
+                }
+                if (face->numberOfPoints() == 3) {
+                    QVector3D p = face->getPoint(0)->getCoordinate();
+                    // 4th point is same as third
+                    strings.push_back(QString("13\r\n%1").arg(truncate(p.x(), 4)));
+                    strings.push_back(QString("23\r\n%1").arg(truncate(-p.y(), 4)));
+                    strings.push_back(QString("33\r\n%1").arg(truncate(p.z(), 4)));
+                }
+            }
+        }
     }
 }
 

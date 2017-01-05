@@ -43,7 +43,8 @@ SOURCES += shipcadlib.cpp \
     preferences.cpp \
     controller.cpp \
     flowline.cpp \
-    backgroundimage.cpp
+    backgroundimage.cpp \
+    developedpatch.cpp
 
 HEADERS += shipcadlib.h \
     entity.h \
@@ -79,7 +80,8 @@ HEADERS += shipcadlib.h \
     pointervec.h \
     controller.h \
     pointgrid.h \
-    controlfacegrid.h
+    controlfacegrid.h \
+    developedpatch.h
 
 unix:!symbian {
     maemo5 {

@@ -567,7 +567,7 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
     lineshader->renderLines(vertices, _color);
 }
 
-void Spline::drawStarboard(Viewport& vp, LineShader* lineshader)
+void Spline::drawStarboard(Viewport& /*vp*/, LineShader* lineshader)
 {
     if (!_build)
         rebuild();

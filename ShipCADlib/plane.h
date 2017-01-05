@@ -89,6 +89,14 @@ public:
      * \return true if line and plane are parallel
      */
     bool intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplanar, QVector3D& intpt);
+
+    
+    /*! \brief get the mirror of a point about the plane
+     *
+     * \param pt point to mirror
+     * \return the mirrored point
+     */
+    QVector3D mirror(const QVector3D& pt);
     
 private:
 

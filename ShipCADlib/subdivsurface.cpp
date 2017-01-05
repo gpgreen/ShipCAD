@@ -2804,8 +2804,8 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionControlEdge *> &source,
         tmpedges.push_back(edge);
         while (source.size() > 0 && findmore) {
             findmore = false;
-            for (size_t i=1; i<=source.size(); ++i) {
-                SubdivisionControlEdge* edge2 = source[i-1];
+            for (size_t i=0; i<source.size(); ++i) {
+                SubdivisionControlEdge* edge2 = source[i];
                 // compare at start
                 edge = tmpedges.front();
                 if ((edge2->startPoint() == edge->startPoint())
@@ -2813,7 +2813,7 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionControlEdge *> &source,
                         || (edge2->endPoint() == edge->startPoint())
                         || (edge2->endPoint() == edge->endPoint())) {
                     tmpedges.insert(tmpedges.begin(), edge2);
-                    source.erase(source.begin()+i-1);
+                    source.erase(source.begin()+i);
                     findmore = true;
                     break;
                 }
@@ -2824,7 +2824,7 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionControlEdge *> &source,
                             || (edge2->endPoint() == edge->startPoint())
                             || (edge2->endPoint() == edge->endPoint())) {
                         tmpedges.push_back(edge2);
-                        source.erase(source.begin()+i-1);
+                        source.erase(source.begin()+i);
                         findmore = true;
                         break;
                     }
@@ -2834,6 +2834,55 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionControlEdge *> &source,
         if (tmpedges.size() > 0) {
             //sort all found edges in correct order
             vector<SubdivisionControlPoint*> tmppoints = sortEdges(tmpedges);
+            if (tmppoints.size() > 0)
+                sorted.push_back(tmppoints);
+        }
+    }
+}
+
+void SubdivisionSurface::isolateEdges(vector<SubdivisionEdge *> &source,
+                                      vector<vector<SubdivisionPoint *> > &sorted)
+{
+    // try to isolate individual (closed) sets of edges
+    vector<SubdivisionEdge*> tmpedges;
+    while (source.size() > 0) {
+        SubdivisionEdge* edge = source[0];
+        source.erase(source.begin());
+        bool findmore = true;
+        tmpedges.clear();
+        tmpedges.push_back(edge);
+        while (source.size() > 0 && findmore) {
+            findmore = false;
+            for (size_t i=0; i<source.size(); ++i) {
+                SubdivisionEdge* edge2 = source[i];
+                // compare at start
+                edge = tmpedges.front();
+                if ((edge2->startPoint() == edge->startPoint())
+                        || (edge2->startPoint() == edge->endPoint())
+                        || (edge2->endPoint() == edge->startPoint())
+                        || (edge2->endPoint() == edge->endPoint())) {
+                    tmpedges.insert(tmpedges.begin(), edge2);
+                    source.erase(source.begin()+i);
+                    findmore = true;
+                    break;
+                }
+                else {
+                    edge = tmpedges.back();
+                    if ((edge2->startPoint() == edge->startPoint())
+                            || (edge2->startPoint() == edge->endPoint())
+                            || (edge2->endPoint() == edge->startPoint())
+                            || (edge2->endPoint() == edge->endPoint())) {
+                        tmpedges.push_back(edge2);
+                        source.erase(source.begin()+i);
+                        findmore = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (tmpedges.size() > 0) {
+            //sort all found edges in correct order
+            vector<SubdivisionPoint*> tmppoints = sortEdges(true, tmpedges);
             if (tmppoints.size() > 0)
                 sorted.push_back(tmppoints);
         }

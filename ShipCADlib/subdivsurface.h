@@ -150,6 +150,8 @@ public:
     SubdivisionEdge* getEdge(size_t index);
     SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
     void deleteEdge(SubdivisionEdge* edge);
+    void isolateEdges(std::vector<SubdivisionEdge*>& input,
+                      std::vector<std::vector<SubdivisionPoint*> >& sorted);
 
     // SubdivisionControlEdge
     size_t numberOfControlEdges() {return _control_edges.size();}

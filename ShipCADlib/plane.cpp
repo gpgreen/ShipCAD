@@ -150,4 +150,11 @@ bool Plane::intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplana
     return parallel;
 }
 
+QVector3D Plane::mirror(const QVector3D& pt)
+{
+    QVector3D p2 = projectPointOnPlane(pt);
+    QVector3D result = pt + 2*(p2 - pt);
+    return result;
+}
+
     

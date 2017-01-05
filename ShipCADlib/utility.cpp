@@ -506,3 +506,12 @@ bool ShipCAD::FuzzyCompare(float val1, float val2, float error)
 {
     return fabs(val1 - val2) < error;
 }
+
+double ShipCAD::Sign(double val)
+{
+    if (val < 0.0)
+        return -1.0;
+    else if (val > 0.0)
+        return 1.0;
+    return 0.0;
+}

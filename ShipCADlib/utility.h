@@ -294,6 +294,13 @@ namespace ShipCAD {
      * \return true if values are sufficiently equal
      */
     bool FuzzyCompare(float val1, float val2, float error);
+
+    /*! \brief get the sign of a floating point number
+     *
+     * \param val value to compute sign of
+     * \return -1, 0, 1
+     */
+    double Sign(double val);
 };
 
 #endif

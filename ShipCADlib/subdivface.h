@@ -198,6 +198,9 @@ protected:
     std::vector<SubdivisionPoint*> _points; /**< points belonging to this face */
 };
 
+typedef std::vector<SubdivisionFace*>::iterator subdivface_iter;
+typedef std::vector<SubdivisionFace*>::const_iterator const_subdivface_iter;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 class SubdivisionControlFace : public SubdivisionFace
@@ -337,6 +340,9 @@ protected:
     std::vector<SubdivisionEdge*> _control_edges;   /**< control edges (may be of SubdivisionEdge type if this face has been subdivided */
 };
 
+typedef std::vector<SubdivisionControlFace*>::iterator subdivctlface_iter;
+typedef std::vector<SubdivisionControlFace*>::const_iterator const_subdivctlface_iter;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */

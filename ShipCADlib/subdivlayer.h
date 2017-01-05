@@ -38,6 +38,7 @@
 #include <QVector3D>
 
 #include "subdivbase.h"
+#include "pointervec.h"
 
 namespace ShipCAD {
 
@@ -46,7 +47,8 @@ namespace ShipCAD {
 class SubdivisionControlFace;
 class Viewport;
 class FileBuffer;
-
+class DevelopedPatch;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 struct LayerProperties
@@ -84,7 +86,7 @@ public:
     void moveUp();
 
     void extents(QVector3D& min, QVector3D& max);
-    //void unroll();
+    void unroll(PointerVector<DevelopedPatch>& destination);
     LayerProperties getSurfaceProperties();
 
     // getters/setters
@@ -142,7 +144,11 @@ protected:
                          const QVector3D& p2,
                          const QVector3D& p3,
                          LayerProperties& props);
-
+    // used in unroll
+    void findAttachedFaces(std::vector<SubdivisionControlFace*>& list,
+                           SubdivisionControlFace* face,
+                           std::vector<SubdivisionControlFace*>& todo);
+    
 protected:
 
     size_t _layerid;
@@ -159,6 +165,9 @@ protected:
     unsigned char _alphablend;
     std::vector<SubdivisionControlFace*> _patches;
 };
+
+typedef std::vector<SubdivisionLayer*>::iterator subdivlayer_iter;
+typedef std::vector<SubdivisionLayer*>::const_iterator const_subdivlayer_iter;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

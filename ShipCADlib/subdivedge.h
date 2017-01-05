@@ -107,6 +107,9 @@ protected:
     SubdivisionControlCurve* _curve;
 };
 
+typedef std::vector<SubdivisionEdge*>::iterator subdivedge_iter;
+typedef std::vector<SubdivisionEdge*>::const_iterator const_subdivedge_iter;
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 class SubdivisionControlEdge : public SubdivisionEdge
@@ -153,6 +156,9 @@ protected:
     bool _selected;
     bool _visible;
 };
+
+typedef std::vector<SubdivisionControlEdge*>::iterator subdivctledge_iter;
+typedef std::vector<SubdivisionControlEdge*>::const_iterator const_subdivctledge_iter;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

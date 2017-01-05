@@ -41,6 +41,7 @@
 #include "viewport.h"
 #include "controlfacegrid.h"
 #include "pointgrid.h"
+#include "developedpatch.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -423,6 +424,75 @@ void SubdivisionLayer::extents(QVector3D& min, QVector3D& max)
                 MinMax(p, min, max);
             }
         }
+    }
+}
+
+void SubdivisionLayer::unroll(PointerVector<DevelopedPatch>& destination)
+{
+    vector<SubdivisionControlFace*> todo(_patches.size());
+    vector<vector<SubdivisionControlFace*> > done;
+    copy(_patches.begin(), _patches.end(), todo.end());
+
+    while (todo.size() > 0) {
+        SubdivisionControlFace* face = todo.back();
+        todo.pop_back();
+        vector<SubdivisionControlFace*> current;
+        current.push_back(face);
+        findAttachedFaces(current, face, todo);
+        done.push_back(current);
+    }
+    // unroll each separate surface area
+    for (size_t i=0; i<done.size(); i++) {
+        vector<SubdivisionControlFace*>& current = done[i];
+        if (current.size() > 0) {
+            DevelopedPatch* patch = new DevelopedPatch(this);
+            patch->unroll(current);
+            QString str;
+            if (done.size() == 1)
+                str = getName();
+            else
+                str = QString("%1 %2 %3").arg(getName()).arg("Part").arg(i+1);
+            patch->setName(str);
+            destination.add(patch);
+            if (!patch->isMirror() && isSymmetric()) {
+                QString nm(str);
+                nm += " (SB)";
+                patch->setName(nm);
+                DevelopedPatch* copy = new DevelopedPatch(this);
+                QString nm1(str);
+                nm1 += " (P)";
+                copy->setName(nm1);
+                destination.add(copy);
+            }
+        }
+    }
+}
+
+// FreeGeometry.pas:9456
+void SubdivisionLayer::findAttachedFaces(vector<SubdivisionControlFace*>& list,
+                                         SubdivisionControlFace* face,
+                                         vector<SubdivisionControlFace*>& todo)
+{
+    SubdivisionPoint* p1 = face->getPoint(face->numberOfPoints() - 1);
+    for (size_t i=0; i<face->numberOfPoints(); i++) {
+        SubdivisionPoint* p2 = face->getPoint(i);
+        SubdivisionEdge* edge = face->getOwner()->edgeExists(p1, p2);
+        if (edge != 0) {
+            for (size_t j=0; j<edge->numberOfFaces(); j++) {
+                if (edge->getFace(j) != face) {
+                    vector<SubdivisionControlFace*>::iterator index = find(
+                        todo.begin(), todo.end(), edge->getFace(j));
+                    if (index != todo.end()) {
+                        SubdivisionControlFace* cface =
+                            dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
+                        list.push_back(cface);
+                        todo.erase(index);
+                        findAttachedFaces(list, cface, todo);
+                    }
+                }
+            }
+        }
+        p1 = p2;
     }
 }
 

@@ -695,9 +695,7 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
     size_t rows, cols;
     int errind;
     
-    vector<SubdivisionControlFace*> checkfaces(ctrlfaces.size());
-    for (size_t i=0; i<ctrlfaces.size(); i++)
-        checkfaces.push_back(ctrlfaces[i]);
+    vector<SubdivisionControlFace*> checkfaces(ctrlfaces.begin(), ctrlfaces.end());
     while (ctrlfaces.size() > 0) {
         // find a corner face
         SubdivisionControlFace* face = findCornerFace(ctrlfaces);

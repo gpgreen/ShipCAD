@@ -51,12 +51,17 @@ class SubdivisionPoint;
     
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief class to store SubdivisionPoint to unrolled point mapping
+ */
 struct PatchPoints
 {
     QVector2D pt2D;
     SubdivisionPoint* pt;
     bool processed;
 };
+
+typedef std::vector<PatchPoints>::iterator patchpt_iter;
+typedef std::vector<PatchPoints>::const_iterator const_patchpt_iter;
 
 enum PolygonOrientation {poCCW, poCW};
     
@@ -185,11 +190,15 @@ protected:
                                  const QVector2D& p1, const QVector2D& p2);
     void unroll2D(SubdivisionFace* face, bool& firstface, bool& error,
                   PolygonOrientation& orientation);
-    void processTriangle(SubdivisionPoint* p1, SubdivisionPoint* p2, SubdivisionPoint* p3,
-                         std::vector<PatchPoints>::iterator& ind1,
-                         std::vector<PatchPoints>::iterator& ind2,
-                         std::vector<PatchPoints>::iterator& ind3,
-                         bool& first, bool& error, PolygonOrientation& orientation);
+    void processTriangle(SubdivisionPoint* p1,
+                         SubdivisionPoint* p2,
+                         SubdivisionPoint* p3,
+                         patchpt_iter& ind1,
+                         patchpt_iter& ind2,
+                         patchpt_iter& ind3,
+                         bool& first,
+                         bool& error,
+                         PolygonOrientation& orientation);
     double triangleArea(const QVector2D& p1, const QVector2D& p2, const QVector2D& p3);
     void processFaces(SubdivisionFace* seedface, double& maxerror,
                       std::vector<SubdivisionFace*>::iterator& error_index,

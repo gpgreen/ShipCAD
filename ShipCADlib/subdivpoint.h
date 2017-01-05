@@ -193,6 +193,9 @@ protected:
     vertex_type_t _vtype;					/**< vertex type of this point */
 };
 
+typedef std::vector<SubdivisionPoint*>::iterator subdivpt_iter;
+typedef std::vector<SubdivisionPoint*>::const_iterator const_subdivpt_iter;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 	/*! \brief Control point
@@ -257,6 +260,9 @@ protected:
 
     bool _locked;				/**< whether point is locked */
 };
+    
+typedef std::vector<SubdivisionControlPoint*>::iterator subdivctlpt_iter;
+typedef std::vector<SubdivisionControlPoint*>::const_iterator const_subdivctlpt_iter;
     
 //////////////////////////////////////////////////////////////////////////////////////
 

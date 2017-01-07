@@ -66,7 +66,7 @@ void DevelopedPatch::clear()
     _corners.clear();
     _boundaryEdges.clear();
     _edgeErrors.clear();
-    _rotation = 0.0;
+    setRotation(0.0);
     _mirrorPlane = Plane();
     _min2D = ZERO2;
     _max2D = ZERO2;
@@ -94,8 +94,9 @@ void DevelopedPatch::clear()
     
     _maxAreaError = 0.0;
     _totalAreaError = 0.0;
-    _cos = 0.0;
-    _sin = 0.0;
+    // these are set in setRotation
+    //_cos = 0.0;
+    //_sin = 0.0;
 }
 
 void DevelopedPatch::extents(QVector3D& min, QVector3D& max)
@@ -155,7 +156,7 @@ void DevelopedPatch::setMirrorOnScreen(bool set)
         float val = _min2D.y();
         _min2D.setY(-_max2D.y());
         _max2D.setY(-val);
-        _rotation = -_rotation;
+        setRotation(-_rotation);
     }
 }
 
@@ -501,12 +502,10 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
         }
     }
 
-    // Find the seed face, which is characterized by the face that it
+    // Find all seed faces, which is characterized by the face that it
     // has one cornerpoint with (possibly) multiple faces, but only 1
     // face is present in the list of faces to be unrolled.
     vector<SubdivisionFace*> seedfaces;
-    SubdivisionFace* seedface = 0;
-    double seedarea = 0.0;
     for (size_t i=0; i<_points.size(); i++) {
         PatchPoints& pp = _points[i];
         int n = 0;
@@ -519,11 +518,6 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
             for (size_t k=0; k<pp.pt->numberOfFaces(); k++) {
                 subdivface_iter idx = find(faces.begin(), faces.end(), pp.pt->getFace(k));
                 if (idx != faces.end()) {
-                    double area = pp.pt->getFace(k)->getArea();
-                    if (area > seedarea || seedface == 0) {
-                        seedface = pp.pt->getFace(k);
-                        seedarea = area;
-                    }
                     seedfaces.push_back(pp.pt->getFace(k));
                 }
             }
@@ -532,8 +526,10 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
 
     // if NO seedfaces could be found (which should not occur) then
     // pick a random one (the one with the largest area)
-    double area;
     if (seedfaces.size() == 0) {
+        double area;
+        double seedarea = 0.0;
+        SubdivisionFace* seedface = 0;
         for (size_t i=0; i<faces.size(); i++) {
             SubdivisionFace* face = faces[i];
             area = face->getArea();
@@ -548,11 +544,11 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
 
     // sort seedfaces
     for (size_t i=0; i<seedfaces.size(); i++) {
-        seedface = seedfaces[i];
-        seedarea = seedface->getArea();
+        SubdivisionFace* seedface = seedfaces[i];
+        double seedarea = seedface->getArea();
         for (size_t j=1; j<seedfaces.size(); j++) {
             SubdivisionFace* child = seedfaces[j];
-            area = child->getArea();
+            double area = child->getArea();
             if (area < seedarea) {
                 swap(seedfaces[i], seedfaces[j]);
                 seedarea = area;
@@ -570,8 +566,7 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
         // Keep trying to develop the faces until no error has occured
         // and the max. error<1e-7 and the number of iterations<=25
         while (i != seedfaces.size()) {
-            seedface = seedfaces[i];
-            processFaces(seedface, error, error_index, faces);
+            processFaces(seedfaces[i], error, error_index, faces);
             ++_numIterations;
             if (error_index != _donelist.end() && seedfaces.size() < 25) {
                 // Add faces where an error occured as new seedfaces, these
@@ -590,8 +585,7 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
 
         // restore the best development
         if (bestindex < seedfaces.size()) {
-            seedface = seedfaces[bestindex];
-            processFaces(seedface, error, error_index, faces);
+            processFaces(seedfaces[bestindex], error, error_index, faces);
         }
 
         // assemble all boundaryedges
@@ -634,7 +628,7 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
         QVector3D min;
         QVector3D max;
         for (int i=0; i<=180; i++) {
-            _rotation = i / 2;
+            setRotation(i / 2.0);
             extents(min, max);
             area = (max.x() - min.x()) * (max.y() - min.y());
             if (i == 0 || area < optarea) {
@@ -642,10 +636,10 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
                 optangle = _rotation;
             }
         }
-        _rotation = optangle;
+        setRotation(optangle);
         extents(min, max);
         if ((max.x() - min.x()) < (max.y() - min.y()))
-            _rotation -= 90;
+            setRotation(_rotation - 90);
         if (getOwner()->isSymmetric()) {
             // now check if the surface has one of its sides on the centerplane
             _mirror = false;

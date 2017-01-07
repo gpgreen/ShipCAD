@@ -76,8 +76,6 @@ public:
     explicit DevelopedPatch(SubdivisionLayer* layer);
     virtual ~DevelopedPatch() {clear();}
 
-    void assign(DevelopedPatch* org, bool mirror);
-    
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
     virtual void draw(Viewport& vp, LineShader* lineshader);
@@ -190,15 +188,8 @@ protected:
                                  const QVector2D& p1, const QVector2D& p2);
     void unroll2D(SubdivisionFace* face, bool& firstface, bool& error,
                   PolygonOrientation& orientation);
-    void processTriangle(SubdivisionPoint* p1,
-                         SubdivisionPoint* p2,
-                         SubdivisionPoint* p3,
-                         patchpt_iter& ind1,
-                         patchpt_iter& ind2,
-                         patchpt_iter& ind3,
-                         bool& first,
-                         bool& error,
-                         PolygonOrientation& orientation);
+    void processTriangle(patchpt_iter ind1, patchpt_iter ind2, patchpt_iter ind3,
+                         bool& first, bool& error, PolygonOrientation& orientation);
     double triangleArea(const QVector2D& p1, const QVector2D& p2, const QVector2D& p3);
     void processFaces(SubdivisionFace* seedface, double& maxerror,
                       std::vector<SubdivisionFace*>::iterator& error_index,

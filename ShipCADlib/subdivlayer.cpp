@@ -429,9 +429,8 @@ void SubdivisionLayer::extents(QVector3D& min, QVector3D& max)
 
 void SubdivisionLayer::unroll(PointerVector<DevelopedPatch>& destination)
 {
-    vector<SubdivisionControlFace*> todo(_patches.size());
+    vector<SubdivisionControlFace*> todo(_patches.begin(), _patches.end());
     vector<vector<SubdivisionControlFace*> > done;
-    copy(_patches.begin(), _patches.end(), todo.end());
 
     while (todo.size() > 0) {
         SubdivisionControlFace* face = todo.back();

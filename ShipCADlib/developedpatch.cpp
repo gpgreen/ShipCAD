@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -109,7 +109,7 @@ void DevelopedPatch::extents(QVector3D& min, QVector3D& max)
         max.setZ(0.0);
     } else {
         for (size_t i=0; i<_points.size(); i++) {
-            QVector3D p = _points[i].pt->getCoordinate();
+            QVector3D p = getPoint(i);
             if (i == 0) {
                 min = p;
                 max = p;
@@ -198,16 +198,22 @@ struct PatchIntersection
 };
 
 // predicate class to find SubdivisionPoint in PatchPoints vector
-struct ExistPointPred 
+struct PatchPointPred
 {
-    ShipCAD::SubdivisionPoint* _querypt;
-    bool operator()(const ShipCAD::PatchPoints& val)
-        {
-            return val.pt == _querypt;
-        }
-    ExistPointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(querypt) {}
+    ShipCAD::SubdivisionPoint* querypt;
+    bool operator()(const ShipCAD::PatchPoints& val) {
+        return (val.pt == querypt);
+    }
+    explicit PatchPointPred (ShipCAD::SubdivisionPoint* pt) : querypt(pt) {}
 };
-    
+
+// function to find a point in a vector
+patchpt_iter find_point(patchpt_iter start, patchpt_iter end, SubdivisionPoint* pt)
+{
+    PatchPointPred pred1(pt);
+    return find_if(start, end, pred1);
+}
+
 // FreeGeometry.pas:5952
 void DevelopedPatch::intersectPlane(Plane& plane, QColor color)
 {
@@ -216,7 +222,7 @@ void DevelopedPatch::intersectPlane(Plane& plane, QColor color)
         SubdivisionFace* face = _donelist[j];
         vector<PatchIntersection> intarray;
         SubdivisionPoint* p1 = face->getPoint(face->numberOfPoints()-1);
-        patchpt_iter index1 = find_if(_points.begin(), _points.end(), ExistPointPred(p1));
+        patchpt_iter index1 = find_point(_points.begin(), _points.end(), p1);
         patchpt_iter index2 = _points.begin();
         float side1 = plane.distance(p1->getCoordinate());
         for (size_t k=0; k<face->numberOfPoints(); k++) {
@@ -227,7 +233,7 @@ void DevelopedPatch::intersectPlane(Plane& plane, QColor color)
                 // add the edge to the list
                 float parameter = -side1 / (side2 - side1);
                 QVector2D pt1 = (*index1).pt2D;
-                index2 = find_if(_points.begin(), _points.end(), ExistPointPred(p2));
+                index2 = find_point(_points.begin(), _points.end(), p2);
                 QVector2D tmp = pt1 + parameter * ((*index2).pt2D - pt1);
                 QVector3D output(tmp.x(), tmp.y(), 0.0);
                 PatchIntersection intsect;
@@ -243,7 +249,7 @@ void DevelopedPatch::intersectPlane(Plane& plane, QColor color)
                 if (fabs(side1) <= 1e-5 && fabs(side2) <= 1e-5) {
                 } else if (fabs(side2) < 1e-5) {
                     PatchIntersection intsect;
-                    index2 = find_if(_points.begin(), _points.end(), ExistPointPred(p2));
+                    index2 = find_point(_points.begin(), _points.end(), p2);
                     QVector2D pt = (*index2).pt2D;
                     intsect.point.setX(pt.x());
                     intsect.point.setY(pt.y());
@@ -343,8 +349,8 @@ void DevelopedPatch::saveToDXF(QStringList& strings)
         strings.push_back(QString("62\r\n%1").arg(col));
         strings.push_back(QString("66\r\n1"));
         for (size_t j=0; j<src.size(); j++) {
-            SubdivisionPoint* p = src[j];
-            QVector3D p3d = p->getCoordinate();
+            patchpt_iter index = find_point(_points.begin(), _points.end(), src[j]);
+            QVector3D p3d = getPoint(index - _points.begin());
             strings.push_back(QString("0\r\nVERTEX"));
             strings.push_back(QString("8\r\n%1").arg(layername));
             strings.push_back(QString("10\r\n%1").arg(truncate(p3d.x(), 4)));
@@ -357,10 +363,8 @@ void DevelopedPatch::saveToDXF(QStringList& strings)
             strings.push_back(QString("62\r\n%1").arg(col));
             strings.push_back(QString("66\r\n1"));
             for (size_t j=0; j<src.size(); j++) {
-                SubdivisionPoint* p = src[j];
-                patchpt_iter index1 = find_if(_points.begin(), _points.end(),
-                                              ExistPointPred(p));
-                QVector3D p3d = getMirrorPoint(index1 - _points.begin());
+                patchpt_iter index = find_point(_points.begin(), _points.end(), src[j]);
+                QVector3D p3d = getMirrorPoint(index - _points.begin());
                 strings.push_back(QString("0\r\nVERTEX"));
                 strings.push_back(QString("8\r\n%1").arg(layername));
                 strings.push_back(QString("10\r\n%1").arg(truncate(p3d.x(), 4)));
@@ -427,8 +431,8 @@ void DevelopedPatch::saveToTextFile(QStringList& strings)
     for (size_t i=0; i<dest.size(); i++) {
         vector<SubdivisionPoint*>& src = dest[i];
         for (size_t j=0; j<src.size(); j++) {
-            SubdivisionPoint* p = src[j];
-            QVector3D p3d = p->getCoordinate();
+            patchpt_iter index = find_point(_points.begin(), _points.end(), src[j]);
+            QVector3D p3d = getPoint(index - _points.begin());
             if (first) {
                 min = p3d;
                 max = min;
@@ -436,10 +440,29 @@ void DevelopedPatch::saveToTextFile(QStringList& strings)
             } else
                 MinMax(p3d, min, max);
             if (_mirror) {
-                patchpt_iter index1 = find_if(_points.begin(), _points.end(),
-                                              ExistPointPred(p));
-                p3d = getMirrorPoint(index1 - _points.begin());
+                p3d = getMirrorPoint(index - _points.begin());
                 MinMax(p3d, min, max);
+            }
+        }
+    }
+
+    for (size_t i=0; i<dest.size(); i++) {
+        if (i > 0)
+            strings.push_back("");
+        vector<SubdivisionPoint*>& src = dest[i];
+        for (size_t j=0; j<src.size(); j++) {
+            patchpt_iter index = find_point(_points.begin(), _points.end(), src[j]);
+            QVector3D p3d = getPoint(index - _points.begin());
+            p3d = p3d - min;
+            strings.push_back(QString("%1 %2 %3").arg(p3d.x(),7,'g',3).arg(p3d.y(),7,'g',3).arg(p3d.z(),7,'g',3));
+        }
+        if (_mirror) {
+            strings.push_back("");
+            for (size_t j=0; j<src.size(); j++) {
+                patchpt_iter index = find_point(_points.begin(), _points.end(), src[j]);
+                QVector3D p3d = getMirrorPoint(index - _points.begin());
+                p3d = p3d - min;
+                strings.push_back(QString("%1 %2 %3").arg(p3d.x(),7,'g',3).arg(p3d.y(),7,'g',3).arg(p3d.z(),7,'g',3));
             }
         }
     }
@@ -453,15 +476,14 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
     for (size_t k=0; k<controlfaces.size(); k++) {
         SubdivisionControlFace* ctrlface = controlfaces[k];
         // copy all the ctrlface child faces
-        copy(ctrlface->childrenBegin(), ctrlface->childrenEnd(), faces.end());
+        faces.insert(faces.end(), ctrlface->childrenBegin(), ctrlface->childrenEnd());
         for (size_t i=0; i<ctrlface->numberOfChildren(); i++) {
             SubdivisionFace* child = ctrlface->getChild(i);
             SubdivisionPoint* p1 = child->getPoint(child->numberOfPoints()-1);
             for (size_t j=0; j<child->numberOfPoints(); j++) {
                 SubdivisionPoint* p2 = child->getPoint(j);
                 // add this point
-                patchpt_iter idx = find_if(_points.begin(), _points.end(),
-                                           ExistPointPred(p1));
+                patchpt_iter idx = find_point(_points.begin(), _points.end(), p2);
                 if (idx == _points.end()) {
                     PatchPoints pp;
                     pp.pt = p2;
@@ -670,16 +692,14 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
                                 }
                             }
                             if (p1 != p2) {
-                                patchpt_iter idx = find_if(_points.begin(), _points.end(),
-                                                           ExistPointPred(p1));
+                                patchpt_iter idx = find_point(_points.begin(), _points.end(),
+                                                              p1);
                                 QVector3D p3d1((*idx).pt2D.x(), (*idx).pt2D.y(), 0.0);
-                                idx = find_if(_points.begin(), _points.end(),
-                                              ExistPointPred(p2));
+                                idx = find_point(_points.begin(), _points.end(), p2);
                                 QVector3D p3d2((*idx).pt2D.x(), (*idx).pt2D.y(), 0.0);
                                 for (size_t j=1; j<centerline.size(); j++) {
                                     SubdivisionPoint* p3 = centerline[j];
-                                    idx = find_if(_points.begin(), _points.end(),
-                                                  ExistPointPred(p3));
+                                    idx = find_point(_points.begin(), _points.end(), p3);
                                     QVector3D p3d3((*idx).pt2D.x(), (*idx).pt2D.y(), 0.0);
                                     double dist = DistancepointToLine(p3d1, p3d2, p3d3);
                                     if (dist > 1E-3) {
@@ -688,11 +708,9 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
                                     }
                                 }
                                 if (_mirror) {
-                                    idx = find_if(_points.begin(), _points.end(),
-                                                  ExistPointPred(p1));
+                                    idx = find_point(_points.begin(), _points.end(), p1);
                                     p3d1 = QVector3D((*idx).pt2D.x(), (*idx).pt2D.y(), 0.0);
-                                    idx = find_if(_points.begin(), _points.end(),
-                                                  ExistPointPred(p2));
+                                    idx = find_point(_points.begin(), _points.end(), p2);
                                     p3d2 = QVector3D((*idx).pt2D.x(), (*idx).pt2D.y(), 0.0);
                                     QVector3D p3d3(p3d2);
                                     p3d3.setZ(1.0);
@@ -841,9 +859,10 @@ void DevelopedPatch::unroll2D(SubdivisionFace* face, bool& firstface, bool& erro
     patchpt_iter index2;
     patchpt_iter index3;
     
-    vector<bool> indices(face->numberOfPoints());
+    vector<bool> indices;
+    indices.reserve(face->numberOfPoints());
     for (size_t i=0; i<face->numberOfPoints(); i++) {
-        index1 = find_if(_points.begin(), _points.end(), ExistPointPred(face->getPoint(i)));
+        index1 = find_point(_points.begin(), _points.end(), face->getPoint(i));
         indices.push_back((*index1).processed);
     }
     // find two successive calculated points
@@ -862,52 +881,44 @@ void DevelopedPatch::unroll2D(SubdivisionFace* face, bool& firstface, bool& erro
     if (s != face->numberOfPoints() && e != face->numberOfPoints()) {
         for (size_t i=2; i<face->numberOfPoints(); i++) {
             SubdivisionPoint* p1 = face->getPoint(s);
-            index1 = find_if(_points.begin(), _points.end(), ExistPointPred(p1));
+            index1 = find_point(_points.begin(), _points.end(), p1);
             e = (s + i - 1) % face->numberOfPoints();
             SubdivisionPoint* p2 = face->getPoint(e);
-            index2 = find_if(_points.begin(), _points.end(), ExistPointPred(p2));
+            index2 = find_point(_points.begin(), _points.end(), p2);
             e = (s + i) % face->numberOfPoints();
             SubdivisionPoint* p3 = face->getPoint(e);
-            index3 = find_if(_points.begin(), _points.end(), ExistPointPred(p3));
-            processTriangle(p1, p2, p3, index1, index2, index3,
-                            firstface, error, orientation);
+            index3 = find_point(_points.begin(), _points.end(), p3);
+            processTriangle(index1, index2, index3, firstface, error, orientation);
         }
     } else {
         for (size_t i=2; i<face->numberOfPoints(); i++) {
             SubdivisionPoint* p1 = face->getPoint(0);
-            index1 = find_if(_points.begin(), _points.end(), ExistPointPred(p1));
+            index1 = find_point(_points.begin(), _points.end(), p1);
             SubdivisionPoint* p2 = face->getPoint(i-1);
-            index2 = find_if(_points.begin(), _points.end(), ExistPointPred(p2));
+            index2 = find_point(_points.begin(), _points.end(), p2);
             SubdivisionPoint* p3 = face->getPoint(i);
-            index3 = find_if(_points.begin(), _points.end(), ExistPointPred(p3));
-            processTriangle(p1, p2, p3, index1, index2, index3,
-                            firstface, error, orientation);
+            index3 = find_point(_points.begin(), _points.end(), p3);
+            processTriangle(index1, index2, index3, firstface, error, orientation);
         }
     }
 }
 
 // FreeGeometry.pas:6416
-void DevelopedPatch::processTriangle(SubdivisionPoint* p1,
-                                     SubdivisionPoint* p2,
-                                     SubdivisionPoint* p3,
-                                     patchpt_iter& ind1,
-                                     patchpt_iter& ind2,
-                                     patchpt_iter& ind3,
-                                     bool& first,
-                                     bool& error,
+void DevelopedPatch::processTriangle(patchpt_iter ind1, patchpt_iter ind2, patchpt_iter ind3,
+                                     bool& first, bool& error,
                                      PolygonOrientation& orientation)
 {
-    double a = p1->getCoordinate().distanceToPoint(p2->getCoordinate());
-    double b = p2->getCoordinate().distanceToPoint(p3->getCoordinate());
-    double c = p3->getCoordinate().distanceToPoint(p1->getCoordinate());
+    double a = (*ind1).pt->getCoordinate().distanceToPoint((*ind2).pt->getCoordinate());
+    double b = (*ind2).pt->getCoordinate().distanceToPoint((*ind3).pt->getCoordinate());
+    double c = (*ind3).pt->getCoordinate().distanceToPoint((*ind1).pt->getCoordinate());
 
     QVector2D p1_2d, p2_2d, p3_2d;
 
     if (!(*ind1).processed && !(*ind2).processed && !(*ind3).processed) {
         // first face, calculate p1, p2, and p3
-        p1_2d.setX(p1->getCoordinate().x());
-        p2_2d.setY(p1->getCoordinate().y());
-        p2_2d = QVector2D(p1_2d);
+        p1_2d.setX((*ind1).pt->getCoordinate().x());
+        p1_2d.setY((*ind1).pt->getCoordinate().y());
+        p2_2d = p1_2d;
         p2_2d.setY(p2_2d.y() + a);
         (*ind1).processed = true;
         (*ind1).pt2D = p1_2d;
@@ -958,17 +969,15 @@ void DevelopedPatch::processFaces(SubdivisionFace* seedface, double& maxerror,
     _totalAreaError = 0.0;
     bool founderror = false;
     //error_index = _donelist.end();
-    _edgeErrors.reserve(_edges.size());
-    for (size_t i=0; i<_edges.size(); i++)
-        _edgeErrors.push_back(0.0);
+    _edgeErrors = vector<double>(_edges.size(), 0.0);
     for (size_t i=0; i<_points.size(); i++) {
         _points[i].processed = false;
         _points[i].pt2D = ZERO2;
     }
     vector<SubdivisionFace*> todo(faces.begin(), faces.end());
     _donelist.clear();
-    bool temp;
-    PolygonOrientation orientation;
+    bool temp = false;
+    PolygonOrientation orientation = poCCW;
     while (todo.size() > 0) {
         if (seedface == 0)
             // find a new seedface, this layer has multiple areas
@@ -978,13 +987,12 @@ void DevelopedPatch::processFaces(SubdivisionFace* seedface, double& maxerror,
         if (index != todo.end())
             todo.erase(index);
         bool firstface = true;
-        subdivface_iter idx = _donelist.begin();
-        while (idx != _donelist.end()) {
-            SubdivisionFace* face = *idx;
+        for (size_t i=0; i<_donelist.size(); i++) {
+            SubdivisionFace* face = _donelist[i];
             unroll2D(face, firstface, temp, orientation);
             if (temp && founderror) {
                 founderror = true;
-                error_index = idx;
+                error_index = _donelist.begin() + i;
             }
             SubdivisionPoint* p1 = face->getPoint(face->numberOfPoints()-1);
             for (size_t j=0; j<face->numberOfPoints(); j++) {
@@ -1002,7 +1010,6 @@ void DevelopedPatch::processFaces(SubdivisionFace* seedface, double& maxerror,
                 }
                 p1 = p2;
             }
-            idx++;
         }
         seedface = 0;
     }
@@ -1015,13 +1022,12 @@ void DevelopedPatch::processFaces(SubdivisionFace* seedface, double& maxerror,
         double _2Darea = 0.0;
         double _3Darea = face->getArea();
         // calculate 2D area
-        patchpt_iter index1 = find_if(_points.begin(), _points.end(),
-                                      ExistPointPred(face->getPoint(0)));
+        patchpt_iter index1 = find_point(_points.begin(), _points.end(), face->getPoint(0));
         for (size_t j=2; j<face->numberOfPoints(); j++) {
-            patchpt_iter index2 = find_if(_points.begin(), _points.end(),
-                                          ExistPointPred(face->getPoint(j-1)));
-            patchpt_iter index3 = find_if(_points.begin(), _points.end(),
-                                          ExistPointPred(face->getPoint(j)));
+            patchpt_iter index2 = find_point(_points.begin(), _points.end(),
+                                             face->getPoint(j-1));
+            patchpt_iter index3 = find_point(_points.begin(), _points.end(),
+                                             face->getPoint(j));
             _2Darea += triangleArea((*index1).pt2D, (*index2).pt2D, (*index3).pt2D);
         }
         double error = _2Darea - _3Darea;
@@ -1034,10 +1040,10 @@ void DevelopedPatch::processFaces(SubdivisionFace* seedface, double& maxerror,
     // calculate min/max errors of edges
     for (size_t i=0; i<_edges.size(); i++) {
         SubdivisionEdge* edge = _edges[i];
-        patchpt_iter index1 = find_if(_points.begin(), _points.end(),
-                                      ExistPointPred(edge->startPoint()));
-        patchpt_iter index2 = find_if(_points.begin(), _points.end(),
-                                      ExistPointPred(edge->endPoint()));
+        patchpt_iter index1 = find_point(_points.begin(), _points.end(),
+                                         edge->startPoint());
+        patchpt_iter index2 = find_point(_points.begin(), _points.end(),
+                                         edge->endPoint());
         if (index1 != _points.end() && index2 != _points.end()) {
             // original distance in 3D
             double L3D = edge->endPoint()->getCoordinate().distanceToPoint(

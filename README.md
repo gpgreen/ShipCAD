@@ -28,3 +28,5 @@ Preferences:
   resetColors, persistence
 BackgroundImage:
   updateData, updateViews
+DevelopedPatch
+  draw

@@ -630,7 +630,7 @@ void DevelopedPatch::unroll(std::vector<SubdivisionControlFace*> controlfaces)
         for (int i=0; i<=180; i++) {
             setRotation(i / 2.0);
             extents(min, max);
-            area = (max.x() - min.x()) * (max.y() - min.y());
+            double area = (max.x() - min.x()) * (max.y() - min.y());
             if (i == 0 || area < optarea) {
                 optarea = area;
                 optangle = _rotation;

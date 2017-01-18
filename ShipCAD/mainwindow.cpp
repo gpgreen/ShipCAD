@@ -28,6 +28,8 @@
  *#############################################################################################*/
 
 #include <iostream>
+#include <QFileDialog>
+#include <QSettings>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -37,6 +39,7 @@
 #include "shipcadmodel.h"
 #include "controller.h"
 #include "viewportcontainer.h"
+#include "utility.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -51,9 +54,14 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     createStatusBar();
     createRecentFilesMenu();
 
+    // connect mainwindow actions
+    connect(ui->actionFileNew, SIGNAL(triggered()), SLOT(newModel()));
+    connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openModelFile()));
+    connect(ui->actionSave, SIGNAL(triggered()), SLOT(saveModelFile()));
+    connect(ui->actionSave_As, SIGNAL(triggered()), SLOT(saveModelAsFile()));
+
     // connect controller signals
     connect(_controller, SIGNAL(updateUndoData()), SLOT(updateUndoData()));
-    connect(_controller, SIGNAL(changeRecentFiles()), SLOT(changeRecentFiles()));
     connect(_controller, SIGNAL(changedLayerData()), SLOT(changedLayerData()));
     connect(_controller, SIGNAL(changeActiveLayer()), SLOT(changeActiveLayer()));
     connect(_controller, SIGNAL(changedModel()), SLOT(modelChanged()));
@@ -65,10 +73,6 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
 
     // connect file actions
-    connect(ui->actionFileNew, SIGNAL(triggered()), _controller, SLOT(newModel()));
-    connect(ui->actionOpen, SIGNAL(triggered()), _controller, SLOT(loadFile()));
-    connect(ui->actionSave, SIGNAL(triggered()), _controller, SLOT(saveFile()));
-    connect(ui->actionSave_As, SIGNAL(triggered()), _controller, SLOT(saveAsFile()));
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));
     connect(ui->actionImportChines, SIGNAL(triggered()), _controller, SLOT(importChines()));
     connect(ui->actionImportFEF, SIGNAL(triggered()), _controller, SLOT(importFEF()));
@@ -332,39 +336,6 @@ void MainWindow::enableActions()
     cout << "enableActions" << endl;
 }
 
-// add the menu entry to the file menu, and create all the actions...
-void MainWindow::createRecentFilesMenu()
-{
-    _menu_recent_files = new QMenu(tr("Recent files"), this);
-    ui->menuFile->addMenu(_menu_recent_files);
-    for (int i=0; i<10; i++) {
-        QAction* action = new QAction(this);
-        _recent_file_actions.push_back(action);
-        action->setVisible(false);
-        _menu_recent_files->addAction(action);
-        connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
-    }
-    _menu_recent_files->setEnabled(false);
-}
-
-// update the recent files menu
-void MainWindow::changeRecentFiles()
-{
-    cout << "changeRecentFiles" << endl;
-    // the recent files menu
-    const QStringList& filelist = _controller->getRecentFiles();
-    if (filelist.size())
-        _menu_recent_files->setEnabled(true);
-    for (int i=0; i<filelist.size(); i++) {
-        QString text = tr("&%1 %2").arg(i+1).arg(filelist[i]);
-        _recent_file_actions[i]->setText(text);
-        _recent_file_actions[i]->setData(filelist[i]);
-        _recent_file_actions[i]->setVisible(true);
-    }
-    for (int i=filelist.size(); i<10; i++)
-        _recent_file_actions[i]->setVisible(false);
-}
-
 void MainWindow::openRecentFile()
 {
     cout << "openRecentFile" << endl;
@@ -372,6 +343,66 @@ void MainWindow::openRecentFile()
     if (action) {
         _controller->loadFile(action->data().toString());
     }
+}
+
+void MainWindow::newModel()
+{
+    ShipCADModel* model = _controller->getModel();
+    if (model != 0 && model->isFileChanged()) {
+        saveModelFile();
+    }
+    _controller->newModel();
+}
+
+void MainWindow::openModelFile()
+{
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/opendir")) {
+        lastdir = settings.value("file/opendir").toString();
+    }
+    // get the filename
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), lastdir);
+    if (filename.length() == 0)
+        return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    settings.setValue("file/opendir", filepath);
+    addRecentFiles(filename);
+    _controller->loadFile(filename);
+}
+
+void MainWindow::saveModelFile()
+{
+    QFileInfo f(_controller->getModel()->getFilename());
+    cout << "saveModelFile:" << f.absoluteFilePath().toStdString() << endl;
+    _controller->saveFile();
+    addRecentFiles(f.absoluteFilePath());
+    QSettings settings;
+    settings.setValue("file/savedir", f.absolutePath());
+}
+
+void MainWindow::saveModelAsFile()
+{
+    cout << "saveModelAsFile\n";
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/savedir")) {
+        lastdir = settings.value("file/savedir").toString();
+    }
+    // get the filename
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                                    lastdir,
+                                                    tr("freeship (*.fbm)"));
+    if (filename.length() == 0)
+        return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    _controller->saveFileAs(filename);
+    addRecentFiles(fi.absoluteFilePath());
+    settings.setValue("file/savedir", fi.absolutePath());
 }
 
 void MainWindow::updateUndoData()
@@ -483,3 +514,63 @@ void MainWindow::changeSelectedItems()
     }
     cout << "changeSelectedItems" << endl;
 }
+
+// add the menu entry to the file menu, and create all the actions...
+void MainWindow::createRecentFilesMenu()
+{
+    _menu_recent_files = new QMenu(tr("Recent files"), this);
+    ui->menuFile->addMenu(_menu_recent_files);
+    for (int i=0; i<10; i++) {
+        QAction* action = new QAction(this);
+        _recent_file_actions.push_back(action);
+        action->setVisible(false);
+        _menu_recent_files->addAction(action);
+        connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
+    }
+    _menu_recent_files->setEnabled(false);
+}
+
+// update the recent files menu
+void MainWindow::changeRecentFiles()
+{
+    cout << "changeRecentFiles" << endl;
+    // the recent files menu
+    const QStringList& filelist = getRecentFiles();
+    if (filelist.size())
+        _menu_recent_files->setEnabled(true);
+    for (int i=0; i<filelist.size(); i++) {
+        QString text = tr("&%1 %2").arg(i+1).arg(filelist[i]);
+        _recent_file_actions[i]->setText(text);
+        _recent_file_actions[i]->setData(filelist[i]);
+        _recent_file_actions[i]->setVisible(true);
+    }
+    for (int i=filelist.size(); i<10; i++)
+        _recent_file_actions[i]->setVisible(false);
+}
+
+const QStringList& MainWindow::getRecentFiles() const
+{
+	return _recent_files;
+}
+
+void MainWindow::addRecentFiles(const QString& filename)
+{
+	bool already_present = false;
+	QString basename(ChangeFileExt(filename, ""));
+    for (int i=0; i<_recent_files.size(); i++) {
+		if (QString::compare(basename, _recent_files[i], Qt::CaseInsensitive) == 0) {
+			already_present = true;
+			_recent_files.removeAt(i);
+			_recent_files.push_front(filename);
+			break;
+		}
+	}
+	if (!already_present) {
+		if (_recent_files.size() == 10) {
+			_recent_files.pop_back();
+		}
+		_recent_files.push_front(filename);
+	}
+    changeRecentFiles();
+}
+

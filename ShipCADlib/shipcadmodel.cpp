@@ -88,14 +88,15 @@ void ShipCADModel::clear()
 
 void ShipCADModel::setFilename(const QString& name)
 {
-    QString tmp;
-    if (name.length() == 0) {
+    QString tmp(name);
+    if (tmp.length() == 0) {
         tmp = ShipCADModel::tr("New model");
     }
     tmp = ChangeFileExt(tmp, kFileExtension);
     if (_filename != tmp) {
         _filename = tmp;
     }
+    _filename_set = true;
 }
 
 void ShipCADModel::buildValidFrameTable(bool close_at_deck)

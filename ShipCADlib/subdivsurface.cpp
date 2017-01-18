@@ -996,6 +996,7 @@ size_t SubdivisionSurface::indexOfPoint(SubdivisionPoint *pt)
                                                  pt);
     if (i != _points.end())
         return i - _points.begin();
+
     throw range_error("point is not in SubdivisionSurface");
 }
 

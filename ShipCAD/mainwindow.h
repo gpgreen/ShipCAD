@@ -79,6 +79,22 @@ private:
 
 private slots:
 
+    /*! \brief action for new model
+     */
+    void newModel();
+
+    /*! \brief action for open model
+     */
+    void openModelFile();
+
+    /*! \brief action for saving model file
+     */
+    void saveModelFile();
+
+    /*! \brief action for saving model file as new name
+     */
+    void saveModelAsFile();
+    
     /*! \brief new model loaded
      */
     void modelLoaded();
@@ -138,6 +154,14 @@ private slots:
      */
     void showControlPointDialog(bool show);
 
+    /*! \brief get the list of recent files
+     */
+    const QStringList& getRecentFiles() const;
+
+    /*! \brief add a filename to the list of recent files
+     */
+    void addRecentFiles(const QString& filename);
+
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
@@ -147,6 +171,7 @@ private:
     std::vector<std::pair<ShipCAD::ViewportContainer*, ShipCAD::Viewport*> > _viewports; /**< collection of ViewportContainer<->Viewport pairs */
     std::vector<QAction*> _recent_file_actions; /**< actions for each recent file */
     QMenu* _menu_recent_files; /**< the menu for recent files */
+    QStringList _recent_files; /**< the list of recent file names */
 };
 
 #endif // MAINWINDOW_H

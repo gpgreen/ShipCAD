@@ -68,13 +68,6 @@ public:
      */
     ShipCADModel* getModel()
         {return _model;}
-    /*! \brief get the list of recent files
-     */
-    const QStringList& getRecentFiles() const;
-
-    /*! \brief add a filename to the list of recent files
-     */
-    void addRecentFiles(const QString& filename);
 
     /*! \brief shoot a pick ray, change items to selected
      *
@@ -97,10 +90,6 @@ signals:
     /*! \brief signal when active layer changes
      */
 	void changeActiveLayer();
-
-    /*! \brief signal when list of recent files changes
-     */
-    void changeRecentFiles();
 
     /*! \brief signal when selection of items changes
      */
@@ -290,10 +279,6 @@ public slots:
 	 */
 	void importVRML();
 
-    /*! \brief import a FREE!Ship file
-	 */
-	void loadFile();
-
     /*! \brief load a FREE!Ship file by name
 	 */
 	void loadFile(const QString& filename);
@@ -302,9 +287,9 @@ public slots:
 	 */
 	void saveFile();
 
-    /*! \brief save a FREE!Ship file, asking for name
+    /*! \brief save a FREE!Ship file with given filename
 	 */
-	void saveAsFile();
+	void saveFileAs(const QString& filename);
 
     /*! \brief
 	 */
@@ -380,7 +365,7 @@ public slots:
 
     /*! \brief start a new model (with a predefined surface)
      */
-    bool newModel();
+    void newModel();
 
     /*! \brief Affine hullform transformation according to Lackenby
      */
@@ -558,7 +543,6 @@ private slots:
 
 private:
     ShipCADModel* _model; /**< the model this is controlling */
-    QStringList _recent_files; /**< the list of recent file names */
 };
 	
 //////////////////////////////////////////////////////////////////////////////////////

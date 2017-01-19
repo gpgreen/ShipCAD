@@ -50,63 +50,118 @@ class ProjectSettings : public QObject
 public:
 
     explicit ProjectSettings(ShipCADModel* owner);
-    ~ProjectSettings();
+    virtual ~ProjectSettings();
 
-    hydrostatic_coeff_t getHydrostaticCoefficients() {return _hydrostatic_coefficients;}
+    hydrostatic_coeff_t getHydrostaticCoefficients()
+        {return _hydrostatic_coefficients;}
 	void setHydrostaticCoefficients(hydrostatic_coeff_t coeff);
+
+    bool isDisableModelCheck() const
+        { return _disable_model_check; }
 	void setDisableModelCheck(bool val);
 
-    float getAppendageCoefficient() const {return _appendage_coefficient;}
+    float getAppendageCoefficient() const
+        {return _appendage_coefficient;}
 	void setAppendageCoefficient(float coeff);
 
-    float getBeam() const {return _beam;}
+    bool isMainParticularsSet() const
+        { return _main_particulars_has_been_set; }
+    
+    float getBeam() const
+        {return _beam;}
 	void setBeam(float beam);
 
-    float getDraft() const {return _draft;}
+    float getDraft() const
+        {return _draft;}
 	void setDraft(float draft);
 
-    float getLength() {return _length;}
+    float getLength()
+        {return _length;}
 	void setLength(float length);
 
     float getMainframeLocation() const;
     void setMainframeLocation(float loc);
+	void setUseDefaultMainframeLocation(bool use);
 
-    float getWaterDensity() const {return _water_density;}
+    float getWaterDensity() const
+        {return _water_density;}
 	void setWaterDensity(float val);
 
     /*! \brief get the Save Preview setting
      */
-    bool getSavePreview() const
+    bool isSavePreview() const
         {return _save_preview;}
     /*! \brief set the Save Preview setting
      */
     void setSavePreview(bool val);
-	void setStartDraft(float val);
-	void setTrim(float val);
-	void setEndDraft(float val);
-	void setDraftStep(float val);
-	void setUseDefaultMainframeLocation(bool use);
 
-    QString getName() const {return _name;}
+    bool useDisplacementIncrements() const
+        { return _use_displ_increments; }
+    void setUseDisplacementIncrements(bool set);
+
+    float getStartDraft() const
+        { return _start_draft; }
+	void setStartDraft(float val);
+
+    float getTrim() const
+        { return _trim; }
+	void setTrim(float val);
+
+    float getEndDraft() const
+        { return _end_draft; }
+	void setEndDraft(float val);
+
+    float getDraftStep() const
+        { return _draft_step; }
+	void setDraftStep(float val);
+
+    float getMinDisplacement() const
+        { return _min_displacement; }
+    void setMinDisplacement(float val);
+
+    float getMaxDisplacement() const
+        { return _max_displacement; }
+    void setMaxDisplacement(float val);
+
+    float getDisplacementInc() const
+        { return _displ_increment; }
+    void setDisplacementInc(float val);
+
+    bool isFreeTrim() const
+        { return _free_trim; }
+    void setFreeTrim(bool set);
+
+    float getFVCG() const
+        { return _fvcg; }
+    void setFVCG(float val);
+    
+    QString getName() const
+        {return _name;}
 	void setName(const QString& name);
 
-    QString getDesigner() const {return _designer;}
+    QString getDesigner() const
+        {return _designer;}
 	void setDesigner(const QString& designer);
 
-    QString getComment() const {return _comment;}
+    QString getComment() const
+        {return _comment;}
 	void setComment(const QString& comment);
 
-    QString getFileCreatedBy() const {return _file_created_by;}
+    QString getFileCreatedBy() const
+        {return _file_created_by;}
 	void setFileCreatedBy(const QString& createdby);
 
     bool isShadeUnderwaterShip() const 
         {return _shade_underwater_ship;}
     void setShadeUnderwaterShip(bool set);
-    bool getSimplifyIntersections() {return _simplify_intersections;}
+
+    bool isSimplifyIntersections() const
+        {return _simplify_intersections;}
 	void setSimplifyIntersections(bool set);
+
     QColor getUnderWaterColor() const
         { return _underwater_color;}
-	void setUnderWaterColor(QColor& col);
+	void setUnderWaterColor(QColor col);
 
     unit_type_t getUnits() const {return _units;}
 	void setUnits(unit_type_t unit);

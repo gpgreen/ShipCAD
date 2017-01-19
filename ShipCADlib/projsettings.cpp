@@ -223,6 +223,61 @@ void ProjectSettings::setShadeUnderwaterShip(bool set)
 	}
 }
 
+// TODO: does changing this invalidate something
+void ProjectSettings::setMinDisplacement(float val)
+{
+	if (fabs(val - _min_displacement) >= 1e-5) {
+		_min_displacement = val;
+		_owner->setFileChanged(true);
+	}
+}
+
+// TODO: does changing this invalidate something
+void ProjectSettings::setMaxDisplacement(float val)
+{
+	if (fabs(val - _max_displacement) >= 1e-5) {
+		_max_displacement = val;
+		_owner->setFileChanged(true);
+	}
+}
+
+// TODO: does changing this invalidate something
+void ProjectSettings::setUseDisplacementIncrements(bool set)
+{
+	if (_use_displ_increments != set) {
+		_use_displ_increments = set;
+		_owner->setFileChanged(true);
+	}
+}
+
+// TODO: does changing this invalidate something
+void ProjectSettings::setDisplacementInc(float val)
+{
+	if (fabs(val - _displ_increment) >= 1e-5) {
+		_displ_increment = val;
+		_owner->setFileChanged(true);
+	}
+}
+
+// TODO: does changing this invalidate something
+void ProjectSettings::setFreeTrim(bool set)
+{
+	if (_free_trim != set) {
+		_free_trim = set;
+		_owner->setFileChanged(true);
+	}
+}
+
+// TODO: does changing this invalidate something
+void ProjectSettings::setFVCG(float val)
+{
+	if (fabs(val - _fvcg) >= 1e-5) {
+		_fvcg = val;
+		_owner->setFileChanged(true);
+	}
+}
+
+
 void ProjectSettings::setSimplifyIntersections(bool set)
 {
 	if (_simplify_intersections != set) {
@@ -231,7 +286,7 @@ void ProjectSettings::setSimplifyIntersections(bool set)
 	}
 }
 
-void ProjectSettings::setUnderWaterColor(QColor& col)
+void ProjectSettings::setUnderWaterColor(QColor col)
 {
 	if (_underwater_color != col) {
 		_underwater_color = col;
@@ -289,11 +344,12 @@ void ProjectSettings::clear()
     _use_default_mainframe_location = true;
 	_mainframe_location = 0.0;
 	_disable_model_check = false;
-	_save_preview = true;
+	_save_preview = false;
 	delete _preview_img;
 	_preview_img = 0;
 	_hydrostatic_coefficients = fcActualData;
 	_simplify_intersections = true;
+    _use_displ_increments = true;
 	_start_draft = 0.0;
 	_end_draft = 1.0;
     _draft_step = 0.1f;
@@ -411,7 +467,7 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
         dest.add(_comment);
         dest.add(_file_created_by);
         if (_owner->getFileVersion() >= fv210) {
-            dest.add(static_cast<quint8>(_hydrostatic_coefficients));
+            dest.add(static_cast<quint32>(_hydrostatic_coefficients));
             dest.add(_save_preview);
             if (_save_preview) {
                 // save the jpg
@@ -424,17 +480,17 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
                 dest.add(_end_draft);
                 dest.add(_draft_step);
                 dest.add(_trim);
-                dest.add(_displacements.size());
+                dest.add(static_cast<quint32>(_displacements.size()));
                 for (size_t i=0; i<_displacements.size(); i++)
                     dest.add(_displacements[i]);
                 dest.add(_min_displacement);
                 dest.add(_max_displacement);
                 dest.add(_displ_increment);
                 dest.add(_use_displ_increments);
-                dest.add(_angles.size());
+                dest.add(static_cast<quint32>(_angles.size()));
                 for (size_t i=0; i<_angles.size(); i++)
                     dest.add(_angles[i]);
-                dest.add(_stab_trims.size());
+                dest.add(static_cast<quint32>(_stab_trims.size()));
                 for (size_t i=0; i<_stab_trims.size(); i++)
                     dest.add(_stab_trims[i]);
                 dest.add(_free_trim);

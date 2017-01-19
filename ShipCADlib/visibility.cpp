@@ -58,6 +58,7 @@ void Visibility::clear()
     _show_hydrostatic_data = true;
     _show_hydro_displacement = true;
     _show_hydro_lateral_area = true;
+    _show_hydro_sectional_areas = true;
     _show_hydro_metacentric_height = true;
     _show_hydro_lcf = true;
     _show_flowlines = true;
@@ -111,9 +112,9 @@ void Visibility::saveBinary(FileBuffer &dest)
     dest.add(_show_stations);
     dest.add(_show_buttocks);
     dest.add(_show_waterlines);
+    dest.add(_show_normals);
     dest.add(_show_grid);
     dest.add(_show_diagonals);
-    dest.add(_show_markers);
     dest.add(_show_markers);
     dest.add(_show_curvature);
     dest.add(_curvature_scale);
@@ -251,7 +252,7 @@ void Visibility::setShowDiagonals(bool show)
     }
 }
 
-void Visibility::setShowHydroData(bool show)
+void Visibility::setShowHydrostaticData(bool show)
 {
     if (show != _show_hydrostatic_data) {
         _show_hydrostatic_data = show;
@@ -266,4 +267,53 @@ void Visibility::setShowFlowlines(bool show)
         _owner->setFileChanged(true);
     }
 }
+
+void Visibility::setCursorIncrement(float inc)
+{
+    if (fabs(inc - _cursor_increment) > 1e-5) {
+        _cursor_increment = inc;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowHydrostaticDisplacement(bool show)
+{
+    if (show != _show_hydro_displacement) {
+        _show_hydro_displacement = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowHydrostaticLateralArea(bool show)
+{
+    if (show != _show_hydro_lateral_area) {
+        _show_hydro_lateral_area = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowHydrostaticSectionalAreas(bool show)
+{
+    if (show != _show_hydro_sectional_areas) {
+        _show_hydro_sectional_areas = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowHydrostaticMetacentricHeight(bool show)
+{
+    if (show != _show_hydro_metacentric_height) {
+        _show_hydro_metacentric_height = show;
+        _owner->setFileChanged(true);
+    }
+}
+
+void Visibility::setShowHydrostaticLCF(bool show)
+{
+    if (show != _show_hydro_lcf) {
+        _show_hydro_lcf = show;
+        _owner->setFileChanged(true);
+    }
+}
+
 

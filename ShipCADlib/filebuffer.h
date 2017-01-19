@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -64,8 +64,8 @@ public:
     void setVersion(version_t v);
 	
     // save/restore/reset
-    void loadFromFile(const QString& filename);
-    void saveToFile(const QString& filename);
+    void loadFromFile(QFile& file);
+    void saveToFile(QFile& file);
     void reset();
 
     // load/add
@@ -106,6 +106,7 @@ public:
 
     void load(QString& val);
     void add(const QString& val);
+    void add(const char* str);
 
     void load(Plane& val);
     void add(const Plane& val);

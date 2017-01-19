@@ -9,4 +9,6 @@ SUBDIRS = \
     spline \
     intersection \
     subdivsurface \
-    developedpatch
+    developedpatch \
+    projsettings \
+    visibility

@@ -571,8 +571,8 @@ void SubdivisionControlEdge::saveToStream(QStringList &strings)
 
 void SubdivisionControlEdge::saveBinary(FileBuffer& destination)
 {
-    destination.add(_owner->indexOfPoint(_points[0]));
-    destination.add(_owner->indexOfPoint(_points[1]));
+    destination.add(_owner->indexOfControlPoint(dynamic_cast<SubdivisionControlPoint*>(startPoint())));
+    destination.add(_owner->indexOfControlPoint(dynamic_cast<SubdivisionControlPoint*>(endPoint())));
     destination.add(isCrease());
     destination.add(isSelected());
 }

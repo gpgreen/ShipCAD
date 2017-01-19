@@ -269,7 +269,7 @@ void MainWindow::updateVisibilityActions()
     ui->actionShowButtocks->setChecked(vis.isShowButtocks());
     ui->actionShowWaterlines->setChecked(vis.isShowWaterlines());
     ui->actionShowDiagonals->setChecked(vis.isShowDiagonals());
-    ui->actionShowHydrostatic_features->setChecked(vis.isShowHydroData());
+    ui->actionShowHydrostatic_features->setChecked(vis.isShowHydrostaticData());
     ui->actionShowFlowlines->setChecked(vis.isShowFlowlines());
     ui->actionShowNormals->setChecked(vis.isShowNormals());
     ui->actionShowCurvature->setChecked(vis.isShowCurvature());

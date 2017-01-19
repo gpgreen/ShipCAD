@@ -355,7 +355,7 @@ void ShipCADModel::draw(Viewport& vp)
             for_each(_diagonals.begin(), _diagonals.end(), di);
         }
     }
-    if (vp.getViewportMode() == vmWireFrame && _vis.isShowHydroData()) {
+    if (vp.getViewportMode() == vmWireFrame && _vis.isShowHydrostaticData()) {
         // TODO
     }
     if (_vis.isShowFlowlines()) {
@@ -466,7 +466,7 @@ void ShipCADModel::saveBinary(FileBuffer& dest)
     dest.add("FREE!ship");
     dest.add(static_cast<quint8>(_file_version));
     dest.add(static_cast<quint32>(_precision));
-    _vis.saveBinary(dest);
+    _vis.saveBinary(dest);      // starting at offset hex 76 freeship and ours differ
     _settings.saveBinary(dest);
     _surface.saveBinary(dest);
     // save stations

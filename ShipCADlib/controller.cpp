@@ -123,7 +123,7 @@ void Controller::openBackgroundImage()
 UndoObject* Controller::createRedoObject()
 {
 	version_t version = _model->getFileVersion();
-	bool preview = _model->getProjectSettings().getSavePreview();
+    bool preview = _model->getProjectSettings().isSavePreview();
 	// temporarily set to the latest fileversion so no data will be lost
 	UndoObject* rd = new UndoObject(_model,
                                     _model->getFilename(),
@@ -335,8 +335,9 @@ void Controller::importVRML()
 
 void Controller::loadFile(const QString& filename)
 {
+    QFile loadfile(filename);
     FileBuffer source;
-    source.loadFromFile(filename);
+    source.loadFromFile(loadfile);
     _model->loadBinary(source);
     _model->getSurface()->clearSelection();
     // TODO clear selected flowlines
@@ -357,27 +358,33 @@ void Controller::saveFile()
         cout << "tmp:" << tmp.fileName().toStdString() << endl;
         if (tmp.exists())
             throw runtime_error("tmp file already exists");
-        FileBuffer dest;
-        dest.saveToFile(tmp.fileName());
-        _model->saveBinary(dest);
-        // remove backup if it exists
-        QFile backup(ChangeFileExt(filename, ".Bak"));
-        cout << "backup:" << backup.fileName().toStdString() << endl;
-        if (backup.exists() && !backup.remove())
-            throw runtime_error("unable to remove backup file");
-        cout << "removed backup\n";
-        // rename exising to .bak
-        QFile existing(filename);
-        cout << "existing:" << existing.fileName().toStdString() << endl;
-        if (existing.exists() && !existing.rename(backup.fileName()))
-            throw runtime_error("unable to rename original to backup file");
-        cout << "renamed existing to backup\n";
-        // rename saved tmp
-        if (tmp.rename(filename))
-            throw runtime_error("unable to rename temporary to original");
-        cout << "renamed tmp to original\n";
-        // all done with saving file
-        emit changedModel();
+        try {
+            FileBuffer dest;
+            _model->saveBinary(dest);
+            dest.saveToFile(tmp);
+            // remove backup if it exists
+            QFile backup(ChangeFileExt(filename, ".Bak"));
+            cout << "backup:" << backup.fileName().toStdString() << endl;
+            if (backup.exists() && !backup.remove())
+                throw runtime_error("unable to remove backup file");
+            cout << "removed backup\n";
+            // rename existing to .bak
+            QFile existing(filename);
+            cout << "existing:" << existing.fileName().toStdString() << endl;
+            if (existing.exists() && !existing.rename(backup.fileName()))
+                throw runtime_error("unable to rename original to backup file");
+            cout << "renamed existing to backup\n";
+            // rename saved tmp
+            if (!tmp.rename(filename))
+                throw runtime_error("unable to rename temporary to original");
+            cout << "renamed tmp to original\n";
+            // all done with saving file
+            emit changedModel();
+        } catch(...) {
+            if (tmp.exists())
+                tmp.remove();
+            throw;
+        }
     } else {
         throw runtime_error("no filename for save");
     }
@@ -884,8 +891,8 @@ void
 Controller::showHydroData(bool val)
 {
     Visibility& vis = _model->getVisibility();
-    if (vis.isShowHydroData() != val) {
-        vis.setShowHydroData(val);
+    if (vis.isShowHydrostaticData() != val) {
+        vis.setShowHydrostaticData(val);
 		emit onUpdateVisibilityInfo();
         cout << "show hydro features: " << (val ? 'y' : 'n') << endl;
     }

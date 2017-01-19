@@ -55,8 +55,14 @@ public:
     explicit Visibility(ShipCADModel* owner);
 	/*! \brief destructor
 	 */
-    ~Visibility() {}
+    virtual ~Visibility() {}
 
+    /*! \brief get cursor increment
+     *
+     * \return cursor increment
+     */
+    float getCursorInc() const
+        {return _cursor_increment;}
     void setCursorIncrement(float val);
 
     /*! \brief get curvature scale
@@ -219,13 +225,68 @@ public:
 	 *
 	 * \return true if hydrostatic data visible
 	 */
-	bool isShowHydroData() const
+	bool isShowHydrostaticData() const
 		{return _show_hydrostatic_data;}
     /*! \brief set visibility of Hydrostatic data
      *
      * \param show visibility of Hydrostatic data
      */
-    void setShowHydroData(bool show);
+    void setShowHydrostaticData(bool show);
+	/*! \brief show visibility of hydrostatic displacement
+	 *
+	 * \return true if hydrostatic displacement visible
+	 */
+	bool isShowHydrostaticDisplacement() const
+		{return _show_hydro_displacement;}
+    /*! \brief set visibility of Hydrostatic displacement
+     *
+     * \param show visibility of Hydrostatic displacement
+     */
+    void setShowHydrostaticDisplacement(bool show);
+	/*! \brief show visibility of hydrostatic lateral area
+	 *
+	 * \return true if hydrostatic lateral area visible
+	 */
+	bool isShowHydrostaticLateralArea() const
+		{return _show_hydro_lateral_area;}
+    /*! \brief set visibility of Hydrostatic lateral area
+     *
+     * \param show visibility of Hydrostatic lateral area
+     */
+    void setShowHydrostaticLateralArea(bool show);
+	/*! \brief show visibility of hydrostatic section areas
+	 *
+	 * \return true if hydrostatic section areas visible
+	 */
+	bool isShowHydrostaticSectionalAreas() const
+		{return _show_hydro_sectional_areas;}
+    /*! \brief set visibility of Hydrostatic section areas
+     *
+     * \param show visibility of Hydrostatic section areas
+     */
+    void setShowHydrostaticSectionalAreas(bool show);
+	/*! \brief show visibility of hydrostatic metacenter
+	 *
+	 * \return true if hydrostatic metacenter visible
+	 */
+	bool isShowHydrostaticMetacentricHeight() const
+		{return _show_hydro_metacentric_height;}
+    /*! \brief set visibility of Hydrostatic metacenter
+     *
+     * \param show visibility of Hydrostatic metacenter
+     */
+    void setShowHydrostaticMetacentricHeight(bool show);
+	/*! \brief show visibility of hydrostatic center of flotation
+	 *
+	 * \return true if hydrostatic center of flotation visible
+	 */
+	bool isShowHydrostaticLCF() const
+		{return _show_hydro_lcf;}
+    /*! \brief set visibility of Hydrostatic center of flotation
+     *
+     * \param show visibility of Hydrostatic center of flotation
+     */
+    void setShowHydrostaticLCF(bool show);
 
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);

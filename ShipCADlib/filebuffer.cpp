@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -63,11 +63,10 @@ void FileBuffer::setVersion(version_t v)
     _file_version = v;
 }
 
-void FileBuffer::loadFromFile(const QString &filename)
+void FileBuffer::loadFromFile(QFile &file)
 {
     _pos = 0;
     _data.clear();
-	QFile file(filename);
 	if (!file.open(QIODevice::ReadOnly))
 		return;
 	_data.reserve(file.size());
@@ -78,19 +77,18 @@ void FileBuffer::loadFromFile(const QString &filename)
         _data.push_back(byte);
     }
     file.close();
-    cout << "Read " << _data.size() << " bytes from '" << filename.toStdString() << "'" << endl;
+    cout << "Read " << _data.size() << " bytes from '" << file.fileName().toStdString() << "'" << endl;
 }
 
-void FileBuffer::saveToFile(const QString &filename)
+void FileBuffer::saveToFile(QFile& file)
 {
-	QFile file(filename);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
 		return;
 	QDataStream out(&file);
     for (size_t i=0; i<_data.size(); ++i)
         out << _data[i];
     file.close();
-    cout << "Wrote " << _data.size() << " bytes to '" << filename.toStdString() << "'" << endl;
+    cout << "Wrote " << _data.size() << " bytes to '" << file.fileName().toStdString() << "'" << endl;
 }
 
 void FileBuffer::load(JPEGImage& img)
@@ -260,6 +258,19 @@ void FileBuffer::add(const QString& val)
 {
     // convert string to utf8
     QByteArray s = val.toUtf8();
+    convert_type_t ct;
+    ct.ival = s.length();
+    for (int i=0; i<4; ++i)
+        _data.push_back(ct.d[i]);
+    for (int i=0; i<s.length(); ++i)
+        _data.push_back(s[i]);
+}
+
+void FileBuffer::add(const char* str)
+{
+    // convert string to utf8
+    QString s1(str);
+    QByteArray s = s1.toUtf8();
     convert_type_t ct;
     ct.ival = s.length();
     for (int i=0; i<4; ++i)

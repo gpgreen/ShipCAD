@@ -209,7 +209,7 @@ void Intersection::rebuild()
     setBuild(false);
     _owner->getSurface()->intersectPlane(_plane, _use_hydrostatic_surfaces_only, _items);
     // use a low simplification factor to remove only points that are (nearly) on a line
-    if (_owner->getProjectSettings().getSimplifyIntersections()) {
+    if (_owner->getProjectSettings().isSimplifyIntersections()) {
         _items.apply(Simplify);
     }
     setBuild(true);

@@ -3194,14 +3194,14 @@ void SubdivisionSurface::rebuild()
 void SubdivisionSurface::saveBinary(FileBuffer &destination)
 {
     // first save layerdata
-    destination.add(numberOfLayers());
+    destination.add(static_cast<quint32>(numberOfLayers()));
     for (size_t i=0; i<numberOfLayers(); ++i)
         getLayer(i)->saveBinary(destination);
     // save index of active layer
-    destination.add(getActiveLayer()->getLayerIndex());
+    destination.add(static_cast<quint32>(getActiveLayer()->getLayerIndex()));
     // first sort controlpoints for faster access of function
     sort(_control_points.begin(), _control_points.end());
-    destination.add(numberOfControlPoints());
+    destination.add(static_cast<quint32>(numberOfControlPoints()));
     for (size_t i=0; i<numberOfControlPoints(); ++i)
         getControlPoint(i)->save_binary(destination);
     // save control edges

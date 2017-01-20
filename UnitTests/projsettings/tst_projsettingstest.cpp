@@ -97,9 +97,11 @@ void ProjsettingsTest::testWriteRead()
     ProjectSettings* settingsW = getNonDefault();
     FileBuffer dest;
     settingsW->saveBinary(dest);
+    size_t orig = dest.size();
     ProjectSettings* settingsR = new ProjectSettings(_model);
     dest.reset();
     settingsR->loadBinary(dest, 0);
+    QVERIFY(dest.pos() == orig);
     QVERIFY(settingsW->getName() == settingsR->getName());
     QVERIFY(settingsW->getDesigner() == settingsR->getDesigner());
     QVERIFY(settingsW->getLength() == settingsR->getLength());

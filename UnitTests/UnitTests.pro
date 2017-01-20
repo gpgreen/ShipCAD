@@ -4,7 +4,9 @@ SUBDIRS = \
     subdivpoint \
     subdivcontrolpoint \
     subdivface \
+    subdivcontroledge \
     subdivcontrolface \
+    subdivlayer \
     hydrostaticcalc \
     spline \
     intersection \

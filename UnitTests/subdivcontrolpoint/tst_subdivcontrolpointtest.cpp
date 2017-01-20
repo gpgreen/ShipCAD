@@ -33,6 +33,7 @@
 #include "subdivface.h"
 #include "subdivedge.h"
 #include "subdivsurface.h"
+#include "filebuffer.h"
 
 using namespace ShipCAD;
 
@@ -48,6 +49,7 @@ private:
 private Q_SLOTS:
     void testCaseConstruct();
     void testCaseSetVertexLockedSelected();
+    void testWriteRead();
 };
 
 SubdivcontrolpointTest::SubdivcontrolpointTest()
@@ -89,6 +91,23 @@ void SubdivcontrolpointTest::testCaseSetVertexLockedSelected()
     QVERIFY(pt->isLocked());
     QVERIFY(pt->isSelected());
 }
+
+void SubdivcontrolpointTest::testWriteRead()
+{
+    SubdivisionControlPoint *ptO = SubdivisionControlPoint::construct(_owner);
+	SubdivisionControlPoint *ptI = SubdivisionControlPoint::construct(_owner);
+    FileBuffer dest;
+    ptO->save_binary(dest);
+    size_t orig = dest.size();
+    dest.reset();
+    ptI->load_binary(dest);
+    QVERIFY(dest.pos() == orig);
+    QVERIFY(ptI->getCoordinate() == ptO->getCoordinate());
+    QVERIFY(ptI->getVertexType() == ptO->getVertexType());
+    QVERIFY(ptI->isSelected() == ptO->isSelected());
+    QVERIFY(ptI->isLocked() == ptO->isLocked());
+}
+
 
 QTEST_APPLESS_MAIN(SubdivcontrolpointTest)
 

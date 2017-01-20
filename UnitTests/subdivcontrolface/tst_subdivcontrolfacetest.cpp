@@ -36,6 +36,7 @@
 #include "subdivface.h"
 #include "subdivedge.h"
 #include "subdivsurface.h"
+#include "filebuffer.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -58,6 +59,7 @@ private Q_SLOTS:
     void testCaseSubdivision4pt();
     void testCaseSubdivision3pt();
     void testCaseSubdivision5pt();
+    void testCaseWriteRead();
 };
 
 SubdivControlfaceTest::SubdivControlfaceTest()
@@ -372,6 +374,57 @@ void SubdivControlfaceTest::testCaseSubdivision5pt()
         QVERIFY2(n.y() == 0, "face normal y sb 0");
         QVERIFY2(n.z() == 1.0, "face normal z sb 1");
     }
+}
+
+void SubdivControlfaceTest::testCaseWriteRead()
+{
+    SubdivisionControlFace *face = new SubdivisionControlFace(_owner);
+    face->setLayer(_owner->getLayer(0));
+    
+    // create vertex points
+    SubdivisionControlPoint *pt1 = SubdivisionControlPoint::construct(_owner);
+    pt1->setCoordinate(QVector3D(0,0,0));
+    _owner->addControlPoint(pt1);
+    SubdivisionControlPoint *pt2 = SubdivisionControlPoint::construct(_owner);
+    pt2->setCoordinate(QVector3D(1,0,0));
+    _owner->addControlPoint(pt2);
+    SubdivisionControlPoint *pt3 = SubdivisionControlPoint::construct(_owner);
+    pt3->setCoordinate(QVector3D(1,1,0));
+    _owner->addControlPoint(pt3);
+    SubdivisionControlPoint *pt4 = SubdivisionControlPoint::construct(_owner);
+    pt4->setCoordinate(QVector3D(0.5,1.5,0));
+    _owner->addControlPoint(pt4);
+    SubdivisionControlPoint *pt5 = SubdivisionControlPoint::construct(_owner);
+    pt5->setCoordinate(QVector3D(0,1,0));
+    _owner->addControlPoint(pt5);
+
+    face->addPoint(pt1);
+    face->addPoint(pt2);
+    face->addPoint(pt3);
+    face->addPoint(pt4);
+    face->addPoint(pt5);
+
+    FileBuffer dest;
+    face->saveBinary(dest);
+    size_t orig = dest.size();
+    SubdivisionControlFace* faceR = new SubdivisionControlFace(_owner);
+    dest.reset();
+    faceR->loadBinary(dest);
+    QVERIFY(dest.pos() == orig);
+    QVERIFY(face->numberOfPoints() == faceR->numberOfPoints());
+    QVERIFY(face->getPoint(0) == faceR->getPoint(0));
+    QVERIFY(face->getPoint(1) == faceR->getPoint(1));
+    QVERIFY(face->getPoint(2) == faceR->getPoint(2));
+    QVERIFY(face->getPoint(3) == faceR->getPoint(3));
+    QVERIFY(face->getPoint(4) == faceR->getPoint(4));
+    QVERIFY(face->getLayer() == faceR->getLayer());
+    QVERIFY(face->getColor() == faceR->getColor());
+    QVERIFY(face->isSelected() == faceR->isSelected());
+    QVERIFY(face->isVisible() == faceR->isVisible());
+    QVERIFY(face->numberOfChildren() == faceR->numberOfChildren());
+    QVERIFY(face->numberOfEdges() == faceR->numberOfEdges());
+    delete face;
+    delete faceR;
 }
 
 QTEST_APPLESS_MAIN(SubdivControlfaceTest)

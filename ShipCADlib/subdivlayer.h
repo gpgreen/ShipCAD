@@ -102,22 +102,24 @@ public:
     float getMaterialDensity() {return _material_density;}
     float getThickness() {return _thickness;}
     QString getName();
-    QString getDescription();
+    QString getDescription()
+        {return _desc;}
     QString getDXFLayername() {return getName();}
     QColor getColor() {return _color;}
     float getAlphaBlend() {return _alphablend/255.0;}
     void setDevelopable(bool val);
-    void setDescription(const QString& val) {_desc = val;}
+    void setDescription(const QString& val);
     void setName(const QString& val);
     void setSymmetric(bool val);
     void setColor(QColor col);
-    void setMaterialDensity(float val) {_material_density = val;}
-    void setThickness(float val) {_thickness = val;}
+    void setMaterialDensity(float val);
+    void setThickness(float val);
     void setShowInLinesplan(bool val);
     void setUseInHydrostatics(bool val);
     void setUseForIntersections(bool val);
     void setVisible(bool val);
-
+    void setAlphaBlend(unsigned char val);
+    
     // persistence
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& destination);

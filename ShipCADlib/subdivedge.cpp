@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *

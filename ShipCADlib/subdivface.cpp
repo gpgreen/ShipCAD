@@ -760,10 +760,7 @@ void SubdivisionControlFace::loadBinary(FileBuffer &source)
         _layer = _owner->getLayer(ind);
     else
         _layer = _owner->getLayer(0); // reference to an invalid layer, assign to owners default layer
-    if (_layer != 0)
-        _layer->addControlFace(this);
-    else
-        throw runtime_error("Invalid layer reference in SubdivisionControlFace::loadBinary");
+    _layer->addControlFace(this);
     bool sel;
     source.load(sel);
     if (sel)
@@ -778,7 +775,7 @@ void SubdivisionControlFace::loadBinary(FileBuffer &source)
         else {
             edge = _owner->addControlEdge(p1, p2);
             edge->setCrease(true);
-            cerr << "Could not find edge!" << endl;
+            cerr << "SubdivisionControlFace::loadBinary - Could not find edge!" << endl;
         }
         p1 = p2;
     }

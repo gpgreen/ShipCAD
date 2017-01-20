@@ -142,6 +142,14 @@ LayerProperties SubdivisionLayer::getSurfaceProperties()
     return result;
 }
 
+void SubdivisionLayer::setAlphaBlend(unsigned char val)
+{
+    if (val != _alphablend) {
+        _alphablend = val;
+        // emit changedLayerData();
+    }
+}
+
 void SubdivisionLayer::setDevelopable(bool val)
 {
     if (val != _developable) {
@@ -150,7 +158,16 @@ void SubdivisionLayer::setDevelopable(bool val)
     }
 }
 
+// TODO: why is name and desc the same?
 void SubdivisionLayer::setName(const QString& val)
+{
+    if (QString::compare(val, _desc, Qt::CaseInsensitive) != 0) {
+        _desc = val;
+        //emit changedLayerData();
+    }
+}
+
+void SubdivisionLayer::setDescription(const QString& val)
 {
     if (QString::compare(val, _desc, Qt::CaseInsensitive) != 0) {
         _desc = val;
@@ -170,6 +187,22 @@ void SubdivisionLayer::setColor(QColor val)
 {
     if (val != _color) {
         _color = val;
+        //emit changedLayerData();
+    }
+}
+
+void SubdivisionLayer::setThickness(float t)
+{
+    if (fabs(t - _thickness) > 1e-5) {
+        _thickness = t;
+        //emit changedLayerData();
+    }
+}
+
+void SubdivisionLayer::setMaterialDensity(float d)
+{
+    if (fabs(d - _material_density) > 1e-5) {
+        _material_density = d;
         //emit changedLayerData();
     }
 }
@@ -595,7 +628,8 @@ void SubdivisionLayer::saveBinary(FileBuffer& destination)
             if (destination.getVersion() >= fv201) {
                 destination.add(_show_in_linesplan);
                 if (destination.getVersion() >= fv260) {
-                    destination.add(_alphablend);
+                    quint32 n = _alphablend;
+                    destination.add(n);
                 }
             }
         }

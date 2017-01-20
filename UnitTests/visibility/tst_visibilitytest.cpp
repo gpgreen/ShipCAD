@@ -83,9 +83,11 @@ void VisibilityTest::testWriteRead()
     Visibility* visW = getNonDefault();
     FileBuffer dest;
     visW->saveBinary(dest);
+    size_t orig = dest.size();
     Visibility* visR = new Visibility(_model);
     dest.reset();
     visR->loadBinary(dest);
+    QVERIFY(dest.pos() == orig);
     QVERIFY(visW->getModelView() == visR->getModelView());
     QVERIFY(visW->isShowControlNet() == visR->isShowControlNet());
     QVERIFY(visW->isShowInteriorEdges() == visR->isShowInteriorEdges());

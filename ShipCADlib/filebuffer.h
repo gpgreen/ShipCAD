@@ -58,7 +58,8 @@ public:
     ~FileBuffer() {}
 
     size_t size() {return _data.size();}
-
+    size_t pos() {return _pos;}
+    
     // version
     version_t getVersion() {return _file_version;}
     void setVersion(version_t v);

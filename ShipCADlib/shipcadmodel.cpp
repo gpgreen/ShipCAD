@@ -457,7 +457,8 @@ void ShipCADModel::loadBinary(FileBuffer& source)
         // TODO this is not a free ship binary file
     }
     _file_changed = false;
-    rebuildModel();
+    //rebuildModel();
+    _surface.setBuild(false);
     emit onUpdateGeometryInfo();
 }
 

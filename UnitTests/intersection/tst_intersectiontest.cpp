@@ -12,6 +12,7 @@
 #include "subdivedge.h"
 #include "projsettings.h"
 #include "utility.h"
+#include "filebuffer.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -30,6 +31,7 @@ private Q_SLOTS:
     void testConstructSta();
     void testArea();
     void testDXF();
+    void testWriteRead();
 };
 
 IntersectionTest::IntersectionTest()
@@ -193,6 +195,49 @@ void IntersectionTest::testDXF()
         os << dxf[i].toStdString() << "\r\n";
     os.close();
     QVERIFY(dxf.size() > 0);
+}
+
+void IntersectionTest::testWriteRead()
+{
+    Plane halfcube(-1,0,0,0.5);
+
+    Intersection o(_model, fiStation, halfcube, true);
+    Intersection i(_model);
+
+    FileBuffer dest;
+    o.saveBinary(dest);
+    size_t orig = dest.size();
+    dest.reset();
+    i.loadBinary(dest);
+    QVERIFY(dest.pos() == orig);
+    QVERIFY(o.isBuild() == i.isBuild());
+    QVERIFY(o.getColor() == i.getColor());
+    QVERIFY(o.getPlane().a() == i.getPlane().a());
+    QVERIFY(o.getPlane().b() == i.getPlane().b());
+    QVERIFY(o.getPlane().c() == i.getPlane().c());
+    QVERIFY(o.getPlane().d() == i.getPlane().d());
+    QVERIFY(o.isShowCurvature() == i.isShowCurvature());
+    QVERIFY(o.getDescription() == i.getDescription());
+    QVERIFY(o.getIntersectionType() == i.getIntersectionType());
+    // the following is not equal because the o constructor changed the default
+    // this is not saved in the binary file
+    QVERIFY(o.useHydrostaticsSurfacesOnly() != i.useHydrostaticsSurfacesOnly());
+    SplineVector& iv = i.getSplines();
+    SplineVector& ov = o.getSplines();
+    QVERIFY(iv.size() == ov.size());
+    for (size_t k=0; k<ov.size(); k++) {
+        Spline* os = ov.get(k);
+        Spline* is = iv.get(k);
+        QVERIFY(os->showCurvature() == is->showCurvature());
+        QVERIFY(os->getCurvatureColor() == is->getCurvatureColor());
+        QVERIFY(os->getCurvatureScale() == is->getCurvatureScale());
+        QVERIFY(os->numberOfPoints() == is->numberOfPoints());
+        for (size_t j=0; j<os->numberOfPoints(); j++) {
+            QVERIFY(os->getParameter(j) == is->getParameter(j));
+            QVERIFY(os->getPoint(j) == is->getPoint(j));
+            QVERIFY(os->isKnuckle(j) == is->isKnuckle(j));
+        }
+    }
 }
 
 QTEST_APPLESS_MAIN(IntersectionTest)

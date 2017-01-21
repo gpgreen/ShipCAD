@@ -581,7 +581,7 @@ bool HydrostaticCalc::balance(float displacement, bool freetotrim,
         return true;
 
     if (!_owner->isBuild())
-        _owner->rebuildModel();
+        _owner->rebuildModel(true);
 
     bool result = false;
 	int max_iterations = 25;
@@ -923,7 +923,7 @@ void HydrostaticCalc::calculate()
 
     setCalculated(false);
     if (!_owner->isBuild())
-        _owner->rebuildModel();
+        _owner->rebuildModel(true);
 
     // calculate overall extents of the hull alone
     for (size_t i=0; i<_owner->numberOfLayers(); i++) {
@@ -1058,7 +1058,7 @@ void HydrostaticCalc::calculateVolume(const Plane& waterline_plane)
     setCalculated(false);
 
     if (!_owner->isBuild())
-        _owner->rebuildModel();
+        _owner->rebuildModel(true);
 
 	VolumeCalc vc(waterline_plane, this);
 	vc.run();

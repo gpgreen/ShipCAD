@@ -42,6 +42,14 @@ using namespace ShipCAD;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+ViewportContextEvent::ViewportContextEvent(Viewport* vp, QMouseEvent* event)
+    : _vp(vp), _event(event)
+{
+    // does nothing
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 Viewport::Viewport(Controller* ctl, viewport_type_t vtype)
     : _ctl(ctl), _mode(vmWireFrame), _view_type(vtype),
       _view(0), _drag_state(0), _current_shader(0)
@@ -58,6 +66,11 @@ Viewport::~Viewport()
         delete (*i).second;
         ++i;
     }
+}
+
+Controller* Viewport::getController()
+{
+    return _ctl;
 }
 
 void Viewport::initialize()
@@ -125,7 +138,7 @@ void Viewport::resizeEvent(QResizeEvent *event)
 void Viewport::update()
 {
     QVector3D min, max;
-    _ctl->getModel()->getSurface()->extents(min, max);
+    getController()->getModel()->getSurface()->extents(min, max);
     _view->initializeViewport(min, max, width(), height());
     renderLater();
 }
@@ -146,16 +159,13 @@ void Viewport::render()
     glEnable( GL_LIGHT0 );
     glLightfv(GL_LIGHT0, GL_POSITION, ltcolor);
 
-    // set to shade
-    setViewportMode(vmShade);
-    
     // set the color of the background
-    QColor vpcolor = _ctl->getModel()->getPreferences().getViewportColor();
+    QColor vpcolor = getController()->getModel()->getPreferences().getViewportColor();
     glClearColor(vpcolor.redF(), vpcolor.greenF(), vpcolor.blueF(), 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     // draw the model
-    _ctl->getModel()->draw(*this);
+    getController()->getModel()->draw(*this);
 
     // need to release the shader, otherwise doesn't draw right
     if (_current_shader != 0) {
@@ -208,6 +218,8 @@ FaceShader* Viewport::setLightedFaceShader()
 
 bool Viewport::contextMenu(QMouseEvent *event)
 {
+    ViewportContextEvent cevent(this, event);
+    emit contextMenuEvent(&cevent);
     return false;
 }
 
@@ -309,5 +321,5 @@ void Viewport::keyPressEvent(QKeyEvent *event)
 
 bool Viewport::shootPickRay(PickRay& ray)
 {
-    return _ctl->shootPickRay(*this, ray);
+    return getController()->shootPickRay(*this, ray);
 }

@@ -270,7 +270,7 @@ public:
     void saveBinary(FileBuffer& dest);
     void savePart(std::vector<SubdivisionFace*> faces);
 
-    void rebuildModel();
+    void rebuildModel(bool redo_intersections);
 
     void draw(Viewport& vp);
     

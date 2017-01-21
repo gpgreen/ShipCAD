@@ -138,12 +138,14 @@ void ShipCADModel::setBuild(bool set)
     }
 }
 
-void ShipCADModel::rebuildModel()
+void ShipCADModel::rebuildModel(bool redo_intersections)
 {
-    setBuild(false);
+    if (redo_intersections)
+        setBuild(false);
 
-    // get preferences setttings
+    // get preferences settings
     _prefs.setSurfaceColors(_surface);
+    _surface.setControlPointSize(_prefs.getPointSize());
 
     // get visibility settings
     Visibility& v = getVisibility();
@@ -457,8 +459,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
         // TODO this is not a free ship binary file
     }
     _file_changed = false;
-    //rebuildModel();
-    _surface.setBuild(false);
+    rebuildModel(false);
     emit onUpdateGeometryInfo();
 }
 

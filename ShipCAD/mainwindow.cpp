@@ -47,13 +47,18 @@ using namespace std;
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), _pointdialog(0),
-    _controller(c), _menu_recent_files(0)
+    _controller(c), _menu_recent_files(0), _contextMenu(0),
+    _viewportModeGroup(0),
+    _wireframeAct(0), _shadeAct(0), _gaussCurvAct(0), _zebraAct(0),
+    _developCheckAct(0), _currentViewportContext(0)
 {
     ui->setupUi(this);
     createToolBars();
     createStatusBar();
     createRecentFilesMenu();
-
+    createActions();
+    createMenus();
+    
     // connect mainwindow actions
     connect(ui->actionFileNew, SIGNAL(triggered()), SLOT(newModel()));
     connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openModelFile()));
@@ -216,6 +221,45 @@ void MainWindow::createStatusBar()
     ui->statusBar->addPermanentWidget(_geom_info);
 }
 
+void MainWindow::createActions()
+{
+    _wireframeAct = new QAction(tr("Wireframe"), this);
+    _wireframeAct->setCheckable(true);
+    _shadeAct = new QAction(tr("Shade"), this);
+    _shadeAct->setCheckable(true);
+    _gaussCurvAct = new QAction(tr("Gaussian Curvature"), this);
+    _gaussCurvAct->setCheckable(true);
+    _zebraAct = new QAction(tr("Zebra Shading"), this);
+    _zebraAct->setCheckable(true);
+    _developCheckAct = new QAction(tr("Developability Check"), this);
+    _developCheckAct->setCheckable(true);
+
+    _viewportModeGroup = new QActionGroup(this);
+    _viewportModeGroup->addAction(_wireframeAct);
+    _viewportModeGroup->addAction(_shadeAct);
+    _viewportModeGroup->addAction(_gaussCurvAct);
+    _viewportModeGroup->addAction(_zebraAct);
+    _viewportModeGroup->addAction(_developCheckAct);
+    _wireframeAct->setChecked(true);
+}
+
+void MainWindow::createMenus()
+{
+    // the context menu
+    _contextMenu = new QMenu(this);
+    QMenu* modeMenu = _contextMenu->addMenu(tr("Mode"));
+    modeMenu->addAction(_wireframeAct);
+    modeMenu->addAction(_shadeAct);
+    modeMenu->addAction(_gaussCurvAct);
+    modeMenu->addAction(_zebraAct);
+    modeMenu->addAction(_developCheckAct);
+    connect(_wireframeAct, SIGNAL(triggered()), this, SLOT(wireFrame()));
+    connect(_shadeAct, SIGNAL(triggered()), this, SLOT(shade()));
+    connect(_gaussCurvAct, SIGNAL(triggered()), this, SLOT(shadeCurvature()));
+    connect(_zebraAct, SIGNAL(triggered()), this, SLOT(shadeZebra()));
+    connect(_developCheckAct, SIGNAL(triggered()), this, SLOT(shadeDevelopable()));
+}
+
 void MainWindow::addDefaultViewports()
 {
     ShipCADModel* model = _controller->getModel();
@@ -248,7 +292,8 @@ void MainWindow::addDefaultViewports()
         //connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
         connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
         ViewportContainer* vpcontainer = new ViewportContainer(vp, this);
-
+        connect(vp, SIGNAL(contextMenuEvent(ShipCAD::ViewportContextEvent*)),
+                this, SLOT(vpContextMenuEvent(ShipCAD::ViewportContextEvent*)));
         // put it in display area
         ui->displayLayout->addWidget(vpcontainer, row, col);
         _viewports.push_back(make_pair(vpcontainer, vp));
@@ -428,55 +473,50 @@ void MainWindow::showPreferences()
 void
 MainWindow::wireFrame()
 {
-    for (size_t i=0; i<_viewports.size(); i++) {
-        Viewport* vp = _viewports[i].second;
-        if (vp->getViewportMode() != vmWireFrame)
-            vp->setViewportMode(vmWireFrame);
-    }
+    if (_currentViewportContext == 0)
+        return;
+    if (_currentViewportContext->getViewportMode() != vmWireFrame)
+        _currentViewportContext->setViewportMode(vmWireFrame);
     cout << "Viewport mode Wire Frame" << endl;
 }
 
 void
 MainWindow::shade()
 {
-    for (size_t i=0; i<_viewports.size(); i++) {
-        Viewport* vp = _viewports[i].second;
-        if (vp->getViewportMode() != vmShade)
-            vp->setViewportMode(vmShade);
-    }
+    if (_currentViewportContext == 0)
+        return;
+    if (_currentViewportContext->getViewportMode() != vmShade)
+        _currentViewportContext->setViewportMode(vmShade);
     cout << "Viewport mode shade" << endl;
 }
 
 void
 MainWindow::shadeCurvature()
 {
-    for (size_t i=0; i<_viewports.size(); i++) {
-        Viewport* vp = _viewports[i].second;
-        if (vp->getViewportMode() != vmShadeGauss)
-            vp->setViewportMode(vmShadeGauss);
-    }
+    if (_currentViewportContext == 0)
+        return;
+    if (_currentViewportContext->getViewportMode() != vmShadeGauss)
+        _currentViewportContext->setViewportMode(vmShadeGauss);
     cout << "Viewport mode shade gauss" << endl;
 }
 
 void
 MainWindow::shadeDevelopable()
 {
-    for (size_t i=0; i<_viewports.size(); i++) {
-        Viewport* vp = _viewports[i].second;
-        if (vp->getViewportMode() != vmShadeDevelopable)
-            vp->setViewportMode(vmShadeDevelopable);
-    }
+    if (_currentViewportContext == 0)
+        return;
+    if (_currentViewportContext->getViewportMode() != vmShadeDevelopable)
+        _currentViewportContext->setViewportMode(vmShadeDevelopable);
     cout << "Viewport mode shade developable" << endl;
 }
 
 void
 MainWindow::shadeZebra()
 {
-    for (size_t i=0; i<_viewports.size(); i++) {
-        Viewport* vp = _viewports[i].second;
-        if (vp->getViewportMode() != vmShadeZebra)
-            vp->setViewportMode(vmShadeZebra);
-    }
+    if (_currentViewportContext == 0)
+        return;
+    if (_currentViewportContext->getViewportMode() != vmShadeZebra)
+        _currentViewportContext->setViewportMode(vmShadeZebra);
     cout << "Viewport mode shade zebra" << endl;
 }
 
@@ -574,3 +614,12 @@ void MainWindow::addRecentFiles(const QString& filename)
     changeRecentFiles();
 }
 
+void MainWindow::vpContextMenuEvent(ViewportContextEvent* event)
+{
+    cout << "MainWindow::contextMenuEvent" << endl;
+    if (_contextMenu == 0)
+        return;
+    _currentViewportContext = event->getViewport();
+    _contextMenu->exec(event->getMouseEvent()->globalPos());
+    cout << "MainWindow::contextMenuEvent finished" << endl;
+}

@@ -841,6 +841,7 @@ void SubdivisionControlPoint::save_binary(FileBuffer &destination)
         destination.add(_locked);
 }
 
+// FreeGeometry.pas: 10258
 void SubdivisionControlPoint::drawControlPoints(Viewport& vp, 
                                                 SubdivisionSurface* surface)
 {
@@ -854,54 +855,52 @@ void SubdivisionControlPoint::drawControlPoints(Viewport& vp,
     QVector<QVector3D> dartPoints;
     QVector<QVector3D> creasePoints;
 
-    if (vp.getViewportMode() == vmWireFrame) {
-        for (size_t i=0; i<surface->numberOfControlPoints(); ++i) {
-            SubdivisionControlPoint* pt = surface->getControlPoint(i);
-            if (!pt->isVisible())
-                continue;
-            QVector3D p = pt->getCoordinate();
-            if (vp.getViewportType() == fvBodyplan && p.x() <= surface->getMainframeLocation())
-                p.setY(-p.y());
-            if (pt->isSelected())
-                selPoints << p;
-            else if (pt->isLocked())
-                lockPoints << p;
-            else if (pt->isLeak())
-                leakPoints << p;
-            else {
-                switch (pt->getVertexType()) {
-                case svRegular:
-                    regularPoints << p;
-                    break;
-                case svDart:
-                    dartPoints << p;
-                    break;
-                case svCrease:
-                    creasePoints << p;
-                    break;
-                case svCorner:
-                    cornerPoints << p;
-                    break;
-                }
+    for (size_t i=0; i<surface->numberOfControlPoints(); ++i) {
+        SubdivisionControlPoint* pt = surface->getControlPoint(i);
+        if (!pt->isVisible())
+            continue;
+        QVector3D p = pt->getCoordinate();
+        if (vp.getViewportType() == fvBodyplan && p.x() <= surface->getMainframeLocation())
+            p.setY(-p.y());
+        if (pt->isSelected())
+            selPoints << p;
+        else if (pt->isLocked())
+            lockPoints << p;
+        else if (pt->isLeak())
+            leakPoints << p;
+        else {
+            switch (pt->getVertexType()) {
+            case svRegular:
+                regularPoints << p;
+                break;
+            case svDart:
+                dartPoints << p;
+                break;
+            case svCrease:
+                creasePoints << p;
+                break;
+            case svCorner:
+                cornerPoints << p;
+                break;
             }
         }
-        glPointSize(surface->getControlPointSize()*2);
-        if (selPoints.size() > 0)
-            shader->renderPoints(selPoints, surface->getSelectedColor());
-        glPointSize(surface->getControlPointSize());
-        if (lockPoints.size() > 0)
-            shader->renderPoints(lockPoints, Qt::darkGray);
-        if (leakPoints.size() > 0)
-            shader->renderPoints(leakPoints, surface->getLeakColor());
-        if (regularPoints.size() > 0)
-            shader->renderPoints(regularPoints, surface->getRegularPointColor());
-        if (dartPoints.size() > 0)
-            shader->renderPoints(dartPoints, surface->getDartPointColor());
-        if (cornerPoints.size() > 0)
-            shader->renderPoints(cornerPoints, surface->getCornerPointColor());
-        if (creasePoints.size() > 0)
-            shader->renderPoints(creasePoints, surface->getCreasePointColor());
     }
+    glPointSize(surface->getControlPointSize()*2);
+    if (selPoints.size() > 0)
+        shader->renderPoints(selPoints, surface->getSelectedColor());
+    glPointSize(surface->getControlPointSize());
+    if (lockPoints.size() > 0)
+        shader->renderPoints(lockPoints, Qt::darkGray);
+    if (leakPoints.size() > 0)
+        shader->renderPoints(leakPoints, surface->getLeakColor());
+    if (regularPoints.size() > 0)
+        shader->renderPoints(regularPoints, surface->getRegularPointColor());
+    if (dartPoints.size() > 0)
+        shader->renderPoints(dartPoints, surface->getDartPointColor());
+    if (cornerPoints.size() > 0)
+        shader->renderPoints(cornerPoints, surface->getCornerPointColor());
+    if (creasePoints.size() > 0)
+        shader->renderPoints(creasePoints, surface->getCreasePointColor());
 }
 
 float SubdivisionControlPoint::distanceFromPickRay(

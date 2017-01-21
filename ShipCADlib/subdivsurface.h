@@ -250,6 +250,8 @@ public:
     void setMainframeLocation(float val) {_main_frame_location=val;}
 
     int getControlPointSize() {return _control_point_size;}
+    void setControlPointSize(int sz) 
+        {_control_point_size=sz;}
 
     // options
     bool showCurvature() {return _show_curvature;}

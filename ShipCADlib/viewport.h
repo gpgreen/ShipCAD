@@ -46,6 +46,23 @@ class FaceShader;
 class ViewportView;
 class Controller;
 struct PickRay;
+class Viewport;
+    
+//////////////////////////////////////////////////////////////////////////////////////
+
+class ViewportContextEvent : public QObject
+{
+    Q_OBJECT
+public:
+    explicit ViewportContextEvent(Viewport* vp, QMouseEvent* event);
+
+    Viewport* getViewport() {return _vp;}
+    QMouseEvent* getMouseEvent() {return _event;}
+    
+private:
+    Viewport* _vp;
+    QMouseEvent* _event;
+};
     
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -54,13 +71,13 @@ class Viewport : public OpenGLWindow
     Q_OBJECT
 public:
 
-    explicit Viewport(Controller* ctl, viewport_type_t vtype);
+    explicit Viewport(ShipCAD::Controller* ctl, viewport_type_t vtype);
     ~Viewport();
 
     void initialize();
     void render();
 
-    Controller* getController() {return _ctl;}
+    ShipCAD::Controller* getController();
 
     viewport_mode_t getViewportMode() const {return _mode;}
 
@@ -73,7 +90,10 @@ public:
     FaceShader* setLightedFaceShader();
     
     bool shootPickRay(PickRay& ray);
-                                   
+
+signals:
+    void contextMenuEvent(ShipCAD::ViewportContextEvent* event);
+                                                 
 public slots:
 
     void setViewportMode(viewport_mode_t mode);

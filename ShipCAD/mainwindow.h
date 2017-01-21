@@ -44,6 +44,7 @@ namespace ShipCAD {
 class Viewport;
 class ViewportContainer;
 class Controller;
+class ViewportContextEvent;
 }
 
 class PointDialog;
@@ -76,6 +77,12 @@ private:
     /*! \brief create the Recent files menu
      */
     void createRecentFilesMenu();
+    /*! \brief create actions not in form
+     */
+    void createActions();
+    /*! \brief create menus
+     */
+    void createMenus();
 
 private slots:
 
@@ -162,6 +169,10 @@ private slots:
      */
     void addRecentFiles(const QString& filename);
 
+    /*! \brief context menu event in a viewport
+     */
+    void vpContextMenuEvent(ShipCAD::ViewportContextEvent* event);
+
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
@@ -171,7 +182,15 @@ private:
     std::vector<std::pair<ShipCAD::ViewportContainer*, ShipCAD::Viewport*> > _viewports; /**< collection of ViewportContainer<->Viewport pairs */
     std::vector<QAction*> _recent_file_actions; /**< actions for each recent file */
     QMenu* _menu_recent_files; /**< the menu for recent files */
+    QMenu* _contextMenu; /**< context menu */
     QStringList _recent_files; /**< the list of recent file names */
+    QActionGroup* _viewportModeGroup;
+    QAction* _wireframeAct;
+    QAction* _shadeAct;
+    QAction* _gaussCurvAct;
+    QAction* _zebraAct;
+    QAction* _developCheckAct;
+    ShipCAD::Viewport* _currentViewportContext;
 };
 
 #endif // MAINWINDOW_H

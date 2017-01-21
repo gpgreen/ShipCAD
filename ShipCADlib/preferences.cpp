@@ -34,7 +34,7 @@
 using namespace ShipCAD;
 
 Preferences::Preferences(ShipCADModel* owner)
-    : _owner(owner), _point_size(2), _max_undo_memory(20)
+    : _owner(owner), _point_size(4), _max_undo_memory(20)
 {
 	resetColors();
 }
@@ -42,7 +42,7 @@ Preferences::Preferences(ShipCADModel* owner)
 void Preferences::clear()
 {
 	resetColors();
-	_point_size = 2;
+    _point_size = 4;
 	_max_undo_memory = 20;
 }
 

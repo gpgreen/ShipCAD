@@ -22,7 +22,7 @@
      <x>0</x>
      <y>0</y>
      <width>1079</width>
-     <height>20</height>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -219,6 +219,7 @@
     <addaction name="actionNew_window"/>
     <addaction name="actionTile"/>
     <addaction name="actionCascade"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">

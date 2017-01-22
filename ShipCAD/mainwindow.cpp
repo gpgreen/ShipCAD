@@ -47,10 +47,18 @@ using namespace std;
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), _pointdialog(0),
-    _controller(c), _menu_recent_files(0), _contextMenu(0),
+    _controller(c), _currentViewportContext(0),
+    _menu_recent_files(0), _contextMenu(0), _cameraMenu(0),
     _viewportModeGroup(0),
-    _wireframeAct(0), _shadeAct(0), _gaussCurvAct(0), _zebraAct(0),
-    _developCheckAct(0), _currentViewportContext(0)
+    _wireframeAction(0), _shadeAction(0), _gaussCurvAction(0), _zebraAction(0),
+    _developCheckAction(0),
+    _viewGroup(0),
+    _perspectiveAction(0), _bodyPlanAction(0),
+    _profileAction(0), _planViewAction(0), _zoomInAction(0), _zoomOutAction(0),
+    _zoomAllAction(0), _printAction(0), _saveImageAction(0),
+    _cameraGroup(0),
+    _wideLensAction(0), _stdLensAction(0), _shortLensAction(0), _medLensAction(0),
+    _longLensAction(0)
 {
     ui->setupUi(this);
     createToolBars();
@@ -223,46 +231,119 @@ void MainWindow::createStatusBar()
 
 void MainWindow::createActions()
 {
-    _wireframeAct = new QAction(tr("Wireframe"), this);
-    _wireframeAct->setCheckable(true);
-    _shadeAct = new QAction(tr("Shade"), this);
-    _shadeAct->setCheckable(true);
-    _gaussCurvAct = new QAction(tr("Gaussian Curvature"), this);
-    _gaussCurvAct->setCheckable(true);
-    _zebraAct = new QAction(tr("Zebra Shading"), this);
-    _zebraAct->setCheckable(true);
-    _developCheckAct = new QAction(tr("Developability Check"), this);
-    _developCheckAct->setCheckable(true);
+    _wireframeAction = new QAction(tr("Wireframe"), this);
+    _wireframeAction->setCheckable(true);
+    _shadeAction = new QAction(tr("Shade"), this);
+    _shadeAction->setCheckable(true);
+    _gaussCurvAction = new QAction(tr("Gaussian curvature"), this);
+    _gaussCurvAction->setCheckable(true);
+    _zebraAction = new QAction(tr("Zebra shading"), this);
+    _zebraAction->setCheckable(true);
+    _developCheckAction = new QAction(tr("Developability check"), this);
+    _developCheckAction->setCheckable(true);
 
     _viewportModeGroup = new QActionGroup(this);
-    _viewportModeGroup->addAction(_wireframeAct);
-    _viewportModeGroup->addAction(_shadeAct);
-    _viewportModeGroup->addAction(_gaussCurvAct);
-    _viewportModeGroup->addAction(_zebraAct);
-    _viewportModeGroup->addAction(_developCheckAct);
-    _wireframeAct->setChecked(true);
+    _viewportModeGroup->addAction(_wireframeAction);
+    _viewportModeGroup->addAction(_shadeAction);
+    _viewportModeGroup->addAction(_gaussCurvAction);
+    _viewportModeGroup->addAction(_zebraAction);
+    _viewportModeGroup->addAction(_developCheckAction);
+    _wireframeAction->setChecked(true);
+
+    connect(_wireframeAction, SIGNAL(triggered()), this, SLOT(wireFrame()));
+    connect(_shadeAction, SIGNAL(triggered()), this, SLOT(shade()));
+    connect(_gaussCurvAction, SIGNAL(triggered()), this, SLOT(shadeCurvature()));
+    connect(_zebraAction, SIGNAL(triggered()), this, SLOT(shadeZebra()));
+    connect(_developCheckAction, SIGNAL(triggered()), this, SLOT(shadeDevelopable()));
+
+    _perspectiveAction = new QAction(tr("Perspective"), this);
+    _perspectiveAction->setCheckable(true);
+    _bodyPlanAction = new QAction(tr("Body plan"), this);
+    _bodyPlanAction->setCheckable(true);
+    _profileAction = new QAction(tr("Profile"), this);
+    _profileAction->setCheckable(true);
+    _planViewAction = new QAction(tr("Plan view"), this);
+    _planViewAction->setCheckable(true);
+    
+    _viewGroup = new QActionGroup(this);
+    _viewGroup->addAction(_bodyPlanAction);
+    _viewGroup->addAction(_profileAction);
+    _viewGroup->addAction(_planViewAction);
+    _viewGroup->addAction(_perspectiveAction);
+    _perspectiveAction->setChecked(true);
+
+    connect(_bodyPlanAction, SIGNAL(triggered()), this, SLOT(setBodyPlanView()));
+    connect(_profileAction, SIGNAL(triggered()), this, SLOT(setProfileView()));
+    connect(_planViewAction, SIGNAL(triggered()), this, SLOT(setPlanView()));
+    connect(_perspectiveAction, SIGNAL(triggered()), this, SLOT(setPerspectiveView()));
+    
+    _zoomInAction = new QAction(tr("Zoom in"), this);
+    _zoomOutAction = new QAction(tr("Zoom out"), this);
+    _zoomAllAction = new QAction(tr("All"), this);
+
+    _wideLensAction = new QAction(tr("Wide lens 28mm."), this);
+    _wideLensAction->setCheckable(true);
+    _stdLensAction = new QAction(tr("Standard lens 50mm."), this);
+    _stdLensAction->setCheckable(true);
+    _shortLensAction = new QAction(tr("Short telelens 90mm."), this);
+    _shortLensAction->setCheckable(true);
+    _medLensAction = new QAction(tr("Medium telelens 130mm."), this);
+    _medLensAction->setCheckable(true);
+    _longLensAction = new QAction(tr("Long telelens 200mm."), this);
+    _longLensAction->setCheckable(true);
+
+    _cameraGroup = new QActionGroup(this);
+    _cameraGroup->addAction(_wideLensAction);
+    _cameraGroup->addAction(_stdLensAction);
+    _cameraGroup->addAction(_shortLensAction);
+    _cameraGroup->addAction(_medLensAction);
+    _cameraGroup->addAction(_longLensAction);
+    _stdLensAction->setChecked(true);
+
+    connect(_wideLensAction, SIGNAL(triggered()), this, SLOT(setWideLens()));
+    connect(_stdLensAction, SIGNAL(triggered()), this, SLOT(setStdLens()));
+    connect(_shortLensAction, SIGNAL(triggered()), this, SLOT(setShortLens()));
+    connect(_medLensAction, SIGNAL(triggered()), this, SLOT(setMedLens()));
+    connect(_longLensAction, SIGNAL(triggered()), this, SLOT(setFarLens()));
+
+    _printAction = new QAction(tr("Print"), this);
+    _printAction->setEnabled(false);
+    _saveImageAction = new QAction(tr("Save image"), this);
 }
 
 void MainWindow::createMenus()
 {
     // the context menu
     _contextMenu = new QMenu(this);
+    _contextMenu->addAction(ui->actionDeselect_all);
+    QMenu* viewMenu = _contextMenu->addMenu(tr("View"));
+    viewMenu->addAction(_bodyPlanAction);
+    viewMenu->addAction(_profileAction);
+    viewMenu->addAction(_planViewAction);
+    viewMenu->addAction(_perspectiveAction);
+    QMenu* zoomMenu = _contextMenu->addMenu(tr("Zoom"));
+    zoomMenu->addAction(_zoomInAction);
+    zoomMenu->addAction(_zoomOutAction);
+    zoomMenu->addAction(_zoomAllAction);
+    _cameraMenu = _contextMenu->addMenu(tr("Camera"));
+    _cameraMenu->addAction(_wideLensAction);
+    _cameraMenu->addAction(_stdLensAction);
+    _cameraMenu->addAction(_shortLensAction);
+    _cameraMenu->addAction(_medLensAction);
+    _cameraMenu->addAction(_longLensAction);
     QMenu* modeMenu = _contextMenu->addMenu(tr("Mode"));
-    modeMenu->addAction(_wireframeAct);
-    modeMenu->addAction(_shadeAct);
-    modeMenu->addAction(_gaussCurvAct);
-    modeMenu->addAction(_zebraAct);
-    modeMenu->addAction(_developCheckAct);
-    connect(_wireframeAct, SIGNAL(triggered()), this, SLOT(wireFrame()));
-    connect(_shadeAct, SIGNAL(triggered()), this, SLOT(shade()));
-    connect(_gaussCurvAct, SIGNAL(triggered()), this, SLOT(shadeCurvature()));
-    connect(_zebraAct, SIGNAL(triggered()), this, SLOT(shadeZebra()));
-    connect(_developCheckAct, SIGNAL(triggered()), this, SLOT(shadeDevelopable()));
+    modeMenu->addAction(_wireframeAction);
+    modeMenu->addAction(_shadeAction);
+    modeMenu->addAction(_gaussCurvAction);
+    modeMenu->addAction(_zebraAction);
+    modeMenu->addAction(_developCheckAction);
+    QMenu* imgMenu = _contextMenu->addMenu(tr("Background image"));
+    _contextMenu->addAction(_printAction);
+    _contextMenu->addAction(_saveImageAction);
 }
 
 void MainWindow::addDefaultViewports()
 {
-    ShipCADModel* model = _controller->getModel();
     int row = 0;
     int col = 0;
     viewport_type_t ty;
@@ -289,9 +370,9 @@ void MainWindow::addDefaultViewports()
         // make the viewport
         Viewport* vp = new Viewport(_controller, ty);
         // connect the render signal to the viewport
-        //connect(this, SIGNAL(viewportRender()), vp, SLOT(renderLater()));
         connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
         ViewportContainer* vpcontainer = new ViewportContainer(vp, this);
+        // connect viewport context menu to main window
         connect(vp, SIGNAL(contextMenuEvent(ShipCAD::ViewportContextEvent*)),
                 this, SLOT(vpContextMenuEvent(ShipCAD::ViewportContextEvent*)));
         // put it in display area
@@ -475,8 +556,7 @@ MainWindow::wireFrame()
 {
     if (_currentViewportContext == 0)
         return;
-    if (_currentViewportContext->getViewportMode() != vmWireFrame)
-        _currentViewportContext->setViewportMode(vmWireFrame);
+    _currentViewportContext->setViewportMode(vmWireFrame);
     cout << "Viewport mode Wire Frame" << endl;
 }
 
@@ -485,8 +565,7 @@ MainWindow::shade()
 {
     if (_currentViewportContext == 0)
         return;
-    if (_currentViewportContext->getViewportMode() != vmShade)
-        _currentViewportContext->setViewportMode(vmShade);
+    _currentViewportContext->setViewportMode(vmShade);
     cout << "Viewport mode shade" << endl;
 }
 
@@ -495,8 +574,7 @@ MainWindow::shadeCurvature()
 {
     if (_currentViewportContext == 0)
         return;
-    if (_currentViewportContext->getViewportMode() != vmShadeGauss)
-        _currentViewportContext->setViewportMode(vmShadeGauss);
+    _currentViewportContext->setViewportMode(vmShadeGauss);
     cout << "Viewport mode shade gauss" << endl;
 }
 
@@ -505,8 +583,7 @@ MainWindow::shadeDevelopable()
 {
     if (_currentViewportContext == 0)
         return;
-    if (_currentViewportContext->getViewportMode() != vmShadeDevelopable)
-        _currentViewportContext->setViewportMode(vmShadeDevelopable);
+    _currentViewportContext->setViewportMode(vmShadeDevelopable);
     cout << "Viewport mode shade developable" << endl;
 }
 
@@ -515,9 +592,48 @@ MainWindow::shadeZebra()
 {
     if (_currentViewportContext == 0)
         return;
-    if (_currentViewportContext->getViewportMode() != vmShadeZebra)
-        _currentViewportContext->setViewportMode(vmShadeZebra);
+    _currentViewportContext->setViewportMode(vmShadeZebra);
     cout << "Viewport mode shade zebra" << endl;
+}
+
+void MainWindow::setWideLens()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setCameraType(ftWide);
+    cout << "MainWindow::setWideLens()" << endl;
+}
+
+void MainWindow::setStdLens()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setCameraType(ftStandard);
+    cout << "MainWindow::setStdLens()" << endl;
+}
+
+void MainWindow::setShortLens()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setCameraType(ftShortTele);
+    cout << "MainWindow::setShortLens()" << endl;
+}
+
+void MainWindow::setMedLens()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setCameraType(ftMediumTele);
+    cout << "MainWindow::setMedLens()" << endl;
+}
+
+void MainWindow::setFarLens()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setCameraType(ftFarTele);
+    cout << "MainWindow::setFarLens()" << endl;
 }
 
 void MainWindow::modelChanged()
@@ -529,6 +645,38 @@ void MainWindow::modelChanged()
         setWindowTitle(tr("ShipCAD"));
     cout << "model changed" << endl;
     ui->actionSave->setEnabled(changed);
+}
+
+void MainWindow::setBodyPlanView()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setViewportType(fvBodyplan);
+    cout << "MainWindow::setBodyPlanView()" << endl;
+}
+
+void MainWindow::setProfileView()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setViewportType(fvProfile);
+    cout << "MainWindow::setProfileView()" << endl;
+}
+
+void MainWindow::setPlanView()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setViewportType(fvPlan);
+    cout << "MainWindow::setPlanView()" << endl;
+}
+
+void MainWindow::setPerspectiveView()
+{
+    if (_currentViewportContext == 0)
+        return;
+    _currentViewportContext->setViewportType(fvPerspective);
+    cout << "MainWindow::setPerspectiveView()" << endl;
 }
 
 void MainWindow::showControlPointDialog(bool show)
@@ -620,6 +768,41 @@ void MainWindow::vpContextMenuEvent(ViewportContextEvent* event)
     if (_contextMenu == 0)
         return;
     _currentViewportContext = event->getViewport();
+    bool camera_menu_active = false;
+    switch(_currentViewportContext->getViewportMode()) {
+    case vmWireFrame:
+        _wireframeAction->setChecked(true); break;
+    case vmShade:
+        _shadeAction->setChecked(true); break;
+    case vmShadeGauss:
+        _gaussCurvAction->setChecked(true); break;
+    case vmShadeDevelopable:
+        _developCheckAction->setChecked(true); break;
+    case vmShadeZebra:
+        _zebraAction->setChecked(true); break;
+    }
+    switch (_currentViewportContext->getViewportType()) {
+    case fvBodyplan:
+        _bodyPlanAction->setChecked(true); break;
+    case fvProfile:
+        _profileAction->setChecked(true); break;
+    case fvPlan:
+        _planViewAction->setChecked(true); break;
+    case fvPerspective:
+        _perspectiveAction->setChecked(true);
+        camera_menu_active = true;
+        break;
+    }
+    _cameraMenu->setEnabled(camera_menu_active);
+    if (camera_menu_active) {
+        switch (_currentViewportContext->getCameraType()) {
+        case ftWide: _wideLensAction->setChecked(true); break;
+        case ftStandard: _stdLensAction->setChecked(true); break;
+        case ftShortTele: _shortLensAction->setChecked(true); break;
+        case ftMediumTele: _medLensAction->setChecked(true); break;
+        case ftFarTele: _longLensAction->setChecked(true); break;
+        }
+    }
     _contextMenu->exec(event->getMouseEvent()->globalPos());
     cout << "MainWindow::contextMenuEvent finished" << endl;
 }

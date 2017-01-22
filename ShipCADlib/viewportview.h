@@ -125,6 +125,8 @@ public:
         {_angle = val;}
     void setElevation(float val)
         {_elevation=val;}
+    camera_type_t getCameraType() const
+        { return _camera; }
     void setCameraType(camera_type_t val);
 
     virtual bool middleMouseMove(QPoint cur, QPoint prev, int w, int h);

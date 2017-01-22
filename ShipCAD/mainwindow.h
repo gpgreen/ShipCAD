@@ -149,9 +149,37 @@ private slots:
     /*! \brief use zebra curvature shading
      */
     void shadeZebra();
+    /*! \brief use wide camera lens
+     */
+    void setWideLens();
+    /*! \brief use standard camera lens
+     */
+    void setStdLens();
+    /*! \brief use short telephoto lens
+     */
+    void setShortLens();
+    /*! \brief use medium telephoto lens
+     */
+    void setMedLens();
+    /*! \brief use long telephoto lens
+     */
+    void setFarLens();
+    /*! \brief change viewport to body plan view
+     */
+    void setBodyPlanView();
+    /*! \brief change viewport to profile view
+     */
+    void setProfileView();
+    /*! \brief change viewport to plan view
+     */
+    void setPlanView();
+    /*! \brief change viewport to perspective view
+     */
+    void setPerspectiveView();
     /*! \brief model has changed
      */
     void modelChanged();
+
     void createToolBars();
     void createStatusBar();
 
@@ -179,18 +207,35 @@ private:
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */
+    ShipCAD::Viewport* _currentViewportContext; /**< viewport current during context menu */
     std::vector<std::pair<ShipCAD::ViewportContainer*, ShipCAD::Viewport*> > _viewports; /**< collection of ViewportContainer<->Viewport pairs */
     std::vector<QAction*> _recent_file_actions; /**< actions for each recent file */
     QMenu* _menu_recent_files; /**< the menu for recent files */
     QMenu* _contextMenu; /**< context menu */
+    QMenu* _cameraMenu; /**< camera group in context menu */
     QStringList _recent_files; /**< the list of recent file names */
     QActionGroup* _viewportModeGroup;
-    QAction* _wireframeAct;
-    QAction* _shadeAct;
-    QAction* _gaussCurvAct;
-    QAction* _zebraAct;
-    QAction* _developCheckAct;
-    ShipCAD::Viewport* _currentViewportContext;
+    QAction* _wireframeAction;
+    QAction* _shadeAction;
+    QAction* _gaussCurvAction;
+    QAction* _zebraAction;
+    QAction* _developCheckAction;
+    QActionGroup* _viewGroup;
+    QAction* _perspectiveAction;
+    QAction* _bodyPlanAction;
+    QAction* _profileAction;
+    QAction* _planViewAction;
+    QAction* _zoomInAction;
+    QAction* _zoomOutAction;
+    QAction* _zoomAllAction;
+    QAction* _printAction;
+    QAction* _saveImageAction;
+    QActionGroup* _cameraGroup;
+    QAction* _wideLensAction;
+    QAction* _stdLensAction;
+    QAction* _shortLensAction;
+    QAction* _medLensAction;
+    QAction* _longLensAction;
 };
 
 #endif // MAINWINDOW_H

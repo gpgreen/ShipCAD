@@ -83,6 +83,8 @@ public:
 
     viewport_type_t getViewportType() const {return _view_type;}
 
+    camera_type_t getCameraType() const;
+    
     void addShader(const std::string& name, Shader* shader);
 
     LineShader* setLineShader();
@@ -103,7 +105,7 @@ public slots:
     void setElevation(float val);
     virtual void resizeEvent(QResizeEvent *event);
     bool contextMenu(QMouseEvent *event);
-
+    
 protected:
 
     virtual void update();

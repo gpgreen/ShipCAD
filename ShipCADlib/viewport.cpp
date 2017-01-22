@@ -87,8 +87,18 @@ void Viewport::initialize()
 
 void Viewport::setViewportMode(viewport_mode_t mode)
 {
-    _mode = mode;
-    renderLater();
+    if (mode != _mode) {
+        _mode = mode;
+        renderLater();
+    }
+}
+
+camera_type_t Viewport::getCameraType() const
+{
+    if (_view_type != fvPerspective)
+        return ftStandard;
+    ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
+    return view->getCameraType();
 }
 
 void Viewport::setCameraType(camera_type_t val)

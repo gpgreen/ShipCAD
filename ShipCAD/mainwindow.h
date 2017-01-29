@@ -35,6 +35,7 @@
 #include <QAction>
 #include <QMenu>
 #include <QLabel>
+#include "shipcadlib.h"
 
 namespace Ui {
 class MainWindow;
@@ -48,6 +49,27 @@ class ViewportContextEvent;
 }
 
 class PointDialog;
+
+class ViewportState
+{
+private:
+    ShipCAD::ViewportContainer* _container;
+    ShipCAD::Viewport* _vp;
+    int _row;
+    int _col;
+public:
+    ViewportState(ShipCAD::ViewportContainer* container,
+                  ShipCAD::Viewport* vp,
+                  int row,
+                  int col)
+        : _container(container), _vp(vp), _row(row), _col(col)
+        {}
+    
+    ShipCAD::Viewport* viewport() const {return _vp;}
+    int row() const {return _row;}
+    int col() const {return _col;}
+    
+};
 
 /*! \brief GUI Main window for ShipCAD
  */
@@ -69,11 +91,29 @@ signals:
      */
     void viewportRender();
 
+protected:
+
+    void closeEvent(QCloseEvent* event);
+    
 private:
 
+    /*! \brief restore the viewports when model loaded
+     */
+    void restoreViewports();
     /*! \brief add the default viewports to the GUI
      */
     void addDefaultViewports();
+    /*! \brief add a specified viewport to the GUI
+     */
+    void addViewport(int row, int col, ShipCAD::viewport_type_t ty,
+                     ShipCAD::viewport_mode_t vm, ShipCAD::camera_type_t ct,
+                     float angle, float elev);
+    /*! \brief save the viewports to settings
+     */
+    void saveViewports();
+    /*! \brief save a viewport to settings
+     */
+    void saveViewport(size_t idx, ViewportState& state);
     /*! \brief create the Recent files menu
      */
     void createRecentFilesMenu();
@@ -83,7 +123,10 @@ private:
     /*! \brief create menus
      */
     void createMenus();
-
+    /*! \brief read settings and action them
+     */
+    void readSettings();
+                       
 private slots:
 
     /*! \brief action for new model
@@ -208,7 +251,7 @@ private:
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */
     ShipCAD::Viewport* _currentViewportContext; /**< viewport current during context menu */
-    std::vector<std::pair<ShipCAD::ViewportContainer*, ShipCAD::Viewport*> > _viewports; /**< collection of ViewportContainer<->Viewport pairs */
+    std::vector<ViewportState> _viewports; /**< collection of ViewportState */
     std::vector<QAction*> _recent_file_actions; /**< actions for each recent file */
     QMenu* _menu_recent_files; /**< the menu for recent files */
     QMenu* _contextMenu; /**< context menu */

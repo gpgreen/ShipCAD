@@ -121,8 +121,12 @@ public:
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
     virtual void resetView();
     
+    float getAngle() const
+        {return _angle;}
     void setAngle(float val)
         {_angle = val;}
+    float getElevation() const
+        {return _elevation;}
     void setElevation(float val)
         {_elevation=val;}
     camera_type_t getCameraType() const

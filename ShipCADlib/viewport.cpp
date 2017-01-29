@@ -120,6 +120,14 @@ void Viewport::setViewportType(viewport_type_t ty)
     }
 }
 
+float Viewport::getAngle() const
+{
+    if (_view_type != fvPerspective)
+        return 0.0;
+    ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
+    return view->getAngle();
+}
+
 void Viewport::setAngle(float val)
 {
     if (_view_type != fvPerspective)
@@ -127,6 +135,14 @@ void Viewport::setAngle(float val)
     ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
     view->setAngle(val);
     update();
+}
+
+float Viewport::getElevation() const
+{
+    if (_view_type != fvPerspective)
+        return 0.0;
+    ViewportViewPerspective* view = dynamic_cast<ViewportViewPerspective*>(_view);
+    return view->getElevation();
 }
 
 void Viewport::setElevation(float val)

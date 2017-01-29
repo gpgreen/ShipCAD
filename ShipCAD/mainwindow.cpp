@@ -35,7 +35,6 @@
 #include "ui_mainwindow.h"
 #include "pointdialog.h"
 #include "viewport.h"
-#include "shipcadlib.h"
 #include "shipcadmodel.h"
 #include "controller.h"
 #include "viewportcontainer.h"
@@ -66,7 +65,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     createRecentFilesMenu();
     createActions();
     createMenus();
-    
+
     // connect mainwindow actions
     connect(ui->actionFileNew, SIGNAL(triggered()), SLOT(newModel()));
     connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openModelFile()));
@@ -202,15 +201,34 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     // set action status
     updateVisibilityActions();
 
+    // restore settings
+    readSettings();
+    
     ui->statusBar->showMessage(tr("Ready"));
 }
 
 MainWindow::~MainWindow()
 {
     for (size_t i=0; i<_viewports.size(); i++) {
-        delete _viewports[i].second;
+        delete _viewports[i].viewport();
     }
     delete ui;
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+    QSettings settings;
+    settings.setValue("geometry", saveGeometry());
+    settings.setValue("windowState", saveState());
+    saveViewports();
+    QMainWindow::closeEvent(event);
+}
+
+void MainWindow::readSettings()
+{
+    QSettings settings;
+    restoreGeometry(settings.value("geometry").toByteArray());
+    restoreState(settings.value("windowState").toByteArray());
 }
 
 void MainWindow::createToolBars()
@@ -337,20 +355,97 @@ void MainWindow::createMenus()
     modeMenu->addAction(_gaussCurvAction);
     modeMenu->addAction(_zebraAction);
     modeMenu->addAction(_developCheckAction);
+    // Visible, Clear, Load, Save, Origin, Set scale, Transparent color, Tolerance, Blending
     QMenu* imgMenu = _contextMenu->addMenu(tr("Background image"));
     _contextMenu->addAction(_printAction);
     _contextMenu->addAction(_saveImageAction);
+}
+
+const char* vp_keys[] = {
+    "i:row", "i:col", "vt:type", "vm:mode", "ct:camera", "f:angle", "f:elev", 0
+};
+
+struct ViewportSettings 
+{
+    int row;
+    int col;
+    viewport_mode_t vm;
+    viewport_type_t ty;
+    camera_type_t ct;
+    float angle;
+    float elev;
+};
+
+void MainWindow::restoreViewports()
+{
+    QSettings settings;
+    int num;
+    vector<ViewportSettings> vpsets;
+    if (settings.contains("view/viewports")) {
+        num = settings.value("view/viewports").toInt();
+        vpsets.reserve(num);
+        for (int i=0; i<num; i++) {
+            QString basekey = QString("view/viewport%1").arg(i);
+            const char** vp_key = vp_keys;
+            ViewportSettings vpset;
+            try {
+                while (*vp_key != 0) {
+                    QString key(*vp_key);
+                    QStringList pcs = key.split(":");
+                    QString viewkey = QString("%1/%2").arg(basekey).arg(pcs.at(1));
+                    if (settings.contains(viewkey)) {
+                        if (pcs.at(0) == "i") {
+                            int val = settings.value(viewkey).toInt();
+                            if (pcs.at(1) == "row")
+                                vpset.row = val;
+                            else
+                                vpset.col = val;
+                        } else if (pcs.at(0) == "vt") {
+                            vpset.ty = static_cast<viewport_type_t>(settings.value(viewkey).toInt());
+                        } else if (pcs.at(0) == "vm") {
+                            vpset.vm = static_cast<viewport_mode_t>(settings.value(viewkey).toInt());
+                        } else if (pcs.at(0) == "ct") {
+                            vpset.ct = static_cast<camera_type_t>(settings.value(viewkey).toInt());
+                        } else if (pcs.at(0) == "f") {
+                            float val = settings.value(viewkey).toFloat();
+                            if (pcs.at(1) == "angle")
+                                vpset.angle = val;
+                            else
+                                vpset.elev = val;
+                        }
+                    } else {
+                        goto settingserror;
+                    }
+                    vp_key++;
+                }
+            } catch(...) {
+                goto settingserror;
+            }
+            vpsets.push_back(vpset);
+        }
+    } else {
+        goto settingserror;
+    }
+    for (size_t i=0; i<vpsets.size(); i++)
+        addViewport(vpsets[i].row, vpsets[i].col, vpsets[i].ty, vpsets[i].vm, vpsets[i].ct, vpsets[i].angle, vpsets[i].elev);
+    return;
+settingserror:
+    addDefaultViewports();
 }
 
 void MainWindow::addDefaultViewports()
 {
     int row = 0;
     int col = 0;
+    float elev = 0.0;
+    float angle = 0.0;
     viewport_type_t ty;
     for (int i=0; i<4; i++) {
         switch (i) {
         case 0:
             row = 0; col = 0;
+            elev = 30.0;
+            angle = -30.0;
             ty = fvPerspective;
             break;
         case 1:
@@ -367,19 +462,71 @@ void MainWindow::addDefaultViewports()
             break;
         }
 
-        // make the viewport
-        Viewport* vp = new Viewport(_controller, ty);
-        // connect the render signal to the viewport
-        connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
-        ViewportContainer* vpcontainer = new ViewportContainer(vp, this);
-        // connect viewport context menu to main window
-        connect(vp, SIGNAL(contextMenuEvent(ShipCAD::ViewportContextEvent*)),
-                this, SLOT(vpContextMenuEvent(ShipCAD::ViewportContextEvent*)));
-        // put it in display area
-        ui->displayLayout->addWidget(vpcontainer, row, col);
-        _viewports.push_back(make_pair(vpcontainer, vp));
+        addViewport(row, col, ty, vmShade, ftStandard, angle, elev);
     }
     cout << "addDefaultViewports" << endl;
+}
+
+void MainWindow::addViewport(int row, int col, viewport_type_t ty, viewport_mode_t vm, camera_type_t ct,
+                             float angle, float elev)
+{
+    // make the viewport
+    Viewport* vp = new Viewport(_controller, ty);
+    // connect the render signal to the viewport
+    connect(this, SIGNAL(viewportRender()), vp, SLOT(renderNow()));
+    ViewportContainer* vpcontainer = new ViewportContainer(vp, this);
+    // connect viewport context menu to main window
+    connect(vp, SIGNAL(contextMenuEvent(ShipCAD::ViewportContextEvent*)),
+            this, SLOT(vpContextMenuEvent(ShipCAD::ViewportContextEvent*)));
+    // put it in display area
+    ui->displayLayout->addWidget(vpcontainer, row, col);
+    ViewportState state(vpcontainer, vp, row, col);
+    _viewports.push_back(state);
+    vp->setViewportMode(vm);
+    vp->setCameraType(ct);
+    vp->setAngle(angle);
+    vp->setElevation(elev);
+}
+
+void MainWindow::saveViewports()
+{
+    QSettings settings;
+    if (_viewports.size() > 0)
+        settings.setValue("view/viewports", static_cast<uint>(_viewports.size()));
+    for (size_t i=0; i<_viewports.size(); i++) {
+        ViewportState& state = _viewports[i];
+        saveViewport(i, state);
+    }
+}
+
+void MainWindow::saveViewport(size_t idx, ViewportState& state)
+{
+    QSettings settings;
+    const char** vp_key = vp_keys;
+    QString basekey = QString("view/viewport%1").arg(idx);
+    while (*vp_key != 0) {
+        QString key(*vp_key);
+        QStringList pcs = key.split(":");
+        QString viewkey = QString("%1/%2").arg(basekey).arg(pcs.at(1));
+        if (pcs.at(0) == "i") {
+            if (pcs.at(1) == "row")
+                settings.setValue(viewkey, state.row());
+            else
+                settings.setValue(viewkey, state.col());
+        } else if (pcs.at(0) == "vt") {
+            settings.setValue(viewkey, static_cast<int>(state.viewport()->getViewportType()));
+        } else if (pcs.at(0) == "vm") {
+            settings.setValue(viewkey, static_cast<int>(state.viewport()->getViewportMode()));
+        } else if (pcs.at(0) == "ct") {
+            settings.setValue(viewkey, static_cast<int>(state.viewport()->getCameraType()));
+        } else if (pcs.at(0) == "f") {
+            if (pcs.at(1) == "angle")
+                settings.setValue(viewkey, state.viewport()->getAngle());
+            else
+                settings.setValue(viewkey, state.viewport()->getElevation());
+        }
+        vp_key++;
+    }
 }
 
 void MainWindow::updateVisibilityActions()
@@ -409,7 +556,7 @@ void MainWindow::updateVisibilityActions()
 void MainWindow::modelLoaded()
 {
     cout << "modelLoaded" << endl;
-    addDefaultViewports();
+    restoreViewports();
     enableActions();
     updateVisibilityActions();
 }

@@ -84,6 +84,9 @@ public:
     viewport_type_t getViewportType() const {return _view_type;}
 
     camera_type_t getCameraType() const;
+
+    float getAngle() const;
+    float getElevation() const;
     
     void addShader(const std::string& name, Shader* shader);
 

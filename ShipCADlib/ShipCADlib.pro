@@ -4,8 +4,6 @@
 #
 #-------------------------------------------------
 
-include(../common.pri)
-
 QT       += opengl gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -81,7 +79,8 @@ HEADERS += shipcadlib.h \
     controller.h \
     pointgrid.h \
     controlfacegrid.h \
-    developedpatch.h
+    developedpatch.h \
+    mempool.h
 
 unix:!symbian {
     maemo5 {

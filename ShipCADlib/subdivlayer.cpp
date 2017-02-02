@@ -50,7 +50,7 @@ using namespace ShipCAD;
 
 SubdivisionLayer* SubdivisionLayer::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getLayerPool().malloc();
+    void * mem = owner->getLayerPool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionLayer::construct");
     return new (mem) SubdivisionLayer(owner);

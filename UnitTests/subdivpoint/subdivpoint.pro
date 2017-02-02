@@ -4,8 +4,6 @@
 #
 #-------------------------------------------------
 
-include(../../common.pri)
-
 QT       += testlib opengl
 
 QT       -= gui

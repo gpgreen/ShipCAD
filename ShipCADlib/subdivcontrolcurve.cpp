@@ -48,7 +48,7 @@ using namespace ShipCAD;
 
 SubdivisionControlCurve* SubdivisionControlCurve::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getControlCurvePool().malloc();
+    void * mem = owner->getControlCurvePool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionControlCurve::construct");
     return new (mem) SubdivisionControlCurve(owner);

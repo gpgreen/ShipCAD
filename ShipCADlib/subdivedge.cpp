@@ -52,7 +52,7 @@ bool ShipCAD::g_edge_verbose = true;
 
 SubdivisionEdge* SubdivisionEdge::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getEdgePool().malloc();
+    void * mem = owner->getEdgePool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionEdge::construct");
     return new (mem) SubdivisionEdge(owner);
@@ -367,7 +367,7 @@ ostream& operator << (ostream& os, const ShipCAD::SubdivisionEdge& edge)
 
 SubdivisionControlEdge* SubdivisionControlEdge::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getControlEdgePool().malloc();
+    void * mem = owner->getControlEdgePool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionControlEdge::construct");
     return new (mem) SubdivisionControlEdge(owner);

@@ -36,11 +36,11 @@
 #include <QObject>
 #include <QColor>
 #include <QVector3D>
-#include <boost/pool/pool.hpp>
 #include "shipcadlib.h"
 #include "plane.h"
 #include "spline.h"
 #include "entity.h"
+#include "mempool.h"
 
 namespace ShipCAD {
 
@@ -304,14 +304,14 @@ public:
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
 
-    boost::pool<>& getControlPointPool() {return _cpoint_pool;}
-    boost::pool<>& getControlEdgePool() {return _cedge_pool;}
-    boost::pool<>& getControlFacePool() {return _cface_pool;}
-    boost::pool<>& getControlCurvePool() {return _ccurve_pool;}
-    boost::pool<>& getLayerPool() {return _layer_pool;}
-    boost::pool<>& getPointPool() {return _point_pool;}
-    boost::pool<>& getEdgePool() {return _edge_pool;}
-    boost::pool<>& getFacePool() {return _face_pool;}
+    Pool<SubdivisionControlPoint>& getControlPointPool() {return _cpoint_pool;}
+    Pool<SubdivisionControlEdge>& getControlEdgePool() {return _cedge_pool;}
+    Pool<SubdivisionControlFace>& getControlFacePool() {return _cface_pool;}
+    Pool<SubdivisionControlCurve>& getControlCurvePool() {return _ccurve_pool;}
+    Pool<SubdivisionLayer>& getLayerPool() {return _layer_pool;}
+    Pool<SubdivisionPoint>& getPointPool() {return _point_pool;}
+    Pool<SubdivisionEdge>& getEdgePool() {return _edge_pool;}
+    Pool<SubdivisionFace>& getFacePool() {return _face_pool;}
 
 signals:
 
@@ -422,14 +422,14 @@ protected:
     std::vector<SubdivisionControlCurve*> _sel_control_curves;
     
     // memory pools
-    boost::pool<> _cpoint_pool;
-    boost::pool<> _cedge_pool;
-    boost::pool<> _cface_pool;
-    boost::pool<> _ccurve_pool;
-    boost::pool<> _layer_pool;
-    boost::pool<> _point_pool;
-    boost::pool<> _edge_pool;
-    boost::pool<> _face_pool;
+    Pool<SubdivisionControlPoint> _cpoint_pool;
+    Pool<SubdivisionControlEdge> _cedge_pool;
+    Pool<SubdivisionControlFace> _cface_pool;
+    Pool<SubdivisionControlCurve> _ccurve_pool;
+    Pool<SubdivisionLayer> _layer_pool;
+    Pool<SubdivisionPoint> _point_pool;
+    Pool<SubdivisionEdge> _edge_pool;
+    Pool<SubdivisionFace> _face_pool;
 
     friend class Preferences;
 };

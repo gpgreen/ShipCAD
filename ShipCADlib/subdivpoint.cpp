@@ -54,7 +54,8 @@ bool ShipCAD::g_point_verbose = true;
 
 SubdivisionPoint* SubdivisionPoint::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getPointPool().malloc();
+    //void * mem = owner->getPointPool().malloc();
+    void * mem = owner->getPointPool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionPoint::construct");
     return new (mem) SubdivisionPoint(owner);
@@ -534,7 +535,7 @@ ostream& operator << (ostream& os, const ShipCAD::SubdivisionPoint& point)
 
 SubdivisionControlPoint* SubdivisionControlPoint::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getControlPointPool().malloc();
+    void * mem = owner->getControlPointPool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionControlPoint::construct");
     return new (mem) SubdivisionControlPoint(owner);

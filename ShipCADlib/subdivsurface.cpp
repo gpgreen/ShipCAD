@@ -90,13 +90,13 @@ SubdivisionSurface::SubdivisionSurface()
 SubdivisionSurface::~SubdivisionSurface()
 {
     // clear the pools
-    _ccurve_pool.release_memory();
-    _cface_pool.release_memory();
-    _cedge_pool.release_memory();
-    _cpoint_pool.release_memory();
-    _layer_pool.release_memory();
-    _edge_pool.release_memory();
-    _point_pool.release_memory();
+    _ccurve_pool.clear();
+    _cface_pool.clear();
+    _cedge_pool.clear();
+    _cpoint_pool.clear();
+    _layer_pool.clear();
+    _edge_pool.clear();
+    _point_pool.clear();
 }
 
 SubdivisionControlPoint* SubdivisionSurface::newControlPoint(const QVector3D& p)
@@ -176,7 +176,7 @@ void SubdivisionSurface::deleteControlPoint(SubdivisionControlPoint* point)
         removeSelectedControlPoint(point);
     if (hasControlPoint(point)) {
         point->~SubdivisionControlPoint();
-        _cpoint_pool.free(point);
+        _cpoint_pool.del(point);
     }
 }
 
@@ -856,7 +856,7 @@ void SubdivisionSurface::deleteControlEdge(SubdivisionControlEdge* edge)
         removeSelectedControlEdge(edge);
     if (hasControlEdge(edge)) {
         edge->~SubdivisionControlEdge();
-        _cedge_pool.free(edge);
+        _cedge_pool.del(edge);
     }
 }
 
@@ -916,7 +916,7 @@ void SubdivisionSurface::deleteControlFace(SubdivisionControlFace *face)
         removeSelectedControlFace(face);
     if (hasControlFace(face)) {
         face->~SubdivisionControlFace();
-        _cface_pool.free(face);
+        _cface_pool.del(face);
     }
 }
 
@@ -1013,7 +1013,8 @@ void SubdivisionSurface::deletePoint(SubdivisionPoint* point)
     if (i != _points.end()) {
         _points.erase(i);
         point->~SubdivisionPoint();
-        _point_pool.free(point);
+//        _point_pool.free(point);
+        _point_pool.del(point);
     }
 }
 
@@ -1030,7 +1031,7 @@ void SubdivisionSurface::deleteEdge(SubdivisionEdge* edge)
     if (i != _edges.end()) {
         _edges.erase(i);
         edge->~SubdivisionEdge();
-        _edge_pool.free(edge);
+        _edge_pool.del(edge);
     }
 }
 
@@ -1396,13 +1397,13 @@ void SubdivisionSurface::clear()
     _points.clear();
 
     // clear the pools
-    _ccurve_pool.release_memory();
-    _cface_pool.release_memory();
-    _cedge_pool.release_memory();
-    _cpoint_pool.release_memory();
-    _layer_pool.release_memory();
-    _edge_pool.release_memory();
-    _point_pool.release_memory();
+    _ccurve_pool.clear();
+    _cface_pool.clear();
+    _cedge_pool.clear();
+    _cpoint_pool.clear();
+    _layer_pool.clear();
+    _edge_pool.clear();
+    _point_pool.clear();
 
     _last_used_layerID = 0;
     _sel_control_curves.clear();
@@ -1431,12 +1432,12 @@ void SubdivisionSurface::clearFaces()
     }
     // dump all edges
     _edges.clear();
-    _edge_pool.release_memory();
+    _edge_pool.clear();
     // dump all points
     _points.clear();
-    _point_pool.release_memory();
+    _point_pool.clear();
     // dump all faces
-    _face_pool.release_memory();
+    _face_pool.clear();
     // clear edges in control faces
     for (size_t i=1; i<=numberOfControlFaces(); ++i)
         getControlFace(i-1)->clearControlEdges();
@@ -3021,7 +3022,7 @@ void SubdivisionSurface::loadBinary(FileBuffer &source)
     source.load(n);
     if (n != 0) {
         // delete current layers and load new ones
-        _layer_pool.release_memory();
+        _layer_pool.clear();
         _layers.clear();
         _layers.reserve(n);
         for (size_t i=1; i<=n; ++i) {

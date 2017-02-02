@@ -4,8 +4,6 @@
 #
 #-------------------------------------------------
 
-include(../../common.pri)
-
 QT       += testlib gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

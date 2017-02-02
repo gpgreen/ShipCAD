@@ -51,7 +51,7 @@ using namespace ShipCAD;
 
 SubdivisionFace* SubdivisionFace::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getFacePool().malloc();
+    void * mem = owner->getFacePool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionFace::construct");
     return new (mem) SubdivisionFace(owner);
@@ -401,7 +401,7 @@ ostream& operator << (ostream& os, const ShipCAD::SubdivisionFace& face)
 
 SubdivisionControlFace* SubdivisionControlFace::construct(SubdivisionSurface* owner)
 {
-    void * mem = owner->getControlFacePool().malloc();
+    void * mem = owner->getControlFacePool().add();
     if (mem == 0)
         throw runtime_error("out of memory in SubdivisionControlFace::construct");
     return new (mem) SubdivisionControlFace(owner);
@@ -733,9 +733,9 @@ void SubdivisionControlFace::clear()
 void SubdivisionControlFace::clearChildren()
 {
     for (size_t i=0; i<_children.size(); ++i)
-        _owner->getFacePool().free(_children[i]);
+        _owner->getFacePool().del(_children[i]);
     for (size_t i=0; i<_edges.size(); ++i)
-        _owner->getEdgePool().free(_edges[i]);
+        _owner->getEdgePool().del(_edges[i]);
     _children.clear();
     _edges.clear();
 }

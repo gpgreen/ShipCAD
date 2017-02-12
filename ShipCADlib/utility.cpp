@@ -28,6 +28,7 @@
  *#############################################################################################*/
 
 #include <cmath>
+#include <climits>
 #include <boost/math/constants/constants.hpp>
 #include "utility.h"
 #include "shipcadlib.h"
@@ -514,4 +515,11 @@ double ShipCAD::Sign(double val)
     else if (val > 0.0)
         return 1.0;
     return 0.0;
+}
+
+size_t ShipCAD::to_size_t(int val)
+{
+    if (val > 0)
+        return static_cast<size_t>(val);
+    throw runtime_error("int cannot be converted to unsigned int");
 }

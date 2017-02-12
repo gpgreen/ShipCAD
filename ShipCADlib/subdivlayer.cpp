@@ -582,17 +582,17 @@ void SubdivisionLayer::loadFromStream(size_t &lineno, QStringList &strings)
     _visible = ReadBoolFromStr(lineno, str, start);
     _symmetric = ReadBoolFromStr(lineno, str, start);
     // read developability
-    if (start != str.length())
+    if (start != to_size_t(str.length()))
         _developable = ReadBoolFromStr(lineno, str, start);
     else
         _developable = false;
     // read calc intersections flag
-    if (start != str.length())
+    if (start != to_size_t(str.length()))
         _use_for_intersections = ReadBoolFromStr(lineno, str, start);
     else
         _use_for_intersections = true;
     // read use in hydrostatics flag
-    if (start != str.length())
+    if (start != to_size_t(str.length()))
         _use_in_hydrostatics = ReadBoolFromStr(lineno, str, start);
     else
         _use_in_hydrostatics = true;

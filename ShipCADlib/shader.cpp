@@ -71,16 +71,18 @@ void Shader::initialize(const char* vertexShaderSource,
 
 void Shader::addUniform(const string& name)
 {
-    _uniforms[name] = _program->uniformLocation(name.c_str());
-    if (_uniforms[name] == -1)
+    int ul = _program->uniformLocation(name.c_str());
+    if (ul == -1)
         throw runtime_error("bad uniform");
+    _uniforms[name] = ul;
 }
 
 void Shader::addAttribute(const string& name)
 {
-    _attributes[name] = _program->attributeLocation(name.c_str());
-    if (_attributes[name] == -1)
+    int al = _program->attributeLocation(name.c_str());
+    if (al == -1)
         throw runtime_error("bad attribute");
+    _attributes[name] = al;
 }
 
 void Shader::setMatrix(const QMatrix4x4& matrix)

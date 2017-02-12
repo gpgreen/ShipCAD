@@ -90,8 +90,9 @@ QColor Intersection::getColor()
         return _owner->getPreferences().getWaterlineColor();
     case fiDiagonal:
         return _owner->getPreferences().getDiagonalColor();
+    default:
+        return Qt::white;
     }
-    return Qt::white;
 }
 
 void Intersection::setPlane(const Plane& pln)
@@ -333,6 +334,8 @@ struct CalculateSplineArea
                     _moi->setY(momi.y());
                     _moi->setZ(0);
                     break;
+                default:
+                    break;
                 }
             }
         }
@@ -372,6 +375,8 @@ void Intersection::calculateArea(const Plane& wlplane, float* area, QVector3D* c
             break;
         case fiWaterline:
             cog->setZ(-_plane.d());
+            break;
+        default:
             break;
         }
     }
@@ -521,6 +526,8 @@ void Intersection::saveBinary(FileBuffer& dest)
                 case fiDiagonal:
                     dest.add(p);
                     dest.add(sp->isKnuckle(j));
+                    break;
+                default:
                     break;
                 }
             } else {

@@ -301,6 +301,12 @@ namespace ShipCAD {
      * \return -1, 0, 1
      */
     double Sign(double val);
+
+    /*! \brief convert an int to a size_t
+     * * \param val the integer
+     * * \return corresponding size_t
+     */
+    size_t to_size_t(int val);
 };
 
 #endif

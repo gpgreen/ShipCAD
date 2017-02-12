@@ -809,10 +809,10 @@ void SubdivisionControlPoint::loadFromStream(size_t &lineno, QStringList &string
     _coordinate.setY(ReadFloatFromStr(lineno, str, start));
     _coordinate.setZ(ReadFloatFromStr(lineno, str, start));
     // vertex type
-    if (start != str.length()) {
+    if (start != to_size_t(str.length())) {
         int i = ReadIntFromStr(lineno, str, start);
         _vtype = fromInt(i);
-        if (start != str.length()) {
+        if (start != to_size_t(str.length())) {
             bool sel = ReadBoolFromStr(lineno, str, start);
             if (sel)
                 setSelected(true);

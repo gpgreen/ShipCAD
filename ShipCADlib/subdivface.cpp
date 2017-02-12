@@ -949,7 +949,7 @@ void SubdivisionControlFace::loadFromStream(size_t &lineno, QStringList &strings
         _layer->addControlFace(this);
     else
         throw runtime_error("Invalid layer reference in SubdivisionControlFace::loadFromStream");
-    if (start != str.length()) {
+    if (start != to_size_t(str.length())) {
         bool sel = ReadBoolFromStr(lineno, str, start);
         if (sel)
             setSelected(true);

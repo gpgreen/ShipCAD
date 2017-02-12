@@ -361,6 +361,7 @@ void MainWindow::createMenus()
     _contextMenu->addAction(_saveImageAction);
 }
 
+// array of keys mapping type to settings name
 const char* vp_keys[] = {
     "i:row", "i:col", "vt:type", "vm:mode", "ct:camera", "f:angle", "f:elev", 0
 };

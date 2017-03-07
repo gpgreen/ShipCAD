@@ -89,13 +89,18 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
         }
     }
     if (filtered.size() > 0) {
+        if (filtered.size() >= 1 && !ray.multi_sel)
+            getModel()->getSurface()->clearSelection();
         if (filtered.size() == 1) {
             // is this a point?
             SubdivisionControlPoint* cp = dynamic_cast<SubdivisionControlPoint*>(filtered[0]);
             if (cp != 0) {
                 cp->setSelected(true);
+                getModel()->setActiveControlPoint(cp);
                 scene_changed = true;
                 cout << "control point selected" << endl;
+            } else {
+                cout << "non control point selected" << endl;
             }
         } else {
             // need to discriminate against these elements
@@ -671,6 +676,25 @@ void Controller::newPoint()
     _model->setActiveControlPoint(pt);
     _model->setFileChanged(true);
     emit showControlPointDialog(true);
+    emit updateControlPointValue(pt);
+    emit modelGeometryChanged();
+}
+
+void Controller::movePoint(QVector3D changedCoords)
+{
+    cout << "Controller::movePoint" << endl;
+    if (_model->getSurface()->numberOfSelectedControlPoints() != 1)
+        throw runtime_error("moving multiple points at once");
+    SubdivisionControlPoint* pt = _model->getActiveControlPoint();
+    QVector3D updated = pt->getCoordinate();
+    if (changedCoords.x() != 0.0)
+        updated.setX(changedCoords.x());
+    if (changedCoords.y() != 0.0)
+        updated.setY(changedCoords.y());
+    if (changedCoords.z() != 0.0)
+        updated.setZ(changedCoords.z());
+    pt->setCoordinate(updated);
+    _model->setFileChanged(true);
     emit updateControlPointValue(pt);
     emit modelGeometryChanged();
 }

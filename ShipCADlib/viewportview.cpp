@@ -80,10 +80,11 @@ void ViewportView::resetView()
     _scale = 1.0;
 }
 
-bool ViewportView::leftMousePick(QPoint pos, int w, int h)
+bool ViewportView::leftMousePick(QPoint pos, int w, int h, bool multi_sel)
 {
     bool scene_changed = false;
     PickRay ray = convertMouseCoordToWorld(pos, w, h);
+    ray.multi_sel = multi_sel;
     scene_changed = _vp->shootPickRay(ray);
     return scene_changed;
 }
@@ -134,6 +135,11 @@ bool ViewportView::wheelWithDegrees(QPoint degrees, int /*w*/, int /*h*/)
     return zoomed;
 }
 
+bool ViewportView::pointDrag(QPoint /*pos*/, int /*w*/, int /*h*/, QVector3D& /*newcoord*/)
+{
+    return false;
+}
+
 ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h) const
 {
     float x = (2.0f * pos.x()) / w - 1.0f;
@@ -146,6 +152,7 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
     to /= to.w();
 
     PickRay ray;
+    ray.multi_sel = false;
     ray.pt = from.toVector3D();
     ray.dir = to.toVector3D() - from.toVector3D();
     ray.dir.normalize();
@@ -367,7 +374,7 @@ void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D&
     finishSetup();
 }
 
-bool ViewportViewPlan::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+bool ViewportViewPlan::rightMouseMove(QPoint cur, QPoint prev, int w, int h)
 {
     PickRay pr1 = convertMouseCoordToWorld(cur, w, h);
     PickRay pr2 = convertMouseCoordToWorld(prev, w, h);
@@ -381,6 +388,17 @@ bool ViewportViewPlan::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
     
     return true;
 }
+
+bool ViewportViewPlan::pointDrag(QPoint pos, int w, int h, QVector3D& newcoord)
+{
+    PickRay pr = convertMouseCoordToWorld(pos, w, h);
+    newcoord.setX(pr.pt.x());
+    newcoord.setY(pr.pt.y());
+    newcoord.setZ(0.0);
+    cout << "plan drag:(" << newcoord.x() << "," << newcoord.y() << "," << newcoord.z() << ")" << endl;
+    return true;
+}
+
 
 ViewportViewProfile::ViewportViewProfile(Viewport* vp)
     : ViewportView(vp)
@@ -430,7 +448,7 @@ void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector
     finishSetup();
 }
 
-bool ViewportViewProfile::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+bool ViewportViewProfile::rightMouseMove(QPoint cur, QPoint prev, int w, int h)
 {
     PickRay pr1 = convertMouseCoordToWorld(cur, w, h);
     PickRay pr2 = convertMouseCoordToWorld(prev, w, h);
@@ -442,6 +460,16 @@ bool ViewportViewProfile::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
 
     cout << "profile pan:" << _panX << "," << _panY << endl;
     
+    return true;
+}
+
+bool ViewportViewProfile::pointDrag(QPoint pos, int w, int h, QVector3D& newcoord)
+{
+    PickRay pr = convertMouseCoordToWorld(pos, w, h);
+    newcoord.setX(pr.pt.x());
+    newcoord.setY(0.0);
+    newcoord.setZ(pr.pt.z());
+    cout << "profile drag:(" << newcoord.x() << "," << newcoord.y() << "," << newcoord.z() << ")" << endl;
     return true;
 }
 
@@ -489,7 +517,7 @@ void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVecto
     finishSetup();
 }
 
-bool ViewportViewBodyplan::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
+bool ViewportViewBodyplan::rightMouseMove(QPoint cur, QPoint prev, int w, int h)
 {
     PickRay pr1 = convertMouseCoordToWorld(cur, w, h);
     PickRay pr2 = convertMouseCoordToWorld(prev, w, h);
@@ -504,4 +532,16 @@ bool ViewportViewBodyplan::leftMouseMove(QPoint cur, QPoint prev, int w, int h)
     return true;
 }
 
-
+bool ViewportViewBodyplan::pointDrag(QPoint pos, int w, int h, QVector3D& newcoord)
+{
+    PickRay pr = convertMouseCoordToWorld(pos, w, h);
+    cout << "bodyplan drag:(" << pr.pt.y() << "," << pr.pt.z() << ")" << endl;
+    newcoord.setX(0.0);
+    if (pr.pt.y() < 0)
+        newcoord.setY(-pr.pt.y());
+    else
+        newcoord.setY(pr.pt.y());
+    newcoord.setZ(pr.pt.z());
+    cout << "bodyplan drag:(" << newcoord.x() << "," << newcoord.y() << "," << newcoord.z() << ")" << endl;
+    return true;
+}

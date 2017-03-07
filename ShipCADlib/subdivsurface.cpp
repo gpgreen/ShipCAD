@@ -1164,6 +1164,7 @@ void SubdivisionSurface::setBuild(bool val)
 std::multimap<float, SubdivisionBase*>
 SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
 {
+    // TODO: need to get list of elements to check from viewport
     multimap<float,SubdivisionBase*> picks;
     // check control points
     for (size_t i=0; i<numberOfControlPoints(); i++) {

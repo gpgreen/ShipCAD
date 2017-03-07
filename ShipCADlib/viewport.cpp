@@ -254,26 +254,39 @@ bool Viewport::contextMenu(QMouseEvent *event)
 // _drag_state = 0      no dragging, move or pick in progress
 // _drag_state = 1      button has been pressed, not moved far enough for a drag
 // _drag_state = 2      button has been pressed, and dragging
+// _drag_state = 3      left button has been pressed, dragging point. not moved far enough for a drag
+// _drag_state = 4      left button has been pressed, dragging point
 void
 Viewport::mousePressEvent(QMouseEvent *event)
 {
+    cout << "mouse press enter:" << _drag_state << endl;
+    _drag_state = 1;
+    // on a left mouse press, check for selection
+    if (event->buttons().testFlag(Qt::LeftButton)) {
+        cout << "left mouse" << endl;
+        bool multi = event->modifiers() == Qt::ControlModifier;
+        if (_view->leftMousePick(event->pos(), width(), height(), multi)) {
+            cout << "pick state changed - multisel:" << multi << endl;
+            update();
+            if (!multi)
+                _drag_state = 3;
+        }
+    }
     _prev_pos = event->pos();
     _prev_buttons = event->buttons();
     _drag_start = event->pos();
-    _drag_state = 1;
     // are we getting mouse clicks in the gl window?
-    cout << "mouse press: " << event->pos().x() << "," << event->pos().y() << endl;
+    cout << "mouse press exit: " << _drag_state << " pos:" << event->pos().x() << "," << event->pos().y() << endl;
 }
 
 void
 Viewport::mouseReleaseEvent(QMouseEvent *event)
 {
+    cout << "mouse release enter:" << _drag_state << endl;
     bool view_changed = false;
     // for mouse release, the button released won't be in the set
     if (_prev_buttons.testFlag(Qt::LeftButton) && !event->buttons().testFlag(Qt::LeftButton)) {
-        if (_drag_state == 1)
-            view_changed = _view->leftMousePick(event->pos(), width(), height());
-        else
+        if (_drag_state != 1 || _drag_state != 3)
             view_changed = _view->leftMouseRelease(event->pos(), width(), height());
     }
     else if (_prev_buttons.testFlag(Qt::RightButton) && !event->buttons().testFlag(Qt::RightButton)) {
@@ -287,24 +300,38 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
         update();
     _prev_buttons = event->buttons();
     // are we getting mouse clicks in the gl window?
-    cout << "mouse release: " << event->pos().x() << "," << event->pos().y() << endl;
+    cout << "mouse release exit: " << _drag_state << " pos:" << event->pos().x() << "," << event->pos().y() << endl;
     _drag_state = 0;
 }
 
 void
 Viewport::mouseMoveEvent(QMouseEvent *event)
 {
+    cout << "mouse move enter:" << _drag_state << endl;
+
     bool view_changed = false;
 
     // check for actual dragging
-    if ((_drag_state < 1 || _drag_state > 2)
-        || (_drag_state == 1 && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance()))
+    if (_drag_state == 0
+        || (_drag_state == 1 && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance())
+        || (_drag_state == 3 && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance()))
         return;
 
-    _drag_state = 2;
-    
+    if (_drag_state != 2 && _drag_state != 4)
+        _drag_state = _drag_state == 1 ? 2 : 4;
+
     if (event->buttons().testFlag(Qt::LeftButton)) {
-        view_changed = _view->leftMouseMove(event->pos(), _prev_pos, width(), height());
+        // are we dragging a point?
+        if (_drag_state == 4) {
+            QVector3D coordchg;
+            if (_view->pointDrag(event->pos(), width(), height(), coordchg)) {
+                // the point has been dragged
+                getController()->movePoint(coordchg);
+            }
+        }
+        else {
+            view_changed = _view->leftMouseMove(event->pos(), _prev_pos, width(), height());
+        }
     }
     else if (event->buttons().testFlag(Qt::MidButton)) {
         view_changed = _view->middleMouseMove(event->pos(), _prev_pos, width(), height());
@@ -318,7 +345,7 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
 
     _prev_pos = event->pos();
     // are we getting mouse clicks in the gl window?
-    //cout << "mouse move: " << event->pos().x() << "," << event->pos().y() << endl;
+    cout << "mouse move exit:" << _drag_state << " pos:" << event->pos().x() << "," << event->pos().y() << endl;
 }
 
 void Viewport::wheelEvent(QWheelEvent *event)

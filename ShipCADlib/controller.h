@@ -399,6 +399,10 @@ public slots:
      */
     void newPoint();
 
+    /*! \brief move a selected point in the model
+     */
+    void movePoint(QVector3D changedCoords);
+
     /*! \brief project all selected points ont a straight line through the first and last
      */
     void projectStraightLinePoint();

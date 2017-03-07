@@ -46,6 +46,7 @@ struct PickRay
 {
     QVector3D pt;
     QVector3D dir;
+    bool multi_sel;             // true if we are multi-selecting elements
 };
     
 //////////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +70,7 @@ public:
     const QMatrix4x4& getWorldInv() const
         {return _worldInv;}
 
-    virtual bool leftMousePick(QPoint pos, int w, int h);
+    virtual bool leftMousePick(QPoint pos, int w, int h, bool multi_sel);
     virtual bool rightMousePick(QPoint pos, int w, int h);
     virtual bool leftMouseRelease(QPoint pos, int w, int h);
     virtual bool rightMouseRelease(QPoint pos, int w, int h);
@@ -77,13 +78,22 @@ public:
     virtual bool middleMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool wheelWithDegrees(QPoint degrees, int w, int h);
+    /*! \brief drag a point in the viewport
+     *
+     * \param pos the current mouse coordinates
+     * \param w width of viewport in pixels
+     * \param h height of viewport in pixels
+     * \param newcoord the new coordinates of the point in 3D space
+     * \return true if the point can be dragged in this view
+     */
+    virtual bool pointDrag(QPoint pos, int w, int h, QVector3D& newcoord);
     
     /*! \brief given mouse coordinates, find a pick ray for this view
      *
      * \param pos the mouse coordinates
      * \param width the viewport width in pixels
      * \param height the viewport height in pixels
-     * \raturn the world coordinate system PickRay corresponding to the mouse coordinages
+     * \return the world coordinate system PickRay corresponding to the mouse coordinates
      */
     virtual PickRay convertMouseCoordToWorld(QPoint pos, int width, int height) const;
     
@@ -159,7 +169,8 @@ public:
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
 
-    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool pointDrag(QPoint pos, int w, int h, QVector3D& newcoord);
 
 private:
         
@@ -177,7 +188,8 @@ public:
     virtual ~ViewportViewProfile() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
-    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool pointDrag(QPoint pos, int w, int h, QVector3D& newcoord);
 
 private:
         
@@ -195,7 +207,8 @@ public:
     virtual ~ViewportViewBodyplan() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
-    virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
+    virtual bool pointDrag(QPoint pos, int w, int h, QVector3D& newcoord);
 
 private:
         

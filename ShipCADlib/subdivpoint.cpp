@@ -861,7 +861,9 @@ void SubdivisionControlPoint::drawControlPoints(Viewport& vp,
         if (!pt->isVisible())
             continue;
         QVector3D p = pt->getCoordinate();
-        if (vp.getViewportType() == fvBodyplan && p.x() <= surface->getMainframeLocation())
+        if (vp.getViewportMode() == vmWireFrame
+                && vp.getViewportType() == fvBodyplan
+                && p.x() <= surface->getMainframeLocation())
             p.setY(-p.y());
         if (pt->isSelected())
             selPoints << p;

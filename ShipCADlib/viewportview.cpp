@@ -537,7 +537,7 @@ bool ViewportViewBodyplan::pointDrag(QPoint pos, int w, int h, QVector3D& newcoo
     PickRay pr = convertMouseCoordToWorld(pos, w, h);
     cout << "bodyplan drag:(" << pr.pt.y() << "," << pr.pt.z() << ")" << endl;
     newcoord.setX(0.0);
-    newcoord.setY(-gpr.pt.y());
+    newcoord.setY(-pr.pt.y());
     newcoord.setZ(pr.pt.z());
     cout << "bodyplan drag:(" << newcoord.x() << "," << newcoord.y() << "," << newcoord.z() << ")" << endl;
     return true;

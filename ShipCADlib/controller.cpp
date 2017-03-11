@@ -99,6 +99,7 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
                 getModel()->setActiveControlPoint(cp);
                 scene_changed = true;
                 cout << "control point selected" << endl;
+                emit showControlPointDialog(true);
             } else {
                 cout << "non control point selected" << endl;
             }

@@ -68,6 +68,7 @@ public:
     ~ShipCADModel();
 
     Visibility& getVisibility() {return _vis;}
+    const Visibility& getVisibility() const {return _vis;}
     ProjectSettings& getProjectSettings() {return _settings;}
     Preferences& getPreferences() {return _prefs;}
 

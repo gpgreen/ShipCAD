@@ -25,19 +25,43 @@ PointDialog::PointDialog(QWidget *parent) :
     ui->doubleSpinBoxX->setSingleStep(0.001);
     ui->doubleSpinBoxY->setSingleStep(0.001);
     ui->doubleSpinBoxZ->setSingleStep(0.001);
+    readSettings();
 }
 
 PointDialog::~PointDialog()
 {
+    saveSettings();
     delete ui;
+}
+
+void PointDialog::closeEvent(QCloseEvent* event)
+{
+    saveSettings();
+    QDialog::closeEvent(event);
+}
+
+void PointDialog::readSettings()
+{
+    QSettings settings;
+    restoreGeometry(settings.value("pointdialog-geometry").toByteArray());
+}
+
+void PointDialog::saveSettings()
+{
+    QSettings settings;
+    settings.setValue("pointdialog-geometry", saveGeometry());
 }
 
 void PointDialog::setActive(bool active)
 {
-    if (active)
+    if (active) {
+        readSettings();
         show();
-    else
+    }
+    else {
+        saveSettings();
         hide();
+    }
 }
 
 void PointDialog::dialogUpdatePointCoord(double /*d*/)

@@ -46,6 +46,15 @@ public slots:
      */
     void dialogUpdatePointCoord(double d);
 
+protected:
+    /*! \brief read stored settings for dialog
+     */
+    void readSettings();
+    /*! \brief save settings for dialog
+     */
+    void saveSettings();
+    virtual void closeEvent(QCloseEvent* event);
+
 private:
 
     Ui::PointDialog *ui;

@@ -69,6 +69,11 @@ public:
     ShipCADModel* getModel()
         {return _model;}
 
+    /*! \brief get the model this is controlling const version
+     */
+    const ShipCADModel* getModel() const
+        {return _model;}
+
     /*! \brief shoot a pick ray, change items to selected
      *
      * \param vp the viewport that has the pick ray

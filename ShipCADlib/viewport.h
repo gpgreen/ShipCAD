@@ -78,6 +78,7 @@ public:
     void render();
 
     ShipCAD::Controller* getController();
+    const ShipCAD::Controller* getController() const;
 
     viewport_mode_t getViewportMode() const {return _mode;}
 
@@ -96,6 +97,8 @@ public:
     
     bool shootPickRay(PickRay& ray);
 
+    bool canPickPoint() const;
+    
 signals:
     void contextMenuEvent(ShipCAD::ViewportContextEvent* event);
                                                  

@@ -4,7 +4,7 @@
 \usepackage{placeins}
 \usepackage{hyperref}
 \usepackage{array}
-
+\usepackage{wrapfig}
 
 \title{ShipCAD manual\\Version 2.6}
 \author{Greg Green}
@@ -157,11 +157,11 @@ for example the deck line is submerged. The downside to this is that
 it is critical for any regular edge to be connected to two faces, at
 least when not submerged. Having two different edges which are located
 precisely on top of each other is not sufficient. Faces have to be
-physically connected to the same edge. There is also another reason
-for this which will be explained in 1.6 Guidelines to subdivision
-modeling. Boundary-edges from which both the startpoint and endpoint
-are located on the center plane are excluded from this test.  In
-reality these edges are connected to both the portside and the
+physically connected to the \textbf{same} edge. There is also another
+reason for this which will be explained
+in \ref{guidelines}. Boundary-edges from which both the startpoint and
+endpoint are located on the center plane are excluded from this test.
+In reality these edges are connected to both the portside and the
 starboard side of the ship and are therefore not truly a
 boundary-edge.
 
@@ -183,226 +183,297 @@ or more crease-edges meet are automatically set to cornerpoints by the program.
 \end{itemize}
 
 \subsection{Subdivision surfaces.}
-A subdivision surface is a special type of spline-surface. Normally modeling programs work with
-parametric spline surfaces like B-Spline surfaces or NURB surfaces. These surfaces are completely
-described by a set of controlpoints. Controlpoints are the points which the user can modify to control
-the shape of the surface. Any point on the surface can be
-calculated from these controlpoints using a set of parametric
-formulas. The drawback of these parametric surfaces is that they
-always require a “rectangular” grid of controlpoints. These
-controlpoints in reality might follow the shape of a hull, so they do
-not look like a true rectangular grid. But they always have say N
-points in the longitudinal direction and M points in the vertical
-direction where both N and M might be any number equal to or
-larger than 2. In the figure left N=4 and M=4 and the number of
-controlpoints equals 4*4=16. With parametric spline surfaces it is
-not possible to insert a single new
-Illustration 2
-point on an edge. Instead an entire
-row of points have to be inserted as demonstrated in the figure to
-the right. This results in having more controlpoints than actually
-needed or desired, and more controlpoints mean more work to the
-designer. Also very complex shapes cannot be modeled using only
-one surface. When using multiple surfaces the designer is
-challenged with the difficult task of aligning these surfaces at their
-boundaries. It is often desirable to maintain a smooth transition
-along these boundaries. Each time one of these surfaces is
- Illustration 3
-modified, the other surface has to be modified by the user to
-maintain this smooth transition.
 
-To overcome these problems ShipCAD makes use of subdivision surfaces. Subdivision surfaces
-also use controlpoints as a modeling handle, just like NURBS or B-Splines. With subdivision
-surfaces the grid of controlpoints does not need to be rectangular, but calculating a point on the
-surface is more difficult since the surface is not parametric. Instead the controlmesh is refined and
-smoothed in a number of steps. Each step is called a “subdivision step”, hence the name
-subdivision surfaces. This process is clarified in Illustration 4:
+A subdivision surface is a special type of spline-surface. Normally
+modeling programs work with parametric spline surfaces like B-Spline
+surfaces or NURB surfaces. These surfaces are completely described by
+a set of controlpoints.
 
-To the left the controlmesh of a beveled cube is visible. The first step in the subdivision process is
-refining the mesh. This is done by inserting a new point on each edge (called an edge-point).
-Whenever a new edge-point is calculated, information from both adjacent faces is retrieved. This is
-another reason why edges always must be shared by two faces. For each face which has four
-points or more a point is also inserted at the center of each face (called a face-point). For faces with
-three points each new edge-point is connected with the new point of the previous edge, thus
-creating 4 new triangles. All other faces are subdivided by connecting each edge-point to the face-
-point. This way a refined mesh is created which still has the same shape as the original. This is
-shown in the middle. Finally all the points in the surface are shifted to a new location in such a way
-that the surface appears smooth. This is called averaging in subdivision terms (right side). If this
-process is repeated a number of times a very fine and smooth
-mesh is the result. ShipCAD shows a dropdown box in the toolbar showing the precision of the
-model. This is actually a measure for how many subsequent subdivision steps the program
-performs.
-Illustration 5
-Illustration 6 shows the controlmesh of the same beveled cube and the resulting surface after 1, 2
-and 3 subdivision steps is shown.
+\begin{wrapfigure}{l}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=311,natheight=240]{figure2.png}
+        \caption{}
+        \label{fig:mesh1}
+\end{wrapfigure}
 
-Illustration 6
-This is the same cube, but a number of edges have been marked as crease-edges (red lines). The
-result is a sharp knuckle line going around the cube. It is clearly visible that faces adjacent to the
+Controlpoints are the points which the user can modify to control the
+shape of the surface. Any point on the surface can be calculated from
+these controlpoints using a set of parametric formulas. The drawback
+of these parametric surfaces is that they always require a
+“rectangular” grid of controlpoints. These controlpoints in reality
+might follow the shape of a hull, so they do not look like a true
+rectangular grid. But they always have say \textit{\textbf{N}} points
+in the longitudinal direction and \textit{\textbf{M}} points in the
+vertical direction where both N and M might be any number equal to or
+larger than 2. In the figure left \textit{\textbf{N}}=4
+and \textit{\textbf{M}}=4 and the number of controlpoints equals
+4*4=16. With parametric spline surfaces it is not possible to insert a
+single new point on an edge. Instead an entire row of points have to
+be inserted as demonstrated in the figure to the right.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=300,natheight=233]{figure3.png}
+        \caption{}
+        \label{fig:mesh2}
+\end{wrapfigure}
+
+This results in having more controlpoints than actually needed or
+desired, and more controlpoints mean more work to the designer. Also
+very complex shapes cannot be modeled using only one surface. When
+using multiple surfaces the designer is challenged with the difficult
+task of aligning these surfaces at their boundaries. It is often
+desirable to maintain a smooth transition along these boundaries. Each
+time one of these surfaces is modified, the other surface has to be
+modified by the user to maintain this smooth transition.
+
+To overcome these problems ShipCAD makes use of subdivision
+surfaces. Subdivision surfaces also use controlpoints as a modeling
+handle, just like NURBS or B-Splines. With subdivision surfaces the
+grid of controlpoints does not need to be rectangular, but calculating
+a point on the surface is more difficult since the surface is not
+parametric. Instead the controlmesh is refined and smoothed in a
+number of steps. Each step is called a “subdivision step”, hence the
+name subdivision surfaces. This process is clarified in
+Figure \ref{fig:mesh3}:
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=697,natheight=238]{figure4.png}
+        \caption{}
+        \label{fig:mesh3}
+\end{figure}
+
+To the left the controlmesh of a beveled cube is visible. The first
+step in the subdivision process is refining the mesh. This is done by
+inserting a new point on each edge (called an edge-point).  Whenever a
+new edge-point is calculated, information from both adjacent faces is
+retrieved. This is another reason why edges always must be shared by
+two faces. For each face which has four points or more a point is also
+inserted at the center of each face (called a face-point). For faces
+with three points each new edge-point is connected with the new point
+of the previous edge, thus creating 4 new triangles. All other faces
+are subdivided by connecting each edge-point to the face- point. This
+way a refined mesh is created which still has the same shape as the
+original. This is shown in the middle. Finally all the points in the
+surface are shifted to a new location in such a way that the surface
+appears smooth. This is called averaging in subdivision terms (right
+side). If this process is repeated a number of times a very fine and
+smooth mesh is the result. ShipCAD shows a dropdown box in the toolbar
+showing the precision of the model. This is actually a measure for how
+many subsequent subdivision steps the program performs.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=1065,natheight=280]{figure5.png}
+        \caption{}
+        \label{fig:mesh4}
+\end{figure}
+
+Figure \ref{fig:mesh4} shows the controlmesh of the same beveled cube
+and the resulting surface after 1, 2 and 3 subdivision steps is shown.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=535,natheight=268]{figure6.png}
+        \caption{}
+        \label{fig:mesh5}
+\end{figure}
+
+This is the same cube, but a number of edges have been marked as
+crease-edges (red lines). The result is a sharp knuckle line going
+around the cube. It is clearly visible that faces adjacent to the
 crease-edges are no longer joined in a smooth manner.
 
-\subsection{Guidelines to subdivision modeling.}
+\subsection{Guidelines to subdivision modeling.} \label{guidelines}
 In this paragraph some guidelines are given to obtain the best
 results.
+
 \begin{itemize}
-  \item Use a regular grid whenever possible. A
-grid is considered regular if all faces consist
-of four points, and all points are connected
-to four edges and faces. A point on the
-boundary is considered regular if it has 3
-edges and two faces connected to it. Off
-course this is not always possible.
-Triangular faces may be used as a means
-to reduce the number of points in an area.
-5-sided faces, or 5 4-sided faces can be
-used to increase the number of points. A
-truly regular grid would look exactly as the
-B-spline surface in the previous paragraph.Illustration 7
 
-\item Whenever possible always have two faces
-connected to all edges other than boundary-edges. If more than two edges are connected to
-an edge, that specific edge will be drawn thicker and in a light green color. This must be
-avoided at all cost as it messes up hydrostatic calculations. Boundary-edges are allowed,
-but as soon as they become submerged hydrostatics will not be calculated anymore. See
-also 13.1 Check model.
+  \item Use a regular grid whenever possible. A grid is considered
+regular if all faces consist of four points, and all points are
+connected to four edges and faces. A point on the boundary is
+considered regular if it has 3 edges and two faces connected to
+it. Off course this is not always possible.  Triangular faces may be
+used as a means to reduce the number of points in an area.  5-sided
+faces, or 5 4-sided faces can be used to increase the number of
+points. A truly regular grid would look exactly as the B-spline
+surface in the previous paragraph.
+Illustration 7
 
-\item Make sure that the normals of all the faces point outward (in the direction of the water). This
-is of uttermost importance since ShipCAD calculates hydrostatics by integrating the
-enclosed volume at the back of the faces. If the normal of a face points inward, the volume
-outside the hull would be calculated and might even become negative. By using the actual
-surface for hydrostatic calculations instead of a number of stations, a higher accuracy is
-obtained. This is especially true when the model has a heeling angle and/or trim, or is fitted
-with a superstructure. ShipCAD can also check the direction of normals automatically, but
-correctness is only guaranteed if the model is totally closed, meaning that no other
-boundary-edges are present except the edges lying on the center plane. Automatic checking
-can be disabled in the project settings dialog as explained in 4.1 Project settings.
+  \item Whenever possible always have two faces connected to all edges
+other than boundary-edges. If more than two edges are connected to an
+edge, that specific edge will be drawn thicker and in a light green
+color. This must be avoided at all cost as it messes up hydrostatic
+calculations. Boundary-edges are allowed, but as soon as they become
+submerged hydrostatics will not be calculated anymore. See also \ref{check-model}.
+
+  \item Make sure that the normals of all the faces point outward (in
+the direction of the water). This is of uttermost importance since
+ShipCAD calculates hydrostatics by integrating the enclosed
+volume \textbf{at the back} of the faces. If the normal of a face
+points inward, the volume \textbf{outside} the hull would be
+calculated and might even become negative. By using the actual surface
+for hydrostatic calculations instead of a number of stations, a higher
+accuracy is obtained. This is especially true when the model has a
+heeling angle and/or trim, or is fitted with a superstructure. ShipCAD
+can also check the direction of normals automatically, but correctness
+is only guaranteed if the model is totally closed, meaning that no
+other boundary-edges are present except the edges lying on the center
+plane. Automatic checking can be disabled in the project settings
+dialog as explained in \ref{project-settings}.
+
 \end{itemize}
 
 \section{Viewports.}
+
 \subsection{Zooming and panning.}
-When a new model is opened or started the program by default adds 4 windows. Each window has
-a different view on the 3D hull. The area of the window on which the model is drawn is called a
-viewport. Zooming in or out on the viewport is done by
-pressing the left mouse button and moving the mouse
-up or down while keeping the left button pressed.
-Users having a mouse wheel may find it convenient to
-zoom in or out using their mouse wheel. Panning the
-viewport is done in a similar manner, only with the right
-mouse button must be pressed. Only when the
-viewport displays a perspective view, as in the image
-to the right, two scrollbars are visible. These can be
-used to rotate and tilt the model. Another way to rotate
-the model is keeping the middle mouse button (or
-mouse wheel) pressed while dragging the mouse, also
-only in a in a perspective view. Additional options for
- Illustration 8
-each viewport are accessible from the popup-menu which shows after the right button of the mouse
-has been pressed.
+When a new model is opened or started the program by default adds 4
+windows. Each window has a different view on the 3D hull. The area of
+the window on which the model is drawn is called a viewport. Zooming
+in or out on the viewport is done by pressing the left mouse button
+and moving the mouse up or down while keeping the left button pressed.
+Users having a mouse wheel may find it convenient to zoom in or out
+using their mouse wheel. Panning the viewport is done in a similar
+manner, only with the right mouse button must be pressed. Only when
+the viewport displays a perspective view, as in the image to the
+right, two scrollbars are visible. These can be used to rotate and
+tilt the model. Another way to rotate the model is keeping the middle
+mouse button (or mouse wheel) pressed while dragging the mouse, also
+only in a in a perspective view. Additional options for each viewport
+are accessible from the popup-menu which shows after the right button
+of the mouse has been pressed.
+Illustration 8
 
 \subsection{Selecting items.}
-Only items visible in the viewport can be selected and only if the viewport is in wireframe mode
-(shading is turned off). In order to select points or edges the controlnet has to be turned on. Faces
-can only be selected when the interior edges are turned on. For more information concerning
-visibility options the reader is referred to 11. Visibility options. It is important to keep in mind that
-selected faces, edges or points remain selected even when they are not visible in the viewport due
-to a change in the visibility options. To select an item, simply click on it with the mouse. Selected
-items can be recognized because they are drawn in yellow. If a point is selected, and the user clicks
-on a different point, this new point will be selected and the previous point will be deselected.
-Selecting multiple points however is possible by keeping the CTRL-key pressed while clicking on a
-new point.
-If the CTRL key is pressed while an edge is being selected, the program tries to trace the edge until
-a irregular point is encountered or an edge with a different crease-property. This way it is easy to
-select an entire row of edges (edgeloop) such as for example the sheerline or a hard chine.
-Faces also can be CTRL-selected. In that case all the faces belonging to the same layer and
-connected to the selected one are also selected or deselected. Faces that are isolated from the
-selected face because they are totally surrounded by crease edges are not included.
+Only items visible in the viewport can be selected and only if the
+viewport is in wireframe mode (shading is turned off). In order to
+select points or edges the controlnet has to be turned on. Faces can
+only be selected when the interior edges are turned on. For more
+information concerning visibility options the reader is referred
+to \ref{visibility-options}. It is important to keep in mind that
+selected faces, edges or points remain selected even when they are not
+visible in the viewport due to a change in the visibility options. To
+select an item, simply click on it with the mouse. Selected items can
+be recognized because they are drawn in yellow. If a point is
+selected, and the user clicks on a different point, this new point
+will be selected and the previous point will be deselected.  Selecting
+multiple points however is possible by keeping the CTRL-key pressed
+while clicking on a new point.
+
+If the CTRL key is pressed while an edge is being selected, the
+program tries to trace the edge until a irregular point is encountered
+or an edge with a different crease-property. This way it is easy to
+select an entire row of edges (edgeloop) such as for example the
+sheerline or a hard chine.  Faces also can be CTRL-selected. In that
+case all the faces belonging to the same layer and connected to the
+selected one are also selected or deselected. Faces that are isolated
+from the selected face because they are totally surrounded by crease
+edges are not included.
 
 \subsection{Dragging control points.}
-One of the most important options when it comes to modeling the hull is dragging points. In order to
-do this the controlnet must be turned on. Although it is possible to select points in a perspective
-view, the actual dragging of the point can only be done in the bodyplan view, profile view or plan
-view. When dragging a controlpoint all information is updated realtime. This includes stations,
-buttocks, waterlines and diagonals. Especially when the precision of the model is set to a high value
-this updating might become slow since each intersection with the hull must be recalculated. If it
-becomes too slow, try using a lower precision. If it is still too slow, switch off some of these
-intersection curves since only visible items are recalculated, or try using less intersection curves.
+One of the most important options when it comes to modeling the hull
+is dragging points. In order to do this the controlnet must be turned
+on. Although it is possible to select points in a perspective view,
+the actual dragging of the point can only be done in the bodyplan
+view, profile view or plan view. When dragging a controlpoint all
+information is updated realtime. This includes stations, buttocks,
+waterlines and diagonals. Especially when the precision of the model
+is set to a high value this updating might become slow since each
+intersection with the hull must be recalculated. If it becomes too
+slow, try using a lower precision. If it is still too slow, switch off
+some of these intersection curves since only visible items are
+recalculated, or try using less intersection curves.
 
 \subsection{Modifying controlpoints manually.}
-If a point is selected, the form displayed to the right is shown, and the
-position of the point in 3D-space is displayed in it. These values can be
-altered manually by typing the new location in the appropriate fields. In
-addition to that the values can also be altered relatively to the current
-location by typing the character @ in front of the numerical part. If for
-example the string @-0.2 is entered in the field for the y-coordinate, then all the y-coordinates of all
-selected points will be decreased by 0.20. So the y-coordinate for the displayed point becomes
-2.10-0.20=1.90. This is a convenient way to shift a number of selected points. If the project uses
-imperial units then it is also possible to enter a feet-inch/8 value as follows: 3-2-1, meaning 3ft 2 1/8
-inch.
-Another way of moving points is by pressing the arrow keys in the bodyplan, profile or plan view.
-The active point moves a certain distance in the direction of the arrow key that was pressed. This
-distance, called “incremental distance” is visible at the statusbar of the program, next to the amount
-of undo memory that is in use. If clicked on the text displaying the incremental distance a dialog
-appears in which a new value for the incremental distance can be specified. Another and faster way
-is to press either the + or – key. The incremental distance is then changed by 10%.
-The black arrows displayed next to each input field on the controlpoint form can be used to
-increment the values with the same incremental distance as mentioned above.
+If a point is selected, the form displayed to the right is shown, and
+the position of the point in 3D-space is displayed in it. These values
+can be altered manually by typing the new location in the appropriate
+fields. In addition to that the values can also be altered relatively
+to the current location by typing the character @ in front of the
+numerical part. If for example the string @-0.2 is entered in the
+field for the y-coordinate, then all the y-coordinates of \textbf{all}
+selected points will be decreased by 0.20. So the y-coordinate for the
+displayed point becomes 2.10-0.20=1.90. This is a convenient way to
+shift a number of selected points. If the project uses imperial units
+then it is also possible to enter a feet-inch/8 value as follows:
+3-2-1, meaning 3ft 2 1/8 inch.  Another way of moving points is by
+pressing the arrow keys in the bodyplan, profile or plan view.  The
+active point moves a certain distance in the direction of the arrow
+key that was pressed. This distance, called “incremental distance” is
+visible at the statusbar of the program, next to the amount of undo
+memory that is in use. If clicked on the text displaying the
+incremental distance a dialog appears in which a new value for the
+incremental distance can be specified. Another and faster way is to
+press either the + or – key. The incremental distance is then changed
+by 10\%.  The black arrows displayed next to each input field on the
+controlpoint form can be used to increment the values with the same
+incremental distance as mentioned above.
 
 \subsection{Different drawing modes.}
 ShipCAD has three different drawing modes which are accessible from the popup-menu under the
 right mouse button.
+
 \begin{itemize}
+
   \item Wireframe (Ctrl-W). Only the points, lines and edges are drawn.
-  \item  Shade (Ctrl-F). The surfaces are drawn in a solid color, lines are drawn on top of it. The
-submerged part of the surface can optionally be shown in a different color.
-  \item Developability check (Ctrl-D). The surfaces are shaded again, only this time parts that are
-developable are shaded green and parts that are not developable are shaded red. More
-about developable surfaces can be found in 10.8 Layer properties dialog and 13.4 Develop
-plates
-  \item Gaussian curvature (Ctrl-G), used to check the
-fairness of a surface. The model is shaded in
-colors, based on the discrete Gaussian
-curvature in each point. Most hulls are curved in
-two directions, called the principal curvatures.
-Gaussian curvature is the product of these two
-principal curvatures. Now there are 3
-possibilities here:
 
-\begin{itemize}
-  \item Negative Gaussian curvature. These
-areas are shaded blue and have the
-shape of a saddle, since the curvature in
-one direction is positive while the
-curvature in the other must be negative.
-  \item Zero Gaussian curvature. At least one of the two principal curvatures is zero, so the
-surface is either flat or curved in only one direction. In both cases the surface is
-developable (This is in fact a very important property of developable surfaces). These
-areas are shaded green.
-  \item Positive Gaussian curvature. The curvature in both directions can be positive or
-negative, but must have the same sign. These areas are convex or concave and
-shaded red.
-\end{itemize}
+  \item Shade (Ctrl-F). The surfaces are drawn in a solid color, lines
+are drawn on top of it. The submerged part of the surface can
+optionally be shown in a different color.
 
-  \item Zebra shading (Ctrl-E). Another option to check the model for fairness. Regions with a
-constant light-reflection intensity are shaded in
-bands. This is similar to the way the human eye
-detects unfair spots on a surface since the
-shininess and shadows vary in those areas. If the
-edges of the zebra stripes are curved smoothly
-then the surface is smooth in these areas. At
-knuckle lines they vary abrubtly.
+  \item Developability check (Ctrl-D). The surfaces are shaded again,
+only this time parts that are developable are shaded green and parts
+that are not developable are shaded red. More about developable
+surfaces can be found in \ref{layer-properties} dialog
+and \ref{develop-plates}.
+
+  \item Gaussian curvature (Ctrl-G), used to check the fairness of a
+surface. The model is shaded in colors, based on the discrete Gaussian
+curvature in each point. Most hulls are curved in two directions,
+called the principal curvatures.  Gaussian curvature is the product of
+these two principal curvatures. Now there are 3 possibilities here:
+
+  \begin{itemize}
+
+    \item \textbf{Negative Gaussian curvature}. These areas are shaded blue and
+have the shape of a saddle, since the curvature in one direction is
+positive while the curvature in the other must be negative.
+
+    \item \textbf{Zero Gaussian curvature}. At least one of the two principal
+curvatures is zero, so the surface is either flat or curved in only
+one direction. In both cases the surface is developable (This is in
+fact a very important property of developable surfaces). These areas
+are shaded green.
+
+    \item \textbf{Positive Gaussian curvature}. The curvature in both
+directions can be positive or negative, but must have the same
+sign. These areas are convex or concave and shaded red.
+
+  \end{itemize}
+
+  \item Zebra shading (Ctrl-E). Another option to check the model for
+fairness. Regions with a constant light-reflection intensity are
+shaded in bands. This is similar to the way the human eye detects
+unfair spots on a surface since the shininess and shadows vary in
+those areas. If the edges of the zebra stripes are curved smoothly
+then the surface is smooth in these areas. At knuckle lines they vary
+abrubtly.
+
 \end{itemize}
 
 \subsection{Printing.}
-Viewports can be printed, but only if they are in wireframe mode. Regardless of the zoom state of
-the viewport, the entire model will be send to the printer. If the current view is a perspective view
-then the scale of the print will be such that the model fits the paper. Other views may be printed to
-scale.
+Viewports can be printed, but only if they are in wireframe
+mode. Regardless of the zoom state of the viewport, the entire model
+will be send to the printer. If the current view is a perspective view
+then the scale of the print will be such that the model fits the
+paper. Other views may be printed to scale.
 
 \subsection{Save as bitmap image.}
-The image as shown in the viewport can also be
-saved to disk. The following dialog appears in which
-the desired width or height might be specified. It is
-also possible to enter the filename and the file
+The image as shown in the viewport can also be saved to disk. The
+following dialog appears in which the desired width or height might be
+specified. It is also possible to enter the filename and the file
 location.
 
 \section{File menu.}
@@ -410,33 +481,37 @@ From the file menu various options are available.
 
 \subsection{New.}
 This starts a new model. The following dialog is shown:
-The number of points in longitudinal
-direction means how many “columns” of
-points are desired. Points on these
-columns are roughly in the ordinate plane.
-The number of points in vertical direction
-means the number of points on each
-“column” from the bottom up. The desired
-number of points depends on (and
- Illustration 9
-increases with) the complexity of the final hull. But it is easier to obtain a fair surface when the
-number of points is kept as low as possible. Also the amount of work is reduced, since fewer points
-have to be faired. Extra points might always be inserted later on in the process, especially in surface
-areas with high curvature (such as the bilge or bulb). The input values for length and draft speak for
-itself. With beam is meant the total moulded beam. The last option enables to user to switch
-between metric units (meters) or imperial units (feet and inches).
+
+The number of points in longitudinal direction means how many
+“columns” of points are desired. Points on these columns are roughly
+in the ordinate plane.  The number of points in vertical direction
+means the number of points on each “column” from the bottom up. The
+desired number of points depends on (and Illustration 9 increases
+with) the complexity of the final hull. But it is easier to obtain a
+fair surface when the number of points is kept as low as
+possible. Also the amount of work is reduced, since fewer points have
+to be faired. Extra points might always be inserted later on in the
+process, especially in surface areas with high curvature (such as the
+bilge or bulb). The input values for length and draft speak for
+itself. With beam is meant the total moulded beam. The last option
+enables to user to switch between metric units (meters) or imperial
+units (feet and inches).
 
 \subsection{Open.}
-Use the open option to read an existing ShipCAD model from file. Starting with version 1.90
-ShipCAD saves files to a new binary format with the .fbm extension. The old files with the .free
-extension can still be imported, but saving of this format is no longer supported. Files can still be
-transferred to older version of the program by using the .fef import/export. To open a .free file, click
-the open command in the mainmenu. When the opendialog appears, select “Old freeship files
-(*.free)” from the dropdownbox at the bottom of the dialog.
+Use the open option to read an existing ShipCAD model from
+file. Starting with version 1.90 ShipCAD saves files to a new binary
+format with the .fbm extension. The old files with the .free extension
+can still be imported, but saving of this format is no longer
+supported. Files can still be transferred to older version of the
+program by using the .fef import/export. To open a .free file, click
+the open command in the mainmenu. When the opendialog appears, select
+“Old freeship files (*.free)” from the dropdownbox at the bottom of
+the dialog.
 
 \subsection{Save.}
-This option saves the current model to file. If a file is saved and a file with that name already exists,
-it is renamed by changing the extension from .fbm to .bak This way a backup file is created.
+This option saves the current model to file. If a file is saved and a
+file with that name already exists, it is renamed by changing the
+extension from .fbm to .bak This way a backup file is created.
 
 \subsection{Save as.}
 Save the model while prompting for a filename.
@@ -445,12 +520,15 @@ Save the model while prompting for a filename.
 FREE!Ship imports the following file formats:
 
 \subsubsection{Part.}
-You can import a part file and add it to the present geometry. How to create part files is discussed in
-3.6.1 Part.. ShipCAD automatically detects if the part file uses imperial or metric units and scales
-the imported geometry to suit the type of units used for the current project.
+You can import a part file and add it to the present geometry. How to
+create part files is discussed in \ref{part}. ShipCAD automatically
+detects if the part file uses imperial or metric units and scales the
+imported geometry to suit the type of units used for the current
+project.
 
 \subsubsection{Carlson .hul file.}
-Import files created with Carlson Hulls shareware program, which is available from
+Import files created with Carlson Hulls shareware program, which is
+available from
 \url{http://www.carlsondesign.com/hulls.zip}. Information about the rig will not be imported. When
 importing a file, the user may specify if the intermediate bulkheads, as specified in Hulls, should
 also be imported. If not then only 5 points on each subsequent chine are imported. From version
@@ -464,130 +542,102 @@ edges corresponding to each chine which should coincide with
 the markers.
 Illustration 10
 
-\subsubsection{Import .fef file.}
-The Fef file format (ShipCAD Exchange Format) is of no interest to most users sincesupported by other programs from the same developer.
+\subsubsection{Import .fef file.} \label{import-fef}
+The Fef file format (FREE!ship Exchange Format) is of no interest to
+most users since it mainly supported by other programs from the same
+developer.
 
 \subsubsection{Surface.}
-Import a textfile containing a number of 3D curves. This
-option can best be used when the offsets of a round
-bottomed hull need to be imported. These curves may
-have any number of points which may differ from curve to
-curve. Usually the curves run from the bottom of the hull
-upwards, however longitudinal curves are allowed too,
-just as long as all the curves have the same orientation
-and run in the same direction. It is important that the
-curves are not crossing each other.
-it is mainly
-The user will be prompted how many points in
-longitudinal direction (number of columns) and in
-vertical direction (number of rows) the imported
-hull must have. Then the program fits a B-Spline
-surface through these points such that the new
-surface interpolates these points.
-The first line of the file must either be a 0 (zero) or a 1. A zero indicates that all coordinates are in
-meters while a one indicates that the coordinates are in feet. Each curve is defined by a sequence
-of X,Y and Z coordinates separated by at least 1 space. The end of a curve is indicated by an
-empty line after the last coordinate. The last line in the file should be 'EOF'. The following is an
-example of a file containing 3 stations.
-0
-10.62990
- 0.00000
- 1.75504
-10.62990
- 0.15186
- 1.87085
-10.62990
- 0.36387
- 2.07768
-10.62990
- 0.51880
- 2.25144
-10.62990
- 0.71454
- 2.51209
-10.62990
- 0.91032
- 2.83897
-10.62990
- 1.03680
- 3.13278
-10.62990
- 1.10212
- 3.33143
-10.62990
- 1.18380
- 3.65010
-11.81100
- 0.00000
- 2.26416
-11.81100
- 0.20519
- 2.48343
-A more extensive sample file can be found
- 11.81100
- 0.36424
- 2.71927
-11.81100
- 0.55190
- 3.09169
-in the ShipCAD ships subdirectory and is
- 11.81100
- 0.68655
- 3.41447
-called Round hull import demo.txt. When
- 11.81100
- 0.80491
- 3.75381
-importing such a text file ShipCAD
- 12.99210
- 0.00000
- 3.01751
-assumes the following:
- 12.99210
- 0.09559
- 3.19544
-12.99210
- 0.18538
- 3.43133
-12.99210
- 0.25068
- 3.62583
-X-coordinates are longitudinal.
- 12.99210
- 0.33232
- 3.86172
-Positive Y coordinates correspond
- EOF
-with the portside of the ship. The base lies at z=0.0 and the aft perpendicular at x=0.0
-All curves have multiplicity of 1. Having 2 curves at the same location leads to errors.
-Whenever 2 curves exist at the same location these 2 curves must be combined into one by
-connecting the two segments with a line lying on the center plane. These segments can later
-be removed.
-The curves must be sorted from aft to front (or bottom up in case of longitudinal curves), and
-the coordinates of these curves must be sorted from the bottom to the top ( or aft to front in
-case of longitudinal curves).
+Import a textfile containing a number of 3D curves. This option can
+best be used when the offsets of a round bottomed hull need to be
+imported. These curves may have any number of points which may differ
+from curve to curve. Usually the curves run from the bottom of the
+hull upwards, however longitudinal curves are allowed too, just as
+long as all the curves have the same orientation and run in the same
+direction. It is important that the curves are not crossing each
+other.
+
+The user will be prompted how many points in longitudinal direction
+(number of columns) and in vertical direction (number of rows) the
+imported hull must have. Then the program fits a B-Spline surface
+through these points such that the new surface interpolates these
+points.
+
+The first line of the file must either be a 0 (zero) or a 1. A zero
+indicates that all coordinates are in meters while a one indicates
+that the coordinates are in feet. Each curve is defined by a sequence
+of X,Y and Z coordinates separated by at least 1 space. The end of a
+curve is indicated by an empty line after the last coordinate. The
+last line in the file should be 'EOF'. The following is an example of
+a file containing 3 stations.
+
+\begin{verbatim}
+0 
+10.62990 0.00000 1.75504 
+10.62990 0.15186 1.87085 
+10.62990 0.36387 2.07768 
+10.62990 0.51880 2.25144
+10.62990 0.71454 2.51209 
+10.62990 0.91032 2.83897 
+10.62990 1.03680 3.13278 
+10.62990 1.10212 3.33143 
+10.62990 1.18380 3.65010 
+11.81100 0.00000 2.26416 
+11.81100 0.20519 2.48343 
+11.81100 0.36424 2.71927 
+11.81100 0.55190 3.09169 
+11.81100 0.68655 3.41447 
+11.81100 0.80491 3.75381 
+12.99210 0.00000 3.01751 
+12.99210 0.09559 3.19544 
+12.99210 0.18538 3.43133 
+12.99210 0.25068 3.62583 
+12.99210 0.33232 3.86172 
+EOF 
+\end{verbatim}
+
+A more extensive sample file can be found in the ShipCAD\\ships
+subdirectory and is called \textit{Round hull import demo.txt}. When
+importing such a text file ShipCAD assumes the following:
+
+\begin{itemize}
+
+  \item X-coordinates are longitudinal.  Positive Y coordinates
+correspond with the portside of the ship. The base lies at z=0.0 and
+the aft perpendicular at x=0.0
+
+  \item All curves have multiplicity of 1. Having 2 curves at the same
+location leads to errors.  Whenever 2 curves exist at the same
+location these 2 curves must be combined into one by connecting the
+two segments with a line lying on the center plane. These segments can
+later be removed.
+
+  \item The curves must be sorted from aft to front (or bottom up in
+case of longitudinal curves), and the coordinates of these curves must
+be sorted from the bottom to the top ( or aft to front in case of
+longitudinal curves).
+
+\end{itemize}
 
 \subsubsection{Importing chines.}
-If you want to import a hard chined hull then this is the
-best option. The file has the same format as described
-in the previous paragraph, only the curves have to run in
-longitudinal direction this time since they represent
-chines.
-Again the number of points may differ from chine to
-chine, each chine is ended with an empty line while the
-last line of the file should contain the EOF identifier.
-The curves are imported and the chines are fitted to the
-datapoints of each imported curve in such a way that
-the chines from the ShipCAD hull match these curves.
-The imported curves are also added to the model as
-markers. The file chines import demo.txt contains a
-more elaborate demo. It is located in the ShipCAD
-ships subdirectory. The chines must be ordered from
-the bottom up with coordinates going from aft to front.
-At least three curves must be in the file: The keel line, at
-least one chine and finally the deck- or sheerline.
-Controlcurves are added to the crease edges
-corresponding to each chine.
+If you want to import a hard chined hull then this is the best
+option. The file has the same format as described in the previous
+paragraph, only the curves have to run in longitudinal direction this
+time since they represent chines.  Again the number of points may
+differ from chine to chine, each chine is ended with an empty line
+while the last line of the file should contain the EOF identifier.
+The curves are imported and the chines are fitted to the datapoints of
+each imported curve in such a way that the chines from the ShipCAD
+hull match these curves.  The imported curves are also added to the
+model as markers. The file \textit{chines import demo.txt} contains a
+more elaborate demo. It is located in the ShipCAD\\ships
+subdirectory. The chines must be ordered from the bottom up with
+coordinates going from aft to front.  At least three curves must be in
+the file: The keel line, at least one chine and finally the deck- or
+sheerline.  Controlcurves are added to the crease edges corresponding
+to each chine.
+
+\begin{verbatim}
 1
 0.000
 0.856
@@ -680,63 +730,72 @@ EOF
 1.247
 1.563
 1.683
+\end{verbatim}
 
 \subsubsection{Import Carene XYZ file.}
-This option is to open a textfile generated by
-the Carene program, which is available from
+This option is to open a textfile generated by the Carene program,
+which is available from
 \url{http://www.epoxy-resins.co.uk/Carene/carene.htm}. The textfile
-contains the coordinates of the chines
-describing the hull. These chines will be
-imported into ShipCAD and a spline is fitted
-such that the chine in ShipCAD lies exactly
-on that of Carene. The original chine as
-defined in the XYZ file is added as a marker
-so that it can be checked visually if the
-models are the same. Controlcurves are
+contains the coordinates of the chines describing the hull. These
+chines will be imported into ShipCAD and a spline is fitted such that
+the chine in ShipCAD lies exactly on that of Carene. The original
+chine as defined in the XYZ file is added as a marker so that it can
+be checked visually if the models are the same. Controlcurves are
 added to the crease edges corresponding to each chine.
 
 \subsubsection{VRML.}
-Import a mesh from VRML 1.0 files. For information regarding the VRML format see :
+Import a mesh from VRML 1.0 files. For information regarding the VRML
+format see:
 \url{http://www.bergen.org/ATC/Course/InfoTech/VRML_FAQ.html}
 \url{http://trap.mtview.ca.us/~tom/tech/languages/vrml10c.html}
 When a VRML file is imported only the boundary-edges are set as crease-edges. All other crease-
 edges must be manually set. The only information imported from a VRML file are indexed face sets.
 
 \subsubsection{PolyCad files.}
-Used to import .geo files generated with PolyCad by Marcus Bole. PolyCad can be downloaded for
-free from \url{http://www.polycad.co.uk/downloads.htm} Information currently imported from the file
-includes either generalized Bspline surfaces or surfaces generated with the Shiplines or Yachtlines
+Used to import .geo files generated with PolyCad by Marcus
+Bole. PolyCad can be downloaded for free
+from \url{http://www.polycad.co.uk/downloads.htm} Information
+currently imported from the file includes either generalized Bspline
+surfaces or surfaces generated with the Shiplines or Yachtlines
 option. Contours are also imported.
 
-\subsubsection{Michlet waves.}
-If wave elevations have been calculated using Michlet (see 3.6.11 Michlet), the results can be saved
-to a file. ShipCAD is able to import this information back into the program. It is important not to use
-too many panels. A resolution of 50 x 50=2500 panels gives generally a good result as can be seen
-below. Using more panels really slows the program down. Results of both the rectangular plot and
-the sectorial plot can be imported into the program.
+\subsubsection{Michlet waves.} \label{michlet-waves}
+If wave elevations have been calculated using Michlet (\ref{michlet}),
+the results can be saved to a file. ShipCAD is able to import this
+information back into the program. It is important not to use too many
+panels. A resolution of 50 x 50=2500 panels gives generally a good
+result as can be seen below. Using more panels really slows the
+program down. Results of both the rectangular plot and the sectorial
+plot can be imported into the program.
 
 \subsection{Export.}
 ShipCAD currently exports the following file formats:
 
-\subsubsection{Part.}
-It is possible to save a selection of the model as a part to a so called part file. You can do this by
-selecting the desired faces yourself, or by selecting layers in the layer selection dialog that appears
-if no faces were selected manually. Apart from the points, edges, faces and controlcurves also layer
-information is saved. This way for example a keel can be saved to a file and imported in another
+\subsubsection{Part.} \label{part}
+It is possible to save a selection of the model as a part to a so
+called part file. You can do this by selecting the desired faces
+yourself, or by selecting layers in the layer selection dialog that
+appears if no faces were selected manually. Apart from the points,
+edges, faces and controlcurves also layer information is saved. This
+way for example a keel can be saved to a file and imported in another
 design.
 
 \subsubsection{IGES.}
-Subdivision surfaces can be used to model very complex shapes with only one mathematical
-surface, which cannot be done with one single NURB surface. Because of this it can be difficult to
-translate the subdivision surface into NURB surfaces. Normally one NURB surface is created for
-each face with 4 points. Faces with more or less points are subdivided in as much NURB patches
-as there are points in the face. So a three sided face is converted to 3 NURB patches. This can lead
-to an enormous amount of patches in the IGES file. This is not necessarily a problem, unless you
-want to modify the surfaces in another CAD program. Therefore ShipCAD uses an algorithm that
-assembles as much 4 sided faces as possible to form larger NURB surfaces. This reduces the
-amount of exported surfaces significantly. In some cases it can even be reduced to a single NURB
-surface. Only surfaces are exported to the IGES file. They are exported as NURB surfaces (IGES
-entity 128).
+Subdivision surfaces can be used to model very complex shapes with
+only one mathematical surface, which cannot be done with one single
+NURB surface. Because of this it can be difficult to translate the
+subdivision surface into NURB surfaces. Normally one NURB surface is
+created for each face with 4 points. Faces with more or less points
+are subdivided in as much NURB patches as there are points in the
+face. So a three sided face is converted to 3 NURB patches. This can
+lead to an enormous amount of patches in the IGES file. This is not
+necessarily a problem, unless you want to modify the surfaces in
+another CAD program. Therefore ShipCAD uses an algorithm that
+assembles as much 4 sided faces as possible to form larger NURB
+surfaces. This reduces the amount of exported surfaces
+significantly. In some cases it can even be reduced to a single NURB
+surface. Only surfaces are exported to the IGES file. They are
+exported as NURB surfaces (IGES entity 128).
 
 \subsubsection{DXF 3D mesh.}
 The same algorithm as described above is used to form polygonal meshes. These meshes are
@@ -755,156 +814,177 @@ segments. The max. length of such a straight line segment is adjustable which ma
 export ideal for CNC data.
 
 \subsubsection{DXF 3D polylines.}
-All intersection curves such as stations, buttocks, waterlines, diagonals and crease edges are
-exported to an AutoCad DXF file as 3D polylines. Controlcurves are exported also. Again
-information is exported as visible in the viewports.
+All intersection curves such as stations, buttocks, waterlines,
+diagonals and crease edges are exported to an AutoCad DXF file as 3D
+polylines. Controlcurves are exported also. Again information is
+exported as visible in the viewports.
 
 \subsubsection{Wavefront file (.obj).}
 Visible parts of the surface are sent to an .obj file as specified at
 \url{http://www.fileformat.info/format/wavefrontobj/}. Color information is not included at this point.
 
 \subsubsection{STL file.}
-The STL format is mainly used for manufacturing purposes, but sometimes also for exchanging
-data with other CAD programs. All visible parts of the surfaces are send to the file as a large
+The STL format is mainly used for manufacturing purposes, but
+sometimes also for exchanging data with other CAD programs. All
+visible parts of the surfaces are send to the file as a large
 collection of small triangles.
 
 \subsubsection{Export .fef file.}
-See:3.5.3 Import .fef file
+See:\ref{import-fef}
 
 \subsubsection{Offsets.}
-Offsets of intersection curves and controlcurves are exported to a text file. Regardless of the
-visibility settings all available lines are exported. Of each line only the portside is send to the file.
+Offsets of intersection curves and controlcurves are exported to a
+text file. Regardless of the visibility settings all available lines
+are exported. Of each line only the portside is send to the file.
 
 \subsubsection{Coordinates.}
-This option saves the coordinates of all the controlpoints from the model to a textfile. This textfile
-can be read directly into Rhino.
+This option saves the coordinates of all the controlpoints from the
+model to a textfile. This textfile can be read directly into Rhino.
 
-\subsubsection{Michlet.}
+\subsubsection{Michlet.} \label{michlet}
 Michlet is an excellent free CFD program which can be downloaded from
 \url{http://www.cyberiad.net/michlet.htm}. The program can be used to give a more accurate prediction
-of frictional and residual resistance. It is based in
-Mitchell's theory and is best suited for ships with a
-large length/beam ratio (7 or higher) and low
-blockcoefficient. However Leo Lazauskas, the author
-of Michlet, reported that even ships with a L/B ratio of
-5 and up may be used, although this reduces
-accuracy. Michlet also predicts the wave elevations
-of the far field (the waves behind the vessel). For
-more information regarding the use of Michlet and its
-input values the user is referred to to Michlet manual.
-One important aspect which I believe is not
-mentioned in that manual is that the speed used for
-prediction wave elevations cannot be higher than the
-maximum speed specified for the resistance
-calculations. So make sure that this is high enough.
-There are currently 3 ways of exporting a hull to Michlet:
+of frictional and residual resistance. It is based in Mitchell's
+theory and is best suited for ships with a large length/beam ratio (7
+or higher) and low blockcoefficient. However Leo Lazauskas, the author
+of Michlet, reported that even ships with a L/B ratio of 5 and up may
+be used, although this reduces accuracy. Michlet also predicts the
+wave elevations of the far field (the waves behind the vessel). For
+more information regarding the use of Michlet and its input values the
+user is referred to to Michlet manual.  One important aspect which I
+believe is not mentioned in that manual is that the speed used for
+prediction wave elevations cannot be higher than the maximum speed
+specified for the resistance calculations. So make sure that this is
+high enough.  There are currently 3 ways of exporting a hull to
+Michlet:
 
 \begin{itemize}
-  \item Monohull. This is the default option for sending monohulls.
-  \item Monohull as catamaran. This option is intended for designing catamarans. The usual
+
+  \item \textbf{Monohull}. This is the default option for sending monohulls.
+
+  \item \textbf{Monohull as catamaran}. This option is intended for designing catamarans. The usual
 way to do this is first design the hull as a monohull, with it's centerplane still on the XZ
 plane through the origin. You can send the hull to Michlet as a multihull with a specified
 distance between the two center planes of each individual hull. Michlet can be used to
 optimize this distance by varying it as the interference of the two hulls shows up in the
 wave pattern (and in the resistance curves).
-  \item Catamaran. If you have a design consisting of two hulls, again the distance must be
-specified. however in this case it must be the actual distance between the center planes
+
+  \item \textbf{Catamaran}. If you have a design consisting of two hulls, again the distance must be
+specified. however in this case it \textbf{must} be the actual distance between the center planes
 of the hulls otherwise ShipCAD cannot calculate the proper offsets of
 the hulls.
+
 \end{itemize}
 
-If you want to use Michlet it is important to realize that each individual hull in Michlet must be
-symmetrical with respect to its own centerplane. In other words, it cannot handle asymmetrical hulls.
-The results of the wave elevation calculation can be imported back into the program. More
-information about this topic is given in 3.5.9 Michlet waves.
+If you want to use Michlet it is important to realize that each
+individual hull in Michlet must be symmetrical with respect to its own
+centerplane. In other words, it cannot handle asymmetrical hulls.  The
+results of the wave elevation calculation can be imported back into
+the program. More information about this topic is given in \ref{michlet-waves}.
 
 \subsubsection{Archimedes.}
-ShipCAD exports all stations in the model either to Archimedes single body (.app file) or to
-ArchimedesMB, which is the multi body version of Archimedes (.hll file). Both versions of
-Archimedes can be used to perform additional hydrostatic and stability calculations. Archimedes is
-low-cost software and is available from \url{http://www.naval-architecture.co.uk}. This option is only
+ShipCAD exports all stations in the model either to Archimedes single
+body (.app file) or to ArchimedesMB, which is the multi body version
+of Archimedes (.hll file). Both versions of Archimedes can be used to
+perform additional hydrostatic and stability calculations. Archimedes
+is low-cost software and is available
+from \url{http://www.naval-architecture.co.uk}. This option is only
 enabled if stations are added to the model.
 
 \subsubsection{GHS.}
-Export all available stations to a GHS file. GHS files can be imported by most hydrostatic programs
-that perform calculations based on a bodyplan and is a widely accepted format.
+Export all available stations to a GHS file. GHS files can be imported
+by most hydrostatic programs that perform calculations based on a
+bodyplan and is a widely accepted format.
 
 \subsection{Exit.}
 Shuts down the program.
 
 \subsection{Preferences.}
-The following dialog in Illustration 11 shows in which program preferences may be altered. These
-modified preferences are stored in the file freeship.dta located in the same directory as the
-program. To restore the preferences to the default settings it suffices to delete this file and restart
-the program. You can restore modifications to color settings by pressing the reset button.
-You can also modify the language used by ShipCAD. More about the language support can be
-found in Chapter 17.
+The following dialog in Illustration 11 shows in which program
+preferences may be altered. These modified preferences are stored in
+the file freeship.dta located in the same directory as the program. To
+restore the preferences to the default settings it suffices to delete
+this file and restart the program. You can restore modifications to
+color settings by pressing the reset button.  You can also modify the
+language used by ShipCAD. More about the language support can be found
+in \ref{language-support}.
 Illustration 11
 
 \section{Project options.}
 
-\subsection{Project settings.}
-The project settings dialog will let you specify various project settings. It has a number of tab pages.
+\subsection{Project settings.} \label{project-settings}
+The project settings dialog will let you specify various project
+settings. It has a number of tab pages.
+
 The first tab page is used for general information about the
 project, such as the project name, name of the designer, some
 comment, the name of the person who created the file and the
 type of units used for this project. This can either be imperial or
 metric units.
+
 It is also possible to turn shading of the submerged hull in a
 different color on or off, and to specify the color to be used for the
 submerged body.
+
 There's also a switch to enable or disable the storage of a
 preview image in the project file.
+
 The second tab page is used to define the main particulars of the
 model, and the location of the midship section. By default this is
 at half the defined project length but this can be modified.
-The last tab page is used for all hydrostatics related settings,
-such as the density of the water and appendage coefficient. This
-is a factor normally used to incorporate shell thickness and
-appendages such as the rudder in the displacement calculation,
-usually in the range 1.005 - 1.010. There's also a dropdownbox
-which can be used to specify how hydrostatic coefficients, such
-as for example the blockcoefficient and prismatic coefficient
-should be calculated. This can be done using either the
-dimensions specified in this project dialog (customary when
-designing larger ships) or the actual dimensions of the
-submerged body(customary when designing yachts and small
-boats) .
-Each time hydrostatics are calculated, the program checks the direction of all facenormals. If the
-normals point in the wrong direction after this check, it is best to disable the automatic check and
-manually flip the normals (9.2 Flip) to the correct side.
-ShipCAD can also show some hydrostatic features in the 3D model in wireframe mode (see 11.10
-Hydrostatic features). You can also specify here which features should or should not be plotted.
+
+The last tab page is used for all hydrostatics related settings, such
+as the density of the water and appendage coefficient. This is a
+factor normally used to incorporate shell thickness and appendages
+such as the rudder in the displacement calculation, usually in the
+range 1.005 - 1.010. There's also a dropdownbox which can be used to
+specify how hydrostatic coefficients, such as for example the
+blockcoefficient and prismatic coefficient should be calculated. This
+can be done using either the dimensions specified in this project
+dialog (customary when designing larger ships) or the actual
+dimensions of the submerged body(customary when designing yachts and
+small boats).
+
+Each time hydrostatics are calculated, the program checks the
+direction of all facenormals. If the normals point in the wrong
+direction after this check, it is best to disable the automatic check
+and manually flip the normals (\ref{flip}) to the correct side.  ShipCAD
+can also show some hydrostatic features in the 3D model in wireframe
+mode (see \ref{hydrostatic-features}). You can also specify here which
+features should or should not be plotted.
 
 \subsection{Linesplan.}
-FREEship! enables the user to view the complete formatted linesplan of the ship. This can be done
-in two different modes, wireframe mode (to the left) and the filled mode (to the right). The linesplan
-shows only the present intersection curves, regardless of the visibility setting of the corresponding
-intersection curves. So stations are always shown in the linesplan, even if they are switched off in
-the hullform views. Currently this linesplan can be saved as a bitmap, to a dxf file, or sent directly to
-the printer/plotter. The linesplan can also be drawn in black \& white by clicking on the appropriate
-button in the toolbar. Using fill colors is not possible in black \& white mode. Only if the model
-contains no diagonals, the plan view might optionally be mirrored so that both sides are visible.
-Some layers can be
-hidden from the
-linesplan. How this is
-done is described in
-10.8 Layer properties
-dialog.
+ShipCAD enables the user to view the complete formatted linesplan of
+the ship. This can be done in two different modes, wireframe mode (to
+the left) and the filled mode (to the right). The linesplan shows only
+the present intersection curves, regardless of the visibility setting
+of the corresponding intersection curves. So stations are always shown
+in the linesplan, even if they are switched off in the hullform
+views. Currently this linesplan can be saved as a bitmap, to a dxf
+file, or sent directly to the printer/plotter. The linesplan can also
+be drawn in black \& white by clicking on the appropriate button in
+the toolbar. Using fill colors is not possible in black \& white
+mode. Only if the model contains \underline{no} diagonals, the plan view might
+optionally be mirrored so that both sides are visible.  Some layers
+can be hidden from the linesplan. How this is done is described in
+\ref{layer-properties}.
 Illustration 12
 
 \section{Edit menu.}
 
 \subsection{Undo.}
-Undo previous editing actions. ShipCAD stores all actions. When a new file is read into memory,
-the previous undo data will not be destroyed.
+Undo previous editing actions. ShipCAD stores all actions. When a new
+file is read into memory, the previous undo data will not be
+destroyed.
 
 \subsection{Delete.}
-Use this if you want to delete selected items. The program first deletes all selected faces, then the
-edges and finally the selected points. Any points or edges that appear to be unused after this
-process are deleted also. Note that when a point is deleted all attached faces and edges are
-deleted too. If an edge is deleted, any attached faces will also be deleted. See also point collapse
-and edge collapse.
+Use this if you want to delete selected items. The program first
+deletes all selected faces, then the edges and finally the selected
+points. Any points or edges that appear to be unused after this
+process are deleted also. Note that when a point is deleted all
+attached faces and edges are deleted too. If an edge is deleted, any
+attached faces will also be deleted. See also \ref{point-collapse}
+and \ref{edge-collapse}.
 
 \section{Point operations.}
 
@@ -918,7 +998,7 @@ is done by projecting all the selected points on the line segment through the fi
 point. They are projected to that line rather than uniformly distributed to keep the displacement of
 the points minimal.
 
-\subsection{Collapse.}
+\subsection{Collapse.} \label{point-collapse}
 This removes a selected point without deleting the surrounding geometry. A point can only be
 collapsed if it is attached to exactly two edges. The point is then removed, and the two edges are
 combined into a single edge. If a point is attached to more than 2 edges, the other edges might be
@@ -996,7 +1076,7 @@ smoother surface. (see also 1.6 Guidelines to
 subdivision modeling).
 Illustration 15
 
-\subsection{Collapse.}
+\subsection{Collapse.} \label{edge-collapse}
 Collapsing an edge removes the edge and combines the two attached faces into one new face.
 Edge collapsing only makes sense if the selected edge is not a boundary-edge. The example to the
 right shows how multiple edges are collapsed in one pass. Only two points on the boundary-edges
@@ -1079,7 +1159,7 @@ Guidelines to subdivision modeling). The direction of facenormals is automatical
 corrected (if possible) if this option is not disabled in the project dialog. This check is performed
 each time hydrostatics are calculated or when the check model option is chosen from the menu.
 
-\subsection{Flip.}
+\subsection{Flip.} \label{flip}
 This option can be used to manually flip the normals of selected faces to the other side. The
 normals of a face can be visualized by selecting the specific face. Make sure that both interior
 edges and visibility of normals are turned on. When displaying normals, each normal is calculated
@@ -1144,7 +1224,7 @@ Only enabled when the model contains at least one empty layer and when more than
 present. When selected, all empty layers are removed from the model. This also includes the active
 layer if it is empty. At least one layer remains as the active layer.
 
-\subsection{Layer properties dialog.}
+\subsection{Layer properties dialog.} \label{layer-properties}
 A window is displayed showing all layers and
 their properties. The left half of the window shows
 a list containing all available layers in the model.
@@ -1253,7 +1333,7 @@ displayed. The black up and down arrows in the toolbar can be used to move a sel
 down in the list. Developable layers will appear in the same order in the window with developed
 panels.
 
-\section{Visibility options.}
+\section{Visibility options.} \label{visibility-options}
 
 \subsection{Control net.}
 The controlnet is the combination of points and
@@ -1319,7 +1399,7 @@ the model.
 Draws all present diagonals to the viewport. This option is only enabled if diagonals are added to
 the model.
 
-\subsection{Hydrostatic features.}
+\subsection{Hydrostatic features.} \label{hydrostatic-features}
 FREEship also provides the option to plot some key hydrostatic values in the model. These are:
 •
 •
@@ -1401,7 +1481,7 @@ the same result.
 
 \section{Tools.}
 
-\subsection{Check model.}
+\subsection{Check model.} \label{check-model}
 ShipCAD can check the model for any inconsistencies, and corrects most of them automatically.
 This check is also performed each time hydrostatics are calculated, unless this automatic checking
 is disabled in the project settings. First of all the surface is checked for any disjoint segments. Then
@@ -1438,7 +1518,7 @@ starboard side.
 \subsection{Remove unused points.}
 This can be used to remove all unused points from the model.
 
-\subsection{Develop plates.}
+\subsection{Develop plates.} \label{develop-plates}
 All layers which are marked as developable in the layer properties dialog are unfolded onto flat
 plates (a process also called developing). If the model contains no developable layers then this
 option appears disabled. Both sides of the ship are unfolded. A window then appears showing the
@@ -1821,7 +1901,7 @@ If even after all the measures above the background image is till too dominant, 
 with the viewport color. This way it dissolves in the background and the geometry of you ShipCAD
 model is still clearly visible.
 
-\section{Language support.}
+\section{Language support.} \label{language-support}
 Current translations include:
 •
  English

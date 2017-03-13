@@ -265,7 +265,7 @@ many subsequent subdivision steps the program performs.
 
 \begin{figure}[h]
         \centering
-        \includegraphics[width=15cm,natwidth=1065,natheight=280]{figure5.png}
+        \includegraphics[width=12cm,natwidth=1065,natheight=280]{figure5.png}
         \caption{}
         \label{fig:mesh4}
 \end{figure}
@@ -284,6 +284,7 @@ This is the same cube, but a number of edges have been marked as
 crease-edges (red lines). The result is a sharp knuckle line going
 around the cube. It is clearly visible that faces adjacent to the
 crease-edges are no longer joined in a smooth manner.
+\pagebreak
 
 \subsection{Guidelines to subdivision modeling.} \label{guidelines}
 In this paragraph some guidelines are given to obtain the best
@@ -300,7 +301,13 @@ used as a means to reduce the number of points in an area.  5-sided
 faces, or 5 4-sided faces can be used to increase the number of
 points. A truly regular grid would look exactly as the B-spline
 surface in the previous paragraph.
-Illustration 7
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=10cm,natwidth=583,natheight=386]{figure7.png}
+        \caption{}
+        \label{fig:mesh6}
+\end{figure}
 
   \item Whenever possible always have two faces connected to all edges
 other than boundary-edges. If more than two edges are connected to an
@@ -596,7 +603,7 @@ a file containing 3 stations.
 EOF 
 \end{verbatim}
 
-A more extensive sample file can be found in the ShipCAD\\ships
+A more extensive sample file can be found in the ShipCAD$\textbackslash$ships
 subdirectory and is called \textit{Round hull import demo.txt}. When
 importing such a text file ShipCAD assumes the following:
 
@@ -623,113 +630,56 @@ longitudinal curves).
 If you want to import a hard chined hull then this is the best
 option. The file has the same format as described in the previous
 paragraph, only the curves have to run in longitudinal direction this
-time since they represent chines.  Again the number of points may
+time since they represent chines. Again the number of points may
 differ from chine to chine, each chine is ended with an empty line
 while the last line of the file should contain the EOF identifier.
 The curves are imported and the chines are fitted to the datapoints of
 each imported curve in such a way that the chines from the ShipCAD
 hull match these curves.  The imported curves are also added to the
 model as markers. The file \textit{chines import demo.txt} contains a
-more elaborate demo. It is located in the ShipCAD\\ships
+more elaborate demo. It is located in the ShipCAD$\textbackslash$ships
 subdirectory. The chines must be ordered from the bottom up with
-coordinates going from aft to front.  At least three curves must be in
+coordinates going from aft to front. At least three curves must be in
 the file: The keel line, at least one chine and finally the deck- or
-sheerline.  Controlcurves are added to the crease edges corresponding
+sheerline. Controlcurves are added to the crease edges corresponding
 to each chine.
 
 \begin{verbatim}
 1
-0.000
-0.856
-1.884
-3.939
-4.966
-5.994
-8.049
-9.590
-10.618
-11.645
-13.700
--0.771
-0.685
-2.398
-4.110
-5.822
-7.535
-9.248
-10.960
-12.672
-14.471
--0.053
-0.856
-2.911
-4.966
-7.021
-9.076
-11.131
-13.186
-13.753
+ 0.000           0.000           0.150
+ 0.856           0.000           0.048
+ 1.884           0.000           -0.04
+ 3.939           0.000           -0.15
+ 4.966           0.000           -0.18
+ 5.994           0.000           -0.19
+ 8.049           0.000           -0.19
+ 9.590           0.000           -0.16
+ 10.618          0.000           -0.12
+ 11.645          0.000           -0.05
+ 13.700          0.000           0.150
+ 
+-0.771           0.000           1.056
+ 0.685           0.662           0.844
+ 2.398           1.219           0.666
+ 4.110           1.536           0.565
+ 5.822           1.664           0.524
+ 7.535           1.672           0.522
+ 9.248           1.575           0.553
+ 10.960          1.300           0.640
+ 12.672          0.795           0.802
+ 14.471          0.000           1.056
+ 
+-0.053           0.000           1.683
+ 0.856           0.421           1.498
+ 2.911           1.071           1.211
+ 4.966           1.375           1.077
+ 7.021           1.436           1.050
+ 9.076           1.344           1.090
+ 11.131          0.989           1.247
+ 13.186          0.272           1.563
+ 13.753          0.000           1.683
+
 EOF
-0.000
-0.000
-0.000
-0.000
-0.000
-0.000
-0.000
-0.000
-0.000
-0.000
-0.000
-0.000
-0.662
-1.219
-1.536
-1.664
-1.672
-1.575
-1.300
-0.795
-0.000
-0.000
-0.421
-1.071
-1.375
-1.436
-1.344
-0.989
-0.272
-0.000
-0.150
-0.048
--0.046
--0.158
--0.184
--0.195
--0.192
--0.163
--0.122
--0.059
-0.150
-1.056
-0.844
-0.666
-0.565
-0.524
-0.522
-0.553
-0.640
-0.802
-1.056
-1.683
-1.498
-1.211
-1.077
-1.050
-1.090
-1.247
-1.563
-1.683
 \end{verbatim}
 
 \subsubsection{Import Carene XYZ file.}

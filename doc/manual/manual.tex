@@ -292,7 +292,7 @@ results.
 
 \begin{itemize}
 
-  \item Use a regular grid whenever possible. A grid is considered
+\item Use a regular grid whenever possible. A grid is considered
 regular if all faces consist of four points, and all points are
 connected to four edges and faces. A point on the boundary is
 considered regular if it has 3 edges and two faces connected to
@@ -304,10 +304,11 @@ surface in the previous paragraph.
 
 \begin{figure}[h]
         \centering
-        \includegraphics[width=10cm,natwidth=583,natheight=386]{figure7.png}
+        \includegraphics[width=5cm,natwidth=583,natheight=386]{figure7.png}
         \caption{}
         \label{fig:mesh6}
 \end{figure}
+
 
   \item Whenever possible always have two faces connected to all edges
 other than boundary-edges. If more than two edges are connected to an
@@ -336,6 +337,14 @@ dialog as explained in \ref{project-settings}.
 \section{Viewports.}
 
 \subsection{Zooming and panning.}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=1024,natheight=715]{figure8.png}
+        \caption{}
+        \label{fig:viewport}
+\end{wrapfigure}
+
 When a new model is opened or started the program by default adds 4
 windows. Each window has a different view on the 3D hull. The area of
 the window on which the model is drawn is called a viewport. Zooming
@@ -351,13 +360,13 @@ mouse button (or mouse wheel) pressed while dragging the mouse, also
 only in a in a perspective view. Additional options for each viewport
 are accessible from the popup-menu which shows after the right button
 of the mouse has been pressed.
-Illustration 8
 
 \subsection{Selecting items.}
 Only items visible in the viewport can be selected and only if the
 viewport is in wireframe mode (shading is turned off). In order to
-select points or edges the controlnet has to be turned on. Faces can
-only be selected when the interior edges are turned on. For more
+select points or edges the Control Net has to be
+turned on. Faces can only be selected when
+the interior edges are turned on. For more
 information concerning visibility options the reader is referred
 to \ref{visibility-options}. It is important to keep in mind that
 selected faces, edges or points remain selected even when they are not
@@ -393,6 +402,13 @@ slow, try using a lower precision. If it is still too slow, switch off
 some of these intersection curves since only visible items are
 recalculated, or try using less intersection curves.
 
+\begin{wrapfigure}{r}{0.2\textwidth}
+        \centering
+        \includegraphics[width=0.2\textwidth,natwidth=277,natheight=165]{pointdialog.png}
+        \caption{}
+        \label{fig:pointdialog}
+\end{wrapfigure}
+
 \subsection{Modifying controlpoints manually.}
 If a point is selected, the form displayed to the right is shown, and
 the position of the point in 3D-space is displayed in it. These values
@@ -405,7 +421,9 @@ selected points will be decreased by 0.20. So the y-coordinate for the
 displayed point becomes 2.10-0.20=1.90. This is a convenient way to
 shift a number of selected points. If the project uses imperial units
 then it is also possible to enter a feet-inch/8 value as follows:
-3-2-1, meaning 3ft 2 1/8 inch.  Another way of moving points is by
+3-2-1, meaning 3ft 2 1/8 inch.
+
+Another way of moving points is by
 pressing the arrow keys in the bodyplan, profile or plan view.  The
 active point moves a certain distance in the direction of the arrow
 key that was pressed. This distance, called “incremental distance” is
@@ -414,9 +432,18 @@ memory that is in use. If clicked on the text displaying the
 incremental distance a dialog appears in which a new value for the
 incremental distance can be specified. Another and faster way is to
 press either the + or – key. The incremental distance is then changed
-by 10\%.  The black arrows displayed next to each input field on the
+by 10\%.
+
+The black arrows displayed next to each input field on the
 controlpoint form can be used to increment the values with the same
 incremental distance as mentioned above.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=604,natheight=400]{surfacecurvaturevw.png}
+        \caption{}
+        \label{fig:surfcurvvw}
+\end{wrapfigure}
 
 \subsection{Different drawing modes.}
 ShipCAD has three different drawing modes which are accessible from the popup-menu under the
@@ -460,6 +487,13 @@ sign. These areas are convex or concave and shaded red.
 
   \end{itemize}
 
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=493,natheight=233]{zebrashading.png}
+        \caption{}
+        \label{fig:zebra}
+\end{wrapfigure}
+
   \item Zebra shading (Ctrl-E). Another option to check the model for
 fairness. Regions with a constant light-reflection intensity are
 shaded in bands. This is similar to the way the human eye detects
@@ -477,6 +511,13 @@ will be send to the printer. If the current view is a perspective view
 then the scale of the print will be such that the model fits the
 paper. Other views may be printed to scale.
 
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=570,natheight=377]{saveimagedialog.png}
+        \caption{}
+        \label{fig:saveas}
+\end{wrapfigure}
+
 \subsection{Save as bitmap image.}
 The image as shown in the viewport can also be saved to disk. The
 following dialog appears in which the desired width or height might be
@@ -488,6 +529,13 @@ From the file menu various options are available.
 
 \subsection{New.}
 This starts a new model. The following dialog is shown:
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=401,natheight=223]{filenewdialog.png}
+        \caption{}
+        \label{fig:filenew}
+\end{wrapfigure}
 
 The number of points in longitudinal direction means how many
 “columns” of points are desired. Points on these columns are roughly
@@ -512,13 +560,13 @@ can still be imported, but saving of this format is no longer
 supported. Files can still be transferred to older version of the
 program by using the .fef import/export. To open a .free file, click
 the open command in the mainmenu. When the opendialog appears, select
-“Old freeship files (*.free)” from the dropdownbox at the bottom of
+``Old freeship files (*.free)'' from the dropdownbox at the bottom of
 the dialog.
 
 \subsection{Save.}
 This option saves the current model to file. If a file is saved and a
 file with that name already exists, it is renamed by changing the
-extension from .fbm to .bak This way a backup file is created.
+extension from \textit{.fbm} to \textit{.bak} This way a backup file is created.
 
 \subsection{Save as.}
 Save the model while prompting for a filename.
@@ -532,6 +580,13 @@ create part files is discussed in \ref{part}. ShipCAD automatically
 detects if the part file uses imperial or metric units and scales the
 imported geometry to suit the type of units used for the current
 project.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=311,natheight=229]{filecarlson.png}
+        \caption{}
+        \label{fig:carlson}
+\end{wrapfigure}
 
 \subsubsection{Carlson .hul file.}
 Import files created with Carlson Hulls shareware program, which is
@@ -550,9 +605,17 @@ the markers.
 Illustration 10
 
 \subsubsection{Import .fef file.} \label{import-fef}
-The Fef file format (FREE!ship Exchange Format) is of no interest to
-most users since it mainly supported by other programs from the same
-developer.
+The Fef file format
+(\textbf{F}REE!ship \textbf{E}xchange \textbf{F}ormat) is of no
+interest to most users since it mainly supported by other programs
+from the same developer.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=537,natheight=391]{filesurface.png}
+        \caption{}
+        \label{fig:filesurface}
+\end{wrapfigure}
 
 \subsubsection{Surface.}
 Import a textfile containing a number of 3D curves. This option can
@@ -561,8 +624,15 @@ imported. These curves may have any number of points which may differ
 from curve to curve. Usually the curves run from the bottom of the
 hull upwards, however longitudinal curves are allowed too, just as
 long as all the curves have the same orientation and run in the same
-direction. It is important that the curves are not crossing each
-other.
+direction. It is important that the curves are \textbf{not} crossing
+each other.
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=617,natheight=438]{filesurfacewaterline.png}
+        \caption{}
+        \label{fig:filesurfacewaterline}
+\end{wrapfigure}
 
 The user will be prompted how many points in longitudinal direction
 (number of columns) and in vertical direction (number of rows) the
@@ -682,6 +752,13 @@ to each chine.
 EOF
 \end{verbatim}
 
+\begin{wrapfigure}{l}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=654,natheight=501]{filecarene.png}
+        \caption{}
+        \label{fig:carene}
+\end{wrapfigure}
+
 \subsubsection{Import Carene XYZ file.}
 This option is to open a textfile generated by the Carene program,
 which is available from
@@ -710,13 +787,21 @@ surfaces or surfaces generated with the Shiplines or Yachtlines
 option. Contours are also imported.
 
 \subsubsection{Michlet waves.} \label{michlet-waves}
-If wave elevations have been calculated using Michlet (\ref{michlet}),
+If wave elevations have been calculated using Michlet
+(see \ref{michlet} Michlet),
 the results can be saved to a file. ShipCAD is able to import this
 information back into the program. It is important not to use too many
 panels. A resolution of 50 x 50=2500 panels gives generally a good
 result as can be seen below. Using more panels really slows the
 program down. Results of both the rectangular plot and the sectorial
 plot can be imported into the program.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=1182,natheight=601]{filemichlet.png}
+        \caption{}
+        \label{fig:filemichlet}
+\end{figure}
 
 \subsection{Export.}
 ShipCAD currently exports the following file formats:
@@ -780,7 +865,7 @@ visible parts of the surfaces are send to the file as a large
 collection of small triangles.
 
 \subsubsection{Export .fef file.}
-See:\ref{import-fef}
+See: \ref{import-fef}
 
 \subsubsection{Offsets.}
 Offsets of intersection curves and controlcurves are exported to a
@@ -790,6 +875,13 @@ are exported. Of each line only the portside is send to the file.
 \subsubsection{Coordinates.}
 This option saves the coordinates of all the controlpoints from the
 model to a textfile. This textfile can be read directly into Rhino.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=533,natheight=413]{michletscreenshot.png}
+        \caption{}
+        \label{fig:michletscreenshot}
+\end{wrapfigure}
 
 \subsubsection{Michlet.} \label{michlet}
 Michlet is an excellent free CFD program which can be downloaded from
@@ -858,9 +950,22 @@ this file and restart the program. You can restore modifications to
 color settings by pressing the reset button.  You can also modify the
 language used by ShipCAD. More about the language support can be found
 in \ref{language-support}.
-Illustration 11
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=10cm,natwidth=399,natheight=435]{preferencesdialog.png}
+        \caption{}
+        \label{fig:prefdialog}
+\end{figure}
 
 \section{Project options.}
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=401,natheight=363]{projectsettingsdialog-1.png}
+        \caption{}
+        \label{fig:projsettings1}
+\end{wrapfigure}
 
 \subsection{Project settings.} \label{project-settings}
 The project settings dialog will let you specify various project
@@ -879,9 +984,23 @@ submerged body.
 There's also a switch to enable or disable the storage of a
 preview image in the project file.
 
+\begin{wrapfigure}{l}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=395,natheight=364]{projectsettingsdialog-2.png}
+        \caption{}
+        \label{fig:projsettings2}
+\end{wrapfigure}
+
 The second tab page is used to define the main particulars of the
 model, and the location of the midship section. By default this is
 at half the defined project length but this can be modified.
+
+\begin{wrapfigure}{l}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=394,natheight=361]{projectsettingsdialog-3.png}
+        \caption{}
+        \label{fig:projsettings3}
+\end{wrapfigure}
 
 The last tab page is used for all hydrostatics related settings, such
 as the density of the water and appendage coefficient. This is a
@@ -915,10 +1034,18 @@ file, or sent directly to the printer/plotter. The linesplan can also
 be drawn in black \& white by clicking on the appropriate button in
 the toolbar. Using fill colors is not possible in black \& white
 mode. Only if the model contains \underline{no} diagonals, the plan view might
-optionally be mirrored so that both sides are visible.  Some layers
-can be hidden from the linesplan. How this is done is described in
+optionally be mirrored so that both sides are visible.
+
+\begin{wrapfigure}{r}{0.7\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth,natwidth=867,natheight=405]{linesplan.png}
+        \caption{}
+        \label{fig:linesplan}
+\end{wrapfigure}
+
+Some layers can be hidden from the linesplan. How this is done is
+described in
 \ref{layer-properties}.
-Illustration 12
 
 \section{Edit menu.}
 
@@ -1285,7 +1412,7 @@ panels.
 
 \section{Visibility options.} \label{visibility-options}
 
-\subsection{Control net.}
+\subsection{Control net.} \label{control-net}
 The controlnet is the combination of points and
 edges that form the initial subdivision mesh.
 These are the entities that can be manipulated
@@ -1306,7 +1433,7 @@ net is not visible. Points and edges assigned to
 a controlcurve automatically become visible
 whenever a controlcurve is selected.
 
-\subsection{Interior edges.}
+\subsection{Interior edges.} \label{interior-edges}
 The interior edges are in fact the edges of the
 subdivided surface. The higher the precision is
 set, the more edges are shown. The interior

@@ -87,6 +87,8 @@ choice is to kill ShipCAD.  Fluxbox OK IceWm OK WindowMaker OK Openbox
 OK Blackbox Not tested, but as Blackbox is quite close to Fluxbox it
 is probably ok.
 
+\pagebreak
+
 \section {Introduction.}
 ShipCAD uses a technique called surface modeling to define the shape
 of a ship. This technique involves “sculpting” the hull as if it were
@@ -334,6 +336,8 @@ dialog as explained in \ref{project-settings}.
 
 \end{itemize}
 
+\pagebreak
+
 \section{Viewports.}
 
 \subsection{Zooming and panning.}
@@ -524,6 +528,8 @@ following dialog appears in which the desired width or height might be
 specified. It is also possible to enter the filename and the file
 location.
 
+\pagebreak
+
 \section{File menu.}
 From the file menu various options are available.
 
@@ -617,7 +623,7 @@ from the same developer.
         \label{fig:filesurface}
 \end{wrapfigure}
 
-\subsubsection{Surface.}
+\subsubsection{Surface.} \label{import-surface}
 Import a textfile containing a number of 3D curves. This option can
 best be used when the offsets of a round bottomed hull need to be
 imported. These curves may have any number of points which may differ
@@ -696,7 +702,7 @@ longitudinal curves).
 
 \end{itemize}
 
-\subsubsection{Importing chines.}
+\subsubsection{Importing chines.} \label{import-chines}
 If you want to import a hard chined hull then this is the best
 option. The file has the same format as described in the previous
 paragraph, only the curves have to run in longitudinal direction this
@@ -958,6 +964,8 @@ in \ref{language-support}.
         \label{fig:prefdialog}
 \end{figure}
 
+\pagebreak
+
 \section{Project options.}
 
 \begin{wrapfigure}{l}{0.4\textwidth}
@@ -1047,6 +1055,8 @@ Some layers can be hidden from the linesplan. How this is done is
 described in
 \ref{layer-properties}.
 
+\pagebreak
+
 \section{Edit menu.}
 
 \subsection{Undo.}
@@ -1063,78 +1073,121 @@ attached faces and edges are deleted too. If an edge is deleted, any
 attached faces will also be deleted. See also \ref{point-collapse}
 and \ref{edge-collapse}.
 
+\pagebreak
+
 \section{Point operations.}
 
 \subsection{Add.}
-Adds a new point in 3D space. The new point is by default located at the origin (0.0, 0.0, 0.0).
-Adding new points is only enabled if the controlnet is visible.
+Adds a new point in 3D space. The new point is by default located at
+the origin (0.0, 0.0, 0.0).  Adding new points is only enabled if the
+controlnet is visible.
 
 \subsection{Align.}
-If more than two points are selected it is possible to align them so that they form a straight line. This
-is done by projecting all the selected points on the line segment through the first and last selected
-point. They are projected to that line rather than uniformly distributed to keep the displacement of
-the points minimal.
+If more than two points are selected it is possible to align them so
+that they form a straight line. This is done by projecting all the
+selected points on the line segment through the first and last
+selected point. They are projected to that line rather than uniformly
+distributed to keep the displacement of the points minimal.
 
 \subsection{Collapse.} \label{point-collapse}
-This removes a selected point without deleting the surrounding geometry. A point can only be
-collapsed if it is attached to exactly two edges. The point is then removed, and the two edges are
-combined into a single edge. If a point is attached to more than 2 edges, the other edges might be
-removed first by collapsing these edges. The example below shows a point before and after
-collapsing it.
-Illustration 13
+This removes a selected point without deleting the surrounding
+geometry. A point can only be collapsed if it is attached to exactly
+two edges. The point is then removed, and the two edges are combined
+into a single edge. If a point is attached to more than 2 edges, the
+other edges might be removed first by collapsing these edges. The
+example below shows a point before and after collapsing it.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=12cm,natwidth=723,natheight=264]{pointcollapse.png}
+        \caption{}
+        \label{fig:pointcollapse}
+\end{figure}
 
 \subsection{Insert.}
-For inserting a new point on an existing edge the reader is referred to the edge-split operation.
+For inserting a new point on an existing edge the reader is referred
+to the edge-split operation.
 
 \subsection{Insert plane.}
-This operation intersects all edges that are visible with a plane. If such an intersection point exists,
-it will be inserted on the edge. After this, faces that have multiple newly inserted points will be split
-by inserting a new edge. This is a convenient way to insert for example a while range of points at a
-certain ordinate location. There is also an option to add a controlcurve to the newly created edges.
-The type of plane (vertical, horizontal or transverse) can be specified as well as the location by
-entering the desired distance into the dialog that appears.
+This operation intersects all edges that are \textbf{visible} with a
+plane. If such an intersection point exists, it will be inserted on
+the edge. After this, faces that have multiple newly inserted points
+will be split by inserting a new edge. This is a convenient way to
+insert for example a while range of points at a certain ordinate
+location. There is also an option to add a controlcurve to the newly
+created edges.  The type of plane (vertical, horizontal or transverse)
+can be specified as well as the location by entering the desired
+distance into the dialog that appears.
 
 \subsection{Intersect layers.}
-This option is used for finding the intersection curve of two layers, so it is only enabled if more than
-one layer exists. If two layers are selected than all the edges of the first layer are check for an
-intersection with all the faces of the second layer. If such an intersection exists than the point is
-inserted in the edge. After the intersection test all inserted points are connected with new edges
-which form the intersection curve of the two layers. Remember that only the first layer is affected by
-this operation, the second layer is left undisturbed. Another important issue is that points are only
-inserted in edges, not in faces. This option can be used for example to find the intersection of the
-hull with a keel or rudder.
+This option is used for finding the intersection curve of two layers,
+so it is only enabled if more than one layer exists. If two layers are
+selected than all the edges of the first layer are check for an
+intersection with all the faces of the second layer. If such an
+intersection exists than the point is inserted in the edge. After the
+intersection test all inserted points are connected with new edges
+which form the intersection curve of the two layers. Remember that
+only the first layer is affected by this operation, the second layer
+is left undisturbed. Another important issue is that points are only
+inserted in edges, \textbf{not} in faces. This option can be used for example
+to find the intersection of the hull with a keel or rudder.
 
 \subsection{Lock points.}
-All selected unlocked points will be locked. Locked points appear dark gray on screen and cannot
-be moved. None of the available editing operations has any effect on locked points. This option is
-only enabled when more than 1 unlocked point is selected.
+All selected unlocked points will be locked. Locked points appear dark
+gray on screen and cannot be moved. None of the available editing
+operations has any effect on locked points. This option is only
+enabled when more than 1 unlocked point is selected.
 
 \subsection{Unlock points.}
-This unlocks selected points that are locked, so that they can be modified again. Only enabled if at
-least 1 of the currently selected points has previously been locked.
+This unlocks selected points that are locked, so that they can be
+modified again. Only enabled if at least 1 of the currently selected
+points has previously been locked.
 
 \subsection{Unlock all points.}
 This unlocks all points in the model, whether they are selected or not.
 
+\pagebreak
+
 \section{Edge operations.}
 
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=426,natheight=517]{edgeextrude.png}
+        \caption{}
+        \label{fig:edgeextrude}
+\end{wrapfigure}
+
 \subsection{Extrude.}
-Extruding edges is a convenient way to create new surfaces.
-Since an edge may only have a maximum of two faces
-attached, only boundary-edges are allowed to be extruded.
-Illustration 14 shows how a deck is easily added by extruding
-the sheerline. The three stages of the process are:
-Select the boundary edges that must be extruded.
+Extruding edges is a convenient way to create new surfaces.  Since an
+edge may only have a maximum of two faces attached, only
+boundary-edges are allowed to be extruded.
+Figure \ref{fig:edgeextrude} shows how a deck is easily added by
+extruding the sheerline. The three stages of the process are:
+
+\begin{itemize}
+
+\item Select the boundary edges that must be extruded.
 Select the edge-extrude option from the menu. A
 dialog appears in which the direction of the extrusion is
 specified. In this case the extrusion direction is 0.0 in
 longitudinal direction, -2.25 in transverse direction and
 0.02 upwards.
-The edges are extruded in the specified direction. New
-faces are created and added to the currently active
- Illustration 14
-layer. (See 10.1 General information about layers)
-The newly created points are moved to the centerline, and the deck is finished.
+
+\item The edges are extruded in the specified direction. New
+faces are created and added to the currently activelayer. (See \ref{general-info-layer}
+General information about layers)
+
+
+\item The newly created points are moved to the centerline, and the deck is finished.
+
+\end{itemize}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=449,natheight=487]{edgesplit.png}
+        \caption{}
+        \label{fig:edgesplit}
+\end{wrapfigure}
 
 \subsection{Split.}
 Selected edges are split in two by inserting a new
@@ -1143,408 +1196,603 @@ created points are selected. This is convenient if new
 edges should be inserted. In that case multiple edges
 can be selected and split in two. All selected points
 belonging to the same face may then be split by
-inserting a new edge. (see 7.4 Insert). The image to
+inserting a new edge. (see \ref{edge-insert} Insert). The image to
 the right shows two selected edges before and after
 the split. Note that this way a face consisting of 6
 points is created. The two selected points should
 preferably be connected, thus splitting the face in two
 regular faces. This ensures a more regular grid and a
-smoother surface. (see also 1.6 Guidelines to
+smoother surface. (see also \ref{guidelines} Guidelines to
 subdivision modeling).
-Illustration 15
 
 \subsection{Collapse.} \label{edge-collapse}
-Collapsing an edge removes the edge and combines the two attached faces into one new face.
-Edge collapsing only makes sense if the selected edge is not a boundary-edge. The example to the
-right shows how multiple edges are collapsed in one pass. Only two points on the boundary-edges
-remain. These can be collapsed using the point-collapse option from the menu.
+Collapsing an edge removes the edge and combines the two attached
+faces into one new face.  Edge collapsing only makes sense if the
+selected edge is not a boundary-edge. The example to the right shows
+how multiple edges are collapsed in one pass. Only two points on the
+boundary-edges remain. These can be collapsed using the point-collapse
+option from the menu.
 
-\subsection{Insert.}
-A face can be split into two new faces by
-inserting an edge. To do this at least two points
-have to be selected. Both points must share the
-same face, and no edge is allowed to already
-exist between these two points. To ensure a fair
-surface it is recommended to extend inserted
-edges (as those seen to the right) to a crease or
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=560,natheight=605]{insertedge.png}
+        \caption{}
+        \label{fig:edgeinsert}
+\end{wrapfigure}
+
+\subsection{Insert.} \label{edge-insert}
+A face can be split into two new faces by inserting an edge. To do
+this at least two points have to be selected. Both points must share
+the same face, and no edge is allowed to already exist between these
+two points. To ensure a fair surface it is recommended to extend
+inserted edges (as those seen to the right) to a crease or
 boundary-edge if possible.
-Illustration 16
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=1147,natheight=495]{creaseedge.png}
+        \caption{}
+        \label{fig:creaseedge}
+\end{figure}
 
 \subsection{Crease.}
-Setting selected edges as crease-edges allows the user to add knuckle lines to the hull. The
-crease-property of boundary-edges cannot be changed. ShipCAD treats all boundary edges by
-default as crease-edges. The image below shows how a hard chine is created. To the left the model
-without the chine is visible. To the right the yacht with the new knuckle line is displayed. In this
-specific example the knuckle line runs over the full length of the hull. This is not absolutely
-necessary. Knuckle lines may run freely over the surface.
+Setting selected edges as crease-edges allows the user to add knuckle
+lines to the hull. The crease-property of boundary-edges cannot be
+changed. ShipCAD treats all boundary edges by default as
+crease-edges. The image below shows how a hard chine is created. To
+the left the model without the chine is visible. To the right the
+yacht with the new knuckle line is displayed. In this specific example
+the knuckle line runs over the full length of the hull. This is not
+absolutely necessary. Knuckle lines may run freely over the surface.
 Illustration 17
+
+\pagebreak
 
 \section{Curve operations.}
 
 \subsection{Controlcurves and fairing.}
-To have a better control over the shape of the surface, controlcurves can be added to the model.
-These controlcurves are assigned to edges, and after each subdivision step the new edge-points
-are not only inserted into the surface but also into the curve. This ensures that the controlcurves are
-always exactly embedded in the surface, regardless of the precision setting of ShipCAD. If the
-curvature visibility is switched on, then the curvature plot of the selected controlcurves is shown
-also. This curvature plot is updated in realtime if one of the points is moved. If the curvature plot is
-interpreted and used correctly it is possible to produce a perfectly fair surface. Bumps or dents in
-the surface that are too small to be seen on screen with the naked eye are easily identified.
-So what is curvature anyway? Curvature can be defined as follows:
-the rate of change (at a point) of the angle between a curve
-and a tangent to the curve
-The image above shows a controlcurve in the aft part of a container ship. To the left the
-controlcurve is shown in blue, while to the right the controlcurve is show in a selected state (yellow)
-together with it's curvature plot (fuchsia). The straight parts of the curve have zero curvature. If you
-travel along the curve from the bottom to the direction of the deck, first the curve starts bending to
-the left. In this area the curvature is positive. At a height of about 2.5 meters the curve starts
-bending to the right, here the curvature becomes negative. A little bit further along the curve it
-bends to the left again, so the curvature becomes positive. How is this translated into the curvature
-plot? At a number of points on the curve the curvature is calculated and drawn as a line,
-perpendicular to the curve. The larger the line, the larger the curvature. If the curvature is positive
-the line is drawn on the opposite site of the curve. So while the absolute value of the curvature in a
-point is not that interesting, the way it changes along the curve is. This is a measure of the fairness
-of the curve. You don't want abrupt changes in the curvature, it should vary as smoothly as
-possible. And very often, especially with small boats and yachts, a change of the sign of the
-curvature as seen in the image above is highly undesirable. Below is an example of a controlcurve
-from a sailing yacht. The upper part of the image shows a poorly faired curve. We see a change of
-the curvature sign in an area where it should be positive, followed shortly after that by a sudden
-increase in the size of the curvature. After that the curvature size rapidly drops, just to increase
-again at the bow. The lower half of the image shows the same controlcurve after being faired. It is
-obvious that the curvature changes gradually now and the curve is very smooth.
-One thing to bear in mind is that the curvature at the first and the last point of the curve is always
-zero. This is due to the way the curve is being drawn, and it has nothing to do with the actual
-curvature of the surface at that point. Controlcurves are easier to fair when the controlpoints are
-spaced more or less evenly along the curve and are regular whenever possible. The less
-controlpoints a curve has, the easier it is to produce a good running smooth curve.
+To have a better control over the shape of the surface, controlcurves
+can be added to the model.  These controlcurves are assigned to edges,
+and after each subdivision step the new edge-points are not only
+inserted into the surface but also into the curve. This ensures that
+the controlcurves are always exactly embedded in the surface,
+regardless of the precision setting of ShipCAD. If the curvature
+visibility is switched on, then the curvature plot of the selected
+controlcurves is shown also. This curvature plot is updated in
+realtime if one of the points is moved. If the curvature plot is
+interpreted and used correctly it is possible to produce a perfectly
+fair surface. Bumps or dents in the surface that are too small to be
+seen on screen with the naked eye are easily identified.  So what is
+curvature anyway? Curvature can be defined as follows:
+
+\begin{center}
+\textit{the rate of change (at a point) of the angle between a curve and a tangent to the curve}
+\end{center}
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=1017,natheight=651]{curvature.png}
+        \caption{}
+        \label{fig:curvature}
+\end{figure}
+
+The image above shows a controlcurve in the aft part of a container
+ship. To the left the controlcurve is shown in blue, while to the
+right the controlcurve is show in a selected state (yellow) together
+with it's curvature plot (fuchsia). The straight parts of the curve
+have zero curvature. If you travel along the curve from the bottom to
+the direction of the deck, first the curve starts bending to the
+left. In this area the curvature is positive. At a height of about 2.5
+meters the curve starts bending to the right, here the curvature
+becomes negative. A little bit further along the curve it bends to the
+left again, so the curvature becomes positive. How is this translated
+into the curvature plot? At a number of points on the curve the
+curvature is calculated and drawn as a line, perpendicular to the
+curve. The larger the line, the larger the curvature. If the curvature
+is positive the line is drawn on the opposite site of the curve. So
+while the absolute value of the curvature in a point is not that
+interesting, the way it changes along the curve is. This is a measure
+of the fairness of the curve. You don't want abrupt changes in the
+curvature, it should vary as smoothly as possible. And very often,
+especially with small boats and yachts, a change of the sign of the
+curvature as seen in the image above is highly undesirable. Below is
+an example of a controlcurve from a sailing yacht. The upper part of
+the image shows a poorly faired curve. We see a change of the
+curvature sign in an area where it should be positive, followed
+shortly after that by a sudden increase in the size of the
+curvature. After that the curvature size rapidly drops, just to
+increase again at the bow. The lower half of the image shows the same
+controlcurve after being faired. It is obvious that the curvature
+changes gradually now and the curve is very smooth.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=943,natheight=503]{linefairing.png}
+        \caption{}
+        \label{fig:linefairing}
+\end{figure}
+
+One thing to bear in mind is that the curvature at the first and the
+last point of the curve is always zero. This is due to the way the
+curve is being drawn, and it has nothing to do with the actual
+curvature of the surface at that point. Controlcurves are easier to
+fair when the controlpoints are spaced more or less evenly along the
+curve and are regular whenever possible. The less controlpoints a
+curve has, the easier it is to produce a good running smooth curve.
 
 \subsection{New}
-First select a number of edges that are connected by their start and endpoints. (This is easier when
-you hold the control key on your keyboard pressed down when selecting an edge) After that it is
-possible to create and assign a controlcurve to these edges. Only one controlcurve can be assigned
-to each edge. If the new curve is not shown on the screen, make sure that the visibility of
-controlcurves is turned on.
+First select a number of edges that are connected by their start and
+endpoints. (This is easier when you hold the control key on your
+keyboard pressed down when selecting an edge) After that it is
+possible to create and assign a controlcurve to these edges. Only one
+controlcurve can be assigned to each edge. If the new curve is not
+shown on the screen, make sure that the visibility of controlcurves is
+turned on.
+
+\pagebreak
 
 \section{Face operations.}
 
 \subsection{New.}
-Add a new face using previously selected points. These points have to be selected in the correct
-order. If looked in the direction of the new face as seen from the water, the normal of the new face
-points outward if the points are sorted in counterclockwise order. If selected in clockwise order, the
-normal points inward. All normals must point outward in the direction of the water (see 1.6
-Guidelines to subdivision modeling). The direction of facenormals is automatically checked and
-corrected (if possible) if this option is not disabled in the project dialog. This check is performed
-each time hydrostatics are calculated or when the check model option is chosen from the menu.
+Add a new face using previously selected points. These points have to
+be selected in the correct order. If looked in the direction of the
+new face as seen from the water, the normal of the new face points
+outward if the points are sorted in counterclockwise order. If
+selected in clockwise order, the normal points inward. All
+normals \textbf{must} point outward in the direction of the water (see
+1.6 Guidelines to subdivision modeling). The direction of facenormals
+is automatically checked and corrected (if possible) if this option is
+not disabled in the project dialog. This check is performed each time
+hydrostatics are calculated or when the check model option is chosen
+from the menu.
 
 \subsection{Flip.} \label{flip}
-This option can be used to manually flip the normals of selected faces to the other side. The
-normals of a face can be visualized by selecting the specific face. Make sure that both interior
-edges and visibility of normals are turned on. When displaying normals, each normal is calculated
-as the average normal in a point of the refined subdivision mesh. This average is calculated from all
-faces surrounding that point. Along the boundary of an edge sharing two faces with opposite normal
-directions, this may seem a bit strange as can be seen on the left side of the image below. The
-normals along these boundaries look as if projected to the surface.
-Illustration 18
+This option can be used to manually flip the normals of selected faces
+to the other side. The normals of a face can be visualized by
+selecting the specific face. Make sure that both interior edges and
+visibility of normals are turned on. When displaying normals, each
+normal is calculated as the average normal in a point of the refined
+subdivision mesh. This average is calculated from all faces
+surrounding that point. Along the boundary of an edge sharing two
+faces with opposite normal directions, this may seem a bit strange as
+can be seen on the left side of the image below. The normals along
+these boundaries look as if projected to the surface.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=1132,natheight=342]{flipnormal.png}
+        \caption{}
+        \label{fig:flipnormal}
+\end{figure}
+
+\pagebreak
 
 \section{Layer operations.}
 
-\subsection{General information about layers.}
-The hull created with ShipCAD consists of only 1 surface, even if multiple separate surfaces
-appear on the screen that are not connected to each other. When modeling complex models the
-information on the screen may sometimes be overwhelming. Therefore layers are implemented.
-Each face is assigned to a layer. These layers have certain properties such as for example color
-and visibility. This way it is possible to group faces into a layer and assign those properties to all
-faces. The visibility property of these layers makes it possible to hide them from the user. If all faces
-attached to an edge or point are invisible, the edge or point in question will also not be shown. This
-ensures an optimal view on the model when selecting items or dragging points. Faces assigned to a
-layer all share the properties of that layer.
+\subsection{General information about layers.} \label{general-info-layer}
+The hull created with ShipCAD consists of only 1 surface, even if
+multiple separate surfaces appear on the screen that are not connected
+to each other. When modeling complex models the information on the
+screen may sometimes be overwhelming. Therefore layers are
+implemented.  Each face is assigned to a layer. These layers have
+certain properties such as for example color and visibility. This way
+it is possible to group faces into a layer and assign those properties
+to all faces. The visibility property of these layers makes it
+possible to hide them from the user. If all faces attached to an edge
+or point are invisible, the edge or point in question will also not be
+shown. This ensures an optimal view on the model when selecting items
+or dragging points. Faces assigned to a layer all share the properties
+of that layer.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=399,natheight=153]{activelayer.png}
+        \caption{}
+        \label{fig:activelayer}
+\end{wrapfigure}
 
 \subsection{Active layer.}
-At all times an active layer is present in the model. If no
-faces are selected, the dropdown box in the toolbar
-displays which layer is currently active. If one or more
-faces are selected belonging to the same layer, this
-dropdown box shows which layer this is. This might be a
-different layer then the active layer. When multiple faces
- Illustration 19
-are selected which are assigned to different layers, the
-dropdown box turns blank. All newly created faces created by extruding edges or manually adding
-faces, are assigned to the layer which is currently active.
+At all times an active layer is present in the
+model. If \textbf{\underline{no} faces are selected}, the dropdown box
+in the toolbar displays which layer is currently active. If one or
+more faces are selected belonging to the
+\textbf{same} layer, this dropdown box shows which layer this is. This might be
+a different layer then the active layer. When multiple faces are
+selected which are assigned to \textbf{different layers}, the dropdown
+box turns blank. All newly created faces created by extruding edges or
+manually adding faces, are assigned to the layer which is currently
+active.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=408,natheight=168]{assignlayer.png}
+        \caption{}
+        \label{fig:assignlayer}
+\end{wrapfigure}
 
 \subsection{Assigning faces to a different layer.}
 Assigning faces to a different layer is done as follows:
-• Select the faces in question
-• Pull down the dropdown box and click on the new
+
+\begin{itemize}
+
+  \item Select the faces in question
+  \item Pull down the dropdown box and click on the new
 layer.
-• Deselect the faces.
+
+  \item Deselect the faces.
+
+\end{itemize}
+
 All faces should now be assigned to the new layer.
-Illustration 20
 
 \subsection{Active layer color.}
-Modify the color of the active layer. This color is also visible in the toolbar, right next to the
-dropdown box.
+Modify the color of the active layer. This color is also visible in
+the toolbar, right next to the dropdown box.
 
 \subsection{Auto group.}
-This option extracts groups of faces which are totally surrounded by crease edges. Then each
-group of faces is assigned to a new layer. If no faces are selected, all faces of the model will be
-used. Otherwise only the selected faces will be grouped. ShipCAD tries to save as much of the
-present information as possible. If a set of faces is extracted, and they already belong to the same
-layer then this layer is left undisturbed. Auto grouping is only enabled when interior edges are
-turned on.
+This option extracts groups of faces which are totally surrounded by
+crease edges. Then each group of faces is assigned to a new layer. If
+no faces are selected, all faces of the model will be used. Otherwise
+only the selected faces will be grouped. ShipCAD tries to save as much
+of the present information as possible. If a set of faces is
+extracted, and they already belong to the same layer then this layer
+is left undisturbed. Auto grouping is only enabled when interior edges
+are turned on.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=709,natheight=230]{newlayer.png}
+        \caption{}
+        \label{fig:newlayer}
+\end{wrapfigure}
 
 \subsection{New.}
-Adds a new empty layer to the model
-and makes it the active layer.
+Adds a new empty layer to the model and makes it the active layer.
 
 \subsection{Delete empty.}
-Only enabled when the model contains at least one empty layer and when more than 1 layer is
-present. When selected, all empty layers are removed from the model. This also includes the active
-layer if it is empty. At least one layer remains as the active layer.
+Only enabled when the model contains at least one empty layer and when
+more than 1 layer is present. When selected, all empty layers are
+removed from the model. This also includes the active layer if it is
+empty. At least one layer remains as the active layer.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=559,natheight=423]{layerproperties.png}
+        \caption{}
+        \label{fig:layerproperties}
+\end{wrapfigure}
 
 \subsection{Layer properties dialog.} \label{layer-properties}
-A window is displayed showing all layers and
-their properties. The left half of the window shows
-a list containing all available layers in the model.
-By clicking on the name of a layer, this layer is
-selected. The properties of this selected layer are
-then displayed to the right. Double clicking on a
-layer in the list on the left side makes it the active
-layer. From within this dialog it is possible to turn
-layers on or off or to modify the following layer
-properties:
-Visibility.
-The checkboxes on the left side indicate
-whether the corresponding layer is visible
-or not. Click on the checkbox to turn the layer on or off. Points or edges from the controlnet
-belonging to invisible layers are also hidden, which makes modeling of complex models
-easier.
-Name.
-The layer name is displayed in the list at the left, but it can only be modified at the right side
-of the window. ShipCAD does not require the layer name to be a unique name, since all
-layers are identified by an internal unique identification number. Some CAD programs
-however, such as Autocad, do not allow spaces in the name of a layer or duplicate names.
-Color.
-The layer color is used for shading the model. It is also used in the linesplan and for
-developed panels. The color of a layer can be modified by clicking the colored square to the
-right. A dialog then appears in which a new color can be chosen.
-Transparency.
+A window is displayed showing all layers and their properties. The
+left half of the window shows a list containing all available layers
+in the model.  By clicking on the name of a layer, this layer is
+selected. The properties of this selected layer are then displayed to
+the right. Double clicking on a layer in the list on the left side
+makes it the active layer. From within this dialog it is possible to
+turn layers on or off or to modify the following layer properties:
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=413,natheight=258]{layertransparent.png}
+        \caption{}
+        \label{fig:layertransparent}
+\end{wrapfigure}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=666,natheight=422]{developable.png}
+        \caption{}
+        \label{fig:developable}
+\end{wrapfigure}
+
+\begin{itemize}
+
+\item Visibility.
+The checkboxes on the left side indicate whether the corresponding
+layer is visible or not. Click on the checkbox to turn the layer on or
+off. Points or edges from the controlnet belonging to invisible layers
+are also hidden, which makes modeling of complex models easier.
+
+\item Name.
+The layer name is displayed in the list at the left, but it can only
+be modified at the right side of the window. ShipCAD does not require
+the layer name to be a unique name, since all layers are identified by
+an internal unique identification number. Some CAD programs however,
+such as Autocad, do not allow spaces in the name of a layer or
+duplicate names.
+
+\item Color.
+The layer color is used for shading the model. It is also used in the
+linesplan and for developed panels. The color of a layer can be
+modified by clicking the colored square to the right. A dialog then
+appears in which a new color can be chosen.
+
+\item Transparency.
 Sometimes it is nice to shade certain surfaces (partially)
-transparent, such as windows for example. The amount
-of transparency can be modified by moving the slidebar.
-The amount of transparency can range from 0% (totally
-solid) to 100% (invisible). Note though that transparent
-shading might consume a lot of memory and
-significantly slow down the shading process. Since
-normal Z-buffer shading or plain alpha blending
-produces strange artifacts, the only way to do this
-properly is by keeping track of all surfaces covering a particular pixel on the screen and then
-drawing all these surfaces from the back to the front. This costs extra memory and CPU
-time, but apart from being a bit slower it should not pose any real problems.
-Symmetric.
-Only if a layer does not contribute the hydrostatics it can be a non-symmetrical layer. So
-generally it can not be used to create asymmetrical hulls. It can be used however to add
-asymmetrical deckhouses or other objects on the hull, such as sails, people etc.
-Use for hydrostatics.
-ShipCAD uses the faces of the subdivision mesh for hydrostatic calculations (see 15.2
-Design hydrostatics). It calculates the volume enclosed by these faces. Sometime however
-there are surfaces present in the model that should not be included in the hydrostatic
-calculations. This is particularly the case if the faces of a layer do not form an enclosed
-volume, but only a surface, such as a sail for example. If a sail were to be included in the
-calculations, ShipCAD would calculate the volume aft of the sail (if it is submerged) as a
-volume. Since this volume extends to infinity (there is no backside surface present) it would
-introduce an error. So specific layers can be excluded from the calculations by removing the
-check from the checkbox. See also 13.1 Check model for more information concerning leak
-points.
-intersection curves.
-By clicking this checkbox, the intersection curves property of a layer can be enabled or
-disabled. If the checkbox is not checked then the faces of this layer will not be included
-when the intersection curves are calculated. For complex models it is often convenient to
-display stations, buttocks, waterlines and diagonals of the hull only, and not for the deck,
-superstructure etc. This setting has no influence on the hydrostatics.
-Developable.
-Developable hulls can be build
-from flat plates which are only
-bend in one direction. Most hulls
-are not developable since the
-surface is curved in two directions.
-Layers from which the developable
-property is checked are shaded
-differently. Developable areas of
-these layers are shaded with a light
-green color. Areas that are not
-developable are shaded red. This
-is a convenient way to check if a
-hull is indeed developable.
-Illustration 22 shows an example of
-a multi-chine motorboat. It can
-immediately be seen by the green
-Illustration 22
-color that almost the entire hull is
-developable. Just a few very small spots in the topside and bow, and a larger area in front at
-the bottom are colored red. Those very small spots are mostly numeric errors (ShipCAD
-uses a very small tolerance). The larger bottom area however is not developable from a
-mathematical point of view. Developable hulls are often made of plywood, which is far easier
-to bend than metal as a result of different material properties. In reality “almost” developable
-hulls can perfectly be build using plywood, whereas the same hull build of metal requires
-“torturing” the metal to get it into shape. If one or more layers are marked as developable,
-the program can unfold (or develop) this 3D surface onto a flat plane as explained in 13.4
-Develop plates.
-Show in linesplan.
-Sometimes a layer contains items you don't want to be seen in the linesplan. An example of
-this could be a mast and sails. These are relatively high compared to the rest of the boat.
-Showing these in the linesplan view would cause the hull to appear very small. Therefore
-some layers may be hidden. Be aware though that the scale of items in the linesplan is also
-determined by the intersection curves. If a layer would contain a sail, and the intersection
-curves property is checked, intersection curves of this sail would still be calculated and seen
-in the linesplan. Therefore it is best if you want to hide layers from this view to also disable
-calculating intersection curves from those layers.
-Material properties.
-There are two input fields at the bottom that can be used for a weight estimation of a layer. In the
-“specific weight” field the density of the used material can be entered, for example 7.8 tons/m3 in
-the case of steel. In the field below that the average thickness can be specified. These two
-properties combined with the total area of the surface assigned to this layer result in a weight
-estimate and corresponding center of gravity. This is shown when the design hydrostatics are
-calculated.
-Below the material properties the surface area, weight and center of gravity of the selected layer are
-displayed. The black up and down arrows in the toolbar can be used to move a selected layer up or
-down in the list. Developable layers will appear in the same order in the window with developed
-panels.
+transparent, such as windows for example. The amount of transparency
+can be modified by moving the slidebar.  The amount of transparency
+can range from 0% (totally solid) to 100% (invisible). Note though
+that transparent shading might consume a lot of memory and
+significantly slow down the shading process. Since normal Z-buffer
+shading or plain alpha blending produces strange artifacts, the only
+way to do this properly is by keeping track of all surfaces covering a
+particular pixel on the screen and then drawing all these surfaces
+from the back to the front. This costs extra memory and CPU time, but
+apart from being a bit slower it should not pose any real problems.
+
+\item Symmetric.
+Only if a layer does \textbf{not} contribute the hydrostatics it can be a
+non-symmetrical layer. So generally it can not be used to create
+asymmetrical hulls. It can be used however to add asymmetrical
+deckhouses or other objects on the hull, such as sails, people etc.
+
+\item Use for hydrostatics.
+ShipCAD uses the faces of the subdivision mesh for hydrostatic
+calculations (see \ref{design-hydrostatics} Design hydrostatics). It
+calculates the volume enclosed by these faces. Sometime however there
+are surfaces present in the model that should not be included in the
+hydrostatic calculations. This is particularly the case if the faces
+of a layer do \textbf{not} form an enclosed volume, but only a
+surface, such as a sail for example. If a sail were to be included in
+the calculations, ShipCAD would calculate the volume aft of the sail
+(if it is submerged) as a volume. Since this volume extends to
+infinity (there is no backside surface present) it would introduce an
+error. So specific layers can be excluded from the calculations by
+removing the check from the checkbox. See also \ref{check-model} Check
+model for more information concerning leak points.
+
+\item Intersection curves.
+By clicking this checkbox, the intersection curves property of a layer
+can be enabled or disabled. If the checkbox is not checked then the
+faces of this layer will not be included when the intersection curves
+are calculated. For complex models it is often convenient to display
+stations, buttocks, waterlines and diagonals of the hull only, and not
+for the deck, superstructure etc. This setting has \textbf{no} influence on the
+hydrostatics.
+
+\item Developable.
+Developable hulls can be build from flat plates which are only bend in
+one direction. Most hulls are not developable since the surface is
+curved in two directions.  Layers from which the developable property
+is checked are shaded differently. Developable areas of these layers
+are shaded with a light green color. Areas that are not developable
+are shaded red. This is a convenient way to check if a hull is indeed
+developable.  Illustration 22 shows an example of a multi-chine
+motorboat. It can immediately be seen by the green Illustration 22
+color that almost the entire hull is developable. Just a few very
+small spots in the topside and bow, and a larger area in front at the
+bottom are colored red. Those very small spots are mostly numeric
+errors (ShipCAD uses a very small tolerance). The larger bottom area
+however is not developable from a mathematical point of
+view. Developable hulls are often made of plywood, which is far easier
+to bend than metal as a result of different material properties. In
+reality “almost” developable hulls can perfectly be build using
+plywood, whereas the same hull build of metal requires “torturing” the
+metal to get it into shape. If one or more layers are marked as
+developable, the program can unfold (or develop) this 3D surface onto
+a flat plane as explained in \ref{develop-plates} Develop plates.
+
+\item Show in linesplan.
+Sometimes a layer contains items you don't want to be seen in the
+linesplan. An example of this could be a mast and sails. These are
+relatively high compared to the rest of the boat.  Showing these in
+the linesplan view would cause the hull to appear very
+small. Therefore some layers may be hidden. Be aware though that the
+scale of items in the linesplan is also determined by the intersection
+curves. If a layer would contain a sail, and the intersection curves
+property is checked, intersection curves of this sail would still be
+calculated and seen in the linesplan. Therefore it is best if you want
+to hide layers from this view to also disable calculating intersection
+curves from those layers.
+
+\item Material properties.
+There are two input fields at the bottom that can be used for a weight
+estimation of a layer. In the “specific weight” field the density of
+the used material can be entered, for example 7.8 tons/m3 in the case
+of steel. In the field below that the average thickness can be
+specified. These two properties combined with the total area of the
+surface assigned to this layer result in a weight estimate and
+corresponding center of gravity. This is shown when the design
+hydrostatics are calculated.
+
+\end{itemize}
+
+Below the material properties the surface area, weight and center of
+gravity of the selected layer are displayed. The black up and down
+arrows in the toolbar can be used to move a selected layer up or down
+in the list. Developable layers will appear in the same order in the
+window with developed panels.
+
+\pagebreak
 
 \section{Visibility options.} \label{visibility-options}
 
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=529,natheight=308]{controlnet.png}
+        \caption{}
+        \label{fig:controlnet}
+\end{wrapfigure}
+
 \subsection{Control net.} \label{control-net}
-The controlnet is the combination of points and
-edges that form the initial subdivision mesh.
-These are the entities that can be manipulated
-by the user to shape the surface. If all the faces
-attached to a certain point or edge belong to
-layers which are turned off, it will not be drawn
-to the viewports. That way only the points or
-edges of interest will be shown.
-Illustration 23
+The controlnet is the combination of points and edges that form the
+initial subdivision mesh.  These are the entities that can be
+manipulated by the user to shape the surface. If all the faces
+attached to a certain point or edge belong to layers which are turned
+off, it will not be drawn to the viewports. That way only the points
+or edges of interest will be shown.
 
 \subsection{Controlcurves.}
-Controlcurves are curves that are assigned to edges of the controlnet and are used to fair the
-surface. The visibility of these control curves is
-not depending on the visibility of the controlnet.
-In fact, selecting and manipulating
-controlcurves is often easier when the control
-net is not visible. Points and edges assigned to
-a controlcurve automatically become visible
-whenever a controlcurve is selected.
+Controlcurves are curves that are assigned to edges of the controlnet
+and are used to fair the surface. The visibility of these control
+curves is not depending on the visibility of the controlnet.  In fact,
+selecting and manipulating controlcurves is often easier when the
+control net is not visible. Points and edges assigned to a
+controlcurve automatically become visible whenever a controlcurve is
+selected.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=559,natheight=299]{interioredges.png}
+        \caption{}
+        \label{fig:interioredges}
+\end{wrapfigure}
 
 \subsection{Interior edges.} \label{interior-edges}
-The interior edges are in fact the edges of the
-subdivided surface. The higher the precision is
-set, the more edges are shown. The interior
-edges are drawn in the color of the layer they
-are assigned to.
-Illustration 24
+The interior edges are in fact the edges of the subdivided
+surface. The higher the precision is set, the more edges are
+shown. The interior edges are drawn in the color of the layer they are
+assigned to.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=350,natheight=317]{showbothsides.png}
+        \caption{}
+        \label{fig:showbothsides}
+\end{wrapfigure}
 
 \subsection{Show both sides.}
-Since almost any ship is symmetrical in respect to the centerplane, only the portside of the hull is
-modeled. If less information is shown it is easier to select a point,
-edge or face. Both sides can be shown however so that the
-designer has a good impression of what the entire hull looks like.
-Not only the surface is drawn symmetrical, also the intersection
-curves. Showing both sides of the hull is possible in both
-wireframe view and shaded view.
+Since almost any ship is symmetrical in respect to the centerplane,
+only the portside of the hull is modeled. If less information is shown
+it is easier to select a point, edge or face. Both sides can be shown
+however so that the designer has a good impression of what the entire
+hull looks like.  Not only the surface is drawn symmetrical, also the
+intersection curves. Showing both sides of the hull is possible in
+both wireframe view and shaded view.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=1057,natheight=239]{grid.png}
+        \caption{}
+        \label{fig:grid}
+\end{figure}
 
 \subsection{Grid.}
 If intersection curves are added it is also possible to have a grid
 displayed. This grid marks the location of these intersection
-curves. It is visible in wireframe and shaded mode and next to
-Illustration 25
-each line its distance is printed. In addition the baseline, centerline
-and dwl are also indicated. The grid is visible in all views except for the perspective view. This grid
-is shown, regardless of the visibility setting of the intersection curves.
-Illustration 26
+curves. It is visible in wireframe and shaded mode and next to each
+line its distance is printed. In addition the baseline, centerline and
+dwl are also indicated. The grid is visible in all views except for
+the perspective view. This grid is shown, regardless of the visibility
+setting of the intersection curves.
 
 \subsection{Stations.}
-Draws all present stations to the viewport. This option is only enabled if stations are added to the
-model.
+Draws all present stations to the viewport. This option is only
+enabled if stations are added to the model.
 
 \subsection{Buttocks.}
-Draws all present buttocks to the viewport. This option is only enabled if buttocks are added to the
-model.
+Draws all present buttocks to the viewport. This option is only
+enabled if buttocks are added to the model.
 
 \subsection{Waterlines.}
-Draws all present waterlines to the viewport. This option is only enabled if waterlines are added to
-the model.
+Draws all present waterlines to the viewport. This option is only
+enabled if waterlines are added to the model.
 
 \subsection{Diagonals.}
-Draws all present diagonals to the viewport. This option is only enabled if diagonals are added to
-the model.
+Draws all present diagonals to the viewport. This option is only
+enabled if diagonals are added to the model.
 
 \subsection{Hydrostatic features.} \label{hydrostatic-features}
-FREEship also provides the option to plot some key hydrostatic values in the model. These are:
-•
-•
-•
-•
-•
-•
-Center of buoyancy
-Displacement
-Center of floatation
-Lateral center and area
-Metacentric height
-Curve of sectional areas. Contrary to the other values this curve is only plotted in the profile view
-of the hull. Of course these values can only be shown if the model is consistent enough to
-calculate the hydrostatics at the design draft (so no leaks below the waterline). The values are
-updated in realtime when the model
-is being modified. You can specify
-which data you want the program to
-show in the project settings dialog
-(see 4.1 Project settings).
+FREEship also provides the option to plot some key hydrostatic values
+in the model. These are:
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=717,natheight=296]{hydrostaticfeatures.png}
+        \caption{}
+        \label{fig:hydrostaticfeatures}
+\end{wrapfigure}
+
+\begin{itemize}
+
+\item Center of buoyancy
+
+\item Displacement
+
+\item Center of floatation
+
+\item Lateral center and area
+
+\item Metacentric height
+
+\item Curve of sectional areas. Contrary to the other values this
+curve is \underline{only} plotted in the profile view
+of the hull. Of course these values can only be shown if the model is
+consistent enough to calculate the hydrostatics at the design draft
+(so no leaks below the waterline). The values are updated in realtime
+when the model is being modified. You can specify which data you want
+the program to show in the project settings dialog (see \ref{project-settings} Project
+settings).
+
+\end{itemize}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=693,natheight=318]{flowlines.png}
+        \caption{}
+        \label{fig:flowlines}
+\end{wrapfigure}
 
 \subsection{Flowlines.}
-Show or hide flowlines. The flowlines that are displayed by ShipCAD are calculated through
-analysis of the surface geometry only and have nothing to do with CFD. This is a huge simplification
-as speed, pressure and waves are excluded from the calculation. Despite this simplification the
-flowlines show a resemblance with those calculated wit CFD programs, but they only are added to
-give the designer an impression of how the water will approximately flow. Real CFD calculations are
-of course much more accurate and
-reliable. You can add a flowline by
-keeping the alt-button pressed and
-clicking with the mouse on a point below
-the waterline surface (profile, plan or
-bodyplan view only). This point is used as
-the origin of the flowline. From there the
-flow is traced as far as possible to the
-stern or until it penetrates the design
-waterline. Flowlines are only traced along
-surfaces that belong to a layer that is
-also used for hydrostatic calculations (generally the shell of the hull). The image above shows some
-flowlines at the bow of a hull with a bulb. The background image shows the results from a CFD
-calculation. The small black lines represent the direction of the flow as calculated with CFD, the blue
-curves are the flowlines calculated by ShipCAD. Flowlines can be selected and deleted like any
-other geometry in ShipCAD.
+Show or hide flowlines. The flowlines that are displayed by ShipCAD
+are calculated through analysis of the surface geometry only and have
+nothing to do with CFD. This is a huge simplification as speed,
+pressure and waves are excluded from the calculation. Despite this
+simplification the flowlines show a resemblance with those calculated
+wit CFD programs, but they only are added to give the designer an
+impression of how the water will approximately flow. Real CFD
+calculations are of course much more accurate and reliable. You can
+add a flowline by keeping the alt-button pressed and clicking with the
+mouse on a point below the waterline surface (profile, plan or
+bodyplan view only). This point is used as the origin of the
+flowline. From there the flow is traced as far as possible to the
+stern or until it penetrates the design waterline. Flowlines are only
+traced along surfaces that belong to a layer that is also used for
+hydrostatic calculations (generally the shell of the hull). The image
+above shows some flowlines at the bow of a hull with a bulb. The
+background image shows the results from a CFD calculation. The small
+black lines represent the direction of the flow as calculated with
+CFD, the blue curves are the flowlines calculated by
+ShipCAD. Flowlines can be selected and deleted like any other geometry
+in ShipCAD.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=437,natheight=309]{normals.png}
+        \caption{}
+        \label{fig:normals}
+\end{wrapfigure}
 
 \subsection{Normals.}
-If this option is switched on, normals of selected faces are
-drawn. The normals appear as thin white lines, pointing either
-inward or outward the hull. This option is only enabled if the
-interior edges are visible. A normal is drawn at each interior
-point of the subdivision surface. The higher the precision is
-set, the more normals are drawn.
-Illustration 27
+If this option is switched on, normals of \textbf{selected} faces are
+drawn. The normals appear as thin white lines, pointing either inward
+or outward the hull. This option is only enabled if the interior edges
+are visible. A normal is drawn at each interior point of the
+subdivision surface. The higher the precision is set, the more normals
+are drawn.
 
 \subsection{Curvature.}
-This option enables or disables the drawing of the curvature plot of certain intersection curves. Only
-of intersection curves which appear checked in the intersection dialog will the curvature be plotted.
+This option enables or disables the drawing of the curvature plot of
+certain intersection curves. Only of intersection curves which appear
+checked in the intersection dialog will the curvature be plotted.
 
-\subsection{Markers.}
-Markers are lines and/or curves added to the model as a reference. For example the bodyplan of an
-existing design could be imported as markers. Stations could then be added to the ShipCAD
-model at the same location as the markers. Finally the points can be dragged until the stations and
-the markers are exactly on top of each other. In that case the ShipCAD hull matches the hull from
-the existing design.
-Markers can be selected with the mouse and deleted like any other geometry used in your model.
+\subsection{Markers.} \label{vis-markers}
+Markers are lines and/or curves added to the model as a reference. For
+example the bodyplan of an existing design could be imported as
+markers. Stations could then be added to the ShipCAD model at the same
+location as the markers. Finally the points can be dragged until the
+stations and the markers are exactly on top of each other. In that
+case the ShipCAD hull matches the hull from the existing design.
+
+Markers can be selected with the mouse and deleted like any other
+geometry used in your model.
 
 \subsection{Curvature scale.}
-The curvature scale can be decreased by pressing the F9 key, so that curves with high curvature
-can be evaluated. The scale can be increased with the F10 key for low curvature areas.
+The curvature scale can be decreased by pressing the F9 key, so that
+curves with high curvature can be evaluated. The scale can be
+increased with the F10 key for low curvature areas.
+
+\pagebreak
 
 \section{Selection.}
 
@@ -1556,219 +1804,327 @@ selected in one pass. This includes markers and flowlines.
 Use this option to deselect all currently selected items simultaneously. Pressing the Esc-key has
 the same result.
 
+\pagebreak
+
 \section{Tools.}
 
 \subsection{Check model.} \label{check-model}
-ShipCAD can check the model for any inconsistencies, and corrects most of them automatically.
-This check is also performed each time hydrostatics are calculated, unless this automatic checking
-is disabled in the project settings. First of all the surface is checked for any disjoint segments. Then
-each segment is checked if all the face normals point in the same direction. If not, it adapts those
-faces. Then the lowest point of each segment is identified. This usually is the bottom. If this is
-indeed a point on the bottom then the average normal of this point should point down. Assuming
-this, all faces are adapted such that the direction of their normal corresponds to the direction of the
-normal of this particular point. In some rare cases this might cause the normals to point in the wrong
-direction. In that case it is recommended to manually flip the normals to the right direction and to
-disable automatic checking of the surface. This test also identifies edges with more than two faces
-attached. Secondly a list of points is provided where the hull is considered leak. A point is
-considered “leak” if:
-•
-•
-It is not situated on the centerplane, meaning that the y-coordinate of the point >0.0001.
-The point is attached to an edge with only 1 face attached. Note that this is also the case if
-2 faces are attached, but 1 of these faces belongs to a layer from which the “Include in
-hydrostatics” property is switched off. This could for example be the case for a ship with a
-closed deck, from which the deck is put in a separate layer that is not included in the
-hydrostatics calculations. ShipCAD keeps calculating until the deckline is submerged.
-Also windows or any other none watertight surfaces could be treated this way.
-It is important to realize that these points are not actually always leak, they only become leak when
-they are submerged. So the presence of leak points does not always have to be a problem, just as
-long as they are not submerged. If more then 10 leak points are found, only the first 10 are shown.
-The points are shown sorted in increasing height above the base plane.
-Finally, if the test is called from the menu, an overview of corrected items and possible remaining
-errors is shown.
+ShipCAD can check the model for any inconsistencies, and corrects most
+of them automatically.  This check is also performed each time
+hydrostatics are calculated, unless this automatic checking is
+disabled in the project settings. First of all the surface is checked
+for any disjoint segments. Then each segment is checked if all the
+face normals point in the same direction. If not, it adapts those
+faces. Then the lowest point of each segment is identified. This
+usually is the bottom. If this is indeed a point on the bottom then
+the average normal of this point should point down. Assuming this, all
+faces are adapted such that the direction of their normal corresponds
+to the direction of the normal of this particular point. In some rare
+cases this might cause the normals to point in the wrong direction. In
+that case it is recommended to manually flip the normals to the right
+direction and to disable automatic checking of the surface. This test
+also identifies edges with more than two faces attached. Secondly a
+list of points is provided where the hull is considered leak. A point
+is considered ``leak'' if:
+
+\begin{itemize}
+
+\item It is not situated on the centerplane, meaning that the
+y-coordinate of the point \textgreater 0.0001.
+
+\item The point is attached to an edge with only 1 face attached. Note that this is also the case if
+2 faces are attached, but 1 of these faces belongs to a layer from
+which the ``Include in hydrostatics'' property is switched off. This
+could for example be the case for a ship with a closed deck, from
+which the deck is put in a separate layer that is not included in the
+hydrostatics calculations. ShipCAD keeps calculating until the
+deckline is submerged.  Also windows or any other none watertight
+surfaces could be treated this way.
+
+It is important to realize that
+these points are not actually always leak, they only become leak when
+they are submerged. So the presence of leak points does not always
+have to be a problem, just as long as they are not submerged. If more
+then 10 leak points are found, only the first 10 are shown.  The
+points are shown sorted in increasing height above the base plane.
+
+Finally, if the test is called from the menu, an overview of corrected
+items and possible remaining errors is shown.
+
+\end{itemize}
 
 \subsection{Remove negative.}
-Sometimes, when a hull is imported, the geometry of both sides of the ship is present. ShipCAD
-only needs the port side. This option removes all faces from the model that are completely on the
-starboard side.
+Sometimes, when a hull is imported, the geometry of both sides of the
+ship is present. ShipCAD only needs the port side. This option removes
+all faces from the model that are completely on the starboard side.
 
 \subsection{Remove unused points.}
 This can be used to remove all unused points from the model.
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=585,natheight=273]{developplates.png}
+        \caption{}
+        \label{fig:developplates}
+\end{wrapfigure}
+
 \subsection{Develop plates.} \label{develop-plates}
-All layers which are marked as developable in the layer properties dialog are unfolded onto flat
-plates (a process also called developing). If the model contains no developable layers then this
-option appears disabled. Both sides of the ship are unfolded. A window then appears showing the
-unfolded plates. It is best to assign each strake or part of the hull to a different layer. Then each
-layer will have its own unfolding. If a layer consists of multiple separate parts, each part again will
-have its own unfolding. The unfolded panels can be moved by dragging them with the mouse.
-Buttons on the toolbar at the top of the window can be used to rotate the currently selected item.
-The rotation angle of each panel may also be entered manually. Zooming and panning can be done
-exactly as in the viewports used for modeling the ship. Interior edges and any present intersection
-curves are also drawn on the unfolded panels,
-and can be switched on or off as desired. The
-initial settings for these options are the same
-as those for the entire model. So if the stations
-are turned off in the hullform-viewports, they
-will not show in the developed surfaces
-window either, until they are turned on again.
-The viewport be can saved as a bitmap, but
-the visible parts can also be exported to a .dxf
-file or sent directly to the printer/plotter. The
-coordinates forming the boundary of each part
-Illustration 28
-can be exported to n ASCII text file.
-On the right of the window a list is visible, showing all unfolded parts. By clicking on the checkboxes
-each part can be made visible or invisible. At the top some crucial information about the
-developments is shown. After the plates have been unfolded to 2D, ShipCAD compares the length
-of the unfolded interior edges to the length of these edges in 3D. If this length is smaller then the
-edges were compressed (drawn in blue). If the unfolded edges are longer then these edges were
-stretched (drawn in red). The min. error shown at the top is the largest compression error that
-occurred (in world space dimensions, so meters or feet). The max. error is the largest amount of
-stress of an edge. Compressed or stretched edges may be visualized by turning both the visibility of
-interior edges and highlighting of compressed edges on. The difference in area between the 3D
-surface and the unfolded surface is also shown. Below the displayed edges the number of iterations
-it took to unfold the selected panel is shown. ShipCAD makes up to 25 developments of each
-panel and uses the one with the smallest overall error as the final one. Generally surfaces that are
-truly developable are unfolded in 1 iteration, and have min. and max. errors of 0.0. Surfaces that are
-not exactly developable can in most cases still be unfolded but might have significant errors due to
-the fact that the surface is curved in two directions. Think of it as the top half of a sphere, you can
-not press this surface down to a flat surface without stretching or compressing certain areas, unless
-you make some cuts of course.
-So it's very important to check
-these errors when you actually
-want to use the unfolded plates
-for construction purposes!
-There are also two input fields to
-adapt the grid spacing. The grid
-can be turned on and off from the
-toolbar. Each intersection of a
-grid line and an unfolded panel
-has a number next to it indicating
-the coordinate of that intersection.
-The two panels that are created
-from layers that border the
-centerplane of the hull and are
-completely flat, such as for
-example a flat transom or bottom,
-are merged into 1 unfolded panel.
-Illustration29
+All layers which are marked as developable in the layer properties
+dialog are unfolded onto flat plates (a process also called
+developing). If the model contains no developable layers then this
+option appears disabled. Both sides of the ship are unfolded. A window
+then appears showing the unfolded plates. It is best to assign each
+strake or part of the hull to a different layer. Then each layer will
+have its own unfolding. If a layer consists of multiple separate
+parts, each part again will have its own unfolding. The unfolded
+panels can be moved by dragging them with the mouse.  Buttons on the
+toolbar at the top of the window can be used to rotate the currently
+selected item.  The rotation angle of each panel may also be entered
+manually. Zooming and panning can be done exactly as in the viewports
+used for modeling the ship. Interior edges and any present
+intersection curves are also drawn on the unfolded panels, and can be
+switched on or off as desired. The initial settings for these options
+are the same as those for the entire model. So if the stations are
+turned off in the hullform-viewports, they will not show in the
+developed surfaces window either, until they are turned on again.  The
+viewport be can saved as a bitmap, but the visible parts can also be
+exported to a .dxf file or sent directly to the printer/plotter. The
+coordinates forming the boundary of each part can be exported to n
+ASCII text file.
+
+On the right of the window a list is visible, showing all unfolded
+parts. By clicking on the checkboxes each part can be made visible or
+invisible. At the top some crucial information about the developments
+is shown. After the plates have been unfolded to 2D, ShipCAD compares
+the length of the unfolded interior edges to the length of these edges
+in 3D. If this length is smaller then the edges were compressed (drawn
+in blue). If the unfolded edges are longer then these edges were
+stretched (drawn in red). The min. error shown at the top is the
+largest compression error that occurred (in world space dimensions, so
+meters or feet). The max. error is the largest amount of stress of an
+edge. Compressed or stretched edges may be visualized by turning both
+the visibility of interior edges and highlighting of compressed edges
+on. The difference in area between the 3D surface and the unfolded
+surface is also shown. Below the displayed edges the number of
+iterations it took to unfold the selected panel is shown. ShipCAD
+makes up to 25 developments of each panel and uses the one with the
+smallest overall error as the final one. Generally surfaces that are
+truly developable are unfolded in 1 iteration, and have min. and
+max. errors of 0.0. Surfaces that are not exactly developable can in
+most cases still be unfolded but might have significant errors due to
+the fact that the surface is curved in two directions. Think of it as
+the top half of a sphere, you can not press this surface down to a
+flat surface without stretching or compressing certain areas, unless
+you make some cuts of course.  So it's \textbf{very important} to check these
+errors when you actually want to use the unfolded plates for
+construction purposes!
+
+There are also two input fields to adapt the grid spacing. The grid
+can be turned on and off from the toolbar. Each intersection of a grid
+line and an unfolded panel has a number next to it indicating the
+coordinate of that intersection.  The two panels that are created from
+layers that border the centerplane of the hull and are completely
+flat, such as for example a flat transom or bottom, are merged into 1
+unfolded panel.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=566,natheight=360]{keelandrudder.png}
+        \caption{}
+        \label{fig:keelandrudder}
+\end{wrapfigure}
 
 \subsection{Keel and rudder wizard.}
-The keel and rudder wizard enables you to
-quickly define a keel or rudder with a
-predefined planform. You can select the
-desired wingsection from a list of standard
-NACA sections. The keel or rudder is show in
-3D along with it basic properties such as
-aspect ratio, volume, center of buoyancy etc.
-Once the keel or rudder is complete it can be
-exported in two ways. Using the “send” button it
-is inserted at the current ShipCAD model at
-the origin. Using the “save as part” button it can
-be saved to disc as a ShipCAD part which
-can be imported in other designs. The lift/drag tab shows an estimation for the lift and drag curves.
+The keel and rudder wizard enables you to quickly define a keel or
+rudder with a predefined planform. You can select the desired
+wingsection from a list of standard NACA sections. The keel or rudder
+is show in 3D along with it basic properties such as aspect ratio,
+volume, center of buoyancy etc.  Once the keel or rudder is complete
+it can be exported in two ways. Using the “send” button it is inserted
+at the current ShipCAD model at the origin. Using the “save as part”
+button it can be saved to disc as a ShipCAD part which can be imported
+in other designs. The lift/drag tab shows an estimation for the lift
+and drag curves.
 
 \subsection{Import markers.}
-Markers are curves that can be added to the model as a reference. For example the offsets of
-another design can be imported as markers. Then intersection curves can be specified at the same
-locations in ShipCAD. If the intersection curves coincide with the markers both hulls are exactly
-the same. At the moment the only way to add markers is by importing them from a textfile. The file
-format of this file is exactly the same as as described in 3.5.4 Surface and 3.5.5 Importing chines.
-The only difference is that the integer value on the first line of the file that indicates the units used in
-the file (imperial or metric) is discarded here.
+Markers are curves that can be added to the model as a reference. For
+example the offsets of another design can be imported as markers. Then
+intersection curves can be specified at the same locations in
+ShipCAD. If the intersection curves coincide with the markers both
+hulls are exactly the same. At the moment the only way to add markers
+is by importing them from a textfile. The file format of this file is
+exactly the same as as described in \ref{import-surface} Surface and
+\ref{import-chines} Importing
+chines.  The only difference is that the integer value on the first
+line of the file that indicates the units used in the file (imperial
+or metric) is discarded here.
 
 \subsection{Delete markers.}
-This deletes all markers from the model. It speaks for itself that this option is disabled if there are no
-markers added to the model. (see also 11.14 Markers).
+This deletes all markers from the model. It speaks for itself that
+this option is disabled if there are no markers added to the
+model. (see also \ref{vis-markers} Markers).
 
 \subsection{Add cylinder.}
-This option lets you add a cylinder. You can specify the startpoint, endpoint, radius and number of
-points in the dialog that appears. The points are calculated in such a way that the resulting surface
-has the required properties, even though the points are located outside the cylinder. The minimum
-number of points that can be used to form the cylindrical shape is 4, however 6 or more is
-recommended. You can use the cylinder for example to add a bow thruster to your model.
+This option lets you add a cylinder. You can specify the startpoint,
+endpoint, radius and number of points in the dialog that appears. The
+points are calculated in such a way that the resulting surface has the
+required properties, even though the points are located outside the
+cylinder. The minimum number of points that can be used to form the
+cylindrical shape is 4, however 6 or more is recommended. You can use
+the cylinder for example to add a bow thruster to your model.
+
+\pagebreak
 
 \section{Transform.}
 The first following 4 transformation operations described in this chapter are intended to be used on
 a selection. There are two different ways to create such a selection.
-1. Select the items yourself with the mouse
-2. Select nothing. As soon as one of the commands below is chosen, and there is no
+
+\begin{enumerate}
+
+\item Select the items yourself with the mouse
+
+\item Select nothing. As soon as one of the commands below is chosen, and there is no
 selection yet, the program shows a dialog from which you can select entire layers. Then the
 operation is performed on the layers that you have selected.
 
-\subsection{Scale.}
-Scales (part of) the model. For this operation the program assembles all selected points, but also
-all the points that belong to edges and faces that are selected. If nothing is selected, a dialog is
-presented to the user from which entire layers can be selected. If the checkbox at the bottom of the
-dialog is checked (the one saying: “include points that are shared with unselected layers”) then a
-point is selected automatically if at least one attached face belongs to a selected layer. If the
-checkbox is not checked, then a point is selected automatically when all the faces around it belong
-to selected layer(s). If everything is selected, then not only is the hull scaled, but mainparticulars,
-stations, buttocks and waterlines too.
+\end{enumerate}
+
+\subsection{Scale.} \label{scale}
+Scales (part of) the model. For this operation the program assembles
+all selected points, but also all the points that belong to edges and
+faces that are selected. If nothing is selected, a dialog is presented
+to the user from which entire layers can be selected. If the checkbox
+at the bottom of the dialog is checked (the one saying: “include
+points that are shared with unselected layers”) then a point is
+selected automatically if \underline{\textit{at least}} one attached face belongs to a
+selected layer. If the checkbox is not checked, then a point is
+selected automatically when \underline{\textit{all}} the faces around it belong to selected
+layer(s). If everything is selected, then not only is the hull scaled,
+but mainparticulars, stations, buttocks and waterlines too.
 
 \subsection{Move.}
-Moves (part of) the model. Works on points extracted from a selection, as described in 14.1 Scale.
+Moves (part of) the model. Works on points extracted from a selection,
+as described in \ref{scale} Scale.
 
 \subsection{Rotate.}
-Rotates (part of) the model. Works on points extracted from a selection, as described in 14.1 Scale.
+Rotates (part of) the model. Works on points extracted from a
+selection, as described in \ref{scale} Scale.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=279,natheight=308]{mirrordialog.png}
+        \caption{}
+        \label{fig:mirrordialog}
+\end{wrapfigure}
 
 \subsection{Mirror.}
-In contrast to the previous transformation commands is this one based on
-selected faces, not points. First select all the faces you want to mirror (see the
-chapter about viewports for special selecting options). Then use the mirror
-option to create a mirrored copy of the selected faces. The mirror plane can be
-either transverse (YZ plane), horizontal (XY plane) or vertical (XZ plane). The
-distance of the mirror plane to the origin must be specified in the distance field.
-The checkbox at the bottom of the form tells the program if the mirrored points
-should be connected to already existing points or not.
-As an example the image to the right shows the process of creating a catamaran. The catamaran at
-first is modeled as a symmetrical monohull (top left). To
-convert it to a proper catamaran the mirror option is used. All
-faces of the (at this stage still a) monohull are selected and
-mirrored in the centerplane of the hull (vertical plane,
-distance = 0.0). This way a symmetrical monohull is obtained
-(top right). This is finally moved in the positive y-direction
-with the move command as described in the paragraph
-above. If the visibility setting of the program is set to show
-both sides of the design (in this case both hulls) the final
-shape of the catamaran appears (bottom left and bottom
-right)
+In contrast to the previous transformation commands is this one based
+on selected faces, not points. First select all the faces you want to
+mirror (see the chapter about viewports for special selecting
+options). Then use the mirror option to create a mirrored copy of the
+selected faces. The mirror plane can be either transverse (YZ plane),
+horizontal (XY plane) or vertical (XZ plane). The distance of the
+mirror plane to the origin must be specified in the distance field.
+The checkbox at the bottom of the form tells the program if the
+mirrored points should be connected to already existing points or not.
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=443,natheight=303]{mirrorcatamaran.png}
+        \caption{}
+        \label{fig:mirrorcatamaran}
+\end{wrapfigure}
+
+As an example the image to the right shows the process of creating a
+catamaran. The catamaran at first is modeled as a symmetrical monohull
+(top left). To convert it to a proper catamaran the mirror option is
+used. All faces of the (at this stage still a) monohull are selected
+and mirrored in the centerplane of the hull (vertical plane, distance
+= 0.0). This way a symmetrical monohull is obtained (top right). This
+is finally moved in the positive y-direction with the \textit{move} command as
+described in the paragraph above. If the visibility setting of the
+program is set to show both sides of the design (in this case both
+hulls) the final shape of the catamaran appears (bottom left and
+bottom right)
 
 \subsection{Lackenby.}
-The hullform method developed by Lackenby is used to transform the hull to match a desired
-displacement or longitudinal center of buoyancy while maintaining fairness of your design. This is
-done by shifting controlpoints in the longitudinal direction. So the overall length of the design will be
-different after the transformation. The dialog looks as follows:
-The input fields to the left are divided in 3 columns. The left column shows the current values as
-calculated from the model. The middle column shows the desired values which can be modified by
-the user. The right column shows the difference between the current and desired values. The left
-and right column are updated after each iteration so the progress can be monitored.
-Below these 3 columns the maximum number of iterations that may be performed can be modified.
-The default is 15, but sometimes more iterations are needed to obtain the desired result. This is
-specially true when a design has a high prismatic coefficient in the aftship, such as planing
-motorcraft, or when the midship location is far from the usual place at 0.5*Length.
-The checkbox below that ensures that all windows of the program are updated after each iteration,
-so the progress can be monitored in 3D.
-To the right the bodyplan of the original hull is displayed in black. If the transformation was
-successful then the new bodyplan is displayed in red dashed lines on top of the original bodyplan.
-At the bottom of the dialog the original sectional area curve and design waterline are displayed, also
-in black. Again the new sectional area curve and design waterline are displayed on top of these if
-the transformation was successful. The dark gray dashed line is the location of the midship section
-as defined by the user in the project settings. Important to know is that in contrast to the
-hydrostatics calculated elsewhere in the program here it is calculated using ordinates, and not
-surface panels. This can cause a slight difference between the displacement shown here and
-calculated elsewhere. A total of 82 ordinates is used to calculate the sectional area curve and
+The hullform method developed by Lackenby is used to transform the
+hull to match a desired displacement or longitudinal center of
+buoyancy while maintaining fairness of your design. This is done by
+shifting controlpoints in the longitudinal direction. So the overall
+length of the design will be different after the transformation. The
+dialog looks as follows:
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=881,natheight=620]{lackenbydialog.png}
+        \caption{}
+        \label{fig:lackenby}
+\end{figure}
+
+The input fields to the left are divided in 3 columns. The left column
+shows the current values as calculated from the model. The middle
+column shows the desired values which can be modified by the user. The
+right column shows the difference between the current and desired
+values. The left and right column are updated after each iteration so
+the progress can be monitored.
+
+Below these 3 columns the maximum number of iterations that may be
+performed can be modified.  The default is 15, but sometimes more
+iterations are needed to obtain the desired result. This is specially
+true when a design has a high prismatic coefficient in the aftship,
+such as planing motorcraft, or when the midship location is far from
+the usual place at 0.5*Length.
+
+The checkbox below that ensures that all windows of the program are
+updated after each iteration, so the progress can be monitored in 3D.
+
+To the right the bodyplan of the original hull is displayed in
+black. If the transformation was successful then the new bodyplan is
+displayed in red dashed lines on top of the original bodyplan.
+
+At the bottom of the dialog the original sectional area curve and
+design waterline are displayed, also in black. Again the new sectional
+area curve and design waterline are displayed on top of these if the
+transformation was successful. The dark gray dashed line is the
+location of the midship section as defined by the user in the project
+settings. Important to know is that in contrast to the hydrostatics
+calculated elsewhere in the program here it is calculated using
+ordinates, and not surface panels. This can cause a slight difference
+between the displacement shown here and calculated elsewhere. A total
+of 82 ordinates is used to calculate the sectional area curve and
 hydrostatics, 41 for the aftship and 41 for the foreship.
-Finally at the bottom-left corner all layers of the model are shown. The transformation is only applied
-to the layers that have a checkmark next to them. As stated previously the transformation consists
-of shifting controlpoints longitudinally, so the location of for example a keel, centerboard or cabin is
-also likely to change. By removing the checkmark layers containing such items remain unchanged,
-but it may result in a distorted or unfair model if the model was excessively changed.
-Here the result is shown after transforming the blockcoefficient from 0.4726 to 0.5200. The new
-lines and sectional area curve are displayed on top of the original lines.
+
+Finally at the bottom-left corner all layers of the model are
+shown. The transformation is only applied to the layers that have a
+checkmark next to them. As stated previously the transformation
+consists of shifting controlpoints longitudinally, so the location of
+for example a keel, centerboard or cabin is also likely to change. By
+removing the checkmark layers containing such items remain unchanged,
+but it may result in a distorted or unfair model if the model was
+excessively changed.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=880,natheight=626]{lackenbydialog-2.png}
+        \caption{}
+        \label{fig:lackenby-2}
+\end{figure}
+
+Here the result is shown after transforming the blockcoefficient from
+0.4726 to 0.5200. The new lines and sectional area curve are displayed
+on top of the original lines.
+
+\pagebreak
 
 \section{Calculations.}
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+        \centering
+        \includegraphics[width=0.3\textwidth,natwidth=316,natheight=405]{intersectionsdialog.png}
+        \caption{}
+        \label{fig:intersection}
+\end{wrapfigure}
 
 \subsection{intersection curves.}
 intersection curves such as stations, buttocks, waterlines and
@@ -1776,71 +2132,111 @@ diagonals are calculated from the model. Only their location needs to
 be specified. Diagonals are always at an angle of 45 degrees to the
 center plane. Each time the model is changed, the calculated
 intersection curves are destroyed. They are rebuild as soon as they
-need to be exported or drawn to the screen. The buttons on the
-toolbar let you switch to which type of intersection you want to add or
+need to be exported or drawn to the screen. The buttons on the toolbar
+let you switch to which type of intersection you want to add or
 delete. You can add one intersection at a time by selecting the +1
 option in the menu. A dialog is displayed asking for the location of
 the intersection. It is also possible to add a whole range at once by
 selecting the +N option. Only the spacing between successive
 intersection curves needs to be specified. The program starts at the
 origin (x=0, y=0 or z=0, depending on the type of intersection) and
-keeps adding intersection curves in positive and negative direction until the extents of the model is
-reached. The intersection curves appear in an increasing order of their distance. To delete an
-intersection, just select it and press the delete key on your keyboard.
-The checkbox displayed to the left of each intersection indicates if the curvature plot of that specific
-intersection curve must be plotted. (see curvature visibility). Due to the scale and nature of the
-computer screen it is in almost any case impossible to determine if a curve is fair. To overcome this
-a curvature plot is often drawn. A curvature plot
-means that in a large number of points of a curve
-the curvature is calculated and plotted
-perpendicular to the curve ( the purple line). Since
-the curvature can be positive as well as negative,
-the plot can swap from one side of the curve to the
-other (see the image left). Where the plot
-intersects the curve the curvature is zero. So in
-areas of a curve where the curvature is zero
-(straight line segments), both curves are on top of
-each other. At a knuckle point on the other hand
-the curvature is very high and can go to infinity. So
-Illustration 30
-the higher the absolute value of the curvature, the
-further the curvature plot is drawn away from the curve. Smooth curves are characterized by
-curvature plots with no unexpected humps or hollows, the curvature must change gradually as is the
-case with the waterline below. The scale of the curvature plot can be decreased by pressing the F9
-key and increased by pressing the F10 key. Make sure that the curvature visibility is also turned on!
+keeps adding intersection curves in positive and negative direction
+until the extents of the model is reached. The intersection curves
+appear in an increasing order of their distance. To delete an
+intersection, just select it and press the \textit{delete} key on your
+keyboard.
 
-\subsection{Design hydrostatics.}
-A simple hydrostatic calculation is performed of the ship at the design draft, as specified in the
-project settings. Some important coefficients, such as blockcoefficient, are calculated twice. Once
-using the length and beam as specified in the project settings, and once using the actual length and
-beam at the waterline. Finally the surface area and center of gravity of each layer is shown. These
-properties are calculated for both sides of the ship and may be used for example to estimate the
-weight of the hull.
-If imperial units are used, the displacement is given in longtons (1 longton equals 2240 lbs).
+\begin{wrapfigure}{l}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=516,natheight=326]{curvaturevisibility.png}
+        \caption{}
+        \label{fig:curvaturevis}
+\end{wrapfigure}
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=942,natheight=335]{curvaturevisibility-2.png}
+        \caption{}
+        \label{fig:curvaturevis2}
+\end{figure}
+
+The checkbox displayed to the left of each intersection indicates if
+the curvature plot of that specific intersection curve must be
+plotted. (see curvature visibility). Due to the scale and nature of
+the computer screen it is in almost any case impossible to determine
+if a curve is fair. To overcome this a curvature plot is often
+drawn. A curvature plot means that in a large number of points of a
+curve the curvature is calculated and plotted perpendicular to the
+curve ( the purple line). Since the curvature can be positive as well
+as negative, the plot can swap from one side of the curve to the other
+(see the image left). Where the plot intersects the curve the
+curvature is zero. So in areas of a curve where the curvature is zero
+(straight line segments), both curves are on top of each other. At a
+knuckle point on the other hand the curvature is very high and can go
+to infinity. So the higher the absolute value of the curvature, the
+further the curvature plot is drawn away from the curve. Smooth curves
+are characterized by curvature plots with no unexpected humps or
+hollows, the curvature must change gradually as is the case with the
+waterline below. The scale of the curvature plot can be decreased by
+pressing the F9 key and increased by pressing the F10 key. Make sure
+that the curvature visibility is also turned on!
+
+\subsection{Design hydrostatics.} \label{design-hydrostatics}
+A simple hydrostatic calculation is performed of the ship at the
+design draft, as specified in the project settings. Some important
+coefficients, such as blockcoefficient, are calculated twice. Once
+using the length and beam as specified in the project settings, and
+once using the actual length and beam at the waterline. Finally the
+surface area and center of gravity of each layer is shown. These
+properties are calculated for both sides of the ship and may be used
+for example to estimate the weight of the hull.
+
+If imperial units are used, the displacement is given in longtons (1
+longton equals 2240 lbs).
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=15cm,natwidth=655,natheight=472]{hydrostaticsdialog.png}
+        \caption{}
+        \label{fig:hydrostaticsd}
+\end{figure}
 
 \subsection{Hydrostatics.}
-This option is used to perform hydrostatic calculations at a range of drafts. A trim may also be
-specified. The results can be saved to a textfile.
+This option is used to perform hydrostatic calculations at a range of
+drafts. A trim may also be specified. The results can be saved to a
+textfile.
 
 \subsection{Cross curves.}
-Stability calculations are provided in the form of cross curves. For a number of heeling angles and
-displacements KN sin(ø) is calculated and presented in a graph and table. If only one displacement
-is provided the KN sin(ø) curve is displayed. If multiple displacements are provided the graph shows
-the standard cross curves. The calculated data can be printed or saved to a textfile.
+Stability calculations are provided in the form of cross curves. For a
+number of heeling angles and displacements KN sin(ø) is calculated and
+presented in a graph and table. If only one displacement is provided
+the KN sin(ø) curve is displayed. If multiple displacements are
+provided the graph shows the standard cross curves. The calculated
+data can be printed or saved to a textfile.
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[width=10cm,natwidth=662,natheight=454]{crosscurvesdialog.png}
+        \caption{}
+        \label{fig:crosscurves}
+\end{figure}
 
 \subsection{Resistance calculations.}
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=672,natheight=408]{delftdialog.png}
+        \caption{}
+        \label{fig:delft}
+\end{wrapfigure}
+
 \subsubsection{Delft series.}
-The Delft series resistance calculation is a
-method that is intended for fin-keeled
-yachts. It's a statistical method based upon
-a whole series of models that are tested
-over the years in the towing tank of the
-Delft University of Technology. The
-calculation is restricted to run only if the
-parameters of the model are in the same
-range as those of the tested models.
-These ranges are:
+The Delft series resistance calculation is a method that is intended
+for fin-keeled yachts. It's a statistical method based upon a whole
+series of models that are tested over the years in the towing tank of
+the Delft University of Technology. The calculation is restricted to
+run only if the parameters of the model are in the same range as those
+of the tested models.  These ranges are:
 
 \begin{itemize}
   \item Lwl/Bwl [2.76 - 5.00]
@@ -1853,96 +2249,136 @@ These ranges are:
 If there are no lines displayed in the graph to the right, then it's safe to assume that at least one of
 the parameters is out of range. You can switch to the results tab to check the details.
 There are two different ways to use the module:
-• Fill in all the data manually. You don't even need a hull to do this. Each time a modification is
+
+\begin{itemize}
+
+\item Fill in all the data manually. You don't even need a hull to do this. Each time a modification is
 made everything is recalculated and updated.
-• Let the program calculate the hydrostatic values that are needed by clicking on the checkbox that
-says: “Extract data from current hull”. Only two input fields concerning the hull data are enabled
-in this mode. One is for the draft of the hull alone, the other for the total draft of the hull including
-the keel. This last draft is used when the hydrostatic values are calculated, assuming you have
-indeed attached a keel at the bottom of the hull. If this is not the case, then fill in the draft of the
-hull alone as if it was the total draft including the keel. As all data has been calculated by the
-program then disable the “extract from hull” checkbox, and set the correct drafts in the two edit
-fields and continue as normal.
+
+\item Let the program calculate the hydrostatic values that are needed by clicking on the checkbox that
+says: “Extract data from current hull”. Only two input fields
+concerning the hull data are enabled in this mode. One is for the
+draft of the hull alone, the other for the total draft of the hull
+including the keel. This last draft is used when the hydrostatic
+values are calculated, assuming you have indeed attached a keel at the
+bottom of the hull. If this is not the case, then fill in the draft of
+the hull alone as if it was the total draft including the keel. As all
+data has been calculated by the program then disable the “extract from
+hull” checkbox, and set the correct drafts in the two edit fields and
+continue as normal.
+
+\end{itemize}
+
 All data used for the resistance calculation is stored with the model.
 
 \subsubsection{KAPER.}
-The KAPER resistance method is intended for canoes and kayaks. It was originally developed by
-John Winters, a naval architect now specializing in designing canoes and kayaks. (See
+The KAPER resistance method is intended for canoes and kayaks. It was
+originally developed by John Winters, a naval architect now
+specializing in designing canoes and kayaks. (See
 \url{http://www.greenval.com/jwinters.html}) It is based on statistical data obtained by model tests. His
-method is later extended by Matt Broze to higher speed/length ratios and to incorporate more
-variables into the equations. This extended version is available in the form of an Excel spreadsheet
-from \url{http://www.marinerkayaks.com/mkhtml/downloads.htm}. However while implementing this
-method in ShipCAD two serious discontinuities showed up in the curve of residual resistance.
-These consist of a sudden drop in resistance of about 10% at speed/length ratios of 1.4 and 1.6
-and are the result of a correction implemented by Matt. After careful consideration the decision was
-made to only allow calculations up to a speed/length ratio of 1.4 in order not to give the user a false
-sense of security. It also restricts the method to stay within the range of parameters of the actually
-tested hulls.
-Basically there are two ways to use the KAPER resistance method. The easiest way is to open it
-with a design in memory. In that case the checkbox saying “extract data from the current hull” is
-enabled and may be checked. If it is checked all input fields, except those for the draft and
-submerged transom ratio, are disabled.
-When the draft is changed the program
-calculates the appropriate hydrostatics
-corresponding to that draft and the resistance
-data is updated. The other way is by
-removing the check from the checkbox. In
-that case you can specify (or modify after
-most values have been automatically
+method is later extended by Matt Broze to higher speed/length ratios
+and to incorporate more variables into the equations. This extended
+version is available in the form of an Excel spreadsheet
+from \url{http://www.marinerkayaks.com/mkhtml/downloads.htm}. However
+while implementing this method in ShipCAD two serious discontinuities
+showed up in the curve of residual resistance.  These consist of a
+sudden drop in resistance of about 10\% at speed/length ratios of 1.4
+and 1.6 and are the result of a correction implemented by Matt. After
+careful consideration the decision was made to only allow calculations
+up to a speed/length ratio of 1.4 in order not to give the user a
+false sense of security. It also restricts the method to stay within
+the range of parameters of the actually tested hulls.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=536,natheight=384]{kaperdialog.png}
+        \caption{}
+        \label{fig:kaper}
+\end{wrapfigure}
+
+Basically there are two ways to use the KAPER resistance method. The
+easiest way is to open it with a design in memory. In that case the
+checkbox saying “extract data from the current hull” is enabled and
+may be checked. If it is checked all input fields, except those for
+the draft and submerged transom ratio, are disabled.  When the draft
+is changed the program calculates the appropriate hydrostatics
+corresponding to that draft and the resistance data is updated. The
+other way is by removing the check from the checkbox. In that case you
+can specify (or modify after most values have been automatically
 calculated) all input values manually.
-After each modification the resistance is
-recalculated. You can see the data either
-graphically on the first tab page or
-numerically on the second tab page. When
-no data is visible the input data is out of
+
+After each modification the resistance is recalculated. You can see
+the data either graphically on the first tab page or numerically on
+the second tab page. When no data is visible the input data is out of
 range. The range of valid parameters is:
-●
- Prismatic coefficient 0.48-0.64
-●
- Submerged transom ratio 0.0-0.04
-●
- None of the other variables other than the waterline entrance angle me be zero.
-The graph displays 4 resistance curves. The first three are for frictional resistance, residual
-resistance and the total resistance. The fourth line is showing the total resistance according to
-Spilman. The residual resistance in this case is a very simple formula based only upon the
-speed/length ratio of the design and is included to give the user a point of reference.
+
+\begin{itemize}
+
+\item Prismatic coefficient 0.48-0.64
+
+\item Submerged transom ratio 0.0-0.04
+
+\item None of the other variables other than the waterline entrance angle me be zero.
+The graph displays 4 resistance curves. The first three are for
+frictional resistance, residual resistance and the total
+resistance. The fourth line is showing the total resistance according
+to Spilman. The residual resistance in this case is a very simple
+formula based only upon the speed/length ratio of the design and is
+included to give the user a point of reference.
+
+\end{itemize}
+
 All data entered in the input fields of this resistance method is also stored in the ShipCAD file.
 
+\pagebreak
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+        \centering
+        \includegraphics[width=0.4\textwidth,natwidth=579,natheight=234]{backgroundimage-1.png}
+        \caption{}
+        \label{fig:backgroundimage1}
+\end{wrapfigure}
+
 \section{Background images.}
-ShipCAD has the ability to show images on the background of your model. This functionality is
-particularly convenient if you have an existing linesplan on paper and want to recreate the lines in
-ShipCAD. You can load a maximum of three images. Each of these images is assigned to a view
-(profile, plan or bodyplan view). You can not
-assign an image to the perspective view. All
-options related to background images are located
-in the popup-menu that appears when you press
-the right mouse button in a viewport. When using
-background images pay special attention to make
-sure that all horizontal and vertical lines on the
-images are truly horizontal or vertical.
+ShipCAD has the ability to show images on the background of your
+model. This functionality is particularly convenient if you have an
+existing linesplan on paper and want to recreate the lines in
+ShipCAD. You can load a maximum of three images. Each of these images
+is assigned to a view (profile, plan or bodyplan view). You can not
+assign an image to the perspective view. All options related to
+background images are located in the popup-menu that appears when you
+press the right mouse button in a viewport. When using background
+images pay special attention to make sure that all horizontal and
+vertical lines on the images are truly horizontal or vertical.
 
 \subsection{Visible.}
-Once you have assigned an image to for example the profile view, it will be shown in all viewports
-showing the profile view on the model. By changing the visible property you can hide the image
-from a particular viewport.
+Once you have assigned an image to for example the profile view, it
+will be shown in all viewports showing the profile view on the
+model. By changing the \textit{visible property} you can hide the image from a
+particular viewport.
 
 \subsection{Clear.}
-Using the clear command removes the image not only from the current viewport but also from all
-other viewport. It is entirely removed from the ShipCAD model.
+Using the clear command removes the image not only from the current
+viewport but also from all other viewport. It is entirely removed from
+the ShipCAD model.
 
 \subsection{Load.}
-Imports a background image. ShipCAD only reads bmp and jpg images. For performance reasons
-make sure that the images you are going to use are not too big. After having imported an image you
-must set the origin to make sure it is displayed at the right location. You also have to set the scale
-of the image to math the size of your model.
+Imports a background image. ShipCAD only reads \textit{bmp}
+and \textit{jpg} images. For performance reasons make sure that the
+images you are going to use are not too big. After having imported an
+image you must set the origin to make sure it is displayed at the
+right location. You also have to set the scale of the image to math
+the size of your model.
 
 \subsection{Save.}
 Exports the background image to a file.
 
 \subsection{Origin.}
-If you use this option a special cursor appears. Once you click on a spot in the active viewport that
-part of the image will be moved to the origin of the current viewport. It does not necessarily have to
-be a point within the actual background image, it may also be located outside the image.
+If you use this option a special cursor appears. Once you click on a
+spot in the active viewport that part of the image will be moved to
+the origin of the current viewport. It does not necessarily have to be
+a point within the actual background image, it may also be located
+outside the image.
 
 \subsection{Set scale.}
 Make sure you set the scale of an imported image before opening another image. ShipCAD
@@ -1951,67 +2387,99 @@ particularly useful if you have multiple images imported from the same linesplan
 this option the user is required to click on a point within the actual image of which the location is
 known. The program uses the same scale for both the horizontal and vertical direction.
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=581,natheight=236]{backgroundimage-2.png}
+        \caption{}
+        \label{fig:backgroundimage2}
+\end{wrapfigure}
+
 \subsection{Transparent color.}
-Often background images are in black and white. Having a huge white area on your viewport can
-sometimes be distracting. By setting white as the transparent color the program does not draw the
-white areas. So only the black lines are draw on
-your screen. You can select the transparent color
-by clicking on an area of the background image
-that has the color you want to hide. If you click on
-a point that lies outside the area of the
-background image transparency is disabled
+Often background images are in black and white. Having a huge white
+area on your viewport can sometimes be distracting. By setting white
+as the transparent color the program does not draw the white areas. So
+only the black lines are draw on your screen. You can select the
+transparent color by clicking on an area of the background image that
+has the color you want to hide. If you click on a point that lies
+outside the area of the background image transparency is disabled
 again.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth,natwidth=578,natheight=253]{backgroundimage-3.png}
+        \caption{}
+        \label{fig:backgroundimage3}
+\end{wrapfigure}
 
 \subsection{Tolerance.}
 Sometimes images that look black and white
 have a lot of colors in between. This is
 particularly the case where some quality has
 been lost due to compression, as is the case
-with jpg images. When white is the designated
+with \textit{jpg} images. When white is the designated
 transparent color and is filtered out, a lot of
-“almost white” pixels remain. By increasing the
+``almost white'' pixels remain. By increasing the
 tolerance these pixels can be filtered out by the
 program too.
 
 \subsection{Blending.}
-If even after all the measures above the background image is till too dominant, it can be blended
-with the viewport color. This way it dissolves in the background and the geometry of you ShipCAD
-model is still clearly visible.
+If even after all the measures above the background image is till too
+dominant, it can be blended with the viewport color. This way it
+dissolves in the background and the geometry of you ShipCAD model is
+still clearly visible.
+
+\pagebreak
 
 \section{Language support.} \label{language-support}
 Current translations include:
-•
- English
-•
- Dutch
-•
- German
-•
- French
-•
- Castellano
-•
- Suomi
-Due to the fact that ShipCAD is still in development (new features keep being added) and that the
-translations are created and maintained by ShipCAD users, it is likely that the translation files are
-not completely in sync with the most recent English.ini file. After each official release the translation
-files have to be updated again. These update files are then included in the next release of
-ShipCAD.
+
+\begin{itemize}
+
+\item English
+
+\item Dutch
+
+\item German
+
+\item French
+
+\item Castellano
+
+\item Suomi
+
+\end{itemize}
+
+Due to the fact that ShipCAD is still in development (new features
+keep being added) and that the translations are created and maintained
+by ShipCAD users, it is likely that the translation files are not
+completely in sync with the most recent English.ini file. After each
+official release the translation files have to be updated again. These
+update files are then included in the next release of ShipCAD.
 
 \subsection{Creating translations.}
-All the text strings used on the forms are placed into a single .ini file. The original file is called
-English.ini and can be found in the Languages subdirectory. This is a simple textfile containing the
-information of all forms where each form has it own section that begins with the name of the form
-enclose by two square brackets, for example: [TMainform]. Each line after that has the following
-syntax: TMainForm.LoadFile.Hint=Open a new file. This line can be split into two parts. The
-part left of the = sign tells the program where the text should be placed, in this case it is the hint that
-appears when the mouse hovers above the toolbar button used to open a file. The part to the right
-of the = sign is the actual text. When modifying the file make sure the = sign is not removed. You
-can translate the file either with a ASCII text editor such as notepad or use the special tool that can
-be downloaded from the ShipCAD homepage. If you decide to make a translation, make sure you
-give the file the name of the language you are translating into, as this is the text that is displayed in
-the list with available languages in the preferences dialog. New language files can be sent to
-info@freeship.org so they can be included in the next release of ShipCAD.
+All the text strings used on the forms are placed into a single .ini
+file. The original file is called English.ini and can be found in the
+Languages subdirectory. This is a simple textfile containing the
+information of all forms where each form has it own section that
+begins with the name of the form enclose by two square brackets, for
+example: \textit{[TMainform]}. Each line after that has the following syntax:
+\begin{verbatim}
+TMainForm.LoadFile.Hint=Open a new file.
+\end{verbatim}
+This line can be split into two parts. The part left of the = sign
+tells the program where the text should be placed, in this case it is
+the hint that appears when the mouse hovers above the toolbar button
+used to open a file. The part to the right of the = sign is the actual
+text. When modifying the file make sure the = sign is not removed. You
+can translate the file either with a ASCII text editor such as notepad
+or use the special tool that can be downloaded from the ShipCAD
+homepage. If you decide to make a translation, make sure you give the
+file the name of the language you are translating into, as this is the
+text that is displayed in the list with available languages in the
+preferences dialog. New language files can be sent to
+info@freeship.org so they can be included in the next release of
+ShipCAD.
+
 \pagebreak
 
 \section{GNU General Public License.}

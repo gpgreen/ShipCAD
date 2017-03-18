@@ -5,8 +5,9 @@
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage{wrapfig}
+\usepackage[T1]{fontenc}
 
-\title{ShipCAD manual\\Version 2.6}
+\title{ShipCAD manual\\Version 0.1}
 \author{Greg Green}
 
 \begin{document}
@@ -54,6 +55,13 @@ The Free Software Foundation, Inc.,
 Boston, MA 02111-1307
 USA
 
+\section{ShipCAD and FREE!ship.}
+
+ShipCAD is a port of FREE!ship. FREE!ship was written in Delphi
+Pascal, and the port is in C++ with the Qt toolkit. Version 0.1 of
+ShipCAD has the same functionality as 2.6 of FREE!ship. The credits in
+the original manual are reproduced below.
+
 Special thanks to:
 \begin{itemize}
   \item Paul Unterweiser for creating the website
@@ -66,26 +74,6 @@ used for the online database.
   \item Andrey Factor and Bruce Taylor for repeatedly beta testing new features as well as
 their constructive comments.
 \end{itemize}
-
-\section{ShipCAD and Linux.}
-
-Free!ship is originally intended for Windows, although users have
-reported that it runs rather well under WINE too. In some cases
-problems might be experienced with the window focus. In Windows the
-dialog that has focus always stays in front of the mainform. Under
-Wine the dialog windows of ShipCAD go sometimes to the background
-while retaining user input focus. As a result, ShipCAD seems to be
-crashed while it hasn't. To solve this problem, you must cycle through
-the windows to get the dialog window back to the foreground and close
-it. Unfortunately, some window managers don't allow this because not
-all of the open windows are listed in the window menu. The following
-are the results of some tests that have been done on a Ubuntu Breezy
-Badger.  KDE 3.5 Unusable. The menus don't stay opened so no menu item
-can be chosen.  Gnome Only the main window of ShipCAD is listed in the
-window menu, so if you loose the focus of a dialog window, your only
-choice is to kill ShipCAD.  Fluxbox OK IceWm OK WindowMaker OK Openbox
-OK Blackbox Not tested, but as Blackbox is quite close to Fluxbox it
-is probably ok.
 
 \pagebreak
 
@@ -1919,6 +1907,13 @@ you make some cuts of course.  So it's \textbf{very important} to check these
 errors when you actually want to use the unfolded plates for
 construction purposes!
 
+\begin{wrapfigure}{r}{0.6\textwidth}
+        \centering
+        \includegraphics[width=0.6\textwidth,,natwidth=772,natheight=676]{unfoldedplates.png}
+        \caption{}
+        \label{fig:unfoldedplates}
+\end{wrapfigure}
+
 There are also two input fields to adapt the grid spacing. The grid
 can be turned on and off from the toolbar. Each intersection of a grid
 line and an unfolded panel has a number next to it indicating the
@@ -2436,16 +2431,6 @@ Current translations include:
 \begin{itemize}
 
 \item English
-
-\item Dutch
-
-\item German
-
-\item French
-
-\item Castellano
-
-\item Suomi
 
 \end{itemize}
 

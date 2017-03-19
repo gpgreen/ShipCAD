@@ -1130,6 +1130,11 @@ void SubdivisionSurface::removeSelectedControlPoint(SubdivisionControlPoint *pt)
     _sel_control_points.erase(i);
 }
 
+SubdivisionControlPoint* SubdivisionSurface::getSelectedControlPoint(size_t idx)
+{
+    return _sel_control_points[idx];
+}
+
 size_t SubdivisionSurface::requestNewLayerID()
 {
     _last_used_layerID++;

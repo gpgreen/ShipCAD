@@ -143,7 +143,8 @@ public:
     bool hasSelectedControlPoint(SubdivisionControlPoint* pt);
     void setSelectedControlPoint(SubdivisionControlPoint* pt);
     void removeSelectedControlPoint(SubdivisionControlPoint* pt);
-
+    SubdivisionControlPoint* getSelectedControlPoint(size_t idx);
+    
     // SubdivisionEdge
     size_t numberOfEdges() {return _edges.size();}
     size_t indexOfEdge(SubdivisionEdge* edge);

@@ -100,6 +100,7 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
                 scene_changed = true;
                 cout << "control point selected" << endl;
                 emit showControlPointDialog(true);
+                emit updateControlPointValue(cp);
             } else {
                 cout << "non control point selected" << endl;
             }
@@ -212,7 +213,28 @@ void Controller::mirrorPlaneFace()
 
 void Controller::newFace()
 {
-	// TODO
+    if (getModel()->getSurface()->numberOfSelectedControlPoints() <= 2) {
+        // display dialog
+        return;
+    }
+    // create undo object
+    // remember the number of faces, edges and points
+    // assemble all points in a temporary list
+    vector<SubdivisionControlPoint*> tmp;
+    for (size_t i=0; i<getModel()->getSurface()->numberOfSelectedControlPoints(); i++)
+        tmp.push_back(getModel()->getSurface()->getSelectedControlPoint(i));
+    // deselect the controlpoints
+    for (size_t i=getModel()->getSurface()->numberOfSelectedControlPoints(); i>0; i--)
+        getModel()->getSurface()->getSelectedControlPoint(i-1)->setSelected(false);
+    // add the new face
+    SubdivisionControlFace* face = getModel()->getSurface()->addControlFace(tmp, true, getModel()->getActiveLayer());
+    if (face != 0) {
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modelGeometryChanged();
+    } else {
+        // undo
+    }
 }
 
 void Controller::rotateFaces()
@@ -980,9 +1002,9 @@ void Controller::cornerPointSelected(bool sel)
             ap->setVertexType(svCorner);
         if (ap->getVertexType() != oldtype) {
             // create an undo object
-            emit updateControlPointValue(ap);
             emit modelGeometryChanged();
         }
+        emit updateControlPointValue(ap);
     }
 }
 

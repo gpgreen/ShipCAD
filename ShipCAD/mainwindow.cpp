@@ -595,6 +595,7 @@ void MainWindow::enableActions()
     // edge actions
 
     // face actions
+    ui->actionFaceNew->setEnabled(true);
 
     // layer actions
 

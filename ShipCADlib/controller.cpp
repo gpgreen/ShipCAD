@@ -31,6 +31,7 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QFileInfo>
+#include <QErrorMessage>
 
 #include "controller.h"
 #include "shipcadmodel.h"
@@ -214,10 +215,12 @@ void Controller::mirrorPlaneFace()
 void Controller::newFace()
 {
     if (getModel()->getSurface()->numberOfSelectedControlPoints() <= 2) {
-        // display dialog
+        QErrorMessage* em = new QErrorMessage();
+        em->showMessage(
+            tr("You need to select at least 3 controlpoints to create a new controlface"));
         return;
     }
-    // create undo object
+    // create undo object userstring 0094
     // remember the number of faces, edges and points
     // assemble all points in a temporary list
     vector<SubdivisionControlPoint*> tmp;
@@ -1002,9 +1005,11 @@ void Controller::cornerPointSelected(bool sel)
             ap->setVertexType(svCorner);
         if (ap->getVertexType() != oldtype) {
             // create an undo object
+            getModel()->setBuild(false);
+            getModel()->setFileChanged(true);
             emit modelGeometryChanged();
+            emit updateControlPointValue(ap);
         }
-        emit updateControlPointValue(ap);
     }
 }
 

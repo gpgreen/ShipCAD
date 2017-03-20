@@ -85,9 +85,14 @@ void PointDialog::controllerUpdatedPoint(SubdivisionControlPoint* pt)
         ui->checkBoxCornerPoint->setEnabled(false);
         return;
     }
+    { // set the x,y,z of point, blocking signals while doing so
+    const QSignalBlocker blockerx(ui->doubleSpinBoxX);
     ui->doubleSpinBoxX->setValue(pt->getCoordinate().x());
+    const QSignalBlocker blockery(ui->doubleSpinBoxY);
     ui->doubleSpinBoxY->setValue(pt->getCoordinate().y());
+    const QSignalBlocker blockerz(ui->doubleSpinBoxZ);
     ui->doubleSpinBoxZ->setValue(pt->getCoordinate().z());
+    }
     ui->checkBoxCornerPoint->setChecked(pt->getVertexType() == svCorner);
     if (pt->isLocked()) {
         ui->doubleSpinBoxX->setEnabled(false);

@@ -131,25 +131,25 @@ void Controller::openBackgroundImage()
 
 UndoObject* Controller::createRedoObject()
 {
-	version_t version = _model->getFileVersion();
-    bool preview = _model->getProjectSettings().isSavePreview();
+	version_t version = getModel()->getFileVersion();
+    bool preview = getModel()->getProjectSettings().isSavePreview();
 	// temporarily set to the latest fileversion so no data will be lost
-	UndoObject* rd = new UndoObject(_model,
-                                    _model->getFilename(),
-									_model->getEditMode(),
-                                    _model->isFileChanged(),
-                                    _model->isFilenameSet(),
+	UndoObject* rd = new UndoObject(getModel(),
+                                    getModel()->getFilename(),
+									getModel()->getEditMode(),
+                                    getModel()->isFileChanged(),
+                                    getModel()->isFilenameSet(),
 									true);
 	try {
-		_model->setFileVersion(k_current_version);
-		_model->getProjectSettings().setSavePreview(false);
-		_model->saveBinary(rd->getUndoData());
+		getModel()->setFileVersion(k_current_version);
+		getModel()->getProjectSettings().setSavePreview(false);
+		getModel()->saveBinary(rd->getUndoData());
 		rd->accept();
 		emit updateUndoData();
 	} catch(...) {
 		// restore the original version
-		_model->setFileVersion(version);
-		_model->getProjectSettings().setSavePreview(preview);
+		getModel()->setFileVersion(version);
+		getModel()->getProjectSettings().setSavePreview(preview);
 		delete rd;
 		rd = 0;
 	}
@@ -212,6 +212,7 @@ void Controller::mirrorPlaneFace()
 	// TODO
 }
 
+// FreeShipUnit.pas:5393
 void Controller::newFace()
 {
     if (getModel()->getSurface()->numberOfSelectedControlPoints() <= 2) {
@@ -220,7 +221,7 @@ void Controller::newFace()
             tr("You need to select at least 3 controlpoints to create a new controlface"));
         return;
     }
-    // create undo object userstring 0094
+    // create undo object userstring 0094, false
     // remember the number of faces, edges and points
     // assemble all points in a temporary list
     vector<SubdivisionControlPoint*> tmp;
@@ -370,20 +371,20 @@ void Controller::loadFile(const QString& filename)
     QFile loadfile(filename);
     FileBuffer source;
     source.loadFromFile(loadfile);
-    _model->loadBinary(source);
-    _model->getSurface()->clearSelection();
+    getModel()->loadBinary(source);
+    getModel()->getSurface()->clearSelection();
     // TODO clear selected flowlines
     // TODO clear selected markers
-    _model->setFilename(filename);
+    getModel()->setFilename(filename);
     // stop asking for file version
-    _model->setFileChanged(false);
+    getModel()->setFileChanged(false);
     emit modelLoaded();
 }
 
 void Controller::saveFile()
 {
-    if (_model->isFilenameSet()) {
-        const QString& filename = _model->getFilename();
+    if (getModel()->isFilenameSet()) {
+        const QString& filename = getModel()->getFilename();
         cout << "saveFile:" << filename.toStdString() << endl;
         // save to temporary file
         QFile tmp(ChangeFileExt(filename, ".tmp"));
@@ -392,7 +393,7 @@ void Controller::saveFile()
             throw runtime_error("tmp file already exists");
         try {
             FileBuffer dest;
-            _model->saveBinary(dest);
+            getModel()->saveBinary(dest);
             dest.saveToFile(tmp);
             // remove backup if it exists
             QFile backup(ChangeFileExt(filename, ".Bak"));
@@ -424,7 +425,7 @@ void Controller::saveFile()
 
 void Controller::saveFileAs(const QString& filename)
 {
-    _model->setFilename(filename);
+    getModel()->setFilename(filename);
     saveFile();
 }
 
@@ -668,9 +669,29 @@ void Controller::scaleModel()
 	// TODO
 }
 
+// FreeShipUnit.pas:10086
 void Controller::collapsePoint()
 {
-	// TODO
+    // create undo object 160, false
+    int n = 0;
+    for (size_t i=getModel()->getSurface()->numberOfSelectedControlPoints(); i>0; i--) {
+        SubdivisionControlPoint* pt = getModel()->getSurface()->getSelectedControlPoint(i-1);
+        if (!pt->isLocked() && pt->numberOfEdges() == 2) {
+            pt->collapse();
+            n++;
+            if (getModel()->getSurface()->hasControlPoint(pt))
+                getModel()->getSurface()->removeControlPoint(pt);
+        }
+    }
+    if (n > 0) {
+        // undo accept
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modelGeometryChanged();
+    }
+    else {
+        // undo delete
+    }
 }
 
 void Controller::removeUnusedPoint()
@@ -695,12 +716,12 @@ void Controller::lockPoints()
 
 void Controller::newPoint()
 {
-    SubdivisionControlPoint* pt = SubdivisionControlPoint::construct(_model->getSurface());
+    SubdivisionControlPoint* pt = SubdivisionControlPoint::construct(getModel()->getSurface());
     pt->setCoordinate(ZERO);
-    _model->getSurface()->addControlPoint(pt);
-    _model->getSurface()->setSelectedControlPoint(pt);
-    _model->setActiveControlPoint(pt);
-    _model->setFileChanged(true);
+    getModel()->getSurface()->addControlPoint(pt);
+    getModel()->getSurface()->setSelectedControlPoint(pt);
+    getModel()->setActiveControlPoint(pt);
+    getModel()->setFileChanged(true);
     emit showControlPointDialog(true);
     emit updateControlPointValue(pt);
     emit modelGeometryChanged();
@@ -709,9 +730,9 @@ void Controller::newPoint()
 void Controller::movePoint(QVector3D changedCoords)
 {
     cout << "Controller::movePoint" << endl;
-    if (_model->getSurface()->numberOfSelectedControlPoints() != 1)
+    if (getModel()->getSurface()->numberOfSelectedControlPoints() != 1)
         throw runtime_error("moving multiple points at once");
-    SubdivisionControlPoint* pt = _model->getActiveControlPoint();
+    SubdivisionControlPoint* pt = getModel()->getActiveControlPoint();
     QVector3D updated = pt->getCoordinate();
     if (changedCoords.x() != 0.0)
         updated.setX(changedCoords.x());
@@ -720,7 +741,7 @@ void Controller::movePoint(QVector3D changedCoords)
     if (changedCoords.z() != 0.0)
         updated.setZ(changedCoords.z());
     pt->setCoordinate(updated);
-    _model->setFileChanged(true);
+    getModel()->setFileChanged(true);
     emit updateControlPointValue(pt);
     emit modelGeometryChanged();
 }
@@ -763,7 +784,7 @@ void Controller::kaperResistance()
 
 void Controller::clearSelections()
 {
-    _model->clearSelectedItems();
+    getModel()->clearSelectedItems();
     // TODO undo....
     emit modelGeometryChanged();
 	emit changeSelectedItems();
@@ -803,7 +824,7 @@ void Controller::modelFileChanged()
 void
 Controller::showControlNet(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowControlNet() != val) {
         vis.setShowControlNet(val);
 		emit onUpdateVisibilityInfo();
@@ -814,7 +835,7 @@ Controller::showControlNet(bool val)
 void
 Controller::showInteriorEdges(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowInteriorEdges() != val) {
         vis.setShowInteriorEdges(val);
 		emit onUpdateVisibilityInfo();
@@ -825,7 +846,7 @@ Controller::showInteriorEdges(bool val)
 void
 Controller::showGrid(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowGrid() != val) {
         vis.setShowGrid(val);
 		emit onUpdateVisibilityInfo();
@@ -836,7 +857,7 @@ Controller::showGrid(bool val)
 void
 Controller::showControlCurves(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowControlCurves() != val) {
         vis.setShowControlCurves(val);
 		emit onUpdateVisibilityInfo();
@@ -847,7 +868,7 @@ Controller::showControlCurves(bool val)
 void
 Controller::showCurvature(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowCurvature() != val) {
         vis.setShowCurvature(val);
 		emit onUpdateVisibilityInfo();
@@ -858,7 +879,7 @@ Controller::showCurvature(bool val)
 void
 Controller::showNormals(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowNormals() != val) {
         vis.setShowNormals(val);
 		emit onUpdateVisibilityInfo();
@@ -869,7 +890,7 @@ Controller::showNormals(bool val)
 void
 Controller::showBothSides(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if ((vis.getModelView() == mvBoth && !val) || (vis.getModelView() == mvPort && val)) {
         vis.setModelView(val ? mvBoth : mvPort);
 		emit onUpdateVisibilityInfo();
@@ -880,7 +901,7 @@ Controller::showBothSides(bool val)
 void
 Controller::showMarkers(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowMarkers() != val) {
         vis.setShowMarkers(val);
 		emit onUpdateVisibilityInfo();
@@ -897,7 +918,7 @@ Controller::shadeUnderwater(bool val)
 void
 Controller::showStations(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowStations() != val) {
         vis.setShowStations(val);
 		emit onUpdateVisibilityInfo();
@@ -908,7 +929,7 @@ Controller::showStations(bool val)
 void
 Controller::showButtocks(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowButtocks() != val) {
         vis.setShowButtocks(val);
 		emit onUpdateVisibilityInfo();
@@ -919,7 +940,7 @@ Controller::showButtocks(bool val)
 void
 Controller::showWaterlines(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowWaterlines() != val) {
         vis.setShowWaterlines(val);
 		emit onUpdateVisibilityInfo();
@@ -930,7 +951,7 @@ Controller::showWaterlines(bool val)
 void
 Controller::showDiagonals(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowDiagonals() != val) {
         vis.setShowDiagonals(val);
 		emit onUpdateVisibilityInfo();
@@ -941,7 +962,7 @@ Controller::showDiagonals(bool val)
 void
 Controller::showHydroData(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowHydrostaticData() != val) {
         vis.setShowHydrostaticData(val);
 		emit onUpdateVisibilityInfo();
@@ -952,7 +973,7 @@ Controller::showHydroData(bool val)
 void
 Controller::showFlowlines(bool val)
 {
-    Visibility& vis = _model->getVisibility();
+    Visibility& vis = getModel()->getVisibility();
     if (vis.isShowFlowlines() != val) {
         vis.setShowFlowlines(val);
 		emit onUpdateVisibilityInfo();
@@ -984,8 +1005,8 @@ Controller::setActiveLayerColor()
 void Controller::cornerPointSelected(bool sel)
 {
     cout << "corner point selected:" << (sel ? 'y' : 'n') << endl;
-    if (_model->getActiveControlPoint() != 0) {
-        SubdivisionControlPoint* ap = _model->getActiveControlPoint();
+    if (getModel()->getActiveControlPoint() != 0) {
+        SubdivisionControlPoint* ap = getModel()->getActiveControlPoint();
         // count the number of crease edges connected to this point
         vertex_type_t oldtype = ap->getVertexType();
         if (ap->getVertexType() == svCorner) {
@@ -1016,8 +1037,8 @@ void Controller::cornerPointSelected(bool sel)
 void Controller::dialogUpdatedPointCoord(float x, float y, float z)
 {
     cout << "point coord changed: (" << x << "," << y << "," << z << ")" << endl;
-    if (_model->getActiveControlPoint() != 0) {
-        SubdivisionControlPoint* ap = _model->getActiveControlPoint();
+    if (getModel()->getActiveControlPoint() != 0) {
+        SubdivisionControlPoint* ap = getModel()->getActiveControlPoint();
         QVector3D newcoord(x, y, z);
         if (ap->getCoordinate().distanceToPoint(newcoord) > 1e-4) {
             ap->setCoordinate(newcoord);

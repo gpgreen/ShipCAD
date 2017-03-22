@@ -846,7 +846,8 @@ void SubdivisionSurface::removeControlEdge(SubdivisionControlEdge *edge)
                                                        edge);
     if (i != _control_edges.end())
         _control_edges.erase(i);
-    throw range_error("edge not found in SubdivisionSurface::removeControlEdge");
+    else
+        throw range_error("edge not found in SubdivisionSurface::removeControlEdge");
 }
 
 // delete a controledge singly, not by dumping the pool
@@ -907,7 +908,8 @@ void SubdivisionSurface::removeControlFace(SubdivisionControlFace *face)
                                                        face);
     if (i != _control_faces.end())
         _control_faces.erase(i);
-    throw range_error("face not found in SubdivisionSurface::removeControlFace");
+    else
+        throw range_error("face not found in SubdivisionSurface::removeControlFace");
 }
 
 void SubdivisionSurface::deleteControlFace(SubdivisionControlFace *face)

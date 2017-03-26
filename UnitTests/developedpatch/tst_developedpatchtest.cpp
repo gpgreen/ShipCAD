@@ -103,7 +103,7 @@ void DevelopedpatchTest::testUnrollSimpleFace()
     face->subdivide(vertexpoints, edgepoints, facepoints, controledges);
 
     vector<SubdivisionControlFace*> patches;
-    layer.addControlFace(face);
+    layer.useControlFace(face);
     patches.push_back(face);
 
     dp.unroll(patches);

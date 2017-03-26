@@ -57,6 +57,22 @@ bool ShipCAD::g_surface_verbose = true;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+DeleteElementsCollection::DeleteElementsCollection()
+    : _suppress(false)
+{
+    // does nothing
+}
+
+void DeleteElementsCollection::clear()
+{
+    points.clear();
+    edges.clear();
+    faces.clear();
+    curves.clear();
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 SubdivisionSurface::SubdivisionSurface()
     : Entity(),
       _show_control_net(true), _initialized(false), _show_interior_edges(false),
@@ -97,6 +113,42 @@ SubdivisionSurface::~SubdivisionSurface()
     _layer_pool.clear();
     _edge_pool.clear();
     _point_pool.clear();
+}
+
+void SubdivisionSurface::deleteElementsCollection()
+{
+    if (_deleted.isSuppressed()) {
+        cout << "Deleting elements suppressed" << endl;
+        return;
+    }
+    
+    // order of deletion doesn't matter, this is only to remove from pool, not remove
+    // from structure, should have already been done
+    size_t pt,edge,fc,crv;
+    pt = 0;
+    for (set<SubdivisionControlPoint*>::iterator i=_deleted.points.begin(); i!=_deleted.points.end(); i++) {
+        _cpoint_pool.del(*i);
+        pt++;
+    }
+    edge = 0;
+    for (set<SubdivisionControlEdge*>::iterator i=_deleted.edges.begin(); i!=_deleted.edges.end(); i++) {
+        _cedge_pool.del(*i);
+        edge++;
+    }
+    fc = 0;
+    for (set<SubdivisionControlFace*>::iterator i=_deleted.faces.begin(); i!=_deleted.faces.end(); i++) {
+        _cface_pool.del(*i);
+        fc++;
+    }
+    crv = 0;
+    for (set<SubdivisionControlCurve*>::iterator i=_deleted.curves.begin(); i!=_deleted.curves.end(); i++) {
+        _ccurve_pool.del(*i);
+        crv++;
+    }
+    _deleted.clear();
+    cout << "Del pts:" << pt << " edges:" << edge << " faces:" << fc << " curves:" << crv << endl;
+    cout << "Ttl pts:" << _control_points.size() << " edges:" << _control_edges.size()
+         << " faces:" << _control_faces.size() << " curves:" << _control_curves.size() << endl;
 }
 
 SubdivisionControlPoint* SubdivisionSurface::newControlPoint(const QVector3D& p)
@@ -175,9 +227,21 @@ void SubdivisionSurface::deleteControlPoint(SubdivisionControlPoint* point)
     if (hasSelectedControlPoint(point))
         removeSelectedControlPoint(point);
     if (hasControlPoint(point)) {
-        point->~SubdivisionControlPoint();
-        _cpoint_pool.del(point);
+        removeControlPoint(point);
+        point->removePoint();
+        _deleted.points.insert(point);
     }
+    setBuild(false);
+}
+
+void SubdivisionSurface::collapseControlPoint(SubdivisionControlPoint* point)
+{
+    _deleted.suppressDelete(true);
+    point->collapse();
+    deleteControlPoint(point);
+    setBuild(false);
+    _deleted.suppressDelete(false);
+    deleteElementsCollection();
 }
 
 SubdivisionLayer* SubdivisionSurface::addNewLayer()
@@ -856,9 +920,11 @@ void SubdivisionSurface::deleteControlEdge(SubdivisionControlEdge* edge)
     if (hasSelectedControlEdge(edge))
         removeSelectedControlEdge(edge);
     if (hasControlEdge(edge)) {
-        edge->~SubdivisionControlEdge();
-        _cedge_pool.del(edge);
+        removeControlEdge(edge);
+        edge->removeEdge();
+        _deleted.edges.insert(edge);
     }
+    setBuild(false);
 }
 
 SubdivisionControlCurve* SubdivisionSurface::getControlCurve(size_t index)
@@ -917,9 +983,11 @@ void SubdivisionSurface::deleteControlFace(SubdivisionControlFace *face)
     if (hasSelectedControlFace(face))
         removeSelectedControlFace(face);
     if (hasControlFace(face)) {
-        face->~SubdivisionControlFace();
-        _cface_pool.del(face);
+        removeControlFace(face);
+        face->removeFace();
+        _deleted.faces.insert(face);
     }
+    setBuild(false);
 }
 
 SubdivisionControlFace* SubdivisionSurface::getControlFace(size_t index)
@@ -1015,7 +1083,6 @@ void SubdivisionSurface::deletePoint(SubdivisionPoint* point)
     if (i != _points.end()) {
         _points.erase(i);
         point->~SubdivisionPoint();
-//        _point_pool.free(point);
         _point_pool.del(point);
     }
 }
@@ -1156,11 +1223,12 @@ void SubdivisionSurface::setActiveLayer(SubdivisionLayer *layer)
 
 void SubdivisionSurface::setBuild(bool val)
 {
+    cout << "set build" << endl;
     Entity::setBuild(val);
     if (!val) {
         clearFaces();
-        for (size_t i=1; i<=numberOfControlCurves(); ++i)
-            getControlCurve(i-1)->setBuild(false);
+        for (size_t i=0; i<numberOfControlCurves(); ++i)
+            getControlCurve(i)->setBuild(false);
         _current_subdiv_level = 0;
         _gaus_curvature.clear();
         _min_gaus_curvature = 0;
@@ -1281,6 +1349,7 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<QVector3D
     }
     else
         result = 0;
+    deleteElementsCollection();
     setBuild(false);
     return result;
 }
@@ -1382,8 +1451,9 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<Subdivisi
             deleteControlFace(result);
             result = 0;
         }
-        else
+        else 
             setBuild(false);
+        deleteElementsCollection();
     }
     return result;
 }
@@ -1435,8 +1505,8 @@ void SubdivisionSurface::clear()
 
 void SubdivisionSurface::clearFaces()
 {
-    for (size_t i=1; i<=numberOfControlFaces(); ++i) {
-        getControlFace(i-1)->clearChildren();       // deletes children and rendermesh
+    for (size_t i=0; i<numberOfControlFaces(); ++i) {
+        getControlFace(i)->clearChildren();       // deletes children and rendermesh
     }
     // dump all edges
     _edges.clear();
@@ -1447,8 +1517,8 @@ void SubdivisionSurface::clearFaces()
     // dump all faces
     _face_pool.clear();
     // clear edges in control faces
-    for (size_t i=1; i<=numberOfControlFaces(); ++i)
-        getControlFace(i-1)->clearControlEdges();
+    for (size_t i=0; i<numberOfControlFaces(); ++i)
+        getControlFace(i)->clearControlEdges();
 }
 
 void SubdivisionSurface::clearSelection()
@@ -2602,7 +2672,7 @@ void SubdivisionSurface::importFeFFile(QStringList &strings, size_t& lineno)
         // read layer index
         size_t index = ReadIntFromStr(lineno, str, start);
         layer = _layers[index];
-        layer->addControlFace(face);
+        layer->useControlFace(face);
     }
     setBuild(false);
     _initialized = true;
@@ -2943,8 +3013,8 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 	
 	SubdivisionLayer* layer = face1->getLayer();
 	// remove the control faces from the layers they belong to
-	face1->getLayer()->deleteControlFace(face1);
-	face2->getLayer()->deleteControlFace(face2);
+    face1->getLayer()->releaseControlFace(face1);
+    face2->getLayer()->releaseControlFace(face2);
 	size_t ind1 = face1->indexOfPoint(collapseedge->startPoint());
 	size_t ind2 = face1->indexOfPoint(collapseedge->endPoint());
 	if (ind2 < ind1 && fabs(static_cast<float>(ind2 - ind1)) == 1.0f)
@@ -3000,7 +3070,7 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 		p1 = p2;
 	}
 	// connect the new face to a layer
-	layer->addControlFace(newface);
+	layer->useControlFace(newface);
 	if (collapseedge->isCrease())
 		collapseedge->setCrease(false);
 	collapseedge->startPoint()->deleteEdge(collapseedge);
@@ -3280,6 +3350,7 @@ void SubdivisionSurface::selectionDelete()
         if (i > _sel_control_points.size())
             i = _sel_control_points.size();
     }
+    deleteElementsCollection();
     setBuild(false);
 }
 

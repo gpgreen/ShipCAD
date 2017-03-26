@@ -413,30 +413,24 @@ SubdivisionControlFace::SubdivisionControlFace(SubdivisionSurface *owner)
 	// does nothing
 }
 
-SubdivisionControlFace::~SubdivisionControlFace()
+// FreeGeometry.pas:11953
+void SubdivisionControlFace::removeFace()
 {
-    // if we still exist in owner, then continue with removal,
-    // otherwise we are being deleted from an edge/point
-    // and don't need to continue
-    if (_owner->hasControlFace(this)) {
-        _owner->removeControlFace(this);
-        // remove from layer
-        setLayer(0);
-        SubdivisionPoint* p1 = getPoint(numberOfPoints() - 1);
-        p1->deleteFace(this);
-        for (size_t i=0; i<numberOfPoints(); ++i) {
-            SubdivisionPoint* p2 = getPoint(i);
-            SubdivisionControlEdge* edge = _owner->controlEdgeExists(p1, p2);
-            if (edge != 0) {
-                edge->deleteFace(this);
-                if (edge->numberOfFaces() == 0)
-                    _owner->deleteControlEdge(edge);
-            }
-            p1 = p2;
+    // remove from layer
+    setLayer(0);
+    SubdivisionPoint* p1 = getPoint(numberOfPoints() - 1);
+    for (size_t i=0; i<numberOfPoints(); ++i) {
+        SubdivisionPoint* p2 = getPoint(i);
+        p2->deleteFace(this);
+        SubdivisionControlEdge* edge = _owner->controlEdgeExists(p1, p2);
+        if (edge != 0) {
+            edge->deleteFace(this);
+            if (edge->numberOfFaces() == 0)
+                _owner->deleteControlEdge(edge);
         }
-        clear();
+        p1 = p2;
     }
-    _owner->setBuild(false);
+    clear();
 }
 
 void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
@@ -686,12 +680,12 @@ void SubdivisionControlFace::setLayer(SubdivisionLayer *layer)
         return;
     if (_layer != 0) {
         // disconnect from current layer
-        _layer->deleteControlFace(this);
+        _layer->releaseControlFace(this);
         _layer = 0;
     }
     _layer = layer;
     if (layer != 0)
-        layer->addControlFace(this);
+        layer->useControlFace(this);
 }
 
 void SubdivisionControlFace::calcExtents()
@@ -760,7 +754,7 @@ void SubdivisionControlFace::loadBinary(FileBuffer &source)
         _layer = _owner->getLayer(ind);
     else
         _layer = _owner->getLayer(0); // reference to an invalid layer, assign to owners default layer
-    _layer->addControlFace(this);
+    _layer->useControlFace(this);
     bool sel;
     source.load(sel);
     if (sel)
@@ -946,7 +940,7 @@ void SubdivisionControlFace::loadFromStream(size_t &lineno, QStringList &strings
         _layer = _owner->getLayer(0);   // reference to an invalid layer, assign to owners default layer
     }
     if (_layer != 0)
-        _layer->addControlFace(this);
+        _layer->useControlFace(this);
     else
         throw runtime_error("Invalid layer reference in SubdivisionControlFace::loadFromStream");
     if (start != to_size_t(str.length())) {

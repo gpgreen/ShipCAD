@@ -33,6 +33,7 @@
 #include <iosfwd>
 #include <vector>
 #include <map>
+#include <set>
 #include <QObject>
 #include <QColor>
 #include <QVector3D>
@@ -63,6 +64,30 @@ struct ControlFaceGrid;
 struct PointGrid;
     
 extern bool g_surface_verbose;
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class DeleteElementsCollection
+{
+public:
+    std::set<SubdivisionControlPoint*> points;
+    std::set<SubdivisionControlEdge*> edges;
+    std::set<SubdivisionControlFace*> faces;
+    std::set<SubdivisionControlCurve*> curves;
+
+    explicit DeleteElementsCollection();
+    
+    void clear();
+    bool isSuppressed() const
+        { return _suppress; }
+    void suppressDelete(bool on)
+        { _suppress = on;}
+
+private:
+    bool _suppress;
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 // This is the subdivision surface used for modelling the hull.
 // This is actually a quad-triangle subdivision surface as publisehed in the articles:
@@ -137,6 +162,8 @@ public:
     SubdivisionControlPoint* addControlPoint();
     // delete a controlpoint singly, not by dumping the pool
     void deleteControlPoint(SubdivisionControlPoint* point);
+    // collapse a point (remove it)
+    void collapseControlPoint(SubdivisionControlPoint* point);
 	
     // selected SubdivisionControlPoint
     size_t numberOfSelectedControlPoints() {return _sel_control_points.size();}
@@ -352,6 +379,8 @@ protected:
     std::vector<SubdivisionPoint*> sortEdges(bool always_true, std::vector<SubdivisionEdge*>& edges);
     std::vector<SubdivisionControlPoint*> sortEdges(std::vector<SubdivisionControlEdge*>& edges);
 
+    void deleteElementsCollection();
+    
 protected:
 
     bool _show_control_net;
@@ -432,6 +461,8 @@ protected:
     Pool<SubdivisionEdge> _edge_pool;
     Pool<SubdivisionFace> _face_pool;
 
+    DeleteElementsCollection _deleted;
+    
     friend class Preferences;
 };
 

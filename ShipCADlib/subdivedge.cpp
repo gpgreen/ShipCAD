@@ -379,28 +379,22 @@ SubdivisionControlEdge::SubdivisionControlEdge(SubdivisionSurface* owner)
     _control_edge = true;
 }
 
-SubdivisionControlEdge::~SubdivisionControlEdge()
+void SubdivisionControlEdge::removeEdge()
 {
-    if (_owner->hasControlEdge(this)) {
-        // remove from owner list so that destructor
-        // won't do anything if called again during
-        // rest of method
-        _owner->removeControlEdge(this);
-        if (getCurve() != 0)
-            getCurve()->deleteEdge(this);
-        for (size_t i=_faces.size(); i>0; --i)
-            _owner->deleteControlFace(dynamic_cast<SubdivisionControlFace*>(_faces[i-1]));
-        SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
-        SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
-        // remove endpoint from startpoint neighbours
-        ep->deleteEdge(this);
-        if (ep->numberOfEdges() == 0)
-            _owner->deleteControlPoint(ep);
-        // remove startpoint from endpoint neighbours
-        sp->deleteEdge(this);
-        if (sp->numberOfEdges() == 0)
-            _owner->deleteControlPoint(sp);
-    }
+    if (getCurve() != 0)
+        getCurve()->deleteEdge(this);
+    for (size_t i=_faces.size(); i>0; --i)
+        _owner->deleteControlFace(dynamic_cast<SubdivisionControlFace*>(_faces[i-1]));
+    SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
+    SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
+    // remove endpoint from startpoint neighbours
+    ep->deleteEdge(this);
+    if (ep->numberOfEdges() == 0)
+        _owner->deleteControlPoint(ep);
+    // remove startpoint from endpoint neighbours
+    sp->deleteEdge(this);
+    if (sp->numberOfEdges() == 0)
+        _owner->deleteControlPoint(sp);
 }
 
 QColor SubdivisionControlEdge::getColor()

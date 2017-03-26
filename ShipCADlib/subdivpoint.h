@@ -214,8 +214,12 @@ public:
 	 * \param owner the surface this control point belongs to
 	 */
     explicit SubdivisionControlPoint(SubdivisionSurface* owner);
-    virtual ~SubdivisionControlPoint();
+    virtual ~SubdivisionControlPoint() {}
 
+    /*! \brief prepare the point for being removed from model
+     */
+    void removePoint();
+    
     // modifiers
     void collapse();
 

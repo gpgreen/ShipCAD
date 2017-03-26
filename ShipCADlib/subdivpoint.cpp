@@ -547,10 +547,11 @@ SubdivisionControlPoint::SubdivisionControlPoint(SubdivisionSurface *owner)
 	// does nothing
 }
 
-SubdivisionControlPoint::~SubdivisionControlPoint()
+void SubdivisionControlPoint::removePoint()
 {
-    if (_owner->hasControlPoint(this)) {
-        _owner->removeControlPoint(this);
+    for (size_t i=0; i<_edges.size(); i++) {
+        SubdivisionControlEdge* edge = dynamic_cast<SubdivisionControlEdge*>(_edges[i]);
+        _owner->deleteControlEdge(edge);
     }
 }
 
@@ -673,10 +674,8 @@ void SubdivisionControlPoint::collapse()
             }
         }
         if (edge1 != 0 && edge2 != 0) {
-            for (size_t i=numberOfEdges(); i>0; --i) {
-                edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[i-1]);
-                _owner->collapseEdge(edge1);
-            }
+            _owner->collapseEdge(edge2);
+            _owner->collapseEdge(edge1);
         }
         bool edge_collapse = false;
         bool crease = false;

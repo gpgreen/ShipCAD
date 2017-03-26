@@ -75,8 +75,8 @@ public:
     virtual ~SubdivisionLayer();
 
     // modifications
-    void deleteControlFace(SubdivisionControlFace* face);
-    void addControlFace(SubdivisionControlFace* newface);
+    void releaseControlFace(SubdivisionControlFace* face);
+    void useControlFace(SubdivisionControlFace* newface);
     size_t numberOfFaces() { return _patches.size(); }
     SubdivisionControlFace* getFace(size_t index);
     bool calculateIntersectionPoints(SubdivisionLayer* layer);

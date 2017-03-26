@@ -677,10 +677,8 @@ void Controller::collapsePoint()
     for (size_t i=getModel()->getSurface()->numberOfSelectedControlPoints(); i>0; i--) {
         SubdivisionControlPoint* pt = getModel()->getSurface()->getSelectedControlPoint(i-1);
         if (!pt->isLocked() && pt->numberOfEdges() == 2) {
-            pt->collapse();
+            getModel()->getSurface()->collapseControlPoint(pt);
             n++;
-            if (getModel()->getSurface()->hasControlPoint(pt))
-                getModel()->getSurface()->removeControlPoint(pt);
         }
     }
     if (n > 0) {

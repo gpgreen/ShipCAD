@@ -239,11 +239,11 @@ void SubdivisionLayer::setVisible(bool val)
     }
 }
 
-void SubdivisionLayer::addControlFace(SubdivisionControlFace* face)
+void SubdivisionLayer::useControlFace(SubdivisionControlFace* face)
 {
     // disconnect from current layer
     if (face->getLayer() != 0 && face->getLayer() != this)
-        face->getLayer()->deleteControlFace(face);
+        face->getLayer()->releaseControlFace(face);
     if (find(_patches.begin(), _patches.end(), face) == _patches.end())
         _patches.push_back(face);
     face->setLayer(this);
@@ -387,7 +387,7 @@ void SubdivisionLayer::clear()
     _alphablend = 255;
 }
 
-void SubdivisionLayer::deleteControlFace(SubdivisionControlFace* face)
+void SubdivisionLayer::releaseControlFace(SubdivisionControlFace* face)
 {
     vector<SubdivisionControlFace*>::iterator i = find(_patches.begin(), _patches.end(), face);
     if (i != _patches.end())

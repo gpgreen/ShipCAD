@@ -117,9 +117,10 @@ class SubdivisionControlEdge : public SubdivisionEdge
 public:
 
     explicit SubdivisionControlEdge(SubdivisionSurface* owner);
-    virtual ~SubdivisionControlEdge();
+    virtual ~SubdivisionControlEdge() {}
 
     // modifiers
+    void removeEdge();
     SubdivisionControlPoint* insertControlPoint(const QVector3D& p);
     void trace();
 

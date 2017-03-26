@@ -212,9 +212,12 @@ public:
 	 * \param owner parent surface
 	 */
     explicit SubdivisionControlFace(SubdivisionSurface* owner);
-    virtual ~SubdivisionControlFace();
+    virtual ~SubdivisionControlFace() {}
 
     // modifiers
+    /*! \brief remove this face in preparation for deleting it
+     */
+    void removeFace();
 	/*! \brief get min/max coordinate amongst all children
 	 *
 	 * For each child face, update the min and max value for

@@ -65,6 +65,17 @@ QVector3D ShipCAD::MidPoint(const QVector3D& p1, const QVector3D& p2)
     return 0.5 * (p1 + p2);
 }
 
+QVector3D ShipCAD::PointProjectToLine(const QVector3D& p1, const QVector3D& p2, const QVector3D& p)
+{
+    QVector3D ab = p2 - p1;
+    QVector3D ap = p - p1;
+    float ab_dot = QVector3D::dotProduct(ab, ab);
+    if (ab_dot == 0)
+        return p;
+    QVector3D result(p1);
+    return result + ((QVector3D::dotProduct(ap, ab) / ab_dot) * ab);
+}
+
 static QColor DXFLayerColors[255] = {
     QColor(0x00,0x00,0xff), QColor(0x00,0xff,0xff), QColor(0x00,0xFF,0x00), QColor(0xFF,0xFF,0x00), QColor(0xFF,0x00,0x00),
     QColor(0xFF,0x00,0xFF), QColor(0x00,0x00,0x00), QColor(0x80,0x80,0x80), QColor(0xC0,0xC0,0xC0), QColor(0x00,0x00,0xFF),

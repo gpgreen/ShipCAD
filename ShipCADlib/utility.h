@@ -74,6 +74,14 @@ namespace ShipCAD {
      * \return point halfway between p1 and p2
      */
     QVector3D MidPoint(const QVector3D& p1, const QVector3D& p2);
+    /*! \brief project a point to a line
+     *
+     * \param p1 the first point on line
+     * \param p2 the second point on line
+     * \param p the point to project
+     * \return point projected onto line
+     */
+    QVector3D PointProjectToLine(const QVector3D& p1, const QVector3D& p2, const QVector3D& p);
     /*! \brief convert a QColor to a DXF color index
      *
      * \param color the color to convert

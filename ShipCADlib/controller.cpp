@@ -744,9 +744,47 @@ void Controller::movePoint(QVector3D changedCoords)
     emit modelGeometryChanged();
 }
 
+// FreeShipUnit:10356
 void Controller::projectStraightLinePoint()
 {
-	// TODO
+    SubdivisionSurface* surf = getModel()->getSurface();
+    cout << "Controller::projectStraightLinePoint" << endl;
+    if (surf->numberOfSelectedControlPoints() < 3) {
+        // show message dialog 172
+        return;
+    }
+    // determine if the number of points to be moved doesn't contain locked controlpoints only
+    // however the first and last points (determining the line segment) are allowed to be locked
+    size_t nlocked = 0;
+    for (size_t i=1; i<surf->numberOfSelectedControlPoints()-1; i++) {
+        if (surf->getSelectedControlPoint(i)->isLocked())
+            nlocked++;
+    }
+    // number of locked points must be smaller than selected control points
+    if (nlocked < surf->numberOfSelectedControlPoints() - 2) {
+        SubdivisionControlPoint* p1 = surf->getSelectedControlPoint(0);
+        SubdivisionControlPoint* p2 = surf->getSelectedControlPoint(surf->numberOfSelectedControlPoints()-1);
+        // create undo object
+        size_t nchanged = 0;
+        for (size_t i=1; i<surf->numberOfSelectedControlPoints()-1; i++) {
+            SubdivisionControlPoint* point = surf->getSelectedControlPoint(i);
+            if (point->isLocked())
+                continue;
+            QVector3D p = PointProjectToLine(p1->getCoordinate(), p2->getCoordinate(), point->getCoordinate());
+            if (p.distanceToPoint(point->getCoordinate()) > 1E-5) {
+                point->setCoordinate(p);
+                nchanged++;
+            }
+        }
+        if (nchanged > 0) {
+            // accept undo
+            getModel()->setBuild(false);
+            getModel()->setFileChanged(true);
+            emit modelGeometryChanged();
+        } else {
+            // delete undo
+        }
+    }
 }
 
 void Controller::unlockPoints()

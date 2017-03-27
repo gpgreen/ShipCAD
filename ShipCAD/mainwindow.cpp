@@ -34,6 +34,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "pointdialog.h"
+#include "insertplanepointsdialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "controller.h"
@@ -45,7 +46,7 @@ using namespace std;
 
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow), _pointdialog(0),
+    ui(new Ui::MainWindow), _pointdialog(0), _planepointsdialog(0),
     _controller(c), _currentViewportContext(0),
     _menu_recent_files(0), _contextMenu(0), _cameraMenu(0),
     _viewportModeGroup(0),
@@ -83,6 +84,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelLoaded()));
     connect(_controller, SIGNAL(modelGeometryChanged()), SIGNAL(viewportRender()));
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
+    connect(_controller, SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
+            SLOT(executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)));
 
     // connect file actions
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));
@@ -840,6 +843,21 @@ void MainWindow::showControlPointDialog(bool show)
     }
     _pointdialog->setActive(show);
     cout << "show control point dialog:" << (show ? "t" : "f") << endl;
+}
+
+void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)
+{
+    if (_planepointsdialog == 0) {
+        _planepointsdialog = new InsertPlanePointsDialog(this);
+    }
+    _planepointsdialog->setExtents(data.min, data.max);
+    int result = _planepointsdialog->exec();
+    data.accepted = result == QDialog::Accepted;
+    data.addControlCurveSelected = _planepointsdialog->addControlCurveSelected();
+    data.transversePlaneSelected = _planepointsdialog->transversePlane();
+    data.horizontalPlaneSelected = _planepointsdialog->horizontalPlane();
+    data.verticalPlaneSelected = _planepointsdialog->verticalPlane();
+    cout << "execute insert plane points dialog:" << (result ? "t" : "f") << endl;
 }
 
 void MainWindow::changeSelectedItems()

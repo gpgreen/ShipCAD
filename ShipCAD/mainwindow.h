@@ -46,9 +46,11 @@ class Viewport;
 class ViewportContainer;
 class Controller;
 class ViewportContextEvent;
+struct InsertPlaneDialogData;
 }
 
 class PointDialog;
+class InsertPlanePointsDialog;
 
 class ViewportState
 {
@@ -84,6 +86,7 @@ public:
     /*! \brief destructor
      */
     ~MainWindow();
+
 
 signals:
 
@@ -232,6 +235,12 @@ private slots:
      */
     void showControlPointDialog(bool show);
 
+    /*! \brief execute the insert plane control points dialog
+     *
+     * \return true if dialog "ok" selected, false if "cancel" selected
+     */
+    void executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData& data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;
@@ -247,6 +256,7 @@ private slots:
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
+    InsertPlanePointsDialog *_planepointsdialog; /**< the insert plane control points dialog created by QtDesigner */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

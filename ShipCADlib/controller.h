@@ -47,6 +47,22 @@ class Viewport;
 struct PickRay;
     
 //////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for insert plane dialog exchange
+ */
+struct InsertPlaneDialogData
+{
+    bool accepted;
+    bool addControlCurveSelected;
+    bool transversePlaneSelected;
+    bool horizontalPlaneSelected;
+    bool verticalPlaneSelected;
+    float distance;
+    float min;
+    float max;
+    explicit InsertPlaneDialogData();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief ShipCAD model controller, contains editing actions
  */
@@ -116,6 +132,10 @@ signals:
      */
     void updateControlPointValue(ShipCAD::SubdivisionControlPoint* pt);
 
+    /*! \brief execute the Insert Plane Control Points dialog
+     */
+    void exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData& data);
+    
     void onUpdateVisibilityInfo();
 
     /*! \brief the ShipCAD model geometry has changed

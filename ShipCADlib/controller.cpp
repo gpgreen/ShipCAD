@@ -45,6 +45,17 @@
 using namespace ShipCAD;
 using namespace std;
 
+InsertPlaneDialogData::InsertPlaneDialogData()
+    : accepted(false),
+      addControlCurveSelected(false),
+      transversePlaneSelected(true),
+      horizontalPlaneSelected(false),
+      verticalPlaneSelected(false),
+      distance(0.0), min(0.0), max(0.0)
+{
+    // does nothing
+}
+
 Controller::Controller(ShipCADModel* model)
         : _model(model)
 {
@@ -697,9 +708,12 @@ void Controller::removeUnusedPoint()
 	// TODO
 }
 
+// FreeShipUnit.pas:10141
 void Controller::insertPlane()
 {
 	// TODO
+    InsertPlaneDialogData data;
+    emit exeInsertPlanePointsDialog(data);
 }
 
 void Controller::intersectLayerPoint()

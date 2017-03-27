@@ -15,14 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
         pointdialog.cpp \
-    viewportcontainer.cpp
+    viewportcontainer.cpp \
+    insertplanepointsdialog.cpp
 
 HEADERS  += mainwindow.h \
         pointdialog.h \
-    viewportcontainer.h
+    viewportcontainer.h \
+    insertplanepointsdialog.h
 
 FORMS    += mainwindow.ui \
-        pointdialog.ui
+        pointdialog.ui \
+    insertplanepointsdialog.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/release/ -lShipCADlib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/debug/ -lShipCADlib

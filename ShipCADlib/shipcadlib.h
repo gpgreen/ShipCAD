@@ -154,7 +154,12 @@ enum model_view_t {
     mvBoth,
 };
 
-
+enum plane_selected_t {
+    transverse = 0,
+    horizontal,
+    vertical
+};
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 extern QString AreaStr(unit_type_t units);

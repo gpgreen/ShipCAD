@@ -2,6 +2,7 @@
 #define INSERTPLANEPOINTSDIALOG_H
 
 #include <QDialog>
+#include "shipcadlib.h"
 
 namespace Ui {
 class InsertPlanePointsDialog;
@@ -17,14 +18,14 @@ public:
     ~InsertPlanePointsDialog();
 
     QString distanceValue() const;
-    bool transversePlane() const;
-    bool horizontalPlane() const;
-    bool verticalPlane() const;
+    ShipCAD::plane_selected_t whichPlane() const;
+    void setPlaneSelected(ShipCAD::plane_selected_t pln);
     bool addControlCurveSelected() const;
                                              
 public slots:
 
-    void setExtents(float min, float max);
+    void planeChanged();
+    void setExtents(const QVector3D& min, const QVector3D& max);
 
 protected:
 
@@ -35,6 +36,8 @@ protected:
 private:
 
     Ui::InsertPlanePointsDialog *ui;
+    QVector3D _min;
+    QVector3D _max;
 };
 
 #endif // INSERTPLANEPOINTSDIALOG_H

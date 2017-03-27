@@ -48,10 +48,8 @@ using namespace std;
 InsertPlaneDialogData::InsertPlaneDialogData()
     : accepted(false),
       addControlCurveSelected(false),
-      transversePlaneSelected(true),
-      horizontalPlaneSelected(false),
-      verticalPlaneSelected(false),
-      distance(0.0), min(0.0), max(0.0)
+      planeSelected(transverse),
+      distance(0.0), min(ZERO), max(ZERO)
 {
     // does nothing
 }
@@ -711,9 +709,40 @@ void Controller::removeUnusedPoint()
 // FreeShipUnit.pas:10141
 void Controller::insertPlane()
 {
-	// TODO
+    cout << "Controller::insertPlane" << endl;
+    QVector3D min, max;
+    getModel()->extents(min, max);
     InsertPlaneDialogData data;
+    data.min = min;
+    data.max = max;
     emit exeInsertPlanePointsDialog(data);
+    if (!data.accepted)
+        return;
+    // create undo
+    size_t n = getModel()->getSurface()->numberOfControlPoints();
+    Plane p;
+    switch(data.planeSelected) {
+    case transverse:
+        p = Plane(-1, 0, 0, data.distance);
+        break;
+    case horizontal:
+        p = Plane(0, 0, -1, data.distance);
+        break;
+    case vertical:
+        p = Plane(0, -1, 0, data.distance);
+        break;
+    default:
+        return;
+    }
+    getModel()->getSurface()->insertPlane(p, data.addControlCurveSelected);
+    if (n < getModel()->getSurface()->numberOfControlPoints()) {
+        // undo accept
+        getModel()->setFileChanged(true);
+        emit modelGeometryChanged();
+    }
+    else {
+        // undo delete
+    }
 }
 
 void Controller::intersectLayerPoint()

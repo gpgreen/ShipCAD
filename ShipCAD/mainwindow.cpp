@@ -851,13 +851,16 @@ void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)
         _planepointsdialog = new InsertPlanePointsDialog(this);
     }
     _planepointsdialog->setExtents(data.min, data.max);
+    _planepointsdialog->setPlaneSelected(data.planeSelected);
     int result = _planepointsdialog->exec();
-    data.accepted = result == QDialog::Accepted;
+    data.accepted = (result == QDialog::Accepted);
     data.addControlCurveSelected = _planepointsdialog->addControlCurveSelected();
-    data.transversePlaneSelected = _planepointsdialog->transversePlane();
-    data.horizontalPlaneSelected = _planepointsdialog->horizontalPlane();
-    data.verticalPlaneSelected = _planepointsdialog->verticalPlane();
-    cout << "execute insert plane points dialog:" << (result ? "t" : "f") << endl;
+    data.planeSelected = _planepointsdialog->whichPlane();
+    bool ok;
+    data.distance = _planepointsdialog->distanceValue().toFloat(&ok);
+    if (!ok)
+        data.accepted = false;
+    cout << "execute insert plane points dialog:" << (data.accepted ? "t" : "f") << endl;
 }
 
 void MainWindow::changeSelectedItems()

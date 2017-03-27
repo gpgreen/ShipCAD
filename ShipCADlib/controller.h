@@ -53,12 +53,10 @@ struct InsertPlaneDialogData
 {
     bool accepted;
     bool addControlCurveSelected;
-    bool transversePlaneSelected;
-    bool horizontalPlaneSelected;
-    bool verticalPlaneSelected;
+    plane_selected_t planeSelected;
     float distance;
-    float min;
-    float max;
+    QVector3D min;
+    QVector3D max;
     explicit InsertPlaneDialogData();
 };
 

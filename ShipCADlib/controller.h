@@ -140,6 +140,10 @@ signals:
      */
     void modelGeometryChanged();
 
+    /*! \brief show an info dialog
+     */
+    void displayInfoDialog(const QString& msg);
+
 public slots:
 
     /*! \brief delete the background image

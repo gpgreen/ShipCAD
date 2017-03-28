@@ -253,6 +253,10 @@ private slots:
      */
     void vpContextMenuEvent(ShipCAD::ViewportContextEvent* event);
 
+    /*! \brief show an information dialog with given text
+     */
+    void showInfoDialog(const QString& msg);
+    
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */

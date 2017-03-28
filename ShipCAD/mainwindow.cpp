@@ -30,6 +30,7 @@
 #include <iostream>
 #include <QFileDialog>
 #include <QSettings>
+#include <QMessageBox>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -86,6 +87,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
     connect(_controller, SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
             SLOT(executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)));
+    connect(_controller, SIGNAL(displayInfoDialog(const QString&)), SLOT(showInfoDialog(const QString&)));
 
     // connect file actions
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));
@@ -220,11 +222,30 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
+    if (_controller->getModel()->isFileChanged()) {
+        QMessageBox msgBox;
+        // msg 0103
+        msgBox.setText(tr("The current model has been changed!"));
+        // msg 0282
+        msgBox.setInformativeText(tr("Are you sure you want to quit?"));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        if (msgBox.exec() == QMessageBox::No) {
+            saveModelFile();
+        }
+    }
     QSettings settings;
     settings.setValue("geometry", saveGeometry());
     settings.setValue("windowState", saveState());
     saveViewports();
     QMainWindow::closeEvent(event);
+}
+
+void MainWindow::showInfoDialog(const QString& msg)
+{
+    QMessageBox::information(this, "ShipCAD",
+                             msg,
+                             QMessageBox::Ok);
 }
 
 void MainWindow::readSettings()

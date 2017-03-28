@@ -31,7 +31,6 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QFileInfo>
-#include <QErrorMessage>
 
 #include "controller.h"
 #include "shipcadmodel.h"
@@ -194,10 +193,8 @@ void Controller::mirrorPlaneFace()
 void Controller::newFace()
 {
     if (getModel()->getSurface()->numberOfSelectedControlPoints() <= 2) {
-        QErrorMessage* em = new QErrorMessage();
-        em->showMessage(
-            // msg 0095
-            tr("You need to select at least 3 controlpoints to create a new controlface"));
+        // msg 0095 error
+        emit displayInfoDialog(tr("You need to select at least 3 controlpoints to create a new controlface"));
         return;
     }
     // msg 0094
@@ -810,7 +807,8 @@ void Controller::projectStraightLinePoint()
     SubdivisionSurface* surf = getModel()->getSurface();
     cout << "Controller::projectStraightLinePoint" << endl;
     if (surf->numberOfSelectedControlPoints() < 3) {
-        // show message dialog 172
+        // msg 0xxx
+        emit displayInfoDialog(tr("At least 3 points must be selected to align"));
         return;
     }
     // determine if the number of points to be moved doesn't contain locked controlpoints only
@@ -824,7 +822,8 @@ void Controller::projectStraightLinePoint()
     if (nlocked < surf->numberOfSelectedControlPoints() - 2) {
         SubdivisionControlPoint* p1 = surf->getSelectedControlPoint(0);
         SubdivisionControlPoint* p2 = surf->getSelectedControlPoint(surf->numberOfSelectedControlPoints()-1);
-        // create undo object
+        // msg 0171
+        UndoObject* uo = getModel()->createUndo(tr("align points"), false);
         size_t nchanged = 0;
         for (size_t i=1; i<surf->numberOfSelectedControlPoints()-1; i++) {
             SubdivisionControlPoint* point = surf->getSelectedControlPoint(i);
@@ -837,26 +836,49 @@ void Controller::projectStraightLinePoint()
             }
         }
         if (nchanged > 0) {
-            // accept undo
+            uo->accept();
             getModel()->setBuild(false);
             getModel()->setFileChanged(true);
             emit modelGeometryChanged();
         } else {
-            // delete undo
+            delete uo;
         }
+    } else {
+        // msg 0172
+        emit displayInfoDialog(tr("All of the selected points are locked and cannot be moved"));
     }
 }
 
+// FreeShipUnit.pas:10221
 void Controller::unlockPoints()
 {
-	// TODO
+    if (getModel()->getSurface()->numberOfSelectedLockedPoints() == 0)
+        return;
+    // msg 0168
+    getModel()->createUndo(tr("unlock points"), true);
+    for (size_t i=0; i<getModel()->getSurface()->numberOfSelectedControlPoints(); i++) {
+        getModel()->getSurface()->getSelectedControlPoint(i)->setLocked(false);
+    }
+    getModel()->setFileChanged(true);
+    emit modelGeometryChanged();
 }
 
+// FreeShipUnit.pas:10235
 void Controller::unlockAllPoints()
 {
-	// TODO
+    if (getModel()->getSurface()->numberOfLockedPoints() == 0)
+        return;
+    // msg 0169
+    getModel()->createUndo(tr("unlock all points"), true);
+    for (size_t i=0; i<getModel()->getSurface()->numberOfControlPoints(); i++) {
+        getModel()->getSurface()->getControlPoint(i)->setLocked(false);
+    }
+    getModel()->setFileChanged(true);
+    // emit dialog msg 0170
+    emit modelGeometryChanged();
 }
 
+// FreeShipUnit.pas:10251
 bool Controller::proceedWhenLockedPoints()
 {
 	// TODO

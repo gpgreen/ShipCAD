@@ -51,24 +51,22 @@ public:
                         bool is_temp_redo_ob);
     ~UndoObject() {}
 
-	size_t getMemory();
-	bool isTempRedoObj()
+    size_t getMemory();
+	bool isTempRedoObject() const
 		{return _is_temp_redo_obj;}
-	void setIsTempRedoObject(bool set)
+	void setTempRedoObject(bool set)
 		{_is_temp_redo_obj = set;}
-	QString getTime()
+	QString getTime() const
 		{return _time.toString("hh:mm:ss.zzz");}
-	QString& getUndoText()
+    QString getUndoText() const
 		{return _undo_text;}
+    void setUndoText(const QString& txt)
+        {_undo_text = txt;}
 	FileBuffer& getUndoData()
         {return _undo_data;}
 	void accept();
 	void restore();
 	
-public slots:
-
-protected:
-
 private:
 
 	ShipCADModel* _owner;

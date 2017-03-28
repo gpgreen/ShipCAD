@@ -27,6 +27,7 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <iostream>
 #include <stdexcept>
 #include <cstring>
 #include "shipcadmodel.h"
@@ -223,39 +224,107 @@ QString ShipCADModel::getFilename()
 	return ChangeFileExt(_filename, kFileExtension);
 }
 
-void ShipCADModel::addUndoObject(UndoObject* newundo)
+// FreeShipUnit.pas:4595
+UndoObject* ShipCADModel::createUndo(const QString& undotext, bool accept)
 {
-	_undo_list.push_back(newundo);
+    version_t version = getFileVersion();
+    bool preview = getProjectSettings().isSavePreview();
+	UndoObject* rd = new UndoObject(this,
+                                    getFilename(),
+									getEditMode(),
+                                    isFileChanged(),
+                                    isFilenameSet(),
+									false);
+    rd->setUndoText(undotext);
+    cout << "create undo:'" << undotext.toStdString() << "'" << endl;
+    try {
+        // delete all undo objects after the current one
+        while (_undo_list.size() > _undo_pos + 1) {
+            UndoObject* last = _undo_list.back();
+            _undo_list.pop_back();
+            delete last;
+        }
+        // temporarily set to the latest fileversion so no data will be lost
+		setFileVersion(k_current_version);
+        // temp disable saving of preview image
+		getProjectSettings().setSavePreview(false);
+		saveBinary(rd->getUndoData());
+        if (accept) {
+            rd->accept();
+            emit undoDataChanged();
+        }
+    } catch(...) {
+        // restore the original version
+        setFileVersion(version);
+        getProjectSettings().setSavePreview(preview);
+		delete rd;
+		rd = 0;
+        cout << "*** create undo failed" << endl;
+    }
+    return rd;
 }
 
-UndoObject* ShipCADModel::getUndoObject(size_t index)
+// FreeShipUnit.pas:4564
+UndoObject* ShipCADModel::createRedo()
 {
-	if (index >= _undo_list.size())
-		throw range_error("get undo obj");
-	return _undo_list[index];
+	version_t version = getFileVersion();
+    bool preview = getProjectSettings().isSavePreview();
+    UndoObject* rd = new UndoObject(this,
+                                    getFilename(),
+									getEditMode(),
+                                    isFileChanged(),
+                                    isFilenameSet(),
+									true);
+    cout << "create redo" << endl;
+	try {
+        // temporarily set to the latest fileversion so no data will be lost
+		setFileVersion(k_current_version);
+        // temp disable saving of preview image
+		getProjectSettings().setSavePreview(false);
+		saveBinary(rd->getUndoData());
+		rd->accept();
+	} catch(...) {
+		// restore the original version
+		setFileVersion(version);
+		getProjectSettings().setSavePreview(preview);
+		delete rd;
+		rd = 0;
+        cout << "*** create redo failed" << endl;
+	}
+	return rd;
 }
 
-void ShipCADModel::deleteUndoObject(UndoObject* deleted)
+// called from the undo object
+void ShipCADModel::acceptUndo(UndoObject* undo)
 {
-	std::deque<UndoObject*>::iterator i = find(_undo_list.begin(), _undo_list.end(), deleted);
-	if (i != _undo_list.end())
-		_undo_list.erase(i);
-	else
-		throw invalid_argument("delete undo obj");
-}
-
-void ShipCADModel::setUndoPosition(size_t index)
-{
-	if (index >= _undo_list.size())
-		throw range_error("set undo pos");
-	_undo_pos = index;
-}
-
-void ShipCADModel::setPrevUndoPosition(size_t index)
-{
-	if (index >= _undo_list.size())
-		throw range_error("set prev undo pos");
-	_prev_undo_pos = index;
+    if (_undo_list.size() > 0) {
+        if (_undo_list.back()->isTempRedoObject()) {
+            UndoObject* last = _undo_list.back();
+            _undo_list.pop_back();
+            delete last;
+        }
+    }
+    // delete all undo objects after the current one
+    while (_undo_list.size() > _undo_pos + 1) {
+        UndoObject* last = _undo_list.back();
+        _undo_list.pop_back();
+        delete last;
+    }
+    _undo_list.push_back(undo);
+    _undo_pos++;
+    // remove objects from the front of the list until memory is within limits or we have 2 items
+    while (((getUndoMemory() / (1024*1024)) > getPreferences().getMaxUndoMemory())
+           && _undo_list.size() > 2) {
+        UndoObject* first = _undo_list.front();
+        _undo_list.pop_front();
+        delete first;
+        _undo_pos--;
+        _prev_undo_pos--;
+    }
+    emit undoDataChanged();
+    cout << "undo accepted" << endl;
+    cout << "undo list:" << _undo_list.size() << " pos:" << _undo_pos << " prev_pos:" << _prev_undo_pos
+         << " mem:" << getUndoMemory() << endl;
 }
 
 size_t ShipCADModel::getUndoMemory()
@@ -264,6 +333,63 @@ size_t ShipCADModel::getUndoMemory()
 	for (size_t i=0; i<_undo_list.size(); i++)
 		mem_used += _undo_list[i]->getMemory();
 	return mem_used;
+}
+
+void ShipCADModel::undo()
+{
+    cout << "ShipCADModel::undo" << endl;
+    if (_undo_list.size() > 0) {
+        bool preview = getProjectSettings().isSavePreview();
+        try {
+            if (_undo_pos == _undo_list.size()) {
+                if (!_undo_list.back()->isTempRedoObject())
+                    createRedo();
+            }
+            if (_prev_undo_pos < _undo_pos)
+                --_undo_pos;
+            _prev_undo_pos = _undo_pos;
+            UndoObject* uo = _undo_list[_undo_pos];
+            uo->restore();
+            emit undoDataChanged();
+        } catch(...) {
+            getProjectSettings().setSavePreview(preview);
+            cout << "*** ShipCADModel::undo failed" << endl;
+        }
+        cout << "undo list:" << _undo_list.size() << " pos:" << _undo_pos << " prev_pos:"
+             << _prev_undo_pos << " mem:" << getUndoMemory() << endl;
+    }
+}
+
+void ShipCADModel::redo()
+{
+    cout << "ShipCADModel::redo" << endl;
+    if (_undo_list.size() > 0) {
+        bool preview = getProjectSettings().isSavePreview();
+        try {
+            if (_prev_undo_pos > _undo_pos)
+                ++_undo_pos;
+            _prev_undo_pos = _undo_pos;
+            ++_undo_pos;
+            UndoObject* uo = _undo_list[_undo_pos];
+            uo->restore();
+            emit undoDataChanged();
+        } catch(...) {
+            getProjectSettings().setSavePreview(preview);
+            cout << "*** ShipCADModel::redo failed" << endl;
+        }
+        cout << "undo list:" << _undo_list.size() << " pos:" << _undo_pos << " prev_pos:"
+             << _prev_undo_pos << " mem:" << getUndoMemory() << endl;
+    }
+}
+
+void ShipCADModel::clearUndo()
+{
+    for (size_t i=0; i<_undo_list.size(); i++)
+        delete _undo_list[i];
+    _undo_list.clear();
+    _undo_pos = 0;
+    _prev_undo_pos = 0;
+    emit undoDataChanged();
 }
 
 void ShipCADModel::drawGrid(Viewport& vp, LineShader* lineshader)

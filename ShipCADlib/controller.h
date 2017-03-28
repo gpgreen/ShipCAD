@@ -150,14 +150,6 @@ public slots:
      */
     void openBackgroundImage();
 
-    /*! \brief create redo data
-     */
-    UndoObject* createRedoObject();
-
-    /*! \brief create undo data
-     */
-    UndoObject* createUndoObject(QString& undotext, bool accept);
-
     /*! \brief add a new controlcurve
 	 */
 	void addCurve();
@@ -426,6 +418,10 @@ public slots:
      */
     void movePoint(QVector3D changedCoords);
 
+    /*! \brief method to call when point is no longer being dragged
+     */
+    void stopMovePoint();
+    
     /*! \brief project all selected points onto a straight line through the first and last
      */
     void projectStraightLinePoint();
@@ -441,10 +437,6 @@ public slots:
     /*! \brief show a warning when edit commands are invoked and the model has locked points
      */
     bool proceedWhenLockedPoints();
-
-    /*! \brief restore the state of the model after previous undo
-     */
-    void redo();
 
     /*! \brief calculate resistance of yachts according to Delft systematic yacht series
      */
@@ -469,6 +461,10 @@ public slots:
     /*! \brief restore the state of the model before last modification
      */
     void undo();
+
+    /*! \brief restore the state of the model after previous undo
+     */
+    void redo();
 
     /*! \brief clear the undo history
      */
@@ -570,6 +566,7 @@ private slots:
 
 private:
     ShipCADModel* _model; /**< the model this is controlling */
+    bool _point_first_moved; /**< flag set when point is first moved */
 };
 	
 //////////////////////////////////////////////////////////////////////////////////////

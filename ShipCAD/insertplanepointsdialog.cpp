@@ -87,8 +87,8 @@ void InsertPlanePointsDialog::planeChanged()
         minval = _min.y();
         maxval = _max.y();
     }
-    ui->minValueLabel->setText(MakeLength(minval, 4, 10));
-    ui->maxValueLabel->setText(MakeLength(maxval, 4, 10));
+    ui->minValueLabel->setText(MakeLength(minval+1E-4, 4, 10));
+    ui->maxValueLabel->setText(MakeLength(maxval+1E-4, 4, 10));
 }
 
 void InsertPlanePointsDialog::readSettings()

@@ -41,6 +41,7 @@
 #include "subdivedge.h"
 #include "viewport.h"
 #include "viewportview.h"
+#include "subdivlayer.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -55,7 +56,7 @@ InsertPlaneDialogData::InsertPlaneDialogData()
 }
 
 Controller::Controller(ShipCADModel* model)
-        : _model(model)
+    : _model(model), _point_first_moved(false)
 {
     // initialize settings
     QCoreApplication::setOrganizationName("bit-builder");
@@ -68,6 +69,7 @@ Controller::Controller(ShipCADModel* model)
     connect(_model, SIGNAL(changeActiveLayer()), SIGNAL(changeActiveLayer()));
     connect(_model, SIGNAL(changedLayerData()), SIGNAL(changedLayerData()));
     connect(_model, SIGNAL(onUpdateVisibilityInfo()), SIGNAL(onUpdateVisibilityInfo()));
+    connect(_model, SIGNAL(undoDataChanged()), SIGNAL(updateUndoData()));
 }
 
 Controller::~Controller()
@@ -138,39 +140,6 @@ void Controller::openBackgroundImage()
 	// TODO
 }
 
-UndoObject* Controller::createRedoObject()
-{
-	version_t version = getModel()->getFileVersion();
-    bool preview = getModel()->getProjectSettings().isSavePreview();
-	// temporarily set to the latest fileversion so no data will be lost
-	UndoObject* rd = new UndoObject(getModel(),
-                                    getModel()->getFilename(),
-									getModel()->getEditMode(),
-                                    getModel()->isFileChanged(),
-                                    getModel()->isFilenameSet(),
-									true);
-	try {
-		getModel()->setFileVersion(k_current_version);
-		getModel()->getProjectSettings().setSavePreview(false);
-		getModel()->saveBinary(rd->getUndoData());
-		rd->accept();
-		emit updateUndoData();
-	} catch(...) {
-		// restore the original version
-		getModel()->setFileVersion(version);
-		getModel()->getProjectSettings().setSavePreview(preview);
-		delete rd;
-		rd = 0;
-	}
-	return rd;
-}
-
-UndoObject* Controller::createUndoObject(QString& undotext, bool accept)
-{
-	// TODO
-    return 0;
-}
-
 void Controller::addCurve()
 {
 	// TODO
@@ -227,10 +196,12 @@ void Controller::newFace()
     if (getModel()->getSurface()->numberOfSelectedControlPoints() <= 2) {
         QErrorMessage* em = new QErrorMessage();
         em->showMessage(
+            // msg 0095
             tr("You need to select at least 3 controlpoints to create a new controlface"));
         return;
     }
-    // create undo object userstring 0094, false
+    // msg 0094
+    UndoObject* uo = getModel()->createUndo(tr("new face"), false);
     // remember the number of faces, edges and points
     // assemble all points in a temporary list
     vector<SubdivisionControlPoint*> tmp;
@@ -242,11 +213,12 @@ void Controller::newFace()
     // add the new face
     SubdivisionControlFace* face = getModel()->getSurface()->addControlFace(tmp, true, getModel()->getActiveLayer());
     if (face != 0) {
+        uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
         emit modelGeometryChanged();
     } else {
-        // undo
+        delete uo;
     }
 }
 
@@ -379,13 +351,18 @@ void Controller::loadFile(const QString& filename)
 {
     QFile loadfile(filename);
     FileBuffer source;
-    source.loadFromFile(loadfile);
-    getModel()->loadBinary(source);
-    getModel()->getSurface()->clearSelection();
-    // TODO clear selected flowlines
-    // TODO clear selected markers
-    getModel()->setFilename(filename);
-    // stop asking for file version
+    try {
+        source.loadFromFile(loadfile);
+        getModel()->loadBinary(source);
+        getModel()->getSurface()->clearSelection();
+        // TODO clear selected flowlines
+        // TODO clear selected markers
+        getModel()->setFilename(filename);
+        // stop asking for file version
+    } catch(...) {
+        // what do we do?
+    }
+    clearUndo();
     getModel()->setFileChanged(false);
     emit modelLoaded();
 }
@@ -681,7 +658,8 @@ void Controller::scaleModel()
 // FreeShipUnit.pas:10086
 void Controller::collapsePoint()
 {
-    // create undo object 160, false
+    // msg 0160
+    UndoObject* uo = getModel()->createUndo(tr("collapse point"), false);
     int n = 0;
     for (size_t i=getModel()->getSurface()->numberOfSelectedControlPoints(); i>0; i--) {
         SubdivisionControlPoint* pt = getModel()->getSurface()->getSelectedControlPoint(i-1);
@@ -691,13 +669,13 @@ void Controller::collapsePoint()
         }
     }
     if (n > 0) {
-        // undo accept
+        uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
         emit modelGeometryChanged();
     }
     else {
-        // undo delete
+        delete uo;
     }
 }
 
@@ -718,41 +696,64 @@ void Controller::insertPlane()
     emit exeInsertPlanePointsDialog(data);
     if (!data.accepted)
         return;
-    // create undo
+    // msg 0163
+    UndoObject* uo = getModel()->createUndo(tr("insert plane intersections"), false);
     size_t n = getModel()->getSurface()->numberOfControlPoints();
     Plane p;
     switch(data.planeSelected) {
     case transverse:
-        p = Plane(-1, 0, 0, data.distance);
+        p = Plane(1, 0, 0, -data.distance);
         break;
     case horizontal:
-        p = Plane(0, 0, -1, data.distance);
+        p = Plane(0, 0, 1, -data.distance);
         break;
     case vertical:
-        p = Plane(0, -1, 0, data.distance);
+        p = Plane(0, 1, 0, -data.distance);
         break;
     default:
+        delete uo;
         return;
     }
     getModel()->getSurface()->insertPlane(p, data.addControlCurveSelected);
     if (n < getModel()->getSurface()->numberOfControlPoints()) {
-        // undo accept
+        uo->accept();
         getModel()->setFileChanged(true);
         emit modelGeometryChanged();
     }
     else {
-        // undo delete
+        delete uo;
     }
 }
 
+// FreeShipUnit.pas:10170
 void Controller::intersectLayerPoint()
 {
 	// TODO
+    vector<SubdivisionLayer*> layers;
+    for (size_t i=0; i<getModel()->getSurface()->numberOfLayers(); i++) {
+        if (getModel()->getSurface()->getLayer(i)->numberOfFaces() > 0)
+            layers.push_back(getModel()->getSurface()->getLayer(i));
+    }
+    if (layers.size() <= 1) {
+        // message dialog 166
+        return;
+    }
 }
 
+// FreeShipUnit.pas:10207
 void Controller::lockPoints()
 {
-	// TODO
+    cout << "Controller::lockPoints" << endl;
+    SubdivisionSurface* surf = getModel()->getSurface();
+    if (surf->numberOfSelectedLockedPoints() < surf->numberOfSelectedControlPoints()) {
+        // msg 0167
+        getModel()->createUndo(tr("lock points"), true);
+        for (size_t i=0; i<surf->numberOfSelectedControlPoints(); i++) {
+            surf->getSelectedControlPoint(i)->setLocked(true);
+        }
+        getModel()->setFileChanged(true);
+        emit modelGeometryChanged();
+    }
 }
 
 void Controller::newPoint()
@@ -768,12 +769,23 @@ void Controller::newPoint()
     emit modelGeometryChanged();
 }
 
+// FreeShipUnit.pas:13645
 void Controller::movePoint(QVector3D changedCoords)
 {
     cout << "Controller::movePoint" << endl;
     if (getModel()->getSurface()->numberOfSelectedControlPoints() != 1)
         throw runtime_error("moving multiple points at once");
     SubdivisionControlPoint* pt = getModel()->getActiveControlPoint();
+    if (pt->isLocked()) {
+        // msg 0191, warning
+        return;
+    }
+    if (!_point_first_moved) {
+        // if we just started to move the point, create an undo
+        _point_first_moved = true;
+        // msg 0190
+        getModel()->createUndo(tr("point move"), true);
+    }
     QVector3D updated = pt->getCoordinate();
     if (changedCoords.x() != 0.0)
         updated.setX(changedCoords.x());
@@ -785,6 +797,11 @@ void Controller::movePoint(QVector3D changedCoords)
     getModel()->setFileChanged(true);
     emit updateControlPointValue(pt);
     emit modelGeometryChanged();
+}
+
+void Controller::stopMovePoint()
+{
+    _point_first_moved = false;
 }
 
 // FreeShipUnit:10356
@@ -846,11 +863,6 @@ bool Controller::proceedWhenLockedPoints()
     return false;
 }
 
-void Controller::redo()
-{
-	// TODO
-}
-
 void Controller::delftResistance()
 {
 	// TODO
@@ -881,12 +893,17 @@ void Controller::selectAll()
 
 void Controller::undo()
 {
-	// TODO
+    getModel()->undo();
+}
+
+void Controller::redo()
+{
+    getModel()->redo();
 }
 
 void Controller::clearUndo()
 {
-	// TODO
+    getModel()->clearUndo();
 }
 
 void Controller::showHistoryUndo()
@@ -1081,10 +1098,13 @@ Controller::setActiveLayerColor()
 	cout << "set active layer color" << endl;
 }
 
+// FreeControlPointForm.pas:320
 void Controller::cornerPointSelected(bool sel)
 {
     cout << "corner point selected:" << (sel ? 'y' : 'n') << endl;
     if (getModel()->getActiveControlPoint() != 0) {
+        // msg 0213
+        UndoObject* uo = getModel()->createUndo(tr("corner"), false);
         SubdivisionControlPoint* ap = getModel()->getActiveControlPoint();
         // count the number of crease edges connected to this point
         vertex_type_t oldtype = ap->getVertexType();
@@ -1104,12 +1124,13 @@ void Controller::cornerPointSelected(bool sel)
         } else
             ap->setVertexType(svCorner);
         if (ap->getVertexType() != oldtype) {
-            // create an undo object
+            uo->accept();
             getModel()->setBuild(false);
             getModel()->setFileChanged(true);
             emit modelGeometryChanged();
             emit updateControlPointValue(ap);
-        }
+        } else
+            delete uo;
     }
 }
 
@@ -1120,8 +1141,9 @@ void Controller::dialogUpdatedPointCoord(float x, float y, float z)
         SubdivisionControlPoint* ap = getModel()->getActiveControlPoint();
         QVector3D newcoord(x, y, z);
         if (ap->getCoordinate().distanceToPoint(newcoord) > 1e-4) {
+            // msg 0190
+            getModel()->createUndo(tr("point move"), true);
             ap->setCoordinate(newcoord);
-            // create an undo object
             emit modelGeometryChanged();
         }
     }

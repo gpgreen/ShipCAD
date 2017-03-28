@@ -203,52 +203,26 @@ public:
 	void setFileChanged(bool changed);
 
 	// undo
-	/*! \brief add undo object
+	/*! \brief create an undo object
 	 *
-	 * \param new undo object
+	 * \param undotext name of object shown in gui
+     * \param accept whether to accept the object into undo list at creation
+	 * \return the undo object
 	 */
-	void addUndoObject(UndoObject* newundo);
-	/*! \brief get undo object at index
+	UndoObject* createUndo(const QString& undotext, bool accept);
+	/*! \brief add an undo to the undo list
 	 *
-	 * \param index of undo object
-	 * \return the undo object at index
-	 * \throws range_error
+     * \param undo the object to put in the undo list
 	 */
-	UndoObject* getUndoObject(size_t index);
-	/*! \brief get undo object at index
+	void acceptUndo(UndoObject* undo);
+	/*! \brief undo the last operation
 	 *
-	 * \param index of undo object
-	 * \return the undo object at index
-	 * \throws invalid_argument
 	 */
-	void deleteUndoObject(UndoObject* deleted);
-	/*! \brief number of undo objects
+	void undo();
+	/*! \brief redo the last undo
 	 *
-	 * \return number of undo objects
 	 */
-	size_t undoCount() {return _undo_list.size();}
-	/*! \brief current undo index position
-	 *
-	 * \return current undo index position
-	 */
-	size_t undoPosition() {return _undo_pos;}
-	/*! \brief previous undo index position
-	 *
-	 * \return previous undo index position
-	 */
-	size_t prevUndoPosition() {return _prev_undo_pos;}
-	/*! \brief set undo index position
-	 *
-	 * \param new index in undo list
-	 * \throws range_error
-	 */
-	void setUndoPosition(size_t index);
-	/*! \brief set previous undo index position
-	 *
-	 * \param new prev undo index
-	 * \throws range_error
-	 */
-	void setPrevUndoPosition(size_t index);
+	void redo();
 	/*! \brief get amount of memory used for undo
 	 *
 	 * \return memory used in mb
@@ -293,12 +267,18 @@ signals:
     void onUpdateVisibilityInfo();
 	void changedLayerData();
 	void changeActiveLayer();
-
+    void undoDataChanged();
+                          
 public slots:
 
 protected:
 
     void drawGrid(Viewport& vp, LineShader* lineshader);
+	/*! \brief create temp redo object at end of undo list
+	 *
+	 * \return the undo object
+	 */
+	UndoObject* createRedo();
 
 private:
 

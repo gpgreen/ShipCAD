@@ -297,8 +297,11 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
     bool view_changed = false;
     // for mouse release, the button released won't be in the set
     if (_prev_buttons.testFlag(Qt::LeftButton) && !event->buttons().testFlag(Qt::LeftButton)) {
-        if (_drag_state != 1 || _drag_state != 3)
+        if (_drag_state != 1 || _drag_state != 3) {
             view_changed = _view->leftMouseRelease(event->pos(), width(), height());
+            if (_drag_state == 4)
+                getController()->stopMovePoint();
+        }
     }
     else if (_prev_buttons.testFlag(Qt::RightButton) && !event->buttons().testFlag(Qt::RightButton)) {
         if (_drag_state == 1)

@@ -54,6 +54,12 @@ InsertPlaneDialogData::InsertPlaneDialogData()
     // does nothing
 }
 
+IntersectLayersDialogData::IntersectLayersDialogData()
+    : accepted(false), layer1(0), layer2(0)
+{
+    // does nothing
+}
+
 Controller::Controller(ShipCADModel* model)
     : _model(model), _point_first_moved(false)
 {
@@ -194,7 +200,7 @@ void Controller::newFace()
 {
     if (getModel()->getSurface()->numberOfSelectedControlPoints() <= 2) {
         // msg 0095 error
-        emit displayInfoDialog(tr("You need to select at least 3 controlpoints to create a new controlface"));
+        emit displayWarningDialog(tr("You need to select at least 3 controlpoints to create a new controlface"));
         return;
     }
     // msg 0094
@@ -714,6 +720,7 @@ void Controller::insertPlane()
     getModel()->getSurface()->insertPlane(p, data.addControlCurveSelected);
     if (n < getModel()->getSurface()->numberOfControlPoints()) {
         uo->accept();
+        getModel()->setBuild(false);
         getModel()->setFileChanged(true);
         emit modelGeometryChanged();
     }
@@ -725,15 +732,33 @@ void Controller::insertPlane()
 // FreeShipUnit.pas:10170
 void Controller::intersectLayerPoint()
 {
-	// TODO
-    vector<SubdivisionLayer*> layers;
+    IntersectLayersDialogData data;
     for (size_t i=0; i<getModel()->getSurface()->numberOfLayers(); i++) {
         if (getModel()->getSurface()->getLayer(i)->numberOfFaces() > 0)
-            layers.push_back(getModel()->getSurface()->getLayer(i));
+            data.layers.push_back(getModel()->getSurface()->getLayer(i));
     }
-    if (layers.size() <= 1) {
-        // message dialog 166
+    if (data.layers.size() <= 1) {
+        // msg 0166
+        emit displayWarningDialog(tr("At least two layers are needed to perform this operation."));
         return;
+    }
+    emit exeIntersectLayersDialog(data);
+    if (data.accepted) {
+        SubdivisionLayer* layer1 = data.layers[data.layer1];
+        SubdivisionLayer* layer2 = data.layers[data.layer2];
+        // msg 0164
+        UndoObject* uo = getModel()->createUndo(tr("layer intersection"), false);
+        if (layer1->calculateIntersectionPoints(layer2)) {
+            uo->accept();
+            getModel()->setBuild(false);
+            getModel()->setFileChanged(true);
+            emit modelGeometryChanged();
+        }
+        else {
+            delete uo;
+            // msg 0165
+            emit displayErrorDialog(tr("No intersection points found."));
+        }
     }
 }
 
@@ -808,7 +833,7 @@ void Controller::projectStraightLinePoint()
     cout << "Controller::projectStraightLinePoint" << endl;
     if (surf->numberOfSelectedControlPoints() < 3) {
         // msg 0xxx
-        emit displayInfoDialog(tr("At least 3 points must be selected to align"));
+        emit displayWarningDialog(tr("At least 3 points must be selected to align"));
         return;
     }
     // determine if the number of points to be moved doesn't contain locked controlpoints only
@@ -845,7 +870,7 @@ void Controller::projectStraightLinePoint()
         }
     } else {
         // msg 0172
-        emit displayInfoDialog(tr("All of the selected points are locked and cannot be moved"));
+        emit displayErrorDialog(tr("All of the selected points are locked and cannot be moved"));
     }
 }
 

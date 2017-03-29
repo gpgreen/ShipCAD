@@ -36,6 +36,7 @@
 #include "ui_mainwindow.h"
 #include "pointdialog.h"
 #include "insertplanepointsdialog.h"
+#include "intersectlayersdialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "controller.h"
@@ -48,6 +49,7 @@ using namespace std;
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), _pointdialog(0), _planepointsdialog(0),
+    _intersectlayersdialog(0),
     _controller(c), _currentViewportContext(0),
     _menu_recent_files(0), _contextMenu(0), _cameraMenu(0),
     _viewportModeGroup(0),
@@ -79,15 +81,24 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(changedLayerData()), SLOT(changedLayerData()));
     connect(_controller, SIGNAL(changeActiveLayer()), SLOT(changeActiveLayer()));
     connect(_controller, SIGNAL(changedModel()), SLOT(modelChanged()));
+    connect(_controller, SIGNAL(changedModel()), SLOT(enableActions()));
     connect(_controller, SIGNAL(onUpdateVisibilityInfo()), SLOT(updateVisibilityActions()));
-    //emit updateControlPointValue();
     connect(_controller, SIGNAL(showControlPointDialog(bool)), SLOT(showControlPointDialog(bool)));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelLoaded()));
+    connect(_controller, SIGNAL(modelLoaded()), SLOT(enableActions()));
+    connect(_controller, SIGNAL(modelLoaded()), SLOT(updateVisibilityActions()));
     connect(_controller, SIGNAL(modelGeometryChanged()), SIGNAL(viewportRender()));
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
     connect(_controller, SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
             SLOT(executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)));
-    connect(_controller, SIGNAL(displayInfoDialog(const QString&)), SLOT(showInfoDialog(const QString&)));
+    connect(_controller, SIGNAL(exeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData&)),
+            SLOT(executeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData&)));
+    connect(_controller, SIGNAL(displayInfoDialog(const QString&)),
+            SLOT(showInfoDialog(const QString&)));
+    connect(_controller, SIGNAL(displayWarningDialog(const QString&)),
+            SLOT(showWarnDialog(const QString&)));
+    connect(_controller, SIGNAL(displayErrorDialog(const QString&)),
+            SLOT(showErrDialog(const QString&)));
 
     // connect file actions
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));
@@ -246,6 +257,20 @@ void MainWindow::showInfoDialog(const QString& msg)
     QMessageBox::information(this, "ShipCAD",
                              msg,
                              QMessageBox::Ok);
+}
+
+void MainWindow::showWarnDialog(const QString& msg)
+{
+    QMessageBox::warning(this, "ShipCAD",
+                         msg,
+                         QMessageBox::Ok);
+}
+
+void MainWindow::showErrDialog(const QString& msg)
+{
+    QMessageBox::critical(this, "ShipCAD",
+                          msg,
+                          QMessageBox::Ok);
 }
 
 void MainWindow::readSettings()
@@ -582,10 +607,9 @@ void MainWindow::modelLoaded()
 {
     cout << "modelLoaded" << endl;
     restoreViewports();
-    enableActions();
-    updateVisibilityActions();
 }
 
+// Main.pas:542
 void MainWindow::enableActions()
 {
     // file actions
@@ -812,12 +836,19 @@ void MainWindow::setFarLens()
 void MainWindow::modelChanged()
 {
     bool changed = _controller->getModel()->isFileChanged();
-    if (changed)
-        setWindowTitle(tr("ShipCAD") + tr(" (modified)"));
-    else
-        setWindowTitle(tr("ShipCAD"));
-    cout << "model changed" << endl;
+    QString fname(_controller->getModel()->getFilename());
+    // msg 0280
+    QString mod(tr("modified"));
+    // msg 281
+    QString notmod(tr("not modified"));
+    if (changed) {
+        setWindowTitle("ShipCAD   : " + fname + " (" + mod + ")");
+    }
+    else {
+        setWindowTitle("ShipCAD   : " + fname + " (" + notmod + ")");
+    }
     ui->actionSave->setEnabled(changed);
+    cout << "model changed" << endl;
 }
 
 void MainWindow::setBodyPlanView()
@@ -882,6 +913,18 @@ void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)
     if (!ok)
         data.accepted = false;
     cout << "execute insert plane points dialog:" << (data.accepted ? "t" : "f") << endl;
+}
+
+void MainWindow::executeIntersectLayersDialog(IntersectLayersDialogData& data)
+{
+    if (_intersectlayersdialog == 0) {
+        _intersectlayersdialog = new IntersectLayersDialog(this);
+    }
+    _intersectlayersdialog->initialize(data);
+    int result = _intersectlayersdialog->exec();
+    data.accepted = (result == QDialog::Accepted);
+    _intersectlayersdialog->retrieve(data);
+    cout << "execute intersect layers dialog:" << (data.accepted ? "t" : "f") << endl;
 }
 
 void MainWindow::changeSelectedItems()

@@ -47,10 +47,12 @@ class ViewportContainer;
 class Controller;
 class ViewportContextEvent;
 struct InsertPlaneDialogData;
+struct IntersectLayersDialogData;
 }
 
 class PointDialog;
 class InsertPlanePointsDialog;
+class IntersectLayersDialog;
 
 class ViewportState
 {
@@ -241,6 +243,12 @@ private slots:
      */
     void executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData& data);
 
+    /*! \brief execute the intersect layers dialog
+     *
+     * \return true if dialog "ok" selected, false if "cancel" selected
+     */
+    void executeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData& data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;
@@ -257,10 +265,19 @@ private slots:
      */
     void showInfoDialog(const QString& msg);
     
+    /*! \brief show warning dialog with given text
+     */
+    void showWarnDialog(const QString& msg);
+    
+    /*! \brief show error dialog with given text
+     */
+    void showErrDialog(const QString& msg);
+    
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
     InsertPlanePointsDialog *_planepointsdialog; /**< the insert plane control points dialog created by QtDesigner */
+    IntersectLayersDialog *_intersectlayersdialog; /**< the dialog to select 2 different layers */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

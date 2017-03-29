@@ -61,6 +61,18 @@ struct InsertPlaneDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for intersect layer dialog exchange
+ */
+struct IntersectLayersDialogData
+{
+    bool accepted;
+    std::vector<SubdivisionLayer*> layers;
+    size_t layer1;
+    size_t layer2;
+    explicit IntersectLayersDialogData();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief ShipCAD model controller, contains editing actions
  */
@@ -134,6 +146,10 @@ signals:
      */
     void exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData& data);
     
+    /*! \brief execute the Intersect Layers dialog
+     */
+    void exeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData& data);
+
     void onUpdateVisibilityInfo();
 
     /*! \brief the ShipCAD model geometry has changed
@@ -143,6 +159,14 @@ signals:
     /*! \brief show an info dialog
      */
     void displayInfoDialog(const QString& msg);
+
+    /*! \brief show a warning dialog
+     */
+    void displayWarningDialog(const QString& msg);
+
+    /*! \brief show an error dialog
+     */
+    void displayErrorDialog(const QString& msg);
 
 public slots:
 

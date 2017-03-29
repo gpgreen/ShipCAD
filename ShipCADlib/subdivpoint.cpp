@@ -650,6 +650,7 @@ void SubdivisionControlPoint::setCoordinate(const QVector3D &val)
     _owner->setBuild(false);
 }
 
+// FreeGeometry.pas:10088
 void SubdivisionControlPoint::collapse()
 {
     SubdivisionControlPoint* p1, *p2;

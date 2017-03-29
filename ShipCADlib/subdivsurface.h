@@ -311,7 +311,8 @@ public:
     QColor getControlCurveColor() {return _control_curve_color;}
     QColor getLayerColor() {return _layer_color;}
     QColor getCurvatureColor() {return _curvature_color;}
-
+    QColor getUnderWaterColor() {return _underwater_color;}
+    
     void setUnderWaterColor(const QColor& c) 
         {_underwater_color = c;}
 

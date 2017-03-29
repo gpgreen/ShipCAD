@@ -433,16 +433,27 @@ void SubdivisionControlFace::removeFace()
     clear();
 }
 
+void SubdivisionControlFace::addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals, QVector3D& p1, QVector3D& p2, QVector3D& p3)
+{
+    QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
+    vertices << p1;
+    vertices << p2;
+    vertices << p3;
+    normals << n;
+    normals << n;
+    normals << n;
+}
+
 void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
 {
     // make the vertex and color buffers
     QVector<QVector3D> vertices;
     QVector<QVector3D> normals;
+    QVector<QVector3D> vertices_underwater;
+    QVector<QVector3D> normals_underwater;
 
     if (_owner->shadeUnderWater() && vp.getViewportMode() == vmShade
             && getLayer()->useInHydrostatics()) {
-        // BUGBUG: split up faces into 2 sets, above water and below water
-        // shade with different color below waterline
         for (size_t i=0; i<_children.size(); ++i) {
             // clip all triangles against the waterline plane
             for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
@@ -465,11 +476,11 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
                     max = tmp;
                 if (max <= 0.0) {
                     // entirely below the plane
-                    // shade triangle
+                    addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
                 }
                 else if (min >= 0.0) {
                     // entirely above the plane
-                    // shade triangle
+                    addFaceToDL(vertices, normals, p1, p2, p3);
                 }
                 else {
                     // pierces water, clip triangle
@@ -478,12 +489,12 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
                     std::vector<QVector3D> below;
                     below.reserve(6);
                     ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
-                    for (size_t k=3; k<=above.size(); ++k)
+                    for (size_t k=2; k<above.size(); ++k)
                         // shade triangle above
-                        ;
-                    for (size_t k=3; k<=below.size(); ++k)
+                        addFaceToDL(vertices, normals, above[0], above[k-1], above[k]);
+                    for (size_t k=2; k<below.size(); ++k)
                         // shade triangle below
-                        ;
+                        addFaceToDL(vertices_underwater, normals_underwater, below[0], below[k-1], below[k]);
                 }
                 if (_owner->drawMirror() && getLayer()->isSymmetric()) {
                     p1.setY(-p1.y());
@@ -505,11 +516,11 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
                         max = tmp;
                     if (max <= 0.0) {
                         // entirely below the plane
-                        // shade triangle
+                        addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
                     }
                     else if (min >= 0.0) {
                         // entirely above the plane
-                        // shade triangle
+                        addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
                     }
                     else {
                         // pierces water, clip triangle
@@ -518,35 +529,21 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
                         std::vector<QVector3D> below;
                         below.reserve(6);
                         ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
-                        for (size_t k=3; k<=above.size(); ++k)
+                        for (size_t k=2; k<above.size(); ++k)
                             // shade triangle above
-                            ;
-                        for (size_t k=3; k<=below.size(); ++k)
+                            addFaceToDL(vertices, normals, above[0], above[k-1], above[k]);
+                        for (size_t k=2; k<below.size(); ++k)
                             // shade triangle below
-                            ;
+                            addFaceToDL(vertices_underwater, normals_underwater, below[0], below[k-1], below[k]);
                     }
                 }
             }
         }
     }
-    // BUGBUG: lets just shade the face to see if it works
-    for (size_t i=0; i<_children.size(); ++i) {
-        SubdivisionFace* face = _children[i];
-        for (size_t j=2; j<face->numberOfPoints(); ++j) {
-            QVector3D p1 = face->getPoint(0)->getCoordinate();
-            QVector3D p2 = face->getPoint(j-1)->getCoordinate();
-            QVector3D p3 = face->getPoint(j)->getCoordinate();
-            QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
-            vertices << p1;
-            vertices << p2;
-            vertices << p3;
-            normals << n;
-            normals << n;
-            normals << n;
-        }
-    }
-
+    // render above the waterline
     monoshader->renderMesh(getColor(), vertices, normals);
+    // render below the waterline
+    monoshader->renderMesh(_owner->getUnderWaterColor(), vertices_underwater, normals_underwater);
 }
 
 void SubdivisionControlFace::drawCurvatureFaces(Viewport &/*vp*/, float /*MinCurvature*/, float /*MaxCurvature*/)
@@ -582,10 +579,12 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
     }
 }
 
+// FreeGeometry.pas:12496
 SubdivisionControlEdge* SubdivisionControlFace::insertControlEdge(
-        SubdivisionControlPoint *p1, SubdivisionControlPoint *p2)
+        SubdivisionControlPoint *p1, SubdivisionControlPoint *p2, bool& deleteme)
 {
     SubdivisionControlEdge* result = 0;
+    deleteme = false;
     if (p1->hasFace(this) && p2->hasFace(this)) {
         if (_owner->edgeExists(p1, p2) != 0)
             return result;
@@ -595,7 +594,7 @@ SubdivisionControlEdge* SubdivisionControlFace::insertControlEdge(
         for (size_t i=0; i<numberOfPoints(); ++i) {
             tmp = (tmp + 1) % numberOfPoints();
             pts.push_back(dynamic_cast<SubdivisionControlPoint*>(getPoint(tmp)));
-            if (pts[pts.size()-1] == p2)
+            if (pts.back() == p2)
                 break;
         }
         if (pts.size() > 2)
@@ -606,12 +605,12 @@ SubdivisionControlEdge* SubdivisionControlFace::insertControlEdge(
         for (size_t i=0; i<numberOfPoints(); ++i) {
             tmp = (tmp + 1) % numberOfPoints();
             pts.push_back(dynamic_cast<SubdivisionControlPoint*>(getPoint(tmp)));
-            if (pts[pts.size()-1] == p1)
+            if (pts.back() == p1)
                 break;
         }
         if (pts.size() > 2)
             _owner->addControlFace(pts, false, getLayer());
-        // BUGBUG: we need to delete 'this' face, can't do it here
+        deleteme = true;
     }
     result = _owner->controlEdgeExists(p1, p2);
     if (result != 0)

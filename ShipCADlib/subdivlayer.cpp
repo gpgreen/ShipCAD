@@ -339,24 +339,31 @@ bool SubdivisionLayer::calculateIntersectionPoints(SubdivisionLayer* layer)
     }
     if (newpoints.size() > 0) {
         // try to find multiple new points belonging to the same face and insert an edge
-        size_t i = 1;
+restart:
+        size_t i = 0;
         edges.clear();
         bool inserted = false;
-        while (i <= newpoints.size()) {
-            p1 = newpoints[i-1];
-            size_t j = 1;
-            while (j <= p1->numberOfFaces()) {
-                face = dynamic_cast<SubdivisionControlFace*>(p1->getFace(j-1));
-                size_t k = 1;
-                while (k <= face->numberOfPoints() && !inserted) {
-                    p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(k-1));
+        while (i < newpoints.size()) {
+            p1 = newpoints[i];
+            size_t j = 0;
+            while (j < p1->numberOfFaces()) {
+                face = dynamic_cast<SubdivisionControlFace*>(p1->getFace(j));
+                size_t k = 0;
+                while (k < face->numberOfPoints() && !inserted) {
+                    p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(k));
                     if (p1 != p2 && find(newpoints.begin(), newpoints.end(), p2) != newpoints.end()) {
                         // this is also a new point, first check if an edge already exists between p1 and p2
                         if (_owner->edgeExists(p1, p2) == 0) {
                             inserted = true;
-                            edge = face->insertControlEdge(p1, p2);
+                            bool deleteface;
+                            edge = face->insertControlEdge(p1, p2, deleteface);
                             edge->setSelected(true);
                             edges.push_back(edge);
+                            // if face has been deleted, restart the loop
+                            if (deleteface) {
+                                getOwner()->deleteControlFace(face);
+                                goto restart;
+                            }
                         }
                     }
                     k++;
@@ -444,8 +451,8 @@ void SubdivisionLayer::draw(Viewport& vp)
 void SubdivisionLayer::extents(QVector3D& min, QVector3D& max)
 {
     if (isVisible()) {
-        for (size_t i=1; i<=numberOfFaces(); ++i) {
-            SubdivisionControlFace* face = _patches[i-1];
+        for (size_t i=0; i<numberOfFaces(); ++i) {
+            SubdivisionControlFace* face = _patches[i];
             MinMax(face->getMin(), min, max);
             MinMax(face->getMax(), min, max);
             if (isSymmetric() && _owner->drawMirror()) {

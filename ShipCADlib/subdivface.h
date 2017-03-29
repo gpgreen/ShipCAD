@@ -248,11 +248,13 @@ public:
 	 *
 	 * \param p1 start point of edge
 	 * \param p2 end point of edge
+     * \param deleteme true if this face should be deleted, it was replaced in method
 	 * \return new control edge or 0 if no edge exists between
 	 * these 2 points
 	 */
     SubdivisionControlEdge* insertControlEdge(SubdivisionControlPoint* p1,
-                                              SubdivisionControlPoint* p2);
+                                              SubdivisionControlPoint* p2,
+                                              bool& deleteme);
 	/*! \brief Removes this face and all edges from points
 	 *
 	 * For each point in the face, remove this face from the point.
@@ -332,6 +334,8 @@ protected:
     // used in trace
     void findAttachedFaces(std::vector<SubdivisionControlFace*>& todo_list,
                            SubdivisionControlFace* face);
+    void addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
+                     QVector3D& p1, QVector3D& p2, QVector3D& p3);
 
 protected:
 

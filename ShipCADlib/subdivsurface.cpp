@@ -1812,7 +1812,10 @@ void SubdivisionSurface::edgeConnect()
                 for (size_t j=1; j<=v1->numberOfFaces(); ++j) {
                     SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(v1->getFace(j-1));
                     if (v2->hasFace(face)) {
-                        face->insertControlEdge(v1, v2);
+                        bool deleteface;
+                        face->insertControlEdge(v1, v2, deleteface);
+                        if (deleteface)
+                            deleteControlFace(face);
                         v2->setSelected(false);
                         setBuild(false);
                         break;
@@ -2818,25 +2821,32 @@ void SubdivisionSurface::insertPlane(const Plane& plane, bool add_curves)
         ++i;
     }
     if (points.size() > 0) {
+restart:
         // try to find multiple points belonging to the same face and insert an edge
-        i = 1;
+        i = 0;
         sort(points.begin(), points.end());
         vector<SubdivisionControlEdge*> edges;
-        while (i <= points.size()) {
-            SubdivisionControlPoint* p1 = points[i-1];
-            size_t j = 1;
-            while (j <= p1->numberOfFaces()) {
-                SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(p1->getFace(j-1));
-                size_t k = 1;
+        while (i < points.size()) {
+            SubdivisionControlPoint* p1 = points[i];
+            size_t j = 0;
+            while (j < p1->numberOfFaces()) {
+                SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(p1->getFace(j));
+                size_t k = 0;
                 bool inserted = false;
-                while (k <= face->numberOfPoints()) {
-                    SubdivisionControlPoint* p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(k-1));
+                while (k < face->numberOfPoints()) {
+                    SubdivisionControlPoint* p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(k));
                     if (p1 != p2 && find(points.begin(), points.end(), p2) != points.end()) {
                         // this is also a new point, first check if an edge already exists between p1 and p2
                         if (edgeExists(p1, p2) == 0) {
                             inserted = true;
-                            SubdivisionControlEdge* edge = face->insertControlEdge(p1, p2);
+                            bool deleteface;
+                            SubdivisionControlEdge* edge = face->insertControlEdge(p1, p2, deleteface);
                             edges.push_back(edge);
+                            // if face has been deleted, restart loop
+                            if (deleteface) {
+                                deleteControlFace(face);
+                                goto restart;
+                            }
                         }
                     }
                     ++k;

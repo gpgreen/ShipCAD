@@ -284,7 +284,7 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     _proj = QMatrix4x4();
 
     // create projection
-    _proj.perspective(RadToDeg(_field_of_view) / _zoom, aspect_ratio, 0.1f, 40.0f);
+    _proj.perspective(RadToDeg(_field_of_view) / _zoom, aspect_ratio, 0.1f, 200.0f);
     
     // find the camera location
     QMatrix4x4 model;

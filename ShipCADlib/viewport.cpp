@@ -89,6 +89,9 @@ void Viewport::initialize()
 
     LightedFaceShader* lightedfaceshader = new LightedFaceShader(this);
     addShader("lightedfaceshader", lightedfaceshader);
+
+    CurveFaceShader* curvefaceshader = new CurveFaceShader(this);
+    addShader("curvefaceshader", curvefaceshader);
 }
 
 void Viewport::setViewportMode(viewport_mode_t mode)
@@ -185,16 +188,11 @@ void Viewport::render()
     
     glViewport(0, 0, width(), height());
     
- 	// setup the lighting
-    float ltcolor[] = {0, .3, 1.0};
-    glEnable( GL_LIGHTING );
-    glEnable( GL_LIGHT0 );
-    glLightfv(GL_LIGHT0, GL_POSITION, ltcolor);
-
     // set the color of the background
     QColor vpcolor = getController()->getModel()->getPreferences().getViewportColor();
     glClearColor(vpcolor.redF(), vpcolor.greenF(), vpcolor.blueF(), 1.0);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
 
     // draw the model
     getController()->getModel()->draw(*this);
@@ -208,44 +206,54 @@ void Viewport::render()
 
 LineShader* Viewport::setLineShader()
 {
-    Shader* shader = _shaders["lineshader"];
+    LineShader* shader = dynamic_cast<LineShader*>(_shaders["lineshader"]);
     if (shader == _current_shader)
-        return dynamic_cast<LineShader*>(_current_shader);
+        return shader;
     if (_current_shader != 0)
         _current_shader->release();
     shader->bind();
     shader->setMatrix(_view->getWorld());
     _current_shader = shader;
-    //cerr << "set line shader\n";
-    return dynamic_cast<LineShader*>(_current_shader);
+    return shader;
 }
 
 FaceShader* Viewport::setMonoFaceShader()
 {
-    Shader* shader = _shaders["monofaceshader"];
+    MonoFaceShader* shader = dynamic_cast<MonoFaceShader*>(_shaders["monofaceshader"]);
     if (shader == _current_shader)
-        return dynamic_cast<MonoFaceShader*>(_current_shader);
+        return shader;
     if (_current_shader != 0)
         _current_shader->release();
     shader->bind();
     shader->setMatrix(_view->getWorld());
     _current_shader = shader;
-    //cerr << "set mono face shader\n";
-    return dynamic_cast<FaceShader*>(_current_shader);
+    return shader;
 }
 
 FaceShader* Viewport::setLightedFaceShader()
 {
-    Shader* shader = _shaders["lightedfaceshader"];
+    LightedFaceShader* shader = dynamic_cast<LightedFaceShader*>(_shaders["lightedfaceshader"]);
     if (shader == _current_shader)
-        return dynamic_cast<LightedFaceShader*>(_current_shader);
+        return shader;
     if (_current_shader != 0)
         _current_shader->release();
     shader->bind();
-    shader->setMatrix(_view->getWorld());
+    shader->setMatrices(_view->getProj(), _view->getView(), _view->getWorld());
     _current_shader = shader;
-    //cerr << "set lighted face shader\n";
-    return dynamic_cast<FaceShader*>(_current_shader);
+    return shader;
+}
+
+CurveFaceShader* Viewport::setCurveFaceShader()
+{
+    CurveFaceShader* shader = dynamic_cast<CurveFaceShader*>(_shaders["curvefaceshader"]);
+    if (shader == _current_shader)
+        return shader;
+    if (_current_shader != 0)
+        _current_shader->release();
+    shader->bind();
+    shader->setMatrices(_view->getProj(), _view->getView(), _view->getWorld());
+    _current_shader = shader;
+    return shader;
 }
 
 bool Viewport::contextMenu(QMouseEvent *event)

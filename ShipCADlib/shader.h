@@ -59,8 +59,6 @@ public:
     void addUniform(const std::string& name);
     void addAttribute(const std::string& name);
 
-    void setMatrix(const QMatrix4x4& matrix);
-
     void bind() {_program->bind();}
     void release() {_program->release();}
 
@@ -82,6 +80,8 @@ public:
 
     explicit LineShader(Viewport* vp);
     virtual ~LineShader() {}
+
+    void setMatrix(const QMatrix4x4& matrix);
 
     void renderPoints(QVector<QVector3D>& points, QColor color);
     void renderLines(QVector<QVector3D>& vertices, QColor lineColor);
@@ -115,6 +115,8 @@ public:
     explicit MonoFaceShader(Viewport* vp);
     virtual ~MonoFaceShader() {}
 
+    void setMatrix(const QMatrix4x4& matrix);
+
     virtual void renderMesh(QColor meshColor,
                             QVector<QVector3D>& vertices,
                             QVector<QVector3D>& normals);
@@ -132,8 +134,29 @@ public:
     explicit LightedFaceShader(Viewport* vp);
     virtual ~LightedFaceShader() {}
 
+    void setMatrices(const QMatrix4x4& proj, const QMatrix4x4& view, const QMatrix4x4& world);
+
     virtual void renderMesh(QColor meshColor,
                             QVector<QVector3D>& vertices,
+                            QVector<QVector3D>& normals);
+
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+class CurveFaceShader : public Shader
+{
+    Q_OBJECT
+
+public:
+
+    explicit CurveFaceShader(Viewport* vp);
+    virtual ~CurveFaceShader() {}
+
+    void setMatrices(const QMatrix4x4& proj, const QMatrix4x4& view, const QMatrix4x4& world);
+
+    virtual void renderMesh(QVector<QVector3D>& vertices,
+                            QVector<QVector3D>& colors,
                             QVector<QVector3D>& normals);
 
 };

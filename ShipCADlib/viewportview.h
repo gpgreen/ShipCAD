@@ -69,6 +69,12 @@ public:
         {return _world;}
     const QMatrix4x4& getWorldInv() const
         {return _worldInv;}
+    const QMatrix4x4& getProj() const
+        {return _proj;}
+    const QMatrix4x4& getView() const
+        {return _view;}
+    const QVector3D& getCamera() const
+        {return _camera_location;}
 
     virtual bool leftMousePick(QPoint pos, int w, int h, bool multi_sel);
     virtual bool rightMousePick(QPoint pos, int w, int h);

@@ -271,7 +271,8 @@ public:
     void setCurvatureScale(float val) {_curvature_scale=val;}
     float getMinGausCurvature() {return _min_gaus_curvature;}
     float getMaxGausCurvature() {return _max_gaus_curvature;}
-
+    float getGaussCurvature(size_t idx);
+    
     const Plane& getWaterlinePlane() {return _waterline_plane;}
     void setWaterlinePlane(const Plane& val) {_waterline_plane = val;}
     float getMainframeLocation() {return _main_frame_location;}

@@ -863,6 +863,13 @@ void SubdivisionSurface::calculateGaussCurvature()
     }
 }
 
+float SubdivisionSurface::getGaussCurvature(size_t idx)
+{
+    if (idx >= _gaus_curvature.size())
+        throw range_error("curvature index out of range");
+    return _gaus_curvature[idx];
+}
+
 size_t SubdivisionSurface::indexOfControlPoint(SubdivisionControlPoint *pt)
 {
     vector<SubdivisionControlPoint*>::iterator i = find(_control_points.begin(),

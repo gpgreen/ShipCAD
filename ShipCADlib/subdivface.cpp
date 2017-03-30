@@ -433,7 +433,8 @@ void SubdivisionControlFace::removeFace()
     clear();
 }
 
-void SubdivisionControlFace::addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals, QVector3D& p1, QVector3D& p2, QVector3D& p3)
+void SubdivisionControlFace::addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
+                                         QVector3D& p1, QVector3D& p2, QVector3D& p3)
 {
     QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
     vertices << p1;
@@ -444,7 +445,52 @@ void SubdivisionControlFace::addFaceToDL(QVector<QVector3D>& vertices, QVector<Q
     normals << n;
 }
 
-void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
+void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& colors, QVector<QVector3D>& normals,
+                                              QVector3D& p1, QVector3D& p2, QVector3D& p3, float& c1, float& c2, float& c3)
+{
+    QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
+    vertices << p1 << p2 << p3;
+    QVector3D cc1(c1, c1, c1);
+    QVector3D cc2(c2, c2, c2);
+    QVector3D cc3(c3, c3, c3);
+    colors << cc1 << cc2 << cc3;
+    normals << n << n << n;
+}
+
+void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, CurveFaceShader* faceshader)
+{
+    // make the vertex and color buffers
+    QVector<QVector3D> vertices;
+    QVector<QVector3D> colors;
+    QVector<QVector3D> normals;
+
+    for (size_t i=0; i<_children.size(); ++i) {
+        for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
+            QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
+            QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
+            QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
+            // do developable curvature
+            size_t idx = _owner->indexOfPoint(_children[i]->getPoint(0));
+            float c1 = _owner->getGaussCurvature(idx);
+            idx = _owner->indexOfPoint(_children[i]->getPoint(j-1));
+            float c2 = _owner->getGaussCurvature(idx);
+            idx = _owner->indexOfPoint(_children[i]->getPoint(j));
+            float c3 = _owner->getGaussCurvature(idx);
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, c1, c2, c3);
+            if (_owner->drawMirror() && getLayer()->isSymmetric()) {
+                p1.setY(-p1.y());
+                p2.setY(-p2.y());
+                p3.setY(-p3.y());
+                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, c1, c2, c3);
+            }
+        }
+    }
+    if (vertices.size() > 0)
+        faceshader->renderMesh(vertices, colors, normals);
+}
+
+// FreeGeometry.pas:11995
+void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
 {
     // make the vertex and color buffers
     QVector<QVector3D> vertices;
@@ -520,7 +566,7 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
                     }
                     else if (min >= 0.0) {
                         // entirely above the plane
-                        addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
+                        addFaceToDL(vertices, normals, p1, p2, p3);
                     }
                     else {
                         // pierces water, clip triangle
@@ -539,13 +585,34 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* monoshader)
                 }
             }
         }
+    } else if (vp.getViewportMode() == vmShadeZebra) {
+        // TODO
+    } else {
+        for (size_t i=0; i<_children.size(); ++i) {
+            for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
+                QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
+                QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
+                QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
+                addFaceToDL(vertices, normals, p1, p2, p3);
+                if (_owner->drawMirror() && getLayer()->isSymmetric()) {
+                    p1.setY(-p1.y());
+                    p2.setY(-p2.y());
+                    p3.setY(-p3.y());
+                    addFaceToDL(vertices, normals, p1, p2, p3);
+                }
+            }
+        }
     }
+        
     // render above the waterline
-    monoshader->renderMesh(getColor(), vertices, normals);
+    if (vertices.size() > 0)
+        faceshader->renderMesh(getColor(), vertices, normals);
     // render below the waterline
-    monoshader->renderMesh(_owner->getUnderWaterColor(), vertices_underwater, normals_underwater);
+    if (vertices_underwater.size() > 0)
+        faceshader->renderMesh(_owner->getUnderWaterColor(), vertices_underwater, normals_underwater);
 }
 
+// FreeGeometry.pas:12438
 void SubdivisionControlFace::drawCurvatureFaces(Viewport &/*vp*/, float /*MinCurvature*/, float /*MaxCurvature*/)
 {
     // TODO

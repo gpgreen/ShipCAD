@@ -61,8 +61,6 @@ void Shader::initialize(const char* vertexShaderSource,
     if (!_program->link())
         cerr << "OpenGL Link failed - Log:\n" << _program->log().toStdString() << endl;
 
-    addUniform("matrix");
-
     for (size_t i=0; i<uniforms.size(); ++i)
         addUniform(uniforms[i]);
     for (size_t i=0; i<attributes.size(); ++i)
@@ -72,22 +70,23 @@ void Shader::initialize(const char* vertexShaderSource,
 void Shader::addUniform(const string& name)
 {
     int ul = _program->uniformLocation(name.c_str());
-    if (ul == -1)
-        throw runtime_error("bad uniform");
+    if (ul == -1) {
+        string err("bad uniform:");
+        err += name;
+        throw runtime_error(err);
+    }
     _uniforms[name] = ul;
 }
 
 void Shader::addAttribute(const string& name)
 {
     int al = _program->attributeLocation(name.c_str());
-    if (al == -1)
-        throw runtime_error("bad attribute");
+    if (al == -1) {
+        string err("bad attribute:");
+        err += name;
+        throw runtime_error(err);
+    }
     _attributes[name] = al;
-}
-
-void Shader::setMatrix(const QMatrix4x4& matrix)
-{
-    _program->setUniformValue(_uniforms["matrix"], matrix);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -117,6 +116,12 @@ LineShader::LineShader(Viewport* vp)
     unis.push_back("sourceColor");
     attrs.push_back("posAttr");
     initialize(LineShaderVertexSource, LineShaderFragmentSource, unis, attrs);
+    addUniform("matrix");
+}
+
+void LineShader::setMatrix(const QMatrix4x4& matrix)
+{
+    _program->setUniformValue(_uniforms["matrix"], matrix);
 }
 
 void LineShader::renderPoints(QVector<QVector3D>& points, QColor color)
@@ -185,6 +190,12 @@ MonoFaceShader::MonoFaceShader(Viewport* vp)
     attrs.push_back("vertex");
     attrs.push_back("normal");
     initialize(MonoShaderVertexSource, MonoShaderFragmentSource, unis, attrs);
+    addUniform("matrix");
+}
+
+void MonoFaceShader::setMatrix(const QMatrix4x4& matrix)
+{
+    _program->setUniformValue(_uniforms["matrix"], matrix);
 }
 
 void MonoFaceShader::renderMesh(QColor meshColor,
@@ -214,42 +225,82 @@ void MonoFaceShader::renderMesh(QColor meshColor,
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-static const char* LightedShaderVertexSource =
-	"attribute vec4 vertex;"
-	"attribute vec3 normal;"
-	"uniform mat4 matrix;"
-	"varying vec3 vnormal;"
-	"varying vec3 vertex_to_light_vector;"
-	"void main(void)"
-	"{"
-	"    gl_Position = matrix * vertex;"
-	"    vnormal = vec3(matrix * vec4(normal.xyz, 1.0));"
-	"    vertex_to_light_vector = vec3(gl_LightSource[0].position - gl_Position);"
-	"}";
+static const char *vertexShaderSourceCore =
+    "#version 150\n"
+    "in vec4 vertex;\n"
+    "in vec3 normal;\n"
+    "out vec3 vert;\n"
+    "out vec3 vertNormal;\n"
+    "uniform mat4 projMatrix;\n"
+    "uniform mat4 mvMatrix;\n"
+    "uniform mat3 normalMatrix;\n"
+    "void main() {\n"
+    "   vert = vertex.xyz;\n"
+    "   vertNormal = normalMatrix * normal;\n"
+    "   gl_Position = projMatrix * mvMatrix * vertex;\n"
+    "}\n";
 
-static const char* LightedShaderFragmentSource =
-	"uniform vec4 sourceColor;"
-	"uniform vec4 diffuseColor;"
-	"varying vec3 vnormal;"
-	"varying vec3 vertex_to_light_vector;"
-	"void main(void)"
-	"{"
-	"    vec3 normalized_normal = normalize(vnormal);"
-	"    vec3 normalized_vertex_to_light = normalize(vertex_to_light_vector);"
-	"    float DiffuseTerm = clamp(dot(normalized_normal, normalized_vertex_to_light), 0.0, 1.0);"
-	"    gl_FragColor = sourceColor + diffuseColor * DiffuseTerm;"
-	"}";
+static const char *fragmentShaderSourceCore =
+    "#version 150\n"
+    "in highp vec3 vert;\n"
+    "in highp vec3 vertNormal;\n"
+    "out highp vec4 fragColor;\n"
+    "uniform highp vec3 lightPos;\n"
+    "void main() {\n"
+    "   highp vec3 L = normalize(lightPos - vert);\n"
+    "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
+    "   highp vec3 color = vec3(0.39, 1.0, 0.0);\n"
+    "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
+    "   fragColor = vec4(col, 1.0);\n"
+    "}\n";
+
+static const char *vertexShaderSource =
+    "attribute vec4 vertex;\n"
+    "attribute vec3 normal;\n"
+    "varying vec3 vert;\n"
+    "varying vec3 vertNormal;\n"
+    "uniform mat4 projMatrix;\n"
+    "uniform mat4 mvMatrix;\n"
+    "uniform mat3 normalMatrix;\n"
+    "void main() {\n"
+    "   vert = vertex.xyz;\n"
+    "   vertNormal = normalMatrix * normal;\n"
+    "   gl_Position = projMatrix * mvMatrix * vertex;\n"
+    "}\n";
+
+static const char *fragmentShaderSource =
+    "varying highp vec3 vert;\n"
+    "varying highp vec3 vertNormal;\n"
+    "uniform highp vec3 lightPos;\n"
+    "uniform vec4 color;\n"
+    "void main() {\n"
+    "   highp vec3 L = normalize(lightPos - vert);\n"
+    "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
+    "   highp vec3 col = clamp(color.xyz * 0.2 + color.xyz * 0.8 * NL, 0.0, 1.0);\n"
+    "   gl_FragColor = vec4(col, color.z);\n"
+    "}\n";
 
 LightedFaceShader::LightedFaceShader(Viewport* vp)
   : FaceShader(vp)
 {
     vector<string> attrs;
     vector<string> unis;
-    unis.push_back("sourceColor");
-	unis.push_back("diffuseColor");
+    unis.push_back("lightPos");
+    unis.push_back("projMatrix");
+    unis.push_back("mvMatrix");
+    unis.push_back("normalMatrix");
+    unis.push_back("color");
     attrs.push_back("vertex");
     attrs.push_back("normal");
-    initialize(LightedShaderVertexSource, LightedShaderFragmentSource, unis, attrs);
+    initialize(vertexShaderSource, fragmentShaderSource, unis, attrs);
+}
+
+void LightedFaceShader::setMatrices(const QMatrix4x4& proj, const QMatrix4x4& view, const QMatrix4x4& world)
+{
+    _program->setUniformValue(_uniforms["projMatrix"], proj);
+    _program->setUniformValue(_uniforms["mvMatrix"], view);
+    _program->setUniformValue(_uniforms["normalMatrix"], world.normalMatrix());
+    _program->setUniformValue(_uniforms["lightPos"], QVector3D(50, 20, 2));
 }
 
 void LightedFaceShader::renderMesh(QColor meshColor,
@@ -259,22 +310,95 @@ void LightedFaceShader::renderMesh(QColor meshColor,
     if (vertices.size() != normals.size())
         throw runtime_error("vertex and normal array not same size LightedFaceShader::renderMesh");
 
-    _program->setUniformValue(_uniforms["sourceColor"],
-                  meshColor.redF(),
-                  meshColor.greenF(),
-                  meshColor.blueF(),
-                  1.0f);
-    _program->setUniformValue(_uniforms["diffuseColor"],1.0f,0.0f,0.0f,1.0f);
-
     GLuint normalAttr = _attributes["normal"];
     GLuint vertexAttr = _attributes["vertex"];
 
+    _program->setUniformValue(_uniforms["color"], meshColor.redF(), meshColor.greenF(),
+                meshColor.blueF(), meshColor.alphaF());
     _program->setAttributeArray(vertexAttr, vertices.constData());
     _program->setAttributeArray(normalAttr, normals.constData());
     _program->enableAttributeArray(normalAttr);
     _program->enableAttributeArray(vertexAttr);
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     _program->disableAttributeArray(normalAttr);
+    _program->disableAttributeArray(vertexAttr);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+static const char *colVertexShaderSource =
+    "attribute vec4 vertex;\n"
+    "attribute vec4 color;\n"
+    "attribute vec3 normal;\n"
+    "varying vec3 vert;\n"
+    "varying vec3 vertNormal;\n"
+    "varying vec4 col;\n"
+    "uniform mat4 projMatrix;\n"
+    "uniform mat4 mvMatrix;\n"
+    "uniform mat3 normalMatrix;\n"
+    "void main() {\n"
+    "   vert = vertex.xyz;\n"
+    "   vertNormal = normalMatrix * normal;\n"
+    "   col = color;\n"
+    "   gl_Position = projMatrix * mvMatrix * vertex;\n"
+    "}\n";
+
+static const char *colFragmentShaderSource =
+    "varying highp vec3 vert;\n"
+    "varying highp vec3 vertNormal;\n"
+    "varying highp vec4 col;\n"
+    "uniform highp vec3 lightPos;\n"
+    "void main() {\n"
+    "   highp vec3 L = normalize(lightPos - vert);\n"
+    "   highp float NL = max(dot(normalize(vertNormal), L), 0.0);\n"
+    "   highp vec3 col = clamp(col.xyz * 0.2 + col.xyz * 0.8 * NL, 0.0, 1.0);\n"
+    "   gl_FragColor = vec4(col, 1.0);\n"
+    "}\n";
+
+CurveFaceShader::CurveFaceShader(Viewport* vp)
+  : Shader(vp)
+{
+    vector<string> attrs;
+    vector<string> unis;
+    unis.push_back("lightPos");
+    unis.push_back("projMatrix");
+    unis.push_back("mvMatrix");
+    unis.push_back("normalMatrix");
+    attrs.push_back("vertex");
+    attrs.push_back("color");
+    attrs.push_back("normal");
+    initialize(colVertexShaderSource, colFragmentShaderSource, unis, attrs);
+}
+
+void CurveFaceShader::setMatrices(const QMatrix4x4& proj, const QMatrix4x4& view,
+                                  const QMatrix4x4& world)
+{
+    _program->setUniformValue(_uniforms["projMatrix"], proj);
+    _program->setUniformValue(_uniforms["mvMatrix"], view);
+    _program->setUniformValue(_uniforms["normalMatrix"], world.normalMatrix());
+    _program->setUniformValue(_uniforms["lightPos"], QVector3D(50, 20, 2));
+}
+
+void CurveFaceShader::renderMesh(QVector<QVector3D>& vertices,
+                                 QVector<QVector3D>& colors,
+                                 QVector<QVector3D>& normals)
+{
+    if (vertices.size() != normals.size() || vertices.size() != colors.size())
+        throw runtime_error("vertex, color, normal array not same size CurveFaceShader::renderMesh");
+
+    GLuint normalAttr = _attributes["normal"];
+    GLuint vertexAttr = _attributes["vertex"];
+    GLuint colorAttr = _attributes["color"];
+
+    _program->setAttributeArray(vertexAttr, vertices.constData());
+    _program->setAttributeArray(colorAttr, colors.constData());
+    _program->setAttributeArray(normalAttr, normals.constData());
+    _program->enableAttributeArray(normalAttr);
+    _program->enableAttributeArray(colorAttr);
+    _program->enableAttributeArray(vertexAttr);
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    _program->disableAttributeArray(normalAttr);
+    _program->disableAttributeArray(colorAttr);
     _program->disableAttributeArray(vertexAttr);
 }
 

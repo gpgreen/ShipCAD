@@ -422,11 +422,14 @@ void SubdivisionLayer::draw(Viewport& vp)
                                                _owner->getMinGausCurvature(),
                                                _owner->getMaxGausCurvature());
         }
-        else {
-//            FaceShader* faceshader = vp.setMonoFaceShader();
-            FaceShader* faceshader = vp.setLightedFaceShader();
+        else if (vp.getViewportMode() == vmShadeDevelopable) {
+            CurveFaceShader* shader = vp.setCurveFaceShader();
+            for (size_t i=0; i<numberOfFaces(); i++)
+                getFace(i)->drawCurvatureFaces(vp, shader);
+        } else {
+            FaceShader* shader = vp.setLightedFaceShader();
             for (size_t i=0; i<numberOfFaces(); ++i)
-                getFace(i)->drawFaces(vp, faceshader);
+                getFace(i)->drawFaces(vp, shader);
         }
     }
     else {

@@ -43,6 +43,7 @@ class SubdivisionSurface;
 class Shader;
 class LineShader;
 class FaceShader;
+class CurveFaceShader;
 class ViewportView;
 class Controller;
 struct PickRay;
@@ -94,7 +95,8 @@ public:
     LineShader* setLineShader();
     FaceShader* setMonoFaceShader();
     FaceShader* setLightedFaceShader();
-    
+    CurveFaceShader* setCurveFaceShader();
+
     bool shootPickRay(PickRay& ray);
 
     bool canPickPoint() const;

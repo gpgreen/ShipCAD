@@ -157,38 +157,6 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
     ray.dir = to.toVector3D() - from.toVector3D();
     ray.dir.normalize();
 
-#if 0
-    cout << "from:" << from.x() << "," << from.y() << "," << from.z() << endl;
-    cout << "to:" << to.x() << "," << to.y() << "," << to.z() << endl;
-
-    // find the intersection with the xz plane if possible
-    Plane xz(0,1,0,0);
-    bool coplanar;
-    QVector3D intpt;
-    if (!xz.intersectLine(ray.pt, ray.dir, coplanar, intpt))
-        cout << "xz intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
-    else
-        cout << "parallel to xz" << endl;
-    if (coplanar)
-        cout << "coplanar" << endl;
-    // find the intersection with the yz plane if possible
-    Plane yz(1,0,0,0);
-    if (!yz.intersectLine(ray.pt, ray.dir, coplanar, intpt))
-        cout << "yz intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
-    else
-        cout << "parallel to yz" << endl;
-    if (coplanar)
-        cout << "coplanar" << endl;
-    // find the intersection with the xy plane if possible
-    Plane xy(0,0,1,0);
-    if (!xy.intersectLine(ray.pt, ray.dir, coplanar, intpt))
-        cout << "xy intersect:" << intpt.x() << "," << intpt.y() << "," << intpt.z() << endl;
-    else
-        cout << "parallel to xy" << endl;
-    if (coplanar)
-        cout << "coplanar" << endl;
-#endif
-
     return ray;
 }
 
@@ -212,15 +180,19 @@ bool ViewportViewPerspective::middleMouseMove(QPoint cur, QPoint prev, int /*w*/
     QPoint rel = cur - prev;
     // dragging the perspective around with middle button
     _angle -= rel.x() / 2.0f;
+    _elevation += rel.y() / 2.0f;
+    while (_elevation > 90) {
+        _elevation = 90 - _elevation;
+        _angle += 180;
+    }
+    while (_elevation < -90) {
+        _elevation += 180;
+        _angle += 180;
+    }
     while (_angle > 180)
         _angle -= 360;
     while (_angle < -180)
         _angle += 360;
-    _elevation += rel.y() / 2.0f;
-    while (_elevation > 180)
-        _elevation -= 360;
-    while (_elevation < -180)
-        _elevation += 360;
     cout << "angle:" << _angle << " elev:" << _elevation << endl;
     return true;
 }

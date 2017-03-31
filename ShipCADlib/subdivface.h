@@ -320,9 +320,9 @@ public:
 
     // drawing
     virtual void draw(Viewport& vp, LineShader* lineshader);
-    virtual void drawFaces(Viewport& vp, FaceShader* monoshader);
-    virtual void drawCurvatureFaces(Viewport& vp, float MinCurvature, float MaxCurvature);
-    virtual void drawCurvatureFaces(Viewport &vp, CurveFaceShader* faceshader);
+    virtual void drawFaces(Viewport& vp, FaceShader* shader);
+    virtual void drawCurvatureFaces(CurveFaceShader* shader, float MinCurvature, float MaxCurvature);
+    virtual void drawCurvatureFaces(CurveFaceShader* shader);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
@@ -338,8 +338,16 @@ protected:
                            SubdivisionControlFace* face);
     void addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
                      QVector3D& p1, QVector3D& p2, QVector3D& p3);
-    void addCurveFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& colors, QVector<QVector3D>& normals,
-                          QVector3D& p1, QVector3D& p2, QVector3D& p3, float& c1, float& c2, float& c3);
+    void addCurveFaceToDL(QVector<QVector3D>& vertices,
+                          QVector<QVector3D>& colors,
+                          QVector<QVector3D>& normals,
+                          QVector3D& p1, QVector3D& p2, QVector3D& p3,
+                          QVector3D& c1, QVector3D& c2, QVector3D& c3);
+    void addCurveFaceToDL(QVector<QVector3D>& vertices,
+                          QVector<QVector3D>& colors,
+                          QVector<QVector3D>& normals,
+                          QVector3D& p1, QVector3D& p2, QVector3D& p3,
+                          QColor& c1, QColor& c2, QColor& c3);
 
 protected:
 

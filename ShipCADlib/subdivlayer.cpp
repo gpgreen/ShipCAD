@@ -417,15 +417,17 @@ void SubdivisionLayer::draw(Viewport& vp)
     if (vp.getViewportMode() != vmWireFrame) {
         // not vmWireFrame, but shaded
         if (vp.getViewportMode() == vmShadeGauss) {
-            for (size_t i=0; i<numberOfFaces(); ++i)
-                getFace(i)->drawCurvatureFaces(vp,
+            for (size_t i=0; i<numberOfFaces(); ++i) {
+                CurveFaceShader* shader = vp.setCurveFaceShader();
+                getFace(i)->drawCurvatureFaces(shader,
                                                _owner->getMinGausCurvature(),
                                                _owner->getMaxGausCurvature());
+            }
         }
         else if (vp.getViewportMode() == vmShadeDevelopable) {
             CurveFaceShader* shader = vp.setCurveFaceShader();
             for (size_t i=0; i<numberOfFaces(); i++)
-                getFace(i)->drawCurvatureFaces(vp, shader);
+                getFace(i)->drawCurvatureFaces(shader);
         } else {
             FaceShader* shader = vp.setLightedFaceShader();
             for (size_t i=0; i<numberOfFaces(); ++i)

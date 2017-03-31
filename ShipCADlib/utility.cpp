@@ -157,6 +157,67 @@ QColor ShipCAD::QColorFromDXFIndex(int index)
     throw range_error("bad index in FindColorFromDXFIndex");
 }
 
+QColor ShipCAD::FillColor(float parameter)
+{
+    float red, green, blue;
+    
+    parameter = 1.0 - parameter;
+    float wavelength = 420 + parameter * 280;
+    float ftrunc_wavelength;
+    modf(wavelength, &ftrunc_wavelength);
+    int trunc_wavelength = static_cast<int>(ftrunc_wavelength);
+    if (trunc_wavelength >= 380 && trunc_wavelength <= 439) {
+        red = -(wavelength - 440.0) / (440.0 - 380.0);
+        green = 0.0;
+        blue = 1.0;
+    }
+    else if (trunc_wavelength >= 440 && trunc_wavelength <= 489) {
+        red = 0.0;
+        green = (wavelength - 440.0) / (490.0 - 440.0);
+        blue = 1.0;
+    }
+    else if (trunc_wavelength >= 490 && trunc_wavelength <= 509) {
+        red = 0.0;
+        green = 1.0;
+        blue = -(wavelength - 510.0) / (510.0 - 490.0);
+    }
+    else if (trunc_wavelength >= 510 && trunc_wavelength <= 579) {
+        red = (wavelength - 510.0) / (580.0 - 510.0);
+        green = 1.0;
+        blue = 0.0;
+    }
+    else if (trunc_wavelength >= 580 && trunc_wavelength <= 644) {
+        red = 1.0;
+        green = -(wavelength - 645.0) / (645.0 - 580.0);
+        blue = 0.0;
+    }
+    else if (trunc_wavelength >= 645 && trunc_wavelength <= 780) {
+        red = 1.0;
+        green = 0.0;
+        blue = 0.0;
+    }
+    else {
+        red = 0.0;
+        green = 0.0;
+        blue = 0.0;
+    }
+    
+    if (red < 0.0)
+        red = 0;
+    else if (red > 1.0)
+        red = 1.0;
+    if (green < 0.0)
+        green = 0;
+    else if (green > 1.0)
+        green = 1.0;
+    if (blue < 0.0)
+        blue = 0;
+    else if (blue > 1.0)
+        blue = 1.0;
+    
+    return QColor(red, green, blue);
+}
+
 QString ShipCAD::truncate(float val, int max_length)
 {
     QString num;

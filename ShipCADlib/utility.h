@@ -67,6 +67,7 @@ namespace ShipCAD {
      * \return the interpolated point
      */
     QVector3D Interpolate(const QVector3D& p1, const QVector3D& p2, float param);
+
     /*! \brief get the midpoint between 2 points (interpolate 50%)
      *
      * \param p1 the first point
@@ -74,6 +75,7 @@ namespace ShipCAD {
      * \return point halfway between p1 and p2
      */
     QVector3D MidPoint(const QVector3D& p1, const QVector3D& p2);
+
     /*! \brief project a point to a line
      *
      * \param p1 the first point on line
@@ -82,12 +84,14 @@ namespace ShipCAD {
      * \return point projected onto line
      */
     QVector3D PointProjectToLine(const QVector3D& p1, const QVector3D& p2, const QVector3D& p);
+
     /*! \brief convert a QColor to a DXF color index
      *
      * \param color the color to convert
      * \return the DXF index of the color
      */
     int FindDXFColorIndex(QColor color);
+
     /*! \brief get a QColor from a DXF color index
      *
      * \param index the DXF index (0-255)
@@ -95,6 +99,13 @@ namespace ShipCAD {
      * \throws std::range_error if index is not a DXF color index
      */
     QColor QColorFromDXFIndex(int index);
+
+    /*! \brief calculate color on basis of wavelength (0.0 - 1.0)
+     *
+     * \param parameter
+     * \return the color
+     */
+    QColor FillColor(float parameter);
 
     // calculate the normal of a plane defined by points p1,p2,p3 and scale to unit-length
     /*! \brief find the unit normal of a plane defined by 3 points

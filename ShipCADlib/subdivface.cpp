@@ -436,34 +436,46 @@ void SubdivisionControlFace::removeFace()
 void SubdivisionControlFace::addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
                                          QVector3D& p1, QVector3D& p2, QVector3D& p3)
 {
-    QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
-    vertices << p1;
-    vertices << p2;
-    vertices << p3;
-    normals << n;
-    normals << n;
-    normals << n;
-}
-
-void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& colors, QVector<QVector3D>& normals,
-                                              QVector3D& p1, QVector3D& p2, QVector3D& p3, float& c1, float& c2, float& c3)
-{
-    QVector3D n = QVector3D::normal(p2 - p1, p3 - p1);
+    QVector3D n = UnifiedNormal(p1, p2, p3);
     vertices << p1 << p2 << p3;
-    QVector3D cc1(c1, c1, c1);
-    QVector3D cc2(c2, c2, c2);
-    QVector3D cc3(c3, c3, c3);
-    colors << cc1 << cc2 << cc3;
     normals << n << n << n;
 }
 
-void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, CurveFaceShader* faceshader)
+void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices,
+                                              QVector<QVector3D>& colors,
+                                              QVector<QVector3D>& normals,
+                                              QVector3D& p1, QVector3D& p2, QVector3D& p3,
+                                              QVector3D& c1, QVector3D& c2, QVector3D& c3)
+{
+    QVector3D n = UnifiedNormal(p1, p2, p3);
+    vertices << p1 << p2 << p3;
+    colors << c1 << c2 << c3;
+    normals << n << n << n;
+}
+
+void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices,
+                                              QVector<QVector3D>& colors,
+                                              QVector<QVector3D>& normals,
+                                              QVector3D& p1, QVector3D& p2, QVector3D& p3,
+                                              QColor& c1, QColor& c2, QColor& c3)
+{
+    QVector3D n = UnifiedNormal(p1, p2, p3);
+    vertices << p1 << p2 << p3;
+    colors << QVector3D(c1.redF(), c1.blueF(), c1.greenF())
+           << QVector3D(c2.redF(), c2.blueF(), c2.greenF())
+           << QVector3D(c3.redF(), c3.blueF(), c3.greenF());
+    normals << n << n << n;
+}
+
+void SubdivisionControlFace::drawCurvatureFaces(CurveFaceShader* faceshader)
 {
     // make the vertex and color buffers
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
     QVector<QVector3D> normals;
 
+    QVector3D low(0,1.0,0);
+    QVector3D hi(1.0,0,0);
     for (size_t i=0; i<_children.size(); ++i) {
         for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
             QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
@@ -476,12 +488,15 @@ void SubdivisionControlFace::drawCurvatureFaces(Viewport &vp, CurveFaceShader* f
             float c2 = _owner->getGaussCurvature(idx);
             idx = _owner->indexOfPoint(_children[i]->getPoint(j));
             float c3 = _owner->getGaussCurvature(idx);
-            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, c1, c2, c3);
+            QVector3D& cc1 = (fabs(c1) < 1e-4) ? low : hi;
+            QVector3D& cc2 = (fabs(c2) < 1e-4) ? low : hi;
+            QVector3D& cc3 = (fabs(c3) < 1e-4) ? low : hi;
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
             if (_owner->drawMirror() && getLayer()->isSymmetric()) {
                 p1.setY(-p1.y());
                 p2.setY(-p2.y());
                 p3.setY(-p3.y());
-                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, c1, c2, c3);
+                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
             }
         }
     }
@@ -612,10 +627,56 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
         faceshader->renderMesh(_owner->getUnderWaterColor(), vertices_underwater, normals_underwater);
 }
 
-// FreeGeometry.pas:12438
-void SubdivisionControlFace::drawCurvatureFaces(Viewport &/*vp*/, float /*MinCurvature*/, float /*MaxCurvature*/)
+float Fragment(float curvature, float mincurvature, float maxcurvature)
 {
-    // TODO
+    float frag;
+    float contrast = 0.1;
+    if (curvature > -1e-4 && curvature < 1e-4)
+        frag = 0.5;
+    else {
+        if (curvature > 0)
+            frag = 0.5 + 0.5 * pow(curvature/maxcurvature, contrast);
+        else
+            frag = 0.5 - 0.5 * pow(curvature/mincurvature, contrast);
+        frag = 1 - frag;
+    }
+    return frag;
+}
+
+// FreeGeometry.pas:12438
+void SubdivisionControlFace::drawCurvatureFaces(CurveFaceShader* shader, float MinCurvature, float MaxCurvature)
+{
+    // make the vertex and color buffers
+    QVector<QVector3D> vertices;
+    QVector<QVector3D> colors;
+    QVector<QVector3D> normals;
+
+    for (size_t i=0; i<_children.size(); ++i) {
+        for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
+            QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
+            QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
+            QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
+            // do developable curvature
+            size_t idx = _owner->indexOfPoint(_children[i]->getPoint(0));
+            float c1 = _owner->getGaussCurvature(idx);
+            QColor cc1 = FillColor(Fragment(c1, MinCurvature, MaxCurvature));
+            idx = _owner->indexOfPoint(_children[i]->getPoint(j-1));
+            float c2 = _owner->getGaussCurvature(idx);
+            QColor cc2 = FillColor(Fragment(c2, MinCurvature, MaxCurvature));
+            idx = _owner->indexOfPoint(_children[i]->getPoint(j));
+            float c3 = _owner->getGaussCurvature(idx);
+            QColor cc3 = FillColor(Fragment(c3, MinCurvature, MaxCurvature));
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+            if (_owner->drawMirror() && getLayer()->isSymmetric()) {
+                p1.setY(-p1.y());
+                p2.setY(-p2.y());
+                p3.setY(-p3.y());
+                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+            }
+        }
+    }
+    if (vertices.size() > 0)
+        shader->renderMesh(vertices, colors, normals);
 }
 
 void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)

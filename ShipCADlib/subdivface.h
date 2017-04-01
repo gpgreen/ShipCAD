@@ -322,7 +322,8 @@ public:
     virtual void draw(Viewport& vp, LineShader* lineshader);
     virtual void drawFaces(Viewport& vp, FaceShader* shader);
     virtual void drawCurvatureFaces(CurveFaceShader* shader, float MinCurvature, float MaxCurvature);
-    virtual void drawCurvatureFaces(CurveFaceShader* shader);
+    virtual void drawDevelopableFaces(CurveFaceShader* shader);
+    virtual void drawZebraFaces(Viewport& vp, CurveFaceShader* shader);
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
@@ -336,18 +337,6 @@ protected:
     // used in trace
     void findAttachedFaces(std::vector<SubdivisionControlFace*>& todo_list,
                            SubdivisionControlFace* face);
-    void addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
-                     QVector3D& p1, QVector3D& p2, QVector3D& p3);
-    void addCurveFaceToDL(QVector<QVector3D>& vertices,
-                          QVector<QVector3D>& colors,
-                          QVector<QVector3D>& normals,
-                          QVector3D& p1, QVector3D& p2, QVector3D& p3,
-                          QVector3D& c1, QVector3D& c2, QVector3D& c3);
-    void addCurveFaceToDL(QVector<QVector3D>& vertices,
-                          QVector<QVector3D>& colors,
-                          QVector<QVector3D>& normals,
-                          QVector3D& p1, QVector3D& p2, QVector3D& p3,
-                          QColor& c1, QColor& c2, QColor& c3);
 
 protected:
 

@@ -433,19 +433,21 @@ void SubdivisionControlFace::removeFace()
     clear();
 }
 
-void SubdivisionControlFace::addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
-                                         QVector3D& p1, QVector3D& p2, QVector3D& p3)
+// add face to display list, face is constant color
+static void addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
+                        const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
 {
     QVector3D n = UnifiedNormal(p1, p2, p3);
     vertices << p1 << p2 << p3;
     normals << n << n << n;
 }
 
-void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices,
-                                              QVector<QVector3D>& colors,
-                                              QVector<QVector3D>& normals,
-                                              QVector3D& p1, QVector3D& p2, QVector3D& p3,
-                                              QVector3D& c1, QVector3D& c2, QVector3D& c3)
+// add face to display list, face has a different color at each vertex, colors are provided as r,g,b triples
+static void addCurveFaceToDL(QVector<QVector3D>& vertices,
+                             QVector<QVector3D>& colors,
+                             QVector<QVector3D>& normals,
+                             const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+                             const QVector3D& c1, const QVector3D& c2, const QVector3D& c3)
 {
     QVector3D n = UnifiedNormal(p1, p2, p3);
     vertices << p1 << p2 << p3;
@@ -453,11 +455,12 @@ void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices,
     normals << n << n << n;
 }
 
-void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices,
-                                              QVector<QVector3D>& colors,
-                                              QVector<QVector3D>& normals,
-                                              QVector3D& p1, QVector3D& p2, QVector3D& p3,
-                                              QColor& c1, QColor& c2, QColor& c3)
+// add face to display list, face has different color at each vertex, colors are QColors
+static void addCurveFaceToDL(QVector<QVector3D>& vertices,
+                             QVector<QVector3D>& colors,
+                             QVector<QVector3D>& normals,
+                             const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+                             const QColor& c1, const QColor& c2, const QColor& c3)
 {
     QVector3D n = UnifiedNormal(p1, p2, p3);
     vertices << p1 << p2 << p3;
@@ -467,41 +470,198 @@ void SubdivisionControlFace::addCurveFaceToDL(QVector<QVector3D>& vertices,
     normals << n << n << n;
 }
 
-void SubdivisionControlFace::drawCurvatureFaces(CurveFaceShader* faceshader)
+// constant used in zebra striping
+const float Width = 0.02;
+
+// structure used in zebra striping
+struct ZebraIntersection 
+{
+    QVector3D p;
+    float dotprod;
+
+    ZebraIntersection(const QVector3D& pt, float dp)
+        : p(pt), dotprod(dp) {}
+};
+
+// function used during zebra shading, splits triangle up based on coloring
+static void zebraProcess(const QVector3D& p, float dp,
+                         vector<ZebraIntersection>& intersections)
+{
+    float prevdp = intersections.back().dotprod;
+    float lf;
+    modf(prevdp/Width, &lf);
+    float hf;
+    modf(dp/Width, &hf);
+    int lo = static_cast<int>(lf);
+    int hi = static_cast<int>(hf);
+    if ((hi - lo) > 0) {
+        const QVector3D& prevp = intersections.back().p;
+        for (int i=lo; i<=hi; i++) {
+            float val = i * Width;
+            if (val > prevdp && val < dp) {
+                float t = (val - prevdp) / (dp - prevdp);
+                QVector3D p3d = prevp + t * (p - prevp);
+                intersections.push_back(ZebraIntersection(p3d, val));
+            }
+        }
+        intersections.push_back(ZebraIntersection(p, dp));
+    } else if ((lo - hi) > 0) {
+        const QVector3D& prevp = intersections.back().p;
+        for (int i=lo; i>=hi; i--) {
+            float val = i * Width;
+            if (val < prevdp && val > dp) {
+                float t = (val - prevdp) / (dp - prevdp);
+                QVector3D p3d = prevp + t * (p - prevp);
+                intersections.push_back(ZebraIntersection(p3d, val));
+            }
+        }
+        intersections.push_back(ZebraIntersection(p, dp));
+    } else
+        intersections.push_back(ZebraIntersection(p, dp));
+}
+
+// returns true if points are outside of previous extents
+bool checkExtents(const QVector3D& fmin, const QVector3D& fmax, const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
+{
+    QVector3D newmin;
+    QVector3D newmax;
+    MinMax(p1, newmin, newmax);
+    MinMax(p2, newmin, newmax);
+    MinMax(p3, newmin, newmax);
+    if (newmin.x() < fmin.x() || newmin.y() < fmin.y() || newmin.z() < fmin.z())
+        return true;
+    if (newmax.x() > fmax.x() || newmax.y() > fmax.y() || newmax.z() > fmax.z())
+        return true;
+    return false;
+}
+
+// draw a face with zebra shading
+static void zebraDrawFace(bool check, const QVector3D& facemin, const QVector3D& facemax,
+                          Viewport& vp,
+                          QVector<QVector3D>& vertices,
+                          QVector<QVector3D>& colors,
+                          QVector<QVector3D>& normals,
+                          const QColor& color, const QColor& zebraColor,
+                          const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+                          const QVector3D& n1, const QVector3D& n2, const QVector3D& n3)
+{
+    vector<ZebraIntersection> intersections;
+    QVector3D eye = (vp.getCamera() - p1).normalized();
+    float d1 = QVector3D::dotProduct(eye, n1);
+    if (d1 < 0)
+        d1 = -d1;
+    eye = (vp.getCamera() - p2).normalized();
+    float d2 = QVector3D::dotProduct(eye, n2);
+    if (d2 < 0)
+        d2 = -d2;
+    eye = (vp.getCamera() - p3).normalized();
+    float d3 = QVector3D::dotProduct(eye, n3);
+    if (d3 < 0)
+        d3 = -d3;
+    float mindp = d1;
+    float maxdp = d1;
+    mindp = min(d2, mindp);
+    maxdp = max(d2, maxdp);
+    mindp = min(d3, mindp);
+    maxdp = max(d3, maxdp);
+    float lof;
+    modf(mindp/Width, &lof);
+    if (lof < 0)
+        lof = 0;
+    float hif;
+    modf(maxdp/Width, &hif);
+    if (hif > roundf(1/Width))
+        hif = roundf(1/Width);
+    int lo = static_cast<int>(lof);
+    int hi = static_cast<int>(hif);
+    if (lo == hi) {
+        if ((lo % 2) == 0) {      // lo is even
+            if (check && checkExtents(facemin, facemax, p1, p2, p3))
+                cout << "bad stuff" << endl;
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, color, color, color);
+        }
+        else {
+            if (check && checkExtents(facemin, facemax, p1, p2, p3))
+                cout << "bad stuff" << endl;
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, zebraColor, zebraColor, zebraColor);
+        }
+    } else {
+        intersections.push_back(ZebraIntersection(p1, d1));
+        zebraProcess(p2, d2, intersections);
+        zebraProcess(p3, d3, intersections);
+        zebraProcess(p1, d1, intersections);
+        for (int i=lo; i<=hi+1; i++) {
+            vector<QVector3D*> pts;
+            for (size_t j=0; j<intersections.size()-1; j++) {
+                if (((intersections[j].dotprod >= ((i-1)*Width))
+                     || (fabs(intersections[j].dotprod-((i-1)*Width)) < 1E-6))
+                    && ((intersections[j].dotprod <= (i*Width))
+                        || (fabs(intersections[j].dotprod-(i*Width)) < 1E-6))) {
+                    pts.push_back(&(intersections[j].p));
+                }
+            }
+            for (size_t j=2; j<pts.size(); j++) {
+                if (check && checkExtents(facemin, facemax, *pts[0], *pts[j-1], *pts[j]))
+                    cout << "bad stuff" << endl;
+                if ((i % 2)) {    // i is odd
+                    addCurveFaceToDL(vertices, colors, normals, *pts[0], *pts[j-1], *pts[j],
+                                     color, color, color);
+                }
+                else {
+                    addCurveFaceToDL(vertices, colors, normals, *pts[0], *pts[j-1], *pts[j],
+                                     zebraColor, zebraColor, zebraColor);
+                }
+            }
+        }
+    }
+}
+
+// FreeGeometry.pas:12438
+void SubdivisionControlFace::drawZebraFaces(Viewport& vp, CurveFaceShader* shader)
 {
     // make the vertex and color buffers
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
     QVector<QVector3D> normals;
-
-    QVector3D low(0,1.0,0);
-    QVector3D hi(1.0,0,0);
     for (size_t i=0; i<_children.size(); ++i) {
         for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
-            QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
-            QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
-            QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
-            // do developable curvature
-            size_t idx = _owner->indexOfPoint(_children[i]->getPoint(0));
-            float c1 = _owner->getGaussCurvature(idx);
-            idx = _owner->indexOfPoint(_children[i]->getPoint(j-1));
-            float c2 = _owner->getGaussCurvature(idx);
-            idx = _owner->indexOfPoint(_children[i]->getPoint(j));
-            float c3 = _owner->getGaussCurvature(idx);
-            QVector3D& cc1 = (fabs(c1) < 1e-4) ? low : hi;
-            QVector3D& cc2 = (fabs(c2) < 1e-4) ? low : hi;
-            QVector3D& cc3 = (fabs(c3) < 1e-4) ? low : hi;
-            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+            SubdivisionPoint* sp1 = _children[i]->getPoint(0);
+            SubdivisionPoint* sp2 = _children[i]->getPoint(j-1);
+            SubdivisionPoint* sp3 = _children[i]->getPoint(j);
+            QVector3D p1 = sp1->getCoordinate();
+            QVector3D p2 = sp2->getCoordinate();
+            QVector3D p3 = sp3->getCoordinate();
+
+            // get min max of this face
+            QVector3D facemin;
+            QVector3D facemax;
+            MinMax(p1, facemin, facemax);
+            MinMax(p2, facemin, facemax);
+            MinMax(p3, facemin, facemax);
+            
+            QVector3D vec = UnifiedNormal(p1, p2, p3);
+            QVector3D n1 = (sp1->getVertexType() == svRegular || sp1->getVertexType() == svDart) ?
+                sp1->getNormal() : vec;
+            QVector3D n2 = (sp2->getVertexType() == svRegular || sp2->getVertexType() == svDart) ?
+                sp2->getNormal() : vec;
+            QVector3D n3 = (sp3->getVertexType() == svRegular || sp3->getVertexType() == svDart) ?
+                sp3->getNormal() : vec;
+            zebraDrawFace(true, facemin, facemax, vp, vertices, colors, normals, getColor(),
+                          _owner->getZebraColor(), p1, p2, p3, n1, n2, n3);
             if (_owner->drawMirror() && getLayer()->isSymmetric()) {
                 p1.setY(-p1.y());
                 p2.setY(-p2.y());
                 p3.setY(-p3.y());
-                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+                n1.setY(-n1.y());
+                n2.setY(-n2.y());
+                n3.setY(-n3.y());
+                zebraDrawFace(false, facemin, facemax, vp, vertices, colors, normals, getColor(),
+                              _owner->getZebraColor(), p1, p2, p3, n1, n2, n3);
             }
         }
     }
     if (vertices.size() > 0)
-        faceshader->renderMesh(vertices, colors, normals);
+        shader->renderMesh(vertices, colors, normals);
 }
 
 // FreeGeometry.pas:11995
@@ -600,8 +760,6 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
                 }
             }
         }
-    } else if (vp.getViewportMode() == vmShadeZebra) {
-        // TODO
     } else {
         for (size_t i=0; i<_children.size(); ++i) {
             for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
@@ -625,6 +783,44 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
     // render below the waterline
     if (vertices_underwater.size() > 0)
         faceshader->renderMesh(_owner->getUnderWaterColor(), vertices_underwater, normals_underwater);
+}
+
+// developable surface shading
+void SubdivisionControlFace::drawDevelopableFaces(CurveFaceShader* faceshader)
+{
+    // make the vertex and color buffers
+    QVector<QVector3D> vertices;
+    QVector<QVector3D> colors;
+    QVector<QVector3D> normals;
+
+    QVector3D low(0,1.0,0);
+    QVector3D hi(1.0,0,0);
+    for (size_t i=0; i<_children.size(); ++i) {
+        for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
+            QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
+            QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
+            QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
+            // do developable curvature
+            size_t idx = _owner->indexOfPoint(_children[i]->getPoint(0));
+            float c1 = _owner->getGaussCurvature(idx);
+            idx = _owner->indexOfPoint(_children[i]->getPoint(j-1));
+            float c2 = _owner->getGaussCurvature(idx);
+            idx = _owner->indexOfPoint(_children[i]->getPoint(j));
+            float c3 = _owner->getGaussCurvature(idx);
+            QVector3D& cc1 = (fabs(c1) < 1e-4) ? low : hi;
+            QVector3D& cc2 = (fabs(c2) < 1e-4) ? low : hi;
+            QVector3D& cc3 = (fabs(c3) < 1e-4) ? low : hi;
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+            if (_owner->drawMirror() && getLayer()->isSymmetric()) {
+                p1.setY(-p1.y());
+                p2.setY(-p2.y());
+                p3.setY(-p3.y());
+                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+            }
+        }
+    }
+    if (vertices.size() > 0)
+        faceshader->renderMesh(vertices, colors, normals);
 }
 
 float Fragment(float curvature, float mincurvature, float maxcurvature)

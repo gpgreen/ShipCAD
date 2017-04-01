@@ -79,6 +79,11 @@ const Controller* Viewport::getController() const
     return _ctl;
 }
 
+const QVector3D& Viewport::getCamera() const
+{
+    return _view->getCamera();
+}
+
 void Viewport::initialize()
 {
     LineShader* lineshader = new LineShader(this);
@@ -185,7 +190,8 @@ void Viewport::addShader(const string &name, Shader *shader)
 
 void Viewport::render()
 {
-    
+    cout << "Viewport::render" << endl;
+
     glViewport(0, 0, width(), height());
     
     // set the color of the background

@@ -87,6 +87,8 @@ public:
 
     camera_type_t getCameraType() const;
 
+    const QVector3D& getCamera() const;
+    
     float getAngle() const;
     float getElevation() const;
     

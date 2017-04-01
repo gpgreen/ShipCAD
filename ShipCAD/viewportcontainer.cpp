@@ -42,9 +42,6 @@ ViewportContainer::ViewportContainer(Viewport* vp, QWidget* parent, Qt::WindowFl
 {
     _container = QWidget::createWindowContainer(vp, this);
     setMinimumSize(320,200);
-    setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, SIGNAL(customContextMenuRequested(const QPoint&)),
-            SLOT(showContextMenu(const QPoint&)));
 }
 
 ViewportContainer::~ViewportContainer()
@@ -54,27 +51,5 @@ ViewportContainer::~ViewportContainer()
 void ViewportContainer::resizeEvent(QResizeEvent* event)
 {
     _container->resize(event->size());
-}
-
-void ViewportContainer::showContextMenu(const QPoint& pt)
-{
-    cout << "showContextMenu" << endl;
-    QPoint globalPos = this->mapToGlobal(pt);
-    // for QAbstractScrollArea and derived classes you would use:
-    // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
-
-    QMenu myMenu;
-    myMenu.addAction("Menu Item 1");
-    // ...
-
-    QAction* selectedItem = myMenu.exec(globalPos);
-    if (selectedItem)
-    {
-        // something was chosen, do stuff
-    }
-    else
-    {
-        // nothing was chosen
-    }
 }
 

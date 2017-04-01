@@ -214,8 +214,11 @@ QColor ShipCAD::FillColor(float parameter)
         blue = 0;
     else if (blue > 1.0)
         blue = 1.0;
-    
-    return QColor(red, green, blue);
+    QColor col;
+    col.setRedF(red);
+    col.setGreenF(green);
+    col.setBlueF(blue);
+    return col;
 }
 
 QString ShipCAD::truncate(float val, int max_length)

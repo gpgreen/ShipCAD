@@ -427,7 +427,12 @@ void SubdivisionLayer::draw(Viewport& vp)
         else if (vp.getViewportMode() == vmShadeDevelopable) {
             CurveFaceShader* shader = vp.setCurveFaceShader();
             for (size_t i=0; i<numberOfFaces(); i++)
-                getFace(i)->drawCurvatureFaces(shader);
+                getFace(i)->drawDevelopableFaces(shader);
+        }
+        else if (vp.getViewportMode() == vmShadeZebra) {
+            CurveFaceShader* shader = vp.setCurveFaceShader();
+            for (size_t i=0; i<numberOfFaces(); i++)
+                getFace(i)->drawZebraFaces(vp, shader);
         } else {
             FaceShader* shader = vp.setLightedFaceShader();
             for (size_t i=0; i<numberOfFaces(); ++i)
@@ -435,6 +440,7 @@ void SubdivisionLayer::draw(Viewport& vp)
         }
     }
     else {
+#if 0
         LineShader* lineshader = vp.setLineShader();
         // vmWireFrame
         if (_owner->showInteriorEdges()) {
@@ -450,6 +456,7 @@ void SubdivisionLayer::draw(Viewport& vp)
                     edge->draw(_owner->drawMirror() && isSymmetric(), vp, lineshader, _owner->getCreaseColor());
             }
         }
+#endif
     }
 }
 

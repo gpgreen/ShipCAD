@@ -53,10 +53,6 @@ public:
 
     virtual void resizeEvent(QResizeEvent* event);
 
-public slots:
-
-    void showContextMenu(const QPoint& pt);
-    
 private:
     QWidget* _container;
     Viewport* _vp;

@@ -229,6 +229,9 @@ public:
 	 */
 	size_t getUndoMemory();
 
+    bool canUndo() const;
+    bool canRedo() const;
+    
 	/*! \brief redraw the model
 	 *
      * all this does is issue the geometry changed signal

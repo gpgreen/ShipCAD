@@ -39,6 +39,7 @@
 #include "intersectlayersdialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
+#include "subdivlayer.h"
 #include "controller.h"
 #include "viewportcontainer.h"
 #include "utility.h"
@@ -87,6 +88,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelLoaded()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(enableActions()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(updateVisibilityActions()));
+    connect(_controller, SIGNAL(modelLoaded()), SLOT(modelChanged()));
     connect(_controller, SIGNAL(modelGeometryChanged()), SIGNAL(viewportRender()));
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
     connect(_controller, SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
@@ -225,10 +227,16 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    deleteViewports();
+    delete ui;
+}
+
+void MainWindow::deleteViewports()
+{
     for (size_t i=0; i<_viewports.size(); i++) {
         delete _viewports[i].viewport();
     }
-    delete ui;
+    _viewports.clear();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -606,46 +614,108 @@ void MainWindow::updateVisibilityActions()
 void MainWindow::modelLoaded()
 {
     cout << "modelLoaded" << endl;
-    restoreViewports();
+    // if we already had a model loaded, save the viewports
+    if (_viewports.size()) {
+        saveViewports();
+    }
+    else
+        restoreViewports();
 }
 
 // Main.pas:542
 void MainWindow::enableActions()
 {
+    Visibility& vis = _controller->getModel()->getVisibility();
+    ShipCADModel* model = _controller->getModel();
+    SubdivisionSurface* surf = _controller->getModel()->getSurface();
+    size_t nlayers = 0;
+    for (size_t i=0; i<surf->numberOfLayers(); i++)
+        if (surf->getLayer(i)->numberOfFaces())
+            nlayers++;
+    size_t ncpoints = surf->numberOfControlPoints();
+    size_t nselcpoints = surf->numberOfSelectedControlPoints();
+    size_t ncfaces = surf->numberOfControlFaces();
+    size_t nstations = model->getStations().size();
+    size_t nwaterlines = model->getWaterlines().size();
+    size_t nbuttocks = model->getButtocks().size();
+    size_t ndiagonals = model->getDiagonals().size();
+    size_t ncurves = model->getControlCurves().size();
+
     // file actions
-    ui->actionSave_As->setEnabled(true);
-    ui->actionExportArchimedes->setEnabled(true);
-    ui->actionExportCoordinates->setEnabled(true);
-    ui->actionExportDXF_2D_Polylines->setEnabled(true);
-    ui->actionExportDXF_3D_mesh->setEnabled(true);
-    ui->actionExportDXF_3D_Polylines->setEnabled(true);
-    ui->actionExportFEF->setEnabled(true);
-    ui->actionExportGHS->setEnabled(true);
-    ui->actionExportPart->setEnabled(true);
-    ui->actionExportMichlet->setEnabled(true);
-    ui->actionExportWavefront->setEnabled(true);
-    ui->actionExportOffsets->setEnabled(true);
-    ui->actionExportSTL->setEnabled(true);
-    ui->actionExportIGES->setEnabled(true);
+    ui->actionSave_As->setEnabled(ncpoints > 0 || model->isFileChanged() || model->isFilenameSet());
+
+    ui->actionImportCarene->setEnabled(true);
+    ui->actionImportChines->setEnabled(true);
+    ui->actionImportFEF->setEnabled(true);
+    ui->actionImportPart->setEnabled(_viewports.size() > 0 && ncfaces > 0);
+    ui->actionImportPolyCad->setEnabled(true);
+    ui->actionImportSurface->setEnabled(true);
+    ui->actionImportVRML->setEnabled(true);
+    ui->actionImportMichlet_waves->setEnabled(_viewports.size() > 0 && ncfaces > 1);
+    ui->actionImportCarlson->setEnabled(true);
+
+    ui->actionExportArchimedes->setEnabled(nstations > 0);
+    ui->actionExportCoordinates->setEnabled(ncpoints > 0);
+    ui->actionExportDXF_2D_Polylines->setEnabled((nstations > 0 && vis.isShowStations())
+                                                 || (nbuttocks > 0 && vis.isShowButtocks())
+                                                 || (nwaterlines > 0 && vis.isShowWaterlines()));
+    ui->actionExportDXF_3D_mesh->setEnabled(ncfaces > 0);
+    ui->actionExportDXF_3D_Polylines->setEnabled((nstations > 0 && vis.isShowStations())
+                                                 || (nbuttocks > 0 && vis.isShowButtocks())
+                                                 || (nwaterlines > 0 && vis.isShowWaterlines())
+                                                 || (ndiagonals > 0 && vis.isShowDiagonals())
+                                                 || (ncurves > 0 && vis.isShowControlCurves()));
+    ui->actionExportFEF->setEnabled(ncpoints > 0);
+    ui->actionExportGHS->setEnabled(nstations > 0);
+    ui->actionExportPart->setEnabled(ncfaces > 0);
+    ui->actionExportMichlet->setEnabled(ncfaces > 0 && model->getProjectSettings().isMainParticularsSet());
+    ui->actionExportWavefront->setEnabled(ncfaces > 0);
+    ui->actionExportOffsets->setEnabled(nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0);
+    ui->actionExportSTL->setEnabled(ncfaces > 0);
+    ui->actionExportIGES->setEnabled(ncfaces > 0);
 
     // edit actions
-
+    ui->actionUndo->setEnabled(model->canUndo());
+    ui->actionRedo->setEnabled(model->canRedo());
+    ui->actionDelete->setEnabled(nselcpoints
+                                 + surf->numberOfSelectedControlFaces()
+                                 + surf->numberOfSelectedControlEdges()
+                                 + surf->numberOfSelectedControlCurves() > 0);// BUGBUG missing number of flowlines and markers
+    ui->actionUndo_history->setEnabled(model->canUndo());
+    
     // point actions
-    ui->actionAdd->setEnabled(true);
-    ui->actionAlign->setEnabled(true);
-    ui->actionPointCollapse->setEnabled(true);
-    ui->actionInsert_plane->setEnabled(true);
-    ui->actionIntersect_layers->setEnabled(true);
-    ui->actionLock_points->setEnabled(true);
-    ui->actionUnlock_points->setEnabled(true);
-    ui->actionUnlock_all_points->setEnabled(true);
+    ui->actionAdd->setEnabled(_viewports.size() && vis.isShowControlNet());
+    ui->actionAlign->setEnabled(nselcpoints > 2);
+    ui->actionPointCollapse->setEnabled(nselcpoints > 0);
+    ui->actionInsert_plane->setEnabled(surf->numberOfControlEdges() > 0 && vis.isShowControlNet());
+    ui->actionIntersect_layers->setEnabled(surf->numberOfLayers() > 1);
+    ui->actionLock_points->setEnabled(nselcpoints > 0 && surf->numberOfSelectedLockedPoints() < nselcpoints);
+    ui->actionUnlock_points->setEnabled(nselcpoints > 0);
+    ui->actionUnlock_all_points->setEnabled(surf->numberOfLockedPoints() > 0);
 
     // edge actions
 
     // face actions
-    ui->actionFaceNew->setEnabled(true);
+    ui->actionFaceNew->setEnabled(nselcpoints > 2);
 
     // layer actions
+
+    // visibility actions
+    ui->actionShowControl_net->setEnabled(ncpoints > 0);
+    ui->actionShow_both_sides->setEnabled(ncfaces > 0);
+    ui->actionShowControl_curves->setChecked(ncurves > 0);
+    ui->actionShowInterior_edges->setEnabled(ncfaces > 0);
+    ui->actionShowGrid->setEnabled(vis.isShowGrid());
+    ui->actionShowStations->setEnabled(nstations > 0);
+    ui->actionShowButtocks->setEnabled(nbuttocks > 0);
+    ui->actionShowWaterlines->setEnabled(nwaterlines > 0);
+    ui->actionShowDiagonals->setEnabled(ndiagonals > 0);
+    ui->actionShowHydrostatic_features->setEnabled(ncfaces > 2
+                                                   && model->getProjectSettings().isMainParticularsSet());
+    ui->actionShowFlowlines->setEnabled(false);
+    ui->actionShowNormals->setEnabled(surf->numberOfSelectedControlFaces() > 0);
+    ui->actionShowCurvature->setEnabled(nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0);
+    ui->actionShowMarkers->setEnabled(false);
 
     // selection actions
     ui->actionSelect_all->setEnabled(true);
@@ -841,12 +911,8 @@ void MainWindow::modelChanged()
     QString mod(tr("modified"));
     // msg 281
     QString notmod(tr("not modified"));
-    if (changed) {
-        setWindowTitle("ShipCAD   : " + fname + " (" + mod + ")");
-    }
-    else {
-        setWindowTitle("ShipCAD   : " + fname + " (" + notmod + ")");
-    }
+    QString title = QString(tr("ShipCAD  :  %1 (%2)")).arg(fname).arg(changed ? mod : notmod);
+    setWindowTitle(title);
     ui->actionSave->setEnabled(changed);
     cout << "model changed" << endl;
 }

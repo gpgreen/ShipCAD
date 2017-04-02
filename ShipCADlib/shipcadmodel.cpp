@@ -382,6 +382,16 @@ void ShipCADModel::redo()
     }
 }
 
+bool ShipCADModel::canUndo() const
+{
+    return _undo_list.size() > 0 && _undo_pos > 0;
+}
+
+bool ShipCADModel::canRedo() const
+{
+    return _undo_list.size() > 0 && _undo_pos < _undo_list.size();
+}
+
 void ShipCADModel::clearUndo()
 {
     for (size_t i=0; i<_undo_list.size(); i++)

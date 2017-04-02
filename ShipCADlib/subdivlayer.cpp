@@ -414,35 +414,30 @@ void SubdivisionLayer::draw(Viewport& vp)
 {
     if (!isVisible() || numberOfFaces() == 0)
         return;
-    if (vp.getViewportMode() != vmWireFrame) {
-        // not vmWireFrame, but shaded
-        if (vp.getViewportMode() == vmShadeGauss) {
-            for (size_t i=0; i<numberOfFaces(); ++i) {
-                CurveFaceShader* shader = vp.setCurveFaceShader();
-                getFace(i)->drawCurvatureFaces(shader,
-                                               _owner->getMinGausCurvature(),
-                                               _owner->getMaxGausCurvature());
-            }
-        }
-        else if (vp.getViewportMode() == vmShadeDevelopable) {
-            CurveFaceShader* shader = vp.setCurveFaceShader();
-            for (size_t i=0; i<numberOfFaces(); i++)
-                getFace(i)->drawDevelopableFaces(shader);
-        }
-        else if (vp.getViewportMode() == vmShadeZebra) {
-            CurveFaceShader* shader = vp.setCurveFaceShader();
-            for (size_t i=0; i<numberOfFaces(); i++)
-                getFace(i)->drawZebraFaces(vp, shader);
-        } else {
-            FaceShader* shader = vp.setLightedFaceShader();
-            for (size_t i=0; i<numberOfFaces(); ++i)
-                getFace(i)->drawFaces(vp, shader);
-        }
+    if (vp.getViewportMode() == vmShadeGauss) {
+        CurveFaceShader* shader = vp.setCurveFaceShader();
+        for (size_t i=0; i<numberOfFaces(); ++i)
+            getFace(i)->drawCurvatureFaces(shader,
+                                           _owner->getMinGausCurvature(),
+                                           _owner->getMaxGausCurvature());
     }
-    else {
-#if 0
+    else if (vp.getViewportMode() == vmShadeDevelopable) {
+        CurveFaceShader* shader = vp.setCurveFaceShader();
+        for (size_t i=0; i<numberOfFaces(); i++)
+            getFace(i)->drawDevelopableFaces(shader);
+    }
+    else if (vp.getViewportMode() == vmShadeZebra) {
+        CurveFaceShader* shader = vp.setCurveFaceShader();
+        for (size_t i=0; i<numberOfFaces(); i++)
+            getFace(i)->drawZebraFaces(vp, shader);
+    }
+    else if (vp.getViewportMode() == vmShade) {
+        FaceShader* shader = vp.setLightedFaceShader();
+        for (size_t i=0; i<numberOfFaces(); ++i)
+            getFace(i)->drawFaces(vp, shader);
+    }
+    else if (vp.getViewportMode() == vmWireFrame) {
         LineShader* lineshader = vp.setLineShader();
-        // vmWireFrame
         if (_owner->showInteriorEdges()) {
             for (size_t i=0; i<numberOfFaces(); ++i)
                 getFace(i)->draw(vp, lineshader);
@@ -453,10 +448,10 @@ void SubdivisionLayer::draw(Viewport& vp)
             for (size_t j=0; j<face->numberOfControlEdges(); ++j) {
                 SubdivisionEdge* edge = face->getControlEdge(j);
                 if (edge->isCrease())
-                    edge->draw(_owner->drawMirror() && isSymmetric(), vp, lineshader, _owner->getCreaseColor());
+                    edge->draw(_owner->drawMirror() && isSymmetric(), vp, lineshader,
+                               _owner->getCreaseColor());
             }
         }
-#endif
     }
 }
 

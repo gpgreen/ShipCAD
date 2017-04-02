@@ -99,9 +99,10 @@ signals:
 protected:
 
     void closeEvent(QCloseEvent* event);
-    
-private:
 
+    /*! \brief delete the viewports
+     */
+    void deleteViewports();
     /*! \brief restore the viewports when model loaded
      */
     void restoreViewports();

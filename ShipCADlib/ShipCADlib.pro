@@ -45,6 +45,7 @@ SOURCES += shipcadlib.cpp \
     developedpatch.cpp
 
 HEADERS += shipcadlib.h \
+    dialogdata.h \
     entity.h \
     filebuffer.h \
     plane.h \

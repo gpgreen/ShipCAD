@@ -213,6 +213,7 @@ void Controller::extrudeEdges()
     }
 }
 
+// FreeShipUnit.pas:4808
 void Controller::splitEdges()
 {
 	// TODO
@@ -977,6 +978,7 @@ void Controller::clearSelections()
     getModel()->clearSelectedItems();
     getModel()->setActiveControlPoint(0);
     // BUGBUG: clear markers and flowlines
+    emit showControlPointDialog(false);
     emit modelGeometryChanged();
 	emit changeSelectedItems();
 }
@@ -997,6 +999,7 @@ void Controller::deleteSelections()
     //getModel()->createUndo(tr("delete"), true);
     //getModel()->clearSelectedItems();
     //getModel()->setActiveControlPoint(0);
+    //emit showControlPointDialog(false);
     //emit modelGeometryChanged();
     //emit changeSelectedItems();
 }

@@ -2,13 +2,10 @@
 #define EXTRUDEEDGEDIALOG_H
 
 #include <QDialog>
+#include "dialogdata.h"
 
 namespace Ui {
     class ExtrudeEdgeDialog;
-}
-
-namespace ShipCAD {
-    struct ExtrudeEdgeDialogData;
 }
 
 class ExtrudeEdgeDialog : public QDialog

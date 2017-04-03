@@ -36,6 +36,7 @@
 #include <QMenu>
 #include <QLabel>
 #include "shipcadlib.h"
+#include "dialogdata.h"
 
 namespace Ui {
 class MainWindow;
@@ -46,9 +47,6 @@ class Viewport;
 class ViewportContainer;
 class Controller;
 class ViewportContextEvent;
-struct InsertPlaneDialogData;
-struct IntersectLayersDialogData;
-struct ExtrudeEdgeDialogData;
 }
 
 class PointDialog;

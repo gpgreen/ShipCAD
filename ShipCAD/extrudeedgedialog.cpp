@@ -2,7 +2,6 @@
 
 #include "extrudeedgedialog.h"
 #include "ui_extrudeedgedialog.h"
-#include "controller.h"
 #include "shipcadlib.h"
 
 using namespace ShipCAD;

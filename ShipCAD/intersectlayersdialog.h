@@ -2,13 +2,10 @@
 #define INTERSECTLAYERSDIALOG_H
 
 #include <QDialog>
+#include "dialogdata.h"
 
 namespace Ui {
 class IntersectLayersDialog;
-}
-
-namespace ShipCAD {
-struct IntersectLayersDialogData;
 }
 
 class IntersectLayersDialog : public QDialog

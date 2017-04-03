@@ -2,7 +2,6 @@
 
 #include "intersectlayersdialog.h"
 #include "ui_intersectlayersdialog.h"
-#include "controller.h"
 #include "subdivlayer.h"
 
 IntersectLayersDialog::IntersectLayersDialog(QWidget *parent) :

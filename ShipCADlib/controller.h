@@ -35,6 +35,7 @@
 
 #include "shipcadlib.h"
 #include "shipcadmodel.h"
+#include "dialogdata.h"
 
 namespace ShipCAD {
 
@@ -46,42 +47,6 @@ class Marker;
 class Viewport;
 struct PickRay;
     
-//////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for insert plane dialog exchange
- */
-struct InsertPlaneDialogData
-{
-    bool accepted;
-    bool addControlCurveSelected;
-    plane_selected_t planeSelected;
-    float distance;
-    QVector3D min;
-    QVector3D max;
-    explicit InsertPlaneDialogData();
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for intersect layer dialog exchange
- */
-struct IntersectLayersDialogData
-{
-    bool accepted;
-    std::vector<SubdivisionLayer*> layers;
-    size_t layer1;
-    size_t layer2;
-    explicit IntersectLayersDialogData();
-};
-
-//////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for extrude edge dialog exchange
- */
-struct ExtrudeEdgeDialogData
-{
-    bool accepted;
-    QVector3D vector;
-    explicit ExtrudeEdgeDialogData();
-};
-
 //////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief ShipCAD model controller, contains editing actions

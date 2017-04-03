@@ -3,7 +3,6 @@
 
 #include <QSettings>
 
-#include "controller.h"
 #include "utility.h"
 
 using namespace ShipCAD;

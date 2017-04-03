@@ -216,7 +216,37 @@ void Controller::extrudeEdges()
 // FreeShipUnit.pas:4808
 void Controller::splitEdges()
 {
-	// TODO
+    cout << "Controller::splitEdges" << endl;
+    // msg 0078
+    UndoObject* uo = getModel()->createUndo(tr("edge split"), false);
+    SubdivisionControlPoint* last = 0;
+    vector<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    size_t n = 0;
+    for (size_t i=0; i<list.size(); i++) {
+        const QVector3D& p1 = list[i]->startPoint()->getCoordinate();
+        const QVector3D& p2 = list[i]->endPoint()->getCoordinate();
+        SubdivisionControlPoint* point = list[i]->insertControlPoint((p1 + p2)/2);
+        if (point != 0) {
+            point->setSelected(true);
+            last = point;
+            n++;
+        }
+    }
+    list.clear();
+    if (last != 0) {
+        getModel()->setActiveControlPoint(last);
+        emit showControlPointDialog(true);
+        emit updateControlPointValue(last);
+    }
+    if (n > 0) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modelGeometryChanged();
+    }
+    else {
+        delete uo;
+    }
 }
 
 void Controller::assembleFace()

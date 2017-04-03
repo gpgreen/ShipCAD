@@ -73,6 +73,16 @@ struct IntersectLayersDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for extrude edge dialog exchange
+ */
+struct ExtrudeEdgeDialogData
+{
+    bool accepted;
+    QVector3D vector;
+    explicit ExtrudeEdgeDialogData();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief ShipCAD model controller, contains editing actions
  */
@@ -149,6 +159,10 @@ signals:
     /*! \brief execute the Intersect Layers dialog
      */
     void exeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData& data);
+
+    /*! \brief execute the Extrude Edge dialog
+     */
+    void exeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData& data);
 
     void onUpdateVisibilityInfo();
 

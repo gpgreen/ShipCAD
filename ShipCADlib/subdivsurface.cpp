@@ -1146,7 +1146,8 @@ void SubdivisionSurface::removeSelectedControlEdge(SubdivisionControlEdge *edge)
 {
     vector<SubdivisionControlEdge*>::iterator i = find(
                 _sel_control_edges.begin(), _sel_control_edges.end(), edge);
-    _sel_control_edges.erase(i);
+    if (i != _sel_control_edges.end())
+        _sel_control_edges.erase(i);
 }
 
 void SubdivisionSurface::setSelectedControlCurve(SubdivisionControlCurve* curve)
@@ -1246,7 +1247,6 @@ void SubdivisionSurface::setBuild(bool val)
 std::multimap<float, SubdivisionBase*>
 SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
 {
-    // TODO: need to get list of elements to check from viewport
     multimap<float,SubdivisionBase*> picks;
     // check control points
     for (size_t i=0; i<numberOfControlPoints(); i++) {
@@ -1254,6 +1254,19 @@ SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
         if (cp->distanceFromPickRay(vp, ray) < 1E-2) {
             float s = ray.pt.distanceToPoint(cp->getCoordinate());
             picks.insert(make_pair(s,cp));
+        }
+    }
+    if (picks.size() == 0) {
+        // check control edges
+        for (size_t i=0; i<numberOfControlEdges(); i++) {
+            SubdivisionControlEdge* edge = getControlEdge(i);
+            if (!edge->isVisible())
+                continue;
+            float dist = edge->distanceToEdge(ray.pt, ray.dir);
+            if (dist < 1E-2) {
+                picks.insert(make_pair(dist, edge));
+                break; // if we came close to an edge, pick it and stop looking
+            }
         }
     }
     return picks;
@@ -1432,8 +1445,8 @@ SubdivisionControlFace* SubdivisionSurface::addControlFace(std::vector<Subdivisi
             result->setLayer(layer);
         _control_faces.push_back(result);
         p1 = points.back();
-        for (size_t i=0; i<points.size(); ++i) {
-            p2 = points[i];
+        for (size_t j=0; j<points.size(); ++j) {
+            p2 = points[j];
             p2->addFace(result);
             result->addPoint(p2);
             edge = controlEdgeExists(p1, p2);
@@ -2031,6 +2044,7 @@ struct ExtrudePointPred {
     ExtrudePointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
 };
 
+// FreeGeometry.pas:14684
 void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
                                       const QVector3D& direction)
 {
@@ -2058,8 +2072,7 @@ void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
     // create all new extruded points
     for (size_t i=0; i<vertices.size(); ++i) {
         point1 = vertices[i].first;
-        point2 = SubdivisionControlPoint::construct(this);
-        point2->setCoordinate(point1->getCoordinate() + direction);
+        point2 = newControlPoint(point1->getCoordinate() + direction);
         vertices[i].second = point2;
     }
     for (size_t i=0; i<edges.size(); ++i) {
@@ -2069,12 +2082,12 @@ void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
         points.push_back(dynamic_cast<SubdivisionControlPoint*>(edge->startPoint()));
         point1 = 0;
         point2 = 0;
-        vidx = find_if(vertices.begin(), vertices.end(), ExtrudePointPred(edge->startPoint()));
+        vidx = find_if(vertices.begin(), vertices.end(), ExistPointPred(edge->startPoint()));
         if (vidx != vertices.end()) {
             point1 = (*vidx).second;
             points.push_back(point1);
         }
-        vidx = find_if(vertices.begin(), vertices.end(), ExtrudePointPred(edge->endPoint()));
+        vidx = find_if(vertices.begin(), vertices.end(), ExistPointPred(edge->endPoint()));
         if (vidx != vertices.end()) {
             point2 = (*vidx).second;
             points.push_back(point2);
@@ -2102,6 +2115,7 @@ void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
     for (size_t i=0; i<newedges.size(); ++i)
         edges.push_back(newedges[i]);
     initialize(novertices+1, noedges+1);
+    setBuild(false);
 }
 
 struct SurfIntersectionData
@@ -2374,6 +2388,7 @@ void SubdivisionSurface::calculateIntersections(const Plane& plane,
     }
 }
 
+// FreeGeometry.pas:15169
 void SubdivisionSurface::draw(Viewport &vp)
 {
     if (!isBuild())

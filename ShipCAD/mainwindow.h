@@ -48,11 +48,13 @@ class Controller;
 class ViewportContextEvent;
 struct InsertPlaneDialogData;
 struct IntersectLayersDialogData;
+struct ExtrudeEdgeDialogData;
 }
 
 class PointDialog;
 class InsertPlanePointsDialog;
 class IntersectLayersDialog;
+class ExtrudeEdgeDialog;
 
 class ViewportState
 {
@@ -250,6 +252,12 @@ private slots:
      */
     void executeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData& data);
 
+    /*! \brief execute the extrude edge dialog
+     *
+     * \return true if dialog "ok" selected, false if "cancel" selected
+     */
+    void executeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData& data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;
@@ -279,6 +287,7 @@ private:
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
     InsertPlanePointsDialog *_planepointsdialog; /**< the insert plane control points dialog created by QtDesigner */
     IntersectLayersDialog *_intersectlayersdialog; /**< the dialog to select 2 different layers */
+    ExtrudeEdgeDialog *_extrudeedgedialog; /**< the dialog to set vector to extrude edges */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

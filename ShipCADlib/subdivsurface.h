@@ -204,6 +204,7 @@ public:
     void setSelectedControlEdge(SubdivisionControlEdge* edge);
     void removeSelectedControlEdge(SubdivisionControlEdge* edge);
     bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
+    std::vector<SubdivisionControlEdge*>& getSelControlEdgeCollection() {return _sel_control_edges;}
 
     // SubdivisionFace
     size_t numberOfFaces();

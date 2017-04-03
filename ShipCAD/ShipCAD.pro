@@ -17,18 +17,21 @@ SOURCES += main.cpp\
         pointdialog.cpp \
     viewportcontainer.cpp \
     insertplanepointsdialog.cpp \
-    intersectlayersdialog.cpp
+    intersectlayersdialog.cpp \
+    extrudeedgedialog.cpp
 
 HEADERS  += mainwindow.h \
         pointdialog.h \
     viewportcontainer.h \
     insertplanepointsdialog.h \
-    intersectlayersdialog.h
+    intersectlayersdialog.h \
+    extrudeedgedialog.h
 
 FORMS    += mainwindow.ui \
         pointdialog.ui \
     insertplanepointsdialog.ui \
-    intersectlayersdialog.ui
+    intersectlayersdialog.ui \
+    extrudeedgedialog.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/release/ -lShipCADlib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/debug/ -lShipCADlib

@@ -78,6 +78,76 @@ void SubdivisionEdge::clear()
     _control_edge = false;
 }
 
+// algorithm from http://geomalgorithms.com/a07-_distance.html#Distance-between-Segments-and-Rays
+float SubdivisionEdge::distanceToEdge(const QVector3D& pt, const QVector3D& dir)
+{
+    QVector3D l2p1 = pt + 100*dir;
+    QVector3D u = _points[1]->getCoordinate() - _points[0]->getCoordinate();
+    QVector3D v = l2p1 - pt;
+    QVector3D w = _points[0]->getCoordinate() - pt;
+    float a = QVector3D::dotProduct(u, u);   // always >= 0
+    float b = QVector3D::dotProduct(u, v);
+    float c = QVector3D::dotProduct(v, v);   // always >= 0
+    float d = QVector3D::dotProduct(u, w);
+    float e = QVector3D::dotProduct(v, w);
+    float D = a * c - b * b;                 // always >= 0
+    float sc, sN, sD = D;                    // sc = sN / sD, default sD = D >= 0
+    float tc, tN, tD = D;                    // tc = tN / tD, default tD = D >= 0
+
+    // compute the line parameters of the two closest points
+    if (D < 1E-5) { // the lines are almost parallel
+        sN = 0.0;   // force using point P0 on this edge
+        sD = 1.0;   // to prevent possible division by 0 later
+        tN = e;
+        tD = c;
+    }
+    else {  // get the closest points on the infinite lines
+        sN = (b * e - c * d);
+        tN = (a * e - b * d);
+        if (sN < 0.0) {   // sc < 0 => the s=0 edge is visible
+            sN = 0.0;
+            tN = e;
+            tD = c;
+        } else if (sN > sD) {   // sc > 1 => the s=1 edge is visible
+            sN = sD;
+            tN = e + b;
+            tD = c;
+        }
+    }
+    if (tN < 0.0) { // tc < 0 => the t=0 edge is visible
+        tN = 0.0;
+        // recompute sc for this edge
+        if (-d < 0.0)
+            sN = 0.0;
+        else if (-d > a)
+            sN = sD;
+        else {
+            sN = -d;
+            sD = a;
+        }
+    }
+    else if (tN > tD) {  // tc > 1 => the t=e edge is visible
+        tN = tD;
+        // recompute sc for this edge
+        if ((-d + b) < 0.0)
+            sN = 0;
+        else if ((-d + b) > a)
+            sN = sD;
+        else {
+            sN = (-d + b);
+            sD = a;
+        }
+    }
+    // do the division to get sc and tc
+    sc = (abs(sN) < 1E-5 ? 0.0 : sN / sD);
+    tc = (abs(tN) < 1E-5 ? 0.0 : tN / tD);
+
+    // get the difference of the two closest points
+    QVector3D dP = w + (sc * u) - (tc * v);   // = S1(sc) - S2(sc)
+
+    return dP.length();
+}
+
 size_t SubdivisionEdge::getIndex()
 {
     try {
@@ -374,7 +444,7 @@ SubdivisionControlEdge* SubdivisionControlEdge::construct(SubdivisionSurface* ow
 }
 
 SubdivisionControlEdge::SubdivisionControlEdge(SubdivisionSurface* owner)
-    : SubdivisionEdge(owner), _selected(false), _visible(true)
+    : SubdivisionEdge(owner), _visible(true)
 {
     _control_edge = true;
 }
@@ -400,7 +470,7 @@ void SubdivisionControlEdge::removeEdge()
 QColor SubdivisionControlEdge::getColor()
 {
     QColor result;
-    if (_selected)
+    if (isSelected())
         result = _owner->getSelectedColor();
     else if (_faces.size() > 2)
         result = Qt::green;
@@ -526,9 +596,9 @@ void SubdivisionControlEdge::loadBinary(FileBuffer& source)
     _points[1] = _owner->getControlPoint(index);
     _points[1]->addEdge(this);
     source.load(_crease);
-    source.load(_selected);
-    if (_selected)
-        _owner->setSelectedControlEdge(this);
+    bool selected;
+    source.load(selected);
+    setSelected(selected);
 }
 
 void SubdivisionControlEdge::loadFromStream(size_t &lineno, QStringList &strings)
@@ -547,9 +617,8 @@ void SubdivisionControlEdge::loadFromStream(size_t &lineno, QStringList &strings
     _crease = ReadBoolFromStr(lineno, str, start);
     if (start < static_cast<size_t>(str.length())) {
         // flag to indicate that this edge was selected when the model was saved (for undo-purposes)
-        _selected = ReadBoolFromStr(lineno, str, start);
-        if (_selected)
-            _owner->setSelectedControlEdge(this);
+        bool selected = ReadBoolFromStr(lineno, str, start);
+        setSelected(selected);
     }
 }
 
@@ -560,7 +629,7 @@ void SubdivisionControlEdge::saveToStream(QStringList &strings)
     strings.push_back(QString("%1 %2 %3 %4")
                       .arg(_owner->indexOfControlPoint(sp))
                         .arg(_owner->indexOfControlPoint(ep))
-                        .arg(BoolToStr(_crease)).arg(BoolToStr(_selected)));
+                      .arg(BoolToStr(_crease)).arg(BoolToStr(isSelected())));
 }
 
 void SubdivisionControlEdge::saveBinary(FileBuffer& destination)
@@ -610,6 +679,7 @@ void SubdivisionControlEdge::trace()
     priv_trace(p);
 }
 
+// FreeGeometry.pas:11135
 void SubdivisionControlEdge::draw(Viewport& vp, LineShader* lineshader)
 {
     if (!isVisible())

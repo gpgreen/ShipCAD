@@ -37,6 +37,7 @@
 #include "pointdialog.h"
 #include "insertplanepointsdialog.h"
 #include "intersectlayersdialog.h"
+#include "extrudeedgedialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
@@ -50,7 +51,7 @@ using namespace std;
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), _pointdialog(0), _planepointsdialog(0),
-    _intersectlayersdialog(0),
+    _intersectlayersdialog(0), _extrudeedgedialog(0),
     _controller(c), _currentViewportContext(0),
     _menu_recent_files(0), _contextMenu(0), _cameraMenu(0),
     _viewportModeGroup(0),
@@ -90,11 +91,14 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(modelLoaded()), SLOT(updateVisibilityActions()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelChanged()));
     connect(_controller, SIGNAL(modelGeometryChanged()), SIGNAL(viewportRender()));
+    connect(_controller, SIGNAL(changeSelectedItems()), SLOT(enableActions()));
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
     connect(_controller, SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
             SLOT(executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)));
     connect(_controller, SIGNAL(exeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData&)),
             SLOT(executeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData&)));
+    connect(_controller, SIGNAL(exeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData&)),
+            SLOT(executeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData&)));
     connect(_controller, SIGNAL(displayInfoDialog(const QString&)),
             SLOT(showInfoDialog(const QString&)));
     connect(_controller, SIGNAL(displayWarningDialog(const QString&)),
@@ -217,8 +221,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     // connect about actions
 
     // set action status
+    enableActions();
     updateVisibilityActions();
-
+    
     // restore settings
     readSettings();
     
@@ -587,41 +592,6 @@ void MainWindow::saveViewport(size_t idx, ViewportState& state)
     }
 }
 
-void MainWindow::updateVisibilityActions()
-{
-    Visibility& vis = _controller->getModel()->getVisibility();
-
-    ui->actionShowControl_net->setChecked(vis.isShowControlNet());
-    ui->actionShow_both_sides->setChecked(vis.getModelView() == mvBoth);
-    ui->actionShowControl_curves->setChecked(vis.isShowControlCurves());
-    ui->actionShowInterior_edges->setChecked(vis.isShowInteriorEdges());
-    ui->actionShowGrid->setChecked(vis.isShowGrid());
-    ui->actionShowStations->setChecked(vis.isShowStations());
-    ui->actionShowButtocks->setChecked(vis.isShowButtocks());
-    ui->actionShowWaterlines->setChecked(vis.isShowWaterlines());
-    ui->actionShowDiagonals->setChecked(vis.isShowDiagonals());
-    ui->actionShowHydrostatic_features->setChecked(vis.isShowHydrostaticData());
-    ui->actionShowFlowlines->setChecked(vis.isShowFlowlines());
-    ui->actionShowNormals->setChecked(vis.isShowNormals());
-    ui->actionShowCurvature->setChecked(vis.isShowCurvature());
-    ui->actionShowMarkers->setChecked(vis.isShowMarkers());
-
-//    ui->actionShade_Underwater->setChecked(s->shadeUnderWater());
-    emit viewportRender();
-    cout << "updateVisibilityActions" << endl;
-}
-
-void MainWindow::modelLoaded()
-{
-    cout << "modelLoaded" << endl;
-    // if we already had a model loaded, save the viewports
-    if (_viewports.size()) {
-        saveViewports();
-    }
-    else
-        restoreViewports();
-}
-
 // Main.pas:542
 void MainWindow::enableActions()
 {
@@ -634,12 +604,15 @@ void MainWindow::enableActions()
             nlayers++;
     size_t ncpoints = surf->numberOfControlPoints();
     size_t nselcpoints = surf->numberOfSelectedControlPoints();
+    size_t nselcedges = surf->numberOfSelectedControlEdges();
     size_t ncfaces = surf->numberOfControlFaces();
+    size_t nselcfaces = surf->numberOfSelectedControlFaces();
+    size_t ncurves = model->getControlCurves().size();
+    size_t nselccurves = surf->numberOfSelectedControlCurves();
     size_t nstations = model->getStations().size();
     size_t nwaterlines = model->getWaterlines().size();
     size_t nbuttocks = model->getButtocks().size();
     size_t ndiagonals = model->getDiagonals().size();
-    size_t ncurves = model->getControlCurves().size();
 
     // file actions
     ui->actionSave_As->setEnabled(ncpoints > 0 || model->isFileChanged() || model->isFilenameSet());
@@ -694,6 +667,11 @@ void MainWindow::enableActions()
     ui->actionUnlock_all_points->setEnabled(surf->numberOfLockedPoints() > 0);
 
     // edge actions
+    ui->actionEdgeExtrude->setEnabled(nselcedges > 0);
+    ui->actionEdgeSplit->setEnabled(nselcedges > 0);
+    ui->actionEdgeCollapse->setEnabled(nselcedges > 0);
+    ui->actionEdgeInsert->setEnabled(nselcedges > 1);
+    ui->actionEdgeCrease->setEnabled(nselcedges > 0);
 
     // face actions
     ui->actionFaceNew->setEnabled(nselcpoints > 2);
@@ -719,7 +697,9 @@ void MainWindow::enableActions()
 
     // selection actions
     ui->actionSelect_all->setEnabled(true);
-
+    ui->actionDeselect_all->setEnabled(nselcpoints+nselcedges+nselcfaces+nselccurves > 0
+                                       || model->getActiveControlPoint() != 0);
+    
     // tools actions
 
     // transform actions
@@ -727,6 +707,41 @@ void MainWindow::enableActions()
     // calculations actions
 
     cout << "enableActions" << endl;
+}
+
+void MainWindow::updateVisibilityActions()
+{
+    Visibility& vis = _controller->getModel()->getVisibility();
+
+    ui->actionShowControl_net->setChecked(vis.isShowControlNet());
+    ui->actionShow_both_sides->setChecked(vis.getModelView() == mvBoth);
+    ui->actionShowControl_curves->setChecked(vis.isShowControlCurves());
+    ui->actionShowInterior_edges->setChecked(vis.isShowInteriorEdges());
+    ui->actionShowGrid->setChecked(vis.isShowGrid());
+    ui->actionShowStations->setChecked(vis.isShowStations());
+    ui->actionShowButtocks->setChecked(vis.isShowButtocks());
+    ui->actionShowWaterlines->setChecked(vis.isShowWaterlines());
+    ui->actionShowDiagonals->setChecked(vis.isShowDiagonals());
+    ui->actionShowHydrostatic_features->setChecked(vis.isShowHydrostaticData());
+    ui->actionShowFlowlines->setChecked(vis.isShowFlowlines());
+    ui->actionShowNormals->setChecked(vis.isShowNormals());
+    ui->actionShowCurvature->setChecked(vis.isShowCurvature());
+    ui->actionShowMarkers->setChecked(vis.isShowMarkers());
+
+//    ui->actionShade_Underwater->setChecked(s->shadeUnderWater());
+    emit viewportRender();
+    cout << "updateVisibilityActions" << endl;
+}
+
+void MainWindow::modelLoaded()
+{
+    cout << "modelLoaded" << endl;
+    // if we already had a model loaded, save the viewports
+    if (_viewports.size()) {
+        saveViewports();
+    }
+    else
+        restoreViewports();
 }
 
 void MainWindow::openRecentFile()
@@ -993,14 +1008,21 @@ void MainWindow::executeIntersectLayersDialog(IntersectLayersDialogData& data)
     cout << "execute intersect layers dialog:" << (data.accepted ? "t" : "f") << endl;
 }
 
+void MainWindow::executeExtrudeEdgeDialog(ExtrudeEdgeDialogData& data)
+{
+    if (_extrudeedgedialog == 0) {
+        _extrudeedgedialog = new ExtrudeEdgeDialog(this);
+    }
+    _extrudeedgedialog->initialize(data);
+    int result = _extrudeedgedialog->exec();
+    data.accepted = (result == QDialog::Accepted);
+    _extrudeedgedialog->retrieve(data);
+    cout << "execute extrude edge dialog:" << (data.accepted ? "t" : "f") << endl;
+}
+
 void MainWindow::changeSelectedItems()
 {
-    if (_controller->getModel()->countSelectedItems() > 0) {
-        ui->actionDeselect_all->setEnabled(true);
-    } else {
-        ui->actionDeselect_all->setEnabled(false);
-    }
-    cout << "changeSelectedItems" << endl;
+    // TODO
 }
 
 // add the menu entry to the file menu, and create all the actions...

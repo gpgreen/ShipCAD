@@ -60,6 +60,12 @@ IntersectLayersDialogData::IntersectLayersDialogData()
     // does nothing
 }
 
+ExtrudeEdgeDialogData::ExtrudeEdgeDialogData()
+    : accepted(false), vector(ZERO)
+{
+    // does nothing
+}
+
 Controller::Controller(ShipCADModel* model)
     : _model(model), _point_first_moved(false)
 {
@@ -119,7 +125,12 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
                 emit showControlPointDialog(true);
                 emit updateControlPointValue(cp);
             } else {
-                cout << "non control point selected" << endl;
+                SubdivisionControlEdge* edge = dynamic_cast<SubdivisionControlEdge*>(filtered[0]);
+                if (edge != 0 ) {
+                    edge->setSelected(true);
+                    scene_changed = true;
+                    cout << "control edge selected" << endl;
+                }
             }
         } else {
             // need to discriminate against these elements
@@ -165,9 +176,41 @@ void Controller::creaseEdges()
 	// TODO
 }
 
+// FreeShipUnit.pas:4753
 void Controller::extrudeEdges()
 {
-	// TODO
+    cout << "Controller::extrudeEdges" << endl;
+    ExtrudeEdgeDialogData data;
+    emit exeExtrudeEdgeDialog(data);
+    if (!data.accepted)
+        return;
+    // msg 0076
+    UndoObject* uo = getModel()->createUndo(tr("edge extrusion"), false);
+    // assemble edges in a list
+    vector<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    // only boundary edges are allowed
+    vector<SubdivisionControlEdge*> actinglist;
+    for (size_t i=0; i<list.size(); i++) {
+        if (list[i]->numberOfFaces() == 1)
+            actinglist.push_back(list[i]);
+    }
+    // clear selected edges
+    list.clear();
+    if (actinglist.size() > 0) {
+        getModel()->getSurface()->extrudeEdges(actinglist, data.vector);
+        // new edges are returned in the list, select them
+        for (size_t i=0; i<actinglist.size(); i++) {
+            actinglist[i]->setSelected(true);
+        }
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modelGeometryChanged();
+    } else {
+        // msg 0077
+        emit displayWarningDialog(tr("Only boundary edges can be extruded!"));
+        delete uo;
+    }
 }
 
 void Controller::splitEdges()
@@ -920,17 +963,42 @@ void Controller::kaperResistance()
 	// TODO
 }
 
+// FreeShipUnit.pas:10402
 void Controller::clearSelections()
 {
+    cout << "Controller::clearSelections" << endl;
+    SubdivisionSurface* surf = getModel()->getSurface();
+    size_t n = surf->numberOfSelectedControlPoints()
+            + surf->numberOfSelectedControlEdges()
+            + surf->numberOfSelectedControlFaces()
+            + surf->numberOfSelectedControlCurves(); //BUGBUG: markers and flowlines
+    if (n == 0)
+        return;
     getModel()->clearSelectedItems();
-    // TODO undo....
+    getModel()->setActiveControlPoint(0);
+    // BUGBUG: clear markers and flowlines
     emit modelGeometryChanged();
 	emit changeSelectedItems();
 }
 
+// FreeShipUnit.pas:10411
 void Controller::deleteSelections()
 {
-	// TODO
+    cout << "Controller::deleteSelections" << endl;
+    SubdivisionSurface* surf = getModel()->getSurface();
+    size_t n = surf->numberOfSelectedControlPoints()
+            + surf->numberOfSelectedControlEdges()
+            + surf->numberOfSelectedControlFaces()
+            + surf->numberOfSelectedControlCurves(); //BUGBUG: markers and flowlines
+    if (n == 0)
+        return;
+    // TODO
+    // msg 0175
+    //getModel()->createUndo(tr("delete"), true);
+    //getModel()->clearSelectedItems();
+    //getModel()->setActiveControlPoint(0);
+    //emit modelGeometryChanged();
+    //emit changeSelectedItems();
 }
 
 void Controller::selectAll()

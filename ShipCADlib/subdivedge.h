@@ -62,6 +62,8 @@ public:
     virtual void draw(bool draw_mirror, Viewport& vp, LineShader* lineshader,
                       const QColor& edgeColor);
 
+    float distanceToEdge(const QVector3D& pt, const QVector3D& dir);
+    
     // modifiers
     void addFace(SubdivisionFace* face);
     void assign(SubdivisionEdge* edge);
@@ -154,7 +156,6 @@ protected:
 
 protected:
 
-    bool _selected;
     bool _visible;
 };
 

@@ -189,9 +189,23 @@ void Controller::collapseEdges()
     emit changeSelectedItems();
 }
 
+// FreeShipUnit.pas:4724
 void Controller::connectEdges()
 {
-	// TODO
+    cout << "Controller::connectEdges" << endl;
+    size_t n = getModel()->getSurface()->numberOfControlEdges();
+    // msg 0074
+    UndoObject* uo = getModel()->createUndo(tr("new edge"), false);
+    getModel()->getSurface()->edgeConnect();
+    if (getModel()->getSurface()->numberOfControlEdges() > n) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+    } else {
+        delete uo;
+    }
+    emit modelGeometryChanged();
+    emit changeSelectedItems();
 }
 
 void Controller::creaseEdges()

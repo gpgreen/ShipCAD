@@ -670,7 +670,7 @@ void MainWindow::enableActions()
     ui->actionEdgeExtrude->setEnabled(nselcedges > 0);
     ui->actionEdgeSplit->setEnabled(nselcedges > 0);
     ui->actionEdgeCollapse->setEnabled(nselcedges > 0);
-    ui->actionEdgeInsert->setEnabled(nselcedges > 1);
+    ui->actionEdgeInsert->setEnabled(nselcpoints > 1);
     ui->actionEdgeCrease->setEnabled(nselcedges > 0);
 
     // face actions

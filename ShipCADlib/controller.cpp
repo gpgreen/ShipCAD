@@ -161,9 +161,32 @@ void Controller::addCurve()
 	// TODO
 }
 
+// FreeShipUnit.pas:4697
 void Controller::collapseEdges()
 {
-	// TODO
+    cout << "Controller::collapseEdges" << endl;
+    size_t n = 0;
+    // msg 0073
+    UndoObject* uo = getModel()->createUndo(tr("edge collapse"), false);
+    vector<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    for (size_t i=0; i<list.size(); i++) {
+        if (list[i]->numberOfFaces() > 1) {
+            getModel()->getSurface()->collapseEdge(list[i]);
+            n++;
+        }
+    }
+    list.clear();
+    if (n > 0) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modelGeometryChanged();
+    }
+    else {
+        delete uo;
+    }
+    emit modelGeometryChanged();
+    emit changeSelectedItems();
 }
 
 void Controller::connectEdges()
@@ -205,12 +228,13 @@ void Controller::extrudeEdges()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
-        emit modelGeometryChanged();
     } else {
         // msg 0077
         emit displayWarningDialog(tr("Only boundary edges can be extruded!"));
         delete uo;
     }
+    emit modelGeometryChanged();
+    emit changeSelectedItems();
 }
 
 // FreeShipUnit.pas:4808
@@ -242,11 +266,12 @@ void Controller::splitEdges()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
-        emit modelGeometryChanged();
     }
     else {
         delete uo;
     }
+    emit modelGeometryChanged();
+    emit changeSelectedItems();
 }
 
 void Controller::assembleFace()

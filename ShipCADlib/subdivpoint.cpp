@@ -629,12 +629,10 @@ bool SubdivisionControlPoint::isLeak()
 void SubdivisionControlPoint::setSelected(bool val)
 {
     if (val) {
-        if (!_owner->hasSelectedControlPoint(this))
-            _owner->setSelectedControlPoint(this);
+        _owner->setSelectedControlPoint(this);
     }
     else {
-        if (_owner->hasSelectedControlPoint(this))
-            _owner->removeSelectedControlPoint(this);
+        _owner->removeSelectedControlPoint(this);
     }
 }
 

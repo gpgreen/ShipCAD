@@ -72,6 +72,18 @@ public:
     ProjectSettings& getProjectSettings() {return _settings;}
     Preferences& getPreferences() {return _prefs;}
 
+    /*! \brief create a new model
+     *
+     * \param units units to use in model
+     * \param length length of new hull
+     * \param breadth beam of new hull
+     * \param draft draft of new hull
+     * \param rows how many rows of control points
+     * \param cols how many cols of control points
+     */
+    void newModel(unit_type_t units, float length, float breadth, float draft,
+                  size_t rows, size_t cols);
+    
     /*! \brief Assembles all stations and builds a 2D bodyplan
      *
      * \param close_at_deck
@@ -81,6 +93,14 @@ public:
     bool isBuild() {return _surface.isBuild();}
     void setBuild(bool set);
 
+    /*! \brief create an intersection
+     *
+     * \param type which type of intersection
+     * \param distance location of intersection
+     * \return the created intersection, or 0 if not created
+     */
+    Intersection* createIntersection(intersection_type_t ty, float distance);
+    
     /*! \brief get the active control point
      *
      * \return the active control point or 0
@@ -251,6 +271,10 @@ public:
     void rebuildModel(bool redo_intersections);
 
     void draw(Viewport& vp);
+
+    /*! \brief delete all selected items
+     */
+    void deleteSelected();
     
 	void clear();
     void clearUndo();

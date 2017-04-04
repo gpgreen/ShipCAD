@@ -47,6 +47,11 @@ struct PickRay
     QVector3D pt;
     QVector3D dir;
     bool multi_sel;             // true if we are multi-selecting elements
+    bool point;
+    bool edge;
+    bool face;
+    PickRay(bool multi, bool p, bool e, bool f) :
+        multi_sel(multi), point(p), edge(e), face(f) {}
 };
     
 //////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +81,7 @@ public:
     const QVector3D& getCamera() const
         {return _camera_location;}
 
-    virtual bool leftMousePick(QPoint pos, int w, int h, bool multi_sel);
+    virtual bool leftMousePick(QPoint pos, int w, int h, PickRay& ray);
     virtual bool rightMousePick(QPoint pos, int w, int h);
     virtual bool leftMouseRelease(QPoint pos, int w, int h);
     virtual bool rightMouseRelease(QPoint pos, int w, int h);

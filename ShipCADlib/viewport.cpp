@@ -269,7 +269,7 @@ bool Viewport::contextMenu(QMouseEvent *event)
     return false;
 }
 
-bool Viewport::canPickPoint() const
+bool Viewport::canPick() const
 {
     return getViewportMode() == vmWireFrame
         && getController()->getModel()->getVisibility().isShowControlNet();
@@ -281,6 +281,7 @@ bool Viewport::canPickPoint() const
 // _drag_state = 2      button has been pressed, and dragging
 // _drag_state = 3      left button has been pressed, dragging point. not moved far enough for a drag
 // _drag_state = 4      left button has been pressed, dragging point
+// _drag_state = 5      left button pressed, multi selecting, got a point on press
 void
 Viewport::mousePressEvent(QMouseEvent *event)
 {
@@ -289,11 +290,14 @@ Viewport::mousePressEvent(QMouseEvent *event)
     // on a left mouse press, check for selection
     if (event->buttons().testFlag(Qt::LeftButton)) {
         cout << "left mouse" << endl;
-        bool multi = event->modifiers() == Qt::ControlModifier;
-        if (canPickPoint() && _view->leftMousePick(event->pos(), width(), height(), multi)) {
-            cout << "pick state changed - multisel:" << multi << endl;
+        // find multi select, and only pick points
+        PickRay ray(event->modifiers() == Qt::ControlModifier, true, false, false);
+        if (canPick() && _view->leftMousePick(event->pos(), width(), height(), ray)) {
+            cout << "pick state changed - multisel:" << ray.multi_sel << endl;
             update();
-            if (!multi)
+            if (ray.multi_sel)
+                _drag_state = 5;
+            else
                 _drag_state = 3;
         }
     }
@@ -311,9 +315,21 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
     bool view_changed = false;
     // for mouse release, the button released won't be in the set
     if (_prev_buttons.testFlag(Qt::LeftButton) && !event->buttons().testFlag(Qt::LeftButton)) {
-        if (_drag_state != 1 || _drag_state != 3) {
+        if (_drag_state == 1) {
+            // no movement, or not far enough to drag
+            // a point could have been picked in mouse down, if not multi selecting
+            PickRay ray(event->modifiers() == Qt::ControlModifier, false, true, false);
+            if (canPick() && _view->leftMousePick(event->pos(), width(), height(), ray)) {
+                cout << "pick on release: multisel:" << ray.multi_sel << endl;
+                update();
+            }
+        }
+        // drag state = 2, 3, 4, 5 no picking
+        // 5 is no picking as even though multiselect, we got it on mouse down
+        else {
+            // dragging view or point
             view_changed = _view->leftMouseRelease(event->pos(), width(), height());
-            if (_drag_state == 4)
+            if (_drag_state == 4) // dragging point
                 getController()->stopMovePoint();
         }
     }
@@ -340,7 +356,7 @@ Viewport::mouseMoveEvent(QMouseEvent *event)
     bool view_changed = false;
 
     // check for actual dragging
-    if (_drag_state == 0
+    if (_drag_state == 0 || _drag_state == 5
         || (_drag_state == 1 && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance())
         || (_drag_state == 3 && (event->pos() - _drag_start).manhattanLength() < QApplication::startDragDistance()))
         return;

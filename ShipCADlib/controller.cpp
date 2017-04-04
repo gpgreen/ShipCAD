@@ -125,6 +125,8 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
                 emit showControlPointDialog(true);
                 emit updateControlPointValue(cp);
             } else {
+                getModel()->setActiveControlPoint(0);
+                emit showControlPointDialog(false);
                 SubdivisionControlEdge* edge = dynamic_cast<SubdivisionControlEdge*>(filtered[0]);
                 if (edge != 0 ) {
                     edge->setSelected(true);
@@ -193,15 +195,17 @@ void Controller::collapseEdges()
 void Controller::connectEdges()
 {
     cout << "Controller::connectEdges" << endl;
-    size_t n = getModel()->getSurface()->numberOfControlEdges();
+    if (getModel()->getSurface()->numberOfSelectedControlPoints() < 2)
+        return;
     // msg 0074
     UndoObject* uo = getModel()->createUndo(tr("new edge"), false);
-    getModel()->getSurface()->edgeConnect();
-    if (getModel()->getSurface()->numberOfControlEdges() > n) {
+    if (getModel()->getSurface()->edgeConnect()) {
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
     } else {
+        // msg 0202
+        displayWarningDialog(tr("Edge already exists"));
         delete uo;
     }
     emit modelGeometryChanged();
@@ -311,7 +315,10 @@ void Controller::mirrorPlaneFace()
 // FreeShipUnit.pas:5393
 void Controller::newFace()
 {
-    if (getModel()->getSurface()->numberOfSelectedControlPoints() <= 2) {
+    vector<SubdivisionControlPoint*>& cplist =
+        getModel()->getSurface()->getSelControlPointCollection();
+
+    if (cplist.size() < 3) {
         // msg 0095 error
         emit displayWarningDialog(tr("You need to select at least 3 controlpoints to create a new controlface"));
         return;
@@ -321,13 +328,13 @@ void Controller::newFace()
     // remember the number of faces, edges and points
     // assemble all points in a temporary list
     vector<SubdivisionControlPoint*> tmp;
-    for (size_t i=0; i<getModel()->getSurface()->numberOfSelectedControlPoints(); i++)
-        tmp.push_back(getModel()->getSurface()->getSelectedControlPoint(i));
+    for (size_t i=0; i<cplist.size(); i++)
+        tmp.push_back(cplist[i]);
     // deselect the controlpoints
-    for (size_t i=getModel()->getSurface()->numberOfSelectedControlPoints(); i>0; i--)
-        getModel()->getSurface()->getSelectedControlPoint(i-1)->setSelected(false);
+    cplist.clear();
     // add the new face
-    SubdivisionControlFace* face = getModel()->getSurface()->addControlFace(tmp, true, getModel()->getActiveLayer());
+    SubdivisionControlFace* face =
+        getModel()->getSurface()->addControlFace(tmp, true, getModel()->getActiveLayer());
     if (face != 0) {
         uo->accept();
         getModel()->setBuild(false);
@@ -336,6 +343,7 @@ void Controller::newFace()
     } else {
         delete uo;
     }
+    emit changeSelectedItems();
 }
 
 void Controller::rotateFaces()
@@ -556,10 +564,9 @@ void Controller::importFrames()
 	// TODO
 }
 
-Intersection* Controller::addIntersection(intersection_type_t ty, float distance)
+void Controller::addIntersection()
 {
 	// TODO
-    return 0;
 }
 
 void Controller::addIntersectionToList(Intersection* inter)
@@ -620,145 +627,8 @@ void Controller::checkModel()
 
 void Controller::newModel()
 {
-/*
-      CreateUndoObject(Userstring(157),True);
-      Cols:=FreeNewModelDialog.NCols-1;
-      Rows:=FreeNewModelDialog.NRows-1;
-      L:=FreeNewModelDialog.Length;
-      B:=FreeNewModelDialog.Breadth;
-      D:=FreeNewModelDialog.Draft;
-      // station 0, stern
-      Default[0,0]:=Point3D(0.00000,0.00000,1.56754);
-      Default[0,1]:=Point3D(0.00000,0.05280,1.59170);
-      Default[0,2]:=Point3D(0.00000,0.22171,1.77284);
-      Default[0,3]:=Point3D(0.00000,0.28506,2.64108);
-      Default[0,4]:=Point3D(0.00000,0.29135,3.48932);
-      // station 1
-      Default[1,0]:=Point3D(0.20880,0.00000,0.49656);
-      Default[1,1]:=Point3D(0.20881,0.18796,0.53622);
-      Default[1,2]:=Point3D(0.20880,0.33700,0.97840);
-      Default[1,3]:=Point3D(0.20880,0.45607,2.05422);
-      Default[1,4]:=Point3D(0.20882,0.47184,3.44280);
-      // station 2
-      Default[2,0]:=Point3D(0.41765,0.00000,0.00000);
-      Default[2,1]:=Point3D(0.41765,0.23565,0.07524);
-      Default[2,2]:=Point3D(0.41765,0.41555,0.67735);
-      Default[2,3]:=Point3D(0.41765,0.49421,1.91004);
-      Default[2,4]:=Point3D(0.41737,0.51468,3.45474);
-      // station 3
-      Default[3,0]:=Point3D(0.58471,0.00000,0.00000);
-      Default[3,1]:=Point3D(0.58472,0.24072,0.02507);
-      Default[3,2]:=Point3D(0.58472,0.39528,0.71080);
-      Default[3,3]:=Point3D(0.58488,0.45356,2.04881);
-      Default[3,4]:=Point3D(0.58472,0.46756,3.54662);
-      // station 4
-      Default[4,0]:=Point3D(0.75179,0.00000,0.28284);
-      Default[4,1]:=Point3D(0.75178,0.13715,0.44098);
-      Default[4,2]:=Point3D(0.75179,0.20950,0.87760);
-      Default[4,3]:=Point3D(0.75179,0.30538,2.38232);
-      Default[4,4]:=Point3D(0.75177,0.34473,3.67786);
-      // station 5
-      Default[5,0]:=Point3D(0.90672,0.00000,0.81860);
-      Default[5,1]:=Point3D(0.90681,0.01887,0.98650);
-      Default[5,2]:=Point3D(0.90658,0.04671,1.29873);
-      Default[5,3]:=Point3D(0.90637,0.11195,2.83107);
-      Default[5,4]:=Point3D(0.90672,0.14523,3.81697);
-      // station 6 , stem
-      Default[6,0]:=Point3D(0.91580,0.00000,0.85643);
-      Default[6,1]:=Point3D(0.92562,0.00000,1.17444);
-      Default[6,2]:=Point3D(0.93387,0.00000,1.44618);
-      Default[6,3]:=Point3D(0.97668,0.00000,3.03482);
-      Default[6,4]:=Point3D(1.00000,0.00000,3.91366);
-      Owner.Clear;
-
-      Owner.ProjectSettings.ProjectUnits:=TFreeUnitType(FreeNewModelDialog.ComboBox1.ItemIndex);
-      Owner.ProjectSettings.ProjectLength:=L;
-      Owner.ProjectSettings.ProjectBeam:=B;
-      Owner.ProjectSettings.ProjectDraft:=D;
-
-      TrvSplines:=TFasterList.Create;
-      StemPoint:=nil;
-      // First create tmp. splines in transverse direction
-      for I:=0 to 6 do
-      begin
-         Spline1:=TFreeSpline.Create;
-         for J:=0 to 4 do
-         begin
-            P:=Default[I,J];
-            P.X:=P.X*L;
-            P.Y:=P.Y*B;
-            P.Z:=P.Z*D;
-            Spline1.Add(P);
-         end;
-         TrvSplines.Add(Spline1);
-      end;
-      // now create tmp. splines in longitudinal direction
-      Setlength(Pts,Rows+1);
-      for I:=0 to rows do
-      begin
-         Setlength(Pts[I],Cols+1);
-         Spline2:=TFreeSpline.Create;
-         for j:=0 to TrvSplines.Count-1 do
-         begin
-            Spline1:=TrvSplines[J];
-            P:=Spline1.Value(I/Rows);
-            Spline2.Add(P);
-         end;
-         // now calculate all points on the longitudinal spline and send it to the surface
-         for J:=0 to Cols do
-         begin
-            P:=Spline2.Value(J/Cols);
-            Pts[I,J]:=TFreeSubdivisionControlPoint.Create(Owner.Surface);
-            Owner.Surface.AddControlPoint(Pts[I,J]);
-            Pts[I,J].Coordinate:=P;
-            if (I=0) and (J=Cols) then
-            begin
-               StemPoint:=Pts[I,J];
-            end;
-         end;
-         Spline2.Destroy;
-      end;
-      // Destroy tmp splines
-      for I:=1 to TrvSplines.Count do
-      begin
-         Spline1:=TrvSplines[I-1];
-         Spline1.Destroy;
-      end;
-      TrvSplines.Clear;
-      // finally create the controlfaces over the newly calculated points
-      for I:=1 to Rows do
-      begin
-         for J:=1 to cols do
-         begin
-            TrvSplines.Clear;
-            Trvsplines.Add(Pts[I,J-1]);
-            Trvsplines.Add(Pts[I,J]);
-            Trvsplines.Add(Pts[I-1,J]);
-            Trvsplines.Add(Pts[I-1,J-1]);
-            Owner.Surface.AddControlFace(Trvsplines,True);
-         end;
-      end;
-      Owner.Precision:=fpMedium;
-      Owner.Surface.Initialize(1,1,1);
-      // Collapse stempoint to mage the grid irregular in order to demonstrate subdivision-surface capabilities
-      if StemPoint<>nil then if StemPoint.VertexType=svCorner then stempoint.VertexType:=svCrease;
-      Owner.Build:=False;
-
-      // Add 21 stations
-      for I:=0 to 20 do Intersection_Add(fiStation,I/20*(Owner.Surface.Max.X-Owner.Surface.Min.X));
-      // Add 7 buttocks
-      for I:=1 to 6 do Intersection_Add(fiButtock,I/7*(Owner.Surface.Max.Y-Owner.Surface.Min.Y));
-      // Add 11 waterlines
-      for I:=0 to 10 do Intersection_Add(fiWaterline,I/10*(Owner.Surface.Max.Z-Owner.Surface.Min.Z));
-
-      Owner.draw;
-      Owner.FileChanged:=True;
-      if Assigned(Owner.OnUpdateGeometryInfo) then Owner.OnUpdateGeometryInfo(self);
-      Result:=true;
-      TrvSplines.Destroy;
-   end;
-   FreeNewModelDialog.Destroy;
-*/    
+    getModel()->newModel(fuMetric, 15.0, 6.0, 1.0, 10, 8);
+    emit modelLoaded();
 }
 
 void Controller::lackenbyModelTransformation()
@@ -1063,14 +933,15 @@ void Controller::deleteSelections()
             + surf->numberOfSelectedControlCurves(); //BUGBUG: markers and flowlines
     if (n == 0)
         return;
-    // TODO
     // msg 0175
-    //getModel()->createUndo(tr("delete"), true);
-    //getModel()->clearSelectedItems();
-    //getModel()->setActiveControlPoint(0);
-    //emit showControlPointDialog(false);
-    //emit modelGeometryChanged();
-    //emit changeSelectedItems();
+    getModel()->createUndo(tr("delete"), true);
+    getModel()->deleteSelected();
+    getModel()->setActiveControlPoint(0);
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit showControlPointDialog(false);
+    emit modelGeometryChanged();
+    emit changeSelectedItems();
 }
 
 void Controller::selectAll()

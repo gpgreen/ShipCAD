@@ -375,7 +375,7 @@ void ProjectSettings::clear()
 	_fvcg = 1.0;
 }
 
-void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
+void ProjectSettings::loadBinary(FileBuffer& source, QImage* /*img*/)
 {
 	clear();
     source.load(_name);
@@ -502,7 +502,7 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
 
 void ProjectSettings::dump(ostream& os) const
 {
-	// TODO: dump this
+    os << "ProjectSettings";
 }
 
 ostream& operator << (ostream& os, const ShipCAD::ProjectSettings& settings)

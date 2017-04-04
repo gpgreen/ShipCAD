@@ -39,6 +39,7 @@
 #include "subdivface.h"
 #include "flowline.h"
 #include "viewport.h"
+#include "subdivpoint.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -85,6 +86,7 @@ void ShipCADModel::clear()
     _selected_flowlines.clear();
     _flowlines.clear();
     _background_images.clear();
+    clearUndo();
 }
 
 void ShipCADModel::setFilename(const QString& name)
@@ -100,7 +102,7 @@ void ShipCADModel::setFilename(const QString& name)
     _filename_set = true;
 }
 
-void ShipCADModel::buildValidFrameTable(bool close_at_deck)
+void ShipCADModel::buildValidFrameTable(bool /*close_at_deck*/)
 {
     // TODO
 }
@@ -402,7 +404,7 @@ void ShipCADModel::clearUndo()
     emit undoDataChanged();
 }
 
-void ShipCADModel::drawGrid(Viewport& vp, LineShader* lineshader)
+void ShipCADModel::drawGrid(Viewport& /*vp*/, LineShader* /*lineshader*/)
 {
 
 }
@@ -504,6 +506,63 @@ void ShipCADModel::draw(Viewport& vp)
         // Draw legend with gaussian curvature values
         //TODO
     }
+}
+
+// FreeShipUnit.pas:10540
+Intersection* ShipCADModel::createIntersection(intersection_type_t ty, float distance)
+{
+    IntersectionVector* targetlist = 0;
+    switch(ty) {
+    case fiStation:
+        targetlist = &_stations;
+        break;
+    case fiWaterline:
+        targetlist = &_waterlines;
+        break;
+    case fiButtock:
+        targetlist = &_buttocks;
+        break;
+    case fiDiagonal:
+        targetlist = &_diagonals;
+        break;
+    case fiFree:
+        return 0;
+    }
+    // check if an intersection already exists at this location
+    for (size_t i=0; i<targetlist->size(); i++) {
+        Intersection* inter = targetlist->get(i);
+        if (abs(-(inter->getPlane().d()) - distance) < 1E-5) {
+            // it exists, don't make a new one
+            return 0;
+        }
+    }
+    // add the new one
+    Plane pln;
+    switch(ty) {
+    case fiStation:
+        pln = Plane(1.0, 0, 0, -distance);
+        break;
+    case fiButtock:
+        pln = Plane(0, 1.0, 0, -distance);
+        break;
+    case fiWaterline:
+        pln = Plane(0, 0, 1.0, -distance);
+        break;
+    case fiDiagonal:
+        pln = Plane(0, 1.0/sqrt(2.0), 1.0/sqrt(2.0), -(1.0/sqrt(2.0))*distance);
+        break;
+    case fiFree:
+        return 0;
+    }
+    Intersection* result = new Intersection(this, ty, pln, false);
+    result->rebuild();
+    // only add if an intersection has been found
+    if (result->getSplines().size() == 0) {
+        delete result;
+        return 0;
+    }
+    targetlist->add(result);
+    return result;
 }
 
 void ShipCADModel::loadBinary(FileBuffer& source)
@@ -725,4 +784,143 @@ void ShipCADModel::removeSelectedFlowline(const Flowline* flow)
     if (i != _selected_flowlines.end())
         _selected_flowlines.erase(i);
 }
+
+void ShipCADModel::deleteSelected()
+{
+    // BUGBUG markers, flowlines
+    getSurface()->deleteSelected();
+}
+
+float new_model_pts[] = {
+    // station 0, stern
+    0.00000,0.00000,1.56754,
+    0.00000,0.05280,1.59170,
+    0.00000,0.22171,1.77284,
+    0.00000,0.28506,2.64108,
+    0.00000,0.29135,3.48932,
+    // station 1
+    0.20880,0.00000,0.49656,
+    0.20881,0.18796,0.53622,
+    0.20880,0.33700,0.97840,
+    0.20880,0.45607,2.05422,
+    0.20882,0.47184,3.44280,
+    // station 2
+    0.41765,0.00000,0.00000,
+    0.41765,0.23565,0.07524,
+    0.41765,0.41555,0.67735,
+    0.41765,0.49421,1.91004,
+    0.41737,0.51468,3.45474,
+    // station 3
+    0.58471,0.00000,0.00000,
+    0.58472,0.24072,0.02507,
+    0.58472,0.39528,0.71080,
+    0.58488,0.45356,2.04881,
+    0.58472,0.46756,3.54662,
+    // station 4
+    0.75179,0.00000,0.28284,
+    0.75178,0.13715,0.44098,
+    0.75179,0.20950,0.87760,
+    0.75179,0.30538,2.38232,
+    0.75177,0.34473,3.67786,
+    // station 5
+    0.90672,0.00000,0.81860,
+    0.90681,0.01887,0.98650,
+    0.90658,0.04671,1.29873,
+    0.90637,0.11195,2.83107,
+    0.90672,0.14523,3.81697,
+    // station 6, stem
+    0.91580,0.00000,0.85643,
+    0.92562,0.00000,1.17444,
+    0.93387,0.00000,1.44618,
+    0.97668,0.00000,3.03482,
+    1.00000,0.00000,3.91366
+};
+
+void ShipCADModel::newModel(unit_type_t units,
+                            float length, float breadth, float draft,
+                            size_t rows, size_t cols)
+{
+    clear();
+
+    _settings.setLength(length);
+    _settings.setBeam(breadth);
+    _settings.setDraft(draft);
+    _settings.setUnits(units);
+    
+    // create temporary splines
+    SplineVector trvsplines(true);
+    // first create temporary splines in transverse direction
+    for (size_t i=0; i<7; i++) {
+        Spline* spline = new Spline();
+        for (size_t j=0; j<5; j++) {
+            QVector3D p(new_model_pts[i*15+j*3],
+                    new_model_pts[i*15+j*3+1],
+                    new_model_pts[i*15+j*3+2]);
+            p.setX(p.x() * length);
+            p.setY(p.y() * breadth);
+            p.setZ(p.z() * draft);
+            spline->add(p);
+        }
+        trvsplines.add(spline);
+    }
+    // now create temporary splines in longitudinal direction
+    vector<vector<SubdivisionControlPoint*> > pts;
+    SubdivisionControlPoint* stem_point = 0;
+    for (size_t i=0; i<=rows; i++) {
+        Spline spline2;
+        for (size_t j=0; j<trvsplines.size(); j++) {
+            Spline spline1(*(trvsplines.get(j)));
+            QVector3D p(spline1.value(i/static_cast<float>(rows)));
+            spline2.add(p);
+        }
+        // now calculate all points on the longitudinal spline and send to the surface
+        vector<SubdivisionControlPoint*> row;
+        for (size_t j=0; j<=cols; j++) {
+            QVector3D p(spline2.value(j/static_cast<float>(cols)));
+            SubdivisionControlPoint* pt = getSurface()->addControlPoint(p);
+            row.push_back(pt);
+            if (i == 0 && j == cols)
+                stem_point = pt;
+        }
+        pts.push_back(row);
+    }
+    // finally create the controlfaces over the newly calculate points
+    for (size_t i=1; i<=rows; i++) {
+        for (size_t j=1; j<=cols; j++) {
+            vector<SubdivisionControlPoint*> tmppoints;
+            tmppoints.push_back(pts[i][j-1]);
+            tmppoints.push_back(pts[i][j]);
+            tmppoints.push_back(pts[i-1][j]);
+            tmppoints.push_back(pts[i-1][j-1]);
+            getSurface()->addControlFace(tmppoints, true);
+        }
+    }
+    setPrecision(fpMedium);
+    getSurface()->initialize(1,1);
+    // collapse stempoint
+    if (stem_point != 0 && stem_point->getVertexType() == svCorner)
+        stem_point->setVertexType(svCrease);
+    QVector3D min;
+    QVector3D max;
+    getSurface()->extents(min, max);
+    // add 21 stations
+    for (size_t i=0; i<21; i++)
+        createIntersection(fiStation, i/20.0*(max.x() - min.x()));
+    // add 7 buttocks
+    for (size_t i=0; i<7; i++)
+        createIntersection(fiButtock, i/7.0*(max.y() - min.y()));
+    // add 11 waterlines
+    for (size_t i=0; i<11; i++)
+        createIntersection(fiWaterline, i/10.0*(max.z() - min.z()));
+    _file_changed = false;
+    rebuildModel(false);
+    if (_stations.size() > 0)
+        _vis.setShowStations(true);
+    if (_waterlines.size() > 0)
+        _vis.setShowWaterlines(true);
+    if (_buttocks.size() > 0)
+        _vis.setShowButtocks(true);
+    emit onUpdateGeometryInfo();
+}
+
 

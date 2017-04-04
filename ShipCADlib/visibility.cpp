@@ -44,24 +44,24 @@ void Visibility::clear()
     _model_view = mvPort;
     _show_interior_edges = false;
     _show_control_net = true;
-    _show_grid = true;
-    _show_normals = true;
+    _show_grid = false;
+    _show_normals = false;
     _show_stations = true;
     _show_buttocks = true;
     _show_waterlines = true;
     _show_diagonals = true;
     _show_markers = true;
-    _show_curvature = true;
+    _show_curvature = false;
     _show_control_curves = true;
     _curvature_scale = 1.0;
     _cursor_increment = 0.1f;
-    _show_hydrostatic_data = true;
-    _show_hydro_displacement = true;
-    _show_hydro_lateral_area = true;
-    _show_hydro_sectional_areas = true;
-    _show_hydro_metacentric_height = true;
-    _show_hydro_lcf = true;
-    _show_flowlines = true;
+    _show_hydrostatic_data = false;
+    _show_hydro_displacement = false;
+    _show_hydro_lateral_area = false;
+    _show_hydro_sectional_areas = false;
+    _show_hydro_metacentric_height = false;
+    _show_hydro_lcf = false;
+    _show_flowlines = false;
     emit onChangeCursorIncrement();
 }
 

@@ -80,11 +80,12 @@ void ViewportView::resetView()
     _scale = 1.0;
 }
 
-bool ViewportView::leftMousePick(QPoint pos, int w, int h, bool multi_sel)
+bool ViewportView::leftMousePick(QPoint pos, int w, int h, PickRay& ray)
 {
     bool scene_changed = false;
-    PickRay ray = convertMouseCoordToWorld(pos, w, h);
-    ray.multi_sel = multi_sel;
+    PickRay tray = convertMouseCoordToWorld(pos, w, h);
+    ray.dir = tray.dir;
+    ray.pt = tray.pt;
     scene_changed = _vp->shootPickRay(ray);
     return scene_changed;
 }
@@ -151,8 +152,7 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
     from /= from.w();
     to /= to.w();
 
-    PickRay ray;
-    ray.multi_sel = false;
+    PickRay ray(false, false, false, false);
     ray.pt = from.toVector3D();
     ray.dir = to.toVector3D() - from.toVector3D();
     ray.dir.normalize();

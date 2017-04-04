@@ -312,12 +312,23 @@ private:
     QAction* _zoomAllAction;
     QAction* _printAction;
     QAction* _saveImageAction;
+    // camera actions
     QActionGroup* _cameraGroup;
     QAction* _wideLensAction;
     QAction* _stdLensAction;
     QAction* _shortLensAction;
     QAction* _medLensAction;
     QAction* _longLensAction;
+    // background image actions
+    QAction* _visibleBgImgAction;
+    QAction* _clearBgImgAction;
+    QAction* _loadBgImgAction;
+    QAction* _saveBgImgAction;
+    QAction* _originBgImgAction;
+    QAction* _scaleBgImgAction;
+    QAction* _alphaBgImgAction;
+    QAction* _tolBgImgAction;
+    QAction* _blendBgImgAction;
 };
 
 #endif // MAINWINDOW_H

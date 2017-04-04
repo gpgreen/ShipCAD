@@ -1185,7 +1185,8 @@ void SubdivisionSurface::removeSelectedControlFace(SubdivisionControlFace *face)
 {
     vector<SubdivisionControlFace*>::iterator i = find(
                 _sel_control_faces.begin(), _sel_control_faces.end(), face);
-    _sel_control_faces.erase(i);
+    if (i != _sel_control_faces.end())
+        _sel_control_faces.erase(i);
 }
 
 void SubdivisionSurface::setSelectedControlPoint(SubdivisionControlPoint* pt)
@@ -1204,7 +1205,8 @@ void SubdivisionSurface::removeSelectedControlPoint(SubdivisionControlPoint *pt)
 {
     vector<SubdivisionControlPoint*>::iterator i = find(
                 _sel_control_points.begin(), _sel_control_points.end(), pt);
-    _sel_control_points.erase(i);
+    if (i != _sel_control_points.end())
+        _sel_control_points.erase(i);
 }
 
 SubdivisionControlPoint* SubdivisionSurface::getSelectedControlPoint(size_t idx)
@@ -1249,14 +1251,16 @@ SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
 {
     multimap<float,SubdivisionBase*> picks;
     // check control points
-    for (size_t i=0; i<numberOfControlPoints(); i++) {
-        SubdivisionControlPoint* cp = getControlPoint(i);
-        if (cp->distanceFromPickRay(vp, ray) < 1E-2) {
-            float s = ray.pt.distanceToPoint(cp->getCoordinate());
-            picks.insert(make_pair(s,cp));
+    if (ray.point) {
+        for (size_t i=0; i<numberOfControlPoints(); i++) {
+            SubdivisionControlPoint* cp = getControlPoint(i);
+            if (cp->distanceFromPickRay(vp, ray) < 1E-2) {
+                float s = ray.pt.distanceToPoint(cp->getCoordinate());
+                picks.insert(make_pair(s,cp));
+            }
         }
     }
-    if (picks.size() == 0) {
+    if (ray.edge) {
         // check control edges
         for (size_t i=0; i<numberOfControlEdges(); i++) {
             SubdivisionControlEdge* edge = getControlEdge(i);
@@ -1815,13 +1819,11 @@ void SubdivisionSurface::convertToGrid(ControlFaceGrid& input, PointGrid& grid)
         throw runtime_error("Could not establish the entire grid!");
 }
 
-void SubdivisionSurface::edgeConnect()
+bool SubdivisionSurface::edgeConnect()
 {
-    if (numberOfSelectedControlPoints() <= 1)
-        return;
-    for (size_t i=numberOfSelectedControlPoints()-1; i>=1; --i) {
-        SubdivisionControlPoint* v1 = _sel_control_points[numberOfSelectedControlPoints()-2];
-        SubdivisionControlPoint* v2 = _sel_control_points[numberOfSelectedControlPoints()-1];
+    for (size_t i=0; i<numberOfSelectedControlPoints()-1; ++i) {
+        SubdivisionControlPoint* v1 = _sel_control_points[i];
+        SubdivisionControlPoint* v2 = _sel_control_points[++i];
         if (controlEdgeExists(v1, v2) == 0) {
             if (v1->numberOfFaces() == 0 && v2->numberOfFaces() == 0) {
                 SubdivisionControlEdge* edge = addControlEdge(v1, v2);
@@ -1829,28 +1831,26 @@ void SubdivisionSurface::edgeConnect()
                     edge->setCrease(true);
             }
             else {
-                for (size_t j=1; j<=v1->numberOfFaces(); ++j) {
-                    SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(v1->getFace(j-1));
+                for (size_t j=0; j<v1->numberOfFaces(); ++j) {
+                    SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(v1->getFace(j));
                     if (v2->hasFace(face)) {
                         bool deleteface;
                         face->insertControlEdge(v1, v2, deleteface);
                         if (deleteface)
                             deleteControlFace(face);
-                        v2->setSelected(false);
-                        setBuild(false);
                         break;
                     }
                 }
             }
         }
         else if (numberOfSelectedControlPoints() == 2) {
-            // BUGBUG: userstring 202
-            throw runtime_error("");
+            return false;
         }
     }
-    for (size_t i=numberOfSelectedControlPoints(); i>=1; --i) {
-        _sel_control_points[i-1]->setSelected(false);
-    }
+    _sel_control_points.clear();
+    deleteElementsCollection();
+    setBuild(false);
+    return true;
 }
 
 void SubdivisionSurface::exportFeFFile(QStringList& strings)
@@ -2393,12 +2393,10 @@ void SubdivisionSurface::draw(Viewport &vp)
 {
     if (!isBuild())
         rebuild();
-    if (vp.getViewportMode() != vmWireFrame) {
-        if (vp.getViewportMode() == vmShadeGauss
-                || vp.getViewportMode() == vmShadeDevelopable) {
-            if (!isGaussCurvatureCalculated())
-                calculateGaussCurvature();
-        }
+    if ((vp.getViewportMode() == vmShadeGauss
+            || vp.getViewportMode() == vmShadeDevelopable)
+            && !isGaussCurvatureCalculated()) {
+        calculateGaussCurvature();
     }
     SubdivisionLayer::drawLayers(vp, this);
     LineShader* lineshader = vp.setLineShader();
@@ -3000,6 +2998,7 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionEdge *> &source,
     }
 }
 
+// FreeGeometry.pas:10840
 void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 {
 	// checking..
@@ -3018,8 +3017,7 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 		&& collapseedge->endPoint()->numberOfEdges() > 2) {
 		if (collapseedge->getCurve() != 0)
 			collapseedge->getCurve()->deleteEdge(collapseedge);
-		if (collapseedge->isSelected())
-			collapseedge->setSelected(false);
+        collapseedge->setSelected(false);
 		s = dynamic_cast<SubdivisionControlPoint*>(collapseedge->startPoint());
 		e = dynamic_cast<SubdivisionControlPoint*>(collapseedge->endPoint());
 		if (s == 0 || e == 0)
@@ -3032,9 +3030,9 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 			p2 = face1->getPoint(i);
 			if ((p1 == collapseedge->startPoint() && p2 == collapseedge->endPoint())
 				|| ((p2 == collapseedge->startPoint() && p1 == collapseedge->endPoint()))) {
-				size_t ind1 = face2->indexOfPoint(p2);
-				size_t ind2 = (ind1 + 1) % face2->numberOfPoints(); // select the next index
-				if (face2->getPoint(ind2) != p1) {
+				size_t i1 = face2->indexOfPoint(p2);
+				size_t i2 = (i1 + 1) % face2->numberOfPoints(); // select the next index
+				if (face2->getPoint(i2) != p1) {
 					face2->flipNormal();
 				}
 				break;
@@ -3050,11 +3048,11 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
     face2->getLayer()->releaseControlFace(face2);
 	size_t ind1 = face1->indexOfPoint(collapseedge->startPoint());
 	size_t ind2 = face1->indexOfPoint(collapseedge->endPoint());
-	if (ind2 < ind1 && fabs(static_cast<float>(ind2 - ind1)) == 1.0f)
+	if (ind2 < ind1 && abs(ind2 - ind1) == 1)
 		swap(ind1, ind2);
 	size_t ind3 = face2->indexOfPoint(collapseedge->startPoint());
 	size_t ind4 = face2->indexOfPoint(collapseedge->endPoint());
-	if (ind4 < ind3 && fabs(static_cast<float>(ind4 - ind3)) == 1.0f)
+	if (ind4 < ind3 && abs(ind4 - ind3) == 1)
 		swap(ind3, ind4);
 	if (ind1 == 0 && ind2 == face1->numberOfPoints() - 1
 		&& ind3 == 0 && ind4 == face2->numberOfPoints() - 1) {
@@ -3076,14 +3074,21 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 	newface->setLayer(layer);
 	addControlFace(newface);
 	for (size_t i=0; i<=ind1; ++i) {
-		newface->addPoint(face1->getPoint(i));
-	}
-	for (size_t i=ind4; i<face2->numberOfPoints(); ++i)
-		newface->addPoint(face2->getPoint(i));
-	for (size_t i=0; i<=ind3; ++i)
-		newface->addPoint(face2->getPoint(i));
-	for (size_t i=ind2; i<face1->numberOfPoints(); ++i)
-		newface->addPoint(face1->getPoint(i));
+        if (!newface->hasPoint(face1->getPoint(i)))
+            newface->addPoint(face1->getPoint(i));
+    }
+	for (size_t i=ind4; i<face2->numberOfPoints(); ++i) {
+        if (!newface->hasPoint(face2->getPoint(i)))
+            newface->addPoint(face2->getPoint(i));
+    }
+	for (size_t i=0; i<=ind3; ++i) {
+        if (!newface->hasPoint(face2->getPoint(i)))
+            newface->addPoint(face2->getPoint(i));
+    }
+	for (size_t i=ind2; i<face1->numberOfPoints(); ++i) {
+        if (!newface->hasPoint(face1->getPoint(i)))
+            newface->addPoint(face1->getPoint(i));
+    }
 	// check all appropriate points are added
 	if (newface->numberOfPoints() != face1->numberOfPoints() + face2->numberOfPoints() - 2)
 		throw runtime_error("wrong number of points in SubdivisionControlEdge::collapse");
@@ -3108,12 +3113,7 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 		collapseedge->setCrease(false);
 	collapseedge->startPoint()->deleteEdge(collapseedge);
 	collapseedge->endPoint()->deleteEdge(collapseedge);
-	if (hasControlEdge(collapseedge))
-		removeControlEdge(collapseedge);
-	if (hasControlFace(face1))
-		removeControlFace(face1);
-	if (hasControlFace(face2))
-		removeControlFace(face2);
+
 	deleteControlFace(face1);
 	deleteControlFace(face2);
 
@@ -3122,8 +3122,10 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
 		s->collapse();
     if (e != 0 && e->numberOfFaces() > 1 && e->numberOfEdges() == 2)
 		e->collapse();
+    
+    deleteControlEdge(collapseedge);
+    deleteElementsCollection();
 	setBuild(false);
-	// BUGBUG: pascal deletes edge here, but we can't do that...
 }
 
 void SubdivisionSurface::loadBinary(FileBuffer &source)
@@ -3351,7 +3353,7 @@ void SubdivisionSurface::saveToStream(QStringList& strings)
         getControlFace(i)->saveToStream(strings);
 }
 
-void SubdivisionSurface::selectionDelete()
+void SubdivisionSurface::deleteSelected()
 {
     // first controlcurves, then faces, edges, and points
     size_t i = numberOfSelectedControlCurves();

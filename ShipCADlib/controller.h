@@ -339,7 +339,7 @@ public slots:
 
     /*! \brief add a new intersection at the specified location
      */
-    Intersection* addIntersection(intersection_type_t ty, float distance);
+    void addIntersection();
 
     /*! \brief add an intersection to the appropriate list
      */

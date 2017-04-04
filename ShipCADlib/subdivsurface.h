@@ -122,7 +122,11 @@ public:
     void calculateGaussCurvature();
     void clearSelection();
     void convertToGrid(ControlFaceGrid& input, PointGrid& grid);
-    void edgeConnect();
+    /*! \brief connect edges between selected points
+     *
+     * \return true if successfull, false if edge already exists
+     */
+    bool edgeConnect();
     virtual void extents(QVector3D& min, QVector3D& max);
     void extrudeEdges(std::vector<SubdivisionControlEdge*>& edges,
 		      const QVector3D& direction);
@@ -139,7 +143,7 @@ public:
     bool intersectPlane(const Plane& plane, bool hydrostatics_layers_only, SplineVector& destination);
     void insertPlane(const Plane& plane, bool add_curves);
     void subdivide();
-    void selectionDelete();
+    void deleteSelected();
 
     size_t numberOfLockedPoints();
     size_t numberOfSelectedLockedPoints();
@@ -171,6 +175,8 @@ public:
     void setSelectedControlPoint(SubdivisionControlPoint* pt);
     void removeSelectedControlPoint(SubdivisionControlPoint* pt);
     SubdivisionControlPoint* getSelectedControlPoint(size_t idx);
+    std::vector<SubdivisionControlPoint*>& getSelControlPointCollection()
+        {return _sel_control_points;}
     
     // SubdivisionEdge
     size_t numberOfEdges() {return _edges.size();}

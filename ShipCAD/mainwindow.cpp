@@ -63,7 +63,10 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     _zoomAllAction(0), _printAction(0), _saveImageAction(0),
     _cameraGroup(0),
     _wideLensAction(0), _stdLensAction(0), _shortLensAction(0), _medLensAction(0),
-    _longLensAction(0)
+    _longLensAction(0),
+    _visibleBgImgAction(0), _clearBgImgAction(0), _loadBgImgAction(0),
+    _saveBgImgAction(0), _originBgImgAction(0), _scaleBgImgAction(0),
+    _alphaBgImgAction(0), _tolBgImgAction(0), _blendBgImgAction(0)
 {
     ui->setupUi(this);
     createToolBars();
@@ -386,9 +389,29 @@ void MainWindow::createActions()
     connect(_medLensAction, SIGNAL(triggered()), this, SLOT(setMedLens()));
     connect(_longLensAction, SIGNAL(triggered()), this, SLOT(setFarLens()));
 
+    _visibleBgImgAction = new QAction(tr("Visible"), this);
+    _visibleBgImgAction->setEnabled(false);
+    _clearBgImgAction = new QAction(tr("Clear"), this);
+    _clearBgImgAction->setEnabled(false);
+    _loadBgImgAction = new QAction(tr("Load"), this);
+    _loadBgImgAction->setEnabled(false);
+    _saveBgImgAction = new QAction(tr("Save"), this);
+    _saveBgImgAction->setEnabled(false);
+    _originBgImgAction = new QAction(tr("Origin"), this);
+    _originBgImgAction->setEnabled(false);
+    _scaleBgImgAction = new QAction(tr("Scale"), this);
+    _scaleBgImgAction->setEnabled(false);
+    _alphaBgImgAction = new QAction(tr("Transparent"), this);
+    _alphaBgImgAction->setEnabled(false);
+    _tolBgImgAction = new QAction(tr("Tolerance"), this);
+    _tolBgImgAction->setEnabled(false);
+    _blendBgImgAction = new QAction(tr("Blending"), this);
+    _blendBgImgAction->setEnabled(false);
+
     _printAction = new QAction(tr("Print"), this);
     _printAction->setEnabled(false);
     _saveImageAction = new QAction(tr("Save image"), this);
+    _saveImageAction->setEnabled(false);
 }
 
 void MainWindow::createMenus()
@@ -417,8 +440,16 @@ void MainWindow::createMenus()
     modeMenu->addAction(_gaussCurvAction);
     modeMenu->addAction(_zebraAction);
     modeMenu->addAction(_developCheckAction);
-    // Visible, Clear, Load, Save, Origin, Set scale, Transparent color, Tolerance, Blending
     QMenu* imgMenu = _contextMenu->addMenu(tr("Background image"));
+    imgMenu->addAction(_visibleBgImgAction);
+    imgMenu->addAction(_clearBgImgAction);
+    imgMenu->addAction(_loadBgImgAction);
+    imgMenu->addAction(_saveBgImgAction);
+    imgMenu->addAction(_originBgImgAction);
+    imgMenu->addAction(_scaleBgImgAction);
+    imgMenu->addAction(_alphaBgImgAction);
+    imgMenu->addAction(_tolBgImgAction);
+    imgMenu->addAction(_blendBgImgAction);
     _contextMenu->addAction(_printAction);
     _contextMenu->addAction(_saveImageAction);
 }
@@ -715,13 +746,18 @@ void MainWindow::updateVisibilityActions()
 
     ui->actionShowControl_net->setChecked(vis.isShowControlNet());
     ui->actionShow_both_sides->setChecked(vis.getModelView() == mvBoth);
-    ui->actionShowControl_curves->setChecked(vis.isShowControlCurves());
+    ui->actionShowControl_curves->setChecked(_controller->getModel()->getControlCurves().size() > 0
+                                             && vis.isShowControlCurves());
     ui->actionShowInterior_edges->setChecked(vis.isShowInteriorEdges());
     ui->actionShowGrid->setChecked(vis.isShowGrid());
-    ui->actionShowStations->setChecked(vis.isShowStations());
-    ui->actionShowButtocks->setChecked(vis.isShowButtocks());
-    ui->actionShowWaterlines->setChecked(vis.isShowWaterlines());
-    ui->actionShowDiagonals->setChecked(vis.isShowDiagonals());
+    ui->actionShowStations->setChecked(_controller->getModel()->getStations().size() > 0
+                                       && vis.isShowStations());
+    ui->actionShowButtocks->setChecked(_controller->getModel()->getButtocks().size() > 0
+                                       && vis.isShowButtocks());
+    ui->actionShowWaterlines->setChecked(_controller->getModel()->getWaterlines().size() > 0
+                                         && vis.isShowWaterlines());
+    ui->actionShowDiagonals->setChecked(_controller->getModel()->getDiagonals().size() > 0
+                                        && vis.isShowDiagonals());
     ui->actionShowHydrostatic_features->setChecked(vis.isShowHydrostaticData());
     ui->actionShowFlowlines->setChecked(vis.isShowFlowlines());
     ui->actionShowNormals->setChecked(vis.isShowNormals());

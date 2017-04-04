@@ -460,14 +460,14 @@ static void addCurveFaceToDL(QVector<QVector3D>& vertices,
                              QVector<QVector3D>& colors,
                              QVector<QVector3D>& normals,
                              const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
-                             const QColor& c1, const QColor& c2, const QColor& c3)
+                             const QColor& c1, const QColor& c2, const QColor& c3,
+                             const QVector3D& n1, const QVector3D& n2, const QVector3D& n3)
 {
-    QVector3D n = UnifiedNormal(p1, p2, p3);
     vertices << p1 << p2 << p3;
     colors << QVector3D(c1.redF(), c1.blueF(), c1.greenF())
            << QVector3D(c2.redF(), c2.blueF(), c2.greenF())
            << QVector3D(c3.redF(), c3.blueF(), c3.greenF());
-    normals << n << n << n;
+    normals << n1 << n2 << n3;
 }
 
 // constant used in zebra striping
@@ -532,6 +532,8 @@ bool checkExtents(const QVector3D& fmin, const QVector3D& fmax, const QVector3D&
         return true;
     if (newmax.x() > fmax.x() || newmax.y() > fmax.y() || newmax.z() > fmax.z())
         return true;
+    if (abs(newmax.x() - newmax.x()) > 2.0)
+        return true;
     return false;
 }
 
@@ -578,12 +580,15 @@ static void zebraDrawFace(bool check, const QVector3D& facemin, const QVector3D&
         if ((lo % 2) == 0) {      // lo is even
             if (check && checkExtents(facemin, facemax, p1, p2, p3))
                 cout << "bad stuff" << endl;
-            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, color, color, color);
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, color, color, color,
+                             n1, n2, n3);
         }
         else {
             if (check && checkExtents(facemin, facemax, p1, p2, p3))
                 cout << "bad stuff" << endl;
-            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, zebraColor, zebraColor, zebraColor);
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3,
+                             zebraColor, zebraColor, zebraColor,
+                             n1, n2, n3);
         }
     } else {
         intersections.push_back(ZebraIntersection(p1, d1));
@@ -605,11 +610,13 @@ static void zebraDrawFace(bool check, const QVector3D& facemin, const QVector3D&
                     cout << "bad stuff" << endl;
                 if ((i % 2)) {    // i is odd
                     addCurveFaceToDL(vertices, colors, normals, *pts[0], *pts[j-1], *pts[j],
-                                     color, color, color);
+                                     color, color, color,
+                                     n1, n2, n3);
                 }
                 else {
                     addCurveFaceToDL(vertices, colors, normals, *pts[0], *pts[j-1], *pts[j],
-                                     zebraColor, zebraColor, zebraColor);
+                                     zebraColor, zebraColor, zebraColor,
+                                     n1, n2, n3);
                 }
             }
         }
@@ -862,12 +869,18 @@ void SubdivisionControlFace::drawCurvatureFaces(CurveFaceShader* shader, float M
             idx = _owner->indexOfPoint(_children[i]->getPoint(j));
             float c3 = _owner->getGaussCurvature(idx);
             QColor cc3 = FillColor(Fragment(c3, MinCurvature, MaxCurvature));
-            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+            QVector3D n = UnifiedNormal(p1, p2, p3);
+            addCurveFaceToDL(vertices, colors, normals, p1, p2, p3,
+                             cc1, cc2, cc3,
+                             n, n, n);
             if (_owner->drawMirror() && getLayer()->isSymmetric()) {
                 p1.setY(-p1.y());
                 p2.setY(-p2.y());
                 p3.setY(-p3.y());
-                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3, cc1, cc2, cc3);
+                n = UnifiedNormal(p1, p2, p3);
+                addCurveFaceToDL(vertices, colors, normals, p1, p2, p3,
+                                 cc1, cc2, cc3,
+                                 n, n, n);
             }
         }
     }
@@ -966,10 +979,9 @@ SubdivisionEdge* SubdivisionControlFace::getControlEdge(size_t index)
 
 void SubdivisionControlFace::setSelected(bool val)
 {
-    bool have = _owner->hasSelectedControlFace(this);
-    if (val && !have)
+    if (val)
         _owner->setSelectedControlFace(this);
-    else if (!val && have)
+    else
         _owner->removeSelectedControlFace(this);
 }
 

@@ -225,6 +225,7 @@ void MonoFaceShader::renderMesh(QColor meshColor,
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+#if 0
 static const char *vertexShaderSourceCore =
     "#version 150\n"
     "in vec4 vertex;\n"
@@ -253,6 +254,7 @@ static const char *fragmentShaderSourceCore =
     "   highp vec3 col = clamp(color * 0.2 + color * 0.8 * NL, 0.0, 1.0);\n"
     "   fragColor = vec4(col, 1.0);\n"
     "}\n";
+#endif
 
 static const char *vertexShaderSource =
     "attribute vec4 vertex;\n"

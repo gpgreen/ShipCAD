@@ -355,12 +355,12 @@ void SubdivisionFace::subdivide(bool controlface,
         }
 
         // then the center triangle
-        for (size_t i=1; i<=numberOfPoints(); ++i) {
-            p2 = _points[i-1];
-            size_t index = (i - 2 + numberOfPoints()) % numberOfPoints();
+        for (size_t i=0; i<numberOfPoints(); ++i) {
+            p2 = _points[i];
+            size_t index = (i - 1 + numberOfPoints()) % numberOfPoints();
             prevedge = _owner->edgeExists(p2, _points[index]);
             etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(prevedge));
-            pts[i-1] = (*etmpindex).second;
+            pts[i] = (*etmpindex).second;
         }
         // add the new face
         newface = SubdivisionFace::construct(_owner);

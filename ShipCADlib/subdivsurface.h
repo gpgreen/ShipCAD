@@ -42,6 +42,7 @@
 #include "spline.h"
 #include "entity.h"
 #include "mempool.h"
+#include "orderedmap.h"
 
 namespace ShipCAD {
 
@@ -174,8 +175,7 @@ public:
     bool hasSelectedControlPoint(SubdivisionControlPoint* pt);
     void setSelectedControlPoint(SubdivisionControlPoint* pt);
     void removeSelectedControlPoint(SubdivisionControlPoint* pt);
-    SubdivisionControlPoint* getSelectedControlPoint(size_t idx);
-    std::vector<SubdivisionControlPoint*>& getSelControlPointCollection()
+    OrderedPointMap& getSelControlPointCollection()
         {return _sel_control_points;}
     
     // SubdivisionEdge
@@ -210,7 +210,7 @@ public:
     void setSelectedControlEdge(SubdivisionControlEdge* edge);
     void removeSelectedControlEdge(SubdivisionControlEdge* edge);
     bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
-    std::vector<SubdivisionControlEdge*>& getSelControlEdgeCollection() {return _sel_control_edges;}
+    std::set<SubdivisionControlEdge*>& getSelControlEdgeCollection() {return _sel_control_edges;}
 
     // SubdivisionFace
     size_t numberOfFaces();
@@ -360,19 +360,6 @@ protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;
     SubdivisionControlPoint* newControlPoint(const QVector3D& p);
-    // used in assembleFacesToPatches
-    void findAttachedFaces(std::vector<SubdivisionControlFace*>& found_list,
-                           std::vector<SubdivisionControlFace*>& todo_list,
-                           SubdivisionControlFace* face);
-    SubdivisionControlFace* findCornerFace(std::vector<SubdivisionControlFace*>& ctrlfaces);
-    // used in doAssemble
-    bool validFace(SubdivisionFace* face,
-                   std::vector<SubdivisionFace*>& faces,
-                   std::vector<SubdivisionFace*>& tmpfaces);
-    // used in doAssembleSpecial
-    bool validFace(SubdivisionControlFace* face,
-                   std::vector<SubdivisionControlFace*>& faces,
-                   std::vector<SubdivisionControlFace*>& tmpfaces);
     // used in convertToGrid
     void doAssemble(PointGrid& grid, size_t& cols, size_t& rows,
                     std::vector<SubdivisionFace*>& faces);
@@ -456,10 +443,10 @@ protected:
                                                 // in their _edges list.
 
     // selected entities
-    std::vector<SubdivisionControlPoint*> _sel_control_points;
-    std::vector<SubdivisionControlEdge*> _sel_control_edges;
-    std::vector<SubdivisionControlFace*> _sel_control_faces;
-    std::vector<SubdivisionControlCurve*> _sel_control_curves;
+    OrderedPointMap _sel_control_points;
+    std::set<SubdivisionControlEdge*> _sel_control_edges;
+    std::set<SubdivisionControlFace*> _sel_control_faces;
+    std::set<SubdivisionControlCurve*> _sel_control_curves;
     
     // memory pools
     Pool<SubdivisionControlPoint> _cpoint_pool;

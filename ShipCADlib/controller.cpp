@@ -170,10 +170,10 @@ void Controller::collapseEdges()
     size_t n = 0;
     // msg 0073
     UndoObject* uo = getModel()->createUndo(tr("edge collapse"), false);
-    vector<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
-    for (size_t i=0; i<list.size(); i++) {
-        if (list[i]->numberOfFaces() > 1) {
-            getModel()->getSurface()->collapseEdge(list[i]);
+    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
+        if ((*i)->numberOfFaces() > 1) {
+            getModel()->getSurface()->collapseEdge(*i);
             n++;
         }
     }
@@ -228,12 +228,12 @@ void Controller::extrudeEdges()
     // msg 0076
     UndoObject* uo = getModel()->createUndo(tr("edge extrusion"), false);
     // assemble edges in a list
-    vector<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
     // only boundary edges are allowed
     vector<SubdivisionControlEdge*> actinglist;
-    for (size_t i=0; i<list.size(); i++) {
-        if (list[i]->numberOfFaces() == 1)
-            actinglist.push_back(list[i]);
+    for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
+        if ((*i)->numberOfFaces() == 1)
+            actinglist.push_back(*i);
     }
     // clear selected edges
     list.clear();
@@ -262,12 +262,12 @@ void Controller::splitEdges()
     // msg 0078
     UndoObject* uo = getModel()->createUndo(tr("edge split"), false);
     SubdivisionControlPoint* last = 0;
-    vector<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
     size_t n = 0;
-    for (size_t i=0; i<list.size(); i++) {
-        const QVector3D& p1 = list[i]->startPoint()->getCoordinate();
-        const QVector3D& p2 = list[i]->endPoint()->getCoordinate();
-        SubdivisionControlPoint* point = list[i]->insertControlPoint((p1 + p2)/2);
+    for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
+        const QVector3D& p1 = (*i)->startPoint()->getCoordinate();
+        const QVector3D& p2 = (*i)->endPoint()->getCoordinate();
+        SubdivisionControlPoint* point = (*i)->insertControlPoint((p1 + p2)/2);
         if (point != 0) {
             point->setSelected(true);
             last = point;
@@ -315,7 +315,7 @@ void Controller::mirrorPlaneFace()
 // FreeShipUnit.pas:5393
 void Controller::newFace()
 {
-    vector<SubdivisionControlPoint*>& cplist =
+    OrderedPointMap& cplist =
         getModel()->getSurface()->getSelControlPointCollection();
 
     if (cplist.size() < 3) {
@@ -329,7 +329,7 @@ void Controller::newFace()
     // assemble all points in a temporary list
     vector<SubdivisionControlPoint*> tmp;
     for (size_t i=0; i<cplist.size(); i++)
-        tmp.push_back(cplist[i]);
+        tmp.push_back(cplist.get(i));
     // deselect the controlpoints
     cplist.clear();
     // add the new face
@@ -627,6 +627,7 @@ void Controller::checkModel()
 
 void Controller::newModel()
 {
+    clearUndo();
     getModel()->newModel(fuMetric, 15.0, 6.0, 1.0, 10, 8);
     emit modelLoaded();
 }
@@ -647,8 +648,9 @@ void Controller::collapsePoint()
     // msg 0160
     UndoObject* uo = getModel()->createUndo(tr("collapse point"), false);
     int n = 0;
-    for (size_t i=getModel()->getSurface()->numberOfSelectedControlPoints(); i>0; i--) {
-        SubdivisionControlPoint* pt = getModel()->getSurface()->getSelectedControlPoint(i-1);
+    OrderedPointMap& pmap = getModel()->getSurface()->getSelControlPointCollection();
+    for (OrderedPointMap::iterator i=pmap.begin(); i!=pmap.end(); ++i) {
+        SubdivisionControlPoint* pt = *i;
         if (!pt->isLocked() && pt->numberOfEdges() == 2) {
             getModel()->getSurface()->collapseControlPoint(pt);
             n++;
@@ -659,6 +661,7 @@ void Controller::collapsePoint()
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
         emit modelGeometryChanged();
+        emit changeSelectedItems();
     }
     else {
         delete uo;
@@ -753,8 +756,9 @@ void Controller::lockPoints()
     if (surf->numberOfSelectedLockedPoints() < surf->numberOfSelectedControlPoints()) {
         // msg 0167
         getModel()->createUndo(tr("lock points"), true);
-        for (size_t i=0; i<surf->numberOfSelectedControlPoints(); i++) {
-            surf->getSelectedControlPoint(i)->setLocked(true);
+        OrderedPointMap& ptmap = surf->getSelControlPointCollection();
+        for (OrderedPointMap::iterator i=ptmap.begin(); i!=ptmap.end(); ++i) {
+            (*i)->setLocked(true);
         }
         getModel()->setFileChanged(true);
         emit modelGeometryChanged();
@@ -822,22 +826,25 @@ void Controller::projectStraightLinePoint()
     // determine if the number of points to be moved doesn't contain locked controlpoints only
     // however the first and last points (determining the line segment) are allowed to be locked
     size_t nlocked = 0;
-    for (size_t i=1; i<surf->numberOfSelectedControlPoints()-1; i++) {
-        if (surf->getSelectedControlPoint(i)->isLocked())
+    OrderedPointMap& ptset = getModel()->getSurface()->getSelControlPointCollection();
+    for (size_t i=1; i<ptset.size()-1; i++) {
+        if (ptset.get(i)->isLocked())
             nlocked++;
     }
     // number of locked points must be smaller than selected control points
-    if (nlocked < surf->numberOfSelectedControlPoints() - 2) {
-        SubdivisionControlPoint* p1 = surf->getSelectedControlPoint(0);
-        SubdivisionControlPoint* p2 = surf->getSelectedControlPoint(surf->numberOfSelectedControlPoints()-1);
+    if (nlocked < ptset.size() - 2) {
+        SubdivisionControlPoint* p1 = ptset.get(static_cast<size_t>(0));
+        SubdivisionControlPoint* p2 = ptset.get(ptset.size()-1);
         // msg 0171
         UndoObject* uo = getModel()->createUndo(tr("align points"), false);
         size_t nchanged = 0;
-        for (size_t i=1; i<surf->numberOfSelectedControlPoints()-1; i++) {
-            SubdivisionControlPoint* point = surf->getSelectedControlPoint(i);
+        for (size_t i=1; i<ptset.size()-1; i++) {
+            SubdivisionControlPoint* point = ptset.get(i);
             if (point->isLocked())
                 continue;
-            QVector3D p = PointProjectToLine(p1->getCoordinate(), p2->getCoordinate(), point->getCoordinate());
+            QVector3D p = PointProjectToLine(p1->getCoordinate(),
+                                             p2->getCoordinate(),
+                                             point->getCoordinate());
             if (p.distanceToPoint(point->getCoordinate()) > 1E-5) {
                 point->setCoordinate(p);
                 nchanged++;
@@ -864,8 +871,9 @@ void Controller::unlockPoints()
         return;
     // msg 0168
     getModel()->createUndo(tr("unlock points"), true);
-    for (size_t i=0; i<getModel()->getSurface()->numberOfSelectedControlPoints(); i++) {
-        getModel()->getSurface()->getSelectedControlPoint(i)->setLocked(false);
+    OrderedPointMap& ptset = getModel()->getSurface()->getSelControlPointCollection();
+    for (OrderedPointMap::iterator i=ptset.begin(); i!=ptset.end(); ++i) {
+        (*i)->setLocked(false);
     }
     getModel()->setFileChanged(true);
     emit modelGeometryChanged();

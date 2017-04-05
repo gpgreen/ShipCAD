@@ -254,10 +254,10 @@ SubdivisionLayer* SubdivisionSurface::addNewLayer()
     return result;
 }
 
-SubdivisionControlFace* SubdivisionSurface::getControlFace(SubdivisionPoint* p1,
-                                                           SubdivisionPoint* p2,
-                                                           SubdivisionPoint* p3,
-                                                           SubdivisionPoint* p4)
+static SubdivisionControlFace* privGetControlFace(SubdivisionPoint* p1,
+                                                  SubdivisionPoint* p2,
+                                                  SubdivisionPoint* p3,
+                                                  SubdivisionPoint* p4)
 {
     SubdivisionFace* face;
     SubdivisionControlFace* cface = 0;
@@ -271,9 +271,9 @@ SubdivisionControlFace* SubdivisionSurface::getControlFace(SubdivisionPoint* p1,
     return cface;
 }
 
-void SubdivisionSurface::findAttachedFaces(vector<SubdivisionControlFace*>& found_list,
-                                           vector<SubdivisionControlFace*>& todo_list,
-                                           SubdivisionControlFace* face)
+static void privFindAttachedFaces(vector<SubdivisionControlFace*>& found_list,
+                                  vector<SubdivisionControlFace*>& todo_list,
+                                  SubdivisionControlFace* face)
 {
     SubdivisionPoint* p1 = face->getPoint(face->numberOfPoints() - 1);
     for (size_t i=0; i<face->numberOfPoints(); ++i) {
@@ -289,7 +289,7 @@ void SubdivisionSurface::findAttachedFaces(vector<SubdivisionControlFace*>& foun
                     if (idx != todo_list.end()) {
                         found_list.push_back(f);
                         todo_list.erase(idx);
-                        findAttachedFaces(found_list, todo_list, f);
+                        privFindAttachedFaces(found_list, todo_list, f);
                     }
                 }
             }
@@ -298,8 +298,7 @@ void SubdivisionSurface::findAttachedFaces(vector<SubdivisionControlFace*>& foun
     }
 }
 
-SubdivisionControlFace* SubdivisionSurface::findCornerFace(
-    vector<SubdivisionControlFace*>& ctrlfaces)
+static SubdivisionControlFace* privFindCornerFace(vector<SubdivisionControlFace*>& ctrlfaces)
 {
     SubdivisionControlFace* result = 0;
     for (size_t i=0; i<ctrlfaces.size(); i++) {
@@ -328,9 +327,9 @@ SubdivisionControlFace* SubdivisionSurface::findCornerFace(
     return result;
 }
 
-bool SubdivisionSurface::validFace(SubdivisionFace* face,
-                                   vector<SubdivisionFace*>& faces,
-                                   vector<SubdivisionFace*>& tmpfaces)
+static bool privValidFace(SubdivisionFace* face,
+                          vector<SubdivisionFace*>& faces,
+                          vector<SubdivisionFace*>& tmpfaces)
 {
     bool result = false;
     if (face->numberOfPoints() == 4) {
@@ -355,9 +354,9 @@ bool SubdivisionSurface::validFace(SubdivisionFace* face,
     return result;
 }
 
-bool SubdivisionSurface::validFace(SubdivisionControlFace* face,
-                                   vector<SubdivisionControlFace*>& faces,
-                                   vector<SubdivisionControlFace*>& tmpfaces)
+static bool privValidFace(SubdivisionControlFace* face,
+                          vector<SubdivisionControlFace*>& faces,
+                          vector<SubdivisionControlFace*>& tmpfaces)
 {
     bool result = false;
     if (face->numberOfPoints() == 4) {
@@ -426,7 +425,7 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -497,7 +496,7 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -568,7 +567,7 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -655,7 +654,7 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -762,7 +761,7 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
     vector<SubdivisionControlFace*> checkfaces(ctrlfaces.begin(), ctrlfaces.end());
     while (ctrlfaces.size() > 0) {
         // find a corner face
-        SubdivisionControlFace* face = findCornerFace(ctrlfaces);
+        SubdivisionControlFace* face = privFindCornerFace(ctrlfaces);
         errind++;
         if (face != 0) {
 
@@ -788,7 +787,7 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
                 newfacegrid.setCols(cols - 1);
                 for (size_t i=2; i<=rows; i++) {
                     for (size_t j=2; j<=cols; j++) {
-                        SubdivisionControlFace* face = getControlFace(
+                        SubdivisionControlFace* face = privGetControlFace(
                             grid.getPoint(i-2, j-1),
                             grid.getPoint(i-2, j-2),
                             grid.getPoint(i-1, j-2),
@@ -830,7 +829,7 @@ void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
             todo.erase(todo.end());
             vector<SubdivisionControlFace*>* current = new vector<SubdivisionControlFace*>();
             current->push_back(face);
-            findAttachedFaces(*current, todo, face);
+            privFindAttachedFaces(*current, todo, face);
             done.push_back(current);
         }
         // assign all groups to different layers
@@ -1121,31 +1120,21 @@ size_t SubdivisionSurface::indexOfEdge(SubdivisionEdge *edge)
     throw range_error("edge is not in SubdivisionSurface");
 }
 
-size_t SubdivisionSurface::numberOfSelectedLockedPoints()
-{
-    size_t result = 0;
-    for (size_t i=0; i<numberOfSelectedControlPoints(); ++i)
-        if (_sel_control_points[i]->isLocked())
-            result++;
-    return result;
-}
-
 void SubdivisionSurface::setSelectedControlEdge(SubdivisionControlEdge* edge)
 {
     if (!hasSelectedControlEdge(edge))
-        _sel_control_edges.push_back(edge);
+        _sel_control_edges.insert(edge);
 }
 
 bool SubdivisionSurface::hasSelectedControlEdge(SubdivisionControlEdge* edge)
 {
-    return (find(_sel_control_edges.begin(), _sel_control_edges.end(), edge)
-            != _sel_control_edges.end());
+    set<SubdivisionControlEdge*>::iterator i = _sel_control_edges.find(edge);
+    return (i != _sel_control_edges.end());
 }
 
 void SubdivisionSurface::removeSelectedControlEdge(SubdivisionControlEdge *edge)
 {
-    vector<SubdivisionControlEdge*>::iterator i = find(
-                _sel_control_edges.begin(), _sel_control_edges.end(), edge);
+    set<SubdivisionControlEdge*>::iterator i = _sel_control_edges.find(edge);
     if (i != _sel_control_edges.end())
         _sel_control_edges.erase(i);
 }
@@ -1153,7 +1142,7 @@ void SubdivisionSurface::removeSelectedControlEdge(SubdivisionControlEdge *edge)
 void SubdivisionSurface::setSelectedControlCurve(SubdivisionControlCurve* curve)
 {
     if (!hasSelectedControlCurve(curve))
-        _sel_control_curves.push_back(curve);
+        _sel_control_curves.insert(curve);
 }
 
 bool SubdivisionSurface::hasSelectedControlCurve(SubdivisionControlCurve* curve)
@@ -1164,54 +1153,52 @@ bool SubdivisionSurface::hasSelectedControlCurve(SubdivisionControlCurve* curve)
 
 void SubdivisionSurface::removeSelectedControlCurve(SubdivisionControlCurve *curve)
 {
-    vector<SubdivisionControlCurve*>::iterator i = find(
-                _sel_control_curves.begin(), _sel_control_curves.end(), curve);
-    _sel_control_curves.erase(i);
+    set<SubdivisionControlCurve*>::iterator i = _sel_control_curves.find(curve);
+    if (i != _sel_control_curves.end())
+        _sel_control_curves.erase(i);
 }
 
 void SubdivisionSurface::setSelectedControlFace(SubdivisionControlFace* face)
 {
     if (!hasSelectedControlFace(face))
-        _sel_control_faces.push_back(face);
+        _sel_control_faces.insert(face);
 }
 
 bool SubdivisionSurface::hasSelectedControlFace(SubdivisionControlFace* face)
 {
-    return (find(_sel_control_faces.begin(), _sel_control_faces.end(), face)
-            != _sel_control_faces.end());
+    return (_sel_control_faces.find(face) != _sel_control_faces.end());
 }
 
 void SubdivisionSurface::removeSelectedControlFace(SubdivisionControlFace *face)
 {
-    vector<SubdivisionControlFace*>::iterator i = find(
-                _sel_control_faces.begin(), _sel_control_faces.end(), face);
+    set<SubdivisionControlFace*>::iterator i = _sel_control_faces.find(face);
     if (i != _sel_control_faces.end())
         _sel_control_faces.erase(i);
+}
+
+size_t SubdivisionSurface::numberOfSelectedLockedPoints()
+{
+    size_t result = 0;
+    for (OrderedPointMap::iterator i=_sel_control_points.begin(); i!=_sel_control_points.end(); ++i)
+        if ((*i)->isLocked())
+            result++;
+    return result;
 }
 
 void SubdivisionSurface::setSelectedControlPoint(SubdivisionControlPoint* pt)
 {
     if (!hasSelectedControlPoint(pt))
-        _sel_control_points.push_back(pt);
+        _sel_control_points.add(pt);
 }
 
 bool SubdivisionSurface::hasSelectedControlPoint(SubdivisionControlPoint* pt)
 {
-    return (find(_sel_control_points.begin(), _sel_control_points.end(), pt)
-            != _sel_control_points.end());
+    return _sel_control_points.has(pt);
 }
 
 void SubdivisionSurface::removeSelectedControlPoint(SubdivisionControlPoint *pt)
 {
-    vector<SubdivisionControlPoint*>::iterator i = find(
-                _sel_control_points.begin(), _sel_control_points.end(), pt);
-    if (i != _sel_control_points.end())
-        _sel_control_points.erase(i);
-}
-
-SubdivisionControlPoint* SubdivisionSurface::getSelectedControlPoint(size_t idx)
-{
-    return _sel_control_points[idx];
+    _sel_control_points.remove(pt);
 }
 
 size_t SubdivisionSurface::requestNewLayerID()
@@ -1579,7 +1566,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                 if (edge != 0) {
                     for (size_t j=1; j<=edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j-1);
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -1627,7 +1614,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                 if (edge != 0) {
                     for (size_t j=1; j<=edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j-1);
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -1675,7 +1662,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                 if (edge != 0) {
                     for (size_t j=1; j<=edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j-1);
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -1728,7 +1715,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                 if (edge != 0) {
                     for (size_t j=0; j<edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j);
-                        if (validFace(face, faces, tmpfaces)) {
+                        if (privValidFace(face, faces, tmpfaces)) {
                             tmpfaces.push_back(face);
                             break;
                         }
@@ -1821,9 +1808,9 @@ void SubdivisionSurface::convertToGrid(ControlFaceGrid& input, PointGrid& grid)
 
 bool SubdivisionSurface::edgeConnect()
 {
-    for (size_t i=0; i<numberOfSelectedControlPoints()-1; ++i) {
-        SubdivisionControlPoint* v1 = _sel_control_points[i];
-        SubdivisionControlPoint* v2 = _sel_control_points[++i];
+    for (size_t i=0; i<_sel_control_points.size()-1; ++i) {
+        SubdivisionControlPoint* v1 = _sel_control_points.get(i);
+        SubdivisionControlPoint* v2 = _sel_control_points.get(++i);
         if (controlEdgeExists(v1, v2) == 0) {
             if (v1->numberOfFaces() == 0 && v2->numberOfFaces() == 0) {
                 SubdivisionControlEdge* edge = addControlEdge(v1, v2);
@@ -1843,7 +1830,7 @@ bool SubdivisionSurface::edgeConnect()
                 }
             }
         }
-        else if (numberOfSelectedControlPoints() == 2) {
+        else if (_sel_control_points.size() == 2) {
             return false;
         }
     }
@@ -2583,16 +2570,16 @@ void SubdivisionSurface::extractPointsFromSelection(vector<SubdivisionControlPoi
                            + numberOfSelectedControlPoints() + 1);
     lockedpoints = 0;
     SubdivisionControlPoint* p;
-    for (size_t i=0; i<_sel_control_faces.size(); ++i) {
-        SubdivisionControlFace* face = _sel_control_faces[i];
+    for (set<SubdivisionControlFace*>::iterator i=_sel_control_faces.begin(); i!=_sel_control_faces.end(); ++i) {
+        SubdivisionControlFace* face = *i;
         for (size_t j=0; j<face->numberOfPoints(); ++j) {
             p = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
             if (find(selectedpoints.begin(), selectedpoints.end(), p) == selectedpoints.end())
                 selectedpoints.push_back(p);
         }
     }
-    for (size_t i=0; i<_sel_control_edges.size(); ++i) {
-        SubdivisionControlEdge* edge = _sel_control_edges[i];
+    for (set<SubdivisionControlEdge*>::iterator j=_sel_control_edges.begin(); j!=_sel_control_edges.end(); ++j) {
+        SubdivisionControlEdge* edge = *j;
         p = dynamic_cast<SubdivisionControlPoint*>(edge->startPoint());
         if (find(selectedpoints.begin(), selectedpoints.end(), p) == selectedpoints.end())
             selectedpoints.push_back(p);
@@ -2600,14 +2587,13 @@ void SubdivisionSurface::extractPointsFromSelection(vector<SubdivisionControlPoi
         if (find(selectedpoints.begin(), selectedpoints.end(), p) == selectedpoints.end())
             selectedpoints.push_back(p);
     }
-    for (size_t i=0; i<_sel_control_points.size(); ++i) {
-        p = _sel_control_points[i];
+    for (OrderedPointMap::iterator k=_sel_control_points.begin(); k!=_sel_control_points.end(); ++k) {
+        p = *k;
         if (find(selectedpoints.begin(), selectedpoints.end(), p) == selectedpoints.end())
             selectedpoints.push_back(p);
     }
-    for (size_t i=0; i<selectedpoints.size(); ++i) {
-        p = _sel_control_points[i];
-        if (p->isLocked())
+    for (size_t m=0; m<selectedpoints.size(); ++m) {
+        if (selectedpoints[m]->isLocked())
             ++lockedpoints;
     }
 }
@@ -3363,28 +3349,18 @@ void SubdivisionSurface::deleteSelected()
         if (i > numberOfSelectedControlCurves())
             i = numberOfSelectedControlCurves();
     }
-    i = _sel_control_faces.size();
-    while (i >= 1) {
-        deleteControlFace(_sel_control_faces[i-1]);
-        --i;
-        if (i > _sel_control_faces.size())
-            i = _sel_control_faces.size();
+    for (set<SubdivisionControlFace*>::iterator j=_sel_control_faces.begin(); j!=_sel_control_faces.end(); ++j) {
+        deleteControlFace(*j);
     }
-    i = _sel_control_edges.size();
-    while (i >= 1) {
-        deleteControlEdge(_sel_control_edges[i-1]);
-        --i;
-        if (i > _sel_control_edges.size())
-            i = _sel_control_edges.size();
+    _sel_control_faces.clear();
+    for (set<SubdivisionControlEdge*>::iterator k=_sel_control_edges.begin(); k!=_sel_control_edges.end(); ++k) {
+        deleteControlEdge(*k);
     }
-    // delete selected points
-    i = _sel_control_points.size();
-    while (i >= 1) {
-        deleteControlPoint(_sel_control_points[i-1]);
-        --i;
-        if (i > _sel_control_points.size())
-            i = _sel_control_points.size();
+    _sel_control_edges.clear();
+    for (OrderedPointMap::iterator l=_sel_control_points.begin(); l!=_sel_control_points.end(); ++l) {
+        deleteControlPoint(*l);
     }
+    _sel_control_points.clear();
     deleteElementsCollection();
     setBuild(false);
 }

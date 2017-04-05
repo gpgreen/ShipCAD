@@ -81,7 +81,8 @@ HEADERS += shipcadlib.h \
     pointgrid.h \
     controlfacegrid.h \
     developedpatch.h \
-    mempool.h
+    mempool.h \
+    orderedmap.h
 
 unix:!symbian {
     maemo5 {

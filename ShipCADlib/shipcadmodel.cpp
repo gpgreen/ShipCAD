@@ -86,7 +86,6 @@ void ShipCADModel::clear()
     _selected_flowlines.clear();
     _flowlines.clear();
     _background_images.clear();
-    clearUndo();
 }
 
 void ShipCADModel::setFilename(const QString& name)
@@ -350,6 +349,7 @@ void ShipCADModel::undo()
             if (_prev_undo_pos < _undo_pos)
                 --_undo_pos;
             _prev_undo_pos = _undo_pos;
+            --_undo_pos;
             UndoObject* uo = _undo_list[_undo_pos];
             uo->restore();
             emit undoDataChanged();
@@ -372,7 +372,7 @@ void ShipCADModel::redo()
                 ++_undo_pos;
             _prev_undo_pos = _undo_pos;
             ++_undo_pos;
-            UndoObject* uo = _undo_list[_undo_pos];
+            UndoObject* uo = _undo_list[_undo_pos-1];
             uo->restore();
             emit undoDataChanged();
         } catch(...) {

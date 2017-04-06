@@ -275,6 +275,12 @@ bool Viewport::canPick() const
         && getController()->getModel()->getVisibility().isShowControlNet();
 }
 
+bool Viewport::canPickFace() const
+{
+    return getViewportMode() == vmWireFrame
+        && getController()->getModel()->getVisibility().isShowInteriorEdges();
+}
+
 // keep track of drag state as fallows:
 // _drag_state = 0      no dragging, move or pick in progress
 // _drag_state = 1      button has been pressed, not moved far enough for a drag
@@ -318,8 +324,9 @@ Viewport::mouseReleaseEvent(QMouseEvent *event)
         if (_drag_state == 1) {
             // no movement, or not far enough to drag
             // a point could have been picked in mouse down, if not multi selecting
-            PickRay ray(event->modifiers() == Qt::ControlModifier, false, true, false);
-            if (canPick() && _view->leftMousePick(event->pos(), width(), height(), ray)) {
+            PickRay ray(event->modifiers() == Qt::ControlModifier, false, true, canPickFace());
+            if ((canPick() || canPickFace())
+                && _view->leftMousePick(event->pos(), width(), height(), ray)) {
                 cout << "pick on release: multisel:" << ray.multi_sel << endl;
                 update();
             }

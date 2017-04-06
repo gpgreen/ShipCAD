@@ -146,7 +146,6 @@ void SubdivisionLayer::setAlphaBlend(unsigned char val)
 {
     if (val != _alphablend) {
         _alphablend = val;
-        // emit changedLayerData();
     }
 }
 
@@ -154,7 +153,6 @@ void SubdivisionLayer::setDevelopable(bool val)
 {
     if (val != _developable) {
         _developable = val;
-        //emit changedLayerData();
     }
 }
 
@@ -163,7 +161,6 @@ void SubdivisionLayer::setName(const QString& val)
 {
     if (QString::compare(val, _desc, Qt::CaseInsensitive) != 0) {
         _desc = val;
-        //emit changedLayerData();
     }
 }
 
@@ -171,7 +168,6 @@ void SubdivisionLayer::setDescription(const QString& val)
 {
     if (QString::compare(val, _desc, Qt::CaseInsensitive) != 0) {
         _desc = val;
-        //emit changedLayerData();
     }
 }
 
@@ -179,7 +175,6 @@ void SubdivisionLayer::setSymmetric(bool val)
 {
     if (val != _symmetric) {
         _symmetric = val;
-        //emit changedLayerData();
     }
 }
 
@@ -187,7 +182,6 @@ void SubdivisionLayer::setColor(QColor val)
 {
     if (val != _color) {
         _color = val;
-        //emit changedLayerData();
     }
 }
 
@@ -195,7 +189,6 @@ void SubdivisionLayer::setThickness(float t)
 {
     if (fabs(t - _thickness) > 1e-5) {
         _thickness = t;
-        //emit changedLayerData();
     }
 }
 
@@ -203,7 +196,6 @@ void SubdivisionLayer::setMaterialDensity(float d)
 {
     if (fabs(d - _material_density) > 1e-5) {
         _material_density = d;
-        //emit changedLayerData();
     }
 }
 
@@ -211,7 +203,6 @@ void SubdivisionLayer::setShowInLinesplan(bool val)
 {
     if (val != _show_in_linesplan) {
         _show_in_linesplan = val;
-        //emit changedLayerData();
     }
 }
 
@@ -219,7 +210,6 @@ void SubdivisionLayer::setUseInHydrostatics(bool val)
 {
     if (val != _use_in_hydrostatics) {
         _use_in_hydrostatics = val;
-        //emit changedLayerData();
     }
 }
 
@@ -227,7 +217,6 @@ void SubdivisionLayer::setUseForIntersections(bool val)
 {
     if (val != _use_for_intersections) {
         _use_for_intersections = val;
-        //emit changedLayerData();
     }
 }
 
@@ -235,7 +224,6 @@ void SubdivisionLayer::setVisible(bool val)
 {
     if (val != _visible) {
         _visible = val;
-        //emit changedLayerData();
     }
 }
 

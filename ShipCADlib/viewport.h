@@ -102,7 +102,8 @@ public:
     bool shootPickRay(PickRay& ray);
 
     bool canPick() const;
-    
+    bool canPickFace() const;
+
 signals:
     void contextMenuEvent(ShipCAD::ViewportContextEvent* event);
                                                  

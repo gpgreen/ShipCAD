@@ -43,6 +43,7 @@
 #include "shader.h"
 #include "controlfacegrid.h"
 #include "pointgrid.h"
+#include "viewportview.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -155,6 +156,52 @@ void SubdivisionFace::addPoint(SubdivisionPoint *point)
 {
     _points.push_back(point);
     point->addFace(this);
+}
+
+// algorithm from http://geomalgorithms.com/a06-_intersect.html
+static bool privIntersectWithRay(const PickRay& ray, const QVector3D& p1, const QVector3D& p2,
+                          const QVector3D& p3)
+{
+    // get triangle edge vectors and plane normal
+    QVector3D u = p2 - p1;
+    QVector3D v = p3 - p1;
+    QVector3D n = QVector3D::crossProduct(u, v);
+    // check for degenerate triangle
+    if (n.x() == 0 && n.y() == 0 && n.z() == 0)
+        return false;
+    QVector3D w0 = ray.pt - p1;
+    float a = -QVector3D::dotProduct(n, w0);
+    float b = QVector3D::dotProduct(n, ray.dir);
+    if (abs(b) < 1E-5) {
+        if (a == 0)
+            return true;        // ray lies in triangle plane
+        return false;           // ray disjoint from plane
+    }
+
+    // get intersect point of ray with triangle plane
+    float r = a / b;
+    if (r < 0.0)                // ray goes away from triangle
+        return false;
+
+    QVector3D pt = ray.pt + r * ray.dir; // intersect point of ray and plane
+
+    // is point in triangle?
+    return PointInTriangle(pt, p1, p2, p3);
+}
+
+bool SubdivisionFace::intersectWithRay(const PickRay& ray)
+{
+    if (_points.size() < 3)
+        return false;
+    if (_points.size() == 3)
+        return privIntersectWithRay(ray, _points[0]->getCoordinate(), _points[1]->getCoordinate(),
+                                    _points[2]->getCoordinate());
+    for (size_t i=2; i<_points.size(); i++) {
+        if (privIntersectWithRay(ray, _points[0]->getCoordinate(), _points[i-1]->getCoordinate(),
+                                 _points[i]->getCoordinate()))
+            return true;
+    }
+    return false;
 }
 
 SubdivisionPoint* SubdivisionFace::calculateFacePoint()

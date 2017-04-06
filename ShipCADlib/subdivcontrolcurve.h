@@ -57,10 +57,11 @@ class SubdivisionControlCurve : public SubdivisionBase
 {
 public:
 
-    explicit SubdivisionControlCurve(SubdivisionSurface* owner);
-    virtual ~SubdivisionControlCurve();
+    explicit SubdivisionControlCurve(SubdivisionSurface* owner, Spline* spline);
+    virtual ~SubdivisionControlCurve() {}
 
     // modifications
+    void removeCurve();
     void replaceVertexPoint(SubdivisionPoint* oldpt, SubdivisionPoint* newpt);
     void insertEdgePoint(SubdivisionPoint* p1, SubdivisionPoint* p2, SubdivisionPoint* newpt);
     void deleteEdge(SubdivisionControlEdge* edge);

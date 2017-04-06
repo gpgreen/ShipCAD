@@ -293,10 +293,6 @@ public:
 
     void clear();
 
-signals:
-
-    void onChangeCursorIncrement();
-
 public slots:
 
     void decreaseCurvatureScale();

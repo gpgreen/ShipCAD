@@ -83,26 +83,33 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
 
     // connect controller signals
     connect(_controller, SIGNAL(updateUndoData()), SLOT(updateUndoData()));
-    connect(_controller, SIGNAL(changedLayerData()), SLOT(changedLayerData()));
     connect(_controller, SIGNAL(changeActiveLayer()), SLOT(changeActiveLayer()));
-    connect(_controller, SIGNAL(changedModel()), SLOT(modelChanged()));
-    connect(_controller, SIGNAL(changedModel()), SLOT(enableActions()));
-    connect(_controller, SIGNAL(onUpdateVisibilityInfo()), SLOT(updateVisibilityActions()));
-    connect(_controller, SIGNAL(showControlPointDialog(bool)), SLOT(showControlPointDialog(bool)));
+    connect(_controller, SIGNAL(modifiedModel()), SLOT(modelChanged()));
+    connect(_controller, SIGNAL(modifiedModel()), SLOT(enableActions()));
+    connect(_controller, SIGNAL(modifiedModel()), SIGNAL(viewportRender()));
+    connect(_controller, SIGNAL(modifiedModel()), SLOT(updateVisibilityActions()));
+    connect(_controller, SIGNAL(showControlPointDialog(bool)),
+            SLOT(showControlPointDialog(bool)));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelLoaded()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(enableActions()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(updateVisibilityActions()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelChanged()));
-    connect(_controller, SIGNAL(modelGeometryChanged()), SIGNAL(viewportRender()));
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(enableActions()));
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
-    connect(_controller, SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
+    connect(_controller,
+            SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
             SLOT(executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)));
-    connect(_controller, SIGNAL(exeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData&)),
+    connect(_controller,
+            SIGNAL(exeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData&)),
             SLOT(executeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData&)));
-    connect(_controller, SIGNAL(exeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData&)),
+    connect(_controller,
+            SIGNAL(exeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData&)),
             SLOT(executeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData&)));
-    connect(_controller, SIGNAL(displayInfoDialog(const QString&)),
+    connect(_controller,
+            SIGNAL(exeChooseColorDialog(ShipCAD::ChooseColorDialogData&)),
+            SLOT(executeChooseColorDialog(ShipCAD::ChooseColorDialogData&)));
+    connect(_controller,
+            SIGNAL(displayInfoDialog(const QString&)),
             SLOT(showInfoDialog(const QString&)));
     connect(_controller, SIGNAL(displayWarningDialog(const QString&)),
             SLOT(showWarnDialog(const QString&)));
@@ -117,13 +124,19 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionImportPolyCad, SIGNAL(triggered()), _controller, SLOT(importPolycad()));
     connect(ui->actionImportSurface, SIGNAL(triggered()), _controller, SLOT(importSurface()));
     connect(ui->actionImportVRML, SIGNAL(triggered()), _controller, SLOT(importVRML()));
-    connect(ui->actionImportMichlet_waves, SIGNAL(triggered()), _controller, SLOT(importMichletWaves()));
+    connect(ui->actionImportMichlet_waves, SIGNAL(triggered()),
+            _controller, SLOT(importMichletWaves()));
     connect(ui->actionImportCarlson, SIGNAL(triggered()), _controller, SLOT(importHull()));
-    connect(ui->actionExportArchimedes, SIGNAL(triggered()), _controller, SLOT(exportFileArchimedes()));
-    connect(ui->actionExportCoordinates, SIGNAL(triggered()), _controller, SLOT(exportCoordinates()));
-    connect(ui->actionExportDXF_2D_Polylines, SIGNAL(triggered()), _controller, SLOT(export2DPolylinesDXF()));
-    connect(ui->actionExportDXF_3D_mesh, SIGNAL(triggered()), _controller, SLOT(exportFacesDXF()));
-    connect(ui->actionExportDXF_3D_Polylines, SIGNAL(triggered()), _controller, SLOT(export3DPolylinesDXF()));
+    connect(ui->actionExportArchimedes, SIGNAL(triggered()),
+            _controller, SLOT(exportFileArchimedes()));
+    connect(ui->actionExportCoordinates, SIGNAL(triggered()),
+            _controller, SLOT(exportCoordinates()));
+    connect(ui->actionExportDXF_2D_Polylines, SIGNAL(triggered()),
+            _controller, SLOT(export2DPolylinesDXF()));
+    connect(ui->actionExportDXF_3D_mesh, SIGNAL(triggered()),
+            _controller, SLOT(exportFacesDXF()));
+    connect(ui->actionExportDXF_3D_Polylines, SIGNAL(triggered()),
+            _controller, SLOT(export3DPolylinesDXF()));
     connect(ui->actionExportFEF, SIGNAL(triggered()), _controller, SLOT(exportFEF()));
     connect(ui->actionExportGHS, SIGNAL(triggered()), _controller, SLOT(exportGHS()));
     connect(ui->actionExportPart, SIGNAL(triggered()), _controller, SLOT(exportPart()));
@@ -147,7 +160,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionAlign, SIGNAL(triggered()), _controller, SLOT(projectStraightLinePoint()));
     connect(ui->actionPointCollapse, SIGNAL(triggered()), _controller, SLOT(collapsePoint()));
     connect(ui->actionInsert_plane, SIGNAL(triggered()), _controller, SLOT(insertPlane()));
-    connect(ui->actionIntersect_layers, SIGNAL(triggered()), _controller, SLOT(intersectLayerPoint()));
+    connect(ui->actionIntersect_layers, SIGNAL(triggered()),
+            _controller, SLOT(intersectLayerPoint()));
     connect(ui->actionLock_points, SIGNAL(triggered()), _controller, SLOT(lockPoints()));
     connect(ui->actionUnlock_points, SIGNAL(triggered()), _controller, SLOT(unlockPoints()));
     connect(ui->actionUnlock_all_points, SIGNAL(triggered()), _controller, SLOT(unlockAllPoints()));
@@ -167,27 +181,43 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionFaceInvert, SIGNAL(triggered()), _controller, SLOT(flipFaces()));
 
     // connect layer actions
-    connect(ui->actionActive_layer_color, SIGNAL(triggered()), _controller, SLOT(setActiveLayerColor()));
+    connect(ui->actionActive_layer_color, SIGNAL(triggered()),
+            _controller, SLOT(setActiveLayerColor()));
     connect(ui->actionLayerAuto_group, SIGNAL(triggered()), _controller, SLOT(autoGroupLayer()));
     connect(ui->actionLayerNew, SIGNAL(triggered()), _controller, SLOT(newLayer()));
-    connect(ui->actionLayerDelete_empty, SIGNAL(triggered()), _controller, SLOT(deleteEmptyLayers()));
+    connect(ui->actionLayerDelete_empty, SIGNAL(triggered()),
+            _controller, SLOT(deleteEmptyLayers()));
     connect(ui->actionLayerDialog, SIGNAL(triggered()), _controller, SLOT(layerDialog()));
 
     // connect visibility actions
-    connect(ui->actionShowControl_net, SIGNAL(triggered(bool)), _controller, SLOT(showControlNet(bool)));
-    connect(ui->actionShow_both_sides, SIGNAL(triggered(bool)), _controller, SLOT(showBothSides(bool)));
-    connect(ui->actionShowControl_curves, SIGNAL(triggered(bool)), _controller, SLOT(showControlCurves(bool)));
-    connect(ui->actionShowInterior_edges, SIGNAL(triggered(bool)), _controller, SLOT(showInteriorEdges(bool)));
-    connect(ui->actionShowGrid, SIGNAL(triggered(bool)), _controller, SLOT(showGrid(bool)));
-    connect(ui->actionShowStations, SIGNAL(triggered(bool)), _controller, SLOT(showStations(bool)));
-    connect(ui->actionShowButtocks, SIGNAL(triggered(bool)), _controller, SLOT(showButtocks(bool)));
-    connect(ui->actionShowWaterlines, SIGNAL(triggered(bool)), _controller, SLOT(showWaterlines(bool)));
-    connect(ui->actionShowDiagonals, SIGNAL(triggered(bool)), _controller, SLOT(showDiagonals(bool)));
-    connect(ui->actionShowHydrostatic_features, SIGNAL(triggered(bool)), _controller, SLOT(showHydroData(bool)));
-    connect(ui->actionShowFlowlines, SIGNAL(triggered(bool)), _controller, SLOT(showFlowlines(bool)));
-    connect(ui->actionShowNormals, SIGNAL(triggered(bool)), _controller, SLOT(showNormals(bool)));
-    connect(ui->actionShowCurvature, SIGNAL(triggered(bool)), _controller, SLOT(showCurvature(bool)));
-    connect(ui->actionShowMarkers, SIGNAL(triggered(bool)), _controller, SLOT(showMarkers(bool)));
+    connect(ui->actionShowControl_net, SIGNAL(triggered(bool)),
+            _controller, SLOT(showControlNet(bool)));
+    connect(ui->actionShow_both_sides, SIGNAL(triggered(bool)),
+            _controller, SLOT(showBothSides(bool)));
+    connect(ui->actionShowControl_curves, SIGNAL(triggered(bool)),
+            _controller, SLOT(showControlCurves(bool)));
+    connect(ui->actionShowInterior_edges, SIGNAL(triggered(bool)),
+            _controller, SLOT(showInteriorEdges(bool)));
+    connect(ui->actionShowGrid, SIGNAL(triggered(bool)),
+            _controller, SLOT(showGrid(bool)));
+    connect(ui->actionShowStations, SIGNAL(triggered(bool)),
+            _controller, SLOT(showStations(bool)));
+    connect(ui->actionShowButtocks, SIGNAL(triggered(bool)),
+            _controller, SLOT(showButtocks(bool)));
+    connect(ui->actionShowWaterlines, SIGNAL(triggered(bool)),
+            _controller, SLOT(showWaterlines(bool)));
+    connect(ui->actionShowDiagonals, SIGNAL(triggered(bool)),
+            _controller, SLOT(showDiagonals(bool)));
+    connect(ui->actionShowHydrostatic_features, SIGNAL(triggered(bool)),
+            _controller, SLOT(showHydroData(bool)));
+    connect(ui->actionShowFlowlines, SIGNAL(triggered(bool)),
+            _controller, SLOT(showFlowlines(bool)));
+    connect(ui->actionShowNormals, SIGNAL(triggered(bool)),
+            _controller, SLOT(showNormals(bool)));
+    connect(ui->actionShowCurvature, SIGNAL(triggered(bool)),
+            _controller, SLOT(showCurvature(bool)));
+    connect(ui->actionShowMarkers, SIGNAL(triggered(bool)),
+            _controller, SLOT(showMarkers(bool)));
     // inc/dec curvature
 
     // connect selection actions
@@ -198,10 +228,14 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionImportMarkers, SIGNAL(triggered()), _controller, SLOT(importMarkers()));
     connect(ui->actionDelete_all_markers, SIGNAL(triggered()), _controller, SLOT(deleteMarkers()));
     connect(ui->actionCheck_model, SIGNAL(triggered()), _controller, SLOT(checkModel()));
-    connect(ui->actionRemove_negative, SIGNAL(triggered()), _controller, SLOT(deleteNegativeFaces()));
-    connect(ui->actionRemove_unused_points, SIGNAL(triggered()), _controller, SLOT(removeUnusedPoint()));
-    connect(ui->actionDevelop_plates, SIGNAL(triggered()), _controller, SLOT(developLayers()));
-    connect(ui->actionKeel_and_rudder_wizard, SIGNAL(triggered()), _controller, SLOT(keelAndRudderWizard()));
+    connect(ui->actionRemove_negative, SIGNAL(triggered()),
+            _controller, SLOT(deleteNegativeFaces()));
+    connect(ui->actionRemove_unused_points, SIGNAL(triggered()),
+            _controller, SLOT(removeUnusedPoint()));
+    connect(ui->actionDevelop_plates, SIGNAL(triggered()),
+            _controller, SLOT(developLayers()));
+    connect(ui->actionKeel_and_rudder_wizard, SIGNAL(triggered()),
+            _controller, SLOT(keelAndRudderWizard()));
     connect(ui->actionAdd_cylinder, SIGNAL(triggered()), _controller, SLOT(addCylinder()));
 
     // connect transform actions
@@ -209,15 +243,18 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionMove, SIGNAL(triggered()), _controller, SLOT(moveFaces()));
     connect(ui->actionRotate, SIGNAL(triggered()), _controller, SLOT(rotateFaces()));
     connect(ui->actionMirror, SIGNAL(triggered()), _controller, SLOT(mirrorPlaneFace()));
-    connect(ui->actionLackenby, SIGNAL(triggered()), _controller, SLOT(lackenbyModelTransformation()));
+    connect(ui->actionLackenby, SIGNAL(triggered()),
+            _controller, SLOT(lackenbyModelTransformation()));
 
     // connect calculations actions
     connect(ui->actionDelft_yacht_series, SIGNAL(triggered()), _controller, SLOT(delftResistance()));
     connect(ui->actionKAPER, SIGNAL(triggered()), _controller, SLOT(kaperResistance()));
     connect(ui->actionIntersections, SIGNAL(triggered()), _controller, SLOT(intersectionDialog()));
-    connect(ui->actionDesign_Hydrostatics, SIGNAL(triggered()), _controller, SLOT(calculateHydrostatics()));
+    connect(ui->actionDesign_Hydrostatics, SIGNAL(triggered()),
+            _controller, SLOT(calculateHydrostatics()));
     connect(ui->actionHydrostatics, SIGNAL(triggered()), _controller, SLOT(hydrostaticsDialog()));
-    connect(ui->actionCross_curves, SIGNAL(triggered()), _controller, SLOT(crossCurvesHydrostatics()));
+    connect(ui->actionCross_curves, SIGNAL(triggered()),
+            _controller, SLOT(crossCurvesHydrostatics()));
 
     // connect window actions
 
@@ -521,7 +558,8 @@ void MainWindow::restoreViewports()
         goto settingserror;
     }
     for (size_t i=0; i<vpsets.size(); i++)
-        addViewport(vpsets[i].row, vpsets[i].col, vpsets[i].ty, vpsets[i].vm, vpsets[i].ct, vpsets[i].angle, vpsets[i].elev);
+        addViewport(vpsets[i].row, vpsets[i].col, vpsets[i].ty, vpsets[i].vm, vpsets[i].ct,
+                    vpsets[i].angle, vpsets[i].elev);
     return;
 settingserror:
     addDefaultViewports();
@@ -561,8 +599,8 @@ void MainWindow::addDefaultViewports()
     cout << "addDefaultViewports" << endl;
 }
 
-void MainWindow::addViewport(int row, int col, viewport_type_t ty, viewport_mode_t vm, camera_type_t ct,
-                             float angle, float elev)
+void MainWindow::addViewport(int row, int col, viewport_type_t ty, viewport_mode_t vm,
+                             camera_type_t ct, float angle, float elev)
 {
     // make the viewport
     Viewport* vp = new Viewport(_controller, ty);
@@ -693,7 +731,8 @@ void MainWindow::enableActions()
     ui->actionPointCollapse->setEnabled(nselcpoints > 0);
     ui->actionInsert_plane->setEnabled(surf->numberOfControlEdges() > 0 && vis.isShowControlNet());
     ui->actionIntersect_layers->setEnabled(surf->numberOfLayers() > 1);
-    ui->actionLock_points->setEnabled(nselcpoints > 0 && surf->numberOfSelectedLockedPoints() < nselcpoints);
+    ui->actionLock_points->setEnabled(nselcpoints > 0
+                                      && surf->numberOfSelectedLockedPoints() < nselcpoints);
     ui->actionUnlock_points->setEnabled(nselcpoints > 0);
     ui->actionUnlock_all_points->setEnabled(surf->numberOfLockedPoints() > 0);
 
@@ -704,9 +743,13 @@ void MainWindow::enableActions()
     ui->actionEdgeInsert->setEnabled(nselcpoints > 1);
     ui->actionEdgeCrease->setEnabled(nselcedges > 0);
 
+    // curve actions
+    ui->actionCurveNew->setEnabled(nselcedges > 0);
+
     // face actions
     ui->actionFaceNew->setEnabled(nselcpoints > 2);
-
+    ui->actionFaceInvert->setEnabled(nselcfaces > 0);
+    
     // layer actions
 
     // visibility actions
@@ -719,8 +762,8 @@ void MainWindow::enableActions()
     ui->actionShowButtocks->setEnabled(nbuttocks > 0);
     ui->actionShowWaterlines->setEnabled(nwaterlines > 0);
     ui->actionShowDiagonals->setEnabled(ndiagonals > 0);
-    ui->actionShowHydrostatic_features->setEnabled(ncfaces > 2
-                                                   && model->getProjectSettings().isMainParticularsSet());
+    ui->actionShowHydrostatic_features->setEnabled(
+        ncfaces > 2 && model->getProjectSettings().isMainParticularsSet());
     ui->actionShowFlowlines->setEnabled(false);
     ui->actionShowNormals->setEnabled(surf->numberOfSelectedControlFaces() > 0);
     ui->actionShowCurvature->setEnabled(nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0);
@@ -1004,7 +1047,8 @@ void MainWindow::showControlPointDialog(bool show)
 {
     if (_pointdialog == 0) {
         _pointdialog = new PointDialog(this);
-        connect(_pointdialog, SIGNAL(cornerPointSelect(bool)), _controller, SLOT(cornerPointSelected(bool)));
+        connect(_pointdialog, SIGNAL(cornerPointSelect(bool)),
+                _controller, SLOT(cornerPointSelected(bool)));
         connect(_pointdialog, SIGNAL(pointCoordChange(float,float,float)),
                 _controller, SLOT(dialogUpdatedPointCoord(float,float,float)));
         connect(_controller, SIGNAL(updateControlPointValue(ShipCAD::SubdivisionControlPoint*)),
@@ -1163,4 +1207,18 @@ void MainWindow::vpContextMenuEvent(ViewportContextEvent* event)
     }
     _contextMenu->exec(event->getMouseEvent()->globalPos());
     cout << "MainWindow::contextMenuEvent finished" << endl;
+}
+
+void MainWindow::executeChooseColorDialog(ChooseColorDialogData& data)
+{
+    //const QColorDialog::ColorDialogOptions options = QFlag(colorDialogOptionsWidget->value());
+    const QColor color = QColorDialog::getColor(data.initial, this, data.title, data.options);
+
+    if (color.isValid()) {
+        data.chosen = color;
+        data.accepted = true;
+    } else
+        data.accepted = false;
+    
+    cout << "MainWindow::executeColorDialog" << endl;
 }

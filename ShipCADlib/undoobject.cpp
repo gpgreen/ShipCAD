@@ -50,14 +50,12 @@ size_t UndoObject::getMemory()
 }
 
 // FreeShipUnit.pas:1030
-// TODO this should be in the ship model object, not here
 void UndoObject::accept()
 {
     _owner->acceptUndo(this);
 }
 
 // FreeShipUnit.pas:1092
-// TODO this should be in the ship model object, not here
 void UndoObject::restore()
 {
     _owner->loadBinary(_undo_data);
@@ -65,5 +63,4 @@ void UndoObject::restore()
 	_owner->setFilename(_filename);
 	_owner->setEditMode(_edit_mode);
 	_owner->setFilenameSet(_filename_set);
-	_owner->redraw();
 }

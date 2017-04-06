@@ -62,7 +62,6 @@ void Visibility::clear()
     _show_hydro_metacentric_height = false;
     _show_hydro_lcf = false;
     _show_flowlines = false;
-    emit onChangeCursorIncrement();
 }
 
 void Visibility::loadBinary(FileBuffer &source)
@@ -88,7 +87,6 @@ void Visibility::loadBinary(FileBuffer &source)
             source.load(_cursor_increment);
             if (fabs(_cursor_increment)<1e-5)
                 _cursor_increment = 0.1f;
-            emit onChangeCursorIncrement();
             if (_owner->getFileVersion() >= fv220) {
                 source.load(_show_hydrostatic_data);
                 source.load(_show_hydro_displacement);

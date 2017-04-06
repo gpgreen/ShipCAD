@@ -31,6 +31,7 @@
 #define DIALOGDATA_H_
 
 #include <QtCore>
+#include <QColorDialog>
 #include <vector>
 #include "shipcadlib.h"
 
@@ -72,6 +73,19 @@ struct ExtrudeEdgeDialogData
     bool accepted;
     QVector3D vector;
     explicit ExtrudeEdgeDialogData();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for color chooser dialog exchange
+ */
+struct ChooseColorDialogData
+{
+    bool accepted;
+    QString title;
+    const QColor& initial;
+    QColorDialog::ColorDialogOptions options;
+    QColor chosen;
+    explicit ChooseColorDialogData(const QString& title, const QColor& initial);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

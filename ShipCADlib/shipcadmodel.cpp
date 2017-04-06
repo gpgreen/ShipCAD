@@ -55,8 +55,6 @@ ShipCADModel::ShipCADModel()
 {
 	memset(&_delft_resistance, 0, sizeof(DelftSeriesResistance));
 	memset(&_kaper_resistance, 0, sizeof(KAPERResistance));
-	connect(&_surface, SIGNAL(changedLayerData()), SIGNAL(changedLayerData()));
-	connect(&_surface, SIGNAL(changeActiveLayer()), SIGNAL(changeActiveLayer()));
 }
 
 ShipCADModel::~ShipCADModel()
@@ -169,8 +167,6 @@ void ShipCADModel::rebuildModel(bool redo_intersections)
     }
     _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision)+1);
     _surface.rebuild();
-
-    emit onUpdateGeometryInfo();
 }
 
 void ShipCADModel::setPrecision(precision_t precision)
@@ -180,7 +176,6 @@ void ShipCADModel::setPrecision(precision_t precision)
         _surface.setDesiredSubdivisionLevel(static_cast<int>(_precision) + 1);
         setFileChanged(true);
         setBuild(false);
-        emit onUpdateGeometryInfo();
     }
 }
 
@@ -188,7 +183,6 @@ void ShipCADModel::setEditMode(edit_mode_t mode)
 {
 	if (mode != _edit_mode) {
 		_edit_mode = mode;
-        emit onUpdateGeometryInfo();
 	}
 }
 
@@ -213,7 +207,6 @@ void ShipCADModel::setFileChanged(bool set)
 {
 	if (set != _file_changed) {
 		_file_changed = set;
-		emit onFileChanged();
 	}
 }
 
@@ -655,7 +648,6 @@ void ShipCADModel::loadBinary(FileBuffer& source)
     }
     _file_changed = false;
     rebuildModel(false);
-    emit onUpdateGeometryInfo();
 }
 
 void ShipCADModel::saveBinary(FileBuffer& dest)
@@ -722,11 +714,6 @@ float ShipCADModel::findLowestHydrostaticsPoint()
         }
     }
     return result;
-}
-
-void ShipCADModel::redraw()
-{
-    emit onUpdateGeometryInfo();
 }
 
 void ShipCADModel::setFileVersion(version_t v)
@@ -920,7 +907,6 @@ void ShipCADModel::newModel(unit_type_t units,
         _vis.setShowWaterlines(true);
     if (_buttocks.size() > 0)
         _vis.setShowButtocks(true);
-    emit onUpdateGeometryInfo();
 }
 
 

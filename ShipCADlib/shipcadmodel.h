@@ -252,12 +252,6 @@ public:
     bool canUndo() const;
     bool canRedo() const;
     
-	/*! \brief redraw the model
-	 *
-     * all this does is issue the geometry changed signal
-	 */
-	void redraw();
-
     /*! \brief get the lowest underwater point of hull
 	 *
      * \return lowest point of hull
@@ -288,14 +282,8 @@ public:
 
 signals:
 	
-    void onFileChanged();
-    void onChangeCursorIncrement();
-    void onUpdateGeometryInfo();
-    void onUpdateVisibilityInfo();
-	void changedLayerData();
-	void changeActiveLayer();
     void undoDataChanged();
-                          
+                               
 public slots:
 
 protected:

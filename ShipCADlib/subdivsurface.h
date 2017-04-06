@@ -75,7 +75,8 @@ public:
     std::set<SubdivisionControlEdge*> edges;
     std::set<SubdivisionControlFace*> faces;
     std::set<SubdivisionControlCurve*> curves;
-
+    std::set<Spline*> splines;
+    
     explicit DeleteElementsCollection();
     
     void clear();
@@ -91,7 +92,7 @@ private:
 //////////////////////////////////////////////////////////////////////////////////////
 
 // This is the subdivision surface used for modelling the hull.
-// This is actually a quad-triangle subdivision surface as publisehed in the articles:
+// This is actually a quad-triangle subdivision surface as published in the articles:
 //
 //   "Quad/triangle subdivision" by J. Stam & C. Loop 
 //       http://research.microsoft.com/~cloop/qtEG.pdf
@@ -246,8 +247,10 @@ public:
     SubdivisionControlCurve* getControlCurve(size_t index);
     bool hasControlCurve(SubdivisionControlCurve* curve);
     void addControlCurve(SubdivisionControlCurve* curve);
+    void addControlCurves(std::vector<SubdivisionControlEdge*>& edges);
     void removeControlCurve(SubdivisionControlCurve* curve);
-
+    void deleteControlCurve(SubdivisionControlCurve* curve);
+    
     // selected SubdivisionControlCurve
     size_t numberOfSelectedControlCurves() {return _sel_control_curves.size();}
     void setSelectedControlCurve(SubdivisionControlCurve* curve);
@@ -350,11 +353,7 @@ public:
     Pool<SubdivisionPoint>& getPointPool() {return _point_pool;}
     Pool<SubdivisionEdge>& getEdgePool() {return _edge_pool;}
     Pool<SubdivisionFace>& getFacePool() {return _face_pool;}
-
-signals:
-
-    void changedLayerData();
-    void changeActiveLayer();
+    Pool<Spline>& getSplinePool() {return _spline_pool;}
 
 protected:
 
@@ -457,6 +456,7 @@ protected:
     Pool<SubdivisionPoint> _point_pool;
     Pool<SubdivisionEdge> _edge_pool;
     Pool<SubdivisionFace> _face_pool;
+    Pool<Spline> _spline_pool;
 
     DeleteElementsCollection _deleted;
     

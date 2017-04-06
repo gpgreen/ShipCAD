@@ -256,6 +256,11 @@ private slots:
      */
     void executeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData& data);
 
+    /*! \brief execute a color dialog
+     *
+     */
+    void executeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;

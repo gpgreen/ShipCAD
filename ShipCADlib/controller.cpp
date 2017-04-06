@@ -31,6 +31,7 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QFileInfo>
+#include <QColorDialog>
 
 #include "controller.h"
 #include "shipcadmodel.h"
@@ -41,6 +42,7 @@
 #include "viewport.h"
 #include "viewportview.h"
 #include "subdivlayer.h"
+#include "subdivface.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -66,6 +68,12 @@ ExtrudeEdgeDialogData::ExtrudeEdgeDialogData()
     // does nothing
 }
 
+ChooseColorDialogData::ChooseColorDialogData(const QString& title, const QColor& initial)
+    : accepted(false), title(title), initial(initial), options(QColorDialog::ColorDialogOptions())
+{
+    // does nothing
+}
+
 Controller::Controller(ShipCADModel* model)
     : _model(model), _point_first_moved(false)
 {
@@ -75,11 +83,6 @@ Controller::Controller(ShipCADModel* model)
     QCoreApplication::setApplicationName("ShipCAD");
 	
     // setup signals and slots
-    connect(_model, SIGNAL(onFileChanged()), SLOT(modelFileChanged()));
-    connect(_model, SIGNAL(onUpdateGeometryInfo()), SIGNAL(modelGeometryChanged()));
-    connect(_model, SIGNAL(changeActiveLayer()), SIGNAL(changeActiveLayer()));
-    connect(_model, SIGNAL(changedLayerData()), SIGNAL(changedLayerData()));
-    connect(_model, SIGNAL(onUpdateVisibilityInfo()), SIGNAL(onUpdateVisibilityInfo()));
     connect(_model, SIGNAL(undoDataChanged()), SIGNAL(updateUndoData()));
 }
 
@@ -127,11 +130,19 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
             } else {
                 getModel()->setActiveControlPoint(0);
                 emit showControlPointDialog(false);
+                // is this an edge?
                 SubdivisionControlEdge* edge = dynamic_cast<SubdivisionControlEdge*>(filtered[0]);
                 if (edge != 0 ) {
                     edge->setSelected(true);
                     scene_changed = true;
                     cout << "control edge selected" << endl;
+                }
+                // is this a face?
+                SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(filtered[0]);
+                if (face != 0) {
+                    face->setSelected(true);
+                    scene_changed = true;
+                    cout << "control face selected" << endl;
                 }
             }
         } else {
@@ -142,8 +153,7 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
     if (scene_changed) {
         // TODO file changed, undo
         getModel()->setFileChanged(true);
-        emit changeSelectedItems();
-        emit modelGeometryChanged();
+        emit modifiedModel();
     }
     return scene_changed;
 }
@@ -158,9 +168,28 @@ void Controller::openBackgroundImage()
 	// TODO
 }
 
+// FreeShipUnit.pas:4632
 void Controller::addCurve()
 {
-	// TODO
+	cout << "Controller::addCurve" << endl;
+    vector<SubdivisionControlEdge*> edges;
+
+    SubdivisionSurface* surf = getModel()->getSurface();
+    
+    set<SubdivisionControlEdge*>& list = surf->getSelControlEdgeCollection();
+    for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
+        if ((*i)->getCurve() == 0)
+            edges.push_back(*i);
+    }
+    if (edges.size() == 0)
+        return;
+    // msg 0072
+    getModel()->createUndo(tr("new controlcurve"), true);
+    surf->addControlCurves(edges);
+    list.clear();
+    if (!getModel()->getVisibility().isShowControlCurves())
+        getModel()->getVisibility().setShowControlCurves(true);
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:4697
@@ -182,13 +211,12 @@ void Controller::collapseEdges()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
-        emit modelGeometryChanged();
+        emit modifiedModel();
     }
     else {
         delete uo;
+        emit changeSelectedItems();
     }
-    emit modelGeometryChanged();
-    emit changeSelectedItems();
 }
 
 // FreeShipUnit.pas:4724
@@ -203,18 +231,27 @@ void Controller::connectEdges()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
+        emit modifiedModel();
     } else {
         // msg 0202
         displayWarningDialog(tr("Edge already exists"));
         delete uo;
     }
-    emit modelGeometryChanged();
-    emit changeSelectedItems();
 }
 
+// FreeShipUnit.pas:4742
 void Controller::creaseEdges()
 {
-	// TODO
+    cout << "Controller::creaseEdges" << endl;
+    // msg 0075
+    getModel()->createUndo(tr("set crease edges"), true);
+    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
+        (*i)->setCrease(!(*i)->isCrease());
+    }
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:4753
@@ -246,13 +283,13 @@ void Controller::extrudeEdges()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
+        emit modifiedModel();
     } else {
+        emit changeSelectedItems();
         // msg 0077
         emit displayWarningDialog(tr("Only boundary edges can be extruded!"));
         delete uo;
     }
-    emit modelGeometryChanged();
-    emit changeSelectedItems();
 }
 
 // FreeShipUnit.pas:4808
@@ -284,12 +321,12 @@ void Controller::splitEdges()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
+        emit modifiedModel();
     }
     else {
         delete uo;
+        emit changeSelectedItems();
     }
-    emit modelGeometryChanged();
-    emit changeSelectedItems();
 }
 
 void Controller::assembleFace()
@@ -302,6 +339,7 @@ void Controller::deleteNegativeFaces()
 	// TODO
 }
 
+// FreeShipUnit.pas:4948
 void Controller::flipFaces()
 {
 	// TODO
@@ -339,11 +377,11 @@ void Controller::newFace()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
-        emit modelGeometryChanged();
+        emit modifiedModel();
     } else {
         delete uo;
+        emit changeSelectedItems();
     }
-    emit changeSelectedItems();
 }
 
 void Controller::rotateFaces()
@@ -522,7 +560,7 @@ void Controller::saveFile()
                 throw runtime_error("unable to rename temporary to original");
             cout << "renamed tmp to original\n";
             // all done with saving file
-            emit changedModel();
+            emit modifiedModel();
         } catch(...) {
             if (tmp.exists())
                 tmp.remove();
@@ -537,6 +575,7 @@ void Controller::saveFileAs(const QString& filename)
 {
     getModel()->setFilename(filename);
     saveFile();
+    emit modifiedModel();
 }
 
 void Controller::addFlowline(const QVector2D& source, viewport_type_t view)
@@ -660,11 +699,11 @@ void Controller::collapsePoint()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
-        emit modelGeometryChanged();
-        emit changeSelectedItems();
+        emit modifiedModel();
     }
     else {
         delete uo;
+        emit changeSelectedItems();
     }
 }
 
@@ -708,7 +747,7 @@ void Controller::insertPlane()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
-        emit modelGeometryChanged();
+        emit modifiedModel();
     }
     else {
         delete uo;
@@ -738,7 +777,7 @@ void Controller::intersectLayerPoint()
             uo->accept();
             getModel()->setBuild(false);
             getModel()->setFileChanged(true);
-            emit modelGeometryChanged();
+            emit modifiedModel();
         }
         else {
             delete uo;
@@ -761,7 +800,7 @@ void Controller::lockPoints()
             (*i)->setLocked(true);
         }
         getModel()->setFileChanged(true);
-        emit modelGeometryChanged();
+        emit modifiedModel();
     }
 }
 
@@ -775,7 +814,7 @@ void Controller::newPoint()
     getModel()->setFileChanged(true);
     emit showControlPointDialog(true);
     emit updateControlPointValue(pt);
-    emit modelGeometryChanged();
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:13645
@@ -805,7 +844,7 @@ void Controller::movePoint(QVector3D changedCoords)
     pt->setCoordinate(updated);
     getModel()->setFileChanged(true);
     emit updateControlPointValue(pt);
-    emit modelGeometryChanged();
+    emit modifiedModel();
 }
 
 void Controller::stopMovePoint()
@@ -854,7 +893,7 @@ void Controller::projectStraightLinePoint()
             uo->accept();
             getModel()->setBuild(false);
             getModel()->setFileChanged(true);
-            emit modelGeometryChanged();
+            emit modifiedModel();
         } else {
             delete uo;
         }
@@ -876,7 +915,7 @@ void Controller::unlockPoints()
         (*i)->setLocked(false);
     }
     getModel()->setFileChanged(true);
-    emit modelGeometryChanged();
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:10235
@@ -891,7 +930,7 @@ void Controller::unlockAllPoints()
     }
     getModel()->setFileChanged(true);
     // emit dialog msg 0170
-    emit modelGeometryChanged();
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:10251
@@ -926,8 +965,7 @@ void Controller::clearSelections()
     getModel()->setActiveControlPoint(0);
     // BUGBUG: clear markers and flowlines
     emit showControlPointDialog(false);
-    emit modelGeometryChanged();
-	emit changeSelectedItems();
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:10411
@@ -948,8 +986,7 @@ void Controller::deleteSelections()
     getModel()->setBuild(false);
     getModel()->setFileChanged(true);
     emit showControlPointDialog(false);
-    emit modelGeometryChanged();
-    emit changeSelectedItems();
+    emit modifiedModel();
 }
 
 void Controller::selectAll()
@@ -977,19 +1014,13 @@ void Controller::showHistoryUndo()
 	// TODO
 }
 
-void Controller::modelFileChanged()
-{
-	// TODO
-    emit changedModel();
-}
-
 void
 Controller::showControlNet(bool val)
 {
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowControlNet() != val) {
         vis.setShowControlNet(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "surface control net visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1000,7 +1031,7 @@ Controller::showInteriorEdges(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowInteriorEdges() != val) {
         vis.setShowInteriorEdges(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "surface interior edges visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1011,7 +1042,7 @@ Controller::showGrid(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowGrid() != val) {
         vis.setShowGrid(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "grid visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1022,7 +1053,7 @@ Controller::showControlCurves(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowControlCurves() != val) {
         vis.setShowControlCurves(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "surface control curves visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1033,7 +1064,7 @@ Controller::showCurvature(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowCurvature() != val) {
         vis.setShowCurvature(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "surface curvature visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1044,7 +1075,7 @@ Controller::showNormals(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowNormals() != val) {
         vis.setShowNormals(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "surface normals visible: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1055,7 +1086,7 @@ Controller::showBothSides(bool val)
     Visibility& vis = getModel()->getVisibility();
     if ((vis.getModelView() == mvBoth && !val) || (vis.getModelView() == mvPort && val)) {
         vis.setModelView(val ? mvBoth : mvPort);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show both sides: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1066,7 +1097,7 @@ Controller::showMarkers(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowMarkers() != val) {
         vis.setShowMarkers(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show markers: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1083,7 +1114,7 @@ Controller::showStations(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowStations() != val) {
         vis.setShowStations(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show stations: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1094,7 +1125,7 @@ Controller::showButtocks(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowButtocks() != val) {
         vis.setShowButtocks(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show buttocks: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1105,7 +1136,7 @@ Controller::showWaterlines(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowWaterlines() != val) {
         vis.setShowWaterlines(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show waterlines: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1116,7 +1147,7 @@ Controller::showDiagonals(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowDiagonals() != val) {
         vis.setShowDiagonals(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show diagonals: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1127,7 +1158,7 @@ Controller::showHydroData(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowHydrostaticData() != val) {
         vis.setShowHydrostaticData(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show hydro features: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1138,7 +1169,7 @@ Controller::showFlowlines(bool val)
     Visibility& vis = getModel()->getVisibility();
     if (vis.isShowFlowlines() != val) {
         vis.setShowFlowlines(val);
-		emit onUpdateVisibilityInfo();
+		emit modifiedModel();
         cout << "show flowlines: " << (val ? 'y' : 'n') << endl;
     }
 }
@@ -1157,11 +1188,20 @@ Controller::keelAndRudderWizard()
 	cout << "keel and rudder wizard" << endl;
 }
 
-void
-Controller::setActiveLayerColor()
+// Main.pas:952
+void Controller::setActiveLayerColor()
 {
-	// TODO
-	cout << "set active layer color" << endl;
+	cout << "Controller::setActiveLayerColor" << endl;
+    ChooseColorDialogData data(tr("Choose color for Layer"),
+                               getModel()->getSurface()->getActiveLayer()->getColor());
+    emit exeChooseColorDialog(data);
+    if (data.accepted) {
+        getModel()->createUndo(tr("change active layer color"), true);
+        getModel()->getSurface()->getActiveLayer()->setColor(data.chosen);
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    }
 }
 
 // FreeControlPointForm.pas:320
@@ -1193,7 +1233,7 @@ void Controller::cornerPointSelected(bool sel)
             uo->accept();
             getModel()->setBuild(false);
             getModel()->setFileChanged(true);
-            emit modelGeometryChanged();
+            emit modifiedModel();
             emit updateControlPointValue(ap);
         } else
             delete uo;
@@ -1210,7 +1250,7 @@ void Controller::dialogUpdatedPointCoord(float x, float y, float z)
             // msg 0190
             getModel()->createUndo(tr("point move"), true);
             ap->setCoordinate(newcoord);
-            emit modelGeometryChanged();
+            emit modifiedModel();
         }
     }
 }

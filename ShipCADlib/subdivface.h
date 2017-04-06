@@ -53,6 +53,7 @@ class LineShader;
 class FileBuffer;
 class FaceShader;
 class CurveFaceShader;
+class PickRay;
 
 class SubdivisionFace : public SubdivisionBase
 {
@@ -163,6 +164,12 @@ public:
 	 */
     QVector3D getFaceNormal();
 
+    /*! \brief does a ray intersect this face
+     *
+     * \return true if ray intersects face
+     */
+    bool intersectWithRay(const PickRay& ray);
+    
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;
 

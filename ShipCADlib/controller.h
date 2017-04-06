@@ -89,21 +89,18 @@ signals:
 	 */
 	void updateUndoData();
 
-    /*! \brief signal when layer data changes
-     */
-	void changedLayerData();
-
     /*! \brief signal when active layer changes
      */
 	void changeActiveLayer();
 
     /*! \brief signal when selection of items changes
+     * signal isn't required when modifiedModel is issued
      */
     void changeSelectedItems();
 
     /*! \brief signal when model has changes
 	 */
-	void changedModel();
+	void modifiedModel();
 
     /*! \brief signal when new model loaded
      */
@@ -129,11 +126,9 @@ signals:
      */
     void exeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData& data);
 
-    void onUpdateVisibilityInfo();
-
-    /*! \brief the ShipCAD model geometry has changed
+    /*! \brief execute the Choose Color dialog
      */
-    void modelGeometryChanged();
+    void exeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
 
     /*! \brief show an info dialog
      */
@@ -564,12 +559,6 @@ public slots:
      * \param z current z value
      */
     void dialogUpdatedPointCoord(float x, float y, float z);
-
-private slots:
-
-	/*! \brief the ShipCAD model file has changed
-	 */
-	void modelFileChanged();
 
 private:
     ShipCADModel* _model; /**< the model this is controlling */

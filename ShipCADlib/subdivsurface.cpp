@@ -822,31 +822,27 @@ void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
                                                 vector<ControlFaceGrid>& assembledPatches)
 {
     vector<SubdivisionControlFace*> todo;
-    vector<vector<SubdivisionControlFace*>* > done;
+    vector<vector<SubdivisionControlFace*> > done;
 
     // use all visible faces
-    for (size_t i=0; i<numberOfLayers(); i++) {
-        SubdivisionLayer* layer = getLayer(i);
-        if (layer->isVisible()) {
-            for (size_t j=0; j<layer->numberOfFaces(); j++)
-                todo.push_back(layer->getFace(j));
-        }
+    for (size_t i=0; i<_layers.size(); i++) {
+        if (_layer[i]->isVisible()
+            todo.insert(todo.end(), _layers[i]->faces_begin(), _layers[i]->faces_end());
     }
     if (todo.size() > 0) {
         while (todo.size() > 0) {
             SubdivisionControlFace* face = todo.back();
             todo.pop_back();
-            vector<SubdivisionControlFace*>* current = new vector<SubdivisionControlFace*>();
-            current->push_back(face);
+            vector<SubdivisionControlFace*> current;
+            current.push_back(face);
             privFindAttachedFaces(*current, todo, face);
             done.push_back(current);
         }
         // assign all groups to different layers
         for (size_t i=0; i<done.size(); i++) {
             vector<SubdivisionControlFace*>* current = done[i];
-            if (current->size() > 0)
+            if (current.size() > 0)
                 assembleFaces(mode, *current, assembledPatches);
-            delete current;
         }
     }
 }
@@ -2147,16 +2143,6 @@ struct ExistPointPred {
         return val.first == _querypt;
     }
     ExistPointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
-};
-
-// predicate class to find an element with given point
-struct ExtrudePointPred {
-    ShipCAD::SubdivisionControlPoint* _querypt;
-    bool operator()(const pair<ShipCAD::SubdivisionControlPoint*, ShipCAD::SubdivisionControlPoint*>& val)
-    {
-        return val.second == _querypt;
-    }
-    ExtrudePointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
 };
 
 // FreeGeometry.pas:14684

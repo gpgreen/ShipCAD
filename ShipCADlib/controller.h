@@ -63,7 +63,7 @@ public:
 
     /*! \brief destructor
      */
-	~Controller();
+	~Controller() {}
 
     /*! \brief get the model this is controlling
      */
@@ -362,7 +362,7 @@ public slots:
 
     /*! \brief add a new empty layer
      */
-    SubdivisionLayer* newLayer();
+    void newLayer();
 
     /*! \brief add a marker
      */

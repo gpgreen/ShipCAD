@@ -137,6 +137,11 @@ public:
     // makers
     static SubdivisionLayer* construct(SubdivisionSurface* owner);
 
+    std::vector<SubdivisionControlFace*>::const_iterator faces_begin() const
+        { return _patches.begin(); }
+    std::vector<SubdivisionControlFace*>::const_iterator faces_end() const
+        { return _patches.end(); }
+    
 protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;

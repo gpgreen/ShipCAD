@@ -598,3 +598,11 @@ size_t ShipCAD::to_size_t(int val)
         return static_cast<size_t>(val);
     throw runtime_error("int cannot be converted to unsigned int");
 }
+
+QColor ShipCAD::RandomColor()
+{
+    quint8 r = rand() % 255;
+    quint8 g = rand() % 255;
+    quint8 b = rand() % 255;
+    return QColor(r, g, b);
+}

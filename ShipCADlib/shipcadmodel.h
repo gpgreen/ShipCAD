@@ -133,7 +133,7 @@ public:
     IntersectionVector& getWaterlines() {return _waterlines;}
     IntersectionVector& getButtocks() {return _buttocks;}
     IntersectionVector& getDiagonals() {return _diagonals;}
-    SubdivisionControlCurveVector& getControlCurves() {return _control_curves;}
+
     Flowline* getFlowline(size_t index);
 
 	edit_mode_t getEditMode() {return _edit_mode;}
@@ -311,7 +311,6 @@ private:
     IntersectionVector _waterlines;
     IntersectionVector _buttocks;
     IntersectionVector _diagonals;
-    SubdivisionControlCurveVector _control_curves;
     MarkerVector _markers;
     Visibility _vis;
     // Frame class

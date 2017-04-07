@@ -326,6 +326,12 @@ namespace ShipCAD {
      * * \return corresponding size_t
      */
     size_t to_size_t(int val);
+
+    /*! \brief get a random color
+     *
+     * \return a random color
+     */
+    QColor RandomColor();
 };
 
 #endif

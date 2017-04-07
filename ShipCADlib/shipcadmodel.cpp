@@ -47,7 +47,7 @@ using namespace ShipCAD;
 ShipCADModel::ShipCADModel()
     : _precision(fpLow), _file_version(k_current_version), _edit_mode(emSelectItems), _prefs(this),
       _active_control_point(0), _file_changed(false), _filename(""),
-      _stations(true), _waterlines(true), _buttocks(true), _diagonals(true), _control_curves(true),
+      _stations(true), _waterlines(true), _buttocks(true), _diagonals(true),
       _markers(true), _vis(this), _filename_set(false), _currently_moving(false),
       _stop_asking_for_file_version(false), _settings(this), _calculations(true),
       _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0), _flowlines(true),

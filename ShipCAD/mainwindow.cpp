@@ -668,15 +668,19 @@ void MainWindow::enableActions()
     ShipCADModel* model = _controller->getModel();
     SubdivisionSurface* surf = _controller->getModel()->getSurface();
     size_t nlayers = 0;
-    for (size_t i=0; i<surf->numberOfLayers(); i++)
+    bool delete_empty_layers = false;
+    for (size_t i=0; i<surf->numberOfLayers(); i++) {
         if (surf->getLayer(i)->numberOfFaces())
             nlayers++;
+        else if (!delete_empty_layers && surf->getLayer(i)->numberOfFaces() == 0)
+            delete_empty_layers = true;
+    }
     size_t ncpoints = surf->numberOfControlPoints();
     size_t nselcpoints = surf->numberOfSelectedControlPoints();
     size_t nselcedges = surf->numberOfSelectedControlEdges();
     size_t ncfaces = surf->numberOfControlFaces();
     size_t nselcfaces = surf->numberOfSelectedControlFaces();
-    size_t ncurves = model->getControlCurves().size();
+    size_t ncurves = surf->numberOfControlCurves();
     size_t nselccurves = surf->numberOfSelectedControlCurves();
     size_t nstations = model->getStations().size();
     size_t nwaterlines = model->getWaterlines().size();
@@ -751,6 +755,8 @@ void MainWindow::enableActions()
     ui->actionFaceInvert->setEnabled(nselcfaces > 0);
     
     // layer actions
+    ui->actionLayerAuto_group->setEnabled(ncfaces > 1 && vis.isShowInteriorEdges());
+    ui->actionLayerDelete_empty->setEnabled(delete_empty_layers);
 
     // visibility actions
     ui->actionShowControl_net->setEnabled(ncpoints > 0);
@@ -789,8 +795,9 @@ void MainWindow::updateVisibilityActions()
 
     ui->actionShowControl_net->setChecked(vis.isShowControlNet());
     ui->actionShow_both_sides->setChecked(vis.getModelView() == mvBoth);
-    ui->actionShowControl_curves->setChecked(_controller->getModel()->getControlCurves().size() > 0
-                                             && vis.isShowControlCurves());
+    ui->actionShowControl_curves->setChecked(
+        _controller->getModel()->getSurface()->numberOfControlCurves() > 0
+        && vis.isShowControlCurves());
     ui->actionShowInterior_edges->setChecked(vis.isShowInteriorEdges());
     ui->actionShowGrid->setChecked(vis.isShowGrid());
     ui->actionShowStations->setChecked(_controller->getModel()->getStations().size() > 0

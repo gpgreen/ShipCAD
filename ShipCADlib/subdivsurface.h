@@ -121,12 +121,17 @@ public:
     // tries to assemble quads into as few as possible rectangular patches
     void assembleFacesToPatches(assemble_mode_t mode,
                                 std::vector<ControlFaceGrid>& assembledPatches);
+    /*! \brief group faces
+     *
+     * \return true if any faces were moved to new layers
+     */
+    bool autoGroupFaces();
     void calculateGaussCurvature();
     void clearSelection();
     void convertToGrid(ControlFaceGrid& input, PointGrid& grid);
     /*! \brief connect edges between selected points
      *
-     * \return true if successfull, false if edge already exists
+     * \return true if successful, false if edge already exists
      */
     bool edgeConnect();
     virtual void extents(QVector3D& min, QVector3D& max);
@@ -240,6 +245,7 @@ public:
     void setSelectedControlFace(SubdivisionControlFace* face);
     void removeSelectedControlFace(SubdivisionControlFace* face);
     bool hasSelectedControlFace(SubdivisionControlFace* face);
+    std::set<SubdivisionControlFace*>& getSelControlFaceCollection() {return _sel_control_faces;}
 
     // SubdivisionControlCurve
     size_t numberOfControlCurves() {return _control_curves.size();}
@@ -256,6 +262,7 @@ public:
     void setSelectedControlCurve(SubdivisionControlCurve* curve);
     void removeSelectedControlCurve(SubdivisionControlCurve* curve);
     bool hasSelectedControlCurve(SubdivisionControlCurve* curve);
+    std::set<SubdivisionControlCurve*>& getSelControlCurveCollection() {return _sel_control_curves;}
 
     // SubdivisionLayer
     size_t numberOfLayers() {return _layers.size();}
@@ -270,7 +277,8 @@ public:
     size_t requestNewLayerID();
     SubdivisionLayer* addNewLayer();
     QString getDefaultLayerName();
-
+    size_t deleteEmptyLayers();
+    
     // getters/setters
     subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
     void setSubdivisionMode(subdiv_mode_t val);
@@ -372,8 +380,8 @@ protected:
                        std::vector<SubdivisionControlFace*>& ctrlfaces,
                        std::vector<ControlFaceGrid>& assembled);
     void sortEdges(std::vector<SubdivisionEdge*>& edges);
-    std::vector<SubdivisionPoint*> sortEdges(bool always_true, std::vector<SubdivisionEdge*>& edges);
-    std::vector<SubdivisionControlPoint*> sortEdges(std::vector<SubdivisionControlEdge*>& edges);
+    void sortEdges(std::vector<SubdivisionPoint*>& points, std::vector<SubdivisionEdge*>& edges);
+    void sortControlEdges(std::vector<SubdivisionControlPoint*>& points, std::vector<SubdivisionControlEdge*>& edges);
 
     void deleteElementsCollection();
     

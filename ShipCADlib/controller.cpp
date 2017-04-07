@@ -86,11 +86,6 @@ Controller::Controller(ShipCADModel* model)
     connect(_model, SIGNAL(undoDataChanged()), SIGNAL(updateUndoData()));
 }
 
-Controller::~Controller()
-{
-    // does nothing
-}
-
 bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
 {
     bool scene_changed = false;
@@ -187,8 +182,7 @@ void Controller::addCurve()
     getModel()->createUndo(tr("new controlcurve"), true);
     surf->addControlCurves(edges);
     list.clear();
-    if (!getModel()->getVisibility().isShowControlCurves())
-        getModel()->getVisibility().setShowControlCurves(true);
+    showControlCurves(true);
     emit modifiedModel();
 }
 
@@ -342,7 +336,16 @@ void Controller::deleteNegativeFaces()
 // FreeShipUnit.pas:4948
 void Controller::flipFaces()
 {
-	// TODO
+    cout << "Controller::flipFaces" << endl;
+    // msg 0083
+    getModel()->createUndo(tr("flip normals"), true);
+    set<SubdivisionControlFace*>::iterator i =
+        getModel()->getSurface()->getSelControlFaceCollection().begin();
+    for (; i!=getModel()->getSurface()->getSelControlFaceCollection().end(); ++i)
+        (*i)->flipNormal();
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
 void Controller::mirrorPlaneFace()
@@ -353,6 +356,7 @@ void Controller::mirrorPlaneFace()
 // FreeShipUnit.pas:5393
 void Controller::newFace()
 {
+    cout << "Controller::newFace" << endl;
     OrderedPointMap& cplist =
         getModel()->getSurface()->getSelControlPointCollection();
 
@@ -511,6 +515,7 @@ void Controller::importVRML()
 
 void Controller::loadFile(const QString& filename)
 {
+    cout << "Controller::loadFile" << endl;
     QFile loadfile(filename);
     FileBuffer source;
     try {
@@ -531,6 +536,7 @@ void Controller::loadFile(const QString& filename)
 
 void Controller::saveFile()
 {
+    cout << "Controller::saveFile" << endl;
     if (getModel()->isFilenameSet()) {
         const QString& filename = getModel()->getFilename();
         cout << "saveFile:" << filename.toStdString() << endl;
@@ -573,6 +579,7 @@ void Controller::saveFile()
 
 void Controller::saveFileAs(const QString& filename)
 {
+    cout << "Controller::saveFileAs" << endl;
     getModel()->setFilename(filename);
     saveFile();
     emit modifiedModel();
@@ -618,9 +625,22 @@ void Controller::intersectionDialog()
 	// TODO
 }
 
+// FreeShipUnit.pas:9128
 void Controller::autoGroupLayer()
 {
-	// TODO
+    cout << "Controller::autoGroupLayer" << endl;
+    SubdivisionSurface* surf = getModel()->getSurface();
+    // msg 0139
+    UndoObject* uo = getModel()->createUndo(tr("layer grouping"), false);
+    if (surf->autoGroupFaces()) {
+        surf->deleteEmptyLayers();
+        surf->setActiveLayer(surf->getLayer(surf->numberOfLayers() - 1));
+        uo->accept();
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+        emit changeActiveLayer();
+    } else
+        delete uo;
 }
 
 void Controller::developLayers()
@@ -633,15 +653,40 @@ void Controller::layerDialog()
 	// TODO
 }
 
+// FreeShipUnit.pas:9316
 void Controller::deleteEmptyLayers()
 {
-	// TODO
+    cout << "Controller::deleteEmptyLayers" << endl;
+    SubdivisionSurface* surf = getModel()->getSurface();
+    // msg 0140
+    UndoObject* uo = getModel()->createUndo(tr("delete empty layers"), false);
+    size_t n = surf->deleteEmptyLayers();
+    if (surf->getActiveLayer() == 0)
+        surf->setActiveLayer(surf->getLayer(surf->numberOfLayers() - 1));
+    if (n > 0) {
+        uo->accept();
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+        emit changeActiveLayer();
+        // msg 0141
+        QString msg(tr("%1 empty layers deleted"));
+        msg.arg(n);
+        emit displayInfoDialog(msg);
+    } else
+        delete uo;
 }
 
-SubdivisionLayer* Controller::newLayer()
+// FreeShipUnit.pas:9349
+void Controller::newLayer()
 {
-	// TODO
-    return 0;
+    cout << "Controller::newLayer" << endl;
+    // msg 0142
+    getModel()->createUndo(tr("new layer"), true);
+    SubdivisionLayer* layer = getModel()->getSurface()->addNewLayer();
+    layer->setColor(getModel()->getPreferences().getLayerColor());
+    getModel()->setFileChanged(true);
+    emit changeActiveLayer();
+    emit modifiedModel();
 }
 
 void Controller::addMarker(Marker* marker)
@@ -666,6 +711,7 @@ void Controller::checkModel()
 
 void Controller::newModel()
 {
+    cout << "Controller::newModel" << endl;
     clearUndo();
     getModel()->newModel(fuMetric, 15.0, 6.0, 1.0, 10, 8);
     emit modelLoaded();
@@ -684,6 +730,7 @@ void Controller::scaleModel()
 // FreeShipUnit.pas:10086
 void Controller::collapsePoint()
 {
+    cout << "Controller::collapsePoint" << endl;
     // msg 0160
     UndoObject* uo = getModel()->createUndo(tr("collapse point"), false);
     int n = 0;
@@ -757,6 +804,7 @@ void Controller::insertPlane()
 // FreeShipUnit.pas:10170
 void Controller::intersectLayerPoint()
 {
+    cout << "Controller::intersectLayerPoint" << endl;
     IntersectLayersDialogData data;
     for (size_t i=0; i<getModel()->getSurface()->numberOfLayers(); i++) {
         if (getModel()->getSurface()->getLayer(i)->numberOfFaces() > 0)
@@ -806,6 +854,7 @@ void Controller::lockPoints()
 
 void Controller::newPoint()
 {
+    cout << "Controller::newPoint" << endl;
     SubdivisionControlPoint* pt = SubdivisionControlPoint::construct(getModel()->getSurface());
     pt->setCoordinate(ZERO);
     getModel()->getSurface()->addControlPoint(pt);
@@ -906,6 +955,7 @@ void Controller::projectStraightLinePoint()
 // FreeShipUnit.pas:10221
 void Controller::unlockPoints()
 {
+    cout << "Controller::unlockPoints" << endl;
     if (getModel()->getSurface()->numberOfSelectedLockedPoints() == 0)
         return;
     // msg 0168
@@ -921,6 +971,7 @@ void Controller::unlockPoints()
 // FreeShipUnit.pas:10235
 void Controller::unlockAllPoints()
 {
+    cout << "Controller::unlockAllPoints" << endl;
     if (getModel()->getSurface()->numberOfLockedPoints() == 0)
         return;
     // msg 0169
@@ -996,16 +1047,19 @@ void Controller::selectAll()
 
 void Controller::undo()
 {
+    cout << "Controller::undo" << endl;
     getModel()->undo();
 }
 
 void Controller::redo()
 {
+    cout << "Controller::redo" << endl;
     getModel()->redo();
 }
 
 void Controller::clearUndo()
 {
+    cout << "Controller::clearUndo" << endl;
     getModel()->clearUndo();
 }
 

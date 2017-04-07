@@ -835,7 +835,7 @@ void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
     if (todo.size() > 0) {
         while (todo.size() > 0) {
             SubdivisionControlFace* face = todo.back();
-            todo.erase(todo.end());
+            todo.pop_back();
             vector<SubdivisionControlFace*>* current = new vector<SubdivisionControlFace*>();
             current->push_back(face);
             privFindAttachedFaces(*current, todo, face);
@@ -849,6 +849,80 @@ void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
             delete current;
         }
     }
+}
+
+// layer auto group FreeShipUnit.pas:9128
+bool SubdivisionSurface::autoGroupFaces()
+{
+    vector<SubdivisionControlFace*> todo;
+    vector<vector<SubdivisionControlFace*> > done;
+
+    if (_sel_control_faces.size() > 0) {
+        // use only the selected faces
+        todo.assign(_sel_control_faces.begin(), _sel_control_faces.end());
+    } else {
+        // use all visible faces
+        for (size_t i=0; i<_layers.size(); i++) {
+            if (_layers[i]->isVisible())
+                todo.insert(todo.end(), _layers[i]->faces_begin(), _layers[i]->faces_end());
+        }
+    }
+    if (todo.size() == 0)
+        return false;
+    while (todo.size() > 0) {
+        SubdivisionControlFace* face = todo.back();
+        todo.pop_back();
+        vector<SubdivisionControlFace*> current;
+        current.push_back(face);
+        privFindAttachedFaces(current, todo, face);
+        done.push_back(current);
+    }
+    // assign all groups to different layers
+    for (size_t i=0; i<done.size(); i++) {
+        vector<SubdivisionControlFace*>& current = done[i];
+        if (current.size() > 0) {
+            bool same_layer = true;
+            // check if all faces currently belong to the same layer
+            SubdivisionControlFace* face = current[0];
+            SubdivisionLayer* layer = 0;
+            for (size_t j=1; j<current.size(); j++) {
+                SubdivisionControlFace* face2 = current[j];
+                if (face2->getLayer() != face->getLayer()) {
+                    same_layer = false;
+                    break;
+                }
+            }
+            if (same_layer) {
+                if (current.size() != face->getLayer()->numberOfFaces()) {
+                    // a subset of face layer is selected, copy properties from that layer
+                    layer = addNewLayer();
+                    layer->assignProperties(face->getLayer());
+                }
+            } else {
+                // faces belong to multiple layers
+                layer = addNewLayer();
+                layer->setColor(RandomColor());
+            }
+            if (layer != 0) {
+                for (size_t j=0; j<current.size(); j++)
+                    current[j]->setLayer(layer);
+            }
+        }
+    }
+    return true;
+}
+
+size_t SubdivisionSurface::deleteEmptyLayers()
+{
+    size_t n = 0;
+    for (size_t i=_layers.size(); i>=1; i--) {
+        SubdivisionLayer* layer = _layers[i-1];
+        if (layer->numberOfFaces() == 0 && _layers.size() > 1) {
+            deleteLayer(layer);
+            n++;
+        }
+    }
+    return n;
 }
 
 void SubdivisionSurface::calculateGaussCurvature()
@@ -2492,6 +2566,29 @@ SubdivisionControlEdge* SubdivisionSurface::controlEdgeExists(SubdivisionPoint *
     return static_cast<SubdivisionControlEdge*>(0);
 }
 
+static void sortEdge(bool first, SubdivisionEdge* edge1, SubdivisionEdge* edge2)
+{
+    if (first) {
+        if (edge1->startPoint() == edge2->startPoint())
+            edge1->swapData();
+        else if (edge1->startPoint() == edge2->endPoint()) {
+            edge1->swapData();
+            edge2->swapData();
+        }
+        else if (edge1->endPoint() == edge2->endPoint()) {
+            edge2->swapData();
+        }
+    }
+    else {
+        if (edge1->endPoint() == edge2->endPoint())
+            edge2->swapData();
+        if (edge1->endPoint() == edge2->startPoint()) {
+            edge2->swapData();
+            edge2->swapData();
+        }
+    }
+}
+
 void SubdivisionSurface::sortEdges(vector<SubdivisionEdge*>& edges)
 {
     if (edges.size() <= 1)
@@ -2522,34 +2619,42 @@ void SubdivisionSurface::sortEdges(vector<SubdivisionEdge*>& edges)
     }
 }
 
-// use the bool argument so that we don't get compile error, value passed in doesn't matter
-vector<SubdivisionPoint*> SubdivisionSurface::sortEdges(bool /*always_true*/, vector<SubdivisionEdge*>& edges)
+void SubdivisionSurface::sortEdges(
+    vector<SubdivisionPoint*>& points, vector<SubdivisionEdge*>& edges)
 {
-    vector<SubdivisionPoint*> points;
     if (edges.size() > 0) {
-        sortEdges(edges);
-        for (size_t i=0; i<edges.size(); ++i) {
-            if (i == 0)
-                points.push_back(edges[i]->startPoint());
+        if (edges.size() > 1) {
+            SubdivisionEdge* edge1 = edges[0];
+            for (size_t j=1; j<edges.size(); ++j) {
+                SubdivisionEdge* edge2 = edges[j];
+                sortEdge(j==1, edge1, edge2);
+            }
+        }
+        points.push_back(edges.front()->startPoint());
+        points.push_back(edges.front()->endPoint());
+        for (size_t i=1; i<edges.size(); ++i) {
             points.push_back(edges[i]->endPoint());
         }
     }
-    return points;
 }
 
-// use the bool argument so that we don't get compile error, value passed in doesn't matter
-vector<SubdivisionControlPoint*> SubdivisionSurface::sortEdges(vector<SubdivisionControlEdge*>& edges)
+void SubdivisionSurface::sortControlEdges(
+    vector<SubdivisionControlPoint*>& points, vector<SubdivisionControlEdge*>& edges)
 {
-    vector<SubdivisionControlPoint*> points;
     if (edges.size() > 0) {
-        sortEdges(edges);
-        for (size_t i=0; i<edges.size(); ++i) {
-            if (i == 0)
-                points.push_back(dynamic_cast<SubdivisionControlPoint*>(edges[i]->startPoint()));
+        if (edges.size() > 1) {
+            SubdivisionEdge* edge1 = edges[0];
+            for (size_t j=1; j<edges.size(); ++j) {
+                SubdivisionEdge* edge2 = edges[j];
+                sortEdge(j==1, edge1, edge2);
+            }
+        }
+        points.push_back(dynamic_cast<SubdivisionControlPoint*>(edges.front()->startPoint()));
+        points.push_back(dynamic_cast<SubdivisionControlPoint*>(edges.front()->endPoint()));
+        for (size_t i=1; i<edges.size(); ++i) {
             points.push_back(dynamic_cast<SubdivisionControlPoint*>(edges[i]->endPoint()));
         }
     }
-    return points;
 }
 
 void SubdivisionSurface::extractAllEdgeLoops(vector<vector<SubdivisionPoint*> >& destination)
@@ -2582,7 +2687,8 @@ void SubdivisionSurface::extractAllEdgeLoops(vector<vector<SubdivisionPoint*> >&
             }
         } while(nextedge != 0);
 
-        vector<SubdivisionPoint*> points = sortEdges(true, loop);
+        vector<SubdivisionPoint*> points;
+        sortEdges(points, loop);
         if (points.size() > 0)
             destination.push_back(points);
     }
@@ -2964,7 +3070,8 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionControlEdge *> &source,
         }
         if (tmpedges.size() > 0) {
             //sort all found edges in correct order
-            vector<SubdivisionControlPoint*> tmppoints = sortEdges(tmpedges);
+            vector<SubdivisionControlPoint*> tmppoints;
+            sortControlEdges(tmppoints, tmpedges);
             if (tmppoints.size() > 0)
                 sorted.push_back(tmppoints);
         }
@@ -3013,7 +3120,8 @@ void SubdivisionSurface::isolateEdges(vector<SubdivisionEdge *> &source,
         }
         if (tmpedges.size() > 0) {
             //sort all found edges in correct order
-            vector<SubdivisionPoint*> tmppoints = sortEdges(true, tmpedges);
+            vector<SubdivisionPoint*> tmppoints;
+            sortEdges(tmppoints, tmpedges);
             if (tmppoints.size() > 0)
                 sorted.push_back(tmppoints);
         }

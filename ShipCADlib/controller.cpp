@@ -303,18 +303,37 @@ void Controller::mirrorPlaneFace()
     vector<SubdivisionControlFace*> mirrorfaces;
     set<SubdivisionControlFace*>& cflist = getSurface()->getSelControlFaceCollection();
     if (cflist.size() == 0) {
-        // TODO
         // select layers dialog
-    } else {
-        // use all selected control faces
-        mirrorfaces.insert(mirrorfaces.end(), cflist.begin(), cflist.end());
+        bool old_normals = getModel()->getVisibility().isShowNormals();
+        bool old_edges = getModel()->getVisibility().isShowInteriorEdges();
+        bool old_control_net = getModel()->getVisibility().isShowControlNet();
+        getModel()->getVisibility().setShowNormals(false);
+        getModel()->getVisibility().setShowInteriorEdges(true);
+        vector<SubdivisionLayer*> layers;
+        for (size_t i=0; i<getSurface()->numberOfLayers(); i++) {
+            if (getSurface()->getLayer(i)->isVisible())
+                layers.push_back(getSurface()->getLayer(i));
+        }
+        ChooseLayerDialogData data(layers, fsFaces);
+        emit exeChooseLayerDialog(data);
+        getModel()->getVisibility().setShowNormals(old_normals);
+        getModel()->getVisibility().setShowInteriorEdges(old_edges);
+        getModel()->getVisibility().setShowControlNet(old_control_net);
+        if (!data.accepted) {
+            clearSelections();
+            return;
+        }
     }
+    // use all selected control faces
+    mirrorfaces.insert(mirrorfaces.end(), cflist.begin(), cflist.end());
     if (mirrorfaces.size() == 0)
         return;
     MirrorDialogData data(false, transverse, 0.0);
     emit exeMirrorDialog(data);
-    if (!data.accepted)
+    if (!data.accepted) {
+        clearSelections();
         return;
+    }
     // msg 0084
     getModel()->createUndo(tr("mirror"), true);
     Plane p(0,0,0,-data.distance);
@@ -1285,5 +1304,26 @@ void Controller::dialogUpdatedPointCoord(float x, float y, float z)
             ap->setCoordinate(newcoord);
             emit modifiedModel();
         }
+    }
+}
+
+void Controller::layerFacesSelected(SubdivisionLayer* layer)
+{
+    layerFacesSelection(layer, true);
+}
+
+void Controller::layerFacesDeselected(SubdivisionLayer* layer)
+{
+    layerFacesSelection(layer, false);
+}
+
+void Controller::layerFacesSelection(SubdivisionLayer* layer, bool selected)
+{
+    vector<SubdivisionControlFace*>::const_iterator i = layer->faces_begin();
+    for(; i!=layer->faces_end(); ++i) {
+        if (selected)
+            getSurface()->setSelectedControlFace(*i);
+        else
+            getSurface()->removeSelectedControlFace(*i);
     }
 }

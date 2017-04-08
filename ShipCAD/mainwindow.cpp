@@ -38,6 +38,7 @@
 #include "insertplanepointsdialog.h"
 #include "intersectlayersdialog.h"
 #include "extrudeedgedialog.h"
+#include "chooselayerdialog.h"
 #include "mirrordialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
@@ -51,23 +52,24 @@ using namespace std;
 
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow), _pointdialog(0), _planepointsdialog(0),
-    _intersectlayersdialog(0), _extrudeedgedialog(0), _mirrordialog(0),
-    _controller(c), _currentViewportContext(0),
-    _menu_recent_files(0), _contextMenu(0), _cameraMenu(0),
-    _viewportModeGroup(0),
-    _wireframeAction(0), _shadeAction(0), _gaussCurvAction(0), _zebraAction(0),
-    _developCheckAction(0),
-    _viewGroup(0),
-    _perspectiveAction(0), _bodyPlanAction(0),
-    _profileAction(0), _planViewAction(0), _zoomInAction(0), _zoomOutAction(0),
-    _zoomAllAction(0), _printAction(0), _saveImageAction(0),
-    _cameraGroup(0),
-    _wideLensAction(0), _stdLensAction(0), _shortLensAction(0), _medLensAction(0),
-    _longLensAction(0),
-    _visibleBgImgAction(0), _clearBgImgAction(0), _loadBgImgAction(0),
-    _saveBgImgAction(0), _originBgImgAction(0), _scaleBgImgAction(0),
-    _alphaBgImgAction(0), _tolBgImgAction(0), _blendBgImgAction(0)
+    ui(new Ui::MainWindow), _pointdialog(nullptr), _planepointsdialog(nullptr),
+    _intersectlayersdialog(nullptr), _extrudeedgedialog(nullptr), _chooselayerdialog(nullptr),
+    _mirrordialog(nullptr),
+    _controller(c), _currentViewportContext(nullptr),
+    _menu_recent_files(nullptr), _contextMenu(nullptr), _cameraMenu(nullptr),
+    _viewportModeGroup(nullptr),
+    _wireframeAction(nullptr), _shadeAction(nullptr), _gaussCurvAction(nullptr), _zebraAction(nullptr),
+    _developCheckAction(nullptr),
+    _viewGroup(nullptr),
+    _perspectiveAction(nullptr), _bodyPlanAction(nullptr),
+    _profileAction(nullptr), _planViewAction(nullptr), _zoomInAction(nullptr), _zoomOutAction(nullptr),
+    _zoomAllAction(nullptr), _printAction(nullptr), _saveImageAction(nullptr),
+    _cameraGroup(nullptr),
+    _wideLensAction(nullptr), _stdLensAction(nullptr), _shortLensAction(nullptr), _medLensAction(nullptr),
+    _longLensAction(nullptr),
+    _visibleBgImgAction(nullptr), _clearBgImgAction(nullptr), _loadBgImgAction(nullptr),
+    _saveBgImgAction(nullptr), _originBgImgAction(nullptr), _scaleBgImgAction(nullptr),
+    _alphaBgImgAction(nullptr), _tolBgImgAction(nullptr), _blendBgImgAction(nullptr)
 {
     ui->setupUi(this);
     createToolBars();
@@ -109,6 +111,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller,
             SIGNAL(exeChooseColorDialog(ShipCAD::ChooseColorDialogData&)),
             SLOT(executeChooseColorDialog(ShipCAD::ChooseColorDialogData&)));
+    connect(_controller,
+            SIGNAL(exeChooseLayerDialog(ShipCAD::ChooseLayerDialogData&)),
+            SLOT(executeChooseLayerDialog(ShipCAD::ChooseLayerDialogData&)));
     connect(_controller,
             SIGNAL(exeMirrorDialog(ShipCAD::MirrorDialogData&)),
             SLOT(executeMirrorDialog(ShipCAD::MirrorDialogData&)));
@@ -931,7 +936,7 @@ void MainWindow::showPreferences()
 void
 MainWindow::wireFrame()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportMode(vmWireFrame);
     cout << "Viewport mode Wire Frame" << endl;
@@ -940,7 +945,7 @@ MainWindow::wireFrame()
 void
 MainWindow::shade()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportMode(vmShade);
     cout << "Viewport mode shade" << endl;
@@ -949,7 +954,7 @@ MainWindow::shade()
 void
 MainWindow::shadeCurvature()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportMode(vmShadeGauss);
     cout << "Viewport mode shade gauss" << endl;
@@ -958,7 +963,7 @@ MainWindow::shadeCurvature()
 void
 MainWindow::shadeDevelopable()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportMode(vmShadeDevelopable);
     cout << "Viewport mode shade developable" << endl;
@@ -967,7 +972,7 @@ MainWindow::shadeDevelopable()
 void
 MainWindow::shadeZebra()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportMode(vmShadeZebra);
     cout << "Viewport mode shade zebra" << endl;
@@ -975,7 +980,7 @@ MainWindow::shadeZebra()
 
 void MainWindow::setWideLens()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setCameraType(ftWide);
     cout << "MainWindow::setWideLens()" << endl;
@@ -983,7 +988,7 @@ void MainWindow::setWideLens()
 
 void MainWindow::setStdLens()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setCameraType(ftStandard);
     cout << "MainWindow::setStdLens()" << endl;
@@ -991,7 +996,7 @@ void MainWindow::setStdLens()
 
 void MainWindow::setShortLens()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setCameraType(ftShortTele);
     cout << "MainWindow::setShortLens()" << endl;
@@ -999,7 +1004,7 @@ void MainWindow::setShortLens()
 
 void MainWindow::setMedLens()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setCameraType(ftMediumTele);
     cout << "MainWindow::setMedLens()" << endl;
@@ -1007,7 +1012,7 @@ void MainWindow::setMedLens()
 
 void MainWindow::setFarLens()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setCameraType(ftFarTele);
     cout << "MainWindow::setFarLens()" << endl;
@@ -1029,7 +1034,7 @@ void MainWindow::modelChanged()
 
 void MainWindow::setBodyPlanView()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportType(fvBodyplan);
     cout << "MainWindow::setBodyPlanView()" << endl;
@@ -1037,7 +1042,7 @@ void MainWindow::setBodyPlanView()
 
 void MainWindow::setProfileView()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportType(fvProfile);
     cout << "MainWindow::setProfileView()" << endl;
@@ -1045,7 +1050,7 @@ void MainWindow::setProfileView()
 
 void MainWindow::setPlanView()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportType(fvPlan);
     cout << "MainWindow::setPlanView()" << endl;
@@ -1053,7 +1058,7 @@ void MainWindow::setPlanView()
 
 void MainWindow::setPerspectiveView()
 {
-    if (_currentViewportContext == 0)
+    if (_currentViewportContext == nullptr)
         return;
     _currentViewportContext->setViewportType(fvPerspective);
     cout << "MainWindow::setPerspectiveView()" << endl;
@@ -1061,7 +1066,7 @@ void MainWindow::setPerspectiveView()
 
 void MainWindow::showControlPointDialog(bool show)
 {
-    if (_pointdialog == 0) {
+    if (_pointdialog == nullptr) {
         _pointdialog = new PointDialog(this);
         connect(_pointdialog, SIGNAL(cornerPointSelect(bool)),
                 _controller, SLOT(cornerPointSelected(bool)));
@@ -1076,7 +1081,7 @@ void MainWindow::showControlPointDialog(bool show)
 
 void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)
 {
-    if (_planepointsdialog == 0) {
+    if (_planepointsdialog == nullptr) {
         _planepointsdialog = new InsertPlanePointsDialog(this);
     }
     _planepointsdialog->setExtents(data.min, data.max);
@@ -1094,7 +1099,7 @@ void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)
 
 void MainWindow::executeIntersectLayersDialog(IntersectLayersDialogData& data)
 {
-    if (_intersectlayersdialog == 0) {
+    if (_intersectlayersdialog == nullptr) {
         _intersectlayersdialog = new IntersectLayersDialog(this);
     }
     _intersectlayersdialog->initialize(data);
@@ -1106,7 +1111,7 @@ void MainWindow::executeIntersectLayersDialog(IntersectLayersDialogData& data)
 
 void MainWindow::executeExtrudeEdgeDialog(ExtrudeEdgeDialogData& data)
 {
-    if (_extrudeedgedialog == 0) {
+    if (_extrudeedgedialog == nullptr) {
         _extrudeedgedialog = new ExtrudeEdgeDialog(this);
     }
     _extrudeedgedialog->initialize(data);
@@ -1118,7 +1123,7 @@ void MainWindow::executeExtrudeEdgeDialog(ExtrudeEdgeDialogData& data)
 
 void MainWindow::executeMirrorDialog(MirrorDialogData& data)
 {
-    if (_mirrordialog == 0) {
+    if (_mirrordialog == nullptr) {
         _mirrordialog = new MirrorDialog(this);
     }
     _mirrordialog->initialize(data);
@@ -1126,6 +1131,38 @@ void MainWindow::executeMirrorDialog(MirrorDialogData& data)
     data.accepted = (result == QDialog::Accepted);
     _mirrordialog->retrieve(data);
     cout << "execute mirror dialog:" << (data.accepted ? "t" : "f") << endl;
+}
+
+void MainWindow::executeChooseLayerDialog(ChooseLayerDialogData& data)
+{
+    if (_chooselayerdialog == nullptr) {
+        _chooselayerdialog = new ChooseLayerDialog(this);
+        connect(_chooselayerdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
+                _controller, SLOT(layerFacesSelected(ShipCAD::SubdivisionLayer*)));
+        connect(_chooselayerdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
+                _controller, SLOT(layerFacesDeselected(ShipCAD::SubdivisionLayer*)));
+    }
+    _chooselayerdialog->initialize(data);
+
+    // now that dialog is initialized, connect to display
+    connect(_chooselayerdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
+            this, SIGNAL(viewportRender()));
+    connect(_chooselayerdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
+            this, SIGNAL(viewportRender()));
+    emit viewportRender();
+
+    // execute the dialog
+    int result = _chooselayerdialog->exec();
+
+    // dialog finished, disconnect from display
+    disconnect(_chooselayerdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
+            this, SIGNAL(viewportRender()));
+    disconnect(_chooselayerdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
+            this, SIGNAL(viewportRender()));
+
+    data.accepted = (result == QDialog::Accepted);
+    _chooselayerdialog->retrieve(data);
+    cout << "execute choose layer dialog:" << (data.accepted ? "t" : "f") << endl;
 }
 
 void MainWindow::changeSelectedItems()
@@ -1195,7 +1232,7 @@ void MainWindow::addRecentFiles(const QString& filename)
 void MainWindow::vpContextMenuEvent(ViewportContextEvent* event)
 {
     cout << "MainWindow::contextMenuEvent" << endl;
-    if (_contextMenu == 0)
+    if (_contextMenu == nullptr)
         return;
     _currentViewportContext = event->getViewport();
     bool camera_menu_active = false;

@@ -132,6 +132,10 @@ signals:
      */
     void exeIntersectLayersDialog(ShipCAD::IntersectLayersDialogData& data);
 
+    /*! \brief execute the Choose layer dialog
+     */
+    void exeChooseLayerDialog(ShipCAD::ChooseLayerDialogData& data);
+
     /*! \brief execute the Extrude Edge dialog
      */
     void exeExtrudeEdgeDialog(ShipCAD::ExtrudeEdgeDialogData& data);
@@ -573,6 +577,22 @@ public slots:
      * \param z current z value
      */
     void dialogUpdatedPointCoord(float x, float y, float z);
+
+    /*! \brief select all faces in a layer
+     *
+     * \param layer the layer to select faces in
+     */
+    void layerFacesSelected(ShipCAD::SubdivisionLayer* layer);
+
+    /*! \brief deselect all faces in a layer
+     *
+     * \param layer the layer to deselect faces in
+     */
+    void layerFacesDeselected(ShipCAD::SubdivisionLayer* layer);
+
+protected:
+
+    void layerFacesSelection(ShipCAD::SubdivisionLayer* layer, bool selected);
 
 private:
     ShipCADModel* _model; /**< the model this is controlling */

@@ -78,7 +78,7 @@ public:
      * \param p the point to project onto this plane
      * \return the projected point
      */
-    QVector3D projectPointOnPlane(const QVector3D& p);
+    QVector3D projectPointOnPlane(const QVector3D& p) const;
 
     /*! \brief intersect a line with this plane
      *
@@ -88,7 +88,7 @@ public:
      * \param intpt intersection point
      * \return true if line and plane are parallel
      */
-    bool intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplanar, QVector3D& intpt);
+    bool intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplanar, QVector3D& intpt) const;
 
     
     /*! \brief get the mirror of a point about the plane
@@ -96,7 +96,7 @@ public:
      * \param pt point to mirror
      * \return the mirrored point
      */
-    QVector3D mirror(const QVector3D& pt);
+    QVector3D mirror(const QVector3D& pt) const;
     
 private:
 

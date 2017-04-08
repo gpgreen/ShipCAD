@@ -601,8 +601,8 @@ size_t ShipCAD::to_size_t(int val)
 
 QColor ShipCAD::RandomColor()
 {
-    quint8 r = rand() % 255;
-    quint8 g = rand() % 255;
-    quint8 b = rand() % 255;
+    quint8 r = rand() % 256;
+    quint8 g = rand() % 256;
+    quint8 b = rand() % 256;
     return QColor(r, g, b);
 }

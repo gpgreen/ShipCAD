@@ -75,6 +75,16 @@ public:
     const ShipCADModel* getModel() const
         {return _model;}
 
+    /*! \brief get the surface for this model
+     */
+    SubdivisionSurface* getSurface()
+        {return _model->getSurface();}
+    
+    /*! \brief get the surface for this model
+     */
+    const SubdivisionSurface* getSurface() const
+        {return _model->getSurface();}
+    
     /*! \brief shoot a pick ray, change items to selected
      *
      * \param vp the viewport that has the pick ray
@@ -129,6 +139,10 @@ signals:
     /*! \brief execute the Choose Color dialog
      */
     void exeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
+
+    /*! \brief execute the Mirror dialog
+     */
+    void exeMirrorDialog(ShipCAD::MirrorDialogData& data);
 
     /*! \brief show an info dialog
      */

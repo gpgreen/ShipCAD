@@ -121,7 +121,7 @@ bool Plane::intersectsBox(const QVector3D& p1, const QVector3D& p2) const
     return (smin <= 0 && smax >= 0) || (smax <= 0 && smin >= 0);
 }
 
-QVector3D Plane::projectPointOnPlane(const QVector3D& p)
+QVector3D Plane::projectPointOnPlane(const QVector3D& p) const
 {
     float q = _vars[0] * _vars[0] + _vars[1] * _vars[1] + _vars[2] * _vars[2];
     if (q != 0) {
@@ -133,7 +133,7 @@ QVector3D Plane::projectPointOnPlane(const QVector3D& p)
     return ZERO;
 }
 
-bool Plane::intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplanar, QVector3D& intpt)
+bool Plane::intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplanar, QVector3D& intpt) const
 {
     bool parallel = false;
     coplanar = false;
@@ -150,7 +150,7 @@ bool Plane::intersectLine(const QVector3D& pt, const QVector3D& n, bool& coplana
     return parallel;
 }
 
-QVector3D Plane::mirror(const QVector3D& pt)
+QVector3D Plane::mirror(const QVector3D& pt) const
 {
     QVector3D p2 = projectPointOnPlane(pt);
     QVector3D result = pt + 2*(p2 - pt);

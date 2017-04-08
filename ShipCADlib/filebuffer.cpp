@@ -100,7 +100,7 @@ void FileBuffer::load(JPEGImage& img)
         img.data.push_back(_data[_pos]);
 }
 
-void FileBuffer::add(const JPEGImage& img)
+void FileBuffer::add(const JPEGImage& /*img*/)
 {
 	throw runtime_error("not implemented");
 }

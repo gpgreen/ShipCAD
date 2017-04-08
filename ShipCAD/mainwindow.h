@@ -53,6 +53,7 @@ class PointDialog;
 class InsertPlanePointsDialog;
 class IntersectLayersDialog;
 class ExtrudeEdgeDialog;
+class MirrorDialog;
 
 class ViewportState
 {
@@ -261,6 +262,12 @@ private slots:
      */
     void executeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
 
+    /*! \brief execute the extrude edge dialog
+     *
+     * \return true if dialog "ok" selected, false if "cancel" selected
+     */
+    void executeMirrorDialog(ShipCAD::MirrorDialogData& data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;
@@ -291,6 +298,7 @@ private:
     InsertPlanePointsDialog *_planepointsdialog; /**< the insert plane control points dialog created by QtDesigner */
     IntersectLayersDialog *_intersectlayersdialog; /**< the dialog to select 2 different layers */
     ExtrudeEdgeDialog *_extrudeedgedialog; /**< the dialog to set vector to extrude edges */
+    MirrorDialog* _mirrordialog; /**< the dialog to select mirror plane for faces */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

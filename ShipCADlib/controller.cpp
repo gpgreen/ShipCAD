@@ -47,33 +47,6 @@
 using namespace ShipCAD;
 using namespace std;
 
-InsertPlaneDialogData::InsertPlaneDialogData()
-    : accepted(false),
-      addControlCurveSelected(false),
-      planeSelected(transverse),
-      distance(0.0), min(ZERO), max(ZERO)
-{
-    // does nothing
-}
-
-IntersectLayersDialogData::IntersectLayersDialogData()
-    : accepted(false), layer1(0), layer2(0)
-{
-    // does nothing
-}
-
-ExtrudeEdgeDialogData::ExtrudeEdgeDialogData()
-    : accepted(false), vector(ZERO)
-{
-    // does nothing
-}
-
-ChooseColorDialogData::ChooseColorDialogData(const QString& title, const QColor& initial)
-    : accepted(false), title(title), initial(initial), options(QColorDialog::ColorDialogOptions())
-{
-    // does nothing
-}
-
 Controller::Controller(ShipCADModel* model)
     : _model(model), _point_first_moved(false)
 {
@@ -88,69 +61,44 @@ Controller::Controller(ShipCADModel* model)
 
 bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
 {
-    bool scene_changed = false;
-    vector<SubdivisionBase*> filtered;
-    multimap<float, SubdivisionBase*> picks = getModel()->getSurface()->shootPickRay(vp, ray);
-    if (picks.size() > 0) {
-        multimap<float, SubdivisionBase*>::iterator it, itlow;
-        itlow = picks.lower_bound(0);
-        float last = 0;
-        bool first = true;
-        for (it=itlow; it!=picks.end(); ++it) {
-            float s = (*it).first;
-            // check to see if next element is farther away than first, since this is multimap, we
-            // can several at the same distance from the ray origin
-            if (!first) {
-                if (s > last)
-                    break;
-            } else
-                first = false;
-            filtered.push_back((*it).second);
-            last = s;
-        }
-    }
-    if (filtered.size() > 0) {
-        if (filtered.size() >= 1 && !ray.multi_sel)
-            getModel()->getSurface()->clearSelection();
-        if (filtered.size() == 1) {
-            // is this a point?
-            SubdivisionControlPoint* cp = dynamic_cast<SubdivisionControlPoint*>(filtered[0]);
-            if (cp != 0) {
-                cp->setSelected(true);
-                getModel()->setActiveControlPoint(cp);
-                scene_changed = true;
-                cout << "control point selected" << endl;
-                emit showControlPointDialog(true);
-                emit updateControlPointValue(cp);
-            } else {
-                getModel()->setActiveControlPoint(0);
-                emit showControlPointDialog(false);
-                // is this an edge?
-                SubdivisionControlEdge* edge = dynamic_cast<SubdivisionControlEdge*>(filtered[0]);
-                if (edge != 0 ) {
-                    edge->setSelected(true);
-                    scene_changed = true;
-                    cout << "control edge selected" << endl;
-                }
-                // is this a face?
-                SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(filtered[0]);
-                if (face != 0) {
-                    face->setSelected(true);
-                    scene_changed = true;
-                    cout << "control face selected" << endl;
-                }
-            }
+    bool element_sel = false;
+    SubdivisionBase* pick = getSurface()->shootPickRay(vp, ray);
+    if (pick != nullptr) {
+        if (!ray.multi_sel)
+            getSurface()->clearSelection();
+        // is this a point?
+        SubdivisionControlPoint* cp = dynamic_cast<SubdivisionControlPoint*>(pick);
+        if (cp != nullptr) {
+            cp->setSelected(true);
+            getModel()->setActiveControlPoint(cp);
+            element_sel = true;
+            cout << "control point selected" << endl;
+            emit showControlPointDialog(true);
+            emit updateControlPointValue(cp);
         } else {
-            // need to discriminate against these elements
-            throw runtime_error("multiple elements picked");
+            getModel()->setActiveControlPoint(nullptr);
+            emit showControlPointDialog(false);
+            // is this an edge?
+            SubdivisionControlEdge* edge = dynamic_cast<SubdivisionControlEdge*>(pick);
+            if (edge != nullptr) {
+                edge->setSelected(true);
+                element_sel = true;
+                cout << "control edge selected" << endl;
+            }
+            // is this a face?
+            SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(pick);
+            if (!element_sel && face != nullptr) {
+                face->setSelected(true);
+                element_sel = true;
+                cout << "control face selected" << endl;
+            }
         }
     }
-    if (scene_changed) {
-        // TODO file changed, undo
+    if (element_sel) {
         getModel()->setFileChanged(true);
         emit modifiedModel();
     }
-    return scene_changed;
+    return element_sel;
 }
 
 void Controller::deleteBackgroundImage()
@@ -169,7 +117,7 @@ void Controller::addCurve()
 	cout << "Controller::addCurve" << endl;
     vector<SubdivisionControlEdge*> edges;
 
-    SubdivisionSurface* surf = getModel()->getSurface();
+    SubdivisionSurface* surf = getSurface();
     
     set<SubdivisionControlEdge*>& list = surf->getSelControlEdgeCollection();
     for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
@@ -193,10 +141,10 @@ void Controller::collapseEdges()
     size_t n = 0;
     // msg 0073
     UndoObject* uo = getModel()->createUndo(tr("edge collapse"), false);
-    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    set<SubdivisionControlEdge*>& list = getSurface()->getSelControlEdgeCollection();
     for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
         if ((*i)->numberOfFaces() > 1) {
-            getModel()->getSurface()->collapseEdge(*i);
+            getSurface()->collapseEdge(*i);
             n++;
         }
     }
@@ -217,11 +165,11 @@ void Controller::collapseEdges()
 void Controller::connectEdges()
 {
     cout << "Controller::connectEdges" << endl;
-    if (getModel()->getSurface()->numberOfSelectedControlPoints() < 2)
+    if (getSurface()->numberOfSelectedControlPoints() < 2)
         return;
     // msg 0074
     UndoObject* uo = getModel()->createUndo(tr("new edge"), false);
-    if (getModel()->getSurface()->edgeConnect()) {
+    if (getSurface()->edgeConnect()) {
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
@@ -239,7 +187,7 @@ void Controller::creaseEdges()
     cout << "Controller::creaseEdges" << endl;
     // msg 0075
     getModel()->createUndo(tr("set crease edges"), true);
-    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    set<SubdivisionControlEdge*>& list = getSurface()->getSelControlEdgeCollection();
     for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
         (*i)->setCrease(!(*i)->isCrease());
     }
@@ -259,7 +207,7 @@ void Controller::extrudeEdges()
     // msg 0076
     UndoObject* uo = getModel()->createUndo(tr("edge extrusion"), false);
     // assemble edges in a list
-    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    set<SubdivisionControlEdge*>& list = getSurface()->getSelControlEdgeCollection();
     // only boundary edges are allowed
     vector<SubdivisionControlEdge*> actinglist;
     for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
@@ -269,7 +217,7 @@ void Controller::extrudeEdges()
     // clear selected edges
     list.clear();
     if (actinglist.size() > 0) {
-        getModel()->getSurface()->extrudeEdges(actinglist, data.vector);
+        getSurface()->extrudeEdges(actinglist, data.vector);
         // new edges are returned in the list, select them
         for (size_t i=0; i<actinglist.size(); i++) {
             actinglist[i]->setSelected(true);
@@ -293,7 +241,7 @@ void Controller::splitEdges()
     // msg 0078
     UndoObject* uo = getModel()->createUndo(tr("edge split"), false);
     SubdivisionControlPoint* last = 0;
-    set<SubdivisionControlEdge*>& list = getModel()->getSurface()->getSelControlEdgeCollection();
+    set<SubdivisionControlEdge*>& list = getSurface()->getSelControlEdgeCollection();
     size_t n = 0;
     for (set<SubdivisionControlEdge*>::iterator i=list.begin(); i!=list.end(); ++i) {
         const QVector3D& p1 = (*i)->startPoint()->getCoordinate();
@@ -340,17 +288,46 @@ void Controller::flipFaces()
     // msg 0083
     getModel()->createUndo(tr("flip normals"), true);
     set<SubdivisionControlFace*>::iterator i =
-        getModel()->getSurface()->getSelControlFaceCollection().begin();
-    for (; i!=getModel()->getSurface()->getSelControlFaceCollection().end(); ++i)
+        getSurface()->getSelControlFaceCollection().begin();
+    for (; i!=getSurface()->getSelControlFaceCollection().end(); ++i)
         (*i)->flipNormal();
     getModel()->setBuild(false);
     getModel()->setFileChanged(true);
     emit modifiedModel();
 }
 
+// FreeShipUnit.pas:4959
 void Controller::mirrorPlaneFace()
 {
-	// TODO
+    cout << "Controller::mirrorPlaneFace" << endl;
+    vector<SubdivisionControlFace*> mirrorfaces;
+    set<SubdivisionControlFace*>& cflist = getSurface()->getSelControlFaceCollection();
+    if (cflist.size() == 0) {
+        // TODO
+        // select layers dialog
+    } else {
+        // use all selected control faces
+        mirrorfaces.insert(mirrorfaces.end(), cflist.begin(), cflist.end());
+    }
+    if (mirrorfaces.size() == 0)
+        return;
+    MirrorDialogData data(false, transverse, 0.0);
+    emit exeMirrorDialog(data);
+    if (!data.accepted)
+        return;
+    // msg 0084
+    getModel()->createUndo(tr("mirror"), true);
+    Plane p(0,0,0,-data.distance);
+    if (data.which_plane == transverse)
+        p.setA(1.0);
+    else if (data.which_plane == horizontal)
+        p.setC(1.0);
+    else
+        p.setB(1.0);
+    getSurface()->mirrorFaces(data.connect_points, p, mirrorfaces);
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:5393
@@ -358,7 +335,7 @@ void Controller::newFace()
 {
     cout << "Controller::newFace" << endl;
     OrderedPointMap& cplist =
-        getModel()->getSurface()->getSelControlPointCollection();
+        getSurface()->getSelControlPointCollection();
 
     if (cplist.size() < 3) {
         // msg 0095 error
@@ -376,7 +353,7 @@ void Controller::newFace()
     cplist.clear();
     // add the new face
     SubdivisionControlFace* face =
-        getModel()->getSurface()->addControlFace(tmp, true, getModel()->getActiveLayer());
+        getSurface()->addControlFace(tmp, true, getModel()->getActiveLayer());
     if (face != 0) {
         uo->accept();
         getModel()->setBuild(false);
@@ -521,7 +498,7 @@ void Controller::loadFile(const QString& filename)
     try {
         source.loadFromFile(loadfile);
         getModel()->loadBinary(source);
-        getModel()->getSurface()->clearSelection();
+        getSurface()->clearSelection();
         // TODO clear selected flowlines
         // TODO clear selected markers
         getModel()->setFilename(filename);
@@ -629,7 +606,7 @@ void Controller::intersectionDialog()
 void Controller::autoGroupLayer()
 {
     cout << "Controller::autoGroupLayer" << endl;
-    SubdivisionSurface* surf = getModel()->getSurface();
+    SubdivisionSurface* surf = getSurface();
     // msg 0139
     UndoObject* uo = getModel()->createUndo(tr("layer grouping"), false);
     if (surf->autoGroupFaces()) {
@@ -657,7 +634,7 @@ void Controller::layerDialog()
 void Controller::deleteEmptyLayers()
 {
     cout << "Controller::deleteEmptyLayers" << endl;
-    SubdivisionSurface* surf = getModel()->getSurface();
+    SubdivisionSurface* surf = getSurface();
     // msg 0140
     UndoObject* uo = getModel()->createUndo(tr("delete empty layers"), false);
     size_t n = surf->deleteEmptyLayers();
@@ -682,7 +659,7 @@ void Controller::newLayer()
     cout << "Controller::newLayer" << endl;
     // msg 0142
     getModel()->createUndo(tr("new layer"), true);
-    SubdivisionLayer* layer = getModel()->getSurface()->addNewLayer();
+    SubdivisionLayer* layer = getSurface()->addNewLayer();
     layer->setColor(getModel()->getPreferences().getLayerColor());
     getModel()->setFileChanged(true);
     emit changeActiveLayer();
@@ -722,8 +699,10 @@ void Controller::lackenbyModelTransformation()
 	// TODO
 }
 
+// FreeShipUnit.pas:5195
 void Controller::scaleModel()
 {
+    cout << "Controller::scaleModel" << endl;
 	// TODO
 }
 
@@ -734,11 +713,11 @@ void Controller::collapsePoint()
     // msg 0160
     UndoObject* uo = getModel()->createUndo(tr("collapse point"), false);
     int n = 0;
-    OrderedPointMap& pmap = getModel()->getSurface()->getSelControlPointCollection();
+    OrderedPointMap& pmap = getSurface()->getSelControlPointCollection();
     for (OrderedPointMap::iterator i=pmap.begin(); i!=pmap.end(); ++i) {
         SubdivisionControlPoint* pt = *i;
         if (!pt->isLocked() && pt->numberOfEdges() == 2) {
-            getModel()->getSurface()->collapseControlPoint(pt);
+            getSurface()->collapseControlPoint(pt);
             n++;
         }
     }
@@ -773,7 +752,7 @@ void Controller::insertPlane()
         return;
     // msg 0163
     UndoObject* uo = getModel()->createUndo(tr("insert plane intersections"), false);
-    size_t n = getModel()->getSurface()->numberOfControlPoints();
+    size_t n = getSurface()->numberOfControlPoints();
     Plane p;
     switch(data.planeSelected) {
     case transverse:
@@ -789,8 +768,8 @@ void Controller::insertPlane()
         delete uo;
         return;
     }
-    getModel()->getSurface()->insertPlane(p, data.addControlCurveSelected);
-    if (n < getModel()->getSurface()->numberOfControlPoints()) {
+    getSurface()->insertPlane(p, data.addControlCurveSelected);
+    if (n < getSurface()->numberOfControlPoints()) {
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
@@ -806,9 +785,9 @@ void Controller::intersectLayerPoint()
 {
     cout << "Controller::intersectLayerPoint" << endl;
     IntersectLayersDialogData data;
-    for (size_t i=0; i<getModel()->getSurface()->numberOfLayers(); i++) {
-        if (getModel()->getSurface()->getLayer(i)->numberOfFaces() > 0)
-            data.layers.push_back(getModel()->getSurface()->getLayer(i));
+    for (size_t i=0; i<getSurface()->numberOfLayers(); i++) {
+        if (getSurface()->getLayer(i)->numberOfFaces() > 0)
+            data.layers.push_back(getSurface()->getLayer(i));
     }
     if (data.layers.size() <= 1) {
         // msg 0166
@@ -839,7 +818,7 @@ void Controller::intersectLayerPoint()
 void Controller::lockPoints()
 {
     cout << "Controller::lockPoints" << endl;
-    SubdivisionSurface* surf = getModel()->getSurface();
+    SubdivisionSurface* surf = getSurface();
     if (surf->numberOfSelectedLockedPoints() < surf->numberOfSelectedControlPoints()) {
         // msg 0167
         getModel()->createUndo(tr("lock points"), true);
@@ -855,10 +834,10 @@ void Controller::lockPoints()
 void Controller::newPoint()
 {
     cout << "Controller::newPoint" << endl;
-    SubdivisionControlPoint* pt = SubdivisionControlPoint::construct(getModel()->getSurface());
+    SubdivisionControlPoint* pt = SubdivisionControlPoint::construct(getSurface());
     pt->setCoordinate(ZERO);
-    getModel()->getSurface()->addControlPoint(pt);
-    getModel()->getSurface()->setSelectedControlPoint(pt);
+    getSurface()->addControlPoint(pt);
+    getSurface()->setSelectedControlPoint(pt);
     getModel()->setActiveControlPoint(pt);
     getModel()->setFileChanged(true);
     emit showControlPointDialog(true);
@@ -870,7 +849,7 @@ void Controller::newPoint()
 void Controller::movePoint(QVector3D changedCoords)
 {
     cout << "Controller::movePoint" << endl;
-    if (getModel()->getSurface()->numberOfSelectedControlPoints() != 1)
+    if (getSurface()->numberOfSelectedControlPoints() != 1)
         throw runtime_error("moving multiple points at once");
     SubdivisionControlPoint* pt = getModel()->getActiveControlPoint();
     if (pt->isLocked()) {
@@ -904,7 +883,7 @@ void Controller::stopMovePoint()
 // FreeShipUnit:10356
 void Controller::projectStraightLinePoint()
 {
-    SubdivisionSurface* surf = getModel()->getSurface();
+    SubdivisionSurface* surf = getSurface();
     cout << "Controller::projectStraightLinePoint" << endl;
     if (surf->numberOfSelectedControlPoints() < 3) {
         // msg 0xxx
@@ -914,7 +893,7 @@ void Controller::projectStraightLinePoint()
     // determine if the number of points to be moved doesn't contain locked controlpoints only
     // however the first and last points (determining the line segment) are allowed to be locked
     size_t nlocked = 0;
-    OrderedPointMap& ptset = getModel()->getSurface()->getSelControlPointCollection();
+    OrderedPointMap& ptset = getSurface()->getSelControlPointCollection();
     for (size_t i=1; i<ptset.size()-1; i++) {
         if (ptset.get(i)->isLocked())
             nlocked++;
@@ -956,11 +935,11 @@ void Controller::projectStraightLinePoint()
 void Controller::unlockPoints()
 {
     cout << "Controller::unlockPoints" << endl;
-    if (getModel()->getSurface()->numberOfSelectedLockedPoints() == 0)
+    if (getSurface()->numberOfSelectedLockedPoints() == 0)
         return;
     // msg 0168
     getModel()->createUndo(tr("unlock points"), true);
-    OrderedPointMap& ptset = getModel()->getSurface()->getSelControlPointCollection();
+    OrderedPointMap& ptset = getSurface()->getSelControlPointCollection();
     for (OrderedPointMap::iterator i=ptset.begin(); i!=ptset.end(); ++i) {
         (*i)->setLocked(false);
     }
@@ -972,12 +951,12 @@ void Controller::unlockPoints()
 void Controller::unlockAllPoints()
 {
     cout << "Controller::unlockAllPoints" << endl;
-    if (getModel()->getSurface()->numberOfLockedPoints() == 0)
+    if (getSurface()->numberOfLockedPoints() == 0)
         return;
     // msg 0169
     getModel()->createUndo(tr("unlock all points"), true);
-    for (size_t i=0; i<getModel()->getSurface()->numberOfControlPoints(); i++) {
-        getModel()->getSurface()->getControlPoint(i)->setLocked(false);
+    for (size_t i=0; i<getSurface()->numberOfControlPoints(); i++) {
+        getSurface()->getControlPoint(i)->setLocked(false);
     }
     getModel()->setFileChanged(true);
     // emit dialog msg 0170
@@ -1005,7 +984,7 @@ void Controller::kaperResistance()
 void Controller::clearSelections()
 {
     cout << "Controller::clearSelections" << endl;
-    SubdivisionSurface* surf = getModel()->getSurface();
+    SubdivisionSurface* surf = getSurface();
     size_t n = surf->numberOfSelectedControlPoints()
             + surf->numberOfSelectedControlEdges()
             + surf->numberOfSelectedControlFaces()
@@ -1023,7 +1002,7 @@ void Controller::clearSelections()
 void Controller::deleteSelections()
 {
     cout << "Controller::deleteSelections" << endl;
-    SubdivisionSurface* surf = getModel()->getSurface();
+    SubdivisionSurface* surf = getSurface();
     size_t n = surf->numberOfSelectedControlPoints()
             + surf->numberOfSelectedControlEdges()
             + surf->numberOfSelectedControlFaces()
@@ -1247,11 +1226,11 @@ void Controller::setActiveLayerColor()
 {
 	cout << "Controller::setActiveLayerColor" << endl;
     ChooseColorDialogData data(tr("Choose color for Layer"),
-                               getModel()->getSurface()->getActiveLayer()->getColor());
+                               getSurface()->getActiveLayer()->getColor());
     emit exeChooseColorDialog(data);
     if (data.accepted) {
         getModel()->createUndo(tr("change active layer color"), true);
-        getModel()->getSurface()->getActiveLayer()->setColor(data.chosen);
+        getSurface()->getActiveLayer()->setColor(data.chosen);
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
         emit modifiedModel();

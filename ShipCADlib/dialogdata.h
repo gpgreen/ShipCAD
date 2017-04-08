@@ -1,16 +1,6 @@
 /*##############################################################################################
  *    ShipCAD																				   *
  *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>								   *
- *    Original Copyright header below														   *
- *																							   *
- *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
- *    open source surface-modelling program based on subdivision surfaces and intended for     *
- *    designing ships.                                                                         *
- *                                                                                             *
- *    Copyright © 2005, by Martijn van Engeland                                                *
- *    e-mail                  : Info@FREEship.org                                              *
- *    FREE!ship project page  : https://sourceforge.net/projects/freeship                      *
- *    FREE!ship homepage      : www.FREEship.org                                               *
  *                                                                                             *
  *    This program is free software; you can redistribute it and/or modify it under            *
  *    the terms of the GNU General Public License as published by the                          *
@@ -86,6 +76,46 @@ struct ChooseColorDialogData
     QColorDialog::ColorDialogOptions options;
     QColor chosen;
     explicit ChooseColorDialogData(const QString& title, const QColor& initial);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for layer properties dialog exchange
+ */
+struct LayerDialogData
+{
+    explicit LayerDialogData();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for layer chooser dialog exchange
+ */
+enum LayerSelectMode {
+    fsFaces = 0,
+    fsPoints
+};
+    
+struct ChooseLayerDialogData
+{
+    bool accepted;
+    ShipCAD::LayerSelectMode mode;
+    // collection of layers and whether they are selected
+    std::vector<std::pair<ShipCAD::SubdivisionLayer*, bool> > layers;
+    explicit ChooseLayerDialogData(std::vector<ShipCAD::SubdivisionLayer*> list_of_layers,
+                                   ShipCAD::LayerSelectMode mode);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for mirror dialog exchange
+ */
+
+struct MirrorDialogData
+{
+    bool accepted;
+    bool connect_points;
+    plane_selected_t which_plane;
+    float distance;
+    
+    explicit MirrorDialogData(bool connect, plane_selected_t init, float d);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

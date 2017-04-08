@@ -44,6 +44,7 @@
 #include "controlfacegrid.h"
 #include "pointgrid.h"
 #include "viewportview.h"
+#include "predicate.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -268,36 +269,6 @@ void SubdivisionFace::edgeCheck(SubdivisionPoint* p1,
     newedge->addFace(this);
 }
 
-// predicate class to find an element with given point
-struct PointPred {
-    ShipCAD::SubdivisionPoint* _querypt;
-    bool operator()(const pair<ShipCAD::SubdivisionPoint*, ShipCAD::SubdivisionPoint*>& val)
-    {
-        return val.first == _querypt;
-    }
-    PointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(querypt) {}
-};
-
-// predicate class to find an element with given face
-struct FacePred {
-    ShipCAD::SubdivisionFace* _queryface;
-    bool operator()(const pair<ShipCAD::SubdivisionFace*, ShipCAD::SubdivisionPoint*>& val)
-    {
-        return val.first == _queryface;
-    }
-    FacePred (ShipCAD::SubdivisionFace* queryface) : _queryface(queryface) {}
-};
-
-// predicate class to find an element with given edge
-struct EdgePred {
-    ShipCAD::SubdivisionEdge* _queryedge;
-    bool operator()(const pair<ShipCAD::SubdivisionEdge*, ShipCAD::SubdivisionPoint*>& val)
-    {
-        return val.first == _queryedge;
-    }
-    EdgePred (ShipCAD::SubdivisionEdge* queryedge) : _queryedge(queryedge) {}
-};
-
 // TODO: facepoints should be common to this face, and then we don't
 // have to search the list each time to find the facepoint for this
 // face
@@ -326,19 +297,23 @@ void SubdivisionFace::subdivide(bool controlface,
             index = (i + _points.size()) % _points.size();
             curedge = _owner->edgeExists(p2, _points[index]);
             index = (i - 1) % 4;
-            ptmpindex = find_if(vertexpoints.begin(), vertexpoints.end(), PointPred(p2));
+            ptmpindex = find_if(vertexpoints.begin(), vertexpoints.end(),
+                                FirstPointPairPredicate(p2));
             pts[index] = (*ptmpindex).second; // p2.newlocation
             SubdivisionPoint* p2pt = pts[index];
             index = (index + 1) % 4;
-            etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(curedge));
+            etmpindex = find_if(edgepoints.begin(), edgepoints.end(),
+                                FirstEdgePointPredicate(curedge));
             pts[index] = (*etmpindex).second; // curedge.newlocation
             SubdivisionPoint* curredgept = pts[index];
             index = (index + 1) % 4;
-            ftmpindex = find_if(facepoints.begin(), facepoints.end(), FacePred(this));
+            ftmpindex = find_if(facepoints.begin(), facepoints.end(),
+                                FirstFacePointPredicate(this));
             pts[index] = (*ftmpindex).second; // this.newlocation
             SubdivisionPoint* newlocation = pts[index];
             index = (index + 1) % 4;
-            etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(prevedge));
+            etmpindex = find_if(edgepoints.begin(), edgepoints.end(),
+                                FirstEdgePointPredicate(prevedge));
             pts[index] = (*etmpindex).second; // prevedge.newlocation
             SubdivisionPoint* prevedgept = pts[index];
             // add the new face
@@ -374,13 +349,16 @@ void SubdivisionFace::subdivide(bool controlface,
             curedge = _owner->edgeExists(p2, _points[index]);
 
             index = 0;
-            etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(prevedge));
+            etmpindex = find_if(edgepoints.begin(), edgepoints.end(),
+                                FirstEdgePointPredicate(prevedge));
             pts[index] = (*etmpindex).second;
             index = 1;
-            ptmpindex = find_if(vertexpoints.begin(), vertexpoints.end(), PointPred(p2));
+            ptmpindex = find_if(vertexpoints.begin(), vertexpoints.end(),
+                                FirstPointPairPredicate(p2));
             pts[index] = (*ptmpindex).second;
             index = 2;
-            etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(curedge));
+            etmpindex = find_if(edgepoints.begin(), edgepoints.end(),
+                                FirstEdgePointPredicate(curedge));
             pts[index] = (*etmpindex).second;
             // add the new face
             newface = SubdivisionFace::construct(_owner);
@@ -406,7 +384,8 @@ void SubdivisionFace::subdivide(bool controlface,
             p2 = _points[i];
             size_t index = (i - 1 + numberOfPoints()) % numberOfPoints();
             prevedge = _owner->edgeExists(p2, _points[index]);
-            etmpindex = find_if(edgepoints.begin(), edgepoints.end(), EdgePred(prevedge));
+            etmpindex = find_if(edgepoints.begin(), edgepoints.end(),
+                                FirstEdgePointPredicate(prevedge));
             pts[i] = (*etmpindex).second;
         }
         // add the new face

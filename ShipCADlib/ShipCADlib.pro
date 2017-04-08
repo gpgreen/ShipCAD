@@ -42,7 +42,8 @@ SOURCES += shipcadlib.cpp \
     controller.cpp \
     flowline.cpp \
     backgroundimage.cpp \
-    developedpatch.cpp
+    developedpatch.cpp \
+    dialogdata.cpp
 
 HEADERS += shipcadlib.h \
     dialogdata.h \
@@ -82,7 +83,8 @@ HEADERS += shipcadlib.h \
     controlfacegrid.h \
     developedpatch.h \
     mempool.h \
-    orderedmap.h
+    orderedmap.h \
+    predicate.h
 
 unix:!symbian {
     maemo5 {

@@ -210,6 +210,7 @@ public:
     void addViewport(Viewport* vp);
 
     SubdivisionSurface* getSurface() {return &_surface;}
+    const SubdivisionSurface* getSurface() const {return &_surface;}
 
 	/*! \brief file changed flag
 	 *

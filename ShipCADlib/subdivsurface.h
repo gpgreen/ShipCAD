@@ -32,7 +32,6 @@
 
 #include <iosfwd>
 #include <vector>
-#include <map>
 #include <set>
 #include <QObject>
 #include <QColor>
@@ -114,7 +113,7 @@ public:
     virtual void setBuild(bool val);
 
     // selecting
-    std::multimap<float, SubdivisionBase*> shootPickRay(Viewport& vp, const PickRay& ray);
+    SubdivisionBase* shootPickRay(Viewport& vp, const PickRay& ray);
     
     // modifiers
 
@@ -126,6 +125,17 @@ public:
      * \return true if any faces were moved to new layers
      */
     bool autoGroupFaces();
+    
+    /*! \brief mirror selected faces around a plane
+     *
+     * \param connect_points use existing points if true, otherwise create new
+     * \param pln the plane to mirror faces around
+     * \param faces the list of faces to mirror
+     */
+    void mirrorFaces(bool connect_points,
+                     const Plane& pln,
+                     std::vector<SubdivisionControlFace*>& faces);
+    
     void calculateGaussCurvature();
     void clearSelection();
     void convertToGrid(ControlFaceGrid& input, PointGrid& grid);

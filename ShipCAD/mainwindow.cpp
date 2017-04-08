@@ -38,6 +38,7 @@
 #include "insertplanepointsdialog.h"
 #include "intersectlayersdialog.h"
 #include "extrudeedgedialog.h"
+#include "mirrordialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
@@ -51,7 +52,7 @@ using namespace std;
 MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), _pointdialog(0), _planepointsdialog(0),
-    _intersectlayersdialog(0), _extrudeedgedialog(0),
+    _intersectlayersdialog(0), _extrudeedgedialog(0), _mirrordialog(0),
     _controller(c), _currentViewportContext(0),
     _menu_recent_files(0), _contextMenu(0), _cameraMenu(0),
     _viewportModeGroup(0),
@@ -108,6 +109,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller,
             SIGNAL(exeChooseColorDialog(ShipCAD::ChooseColorDialogData&)),
             SLOT(executeChooseColorDialog(ShipCAD::ChooseColorDialogData&)));
+    connect(_controller,
+            SIGNAL(exeMirrorDialog(ShipCAD::MirrorDialogData&)),
+            SLOT(executeMirrorDialog(ShipCAD::MirrorDialogData&)));
     connect(_controller,
             SIGNAL(displayInfoDialog(const QString&)),
             SLOT(showInfoDialog(const QString&)));
@@ -783,6 +787,11 @@ void MainWindow::enableActions()
     // tools actions
 
     // transform actions
+    ui->actionScale->setEnabled(ncpoints > 0);
+    ui->actionMove->setEnabled(ncpoints > 0);
+    ui->actionRotate->setEnabled(ncpoints > 0);
+    ui->actionMirror->setEnabled(ncfaces > 0);
+    ui->actionLackenby->setEnabled(ncfaces > 0);
 
     // calculations actions
 
@@ -1105,6 +1114,18 @@ void MainWindow::executeExtrudeEdgeDialog(ExtrudeEdgeDialogData& data)
     data.accepted = (result == QDialog::Accepted);
     _extrudeedgedialog->retrieve(data);
     cout << "execute extrude edge dialog:" << (data.accepted ? "t" : "f") << endl;
+}
+
+void MainWindow::executeMirrorDialog(MirrorDialogData& data)
+{
+    if (_mirrordialog == 0) {
+        _mirrordialog = new MirrorDialog(this);
+    }
+    _mirrordialog->initialize(data);
+    int result = _mirrordialog->exec();
+    data.accepted = (result == QDialog::Accepted);
+    _mirrordialog->retrieve(data);
+    cout << "execute mirror dialog:" << (data.accepted ? "t" : "f") << endl;
 }
 
 void MainWindow::changeSelectedItems()

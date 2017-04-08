@@ -47,6 +47,7 @@
 #include "version.h"
 #include "controlfacegrid.h"
 #include "pointgrid.h"
+#include "predicate.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -826,7 +827,7 @@ void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
 
     // use all visible faces
     for (size_t i=0; i<_layers.size(); i++) {
-        if (_layer[i]->isVisible()
+        if (_layers[i]->isVisible())
             todo.insert(todo.end(), _layers[i]->faces_begin(), _layers[i]->faces_end());
     }
     if (todo.size() > 0) {
@@ -835,14 +836,14 @@ void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
             todo.pop_back();
             vector<SubdivisionControlFace*> current;
             current.push_back(face);
-            privFindAttachedFaces(*current, todo, face);
+            privFindAttachedFaces(current, todo, face);
             done.push_back(current);
         }
         // assign all groups to different layers
         for (size_t i=0; i<done.size(); i++) {
-            vector<SubdivisionControlFace*>* current = done[i];
+            vector<SubdivisionControlFace*>& current = done[i];
             if (current.size() > 0)
-                assembleFaces(mode, *current, assembledPatches);
+                assembleFaces(mode, current, assembledPatches);
         }
     }
 }
@@ -906,6 +907,93 @@ bool SubdivisionSurface::autoGroupFaces()
         }
     }
     return true;
+}
+
+void SubdivisionSurface::mirrorFaces(bool connect_points, const Plane& pln,
+                                     vector<SubdivisionControlFace*>& faces)
+{
+    // assemble all points
+    vector<pair<SubdivisionControlPoint*,SubdivisionControlPoint*> > vertices;
+    vector<pair<SubdivisionControlPoint*,SubdivisionControlPoint*> >::iterator itr;
+
+    for (size_t i=0; i<faces.size(); i++) {
+        for (size_t j=0; j<faces[i]->numberOfPoints(); j++) {
+            SubdivisionControlPoint* p1 =
+                    dynamic_cast<SubdivisionControlPoint*>(faces[i]->getPoint(j));
+            itr = find_if(vertices.begin(), vertices.end(), FirstCPointPairPredicate(p1));
+            if (itr == vertices.end())
+                vertices.push_back(make_pair(p1, nullptr));
+        }
+    }
+    SubdivisionControlPoint* p1;
+    SubdivisionControlPoint* p2;
+    for (itr=vertices.begin(); itr != vertices.end(); ++itr) {
+        p1 = (*itr).first;
+        if (!connect_points) {
+            // do NOT try cot connect the points to any existing point
+            // always create a new point
+            p2 = newControlPoint(pln.mirror(p1->getCoordinate()));
+        } else {
+            // try to connect ALL new points to existing ones
+            p2 = addControlPoint(pln.mirror(p1->getCoordinate()));
+        }
+        (*itr).second = p2;
+    }
+
+    // now create the controlfaces
+    vector<SubdivisionControlPoint*> points;
+    vector<SubdivisionControlFace*>::iterator fi = faces.begin();
+    for ( ; fi != faces.end(); ++fi) {
+        points.clear();
+        for (size_t j=(*fi)->numberOfPoints(); j>=1; --j) {
+            p1 = dynamic_cast<SubdivisionControlPoint*>((*fi)->getPoint(j-1));
+            itr = find_if(vertices.begin(), vertices.end(), FirstCPointPairPredicate(p1));
+            if (itr != vertices.end()) {
+                p2 = (*itr).second;
+                if (find(points.begin(), points.end(), p2) == points.end())
+                    points.push_back(p2);
+                else
+                    // msg 0085
+                    throw runtime_error(tr("Unknown point in mirror command!").toStdString());
+            }
+        }
+        if (points.size() > 2) {
+            SubdivisionControlFace* newface = addControlFace(points, false);
+            if (newface != 0)
+                newface->setLayer((*fi)->getLayer());
+        }
+    }
+
+    // now check all the edges for crease edges
+    for (itr=vertices.begin(); itr != vertices.end(); ++itr) {
+        p1 = (*itr).first;
+        for (size_t j=0; j<p1->numberOfEdges(); j++) {
+            SubdivisionEdge* edge1 = p1->getEdge(j);
+            if (edge1->startPoint() == p1)
+                p2 = dynamic_cast<SubdivisionControlPoint*>(edge1->endPoint());
+            else
+                p2 = dynamic_cast<SubdivisionControlPoint*>(edge1->startPoint());
+            vector<pair<SubdivisionControlPoint*,SubdivisionControlPoint*> >::iterator k;
+            k = find_if(vertices.begin(), vertices.end(), FirstCPointPairPredicate(p2));
+            if (k != vertices.end()) {
+                // edge is part of the selected faces
+                SubdivisionEdge* edge2 = edgeExists((*itr).second, (*k).second);
+                if (edge2 != 0 && edge2 != edge1)
+                    edge2->setCrease(edge1->isCrease());
+            }
+        }
+    }
+
+    // copy cornerpoint and locked status that might be lost in the edge-setting process
+    for (itr=vertices.begin(); itr != vertices.end(); ++itr) {
+        p1 = (*itr).first;
+        p2 = (*itr).second;
+        if (p1 != p2) {
+            if (p1->getVertexType() == svCorner)
+                p2->setVertexType(svCorner);
+            p2->setLocked(p1->isLocked());
+        }
+    }
 }
 
 size_t SubdivisionSurface::deleteEmptyLayers()
@@ -1324,44 +1412,47 @@ void SubdivisionSurface::setBuild(bool val)
     }
 }
 
-std::multimap<float, SubdivisionBase*>
+SubdivisionBase*
 SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
 {
-    multimap<float,SubdivisionBase*> picks;
+    SubdivisionBase* pick = nullptr;
     // check control points
     if (ray.point) {
         for (size_t i=0; i<numberOfControlPoints(); i++) {
             SubdivisionControlPoint* cp = getControlPoint(i);
+            if (!cp->isVisible())
+                continue;
             if (cp->distanceFromPickRay(vp, ray) < 1E-2) {
-                float s = ray.pt.distanceToPoint(cp->getCoordinate());
-                picks.insert(make_pair(s,cp));
+                pick = cp;
+                break;
             }
         }
     }
-    if (ray.edge && picks.size() == 0) {
+    if (ray.edge && pick == nullptr) {
         // check control edges
         for (size_t i=0; i<numberOfControlEdges(); i++) {
             SubdivisionControlEdge* edge = getControlEdge(i);
             if (!edge->isVisible())
                 continue;
-            float dist = edge->distanceToEdge(ray.pt, ray.dir);
-            if (dist < 1E-2) {
-                picks.insert(make_pair(dist, edge));
+            if (edge->distanceToEdge(ray.pt, ray.dir) < 1E-2) {
+                pick = edge;
                 break; // if we came close to an edge, pick it and stop looking
             }
         }
     }
-    if (ray.face && picks.size() == 0) {
+    if (ray.face && pick == nullptr) {
         // check face
         for (size_t i=0; i<numberOfControlFaces(); i++) {
             SubdivisionControlFace* face = getControlFace(i);
+            if (!face->isVisible())
+                continue;
             if (face->intersectWithRay(ray)) {
-                picks.insert(make_pair(0, face));
+                pick = face;
                 break;
             }
         }
     }
-    return picks;
+    return pick;
 }
 
 void SubdivisionSurface::setDesiredSubdivisionLevel(int val)
@@ -2135,16 +2226,6 @@ void SubdivisionSurface::extents(QVector3D& min, QVector3D& max)
     }
 }
 
-// predicate class to find an element with given point
-struct ExistPointPred {
-    ShipCAD::SubdivisionControlPoint* _querypt;
-    bool operator()(const pair<ShipCAD::SubdivisionControlPoint*, ShipCAD::SubdivisionControlPoint*>& val)
-    {
-        return val.first == _querypt;
-    }
-    ExistPointPred (ShipCAD::SubdivisionPoint* querypt) : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
-};
-
 // FreeGeometry.pas:14684
 void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
                                       const QVector3D& direction)
@@ -2163,10 +2244,12 @@ void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
         edge = edges[i];
         point1 = dynamic_cast<SubdivisionControlPoint*>(edge->startPoint());
         point2 = dynamic_cast<SubdivisionControlPoint*>(edge->endPoint());
-        if (find_if(vertices.begin(), vertices.end(), ExistPointPred(point1)) == vertices.end())
-            vertices.push_back(make_pair(point1, static_cast<SubdivisionControlPoint*>(0)));
-        if (find_if(vertices.begin(), vertices.end(), ExistPointPred(point2)) == vertices.end())
-            vertices.push_back(make_pair(point2, static_cast<SubdivisionControlPoint*>(0)));
+        if (find_if(vertices.begin(), vertices.end(), FirstCPointPairPredicate(point1))
+            == vertices.end())
+            vertices.push_back(make_pair(point1, nullptr));
+        if (find_if(vertices.begin(), vertices.end(), FirstCPointPairPredicate(point2))
+            == vertices.end())
+            vertices.push_back(make_pair(point2, nullptr));
     }
     size_t noedges = numberOfControlEdges();
     size_t novertices = numberOfControlPoints();
@@ -2183,12 +2266,12 @@ void SubdivisionSurface::extrudeEdges(vector<SubdivisionControlEdge*>& edges,
         points.push_back(dynamic_cast<SubdivisionControlPoint*>(edge->startPoint()));
         point1 = 0;
         point2 = 0;
-        vidx = find_if(vertices.begin(), vertices.end(), ExistPointPred(edge->startPoint()));
+        vidx = find_if(vertices.begin(), vertices.end(), FirstCPointPairPredicate(edge->startPoint()));
         if (vidx != vertices.end()) {
             point1 = (*vidx).second;
             points.push_back(point1);
         }
-        vidx = find_if(vertices.begin(), vertices.end(), ExistPointPred(edge->endPoint()));
+        vidx = find_if(vertices.begin(), vertices.end(), FirstCPointPairPredicate(edge->endPoint()));
         if (vidx != vertices.end()) {
             point2 = (*vidx).second;
             points.push_back(point2);

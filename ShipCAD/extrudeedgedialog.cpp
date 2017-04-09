@@ -20,7 +20,7 @@ ExtrudeEdgeDialog::~ExtrudeEdgeDialog()
     delete ui;
 }
 
-void ExtrudeEdgeDialog::initialize(ShipCAD::ExtrudeEdgeDialogData& data)
+void ExtrudeEdgeDialog::initialize(ShipCAD::ExtrudeEdgeDialogData& /*data*/)
 {
     // does nothing
 }

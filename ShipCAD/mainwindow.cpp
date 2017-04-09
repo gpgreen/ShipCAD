@@ -40,6 +40,7 @@
 #include "extrudeedgedialog.h"
 #include "chooselayerdialog.h"
 #include "mirrordialog.h"
+#include "rotatedialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
@@ -54,7 +55,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), _pointdialog(nullptr), _planepointsdialog(nullptr),
     _intersectlayersdialog(nullptr), _extrudeedgedialog(nullptr), _chooselayerdialog(nullptr),
-    _mirrordialog(nullptr),
+    _mirrordialog(nullptr), _rotatedialog(nullptr),
     _controller(c), _currentViewportContext(nullptr),
     _menu_recent_files(nullptr), _contextMenu(nullptr), _cameraMenu(nullptr),
     _viewportModeGroup(nullptr),
@@ -118,12 +119,17 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
             SIGNAL(exeMirrorDialog(ShipCAD::MirrorDialogData&)),
             SLOT(executeMirrorDialog(ShipCAD::MirrorDialogData&)));
     connect(_controller,
+            SIGNAL(exeRotateDialog(ShipCAD::RotateDialogData&)),
+            SLOT(executeRotateDialog(ShipCAD::RotateDialogData&)));
+    connect(_controller,
             SIGNAL(displayInfoDialog(const QString&)),
             SLOT(showInfoDialog(const QString&)));
     connect(_controller, SIGNAL(displayWarningDialog(const QString&)),
             SLOT(showWarnDialog(const QString&)));
     connect(_controller, SIGNAL(displayErrorDialog(const QString&)),
             SLOT(showErrDialog(const QString&)));
+    connect(_controller, SIGNAL(displayQuestionDialog(const QString&, bool&)),
+            SLOT(showQuestionDialog(const QString& bool&)));
 
     // connect file actions
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));
@@ -333,6 +339,15 @@ void MainWindow::showErrDialog(const QString& msg)
     QMessageBox::critical(this, "ShipCAD",
                           msg,
                           QMessageBox::Ok);
+}
+
+void MainWindow::showQuestionDialog(const QString& msg, bool& ok)
+{
+    QMessageBox::StandardButton btn = QMessageBox::question(this, "ShipCAD", msg);
+    if (btn == QMessageBox::StandardButton::Ok)
+        ok = true;
+    else
+        ok = false;
 }
 
 void MainWindow::readSettings()
@@ -1133,6 +1148,18 @@ void MainWindow::executeMirrorDialog(MirrorDialogData& data)
     cout << "execute mirror dialog:" << (data.accepted ? "t" : "f") << endl;
 }
 
+void MainWindow::executeRotateDialog(RotateDialogData& data)
+{
+    if (_rotatedialog == nullptr) {
+        _rotatedialog = new RotateDialog(this);
+    }
+    _rotatedialog->initialize(data);
+    int result = _rotatedialog->exec();
+    data.accepted = (result == QDialog::Accepted);
+    _rotatedialog->retrieve(data);
+    cout << "execute rotate dialog:" << (data.accepted ? "t" : "f") << endl;
+}
+
 void MainWindow::executeChooseLayerDialog(ChooseLayerDialogData& data)
 {
     if (_chooselayerdialog == nullptr) {
@@ -1141,6 +1168,8 @@ void MainWindow::executeChooseLayerDialog(ChooseLayerDialogData& data)
                 _controller, SLOT(layerFacesSelected(ShipCAD::SubdivisionLayer*)));
         connect(_chooselayerdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
                 _controller, SLOT(layerFacesDeselected(ShipCAD::SubdivisionLayer*)));
+        connect(_chooselayerdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
+                _controller, SLOT(layerSelectionUpdate(ShipCAD::ChooseLayerDialogData*)));
     }
     _chooselayerdialog->initialize(data);
 
@@ -1148,6 +1177,8 @@ void MainWindow::executeChooseLayerDialog(ChooseLayerDialogData& data)
     connect(_chooselayerdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
             this, SIGNAL(viewportRender()));
     connect(_chooselayerdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
+            this, SIGNAL(viewportRender()));
+    connect(_chooselayerdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
             this, SIGNAL(viewportRender()));
     emit viewportRender();
 
@@ -1159,6 +1190,8 @@ void MainWindow::executeChooseLayerDialog(ChooseLayerDialogData& data)
             this, SIGNAL(viewportRender()));
     disconnect(_chooselayerdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
             this, SIGNAL(viewportRender()));
+    disconnect(_chooselayerdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
+               this, SIGNAL(viewportRender()));
 
     data.accepted = (result == QDialog::Accepted);
     _chooselayerdialog->retrieve(data);

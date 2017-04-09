@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     extrudeedgedialog.cpp \
     layerdialog.cpp \
     mirrordialog.cpp \
-    chooselayerdialog.cpp
+    chooselayerdialog.cpp \
+    rotatedialog.cpp
 
 HEADERS  += mainwindow.h \
         pointdialog.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     extrudeedgedialog.h \
     layerdialog.h \
     mirrordialog.h \
-    chooselayerdialog.h
+    chooselayerdialog.h \
+    rotatedialog.h
 
 FORMS    += mainwindow.ui \
         pointdialog.ui \
@@ -40,7 +42,8 @@ FORMS    += mainwindow.ui \
     extrudeedgedialog.ui \
     layerdialog.ui \
     mirrordialog.ui \
-    chooselayerdialog.ui
+    chooselayerdialog.ui \
+    rotatedialog.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/release/ -lShipCADlib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/debug/ -lShipCADlib

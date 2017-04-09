@@ -6,9 +6,7 @@ The original progam is located at: http://sourceforge.net/projects/freeship. It 
 The original program was written in Delphi Pascal. It was licensed as GPLv2.
 
 # Prerequisites
-* boost 1.55 or later
-* Qt 5.3 - 5.5
-
+* Qt 5.7
 
 # Functionality to do:
 

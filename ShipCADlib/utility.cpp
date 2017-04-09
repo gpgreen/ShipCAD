@@ -606,3 +606,22 @@ QColor ShipCAD::RandomColor()
     quint8 b = rand() % 256;
     return QColor(r, g, b);
 }
+
+QVector3D ShipCAD::RotateVector(const QVector3D& coord,
+                                double sinx, double cosx,
+                                double siny, double cosy,
+                                double sinz, double cosz)
+{
+    double r11 = cosy * cosz;
+    double r12 = cosy * sinz;
+    double r13 = -siny;
+    double r21 = sinx * siny * cosz - cosx * sinz;
+    double r22 = sinx * siny * sinz + cosx * cosz;
+    double r23 = sinx * cosy;
+    double r31 = cosx * siny * cosz + sinx * sinz;
+    double r32 = cosx * siny * sinz - sinx * cosz;
+    double r33 = cosx * cosy;
+    return QVector3D(coord.x() * r11 + coord.y() * r12 + coord.z() * r13,
+                     coord.x() * r21 + coord.y() * r22 + coord.z() * r23,
+                     coord.x() * r31 + coord.y() * r32 + coord.z() * r33);
+}

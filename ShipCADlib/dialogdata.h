@@ -97,6 +97,7 @@ enum LayerSelectMode {
 struct ChooseLayerDialogData
 {
     bool accepted;
+    bool include_points;
     ShipCAD::LayerSelectMode mode;
     // collection of layers and whether they are selected
     std::vector<std::pair<ShipCAD::SubdivisionLayer*, bool> > layers;
@@ -116,6 +117,18 @@ struct MirrorDialogData
     float distance;
     
     explicit MirrorDialogData(bool connect, plane_selected_t init, float d);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for rotate dialog exchange
+ */
+
+struct RotateDialogData
+{
+    bool accepted;
+    QVector3D rotation_vector;
+    
+    explicit RotateDialogData();
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

@@ -332,6 +332,20 @@ namespace ShipCAD {
      * \return a random color
      */
     QColor RandomColor();
+
+    /*! \brief rotate a vector
+     *
+     * \param coord input vector
+     * \param sinx the sin of the x value of rotation vector
+     * \param cosx the cos of the x value of rotation vector
+     * \param sinx the sin of the x value of rotation vector
+     * \param cosx the cos of the x value of rotation vector
+     * \param sinx the sin of the x value of rotation vector
+     * \param cosx the cos of the x value of rotation vector
+     * \return the coordinate of the rotated vector
+     */
+    QVector3D RotateVector(const QVector3D& coord, double sinx, double cosx,
+                           double siny, double cosy, double sinz, double cosz);
 };
 
 #endif

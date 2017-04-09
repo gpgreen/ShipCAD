@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>445</width>
     <height>300</height>
    </rect>
   </property>
@@ -25,6 +25,13 @@
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QListView" name="layerListView"/>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="includePointsCheckBox">
+        <property name="text">
+         <string>Include points that are shared with unselected layers</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

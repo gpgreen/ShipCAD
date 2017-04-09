@@ -16,6 +16,9 @@ ChooseLayerDialog::ChooseLayerDialog(QWidget *parent) :
     // register model item changed signal
     connect(_listModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(listItemChanged(QStandardItem*)));
 
+    // connect check box
+    connect(ui->includePointsCheckBox, SIGNAL(clicked()), this, SLOT(includePointClicked()));
+
     readSettings();
 }
 
@@ -38,11 +41,16 @@ void ChooseLayerDialog::initialize(ShipCAD::ChooseLayerDialogData& data)
             listItem->setCheckState(Qt::Unchecked);
         _listModel->setItem(i, listItem);
     }
+    if (data.mode == ShipCAD::fsPoints)
+        ui->includePointsCheckBox->setHidden(false);
+    else
+        ui->includePointsCheckBox->setHidden(true);
+    ui->includePointsCheckBox->setChecked(data.include_points);
 }
 
-void ChooseLayerDialog::retrieve(ShipCAD::ChooseLayerDialogData& /*data*/)
+void ChooseLayerDialog::retrieve(ShipCAD::ChooseLayerDialogData& data)
 {
-    // does nothing
+    data.include_points = ui->includePointsCheckBox->isChecked();
 }
 
 // handles the checkbox indicator state
@@ -57,12 +65,24 @@ void ChooseLayerDialog::listItemChanged(QStandardItem *item)
         Qt::CheckState state = item->checkState();
         if (state == Qt::Checked) {
             _data->layers[currentIndex.row()].second = true;
-            emit layerSelected(_data->layers[currentIndex.row()].first);
+            if (_data->mode == ShipCAD::fsFaces)
+                emit layerSelected(_data->layers[currentIndex.row()].first);
+            else
+                emit layerUpdate(_data);
         } else {
             _data->layers[currentIndex.row()].second = false;
-            emit layerDeselected(_data->layers[currentIndex.row()].first);
+            if (_data->mode == ShipCAD::fsFaces)
+                emit layerDeselected(_data->layers[currentIndex.row()].first);
+            else
+                emit layerUpdate(_data);
         }
     }
+}
+
+void ChooseLayerDialog::includePointClicked()
+{
+    if (_data != nullptr && _data->mode == ShipCAD::fsPoints)
+        emit layerUpdate(_data);
 }
 
 void ChooseLayerDialog::closeEvent(QCloseEvent* event)

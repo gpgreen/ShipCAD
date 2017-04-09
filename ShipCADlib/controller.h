@@ -148,6 +148,10 @@ signals:
      */
     void exeMirrorDialog(ShipCAD::MirrorDialogData& data);
 
+    /*! \brief execute the Rotate dialog
+     */
+    void exeRotateDialog(ShipCAD::RotateDialogData& data);
+
     /*! \brief show an info dialog
      */
     void displayInfoDialog(const QString& msg);
@@ -159,6 +163,10 @@ signals:
     /*! \brief show an error dialog
      */
     void displayErrorDialog(const QString& msg);
+
+    /*! \brief show an question dialog, get a boolean response
+     */
+    void displayQuestionDialog(const QString& msg, bool& ok);
 
 public slots:
 
@@ -590,8 +598,15 @@ public slots:
      */
     void layerFacesDeselected(ShipCAD::SubdivisionLayer* layer);
 
+    /*! \brief update selected points based on layer chooser dialog data update
+     *
+     * \param data the dialog data
+     */
+    void layerSelectionUpdate(ShipCAD::ChooseLayerDialogData* data);
+    
 protected:
 
+    bool showChooseLayerDialog(ShipCAD::LayerSelectMode mode);
     void layerFacesSelection(ShipCAD::SubdivisionLayer* layer, bool selected);
 
 private:

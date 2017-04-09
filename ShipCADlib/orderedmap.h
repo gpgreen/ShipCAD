@@ -176,7 +176,7 @@ public:
     void remove(ShipCAD::SubdivisionControlPoint* point)
     {
         std::map<ShipCAD::SubdivisionControlPoint*, size_t>::iterator i = _bag.find(point);
-        if (i != _bag.end())
+        if (i == _bag.end())
             return;
         _bag.erase(i);
         reorder();

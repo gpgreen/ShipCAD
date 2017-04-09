@@ -296,34 +296,58 @@ void Controller::flipFaces()
     emit modifiedModel();
 }
 
+// returns true if dialog accepted, faces or points will have been selected, or all deselected if
+// dialog not accepted
+bool Controller::showChooseLayerDialog(LayerSelectMode mode)
+{
+    // get current visibility values
+    bool old_normals = getModel()->getVisibility().isShowNormals();
+    bool old_edges = getModel()->getVisibility().isShowInteriorEdges();
+    bool old_control_net = getModel()->getVisibility().isShowControlNet();
+
+    // set new visibility values
+    if (mode == fsFaces) {
+        getModel()->getVisibility().setShowNormals(false);
+        getModel()->getVisibility().setShowInteriorEdges(true);
+    } else {
+        getModel()->getVisibility().setShowNormals(false);
+        getModel()->getVisibility().setShowInteriorEdges(false);
+        getModel()->getVisibility().setShowControlNet(true);
+    }
+
+    // collect all visible layers
+    vector<SubdivisionLayer*> layers;
+    for (size_t i=0; i<getSurface()->numberOfLayers(); i++) {
+        if (getSurface()->getLayer(i)->isVisible())
+            layers.push_back(getSurface()->getLayer(i));
+    }
+
+    // the dialog
+    ChooseLayerDialogData data(layers, mode);
+    emit exeChooseLayerDialog(data);
+
+    // recover
+    getModel()->getVisibility().setShowNormals(old_normals);
+    getModel()->getVisibility().setShowInteriorEdges(old_edges);
+    getModel()->getVisibility().setShowControlNet(old_control_net);
+    if (!data.accepted) {
+        clearSelections();
+        return false;
+    }
+    return true;
+}
+
 // FreeShipUnit.pas:4959
 void Controller::mirrorPlaneFace()
 {
     cout << "Controller::mirrorPlaneFace" << endl;
     vector<SubdivisionControlFace*> mirrorfaces;
     set<SubdivisionControlFace*>& cflist = getSurface()->getSelControlFaceCollection();
-    if (cflist.size() == 0) {
-        // select layers dialog
-        bool old_normals = getModel()->getVisibility().isShowNormals();
-        bool old_edges = getModel()->getVisibility().isShowInteriorEdges();
-        bool old_control_net = getModel()->getVisibility().isShowControlNet();
-        getModel()->getVisibility().setShowNormals(false);
-        getModel()->getVisibility().setShowInteriorEdges(true);
-        vector<SubdivisionLayer*> layers;
-        for (size_t i=0; i<getSurface()->numberOfLayers(); i++) {
-            if (getSurface()->getLayer(i)->isVisible())
-                layers.push_back(getSurface()->getLayer(i));
-        }
-        ChooseLayerDialogData data(layers, fsFaces);
-        emit exeChooseLayerDialog(data);
-        getModel()->getVisibility().setShowNormals(old_normals);
-        getModel()->getVisibility().setShowInteriorEdges(old_edges);
-        getModel()->getVisibility().setShowControlNet(old_control_net);
-        if (!data.accepted) {
-            clearSelections();
-            return;
-        }
-    }
+
+    // if nothing selected, use the Choose Layers dialog
+    if (cflist.size() == 0 && !showChooseLayerDialog(fsFaces))
+        return;
+
     // use all selected control faces
     mirrorfaces.insert(mirrorfaces.end(), cflist.begin(), cflist.end());
     if (mirrorfaces.size() == 0)
@@ -384,16 +408,71 @@ void Controller::newFace()
     }
 }
 
+// FreeShipUnit.pas:5102
 void Controller::rotateFaces()
 {
-	// TODO
+    cout << "Controller::rotateFaces" << endl;
+    OrderedPointMap& cplist =
+        getSurface()->getSelControlPointCollection();
+
+    vector<SubdivisionControlPoint*> points;
+    size_t nlocked;
+
+    getSurface()->extractPointsFromSelection(points, nlocked);
+    if (points.size() == 0 && !showChooseLayerDialog(fsPoints))
+        return;
+
+    getSurface()->extractPointsFromSelection(points, nlocked);
+    if (points.size() == 0)
+        return;
+    bool proceed = true;
+    if (nlocked > 0) {
+        // show proceed dialog
+        // msg 0086 + msg 0087
+        QString msg("%1\n%2")
+            .arg(tr("The selection contains locked points that will not be affected by this operation"))
+            .arg(tr("Are you sure you want to continue?"));
+        emit displayQuestionDialog(msg, proceed);
+    }
+    if (!proceed) {
+        clearSelections();
+        return;
+    }
+    
+    RotateDialogData data;
+    emit exeRotateDialog(data);
+    if (!data.accepted) {
+        clearSelections();
+        return;
+    }
+    // msg 0089
+    getModel()->createUndo(tr("rotate"), true);
+    double cosx = cos(DegToRad(data.rotation_vector.x()));
+    double sinx = sin(DegToRad(data.rotation_vector.x()));
+    double cosy = cos(DegToRad(data.rotation_vector.y()));
+    double siny = sin(DegToRad(data.rotation_vector.y()));
+    double cosz = cos(DegToRad(data.rotation_vector.z()));
+    double sinz = sin(DegToRad(data.rotation_vector.z()));
+
+    for (size_t i=0; i<points.size(); i++) {
+        if (!points[i]->isLocked())
+            points[i]->setCoordinate(RotateVector(points[i]->getCoordinate(), sinx, cosx, siny, cosy, sinz, cosz));
+    }
+
+    // adjust markers
+
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
+// FreeShipUnit.pas:5195
 void Controller::scaleFaces()
 {
 	// TODO
 }
 
+// FreeShipUnit.pas:5287
 void Controller::moveFaces()
 {
 	// TODO
@@ -1307,11 +1386,13 @@ void Controller::dialogUpdatedPointCoord(float x, float y, float z)
     }
 }
 
+// called when a layer's faces are selected
 void Controller::layerFacesSelected(SubdivisionLayer* layer)
 {
     layerFacesSelection(layer, true);
 }
 
+// called when a layer's faces are de-selected
 void Controller::layerFacesDeselected(SubdivisionLayer* layer)
 {
     layerFacesSelection(layer, false);
@@ -1325,5 +1406,48 @@ void Controller::layerFacesSelection(SubdivisionLayer* layer, bool selected)
             getSurface()->setSelectedControlFace(*i);
         else
             getSurface()->removeSelectedControlFace(*i);
+    }
+}
+
+void Controller::layerSelectionUpdate(ChooseLayerDialogData* data)
+{
+    for (size_t i=0; i<getSurface()->numberOfControlPoints(); i++) {
+        SubdivisionControlPoint* pt = getSurface()->getControlPoint(i);
+        bool select = false;
+        if (pt->numberOfFaces() > 0) {
+            if (data->include_points) {
+                // point must be included in the selection if AT LEAST 1 attached
+                // face belongs to a selected layer
+                for (size_t j=0; j<pt->numberOfFaces(); j++) {
+                    SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(pt->getFace(j));
+                    SubdivisionLayer* layer = face->getLayer();
+                    for (size_t k=0; k<data->layers.size(); k++) {
+                        if (data->layers[k].first == layer && data->layers[k].second) {
+                            select = true;
+                            break;
+                        }
+                    }
+                    if (select)
+                        break;
+                }
+            } else {
+                // point must be included in the selection only if ALL attached
+                // faces belong to to selected layers
+                select = true;
+                for (size_t j=0; j<pt->numberOfFaces(); j++) {
+                    SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(pt->getFace(j));
+                    SubdivisionLayer* layer = face->getLayer();
+                    for (size_t k=0; k<data->layers.size(); k++) {
+                        if (data->layers[k].first == layer && !data->layers[k].second) {
+                            select = false;
+                            break;
+                        }
+                    }
+                    if (!select)
+                        break;
+                }
+            }
+            pt->setSelected(select);
+        }
     }
 }

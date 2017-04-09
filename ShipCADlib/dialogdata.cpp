@@ -56,7 +56,7 @@ LayerDialogData::LayerDialogData()
 
 ChooseLayerDialogData::ChooseLayerDialogData(vector<SubdivisionLayer*> list_of_layers,
     LayerSelectMode m)
-    : accepted(false), mode(m)
+    : accepted(false), include_points(false), mode(m)
 {
     for (size_t i=0; i<list_of_layers.size(); i++)
         layers.push_back(make_pair(list_of_layers[i], true));
@@ -64,6 +64,12 @@ ChooseLayerDialogData::ChooseLayerDialogData(vector<SubdivisionLayer*> list_of_l
 
 MirrorDialogData::MirrorDialogData(bool connect, plane_selected_t init, float d)
     : accepted(false), connect_points(connect), which_plane(init), distance(d)
+{
+    // does nothing
+}
+
+RotateDialogData::RotateDialogData()
+    : accepted(false)
 {
     // does nothing
 }

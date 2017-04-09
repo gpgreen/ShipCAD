@@ -55,6 +55,7 @@ class IntersectLayersDialog;
 class ExtrudeEdgeDialog;
 class ChooseLayerDialog;
 class MirrorDialog;
+class RotateDialog;
 
 class ViewportState
 {
@@ -271,9 +272,15 @@ private slots:
 
     /*! \brief execute the extrude edge dialog
      *
-     * \return true if dialog "ok" selected, false if "cancel" selected
+     * \param data dialog data structure
      */
     void executeMirrorDialog(ShipCAD::MirrorDialogData& data);
+
+    /*! \brief execute the rotate dialog
+     *
+     * \param data dialog data structure
+     */
+    void executeRotateDialog(ShipCAD::RotateDialogData& data);
 
     /*! \brief get the list of recent files
      */
@@ -299,6 +306,10 @@ private slots:
      */
     void showErrDialog(const QString& msg);
     
+    /*! \brief show a question box, get ok/not ok
+     */
+    void showQuestionDialog(const QString& msg, bool& ok);
+
 private:
     Ui::MainWindow *ui; /**< the ui created by QtDesigner */
     PointDialog *_pointdialog; /**< the control point dialog created by QtDesigner */
@@ -307,6 +318,7 @@ private:
     ExtrudeEdgeDialog *_extrudeedgedialog; /**< the dialog to set vector to extrude edges */
     ChooseLayerDialog *_chooselayerdialog; /**< the dialog to choose layer(s) */
     MirrorDialog* _mirrordialog; /**< the dialog to select mirror plane for faces */
+    RotateDialog* _rotatedialog; /**< the dialog to select rotation axis for faces */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

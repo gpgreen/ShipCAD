@@ -23,10 +23,12 @@ signals:
 
     void layerSelected(ShipCAD::SubdivisionLayer*);
     void layerDeselected(ShipCAD::SubdivisionLayer*);
+    void layerUpdate(ShipCAD::ChooseLayerDialogData*);
 
 public slots:
 
     void listItemChanged(QStandardItem *item);
+    void includePointClicked();
 
 protected:
     /*! \brief read stored settings for dialog

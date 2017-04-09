@@ -412,8 +412,6 @@ void Controller::newFace()
 void Controller::rotateFaces()
 {
     cout << "Controller::rotateFaces" << endl;
-    OrderedPointMap& cplist =
-        getSurface()->getSelControlPointCollection();
 
     vector<SubdivisionControlPoint*> points;
     size_t nlocked;
@@ -439,7 +437,8 @@ void Controller::rotateFaces()
         return;
     }
     
-    RotateDialogData data;
+    // msg 0088
+    RotateDialogData data(tr("Rotation vector"));
     emit exeRotateDialog(data);
     if (!data.accepted) {
         clearSelections();
@@ -459,17 +458,90 @@ void Controller::rotateFaces()
             points[i]->setCoordinate(RotateVector(points[i]->getCoordinate(), sinx, cosx, siny, cosy, sinz, cosz));
     }
 
-    // adjust markers
+    if (points.size() == getSurface()->numberOfControlPoints()
+        && adjustMarkersDialog()) {
+        // rotate the markers also
+        MarkerVectorIterator i = getModel()->getMarkers().begin();
+        for (; i!=getModel()->getMarkers().end(); ++i) {
+            for (size_t j=0; j<(*i)->numberOfPoints(); j++) {
+                (*i)->setPoint(j, RotateVector((*i)->getPoint(j),
+                                               sinx, cosx,
+                                               siny, cosy,
+                                               sinz, cosz));
+            }
+        }
+    }
 
     getModel()->setBuild(false);
     getModel()->setFileChanged(true);
     emit modifiedModel();
 }
 
+bool Controller::adjustMarkersDialog()
+{
+    if (getModel()->numberOfMarkers() == 0)
+        return false;
+    bool ok;
+    // msg 0180
+    emit displayQuestionDialog(
+        tr("Do you want to adjust the markers too?"), ok);
+    return ok;
+}
+    
 // FreeShipUnit.pas:5195
 void Controller::scaleFaces()
 {
-	// TODO
+    cout << "Controller::scaleFaces" << endl;
+
+    vector<SubdivisionControlPoint*> points;
+    size_t nlocked;
+
+    getSurface()->extractPointsFromSelection(points, nlocked);
+    if (points.size() == 0 && !showChooseLayerDialog(fsPoints))
+        return;
+
+    getSurface()->extractPointsFromSelection(points, nlocked);
+    if (points.size() == 0)
+        return;
+    bool proceed = true;
+    if (nlocked > 0) {
+        // show proceed dialog
+        // msg 0086 + msg 0087
+        QString msg("%1\n%2");
+        msg.arg(tr("The selection contains locked points that will not be affected by this operation"))
+            .arg(tr("Are you sure you want to continue?"));
+        emit displayQuestionDialog(msg, proceed);
+    }
+    if (!proceed) {
+        clearSelections();
+        return;
+    }
+
+    // msg 0090
+    RotateDialogData data(tr("Scale vector"));
+    data.rotation_vector = QVector3D(1.0f, 1.0f, 1.0f);
+    emit exeRotateDialog(data);
+    if (!data.accepted) {
+        clearSelections();
+        return;
+    }
+    // msg 0091
+    getModel()->createUndo(tr("scale"), true);
+    if (points.size() == getSurface()->numberOfControlPoints()) {
+        bool adjust_markers = adjustMarkersDialog();
+        // scale the entire model
+        getModel()->scaleModel(data.rotation_vector, false, adjust_markers);
+    } else {
+        // only a selected part of the model must be scaled
+        for (size_t i=0; i<points.size(); i++) {
+            if (!points[i]->isLocked())
+                points[i]->setCoordinate(
+                    data.rotation_vector * points[i]->getCoordinate());
+        }
+    }
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:5287

@@ -78,6 +78,8 @@ private:
 };
 
 typedef PointerVector<Marker> MarkerVector;
+typedef std::vector<Marker*>::iterator MarkerVectorIterator;
+typedef std::vector<Marker*>::const_iterator MarkerVectorConstIterator;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

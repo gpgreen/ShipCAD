@@ -606,6 +606,7 @@ public slots:
     
 protected:
 
+    bool adjustMarkersDialog();
     bool showChooseLayerDialog(ShipCAD::LayerSelectMode mode);
     void layerFacesSelection(ShipCAD::SubdivisionLayer* layer, bool selected);
 

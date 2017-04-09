@@ -93,6 +93,14 @@ public:
     bool isBuild() {return _surface.isBuild();}
     void setBuild(bool set);
 
+    /*! \brief scale the entire model and all associated data such as sttions
+     *
+     * \param scale 3D vector for scale transformation
+     * \param override_lock if points are locked, scale them anyway if true
+     * \param adjust_markers scale markers if true
+     */
+    void scaleModel(const QVector3D& scale, bool override_lock, bool adjust_markers);
+    
     /*! \brief create an intersection
      *
      * \param type which type of intersection
@@ -133,7 +141,7 @@ public:
     IntersectionVector& getWaterlines() {return _waterlines;}
     IntersectionVector& getButtocks() {return _buttocks;}
     IntersectionVector& getDiagonals() {return _diagonals;}
-
+    
     Flowline* getFlowline(size_t index);
 
 	edit_mode_t getEditMode() {return _edit_mode;}
@@ -183,10 +191,11 @@ public:
     size_t numberOfViewports();
 
     // marker
+    MarkerVector& getMarkers() {return _markers;}
+    size_t numberOfMarkers() const {return _markers.size();}
     bool isSelectedMarker(Marker* mark);
     void setSelectedMarker(Marker* mark);
     void removeSelectedMarker(Marker* mark);
-    bool adjustMarkers();
 
     // flowlines
     /*! \brief is the flowline selected

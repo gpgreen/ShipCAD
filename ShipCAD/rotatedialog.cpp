@@ -17,6 +17,7 @@ RotateDialog::~RotateDialog()
 
 void RotateDialog::initialize(ShipCAD::RotateDialogData& data)
 {
+    setWindowTitle(data.dialog_title);
     ui->longitudinalLineEdit->setText(QString("%1").arg(data.rotation_vector.x()));
     ui->transverseLineEdit->setText(QString("%1").arg(data.rotation_vector.y()));
     ui->verticalLineEdit->setText(QString("%1").arg(data.rotation_vector.z()));

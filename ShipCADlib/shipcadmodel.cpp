@@ -501,6 +501,11 @@ void ShipCADModel::draw(Viewport& vp)
     }
 }
 
+void ShipCADModel::scaleModel(const QVector3D& scale, bool override_lock, bool adjust_markers)
+{
+    // TODO
+}
+
 // FreeShipUnit.pas:10540
 Intersection* ShipCADModel::createIntersection(intersection_type_t ty, float distance)
 {
@@ -743,12 +748,6 @@ void ShipCADModel::removeSelectedMarker(Marker* mark)
         _selected_markers.end(), mark);
     if (i != _selected_markers.end())
         _selected_markers.erase(i);
-}
-
-// TODO this is a dialog, doesn't belong here
-bool ShipCADModel::adjustMarkers()
-{
-    return false;
 }
 
 bool ShipCADModel::isSelectedFlowline(const Flowline* flow) const

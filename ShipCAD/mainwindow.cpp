@@ -129,7 +129,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(displayErrorDialog(const QString&)),
             SLOT(showErrDialog(const QString&)));
     connect(_controller, SIGNAL(displayQuestionDialog(const QString&, bool&)),
-            SLOT(showQuestionDialog(const QString& bool&)));
+            SLOT(showQuestionDialog(const QString&, bool&)));
 
     // connect file actions
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));

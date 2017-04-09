@@ -429,8 +429,8 @@ void Controller::rotateFaces()
     if (nlocked > 0) {
         // show proceed dialog
         // msg 0086 + msg 0087
-        QString msg("%1\n%2")
-            .arg(tr("The selection contains locked points that will not be affected by this operation"))
+        QString msg("%1\n%2");
+        msg.arg(tr("The selection contains locked points that will not be affected by this operation"))
             .arg(tr("Are you sure you want to continue?"));
         emit displayQuestionDialog(msg, proceed);
     }

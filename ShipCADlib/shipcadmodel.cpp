@@ -399,7 +399,7 @@ void ShipCADModel::clearUndo()
 
 void ShipCADModel::drawGrid(Viewport& /*vp*/, LineShader* /*lineshader*/)
 {
-
+    // TODO
 }
 
 struct draw_intersection
@@ -501,9 +501,84 @@ void ShipCADModel::draw(Viewport& vp)
     }
 }
 
+// FreeShipUnit.pas:9995
 void ShipCADModel::scaleModel(const QVector3D& scale, bool override_lock, bool adjust_markers)
 {
+    for (size_t i=0; i<getSurface()->numberOfControlPoints(); i++) {
+        SubdivisionControlPoint* pt = getSurface()->getControlPoint(i);
+        if (!pt->isLocked() || override_lock)
+            pt->setCoordinate(pt->getCoordinate() * scale);
+    }
+    // update mainparticulars
+    ProjectSettings& settings = getProjectSettings();
+    settings.setLength(abs(settings.getLength() * scale.x()));
+    settings.setBeam(abs(settings.getBeam() * scale.y()));
+    settings.setDraft(abs(settings.getDraft() * scale.z()));
+    if (!settings.useDefaultMainframeLocation())
+        settings.setMainframeLocation(settings.getMainframeLocation() * scale.x());
+    // update markers
+    if (adjust_markers) {
+        MarkerVectorIterator itr = getMarkers().begin();
+        for (; itr!=getMarkers().end(); ++itr) {
+            for (size_t j=0; j<(*itr)->numberOfPoints(); j++) {
+                (*itr)->setPoint(j, (*itr)->getPoint(j) * scale);
+            }
+        }
+    }
+    // update stations, buttocks, and waterlines
+    IntersectionVector& stations = getStations();
+    for (size_t i=0; i<stations.size(); i++)
+        stations.get(i)->getPlane().setD(stations.get(i)->getPlane().d() * scale.x());
+    IntersectionVector& waterlines = getWaterlines();
+    for (size_t i=0; i<waterlines.size(); i++)
+        waterlines.get(i)->getPlane().setD(waterlines.get(i)->getPlane().d() * scale.y());
+    IntersectionVector& buttocks = getButtocks();
+    for (size_t i=0; i<buttocks.size(); i++)
+        buttocks.get(i)->getPlane().setD(buttocks.get(i)->getPlane().d() * scale.z());
+    // reset any present hydrostatic calculations
+    HydrostaticCalcVector& calc = getHydrostaticCalculations();
+    for (size_t i=0; i<calc.size(); i++) {
+        calc.get(i)->setDraft(abs(calc.get(i)->getDraft() * scale.z()));
+        calc.get(i)->setTrim(abs(calc.get(i)->getTrim() * scale.z()));
+        calc.get(i)->setCalculated(false);
+    }
+    // scale data used for KAPER series resistance calculations
     // TODO
+    // scale data used for DELFT series resistance calculations
+    // TODO
+}
+
+void ShipCADModel::moveFaces(vector<SubdivisionControlPoint*>& points,
+                             const QVector3D& vec, bool adjust_markers)
+{
+    for (size_t i=0; i<points.size(); i++) {
+        if (!points[i]->isLocked())
+            points[i]->setCoordinate(points[i]->getCoordinate() + vec);
+    }
+    if (points.size() == getSurface()->numberOfControlPoints()) {
+        // update main dimensions
+        if (!getProjectSettings().useDefaultMainframeLocation())
+            getProjectSettings().setMainframeLocation(
+                        getProjectSettings().getMainframeLocation() + vec.x());
+        // update stations buttocks and waterlines
+        IntersectionVector& stations = getStations();
+        for (size_t i=0; i<stations.size(); i++)
+            stations.get(i)->getPlane().setD(stations.get(i)->getPlane().d() - vec.x());
+        IntersectionVector& waterlines = getWaterlines();
+        for (size_t i=0; i<waterlines.size(); i++)
+            waterlines.get(i)->getPlane().setD(waterlines.get(i)->getPlane().d() - vec.y());
+        IntersectionVector& buttocks = getButtocks();
+        for (size_t i=0; i<buttocks.size(); i++)
+            buttocks.get(i)->getPlane().setD(buttocks.get(i)->getPlane().d() - vec.z());
+        if (adjust_markers) {
+            MarkerVectorIterator itr = getMarkers().begin();
+            for (; itr!=getMarkers().end(); ++itr) {
+                for (size_t j=0; j<(*itr)->numberOfPoints(); j++) {
+                    (*itr)->setPoint(j, (*itr)->getPoint(j) + vec);
+                }
+            }
+        }
+    }
 }
 
 // FreeShipUnit.pas:10540

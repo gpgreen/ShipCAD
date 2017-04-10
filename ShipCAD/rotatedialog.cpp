@@ -21,6 +21,9 @@ void RotateDialog::initialize(ShipCAD::RotateDialogData& data)
     ui->longitudinalLineEdit->setText(QString("%1").arg(data.rotation_vector.x()));
     ui->transverseLineEdit->setText(QString("%1").arg(data.rotation_vector.y()));
     ui->verticalLineEdit->setText(QString("%1").arg(data.rotation_vector.z()));
+    ui->longitudinalUnitsLabel->setText(data.units);
+    ui->transverseUnitsLabel->setText(data.units);
+    ui->verticalUnitsLabel->setText(data.units);
 }
 
 void RotateDialog::retrieve(ShipCAD::RotateDialogData& data)

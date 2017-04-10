@@ -414,10 +414,6 @@ public slots:
      */
     void lackenbyModelTransformation();
 
-    /*! \brief scale the model and all equivalent data
-     */
-    void scaleModel();
-
     /*! \brief merge 2 selected edges by removing common controlpoint
      */
     void collapsePoint();

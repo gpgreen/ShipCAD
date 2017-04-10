@@ -424,21 +424,15 @@ void Controller::rotateFaces()
     if (points.size() == 0)
         return;
     bool proceed = true;
-    if (nlocked > 0) {
-        // show proceed dialog
-        // msg 0086 + msg 0087
-        QString msg("%1\n%2");
-        msg.arg(tr("The selection contains locked points that will not be affected by this operation"))
-            .arg(tr("Are you sure you want to continue?"));
-        emit displayQuestionDialog(msg, proceed);
-    }
+    if (nlocked > 0)
+        proceed = proceedWhenLockedPoints();
     if (!proceed) {
         clearSelections();
         return;
     }
     
     // msg 0088
-    RotateDialogData data(tr("Rotation vector"));
+    RotateDialogData data(tr("Rotation vector"), "[Degr.]");
     emit exeRotateDialog(data);
     if (!data.accepted) {
         clearSelections();
@@ -504,21 +498,15 @@ void Controller::scaleFaces()
     if (points.size() == 0)
         return;
     bool proceed = true;
-    if (nlocked > 0) {
-        // show proceed dialog
-        // msg 0086 + msg 0087
-        QString msg("%1\n%2");
-        msg.arg(tr("The selection contains locked points that will not be affected by this operation"))
-            .arg(tr("Are you sure you want to continue?"));
-        emit displayQuestionDialog(msg, proceed);
-    }
+    if (nlocked > 0)
+        proceed = proceedWhenLockedPoints();
     if (!proceed) {
         clearSelections();
         return;
     }
 
     // msg 0090
-    RotateDialogData data(tr("Scale vector"));
+    RotateDialogData data(tr("Scale vector"), "");
     data.rotation_vector = QVector3D(1.0f, 1.0f, 1.0f);
     emit exeRotateDialog(data);
     if (!data.accepted) {
@@ -547,7 +535,43 @@ void Controller::scaleFaces()
 // FreeShipUnit.pas:5287
 void Controller::moveFaces()
 {
-	// TODO
+	cout << "Controller::moveFaces" << endl;
+    vector<SubdivisionControlPoint*> points;
+    size_t nlocked;
+
+    getSurface()->extractPointsFromSelection(points, nlocked);
+    if (points.size() == 0 && !showChooseLayerDialog(fsPoints))
+        return;
+
+    getSurface()->extractPointsFromSelection(points, nlocked);
+    if (points.size() == 0)
+        return;
+    bool proceed = true;
+    if (nlocked > 0)
+        proceed = proceedWhenLockedPoints();
+    if (!proceed) {
+        clearSelections();
+        return;
+    }
+
+    // msg 0092
+    RotateDialogData data(tr("Translation vector"),
+                          LengthStr(getModel()->getProjectSettings().getUnits()));
+    
+    emit exeRotateDialog(data);
+    if (!data.accepted) {
+        clearSelections();
+        return;
+    }
+    // msg 0093
+    getModel()->createUndo(tr("move"), true);
+    bool adjust_markers = false;
+    if (points.size() == getSurface()->numberOfControlPoints())
+         adjust_markers = adjustMarkersDialog();
+    getModel()->moveFaces(points, data.rotation_vector, adjust_markers);
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
 void Controller::exportFileArchimedes()
@@ -869,13 +893,6 @@ void Controller::lackenbyModelTransformation()
 	// TODO
 }
 
-// FreeShipUnit.pas:5195
-void Controller::scaleModel()
-{
-    cout << "Controller::scaleModel" << endl;
-	// TODO
-}
-
 // FreeShipUnit.pas:10086
 void Controller::collapsePoint()
 {
@@ -1024,6 +1041,7 @@ void Controller::movePoint(QVector3D changedCoords)
     SubdivisionControlPoint* pt = getModel()->getActiveControlPoint();
     if (pt->isLocked()) {
         // msg 0191, warning
+        emit displayWarningDialog(tr("Locked points can not be moved!"));
         return;
     }
     if (!_point_first_moved) {
@@ -1136,8 +1154,14 @@ void Controller::unlockAllPoints()
 // FreeShipUnit.pas:10251
 bool Controller::proceedWhenLockedPoints()
 {
-	// TODO
-    return false;
+    bool proceed = true;
+    // show proceed dialog
+    // msg 0086 + msg 0087
+    QString msg("%1\n%2");
+    msg.arg(tr("The selection contains locked points that will not be affected by this operation"))
+        .arg(tr("Are you sure you want to continue?"));
+    emit displayQuestionDialog(msg, proceed);
+    return proceed;
 }
 
 void Controller::delftResistance()

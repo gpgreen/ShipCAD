@@ -68,8 +68,8 @@ MirrorDialogData::MirrorDialogData(bool connect, plane_selected_t init, float d)
     // does nothing
 }
 
-RotateDialogData::RotateDialogData(const QString& title)
-    : accepted(false), dialog_title(title)
+RotateDialogData::RotateDialogData(const QString& title, const QString& unitstr)
+    : accepted(false), dialog_title(title), units(unitstr)
 {
     // does nothing
 }

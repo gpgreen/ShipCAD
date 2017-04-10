@@ -79,6 +79,8 @@ public:
         {return _length;}
 	void setLength(float length);
 
+    bool useDefaultMainframeLocation() const
+        {return _use_default_mainframe_location;}
     float getMainframeLocation() const;
     void setMainframeLocation(float loc);
 	void setUseDefaultMainframeLocation(bool use);

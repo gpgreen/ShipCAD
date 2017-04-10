@@ -127,6 +127,7 @@ public:
     Plane getWlPlane() const;
     bool isCalculated() {return _calculated;}
 	void setCalculated(bool calc);
+    float getDraft() const {return _draft;}
 	void setDraft(float draft);
     HydrostaticsData& getData() {return _data;}
     /*! \brief does this calculation have this type of error
@@ -168,6 +169,12 @@ public:
      * \return the angle of trim in degrees
      */
     float getTrimAngle() const;
+
+    /*! \brief get the trim for this calculation (distance, not angle)
+     * \return the trim
+     */
+    float getTrim() const {return _trim;}
+
     /*! \brief set the trim for this calculation (distance, not angle)
      *
      * \param trim the trim of the hull

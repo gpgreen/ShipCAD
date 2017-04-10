@@ -101,6 +101,14 @@ public:
      */
     void scaleModel(const QVector3D& scale, bool override_lock, bool adjust_markers);
     
+    /*! \brief move selected faces and all associated data
+     *
+     * \param vect displacement vector
+     * \param adjust_markers move markers if true
+     */
+    void moveFaces(std::vector<SubdivisionControlPoint*>& points,
+                   const QVector3D& vec, bool adjust_markers);
+
     /*! \brief create an intersection
      *
      * \param type which type of intersection

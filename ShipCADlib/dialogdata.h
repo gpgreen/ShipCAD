@@ -128,8 +128,9 @@ struct RotateDialogData
     bool accepted;
     QVector3D rotation_vector;
     QString dialog_title;
+    QString units;
 
-    explicit RotateDialogData(const QString& title);
+    explicit RotateDialogData(const QString& title, const QString& units);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

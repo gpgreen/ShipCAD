@@ -254,7 +254,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionAdd_cylinder, SIGNAL(triggered()), _controller, SLOT(addCylinder()));
 
     // connect transform actions
-    connect(ui->actionScale, SIGNAL(triggered()), _controller, SLOT(scaleModel()));
+    connect(ui->actionScale, SIGNAL(triggered()), _controller, SLOT(scaleFaces()));
     connect(ui->actionMove, SIGNAL(triggered()), _controller, SLOT(moveFaces()));
     connect(ui->actionRotate, SIGNAL(triggered()), _controller, SLOT(rotateFaces()));
     connect(ui->actionMirror, SIGNAL(triggered()), _controller, SLOT(mirrorPlaneFace()));

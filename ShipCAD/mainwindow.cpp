@@ -693,11 +693,21 @@ void MainWindow::enableActions()
     SubdivisionSurface* surf = _controller->getModel()->getSurface();
     size_t nlayers = 0;
     bool delete_empty_layers = false;
+    bool develop_layers = false;
     for (size_t i=0; i<surf->numberOfLayers(); i++) {
         if (surf->getLayer(i)->numberOfFaces())
             nlayers++;
         else if (!delete_empty_layers && surf->getLayer(i)->numberOfFaces() == 0)
             delete_empty_layers = true;
+        if (!develop_layers && surf->getLayer(i)->isDevelopable() && surf->getLayer(i)->numberOfFaces() > 0)
+            develop_layers = true;
+    }
+    bool remove_unused = false;
+    for (size_t i=0; i<surf->numberOfControlPoints(); i++) {
+        if (surf->getControlPoint(i)->numberOfFaces() == 0) {
+            remove_unused = true;
+            break;
+        }
     }
     size_t ncpoints = surf->numberOfControlPoints();
     size_t nselcpoints = surf->numberOfSelectedControlPoints();
@@ -710,7 +720,8 @@ void MainWindow::enableActions()
     size_t nwaterlines = model->getWaterlines().size();
     size_t nbuttocks = model->getButtocks().size();
     size_t ndiagonals = model->getDiagonals().size();
-
+    size_t nmarkers = model->numberOfMarkers();
+    
     // file actions
     ui->actionSave_As->setEnabled(ncpoints > 0 || model->isFileChanged() || model->isFilenameSet());
 
@@ -805,6 +816,14 @@ void MainWindow::enableActions()
                                        || model->getActiveControlPoint() != 0);
     
     // tools actions
+    //ui->actionImportMarkers->setEnabled(
+    ui->actionDelete_all_markers->setEnabled(nmarkers > 0);
+    ui->actionCheck_model->setEnabled(ncfaces > 0);
+    //ui->actionRemove_negative->setEnabled(
+    ui->actionRemove_unused_points->setEnabled(remove_unused);
+    ui->actionDevelop_plates->setEnabled(develop_layers);
+    ui->actionKeel_and_rudder_wizard->setEnabled(_viewports.size());
+    ui->actionAdd_cylinder->setEnabled(_viewports.size());
 
     // transform actions
     ui->actionScale->setEnabled(ncpoints > 0);

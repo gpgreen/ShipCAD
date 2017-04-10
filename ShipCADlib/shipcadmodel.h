@@ -150,8 +150,6 @@ public:
     IntersectionVector& getButtocks() {return _buttocks;}
     IntersectionVector& getDiagonals() {return _diagonals;}
     
-    Flowline* getFlowline(size_t index);
-
 	edit_mode_t getEditMode() {return _edit_mode;}
 	void setEditMode(edit_mode_t mode);
 
@@ -194,9 +192,7 @@ public:
     size_t numberOfLayers() {return _surface.numberOfLayers();}
     SubdivisionLayer* getLayer(size_t index) {return _surface.getLayer(index);}
 
-	size_t numberOfFlowlines();
     size_t numberOfLockedPoints();
-    size_t numberOfViewports();
 
     // marker
     MarkerVector& getMarkers() {return _markers;}
@@ -206,6 +202,8 @@ public:
     void removeSelectedMarker(Marker* mark);
 
     // flowlines
+    Flowline* getFlowline(size_t index) {return _flowlines.get(index);}
+    size_t numberOfFlowlines() const {return _flowlines.size();}
     /*! \brief is the flowline selected
      *
      * \param flow flowline to check
@@ -223,8 +221,6 @@ public:
      */
     void removeSelectedFlowline(const Flowline* flow);
     
-    // viewport? we might want to move this into the gui window class
-    void addViewport(Viewport* vp);
 
     SubdivisionSurface* getSurface() {return &_surface;}
     const SubdivisionSurface* getSurface() const {return &_surface;}

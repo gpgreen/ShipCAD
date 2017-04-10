@@ -920,9 +920,32 @@ void Controller::collapsePoint()
     }
 }
 
+// FreeShipUnit.pas:10113
 void Controller::removeUnusedPoint()
 {
-	// TODO
+    cout << "Controller::removeUnusedPoint()" << endl;
+    size_t n = 0;
+    // msg 0161
+    UndoObject* uo = getModel()->createUndo(tr("remove unused points"), false);
+    for (size_t i=getSurface()->numberOfControlPoints(); i>=1; i++) {
+        SubdivisionControlPoint* pt = getSurface()->getControlPoint(i-1);
+        if (pt->numberOfFaces() == 0) {
+            getSurface()->deleteControlPoint(pt);
+            n++;
+        }
+    }
+    if (n > 0) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+        // msg 0162
+        QString msg("%1 %2");
+        msg.arg(n).arg(tr("points removed."));
+        emit displayInfoDialog(msg);
+    }
+    else
+        delete uo;
 }
 
 // FreeShipUnit.pas:10141
@@ -1179,15 +1202,11 @@ void Controller::clearSelections()
 {
     cout << "Controller::clearSelections" << endl;
     SubdivisionSurface* surf = getSurface();
-    size_t n = surf->numberOfSelectedControlPoints()
-            + surf->numberOfSelectedControlEdges()
-            + surf->numberOfSelectedControlFaces()
-            + surf->numberOfSelectedControlCurves(); //BUGBUG: markers and flowlines
+    size_t n = getModel()->countSelectedItems();
     if (n == 0)
         return;
     getModel()->clearSelectedItems();
     getModel()->setActiveControlPoint(0);
-    // BUGBUG: clear markers and flowlines
     emit showControlPointDialog(false);
     emit modifiedModel();
 }
@@ -1213,9 +1232,37 @@ void Controller::deleteSelections()
     emit modifiedModel();
 }
 
+// FreeShipUnit.pas:10438
 void Controller::selectAll()
 {
-	// TODO
+    cout << "Controller::selectAll" << endl;
+    for (size_t i=0; i<getSurface()->numberOfLayers(); i++) {
+        if (getSurface()->getLayer(i)->isVisible()) {
+            for (size_t j=0; j<getSurface()->getLayer(i)->numberOfFaces(); j++)
+                getSurface()->getLayer(i)->getFace(j)->setSelected(true);
+        }
+    }
+    for (size_t i=0; i<getSurface()->numberOfControlEdges(); i++) {
+        if (getSurface()->getControlEdge(i)->isVisible())
+            getSurface()->getControlEdge(i)->setSelected(true);
+    }
+    for (size_t i=0; i<getSurface()->numberOfControlPoints(); i++) {
+        if (getSurface()->getControlPoint(i)->isVisible())
+            getSurface()->getControlPoint(i)->setSelected(true);
+    }
+    for (size_t i=0; i<getSurface()->numberOfControlCurves(); i++) {
+        if (getSurface()->getControlCurve(i)->isVisible())
+            getSurface()->getControlCurve(i)->setSelected(true);
+    }
+    for (size_t i=0; i<getModel()->numberOfMarkers(); i++) {
+        if (getModel()->getMarkers().get(i)->isVisible())
+            getModel()->getMarkers().get(i)->setSelected(true);
+    }
+    for (size_t i=0; i<getModel()->numberOfFlowlines(); i++) {
+        if (getModel()->getFlowline(i)->isVisible())
+            getModel()->getFlowline(i)->setSelected(true);
+    }
+    emit modifiedModel();
 }
 
 void Controller::undo()

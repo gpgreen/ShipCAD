@@ -193,14 +193,17 @@ size_t ShipCADModel::countSelectedItems()
     count += s->numberOfSelectedControlCurves()
             + s->numberOfSelectedControlEdges()
             + s->numberOfSelectedControlFaces()
-            + s->numberOfSelectedControlPoints();
+            + s->numberOfSelectedControlPoints()
+            + _selected_flowlines.size()
+            + _selected_markers.size();
     return count;
 }
 
 void ShipCADModel::clearSelectedItems()
 {
     getSurface()->clearSelection();
-    setFileChanged(true);
+    _selected_markers.clear();
+    _selected_flowlines.clear();
 }
 
 void ShipCADModel::setFileChanged(bool set)

@@ -359,7 +359,15 @@ void MainWindow::readSettings()
 
 void MainWindow::createToolBars()
 {
-
+//    QToolBar *fileToolBar = addToolBar(tr("File"));
+    ui->actionFileNew->setIcon(QIcon(":/Themes/Default/icons/32/NewModel.png"));
+    ui->mainToolBar->insertAction(0, ui->actionFileNew);
+    ui->actionOpen->setIcon(QIcon(":/Themes/Default/icons/32/LoadFile.png"));
+    ui->mainToolBar->insertAction(0, ui->actionOpen);
+    ui->actionSave->setIcon(QIcon(":/Themes/Default/icons/32/FileSave.png"));
+    ui->mainToolBar->insertAction(0, ui->actionSave);
+    ui->actionExit->setIcon(QIcon(":/Themes/Default/icons/32/ExitProgram.png"));
+    ui->mainToolBar->insertAction(0, ui->actionExit);
 }
 
 void MainWindow::createStatusBar()

@@ -359,15 +359,103 @@ void MainWindow::readSettings()
 
 void MainWindow::createToolBars()
 {
-//    QToolBar *fileToolBar = addToolBar(tr("File"));
+    QToolBar *fileToolBar = addToolBar(tr("File"));
     ui->actionFileNew->setIcon(QIcon(":/Themes/Default/icons/32/NewModel.png"));
-    ui->mainToolBar->insertAction(0, ui->actionFileNew);
+    fileToolBar->insertAction(0, ui->actionFileNew);
     ui->actionOpen->setIcon(QIcon(":/Themes/Default/icons/32/LoadFile.png"));
-    ui->mainToolBar->insertAction(0, ui->actionOpen);
+    fileToolBar->insertAction(0, ui->actionOpen);
     ui->actionSave->setIcon(QIcon(":/Themes/Default/icons/32/FileSave.png"));
-    ui->mainToolBar->insertAction(0, ui->actionSave);
+    fileToolBar->insertAction(0, ui->actionSave);
     ui->actionExit->setIcon(QIcon(":/Themes/Default/icons/32/ExitProgram.png"));
-    ui->mainToolBar->insertAction(0, ui->actionExit);
+    fileToolBar->insertAction(0, ui->actionExit);
+
+    QToolBar *visToolBar = addToolBar(tr("Visibility"));
+    // precision list box
+    
+    // visibility
+    ui->actionShowControl_net->setIcon(QIcon(":/Themes/Default/icons/32/ShowControlNet.png"));
+    visToolBar->insertAction(0, ui->actionShowControl_net);
+    ui->actionShowControl_curves->setIcon(QIcon(":/Themes/Default/icons/32/ShowControlCurves.png"));
+    visToolBar->insertAction(0, ui->actionShowControl_curves);
+    ui->actionShowInterior_edges->setIcon(QIcon(":/Themes/Default/icons/32/ShowInteriorEdges.png"));
+    visToolBar->insertAction(0, ui->actionShowInterior_edges);
+    ui->actionShow_both_sides->setIcon(QIcon(":/Themes/Default/icons/32/BothSides.png"));
+    visToolBar->insertAction(0, ui->actionShow_both_sides);
+    ui->actionShowGrid->setIcon(QIcon(":/Themes/Default/icons/32/ShowGrid.png"));
+    visToolBar->insertAction(0, ui->actionShowGrid);
+    ui->actionShowStations->setIcon(QIcon(":/Themes/Default/icons/32/ShowStations.png"));
+    visToolBar->insertAction(0, ui->actionShowStations);
+    ui->actionShowButtocks->setIcon(QIcon(":/Themes/Default/icons/32/ShowButtocks.png"));
+    visToolBar->insertAction(0, ui->actionShowButtocks);
+    ui->actionShowWaterlines->setIcon(QIcon(":/Themes/Default/icons/32/ShowWaterlines.png"));
+    visToolBar->insertAction(0, ui->actionShowWaterlines);
+    ui->actionShowDiagonals->setIcon(QIcon(":/Themes/Default/icons/32/ShowDiagonals.png"));
+    visToolBar->insertAction(0, ui->actionShowDiagonals);
+    ui->actionShowHydrostatic_features->setIcon(QIcon(":/Themes/Default/icons/32/ShowHydrostatics.png"));
+    visToolBar->insertAction(0, ui->actionShowHydrostatic_features);
+    ui->actionShowFlowlines->setIcon(QIcon(":/Themes/Default/icons/32/ShowFlowlines.png"));
+    visToolBar->insertAction(0, ui->actionShowFlowlines);
+    ui->actionShowNormals->setIcon(QIcon(":/Themes/Default/icons/32/ShowNormals.png"));
+    visToolBar->insertAction(0, ui->actionShowNormals);
+    ui->actionShowCurvature->setIcon(QIcon(":/Themes/Default/icons/32/Showcurvature.png"));
+    visToolBar->insertAction(0, ui->actionShowCurvature);
+    ui->actionShowMarkers->setIcon(QIcon(":/Themes/Default/icons/32/ShowMarkers.png"));
+    visToolBar->insertAction(0, ui->actionShowMarkers);
+
+    // layers
+    QToolBar *layerToolBar = addToolBar(tr("Layers"));
+    ui->actionLayerNew->setIcon(QIcon(":/Themes/Default/icons/32/NewLayer.png"));
+    layerToolBar->insertAction(0, ui->actionLayerNew);
+    ui->actionLayerDelete_empty->setIcon(QIcon(":/Themes/Default/icons/32/DeleteEmptyLayers.png"));
+    layerToolBar->insertAction(0, ui->actionLayerDelete_empty);
+    ui->actionLayerDialog->setIcon(QIcon(":/Themes/Default/icons/32/LayerDialog.png"));
+    layerToolBar->insertAction(0, ui->actionLayerDialog);
+    ui->actionLayerAuto_group->setIcon(QIcon(":/Themes/Default/icons/32/LayerAutoGroup.png"));
+    layerToolBar->insertAction(0, ui->actionLayerAuto_group);
+    // active layer list box
+    // active layer color
+    
+    // pick
+    QToolBar *pointToolBar = addToolBar(tr("Points"));
+    ui->actionDelete->setIcon(QIcon(":/Themes/Default/icons/32/DeleteAll.png"));
+    pointToolBar->insertAction(0, ui->actionDelete);
+
+    // editing
+    ui->actionAlign->setIcon(QIcon(":/Themes/Default/icons/32/PointAlign.png"));
+    pointToolBar->insertAction(0, ui->actionAlign);
+    ui->actionEdgeCollapse->setIcon(QIcon(":/Themes/Default/icons/32/EdgeCollapse.png"));
+    pointToolBar->insertAction(0, ui->actionEdgeCollapse);
+    ui->actionInsert_plane->setIcon(QIcon(":/Themes/Default/icons/32/InsertPlane.png"));
+    pointToolBar->insertAction(0, ui->actionInsert_plane);
+    ui->actionIntersect_layers->setIcon(QIcon(":/Themes/Default/icons/32/LayerIntersection.png"));
+    pointToolBar->insertAction(0, ui->actionIntersect_layers);
+    ui->actionLock_points->setIcon(QIcon(":/Themes/Default/icons/32/PointsLock.png"));
+    pointToolBar->insertAction(0, ui->actionLock_points);
+    ui->actionUnlock_points->setIcon(QIcon(":/Themes/Default/icons/32/PointsUnlock.png"));
+    pointToolBar->insertAction(0, ui->actionUnlock_points);
+    ui->actionUnlock_all_points->setIcon(QIcon(":/Themes/Default/icons/32/PointsUnlockAll.png"));
+    pointToolBar->insertAction(0, ui->actionUnlock_all_points);
+    
+    QToolBar *modToolBar = addToolBar(tr("Modification"));
+    ui->actionEdgeExtrude->setIcon(QIcon(":/Themes/Default/icons/32/EdgeExtrude.png"));
+    modToolBar->insertAction(0, ui->actionEdgeExtrude);
+    ui->actionEdgeSplit->setIcon(QIcon(":/Themes/Default/icons/32/EdgeSplit.png"));
+    modToolBar->insertAction(0, ui->actionEdgeSplit);
+    ui->actionEdgeCollapse->setIcon(QIcon(":/Themes/Default/icons/32/EdgeCollapse.png"));
+    modToolBar->insertAction(0, ui->actionEdgeCollapse);
+    ui->actionEdgeInsert->setIcon(QIcon(":/Themes/Default/icons/32/NewEdge.png"));
+    modToolBar->insertAction(0, ui->actionEdgeInsert);
+    ui->actionEdgeCrease->setIcon(QIcon(":/Themes/Default/icons/32/EdgeCrease.png"));
+    modToolBar->insertAction(0, ui->actionEdgeCrease);
+    ui->actionCurveNew->setIcon(QIcon(":/Themes/Default/icons/32/NewCurve.png"));
+    modToolBar->insertAction(0, ui->actionCurveNew);
+    ui->actionFaceNew->setIcon(QIcon(":/Themes/Default/icons/32/NewFace.png"));
+    modToolBar->insertAction(0, ui->actionFaceNew);
+    ui->actionFaceInvert->setIcon(QIcon(":/Themes/Default/icons/32/InvertFace.png"));
+    modToolBar->insertAction(0, ui->actionFaceInvert);
+    ui->actionIntersections->setIcon(QIcon(":/Themes/Default/icons/32/IntersectionDialog.png"));
+    modToolBar->insertAction(0, ui->actionIntersections);
+    
 }
 
 void MainWindow::createStatusBar()

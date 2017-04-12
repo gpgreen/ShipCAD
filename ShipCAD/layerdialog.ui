@@ -179,7 +179,6 @@
              <widget class="QListWidget" name="layerListWidget"/>
             </item>
            </layout>
-           <zorder>frame_5</zorder>
            <zorder>frame_4</zorder>
            <zorder>layerListWidget</zorder>
           </widget>

@@ -138,6 +138,10 @@ protected:
                        
 private slots:
 
+    /*! \brief setup icons in actions
+     */
+    void setIcons();
+
     /*! \brief action for new model
      */
     void newModel();
@@ -362,6 +366,13 @@ private:
     QAction* _alphaBgImgAction;
     QAction* _tolBgImgAction;
     QAction* _blendBgImgAction;
+    // toolbars
+    QToolBar* _fileToolBar;
+    QToolBar* _visToolBar;
+    QToolBar* _layerToolBar;
+    QToolBar* _pointToolBar;
+    QToolBar* _modToolBar;
+    
 };
 
 #endif // MAINWINDOW_H

@@ -594,7 +594,7 @@ double ShipCAD::Sign(double val)
 
 size_t ShipCAD::to_size_t(int val)
 {
-    if (val > 0)
+    if (val >= 0)
         return static_cast<size_t>(val);
     throw runtime_error("int cannot be converted to unsigned int");
 }

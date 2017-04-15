@@ -35,6 +35,7 @@
 #include <QAction>
 #include <QMenu>
 #include <QLabel>
+#include <QComboBox>
 #include "shipcadlib.h"
 #include "dialogdata.h"
 
@@ -176,12 +177,6 @@ private slots:
     /*! \brief undo data update
      */
     void updateUndoData();
-    /*! \brief layer data updated
-     */
-    void changedLayerData();
-    /*! \brief active layer has been changed
-     */
-    void changeActiveLayer();
     /*! \brief show preference dialog
      */
     void showPreferences();
@@ -232,6 +227,9 @@ private slots:
     /*! \brief change viewport to perspective view
      */
     void setPerspectiveView();
+    /*! \brief precision has been changed
+     */
+    void precisionChanged(int newprecision);
     /*! \brief model has changed
      */
     void modelChanged();
@@ -372,6 +370,8 @@ private:
     QToolBar* _layerToolBar;
     QToolBar* _pointToolBar;
     QToolBar* _modToolBar;
+    QComboBox* _precisionComboBox;
+    QComboBox* _activeLayerComboBox;
     
 };
 

@@ -1201,7 +1201,6 @@ void Controller::kaperResistance()
 void Controller::clearSelections()
 {
     cout << "Controller::clearSelections" << endl;
-    SubdivisionSurface* surf = getSurface();
     size_t n = getModel()->countSelectedItems();
     if (n == 0)
         return;
@@ -1446,6 +1445,46 @@ Controller::showFlowlines(bool val)
 		emit modifiedModel();
         cout << "show flowlines: " << (val ? 'y' : 'n') << endl;
     }
+}
+
+void
+Controller::setPrecision(precision_t prec)
+{
+    cout << "Controller::setPrecision" << endl;
+    if (prec != getModel()->getPrecision()) {
+        getModel()->setPrecision(prec);
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    }
+}
+
+// Main.pas:925
+void Controller::setActiveLayer(int layernum)
+{
+    cout << "Controller::setActiveLayer" << endl;
+    size_t idx = to_size_t(layernum);
+    if (idx > getSurface()->numberOfLayers())
+        return;
+    SubdivisionLayer* layer = getSurface()->getLayer(idx);
+    if (getSurface()->numberOfSelectedControlFaces() == 0
+            && layer != getSurface()->getActiveLayer()) {
+        // change the active layer
+        getSurface()->setActiveLayer(layer);
+        cout << "active layer:" << layer->getName().toStdString() << endl;
+    } else if(getSurface()->numberOfSelectedControlFaces() > 0) {
+        // assign all selected controlfaces to the new layer
+        set<SubdivisionControlFace*>::iterator i =
+            getSurface()->getSelControlFaceCollection().begin();
+        for (; i!=getSurface()->getSelControlFaceCollection().end(); ++i)
+            (*i)->setLayer(layer);
+        cout << getSurface()->numberOfSelectedControlFaces()
+             << " faces changed to layer:"
+             << layer->getName().toStdString() << endl;
+    } else
+        return;
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
+    emit changeActiveLayer();
 }
 
 void

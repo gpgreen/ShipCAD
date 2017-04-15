@@ -72,7 +72,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     _saveBgImgAction(nullptr), _originBgImgAction(nullptr), _scaleBgImgAction(nullptr),
     _alphaBgImgAction(nullptr), _tolBgImgAction(nullptr), _blendBgImgAction(nullptr),
     _fileToolBar(nullptr), _visToolBar(nullptr), _layerToolBar(nullptr), _pointToolBar(nullptr),
-    _modToolBar(nullptr)
+    _modToolBar(nullptr), _precisionComboBox(nullptr), _activeLayerComboBox(nullptr)
 {
     ui->setupUi(this);
     setIcons();
@@ -90,7 +90,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
 
     // connect controller signals
     connect(_controller, SIGNAL(updateUndoData()), SLOT(updateUndoData()));
-    connect(_controller, SIGNAL(changeActiveLayer()), SLOT(changeActiveLayer()));
+    connect(_controller, SIGNAL(changeActiveLayer()), SLOT(enableActions()));
     connect(_controller, SIGNAL(modifiedModel()), SLOT(modelChanged()));
     connect(_controller, SIGNAL(modifiedModel()), SLOT(enableActions()));
     connect(_controller, SIGNAL(modifiedModel()), SIGNAL(viewportRender()));
@@ -446,7 +446,16 @@ void MainWindow::createToolBars()
     _visToolBar = addToolBar(tr("Visibility"));
     _visToolBar->setObjectName("vistb");
 
-    // precision list box
+    // precision combo box
+    _precisionComboBox = new QComboBox();
+    _precisionComboBox->addItem(tr("Low"));
+    _precisionComboBox->addItem(tr("Medium"));
+    _precisionComboBox->addItem(tr("High"));
+    _precisionComboBox->addItem(tr("Very High"));
+    _precisionComboBox->setCurrentIndex(1);
+    connect(_precisionComboBox, SIGNAL(activated(int)), SLOT(precisionChanged(int)));
+    _visToolBar->addWidget(_precisionComboBox);
+
     _visToolBar->insertAction(0, ui->actionShowControl_net);
     _visToolBar->insertAction(0, ui->actionShowControl_curves);
     _visToolBar->insertAction(0, ui->actionShowInterior_edges);
@@ -470,7 +479,14 @@ void MainWindow::createToolBars()
     _layerToolBar->insertAction(0, ui->actionLayerDelete_empty);
     _layerToolBar->insertAction(0, ui->actionLayerDialog);
     _layerToolBar->insertAction(0, ui->actionLayerAuto_group);
-    // active layer list box
+
+    _activeLayerComboBox = new QComboBox();
+    _activeLayerComboBox->addItem(tr("0"));
+    _activeLayerComboBox->setCurrentIndex(0);
+    _activeLayerComboBox->setMinimumWidth(100);
+    connect(_activeLayerComboBox, SIGNAL(activated(int)), _controller, SLOT(setActiveLayer(int)));
+    _layerToolBar->addWidget(_activeLayerComboBox);
+
     // active layer color
     
     // pick
@@ -972,6 +988,33 @@ void MainWindow::enableActions()
 
     // calculations actions
 
+    // update the precision combo box
+    if (ncfaces > 0) {
+        _precisionComboBox->setEnabled(true);
+        _precisionComboBox->setCurrentIndex(static_cast<int>(_controller->getModel()->getPrecision()));
+    } else
+        _precisionComboBox->setEnabled(false);
+
+    // update the layer combo box
+    if (ncfaces > 0) {
+        _activeLayerComboBox->setEnabled(true);
+        if (nlayers != _activeLayerComboBox->count()) {
+            _activeLayerComboBox->clear();
+            for (size_t i=0; i<surf->numberOfLayers(); i++) {
+                _activeLayerComboBox->addItem(surf->getLayer(i)->getName());
+                if (surf->getActiveLayer() == surf->getLayer(i))
+                    _activeLayerComboBox->setCurrentIndex(i);
+            }
+        } else {
+            for (size_t i=0; i<surf->numberOfLayers(); i++) {
+                _activeLayerComboBox->setItemText(i, surf->getLayer(i)->getName());
+                if (surf->getActiveLayer() == surf->getLayer(i))
+                    _activeLayerComboBox->setCurrentIndex(i);
+            }
+        }
+    } else
+        _activeLayerComboBox->setEnabled(false);
+
     cout << "enableActions" << endl;
 }
 
@@ -1086,16 +1129,6 @@ void MainWindow::saveModelAsFile()
 }
 
 void MainWindow::updateUndoData()
-{
-
-}
-
-void MainWindow::changedLayerData()
-{
-
-}
-
-void MainWindow::changeActiveLayer()
 {
 
 }
@@ -1234,6 +1267,12 @@ void MainWindow::setPerspectiveView()
         return;
     _currentViewportContext->setViewportType(fvPerspective);
     cout << "MainWindow::setPerspectiveView()" << endl;
+}
+
+void MainWindow::precisionChanged(int newprecision)
+{
+    precision_t p = static_cast<precision_t>(newprecision);
+    _controller->setPrecision(p);
 }
 
 void MainWindow::showControlPointDialog(bool show)

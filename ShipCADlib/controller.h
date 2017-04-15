@@ -558,6 +558,14 @@ public slots:
      */
     void showFlowlines(bool);
 
+    /*! \brief change precision of model
+     */
+    void setPrecision(ShipCAD::precision_t prec);
+
+    /*! \brief change the active layer
+     */
+    void setActiveLayer(int layernum);
+    
     /*! \brief dialog to create keels and rudders
 	 */
 	void keelAndRudderWizard();

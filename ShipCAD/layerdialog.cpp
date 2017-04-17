@@ -28,11 +28,12 @@ using namespace ShipCAD;
 using namespace std;
 
 LayerDialog::LayerDialog(QWidget *parent) :
-    QDialog(parent), _current(0),
+    QDialog(parent), _initializing(false), _current(0),
     ui(new Ui::LayerDialog), _data(nullptr),
     _newToolButton(nullptr), _removeEmptyToolButton(nullptr),
     _moveUpToolButton(nullptr), _moveDownToolButton(nullptr),
-    _colorAction(nullptr), _colorView(nullptr)
+    _colorAction(nullptr), _newLayerAction(nullptr), _deleteEmptyAction(nullptr),
+    _colorView(nullptr)
 {
     ui->setupUi(this);
     createToolButtons();
@@ -51,8 +52,6 @@ LayerDialog::LayerDialog(QWidget *parent) :
 
     connect(ui->layerListWidget, SIGNAL(currentRowChanged(int)),
             this, SLOT(listRowChanged(int)));
-    connect(ui->layerListWidget, SIGNAL(currentRowChanged(int)),
-            this, SIGNAL(activeLayerChanged(int)));
     
     // connect line edit to slots
     connect(ui->nameLineEdit, SIGNAL(textEdited(const QString&)),
@@ -91,16 +90,18 @@ LayerDialog::~LayerDialog()
 void LayerDialog::createToolButtons()
 {
     _newToolButton = new QToolButton(this);
-    QAction* newAction = new QAction(tr("Create new layer"), this);
-    _newToolButton->setDefaultAction(newAction);
-    newAction->setIcon(QIcon(":/Themes/Default/icons/32/NewLayer.png"));
+    _newLayerAction = new QAction(tr("Create new layer"), this);
+    _newToolButton->setDefaultAction(_newLayerAction);
+    _newLayerAction->setIcon(QIcon(":/Themes/Default/icons/32/NewLayer.png"));
     ui->toolBarHorizontalLayout->addWidget(_newToolButton);
+    connect(_newLayerAction, SIGNAL(triggered()), SIGNAL(newLayer()));
 
     _removeEmptyToolButton = new QToolButton(this);
-    QAction* removeAction = new QAction(tr("Delete empty layers"), this);
-    _removeEmptyToolButton->setDefaultAction(removeAction);
-    removeAction->setIcon(QIcon(":/Themes/Default/icons/32/DeleteEmptyLayers.png"));
+    _deleteEmptyAction = new QAction(tr("Delete empty layers"), this);
+    _removeEmptyToolButton->setDefaultAction(_deleteEmptyAction);
+    _deleteEmptyAction->setIcon(QIcon(":/Themes/Default/icons/32/DeleteEmptyLayers.png"));
     ui->toolBarHorizontalLayout->addWidget(_removeEmptyToolButton);
+    connect(_deleteEmptyAction, SIGNAL(triggered()), SIGNAL(deleteEmptyLayer()));
 
     _moveUpToolButton = new QToolButton(this);
     QAction* upAction = new QAction(tr("Move layer up in list"), this);
@@ -117,25 +118,24 @@ void LayerDialog::createToolButtons()
     ui->toolBarHorizontalLayout->addStretch(1);
 }
 
-void LayerDialog::initialize(ShipCAD::LayerDialogData& data)
+void LayerDialog::initialize(ShipCAD::LayerDialogData* data, bool delete_data)
 {
-    _data = &data;
-    // disconnect signal while we update the widget, crashes otherwise
-    disconnect(ui->layerListWidget, SIGNAL(currentRowChanged(int)),
-            this, SLOT(listRowChanged(int)));
+    // set initializing flag, so we can disable signals and slots
+    // from the dialog
+    _initializing = true;
+    if (delete_data)
+        delete _data;
+    _data = data;
     _current = 0;
     ui->layerListWidget->clear();
-    for (size_t i=0; i<data.layers.size(); i++) {
-        ui->layerListWidget->addItem(data.layers[i].name);
-        if (data.active == data.layers[i].data)
+    for (size_t i=0; i<data->layers.size(); i++) {
+        ui->layerListWidget->addItem(data->layers[i].name);
+        if (data->active == data->layers[i].data)
             _current = i;
     }
     ui->layerListWidget->setCurrentRow(_current);
+    _initializing = false;
     updateState();
-    // connect the signal again
-    connect(ui->layerListWidget, SIGNAL(currentRowChanged(int)),
-            this, SLOT(listRowChanged(int)));
-
 }
 
 void LayerDialog::updateState()
@@ -154,16 +154,14 @@ void LayerDialog::updateState()
     _colorView->update();
 }
 
-void LayerDialog::retrieve(ShipCAD::LayerDialogData& data)
-{
-    // does nothing
-}
-
 void LayerDialog::listRowChanged(int index)
 {
+    if (_initializing)
+        return;
     _current = index;
     _data->active = _data->layers[_current].data;
     updateState();
+    emit activeLayerChanged(index);
 }
 
 void LayerDialog::nameChanged(const QString& nm)
@@ -253,10 +251,10 @@ void LayerDialog::selectColor()
 {
 	cout << "LayerDialog::selectColor" << endl;
     LayerPropertiesForDialog& cprops = _data->layers[_current];
-    ChooseColorDialogData data(tr("Choose color for Layer"), cprops.color);
-    emit exeChooseColorDialog(data);
-    if (data.accepted) {
-        cprops.color = data.chosen;
+    ChooseColorDialogData cdata(tr("Choose color for Layer"), cprops.color);
+    emit exeChooseColorDialog(cdata);
+    if (cdata.accepted) {
+        cprops.color = cdata.chosen;
         emit layerColorChanged(cprops.color);
     }
 }

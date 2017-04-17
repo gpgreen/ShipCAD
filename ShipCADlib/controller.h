@@ -380,7 +380,7 @@ public slots:
 
     /*! \brief the layer dialog
      */
-    void layerDialogComplete(ShipCAD::LayerDialogData& data);
+    void layerDialogComplete(ShipCAD::LayerDialogData* data);
 
     /*! \brief delete all empty layers from the model
      */

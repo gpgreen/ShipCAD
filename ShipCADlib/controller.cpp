@@ -818,7 +818,7 @@ void Controller::developLayers()
 	// TODO
 }
 
-void Controller::layerDialogComplete(ShipCAD::LayerDialogData& data)
+void Controller::layerDialogComplete(ShipCAD::LayerDialogData* data)
 {
     cout << "Controller::layerDialogComplete" << endl;
     UndoObject* uo = getModel()->createUndo(tr("edit layers"), false);
@@ -826,7 +826,7 @@ void Controller::layerDialogComplete(ShipCAD::LayerDialogData& data)
     vector<SubdivisionLayer*>::iterator itr = getSurface()->getLayers().begin();
     size_t count = 0;
     for (; itr!=getSurface()->getLayers().end(); ++itr) {
-        if ((*itr)->setProperties(data.layers[count++]))
+        if ((*itr)->setProperties(data->layers[count++]))
             changed = true;
     }
     if (changed) {
@@ -854,8 +854,7 @@ void Controller::deleteEmptyLayers()
         emit modifiedModel();
         emit changeActiveLayer();
         // msg 0141
-        QString msg(tr("%1 empty layers deleted"));
-        msg.arg(n);
+        QString msg(tr("%1 empty layers deleted").arg(n));
         emit displayInfoDialog(msg);
     } else
         delete uo;

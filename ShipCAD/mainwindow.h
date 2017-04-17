@@ -104,7 +104,7 @@ signals:
 
     /*! \brief layer dialog has finished
      */
-    void layerDialogComplete(ShipCAD::LayerDialogData& data);
+    void layerDialogComplete(ShipCAD::LayerDialogData* data);
     
 protected:
 
@@ -253,6 +253,15 @@ private slots:
      */
     void displayLayerDialog();
     
+    /*! \brief layer dialog wants a new layer
+     *
+     */
+    void newLayerFromDialog();
+
+    /*! \brief layer dialog removes empty layers
+     */
+    void removeEmptyLayerFromDialog();
+
     /*! \brief execute the insert plane control points dialog
      *
      * \return true if dialog "ok" selected, false if "cancel" selected

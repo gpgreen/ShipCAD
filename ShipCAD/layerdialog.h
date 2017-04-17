@@ -37,15 +37,17 @@ public:
     explicit LayerDialog(QWidget *parent = 0);
     ~LayerDialog();
 
-    void initialize(ShipCAD::LayerDialogData& data);
-    void retrieve(ShipCAD::LayerDialogData& data);
+    void initialize(ShipCAD::LayerDialogData* data, bool delete_data);
+    ShipCAD::LayerDialogData* retrieve() {return _data;}
 
 signals:
 
     void activeLayerChanged(int index);
     void exeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
     void layerColorChanged(const QColor& color);
-                            
+    void newLayer();
+    void deleteEmptyLayer();
+
 public slots:
 
     void nameChanged(const QString& nm);
@@ -78,6 +80,7 @@ protected:
     virtual void closeEvent(QCloseEvent* event);
 
 private:
+    bool _initializing;
     size_t _current;
     Ui::LayerDialog *ui;
     ShipCAD::LayerDialogData* _data;
@@ -86,6 +89,8 @@ private:
     QToolButton* _moveUpToolButton;
     QToolButton* _moveDownToolButton;
     QAction* _colorAction;
+    QAction* _newLayerAction;
+    QAction* _deleteEmptyAction;
     ColorView* _colorView;
 };
 

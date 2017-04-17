@@ -1016,19 +1016,12 @@ void MainWindow::enableActions()
     // update the layer combo box
     if (ncfaces > 0) {
         _activeLayerComboBox->setEnabled(true);
-        if (nlayers != to_size_t(_activeLayerComboBox->count())) {
-            _activeLayerComboBox->clear();
-            for (size_t i=0; i<surf->numberOfLayers(); i++) {
-                _activeLayerComboBox->addItem(surf->getLayer(i)->getName());
-                if (surf->getActiveLayer() == surf->getLayer(i))
-                    _activeLayerComboBox->setCurrentIndex(i);
-            }
-        } else {
-            for (size_t i=0; i<surf->numberOfLayers(); i++) {
-                _activeLayerComboBox->setItemText(i, surf->getLayer(i)->getName());
-                if (surf->getActiveLayer() == surf->getLayer(i))
-                    _activeLayerComboBox->setCurrentIndex(i);
-            }
+        QSignalBlocker block(_activeLayerComboBox);
+        _activeLayerComboBox->clear();
+        for (size_t i=0; i<surf->numberOfLayers(); i++) {
+            _activeLayerComboBox->addItem(surf->getLayer(i)->getName());
+            if (surf->getActiveLayer() == surf->getLayer(i))
+                _activeLayerComboBox->setCurrentIndex(i);
         }
     } else
         _activeLayerComboBox->setEnabled(false);
@@ -1320,21 +1313,45 @@ void MainWindow::displayLayerDialog()
 {
     if (_layerdialog == nullptr) {
         _layerdialog = new LayerDialog(this);
-        connect(this, SIGNAL(layerDialogComplete(ShipCAD::LayerDialogData&)),
-                _controller, SLOT(layerDialogComplete(ShipCAD::LayerDialogData&)));
+        connect(this, SIGNAL(layerDialogComplete(ShipCAD::LayerDialogData*)),
+                _controller, SLOT(layerDialogComplete(ShipCAD::LayerDialogData*)));
         connect(_layerdialog, SIGNAL(activeLayerChanged(int)),
                 _controller, SLOT(setActiveLayer(int)));
         connect(_layerdialog, SIGNAL(exeChooseColorDialog(ShipCAD::ChooseColorDialogData&)),
                 this, SLOT(executeChooseColorDialog(ShipCAD::ChooseColorDialogData&)));
         connect(_layerdialog, SIGNAL(layerColorChanged(const QColor&)),
                 _controller, SLOT(setActiveLayerColor(const QColor&)));
+        connect(_layerdialog, SIGNAL(newLayer()), SLOT(newLayerFromDialog()));
+        connect(_layerdialog, SIGNAL(deleteEmptyLayer()), SLOT(removeEmptyLayerFromDialog()));
     }
     vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
                                      _controller->getSurface()->getLayers().end());
-    LayerDialogData data(layers, _controller->getSurface()->getActiveLayer());
-    _layerdialog->initialize(data);
+    LayerDialogData* data = new LayerDialogData(layers, _controller->getSurface()->getActiveLayer());
+    _layerdialog->initialize(data, false);
     _layerdialog->exec();
+    data = _layerdialog->retrieve();
     emit layerDialogComplete(data);
+    delete data;
+}
+
+void MainWindow::newLayerFromDialog()
+{
+    // create the new layer
+    _controller->newLayer();
+    vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
+                                     _controller->getSurface()->getLayers().end());
+    LayerDialogData* data = new LayerDialogData(layers, _controller->getSurface()->getActiveLayer());
+    _layerdialog->initialize(data, true);
+}
+
+void MainWindow::removeEmptyLayerFromDialog()
+{
+    // remove the empty layers
+    _controller->deleteEmptyLayers();
+    vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
+                                     _controller->getSurface()->getLayers().end());
+    LayerDialogData* data = new LayerDialogData(layers, _controller->getSurface()->getActiveLayer());
+    _layerdialog->initialize(data, true);
 }
 
 void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)

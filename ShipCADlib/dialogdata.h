@@ -81,9 +81,27 @@ struct ChooseColorDialogData
 //////////////////////////////////////////////////////////////////////////////////////
 /*! \brief data structure for layer properties dialog exchange
  */
+struct LayerPropertiesForDialog
+{
+    QString name;
+    QColor color;
+    float alpha;
+    bool hydrostatics;
+    bool symmetric;
+    bool intersection_curves;
+    bool developable;
+    bool show_linesplan;
+    float material_density;
+    float thickness;
+    const SubdivisionLayer* data;
+};
+    
 struct LayerDialogData
 {
-    explicit LayerDialogData();
+    const SubdivisionLayer* active;
+    std::vector<LayerPropertiesForDialog> layers;
+    explicit LayerDialogData(std::vector<ShipCAD::SubdivisionLayer*> list_of_layers,
+        SubdivisionLayer* active_layer);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

@@ -39,6 +39,7 @@
 
 #include "subdivbase.h"
 #include "pointervec.h"
+#include "dialogdata.h"
 
 namespace ShipCAD {
 
@@ -77,7 +78,8 @@ public:
     // modifications
     void releaseControlFace(SubdivisionControlFace* face);
     void useControlFace(SubdivisionControlFace* newface);
-    size_t numberOfFaces() { return _patches.size(); }
+    size_t numberOfFaces() const
+        { return _patches.size(); }
     SubdivisionControlFace* getFace(size_t index);
     bool calculateIntersectionPoints(SubdivisionLayer* layer);
     virtual void clear();
@@ -90,23 +92,35 @@ public:
     LayerProperties getSurfaceProperties();
 
     // getters/setters
-    bool isVisible() {return _visible;}
-    bool isSymmetric() {return _symmetric;}
-    bool isDevelopable() {return _developable;}
-    bool useForIntersections() {return _use_for_intersections;}
-    bool useInHydrostatics() {return _use_in_hydrostatics;}
-    bool showInLinesplan() {return _show_in_linesplan;}
-    size_t getLayerID() {return _layerid;}
+    bool isVisible() const
+        {return _visible;}
+    bool isSymmetric() const
+        {return _symmetric;}
+    bool isDevelopable() const
+        {return _developable;}
+    bool useForIntersections() const
+        {return _use_for_intersections;}
+    bool useInHydrostatics() const
+        {return _use_in_hydrostatics;}
+    bool showInLinesplan() const
+        {return _show_in_linesplan;}
+    size_t getLayerID() const
+        {return _layerid;}
     void setLayerID(size_t newid) { _layerid = newid; }
     size_t getLayerIndex();
-    float getMaterialDensity() {return _material_density;}
-    float getThickness() {return _thickness;}
-    QString getName();
-    QString getDescription()
+    float getMaterialDensity() const
+        {return _material_density;}
+    float getThickness() const
+        {return _thickness;}
+    QString getName() const;
+    QString getDescription() const
         {return _desc;}
-    QString getDXFLayername() {return getName();}
-    QColor getColor() {return _color;}
-    float getAlphaBlend() {return _alphablend/255.0;}
+    QString getDXFLayername() const
+        {return getName();}
+    QColor getColor() const
+        {return _color;}
+    float getAlphaBlend() const
+        {return _alphablend/255.0;}
     void setDevelopable(bool val);
     void setDescription(const QString& val);
     void setName(const QString& val);
@@ -119,6 +133,9 @@ public:
     void setUseForIntersections(bool val);
     void setVisible(bool val);
     void setAlphaBlend(unsigned char val);
+
+    ShipCAD::LayerPropertiesForDialog getProperties() const;
+    bool setProperties(ShipCAD::LayerPropertiesForDialog& props);
     
     // persistence
     void loadBinary(FileBuffer& source);

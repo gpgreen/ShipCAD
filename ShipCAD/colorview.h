@@ -1,6 +1,6 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>                                   *
  *                                                                                             *
  *    This program is free software; you can redistribute it and/or modify it under            *
  *    the terms of the GNU General Public License as published by the                          *
@@ -16,36 +16,32 @@
  *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
  *                                                                                             *
  *#############################################################################################*/
+#ifndef COLORVIEW_H
+#define COLORVIEW_H
 
-#ifndef MIRRORDIALOG_H
-#define MIRRORDIALOG_H
+#include <QWidget>
 
-#include <QDialog>
-#include "dialogdata.h"
-
-namespace Ui {
-class MirrorDialog;
-}
-
-class MirrorDialog : public QDialog
+class ColorView : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MirrorDialog(QWidget *parent = 0);
-    ~MirrorDialog();
 
-    void initialize(ShipCAD::MirrorDialogData& data);
-    void retrieve(ShipCAD::MirrorDialogData& data);
+    explicit ColorView(const QColor& color, QWidget *parent = 0);
+    virtual ~ColorView() {}
+    
+    // getters/setters for color
+    void setColor(const QColor& color);
+    void setAlpha(float alpha);
+    void setColor(const QColor& color, float alpha);
 
 protected:
 
-    void readSettings();
-    void saveSettings();
-    virtual void closeEvent(QCloseEvent* event);
-    
+    virtual void paintEvent(QPaintEvent *event);
+
 private:
-    Ui::MirrorDialog *ui;
+
+    QColor _color;
 };
 
-#endif // MIRRORDIALOG_H
+#endif // COLORVIEW_H

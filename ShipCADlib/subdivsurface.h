@@ -288,6 +288,7 @@ public:
     SubdivisionLayer* addNewLayer();
     QString getDefaultLayerName();
     size_t deleteEmptyLayers();
+    std::vector<SubdivisionLayer*>& getLayers() {return _layers;}
     
     // getters/setters
     subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}

@@ -1383,8 +1383,8 @@ void SubdivisionSurface::removeSelectedControlPoint(SubdivisionControlPoint *pt)
 
 size_t SubdivisionSurface::requestNewLayerID()
 {
-    _last_used_layerID++;
-    return _last_used_layerID;
+    size_t n = _last_used_layerID++;
+    return n;
 }
 
 QString SubdivisionSurface::getDefaultLayerName()

@@ -1,6 +1,6 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>                                   *
  *                                                                                             *
  *    This program is free software; you can redistribute it and/or modify it under            *
  *    the terms of the GNU General Public License as published by the                          *
@@ -17,35 +17,38 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef MIRRORDIALOG_H
-#define MIRRORDIALOG_H
+#include <QPainter>
+#include <QBrush>
+#include "colorview.h"
 
-#include <QDialog>
-#include "dialogdata.h"
-
-namespace Ui {
-class MirrorDialog;
+ColorView::ColorView(const QColor& color, QWidget *parent) :
+    QWidget(parent), _color(color)
+{
+    // does nothing
 }
 
-class MirrorDialog : public QDialog
+void ColorView::setColor(const QColor& color) {
+    _color = color;
+    setAlpha(1.0f);
+}
+
+void ColorView::setAlpha(float alpha) 
 {
-    Q_OBJECT
+    _color.setAlphaF(alpha);
+}
 
-public:
-    explicit MirrorDialog(QWidget *parent = 0);
-    ~MirrorDialog();
+void ColorView::setColor(const QColor& color, float alpha) 
+{
+    _color = color;
+    _color.setAlphaF(alpha);
+}
 
-    void initialize(ShipCAD::MirrorDialogData& data);
-    void retrieve(ShipCAD::MirrorDialogData& data);
+void ColorView::paintEvent(QPaintEvent *event)
+{
+    QWidget::paintEvent( event );
 
-protected:
-
-    void readSettings();
-    void saveSettings();
-    virtual void closeEvent(QCloseEvent* event);
-    
-private:
-    Ui::MirrorDialog *ui;
-};
-
-#endif // MIRRORDIALOG_H
+    QPainter painter;
+    painter.begin(this);
+    painter.fillRect(1, 1, 30, 30, QBrush(_color));
+    painter.end();
+}

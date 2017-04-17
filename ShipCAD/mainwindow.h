@@ -57,6 +57,8 @@ class ExtrudeEdgeDialog;
 class ChooseLayerDialog;
 class MirrorDialog;
 class RotateDialog;
+class LayerDialog;
+class ColorView;
 
 class ViewportState
 {
@@ -100,6 +102,10 @@ signals:
      */
     void viewportRender();
 
+    /*! \brief layer dialog has finished
+     */
+    void layerDialogComplete(ShipCAD::LayerDialogData& data);
+    
 protected:
 
     void closeEvent(QCloseEvent* event);
@@ -243,6 +249,10 @@ private slots:
      */
     void showControlPointDialog(bool show);
 
+    /*! \brief execute the layer properties dialog
+     */
+    void displayLayerDialog();
+    
     /*! \brief execute the insert plane control points dialog
      *
      * \return true if dialog "ok" selected, false if "cancel" selected
@@ -321,6 +331,7 @@ private:
     ChooseLayerDialog *_chooselayerdialog; /**< the dialog to choose layer(s) */
     MirrorDialog* _mirrordialog; /**< the dialog to select mirror plane for faces */
     RotateDialog* _rotatedialog; /**< the dialog to select rotation axis for faces */
+    LayerDialog* _layerdialog; /**< the dialog to edit layer properties */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */
@@ -372,7 +383,7 @@ private:
     QToolBar* _modToolBar;
     QComboBox* _precisionComboBox;
     QComboBox* _activeLayerComboBox;
-    
+    ColorView* _colorView;
 };
 
 #endif // MAINWINDOW_H

@@ -73,7 +73,7 @@ SubdivisionLayer::~SubdivisionLayer()
         _owner->deleteLayer(this);
 }
 
-QString SubdivisionLayer::getName()
+QString SubdivisionLayer::getName() const
 {
     if (_desc == "") {
         return QString("%1_%2").arg(_owner->getDefaultLayerName()).arg(_layerid);
@@ -246,6 +246,77 @@ void SubdivisionLayer::assignProperties(SubdivisionLayer* source)
     _developable = source->_developable;
     _material_density = source->_material_density;
     _thickness = source->_thickness;
+}
+
+LayerPropertiesForDialog SubdivisionLayer::getProperties() const
+{
+    LayerPropertiesForDialog props;
+    props.data = this;
+    props.name = getName();
+    props.color = _color;
+    props.alpha = _alphablend / 255.0;
+    props.hydrostatics = _use_in_hydrostatics;
+    props.symmetric = _symmetric;
+    props.intersection_curves = _use_for_intersections;
+    props.developable = _developable;
+    props.show_linesplan = _show_in_linesplan;
+    props.material_density = _material_density;
+    props.thickness = _thickness;
+    return props;
+}
+
+bool SubdivisionLayer::setProperties(LayerPropertiesForDialog& props)
+{
+    bool changed = false;
+    
+    props.data = this;
+    if (props.name != getName()) {
+        changed = true;
+        _desc = props.name;
+    }
+    if (props.color != _color) {
+        changed = true;
+        _color = props.color;
+    }
+    double alphaf;
+    modf(props.alpha, &alphaf);
+    alphaf *= 255;
+    if (alphaf >= 0 && alphaf <= 255) {
+        unsigned char alpha = static_cast<unsigned int>(alphaf);
+        if (alpha != _alphablend) {
+            changed = true;
+            _alphablend = alpha;
+        }
+    }
+    if (props.hydrostatics != _use_in_hydrostatics) {
+        changed = true;
+        _use_in_hydrostatics = props.hydrostatics;
+    }
+    if (props.symmetric != _symmetric) {
+        changed = true;
+        _symmetric = props.symmetric;
+    }
+    if (props.intersection_curves != _use_for_intersections) {
+        _use_for_intersections = props.intersection_curves;
+        changed = true;
+    }
+    if (props.developable != _developable) {
+        _developable = props.developable;
+        changed = true;
+    }
+    if (props.show_linesplan != _show_in_linesplan) {
+        _show_in_linesplan = props.show_linesplan;
+        changed = true;
+    }
+    if (abs(props.material_density - _material_density) >= 1E-5) {
+        _material_density = props.material_density;
+        changed = true;
+    }
+    if (abs(props.thickness - _thickness) >= 1E-5) {
+        _thickness = props.thickness;
+        changed = true;
+    }
+    return changed;
 }
 
 bool SubdivisionLayer::calculateIntersectionPoints(SubdivisionLayer* layer)

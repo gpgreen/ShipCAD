@@ -225,13 +225,12 @@ void Controller::extrudeEdges()
         uo->accept();
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
-        emit modifiedModel();
     } else {
-        emit changeSelectedItems();
         // msg 0077
         emit displayWarningDialog(tr("Only boundary edges can be extruded!"));
         delete uo;
     }
+    emit modifiedModel();
 }
 
 // FreeShipUnit.pas:4808
@@ -819,9 +818,24 @@ void Controller::developLayers()
 	// TODO
 }
 
-void Controller::layerDialog()
+void Controller::layerDialogComplete(ShipCAD::LayerDialogData& data)
 {
-	// TODO
+    cout << "Controller::layerDialogComplete" << endl;
+    UndoObject* uo = getModel()->createUndo(tr("edit layers"), false);
+    bool changed = false;
+    vector<SubdivisionLayer*>::iterator itr = getSurface()->getLayers().begin();
+    size_t count = 0;
+    for (; itr!=getSurface()->getLayers().end(); ++itr) {
+        if ((*itr)->setProperties(data.layers[count++]))
+            changed = true;
+    }
+    if (changed) {
+        uo->accept();
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+        emit changeActiveLayer();
+    } else
+        delete uo;
 }
 
 // FreeShipUnit.pas:9316
@@ -1515,6 +1529,16 @@ void Controller::setActiveLayerColor()
         getModel()->setFileChanged(true);
         emit modifiedModel();
     }
+}
+
+// Main.pas:952
+void Controller::setActiveLayerColor(const QColor& color)
+{
+	cout << "Controller::setActiveLayerColor with color" << endl;
+    getSurface()->getActiveLayer()->setColor(color);
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
 // FreeControlPointForm.pas:320

@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     layerdialog.cpp \
     mirrordialog.cpp \
     chooselayerdialog.cpp \
-    rotatedialog.cpp
+    rotatedialog.cpp \
+    colorview.cpp
 
 HEADERS  += mainwindow.h \
         pointdialog.h \
@@ -34,7 +35,8 @@ HEADERS  += mainwindow.h \
     layerdialog.h \
     mirrordialog.h \
     chooselayerdialog.h \
-    rotatedialog.h
+    rotatedialog.h \
+    colorview.h
 
 FORMS    += mainwindow.ui \
         pointdialog.ui \

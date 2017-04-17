@@ -31,6 +31,7 @@
 #include <QFileDialog>
 #include <QSettings>
 #include <QMessageBox>
+#include <QDesktopWidget>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -41,12 +42,14 @@
 #include "chooselayerdialog.h"
 #include "mirrordialog.h"
 #include "rotatedialog.h"
+#include "layerdialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
 #include "controller.h"
 #include "viewportcontainer.h"
 #include "utility.h"
+#include "colorview.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -55,7 +58,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), _pointdialog(nullptr), _planepointsdialog(nullptr),
     _intersectlayersdialog(nullptr), _extrudeedgedialog(nullptr), _chooselayerdialog(nullptr),
-    _mirrordialog(nullptr), _rotatedialog(nullptr),
+    _mirrordialog(nullptr), _rotatedialog(nullptr), _layerdialog(nullptr),
     _controller(c), _currentViewportContext(nullptr),
     _menu_recent_files(nullptr), _contextMenu(nullptr), _cameraMenu(nullptr),
     _viewportModeGroup(nullptr),
@@ -72,7 +75,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     _saveBgImgAction(nullptr), _originBgImgAction(nullptr), _scaleBgImgAction(nullptr),
     _alphaBgImgAction(nullptr), _tolBgImgAction(nullptr), _blendBgImgAction(nullptr),
     _fileToolBar(nullptr), _visToolBar(nullptr), _layerToolBar(nullptr), _pointToolBar(nullptr),
-    _modToolBar(nullptr), _precisionComboBox(nullptr), _activeLayerComboBox(nullptr)
+    _modToolBar(nullptr), _precisionComboBox(nullptr), _activeLayerComboBox(nullptr),
+    _colorView(nullptr)
 {
     ui->setupUi(this);
     setIcons();
@@ -205,8 +209,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionLayerNew, SIGNAL(triggered()), _controller, SLOT(newLayer()));
     connect(ui->actionLayerDelete_empty, SIGNAL(triggered()),
             _controller, SLOT(deleteEmptyLayers()));
-    connect(ui->actionLayerDialog, SIGNAL(triggered()), _controller, SLOT(layerDialog()));
-
+    connect(ui->actionLayerDialog, SIGNAL(triggered()), SLOT(displayLayerDialog()));
+    
     // connect visibility actions
     connect(ui->actionShowControl_net, SIGNAL(triggered(bool)),
             _controller, SLOT(showControlNet(bool)));
@@ -429,8 +433,19 @@ void MainWindow::showQuestionDialog(const QString& msg, bool& ok)
 void MainWindow::readSettings()
 {
     QSettings settings;
-    restoreGeometry(settings.value("geometry").toByteArray());
-    restoreState(settings.value("windowState").toByteArray());
+    const QByteArray geometry = settings.value("geometry", QByteArray()).toByteArray();
+    const QByteArray windowState = settings.value("windowstate", QByteArray()).toByteArray();
+    if (geometry.isEmpty()) {
+        const QRect availableGeometry = QApplication::desktop()->availableGeometry(this);
+        resize(availableGeometry.width() / 2, availableGeometry.height() / 1.5);
+        move((availableGeometry.width() - width()) / 2,
+             (availableGeometry.height() - height()) / 2);
+    } else {
+        restoreGeometry(geometry);
+    }
+    if (!windowState.isEmpty()) {
+        restoreState(windowState);
+    }
 }
 
 void MainWindow::createToolBars()
@@ -487,7 +502,10 @@ void MainWindow::createToolBars()
     connect(_activeLayerComboBox, SIGNAL(activated(int)), _controller, SLOT(setActiveLayer(int)));
     _layerToolBar->addWidget(_activeLayerComboBox);
 
-    // active layer color
+    _colorView = new ColorView(Qt::black);
+    _colorView->setMinimumSize(32, 32);
+    _colorView->setMaximumSize(32, 32);
+    _layerToolBar->addWidget(_colorView);
     
     // pick
     _pointToolBar = addToolBar(tr("Points"));
@@ -998,7 +1016,7 @@ void MainWindow::enableActions()
     // update the layer combo box
     if (ncfaces > 0) {
         _activeLayerComboBox->setEnabled(true);
-        if (nlayers != _activeLayerComboBox->count()) {
+        if (nlayers != to_size_t(_activeLayerComboBox->count())) {
             _activeLayerComboBox->clear();
             for (size_t i=0; i<surf->numberOfLayers(); i++) {
                 _activeLayerComboBox->addItem(surf->getLayer(i)->getName());
@@ -1014,6 +1032,14 @@ void MainWindow::enableActions()
         }
     } else
         _activeLayerComboBox->setEnabled(false);
+
+    // update the layer color box
+    if (surf->getActiveLayer() != nullptr) {
+        _colorView->setColor(surf->getActiveLayer()->getColor());
+    } else {
+        _colorView->setColor(surf->getLayerColor());
+    }
+    _colorView->update();
 
     cout << "enableActions" << endl;
 }
@@ -1290,6 +1316,27 @@ void MainWindow::showControlPointDialog(bool show)
     cout << "show control point dialog:" << (show ? "t" : "f") << endl;
 }
 
+void MainWindow::displayLayerDialog()
+{
+    if (_layerdialog == nullptr) {
+        _layerdialog = new LayerDialog(this);
+        connect(this, SIGNAL(layerDialogComplete(ShipCAD::LayerDialogData&)),
+                _controller, SLOT(layerDialogComplete(ShipCAD::LayerDialogData&)));
+        connect(_layerdialog, SIGNAL(activeLayerChanged(int)),
+                _controller, SLOT(setActiveLayer(int)));
+        connect(_layerdialog, SIGNAL(exeChooseColorDialog(ShipCAD::ChooseColorDialogData&)),
+                this, SLOT(executeChooseColorDialog(ShipCAD::ChooseColorDialogData&)));
+        connect(_layerdialog, SIGNAL(layerColorChanged(const QColor&)),
+                _controller, SLOT(setActiveLayerColor(const QColor&)));
+    }
+    vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
+                                     _controller->getSurface()->getLayers().end());
+    LayerDialogData data(layers, _controller->getSurface()->getActiveLayer());
+    _layerdialog->initialize(data);
+    _layerdialog->exec();
+    emit layerDialogComplete(data);
+}
+
 void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)
 {
     if (_planepointsdialog == nullptr) {
@@ -1505,7 +1552,6 @@ void MainWindow::vpContextMenuEvent(ViewportContextEvent* event)
 
 void MainWindow::executeChooseColorDialog(ChooseColorDialogData& data)
 {
-    //const QColorDialog::ColorDialogOptions options = QFlag(colorDialogOptionsWidget->value());
     const QColor color = QColorDialog::getColor(data.initial, this, data.title, data.options);
 
     if (color.isValid()) {

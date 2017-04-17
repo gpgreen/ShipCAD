@@ -18,6 +18,7 @@
  *#############################################################################################*/
 
 #include "dialogdata.h"
+#include "subdivlayer.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -49,11 +50,6 @@ ChooseColorDialogData::ChooseColorDialogData(const QString& title, const QColor&
     // does nothing
 }
 
-LayerDialogData::LayerDialogData()
-{
-    // does nothing
-}
-
 ChooseLayerDialogData::ChooseLayerDialogData(vector<SubdivisionLayer*> list_of_layers,
     LayerSelectMode m)
     : accepted(false), include_points(false), mode(m)
@@ -72,4 +68,11 @@ RotateDialogData::RotateDialogData(const QString& title, const QString& unitstr)
     : accepted(false), dialog_title(title), units(unitstr)
 {
     // does nothing
+}
+
+LayerDialogData::LayerDialogData(vector<SubdivisionLayer*> list_of_layers, SubdivisionLayer* active_layer)
+    : active(active_layer)
+{
+    for (size_t i=0; i<list_of_layers.size(); i++)
+        layers.push_back(list_of_layers[i]->getProperties());
 }

@@ -380,7 +380,7 @@ public slots:
 
     /*! \brief the layer dialog
      */
-    void layerDialog();
+    void layerDialogComplete(ShipCAD::LayerDialogData& data);
 
     /*! \brief delete all empty layers from the model
      */
@@ -577,6 +577,10 @@ public slots:
     /*! \brief set active layer color
 	 */
 	void setActiveLayerColor();
+
+    /*! \brief set active layer color with specified color, no undo
+	 */
+    void setActiveLayerColor(const QColor& color);
 
     /*! \brief corner point selected/deselected
      * \param sel true if corner point has been selected, false if deselected

@@ -1323,6 +1323,8 @@ void MainWindow::displayLayerDialog()
                 _controller, SLOT(setActiveLayerColor(const QColor&)));
         connect(_layerdialog, SIGNAL(newLayer()), SLOT(newLayerFromDialog()));
         connect(_layerdialog, SIGNAL(deleteEmptyLayer()), SLOT(removeEmptyLayerFromDialog()));
+        connect(_layerdialog, SIGNAL(reorderLayerList(ShipCAD::LayerDialogData*)),
+                _controller, SLOT(reorderLayerList(ShipCAD::LayerDialogData*)));
     }
     vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
                                      _controller->getSurface()->getLayers().end());

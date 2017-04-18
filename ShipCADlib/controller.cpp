@@ -860,6 +860,19 @@ void Controller::deleteEmptyLayers()
         delete uo;
 }
 
+void Controller::reorderLayerList(LayerDialogData* data)
+{
+    cout << "Controller::reorderLayerList" << endl;
+    getModel()->createUndo(tr("reorder layers"), true);
+    vector<SubdivisionLayer*> reordered;
+    for (size_t i=0; i<data->layers.size(); i++)
+        reordered.push_back(const_cast<SubdivisionLayer*>(data->layers[i].data));
+    getSurface()->getLayers().swap(reordered);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
+    emit changeActiveLayer();
+}
+
 // FreeShipUnit.pas:9349
 void Controller::newLayer()
 {

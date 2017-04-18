@@ -27,8 +27,8 @@
 
 namespace ShipCAD {
 
-    class SubdivisionLayer;
-    
+class SubdivisionLayer;
+
 //////////////////////////////////////////////////////////////////////////////////////
 /*! \brief data structure for insert plane dialog exchange
  */
@@ -94,6 +94,7 @@ struct LayerPropertiesForDialog
     float material_density;
     float thickness;
     const SubdivisionLayer* data;
+    ShipCAD::LayerProperties layer_properties;
 };
     
 struct LayerDialogData

@@ -386,6 +386,10 @@ public slots:
      */
     void deleteEmptyLayers();
 
+    /*! \brief reorder layers
+     */
+    void reorderLayerList(ShipCAD::LayerDialogData* data);
+
     /*! \brief add a new empty layer
      */
     void newLayer();

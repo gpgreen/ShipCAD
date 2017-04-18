@@ -96,7 +96,7 @@ size_t SubdivisionLayer::getLayerIndex()
 void SubdivisionLayer::processTriangle(const QVector3D& p1, 
                                        const QVector3D& p2,
                                        const QVector3D& p3,
-                                       LayerProperties& props)
+                                       LayerProperties& props) const
 {
     QVector3D center = (p1 + p2 + p3) / 3.0f;
     float ax = 0.5 * ((p1.y() - p2.y()) * (p1.z() + p2.z())
@@ -113,7 +113,7 @@ void SubdivisionLayer::processTriangle(const QVector3D& p1,
     props.surface_center_of_gravity += (area * center);
 }
 
-LayerProperties SubdivisionLayer::getSurfaceProperties()
+LayerProperties SubdivisionLayer::getSurfaceProperties() const
 {
     LayerProperties result;
     result.surface_area = 0;
@@ -262,6 +262,7 @@ LayerPropertiesForDialog SubdivisionLayer::getProperties() const
     props.show_linesplan = _show_in_linesplan;
     props.material_density = _material_density;
     props.thickness = _thickness;
+    props.layer_properties = getSurfaceProperties();
     return props;
 }
 

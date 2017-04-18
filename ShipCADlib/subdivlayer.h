@@ -49,18 +49,8 @@ class SubdivisionControlFace;
 class Viewport;
 class FileBuffer;
 class DevelopedPatch;
+struct LayerProperties;
     
-//////////////////////////////////////////////////////////////////////////////////////
-
-struct LayerProperties
-{
-    float surface_area;
-    float weight;
-    QVector3D surface_center_of_gravity;
-    LayerProperties() : surface_area(0), weight(0) 
-        {}
-};
-
 //////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief add SubdivisionControlFaces can be assigned to a layer
@@ -84,12 +74,10 @@ public:
     bool calculateIntersectionPoints(SubdivisionLayer* layer);
     virtual void clear();
     void assignProperties(SubdivisionLayer* source);
-    void moveDown();
-    void moveUp();
 
     void extents(QVector3D& min, QVector3D& max);
     void unroll(PointerVector<DevelopedPatch>& destination);
-    LayerProperties getSurfaceProperties();
+    LayerProperties getSurfaceProperties() const;
 
     // getters/setters
     bool isVisible() const
@@ -167,7 +155,7 @@ protected:
     void processTriangle(const QVector3D& p1,
                          const QVector3D& p2,
                          const QVector3D& p3,
-                         LayerProperties& props);
+                         LayerProperties& props) const;
     // used in unroll
     void findAttachedFaces(std::vector<SubdivisionControlFace*>& list,
                            SubdivisionControlFace* face,

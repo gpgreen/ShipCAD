@@ -23,17 +23,18 @@
 #include "ui_layerdialog.h"
 #include "shipcadlib.h"
 #include "colorview.h"
+#include "utility.h"
 
 using namespace ShipCAD;
 using namespace std;
 
 LayerDialog::LayerDialog(QWidget *parent) :
-    QDialog(parent), _initializing(false), _current(0),
+    QDialog(parent), _current(0),
     ui(new Ui::LayerDialog), _data(nullptr),
     _newToolButton(nullptr), _removeEmptyToolButton(nullptr),
     _moveUpToolButton(nullptr), _moveDownToolButton(nullptr),
     _colorAction(nullptr), _newLayerAction(nullptr), _deleteEmptyAction(nullptr),
-    _colorView(nullptr)
+    _moveUpAction(nullptr), _moveDownAction(nullptr), _colorView(nullptr)
 {
     ui->setupUi(this);
     createToolButtons();
@@ -104,25 +105,25 @@ void LayerDialog::createToolButtons()
     connect(_deleteEmptyAction, SIGNAL(triggered()), SIGNAL(deleteEmptyLayer()));
 
     _moveUpToolButton = new QToolButton(this);
-    QAction* upAction = new QAction(tr("Move layer up in list"), this);
-    _moveUpToolButton->setDefaultAction(upAction);
+    _moveUpAction = new QAction(tr("Move layer up in list"), this);
+    _moveUpToolButton->setDefaultAction(_moveUpAction);
     _moveUpToolButton->setArrowType(Qt::UpArrow);
     ui->toolBarHorizontalLayout->addWidget(_moveUpToolButton);
+    connect(_moveUpAction, SIGNAL(triggered()), SLOT(moveUp()));
 
     _moveDownToolButton = new QToolButton(this);
-    QAction* dnAction = new QAction(tr("Move layer down in list"), this);
-    _moveDownToolButton->setDefaultAction(dnAction);
+    _moveDownAction = new QAction(tr("Move layer down in list"), this);
+    _moveDownToolButton->setDefaultAction(_moveDownAction);
     _moveDownToolButton->setArrowType(Qt::DownArrow);
     ui->toolBarHorizontalLayout->addWidget(_moveDownToolButton);
+    connect(_moveDownAction, SIGNAL(triggered()), SLOT(moveDown()));
 
     ui->toolBarHorizontalLayout->addStretch(1);
 }
 
 void LayerDialog::initialize(ShipCAD::LayerDialogData* data, bool delete_data)
 {
-    // set initializing flag, so we can disable signals and slots
-    // from the dialog
-    _initializing = true;
+    QSignalBlocker block(ui->layerListWidget);
     if (delete_data)
         delete _data;
     _data = data;
@@ -134,8 +135,17 @@ void LayerDialog::initialize(ShipCAD::LayerDialogData* data, bool delete_data)
             _current = i;
     }
     ui->layerListWidget->setCurrentRow(_current);
-    _initializing = false;
     updateState();
+}
+
+void LayerDialog::updateLayerList()
+{
+    QSignalBlocker block(ui->layerListWidget);
+    ui->layerListWidget->clear();
+    for (size_t i=0; i<_data->layers.size(); i++) {
+        ui->layerListWidget->addItem(_data->layers[i].name);
+    }
+    ui->layerListWidget->setCurrentRow(_current);
 }
 
 void LayerDialog::updateState()
@@ -152,12 +162,24 @@ void LayerDialog::updateState()
     ui->alphaLineEdit->setText(QString("%1").arg(cprops.alpha));
     _colorView->setColor(cprops.color);
     _colorView->update();
+    if (_current == 0)
+        _moveUpAction->setEnabled(false);
+    else
+        _moveUpAction->setEnabled(true);
+    if (_current == _data->layers.size() - 1)
+        _moveDownAction->setEnabled(false);
+    else
+        _moveDownAction->setEnabled(true);
+    ui->areaLabel->setText(QString(tr("Area %1 [m2]").arg(truncate(cprops.layer_properties.surface_area, 3))));
+    ui->weightLabel->setText(QString(tr("Weight %1 [tons]").arg(truncate(cprops.layer_properties.weight, 3))));
+    ui->cogLabel->setText(QString(tr("Center of gravity %1,%2,%3 [m]")
+                                  .arg(truncate(cprops.layer_properties.surface_center_of_gravity.x(), 3))
+                                  .arg(truncate(cprops.layer_properties.surface_center_of_gravity.y(), 3))
+                                  .arg(truncate(cprops.layer_properties.surface_center_of_gravity.z(), 3))));
 }
 
 void LayerDialog::listRowChanged(int index)
 {
-    if (_initializing)
-        return;
     _current = index;
     _data->active = _data->layers[_current].data;
     updateState();
@@ -257,4 +279,36 @@ void LayerDialog::selectColor()
         cprops.color = cdata.chosen;
         emit layerColorChanged(cprops.color);
     }
+}
+
+void LayerDialog::moveUp()
+{
+    vector<LayerPropertiesForDialog>::iterator i = _data->layers.begin();
+    i += _current;
+    vector<LayerPropertiesForDialog>::iterator j = i;
+    --i;
+    j = _data->layers.insert(i, *j);
+    i = j;
+    ++j; ++j;
+    _data->layers.erase(j);
+    --_current;
+    updateLayerList();
+    //updateState();
+    emit reorderLayerList(_data);
+}
+
+void LayerDialog::moveDown()
+{
+    vector<LayerPropertiesForDialog>::iterator i = _data->layers.begin();
+    i += _current;
+    vector<LayerPropertiesForDialog>::iterator j = i;
+    ++i; ++i;
+    j = _data->layers.insert(i, *j);
+    i = j;
+    --j; --j;
+    _data->layers.erase(j);
+    ++_current;
+    updateLayerList();
+    //updateState();
+    emit reorderLayerList(_data);
 }

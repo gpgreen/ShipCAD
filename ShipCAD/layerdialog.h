@@ -47,6 +47,7 @@ signals:
     void layerColorChanged(const QColor& color);
     void newLayer();
     void deleteEmptyLayer();
+    void reorderLayerList(ShipCAD::LayerDialogData* data);
 
 public slots:
 
@@ -61,6 +62,8 @@ public slots:
     void devBoxChanged(int state);
     void showLinesBoxChanged(int state);
     void selectColor();
+    void moveUp();
+    void moveDown();
     /*! \brief update state of ui after change
      */
     void updateState();
@@ -78,9 +81,11 @@ protected:
     /*! \brief called before dialog is closed
      */
     virtual void closeEvent(QCloseEvent* event);
+    /*! \brief update the layer list widget from layer list
+     */
+    void updateLayerList();
 
 private:
-    bool _initializing;
     size_t _current;
     Ui::LayerDialog *ui;
     ShipCAD::LayerDialogData* _data;
@@ -91,6 +96,8 @@ private:
     QAction* _colorAction;
     QAction* _newLayerAction;
     QAction* _deleteEmptyAction;
+    QAction* _moveUpAction;
+    QAction* _moveDownAction;
     ColorView* _colorView;
 };
 

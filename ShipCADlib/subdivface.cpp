@@ -153,6 +153,13 @@ SubdivisionPoint* SubdivisionFace::getPoint(size_t index)
     throw range_error("index not in range SubdivisionFace::getPoint");
 }
 
+SubdivisionPoint* SubdivisionFace::getLastPoint()
+{
+    if (_points.size() == 0)
+        throw range_error("no last point for SubdivisionFace::getLastPoint");
+    return _points.back();
+}
+
 void SubdivisionFace::addPoint(SubdivisionPoint *point)
 {
     _points.push_back(point);
@@ -434,7 +441,8 @@ SubdivisionControlFace* SubdivisionControlFace::construct(SubdivisionSurface* ow
 }
 
 SubdivisionControlFace::SubdivisionControlFace(SubdivisionSurface *owner)
-    : SubdivisionFace(owner), _layer(0), _min(ZERO), _max(ZERO)
+    : SubdivisionFace(owner), _layer(0), _min(ZERO), _max(ZERO),
+      _vertices1(0), _vertices2(0)
 {
 	// does nothing
 }
@@ -656,6 +664,12 @@ void SubdivisionControlFace::drawZebraFaces(Viewport& vp, CurveFaceShader* shade
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
     QVector<QVector3D> normals;
+    // reserve the size of the lists to save memory allocations
+    if (_vertices1 != 0) {
+        vertices.reserve(_vertices1);
+        colors.reserve(_vertices1);
+        normals.reserve(_vertices1);
+    }
     for (size_t i=0; i<_children.size(); ++i) {
         for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
             SubdivisionPoint* sp1 = _children[i]->getPoint(0);
@@ -693,8 +707,10 @@ void SubdivisionControlFace::drawZebraFaces(Viewport& vp, CurveFaceShader* shade
             }
         }
     }
-    if (vertices.size() > 0)
+    if (vertices.size() > 0) {
         shader->renderMesh(vertices, colors, normals);
+        _vertices1 = vertices.size();
+    }
 }
 
 // FreeGeometry.pas:11995
@@ -705,6 +721,15 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
     QVector<QVector3D> normals;
     QVector<QVector3D> vertices_underwater;
     QVector<QVector3D> normals_underwater;
+    // reserve the size of the lists to save memory allocations
+    if (_vertices1 != 0) {
+        vertices.reserve(_vertices1);
+        normals.reserve(_vertices1);
+    }
+    if (_vertices2 != 0) {
+        vertices_underwater.reserve(_vertices2);
+        normals_underwater.reserve(_vertices2);
+    }
 
     if (_owner->shadeUnderWater() && vp.getViewportMode() == vmShade
             && getLayer()->useInHydrostatics()) {
@@ -811,11 +836,15 @@ void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
     }
         
     // render above the waterline
-    if (vertices.size() > 0)
+    if (vertices.size() > 0) {
         faceshader->renderMesh(getColor(), vertices, normals);
+        _vertices1 = vertices.size();
+    }
     // render below the waterline
-    if (vertices_underwater.size() > 0)
+    if (vertices_underwater.size() > 0) {
         faceshader->renderMesh(_owner->getUnderWaterColor(), vertices_underwater, normals_underwater);
+        _vertices2 = vertices_underwater.size();
+    }
 }
 
 // developable surface shading
@@ -825,6 +854,12 @@ void SubdivisionControlFace::drawDevelopableFaces(CurveFaceShader* faceshader)
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
     QVector<QVector3D> normals;
+    // reserve the size of the lists to save memory allocations
+    if (_vertices1 != 0) {
+        vertices.reserve(_vertices1);
+        colors.reserve(_vertices1);
+        normals.reserve(_vertices1);
+    }
 
     QVector3D low(0,1.0,0);
     QVector3D hi(1.0,0,0);
@@ -852,8 +887,10 @@ void SubdivisionControlFace::drawDevelopableFaces(CurveFaceShader* faceshader)
             }
         }
     }
-    if (vertices.size() > 0)
+    if (vertices.size() > 0) {
         faceshader->renderMesh(vertices, colors, normals);
+        _vertices1 = vertices.size();
+    }
 }
 
 float Fragment(float curvature, float mincurvature, float maxcurvature)
@@ -879,6 +916,12 @@ void SubdivisionControlFace::drawCurvatureFaces(CurveFaceShader* shader, float M
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
     QVector<QVector3D> normals;
+    // reserve the size of the lists to save memory allocations
+    if (_vertices1 != 0) {
+        vertices.reserve(_vertices1);
+        colors.reserve(_vertices1);
+        normals.reserve(_vertices1);
+    }
 
     for (size_t i=0; i<_children.size(); ++i) {
         for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
@@ -910,8 +953,10 @@ void SubdivisionControlFace::drawCurvatureFaces(CurveFaceShader* shader, float M
             }
         }
     }
-    if (vertices.size() > 0)
+    if (vertices.size() > 0) {
         shader->renderMesh(vertices, colors, normals);
+        _vertices1 = vertices.size();
+    }
 }
 
 void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)

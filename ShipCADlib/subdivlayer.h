@@ -71,6 +71,7 @@ public:
     size_t numberOfFaces() const
         { return _patches.size(); }
     SubdivisionControlFace* getFace(size_t index);
+    const SubdivisionControlFace* getFace(size_t index) const;
     bool calculateIntersectionPoints(SubdivisionLayer* layer);
     virtual void clear();
     void assignProperties(SubdivisionLayer* source);

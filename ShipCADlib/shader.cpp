@@ -156,6 +156,12 @@ void LineShader::renderLines(QVector<QVector3D>& vertices, QColor lineColor)
     _program->disableAttributeArray(posAttr);
 }
 
+QVector<QVector3D>& LineShader::getVertexBuffer()
+{
+    _vertices.clear();
+    return _vertices;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 static const char* MonoShaderVertexSource =

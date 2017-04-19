@@ -424,7 +424,7 @@ void MainWindow::showErrDialog(const QString& msg)
 void MainWindow::showQuestionDialog(const QString& msg, bool& ok)
 {
     QMessageBox::StandardButton btn = QMessageBox::question(this, "ShipCAD", msg);
-    if (btn == QMessageBox::StandardButton::Ok)
+    if (btn == QMessageBox::StandardButton::Yes)
         ok = true;
     else
         ok = false;
@@ -893,6 +893,7 @@ void MainWindow::enableActions()
     size_t nbuttocks = model->getButtocks().size();
     size_t ndiagonals = model->getDiagonals().size();
     size_t nmarkers = model->numberOfMarkers();
+    size_t nflowlines = model->numberOfFlowlines();
     
     // file actions
     ui->actionSave_As->setEnabled(ncpoints > 0 || model->isFileChanged() || model->isFilenameSet());
@@ -977,10 +978,10 @@ void MainWindow::enableActions()
     ui->actionShowDiagonals->setEnabled(ndiagonals > 0);
     ui->actionShowHydrostatic_features->setEnabled(
         ncfaces > 2 && model->getProjectSettings().isMainParticularsSet());
-    ui->actionShowFlowlines->setEnabled(false);
+    ui->actionShowFlowlines->setEnabled(nflowlines > 0);
     ui->actionShowNormals->setEnabled(surf->numberOfSelectedControlFaces() > 0);
     ui->actionShowCurvature->setEnabled(nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0);
-    ui->actionShowMarkers->setEnabled(false);
+    ui->actionShowMarkers->setEnabled(nmarkers > 0);
 
     // selection actions
     ui->actionSelect_all->setEnabled(true);
@@ -1057,10 +1058,12 @@ void MainWindow::updateVisibilityActions()
     ui->actionShowDiagonals->setChecked(_controller->getModel()->getDiagonals().size() > 0
                                         && vis.isShowDiagonals());
     ui->actionShowHydrostatic_features->setChecked(vis.isShowHydrostaticData());
-    ui->actionShowFlowlines->setChecked(vis.isShowFlowlines());
+    ui->actionShowFlowlines->setChecked(_controller->getModel()->numberOfFlowlines() > 0
+                                        && vis.isShowFlowlines());
     ui->actionShowNormals->setChecked(vis.isShowNormals());
     ui->actionShowCurvature->setChecked(vis.isShowCurvature());
-    ui->actionShowMarkers->setChecked(vis.isShowMarkers());
+    ui->actionShowMarkers->setChecked(_controller->getModel()->numberOfMarkers() > 0 &&
+                                      vis.isShowMarkers());
 
 //    ui->actionShade_Underwater->setChecked(s->shadeUnderWater());
     emit viewportRender();

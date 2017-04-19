@@ -59,7 +59,7 @@ void Flowline::clear()
     _flowline->clear();
 }
 
-void Flowline::draw(Viewport& vp, LineShader* lineshader)
+void Flowline::draw(Viewport& /*vp*/, LineShader* /*lineshader*/)
 {
     // TODO
 }
@@ -83,7 +83,7 @@ bool Flowline::isVisible() const
 
 bool Flowline::isSelected() const
 {
-    return _owner->isSelectedFlowline(this);
+    return _owner->isSelectedFlowline(const_cast<Flowline*>(this));
 }
 
 void Flowline::setSelected(bool set)

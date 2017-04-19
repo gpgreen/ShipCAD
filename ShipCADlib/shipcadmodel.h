@@ -32,6 +32,7 @@
 
 #include <vector>
 #include <deque>
+#include <set>
 #include <QtCore>
 #include <QtGui>
 #include "shipcadlib.h"
@@ -65,7 +66,10 @@ class ShipCADModel : public QObject
 public:
 
     explicit ShipCADModel();
-    ~ShipCADModel();
+    ~ShipCADModel() {}
+
+    SubdivisionSurface* getSurface() {return &_surface;}
+    const SubdivisionSurface* getSurface() const {return &_surface;}
 
     Visibility& getVisibility() {return _vis;}
     const Visibility& getVisibility() const {return _vis;}
@@ -86,11 +90,13 @@ public:
     
     /*! \brief Assembles all stations and builds a 2D bodyplan
      *
+     * \param dest the spline list with assembled stations
      * \param close_at_deck
      */
-    void buildValidFrameTable(bool close_at_deck);
+    void buildValidFrameTable(SplineVector& dest, bool close_at_deck);
+
     // getBackgroundImage()
-    bool isBuild() {return _surface.isBuild();}
+    bool isBuild() const {return _surface.isBuild();}
     void setBuild(bool set);
 
     /*! \brief scale the entire model and all associated data such as sttions
@@ -135,14 +141,14 @@ public:
      *
      * \return precision of model
      */
-    precision_t getPrecision() {return _precision;}
+    precision_t getPrecision() const {return _precision;}
     /*! \brief set precision of model
      *
      * \param precision new precision for model
      */
     void setPrecision(precision_t precision);
 
-    version_t getFileVersion() {return _file_version;}
+    version_t getFileVersion() const {return _file_version;}
     void setFileVersion(version_t v);
 
     IntersectionVector& getStations() {return _stations;}
@@ -150,14 +156,14 @@ public:
     IntersectionVector& getButtocks() {return _buttocks;}
     IntersectionVector& getDiagonals() {return _diagonals;}
     
-	edit_mode_t getEditMode() {return _edit_mode;}
+	edit_mode_t getEditMode() const {return _edit_mode;}
 	void setEditMode(edit_mode_t mode);
 
     /*! \brief count the number of currently selected items
      *
      * \return number of selected items
      */
-    size_t countSelectedItems();
+    size_t countSelectedItems() const;
 
     /*! \brief clear all selected items
      */
@@ -167,7 +173,7 @@ public:
 	 *
 	 * \return the file name
 	 */
-    QString getFilename();
+    QString getFilename() const;
 	/*! \brief set the name of the file
 	 *
 	 * \param name name of the file
@@ -177,7 +183,7 @@ public:
 	 *
 	 * \return true if filename has been set
 	 */
-    bool isFilenameSet()
+    bool isFilenameSet() const
         {return _filename_set;}
 	/*! \brief set flag for filename set
 	 *
@@ -188,19 +194,15 @@ public:
 	
     HydrostaticCalcVector& getHydrostaticCalculations() {return _calculations;}
 
-    SubdivisionLayer* getActiveLayer() {return _surface.getActiveLayer();}
-    size_t numberOfLayers() {return _surface.numberOfLayers();}
-    SubdivisionLayer* getLayer(size_t index) {return _surface.getLayer(index);}
-
-    size_t numberOfLockedPoints();
-
     // marker
     MarkerVector& getMarkers() {return _markers;}
     size_t numberOfMarkers() const {return _markers.size();}
-    bool isSelectedMarker(Marker* mark);
+    Marker* addMarker();
+    bool isSelectedMarker(Marker* mark) const;
     void setSelectedMarker(Marker* mark);
     void removeSelectedMarker(Marker* mark);
-
+    void deleteMarker(Marker* mark);
+    
     // flowlines
     Flowline* getFlowline(size_t index) {return _flowlines.get(index);}
     size_t numberOfFlowlines() const {return _flowlines.size();}
@@ -209,32 +211,33 @@ public:
      * \param flow flowline to check
      * \return true if flowline selected
      */
-    bool isSelectedFlowline(const Flowline* flow) const;
+    bool isSelectedFlowline(Flowline* flow) const;
     /*! \brief set a flowline as selected
      *
      * \param flow set this flowline as selected
      */
-    void setSelectedFlowline(const Flowline* flow);
+    void setSelectedFlowline(Flowline* flow);
     /*! \brief deselect a flowline
      *
      * \param flow deselect this flowline
      */
-    void removeSelectedFlowline(const Flowline* flow);
-    
-
-    SubdivisionSurface* getSurface() {return &_surface;}
-    const SubdivisionSurface* getSurface() const {return &_surface;}
+    void removeSelectedFlowline(Flowline* flow);
+    /*! \brief delete a flowline from the model
+     *
+     * \param flow the flowline to delete from the model
+     */
+    void deleteFlowline(Flowline* flow);
 
 	/*! \brief file changed flag
 	 *
 	 * \return true if file changed
 	 */
-	bool isFileChanged() {return _file_changed;}	
+	bool isFileChanged() const {return _file_changed;}	
 	/*! \brief set file changed flag
 	 *
 	 * \param changed new value for flag
 	 */
-	void setFileChanged(bool changed);
+	void setFileChanged(bool changed) { _file_changed=changed;}
 
 	// undo
 	/*! \brief create an undo object
@@ -261,20 +264,28 @@ public:
 	 *
 	 * \return memory used in mb
 	 */
-	size_t getUndoMemory();
+	size_t getUndoMemory() const;
 
     bool canUndo() const;
     bool canRedo() const;
+    void clearUndo();
     
     /*! \brief get the lowest underwater point of hull
 	 *
      * \return lowest point of hull
 	 */
-	float findLowestHydrostaticsPoint();
+	float findLowestHydrostaticsPoint() const;
 	
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);
-    void savePart(std::vector<SubdivisionFace*> faces);
+    /*! \brief save selected faces as a part file
+     *
+     * \param filename string stored in file as the part name
+     * \param buffer destination of the part data
+     * \param faces the faces to store as the part
+     */
+    void savePart(const QString& filename, FileBuffer& buffer,
+                  std::vector<SubdivisionControlFace*>& faces);
 
     void rebuildModel(bool redo_intersections);
 
@@ -285,7 +296,6 @@ public:
     void deleteSelected();
     
 	void clear();
-    void clearUndo();
 
     /*! \brief find the bounding box of the model
      *
@@ -311,6 +321,10 @@ protected:
 
 private:
 
+    // define away copy constructor and assignment operator
+    ShipCADModel(const ShipCADModel&);
+    ShipCADModel& operator=(const ShipCADModel&);
+    
     std::vector<Viewport*> _viewports;
     precision_t _precision;
     version_t _file_version;
@@ -341,8 +355,8 @@ private:
 	size_t _undo_pos;
 	size_t _prev_undo_pos;
 	std::deque<UndoObject*> _undo_list;
-    std::vector<Marker*> _selected_markers;
-    std::vector<const Flowline*> _selected_flowlines;
+    std::set<Marker*> _selected_markers;
+    std::set<Flowline*> _selected_flowlines;
     FlowlineVector _flowlines;
     BackgroundImageVector _background_images;
 };

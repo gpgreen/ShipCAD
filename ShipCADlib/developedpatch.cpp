@@ -187,7 +187,7 @@ QVector3D DevelopedPatch::getMirrorPoint(size_t index)
 }
 
 // FreeGeometry.pas:5548
-void DevelopedPatch::draw(Viewport& vp, LineShader* lineshader)
+void DevelopedPatch::draw(Viewport& /*vp*/, LineShader* /*lineshader*/)
 {
     // TODO
 }

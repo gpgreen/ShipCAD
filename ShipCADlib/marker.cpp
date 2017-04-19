@@ -69,7 +69,9 @@ void Marker::draw(Viewport& vp, LineShader* lineshader)
     else
         setColor(_owner->getPreferences().getMarkerColor());
     setFragments(250);
-    QVector<QVector3D> vertices;
+
+    QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
+
     QVector3D p3d;
     if (vp.getViewportType() == fvBodyplan && _owner->getVisibility().getModelView() != mvBoth) {
 
@@ -150,9 +152,9 @@ void Marker::draw(Viewport& vp, LineShader* lineshader)
     }
 }
 
-bool Marker::isSelected()
+bool Marker::isSelected() const
 {
-    return _owner->isSelectedMarker(this);
+    return _owner->isSelectedMarker(const_cast<Marker*>(this));
 }
 
 void Marker::setSelected(bool set)

@@ -332,7 +332,9 @@ void SubdivisionEdge::draw(bool draw_mirror, Viewport& vp, LineShader* lineshade
 {
     QVector3D p1 = startPoint()->getCoordinate();
     QVector3D p2 = endPoint()->getCoordinate();
-    QVector<QVector3D> vertices;
+
+    QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
+
     if (!draw_mirror && vp.getViewportType() == fvBodyplan) {
         float mfl = _owner->getMainframeLocation();
         if ((p1.x() < mfl && p2.x() > mfl) || (p1.x() > mfl && p2.x() < mfl)) {

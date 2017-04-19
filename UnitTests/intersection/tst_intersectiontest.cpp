@@ -58,35 +58,35 @@ IntersectionTest::IntersectionTest()
     face_points.push_back(p4);
     face_points.push_back(p3);
     face_points.push_back(p2);
-    SubdivisionControlFace* f1 = s->addControlFace(face_points);
+    s->addControlFace(face_points);
 
     face_points.clear();
     face_points.push_back(p1);
     face_points.push_back(p2);
     face_points.push_back(p6);
     face_points.push_back(p5);
-    SubdivisionControlFace* f2 = s->addControlFace(face_points);
+    s->addControlFace(face_points);
 
     face_points.clear();
     face_points.push_back(p2);
     face_points.push_back(p3);
     face_points.push_back(p7);
     face_points.push_back(p6);
-    SubdivisionControlFace* f3 = s->addControlFace(face_points);
+    s->addControlFace(face_points);
 
     face_points.clear();
     face_points.push_back(p3);
     face_points.push_back(p4);
     face_points.push_back(p8);
     face_points.push_back(p7);
-    SubdivisionControlFace* f4 = s->addControlFace(face_points);
+    s->addControlFace(face_points);
 
     face_points.clear();
     face_points.push_back(p4);
     face_points.push_back(p1);
     face_points.push_back(p5);
     face_points.push_back(p8);
-    SubdivisionControlFace* f5 = s->addControlFace(face_points);
+    s->addControlFace(face_points);
 
     // make all edges, creased
     for (size_t i=0; i<s->numberOfControlEdges(); i++) {

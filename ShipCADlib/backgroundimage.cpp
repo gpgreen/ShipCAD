@@ -81,7 +81,7 @@ void BackgroundImage::saveBinary(FileBuffer& dest)
     dest.add(_image);
 }
 
-void BackgroundImage::updateData(Viewport& vp)
+void BackgroundImage::updateData(Viewport& /*vp*/)
 {
     // TODO
 }

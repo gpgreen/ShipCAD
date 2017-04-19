@@ -61,7 +61,7 @@ public:
 
     bool isVisible() const {return _visible;}
     void setVisible(bool set) {_visible=set;}
-    bool isSelected();
+    bool isSelected() const;
 	void setSelected(bool set);
 
     void loadBinary(FileBuffer& source);

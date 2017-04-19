@@ -1211,6 +1211,13 @@ SubdivisionLayer* SubdivisionSurface::getLayer(size_t index)
     throw range_error("bad index in SubdivisionSurface::getLayer");
 }
 
+const SubdivisionLayer* SubdivisionSurface::getLayer(size_t index) const
+{
+    if (index < _layers.size())
+        return _layers[index];
+    throw range_error("bad index in SubdivisionSurface::getLayer");
+}
+
 bool SubdivisionSurface::hasLayer(SubdivisionLayer *layer)
 {
     return find(_layers.begin(), _layers.end(), layer)

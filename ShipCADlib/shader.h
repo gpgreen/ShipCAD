@@ -85,6 +85,11 @@ public:
 
     void renderPoints(QVector<QVector3D>& points, QColor color);
     void renderLines(QVector<QVector3D>& vertices, QColor lineColor);
+
+    QVector<QVector3D>& getVertexBuffer();
+
+private:
+    QVector<QVector3D> _vertices;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

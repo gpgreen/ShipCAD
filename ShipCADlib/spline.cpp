@@ -520,7 +520,7 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
     QVector3D normal;
     vector<QVector3D> parray1;
     vector<QVector3D> parray2;
-    QVector<QVector3D> vertices;
+    QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
 
     for (size_t i=0; i<_fragments; ++i)
         parray1.push_back(value(i/static_cast<float>(_fragments)));
@@ -577,7 +577,7 @@ void Spline::drawStarboard(Viewport& /*vp*/, LineShader* lineshader)
     QVector3D normal;
     vector<QVector3D> parray1;
     vector<QVector3D> parray2;
-    QVector<QVector3D> vertices;
+    QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
 
     for (size_t i=0; i<_fragments; ++i) {
         p1 = value(i / static_cast<float>(_fragments));

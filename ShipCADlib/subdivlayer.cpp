@@ -81,7 +81,15 @@ QString SubdivisionLayer::getName() const
     else
         return _desc;
 }
+
 SubdivisionControlFace* SubdivisionLayer::getFace(size_t index)
+{
+    if (index < _patches.size())
+        return _patches[index];
+    throw range_error("index out of range in SubdivisionLayer::getFace");
+}
+
+const SubdivisionControlFace* SubdivisionLayer::getFace(size_t index) const
 {
     if (index < _patches.size())
         return _patches[index];

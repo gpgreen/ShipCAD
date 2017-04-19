@@ -40,6 +40,7 @@
 #include "flowline.h"
 #include "viewport.h"
 #include "subdivpoint.h"
+#include "subdivedge.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -55,11 +56,6 @@ ShipCADModel::ShipCADModel()
 {
 	memset(&_delft_resistance, 0, sizeof(DelftSeriesResistance));
 	memset(&_kaper_resistance, 0, sizeof(KAPERResistance));
-}
-
-ShipCADModel::~ShipCADModel()
-{
-    // does nothing
 }
 
 void ShipCADModel::clear()
@@ -86,24 +82,61 @@ void ShipCADModel::clear()
     _background_images.clear();
 }
 
-void ShipCADModel::setFilename(const QString& name)
+// FreeShipUnit.pas:11564
+void ShipCADModel::buildValidFrameTable(SplineVector& dest, bool close_at_deck)
 {
-    QString tmp(name);
-    if (tmp.length() == 0) {
-        tmp = ShipCADModel::tr("New model");
+    float min = 0;
+    IntersectionVector& stations = getStations();
+    for (size_t i=0; i<stations.size(); ++i) {
+        Intersection* intersection = stations.get(i);
+        if (!intersection->isBuild())
+            intersection->rebuild();
+        SplineVector tmp(false);
+        SplineVector& splines = intersection->getSplines();
+        for (size_t j=0; j<splines.size(); j++) {
+            Spline* spline = new Spline(*(splines.get(j)));
+            // quick check to determine if the frame runs from bottom to top
+            if (spline->value(0.0).z() > spline->value(1.0).z()) {
+                // if not reverse the points
+                spline->invert_direction();
+            }
+            tmp.add(spline);
+        }
+        // take all segments and join into one
+        if (tmp.size() > 1)
+            JoinSplineSegments(0.01, true, tmp);
+        for (size_t j=0; j<tmp.size(); j++) {
+            Spline* spline = tmp.get(j);
+            if (close_at_deck) {
+                if (spline->getLastPoint().y() != 0.0) {
+                    QVector3D p = spline->getLastPoint();
+                    p.setY(0.0);
+                    spline->add(p);
+                    spline->setKnuckle(spline->numberOfPoints() - 2, true);
+                }
+            }
+            dest.add(spline);
+            if (i == 0)
+                min = spline->getMin().z();
+            else if (spline->getMin().z() < min)
+                min = spline->getMin().z();
+        }
     }
-    tmp = ChangeFileExt(tmp, kFileExtension);
-    if (_filename != tmp) {
-        _filename = tmp;
+    // now shift all stations up or down so that the lowest point
+    // of all stations is on the baseline z=0.0
+    if (min != 0.0) {
+        for (size_t i=0; i<dest.size(); i++) {
+            Spline* spline = dest.get(i);
+            for (size_t j=0; j<spline->numberOfPoints(); j++) {
+                QVector3D p = spline->getPoint(j);
+                p.setZ(p.z() - min);
+                spline->setPoint(j, p);
+            }
+        }
     }
-    _filename_set = true;
 }
 
-void ShipCADModel::buildValidFrameTable(bool /*close_at_deck*/)
-{
-    // TODO
-}
-
+// FreeShipUnit.pas:12648
 void ShipCADModel::extents(QVector3D& min, QVector3D& max)
 {
     if (_surface.numberOfControlFaces()) {
@@ -113,10 +146,21 @@ void ShipCADModel::extents(QVector3D& min, QVector3D& max)
         max = QVector3D(-1e6, -1e6, -1e6);
         _surface.extents(min, max);
         if (_vis.isShowMarkers()) {
-            // TODO extents on markers
+            MarkerVectorIterator i = _markers.begin();
+            for (; i!=_markers.end(); ++i)
+                (*i)->extents(min, max);
         }
     } else {
-        // TODO iterate on control points
+        if (_surface.numberOfControlPoints() > 1) {
+            SubdivisionControlPoint* p = _surface.getControlPoint(0);
+            min = p->getCoordinate();
+            max = p->getCoordinate();
+            for (size_t i=1; i<_surface.numberOfControlPoints(); i++)
+                MinMax(_surface.getControlPoint(i)->getCoordinate(), min, max);
+        } else {
+            min = QVector3D(-1, -1, -1);
+            max = QVector3D(1, 1, 1);
+        }
     }
 }
 
@@ -134,7 +178,8 @@ void ShipCADModel::setBuild(bool set)
             getDiagonals().get(i)->setBuild(false);
         for (size_t i=0; i<getHydrostaticCalculations().size(); i++)
             getHydrostaticCalculations().get(i)->setCalculated(false);
-        // TODO flowlines
+        for (size_t i=0; i<_flowlines.size(); i++)
+            _flowlines.get(i)->setBuild(false);
     }
 }
 
@@ -186,10 +231,10 @@ void ShipCADModel::setEditMode(edit_mode_t mode)
 	}
 }
 
-size_t ShipCADModel::countSelectedItems()
+size_t ShipCADModel::countSelectedItems() const
 {
     size_t count = 0;
-    SubdivisionSurface* s = getSurface();
+    const SubdivisionSurface* s = getSurface();
     count += s->numberOfSelectedControlCurves()
             + s->numberOfSelectedControlEdges()
             + s->numberOfSelectedControlFaces()
@@ -206,19 +251,25 @@ void ShipCADModel::clearSelectedItems()
     _selected_flowlines.clear();
 }
 
-void ShipCADModel::setFileChanged(bool set)
-{
-	if (set != _file_changed) {
-		_file_changed = set;
-	}
-}
-
-QString ShipCADModel::getFilename()
+QString ShipCADModel::getFilename() const
 {
 	if (_filename == "") {
         return ShipCADModel::tr("New model");
 	}
 	return ChangeFileExt(_filename, kFileExtension);
+}
+
+void ShipCADModel::setFilename(const QString& name)
+{
+    QString tmp(name);
+    if (tmp.length() == 0) {
+        tmp = ShipCADModel::tr("New model");
+    }
+    tmp = ChangeFileExt(tmp, kFileExtension);
+    if (_filename != tmp) {
+        _filename = tmp;
+    }
+    _filename_set = true;
 }
 
 // FreeShipUnit.pas:4595
@@ -324,7 +375,7 @@ void ShipCADModel::acceptUndo(UndoObject* undo)
          << " mem:" << getUndoMemory() << endl;
 }
 
-size_t ShipCADModel::getUndoMemory()
+size_t ShipCADModel::getUndoMemory() const
 {
 	size_t mem_used = 0;
 	for (size_t i=0; i<_undo_list.size(); i++)
@@ -779,12 +830,12 @@ void ShipCADModel::saveBinary(FileBuffer& dest)
     }
 }
 
-float ShipCADModel::findLowestHydrostaticsPoint()
+float ShipCADModel::findLowestHydrostaticsPoint() const
 {
     float result = _surface.getMin().z();
     bool first = true;
-    for (size_t i=0; i<numberOfLayers(); i++) {
-        SubdivisionLayer* layer = getLayer(i);
+    for (size_t i=0; i<_surface.numberOfLayers(); i++) {
+        const SubdivisionLayer* layer = _surface.getLayer(i);
         if (layer->useInHydrostatics()) {
             for (size_t j=0; j<layer->numberOfFaces(); j++) {
                 if (first) {
@@ -807,7 +858,7 @@ void ShipCADModel::setFileVersion(version_t v)
     }
 }
 
-bool ShipCADModel::isSelectedMarker(Marker* mark)
+bool ShipCADModel::isSelectedMarker(Marker* mark) const
 {
     return find(_selected_markers.begin(),
                 _selected_markers.end(), mark) != _selected_markers.end();
@@ -815,44 +866,64 @@ bool ShipCADModel::isSelectedMarker(Marker* mark)
 
 void ShipCADModel::setSelectedMarker(Marker* mark)
 {
-    if (!isSelectedMarker(mark))
-        _selected_markers.push_back(mark);
+    _selected_markers.insert(mark);
 }
 
 void ShipCADModel::removeSelectedMarker(Marker* mark)
 {
-    vector<Marker*>::iterator i = find(
+    set<Marker*>::iterator i = find(
         _selected_markers.begin(),
         _selected_markers.end(), mark);
     if (i != _selected_markers.end())
         _selected_markers.erase(i);
 }
 
-bool ShipCADModel::isSelectedFlowline(const Flowline* flow) const
+Marker* ShipCADModel::addMarker()
+{
+    Marker *mark = Marker::construct(this);
+    _markers.add(mark);
+    return mark;
+}
+
+void ShipCADModel::deleteMarker(Marker* mark)
+{
+    removeSelectedMarker(mark);
+    _markers.del(mark);
+}
+
+bool ShipCADModel::isSelectedFlowline(Flowline* flow) const
 {
     return find(_selected_flowlines.begin(), _selected_flowlines.end(), flow) !=
         _selected_flowlines.end();
 }
 
-void ShipCADModel::setSelectedFlowline(const Flowline* flow)
+void ShipCADModel::setSelectedFlowline(Flowline* flow)
 {
-    if (!isSelectedFlowline(flow))
-        _selected_flowlines.push_back(flow);
+    _selected_flowlines.insert(flow);
 }
 
-void ShipCADModel::removeSelectedFlowline(const Flowline* flow)
+void ShipCADModel::removeSelectedFlowline(Flowline* flow)
 {
-    vector<const Flowline*>::iterator i = find(_selected_flowlines.begin(),
-                                               _selected_flowlines.end(),
-                                               flow);
+    set<Flowline*>::iterator i = _selected_flowlines.find(flow);
     if (i != _selected_flowlines.end())
         _selected_flowlines.erase(i);
 }
 
+void ShipCADModel::deleteFlowline(Flowline* flow)
+{
+    removeSelectedFlowline(flow);
+    _flowlines.del(flow);
+}
+
 void ShipCADModel::deleteSelected()
 {
-    // BUGBUG markers, flowlines
     getSurface()->deleteSelected();
+    set<Marker*>::iterator i = _selected_markers.begin();
+    for (; i!=_selected_markers.end(); ++i)
+        deleteMarker(*i);
+    set<Flowline*>::iterator j = _selected_flowlines.begin();
+    for(; j!=_selected_flowlines.end(); ++j)
+        deleteFlowline(*j);
 }
 
 float new_model_pts[] = {
@@ -986,4 +1057,101 @@ void ShipCADModel::newModel(unit_type_t units,
         _vis.setShowButtocks(true);
 }
 
+// FreeShipUnit.pas:13166
+void ShipCADModel::savePart(const QString& filename, FileBuffer& buffer,
+                            vector<SubdivisionControlFace*>& faces)
+{
+    set<SubdivisionLayer*> layers;
+    set<SubdivisionControlPoint*> points;
+    set<SubdivisionControlEdge*> edges;
+    set<SubdivisionControlCurve*> curves;
 
+    // extract controlpoints and controledges
+    for (vector<SubdivisionControlFace*>::iterator i=faces.begin(); i!=faces.end(); ++i) {
+        SubdivisionControlFace* face = *i;
+        layers.insert(face->getLayer());
+        SubdivisionControlPoint* p1 = dynamic_cast<SubdivisionControlPoint*>(face->getLastPoint());
+        points.insert(p1);
+        for (size_t j=0; j<face->numberOfPoints(); j++) {
+            SubdivisionControlPoint* p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
+            points.insert(p2);
+            SubdivisionControlEdge* edge = _surface.controlEdgeExists(p1, p2);
+            if (edge != nullptr)
+                edges.insert(edge);
+            p1 = p2;
+        }
+    }
+
+    // process control curves
+    for (size_t i=0; i<_surface.numberOfControlCurves(); ++i) {
+        SubdivisionControlCurve* curve = _surface.getControlCurve(i);
+        // in order to export this curve, all associated control edges must be in the edge list
+        bool addcurve = curve->numberOfControlPoints() > 1;
+        for (size_t j=1; j<curve->numberOfControlPoints(); j++) {
+            SubdivisionControlPoint* p1 = curve->getControlPoint(j-1);
+            SubdivisionControlPoint* p2 = curve->getControlPoint(j);
+            SubdivisionControlEdge* edge = _surface.controlEdgeExists(p1, p2);
+            if ((edge != nullptr && edges.find(edge) == edges.end()) || edge == nullptr)
+                addcurve = false;
+        }
+        if (addcurve)
+            curves.insert(curve);
+    }
+
+    // sort the curves
+    vector<SubdivisionControlCurve*> curvelist(curves.begin(), curves.end());
+    sort(curvelist.begin(), curvelist.end());
+    vector<SubdivisionLayer*> layerlist(layers.begin(), layers.end());
+    sort(layerlist.begin(), layerlist.end());
+
+    // write the file
+    buffer.add("FREE!ship partfile");
+    // file version
+    buffer.add(_file_version);
+    // project units
+    buffer.add(static_cast<quint32>(_settings.getUnits()));
+    // number of layers
+    buffer.add(layerlist.size());
+    // the layers
+    for (size_t i=0; i<layerlist.size(); i++)
+        layerlist[i]->saveBinary(buffer);
+    // controlpoints
+    buffer.add(points.size());
+    map<SubdivisionControlPoint*,size_t> indexer;
+    size_t k=0;
+    for (set<SubdivisionControlPoint*>::iterator itr=points.begin(); itr!=points.end(); ++itr) {
+        (*itr)->save_binary(buffer);
+        indexer.insert(make_pair((*itr), k++));
+    }
+    // save control edges
+    buffer.add(edges.size());
+    for (set<SubdivisionControlEdge*>::iterator eitr=edges.begin(); eitr!=edges.end(); ++eitr) {
+        SubdivisionControlEdge* edge = *eitr;
+        buffer.add(indexer.find(dynamic_cast<SubdivisionControlPoint*>(edge->startPoint()))->second);
+        buffer.add(indexer.find(dynamic_cast<SubdivisionControlPoint*>(edge->endPoint()))->second);
+        buffer.add(edge->isCrease());
+    }
+    // save control faces
+    buffer.add(faces.size());
+    for (vector<SubdivisionControlFace*>::iterator fitr=faces.begin(); fitr!=faces.end(); ++fitr) {
+        SubdivisionControlFace* face = *fitr;
+        buffer.add(face->numberOfPoints());
+        for (size_t j=0; j<face->numberOfPoints(); j++)
+            buffer.add(indexer.find(dynamic_cast<SubdivisionControlPoint*>(
+                                        face->getPoint(j)))->second);
+        vector<SubdivisionLayer*>::iterator l = find(layerlist.begin(), layerlist.end(),
+                                                     face->getLayer());
+        if (l == layerlist.end())
+            throw runtime_error("Didn't find layer in ShipCADModel::savePart");
+        buffer.add(static_cast<size_t>(l-layerlist.begin()));
+    }
+    // save control curves
+    buffer.add(curvelist.size());
+    for (size_t i=0; i<curvelist.size(); i++) {
+        SubdivisionControlCurve* curve = curvelist[i];
+        buffer.add(curve->numberOfControlPoints());
+        for (size_t j=0; j<curve->numberOfControlPoints(); j++)
+            buffer.add(indexer.find(curve->getControlPoint(j))->second);
+    }
+    buffer.add(ChangeFileExt(filename, ".part"));
+}

@@ -394,10 +394,6 @@ public slots:
      */
     void newLayer();
 
-    /*! \brief add a marker
-     */
-    void addMarker(Marker* marker);
-
     /*! \brief delete all markers from the model
      */
     void deleteMarkers();

@@ -1,30 +1,56 @@
 ## ShipCAD
 
+Models Ship hulls using subdivision surfaces.
+
 Port of the Free!Ship program to C++ and Qt.
 
 The original progam is located at: http://sourceforge.net/projects/freeship. It was last updated on 2013-04-19.
-The original program was written in Delphi Pascal. It was licensed as GPLv2.
 
 # Prerequisites
+* c++
 * Qt 5.7
 
 # Functionality to do:
 
+Graphics:
+  zebra shading has some artifacts
+  grids, hydrostatic, curvature display
+
+Main Window:
+  display of number of faces and points, current mouse position
+  
 Controller:
-  a lot of methods
-ShipCADModel:
-  a lot of methods
+  import/export Background Image
+  all import/export methods except native FreeShip
+  Flowlines
+  hydrostatics dialogs and displays
+  import frames
+  intersection dialogs
+  import/delete markers
+  check model
+  lackenby transformation
+  resistance dialogs and displays
+  undo/redo/undo history
+  add cylinder
+  keel and rudder wizard
+
 Spline:
-  draw doesn't do show points
+  draw doesn't show points
+
 NurbSurface:
   all methods
+
 Flowline:
   draw, rebuild
+
 Resistance:
   all methods
+
 Preferences:
   resetColors, persistence
+
 BackgroundImage:
   updateData, updateViews
+
 DevelopedPatch
   draw

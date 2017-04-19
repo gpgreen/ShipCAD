@@ -132,6 +132,11 @@ public:
 	 * \return the point at index
 	 */
     SubdivisionPoint* getPoint(size_t index);
+    /*! \brief get last point in face
+     *
+     * \return the last point in the face
+     */
+    SubdivisionPoint* getLastPoint();
 	/*! \brief Get point on center of face for subdivision
 	 *
 	 * When subdividing a face, each edge is split, and a point is put in
@@ -312,8 +317,8 @@ public:
     bool isSelected();
     bool isVisible();
     void setSelected(bool val);
-    QVector3D getMin() { return _min; }
-    QVector3D getMax() { return _max; }
+    QVector3D getMin() const { return _min; }
+    QVector3D getMax() const { return _max; }
     // iterators to beginning/ending of _children list
     std::vector<SubdivisionFace*>::iterator childrenBegin() {return _children.begin();}
     std::vector<SubdivisionFace*>::iterator childrenEnd() {return _children.end();}
@@ -353,6 +358,8 @@ protected:
     std::vector<SubdivisionFace*> _children;    /**< subdivided faces */
     std::vector<SubdivisionEdge*> _edges;       /**< subdivided internal edges */
     std::vector<SubdivisionEdge*> _control_edges;   /**< control edges (may be of SubdivisionEdge type if this face has been subdivided */
+    size_t _vertices1;           /**< number of vertices drawn to size buffers for next draw */
+    size_t _vertices2;           /**< number of vertices drawn to size buffers for next draw */
 };
 
 typedef std::vector<SubdivisionControlFace*>::iterator subdivctlface_iter;

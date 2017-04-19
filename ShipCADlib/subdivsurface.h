@@ -172,7 +172,7 @@ public:
     void deletePoint(SubdivisionPoint* pt);
 
     // SubdivisionControlPoint
-    size_t numberOfControlPoints() {return _control_points.size();}
+    size_t numberOfControlPoints() const {return _control_points.size();}
     size_t indexOfControlPoint(SubdivisionControlPoint* pt);
     bool hasControlPoint(SubdivisionControlPoint* pt);
     void removeControlPoint(SubdivisionControlPoint* pt);
@@ -187,7 +187,7 @@ public:
     void collapseControlPoint(SubdivisionControlPoint* point);
 	
     // selected SubdivisionControlPoint
-    size_t numberOfSelectedControlPoints() {return _sel_control_points.size();}
+    size_t numberOfSelectedControlPoints() const {return _sel_control_points.size();}
     bool hasSelectedControlPoint(SubdivisionControlPoint* pt);
     void setSelectedControlPoint(SubdivisionControlPoint* pt);
     void removeSelectedControlPoint(SubdivisionControlPoint* pt);
@@ -195,7 +195,7 @@ public:
         {return _sel_control_points;}
     
     // SubdivisionEdge
-    size_t numberOfEdges() {return _edges.size();}
+    size_t numberOfEdges() const {return _edges.size();}
     size_t indexOfEdge(SubdivisionEdge* edge);
     SubdivisionEdge* getEdge(size_t index);
     SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
@@ -204,7 +204,7 @@ public:
                       std::vector<std::vector<SubdivisionPoint*> >& sorted);
 
     // SubdivisionControlEdge
-    size_t numberOfControlEdges() {return _control_edges.size();}
+    size_t numberOfControlEdges() const {return _control_edges.size();}
     size_t indexOfControlEdge(SubdivisionControlEdge* edge);
     SubdivisionControlEdge* getControlEdge(size_t index);
     bool hasControlEdge(SubdivisionControlEdge* edge);
@@ -222,7 +222,7 @@ public:
 	void collapseEdge(SubdivisionControlEdge* edge);
 	
     // selected SubdivisionControlEdge
-    size_t numberOfSelectedControlEdges() {return _sel_control_edges.size();}
+    size_t numberOfSelectedControlEdges() const {return _sel_control_edges.size();}
     void setSelectedControlEdge(SubdivisionControlEdge* edge);
     void removeSelectedControlEdge(SubdivisionControlEdge* edge);
     bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
@@ -233,7 +233,7 @@ public:
     void clearFaces();
 
     // SubdivisionControlFace
-    size_t numberOfControlFaces() {return _control_faces.size();}
+    size_t numberOfControlFaces() const {return _control_faces.size();}
     size_t indexOfControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* getControlFace(size_t index);
     SubdivisionControlFace* getControlFace(SubdivisionPoint* p1,
@@ -251,14 +251,14 @@ public:
     void deleteControlFace(SubdivisionControlFace* face);
 
     // selected SubdivisionControlFace
-    size_t numberOfSelectedControlFaces() {return _sel_control_faces.size();}
+    size_t numberOfSelectedControlFaces() const {return _sel_control_faces.size();}
     void setSelectedControlFace(SubdivisionControlFace* face);
     void removeSelectedControlFace(SubdivisionControlFace* face);
     bool hasSelectedControlFace(SubdivisionControlFace* face);
     std::set<SubdivisionControlFace*>& getSelControlFaceCollection() {return _sel_control_faces;}
 
     // SubdivisionControlCurve
-    size_t numberOfControlCurves() {return _control_curves.size();}
+    size_t numberOfControlCurves() const {return _control_curves.size();}
     size_t indexOfControlCurve(SubdivisionControlCurve* curve);
     SubdivisionControlCurve* getControlCurve(size_t index);
     bool hasControlCurve(SubdivisionControlCurve* curve);
@@ -268,17 +268,18 @@ public:
     void deleteControlCurve(SubdivisionControlCurve* curve);
     
     // selected SubdivisionControlCurve
-    size_t numberOfSelectedControlCurves() {return _sel_control_curves.size();}
+    size_t numberOfSelectedControlCurves() const {return _sel_control_curves.size();}
     void setSelectedControlCurve(SubdivisionControlCurve* curve);
     void removeSelectedControlCurve(SubdivisionControlCurve* curve);
     bool hasSelectedControlCurve(SubdivisionControlCurve* curve);
     std::set<SubdivisionControlCurve*>& getSelControlCurveCollection() {return _sel_control_curves;}
 
     // SubdivisionLayer
-    size_t numberOfLayers() {return _layers.size();}
+    size_t numberOfLayers() const {return _layers.size();}
     size_t indexOfLayer(SubdivisionLayer* layer);
     SubdivisionLayer* getLayer(size_t index);
-    SubdivisionLayer* getActiveLayer() {return _active_layer;}
+    const SubdivisionLayer* getLayer(size_t index) const;
+    SubdivisionLayer* getActiveLayer() const {return _active_layer;}
     void setActiveLayer(SubdivisionLayer* layer);
     bool hasLayer(SubdivisionLayer* layer);
     void deleteLayer(SubdivisionLayer* layer);
@@ -289,6 +290,7 @@ public:
     QString getDefaultLayerName();
     size_t deleteEmptyLayers();
     std::vector<SubdivisionLayer*>& getLayers() {return _layers;}
+    const std::vector<SubdivisionLayer*>& getLayers() const {return _layers;}
     
     // getters/setters
     subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}

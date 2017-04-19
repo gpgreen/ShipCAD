@@ -262,11 +262,12 @@ void HydrostaticCalc::addData(QStringList& strings, hydrostatics_mode_t mode, QC
     } else {
         strings.push_back(getErrorString());
     }
+    SubdivisionSurface* surf = _owner->getSurface();
     if (mode == fhSingleCalculation) {
 		// check if any layers are present to show
 		size_t n = 0;
-		for (size_t i=0; i<_owner->numberOfLayers(); i++)
-            if (_owner->getLayer(i)->numberOfFaces() > 0)
+        for (size_t i=0; i<surf->numberOfLayers(); i++)
+            if (surf->getLayer(i)->numberOfFaces() > 0)
 				n++;
 		if (n > 0) {
 			strings.push_back("");
@@ -286,18 +287,18 @@ void HydrostaticCalc::addData(QStringList& strings, hydrostatics_mode_t mode, QC
 							  +vb+MakeLength(LengthStr(u),7)
 							  +vb+MakeLength(LengthStr(u),7)+" |");
 			strings.push_back("|-------------------------|--------|-----------|----------|---------|---------|---------|");
-			for (size_t i=0; i<_owner->numberOfLayers(); i++) {
-                LayerProperties p = _owner->getLayer(i)->getSurfaceProperties();
+            for (size_t i=0; i<surf->numberOfLayers(); i++) {
+                LayerProperties p = surf->getLayer(i)->getSurfaceProperties();
 				if (u == fuImperial)
 					p.weight /= (12*2240);
 				else
 					p.weight /= 1000;
-                QString str(_owner->getLayer(i)->getName());
+                QString str(surf->getLayer(i)->getName());
                 if (str.length() > 23)
                     str.truncate(23);
                 strings.push_back("| "+MakeLength(str, 23)
                                   +vb+MakeLength(p.surface_area,-1,6)
-                                  +vb+MakeLength(_owner->getLayer(i)->getThickness(),3,9)
+                                  +vb+MakeLength(surf->getLayer(i)->getThickness(),3,9)
                                   +vb+MakeLength(p.weight,3,8)
                                   +vb+MakeLength(p.surface_center_of_gravity.x(),3,7)
                                   +vb+MakeLength(p.surface_center_of_gravity.y(),3,7)
@@ -489,9 +490,10 @@ static void CalculateMinMaxData(MinMaxData& mmd, ShipCADModel* owner,
 	float min = 0;
 	float max = 0;
 	float distance;
-    for (size_t i=0; i<owner->numberOfLayers(); i++) {
-		if (owner->getLayer(i)->useInHydrostatics()) {
-			SubdivisionLayer* layer = owner->getLayer(i);
+    SubdivisionSurface* surf = owner->getSurface();
+    for (size_t i=0; i<surf->numberOfLayers(); i++) {
+        if (surf->getLayer(i)->useInHydrostatics()) {
+            SubdivisionLayer* layer = surf->getLayer(i);
 			for (size_t j=0; j<layer->numberOfFaces(); j++) {
 				SubdivisionControlFace* face = layer->getFace(j);
 				for (size_t k=0; k<face->numberOfChildren(); k++) {
@@ -763,8 +765,8 @@ struct VolumeCalc
 		bool submerged = false;
         float side1, side2, parameter;
         vector<QVector3D> points;
-        for (size_t i=0; i<hydro_calc->getOwner()->numberOfLayers(); i++) {
-            SubdivisionLayer* layer = hydro_calc->getOwner()->getLayer(i);
+        for (size_t i=0; i<hydro_calc->getOwner()->getSurface()->numberOfLayers(); i++) {
+            SubdivisionLayer* layer = hydro_calc->getOwner()->getSurface()->getLayer(i);
             if (!layer->useInHydrostatics()) continue;
             for (size_t j=0; j<layer->numberOfFaces(); j++) {
                 SubdivisionControlFace* face = layer->getFace(j);
@@ -926,8 +928,8 @@ void HydrostaticCalc::calculate()
         _owner->rebuildModel(true);
 
     // calculate overall extents of the hull alone
-    for (size_t i=0; i<_owner->numberOfLayers(); i++) {
-        SubdivisionLayer* layer = _owner->getLayer(i);
+    for (size_t i=0; i<_owner->getSurface()->numberOfLayers(); i++) {
+        SubdivisionLayer* layer = _owner->getSurface()->getLayer(i);
         if (layer->useInHydrostatics()) {
             for (size_t j=0; j<layer->numberOfFaces(); j++) {
                 SubdivisionControlFace* face = layer->getFace(j);

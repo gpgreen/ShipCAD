@@ -395,7 +395,7 @@ void Controller::newFace()
     cplist.clear();
     // add the new face
     SubdivisionControlFace* face =
-        getSurface()->addControlFace(tmp, true, getModel()->getActiveLayer());
+        getSurface()->addControlFace(tmp, true, getSurface()->getActiveLayer());
     if (face != 0) {
         uo->accept();
         getModel()->setBuild(false);
@@ -755,7 +755,7 @@ void Controller::saveFileAs(const QString& filename)
     emit modifiedModel();
 }
 
-void Controller::addFlowline(const QVector2D& source, viewport_type_t view)
+void Controller::addFlowline(const QVector2D& /*source*/, viewport_type_t /*view*/)
 {
 	// TODO
 }
@@ -785,7 +785,7 @@ void Controller::addIntersection()
 	// TODO
 }
 
-void Controller::addIntersectionToList(Intersection* inter)
+void Controller::addIntersectionToList(Intersection* /*inter*/)
 {
 	// TODO
 }
@@ -886,16 +886,24 @@ void Controller::newLayer()
     emit modifiedModel();
 }
 
-void Controller::addMarker(Marker* marker)
-{
-	// TODO
-}
-
+// FreeShipUnit.pas:9365
 void Controller::deleteMarkers()
 {
-	// TODO
+    cout << "Controller::deleteMarkers" << endl;
+    bool ok;
+    // msg 0143
+    emit displayQuestionDialog(tr("Are you sure you want to delete all the markers?"), ok);
+    if (!ok)
+        return;
+    // msg 0144
+    getModel()->createUndo(tr("delete markers"), true);
+    getModel()->getMarkers().clear();
+    getModel()->setBuild(false);
+    getModel()->setFileChanged(true);
+    emit modifiedModel();
 }
 
+// FreeShipUnit.pas:9380
 void Controller::importMarkers()
 {
 	// TODO
@@ -1402,7 +1410,7 @@ Controller::showMarkers(bool val)
 }
 
 void
-Controller::shadeUnderwater(bool val)
+Controller::shadeUnderwater(bool /*val*/)
 {
 	// TODO
 }

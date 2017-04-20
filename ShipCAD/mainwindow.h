@@ -165,6 +165,18 @@ private slots:
      */
     void saveModelAsFile();
     
+    /*! \brief action for exporting part
+     */
+    void exportPart();
+
+    /*! \brief action for loading a part
+     */
+    void importPart();
+
+    /*! \brief action for importing markers
+     */
+    void importMarkers();
+
     /*! \brief new model loaded
      */
     void modelLoaded();

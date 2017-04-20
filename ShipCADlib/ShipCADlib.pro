@@ -12,6 +12,8 @@ TARGET = ShipCADlib
 TEMPLATE = lib
 CONFIG += staticlib
 
+TRANSLATIONS = shipcadlib_es.ts
+
 SOURCES += shipcadlib.cpp \
     shipcadmodel.cpp \
     entity.cpp \

@@ -608,9 +608,27 @@ void Controller::exportGHS()
 	// TODO
 }
 
-void Controller::exportPart()
+// FreeShipUnit.pas:6215
+void Controller::exportPart(const QString& filename)
 {
-	// TODO
+    cout << "Controller::exportPart" << endl;
+
+    vector<SubdivisionControlFace*> partfaces;
+    set<SubdivisionControlFace*>& cflist = getSurface()->getSelControlFaceCollection();
+
+    // if nothing selected, use the Choose Layers dialog
+    if (cflist.size() == 0 && !showChooseLayerDialog(fsFaces))
+        return;
+
+    // use all selected control faces
+    partfaces.insert(partfaces.end(), cflist.begin(), cflist.end());
+    if (partfaces.size() == 0)
+        return;
+
+    QFile part(ChangeFileExt(filename, ".part"));
+    FileBuffer dest;
+    getModel()->savePart(filename, dest, partfaces);
+    dest.saveToFile(part);
 }
 
 void Controller::exportMichlet()
@@ -663,9 +681,40 @@ void Controller::importHull()
 	// TODO
 }
 
-void Controller::importPart()
+// FreeShipUnit.pas:7708
+void Controller::importPart(const QString& filename)
 {
-	// TODO
+    cout << "Controller::importPart" << endl;
+    QFile partfile(filename);
+    FileBuffer source;
+    bool changed = false;
+    version_t partfileversion;
+    // msg 0112
+    UndoObject* uo = getModel()->createUndo(tr("import part"), false);
+    try {
+        source.loadFromFile(partfile);
+        changed = getModel()->loadPart(source, partfileversion);
+    } catch(...) {
+        // what do we do?
+        delete uo;
+        return;
+    }
+    if (partfileversion > k_current_version) {
+        // msg 0113
+        emit displayErrorDialog(tr("This file was created with a later version of ShipCAD!"));
+        delete uo;
+    }
+    else if (changed) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    }
+    else {
+        // msg 0114
+        emit displayErrorDialog(tr("This is not a valid ShipCAD part file!"));
+        delete uo;
+    }
 }
 
 void Controller::importPolycad()
@@ -904,9 +953,50 @@ void Controller::deleteMarkers()
 }
 
 // FreeShipUnit.pas:9380
-void Controller::importMarkers()
+void Controller::importMarkers(const QString& filename)
 {
-	// TODO
+    cout << "Controller::importMarkers" << endl;
+    QFile markerfile(filename);
+    if (markerfile.open(QFile::ReadOnly)) {
+        QTextStream is(&markerfile);
+        MarkerVector markers(false);
+        try {
+            Marker::loadFromText(getModel(), is, markers);
+        } catch(...) {
+            // what do we do?
+            return;
+        }
+        bool imported = false;
+        if (markers.size() > 0) {
+            bool ok;
+            if (getModel()->numberOfMarkers() > 0) {
+                emit displayQuestionDialog(tr("The model already contains markers. Do you want to delete those?"), ok);
+                if (ok) {
+                    getModel()->createUndo(tr("import markers"), true);
+                    getModel()->getMarkers().clear();
+                }
+                imported = true;
+            } else {
+                getModel()->createUndo(tr("import markers"), true);
+                imported = true;
+            }
+            if (imported) {
+                for (size_t i=0; i<markers.size(); i++)
+                    getModel()->getMarkers().add(markers.get(i));
+                getModel()->setBuild(false);
+                getModel()->setFileChanged(true);
+                emit modifiedModel();
+            } else {
+                // destroy the markers
+                for (size_t i=0; i<markers.size(); i++)
+                    delete markers.get(i);
+            }
+        } else {
+            emit displayWarningDialog(tr("No markers could be imported"));
+        }
+    } else {
+        emit displayWarningDialog(tr("Unable to open file!"));
+    }
 }
 
 void Controller::checkModel()

@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ShipCAD
 TEMPLATE = app
 
+TRANSLATIONS = app_es.ts
+
 RESOURCES = shipcad.qrc
 
 SOURCES += main.cpp\

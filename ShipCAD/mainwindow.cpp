@@ -142,7 +142,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));
     connect(ui->actionImportChines, SIGNAL(triggered()), _controller, SLOT(importChines()));
     connect(ui->actionImportFEF, SIGNAL(triggered()), _controller, SLOT(importFEF()));
-    connect(ui->actionImportPart, SIGNAL(triggered()), _controller, SLOT(importPart()));
+    connect(ui->actionImportPart, SIGNAL(triggered()), SLOT(importPart()));
     connect(ui->actionImportPolyCad, SIGNAL(triggered()), _controller, SLOT(importPolycad()));
     connect(ui->actionImportSurface, SIGNAL(triggered()), _controller, SLOT(importSurface()));
     connect(ui->actionImportVRML, SIGNAL(triggered()), _controller, SLOT(importVRML()));
@@ -161,7 +161,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
             _controller, SLOT(export3DPolylinesDXF()));
     connect(ui->actionExportFEF, SIGNAL(triggered()), _controller, SLOT(exportFEF()));
     connect(ui->actionExportGHS, SIGNAL(triggered()), _controller, SLOT(exportGHS()));
-    connect(ui->actionExportPart, SIGNAL(triggered()), _controller, SLOT(exportPart()));
+    connect(ui->actionExportPart, SIGNAL(triggered()), SLOT(exportPart()));
     connect(ui->actionExportMichlet, SIGNAL(triggered()), _controller, SLOT(exportMichlet()));
     connect(ui->actionExportWavefront, SIGNAL(triggered()), _controller, SLOT(exportObj()));
     connect(ui->actionExportOffsets, SIGNAL(triggered()), _controller, SLOT(exportOffsets()));
@@ -247,7 +247,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionDeselect_all, SIGNAL(triggered()), _controller, SLOT(clearSelections()));
 
     // connect tools actions
-    connect(ui->actionImportMarkers, SIGNAL(triggered()), _controller, SLOT(importMarkers()));
+    connect(ui->actionImportMarkers, SIGNAL(triggered()), SLOT(importMarkers()));
     connect(ui->actionDelete_all_markers, SIGNAL(triggered()), _controller, SLOT(deleteMarkers()));
     connect(ui->actionCheck_model, SIGNAL(triggered()), _controller, SLOT(checkModel()));
     connect(ui->actionRemove_negative, SIGNAL(triggered()),
@@ -1083,7 +1083,7 @@ void MainWindow::modelLoaded()
 
 void MainWindow::openRecentFile()
 {
-    cout << "openRecentFile" << endl;
+    cout << "MainWindow::openRecentFile" << endl;
     QAction *action = qobject_cast<QAction *>(sender());
     if (action) {
         _controller->loadFile(action->data().toString());
@@ -1092,6 +1092,7 @@ void MainWindow::openRecentFile()
 
 void MainWindow::newModel()
 {
+    cout << "MainWindow::newModel" << endl;
     ShipCADModel* model = _controller->getModel();
     if (model != 0 && model->isFileChanged()) {
         saveModelFile();
@@ -1101,6 +1102,7 @@ void MainWindow::newModel()
 
 void MainWindow::openModelFile()
 {
+    cout << "MainWindow::openModelFile" << endl;
     // get last directory
     QSettings settings;
     QString lastdir;
@@ -1121,7 +1123,7 @@ void MainWindow::openModelFile()
 void MainWindow::saveModelFile()
 {
     QFileInfo f(_controller->getModel()->getFilename());
-    cout << "saveModelFile:" << f.absoluteFilePath().toStdString() << endl;
+    cout << "MainWindow::saveModelFile:" << f.absoluteFilePath().toStdString() << endl;
     _controller->saveFile();
     addRecentFiles(f.absoluteFilePath());
     QSettings settings;
@@ -1130,7 +1132,7 @@ void MainWindow::saveModelFile()
 
 void MainWindow::saveModelAsFile()
 {
-    cout << "saveModelAsFile\n";
+    cout << "MainWindow::saveModelAsFile" << endl;
     // get last directory
     QSettings settings;
     QString lastdir;
@@ -1148,6 +1150,71 @@ void MainWindow::saveModelAsFile()
     _controller->saveFileAs(filename);
     addRecentFiles(fi.absoluteFilePath());
     settings.setValue("file/savedir", fi.absolutePath());
+}
+
+void MainWindow::exportPart()
+{
+    cout << "MainWindow::exportPart" << endl;
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/savedir")) {
+        lastdir = settings.value("file/savedir").toString();
+    }
+    // get the filename
+    QString filename = QFileDialog::getSaveFileName(this, tr("Export Part"),
+                                                    lastdir,
+                                                    tr("freeship part (*.part)"));
+    if (filename.length() == 0)
+        return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    _controller->exportPart(filename);
+    settings.setValue("file/savedir", fi.absolutePath());
+}
+
+void MainWindow::importPart()
+{
+    cout << "MainWindow::importPart" << endl;
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/opendir")) {
+        lastdir = settings.value("file/opendir").toString();
+    }
+    // get the filename
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Part File"),
+                                                    lastdir,
+                                                    tr("freeship part (*.part)"));
+    if (filename.length() == 0)
+        return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    settings.setValue("file/opendir", filepath);
+    _controller->importPart(filename);
+}
+
+void MainWindow::importMarkers()
+{
+    cout << "MainWindow::importMarkers" << endl;
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/opendir")) {
+        lastdir = settings.value("file/opendir").toString();
+    }
+    // get the filename
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Marker File"),
+                                                    lastdir,
+                                                    tr("text (*.txt)"));
+    if (filename.length() == 0)
+        return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    settings.setValue("file/opendir", filepath);
+    _controller->importMarkers(filename);
 }
 
 void MainWindow::updateUndoData()

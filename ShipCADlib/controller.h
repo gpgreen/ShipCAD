@@ -264,7 +264,7 @@ public slots:
 
     /*! \brief export geometry as a part file
 	 */
-	void exportPart();
+	void exportPart(const QString& filename);
 
     /*! \brief export file for CFD program Michlet
 	 */
@@ -307,8 +307,10 @@ public slots:
     void importHull();
 
     /*! \brief import a partfile and add to current geometry
+     *
+     * \param filename the filename of the part to load
 	 */
-	void importPart();
+    void importPart(const QString& filename);
 
     /*! \brief import a polycad file
 	 */
@@ -400,7 +402,7 @@ public slots:
 
     /*! \brief import markers from a textfile
      */
-    void importMarkers();
+    void importMarkers(const QString& filename);
 
     /*! \brief check the surface for inconsistent normal directions and leaks
      */

@@ -286,7 +286,13 @@ public:
      */
     void savePart(const QString& filename, FileBuffer& buffer,
                   std::vector<SubdivisionControlFace*>& faces);
-
+    /*! \brief load a part
+     *
+     * \param buffer the source of the part file
+     * \return true if geometry actually loaded
+     */
+    bool loadPart(FileBuffer& source, version_t& partversion);
+    
     void rebuildModel(bool redo_intersections);
 
     void draw(Viewport& vp);

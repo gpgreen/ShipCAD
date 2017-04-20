@@ -1155,3 +1155,132 @@ void ShipCADModel::savePart(const QString& filename, FileBuffer& buffer,
     }
     buffer.add(ChangeFileExt(filename, ".part"));
 }
+
+// FreeShipUnit.pas:7708
+bool ShipCADModel::loadPart(FileBuffer& source, version_t& partversion)
+{
+    float scale = 1.0;
+    bool changed = false;       // have we actually loaded something?
+    quint32 n;
+    SubdivisionControlPoint* p1;
+    SubdivisionControlPoint* p2;
+    SubdivisionControlEdge* edge;
+    SubdivisionLayer* layer;
+	source.reset();
+	QString hdr;
+	source.load(hdr);
+	if (hdr == "FREE!ship partfile") {
+        source.load(n);
+        partversion = static_cast<version_t>(n);
+		source.setVersion(partversion);
+        if (partversion <= k_current_version) {
+            vector<SubdivisionControlPoint*> points;
+            vector<SubdivisionControlEdge*> edges;
+            vector<SubdivisionLayer*> layers;
+            // load units
+            source.load(n);
+            unit_type_t units = static_cast<unit_type_t>(n);
+            if (units != _settings.getUnits()) {
+                scale = (units == fuMetric) ? 1 / kFoot : kFoot;
+            }
+            // load number of layers
+            source.load(n);
+            // load layers
+            for (size_t i=0; i<n; i++) {
+                layer = getSurface()->addNewLayer();
+                size_t lid = layer->getLayerID();
+                layer->loadBinary(source);
+                layer->setLayerID(lid);
+                layers.push_back(layer);
+                changed = true;
+            }
+            // control points
+            source.load(n);
+            for (size_t i=0; i<n; i++) {
+                p2 = getSurface()->addControlPoint();
+                p2->load_binary(source);
+                p2->setCoordinate(p2->getCoordinate() * scale);
+                points.push_back(p2);
+                changed = true;
+            }
+            // control edges
+            source.load(n);
+            for (size_t i=0; i<n; i++) {
+                quint32 index;
+                p1 = nullptr;
+                p2 = nullptr;
+                edge = nullptr;
+                source.load(index);
+                if (index < points.size())
+                    p1 = points[index];
+                source.load(index);
+                if (index < points.size())
+                    p2 = points[index];
+                if (p1 != nullptr && p2 != nullptr)
+                    edge = getSurface()->addControlEdge(p1, p2);
+                bool crease;
+                source.load(crease);
+                if (edge != nullptr) {
+                    edge->setCrease(crease);
+                    edges.push_back(edge);
+                }
+                changed = true;
+            }
+            // controlfaces
+            source.load(n);
+            for (size_t i=0; i<n; i++) {
+                quint32 np;
+                layer = nullptr;
+                source.load(np);
+                vector<SubdivisionControlPoint*> fpoints;
+                for (size_t j=0; j<np; j++) {
+                    quint32 index;
+                    p1 = nullptr;
+                    source.load(index);
+                    if (index < points.size())
+                        p1 = points[index];
+                    if (p1 != nullptr)
+                        fpoints.push_back(p1);
+                }
+                quint32 layerid;
+                source.load(layerid);
+                if (layerid < layers.size())
+                    layer = layers[layerid];
+                if (fpoints.size() == np && layer != nullptr) {
+                    getSurface()->addControlFace(fpoints, false, layer);
+                }
+            }
+            // reset crease on edges
+            for (size_t i=0; i<edges.size(); i++) {
+                if (edges[i]->numberOfFaces() != 2 && !edges[i]->isCrease())
+                    edges[i]->setCrease(true);
+            }
+            // controlcurves
+            source.load(n);
+            for (size_t i=0; i<n; i++) {
+                quint32 np;
+                source.load(np);
+                if (np > 1) {
+                    SubdivisionControlCurve* curve = SubdivisionControlCurve::construct(getSurface());
+                    getSurface()->addControlCurve(curve);
+                    for (size_t j=0; j<np; j++) {
+                        quint32 index;
+                        p2 = nullptr;
+                        source.load(index);
+                        if (index < points.size()) {
+                            p2 = points[index];
+                            curve->addPoint(p2);
+                        }
+                        if (j > 0) {
+                            p1 = curve->getControlPoint(j-1);
+                            edge = getSurface()->controlEdgeExists(p1, p2);
+                            if (edge != nullptr)
+                                edge->setCurve(curve);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return changed;
+}

@@ -233,13 +233,13 @@ void SubdivisionControlCurve::draw(Viewport &vp, LineShader* lineshader)
 
     if (!_owner->showControlNet() && sel) {
         // draw controlpoints and edges
-        for (size_t i=2; i<=_points.size(); ++i) {
-            SubdivisionPoint* p1 = _points[i-2];
-            SubdivisionPoint* p2 = _points[i-1];
+        for (size_t i=1; i<_points.size(); ++i) {
+            SubdivisionPoint* p1 = _points[i-1];
+            SubdivisionPoint* p2 = _points[i];
             SubdivisionControlEdge* edge = _owner->controlEdgeExists(p1, p2);
             if (edge != 0)
                 edge->draw(vp, lineshader);
-            if (i == 2)
+            if (i == 1)
                 vertices << p1->getCoordinate();
             vertices << p2->getCoordinate();
         }
@@ -334,10 +334,12 @@ void SubdivisionControlCurve::insertControlPoint(SubdivisionControlPoint *p1,
                                                  SubdivisionControlPoint *p2,
                                                  SubdivisionControlPoint *newpt)
 {
-    size_t i = 2;
-    while (i <= _points.size()) {
-        if ((_points[i-2] == p1 && _points[i-1] == p2) || (_points[i-1] == p1 && _points[i-2] == p2))
-            _points.insert(_points.begin()+i-1, newpt);
+    size_t i = 1;
+    while (i < _points.size()) {
+        if ((_points[i-1] == p1 && _points[i] == p2) || (_points[i] == p1 && _points[i-1] == p2)) {
+            _points.insert(_points.begin()+i, newpt);
+            break;
+        }
         i++;
     }
 }
@@ -346,10 +348,12 @@ void SubdivisionControlCurve::insertEdgePoint(SubdivisionPoint *p1,
                                               SubdivisionPoint *p2,
                                               SubdivisionPoint *newpt)
 {
-    size_t i = 2;
-    while (i <= _div_points.size()) {
-        if ((_div_points[i-2] == p1 && _div_points[i-1] == p2) || (_div_points[i-1] == p1 && _div_points[i-2] == p2))
-            _div_points.insert(_div_points.begin()+i-1, newpt);
+    size_t i = 1;
+    while (i < _div_points.size()) {
+        if ((_div_points[i-1] == p1 && _div_points[i] == p2) || (_div_points[i] == p1 && _div_points[i-1] == p2)) {
+            _div_points.insert(_div_points.begin()+i, newpt);
+            break;
+        }
         i++;
     }
 }
@@ -359,11 +363,11 @@ void SubdivisionControlCurve::loadBinary(FileBuffer &source)
     quint32 n, ind;
     source.load(n);
     SubdivisionControlPoint* p1 = 0;
-    for (size_t i=1; i<=n; ++i) {
+    for (size_t i=0; i<n; ++i) {
         source.load(ind);
         SubdivisionControlPoint* p2 = _owner->getControlPoint(ind);
         _points.push_back(p2);
-        if (i > 1) {
+        if (i > 0) {
             SubdivisionEdge* edge = _owner->edgeExists(p1, p2);
             if (edge != 0)
                 edge->setCurve(this);
@@ -380,10 +384,11 @@ void SubdivisionControlCurve::loadBinary(FileBuffer &source)
 
 void SubdivisionControlCurve::replaceVertexPoint(SubdivisionPoint *oldpt, SubdivisionPoint *newpt)
 {
-    for (size_t i=1; i<=_div_points.size(); ++i) {
-        if (_div_points[i-1] == oldpt) {
-            _div_points[i-1] = newpt;
+    for (size_t i=0; i<_div_points.size(); ++i) {
+        if (_div_points[i] == oldpt) {
+            _div_points[i] = newpt;
             _curve->clear();
+            break;
         }
     }
 }
@@ -391,8 +396,8 @@ void SubdivisionControlCurve::replaceVertexPoint(SubdivisionPoint *oldpt, Subdiv
 void SubdivisionControlCurve::saveBinary(FileBuffer &destination)
 {
     destination.add(numberOfControlPoints());
-    for (size_t i=1; i<=numberOfControlPoints(); ++i) {
-        SubdivisionControlPoint* p = _points[i-1];
+    for (size_t i=0; i<numberOfControlPoints(); ++i) {
+        SubdivisionControlPoint* p = _points[i];
         size_t ind = _owner->indexOfControlPoint(p);
         destination.add(ind);
     }

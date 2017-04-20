@@ -66,7 +66,10 @@ public:
 
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);
-									
+
+    static void loadFromText(ShipCADModel* model, QTextStream& file,
+                              PointerVector<Marker>& markers);
+                                               
 public slots:
 
 protected:

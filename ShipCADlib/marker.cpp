@@ -186,3 +186,71 @@ void Marker::saveBinary(FileBuffer& dest)
     Spline::saveBinary(dest);
 }
 
+void Marker::loadFromText(ShipCADModel* model, QTextStream& file, MarkerVector& markers)
+{
+    size_t lineno = 0;
+    bool unexpected = false;
+    Marker* marker = nullptr;
+    while (!unexpected && !file.atEnd()) {
+        QString line = file.readLine();
+        lineno++;
+        // if an empty line, complete the marker
+        // and get ready for more
+        if (line.size() == 0 && marker != nullptr) {
+            if (marker->numberOfPoints() > 1) {
+                markers.add(marker);
+            } else {
+                delete marker;
+            }
+            marker = nullptr;
+            continue;
+        }
+        if (line == "EOF")
+            break;
+        // split the line
+        QStringList fields = line.split(" ");
+        if (fields.size() != 3) {
+            // try tabs
+            fields = line.split("\t");
+            if (fields.size() != 3) {
+                unexpected = true;
+                continue;
+            }
+        }
+        // we have 3 pieces, turn it into a point
+        bool ok;
+        float x = fields[0].toFloat(&ok);
+        if (!ok) {
+            unexpected = true;
+            continue;
+        }
+        float y = fields[1].toFloat(&ok);
+        if (!ok) {
+            unexpected = true;
+            continue;
+        }
+        float z = fields[2].toFloat(&ok);
+        if (!ok) {
+            unexpected = true;
+            continue;
+        }
+        // add the point to the marker
+        QVector3D pt(x, y, z);
+        if (marker == nullptr) {
+            marker = Marker::construct(model);
+        }
+        marker->add(pt);
+    }
+    // complete the last marker
+    if (!unexpected && marker != nullptr) {
+        if (marker->numberOfPoints() > 1) {
+            markers.add(marker);
+        } else
+            delete marker;
+    }
+    // got something wrong, bail
+    if (unexpected) {
+        throw runtime_error((tr("bad input at line %1").arg(lineno)).toStdString());
+    }
+}
+

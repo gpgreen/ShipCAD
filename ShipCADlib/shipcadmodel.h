@@ -201,6 +201,8 @@ public:
     bool isSelectedMarker(Marker* mark) const;
     void setSelectedMarker(Marker* mark);
     void removeSelectedMarker(Marker* mark);
+    size_t numberOfSelectedMarkers() const
+        {return _selected_markers.size();}
     void deleteMarker(Marker* mark);
     
     // flowlines
@@ -222,6 +224,12 @@ public:
      * \param flow deselect this flowline
      */
     void removeSelectedFlowline(Flowline* flow);
+    /*! \brief count of selected flowlines
+     *
+     * \return count
+     */
+    size_t numberOfSelectedFlowlines() const
+        {return _selected_flowlines.size();}
     /*! \brief delete a flowline from the model
      *
      * \param flow the flowline to delete from the model

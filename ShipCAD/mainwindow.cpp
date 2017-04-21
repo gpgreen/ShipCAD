@@ -249,7 +249,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     // connect tools actions
     connect(ui->actionImportMarkers, SIGNAL(triggered()), SLOT(importMarkers()));
     connect(ui->actionDelete_all_markers, SIGNAL(triggered()), _controller, SLOT(deleteMarkers()));
-    connect(ui->actionCheck_model, SIGNAL(triggered()), _controller, SLOT(checkModel()));
+    connect(ui->actionCheck_model, SIGNAL(triggered()), SLOT(checkModel()));
     connect(ui->actionRemove_negative, SIGNAL(triggered()),
             _controller, SLOT(deleteNegativeFaces()));
     connect(ui->actionRemove_unused_points, SIGNAL(triggered()),
@@ -893,48 +893,47 @@ void MainWindow::enableActions()
     size_t nbuttocks = model->getButtocks().size();
     size_t ndiagonals = model->getDiagonals().size();
     size_t nmarkers = model->numberOfMarkers();
+    size_t nselmarkers = model->numberOfSelectedMarkers();
     size_t nflowlines = model->numberOfFlowlines();
+    size_t nselflowlines = model->numberOfSelectedFlowlines();
     
     // file actions
     ui->actionSave_As->setEnabled(ncpoints > 0 || model->isFileChanged() || model->isFilenameSet());
 
-    ui->actionImportCarene->setEnabled(true);
-    ui->actionImportChines->setEnabled(true);
-    ui->actionImportFEF->setEnabled(true);
+    ui->actionImportCarene->setEnabled(false);
+    ui->actionImportChines->setEnabled(false);
+    ui->actionImportFEF->setEnabled(false);
     ui->actionImportPart->setEnabled(_viewports.size() > 0 && ncfaces > 0);
-    ui->actionImportPolyCad->setEnabled(true);
-    ui->actionImportSurface->setEnabled(true);
-    ui->actionImportVRML->setEnabled(true);
-    ui->actionImportMichlet_waves->setEnabled(_viewports.size() > 0 && ncfaces > 1);
-    ui->actionImportCarlson->setEnabled(true);
+    ui->actionImportPolyCad->setEnabled(false);
+    ui->actionImportSurface->setEnabled(false);
+    ui->actionImportVRML->setEnabled(false);
+    ui->actionImportMichlet_waves->setEnabled(false/*_viewports.size() > 0 && ncfaces > 1*/);
+    ui->actionImportCarlson->setEnabled(false);
 
-    ui->actionExportArchimedes->setEnabled(nstations > 0);
-    ui->actionExportCoordinates->setEnabled(ncpoints > 0);
-    ui->actionExportDXF_2D_Polylines->setEnabled((nstations > 0 && vis.isShowStations())
+    ui->actionExportArchimedes->setEnabled(false/*nstations > 0*/);
+    ui->actionExportCoordinates->setEnabled(false/*ncpoints > 0*/);
+    ui->actionExportDXF_2D_Polylines->setEnabled(false/*(nstations > 0 && vis.isShowStations())
                                                  || (nbuttocks > 0 && vis.isShowButtocks())
-                                                 || (nwaterlines > 0 && vis.isShowWaterlines()));
-    ui->actionExportDXF_3D_mesh->setEnabled(ncfaces > 0);
-    ui->actionExportDXF_3D_Polylines->setEnabled((nstations > 0 && vis.isShowStations())
+                                                 || (nwaterlines > 0 && vis.isShowWaterlines())*/);
+    ui->actionExportDXF_3D_mesh->setEnabled(false/*ncfaces > 0*/);
+    ui->actionExportDXF_3D_Polylines->setEnabled(false/*(nstations > 0 && vis.isShowStations())
                                                  || (nbuttocks > 0 && vis.isShowButtocks())
                                                  || (nwaterlines > 0 && vis.isShowWaterlines())
                                                  || (ndiagonals > 0 && vis.isShowDiagonals())
-                                                 || (ncurves > 0 && vis.isShowControlCurves()));
-    ui->actionExportFEF->setEnabled(ncpoints > 0);
-    ui->actionExportGHS->setEnabled(nstations > 0);
+                                                 || (ncurves > 0 && vis.isShowControlCurves())*/);
+    ui->actionExportFEF->setEnabled(false/*ncpoints > 0*/);
+    ui->actionExportGHS->setEnabled(false/*nstations > 0*/);
     ui->actionExportPart->setEnabled(ncfaces > 0);
-    ui->actionExportMichlet->setEnabled(ncfaces > 0 && model->getProjectSettings().isMainParticularsSet());
-    ui->actionExportWavefront->setEnabled(ncfaces > 0);
-    ui->actionExportOffsets->setEnabled(nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0);
-    ui->actionExportSTL->setEnabled(ncfaces > 0);
-    ui->actionExportIGES->setEnabled(ncfaces > 0);
+    ui->actionExportMichlet->setEnabled(false/*ncfaces > 0 && model->getProjectSettings().isMainParticularsSet()*/);
+    ui->actionExportWavefront->setEnabled(false/*ncfaces > 0*/);
+    ui->actionExportOffsets->setEnabled(false/*nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0*/);
+    ui->actionExportSTL->setEnabled(false/*ncfaces > 0*/);
+    ui->actionExportIGES->setEnabled(false/*ncfaces > 0*/);
 
     // edit actions
     ui->actionUndo->setEnabled(model->canUndo());
     ui->actionRedo->setEnabled(model->canRedo());
-    ui->actionDelete->setEnabled(nselcpoints
-                                 + surf->numberOfSelectedControlFaces()
-                                 + surf->numberOfSelectedControlEdges()
-                                 + surf->numberOfSelectedControlCurves() > 0);// BUGBUG missing number of flowlines and markers
+    ui->actionDelete->setEnabled(nselcpoints+nselcfaces+nselcedges+nselccurves+nselflowlines+nselmarkers > 0);
     ui->actionUndo_history->setEnabled(model->canUndo());
     
     // point actions
@@ -985,7 +984,7 @@ void MainWindow::enableActions()
 
     // selection actions
     ui->actionSelect_all->setEnabled(true);
-    ui->actionDeselect_all->setEnabled(nselcpoints+nselcedges+nselcfaces+nselccurves > 0
+    ui->actionDeselect_all->setEnabled(nselcpoints+nselcedges+nselcfaces+nselccurves+nselflowlines+nselmarkers > 0
                                        || model->getActiveControlPoint() != 0);
     
     // tools actions
@@ -994,16 +993,16 @@ void MainWindow::enableActions()
     ui->actionCheck_model->setEnabled(ncfaces > 0);
     //ui->actionRemove_negative->setEnabled(
     ui->actionRemove_unused_points->setEnabled(remove_unused);
-    ui->actionDevelop_plates->setEnabled(develop_layers);
-    ui->actionKeel_and_rudder_wizard->setEnabled(_viewports.size());
-    ui->actionAdd_cylinder->setEnabled(_viewports.size());
+    ui->actionDevelop_plates->setEnabled(false/*develop_layers*/);
+    ui->actionKeel_and_rudder_wizard->setEnabled(false/*_viewports.size()*/);
+    ui->actionAdd_cylinder->setEnabled(false/*_viewports.size()*/);
 
     // transform actions
     ui->actionScale->setEnabled(ncpoints > 0);
     ui->actionMove->setEnabled(ncpoints > 0);
     ui->actionRotate->setEnabled(ncpoints > 0);
     ui->actionMirror->setEnabled(ncfaces > 0);
-    ui->actionLackenby->setEnabled(ncfaces > 0);
+    ui->actionLackenby->setEnabled(false/*ncfaces > 0*/);
 
     // calculations actions
 
@@ -1533,6 +1532,11 @@ void MainWindow::executeChooseLayerDialog(ChooseLayerDialogData& data)
 void MainWindow::changeSelectedItems()
 {
     // TODO
+}
+
+void MainWindow::checkModel()
+{
+    _controller->checkModel(true);
 }
 
 // add the menu entry to the file menu, and create all the actions...

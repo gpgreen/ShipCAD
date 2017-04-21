@@ -3684,6 +3684,202 @@ void SubdivisionSurface::subdivide()
     }
 }
 
+static void privFindConnectedFaces(vector<SubdivisionControlFace*>& done,
+                                   set<SubdivisionControlFace*>& todo,
+                                   size_t& inconsistent, bool& changed)
+{
+    size_t i = 0;
+    while (i < done.size() && todo.size() > 0) {
+        SubdivisionControlFace* f1 = done[i];
+        SubdivisionPoint* p1 = f1->getLastPoint();
+        for (size_t j=0; j<f1->numberOfPoints(); ++j) {
+            SubdivisionPoint* p2 = f1->getPoint(j);
+            SubdivisionEdge* edge = f1->getOwner()->edgeExists(p1, p2);
+            if (edge != nullptr && edge->numberOfFaces() > 1) {
+                for (size_t k=0; k<edge->numberOfFaces(); ++k) {
+                    SubdivisionControlFace* f2 = dynamic_cast<SubdivisionControlFace*>(
+                        edge->getFace(k));
+                    set<SubdivisionControlFace*>::iterator itr = todo.find(f2);
+                    if (itr != todo.end()) {
+                        // this face is connected to the current, but not present in the
+                        // done list
+                        done.push_back(f2);
+                        todo.erase(itr);
+                        // also perform a check to determine if f2 is oriented i
+                        // the same way as f1
+                        size_t ind = f2->indexOfPoint(p2);
+                        ind = (ind + 1) % f2->numberOfPoints(); // select next index
+                        if (f2->getPoint(ind) != p1) {
+                            // direction is not OK, invert points
+                            f2->flipNormal();
+                            inconsistent++;
+                            changed = true;
+                        }
+                    }
+                }
+            }
+            p1 = p2;
+        }
+        i++;
+    }
+}
+
+bool SubdivisionSurface::check(SurfaceCheckResult& checked, bool quiet)
+{
+    float edge_error = 1E-4;
+    bool changed = false;
+    checked.non_manifold = checked.inconsistent = checked.inverted_faces = checked.double_edges = 0;
+    
+    // if quiet, only the direction of the face normals is checked and fixed
+    if (!quiet) {
+        // find double edges
+        map<SubdivisionControlEdge*, SubdivisionControlEdge*> doubleedges;
+        for (size_t i=0; i<numberOfControlEdges(); ++i) {
+            SubdivisionControlEdge* edge1 = getControlEdge(i);
+            if (edge1->numberOfFaces() == 1 &&
+                doubleedges.find(edge1) == doubleedges.end()) {
+                for (size_t j=0; j<edge1->startPoint()->numberOfEdges(); ++j) {
+                    SubdivisionControlEdge* edge2 = dynamic_cast<SubdivisionControlEdge*>(edge1->startPoint()->getEdge(j));
+                    if (edge1 != edge2 && edge2->numberOfFaces() == 1) {
+                        if (((edge1->startPoint()->getCoordinate().distanceToPoint(
+                                  edge2->startPoint()->getCoordinate()) < edge_error)
+                             && (edge1->endPoint()->getCoordinate().distanceToPoint(
+                                     edge2->endPoint()->getCoordinate()) < edge_error))
+                            || ((edge1->startPoint()->getCoordinate().distanceToPoint(
+                                  edge2->endPoint()->getCoordinate()) < edge_error)
+                             && (edge1->endPoint()->getCoordinate().distanceToPoint(
+                                     edge2->startPoint()->getCoordinate()) < edge_error)))
+                            doubleedges.insert(make_pair(edge1, edge2));
+                    }
+                }
+            }
+        }
+        vector<SubdivisionControlPoint*> points;
+        map<SubdivisionControlEdge*, SubdivisionControlEdge*>::iterator i;
+        for (i=doubleedges.begin(); i!=doubleedges.end(); ++i) {
+            SubdivisionControlEdge* edge1 = (*i).first;
+            SubdivisionControlEdge* edge2 = (*i).second;
+            if (!hasControlEdge(edge1) || !hasControlEdge(edge2))
+                continue;
+            // remove the face connected to edg2 and rebuild it
+            // by connecting it to edge1
+            SubdivisionControlFace* ctrlface = dynamic_cast<SubdivisionControlFace*>(edge2->getFace(0));
+            points.clear();
+            for (size_t j=0; j<ctrlface->numberOfPoints(); ++j) {
+                SubdivisionControlPoint* point = dynamic_cast<SubdivisionControlPoint*>(ctrlface->getPoint(j));
+                if (point == edge2->startPoint()) {
+                    if (edge2->startPoint()->getCoordinate().distanceToPoint(
+                            edge1->startPoint()->getCoordinate()) < edge_error) {
+                        SubdivisionControlPoint* pt = dynamic_cast<SubdivisionControlPoint*>(edge1->startPoint());
+                        if (find(points.begin(), points.end(), pt) == points.end())
+                            points.push_back(pt);
+                    } else if (edge2->startPoint()->getCoordinate().distanceToPoint(
+                            edge1->endPoint()->getCoordinate()) < edge_error) {
+                        SubdivisionControlPoint* pt = dynamic_cast<SubdivisionControlPoint*>(edge1->endPoint());
+                        if (find(points.begin(), points.end(), pt) == points.end())
+                            points.push_back(pt);
+                    }
+                } else if (point == edge2->endPoint()) {
+                    if (edge2->endPoint()->getCoordinate().distanceToPoint(
+                            edge1->startPoint()->getCoordinate()) < edge_error) {
+                        SubdivisionControlPoint* pt = dynamic_cast<SubdivisionControlPoint*>(edge1->startPoint());
+                        if (find(points.begin(), points.end(), pt) == points.end())
+                            points.push_back(pt);
+                    } else if (edge2->endPoint()->getCoordinate().distanceToPoint(
+                            edge1->endPoint()->getCoordinate()) < edge_error) {
+                        SubdivisionControlPoint* pt = dynamic_cast<SubdivisionControlPoint*>(edge1->startPoint());
+                        if (find(points.begin(), points.end(), pt) == points.end())
+                            points.push_back(pt);
+                    }
+                } else if (find(points.begin(), points.end(), point) == points.end())
+                    points.push_back(point);
+            }
+            if (points.size() > 2) {
+                SubdivisionLayer* layer = ctrlface->getLayer();
+                addControlFace(points, false, layer);
+                deleteControlFace(ctrlface);
+                changed = true;
+                ++checked.double_edges;
+            }
+        }
+        deleteElementsCollection();
+    }
+
+    // check for correct normal direction (outward)
+    // first assemble all controlfaces and extract
+    // isolated groups (not physically connected)
+    set<SubdivisionControlFace*> allfaces(_control_faces.begin(), _control_faces.end());
+    
+    // assemble leaks
+    for (size_t i=0; i<_control_points.size(); ++i) {
+        if (_control_points[i]->isLeak())
+            checked.leaks.push_back(_control_points[i]);
+    }
+    // sort leaks in ascending z-coordinate
+    // TODO
+
+    for (size_t i=0; i<_control_edges.size(); ++i)
+        if (_control_edges[i]->numberOfFaces() > 2)
+            ++checked.non_manifold;
+    if (allfaces.size() == 0)
+        return false;
+    vector<SubdivisionControlFace*> newgroup;
+    while (allfaces.size() > 0) {
+        set<SubdivisionControlFace*>::iterator setitr = allfaces.begin();
+        SubdivisionControlFace* face = *(setitr);
+        allfaces.erase(setitr);
+        newgroup.clear();
+        newgroup.push_back(face);
+        // use the first face as seed for the following
+        privFindConnectedFaces(newgroup, allfaces, checked.inconsistent, changed);
+        
+        // find the lowest point of this group of faces
+        SubdivisionPoint* point = nullptr;
+        for (size_t i=0; i<newgroup.size(); ++i) {
+            SubdivisionFace* face = newgroup[i];
+            for (size_t j=0; j<face->numberOfPoints(); j++) {
+                SubdivisionPoint* pt = face->getPoint(j);
+                if (point == nullptr)
+                    point = pt;
+                else if (pt->getCoordinate().z() < point->getCoordinate().z())
+                    point = pt;
+            }
+        }
+        if (point != nullptr) {
+            // select the face connected to this point and also present in the
+            // newgroup list and with the most vertical normal of all candidates
+            SubdivisionControlFace* face = nullptr;
+            QVector3D normal;
+            for (size_t i=0; i<point->numberOfFaces(); ++i) {
+                SubdivisionControlFace* f1 =
+                        dynamic_cast<SubdivisionControlFace*>(point->getFace(i));
+                if (find(newgroup.begin(), newgroup.end(), f1) == newgroup.end())
+                    continue;
+                if (face == nullptr) {
+                    face = f1;
+                    normal = face->getFaceNormal();
+                } else {
+                    QVector3D tmp = f1->getFaceNormal();
+                    if (abs(tmp.z()) > abs(normal.z())) {
+                        face = f1;
+                        normal = face->getFaceNormal();
+                    }
+                }
+            }
+            if (face != nullptr) {
+                if (normal.z() > 0.0) {
+                    // normal points upward, all faces in this group must be inverted
+                    for (size_t i=0; i<newgroup.size(); i++)
+                        newgroup[i]->flipNormal();
+                    changed = true;
+                    ++checked.inverted_faces;
+                }
+            }
+        }
+    }
+    return changed;
+}
+
 void SubdivisionSurface::dump(ostream& os, const char* prefix) const
 {
     os << prefix << "SubdivisionSurface ["

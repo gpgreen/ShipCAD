@@ -43,6 +43,7 @@
 #include "viewportview.h"
 #include "subdivlayer.h"
 #include "subdivface.h"
+#include "exception.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -740,9 +741,7 @@ void Controller::loadFile(const QString& filename)
     try {
         source.loadFromFile(loadfile);
         getModel()->loadBinary(source);
-        getSurface()->clearSelection();
-        // TODO clear selected flowlines
-        // TODO clear selected markers
+        getModel()->clearSelectedItems();
         getModel()->setFilename(filename);
         // stop asking for file version
     } catch(...) {
@@ -769,7 +768,7 @@ void Controller::saveFile()
             getModel()->saveBinary(dest);
             dest.saveToFile(tmp);
             // remove backup if it exists
-            QFile backup(ChangeFileExt(filename, ".Bak"));
+            QFile backup(ChangeFileExt(filename, ".bak"));
             cout << "backup:" << backup.fileName().toStdString() << endl;
             if (backup.exists() && !backup.remove())
                 throw runtime_error("unable to remove backup file");
@@ -957,11 +956,17 @@ void Controller::importMarkers(const QString& filename)
 {
     cout << "Controller::importMarkers" << endl;
     QFile markerfile(filename);
-    if (markerfile.open(QFile::ReadOnly)) {
+    if (markerfile.open(QFile::ReadOnly | QIODevice::Text)) {
         QTextStream is(&markerfile);
         MarkerVector markers(false);
         try {
             Marker::loadFromText(getModel(), is, markers);
+        } catch (ParseError e) {
+            QString err(tr("Error reading marker file on line:%1").arg(e.lineno()));
+            if (e.info().size() > 0)
+                err.append("\n").append(e.info());
+            emit displayErrorDialog(err);
+            return;
         } catch(...) {
             // what do we do?
             return;
@@ -995,13 +1000,62 @@ void Controller::importMarkers(const QString& filename)
             emit displayWarningDialog(tr("No markers could be imported"));
         }
     } else {
-        emit displayWarningDialog(tr("Unable to open file!"));
+        emit displayErrorDialog(tr("Unable to open file!"));
     }
 }
 
-void Controller::checkModel()
+// FreeShipUnit.pas:9494
+void Controller::checkModel(bool showresult)
 {
-	// TODO
+    cout << "Controller::checkModel" << endl;
+    // msg 0148
+    UndoObject* uo = getModel()->createUndo(tr("analyze surface"), false);
+    SurfaceCheckResult checked;
+    bool changed = getSurface()->check(checked, !showresult);
+    if (checked.leaks.size() > 0 && showresult) {
+        // msg 0149, 0150
+        QString msg(tr("The model contains a total of %1 leak points.").arg(checked.leaks.size()));
+        if (checked.leaks.size() > 10)
+            // msg 0151
+            msg.append(tr("\nOnly the first 10 are shown:"));
+        msg.append("\n");
+        for (size_t i=0; i<checked.leaks.size() && i<10; i++) {
+            msg.append(QString("\n%1, %2, %3")
+                       .arg(MakeLength(checked.leaks[i]->getCoordinate().x(), 3, 7))
+                       .arg(MakeLength(checked.leaks[i]->getCoordinate().y(), 3, 7))
+                       .arg(MakeLength(checked.leaks[i]->getCoordinate().z(), 3, 7)));
+        }
+        emit displayWarningDialog(msg);
+    }
+    if (changed || checked.inconsistent > 0 || checked.non_manifold > 0
+            || checked.double_edges > 0 || checked.inverted_faces > 0) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        if (showresult) {
+            // msg 0152
+            QString msg(tr("The following items were corrected:"));
+            if (checked.double_edges > 0)
+                // msg 0158
+                msg.append(tr("\n%1 double edges.").arg(checked.double_edges));
+            if (checked.inconsistent > 0)
+                // msg 0153
+                msg.append(tr("\n%1 inconsistent normals.").arg(checked.inconsistent));
+            if (checked.inverted_faces > 0)
+                // msg 0154
+                msg.append(tr("\n%1 normals flipped to point outward.").arg(checked.inverted_faces));
+            if (checked.non_manifold > 0)
+                // msg 0155
+                msg.append(tr("\n%1 edges found with more than 2 faces connected to it!").arg(checked.non_manifold));
+            emit displayInfoDialog(msg);
+        }
+        emit modifiedModel();
+    } else {
+        delete uo;
+        if (showresult && checked.leaks.size() == 0)
+            // msg 0156
+            emit displayInfoDialog(tr("Model is ok."));
+    }
 }
 
 void Controller::newModel()
@@ -1294,7 +1348,8 @@ void Controller::unlockAllPoints()
         getSurface()->getControlPoint(i)->setLocked(false);
     }
     getModel()->setFileChanged(true);
-    // emit dialog msg 0170
+    // msg 0170
+    emit displayInfoDialog(tr("points unlocked"));
     emit modifiedModel();
 }
 
@@ -1338,12 +1393,7 @@ void Controller::clearSelections()
 void Controller::deleteSelections()
 {
     cout << "Controller::deleteSelections" << endl;
-    SubdivisionSurface* surf = getSurface();
-    size_t n = surf->numberOfSelectedControlPoints()
-            + surf->numberOfSelectedControlEdges()
-            + surf->numberOfSelectedControlFaces()
-            + surf->numberOfSelectedControlCurves(); //BUGBUG: markers and flowlines
-    if (n == 0)
+    if (getModel()->countSelectedItems() == 0)
         return;
     // msg 0175
     getModel()->createUndo(tr("delete"), true);

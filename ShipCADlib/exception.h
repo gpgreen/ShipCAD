@@ -32,26 +32,24 @@
 
 #include <stdexcept>
 #include <string>
+#include <QString>
 
 namespace ShipCAD {
 
-    class ListIndexOutOfBounds : public std::out_of_range
+    class ParseError : public std::runtime_error
     {
     public:
-        ListIndexOutOfBounds(const std::string& what_arg) : std::out_of_range(what_arg) {};
+        ParseError(size_t linenum, const QString& info)
+            : std::runtime_error(""), _lineno(linenum), _info(info) {}
+
+        const QString& info() const {return _info;}
+        size_t lineno() const {return _lineno;}
+
+    private:
+        size_t _lineno;
+        QString _info;
     };
 
-    class PointIndexOutOfBounds : public std::out_of_range
-    {
-    public:
-        PointIndexOutOfBounds(const std::string& what_arg) : std::out_of_range(what_arg) {};
-    };
-
-    class IndexOutOfRange : public std::out_of_range
-    {
-    public:
-        IndexOutOfRange(const std::string& what_arg) : std::out_of_range(what_arg) {};
-    };
 };
 
 #endif // EXCEPTION_H

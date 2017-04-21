@@ -406,7 +406,7 @@ public slots:
 
     /*! \brief check the surface for inconsistent normal directions and leaks
      */
-    void checkModel();
+    void checkModel(bool showresult);
 
     /*! \brief start a new model (with a predefined surface)
      */

@@ -170,12 +170,12 @@ void LayerDialog::updateState()
         _moveDownAction->setEnabled(false);
     else
         _moveDownAction->setEnabled(true);
-    ui->areaLabel->setText(QString(tr("Area %1 [m2]").arg(truncate(cprops.layer_properties.surface_area, 3))));
-    ui->weightLabel->setText(QString(tr("Weight %1 [tons]").arg(truncate(cprops.layer_properties.weight, 3))));
+    ui->areaLabel->setText(QString(tr("Area %1 [m2]").arg(truncate(cprops.layer_properties.surface_area, 2))));
+    ui->weightLabel->setText(QString(tr("Weight %1 [tons]").arg(truncate(cprops.layer_properties.weight, 2))));
     ui->cogLabel->setText(QString(tr("Center of gravity %1,%2,%3 [m]")
-                                  .arg(truncate(cprops.layer_properties.surface_center_of_gravity.x(), 3))
-                                  .arg(truncate(cprops.layer_properties.surface_center_of_gravity.y(), 3))
-                                  .arg(truncate(cprops.layer_properties.surface_center_of_gravity.z(), 3))));
+                                  .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.x(), 3, 7))
+                                  .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.y(), 3, 7))
+                                  .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.z(), 3, 7))));
 }
 
 void LayerDialog::listRowChanged(int index)

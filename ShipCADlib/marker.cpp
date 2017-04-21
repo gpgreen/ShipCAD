@@ -29,7 +29,6 @@
 
 #include <iostream>
 #include <cmath>
-#include <stdexcept>
 #include <algorithm>
 
 #include "marker.h"
@@ -38,6 +37,7 @@
 #include "shipcadmodel.h"
 #include "viewport.h"
 #include "shader.h"
+#include "exception.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -250,7 +250,7 @@ void Marker::loadFromText(ShipCADModel* model, QTextStream& file, MarkerVector& 
     }
     // got something wrong, bail
     if (unexpected) {
-        throw runtime_error((tr("bad input at line %1").arg(lineno)).toStdString());
+        throw ParseError(lineno, "");
     }
 }
 

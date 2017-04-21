@@ -160,12 +160,9 @@ size_t SubdivisionEdge::getIndex()
 
 bool SubdivisionEdge::isBoundaryEdge()
 {
-    bool result = false;
-    if (_faces.size() == 1) {
-        result = (fabs(_points[0]->getCoordinate().y()) > 1E-4f
-                || fabs(_points[1]->getCoordinate().y()) > 1E-4f);
-    }
-    return result;
+    return _faces.size() == 1
+            && ((fabs(_points[0]->getCoordinate().y()) > 1E-4f
+                || fabs(_points[1]->getCoordinate().y()) > 1E-4f));
 }
 
 SubdivisionFace* SubdivisionEdge::getFace(size_t index)

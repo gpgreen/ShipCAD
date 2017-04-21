@@ -32,8 +32,12 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <vector>
 
 namespace ShipCAD {
+
+// forward declarations
+class SubdivisionControlPoint;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -169,6 +173,19 @@ struct LayerProperties
     QVector3D surface_center_of_gravity;
     LayerProperties() : surface_area(0), weight(0) 
         {}
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+/*! \brief used to collect statistics when doing the model check
+ */
+struct SurfaceCheckResult
+{
+    size_t non_manifold;
+    size_t inconsistent;
+    size_t inverted_faces;
+    size_t double_edges;
+    std::vector<SubdivisionControlPoint*> leaks;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

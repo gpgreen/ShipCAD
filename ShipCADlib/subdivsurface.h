@@ -117,6 +117,13 @@ public:
     
     // modifiers
 
+    /*! \brief check a surface for consistent normal direction
+     *
+     * \param checked structure to hold check results
+     * \return true if any faces were inverted during check
+     */
+    bool check(ShipCAD::SurfaceCheckResult& checked, bool quiet);
+    
     // tries to assemble quads into as few as possible rectangular patches
     void assembleFacesToPatches(assemble_mode_t mode,
                                 std::vector<ControlFaceGrid>& assembledPatches);

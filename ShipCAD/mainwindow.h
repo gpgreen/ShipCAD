@@ -203,6 +203,10 @@ private slots:
      */
     void changeSelectedItems();
 
+    /*! \brief check the model
+     */
+    void checkModel();
+
     /*! \brief use wireframe shading
      */
     void wireFrame();

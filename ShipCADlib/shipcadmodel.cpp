@@ -30,6 +30,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstring>
+#include <Eigen/Dense>
+
 #include "shipcadmodel.h"
 #include "filebuffer.h"
 #include "subdivsurface.h"
@@ -41,9 +43,12 @@
 #include "viewport.h"
 #include "subdivpoint.h"
 #include "subdivedge.h"
+#include "pointgrid.h"
+#include "exception.h"
 
 using namespace std;
 using namespace ShipCAD;
+using namespace Eigen;
 
 ShipCADModel::ShipCADModel()
     : _precision(fpLow), _file_version(k_current_version), _edit_mode(emSelectItems), _prefs(this),
@@ -372,7 +377,10 @@ void ShipCADModel::acceptUndo(UndoObject* undo)
     emit undoDataChanged();
     cout << "undo accepted" << endl;
     cout << "undo list:" << _undo_list.size() << " pos:" << _undo_pos << " prev_pos:" << _prev_undo_pos
-         << " mem:" << getUndoMemory() << endl;
+         << " mem:" << getUndoMemory() << "\n***" << endl;
+    for (size_t i=0; i<_undo_list.size(); i++)
+        cout << i << " " << _undo_list[i]->getUndoText().toStdString() << endl;
+    cout << "***" << endl;
 }
 
 size_t ShipCADModel::getUndoMemory() const
@@ -1284,3 +1292,250 @@ bool ShipCADModel::loadPart(FileBuffer& source, version_t& partversion)
     }
     return changed;
 }
+
+void ShipCADModel::loadChinesFromText(QTextStream& file, SplineVector& splines)
+{
+    size_t lineno = 0;
+    bool unexpected = false;
+    Spline* spline = nullptr;
+    while (!unexpected && !file.atEnd()) {
+        QString line = file.readLine();
+        lineno++;
+        bool ok;
+        if (lineno == 1) {
+            int units = line.toInt(&ok);
+            if (ok && units == 0)
+                _settings.setUnits(fuMetric);
+            else if (ok && units == 1)
+                _settings.setUnits(fuMetric);
+            else
+                throw ParseError(1, "first line is units, must be 0 or 1");
+            continue;
+        }
+        // if an empty line, complete the spline
+        // and get ready for more
+        if (line.size() == 0 && spline != nullptr) {
+            if (spline->numberOfPoints() > 1) {
+                splines.add(spline);
+            } else {
+                delete spline;
+            }
+            spline = nullptr;
+            continue;
+        }
+        if (line == "EOF")
+            break;
+        // split the line
+        QStringList fields = line.split(" ");
+        if (fields.size() != 3) {
+            // try tabs
+            fields = line.split("\t");
+            if (fields.size() != 3) {
+                unexpected = true;
+                continue;
+            }
+        }
+        // we have 3 pieces, turn it into a point
+        float x = fields[0].toFloat(&ok);
+        if (!ok) {
+            unexpected = true;
+            continue;
+        }
+        float y = fields[1].toFloat(&ok);
+        if (!ok) {
+            unexpected = true;
+            continue;
+        }
+        float z = fields[2].toFloat(&ok);
+        if (!ok) {
+            unexpected = true;
+            continue;
+        }
+        // add the point to the spline
+        QVector3D pt(x, y, z);
+        if (spline == nullptr) {
+            spline = new Spline();
+        }
+        spline->add(pt);
+    }
+    // complete the last spline
+    if (!unexpected && spline != nullptr) {
+        if (spline->numberOfPoints() > 1) {
+            splines.add(spline);
+        } else
+            delete spline;
+    }
+    // got something wrong, bail
+    if (unexpected) {
+        throw ParseError(lineno, "");
+    }
+}
+
+// FreeShipUnit.pas:12715
+void ShipCADModel::importChines(size_t np, SplineVector& chines)
+{
+    SubdivisionSurface* surf = getSurface();
+    for (size_t i=0; i<chines.size(); ++i) {
+        SubdivisionLayer* layer = (i < surf->numberOfLayers()) ?
+            surf->getLayer(i) : surf->addNewLayer();
+        // msg 0186
+        layer->setName(tr("Strake %1").arg(i+1));
+        layer->setDevelopable(true);
+    }
+    // add special layer to close the hull at centerline
+    SubdivisionLayer* layer = surf->addNewLayer();
+    // msg 0187
+    layer->setName(tr("Close hull"));
+    // prepare matrices
+    MatrixXd mat(np, np);
+    for (size_t i=0; i<np; ++i)
+        for (size_t j=0; j<np; ++j)
+            mat(i,j) = 0.0;
+    mat(0, 0) = 1.0;
+    for (size_t i=2; i<np; i++) {
+        mat(i-1, i-2) = 1/6.0;
+        mat(i-1, i-1) = 2/3.0;
+        mat(i-1, i) = 1/6.0;
+    }
+    mat(np-1, np-1) = 1.0;
+    ColPivHouseholderQR<MatrixXd> qr(np, np);
+    qr.compute(mat);
+    MatrixXd row(np, 3);
+    QVector3D min, max;
+    CPointGrid points;
+    points.setRows(np);
+    points.setCols(chines.size());
+    
+    for (size_t i=0; i<chines.size(); ++i) {
+        Spline* spline = chines.get(i);
+        for (size_t j=0; j<np; ++j) {
+            QVector3D p = spline->value(j / static_cast<float>(np - 1));
+            row(j, 0) = p.x();
+            row(j, 1) = p.y();
+            row(j, 2) = p.z();
+        }
+        // calculate new points
+        MatrixXd newpts = qr.solve(row);
+        for (size_t j=0; j<np; ++j) {
+            QVector3D pt(newpts(j, 0), newpts(j, 1), newpts(j, 2));
+            if (pt.y() < 0)
+                pt.setY(0.0);
+            if (i == 0 && j == 0) {
+                min = pt;
+                max = min;
+            } else
+                MinMax(pt, min, max);
+            points.setPoint(j, i, surf->addControlPoint(pt));
+        }
+    }
+    // add chines as markers
+    for (size_t i=0; i<chines.size(); ++i) {
+        Spline* spline = chines.get(i);
+        Marker* marker = addMarker();
+        for (size_t j=0; j<spline->numberOfPoints(); ++j) {
+            marker->add(spline->getPoint(j));
+            marker->setKnuckle(j, spline->isKnuckle(j));
+        }
+    }
+    // setup control faces
+    vector<SubdivisionControlPoint*> pts;
+    for (size_t i=1; i<np; ++i) {
+        for (size_t j=1; j<chines.size(); ++j) {
+            pts.clear();
+            SubdivisionControlPoint* point = points.getPoint(i, j);
+            if (find(pts.begin(), pts.end(), point) == pts.end())
+                pts.push_back(point);
+            point = points.getPoint(i-1, j);
+            if (find(pts.begin(), pts.end(), point) == pts.end())
+                pts.push_back(point);
+            point = points.getPoint(i-1, j-1);
+            if (find(pts.begin(), pts.end(), point) == pts.end())
+                pts.push_back(point);
+            point = points.getPoint(i, j-1);
+            if (find(pts.begin(), pts.end(), point) == pts.end())
+                pts.push_back(point);
+            if (pts.size() > 2)
+                surf->addControlFace(pts, true, surf->getLayer(j-1));
+        }
+    }
+    for (size_t i=1; i<np; ++i) {
+        for (size_t j=0; j<chines.size(); ++j) {
+            SubdivisionControlEdge* edge = surf->controlEdgeExists(points.getPoint(i-1, j-1),
+                                                                   points.getPoint(i, j));
+            if (edge != nullptr)
+                edge->setCrease(true);
+        }
+    }
+
+    // add controlcurves
+    for (size_t j=0; j<chines.size(); ++j) {
+        SubdivisionControlCurve* curve = SubdivisionControlCurve::construct(surf);
+        surf->addControlCurve(curve);
+        for (size_t i=0; i<np; ++i) {
+            curve->addPoint(points.getPoint(i, j));
+            if (i > 0) {
+                SubdivisionControlEdge* edge = surf->controlEdgeExists(points.getPoint(i-1, j),
+                                                                       points.getPoint(i, j));
+                if (edge != nullptr)
+                    edge->setCurve(curve);
+            }
+        }
+    }
+
+    // check for stem, keel, and stern points to be closed
+    pts.clear();
+    // first stern
+    for (size_t i=chines.size(); i>=2; --i)
+        pts.push_back(points.getPoint(np-1, i-1));
+    // then keel
+    for (size_t i=np; i>=1; --i)
+        pts.push_back(points.getPoint(i-1, 0));
+    // and finally stem
+    for (size_t i=2; i<=chines.size(); ++i)
+        pts.push_back(points.getPoint(0, i-1));
+    vector<SubdivisionControlPoint*> pts2;
+    for (size_t i=0; i<pts.size(); ++i) {
+        SubdivisionControlPoint* point = pts[i];
+        QVector3D p = point->getCoordinate();
+        if (p.y() != 0) {
+            p.setY(0);
+            SubdivisionControlPoint* pt = surf->addControlPoint(p);
+            pts2.push_back(pt);
+        } else
+            pts2.push_back(point);
+    }
+    for (size_t i=1; i<pts.size(); ++i) {
+        vector<SubdivisionControlPoint*> temp;
+        if (find(temp.begin(), temp.end(), pts2[i]) == temp.end())
+            temp.push_back(pts2[i]);
+        if (find(temp.begin(), temp.end(), pts2[i-1]) == temp.end())
+            temp.push_back(pts2[i-1]);
+        if (find(temp.begin(), temp.end(), pts[i-1]) == temp.end())
+            temp.push_back(pts[i-1]);
+        if (find(temp.begin(), temp.end(), pts[i]) == temp.end())
+            temp.push_back(pts[i]);
+        if (temp.size() > 2)
+            surf->addControlFace(temp, false, layer);
+    }
+
+    // set transom as knuckle
+    for (size_t j=1; j<chines.size(); ++j) {
+        SubdivisionControlEdge* edge = surf->controlEdgeExists(points.getPoint(np-1, j-1),
+                                                               points.getPoint(np-1, j));
+        if (edge != nullptr)
+            edge->setCrease(true);
+    }
+    // delete unused layers
+    surf->deleteEmptyLayers();
+    // delete unused control points
+    for (size_t i=surf->numberOfControlPoints(); i>=1; --i)
+        if (surf->getControlPoint(i-1)->numberOfFaces() == 0)
+            surf->deleteControlPoint(surf->getControlPoint(i-1));
+    extents(min, max);
+    _settings.setBeam(2*max.y());
+    _settings.setLength(max.x() - min.x());
+    _settings.setDraft(1.0);
+    setPrecision(fpHigh);
+    setBuild(false);
+}
+

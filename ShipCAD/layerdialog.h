@@ -37,7 +37,8 @@ public:
     explicit LayerDialog(QWidget *parent = 0);
     ~LayerDialog();
 
-    void initialize(ShipCAD::LayerDialogData* data, bool delete_data);
+    void initialize(ShipCAD::LayerDialogData* data, bool delete_data,
+                    ShipCAD::unit_type_t units);
     ShipCAD::LayerDialogData* retrieve() {return _data;}
 
 signals:
@@ -99,6 +100,9 @@ private:
     QAction* _moveUpAction;
     QAction* _moveDownAction;
     ColorView* _colorView;
+    QString _areastr;
+    QString _weightstr;
+    QString _lengthstr;
 };
 
 #endif // LAYERDIALOG_H

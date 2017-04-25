@@ -400,6 +400,11 @@ private:
     QAction* _alphaBgImgAction;
     QAction* _tolBgImgAction;
     QAction* _blendBgImgAction;
+    // status bar
+    ShipCAD::unit_type_t _units;
+    QLabel* _unitLabel;
+    QLabel* _undoMemLabel;
+    QLabel* _geomInfoLabel;
     // toolbars
     QToolBar* _fileToolBar;
     QToolBar* _visToolBar;

@@ -26,7 +26,6 @@
  *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
  *                                                                                             *
  *#############################################################################################*/
-
 #include "shipcadlib.h"
 
 using namespace ShipCAD;
@@ -42,42 +41,42 @@ const QVector2D ShipCAD::ZERO2(0,0);
 QString ShipCAD::AreaStr(unit_type_t units)
 {
     if (units == fuImperial)
-        return "[ft2]";
-    return "[m2]";
+        return QObject::tr("[ft2]");
+    return QObject::tr("[m2]");
 }
 
 QString ShipCAD::LengthStr(unit_type_t units)
 {
     if (units == fuImperial)
-        return "[ft]";
-    return "[m]";
+        return QObject::tr("[ft]");
+    return QObject::tr("[m]");
 }
 
 QString ShipCAD::InertiaStr(unit_type_t units)
 {
     if (units == fuImperial)
-        return "[ft4]";
-    return "[m4]";
+        return QObject::tr("[ft4]");
+    return QObject::tr("[m4]");
 }
 
 QString ShipCAD::VolStr(unit_type_t units)
 {
     if (units == fuImperial)
-        return "[ft3]";
-    return "[m3]";
+        return QObject::tr("[ft3]");
+    return QObject::tr("[m3]");
 }
 
 QString ShipCAD::DensityStr(unit_type_t units)
 {
     if (units == fuImperial)
-        return "[lbs/ft3]";
-    return "[t/m3]";
+        return QObject::tr("[lbs/ft3]");
+    return QObject::tr("[t/m3]");
 }
 
 QString ShipCAD::WeightStr(unit_type_t units)
 {
     if (units == fuImperial)
-        return "[tons]";
-    return "[tonnes]";
+        return QObject::tr("[tons]");
+    return QObject::tr("[tonnes]");
 }
 

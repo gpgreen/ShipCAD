@@ -34,7 +34,8 @@ LayerDialog::LayerDialog(QWidget *parent) :
     _newToolButton(nullptr), _removeEmptyToolButton(nullptr),
     _moveUpToolButton(nullptr), _moveDownToolButton(nullptr),
     _colorAction(nullptr), _newLayerAction(nullptr), _deleteEmptyAction(nullptr),
-    _moveUpAction(nullptr), _moveDownAction(nullptr), _colorView(nullptr)
+    _moveUpAction(nullptr), _moveDownAction(nullptr), _colorView(nullptr),
+    _areastr(""), _weightstr(""), _lengthstr("")
 {
     ui->setupUi(this);
     createToolButtons();
@@ -121,7 +122,8 @@ void LayerDialog::createToolButtons()
     ui->toolBarHorizontalLayout->addStretch(1);
 }
 
-void LayerDialog::initialize(ShipCAD::LayerDialogData* data, bool delete_data)
+void LayerDialog::initialize(ShipCAD::LayerDialogData* data, bool delete_data,
+                             ShipCAD::unit_type_t units)
 {
     QSignalBlocker block(ui->layerListWidget);
     if (delete_data)
@@ -135,6 +137,11 @@ void LayerDialog::initialize(ShipCAD::LayerDialogData* data, bool delete_data)
             _current = i;
     }
     ui->layerListWidget->setCurrentRow(_current);
+    _areastr = AreaStr(units);
+    _weightstr = WeightStr(units);
+    _lengthstr = LengthStr(units);
+    ui->thicknessUnitLabel->setText(_lengthstr);
+    ui->specificWeightUnitLabel->setText(DensityStr(units));
     updateState();
 }
 
@@ -170,12 +177,17 @@ void LayerDialog::updateState()
         _moveDownAction->setEnabled(false);
     else
         _moveDownAction->setEnabled(true);
-    ui->areaLabel->setText(QString(tr("Area %1 [m2]").arg(truncate(cprops.layer_properties.surface_area, 2))));
-    ui->weightLabel->setText(QString(tr("Weight %1 [tons]").arg(truncate(cprops.layer_properties.weight, 2))));
-    ui->cogLabel->setText(QString(tr("Center of gravity %1,%2,%3 [m]")
+    ui->areaLabel->setText(QString(tr("Area %1 %2")
+                                   .arg(truncate(cprops.layer_properties.surface_area, 2))
+                                   .arg(_areastr)));
+    ui->weightLabel->setText(QString(tr("Weight %1 %2")
+                                     .arg(truncate(cprops.layer_properties.weight, 2))
+                                     .arg(_weightstr)));
+    ui->cogLabel->setText(QString(tr("Center of gravity %1,%2,%3 %4")
                                   .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.x(), 3, 7))
                                   .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.y(), 3, 7))
-                                  .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.z(), 3, 7))));
+                                  .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.z(), 3, 7))
+                                  .arg(_lengthstr)));
 }
 
 void LayerDialog::listRowChanged(int index)

@@ -300,6 +300,20 @@ public:
      * \return true if geometry actually loaded
      */
     bool loadPart(FileBuffer& source, version_t& partversion);
+
+    /*! \brief load splines from a text file
+     *
+     * \param file the textstream to load from
+     * \param splines the vector to store loaded splines
+     */
+    void loadChinesFromText(QTextStream& file, SplineVector& splines);
+
+    /*! \brief imports chines and creates developable surface
+     *
+     * \param np number of control points to create per spline
+     * \param chines a list of chines
+     */
+    void importChines(size_t np, SplineVector& chines);
     
     void rebuildModel(bool redo_intersections);
 

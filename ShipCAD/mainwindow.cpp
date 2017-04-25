@@ -74,6 +74,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     _visibleBgImgAction(nullptr), _clearBgImgAction(nullptr), _loadBgImgAction(nullptr),
     _saveBgImgAction(nullptr), _originBgImgAction(nullptr), _scaleBgImgAction(nullptr),
     _alphaBgImgAction(nullptr), _tolBgImgAction(nullptr), _blendBgImgAction(nullptr),
+    _units(fuMetric), _unitLabel(nullptr), _undoMemLabel(nullptr), _geomInfoLabel(nullptr),
     _fileToolBar(nullptr), _visToolBar(nullptr), _layerToolBar(nullptr), _pointToolBar(nullptr),
     _modToolBar(nullptr), _precisionComboBox(nullptr), _activeLayerComboBox(nullptr),
     _colorView(nullptr)
@@ -536,13 +537,16 @@ void MainWindow::createToolBars()
 
 void MainWindow::createStatusBar()
 {
-    QLabel* _undo_info = new QLabel(tr("undo memory:"));
-    _undo_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    QLabel* _geom_info = new QLabel(tr("faces: 0"));
-    _geom_info->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    _unitLabel = new QLabel(tr("Metric"));
+    _unitLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    _undoMemLabel = new QLabel(tr("undo memory: 0"));
+    _undoMemLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+    _geomInfoLabel = new QLabel(tr("faces: 0 pts: 0 edges: 0"));
+    _geomInfoLabel->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
-    ui->statusBar->addPermanentWidget(_undo_info);
-    ui->statusBar->addPermanentWidget(_geom_info);
+    ui->statusBar->addPermanentWidget(_unitLabel);
+    ui->statusBar->addPermanentWidget(_undoMemLabel);
+    ui->statusBar->addPermanentWidget(_geomInfoLabel);
 }
 
 void MainWindow::createActions()
@@ -1065,7 +1069,7 @@ void MainWindow::updateVisibilityActions()
                                       vis.isShowMarkers());
 
 //    ui->actionShade_Underwater->setChecked(s->shadeUnderWater());
-    emit viewportRender();
+
     cout << "updateVisibilityActions" << endl;
 }
 
@@ -1218,7 +1222,8 @@ void MainWindow::importMarkers()
 
 void MainWindow::updateUndoData()
 {
-
+    size_t mem = _controller->getModel()->getUndoMemory();
+    _undoMemLabel->setText(tr("undo memory: %1").arg(mem));
 }
 
 void MainWindow::showPreferences()
@@ -1313,15 +1318,19 @@ void MainWindow::setFarLens()
 
 void MainWindow::modelChanged()
 {
+    SubdivisionSurface* surf = _controller->getModel()->getSurface();
+    _units = _controller->getModel()->getProjectSettings().getUnits();
+    _unitLabel->setText(_units == fuMetric ? tr("Metric") : tr("Imperial"));
     bool changed = _controller->getModel()->isFileChanged();
-    QString fname(_controller->getModel()->getFilename());
-    // msg 0280
-    QString mod(tr("modified"));
-    // msg 281
-    QString notmod(tr("not modified"));
-    QString title = QString(tr("ShipCAD  :  %1 (%2)")).arg(fname).arg(changed ? mod : notmod);
-    setWindowTitle(title);
+    // msg 0280, 0281
+    setWindowTitle(QString(tr("ShipCAD  :  %1 (%2)")
+                   .arg(_controller->getModel()->getFilename())
+                   .arg(changed ? tr("modified") : tr("not modified"))));
     ui->actionSave->setEnabled(changed);
+    _geomInfoLabel->setText(tr("faces: %1 pts: %2 edges: %3")
+                            .arg(surf->numberOfControlFaces())
+                            .arg(surf->numberOfControlPoints())
+                            .arg(surf->numberOfControlEdges()));
     cout << "model changed" << endl;
 }
 
@@ -1398,7 +1407,7 @@ void MainWindow::displayLayerDialog()
     vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
                                      _controller->getSurface()->getLayers().end());
     LayerDialogData* data = new LayerDialogData(layers, _controller->getSurface()->getActiveLayer());
-    _layerdialog->initialize(data, false);
+    _layerdialog->initialize(data, false, _units);
     _layerdialog->exec();
     data = _layerdialog->retrieve();
     emit layerDialogComplete(data);
@@ -1412,7 +1421,7 @@ void MainWindow::newLayerFromDialog()
     vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
                                      _controller->getSurface()->getLayers().end());
     LayerDialogData* data = new LayerDialogData(layers, _controller->getSurface()->getActiveLayer());
-    _layerdialog->initialize(data, true);
+    _layerdialog->initialize(data, true, _units);
 }
 
 void MainWindow::removeEmptyLayerFromDialog()
@@ -1422,7 +1431,7 @@ void MainWindow::removeEmptyLayerFromDialog()
     vector<SubdivisionLayer*> layers(_controller->getSurface()->getLayers().begin(),
                                      _controller->getSurface()->getLayers().end());
     LayerDialogData* data = new LayerDialogData(layers, _controller->getSurface()->getActiveLayer());
-    _layerdialog->initialize(data, true);
+    _layerdialog->initialize(data, true, _units);
 }
 
 void MainWindow::executeInsertPlanePointsDialog(InsertPlaneDialogData& data)

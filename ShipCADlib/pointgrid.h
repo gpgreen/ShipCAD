@@ -38,6 +38,7 @@ namespace ShipCAD {
 //////////////////////////////////////////////////////////////////////////////////////
 
 class SubdivisionPoint;
+class SubdivisionControlPoint;
 
 struct PointGrid
 {
@@ -67,11 +68,38 @@ struct PointGrid
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+struct CPointGrid
+{
+    std::vector<std::vector<SubdivisionControlPoint*> > points;
+    size_t cols() {return points[0].size();}
+    size_t rows() {return points.size();}
+
+    void setRows(size_t rows)
+        {
+            points.resize(rows);
+        }
+
+    void setCols(size_t cols)
+        {
+            for (size_t i=0; i<points.size(); i++)
+                points[i].resize(cols);
+        }
+
+    SubdivisionControlPoint* getPoint(size_t row, size_t col) {
+        return points[row][col];
+    }
+
+    void setPoint(size_t row, size_t col, SubdivisionControlPoint* pt) {
+        points[row][col] = pt;
+    }
+};
+
 };				/* end namespace */
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 std::ostream& operator << (std::ostream& os, const ShipCAD::PointGrid& grid);
+std::ostream& operator << (std::ostream& os, const ShipCAD::CPointGrid& grid);
 
 //////////////////////////////////////////////////////////////////////////////////////
 

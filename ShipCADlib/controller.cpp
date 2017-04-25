@@ -432,7 +432,7 @@ void Controller::rotateFaces()
     }
     
     // msg 0088
-    RotateDialogData data(tr("Rotation vector"), "[Degr.]");
+    RotateDialogData data(tr("Rotation vector"), tr("[Degr.]"));
     emit exeRotateDialog(data);
     if (!data.accepted) {
         clearSelections();
@@ -662,11 +662,13 @@ void Controller::exportSTL()
 	// TODO
 }
 
+// FreeShipUnit.pas:7276
 void Controller::importCarene()
 {
 	// TODO
 }
 
+// FreeShipUnit.pas:7379
 void Controller::importChines()
 {
 	// TODO

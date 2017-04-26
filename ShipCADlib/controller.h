@@ -295,8 +295,10 @@ public slots:
 	void importCarene();
 
     /*! \brief import chines from a textfile and fit a surface through them
+     *
+     * \param filename path of file containing chines
 	 */
-	void importChines();
+	void importChines(const QString& filename);
 
     /*! \brief import a Freeship exchange format (FEF) file
 	 */

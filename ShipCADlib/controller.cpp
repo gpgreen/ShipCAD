@@ -669,9 +669,30 @@ void Controller::importCarene()
 }
 
 // FreeShipUnit.pas:7379
-void Controller::importChines()
+void Controller::importChines(const QString& filename)
 {
-	// TODO
+    cout << "Controller::importChines" << endl;
+    QFile chinefile(filename);
+    // msg 0107
+    getModel()->createUndo(tr("import chines"), true);
+    getModel()->clear();
+    try {
+        if (!chinefile.open(QFile::ReadOnly | QIODevice::Text)) {
+            // msg 0106
+            emit displayErrorDialog(tr("Unable to open file!"));
+            return;
+        }
+        QTextStream is(&chinefile);
+        SplineVector splines(true);
+        getModel()->loadChinesFromText(is, splines);
+        getModel()->importChines(8, splines);
+        splines.clear();
+    } catch(...) {
+        // what do we do?
+        return;
+    }
+    getModel()->setFileChanged(true);
+    emit modelLoaded();
 }
 
 void Controller::importFEF()

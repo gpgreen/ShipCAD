@@ -250,20 +250,35 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     // build the vertex transformation matrix from the perspective
     // and the angle, elevation
 
-    float aspect_ratio = 1.0;
-    if (height != 0)
-        aspect_ratio = width / static_cast<float>(height);
-    _proj = QMatrix4x4();
-
-    // create projection
-    _proj.perspective(RadToDeg(_field_of_view) / _zoom, aspect_ratio, 0.1f, 200.0f);
-    
     // find the camera location
     QMatrix4x4 model;
     model.translate(_panX, _panY, _panZ);
     model.rotate(-_elevation, 1, 0, 0);
     model.rotate(_angle, 0, 0, 1);
     _camera_location = model.map(QVector3D(max.x() + _distance, 0, 0));
+
+    // find the max point and min point distance from the camera
+    // use these plus some buffer for near and far clipping planes
+    float maxdist = (model.map(surfmax) - _camera_location).length();
+    float mindist = (model.map(surfmin) - _camera_location).length();
+    float near = 0;
+    if (abs(maxdist) > abs(mindist))
+        near = abs(mindist) * 0.80;
+    else
+        near = abs(maxdist) * 0.80;
+    float far = 0;
+    if (abs(maxdist) > abs(mindist))
+        far = abs(maxdist) * 1.20;
+    else
+        far = abs(mindist) * 1.20;
+
+    float aspect_ratio = 1.0;
+    if (height != 0)
+        aspect_ratio = width / static_cast<float>(height);
+    _proj = QMatrix4x4();
+
+    // create projection
+    _proj.perspective(RadToDeg(_field_of_view) / _zoom, aspect_ratio, near, far);
     
     // view matrix
     QMatrix4x4 view;
@@ -325,13 +340,13 @@ void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D&
         margin = _midpoint.x() * .01 * _margin;
         hi = (_midpoint.x() / aspect_ratio + margin) / _zoom;
         float x = (_midpoint.x() + margin) / _zoom;
-        _proj.ortho(-x, x, -hi, hi, 0.1f, 40.0f);
+        _proj.ortho(-x, x, -hi, hi, 0.1f, 1000.0f);
     }
     else {
         margin = breadth * .01 * _margin;
         hi = (breadth * aspect_ratio + margin) / _zoom;
         float y = (breadth + margin) / _zoom;
-        _proj.ortho(-hi, hi, -y, y, 0.1f, 40.0f);
+        _proj.ortho(-hi, hi, -y, y, 0.1f, 1000.0f);
     }
     
     // find the camera location
@@ -399,13 +414,13 @@ void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector
         margin = _midpoint.x() * .01 * _margin;
         hi = (_midpoint.x() / aspect_ratio + margin) / _zoom;
         float x = (_midpoint.x() + margin) / _zoom;
-        _proj.ortho(-x, x, -hi, hi, 0.1f, 40.0f);
+        _proj.ortho(-x, x, -hi, hi, 0.1f, 1000.0f);
     }
     else {
         margin = _midpoint.z() * .01 * _margin;
         hi = (_midpoint.z() * aspect_ratio + margin) / _zoom;
         float z = (_midpoint.z() + margin) / _zoom;
-        _proj.ortho(-hi, hi, -z, z, 0.1f, 40.0f);
+        _proj.ortho(-hi, hi, -z, z, 0.1f, 1000.0f);
     }
     
     // find the camera location
@@ -468,13 +483,13 @@ void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVecto
         margin = _midpoint.y() * 2 * .01 * _margin;
         hi = (_midpoint.y() * 2 / aspect_ratio + margin) / _zoom;
         float y = (_midpoint.y() * 2 + margin) / _zoom;
-        _proj.ortho(-y, y, -hi, hi, 0.1f, 40.0f);
+        _proj.ortho(-y, y, -hi, hi, 0.1f, 1000.0f);
     }
     else {
         margin = _midpoint.z() * .01 * _margin;
         hi = (_midpoint.z() * aspect_ratio + margin) / _zoom;
         float z = (_midpoint.z() + margin) / _zoom;
-        _proj.ortho(-hi, hi, -z, z, 0.1f, 40.0f);
+        _proj.ortho(-hi, hi, -z, z, 0.1f, 1000.0f);
     }
     
     // find the camera location

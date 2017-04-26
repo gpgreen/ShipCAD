@@ -167,7 +167,7 @@ void LayerDialog::updateState()
     ui->specificWeightLineEdit->setText(QString("%1").arg(cprops.material_density));
     ui->thicknessLineEdit->setText(QString("%1").arg(cprops.thickness));
     ui->alphaLineEdit->setText(QString("%1").arg(cprops.alpha));
-    _colorView->setColor(cprops.color);
+    _colorView->setColor(cprops.color, cprops.alpha);
     _colorView->update();
     if (_current == 0)
         _moveUpAction->setEnabled(false);
@@ -285,16 +285,20 @@ void LayerDialog::selectColor()
 {
 	cout << "LayerDialog::selectColor" << endl;
     LayerPropertiesForDialog& cprops = _data->layers[_current];
+    cprops.color.setAlphaF(cprops.alpha);
     ChooseColorDialogData cdata(tr("Choose color for Layer"), cprops.color);
+    cdata.options = QColorDialog::ShowAlphaChannel;
     emit exeChooseColorDialog(cdata);
     if (cdata.accepted) {
         cprops.color = cdata.chosen;
+        cprops.alpha = cdata.chosen.alphaF();
         emit layerColorChanged(cprops.color);
     }
 }
 
 void LayerDialog::moveUp()
 {
+    cout << "LayerDialog::moveUp" << endl;
     vector<LayerPropertiesForDialog>::iterator i = _data->layers.begin();
     i += _current;
     vector<LayerPropertiesForDialog>::iterator j = i;
@@ -305,12 +309,12 @@ void LayerDialog::moveUp()
     _data->layers.erase(j);
     --_current;
     updateLayerList();
-    //updateState();
     emit reorderLayerList(_data);
 }
 
 void LayerDialog::moveDown()
 {
+    cout << "LayerDialog::moveDown" << endl;
     vector<LayerPropertiesForDialog>::iterator i = _data->layers.begin();
     i += _current;
     vector<LayerPropertiesForDialog>::iterator j = i;
@@ -321,6 +325,5 @@ void LayerDialog::moveDown()
     _data->layers.erase(j);
     ++_current;
     updateLayerList();
-    //updateState();
     emit reorderLayerList(_data);
 }

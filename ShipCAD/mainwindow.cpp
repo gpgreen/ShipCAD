@@ -96,18 +96,23 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     // connect controller signals
     connect(_controller, SIGNAL(updateUndoData()), SLOT(updateUndoData()));
     connect(_controller, SIGNAL(changeActiveLayer()), SLOT(enableActions()));
+    connect(_controller, SIGNAL(showControlPointDialog(bool)),
+            SLOT(showControlPointDialog(bool)));
+    // modified model
     connect(_controller, SIGNAL(modifiedModel()), SLOT(modelChanged()));
     connect(_controller, SIGNAL(modifiedModel()), SLOT(enableActions()));
     connect(_controller, SIGNAL(modifiedModel()), SIGNAL(viewportRender()));
     connect(_controller, SIGNAL(modifiedModel()), SLOT(updateVisibilityActions()));
-    connect(_controller, SIGNAL(showControlPointDialog(bool)),
-            SLOT(showControlPointDialog(bool)));
+    // loaded model
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelLoaded()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(enableActions()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(updateVisibilityActions()));
     connect(_controller, SIGNAL(modelLoaded()), SLOT(modelChanged()));
+    connect(_controller, SIGNAL(modelLoaded()), SIGNAL(viewportRender()));
+    // selection change
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(enableActions()));
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
+    // show dialogs
     connect(_controller,
             SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
             SLOT(executeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)));
@@ -141,7 +146,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
 
     // connect file actions
     connect(ui->actionImportCarene, SIGNAL(triggered()), _controller, SLOT(importCarene()));
-    connect(ui->actionImportChines, SIGNAL(triggered()), _controller, SLOT(importChines()));
+    connect(ui->actionImportChines, SIGNAL(triggered()), SLOT(importChines()));
     connect(ui->actionImportFEF, SIGNAL(triggered()), _controller, SLOT(importFEF()));
     connect(ui->actionImportPart, SIGNAL(triggered()), SLOT(importPart()));
     connect(ui->actionImportPolyCad, SIGNAL(triggered()), _controller, SLOT(importPolycad()));
@@ -905,7 +910,7 @@ void MainWindow::enableActions()
     ui->actionSave_As->setEnabled(ncpoints > 0 || model->isFileChanged() || model->isFilenameSet());
 
     ui->actionImportCarene->setEnabled(false);
-    ui->actionImportChines->setEnabled(false);
+    //ui->actionImportChines->setEnabled(false);
     ui->actionImportFEF->setEnabled(false);
     ui->actionImportPart->setEnabled(_viewports.size() > 0 && ncfaces > 0);
     ui->actionImportPolyCad->setEnabled(false);
@@ -1032,7 +1037,8 @@ void MainWindow::enableActions()
 
     // update the layer color box
     if (surf->getActiveLayer() != nullptr) {
-        _colorView->setColor(surf->getActiveLayer()->getColor());
+        _colorView->setColor(surf->getActiveLayer()->getColor(),
+                             surf->getActiveLayer()->getAlphaBlend());
     } else {
         _colorView->setColor(surf->getLayerColor());
     }
@@ -1218,6 +1224,45 @@ void MainWindow::importMarkers()
     QString filepath = fi.filePath();
     settings.setValue("file/opendir", filepath);
     _controller->importMarkers(filename);
+}
+
+void MainWindow::importChines()
+{
+    cout << "MainWindow::importChines" << endl;
+    // save existing file if changed
+    if (_controller->getModel() != nullptr && _controller->getModel()->isFileChanged()) {
+        QMessageBox msgBox;
+        // msg 0103
+        msgBox.setText(tr("The current model has been changed!"));
+        // msg 0104
+        msgBox.setInformativeText(tr("Do you want to save it first?"));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Yes);
+        int btn = msgBox.exec();
+        if (btn == QMessageBox::Yes) {
+            saveModelFile();
+        }
+        else if (btn == QMessageBox::Cancel) {
+            return;
+        }
+    }
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/opendir")) {
+        lastdir = settings.value("file/opendir").toString();
+    }
+    // get the filename
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Chine File"),
+                                                    lastdir,
+                                                    tr("text (*.txt)"));
+    if (filename.length() == 0)
+        return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    settings.setValue("file/opendir", filepath);
+    _controller->importChines(filename);
 }
 
 void MainWindow::updateUndoData()

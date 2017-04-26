@@ -92,7 +92,8 @@ void InsertPlanePointsDialog::setExtents(const QVector3D& min, const QVector3D& 
 
 void InsertPlanePointsDialog::planeChanged()
 {
-    float minval, maxval;
+    float minval = 0.0f;
+    float maxval = 0.0f;
     if (ui->transversePlaneRadioButton->isChecked()) {
         minval = _min.x();
         maxval = _max.x();

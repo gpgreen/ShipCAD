@@ -1531,6 +1531,7 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
     for (size_t i=surf->numberOfControlPoints(); i>=1; --i)
         if (surf->getControlPoint(i-1)->numberOfFaces() == 0)
             surf->deleteControlPoint(surf->getControlPoint(i-1));
+    surf->deleteElementsCollection();
     extents(min, max);
     _settings.setBeam(2*max.y());
     _settings.setLength(max.x() - min.x());

@@ -49,6 +49,7 @@ void ColorView::paintEvent(QPaintEvent *event)
 
     QPainter painter;
     painter.begin(this);
+    painter.fillRect(8, 8, 16, 16, QBrush(Qt::black));
     painter.fillRect(1, 1, 30, 30, QBrush(_color));
     painter.end();
 }

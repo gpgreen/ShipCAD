@@ -383,6 +383,10 @@ public:
     Pool<SubdivisionFace>& getFacePool() {return _face_pool;}
     Pool<Spline>& getSplinePool() {return _spline_pool;}
 
+    /*! \brief delete elements marked for permanent removal
+     */
+    void deleteElementsCollection();
+    
 protected:
 
     void priv_dump(std::ostream& os, const char* prefix) const;
@@ -403,8 +407,6 @@ protected:
     void sortEdges(std::vector<SubdivisionPoint*>& points, std::vector<SubdivisionEdge*>& edges);
     void sortControlEdges(std::vector<SubdivisionControlPoint*>& points, std::vector<SubdivisionControlEdge*>& edges);
 
-    void deleteElementsCollection();
-    
 protected:
 
     bool _show_control_net;

@@ -177,6 +177,10 @@ private slots:
      */
     void importMarkers();
 
+    /*! \brief action for importing chines
+     */
+    void importChines();
+
     /*! \brief new model loaded
      */
     void modelLoaded();

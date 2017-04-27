@@ -17,57 +17,27 @@
  *                                                                                             *
  *#############################################################################################*/
 
-#ifndef LAYERDIALOG_H
-#define LAYERDIALOG_H
+#ifndef INTERSECTIONSDIALOG_H
+#define INTERSECTIONSDIALOG_H
 
 #include <QDialog>
-#include <QToolButton>
-#include "dialogdata.h"
-#include "colorview.h"
 
 namespace Ui {
-class LayerDialog;
+class IntersectionsDialog;
 }
 
-class LayerDialog : public QDialog
+class IntersectionsDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit LayerDialog(QWidget *parent = 0);
-    ~LayerDialog();
+    explicit IntersectionsDialog(QWidget *parent = 0);
+    ~IntersectionsDialog();
 
-    void initialize(ShipCAD::LayerDialogData* data, bool delete_data,
+    void initialize(ShipCAD::IntersectionsDialogData* data, bool delete_data,
                     ShipCAD::unit_type_t units);
     ShipCAD::LayerDialogData* retrieve() {return _data;}
 
-signals:
-
-    void activeLayerChanged(int index);
-    void exeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
-    void layerColorChanged(const QColor& color);
-    void newLayer();
-    void deleteEmptyLayer();
-    void reorderLayerList(ShipCAD::LayerDialogData* data);
-
-public slots:
-
-    void nameChanged(const QString& nm);
-    void weightChanged();
-    void thicknessChanged();
-    void listRowChanged(int item);
-    void hydroBoxChanged(int state);
-    void symmBoxChanged(int state);
-    void curveBoxChanged(int state);
-    void devBoxChanged(int state);
-    void showLinesBoxChanged(int state);
-    void selectColor();
-    void moveUp();
-    void moveDown();
-    /*! \brief update state of ui after change
-     */
-    void updateState();
-    
 protected:
     /*! \brief read stored settings for dialog
      */
@@ -81,27 +51,9 @@ protected:
     /*! \brief called before dialog is closed
      */
     virtual void closeEvent(QCloseEvent* event);
-    /*! \brief update the layer list widget from layer list
-     */
-    void updateLayerList();
 
 private:
-    size_t _current;
-    Ui::LayerDialog *ui;
-    ShipCAD::LayerDialogData* _data;
-    QToolButton* _newToolButton;
-    QToolButton* _removeEmptyToolButton;
-    QToolButton* _moveUpToolButton;
-    QToolButton* _moveDownToolButton;
-    QAction* _colorAction;
-    QAction* _newLayerAction;
-    QAction* _deleteEmptyAction;
-    QAction* _moveUpAction;
-    QAction* _moveDownAction;
-    ColorView* _colorView;
-    QString _areastr;
-    QString _weightstr;
-    QString _lengthstr;
+    Ui::IntersectionsDialog *ui;
 };
 
-#endif // LAYERDIALOG_H
+#endif // INTERSECTIONSDIALOG_H

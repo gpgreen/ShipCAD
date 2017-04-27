@@ -64,9 +64,6 @@ LayerDialog::LayerDialog(QWidget *parent) :
     ui->thicknessLineEdit->setValidator( new QDoubleValidator(0, 10000000, 4) );
     connect(ui->thicknessLineEdit, SIGNAL(editingFinished()),
             this, SLOT(thicknessChanged()));
-    ui->alphaLineEdit->setValidator( new QDoubleValidator(0, 1.0, 2) );
-    connect(ui->alphaLineEdit, SIGNAL(editingFinished()),
-            this, SLOT(alphaChanged()));
     
     // connect check boxes to slots
     connect(ui->hydrostaticsCheckBox, SIGNAL(stateChanged(int)),
@@ -166,7 +163,7 @@ void LayerDialog::updateState()
     ui->linesplanCheckBox->setChecked(cprops.show_linesplan ? Qt::Checked : Qt::Unchecked);
     ui->specificWeightLineEdit->setText(QString("%1").arg(cprops.material_density));
     ui->thicknessLineEdit->setText(QString("%1").arg(cprops.thickness));
-    ui->alphaLineEdit->setText(QString("%1").arg(cprops.alpha));
+    ui->alphaLabel->setText(QString(tr("Alpha: %1").arg(cprops.alpha)));
     _colorView->setColor(cprops.color, cprops.alpha);
     _colorView->update();
     if (_current == 0)
@@ -220,14 +217,6 @@ void LayerDialog::thicknessChanged()
     LayerPropertiesForDialog& cprops = _data->layers[_current];
     cprops.thickness = t;
     cout << "Layer:" << cprops.name.toStdString() << " t:" << t << endl;
-}
-
-void LayerDialog::alphaChanged()
-{
-    float a = ui->alphaLineEdit->text().toFloat();
-    LayerPropertiesForDialog& cprops = _data->layers[_current];
-    cprops.alpha = a;
-    cout << "Layer:" << cprops.name.toStdString() << " alpha:" << a << endl;
 }
 
 void LayerDialog::hydroBoxChanged(int state)

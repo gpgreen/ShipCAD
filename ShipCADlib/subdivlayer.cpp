@@ -287,11 +287,10 @@ bool SubdivisionLayer::setProperties(LayerPropertiesForDialog& props)
         changed = true;
         _color = props.color;
     }
-    double alphaf;
-    modf(props.alpha, &alphaf);
-    alphaf *= 255;
-    if (alphaf >= 0 && alphaf <= 255) {
-        unsigned char alpha = static_cast<unsigned int>(alphaf);
+    double alpha_int;
+    modf(props.alpha * 255, &alpha_int);
+    if (alpha_int >= 0 && alpha_int <= 255) {
+        unsigned char alpha = static_cast<unsigned int>(alpha_int);
         if (alpha != _alphablend) {
             changed = true;
             _alphablend = alpha;

@@ -59,6 +59,7 @@ class MirrorDialog;
 class RotateDialog;
 class LayerDialog;
 class ColorView;
+class IntersectionsDialog;
 
 class ViewportState
 {
@@ -323,6 +324,12 @@ private slots:
      */
     void executeRotateDialog(ShipCAD::RotateDialogData& data);
 
+    /*! \brief execute the intersections dialog
+     *
+     * \param data dialog data structure
+     */
+    void executeIntersectionsDialog(ShipCAD::IntersectionsDialogData* data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;
@@ -361,6 +368,7 @@ private:
     MirrorDialog* _mirrordialog; /**< the dialog to select mirror plane for faces */
     RotateDialog* _rotatedialog; /**< the dialog to select rotation axis for faces */
     LayerDialog* _layerdialog; /**< the dialog to edit layer properties */
+    IntersectionsDialog* _intersectionsdialog; /**< the dialog to edit intersections */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

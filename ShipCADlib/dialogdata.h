@@ -24,6 +24,7 @@
 #include <QColorDialog>
 #include <vector>
 #include "shipcadlib.h"
+#include "intersection.h"
 
 namespace ShipCAD {
 
@@ -150,6 +151,22 @@ struct RotateDialogData
     QString units;
 
     explicit RotateDialogData(const QString& title, const QString& units);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for intersections dialog exchange
+ */
+
+struct IntersectionsDialogData
+{
+    bool accepted;
+
+    std::vector<std::pair<ShipCAD::Intersection*, bool> > stations;
+    std::vector<std::pair<ShipCAD::Intersection*, bool> > waterlines;
+    std::vector<std::pair<ShipCAD::Intersection*, bool> > buttocks;
+    std::vector<std::pair<ShipCAD::Intersection*, bool> > diagonals;
+    
+    explicit IntersectionsDialogData(ShipCAD::ShipCADModel* model);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

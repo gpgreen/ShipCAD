@@ -21,6 +21,8 @@
 #define INTERSECTIONSDIALOG_H
 
 #include <QDialog>
+#include <QToolButton>
+#include "dialogdata.h"
 
 namespace Ui {
 class IntersectionsDialog;
@@ -34,9 +36,44 @@ public:
     explicit IntersectionsDialog(QWidget *parent = 0);
     ~IntersectionsDialog();
 
-    void initialize(ShipCAD::IntersectionsDialogData* data, bool delete_data,
-                    ShipCAD::unit_type_t units);
-    ShipCAD::LayerDialogData* retrieve() {return _data;}
+    void initialize(ShipCAD::IntersectionsDialogData* data, bool delete_data);
+
+    enum which_intersection {stations, waterlines, diagonals, buttocks};
+
+signals:
+
+public slots:
+
+    void listItemChanged(QStandardItem* item);
+    void updateState();
+
+    /*! \brief stations toggled
+     */
+    void stationsToggled();
+
+    /*! \brief buttocks toggled
+     */
+    void buttocksToggled();
+
+    /*! \brief waterlines toggled
+     */
+    void waterlinesToggled();
+
+    /*! \brief diagonals toggled
+     */
+    void diagonalsToggled();
+
+    /*! \brief add one triggered
+     */
+    void addOneTriggered();
+
+    /*! \brief add range triggered
+     */
+    void addNTriggered();
+
+    /*! \brief delete all intersections
+     */
+    void deleteAllTriggered();
 
 protected:
     /*! \brief read stored settings for dialog
@@ -54,6 +91,26 @@ protected:
 
 private:
     Ui::IntersectionsDialog *ui;
+    which_intersection _showing_intersection;
+    QStandardItemModel* _stationsListModel;
+    QStandardItemModel* _waterlinesListModel;
+    QStandardItemModel* _diagonalsListModel;
+    QStandardItemModel* _buttocksListModel;
+    ShipCAD::IntersectionsDialogData* _data;
+    QToolButton* _stationsToolButton;
+    QAction* _stationsAction;
+    QToolButton* _buttocksToolButton;
+    QAction* _buttocksAction;
+    QToolButton* _waterlinesToolButton;
+    QAction* _waterlinesAction;
+    QToolButton* _diagonalsToolButton;
+    QAction* _diagonalsAction;
+    QToolButton* _addOneToolButton;
+    QAction* _addOneAction;
+    QToolButton* _addNToolButton;
+    QAction* _addNAction;
+    QToolButton* _deleteAllToolButton;
+    QAction* _deleteAllAction;
 };
 
 #endif // INTERSECTIONSDIALOG_H

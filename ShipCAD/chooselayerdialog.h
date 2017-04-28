@@ -56,6 +56,8 @@ protected:
     /*! \brief save settings for dialog
      */
     void saveSettings();
+    /*! \brief called before dialog is closed
+     */
     virtual void closeEvent(QCloseEvent* event);
 
 private:

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Intersections</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -31,10 +31,15 @@
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
+        <layout class="QHBoxLayout" name="toolBarHorizontalLayout">
+         <property name="margin">
+          <number>2</number>
+         </property>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QListView" name="intersectionListView"/>
+       <widget class="QListView" name="intersectionsListView"/>
       </item>
      </layout>
     </widget>

@@ -19,6 +19,7 @@
 
 #include "dialogdata.h"
 #include "subdivlayer.h"
+#include "shipcadmodel.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -70,9 +71,27 @@ RotateDialogData::RotateDialogData(const QString& title, const QString& unitstr)
     // does nothing
 }
 
-LayerDialogData::LayerDialogData(vector<SubdivisionLayer*> list_of_layers, SubdivisionLayer* active_layer)
+LayerDialogData::LayerDialogData(vector<SubdivisionLayer*> list_of_layers,
+                                 SubdivisionLayer* active_layer)
     : active(active_layer)
 {
     for (size_t i=0; i<list_of_layers.size(); i++)
         layers.push_back(list_of_layers[i]->getProperties());
+}
+
+IntersectionsDialogData::IntersectionsDialogData(ShipCADModel* model)
+    : accepted(false)
+{
+    IntersectionVector& iv = model->getStations();
+    for (size_t i=0; i<iv.size(); ++i)
+        stations.push_back(make_pair(iv.get(i), iv.get(i)->isShowCurvature()));
+    IntersectionVector& div = model->getDiagonals();
+    for (size_t i=0; i<div.size(); ++i)
+        diagonals.push_back(make_pair(div.get(i), div.get(i)->isShowCurvature()));
+    IntersectionVector& wiv = model->getWaterlines();
+    for (size_t i=0; i<wiv.size(); ++i)
+        waterlines.push_back(make_pair(wiv.get(i), wiv.get(i)->isShowCurvature()));
+    IntersectionVector& biv = model->getButtocks();
+    for (size_t i=0; i<biv.size(); ++i)
+        buttocks.push_back(make_pair(biv.get(i), biv.get(i)->isShowCurvature()));
 }

@@ -43,6 +43,7 @@
 #include "mirrordialog.h"
 #include "rotatedialog.h"
 #include "layerdialog.h"
+#include "intersectionsdialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
@@ -59,6 +60,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     ui(new Ui::MainWindow), _pointdialog(nullptr), _planepointsdialog(nullptr),
     _intersectlayersdialog(nullptr), _extrudeedgedialog(nullptr), _chooselayerdialog(nullptr),
     _mirrordialog(nullptr), _rotatedialog(nullptr), _layerdialog(nullptr),
+    _intersectionsdialog(nullptr),
     _controller(c), _currentViewportContext(nullptr),
     _menu_recent_files(nullptr), _contextMenu(nullptr), _cameraMenu(nullptr),
     _viewportModeGroup(nullptr),
@@ -134,6 +136,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller,
             SIGNAL(exeRotateDialog(ShipCAD::RotateDialogData&)),
             SLOT(executeRotateDialog(ShipCAD::RotateDialogData&)));
+    connect(_controller,
+            SIGNAL(exeIntersectionsDialog(ShipCAD::IntersectionsDialogData*)),
+            SLOT(executeIntersectionsDialog(ShipCAD::IntersectionsDialogData*)));
     connect(_controller,
             SIGNAL(displayInfoDialog(const QString&)),
             SLOT(showInfoDialog(const QString&)));
@@ -277,7 +282,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     // connect calculations actions
     connect(ui->actionDelft_yacht_series, SIGNAL(triggered()), _controller, SLOT(delftResistance()));
     connect(ui->actionKAPER, SIGNAL(triggered()), _controller, SLOT(kaperResistance()));
-    connect(ui->actionIntersections, SIGNAL(triggered()), _controller, SLOT(intersectionDialog()));
+    connect(ui->actionIntersections, SIGNAL(triggered()), _controller, SLOT(intersectionsDialog()));
     connect(ui->actionDesign_Hydrostatics, SIGNAL(triggered()),
             _controller, SLOT(calculateHydrostatics()));
     connect(ui->actionHydrostatics, SIGNAL(triggered()), _controller, SLOT(hydrostaticsDialog()));
@@ -1014,7 +1019,8 @@ void MainWindow::enableActions()
     ui->actionLackenby->setEnabled(false/*ncfaces > 0*/);
 
     // calculations actions
-
+    ui->actionIntersections->setEnabled(ncfaces > 0);
+    
     // update the precision combo box
     if (ncfaces > 0) {
         _precisionComboBox->setEnabled(true);
@@ -1581,6 +1587,44 @@ void MainWindow::executeChooseLayerDialog(ChooseLayerDialogData& data)
     data.accepted = (result == QDialog::Accepted);
     _chooselayerdialog->retrieve(data);
     cout << "execute choose layer dialog:" << (data.accepted ? "t" : "f") << endl;
+}
+
+void MainWindow::executeIntersectionsDialog(IntersectionsDialogData* data)
+{
+    if (_intersectionsdialog == nullptr) {
+        _intersectionsdialog = new IntersectionsDialog(this);
+        // connect(_intersectionsdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
+        //         _controller, SLOT(layerFacesSelected(ShipCAD::SubdivisionLayer*)));
+        // connect(_intersectionsdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
+        //         _controller, SLOT(layerFacesDeselected(ShipCAD::SubdivisionLayer*)));
+        // connect(_intersectionsdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
+        //         _controller, SLOT(layerSelectionUpdate(ShipCAD::ChooseLayerDialogData*)));
+    }
+    _intersectionsdialog->initialize(data, false);
+
+    // now that dialog is initialized, connect to display
+    // connect(_intersectionsdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
+    //         this, SIGNAL(viewportRender()));
+    // connect(_intersectionsdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
+    //         this, SIGNAL(viewportRender()));
+    // connect(_intersectionsdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
+    //         this, SIGNAL(viewportRender()));
+    // emit viewportRender();
+
+    // execute the dialog
+    int result = _intersectionsdialog->exec();
+
+    // dialog finished, disconnect from display
+    // disconnect(_intersectionsdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
+    //         this, SIGNAL(viewportRender()));
+    // disconnect(_intersectionsdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
+    //         this, SIGNAL(viewportRender()));
+    // disconnect(_intersectionsdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
+    //            this, SIGNAL(viewportRender()));
+
+    data->accepted = (result == QDialog::Accepted);
+    //_intersectionsdialog->retrieve(data);
+    cout << "execute intersections dialog" << endl;
 }
 
 void MainWindow::changeSelectedItems()

@@ -33,10 +33,12 @@ ChooseLayerDialog::ChooseLayerDialog(QWidget *parent) :
     ui->layerListView->setModel(_listModel);
 
     // register model item changed signal
-    connect(_listModel, SIGNAL(itemChanged(QStandardItem*)), this, SLOT(listItemChanged(QStandardItem*)));
+    connect(_listModel, SIGNAL(itemChanged(QStandardItem*)),
+            this, SLOT(listItemChanged(QStandardItem*)));
 
     // connect check box
-    connect(ui->includePointsCheckBox, SIGNAL(clicked()), this, SLOT(includePointClicked()));
+    connect(ui->includePointsCheckBox, SIGNAL(clicked()),
+            this, SLOT(includePointClicked()));
 
     readSettings();
 }
@@ -113,7 +115,8 @@ void ChooseLayerDialog::closeEvent(QCloseEvent* event)
 void ChooseLayerDialog::readSettings()
 {
     QSettings settings;
-    const QByteArray geometry = settings.value("chooselayerdialog-geometry", QByteArray()).toByteArray();
+    const QByteArray geometry = settings.value("chooselayerdialog-geometry",
+                                               QByteArray()).toByteArray();
     if (!geometry.isEmpty()) {
         restoreGeometry(geometry);
     }

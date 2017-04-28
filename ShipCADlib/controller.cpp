@@ -861,9 +861,11 @@ void Controller::addIntersectionToList(Intersection* /*inter*/)
 	// TODO
 }
 
-void Controller::intersectionDialog()
+void Controller::intersectionsDialog()
 {
-	// TODO
+	cout << "Controller::intersectionsDialog" << endl;
+    IntersectionsDialogData* data = new IntersectionsDialogData(getModel());
+    emit exeIntersectionsDialog(data);
 }
 
 // FreeShipUnit.pas:9128

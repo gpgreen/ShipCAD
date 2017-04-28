@@ -152,6 +152,10 @@ signals:
      */
     void exeRotateDialog(ShipCAD::RotateDialogData& data);
 
+    /*! \brief execute the Intersections dialog
+     */
+    void exeIntersectionsDialog(ShipCAD::IntersectionsDialogData* data);
+
     /*! \brief show an info dialog
      */
     void displayInfoDialog(const QString& msg);
@@ -370,9 +374,9 @@ public slots:
      */
     void addIntersectionToList(Intersection* inter);
 
-    /*! \brief the intersection dialog
+    /*! \brief the intersections dialog
      */
-    void intersectionDialog();
+    void intersectionsDialog();
 
     /*! \brief all connected patches surrounded by creases grouped into new layer
      */

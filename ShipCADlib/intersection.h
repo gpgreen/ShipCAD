@@ -96,6 +96,12 @@ public:
     bool isShowCurvature() const
         {return _show_curvature;}
 
+    /*! \brief set show intersection curvature
+     *
+     * \param set whether to show or not
+     */
+    void setShowCurvature(bool set);
+    
     QString getDescription();
     intersection_type_t getIntersectionType()
         {return _intersection_type;}
@@ -134,6 +140,23 @@ private:
     Plane _plane;
     bool _show_curvature;
     bool _use_hydrostatic_surfaces_only;
+};
+
+/*! \brief comparison class for sorting intersections in an IntersectionVector
+ */
+struct IntersectionSorter {
+    bool operator() (Intersection* i, Intersection* j)
+    {
+        return -i->getPlane().d() < -j->getPlane().d();
+    }
+};
+
+struct IntersectionFinder {
+    bool operator () (Intersection* i) {
+        return (i->getPlane().d()==_d);
+    }
+    IntersectionFinder(float d) : _d(d) {}
+    float _d;
 };
 
 typedef PointerVector<Intersection> IntersectionVector;

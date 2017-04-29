@@ -1593,38 +1593,26 @@ void MainWindow::executeIntersectionsDialog(IntersectionsDialogData* data)
 {
     if (_intersectionsdialog == nullptr) {
         _intersectionsdialog = new IntersectionsDialog(this);
-        // connect(_intersectionsdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
-        //         _controller, SLOT(layerFacesSelected(ShipCAD::SubdivisionLayer*)));
-        // connect(_intersectionsdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
-        //         _controller, SLOT(layerFacesDeselected(ShipCAD::SubdivisionLayer*)));
-        // connect(_intersectionsdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
-        //         _controller, SLOT(layerSelectionUpdate(ShipCAD::ChooseLayerDialogData*)));
+        connect(_intersectionsdialog, SIGNAL(showCurvatureChange()),
+                SIGNAL(viewportRender()));
+        connect(_intersectionsdialog, SIGNAL(addOrDeleteIntersections()),
+                SLOT(addOrDeleteIntersections()));
     }
-    _intersectionsdialog->initialize(data, false);
-
-    // now that dialog is initialized, connect to display
-    // connect(_intersectionsdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
-    //         this, SIGNAL(viewportRender()));
-    // connect(_intersectionsdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
-    //         this, SIGNAL(viewportRender()));
-    // connect(_intersectionsdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
-    //         this, SIGNAL(viewportRender()));
-    // emit viewportRender();
+    _intersectionsdialog->initialize(data);
 
     // execute the dialog
-    int result = _intersectionsdialog->exec();
+    _intersectionsdialog->exec();
 
-    // dialog finished, disconnect from display
-    // disconnect(_intersectionsdialog, SIGNAL(layerSelected(ShipCAD::SubdivisionLayer*)),
-    //         this, SIGNAL(viewportRender()));
-    // disconnect(_intersectionsdialog, SIGNAL(layerDeselected(ShipCAD::SubdivisionLayer*)),
-    //         this, SIGNAL(viewportRender()));
-    // disconnect(_intersectionsdialog, SIGNAL(layerUpdate(ShipCAD::ChooseLayerDialogData*)),
-    //            this, SIGNAL(viewportRender()));
-
-    data->accepted = (result == QDialog::Accepted);
-    //_intersectionsdialog->retrieve(data);
     cout << "execute intersections dialog" << endl;
+}
+
+void MainWindow::addOrDeleteIntersections()
+{
+    cout << "MainWindow::addOrDeleteIntersections" << endl;
+    bool changed;
+    IntersectionsDialogData* data = _intersectionsdialog->retrieve(changed);
+    _controller->addOrDeleteIntersections(data);
+    _intersectionsdialog->initialize(data);
 }
 
 void MainWindow::changeSelectedItems()

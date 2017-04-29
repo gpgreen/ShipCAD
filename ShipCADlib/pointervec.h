@@ -72,17 +72,10 @@ public:
 	void add(T* elem) {_vec.push_back(elem);}
 
 	bool del(T* elem)
-		{
-			bool removed = false;
-            typename std::vector<T*>::iterator i = std::find(_vec.begin(), _vec.end(), elem);
-			if (i != _vec.end()) {
-				if (_owned)
-					delete *i;
-				_vec.erase(i);
-				removed = true;
-			}
-			return removed;
-		}
+    {
+        typename std::vector<T*>::iterator i = std::find(_vec.begin(), _vec.end(), elem);
+        return priv_del(i);
+    }
 
 	void apply(apply_fn* fn)
 		{std::for_each(_vec.begin(), _vec.end(), fn);}
@@ -99,7 +92,29 @@ public:
     typename std::vector<T*>::const_iterator end() const
 		{return _vec.end();}
 	
+    void erase(typename std::vector<T*>::iterator i)
+        {priv_del(i);}
+
+    void insert(typename std::vector<T*>::iterator position,
+                typename std::vector<T*>::iterator first,
+                typename std::vector<T*>::iterator last)
+    {
+        _vec.insert(position, first, last);
+    }
+
 private:
+    bool priv_del(typename std::vector<T*>::iterator i)
+    {
+        bool removed = false;
+        if (i != _vec.end()) {
+            if (_owned)
+                delete *i;
+            _vec.erase(i);
+            removed = true;
+        }
+        return removed;
+    }
+
 	// define copy constructor and assignment operator
 	PointerVector(const PointerVector&);
 	PointerVector& operator=(const PointerVector&);

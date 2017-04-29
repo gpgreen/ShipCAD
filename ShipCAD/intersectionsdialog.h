@@ -36,11 +36,13 @@ public:
     explicit IntersectionsDialog(QWidget *parent = 0);
     ~IntersectionsDialog();
 
-    void initialize(ShipCAD::IntersectionsDialogData* data, bool delete_data);
-
-    enum which_intersection {stations, waterlines, diagonals, buttocks};
+    void initialize(ShipCAD::IntersectionsDialogData* data);
+    ShipCAD::IntersectionsDialogData* retrieve(bool& have_changed);
 
 signals:
+
+    void showCurvatureChange();
+    void addOrDeleteIntersections();
 
 public slots:
 
@@ -91,7 +93,8 @@ protected:
 
 private:
     Ui::IntersectionsDialog *ui;
-    which_intersection _showing_intersection;
+    bool _data_changed;
+    ShipCAD::intersection_type_t _showing_intersection;
     QStandardItemModel* _stationsListModel;
     QStandardItemModel* _waterlinesListModel;
     QStandardItemModel* _diagonalsListModel;

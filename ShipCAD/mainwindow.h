@@ -330,6 +330,10 @@ private slots:
      */
     void executeIntersectionsDialog(ShipCAD::IntersectionsDialogData* data);
 
+    /*! \brief intersections dialog added or deleted intersections
+     */
+    void addOrDeleteIntersections();
+    
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;

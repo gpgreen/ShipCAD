@@ -80,18 +80,12 @@ LayerDialogData::LayerDialogData(vector<SubdivisionLayer*> list_of_layers,
 }
 
 IntersectionsDialogData::IntersectionsDialogData(ShipCADModel* model)
-    : accepted(false)
+    : accepted(false), intersection_type(fiStation), delete_all_intersections(false),
+      delete_intersections(false), stations(false),
+      waterlines(false), buttocks(false), diagonals(false)
 {
-    IntersectionVector& iv = model->getStations();
-    for (size_t i=0; i<iv.size(); ++i)
-        stations.push_back(make_pair(iv.get(i), iv.get(i)->isShowCurvature()));
-    IntersectionVector& div = model->getDiagonals();
-    for (size_t i=0; i<div.size(); ++i)
-        diagonals.push_back(make_pair(div.get(i), div.get(i)->isShowCurvature()));
-    IntersectionVector& wiv = model->getWaterlines();
-    for (size_t i=0; i<wiv.size(); ++i)
-        waterlines.push_back(make_pair(wiv.get(i), wiv.get(i)->isShowCurvature()));
-    IntersectionVector& biv = model->getButtocks();
-    for (size_t i=0; i<biv.size(); ++i)
-        buttocks.push_back(make_pair(biv.get(i), biv.get(i)->isShowCurvature()));
+    stations.insert(stations.begin(), model->getStations().begin(), model->getStations().end());
+    buttocks.insert(buttocks.begin(), model->getButtocks().begin(), model->getButtocks().end());
+    waterlines.insert(waterlines.begin(), model->getWaterlines().begin(), model->getWaterlines().end());
+    diagonals.insert(diagonals.begin(), model->getDiagonals().begin(), model->getDiagonals().end());
 }

@@ -95,6 +95,16 @@ QColor Intersection::getColor()
     }
 }
 
+void Intersection::setShowCurvature(bool set)
+{
+    if (set != _show_curvature) {
+        for (size_t i=0; i<_items.size(); i++) {
+            _items.get(i)->setShowCurvature(set);
+        }
+        _show_curvature = set;
+    }
+}
+
 void Intersection::setPlane(const Plane& pln)
 {
     _plane = pln;

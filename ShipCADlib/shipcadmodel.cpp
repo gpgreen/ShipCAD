@@ -697,6 +697,8 @@ Intersection* ShipCADModel::createIntersection(intersection_type_t ty, float dis
         return 0;
     }
     targetlist->add(result);
+    IntersectionSorter sorter;
+    sort(targetlist->begin(), targetlist->end(), sorter);
     return result;
 }
 

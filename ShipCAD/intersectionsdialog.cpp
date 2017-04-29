@@ -17,12 +17,17 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <QInputDialog>
 #include "intersectionsdialog.h"
 #include "ui_intersectionsdialog.h"
+#include "shipcadlib.h"
+
+using namespace ShipCAD;
+using namespace std;
 
 IntersectionsDialog::IntersectionsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::IntersectionsDialog), _showing_intersection(stations),
+    ui(new Ui::IntersectionsDialog), _data_changed(false), _showing_intersection(fiStation),
     _stationsListModel(nullptr), _waterlinesListModel(nullptr),
     _diagonalsListModel(nullptr), _buttocksListModel(nullptr),
     _data(nullptr), _stationsToolButton(nullptr), _stationsAction(nullptr),
@@ -104,7 +109,6 @@ void IntersectionsDialog::createToolButtons()
     _addOneToolButton = new QToolButton(this);
     _addOneAction = new QAction(QIcon(":/Themes/Default/icons/32/AddOne.png"),
                                 tr("Add one"), this);
-    _addOneAction->setCheckable(true);
     _addOneToolButton->setDefaultAction(_addOneAction);
     ui->toolBarHorizontalLayout->addWidget(_addOneToolButton);
     connect(_addOneAction, SIGNAL(triggered()), this, SLOT(addOneTriggered()));
@@ -112,7 +116,6 @@ void IntersectionsDialog::createToolButtons()
     _addNToolButton = new QToolButton(this);
     _addNAction = new QAction(QIcon(":/Themes/Default/icons/32/AddRange.png"),
                               tr("Add multiple"), this);
-    _addNAction->setCheckable(true);
     _addNToolButton->setDefaultAction(_addNAction);
     ui->toolBarHorizontalLayout->addWidget(_addNToolButton);
     connect(_addNAction, SIGNAL(triggered()), this, SLOT(addNTriggered()));
@@ -120,68 +123,93 @@ void IntersectionsDialog::createToolButtons()
     _deleteAllToolButton = new QToolButton(this);
     _deleteAllAction = new QAction(QIcon(":/Themes/Default/icons/32/DeleteAll.png"),
                               tr("Delete all"), this);
-    _deleteAllAction->setCheckable(true);
     _deleteAllToolButton->setDefaultAction(_deleteAllAction);
     ui->toolBarHorizontalLayout->addWidget(_deleteAllToolButton);
-    connect(_addNAction, SIGNAL(triggered()), this, SLOT(deleteAllTriggered()));
+    connect(_deleteAllAction, SIGNAL(triggered()), this, SLOT(deleteAllTriggered()));
 
     ui->toolBarHorizontalLayout->addStretch(1);
 }
 
-void IntersectionsDialog::initialize(ShipCAD::IntersectionsDialogData* data, bool delete_data)
+void IntersectionsDialog::initialize(ShipCAD::IntersectionsDialogData* data)
 {
-    if (delete_data)
-        delete _data;
     _data = data;
+    _data_changed = false;
+    _showing_intersection = data->intersection_type;
+    // block signals while we populate the list view
+    QSignalBlocker sblock(_stationsListModel);
     _stationsListModel->clear();
     for (size_t i=0; i<data->stations.size(); ++i) {
-        QStandardItem* listItem = new QStandardItem(data->stations[i].first->getDescription());
+        QStandardItem* listItem = new QStandardItem(data->stations.get(i)->getDescription());
         listItem->setCheckable(true);
-        if (data->stations[i].second)
+        if (data->stations.get(i)->isShowCurvature())
             listItem->setCheckState(Qt::Checked);
         else
             listItem->setCheckState(Qt::Unchecked);
         _stationsListModel->setItem(i, listItem);
     }
+    // block signals while we populate the list view
+    QSignalBlocker bblock(_buttocksListModel);
     _buttocksListModel->clear();
     for (size_t i=0; i<data->buttocks.size(); ++i) {
-        QStandardItem* listItem = new QStandardItem(data->buttocks[i].first->getDescription());
+        QStandardItem* listItem = new QStandardItem(data->buttocks.get(i)->getDescription());
         listItem->setCheckable(true);
-        if (data->buttocks[i].second)
+        if (data->buttocks.get(i)->isShowCurvature())
             listItem->setCheckState(Qt::Checked);
         else
             listItem->setCheckState(Qt::Unchecked);
         _buttocksListModel->setItem(i, listItem);
     }
+    // block signals while we populate the list view
+    QSignalBlocker wblock(_waterlinesListModel);
     _waterlinesListModel->clear();
     for (size_t i=0; i<data->waterlines.size(); ++i) {
-        QStandardItem* listItem = new QStandardItem(data->waterlines[i].first->getDescription());
+        QStandardItem* listItem = new QStandardItem(data->waterlines.get(i)->getDescription());
         listItem->setCheckable(true);
-        if (data->waterlines[i].second)
+        if (data->waterlines.get(i)->isShowCurvature())
             listItem->setCheckState(Qt::Checked);
         else
             listItem->setCheckState(Qt::Unchecked);
         _waterlinesListModel->setItem(i, listItem);
     }
+    // block signals while we populate the list view
+    QSignalBlocker dblock(_diagonalsListModel);
     _diagonalsListModel->clear();
     for (size_t i=0; i<data->diagonals.size(); ++i) {
-        QStandardItem* listItem = new QStandardItem(data->diagonals[i].first->getDescription());
+        QStandardItem* listItem = new QStandardItem(data->diagonals.get(i)->getDescription());
         listItem->setCheckable(true);
-        if (data->diagonals[i].second)
+        if (data->diagonals.get(i)->isShowCurvature())
             listItem->setCheckState(Qt::Checked);
         else
             listItem->setCheckState(Qt::Unchecked);
         _diagonalsListModel->setItem(i, listItem);
     }
-    _showing_intersection = stations;
-    _stationsAction->setChecked(true);
+    switch(_showing_intersection) {
+    case fiStation:
+        _stationsAction->setChecked(true);
+        break;
+    case fiDiagonal:
+        _diagonalsAction->setChecked(true);
+        break;
+    case fiWaterline:
+        _waterlinesAction->setChecked(true);
+        break;
+    case fiButtock:
+        _buttocksAction->setChecked(true);
+        break;
+    }
     updateState();
+}
+
+IntersectionsDialogData* IntersectionsDialog::retrieve(bool& have_changed)
+{
+    have_changed = _data_changed;
+    return _data;
 }
 
 void IntersectionsDialog::updateState()
 {
     switch(_showing_intersection) {
-    case stations:
+    case fiStation:
         ui->intersectionsListView->setModel(_stationsListModel);
         _buttocksAction->setChecked(false);
         _waterlinesAction->setChecked(false);
@@ -191,7 +219,7 @@ void IntersectionsDialog::updateState()
         _deleteAllAction->setToolTip(tr("Delete all stations."));
         _deleteAllAction->setEnabled(_data->stations.size() > 0);
         break;
-    case buttocks:
+    case fiButtock:
         ui->intersectionsListView->setModel(_buttocksListModel);
         _stationsAction->setChecked(false);
         _waterlinesAction->setChecked(false);
@@ -201,7 +229,7 @@ void IntersectionsDialog::updateState()
         _deleteAllAction->setToolTip(tr("Delete all buttocks."));
         _deleteAllAction->setEnabled(_data->buttocks.size() > 0);
         break;
-    case waterlines:
+    case fiWaterline:
         ui->intersectionsListView->setModel(_waterlinesListModel);
         _stationsAction->setChecked(false);
         _buttocksAction->setChecked(false);
@@ -211,7 +239,7 @@ void IntersectionsDialog::updateState()
         _deleteAllAction->setToolTip(tr("Delete all waterlines."));
         _deleteAllAction->setEnabled(_data->waterlines.size() > 0);
         break;
-    case diagonals:
+    case fiDiagonal:
         ui->intersectionsListView->setModel(_diagonalsListModel);
         _stationsAction->setChecked(false);
         _buttocksAction->setChecked(false);
@@ -231,31 +259,34 @@ void IntersectionsDialog::listItemChanged(QStandardItem* item)
     const QModelIndex currentIndex =
             item->model()->indexFromItem(item);
 
-#if 0
     // set in data
+    bool set = false;
     if (_data != nullptr) {
         Qt::CheckState state = item->checkState();
-        if (state == Qt::Checked) {
-            _data->layers[currentIndex.row()].second = true;
-            if (_data->mode == ShipCAD::fsFaces)
-                emit layerSelected(_data->layers[currentIndex.row()].first);
-            else
-                emit layerUpdate(_data);
-        } else {
-            _data->layers[currentIndex.row()].second = false;
-            if (_data->mode == ShipCAD::fsFaces)
-                emit layerDeselected(_data->layers[currentIndex.row()].first);
-            else
-                emit layerUpdate(_data);
+        set = (state == Qt::Checked);
+        switch(_showing_intersection) {
+        case fiStation:
+            _data->stations.get(currentIndex.row())->setShowCurvature(set);
+            break;
+        case fiButtock:
+            _data->buttocks.get(currentIndex.row())->setShowCurvature(set);
+            break;
+        case fiWaterline:
+            _data->waterlines.get(currentIndex.row())->setShowCurvature(set);
+            break;
+        case fiDiagonal:
+            _data->diagonals.get(currentIndex.row())->setShowCurvature(set);
+            break;
         }
+        _data_changed = true;
+        emit showCurvatureChange();
     }
-#endif
 }
 
 void IntersectionsDialog::stationsToggled()
 {
     if (_stationsAction->isChecked()) {
-        _showing_intersection = stations;
+        _showing_intersection = fiStation;
         updateState();
     }
 }
@@ -263,7 +294,7 @@ void IntersectionsDialog::stationsToggled()
 void IntersectionsDialog::buttocksToggled()
 {
     if (_buttocksAction->isChecked()) {
-        _showing_intersection = buttocks;
+        _showing_intersection = fiButtock;
         updateState();
     }
 }
@@ -271,7 +302,7 @@ void IntersectionsDialog::buttocksToggled()
 void IntersectionsDialog::waterlinesToggled()
 {
     if (_waterlinesAction->isChecked()) {
-        _showing_intersection = waterlines;
+        _showing_intersection = fiWaterline;
         updateState();
     }
 }
@@ -279,14 +310,21 @@ void IntersectionsDialog::waterlinesToggled()
 void IntersectionsDialog::diagonalsToggled()
 {
     if (_diagonalsAction->isChecked()) {
-        _showing_intersection = diagonals;
+        _showing_intersection = fiDiagonal;
         updateState();
     }
 }
 
 void IntersectionsDialog::addOneTriggered()
 {
-
+    bool ok;
+    double d = QInputDialog::getDouble(this, tr("New intersection"),
+                                       tr("Distance:"), 1.0, -10000, 10000, 3, &ok);
+    if (ok) {
+        _data->intersection_type = _showing_intersection;
+        _data->intersection_offsets.push_back(d);
+        emit addOrDeleteIntersections();
+    }
 }
 
 void IntersectionsDialog::addNTriggered()
@@ -296,7 +334,9 @@ void IntersectionsDialog::addNTriggered()
 
 void IntersectionsDialog::deleteAllTriggered()
 {
-
+    _data->intersection_type = _showing_intersection;
+    _data->delete_all_intersections = true;
+    emit addOrDeleteIntersections();
 }
 
 void IntersectionsDialog::closeEvent(QCloseEvent* event)
@@ -308,7 +348,8 @@ void IntersectionsDialog::closeEvent(QCloseEvent* event)
 void IntersectionsDialog::readSettings()
 {
     QSettings settings;
-    const QByteArray geometry = settings.value("intersectionsdialog-geometry", QByteArray()).toByteArray();
+    const QByteArray geometry = settings.value("intersectionsdialog-geometry",
+                                               QByteArray()).toByteArray();
     if (!geometry.isEmpty()) {
         restoreGeometry(geometry);
     }

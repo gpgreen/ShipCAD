@@ -366,13 +366,11 @@ public slots:
      */
     void importFrames();
 
-    /*! \brief add a new intersection at the specified location
+    /*! \brief add new intersections created in dialog
+     *
+     * \param data dialog data structure containing data for new or deleted intersections
      */
-    void addIntersection();
-
-    /*! \brief add an intersection to the appropriate list
-     */
-    void addIntersectionToList(Intersection* inter);
+    void addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data);
 
     /*! \brief the intersections dialog
      */

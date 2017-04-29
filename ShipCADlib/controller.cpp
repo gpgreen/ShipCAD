@@ -851,14 +851,71 @@ void Controller::importFrames()
 	// TODO
 }
 
-void Controller::addIntersection()
+void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data)
 {
-	// TODO
-}
+    cout << "Controller::addOrDeleteIntersections" << endl;
+    bool changed = false;
+    if (data->delete_all_intersections) {
+        cout << "Deleting all intersections" << endl;
+        IntersectionVector& iv = data->intersection_type == fiStation ? getModel()->getStations()
+            : (data->intersection_type == fiWaterline ? getModel()->getWaterlines()
+               : (data->intersection_type == fiButtock ? getModel()->getButtocks()
+                  : getModel()->getDiagonals()));
+        iv.clear();
+        changed = true;
+    } else if (data->delete_intersections) {
+        cout << "Deleting " << data->intersection_offsets.size() << " intersections" << endl;
+        IntersectionVector& iv = data->intersection_type == fiStation ? getModel()->getStations()
+            : (data->intersection_type == fiWaterline ? getModel()->getWaterlines()
+               : (data->intersection_type == fiButtock ? getModel()->getButtocks()
+                  : getModel()->getDiagonals()));
+        for (size_t i=0; i<data->intersection_offsets.size(); ++i) {
+            IntersectionFinder elemfinder(data->intersection_offsets[i]);
+            vector<Intersection*>::iterator itr = find_if(iv.begin(), iv.end(), elemfinder);
+            iv.erase(itr);
+            changed = true;
+        }
+    } else if (data->intersection_offsets.size() > 0) {
+        cout << "Adding " << data->intersection_offsets.size() << " intersections" << endl;
+        for (size_t i=0; i<data->intersection_offsets.size(); ++i) {
+            Intersection* inter = getModel()->createIntersection(data->intersection_type,
+                                                                 data->intersection_offsets[i]);
+            if (inter == nullptr) {
+                // show dialog that says no intersection
+            } else
+                changed = true;
+        }
+    } else {
+        cout << "no operation specified, skipping" << endl;
+    }
+    if (changed) {
+        switch(data->intersection_type) {
+        case fiStation:
+            data->stations.clear();
+            data->stations.insert(data->stations.begin(), getModel()->getStations().begin(),
+                                  getModel()->getStations().end());
+            break;
+        case fiButtock:
+            data->buttocks.clear();
+            data->buttocks.insert(data->buttocks.begin(), getModel()->getButtocks().begin(),
+                                  getModel()->getButtocks().end());
+            break;
+        case fiWaterline:
+            data->waterlines.clear();
+            data->waterlines.insert(data->waterlines.begin(), getModel()->getWaterlines().begin(),
+                                    getModel()->getWaterlines().end());
+            break;
+        case fiDiagonal:
+            data->diagonals.clear();
+            data->diagonals.insert(data->diagonals.begin(), getModel()->getDiagonals().begin(),
+                                   getModel()->getDiagonals().end());
+            break;
+        }
 
-void Controller::addIntersectionToList(Intersection* /*inter*/)
-{
-	// TODO
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    }
 }
 
 void Controller::intersectionsDialog()
@@ -866,6 +923,7 @@ void Controller::intersectionsDialog()
 	cout << "Controller::intersectionsDialog" << endl;
     IntersectionsDialogData* data = new IntersectionsDialogData(getModel());
     emit exeIntersectionsDialog(data);
+    delete data;
 }
 
 // FreeShipUnit.pas:9128

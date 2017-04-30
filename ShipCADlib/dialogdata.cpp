@@ -80,9 +80,9 @@ LayerDialogData::LayerDialogData(vector<SubdivisionLayer*> list_of_layers,
 }
 
 IntersectionsDialogData::IntersectionsDialogData(ShipCADModel* model)
-    : accepted(false), intersection_type(fiStation), delete_all_intersections(false),
-      delete_intersections(false), stations(false),
-      waterlines(false), buttocks(false), diagonals(false)
+    : intersection_type(fiStation), add_range(false),
+      delete_all_intersections(false), delete_intersections(false),
+      stations(false), waterlines(false), buttocks(false), diagonals(false)
 {
     stations.insert(stations.begin(), model->getStations().begin(), model->getStations().end());
     buttocks.insert(buttocks.begin(), model->getButtocks().begin(), model->getButtocks().end());

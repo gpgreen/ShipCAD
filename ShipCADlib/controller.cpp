@@ -875,18 +875,55 @@ void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data
             iv.erase(itr);
             changed = true;
         }
-    } else if (data->intersection_offsets.size() > 0) {
-        cout << "Adding " << data->intersection_offsets.size() << " intersections" << endl;
-        for (size_t i=0; i<data->intersection_offsets.size(); ++i) {
-            Intersection* inter = getModel()->createIntersection(data->intersection_type,
-                                                                 data->intersection_offsets[i]);
+    } else if (data->add_range && data->intersection_offsets.size() == 1) {
+        cout << "Adding range of intersections" << endl;
+        if (data->intersection_offsets[0] < 1E-3)
+            return;
+        QVector3D min, max;
+        getModel()->extents(min, max);
+        float start, stop;
+        switch(data->intersection_type) {
+        case fiStation:
+            start = min.x();
+            stop = max.x();
+            break;
+        case fiButtock:
+            start = 0.0;
+            stop = max.y();
+            break;
+        case fiWaterline:
+            start = min.z();
+            stop = max.z();
+            break;
+        case fiDiagonal:
+            start = min.z();
+            stop = 2 * max.z();
+            break;
+        case fiFree:
+            start = 0.0;
+            stop = -0.01;
+            break;
+        }
+        double iptr;
+        modf((start / data->intersection_offsets[0]) - 2, &iptr);
+        int index = static_cast<int>(iptr);
+        start = index * data->intersection_offsets[0];
+        while (start <= stop) {
+            Intersection* inter = getModel()->createIntersection(data->intersection_type, start);
             if (inter == nullptr) {
                 // show dialog that says no intersection
             } else
                 changed = true;
+            start += data->intersection_offsets[0];
         }
-    } else {
-        cout << "no operation specified, skipping" << endl;
+    } else if (!data->add_range && data->intersection_offsets.size() == 1) {
+        cout << "Adding intersection" << endl;
+        Intersection* inter = getModel()->createIntersection(data->intersection_type,
+                                                             data->intersection_offsets[0]);
+        if (inter == nullptr) {
+            // show dialog that says no intersection
+        } else
+            changed = true;
     }
     if (changed) {
         switch(data->intersection_type) {

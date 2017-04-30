@@ -159,10 +159,9 @@ struct RotateDialogData
 
 struct IntersectionsDialogData
 {
-    bool accepted;
-
     intersection_type_t intersection_type;
     std::vector<float> intersection_offsets;
+    bool add_range;
     bool delete_all_intersections;
     bool delete_intersections;
 

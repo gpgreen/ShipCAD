@@ -322,6 +322,7 @@ void IntersectionsDialog::addOneTriggered()
                                        tr("Distance:"), 1.0, -10000, 10000, 3, &ok);
     if (ok) {
         _data->intersection_type = _showing_intersection;
+        _data->add_range = _data->delete_all_intersections = _data->delete_intersections = false;
         _data->intersection_offsets.push_back(d);
         emit addOrDeleteIntersections();
     }
@@ -329,6 +330,16 @@ void IntersectionsDialog::addOneTriggered()
 
 void IntersectionsDialog::addNTriggered()
 {
+    bool ok;
+    double d = QInputDialog::getDouble(this, tr("New range of intersections"),
+                                       tr("Distance:"), 1.0, -10000, 10000, 3, &ok);
+    if (ok) {
+        _data->intersection_type = _showing_intersection;
+        _data->add_range = true;
+        _data->delete_all_intersections = _data->delete_intersections = false;
+        _data->intersection_offsets.push_back(d);
+        emit addOrDeleteIntersections();
+    }
 
 }
 
@@ -336,6 +347,7 @@ void IntersectionsDialog::deleteAllTriggered()
 {
     _data->intersection_type = _showing_intersection;
     _data->delete_all_intersections = true;
+    _data->add_range = _data->delete_intersections = false;
     emit addOrDeleteIntersections();
 }
 

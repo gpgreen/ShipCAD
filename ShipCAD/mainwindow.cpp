@@ -1609,8 +1609,7 @@ void MainWindow::executeIntersectionsDialog(IntersectionsDialogData* data)
 void MainWindow::addOrDeleteIntersections()
 {
     cout << "MainWindow::addOrDeleteIntersections" << endl;
-    bool changed;
-    IntersectionsDialogData* data = _intersectionsdialog->retrieve(changed);
+    IntersectionsDialogData* data = _intersectionsdialog->retrieve();
     _controller->addOrDeleteIntersections(data);
     _intersectionsdialog->initialize(data);
 }

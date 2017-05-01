@@ -164,6 +164,7 @@ struct IntersectionsDialogData
     bool add_range;
     bool delete_all_intersections;
     bool delete_intersections;
+    bool changed;
 
     IntersectionVector stations;
     IntersectionVector waterlines;

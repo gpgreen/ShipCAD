@@ -875,10 +875,13 @@ void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data
             iv.erase(itr);
             changed = true;
         }
+        data->intersection_offsets.clear();
     } else if (data->add_range && data->intersection_offsets.size() == 1) {
         cout << "Adding range of intersections" << endl;
-        if (data->intersection_offsets[0] < 1E-3)
+        if (data->intersection_offsets[0] < 1E-3) {
+            data->intersection_offsets.clear();
             return;
+        }
         QVector3D min, max;
         getModel()->extents(min, max);
         float start, stop;
@@ -912,16 +915,20 @@ void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data
             Intersection* inter = getModel()->createIntersection(data->intersection_type, start);
             if (inter == nullptr) {
                 // show dialog that says no intersection
+                emit displayWarningDialog(tr("Intersection distance %1 doesn't intersect hull.").arg(start));
             } else
                 changed = true;
             start += data->intersection_offsets[0];
         }
+        data->intersection_offsets.clear();
     } else if (!data->add_range && data->intersection_offsets.size() == 1) {
         cout << "Adding intersection" << endl;
         Intersection* inter = getModel()->createIntersection(data->intersection_type,
                                                              data->intersection_offsets[0]);
+        data->intersection_offsets.clear();
         if (inter == nullptr) {
             // show dialog that says no intersection
+            emit displayWarningDialog(tr("Intersection distance %1 doesn't intersect hull.").arg(data->intersection_offsets[0]));
         } else
             changed = true;
     }
@@ -947,6 +954,8 @@ void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data
             data->diagonals.insert(data->diagonals.begin(), getModel()->getDiagonals().begin(),
                                    getModel()->getDiagonals().end());
             break;
+        case fiFree:
+            throw runtime_error("");
         }
 
         getModel()->setBuild(false);
@@ -958,9 +967,16 @@ void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data
 void Controller::intersectionsDialog()
 {
 	cout << "Controller::intersectionsDialog" << endl;
-    IntersectionsDialogData* data = new IntersectionsDialogData(getModel());
-    emit exeIntersectionsDialog(data);
-    delete data;
+    UndoObject* uo = getModel()->createUndo(tr("edit intersections"), false);
+    IntersectionsDialogData data(getModel());
+    emit exeIntersectionsDialog(&data);
+    if (data.changed) {
+        uo->accept();
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    } else {
+        delete uo;
+    }
 }
 
 // FreeShipUnit.pas:9128

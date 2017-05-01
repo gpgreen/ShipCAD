@@ -37,8 +37,10 @@ public:
     ~IntersectionsDialog();
 
     void initialize(ShipCAD::IntersectionsDialogData* data);
-    ShipCAD::IntersectionsDialogData* retrieve(bool& have_changed);
+    ShipCAD::IntersectionsDialogData* retrieve();
 
+    virtual void keyPressEvent(QKeyEvent *event);
+    
 signals:
 
     void showCurvatureChange();
@@ -93,7 +95,6 @@ protected:
 
 private:
     Ui::IntersectionsDialog *ui;
-    bool _data_changed;
     ShipCAD::intersection_type_t _showing_intersection;
     QStandardItemModel* _stationsListModel;
     QStandardItemModel* _waterlinesListModel;

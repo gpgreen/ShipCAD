@@ -17,7 +17,9 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <iostream>
 #include <QInputDialog>
+#include <QDialogButtonBox>
 #include "intersectionsdialog.h"
 #include "ui_intersectionsdialog.h"
 #include "shipcadlib.h"
@@ -27,7 +29,7 @@ using namespace std;
 
 IntersectionsDialog::IntersectionsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::IntersectionsDialog), _data_changed(false), _showing_intersection(fiStation),
+    ui(new Ui::IntersectionsDialog), _showing_intersection(fiStation),
     _stationsListModel(nullptr), _waterlinesListModel(nullptr),
     _diagonalsListModel(nullptr), _buttocksListModel(nullptr),
     _data(nullptr), _stationsToolButton(nullptr), _stationsAction(nullptr),
@@ -69,11 +71,6 @@ IntersectionsDialog::~IntersectionsDialog()
 
 void IntersectionsDialog::createToolButtons()
 {
-    // separator
-    // +1
-    // +N
-    // trash
-
     _stationsToolButton = new QToolButton(this);
     _stationsAction = new QAction(QIcon(":/Themes/Default/icons/32/ShowStations.png"),
                                   tr("Switch to view or add stations."), this);
@@ -128,12 +125,15 @@ void IntersectionsDialog::createToolButtons()
     connect(_deleteAllAction, SIGNAL(triggered()), this, SLOT(deleteAllTriggered()));
 
     ui->toolBarHorizontalLayout->addStretch(1);
+
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close, this);
+    ui->toolBarHorizontalLayout->addWidget(buttonBox);
+    connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
 void IntersectionsDialog::initialize(ShipCAD::IntersectionsDialogData* data)
 {
     _data = data;
-    _data_changed = false;
     _showing_intersection = data->intersection_type;
     // block signals while we populate the list view
     QSignalBlocker sblock(_stationsListModel);
@@ -196,13 +196,14 @@ void IntersectionsDialog::initialize(ShipCAD::IntersectionsDialogData* data)
     case fiButtock:
         _buttocksAction->setChecked(true);
         break;
+    case fiFree:
+        throw runtime_error("");
     }
     updateState();
 }
 
-IntersectionsDialogData* IntersectionsDialog::retrieve(bool& have_changed)
+IntersectionsDialogData* IntersectionsDialog::retrieve()
 {
-    have_changed = _data_changed;
     return _data;
 }
 
@@ -249,8 +250,41 @@ void IntersectionsDialog::updateState()
         _deleteAllAction->setToolTip(tr("Delete all diagonals."));
         _deleteAllAction->setEnabled(_data->diagonals.size() > 0);
         break;
+    case fiFree:
+        throw runtime_error("");
     }
     ui->intersectionsListView->update();
+}
+
+void IntersectionsDialog::keyPressEvent(QKeyEvent* event)
+{
+    if (event->matches(QKeySequence::Delete)) {
+        cout << "IntersectionsDialog::delete key" << endl;
+        QModelIndex currentIndex = ui->intersectionsListView->currentIndex();
+        float d = 0.0;
+        switch(_showing_intersection) {
+        case fiStation:
+            d = _data->stations.get(currentIndex.row())->getPlane().d();
+            break;
+        case fiButtock:
+            d = _data->buttocks.get(currentIndex.row())->getPlane().d();
+            break;
+        case fiWaterline:
+            d = _data->waterlines.get(currentIndex.row())->getPlane().d();
+            break;
+        case fiDiagonal:
+            d = _data->diagonals.get(currentIndex.row())->getPlane().d();
+            break;
+        case fiFree:
+            throw runtime_error("");
+        }
+        _data->intersection_offsets.push_back(d);
+        _data->delete_intersections = true;
+        _data->add_range = _data->delete_all_intersections = false;
+        _data->changed = true;
+        emit addOrDeleteIntersections();
+    } else
+        QWidget::keyPressEvent(event);
 }
 
 void IntersectionsDialog::listItemChanged(QStandardItem* item)
@@ -277,8 +311,10 @@ void IntersectionsDialog::listItemChanged(QStandardItem* item)
         case fiDiagonal:
             _data->diagonals.get(currentIndex.row())->setShowCurvature(set);
             break;
+        case fiFree:
+            throw runtime_error("");
         }
-        _data_changed = true;
+        _data->changed = true;
         emit showCurvatureChange();
     }
 }
@@ -324,6 +360,7 @@ void IntersectionsDialog::addOneTriggered()
         _data->intersection_type = _showing_intersection;
         _data->add_range = _data->delete_all_intersections = _data->delete_intersections = false;
         _data->intersection_offsets.push_back(d);
+        _data->changed = true;
         emit addOrDeleteIntersections();
     }
 }
@@ -338,6 +375,7 @@ void IntersectionsDialog::addNTriggered()
         _data->add_range = true;
         _data->delete_all_intersections = _data->delete_intersections = false;
         _data->intersection_offsets.push_back(d);
+        _data->changed = true;
         emit addOrDeleteIntersections();
     }
 
@@ -348,6 +386,7 @@ void IntersectionsDialog::deleteAllTriggered()
     _data->intersection_type = _showing_intersection;
     _data->delete_all_intersections = true;
     _data->add_range = _data->delete_intersections = false;
+    _data->changed = true;
     emit addOrDeleteIntersections();
 }
 

@@ -156,6 +156,10 @@ signals:
      */
     void exeIntersectionsDialog(ShipCAD::IntersectionsDialogData* data);
 
+    /*! \brief execute the new model dialog
+     */
+    void exeNewModelDialog(ShipCAD::NewModelDialogData& data);
+
     /*! \brief show an info dialog
      */
     void displayInfoDialog(const QString& msg);

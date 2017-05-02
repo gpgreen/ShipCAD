@@ -44,6 +44,7 @@
 #include "rotatedialog.h"
 #include "layerdialog.h"
 #include "intersectionsdialog.h"
+#include "newmodeldialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
@@ -60,7 +61,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     ui(new Ui::MainWindow), _pointdialog(nullptr), _planepointsdialog(nullptr),
     _intersectlayersdialog(nullptr), _extrudeedgedialog(nullptr), _chooselayerdialog(nullptr),
     _mirrordialog(nullptr), _rotatedialog(nullptr), _layerdialog(nullptr),
-    _intersectionsdialog(nullptr),
+    _intersectionsdialog(nullptr), _newmodeldialog(nullptr),
     _controller(c), _currentViewportContext(nullptr),
     _menu_recent_files(nullptr), _contextMenu(nullptr), _cameraMenu(nullptr),
     _viewportModeGroup(nullptr),
@@ -139,6 +140,9 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller,
             SIGNAL(exeIntersectionsDialog(ShipCAD::IntersectionsDialogData*)),
             SLOT(executeIntersectionsDialog(ShipCAD::IntersectionsDialogData*)));
+    connect(_controller, SIGNAL(exeNewModelDialog(ShipCAD::NewModelDialogData&)),
+            SLOT(executeNewModelDialog(ShipCAD::NewModelDialogData&)));
+    // generic dialogs
     connect(_controller,
             SIGNAL(displayInfoDialog(const QString&)),
             SLOT(showInfoDialog(const QString&)));
@@ -982,9 +986,9 @@ void MainWindow::enableActions()
     // visibility actions
     ui->actionShowControl_net->setEnabled(ncpoints > 0);
     ui->actionShow_both_sides->setEnabled(ncfaces > 0);
-    ui->actionShowControl_curves->setChecked(ncurves > 0);
+    ui->actionShowControl_curves->setEnabled(ncurves > 0);
     ui->actionShowInterior_edges->setEnabled(ncfaces > 0);
-    ui->actionShowGrid->setEnabled(vis.isShowGrid());
+    ui->actionShowGrid->setEnabled(nstations+nbuttocks+nwaterlines+ndiagonals > 0);
     ui->actionShowStations->setEnabled(nstations > 0);
     ui->actionShowButtocks->setEnabled(nbuttocks > 0);
     ui->actionShowWaterlines->setEnabled(nwaterlines > 0);
@@ -1739,4 +1743,19 @@ void MainWindow::executeChooseColorDialog(ChooseColorDialogData& data)
         data.accepted = false;
     
     cout << "MainWindow::executeColorDialog" << endl;
+}
+
+void MainWindow::executeNewModelDialog(ShipCAD::NewModelDialogData& data)
+{
+    if (_newmodeldialog == nullptr) {
+        _newmodeldialog = new NewModelDialog(this);
+    }
+    _newmodeldialog->initialize(data);
+
+    // execute the dialog
+    int result = _newmodeldialog->exec();
+
+    data.accepted = (result == QDialog::Accepted);
+    _newmodeldialog->retrieve(data);
+    cout << "execute new model dialog:" << (data.accepted ? "t" : "f") << endl;
 }

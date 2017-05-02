@@ -175,6 +175,23 @@ struct IntersectionsDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for new model dialog exchange
+ */
+
+struct NewModelDialogData
+{
+    bool accepted;
+    float length;
+    float breadth;
+    float depth;
+    size_t rows;
+    size_t cols;
+    unit_type_t units;
+
+    explicit NewModelDialogData();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 

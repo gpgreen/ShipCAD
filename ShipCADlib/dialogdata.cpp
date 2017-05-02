@@ -89,3 +89,9 @@ IntersectionsDialogData::IntersectionsDialogData(ShipCADModel* model)
     waterlines.insert(waterlines.begin(), model->getWaterlines().begin(), model->getWaterlines().end());
     diagonals.insert(diagonals.begin(), model->getDiagonals().begin(), model->getDiagonals().end());
 }
+
+NewModelDialogData::NewModelDialogData()
+    : accepted(false), length(0.0), breadth(0.0), depth(0.0), rows(0), cols(0), units(fuMetric)
+{
+    // does nothing
+}

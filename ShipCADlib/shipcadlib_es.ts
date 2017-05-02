@@ -2,245 +2,426 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es_ES">
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="shipcadlib.cpp" line="44"/>
+        <source>[ft2]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="45"/>
+        <source>[m2]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="51"/>
+        <source>[ft]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="52"/>
+        <source>[m]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="58"/>
+        <source>[ft4]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="59"/>
+        <source>[m4]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="65"/>
+        <source>[ft3]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="66"/>
+        <source>[m3]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="72"/>
+        <source>[lbs/ft3]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="73"/>
+        <source>[t/m3]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="79"/>
+        <source>[tons]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadlib.cpp" line="80"/>
+        <source>[tonnes]</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ShipCAD::Controller</name>
     <message>
-        <location filename="controller.cpp" line="130"/>
+        <location filename="controller.cpp" line="131"/>
         <source>new controlcurve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="143"/>
+        <location filename="controller.cpp" line="144"/>
         <source>edge collapse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="171"/>
+        <location filename="controller.cpp" line="172"/>
         <source>new edge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="179"/>
+        <location filename="controller.cpp" line="180"/>
         <source>Edge already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="189"/>
+        <location filename="controller.cpp" line="190"/>
         <source>set crease edges</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="208"/>
+        <location filename="controller.cpp" line="209"/>
         <source>edge extrusion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="230"/>
+        <location filename="controller.cpp" line="231"/>
         <source>Only boundary edges can be extruded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="241"/>
+        <location filename="controller.cpp" line="242"/>
         <source>edge split</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="288"/>
+        <location filename="controller.cpp" line="289"/>
         <source>flip normals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="361"/>
+        <location filename="controller.cpp" line="362"/>
         <source>mirror</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="384"/>
+        <location filename="controller.cpp" line="385"/>
         <source>You need to select at least 3 controlpoints to create a new controlface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="388"/>
+        <location filename="controller.cpp" line="389"/>
         <source>new face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="434"/>
+        <location filename="controller.cpp" line="435"/>
         <source>Rotation vector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="441"/>
+        <location filename="controller.cpp" line="435"/>
+        <source>[Degr.]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="442"/>
         <source>rotate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="480"/>
+        <location filename="controller.cpp" line="481"/>
         <source>Do you want to adjust the markers too?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="508"/>
+        <location filename="controller.cpp" line="509"/>
         <source>Scale vector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="516"/>
+        <location filename="controller.cpp" line="517"/>
         <source>scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="557"/>
+        <location filename="controller.cpp" line="558"/>
         <source>Translation vector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="566"/>
+        <location filename="controller.cpp" line="567"/>
         <source>move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="804"/>
+        <location filename="controller.cpp" line="677"/>
+        <source>import chines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="682"/>
+        <location filename="controller.cpp" line="1139"/>
+        <source>Unable to open file!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="717"/>
+        <source>import part</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="728"/>
+        <source>This file was created with a later version of ShipCAD!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="739"/>
+        <source>This is not a valid ShipCAD part file!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="918"/>
+        <location filename="controller.cpp" line="931"/>
+        <source>Intersection distance %1 doesn&apos;t intersect hull.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="970"/>
+        <source>edit intersections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="988"/>
         <source>layer grouping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="824"/>
+        <location filename="controller.cpp" line="1008"/>
         <source>edit layers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="847"/>
+        <location filename="controller.cpp" line="1031"/>
         <source>delete empty layers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="857"/>
+        <location filename="controller.cpp" line="1041"/>
         <source>%1 empty layers deleted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="866"/>
+        <location filename="controller.cpp" line="1050"/>
         <source>reorder layers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="881"/>
+        <location filename="controller.cpp" line="1065"/>
         <source>new layer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="895"/>
+        <location filename="controller.cpp" line="1079"/>
         <source>Are you sure you want to delete all the markers?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="899"/>
+        <location filename="controller.cpp" line="1083"/>
         <source>delete markers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="935"/>
+        <location filename="controller.cpp" line="1101"/>
+        <source>Error reading marker file on line:%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1114"/>
+        <source>The model already contains markers. Do you want to delete those?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1116"/>
+        <location filename="controller.cpp" line="1121"/>
+        <source>import markers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1136"/>
+        <source>No markers could be imported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1148"/>
+        <source>analyze surface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1153"/>
+        <source>The model contains a total of %1 leak points.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1156"/>
+        <source>
+Only the first 10 are shown:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1173"/>
+        <source>The following items were corrected:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1176"/>
+        <source>
+%1 double edges.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1179"/>
+        <source>
+%1 inconsistent normals.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1182"/>
+        <source>
+%1 normals flipped to point outward.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1185"/>
+        <source>
+%1 edges found with more than 2 faces connected to it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1193"/>
+        <source>Model is ok.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1215"/>
         <source>collapse point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="963"/>
+        <location filename="controller.cpp" line="1243"/>
         <source>remove unused points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="978"/>
+        <location filename="controller.cpp" line="1258"/>
         <source>points removed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="998"/>
+        <location filename="controller.cpp" line="1278"/>
         <source>insert plane intersections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1038"/>
+        <location filename="controller.cpp" line="1318"/>
         <source>At least two layers are needed to perform this operation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1046"/>
+        <location filename="controller.cpp" line="1326"/>
         <source>layer intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1056"/>
+        <location filename="controller.cpp" line="1336"/>
         <source>No intersection points found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1068"/>
+        <location filename="controller.cpp" line="1348"/>
         <source>lock points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1101"/>
+        <location filename="controller.cpp" line="1381"/>
         <source>Locked points can not be moved!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1108"/>
-        <location filename="controller.cpp" line="1608"/>
+        <location filename="controller.cpp" line="1388"/>
+        <location filename="controller.cpp" line="1884"/>
         <source>point move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1135"/>
+        <location filename="controller.cpp" line="1415"/>
         <source>At least 3 points must be selected to align</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1151"/>
+        <location filename="controller.cpp" line="1431"/>
         <source>align points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1175"/>
+        <location filename="controller.cpp" line="1455"/>
         <source>All of the selected points are locked and cannot be moved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1186"/>
+        <location filename="controller.cpp" line="1466"/>
         <source>unlock points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1202"/>
+        <location filename="controller.cpp" line="1482"/>
         <source>unlock all points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1218"/>
+        <location filename="controller.cpp" line="1488"/>
+        <source>points unlocked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="controller.cpp" line="1499"/>
         <source>The selection contains locked points that will not be affected by this operation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1219"/>
+        <location filename="controller.cpp" line="1500"/>
         <source>Are you sure you want to continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1259"/>
+        <location filename="controller.cpp" line="1535"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1542"/>
+        <location filename="controller.cpp" line="1818"/>
         <source>Choose color for Layer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1546"/>
+        <location filename="controller.cpp" line="1822"/>
         <source>change active layer color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="controller.cpp" line="1570"/>
+        <location filename="controller.cpp" line="1846"/>
         <source>corner</source>
         <translation type="unfinished"></translation>
     </message>
@@ -559,52 +740,52 @@
 <context>
     <name>ShipCAD::Intersection</name>
     <message>
-        <location filename="intersection.cpp" line="140"/>
+        <location filename="intersection.cpp" line="150"/>
         <source>Station</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="143"/>
+        <location filename="intersection.cpp" line="153"/>
         <source>Buttock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="146"/>
+        <location filename="intersection.cpp" line="156"/>
         <source>Waterline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="149"/>
+        <location filename="intersection.cpp" line="159"/>
         <source>Diagonal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="152"/>
+        <location filename="intersection.cpp" line="162"/>
         <source>Free</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="550"/>
+        <location filename="intersection.cpp" line="560"/>
         <source>Stations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="553"/>
+        <location filename="intersection.cpp" line="563"/>
         <source>Buttocks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="556"/>
+        <location filename="intersection.cpp" line="566"/>
         <source>Waterlines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="559"/>
+        <location filename="intersection.cpp" line="569"/>
         <source>Diagonals</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="intersection.cpp" line="562"/>
+        <location filename="intersection.cpp" line="572"/>
         <source>Layer_0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -612,10 +793,20 @@
 <context>
     <name>ShipCAD::ShipCADModel</name>
     <message>
-        <location filename="shipcadmodel.cpp" line="67"/>
-        <location filename="shipcadmodel.cpp" line="257"/>
-        <location filename="shipcadmodel.cpp" line="266"/>
+        <location filename="shipcadmodel.cpp" line="72"/>
+        <location filename="shipcadmodel.cpp" line="262"/>
+        <location filename="shipcadmodel.cpp" line="271"/>
         <source>New model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadmodel.cpp" line="1384"/>
+        <source>Strake %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="shipcadmodel.cpp" line="1390"/>
+        <source>Close hull</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

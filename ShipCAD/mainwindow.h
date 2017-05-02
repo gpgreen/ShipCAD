@@ -60,6 +60,7 @@ class RotateDialog;
 class LayerDialog;
 class ColorView;
 class IntersectionsDialog;
+class NewModelDialog;
 
 class ViewportState
 {
@@ -330,6 +331,12 @@ private slots:
      */
     void executeIntersectionsDialog(ShipCAD::IntersectionsDialogData* data);
 
+    /*! \brief execute the new model dialog
+     *
+     * \param data dialog data structure
+     */
+    void executeNewModelDialog(ShipCAD::NewModelDialogData& data);
+
     /*! \brief intersections dialog added or deleted intersections
      */
     void addOrDeleteIntersections();
@@ -373,6 +380,7 @@ private:
     RotateDialog* _rotatedialog; /**< the dialog to select rotation axis for faces */
     LayerDialog* _layerdialog; /**< the dialog to edit layer properties */
     IntersectionsDialog* _intersectionsdialog; /**< the dialog to edit intersections */
+    NewModelDialog* _newmodeldialog; /**< the dialog to get particulars of new model */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

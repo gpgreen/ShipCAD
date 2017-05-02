@@ -111,6 +111,125 @@
     </message>
 </context>
 <context>
+    <name>IntersectionsDialog</name>
+    <message>
+        <location filename="intersectionsdialog.ui" line="14"/>
+        <source>Intersections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="76"/>
+        <source>Switch to view or add stations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="84"/>
+        <source>Switch to view or add buttocks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="92"/>
+        <source>Switch to view or add waterlines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="100"/>
+        <source>Switch to view or add diagonals.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="108"/>
+        <source>Add one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="115"/>
+        <source>Add multiple</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="122"/>
+        <source>Delete all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="218"/>
+        <source>Add one station.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="219"/>
+        <source>Add multiple stations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="220"/>
+        <source>Delete all stations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="228"/>
+        <source>Add one buttock.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="229"/>
+        <source>Add multiple buttocks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="230"/>
+        <source>Delete all buttocks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="238"/>
+        <source>Add one waterline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="239"/>
+        <source>Add multiple waterlines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="240"/>
+        <source>Delete all waterlines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="248"/>
+        <source>Add one diagonal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="249"/>
+        <source>Add multiple diagonals.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="250"/>
+        <source>Delete all diagonals.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="357"/>
+        <source>New intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="358"/>
+        <location filename="intersectionsdialog.cpp" line="372"/>
+        <source>Distance:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="intersectionsdialog.cpp" line="371"/>
+        <source>New range of intersections</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LayerDialog</name>
     <message>
         <location filename="layerdialog.ui" line="14"/>
@@ -118,132 +237,137 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="85"/>
+        <location filename="layerdialog.ui" line="112"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="99"/>
+        <location filename="layerdialog.ui" line="126"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="106"/>
+        <location filename="layerdialog.ui" line="133"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="148"/>
+        <location filename="layerdialog.ui" line="162"/>
         <source>Alpha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="160"/>
+        <location filename="layerdialog.ui" line="184"/>
         <source>Use for hydrostatics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="167"/>
+        <location filename="layerdialog.ui" line="191"/>
         <source>Symmetric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="174"/>
+        <location filename="layerdialog.ui" line="198"/>
         <source>Intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="181"/>
+        <location filename="layerdialog.ui" line="205"/>
         <source>Developable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="188"/>
+        <location filename="layerdialog.ui" line="212"/>
         <source>Show in linesplan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="197"/>
+        <location filename="layerdialog.ui" line="221"/>
         <source>Specific weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="207"/>
+        <location filename="layerdialog.ui" line="231"/>
         <source>[t/m3]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="218"/>
+        <location filename="layerdialog.ui" line="242"/>
         <source>Thickness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="228"/>
+        <location filename="layerdialog.ui" line="252"/>
         <source>[mm]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="242"/>
+        <location filename="layerdialog.ui" line="266"/>
         <source>Surface properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="248"/>
+        <location filename="layerdialog.ui" line="272"/>
         <source>Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="258"/>
+        <location filename="layerdialog.ui" line="282"/>
         <source>Weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.ui" line="268"/>
+        <location filename="layerdialog.ui" line="292"/>
         <source>Center of gravity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="42"/>
+        <location filename="layerdialog.cpp" line="43"/>
         <source>Layer Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="94"/>
+        <location filename="layerdialog.cpp" line="92"/>
         <source>Create new layer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="101"/>
+        <location filename="layerdialog.cpp" line="99"/>
         <source>Delete empty layers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="108"/>
+        <location filename="layerdialog.cpp" line="106"/>
         <source>Move layer up in list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="115"/>
+        <location filename="layerdialog.cpp" line="113"/>
         <source>Move layer down in list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="173"/>
-        <source>Area %1 [m2]</source>
+        <location filename="layerdialog.cpp" line="166"/>
+        <source>Alpha: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="174"/>
-        <source>Weight %1 [tons]</source>
+        <location filename="layerdialog.cpp" line="177"/>
+        <source>Area %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="175"/>
-        <source>Center of gravity %1,%2,%3 [m]</source>
+        <location filename="layerdialog.cpp" line="180"/>
+        <source>Weight %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layerdialog.cpp" line="276"/>
+        <location filename="layerdialog.cpp" line="183"/>
+        <source>Center of gravity %1,%2,%3 %4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layerdialog.cpp" line="278"/>
         <source>Choose color for Layer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -257,7 +381,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="30"/>
-        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="464"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -309,7 +433,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="142"/>
-        <location filename="mainwindow.cpp" line="461"/>
+        <location filename="mainwindow.cpp" line="472"/>
         <source>Visibility</source>
         <translation type="unfinished"></translation>
     </message>
@@ -370,7 +494,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="269"/>
-        <location filename="mainwindow.cpp" line="631"/>
+        <location filename="mainwindow.cpp" line="645"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -391,7 +515,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="295"/>
-        <location filename="mainwindow.cpp" line="1474"/>
+        <location filename="mainwindow.cpp" line="1630"/>
         <source>Recent files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -762,7 +886,7 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="885"/>
-        <location filename="mainwindow.cpp" line="635"/>
+        <location filename="mainwindow.cpp" line="649"/>
         <source>Scale</source>
         <translation type="unfinished"></translation>
     </message>
@@ -817,257 +941,316 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="292"/>
+        <location filename="mainwindow.cpp" line="303"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="387"/>
+        <location filename="mainwindow.cpp" line="398"/>
+        <location filename="mainwindow.cpp" line="1242"/>
         <source>The current model has been changed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="389"/>
+        <location filename="mainwindow.cpp" line="400"/>
         <source>Are you sure you want to quit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="466"/>
+        <location filename="mainwindow.cpp" line="477"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="467"/>
+        <location filename="mainwindow.cpp" line="478"/>
         <source>Medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="468"/>
+        <location filename="mainwindow.cpp" line="479"/>
         <source>High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="469"/>
+        <location filename="mainwindow.cpp" line="480"/>
         <source>Very High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="490"/>
+        <location filename="mainwindow.cpp" line="501"/>
         <source>Layers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="499"/>
+        <location filename="mainwindow.cpp" line="510"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="511"/>
+        <location filename="mainwindow.cpp" line="522"/>
         <source>Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="523"/>
+        <location filename="mainwindow.cpp" line="534"/>
         <source>Modification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="539"/>
-        <source>undo memory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="541"/>
-        <source>faces: 0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="550"/>
+        <location filename="mainwindow.cpp" line="564"/>
         <source>Wireframe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="552"/>
+        <location filename="mainwindow.cpp" line="566"/>
         <source>Shade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="554"/>
+        <location filename="mainwindow.cpp" line="568"/>
         <source>Gaussian curvature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="556"/>
+        <location filename="mainwindow.cpp" line="570"/>
         <source>Zebra shading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="558"/>
+        <location filename="mainwindow.cpp" line="572"/>
         <source>Developability check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="575"/>
+        <location filename="mainwindow.cpp" line="589"/>
         <source>Perspective</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="577"/>
+        <location filename="mainwindow.cpp" line="591"/>
         <source>Body plan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="579"/>
+        <location filename="mainwindow.cpp" line="593"/>
         <source>Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="581"/>
+        <location filename="mainwindow.cpp" line="595"/>
         <source>Plan view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="596"/>
+        <location filename="mainwindow.cpp" line="610"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="597"/>
+        <location filename="mainwindow.cpp" line="611"/>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="598"/>
+        <location filename="mainwindow.cpp" line="612"/>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="600"/>
+        <location filename="mainwindow.cpp" line="614"/>
         <source>Wide lens 28mm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="602"/>
+        <location filename="mainwindow.cpp" line="616"/>
         <source>Standard lens 50mm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="604"/>
+        <location filename="mainwindow.cpp" line="618"/>
         <source>Short telelens 90mm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="606"/>
+        <location filename="mainwindow.cpp" line="620"/>
         <source>Medium telelens 130mm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="608"/>
+        <location filename="mainwindow.cpp" line="622"/>
         <source>Long telelens 200mm.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="625"/>
+        <location filename="mainwindow.cpp" line="639"/>
         <source>Visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="627"/>
+        <location filename="mainwindow.cpp" line="641"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="629"/>
+        <location filename="mainwindow.cpp" line="643"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="633"/>
+        <location filename="mainwindow.cpp" line="647"/>
         <source>Origin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="637"/>
+        <location filename="mainwindow.cpp" line="651"/>
         <source>Transparent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="639"/>
+        <location filename="mainwindow.cpp" line="653"/>
         <source>Tolerance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="641"/>
+        <location filename="mainwindow.cpp" line="655"/>
         <source>Blending</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="644"/>
+        <location filename="mainwindow.cpp" line="658"/>
         <source>Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="646"/>
+        <location filename="mainwindow.cpp" line="660"/>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="655"/>
+        <location filename="mainwindow.cpp" line="669"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="660"/>
+        <location filename="mainwindow.cpp" line="674"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="664"/>
+        <location filename="mainwindow.cpp" line="678"/>
         <source>Camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="670"/>
+        <location filename="mainwindow.cpp" line="684"/>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="676"/>
+        <location filename="mainwindow.cpp" line="690"/>
         <source>Background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1111"/>
+        <location filename="mainwindow.cpp" line="1128"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1141"/>
+        <location filename="mainwindow.cpp" line="1158"/>
         <source>Save File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1143"/>
+        <location filename="mainwindow.cpp" line="1160"/>
         <source>freeship (*.fbm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1253"/>
+        <location filename="mainwindow.cpp" line="1180"/>
+        <source>Export Part</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1182"/>
+        <location filename="mainwindow.cpp" line="1204"/>
+        <source>freeship part (*.part)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1202"/>
+        <source>Open Part File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1224"/>
+        <source>Open Marker File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1226"/>
+        <location filename="mainwindow.cpp" line="1265"/>
+        <source>text (*.txt)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1244"/>
+        <source>Do you want to save it first?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1263"/>
+        <source>Open Chine File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1277"/>
+        <source>undo memory: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1374"/>
+        <source>Imperial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1379"/>
         <source>modified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1255"/>
+        <location filename="mainwindow.cpp" line="1379"/>
         <source>not modified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1256"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>ShipCAD  :  %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1495"/>
+        <location filename="mainwindow.cpp" line="550"/>
+        <location filename="mainwindow.cpp" line="1374"/>
+        <source>Metric</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="552"/>
+        <source>undo memory: 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="554"/>
+        <source>faces: 0 pts: 0 edges: 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1381"/>
+        <source>faces: %1 pts: %2 edges: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1651"/>
         <source>&amp;%1 %2</source>
         <translation type="unfinished"></translation>
     </message>

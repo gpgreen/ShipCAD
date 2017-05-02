@@ -1197,9 +1197,14 @@ void Controller::checkModel(bool showresult)
 void Controller::newModel()
 {
     cout << "Controller::newModel" << endl;
-    clearUndo();
-    getModel()->newModel(fuMetric, 15.0, 6.0, 1.0, 10, 8);
-    emit modelLoaded();
+    NewModelDialogData data;
+    emit exeNewModelDialog(data);
+    if (data.accepted) {
+        clearUndo();
+        getModel()->newModel(data.units, data.length, data.breadth, data.depth,
+                             data.rows, data.cols);
+        emit modelLoaded();
+    }
 }
 
 void Controller::lackenbyModelTransformation()

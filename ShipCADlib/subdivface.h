@@ -53,7 +53,7 @@ class LineShader;
 class FileBuffer;
 class FaceShader;
 class CurveFaceShader;
-class PickRay;
+struct PickRay;
 
 class SubdivisionFace : public SubdivisionBase
 {

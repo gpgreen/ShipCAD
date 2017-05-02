@@ -766,7 +766,7 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
                                        vector<ControlFaceGrid>& assembled)
 {
     size_t rows, cols;
-    int errind;
+    int errind = 0;
     
     vector<SubdivisionControlFace*> checkfaces(ctrlfaces.begin(), ctrlfaces.end());
     while (ctrlfaces.size() > 0) {
@@ -3254,11 +3254,11 @@ void SubdivisionSurface::collapseEdge(SubdivisionControlEdge* collapseedge)
     face2->getLayer()->releaseControlFace(face2);
 	size_t ind1 = face1->indexOfPoint(collapseedge->startPoint());
 	size_t ind2 = face1->indexOfPoint(collapseedge->endPoint());
-	if (ind2 < ind1 && abs(ind2 - ind1) == 1)
+    if (ind2 < ind1 && fabs(ind2 - ind1) == 1)
 		swap(ind1, ind2);
 	size_t ind3 = face2->indexOfPoint(collapseedge->startPoint());
 	size_t ind4 = face2->indexOfPoint(collapseedge->endPoint());
-	if (ind4 < ind3 && abs(ind4 - ind3) == 1)
+    if (ind4 < ind3 && fabs(ind4 - ind3) == 1)
 		swap(ind3, ind4);
 	if (ind1 == 0 && ind2 == face1->numberOfPoints() - 1
 		&& ind3 == 0 && ind4 == face2->numberOfPoints() - 1) {

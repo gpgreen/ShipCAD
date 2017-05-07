@@ -56,7 +56,7 @@ ShipCADModel::ShipCADModel()
       _stations(true), _waterlines(true), _buttocks(true), _diagonals(true),
       _markers(true), _vis(this), _filename_set(false), _currently_moving(false),
       _stop_asking_for_file_version(false), _settings(this), _calculations(true),
-      _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(0), _flowlines(true),
+      _design_hydrostatics(0), _undo_pos(0), _prev_undo_pos(-1), _flowlines(true),
       _background_images(true)
 {
 	memset(&_delft_resistance, 0, sizeof(DelftSeriesResistance));
@@ -401,9 +401,9 @@ void ShipCADModel::undo()
                 if (!_undo_list.back()->isTempRedoObject())
                     createRedo();
             }
-            if (_prev_undo_pos < _undo_pos)
+            if (_prev_undo_pos < static_cast<int>(_undo_pos))
                 --_undo_pos;
-            _prev_undo_pos = _undo_pos;
+            _prev_undo_pos = static_cast<int>(_undo_pos);
             --_undo_pos;
             UndoObject* uo = _undo_list[_undo_pos];
             uo->restore();
@@ -423,9 +423,9 @@ void ShipCADModel::redo()
     if (_undo_list.size() > 0) {
         bool preview = getProjectSettings().isSavePreview();
         try {
-            if (_prev_undo_pos > _undo_pos)
+            if (_prev_undo_pos > static_cast<int>(_undo_pos))
                 ++_undo_pos;
-            _prev_undo_pos = _undo_pos;
+            _prev_undo_pos = static_cast<int>(_undo_pos);
             ++_undo_pos;
             UndoObject* uo = _undo_list[_undo_pos-1];
             uo->restore();
@@ -455,7 +455,7 @@ void ShipCADModel::clearUndo()
         delete _undo_list[i];
     _undo_list.clear();
     _undo_pos = 0;
-    _prev_undo_pos = 0;
+    _prev_undo_pos = -1;
     emit undoDataChanged();
 }
 

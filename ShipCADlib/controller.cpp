@@ -1583,12 +1583,14 @@ void Controller::undo()
 {
     cout << "Controller::undo" << endl;
     getModel()->undo();
+    emit modifiedModel();
 }
 
 void Controller::redo()
 {
     cout << "Controller::redo" << endl;
     getModel()->redo();
+    emit modifiedModel();
 }
 
 void Controller::clearUndo()

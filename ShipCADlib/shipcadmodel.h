@@ -380,8 +380,8 @@ private:
     DelftSeriesResistance _delft_resistance;
 	KAPERResistance _kaper_resistance;
     HydrostaticCalc* _design_hydrostatics;
-	size_t _undo_pos;
-	size_t _prev_undo_pos;
+	size_t _undo_pos;   /**< current undo position */
+	int _prev_undo_pos; /**< make this an int so we can start at -1 **/
 	std::deque<UndoObject*> _undo_list;
     std::set<Marker*> _selected_markers;
     std::set<Flowline*> _selected_flowlines;

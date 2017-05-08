@@ -375,6 +375,8 @@ void ProjectSettings::clear()
 	_fvcg = 1.0;
 }
 
+// FreeShipUnit.pas:11311
+// TODO: figure out what to do with img parameter
 void ProjectSettings::loadBinary(FileBuffer& source, QImage* /*img*/)
 {
 	clear();
@@ -443,6 +445,7 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* /*img*/)
     }
 }
 
+// FreeShipUnit.pas:11379
 void ProjectSettings::saveBinary(FileBuffer& dest)
 {
     if (_owner->getFileVersion() >= fv120) {
@@ -470,7 +473,9 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
             dest.add(static_cast<quint32>(_hydrostatic_coefficients));
             dest.add(_save_preview);
             if (_save_preview) {
-                // save the jpg
+                if (_preview_img == nullptr)
+                    throw runtime_error("trying to save preview image that doesn't exist");
+                dest.add(*_preview_img);
             }
             if (_owner->getFileVersion() >= fv230) {
                 dest.add(_simplify_intersections);

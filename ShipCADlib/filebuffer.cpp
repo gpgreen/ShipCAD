@@ -31,6 +31,7 @@
 #include <QDataStream>
 #include <iostream>
 #include <stdexcept>
+#include <climits>
 
 #include "filebuffer.h"
 #include "utility.h"
@@ -96,15 +97,22 @@ void FileBuffer::load(JPEGImage& img)
     load(img.width);
     load(img.height);
     load(img.size);
-	for (size_t i=0; i<img.size; i++, _pos++)
-        img.data.push_back(_data[_pos]);
+    if (img.size > INT_MAX || (img.size + _pos) > _data.size())
+        throw runtime_error("jpeg image size too large");
+    img.data.reserve(img.size);
+    img.data.insert(img.data.begin(), _data.begin()+_pos, _data.begin()+_pos+img.size);
+    _pos += img.size;
 }
 
-void FileBuffer::add(const JPEGImage& /*img*/)
+void FileBuffer::add(const JPEGImage& img)
 {
-	throw runtime_error("not implemented");
+    add(img.width);
+    add(img.height);
+    add(img.size);
+    _data.insert(_data.end(), img.data.begin(), img.data.end());
+    _pos += img.size;
 }
-	
+
 void FileBuffer::load(quint8& val)
 {
     //cout << "pos:" << _pos << endl;

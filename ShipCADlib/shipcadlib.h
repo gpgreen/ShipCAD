@@ -38,7 +38,7 @@ namespace ShipCAD {
 
 // forward declarations
 class SubdivisionControlPoint;
-
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 const float kFoot = 0.3048f;
@@ -187,6 +187,24 @@ struct SurfaceCheckResult
     size_t double_edges;
     std::vector<SubdivisionControlPoint*> leaks;
 };
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+/*! \brief struct to hold jpeg image as stored in Free!Ship
+ */
+struct JPEGImage 
+{
+    quint32 width;
+    quint32 height;
+    quint32 size;
+    std::vector<quint8> data;
+};
+	
+//////////////////////////////////////////////////////////////////////////////////////
+
+/*! \brief create a QImage from JPEGImage struct loaded from ShipCAD binary
+ */
+QImage CreateFromJPEG(const ShipCAD::JPEGImage* image);
 
 //////////////////////////////////////////////////////////////////////////////////////
 

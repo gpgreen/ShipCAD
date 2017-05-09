@@ -44,7 +44,7 @@ using namespace ShipCAD;
 //////////////////////////////////////////////////////////////////////////////////////
 
 ProjectSettings::ProjectSettings(ShipCADModel* owner)
-	: _owner(owner), _preview_img(0)
+    : _owner(owner), _preview_img(nullptr)
 {
 	clear();
 }
@@ -376,8 +376,7 @@ void ProjectSettings::clear()
 }
 
 // FreeShipUnit.pas:11311
-// TODO: figure out what to do with img parameter
-void ProjectSettings::loadBinary(FileBuffer& source, QImage* /*img*/)
+void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
 {
 	clear();
     source.load(_name);
@@ -406,6 +405,8 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* /*img*/)
         if (_save_preview) {
             _preview_img = new JPEGImage();
 			source.load(*_preview_img);
+            if (img != nullptr)
+                *img = CreateFromJPEG(_preview_img);
         }
         if (_owner->getFileVersion() >= fv230) {
             source.load(_simplify_intersections);

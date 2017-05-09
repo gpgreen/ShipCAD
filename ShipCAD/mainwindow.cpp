@@ -1141,6 +1141,10 @@ void MainWindow::openModelFile()
 
 void MainWindow::saveModelFile()
 {
+    if (!_controller->getModel()->isFilenameSet()) {
+        saveModelAsFile();
+        return;
+    }
     QFileInfo f(_controller->getModel()->getFilename());
     cout << "MainWindow::saveModelFile:" << f.absoluteFilePath().toStdString() << endl;
     _controller->saveFile();

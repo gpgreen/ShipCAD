@@ -702,6 +702,30 @@ Intersection* ShipCADModel::createIntersection(intersection_type_t ty, float dis
     return result;
 }
 
+// FreeShipUnit.pas:13056
+void ShipCADModel::loadPreview(FileBuffer& source, QImage* image)
+{
+	// remember the filename because it is erased by the clear method
+	QString tmpstr = _filename;
+	clear();
+	_filename = tmpstr;
+	source.reset();
+	QString hdr;
+	source.load(hdr);
+	if (hdr == "FREE!ship") {
+        quint8 v;
+		source.load(v);
+		_file_version = static_cast<version_t>(v);
+        if (_file_version >= fv210) {
+			quint32 n;
+			source.load(n);
+			_precision = static_cast<precision_t>(n);
+            _vis.loadBinary(source);
+			_settings.loadBinary(source, image);
+        }
+    }
+}
+
 void ShipCADModel::loadBinary(FileBuffer& source)
 {
 	// remember the filename because it is erased by the clear method
@@ -722,7 +746,7 @@ void ShipCADModel::loadBinary(FileBuffer& source)
 			source.load(n);
 			_precision = static_cast<precision_t>(n);
 			_vis.loadBinary(source);
-			_settings.loadBinary(source, 0);
+			_settings.loadBinary(source, nullptr);
 			// load the subdivision surface
             _surface.loadBinary(source);
 			// stations

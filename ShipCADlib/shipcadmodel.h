@@ -286,6 +286,13 @@ public:
 	
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);
+    /*! \brief load the preview image from a file
+     *
+     * \param source the filebuffer to load image from
+     * \param image where to put the loaded image
+     */
+    void loadPreview(FileBuffer& source, QImage* image);
+
     /*! \brief save selected faces as a part file
      *
      * \param filename string stored in file as the part name

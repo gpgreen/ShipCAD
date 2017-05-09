@@ -44,18 +44,6 @@ class Viewport;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief struct to hold jpeg image as stored in Free!Ship
- */
-struct JPEGImage 
-{
-    quint32 width;
-    quint32 height;
-    quint32 size;
-    std::vector<quint8> data;
-};
-	
-//////////////////////////////////////////////////////////////////////////////////////
-
 /*! \brief Background Images for a viewport
  */
 class BackgroundImage : public QImage

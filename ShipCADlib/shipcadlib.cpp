@@ -26,6 +26,8 @@
  *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
  *                                                                                             *
  *#############################################################################################*/
+
+#include <stdexcept>
 #include "shipcadlib.h"
 
 using namespace ShipCAD;
@@ -78,5 +80,19 @@ QString ShipCAD::WeightStr(unit_type_t units)
     if (units == fuImperial)
         return QObject::tr("[tons]");
     return QObject::tr("[tonnes]");
+}
+
+QImage ShipCAD::CreateFromJPEG(const JPEGImage* image)
+{
+    uchar* data = new uchar[image->data.size()];
+    if (data == nullptr)
+        throw std::runtime_error("unable to create image data array");
+    for (size_t i=0; i<image->data.size(); ++i)
+        data[i] = image->data[i];
+    QImage result = QImage::fromData(data, image->data.size());
+    if (result.isNull())
+        throw std::runtime_error("Unable to create QImage from image data");
+    delete [] data;
+    return result;
 }
 

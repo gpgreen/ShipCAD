@@ -324,6 +324,7 @@ public:
     
     void rebuildModel(bool redo_intersections);
 
+    void drawWithPainter(Viewport& vp, QPainter* painter);
     void draw(Viewport& vp);
 
     /*! \brief delete all selected items

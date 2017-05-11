@@ -459,6 +459,11 @@ void ShipCADModel::clearUndo()
     emit undoDataChanged();
 }
 
+void ShipCADModel::drawWithPainter(Viewport& vp, QPainter* painter)
+{
+//    painter->drawText(10, 10, "Hello world!");
+}
+
 void ShipCADModel::drawGrid(Viewport& /*vp*/, LineShader* /*lineshader*/)
 {
     // TODO

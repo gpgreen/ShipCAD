@@ -86,6 +86,8 @@ const QVector3D& Viewport::getCamera() const
 
 void Viewport::initialize()
 {
+    OpenGLWindow::initialize();
+
     LineShader* lineshader = new LineShader(this);
     addShader("lineshader", lineshader);
 
@@ -188,18 +190,28 @@ void Viewport::addShader(const string &name, Shader *shader)
     _shaders[name] = shader;
 }
 
-void Viewport::render()
+void Viewport::clearBackground()
 {
-    cout << "Viewport::render" << endl;
-
     glViewport(0, 0, width(), height());
     
     // set the color of the background
     QColor vpcolor = getController()->getModel()->getPreferences().getViewportColor();
     glClearColor(vpcolor.redF(), vpcolor.greenF(), vpcolor.blueF(), 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
+}
 
+void Viewport::renderWithPainter(QPainter* painter)
+{
+    // draw the model
+    getController()->getModel()->drawWithPainter(*this, painter);
+}
+
+void Viewport::renderOpenGL()
+{
+    cout << "Viewport::render" << endl;
+
+    glEnable(GL_DEPTH_TEST);
+    
     // draw the model
     getController()->getModel()->draw(*this);
 

@@ -87,24 +87,11 @@ OpenGLWindow::~OpenGLWindow()
 {
     delete m_device;
 }
-void OpenGLWindow::render(QPainter *painter)
-{
-    Q_UNUSED(painter);
-}
 
 void OpenGLWindow::initialize()
 {
-}
-
-void OpenGLWindow::render()
-{
     if (!m_device)
         m_device = new QOpenGLPaintDevice;
-
-    m_device->setSize(size());
-
-    QPainter painter(m_device);
-    render(&painter);
 }
 
 void OpenGLWindow::renderLater()
@@ -166,7 +153,16 @@ void OpenGLWindow::renderNow()
         initialize();
     }
 
-    render();
+    m_device->setSize(size());
+
+    clearBackground();
+    
+    // now render with a painter
+    QPainter painter(m_device);
+    renderWithPainter(&painter);
+    painter.end();
+
+    renderOpenGL();
 
     m_context->swapBuffers(this);
 

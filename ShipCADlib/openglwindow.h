@@ -79,9 +79,10 @@ public:
     explicit OpenGLWindow(QWindow *parent = 0);
     ~OpenGLWindow();
 
-    virtual void render(QPainter *painter);
-    virtual void render();
-
+    virtual void clearBackground() = 0;
+    virtual void renderWithPainter(QPainter *painter) = 0;
+    virtual void renderOpenGL() = 0;
+    
     virtual void initialize();
 
     void setAnimating(bool animating);

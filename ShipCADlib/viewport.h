@@ -73,11 +73,22 @@ class Viewport : public OpenGLWindow
 public:
 
     explicit Viewport(ShipCAD::Controller* ctl, viewport_type_t vtype);
-    ~Viewport();
+    virtual ~Viewport();
 
-    void initialize();
-    void render();
+    virtual void initialize();
 
+    /*! \brief clear background
+     */
+    virtual void clearBackground();
+
+    /*! \brief render OpenGL
+     */
+    virtual void renderOpenGL();
+
+    /*! \brief render qpainter
+     */
+    virtual void renderWithPainter(QPainter* painter);
+    
     ShipCAD::Controller* getController();
     const ShipCAD::Controller* getController() const;
 

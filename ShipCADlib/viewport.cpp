@@ -170,6 +170,11 @@ void Viewport::setElevation(float val)
     update();
 }
 
+QPoint Viewport::convert3D(const QVector3D& pt) const
+{
+    return _view->convert3D(pt, width(), height());
+}
+
 void Viewport::resizeEvent(QResizeEvent *event)
 {
     cout << "vp resize event: " << event->size().width()
@@ -202,13 +207,15 @@ void Viewport::clearBackground()
 
 void Viewport::renderWithPainter(QPainter* painter)
 {
+    cout << "Viewport::renderWithPainter" << endl;
+
     // draw the model
     getController()->getModel()->drawWithPainter(*this, painter);
 }
 
 void Viewport::renderOpenGL()
 {
-    cout << "Viewport::render" << endl;
+    cout << "Viewport::renderOpenGL" << endl;
 
     glEnable(GL_DEPTH_TEST);
     

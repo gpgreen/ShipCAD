@@ -164,7 +164,6 @@ void SubdivisionLayer::setDevelopable(bool val)
     }
 }
 
-// TODO: why is name and desc the same?
 void SubdivisionLayer::setName(const QString& val)
 {
     if (QString::compare(val, _desc, Qt::CaseInsensitive) != 0) {
@@ -745,9 +744,9 @@ void SubdivisionLayer::saveToDXF(QStringList& strings)
                         strings.push_back(QString("0\r\nVERTEX"));
                         strings.push_back(QString("8\r\n%1").arg(getName()));
                         QVector3D p = grid.getPoint(j, k)->getCoordinate();
-                        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
-                        strings.push_back(QString("20\r\n%1").arg(truncate(p.y(), 4)));
-                        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                        strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
+                        strings.push_back(QString("20\r\n%1").arg(Truncate(p.y(), 4)));
+                        strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
                         strings.push_back(QString("70\r\n64")); // polygon mesh vertex
                     }
                 }
@@ -765,9 +764,9 @@ void SubdivisionLayer::saveToDXF(QStringList& strings)
                             strings.push_back(QString("0\r\nVERTEX"));
                             strings.push_back(QString("8\r\n%1").arg(getName()));
                             QVector3D p = grid.getPoint(j, k)->getCoordinate();
-                            strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
-                            strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
-                            strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                            strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
+                            strings.push_back(QString("20\r\n%1").arg(Truncate(-p.y(), 4)));
+                            strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
                             strings.push_back(QString("70\r\n64")); // polygon mesh vertex
                         }
                     }

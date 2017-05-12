@@ -823,10 +823,9 @@ void SubdivisionControlPoint::loadFromStream(size_t &lineno, QStringList &string
 void SubdivisionControlPoint::saveToStream(QStringList &strings)
 {
     strings.push_back(QString("%1 %2 %3 %4 %5")
-                      // TODO: need to fix length of string
-                      .arg(_coordinate.x())
-                      .arg(_coordinate.y())
-                      .arg(_coordinate.z())
+                      .arg(Truncate(_coordinate.x(), 5))
+                      .arg(Truncate(_coordinate.y(), 5))
+                      .arg(Truncate(_coordinate.z(), 5))
                       .arg(static_cast<int>(_vtype))
                       .arg(BoolToStr(isSelected())));
 }

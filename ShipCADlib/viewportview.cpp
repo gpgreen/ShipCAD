@@ -80,6 +80,12 @@ void ViewportView::resetView()
     _scale = 1.0;
 }
 
+QPoint ViewportView::convert3D(const QVector3D& pt, int w, int h) const
+{
+    QVector3D result = _world * pt;
+    return QPoint(w / 2.0f * (result.x() + 1.0f), h / 2.0f * (1.0f - result.y()));
+}
+
 bool ViewportView::leftMousePick(QPoint pos, int w, int h, PickRay& ray)
 {
     bool scene_changed = false;
@@ -385,7 +391,6 @@ bool ViewportViewPlan::pointDrag(QPoint pos, int w, int h, QVector3D& newcoord)
     cout << "plan drag:(" << newcoord.x() << "," << newcoord.y() << "," << newcoord.z() << ")" << endl;
     return true;
 }
-
 
 ViewportViewProfile::ViewportViewProfile(Viewport* vp)
     : ViewportView(vp)

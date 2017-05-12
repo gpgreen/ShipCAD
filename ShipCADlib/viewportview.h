@@ -70,6 +70,7 @@ public:
     virtual void resetView();
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height) = 0;
 
+    
     const QMatrix4x4& getWorld() const
         {return _world;}
     const QMatrix4x4& getWorldInv() const
@@ -89,6 +90,16 @@ public:
     virtual bool middleMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool wheelWithDegrees(QPoint degrees, int w, int h);
+
+    /*! \brief convert a 3D point to viewport 2d coordinates
+     *
+     * \param pt the 3D point to convert
+     * \param w width of viewport in pixels
+     * \param h height of viewport in pixels
+     * \return point in x, y coordinates with 0,0 upper left corner of viewport
+     */
+    QPoint convert3D(const QVector3D& pt, int w, int h) const;
+
     /*! \brief drag a point in the viewport
      *
      * \param pos the current mouse coordinates
@@ -126,6 +137,8 @@ protected:
     QMatrix4x4 _worldInv;   // the inverted world matrix
     QMatrix4x4 _view;       // the view matrix
     QMatrix4x4 _proj;       // the projection matrix
+    QVector3D _max;         // the max picked for viewport
+    QVector3D _min;         // the min picked for viewport
 };
         
 //////////////////////////////////////////////////////////////////////////////////////

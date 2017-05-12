@@ -145,8 +145,9 @@ void ShipCADModel::buildValidFrameTable(SplineVector& dest, bool close_at_deck)
 void ShipCADModel::extents(QVector3D& min, QVector3D& max)
 {
     if (_surface.numberOfControlFaces()) {
-        _surface.setDrawMirror(true);
-        _vis.setModelView(mvBoth);
+        // save the current model view setting, we temporarily set it to both
+        TempVarChange<model_view_t> visview = _vis.tempChangeModelView(mvBoth);
+        TempVarChange<bool> mirror = _surface.tempChangeMirror(true);
         min = QVector3D(1e6, 1e6, 1e6);
         max = QVector3D(-1e6, -1e6, -1e6);
         _surface.extents(min, max);
@@ -461,12 +462,206 @@ void ShipCADModel::clearUndo()
 
 void ShipCADModel::drawWithPainter(Viewport& vp, QPainter* painter)
 {
-//    painter->drawText(10, 10, "Hello world!");
+    if (vp.getViewportType() != fvPerspective && _vis.isShowGrid())
+        drawGrid(vp, painter);
 }
 
-void ShipCADModel::drawGrid(Viewport& /*vp*/, LineShader* /*lineshader*/)
+// FreeShipUnit.pas:12241
+void ShipCADModel::drawGrid(Viewport& vp, QPainter* painter)
 {
-    // TODO
+    QVector3D min;
+    QVector3D max;
+    extents(min, max);
+    
+    bool draw_stations = vp.getViewportType() != fvBodyplan;
+    bool draw_buttocks = vp.getViewportType() != fvProfile;
+    bool draw_waterlines = vp.getViewportType() != fvPlan;
+    bool draw_diagonals = vp.getViewportType() == fvBodyplan;
+
+    // blowup the boundary box by 3%
+    QVector3D diff = (max - min) * 0.03;
+    min -= diff;
+    max += diff;
+    
+    QPen linepen1(_prefs.getGridColor(), 1);
+    QPen linepen2(_prefs.getGridColor(), 2);
+    QPen textpen(_prefs.getGridFontColor());
+    QPen textredpen(Qt::red);
+    QFont font("Arial", 8);
+    QFontMetrics fm(font);
+    painter->setFont(font);
+    if (draw_stations || draw_buttocks || draw_waterlines || draw_diagonals) {
+        if (vp.getViewportType() != fvProfile) {
+            // draw centerline
+            QVector3D p1(min);
+            QVector3D p2(max);
+            p1.setY(0.0);
+            p2.setY(0.0);
+            QPoint pt1 = vp.convert3D(p1);
+            QPoint pt2 = vp.convert3D(p2);
+            painter->setPen(linepen2);
+            painter->drawLine(pt1, pt2);
+            painter->setPen(textredpen);
+            // msg 183
+            QString msg(tr("Centerline"));
+            int width = fm.width(msg);
+            if (vp.getViewportType() == fvBodyplan) {
+                painter->drawText(pt1.x() - (width / 2), pt1.y(), msg);
+                painter->drawText(pt2.x() - (width / 2), pt2.y(), msg);
+            } else {
+                painter->drawText(pt1.x() - width, pt1.y(), msg);
+                painter->drawText(pt2.x(), pt2.y(), msg);
+            }
+        }
+        if (vp.getViewportType() != fvPlan) {
+            // draw baseline
+            QVector3D p1(min);
+            QVector3D p2(max);
+            float position = getSurface()->getMin().z();
+            p1.setZ(position);
+            p2.setZ(p1.z());
+            QPoint pt1 = vp.convert3D(p1);
+            QPoint pt2 = vp.convert3D(p2);
+            painter->setPen(linepen2);
+            painter->drawLine(pt1, pt2);
+            painter->setPen(textredpen);
+            // msg 184
+            QString msg(tr("Base %1").arg(ConvertDimension(position, _settings.getUnits())));
+            int width = fm.width(msg);
+            painter->drawText(pt1.x(), pt1.y(), msg);
+            painter->drawText(pt2.x()-width, pt2.y(), msg);
+            // draw dwl
+            if (_settings.isMainParticularsSet()) {
+                position = getSurface()->getMin().z() + _settings.getDraft();
+                p1.setZ(position);
+                p2.setZ(p1.z());
+                pt1 = vp.convert3D(p1);
+                pt2 = vp.convert3D(p2);
+                painter->setPen(linepen2);
+                painter->drawLine(pt1, pt2);
+                painter->setPen(textredpen);
+                // msg 185
+                QString msg(tr("DWL %1").arg(ConvertDimension(position, _settings.getUnits())));
+                int width = fm.width(msg);
+                painter->drawText(pt1.x() - width / 2, pt1.y(), msg);
+                painter->drawText(pt2.x() - width / 2, pt2.y(), msg);
+            }
+        }
+    }
+    if (draw_stations) {
+        QVector3D p1 = min;
+        QVector3D p2 = max;
+        for (size_t i=0; i<_stations.size(); ++i) {
+            float position = -_stations.get(i)->getPlane().d();
+            p1.setX(position);
+            p2.setX(p1.x());
+            QString str = ConvertDimension(position, _settings.getUnits());
+            QPoint pt1 = vp.convert3D(p1);
+            QPoint pt2 = vp.convert3D(p2);
+            painter->setPen(linepen1);
+            painter->drawLine(pt1, pt2);
+            //int width = fm.width(str);
+            int height = fm.height();
+            painter->setPen(textpen);
+            painter->drawText(pt1.x(), pt1.y() + height, str);
+            painter->drawText(pt2.x(), pt2.y(), str);
+        }
+    }
+    if (draw_diagonals) {
+        QVector3D p1 = min;
+        QVector3D p2 = max;
+        for (size_t i=0; i<_diagonals.size(); ++i) {
+            Intersection* diagonal = _diagonals.get(i);
+            if (!diagonal->isBuild())
+                diagonal->rebuild();
+            for (size_t j=0; j<diagonal->getSplines().size(); ++j) {
+                Spline* sp = diagonal->getSplines().get(j);
+                p1 = sp->value(0 / 100.0);
+                QPoint pt1 = vp.convert3D(p1);
+                for (size_t n=1; n<=100; ++n) {
+                    p2 = sp->value(n / 100.0);
+                    QPoint pt2 = vp.convert3D(p2);
+                    painter->setPen(linepen1);
+                    painter->drawLine(pt1, pt2);
+                    pt1 = pt2;
+                }
+                if (_vis.getModelView() == mvBoth || vp.getViewportType() == fvBodyplan) {
+                    p1 = sp->value(0 / 100.0);
+                    p1.setY(-p1.y());
+                    QPoint pt1 = vp.convert3D(p1);
+                    for (size_t n=1; n<=100; ++n) {
+                        p2 = sp->value(n / 100.0);
+                        p2.setY(-p2.y());
+                        QPoint pt2 = vp.convert3D(p2);
+                        painter->setPen(linepen1);
+                        painter->drawLine(pt1, pt2);
+                        pt1 = pt2;
+                    }
+                }
+            }
+
+        }
+    }
+    if (draw_buttocks) {
+        QVector3D p1 = min;
+        QVector3D p2 = max;
+        for (size_t i=0; i<_buttocks.size(); ++i) {
+            float position = -_buttocks.get(i)->getPlane().d();
+            QString str = ConvertDimension(position, _settings.getUnits());
+            p1.setY(position);
+            p2.setY(p1.y());
+            QPoint pt1 = vp.convert3D(p1);
+            QPoint pt2 = vp.convert3D(p2);
+            painter->setPen(linepen1);
+            painter->drawLine(pt1, pt2);
+            int width = vp.getViewportType() == fvBodyplan ? 0 : fm.width(str);
+            painter->setPen(textpen);
+            if (vp.getViewportType() == fvBodyplan) {
+                painter->drawText(pt1.x(), pt1.y(), str);
+                painter->drawText(pt2.x() - width, pt2.y(), str);
+            } else {
+                painter->drawText(pt1.x(), pt1.y(), str);
+                painter->drawText(pt2.x() - width, pt2.y(), str);
+            }
+            if (_vis.getModelView() == mvBoth || vp.getViewportType() == fvBodyplan) {
+                p1.setY(-position);
+                p2.setY(p1.y());
+                QString str1 = ConvertDimension(-position, _settings.getUnits());
+                pt1 = vp.convert3D(p1);
+                pt2 = vp.convert3D(p2);
+                painter->setPen(linepen1);
+                painter->drawLine(pt1, pt2);
+                int width = fm.width(str);
+                int height = fm.height();
+                painter->setPen(textpen);
+                if (vp.getViewportType() == fvBodyplan) {
+                    painter->drawText(pt1.x() - width, pt1.y(), str1);
+                    painter->drawText(pt2.x() - width, pt2.y(), str1);
+                } else {
+                    painter->drawText(pt2.x() - width, pt2.y() + height, str1);
+                    painter->drawText(pt1.x(), pt1.y() + height, str1);
+                }
+            }
+        }
+    }
+    if (draw_waterlines) {
+        QVector3D p1 = min;
+        QVector3D p2 = max;
+        for (size_t i=0; i<_waterlines.size(); ++i) {
+            float position = -_waterlines.get(i)->getPlane().d();
+            p1.setZ(position);
+            p2.setZ(p1.z());
+            QString str = ConvertDimension(position, _settings.getUnits());
+            QPoint pt1 = vp.convert3D(p1);
+            QPoint pt2 = vp.convert3D(p2);
+            painter->setPen(linepen1);
+            painter->drawLine(pt1, pt2);
+            int width = fm.width(str);
+            painter->setPen(textpen);
+            painter->drawText(pt1.x(), pt1.y(), str);
+            painter->drawText(pt2.x() - width, pt2.y(), str);
+        }
+    }
 }
 
 struct draw_intersection
@@ -490,9 +685,7 @@ void ShipCADModel::draw(Viewport& vp)
     // so that the controlnet appears on top
     // but the intersections that should be drawn last depends on the view
     if (vp.getViewportType() != fvPerspective) {
-        if (_vis.isShowGrid())
-            drawGrid(vp, lineshader);
-        else {
+        if (!_vis.isShowGrid()) {
             if (vp.getViewportType() != fvBodyplan && _vis.isShowStations()) {
                 for_each(_stations.begin(), _stations.end(), di);
             }

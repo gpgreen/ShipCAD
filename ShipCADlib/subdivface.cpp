@@ -1235,9 +1235,9 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings)
                     strings.push_back(QString("0\r\nVERTEX"));
                     strings.push_back(QString("8\r\n%1").arg(layername));
                     QVector3D p = grid.getPoint(i, j)->getCoordinate();
-                    strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
-                    strings.push_back(QString("20\r\n%1").arg(truncate(p.y(), 4)));
-                    strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                    strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
+                    strings.push_back(QString("20\r\n%1").arg(Truncate(p.y(), 4)));
+                    strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
                     strings.push_back(QString("70\r\n64")); // polygon mesh vertex
                 }
             }
@@ -1255,9 +1255,9 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings)
                         strings.push_back(QString("0\r\nVERTEX"));
                         strings.push_back(QString("8\r\n%1").arg(layername));
                         QVector3D p = grid.getPoint(i, j)->getCoordinate();
-                        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
-                        strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
-                        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+                        strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
+                        strings.push_back(QString("20\r\n%1").arg(Truncate(-p.y(), 4)));
+                        strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
                         strings.push_back(QString("70\r\n64")); // polygon mesh vertex
                     }
                 }
@@ -1273,16 +1273,16 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings)
             strings.push_back(QString("62\r\n%1").arg(colorindex));
             for (size_t k=0; k<face->numberOfPoints(); ++k) {
                 QVector3D p = face->getPoint(k)->getCoordinate();
-                strings.push_back(QString("%1\r\n%2").arg(10+k).arg(truncate(p.x(), 4)));
-                strings.push_back(QString("%1\r\n%2").arg(20+k).arg(truncate(p.y(), 4)));
-                strings.push_back(QString("%1\r\n%2").arg(30+k).arg(truncate(p.z(), 4)));
+                strings.push_back(QString("%1\r\n%2").arg(10+k).arg(Truncate(p.x(), 4)));
+                strings.push_back(QString("%1\r\n%2").arg(20+k).arg(Truncate(p.y(), 4)));
+                strings.push_back(QString("%1\r\n%2").arg(30+k).arg(Truncate(p.z(), 4)));
             }
             if (face->numberOfPoints() == 3) {
                 QVector3D p = face->getPoint(2)->getCoordinate();
                 // 4th point is same as third
-                strings.push_back(QString("13\r\n%1").arg(truncate(p.x(), 4)));
-                strings.push_back(QString("23\r\n%1").arg(truncate(p.y(), 4)));
-                strings.push_back(QString("33\r\n%1").arg(truncate(p.z(), 4)));
+                strings.push_back(QString("13\r\n%1").arg(Truncate(p.x(), 4)));
+                strings.push_back(QString("23\r\n%1").arg(Truncate(p.y(), 4)));
+                strings.push_back(QString("33\r\n%1").arg(Truncate(p.z(), 4)));
             }
             if (getLayer()->isSymmetric() && getOwner()->drawMirror()) {
                 // send starboard side also
@@ -1291,16 +1291,16 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings)
                 strings.push_back(QString("62\r\n%1").arg(colorindex));
                 for (size_t k=face->numberOfPoints(); k!=0; --k) {
                     QVector3D p = face->getPoint(k-1)->getCoordinate();
-                    strings.push_back(QString("%1\r\n%2").arg(10+k).arg(truncate(p.x(), 4)));
-                    strings.push_back(QString("%1\r\n%2").arg(20+k).arg(truncate(-p.y(), 4)));
-                    strings.push_back(QString("%1\r\n%2").arg(30+k).arg(truncate(p.z(), 4)));
+                    strings.push_back(QString("%1\r\n%2").arg(10+k).arg(Truncate(p.x(), 4)));
+                    strings.push_back(QString("%1\r\n%2").arg(20+k).arg(Truncate(-p.y(), 4)));
+                    strings.push_back(QString("%1\r\n%2").arg(30+k).arg(Truncate(p.z(), 4)));
                 }
                 if (face->numberOfPoints() == 3) {
                     QVector3D p = face->getPoint(0)->getCoordinate();
                     // 4th point is same as third
-                    strings.push_back(QString("13\r\n%1").arg(truncate(p.x(), 4)));
-                    strings.push_back(QString("23\r\n%1").arg(truncate(-p.y(), 4)));
-                    strings.push_back(QString("33\r\n%1").arg(truncate(p.z(), 4)));
+                    strings.push_back(QString("13\r\n%1").arg(Truncate(p.x(), 4)));
+                    strings.push_back(QString("23\r\n%1").arg(Truncate(-p.y(), 4)));
+                    strings.push_back(QString("33\r\n%1").arg(Truncate(p.z(), 4)));
                 }
             }
         }

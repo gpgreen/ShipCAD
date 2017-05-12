@@ -354,8 +354,8 @@ void DevelopedPatch::saveToDXF(QStringList& strings)
             QVector3D p3d = getPoint(index - _points.begin());
             strings.push_back(QString("0\r\nVERTEX"));
             strings.push_back(QString("8\r\n%1").arg(layername));
-            strings.push_back(QString("10\r\n%1").arg(truncate(p3d.x(), 4)));
-            strings.push_back(QString("20\r\n%1").arg(truncate(p3d.y(), 4)));
+            strings.push_back(QString("10\r\n%1").arg(Truncate(p3d.x(), 4)));
+            strings.push_back(QString("20\r\n%1").arg(Truncate(p3d.y(), 4)));
         }
         strings.push_back(QString("0\r\nSEQEND"));
         if (_mirror) {
@@ -368,8 +368,8 @@ void DevelopedPatch::saveToDXF(QStringList& strings)
                 QVector3D p3d = getMirrorPoint(index - _points.begin());
                 strings.push_back(QString("0\r\nVERTEX"));
                 strings.push_back(QString("8\r\n%1").arg(layername));
-                strings.push_back(QString("10\r\n%1").arg(truncate(p3d.x(), 4)));
-                strings.push_back(QString("20\r\n%1").arg(truncate(p3d.y(), 4)));
+                strings.push_back(QString("10\r\n%1").arg(Truncate(p3d.x(), 4)));
+                strings.push_back(QString("20\r\n%1").arg(Truncate(p3d.y(), 4)));
             }
             strings.push_back(QString("0\r\nSEQEND"));
         }
@@ -408,8 +408,8 @@ void DevelopedPatch::exportSpline(QStringList& strings, Spline* spline,
         p3d = convertTo3D(p2d);
         strings.push_back(QString("0\r\nVERTEX"));
         strings.push_back(QString("8\r\n%1").arg(layername));
-        strings.push_back(QString("10\r\n%1").arg(truncate(p3d.x(), 4)));
-        strings.push_back(QString("20\r\n%1").arg(truncate(p3d.y(), 4)));
+        strings.push_back(QString("10\r\n%1").arg(Truncate(p3d.x(), 4)));
+        strings.push_back(QString("20\r\n%1").arg(Truncate(p3d.y(), 4)));
     }
     strings.push_back(QString("0\r\nSEQEND"));
 }

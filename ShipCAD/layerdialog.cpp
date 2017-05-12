@@ -175,10 +175,10 @@ void LayerDialog::updateState()
     else
         _moveDownAction->setEnabled(true);
     ui->areaLabel->setText(QString(tr("Area %1 %2")
-                                   .arg(truncate(cprops.layer_properties.surface_area, 2))
+                                   .arg(Truncate(cprops.layer_properties.surface_area, 2))
                                    .arg(_areastr)));
     ui->weightLabel->setText(QString(tr("Weight %1 %2")
-                                     .arg(truncate(cprops.layer_properties.weight, 2))
+                                     .arg(Truncate(cprops.layer_properties.weight, 2))
                                      .arg(_weightstr)));
     ui->cogLabel->setText(QString(tr("Center of gravity %1,%2,%3 %4")
                                   .arg(MakeLength(cprops.layer_properties.surface_center_of_gravity.x(), 3, 7))

@@ -42,6 +42,7 @@
 #include "entity.h"
 #include "mempool.h"
 #include "orderedmap.h"
+#include "tempvar.h"
 
 namespace ShipCAD {
 
@@ -386,6 +387,11 @@ public:
     /*! \brief delete elements marked for permanent removal
      */
     void deleteElementsCollection();
+
+    /*! \brief temporarily change draw mirror
+     */
+    TempVarChange<bool> tempChangeMirror(bool val)
+        { return TempVarChange<bool>(val, &_draw_mirror); }
     
 protected:
 

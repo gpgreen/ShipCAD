@@ -221,7 +221,7 @@ QColor ShipCAD::FillColor(float parameter)
     return col;
 }
 
-QString ShipCAD::truncate(float val, int max_length)
+QString ShipCAD::Truncate(float val, int max_length)
 {
     QString num;
     num.setNum(val);
@@ -624,4 +624,21 @@ QVector3D ShipCAD::RotateVector(const QVector3D& coord,
     return QVector3D(coord.x() * r11 + coord.y() * r12 + coord.z() * r13,
                      coord.x() * r21 + coord.y() * r22 + coord.z() * r23,
                      coord.x() * r31 + coord.y() * r32 + coord.z() * r33);
+}
+
+QString ShipCAD::ConvertDimension(float value, unit_type_t units)
+{
+    if (units == fuImperial) {
+        int feet;
+        if (value < 0)
+            feet = static_cast<int>(ceil(value));
+        else
+            feet = static_cast<int>(floor(value));
+        float inches = abs(value - feet) * 12;
+        if (feet == 0 && value < 0)
+            return QString("-%1' %2\"").arg(feet).arg(Truncate(inches, 1));
+        else
+            return QString("%1' %2\"").arg(feet).arg(Truncate(inches, 1));
+    } else
+        return QString("%1").arg(round(1000*value));
 }

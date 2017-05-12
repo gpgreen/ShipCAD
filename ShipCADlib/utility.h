@@ -303,7 +303,7 @@ namespace ShipCAD {
 	 * \param max_length the maximum number of decimals to show in the string
 	 * \return the string with the converted floating point number
 	 */
-    QString truncate(float val, int max_length);
+    QString Truncate(float val, int max_length);
 
     /*! \brief compare 2 floats, if they are sufficiently close, return true
      *
@@ -346,6 +346,15 @@ namespace ShipCAD {
      */
     QVector3D RotateVector(const QVector3D& coord, double sinx, double cosx,
                            double siny, double cosy, double sinz, double cosz);
+
+    /*! \brief create a string holding a dimension based on project units
+     *
+     * \param value the value to convert
+     * \param units the current project units
+     * \return a formatted string
+     */
+    QString ConvertDimension(float value, unit_type_t units);
+
 };
 
 #endif

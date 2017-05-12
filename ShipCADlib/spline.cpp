@@ -765,9 +765,9 @@ void Spline::saveToDXF(QStringList& strings, QString layername, bool sendmirror)
         QVector3D p = value(params[i]);
         strings.push_back("0\r\nVERTEX");
         strings.push_back(QString("8\r\n%1").arg(layername));
-        strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
-        strings.push_back(QString("20\r\n%1").arg(truncate(p.y(), 4)));
-        strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+        strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
+        strings.push_back(QString("20\r\n%1").arg(Truncate(p.y(), 4)));
+        strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
         strings.push_back("70\r\n32");    // 3D polyline mesh vertex
     }
     strings.push_back("0\r\nSEQEND");
@@ -782,9 +782,9 @@ void Spline::saveToDXF(QStringList& strings, QString layername, bool sendmirror)
 			QVector3D p = value(params[i]);
 			strings.push_back("0\r\nVERTEX");
 			strings.push_back(QString("8\r\n%1").arg(layername));
-			strings.push_back(QString("10\r\n%1").arg(truncate(p.x(), 4)));
-			strings.push_back(QString("20\r\n%1").arg(truncate(-p.y(), 4)));
-			strings.push_back(QString("30\r\n%1").arg(truncate(p.z(), 4)));
+			strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
+			strings.push_back(QString("20\r\n%1").arg(Truncate(-p.y(), 4)));
+			strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
 			strings.push_back("70\r\n32");    // 3D polyline mesh vertex
 		}
 		strings.push_back("0\r\nSEQEND");

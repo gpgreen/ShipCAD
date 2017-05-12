@@ -348,7 +348,7 @@ public slots:
 
 protected:
 
-    void drawGrid(Viewport& vp, LineShader* lineshader);
+    void drawGrid(Viewport& vp, QPainter* painter);
 	/*! \brief create temp redo object at end of undo list
 	 *
 	 * \return the undo object

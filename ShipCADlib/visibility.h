@@ -35,6 +35,7 @@
 #include <QtCore>
 #include <QtGui>
 #include "shipcadlib.h"
+#include "tempvar.h"
 
 namespace ShipCAD {
 
@@ -291,6 +292,8 @@ public:
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);
 
+    TempVarChange<model_view_t> tempChangeModelView(model_view_t temp)
+        { return TempVarChange<model_view_t>(temp, &_model_view); }
     void clear();
 
 public slots:
@@ -324,6 +327,7 @@ private:
     bool _show_flowlines;
     float _curvature_scale;
     float _cursor_increment;
+
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

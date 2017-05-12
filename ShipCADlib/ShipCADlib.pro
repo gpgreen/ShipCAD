@@ -88,7 +88,8 @@ HEADERS += shipcadlib.h \
     developedpatch.h \
     mempool.h \
     orderedmap.h \
-    predicate.h
+    predicate.h \
+    tempvar.h
 
 unix:!symbian {
     maemo5 {

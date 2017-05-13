@@ -350,6 +350,7 @@ public:
     QColor getCreasePointColor() {return _crease_point_color;}
     QColor getControlCurveColor() {return _control_curve_color;}
     QColor getLayerColor() {return _layer_color;}
+    QColor getNormalColor() {return _normal_color;}
     QColor getCurvatureColor() {return _curvature_color;}
     QColor getUnderWaterColor() {return _underwater_color;}
     QColor getZebraColor() {return _zebra_color;}

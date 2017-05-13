@@ -231,6 +231,8 @@ private:
 };
 
 typedef PointerVector<HydrostaticCalc> HydrostaticCalcVector;
+typedef std::vector<HydrostaticCalc*>::iterator HydrostaticCalcVectorIterator;
+typedef std::vector<HydrostaticCalc*>::const_iterator HydrostaticCalcVectorConstIterator;
 	
 //////////////////////////////////////////////////////////////////////////////////////
 

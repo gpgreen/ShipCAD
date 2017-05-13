@@ -959,6 +959,23 @@ void SubdivisionControlFace::drawCurvatureFaces(CurveFaceShader* shader, float M
     }
 }
 
+// function to draw a normal
+static void DrawNormal(QVector3D p, QVector3D n, bool draw_mirror, float mainframe,
+                       Viewport& vp, QVector<QVector3D>& vertices)
+{
+    if (vp.getViewportType() == fvBodyplan && !draw_mirror && p.x() <= mainframe) {
+        p.setY(-p.y());
+        n.setY(-n.y());
+    }
+    // TODO fix this so it is a fixed length, should be figured out by viewport
+    // scale the length of the normal such that it is a fixed length relative to the screen resolution
+    float ldes = 0.00075 * vp.width();
+    if (ldes < 10)
+        ldes = 10;
+    n *= ldes;
+    vertices << p << p + n;
+}
+
 void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
 {
     QVector<QVector3D> vertices;
@@ -983,7 +1000,25 @@ void SubdivisionControlFace::draw(Viewport& vp, LineShader* lineshader)
         _control_edges[i]->draw(_owner->drawMirror() && getLayer()->isSymmetric(), vp, lineshader, edgeColor);
     // show normals
     if (isSelected() && _owner->showNormals()) {
-        // TODO showing normals not implemented
+        QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
+        // first assemble all points with this controlface
+        set<SubdivisionPoint*> points;
+        for (size_t i=0; i<_children.size(); ++i)
+            for (size_t j=0; j<_children[i]->numberOfPoints(); ++j)
+                points.insert(_children[i]->getPoint(j));
+        set<SubdivisionPoint*>::iterator i = points.begin();
+        for ( ; i!=points.end(); ++i) {
+            SubdivisionPoint* point = *i;
+            QVector3D p1 = point->getCoordinate();
+            QVector3D p2 = point->getNormal();
+            DrawNormal(p1, p2, _owner->drawMirror(), _owner->getMainframeLocation(), vp, vertices);
+            if (getLayer()->isSymmetric() && _owner->drawMirror()) {
+                p1.setY(-p1.y());
+                p2.setY(-p2.y());
+                DrawNormal(p1, p2, _owner->drawMirror(), _owner->getMainframeLocation(), vp, vertices);
+            }
+        }
+        lineshader->renderLines(vertices, _owner->getNormalColor());
     }
 }
 

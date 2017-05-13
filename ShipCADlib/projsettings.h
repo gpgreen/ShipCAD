@@ -166,7 +166,13 @@ public:
 	void setUnderWaterColor(QColor col);
 
     unit_type_t getUnits() const {return _units;}
-	void setUnits(unit_type_t unit);
+    /*! \brief set the units in the model. Scales the entire model appropriately
+     *
+     * \param unit the unit type for the model
+     * \return true if the unit type is different than previous setting, and the model
+     * has been scaled and changed, needs to be redrawn
+     */
+	bool setUnits(unit_type_t unit);
 								   
     void loadBinary(FileBuffer& source, QImage* img);
     void saveBinary(FileBuffer& dest);

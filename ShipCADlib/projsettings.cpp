@@ -282,7 +282,19 @@ void ProjectSettings::setSimplifyIntersections(bool set)
 {
 	if (_simplify_intersections != set) {
 		_simplify_intersections = set;
-		// TODO: station,buttock,waterline,diagonal,calcs
+        IntersectionVectorIterator i;
+        for (i=_owner->getStations().begin(); i!=_owner->getStations().end(); ++i)
+            (*i)->setBuild(false);
+        for (i=_owner->getButtocks().begin(); i!=_owner->getButtocks().end(); ++i)
+            (*i)->setBuild(false);
+        for (i=_owner->getWaterlines().begin(); i!=_owner->getWaterlines().end(); ++i)
+            (*i)->setBuild(false);
+        for (i=_owner->getDiagonals().begin(); i!=_owner->getDiagonals().end(); ++i)
+            (*i)->setBuild(false);
+        HydrostaticCalcVectorIterator j;
+        for (j=_owner->getHydrostaticCalculations().begin();
+             j!=_owner->getHydrostaticCalculations().end(); ++j)
+            (*j)->setCalculated(false);
 	}
 }
 
@@ -294,15 +306,14 @@ void ProjectSettings::setUnderWaterColor(QColor col)
 	}
 }
 
-void ProjectSettings::setUnits(unit_type_t unit)
+bool ProjectSettings::setUnits(unit_type_t unit)
 {
 	double unit_conversion_factor;
-	QVector3D scale_vector;
 	float weight_factor;
 	float thickness_factor;
  	
 	if (unit == _units)
-		return;
+		return false;
 	_units = unit;
 	if (_units == fuImperial) {
 		unit_conversion_factor = 1 / 0.3048;
@@ -319,10 +330,11 @@ void ProjectSettings::setUnits(unit_type_t unit)
 		layer->setMaterialDensity(layer->getMaterialDensity() * weight_factor);
 		layer->setThickness(layer->getThickness() * thickness_factor);
 	}
-    scale_vector.setX(unit_conversion_factor);
-    scale_vector.setY(unit_conversion_factor);
-    scale_vector.setZ(unit_conversion_factor);
-	// TODO: owner->edit->model_scale
+    QVector3D scale_vector(unit_conversion_factor,
+                           unit_conversion_factor,
+                           unit_conversion_factor);
+    _owner->scaleModel(scale_vector, true, true); // scale and redraw
+    return true;
 }
 
 void ProjectSettings::clear()

@@ -160,7 +160,9 @@ struct IntersectionFinder {
 };
 
 typedef PointerVector<Intersection> IntersectionVector;
-
+typedef std::vector<Intersection*>::iterator IntersectionVectorIterator;
+typedef std::vector<Intersection*>::const_iterator IntersectionVectorConstIterator;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */

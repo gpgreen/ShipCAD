@@ -136,7 +136,9 @@ public:
 	 * \return vertex type
 	 */
     vertex_type_t fromInt(int val);
-    QVector3D getCoordinate();
+
+    QVector3D getCoordinate() const { return _coordinate; }
+    
     virtual void setCoordinate(const QVector3D& val);
 	/*! \brief Calculate normal vector
 	 *

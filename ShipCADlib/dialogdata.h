@@ -22,6 +22,7 @@
 
 #include <QtCore>
 #include <QColorDialog>
+#include <QFrame>
 #include <vector>
 #include "shipcadlib.h"
 #include "intersection.h"
@@ -29,7 +30,8 @@
 namespace ShipCAD {
 
 class SubdivisionLayer;
-
+class Preferences;
+    
 //////////////////////////////////////////////////////////////////////////////////////
 /*! \brief data structure for insert plane dialog exchange
  */
@@ -189,6 +191,29 @@ struct NewModelDialogData
     unit_type_t units;
 
     explicit NewModelDialogData();
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for preferences dialog exchange
+ */
+
+struct ColorChanger 
+{
+    QColor orig;
+    QColor* setColor;
+
+    explicit ColorChanger(QColor* addr);
+    
+};
+
+struct PreferencesDialogData
+{
+    bool accepted;
+    size_t undo_memory;
+    size_t control_point_size;
+    std::map<int, ColorChanger> colors;
+
+    explicit PreferencesDialogData(Preferences& p);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

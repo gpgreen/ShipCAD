@@ -20,6 +20,7 @@
 #include "dialogdata.h"
 #include "subdivlayer.h"
 #include "shipcadmodel.h"
+#include "preferences.h"
 
 using namespace ShipCAD;
 using namespace std;
@@ -94,4 +95,16 @@ NewModelDialogData::NewModelDialogData()
     : accepted(false), length(0.0), breadth(0.0), depth(0.0), rows(0), cols(0), units(fuMetric)
 {
     // does nothing
+}
+
+ColorChanger::ColorChanger(QColor* addr)
+    : orig(*addr), setColor(addr)
+{
+    // does nothing
+}
+
+PreferencesDialogData::PreferencesDialogData(Preferences& p)
+    : accepted(false), undo_memory(p.getMaxUndoMemory()), control_point_size(p.getPointSize())
+{
+    p.getColorDialogMap(colors);
 }

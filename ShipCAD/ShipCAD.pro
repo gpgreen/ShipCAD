@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     rotatedialog.cpp \
     colorview.cpp \
     intersectionsdialog.cpp \
-    newmodeldialog.cpp
+    newmodeldialog.cpp \
+    preferencesdialog.cpp
 
 HEADERS  += mainwindow.h \
         pointdialog.h \
@@ -42,7 +43,8 @@ HEADERS  += mainwindow.h \
     rotatedialog.h \
     colorview.h \
     intersectionsdialog.h \
-    newmodeldialog.h
+    newmodeldialog.h \
+    preferencesdialog.h
 
 FORMS    += mainwindow.ui \
         pointdialog.ui \
@@ -54,7 +56,8 @@ FORMS    += mainwindow.ui \
     chooselayerdialog.ui \
     rotatedialog.ui \
     intersectionsdialog.ui \
-    newmodeldialog.ui
+    newmodeldialog.ui \
+    preferencesdialog.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/release/ -lShipCADlib
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../ShipCADlib/debug/ -lShipCADlib

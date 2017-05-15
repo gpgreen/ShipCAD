@@ -1844,6 +1844,30 @@ void Controller::setActiveLayerColor(const QColor& color)
     emit modifiedModel();
 }
 
+void Controller::editPreferences()
+{
+    cout << "Controller::editPrefererences" << endl;
+    PreferencesDialogData data(getModel()->getPreferences());
+    UndoObject* uo = getModel()->createUndo(tr("edit preferences"), false);
+    emit exePreferencesDialog(&data);
+    if (data.accepted) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    } else {
+        delete uo;
+    }
+}
+
+void Controller::resetPreferences()
+{
+    cout << "Controller::resetPreferences" << endl;
+    getModel()->getPreferences().clear();
+    PreferencesDialogData data(getModel()->getPreferences());
+    emit resetPreferences(&data);
+}
+
 // FreeControlPointForm.pas:320
 void Controller::cornerPointSelected(bool sel)
 {

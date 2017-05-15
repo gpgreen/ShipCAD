@@ -1,6 +1,6 @@
 /*##############################################################################################
- *    ShipCAD                                                                                  *
- *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    ShipCAD																				   *
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>								   *
  *                                                                                             *
  *    This program is free software; you can redistribute it and/or modify it under            *
  *    the terms of the GNU General Public License as published by the                          *
@@ -16,39 +16,60 @@
  *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
  *                                                                                             *
  *#############################################################################################*/
-#ifndef COLORVIEW_H
-#define COLORVIEW_H
 
-#include <QWidget>
+#ifndef PREFERENCESDIALOG_H
+#define PREFERENCESDIALOG_H
 
-class ColorView : public QWidget
+#include <vector>
+#include <QDialog>
+#include <QSignalMapper>
+#include "dialogdata.h"
+#include "colorview.h"
+
+namespace Ui {
+class PreferencesDialog;
+}
+
+class PreferencesDialog : public QDialog
 {
     Q_OBJECT
 
 public:
+    explicit PreferencesDialog(QWidget *parent = 0);
+    ~PreferencesDialog();
 
-    explicit ColorView(const QColor& color, QWidget *parent = 0);
-    virtual ~ColorView() {}
-    
-    // getters/setters for color
-    void setColor(const QColor& color);
-    void setAlpha(float alpha);
-    void setColor(const QColor& color, float alpha);
+    void initialize(ShipCAD::PreferencesDialogData* data);
 
 signals:
     
-    void clicked();
+    void exeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
+    void reset();
+                                                                   
+public slots:
 
+    void colorClicked(int id);
+    
 protected:
 
-    virtual void mousePressEvent(QMouseEvent* e);
-    virtual void mouseReleaseEvent(QMouseEvent* e);
-    virtual void paintEvent(QPaintEvent *event);
+    /*! \brief initialize color structures
+     */
+    void initMembers();
+    
+    /*! \brief read stored settings for dialog
+     */
+    void readSettings();
+    /*! \brief save settings for dialog
+     */
+    void saveSettings();
+    /*! \brief called before dialog is closed
+     */
+    virtual void closeEvent(QCloseEvent* event);
 
 private:
-
-    QColor _color;
-    bool _pressed;
+    Ui::PreferencesDialog *ui;
+    QSignalMapper* _mapper;
+    std::vector<std::pair<QFrame*, ColorView*> > _color_views;
+    ShipCAD::PreferencesDialogData* _data;
 };
 
-#endif // COLORVIEW_H
+#endif // PREFERENCESDIALOG_H

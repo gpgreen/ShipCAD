@@ -32,6 +32,7 @@
 #include "subdivsurface.h"
 
 using namespace ShipCAD;
+using namespace std;
 
 Preferences::Preferences(ShipCADModel* owner)
     : _owner(owner), _point_size(4), _max_undo_memory(20)
@@ -95,3 +96,32 @@ void Preferences::setSurfaceColors(SubdivisionSurface& surface)
     surface._zebra_color = _zebra_stripe_color;
     
 }
+
+void Preferences::getColorDialogMap(map<int, ColorChanger>& colors)
+{
+    colors.insert(make_pair(0, ColorChanger(&_viewport_color)));
+    colors.insert(make_pair(1, ColorChanger(&_grid_color)));
+    colors.insert(make_pair(2, ColorChanger(&_grid_font_color)));
+    colors.insert(make_pair(3, ColorChanger(&_layer_color)));
+    colors.insert(make_pair(4, ColorChanger(&_underwater_color)));
+    colors.insert(make_pair(5, ColorChanger(&_normal_color)));
+    colors.insert(make_pair(6, ColorChanger(&_control_curve_color)));
+    colors.insert(make_pair(7, ColorChanger(&_edge_color)));
+    colors.insert(make_pair(8, ColorChanger(&_crease_color)));
+    colors.insert(make_pair(9, ColorChanger(&_crease_edge_color)));
+    colors.insert(make_pair(10, ColorChanger(&_regular_point_color)));
+    colors.insert(make_pair(11, ColorChanger(&_crease_point_color)));
+    colors.insert(make_pair(12, ColorChanger(&_corner_point_color)));
+    colors.insert(make_pair(13, ColorChanger(&_dart_point_color)));
+    colors.insert(make_pair(14, ColorChanger(&_leakpoint_color)));
+    colors.insert(make_pair(15, ColorChanger(&_select_color)));
+    colors.insert(make_pair(16, ColorChanger(&_curvature_plot_color)));
+    colors.insert(make_pair(17, ColorChanger(&_marker_color)));
+    colors.insert(make_pair(18, ColorChanger(&_station_color)));
+    colors.insert(make_pair(19, ColorChanger(&_buttock_color)));
+    colors.insert(make_pair(20, ColorChanger(&_waterline_color)));
+    colors.insert(make_pair(21, ColorChanger(&_diagonal_color)));
+    colors.insert(make_pair(22, ColorChanger(&_hydrostatics_font_color)));
+    colors.insert(make_pair(23, ColorChanger(&_zebra_stripe_color)));
+}
+

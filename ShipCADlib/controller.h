@@ -160,6 +160,14 @@ signals:
      */
     void exeNewModelDialog(ShipCAD::NewModelDialogData& data);
 
+    /*! \brief execute the preferences dialog
+     */
+    void exePreferencesDialog(ShipCAD::PreferencesDialogData* data);
+
+    /*! \brief reset the preferences dialog with new values
+     */
+    void resetPreferences(ShipCAD::PreferencesDialogData* data);
+    
     /*! \brief show an info dialog
      */
     void displayInfoDialog(const QString& msg);
@@ -591,6 +599,14 @@ public slots:
     /*! \brief set active layer color with specified color, no undo
 	 */
     void setActiveLayerColor(const QColor& color);
+
+    /*! \brief edit preferences
+     */
+    void editPreferences();
+    
+    /*! \brief preferences dialog resets all preferences to default
+     */
+    void resetPreferences();
 
     /*! \brief corner point selected/deselected
      * \param sel true if corner point has been selected, false if deselected

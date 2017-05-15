@@ -61,6 +61,7 @@ class LayerDialog;
 class ColorView;
 class IntersectionsDialog;
 class NewModelDialog;
+class PreferencesDialog;
 
 class ViewportState
 {
@@ -341,6 +342,12 @@ private slots:
      */
     void addOrDeleteIntersections();
     
+    /*! \brief execute the preferences dialog
+     *
+     * \param data dialog data structure
+     */
+    void executePreferencesDialog(ShipCAD::PreferencesDialogData* data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;
@@ -381,6 +388,7 @@ private:
     LayerDialog* _layerdialog; /**< the dialog to edit layer properties */
     IntersectionsDialog* _intersectionsdialog; /**< the dialog to edit intersections */
     NewModelDialog* _newmodeldialog; /**< the dialog to get particulars of new model */
+    PreferencesDialog* _preferencesdialog; /**< the dialog to set preferences */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

@@ -45,6 +45,7 @@
 #include "layerdialog.h"
 #include "intersectionsdialog.h"
 #include "newmodeldialog.h"
+#include "preferencesdialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
@@ -61,7 +62,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     ui(new Ui::MainWindow), _pointdialog(nullptr), _planepointsdialog(nullptr),
     _intersectlayersdialog(nullptr), _extrudeedgedialog(nullptr), _chooselayerdialog(nullptr),
     _mirrordialog(nullptr), _rotatedialog(nullptr), _layerdialog(nullptr),
-    _intersectionsdialog(nullptr), _newmodeldialog(nullptr),
+    _intersectionsdialog(nullptr), _newmodeldialog(nullptr), _preferencesdialog(nullptr),
     _controller(c), _currentViewportContext(nullptr),
     _menu_recent_files(nullptr), _contextMenu(nullptr), _cameraMenu(nullptr),
     _viewportModeGroup(nullptr),
@@ -142,6 +143,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
             SLOT(executeIntersectionsDialog(ShipCAD::IntersectionsDialogData*)));
     connect(_controller, SIGNAL(exeNewModelDialog(ShipCAD::NewModelDialogData&)),
             SLOT(executeNewModelDialog(ShipCAD::NewModelDialogData&)));
+    connect(_controller, SIGNAL(exePreferencesDialog(ShipCAD::PreferencesDialogData*)),
+            SLOT(executePreferencesDialog(ShipCAD::PreferencesDialogData*)));
     // generic dialogs
     connect(_controller,
             SIGNAL(displayInfoDialog(const QString&)),
@@ -182,7 +185,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionExportOffsets, SIGNAL(triggered()), _controller, SLOT(exportOffsets()));
     connect(ui->actionExportSTL, SIGNAL(triggered()), _controller, SLOT(exportSTL()));
     connect(ui->actionExportIGES, SIGNAL(triggered()), _controller, SLOT(exportIGES()));
-    connect(ui->actionPreferences, SIGNAL(triggered()), SLOT(showPreferences()));
+    connect(ui->actionPreferences, SIGNAL(triggered()), _controller, SLOT(editPreferences()));
 
     // connect project actions
 
@@ -1620,6 +1623,24 @@ void MainWindow::addOrDeleteIntersections()
     IntersectionsDialogData* data = _intersectionsdialog->retrieve();
     _controller->addOrDeleteIntersections(data);
     _intersectionsdialog->initialize(data);
+}
+
+void MainWindow::executePreferencesDialog(PreferencesDialogData* data)
+{
+    if (_preferencesdialog == nullptr) {
+        _preferencesdialog = new PreferencesDialog(this);
+        connect(_preferencesdialog, SIGNAL(exeChooseColorDialog(ShipCAD::ChooseColorDialogData&)),
+                this, SLOT(executeChooseColorDialog(ShipCAD::ChooseColorDialogData&)));
+        connect(_preferencesdialog, SIGNAL(reset()),
+                _controller, SLOT(resetPreferences()));
+    }
+    _preferencesdialog->initialize(data);
+
+    // execute the dialog
+    int result = _preferencesdialog->exec();
+    data->accepted = (result == QDialog::Accepted);
+
+    cout << "execute preferences dialog:" << data->accepted << endl;
 }
 
 void MainWindow::changeSelectedItems()

@@ -19,10 +19,11 @@
 
 #include <QPainter>
 #include <QBrush>
+#include <QMouseEvent>
 #include "colorview.h"
 
 ColorView::ColorView(const QColor& color, QWidget *parent) :
-    QWidget(parent), _color(color)
+    QWidget(parent), _color(color), _pressed(false)
 {
     // does nothing
 }
@@ -41,6 +42,28 @@ void ColorView::setColor(const QColor& color, float alpha)
 {
     _color = color;
     _color.setAlphaF(alpha);
+}
+
+void ColorView::mousePressEvent(QMouseEvent* e)
+{
+    if (e->buttons().testFlag(Qt::LeftButton)) {
+        _pressed = true;
+    }
+    else {
+        QWidget::mousePressEvent(e);
+        return;
+    }
+}
+
+void ColorView::mouseReleaseEvent(QMouseEvent* e)
+{
+    if (_pressed && !e->buttons().testFlag(Qt::LeftButton)) {
+        _pressed = false;
+        emit clicked();
+    } else {
+        QWidget::mouseReleaseEvent(e);
+        return;
+    }
 }
 
 void ColorView::paintEvent(QPaintEvent *event)

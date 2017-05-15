@@ -3816,7 +3816,8 @@ bool SubdivisionSurface::check(SurfaceCheckResult& checked, bool quiet)
             checked.leaks.push_back(_control_points[i]);
     }
     // sort leaks in ascending z-coordinate
-    // TODO
+    CompareControlPointZOrder comp;
+    sort(checked.leaks.begin(), checked.leaks.end(), comp);
 
     for (size_t i=0; i<_control_edges.size(); ++i)
         if (_control_edges[i]->numberOfFaces() > 2)

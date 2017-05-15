@@ -32,6 +32,8 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <map>
+#include "dialogdata.h"
 
 namespace ShipCAD {
 
@@ -55,6 +57,8 @@ public:
 
     void setViewportColor(QColor col);
 
+    void getColorDialogMap(std::map<int, ColorChanger>& colors);
+    
     void edit();
     void load();
     void resetColors();

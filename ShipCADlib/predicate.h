@@ -81,7 +81,29 @@ struct FirstCPointPairPredicate {
         : _querypt(dynamic_cast<SubdivisionControlPoint*>(querypt)) {}
 };
 
-
+// predicate class to return true if pt1 is z ordered less than pt2    
+struct CompareControlPointZOrder 
+{
+    bool operator()(ShipCAD::SubdivisionControlPoint* pt1,
+                    ShipCAD::SubdivisionControlPoint* pt2) 
+        {
+            QVector3D p1 = pt1->getCoordinate();
+            QVector3D p2 = pt2->getCoordinate();
+            if (p1.z() < p2.z())
+                return true;
+            if (abs(p1.z() - p2.z()) < 1E-6) {
+                if (p1.x() < p2.x())
+                    return true;
+                if (abs(p1.x() - p2.x()) < 1E-6) {
+                    if (p1.y() < p2.y())
+                        return true;
+                }
+            }
+            return false;
+        }
+};
+    
+                
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */

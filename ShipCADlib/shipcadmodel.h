@@ -206,6 +206,7 @@ public:
     void deleteMarker(Marker* mark);
     
     // flowlines
+    Flowline* addFlowline(const QVector2D& pt, viewport_type_t ty);
     Flowline* getFlowline(size_t index) {return _flowlines.get(index);}
     size_t numberOfFlowlines() const {return _flowlines.size();}
     /*! \brief is the flowline selected

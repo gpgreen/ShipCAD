@@ -677,6 +677,7 @@ struct draw_intersection
     }
 };
 
+// FreeShipUnit.pas:12186
 void ShipCADModel::draw(Viewport& vp)
 {
     LineShader* lineshader = vp.setLineShader();
@@ -752,7 +753,8 @@ void ShipCADModel::draw(Viewport& vp)
         // TODO
     }
     if (_vis.isShowFlowlines()) {
-        // TODO
+        for (size_t i=0; i<_flowlines.size(); i++)
+            _flowlines.get(i)->draw(vp, lineshader);
     }
     if (vp.getViewportMode() == vmShadeGauss && getSurface()->numberOfControlFaces() > 0
             && (getSurface()->getMaxGausCurvature() - getSurface()->getMinGausCurvature()) > 1E-7) {
@@ -1121,6 +1123,19 @@ void ShipCADModel::deleteMarker(Marker* mark)
 {
     removeSelectedMarker(mark);
     _markers.del(mark);
+}
+
+Flowline* ShipCADModel::addFlowline(const QVector2D& pt, viewport_type_t ty)
+{
+    Flowline* flowline = Flowline::construct(this);
+    flowline->initialize(pt, ty);
+    flowline->rebuild();
+    if (flowline->numberOfPoints() == 0) {
+        delete flowline;
+        flowline = nullptr;
+    } else
+        _flowlines.add(flowline);
+    return flowline;
 }
 
 bool ShipCADModel::isSelectedFlowline(Flowline* flow) const

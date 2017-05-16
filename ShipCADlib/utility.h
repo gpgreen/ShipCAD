@@ -190,6 +190,15 @@ namespace ShipCAD {
 							 std::vector<QVector3D>& front,
 							 std::vector<QVector3D>& back);
 
+    /*! \brief Calculate the line segment PaPb that is the shortest route between
+     *   two lines P1P2 and P3P4. Calculate also the values of mua and mub where
+     *      Pa = P1 + mua (P2 - P1)
+     *      Pb = P3 + mub (P4 - P3)
+     * \return FALSE if no solution exists.
+     */
+    bool Lines3DIntersect(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+                          const QVector3D& p4, double& param, QVector3D& int1);
+    
     /*! \brief squared distance between 2 3D points
 	 *
 	 * \param p1 first point

@@ -688,7 +688,7 @@ void Controller::importChines(const QString& filename)
         getModel()->importChines(8, splines);
         splines.clear();
     } catch(...) {
-        // what do we do?
+        // TODO what do we do?
         return;
     }
     getModel()->setFileChanged(true);
@@ -719,7 +719,7 @@ void Controller::importPart(const QString& filename)
         source.loadFromFile(partfile);
         changed = getModel()->loadPart(source, partfileversion);
     } catch(...) {
-        // what do we do?
+        // TODO what do we do?
         delete uo;
         return;
     }
@@ -768,7 +768,7 @@ void Controller::loadFile(const QString& filename)
         getModel()->setFilename(filename);
         // stop asking for file version
     } catch(...) {
-        // what do we do?
+        // TODO what do we do?
     }
     clearUndo();
     getModel()->setFileChanged(false);
@@ -826,9 +826,22 @@ void Controller::saveFileAs(const QString& filename)
     emit modifiedModel();
 }
 
-void Controller::addFlowline(const QVector2D& /*source*/, viewport_type_t /*view*/)
+// FreeShipUnit.pas:8352
+void Controller::addFlowline(const QPoint& source, Viewport& vp)
 {
-	// TODO
+    cout << "Controller::addFlowline" << endl;
+    // msg 130
+    UndoObject* uo = getModel()->createUndo(tr("Add flowline"), false);
+    Flowline* flowline = getModel()->addFlowline(QVector2D(source.x(), source.y()),
+                                                 vp.getViewportType());
+    if (flowline != nullptr) {
+        uo->accept();
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    }
+    else {
+        delete uo;
+    }
 }
 
 void Controller::calculateHydrostatics()
@@ -846,9 +859,12 @@ void Controller::hydrostaticsDialog()
 	// TODO
 }
 
-void Controller::importFrames()
+// FreeShipUnit.pas:8545
+void Controller::importFrames(const QString& filename)
 {
-	// TODO
+    cout << "Controller::importFrames" << endl;
+    Q_UNUSED(filename);
+    // TODO
 }
 
 void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data)
@@ -1104,7 +1120,7 @@ void Controller::importMarkers(const QString& filename)
             emit displayErrorDialog(err);
             return;
         } catch(...) {
-            // what do we do?
+            // TODO what do we do?
             return;
         }
         bool imported = false;

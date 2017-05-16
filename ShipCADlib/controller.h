@@ -356,7 +356,7 @@ public slots:
 
     /*! \brief
 	 */
-	void addFlowline(const QVector2D& source, viewport_type_t view);
+	void addFlowline(const QPoint& source, Viewport& vp);
 
     /*! \brief calculate hydrostatics
 	 *
@@ -376,7 +376,7 @@ public slots:
 
     /*! \brief Load a bodyplan and try to fit surface to it
      */
-    void importFrames();
+    void importFrames(const QString& filename);
 
     /*! \brief add new intersections created in dialog
      *

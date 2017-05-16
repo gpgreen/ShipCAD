@@ -372,6 +372,41 @@ float ShipCAD::DistPP3D(const QVector3D& p1, const QVector3D& p2)
     return p21.length();
 }
 
+bool ShipCAD::Lines3DIntersect(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+                               const QVector3D& p4, double& param, QVector3D& int1)
+{
+    bool result = false;
+    param = 0;
+    int1 = ZERO;
+    QVector3D p13 = p1 - p3;
+    QVector3D p43 = p4 - p3;
+    if (abs(p43.x()) < 1E-6 && abs(p43.y()) < 1E-6 && abs(p43.z()) < 1E-6)
+        return result;
+    QVector3D p21 = p2 - p1;
+    if (abs(p21.x()) < 1E-6 && abs(p21.y()) < 1E-6 && abs(p21.z()) < 1E-6)
+        return result;
+    double d1343 = p13.x() * p43.x() + p13.y() * p43.y() + p13.z() * p43.z();
+    double d4321 = p43.x() * p21.x() + p43.y() * p21.y() + p43.z() * p21.z();
+    double d1321 = p13.x() * p21.x() + p13.y() * p21.y() + p13.z() * p21.z();
+    double d4343 = p43.x() * p43.x() + p43.y() * p43.y() + p43.z() * p43.z();
+    double d2121 = p21.x() * p21.x() + p21.y() * p21.y() + p21.z() * p21.z();
+
+    double denom = d2121 * d4343 - d4321 * d4321;
+    if (abs(denom) < 1E-6)
+        return result;
+    double numer = d1343 * d4321 - d1321 * d4343;
+    double mua = numer / denom;
+    double mub = (d1343 + d4321 * mua) / d4343;
+    QVector3D pa = p1 + mua * p21;
+    QVector3D pb = p3 + mub * p43;
+    if (mua > -1E-6 && mua < 1 && mub > -1E-6 && mub < 1) {
+        result = true;
+        int1 = pa;
+        param = mua;
+    }
+    return result;
+}
+
 QString ShipCAD::BoolToStr(bool val)
 {
     return QString( (val ? "1" : "0") );

@@ -34,6 +34,7 @@
 #include <QtGui>
 #include "entity.h"
 #include "shipcadlib.h"
+#include "spline.h"
 #include "pointervec.h"
 
 namespace ShipCAD {
@@ -42,21 +43,22 @@ class ShipCADModel;
 class Viewport;
 class LineShader;
 class FileBuffer;
-class Spline;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Flowline : public Entity
+class Flowline : public Spline
 {
     Q_OBJECT
 
 public:
 
     explicit Flowline(ShipCADModel* owner);
-    virtual ~Flowline();
+    virtual ~Flowline() {}
 
     static Flowline* construct(ShipCADModel* owner);
 	
+    void initialize(QVector2D pt, viewport_type_t ty);
+    
     virtual void clear();
     virtual void draw(Viewport& vp, LineShader* lineshader);
     virtual void rebuild();
@@ -77,10 +79,11 @@ private:
     QVector2D _projection_point;
     viewport_type_t _projection_vw;
     bool _method_new;
-    Spline* _flowline;
 };
 
 typedef PointerVector<Flowline> FlowlineVector;
+typedef std::vector<Flowline*>::iterator FlowlineVectorIterator;
+typedef std::vector<Flowline*>::const_iterator FlowlineVectorConstIterator;
 
 //////////////////////////////////////////////////////////////////////////////////////
 

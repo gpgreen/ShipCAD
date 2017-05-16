@@ -315,15 +315,23 @@ Viewport::mousePressEvent(QMouseEvent *event)
     // on a left mouse press, check for selection
     if (event->buttons().testFlag(Qt::LeftButton)) {
         cout << "left mouse" << endl;
-        // find multi select, and only pick points
-        PickRay ray(event->modifiers() == Qt::ControlModifier, true, false, false);
-        if (canPick() && _view->leftMousePick(event->pos(), width(), height(), ray)) {
-            cout << "pick state changed - multisel:" << ray.multi_sel << endl;
-            update();
-            if (ray.multi_sel)
-                _drag_state = 5;
-            else
-                _drag_state = 3;
+        // check for shift-alt to create a flowline
+        if (event->modifiers() == (Qt::AltModifier | Qt::ShiftModifier) && getViewportType() != fvPerspective) {
+            cout << "shift-alt" << endl;
+            // convert mouse position back to 2D world coordinates
+            QPoint pos = _view->projectTo3D(event->pos(), width(), height());
+            _ctl->addFlowline(pos, *this);
+        } else {
+            // find multi select, and only pick points
+            PickRay ray(event->modifiers() == Qt::ControlModifier, true, false, false);
+            if (canPick() && _view->leftMousePick(event->pos(), width(), height(), ray)) {
+                cout << "pick state changed - multisel:" << ray.multi_sel << endl;
+                update();
+                if (ray.multi_sel)
+                    _drag_state = 5;
+                else
+                    _drag_state = 3;
+            }
         }
     }
     _prev_pos = event->pos();

@@ -827,12 +827,12 @@ void Controller::saveFileAs(const QString& filename)
 }
 
 // FreeShipUnit.pas:8352
-void Controller::addFlowline(const QPoint& source, Viewport& vp)
+void Controller::addFlowline(const QVector2D& source, Viewport& vp)
 {
     cout << "Controller::addFlowline" << endl;
     // msg 130
     UndoObject* uo = getModel()->createUndo(tr("Add flowline"), false);
-    Flowline* flowline = getModel()->addFlowline(QVector2D(source.x(), source.y()),
+    Flowline* flowline = getModel()->addFlowline(source,
                                                  vp.getViewportType());
     if (flowline != nullptr) {
         uo->accept();

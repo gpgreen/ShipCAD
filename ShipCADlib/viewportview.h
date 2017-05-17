@@ -100,12 +100,13 @@ public:
      */
     QPoint convert3D(const QVector3D& pt, int w, int h) const;
 
-    /*! \brief convert mouse coordinates to 2D world coordinates
-     * \param pos mouse position
+    /*! \brief convert screen coordinates to 2D world coordinates
+     * \param pos screen position
      * \param w width of viewport in pixels
      * \param h height of viewport in pixels
+     * \return the world coordinates of screen position
      */
-    virtual QPoint projectTo3D(QPoint pos, int w, int h) = 0;
+    virtual QVector2D projectTo3D(QPoint pos, int w, int h) = 0;
     
     /*! \brief drag a point in the viewport
      *
@@ -174,7 +175,7 @@ public:
         { return _camera; }
     void setCameraType(camera_type_t val);
 
-    virtual QPoint projectTo3D(QPoint pos, int w, int h);
+    virtual QVector2D projectTo3D(QPoint pos, int w, int h);
     virtual bool middleMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool leftMouseMove(QPoint cur, QPoint prev, int w, int h);
 
@@ -200,7 +201,7 @@ public:
     virtual ~ViewportViewPlan() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
-    virtual QPoint projectTo3D(QPoint pos, int w, int h);
+    virtual QVector2D projectTo3D(QPoint pos, int w, int h);
     virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool pointDrag(QPoint pos, int w, int h, QVector3D& newcoord);
 
@@ -220,7 +221,7 @@ public:
     virtual ~ViewportViewProfile() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
-    virtual QPoint projectTo3D(QPoint pos, int w, int h);
+    virtual QVector2D projectTo3D(QPoint pos, int w, int h);
     virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool pointDrag(QPoint pos, int w, int h, QVector3D& newcoord);
 
@@ -240,7 +241,7 @@ public:
     virtual ~ViewportViewBodyplan() {}
 
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height);
-    virtual QPoint projectTo3D(QPoint pos, int w, int h);
+    virtual QVector2D projectTo3D(QPoint pos, int w, int h);
     virtual bool rightMouseMove(QPoint cur, QPoint prev, int w, int h);
     virtual bool pointDrag(QPoint pos, int w, int h, QVector3D& newcoord);
 

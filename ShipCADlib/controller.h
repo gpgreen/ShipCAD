@@ -356,7 +356,7 @@ public slots:
 
     /*! \brief
 	 */
-	void addFlowline(const QPoint& source, Viewport& vp);
+    void addFlowline(const QVector2D& source, Viewport& vp);
 
     /*! \brief calculate hydrostatics
 	 *

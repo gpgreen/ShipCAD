@@ -319,7 +319,7 @@ Viewport::mousePressEvent(QMouseEvent *event)
         if (event->modifiers() == (Qt::AltModifier | Qt::ShiftModifier) && getViewportType() != fvPerspective) {
             cout << "shift-alt" << endl;
             // convert mouse position back to 2D world coordinates
-            QPoint pos = _view->projectTo3D(event->pos(), width(), height());
+            QVector2D pos = _view->projectTo3D(event->pos(), width(), height());
             _ctl->addFlowline(pos, *this);
         } else {
             // find multi select, and only pick points

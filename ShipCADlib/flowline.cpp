@@ -124,28 +124,15 @@ void Flowline::draw(Viewport& vp, LineShader* lineshader)
             lineshader->renderLines(vertices, getColor());
         }
     } else {
-        draw(vp, lineshader);
-        if (_owner->getVisibility().getModelView() == mvBoth) {
-            for (size_t i=0; i<numberOfPoints(); ++i) {
-                QVector3D p3d = getPoint(i);
-                p3d.setY(-p3d.y());
-                setPoint(i, p3d);
-            }
-            draw(vp, lineshader);
-            for (size_t i=0; i<numberOfPoints(); ++i) {
-                QVector3D p3d = getPoint(i);
-                p3d.setY(-p3d.y());
-                setPoint(i, p3d);
-            }
-        }
+        Spline::draw(vp, lineshader);
+        if (_owner->getVisibility().getModelView() == mvBoth)
+            Spline::drawStarboard(vp, lineshader);
     }
 }
 
 void Flowline::setBuild(bool val)
 {
-    Entity::setBuild(val);
-    if (!val)
-        clear();
+    Spline::setBuild(val);
 }
 
 //< used in Flowline::rebuild
@@ -493,16 +480,17 @@ void Flowline::rebuild()
             if (last.z() > wlheight && nexttolast.z() > wlheight) {
                 delete_point(numberOfPoints() - 1);
             } else if (last.z() > wlheight && nexttolast.z() < wlheight) {
-                QVector3D endpoint(nexttolast.x() + (last.x() - nexttolast.x())
-                                   *(wlheight - nexttolast.z()) / (last.z() - nexttolast.z()),
-                                   nexttolast.y() + (last.y() - nexttolast.y())
-                                   *(wlheight - nexttolast.z()) / (last.z() - nexttolast.z()),
+                QVector3D newendpoint(nexttolast.x() + ((last.x() - nexttolast.x())
+                                   *(wlheight - nexttolast.z()) / (last.z() - nexttolast.z())),
+                                   nexttolast.y() + ((last.y() - nexttolast.y())
+                                   *(wlheight - nexttolast.z()) / (last.z() - nexttolast.z())),
                                    wlheight);
-                setPoint(numberOfPoints() - 1, endpoint);
+                setPoint(numberOfPoints() - 1, newendpoint);
             } else
                 break;
         }
     }
+    Spline::rebuild();
     setBuild(true);
 }
 

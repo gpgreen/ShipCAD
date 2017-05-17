@@ -113,8 +113,6 @@ void Spline::setPoint(size_t index, const QVector3D& p)
 
 void Spline::rebuild()
 {
-    _build = false;
-
     // attempt to eliminate double points
     _total_length = 0;
     for (size_t i=1; i<_nopoints; ++i) {
@@ -519,6 +517,7 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
     QVector3D p2;
     QVector3D normal;
     vector<QVector3D> parray1;
+    parray1.reserve(_fragments);
     vector<QVector3D> parray2;
     QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
 
@@ -578,7 +577,6 @@ void Spline::drawStarboard(Viewport& /*vp*/, LineShader* lineshader)
     vector<QVector3D> parray1;
     parray1.reserve(_fragments);
     vector<QVector3D> parray2;
-    parray2.reserve(_fragments);
     QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
 
     for (size_t i=0; i<_fragments; ++i) {

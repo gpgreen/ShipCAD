@@ -181,12 +181,12 @@ void ViewportViewPerspective::resetView()
     _elevation = 30.0;
 }
 
-QPoint ViewportViewPerspective::projectTo3D(QPoint pos, int w, int h)
+QVector2D ViewportViewPerspective::projectTo3D(QPoint pos, int w, int h)
 {
     Q_UNUSED(pos);
     Q_UNUSED(w);
     Q_UNUSED(h);
-    return QPoint(0,0);
+    return QVector2D(0,0);
 }
 
 bool ViewportViewPerspective::middleMouseMove(QPoint cur, QPoint prev, int /*w*/, int /*h*/)
@@ -375,10 +375,10 @@ void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D&
     finishSetup();
 }
 
-QPoint ViewportViewPlan::projectTo3D(QPoint pos, int w, int h)
+QVector2D ViewportViewPlan::projectTo3D(QPoint pos, int w, int h)
 {
     PickRay pr = convertMouseCoordToWorld(pos, w, h);
-    return QPoint(pr.pt.x(),pr.pt.y());
+    return QVector2D(pr.pt.x(),pr.pt.y());
 }
 
 bool ViewportViewPlan::rightMouseMove(QPoint cur, QPoint prev, int w, int h)
@@ -454,10 +454,10 @@ void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector
     finishSetup();
 }
 
-QPoint ViewportViewProfile::projectTo3D(QPoint pos, int w, int h)
+QVector2D ViewportViewProfile::projectTo3D(QPoint pos, int w, int h)
 {
     PickRay pr = convertMouseCoordToWorld(pos, w, h);
-    return QPoint(pr.pt.x(),pr.pt.z());
+    return QVector2D(pr.pt.x(),pr.pt.z());
 }
 
 bool ViewportViewProfile::rightMouseMove(QPoint cur, QPoint prev, int w, int h)
@@ -529,10 +529,10 @@ void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVecto
     finishSetup();
 }
 
-QPoint ViewportViewBodyplan::projectTo3D(QPoint pos, int w, int h)
+QVector2D ViewportViewBodyplan::projectTo3D(QPoint pos, int w, int h)
 {
     PickRay pr = convertMouseCoordToWorld(pos, w, h);
-    return QPoint(pr.pt.y(),pr.pt.z());
+    return QVector2D(pr.pt.y(),pr.pt.z());
 }
 
 bool ViewportViewBodyplan::rightMouseMove(QPoint cur, QPoint prev, int w, int h)

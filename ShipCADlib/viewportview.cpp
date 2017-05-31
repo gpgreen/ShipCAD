@@ -334,35 +334,41 @@ ViewportViewPlan::ViewportViewPlan(Viewport* vp)
 void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height)
 {
     float breadth = max.y() - min.y();
+    float hull_width = max.x() - min.x();
+
+    float aspect_ratio = 1.0;
+    if (width != 0 && height != 0)
+        aspect_ratio = width / static_cast<float>(height);
+    float margin, hw, hh;
+
+    _proj = QMatrix4x4();
+
+    // find view extents using aspect ratio
+    if (hull_width / aspect_ratio >= breadth) {
+        margin = hull_width / 2.0 * .01 * _margin;
+        hw = (hull_width / 2.0 + margin) / _zoom;
+        hh = hw / aspect_ratio;
+        _proj.ortho(-hw, hw, -hh, hh, 0.1f, 1000.0f);
+    }
+    else {
+        margin = breadth * .01 * _margin;
+        //hw = (breadth * aspect_ratio + margin) / _zoom;
+        hh = (breadth + margin) / _zoom;
+        hw = hh / aspect_ratio;
+        _proj.ortho(-hw, hw, -hh, hh, 0.1f, 1000.0f);
+    }
 
     // calculate the midpoint of the bounding box
     _midpoint = 0.5 * (min + max);
+
+    // calculate the extents of the view
+    _min = min - QVector3D(margin, margin, 0);
+    _max = max + QVector3D(margin, margin, 0);
 
     QVector3D panpoint(_midpoint);
     panpoint.setX(panpoint.x() + _panX);
     panpoint.setY(panpoint.y() + _panY);
 
-    float aspect_ratio = 1.0;
-    if (height != 0)
-        aspect_ratio = width / static_cast<float>(height);
-    float hi, margin;
-
-    _proj = QMatrix4x4();
-
-    // find view extents using aspect ratio
-    if (_midpoint.x() / aspect_ratio >= breadth) {
-        margin = _midpoint.x() * .01 * _margin;
-        hi = (_midpoint.x() / aspect_ratio + margin) / _zoom;
-        float x = (_midpoint.x() + margin) / _zoom;
-        _proj.ortho(-x, x, -hi, hi, 0.1f, 1000.0f);
-    }
-    else {
-        margin = breadth * .01 * _margin;
-        hi = (breadth * aspect_ratio + margin) / _zoom;
-        float y = (breadth + margin) / _zoom;
-        _proj.ortho(-hi, hi, -y, y, 0.1f, 1000.0f);
-    }
-    
     // find the camera location
     _camera_location = QVector3D(panpoint.x(), panpoint.y(), max.z() + 20);
     

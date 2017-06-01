@@ -333,30 +333,20 @@ ViewportViewPlan::ViewportViewPlan(Viewport* vp)
 
 void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height)
 {
-    float breadth = max.y() - min.y();
+    //float breadth = max.y() - min.y();
     float hull_width = max.x() - min.x();
 
     float aspect_ratio = 1.0;
     if (width != 0 && height != 0)
         aspect_ratio = width / static_cast<float>(height);
-    float margin, hw, hh;
 
     _proj = QMatrix4x4();
 
     // find view extents using aspect ratio
-    if (hull_width / aspect_ratio >= breadth) {
-        margin = hull_width / 2.0 * .01 * _margin;
-        hw = (hull_width / 2.0 + margin) / _zoom;
-        hh = hw / aspect_ratio;
-        _proj.ortho(-hw, hw, -hh, hh, 0.1f, 1000.0f);
-    }
-    else {
-        margin = breadth * .01 * _margin;
-        //hw = (breadth * aspect_ratio + margin) / _zoom;
-        hh = (breadth + margin) / _zoom;
-        hw = hh / aspect_ratio;
-        _proj.ortho(-hw, hw, -hh, hh, 0.1f, 1000.0f);
-    }
+    float margin = hull_width / 2.0 * .01 * _margin;
+    float hw = (hull_width / 2.0 + margin) / _zoom;
+    float hh = hw / aspect_ratio;
+    _proj.ortho(-hw, hw, -hh, hh, 0.1f, 1000.0f);
 
     // calculate the midpoint of the bounding box
     _midpoint = 0.5 * (min + max);
@@ -420,34 +410,32 @@ ViewportViewProfile::ViewportViewProfile(Viewport* vp)
 
 void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height)
 {
+    //float hull_height = max.z() - min.z();
+    float hull_width = max.x() - min.x();
+    
+    float aspect_ratio = 1.0;
+    if (width != 0 && height != 0)
+        aspect_ratio = width / static_cast<float>(height);
+
+    _proj = QMatrix4x4();
+
+    float margin = hull_width / 2.0 * .01 * _margin;
+    float hw = (hull_width / 2.0 + margin) / _zoom;
+    float hh = hw / aspect_ratio;
+    _proj.ortho(-hw, hw, -hh, hh, 0.1f, 1000.0f);
+    
     // calculate the midpoint of the bounding box, which is used as the center of the
     // model for rotating the model
     _midpoint = 0.5 * (min + max);
+
+    // calculate the extents of the view
+    _min = min - QVector3D(margin, 0, margin);
+    _max = max + QVector3D(margin, 0, margin);
 
     QVector3D panpoint = _midpoint;
     panpoint.setX(panpoint.x() + _panX);
     panpoint.setZ(panpoint.z() + _panY);
 
-    float aspect_ratio = 1.0;
-    if (height != 0)
-        aspect_ratio = width / static_cast<float>(height);
-    float hi, margin;
-
-    _proj = QMatrix4x4();
-
-    if (_midpoint.x() / aspect_ratio >= _midpoint.z()) {
-        margin = _midpoint.x() * .01 * _margin;
-        hi = (_midpoint.x() / aspect_ratio + margin) / _zoom;
-        float x = (_midpoint.x() + margin) / _zoom;
-        _proj.ortho(-x, x, -hi, hi, 0.1f, 1000.0f);
-    }
-    else {
-        margin = _midpoint.z() * .01 * _margin;
-        hi = (_midpoint.z() * aspect_ratio + margin) / _zoom;
-        float z = (_midpoint.z() + margin) / _zoom;
-        _proj.ortho(-hi, hi, -z, z, 0.1f, 1000.0f);
-    }
-    
     // find the camera location
     _camera_location = QVector3D(panpoint.x(), min.y() - 20, panpoint.z());
 
@@ -499,30 +487,38 @@ ViewportViewBodyplan::ViewportViewBodyplan(Viewport* vp)
 
 void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height)
 {
-    // calculate the midpoint of the bounding box, which is used as the center of the
-    // model for rotating the model
-    _midpoint = 0.5 * (min + max);
+    float breadth = max.y() - min.y();
+    float hull_height = max.z() - min.z();
+    if (min.y() == 0)
+        breadth *= 2.0;
 
     float aspect_ratio = 1.0;
     if (height != 0)
         aspect_ratio = width / static_cast<float>(height);
-    float hi, margin;
 
     _proj = QMatrix4x4();
 
-    if (_midpoint.y() * 2 / aspect_ratio >= _midpoint.z()) {
-        margin = _midpoint.y() * 2 * .01 * _margin;
-        hi = (_midpoint.y() * 2 / aspect_ratio + margin) / _zoom;
-        float y = (_midpoint.y() * 2 + margin) / _zoom;
-        _proj.ortho(-y, y, -hi, hi, 0.1f, 1000.0f);
+    float margin, hb, hh;
+    if (breadth / aspect_ratio >= hull_height) {
+        margin = breadth * .01 * _margin;
+        hb = (breadth / 2.0 + margin) / _zoom;
+        hh = hb / aspect_ratio;
     }
     else {
-        margin = _midpoint.z() * .01 * _margin;
-        hi = (_midpoint.z() * aspect_ratio + margin) / _zoom;
-        float z = (_midpoint.z() + margin) / _zoom;
-        _proj.ortho(-hi, hi, -z, z, 0.1f, 1000.0f);
+        margin = hull_height * .01 * _margin;
+        hh = (hull_height / 2.0 + margin) / _zoom;
+        hb = hh * aspect_ratio;
     }
+    _proj.ortho(-hb, hb, -hh, hh, 0.1f, 1000.0f);
     
+    // calculate the midpoint of the bounding box, which is used as the center of the
+    // model for rotating the model
+    _midpoint = 0.5 * (min + max);
+
+    // calculate the extents of the view
+    _min = min - QVector3D(0, margin, margin);
+    _max = max + QVector3D(0, margin, margin);
+
     // find the camera location
     _camera_location = QVector3D(max.x() + 20, _panX, _midpoint.z() + _panY);
     

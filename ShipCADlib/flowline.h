@@ -68,7 +68,7 @@ public:
     bool isSelected() const;
 	void setSelected(bool set);
 
-    QColor getColor() const;
+    virtual QColor getColor() const;
     
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);

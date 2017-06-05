@@ -58,6 +58,7 @@ void Flowline::clear()
     _projection_point = ZERO2;
     _projection_vw = fvProfile;
     _method_new = false;
+    Spline::clear();
 }
 
 void Flowline::initialize(QVector2D pt, viewport_type_t ty)
@@ -66,7 +67,6 @@ void Flowline::initialize(QVector2D pt, viewport_type_t ty)
     _projection_vw = ty;
     setBuild(false);
 }
-
 
 // FreeShipUnit.pas:3573
 void Flowline::draw(Viewport& vp, LineShader* lineshader)
@@ -114,11 +114,14 @@ void Flowline::draw(Viewport& vp, LineShader* lineshader)
             size_t fragm = floor((params[i] - params[i-1])*getFragments());
             if (fragm < 10)
                 fragm = 10;
-            for (size_t j=0; j<fragm; ++j) {
+            p3d = value(0);
+            p3d.setY(p3d.y() * scale);
+            for (size_t j=1; j<fragm; ++j) {
                 float t = params[i-1] + (params[i] - params[i-1]) * j / (fragm - 1);
-                p3d = value(t);
-                p3d.setY(p3d.y() * scale);
-                vertices << p3d;
+                QVector3D p3d1 = value(t);
+                p3d1.setY(p3d.y() * scale);
+                vertices << p3d << p3d1;
+                p3d = p3d1;
             }
             glLineWidth(1);
             lineshader->renderLines(vertices, getColor());
@@ -287,6 +290,11 @@ static size_t NextTriangleIndex(map<SubdivisionPoint*, PointData>::iterator& ind
     return result;
 }
 
+// used in rebuild
+// returns true if triangle is valid
+// nextindex will be set to the next triangle to process, or to maxindex if no more to process
+// skipind1 and skipind2 are set to the points to ignore for intersections, will be updated
+// in this method with the new points to ignore if valid
 static bool ProcessTriangle(bool method_new, Triangle& triangle,
                             map<SubdivisionPoint*, PointData>::iterator& skipind1,
                             map<SubdivisionPoint*, PointData>::iterator& skipind2,
@@ -355,9 +363,9 @@ static bool ProcessTriangle(bool method_new, Triangle& triangle,
 // FreeShipUnit.pas:3700
 void Flowline::rebuild()
 {
-    // clear any present data
-    setBuild(false);
-
+    // clear spline data
+    Spline::clear();
+    
     // assemble all faces that are (partially) submerged and extract points
     float wlheight = _owner->findLowestHydrostaticsPoint() + _owner->getProjectSettings().getDraft();
 
@@ -463,17 +471,17 @@ void Flowline::rebuild()
                 valid = false;
             else
                 valid = ProcessTriangle(_method_new, triangles[index], skipind1, skipind2,
-                                        intersection, direction, index, pointdata.size());
+                                        intersection, direction, index, triangles.size());
             if (valid) {
                 add(intersection);
             }
             
             else {
                 valid = ProcessTriangle(_method_new, triangles[index], skipind1, skipind2,
-                                        intersection, direction, index, pointdata.size());
+                                        intersection, direction, index, triangles.size());
             }
             ++iteration;
-        } while (valid && index != pointdata.size() && iteration < 5000);
+        } while (valid && index != triangles.size() && iteration < 5000);
         while (numberOfPoints() > 1) {
             QVector3D last = getPoint(numberOfPoints() - 1);
             QVector3D nexttolast = getPoint(numberOfPoints() - 2);
@@ -491,7 +499,6 @@ void Flowline::rebuild()
         }
     }
     Spline::rebuild();
-    setBuild(true);
 }
 
 bool Flowline::isVisible() const

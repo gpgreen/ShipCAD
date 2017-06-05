@@ -76,7 +76,7 @@ public:
      *
      * \return the intersection color
      */
-    QColor getColor();
+    virtual QColor getColor();
     /*! \brief get the intersection plane
      *
      * \return the intersection plane

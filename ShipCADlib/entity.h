@@ -77,7 +77,7 @@ public:
     virtual void rebuild() = 0;
 
     // getters/setters
-    QColor getColor() const
+    virtual QColor getColor() const
         {return _color;}
     void setColor(const QColor& col)
         {_color = col;}

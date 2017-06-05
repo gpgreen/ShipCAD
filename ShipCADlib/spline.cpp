@@ -219,14 +219,10 @@ void Spline::rebuild()
     _build = true;
     // determine min/max values
     if (_nopoints > 0) {
-        for (size_t i=0; i<_nopoints; ++i) {
-            if (i == 0) {
-                _min = _points[i];
-                _max = _min;
-            }
-            else {
-                MinMax(_points[i], _min, _max);
-            }
+        _min = _points[0];
+        _max = _min;
+        for (size_t i=1; i<_nopoints; ++i) {
+            MinMax(_points[i], _min, _max);
         }
     }
 }
@@ -541,7 +537,7 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
                 vertices << parray2[i-1];
                 vertices << parray2[i];
             }
-            lineshader->renderLines(vertices, _curvature_color);
+            lineshader->renderLines(vertices, getCurvatureColor());
         }
         if (_show_points) {
             //vp.setFont("small fonts");
@@ -563,11 +559,13 @@ void Spline::draw(Viewport& vp, LineShader* lineshader)
         vertices << parray1[i-1];
         vertices << parray1[i];
     }
-    lineshader->renderLines(vertices, _color);
+    lineshader->renderLines(vertices, getColor());
 }
 
-void Spline::drawStarboard(Viewport& /*vp*/, LineShader* lineshader)
+void Spline::drawStarboard(Viewport& vp, LineShader* lineshader)
 {
+    Q_UNUSED(vp);
+
     if (!_build)
         rebuild();
 
@@ -602,7 +600,7 @@ void Spline::drawStarboard(Viewport& /*vp*/, LineShader* lineshader)
             vertices << parray2[i-1];
             vertices << parray2[i];
         }
-        lineshader->renderLines(vertices, _curvature_color);
+        lineshader->renderLines(vertices, getCurvatureColor());
     }
     if (_show_points) {
         //vp.setFont("small fonts");
@@ -623,7 +621,7 @@ void Spline::drawStarboard(Viewport& /*vp*/, LineShader* lineshader)
         vertices << parray1[i-1];
         vertices << parray1[i];
     }
-    lineshader->renderLines(vertices, _color);
+    lineshader->renderLines(vertices, getColor());
 }
 
 void Spline::insert_spline(size_t index, bool invert, bool duplicate_point,

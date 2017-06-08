@@ -103,7 +103,7 @@ public:
      *
      * \return the curvature of the surface at this point
      */
-    float getCurvature();
+    float getCurvature() const;
     /*! \brief find the 3D coordinates of a point
      *
      * Get coordinates for this point from faces and edges attached to this point
@@ -113,7 +113,7 @@ public:
      *
      * \return coordinates of the calculated point
      */
-    QVector3D averaging();
+    QVector3D averaging() const;
     /*! \brief Create a vertex point
      *
      * During the subdivision process, new points are created at the
@@ -135,7 +135,7 @@ public:
      * \param val an integer representing vertex type
      * \return vertex type
      */
-    vertex_type_t fromInt(int val);
+    vertex_type_t fromInt(int val) const;
 
     QVector3D getCoordinate() const { return _coordinate; }
     
@@ -147,26 +147,26 @@ public:
      *
      * \return coordinates of the normal vector
      */
-    QVector3D getNormal();
-    SubdivisionFace* getFace(size_t index);
-    SubdivisionEdge* getEdge(size_t index);
-    bool isBoundaryVertex();
+    QVector3D getNormal() const;
+    SubdivisionFace* getFace(size_t index) const;
+    SubdivisionEdge* getEdge(size_t index) const;
+    bool isBoundaryVertex() const;
     /*! \brief index of this point in parent surface 
      *
      * \return the index of this point in parent surface
      */
-    virtual size_t getIndex();
-    size_t numberOfEdges() { return _edges.size(); }
-    size_t numberOfFaces() { return _faces.size(); }
-    size_t numberOfCurves();
-    bool isRegularPoint();
-    QVector3D getLimitPoint();
-    bool isRegularNURBSPoint(std::vector<SubdivisionFace*>& faces);
-    bool isRegularNURBSPoint(std::vector<SubdivisionControlFace*>& faces);
-    size_t indexOfFace(SubdivisionFace* face);
-    bool hasEdge(SubdivisionEdge* edge);
-    bool hasFace(SubdivisionFace* face);
-    vertex_type_t getVertexType() { return _vtype; }
+    virtual size_t getIndex() const;
+    size_t numberOfEdges() const { return _edges.size(); }
+    size_t numberOfFaces() const { return _faces.size(); }
+    size_t numberOfCurves() const;
+    bool isRegularPoint() const;
+    QVector3D getLimitPoint() const;
+    bool isRegularNURBSPoint(std::vector<SubdivisionFace*>& faces) const;
+    bool isRegularNURBSPoint(std::vector<SubdivisionControlFace*>& faces) const;
+    size_t indexOfFace(SubdivisionFace* face) const;
+    bool hasEdge(SubdivisionEdge* edge) const;
+    bool hasFace(SubdivisionFace* face) const;
+    vertex_type_t getVertexType() const { return _vtype; }
     void setVertexType(vertex_type_t nt) { _vtype = nt; }
 
     // output
@@ -185,7 +185,7 @@ protected:
     void priv_dump(std::ostream& os, const char* prefix) const;
     // used in getCurvature
     float Angle_VV_3D(const QVector3D& p1, const QVector3D& p2,
-		      const QVector3D& p3);
+		      const QVector3D& p3) const;
  
 protected:
 
@@ -226,25 +226,25 @@ public:
     void collapse();
 
     // getters/setters
-    QColor getColor();
-    bool isSelected();
-    bool isLeak();
-    bool isVisible();
+    QColor getColor() const;
+    bool isSelected() const;
+    bool isLeak() const;
+    bool isVisible() const;
     void setSelected(bool val);
-    bool isLocked() { return _locked; }
+    bool isLocked() const { return _locked; }
     void setLocked(bool val);
     /*! \brief index of this point in parent surface 
      *
      * \return the index of this point in parent surface
      */
-    virtual size_t getIndex();
+    virtual size_t getIndex() const;
     virtual void setCoordinate(const QVector3D& val);
 
     // persistence
     void load_binary(FileBuffer& source);
-    void save_binary(FileBuffer& destination);
+    void save_binary(FileBuffer& destination) const;
     void loadFromStream(size_t& lineno, QStringList& strings);
-    void saveToStream(QStringList& strings);
+    void saveToStream(QStringList& strings) const;
 
     // drawing
     static void drawControlPoints(Viewport& vp, SubdivisionSurface* surface);

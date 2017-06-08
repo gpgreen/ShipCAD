@@ -96,11 +96,6 @@ const SubdivisionControlFace* SubdivisionLayer::getFace(size_t index) const
     throw range_error("index out of range in SubdivisionLayer::getFace");
 }
 
-size_t SubdivisionLayer::getLayerIndex()
-{
-    return _owner->indexOfLayer(this);
-}
-
 void SubdivisionLayer::processTriangle(const QVector3D& p1, 
                                        const QVector3D& p2,
                                        const QVector3D& p3,
@@ -678,7 +673,7 @@ void SubdivisionLayer::loadFromStream(size_t &lineno, QStringList &strings)
         _use_in_hydrostatics = true;
 }
 
-void SubdivisionLayer::saveToStream(QStringList &strings)
+void SubdivisionLayer::saveToStream(QStringList &strings) const
 {
     strings.push_back(_desc);
     strings.push_back(QString("%1 %2 %3 %4 %5 %6 %7")
@@ -691,7 +686,7 @@ void SubdivisionLayer::saveToStream(QStringList &strings)
                       .arg(BoolToStr(_use_in_hydrostatics)));
 }
 
-void SubdivisionLayer::saveBinary(FileBuffer& destination)
+void SubdivisionLayer::saveBinary(FileBuffer& destination) const
 {
     destination.add(_desc);
     destination.add(_layerid);

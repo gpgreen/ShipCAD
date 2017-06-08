@@ -146,10 +146,11 @@ public:
         _bag.insert(std::make_pair(point, _bag.size()));
     }
 
-    bool has(ShipCAD::SubdivisionControlPoint* point) const
+    bool has(const ShipCAD::SubdivisionControlPoint* point) const
     {
         OrderedPointMap* us = const_cast<OrderedPointMap*>(this);
-        std::map<ShipCAD::SubdivisionControlPoint*, size_t>::iterator i = us->_bag.find(point);
+        std::map<ShipCAD::SubdivisionControlPoint*, size_t>::iterator i
+                = us->_bag.find(const_cast<ShipCAD::SubdivisionControlPoint*>(point));
         return i != us->_bag.end();
     }
 
@@ -163,7 +164,7 @@ public:
         throw std::range_error("index out of range in get via index");
     }
 
-    size_t get(ShipCAD::SubdivisionControlPoint* point) const
+    size_t get(const ShipCAD::SubdivisionControlPoint* point) const
     {
         std::map<ShipCAD::SubdivisionControlPoint*, size_t>::const_iterator i = _bag.begin();
         for ( ; i!=_bag.end(); i++) {

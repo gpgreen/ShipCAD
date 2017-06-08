@@ -1,8 +1,8 @@
 /*###############################################################################################
- *    ShipCAD																					*
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>									*
- *    Original Copyright header below															*
- *																								*
+ *    ShipCAD											*
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>					*
+ *    Original Copyright header below								*
+ *												*
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an                *
  *    open source surface-modelling program based on subdivision surfaces and intended for      *
  *    designing ships.                                                                          *
@@ -34,63 +34,68 @@
 
 namespace ShipCAD {
 
-//////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////
 
-class SubdivisionSurface;
-class Viewport;
+  class SubdivisionSurface;
+  class Viewport;
 
-/*! \brief the base class for all subdivision points, edges and faces
- *
- */
-class SubdivisionBase
-{
-public:
+  /*! \brief the base class for all subdivision points, edges and faces
+   *
+   */
+  class SubdivisionBase
+  {
+  public:
 
-	/*! \brief Constructor
-	 *
-	 * \param owner which surface this element belongs to
-	 */
+    /*! \brief Constructor
+     *
+     * \param owner which surface this element belongs to
+     */
     explicit SubdivisionBase(SubdivisionSurface* owner);
     virtual ~SubdivisionBase();
 
-	/*! \brief get the owning surface
-	 *
-	 * \return the owning surface
-	 */
+    /*! \brief get the owning surface
+     *
+     * \return the owning surface
+     */
     SubdivisionSurface* getOwner() { return _owner; }
-	/*! \brief set the owing surface
-	 *
-	 * \param newowner the owning surface
-	 */
+    /*! \brief get the owning surface
+     *
+     * \return the owning surface
+     */
+    const SubdivisionSurface* getOwner() const { return _owner; }
+    /*! \brief set the owing surface
+     *
+     * \param newowner the owning surface
+     */
     virtual void setOwner(SubdivisionSurface* newowner)
-        { _owner = newowner; }
+    { _owner = newowner; }
 
-	/*! \brief reset this element to default values
-	 */
+    /*! \brief reset this element to default values
+     */
     virtual void clear() = 0;
 
     /*! \brief print out the element to a stream
-	 *
-	 * \param os the output stream
-	 * \param prefix string to prefix on each line output
-	 */
+     *
+     * \param os the output stream
+     * \param prefix string to prefix on each line output
+     */
     virtual void dump(std::ostream& os, const char* prefix = "") const;
 
-protected:
+  protected:
 
-	/*! \brief dump the element to a stream
-	 *
-	 * \param os the output stream
-	 * \param prefix string to prefix on each line output
-	 */
+    /*! \brief dump the element to a stream
+     *
+     * \param os the output stream
+     * \param prefix string to prefix on each line output
+     */
     void priv_dump(std::ostream& os, const char* prefix) const;
 
-protected:
+  protected:
 
     SubdivisionSurface* _owner;	/**< the owning surface */
-};
+  };
 
-//////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 

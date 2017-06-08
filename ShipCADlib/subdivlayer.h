@@ -1,8 +1,8 @@
 /*###############################################################################################
- *    ShipCAD																					*
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>									*
- *    Original Copyright header below															*
- *																								*
+ *    ShipCAD											*
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>					*
+ *    Original Copyright header below								*
+ *												*
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an                *
  *    open source surface-modelling program based on subdivision surfaces and intended for      *
  *    designing ships.                                                                          *
@@ -96,7 +96,6 @@ public:
     size_t getLayerID() const
         {return _layerid;}
     void setLayerID(size_t newid) { _layerid = newid; }
-    size_t getLayerIndex();
     float getMaterialDensity() const
         {return _material_density;}
     float getThickness() const
@@ -128,10 +127,10 @@ public:
     
     // persistence
     void loadBinary(FileBuffer& source);
-    void saveBinary(FileBuffer& destination);
+    void saveBinary(FileBuffer& destination) const;
     void saveToDXF(QStringList& strings);
     void loadFromStream(size_t& lineno, QStringList& strings);
-    void saveToStream(QStringList& strings);
+    void saveToStream(QStringList& strings) const;
 
     // draw
     static void drawLayers(Viewport &vp, SubdivisionSurface* surface);

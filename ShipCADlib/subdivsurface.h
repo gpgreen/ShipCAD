@@ -7,7 +7,7 @@
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
  *                                                                                             *
- *    Copyright © 2005, by Martijn van Engeland                                               *
+ *    Copyright © 2005, by Martijn van Engeland                                                *
  *    e-mail                  : Info@FREEship.org                                              *
  *    FREE!ship project page  : https://sourceforge.net/projects/freeship                      *
  *    FREE!ship homepage      : www.FREEship.org                                               *
@@ -170,21 +170,21 @@ public:
     void subdivide();
     void deleteSelected();
 
-    size_t numberOfLockedPoints();
-    size_t numberOfSelectedLockedPoints();
+    size_t numberOfLockedPoints() const;
+    size_t numberOfSelectedLockedPoints() const;
 
     // SubdivisionPoint
-    size_t numberOfPoints() {return _points.size();}
-    size_t indexOfPoint(SubdivisionPoint* pt);
-    SubdivisionPoint* getPoint(size_t index);
+    size_t numberOfPoints() const {return _points.size();}
+    size_t indexOfPoint(const SubdivisionPoint* pt) const;
+    SubdivisionPoint* getPoint(size_t index) const;
     void deletePoint(SubdivisionPoint* pt);
 
     // SubdivisionControlPoint
     size_t numberOfControlPoints() const {return _control_points.size();}
-    size_t indexOfControlPoint(SubdivisionControlPoint* pt);
-    bool hasControlPoint(SubdivisionControlPoint* pt);
+    size_t indexOfControlPoint(const SubdivisionControlPoint* pt) const;
+    bool hasControlPoint(const SubdivisionControlPoint* pt) const;
     void removeControlPoint(SubdivisionControlPoint* pt);
-    SubdivisionControlPoint* getControlPoint(size_t index);
+    SubdivisionControlPoint* getControlPoint(size_t index) const;
     SubdivisionControlPoint* addControlPoint(const QVector3D& pt);
     void addControlPoint(SubdivisionControlPoint* pt);
     // adds a new controlpoint at 0,0,0 without checking other points
@@ -196,7 +196,7 @@ public:
 	
     // selected SubdivisionControlPoint
     size_t numberOfSelectedControlPoints() const {return _sel_control_points.size();}
-    bool hasSelectedControlPoint(SubdivisionControlPoint* pt);
+    bool hasSelectedControlPoint(const SubdivisionControlPoint* pt) const;
     void setSelectedControlPoint(SubdivisionControlPoint* pt);
     void removeSelectedControlPoint(SubdivisionControlPoint* pt);
     OrderedPointMap& getSelControlPointCollection()
@@ -204,8 +204,7 @@ public:
     
     // SubdivisionEdge
     size_t numberOfEdges() const {return _edges.size();}
-    size_t indexOfEdge(SubdivisionEdge* edge);
-    SubdivisionEdge* getEdge(size_t index);
+    SubdivisionEdge* getEdge(size_t index) const;
     SubdivisionEdge* edgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
     void deleteEdge(SubdivisionEdge* edge);
     void isolateEdges(std::vector<SubdivisionEdge*>& input,
@@ -213,9 +212,8 @@ public:
 
     // SubdivisionControlEdge
     size_t numberOfControlEdges() const {return _control_edges.size();}
-    size_t indexOfControlEdge(SubdivisionControlEdge* edge);
-    SubdivisionControlEdge* getControlEdge(size_t index);
-    bool hasControlEdge(SubdivisionControlEdge* edge);
+    SubdivisionControlEdge* getControlEdge(size_t index) const;
+    bool hasControlEdge(const SubdivisionControlEdge* edge) const;
     SubdivisionControlEdge* addControlEdge(SubdivisionPoint* sp, SubdivisionPoint* ep);
     void addControlEdge(SubdivisionControlEdge* edge);
     SubdivisionControlEdge* controlEdgeExists(SubdivisionPoint* p1, SubdivisionPoint* p2);
@@ -233,7 +231,7 @@ public:
     size_t numberOfSelectedControlEdges() const {return _sel_control_edges.size();}
     void setSelectedControlEdge(SubdivisionControlEdge* edge);
     void removeSelectedControlEdge(SubdivisionControlEdge* edge);
-    bool hasSelectedControlEdge(SubdivisionControlEdge* edge);
+    bool hasSelectedControlEdge(const SubdivisionControlEdge* edge) const;
     std::set<SubdivisionControlEdge*>& getSelControlEdgeCollection() {return _sel_control_edges;}
 
     // SubdivisionFace
@@ -242,13 +240,12 @@ public:
 
     // SubdivisionControlFace
     size_t numberOfControlFaces() const {return _control_faces.size();}
-    size_t indexOfControlFace(SubdivisionControlFace* face);
-    SubdivisionControlFace* getControlFace(size_t index);
+    SubdivisionControlFace* getControlFace(size_t index) const;
     SubdivisionControlFace* getControlFace(SubdivisionPoint* p1,
                                            SubdivisionPoint* p2,
                                            SubdivisionPoint* p3,
-                                           SubdivisionPoint* p4);
-    bool hasControlFace(SubdivisionControlFace* face);
+                                           SubdivisionPoint* p4) const;
+    bool hasControlFace(const SubdivisionControlFace* face) const;
     void addControlFace(SubdivisionControlFace* face);
     SubdivisionControlFace* addControlFace(std::vector<QVector3D>& points);
     SubdivisionControlFace* addControlFace(std::vector<SubdivisionControlPoint*>& points,
@@ -262,12 +259,11 @@ public:
     size_t numberOfSelectedControlFaces() const {return _sel_control_faces.size();}
     void setSelectedControlFace(SubdivisionControlFace* face);
     void removeSelectedControlFace(SubdivisionControlFace* face);
-    bool hasSelectedControlFace(SubdivisionControlFace* face);
+    bool hasSelectedControlFace(const SubdivisionControlFace* face) const;
     std::set<SubdivisionControlFace*>& getSelControlFaceCollection() {return _sel_control_faces;}
 
     // SubdivisionControlCurve
     size_t numberOfControlCurves() const {return _control_curves.size();}
-    size_t indexOfControlCurve(SubdivisionControlCurve* curve);
     SubdivisionControlCurve* getControlCurve(size_t index);
     bool hasControlCurve(SubdivisionControlCurve* curve);
     void addControlCurve(SubdivisionControlCurve* curve);
@@ -301,16 +297,16 @@ public:
     const std::vector<SubdivisionLayer*>& getLayers() const {return _layers;}
     
     // getters/setters
-    subdiv_mode_t getSubdivisionMode() {return _subdivision_mode;}
+    subdiv_mode_t getSubdivisionMode() const {return _subdivision_mode;}
     void setSubdivisionMode(subdiv_mode_t val);
     void setDesiredSubdivisionLevel(int val);
 
-    bool isGaussCurvatureCalculated();
-    float getCurvatureScale() {return _curvature_scale;}
+    bool isGaussCurvatureCalculated() const;
+    float getCurvatureScale() const {return _curvature_scale;}
     void setCurvatureScale(float val) {_curvature_scale=val;}
-    float getMinGausCurvature() {return _min_gaus_curvature;}
-    float getMaxGausCurvature() {return _max_gaus_curvature;}
-    float getGaussCurvature(size_t idx);
+    float getMinGausCurvature() const {return _min_gaus_curvature;}
+    float getMaxGausCurvature() const {return _max_gaus_curvature;}
+    float getGaussCurvature(size_t idx) const;
     
     const Plane& getWaterlinePlane() {return _waterline_plane;}
     void setWaterlinePlane(const Plane& val) {_waterline_plane = val;}
@@ -322,13 +318,13 @@ public:
         {_control_point_size=sz;}
 
     // options
-    bool showCurvature() {return _show_curvature;}
-    bool shadeUnderWater() {return _shade_under_water;}
-    bool showControlNet() {return _show_control_net;}
-    bool showControlCurves() {return _show_control_curves;}
-    bool showInteriorEdges() {return _show_interior_edges;}
-    bool drawMirror() {return _draw_mirror;}
-    bool showNormals() {return _show_normals;}
+    bool showCurvature() const {return _show_curvature;}
+    bool shadeUnderWater() const {return _shade_under_water;}
+    bool showControlNet() const {return _show_control_net;}
+    bool showControlCurves() const {return _show_control_curves;}
+    bool showInteriorEdges() const {return _show_interior_edges;}
+    bool drawMirror() const {return _draw_mirror;}
+    bool showNormals() const {return _show_normals;}
 
     void setShowCurvature(bool val) {_show_curvature = val;}
     void setShadeUnderWater(bool val) {_shade_under_water = val;}
@@ -339,21 +335,21 @@ public:
     void setShowNormals(bool val) {_show_normals = val;}
 
     // colors
-    QColor getSelectedColor() {return _selected_color;}
-    QColor getCreaseEdgeColor() {return _crease_color;}
-    QColor getEdgeColor() {return _edge_color;}
-    QColor getLeakColor() {return _leak_color;}
-    QColor getRegularPointColor() {return _regular_point_color;}
-    QColor getCornerPointColor() {return _corner_point_color;}
-    QColor getDartPointColor() {return _dart_point_color;}
-    QColor getCreaseColor() {return _crease_color;}
-    QColor getCreasePointColor() {return _crease_point_color;}
-    QColor getControlCurveColor() {return _control_curve_color;}
-    QColor getLayerColor() {return _layer_color;}
-    QColor getNormalColor() {return _normal_color;}
-    QColor getCurvatureColor() {return _curvature_color;}
-    QColor getUnderWaterColor() {return _underwater_color;}
-    QColor getZebraColor() {return _zebra_color;}
+    QColor getSelectedColor() const {return _selected_color;}
+    QColor getCreaseEdgeColor() const {return _crease_color;}
+    QColor getEdgeColor() const {return _edge_color;}
+    QColor getLeakColor() const {return _leak_color;}
+    QColor getRegularPointColor() const {return _regular_point_color;}
+    QColor getCornerPointColor() const {return _corner_point_color;}
+    QColor getDartPointColor() const {return _dart_point_color;}
+    QColor getCreaseColor() const {return _crease_color;}
+    QColor getCreasePointColor() const {return _crease_point_color;}
+    QColor getControlCurveColor() const {return _control_curve_color;}
+    QColor getLayerColor() const {return _layer_color;}
+    QColor getNormalColor() const {return _normal_color;}
+    QColor getCurvatureColor() const {return _curvature_color;}
+    QColor getUnderWaterColor() const {return _underwater_color;}
+    QColor getZebraColor() const {return _zebra_color;}
 
     void setUnderWaterColor(const QColor& c) 
         {_underwater_color = c;}

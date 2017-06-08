@@ -1,8 +1,8 @@
 /*###############################################################################################
- *    ShipCAD																					*
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>									*
- *    Original Copyright header below															*
- *																								*
+ *    ShipCAD											*
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>					*
+ *    Original Copyright header below								*
+ *												*
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an                *
  *    open source surface-modelling program based on subdivision surfaces and intended for      *
  *    designing ships.                                                                          *
@@ -62,7 +62,7 @@ public:
     virtual void draw(bool draw_mirror, Viewport& vp, LineShader* lineshader,
                       const QColor& edgeColor);
 
-    float distanceToEdge(const QVector3D& pt, const QVector3D& dir);
+    float distanceToEdge(const QVector3D& pt, const QVector3D& dir) const;
     
     // modifiers
     void addFace(SubdivisionFace* face);
@@ -72,19 +72,18 @@ public:
     void swapData();
 
     // getters/setters
-    SubdivisionPoint* startPoint() { return _points[0]; }
-    SubdivisionPoint* endPoint() { return _points[1]; }
-    virtual bool isBoundaryEdge();
-    bool isControlEdge() { return _control_edge; }
+    SubdivisionPoint* startPoint() const { return _points[0]; }
+    SubdivisionPoint* endPoint() const { return _points[1]; }
+    virtual bool isBoundaryEdge() const;
+    bool isControlEdge() const { return _control_edge; }
     void setControlEdge(bool val) { _control_edge = val; }
-    size_t numberOfFaces() { return _faces.size(); }
-    bool isCrease() { return _crease; }
+    size_t numberOfFaces() const { return _faces.size(); }
+    bool isCrease() const { return _crease; }
     void setCrease(bool val);
-    SubdivisionControlCurve* getCurve() { return _curve; }
+    SubdivisionControlCurve* getCurve() const { return _curve; }
     void setCurve(SubdivisionControlCurve* curve) { _curve = curve; }
-    size_t getIndex();
-    SubdivisionFace* getFace(size_t index);
-    bool hasFace(SubdivisionFace* face);
+    SubdivisionFace* getFace(size_t index) const;
+    bool hasFace(const SubdivisionFace* face) const;
     SubdivisionEdge* getPreviousEdge();
     SubdivisionEdge* getNextEdge();
     void setPoints(SubdivisionPoint* p1, SubdivisionPoint* p2)
@@ -127,21 +126,20 @@ public:
     void trace();
 
     // getters/setters
-    size_t getIndex();
-    QColor getColor();
-    virtual bool isBoundaryEdge();
-    bool isSelected();
+    QColor getColor() const;
+    virtual bool isBoundaryEdge() const;
+    bool isSelected() const;
     void setSelected(bool val);
-    bool isVisible();
+    bool isVisible() const;
 
     // drawing
     virtual void draw(Viewport &vp, LineShader* lineshader);
 
     // persistence
     void loadBinary(FileBuffer& source);
-    void saveBinary(FileBuffer& destination);
+    void saveBinary(FileBuffer& destination) const;
     void loadFromStream(size_t& lineno, QStringList& strings);
-    void saveToStream(QStringList& strings);
+    void saveToStream(QStringList& strings) const;
 
     // output
     virtual void dump(std::ostream& os, const char* prefix = "") const;

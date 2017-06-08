@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -75,7 +75,7 @@ void SubdivisionPoint::clear()
     _vtype = svRegular;
 }
 
-ShipCAD::vertex_type_t SubdivisionPoint::fromInt(int val)
+ShipCAD::vertex_type_t SubdivisionPoint::fromInt(int val) const
 {
     if (val == 0)
         return svRegular;
@@ -88,28 +88,28 @@ ShipCAD::vertex_type_t SubdivisionPoint::fromInt(int val)
     throw range_error("invalid integer value conversion to vertex_type_t");
 }
 
-SubdivisionEdge* SubdivisionPoint::getEdge(size_t index)
+SubdivisionEdge* SubdivisionPoint::getEdge(size_t index) const
 {
     if (index < _edges.size())
         return _edges[index];
     throw range_error("SubdivisionPoint::getEdge");
 }
 
-SubdivisionFace* SubdivisionPoint::getFace(size_t index)
+SubdivisionFace* SubdivisionPoint::getFace(size_t index) const
 {
     if (index < _faces.size())
         return _faces[index];
     throw range_error("SubdivisionPoint::getFace");
 }
 
-size_t SubdivisionPoint::getIndex()
+size_t SubdivisionPoint::getIndex() const
 {
     return _owner->indexOfPoint(this);
 }
 
 float SubdivisionPoint::Angle_VV_3D(const QVector3D& p1, 
                                     const QVector3D& p2,
-                                    const QVector3D& p3)
+                                    const QVector3D& p3) const
 {
     QVector3D v1 = p1 - p2;
     QVector3D v2 = p3 - p2;
@@ -123,7 +123,7 @@ float SubdivisionPoint::Angle_VV_3D(const QVector3D& p1,
     return acos(l);
 }
 
-float SubdivisionPoint::getCurvature()
+float SubdivisionPoint::getCurvature() const
 {
     float result = 0.0;
     for (size_t i=0; i<_edges.size(); ++i)
@@ -146,7 +146,7 @@ float SubdivisionPoint::getCurvature()
     return result;
 }
 
-bool SubdivisionPoint::isBoundaryVertex()
+bool SubdivisionPoint::isBoundaryVertex() const
 {
     bool result = false;
     if (fabs(_coordinate.y()) > 1E-4) {
@@ -156,7 +156,7 @@ bool SubdivisionPoint::isBoundaryVertex()
     return result;
 }
 
-size_t SubdivisionPoint::numberOfCurves()
+size_t SubdivisionPoint::numberOfCurves() const
 {
     size_t result = 0;
     for (size_t i=0; i<_edges.size(); ++i)
@@ -165,7 +165,7 @@ size_t SubdivisionPoint::numberOfCurves()
     return result;
 }
 
-bool SubdivisionPoint::isRegularPoint()
+bool SubdivisionPoint::isRegularPoint() const
 {
     bool result = false;
     // this procedure was only tested to TRACE regular quad edges
@@ -207,7 +207,7 @@ bool SubdivisionPoint::isRegularPoint()
     return result;
 }
 
-QVector3D SubdivisionPoint::getLimitPoint()
+QVector3D SubdivisionPoint::getLimitPoint() const
 {
     QVector3D result = ZERO;
     SubdivisionPoint* p30 = 0;
@@ -254,7 +254,7 @@ QVector3D SubdivisionPoint::getLimitPoint()
     return result;
 }
 
-bool SubdivisionPoint::isRegularNURBSPoint(vector<SubdivisionFace*>& faces)
+bool SubdivisionPoint::isRegularNURBSPoint(vector<SubdivisionFace*>& faces) const
 {
     bool result = false;
     if (_vtype == svRegular || _vtype == svDart)
@@ -285,7 +285,7 @@ bool SubdivisionPoint::isRegularNURBSPoint(vector<SubdivisionFace*>& faces)
     return result;
 }
 
-bool SubdivisionPoint::isRegularNURBSPoint(vector<SubdivisionControlFace*>& faces)
+bool SubdivisionPoint::isRegularNURBSPoint(vector<SubdivisionControlFace*>& faces) const
 {
     bool result = false;
     if (_vtype == svRegular || _vtype == svDart)
@@ -333,7 +333,7 @@ void SubdivisionPoint::addFace(SubdivisionFace* face)
         _faces.push_back(face);
 }
 
-QVector3D SubdivisionPoint::averaging()
+QVector3D SubdivisionPoint::averaging() const
 {
     QVector3D result;
     SubdivisionPoint* p;
@@ -445,7 +445,7 @@ void SubdivisionPoint::deleteFace(SubdivisionFace* face)
         _faces.erase(i);
 }
 
-size_t SubdivisionPoint::indexOfFace(SubdivisionFace* face)
+size_t SubdivisionPoint::indexOfFace(SubdivisionFace* face) const
 {
     for (size_t i=0; i<_faces.size(); ++i)
         if (_faces[i] == face)
@@ -453,17 +453,17 @@ size_t SubdivisionPoint::indexOfFace(SubdivisionFace* face)
     throw range_error("SubdivisionPoint::indexOfFace");
 }
 
-bool SubdivisionPoint::hasEdge(SubdivisionEdge* edge)
+bool SubdivisionPoint::hasEdge(SubdivisionEdge* edge) const
 {
     return (find(_edges.begin(), _edges.end(), edge) != _edges.end());
 }
 
-bool SubdivisionPoint::hasFace(SubdivisionFace* face)
+bool SubdivisionPoint::hasFace(SubdivisionFace* face) const
 {
     return (find(_faces.begin(), _faces.end(), face) != _faces.end());
 }
 
-QVector3D SubdivisionPoint::getNormal()
+QVector3D SubdivisionPoint::getNormal() const
 {
     QVector3D result;
     for (size_t i=0; i<_faces.size(); ++i) {
@@ -550,7 +550,7 @@ void SubdivisionControlPoint::removePoint()
     }
 }
 
-QColor SubdivisionControlPoint::getColor()
+QColor SubdivisionControlPoint::getColor() const
 {
     if (isSelected())
         return _owner->getSelectedColor();
@@ -572,17 +572,17 @@ QColor SubdivisionControlPoint::getColor()
     }
 }
 
-size_t SubdivisionControlPoint::getIndex()
+size_t SubdivisionControlPoint::getIndex() const
 {
     return _owner->indexOfControlPoint(this);
 }
 
-bool SubdivisionControlPoint::isSelected()
+bool SubdivisionControlPoint::isSelected() const
 {
     return _owner->hasSelectedControlPoint(this);
 }
 
-bool SubdivisionControlPoint::isVisible()
+bool SubdivisionControlPoint::isVisible() const
 {
     // meant for controlpoints only
     // a controlpoint is visible if at least one of it's
@@ -616,7 +616,7 @@ bool SubdivisionControlPoint::isVisible()
     return result;
 }
 
-bool SubdivisionControlPoint::isLeak()
+bool SubdivisionControlPoint::isLeak() const
 {
     return (fabs(getCoordinate().y()) > 1E-4f && isBoundaryVertex());
 }
@@ -815,7 +815,7 @@ void SubdivisionControlPoint::loadFromStream(size_t &lineno, QStringList &string
         _vtype = fromInt(0);
 }
 
-void SubdivisionControlPoint::saveToStream(QStringList &strings)
+void SubdivisionControlPoint::saveToStream(QStringList &strings) const
 {
     strings.push_back(QString("%1 %2 %3 %4 %5")
                       .arg(Truncate(_coordinate.x(), 5))
@@ -825,7 +825,7 @@ void SubdivisionControlPoint::saveToStream(QStringList &strings)
                       .arg(BoolToStr(isSelected())));
 }
 
-void SubdivisionControlPoint::save_binary(FileBuffer &destination)
+void SubdivisionControlPoint::save_binary(FileBuffer &destination) const
 {
     destination.add(_coordinate);
     destination.add(static_cast<int>(_vtype));

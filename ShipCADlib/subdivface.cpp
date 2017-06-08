@@ -65,9 +65,9 @@ SubdivisionFace::SubdivisionFace(SubdivisionSurface* owner)
 	// does nothing
 }
 
-size_t SubdivisionFace::indexOfPoint(SubdivisionPoint* pt)
+size_t SubdivisionFace::indexOfPoint(const SubdivisionPoint* pt) const
 {
-    vector<SubdivisionPoint*>::iterator i = find(_points.begin(), _points.end(), pt);
+    vector<SubdivisionPoint*>::const_iterator i = find(_points.begin(), _points.end(), pt);
     return i - _points.begin();
 }
 
@@ -92,7 +92,7 @@ static float triangle_area(const QVector3D& p1, const QVector3D& p2, const QVect
     return sqrt(ax*ax + ay*ay + az*az);
 }
 
-float SubdivisionFace::getArea()
+float SubdivisionFace::getArea() const
 {
     float result = 0;
     for (size_t i=3; i<=_points.size(); ++i)
@@ -102,7 +102,7 @@ float SubdivisionFace::getArea()
     return result;
 }
 
-QVector3D SubdivisionFace::getFaceCenter()
+QVector3D SubdivisionFace::getFaceCenter() const
 {
     QVector3D result = ZERO;
     if (_points.size() > 1) {
@@ -115,7 +115,7 @@ QVector3D SubdivisionFace::getFaceCenter()
     return result;
 }
 
-QVector3D SubdivisionFace::getFaceNormal()
+QVector3D SubdivisionFace::getFaceNormal() const
 {
     QVector3D result = ZERO;
     QVector3D c = ZERO;
@@ -141,19 +141,19 @@ QVector3D SubdivisionFace::getFaceNormal()
     return result;
 }
 
-bool SubdivisionFace::hasPoint(SubdivisionPoint *pt)
+bool SubdivisionFace::hasPoint(const SubdivisionPoint *pt) const
 {
     return (find(_points.begin(), _points.end(), pt) != _points.end());
 }
 
-SubdivisionPoint* SubdivisionFace::getPoint(size_t index)
+SubdivisionPoint* SubdivisionFace::getPoint(size_t index) const
 {
     if (index < _points.size())
         return _points[index];
     throw range_error("index not in range SubdivisionFace::getPoint");
 }
 
-SubdivisionPoint* SubdivisionFace::getLastPoint()
+SubdivisionPoint* SubdivisionFace::getLastPoint() const
 {
     if (_points.size() == 0)
         throw range_error("no last point for SubdivisionFace::getLastPoint");
@@ -197,7 +197,7 @@ static bool privIntersectWithRay(const PickRay& ray, const QVector3D& p1, const 
     return PointInTriangle(pt, p1, p2, p3);
 }
 
-bool SubdivisionFace::intersectWithRay(const PickRay& ray)
+bool SubdivisionFace::intersectWithRay(const PickRay& ray) const
 {
     if (_points.size() < 3)
         return false;
@@ -1061,14 +1061,14 @@ SubdivisionControlEdge* SubdivisionControlFace::insertControlEdge(
     return result;
 }
 
-SubdivisionFace* SubdivisionControlFace::getChild(size_t index)
+SubdivisionFace* SubdivisionControlFace::getChild(size_t index) const
 {
     if (index < _children.size())
         return _children[index];
     throw runtime_error("Bad index in SubdivisionControlFace::getChild");
 }
 
-QColor SubdivisionControlFace::getColor()
+QColor SubdivisionControlFace::getColor() const
 {
     if (isSelected())
         return _owner->getSelectedColor();
@@ -1076,7 +1076,7 @@ QColor SubdivisionControlFace::getColor()
         return _layer->getColor();
 }
 
-SubdivisionEdge* SubdivisionControlFace::getControlEdge(size_t index)
+SubdivisionEdge* SubdivisionControlFace::getControlEdge(size_t index) const
 {
     if (index < _control_edges.size())
         return _control_edges[index];
@@ -1091,24 +1091,19 @@ void SubdivisionControlFace::setSelected(bool val)
         _owner->removeSelectedControlFace(this);
 }
 
-bool SubdivisionControlFace::isSelected()
+bool SubdivisionControlFace::isSelected() const
 {
     return _owner->hasSelectedControlFace(this);
 }
 
-SubdivisionEdge* SubdivisionControlFace::getEdge(size_t index)
+SubdivisionEdge* SubdivisionControlFace::getEdge(size_t index) const
 {
     if (index < _edges.size())
         return _edges[index];
     throw runtime_error("bad index in SubdivisionControlFace::getEdge");
 }
 
-size_t SubdivisionControlFace::getIndex()
-{
-    return _owner->indexOfControlFace(this);
-}
-
-bool SubdivisionControlFace::isVisible()
+bool SubdivisionControlFace::isVisible() const
 {
     if (_layer != 0 && _layer->isVisible())
         return true;
@@ -1229,7 +1224,7 @@ void SubdivisionControlFace::removeReferences()
     }
 }
 
-void SubdivisionControlFace::saveBinary(FileBuffer &destination)
+void SubdivisionControlFace::saveBinary(FileBuffer &destination) const
 {
     destination.add(numberOfPoints());
     for (size_t i=0; i<numberOfPoints(); ++i) {
@@ -1245,7 +1240,7 @@ void SubdivisionControlFace::saveBinary(FileBuffer &destination)
     destination.add(isSelected());
 }
 
-void SubdivisionControlFace::saveToDXF(QStringList& strings)
+void SubdivisionControlFace::saveToDXF(QStringList& strings) const
 {
     QString layername = getLayer()->getName();
     int colorindex = FindDXFColorIndex(getLayer()->getColor());
@@ -1254,7 +1249,7 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings)
         ControlFaceGrid facedata;
         facedata.setRows(1);
         facedata.setCols(1);
-        facedata.setFace(0, 0, this);
+        facedata.setFace(0, 0, const_cast<SubdivisionControlFace*>(this));
         PointGrid grid;
         _owner->convertToGrid(facedata, grid);
         if (grid.rows() > 0 && grid.cols() > 0) {
@@ -1342,7 +1337,7 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings)
     }
 }
 
-void SubdivisionControlFace::saveToStream(QStringList &strings)
+void SubdivisionControlFace::saveToStream(QStringList &strings) const
 {
     QString facestr;
     facestr.setNum(_points.size());

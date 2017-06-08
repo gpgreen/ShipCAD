@@ -214,7 +214,7 @@ void SubdivisionSurface::addControlPoint(SubdivisionControlPoint* pt)
     setBuild(false);
 }
 
-bool SubdivisionSurface::hasControlPoint(SubdivisionControlPoint* pt)
+bool SubdivisionSurface::hasControlPoint(const SubdivisionControlPoint* pt) const
 {
     return find(_control_points.begin(), _control_points.end(), pt)
             != _control_points.end();
@@ -1029,16 +1029,16 @@ void SubdivisionSurface::calculateGaussCurvature()
     }
 }
 
-float SubdivisionSurface::getGaussCurvature(size_t idx)
+float SubdivisionSurface::getGaussCurvature(size_t idx) const
 {
     if (idx >= _gaus_curvature.size())
         throw range_error("curvature index out of range");
     return _gaus_curvature[idx];
 }
 
-size_t SubdivisionSurface::indexOfControlPoint(SubdivisionControlPoint *pt)
+size_t SubdivisionSurface::indexOfControlPoint(const SubdivisionControlPoint *pt) const
 {
-    vector<SubdivisionControlPoint*>::iterator i = find(_control_points.begin(),
+    vector<SubdivisionControlPoint*>::const_iterator i = find(_control_points.begin(),
                                                         _control_points.end(),
                                                         pt);
     if (i != _control_points.end())
@@ -1046,30 +1046,20 @@ size_t SubdivisionSurface::indexOfControlPoint(SubdivisionControlPoint *pt)
     throw range_error("point not found in SubdivisionSurface::indexOfControlPoint");
 }
 
-SubdivisionControlPoint* SubdivisionSurface::getControlPoint(size_t index)
+SubdivisionControlPoint* SubdivisionSurface::getControlPoint(size_t index) const
 {
     if (index < _control_points.size())
         return _control_points[index];
     throw range_error("bad index in SubdivisionSurface::getControlPoint");
 }
 
-bool SubdivisionSurface::hasControlEdge(SubdivisionControlEdge *edge)
+bool SubdivisionSurface::hasControlEdge(const SubdivisionControlEdge *edge) const
 {
     return find(_control_edges.begin(), _control_edges.end(),
                 edge) != _control_edges.end();
 }
 
-size_t SubdivisionSurface::indexOfControlEdge(SubdivisionControlEdge *edge)
-{
-    vector<SubdivisionControlEdge*>::iterator i = find(_control_edges.begin(),
-                                                       _control_edges.end(),
-                                                       edge);
-    if (i != _control_edges.end())
-        return i - _control_edges.begin();
-    throw range_error("edge not found in SubdivisionSurface::indexOfControlEdge");
-}
-
-SubdivisionControlEdge* SubdivisionSurface::getControlEdge(size_t index)
+SubdivisionControlEdge* SubdivisionSurface::getControlEdge(size_t index) const
 {
     if (index < _control_edges.size())
         return _control_edges[index];
@@ -1136,17 +1126,7 @@ void SubdivisionSurface::deleteControlCurve(SubdivisionControlCurve *curve)
     setBuild(false);
 }
 
-size_t SubdivisionSurface::indexOfControlFace(SubdivisionControlFace *face)
-{
-    vector<SubdivisionControlFace*>::iterator i = find(_control_faces.begin(),
-                                                       _control_faces.end(),
-                                                       face);
-    if (i != _control_faces.end())
-        return i - _control_faces.begin();
-    throw range_error("face not found in SubdivisionSurface::indexOfControlFace");
-}
-
-bool SubdivisionSurface::hasControlFace(SubdivisionControlFace *face)
+bool SubdivisionSurface::hasControlFace(const SubdivisionControlFace *face) const
 {
     return find(_control_faces.begin(),
                 _control_faces.end(),
@@ -1176,7 +1156,7 @@ void SubdivisionSurface::deleteControlFace(SubdivisionControlFace *face)
     setBuild(false);
 }
 
-SubdivisionControlFace* SubdivisionSurface::getControlFace(size_t index)
+SubdivisionControlFace* SubdivisionSurface::getControlFace(size_t index) const
 {
     if (index < _control_faces.size())
         return _control_faces[index];
@@ -1189,7 +1169,7 @@ void SubdivisionSurface::addControlFace(SubdivisionControlFace* face)
         _control_faces.push_back(face);
 }
 
-bool SubdivisionSurface::isGaussCurvatureCalculated()
+bool SubdivisionSurface::isGaussCurvatureCalculated() const
 {
     return (isBuild() && _gaus_curvature.size() == _points.size());
 }
@@ -1243,7 +1223,7 @@ size_t SubdivisionSurface::numberOfFaces()
     return result;
 }
 
-size_t SubdivisionSurface::numberOfLockedPoints()
+size_t SubdivisionSurface::numberOfLockedPoints() const
 {
     size_t result = 0;
     for (size_t i=0; i<numberOfControlPoints(); ++i)
@@ -1252,9 +1232,9 @@ size_t SubdivisionSurface::numberOfLockedPoints()
     return result;
 }
 
-size_t SubdivisionSurface::indexOfPoint(SubdivisionPoint *pt)
+size_t SubdivisionSurface::indexOfPoint(const SubdivisionPoint *pt) const
 {
-    vector<SubdivisionPoint*>::iterator i = find(_points.begin(),
+    vector<SubdivisionPoint*>::const_iterator i = find(_points.begin(),
                                                  _points.end(),
                                                  pt);
     if (i != _points.end())
@@ -1263,7 +1243,7 @@ size_t SubdivisionSurface::indexOfPoint(SubdivisionPoint *pt)
     throw range_error("point is not in SubdivisionSurface");
 }
 
-SubdivisionPoint* SubdivisionSurface::getPoint(size_t index)
+SubdivisionPoint* SubdivisionSurface::getPoint(size_t index) const
 {
     if (index < _points.size())
         return _points[index];
@@ -1280,7 +1260,7 @@ void SubdivisionSurface::deletePoint(SubdivisionPoint* point)
     }
 }
 
-SubdivisionEdge* SubdivisionSurface::getEdge(size_t index)
+SubdivisionEdge* SubdivisionSurface::getEdge(size_t index) const
 {
     if (index < _edges.size())
         return _edges[index];
@@ -1297,25 +1277,16 @@ void SubdivisionSurface::deleteEdge(SubdivisionEdge* edge)
     }
 }
 
-size_t SubdivisionSurface::indexOfEdge(SubdivisionEdge *edge)
-{
-    vector<SubdivisionEdge*>::iterator i = find(_edges.begin(),
-                                                _edges.end(),
-                                                edge);
-    if (i != _edges.end())
-        return i - _edges.begin();
-    throw range_error("edge is not in SubdivisionSurface");
-}
-
 void SubdivisionSurface::setSelectedControlEdge(SubdivisionControlEdge* edge)
 {
     if (!hasSelectedControlEdge(edge))
         _sel_control_edges.insert(edge);
 }
 
-bool SubdivisionSurface::hasSelectedControlEdge(SubdivisionControlEdge* edge)
+bool SubdivisionSurface::hasSelectedControlEdge(const SubdivisionControlEdge* edge) const
 {
-    set<SubdivisionControlEdge*>::iterator i = _sel_control_edges.find(edge);
+    set<SubdivisionControlEdge*>::const_iterator i
+            = _sel_control_edges.find(const_cast<SubdivisionControlEdge*>(edge));
     return (i != _sel_control_edges.end());
 }
 
@@ -1351,9 +1322,9 @@ void SubdivisionSurface::setSelectedControlFace(SubdivisionControlFace* face)
         _sel_control_faces.insert(face);
 }
 
-bool SubdivisionSurface::hasSelectedControlFace(SubdivisionControlFace* face)
+bool SubdivisionSurface::hasSelectedControlFace(const SubdivisionControlFace* face) const
 {
-    return (_sel_control_faces.find(face) != _sel_control_faces.end());
+    return (_sel_control_faces.find(const_cast<SubdivisionControlFace*>(face)) != _sel_control_faces.end());
 }
 
 void SubdivisionSurface::removeSelectedControlFace(SubdivisionControlFace *face)
@@ -1363,10 +1334,12 @@ void SubdivisionSurface::removeSelectedControlFace(SubdivisionControlFace *face)
         _sel_control_faces.erase(i);
 }
 
-size_t SubdivisionSurface::numberOfSelectedLockedPoints()
+size_t SubdivisionSurface::numberOfSelectedLockedPoints() const
 {
     size_t result = 0;
-    for (OrderedPointMap::iterator i=_sel_control_points.begin(); i!=_sel_control_points.end(); ++i)
+    // TODO: make a const iterator for OrderedPointMap
+    OrderedPointMap& ptmap = const_cast<OrderedPointMap&>(_sel_control_points);
+    for (OrderedPointMap::iterator i=ptmap.begin(); i!=ptmap.end(); ++i)
         if ((*i)->isLocked())
             result++;
     return result;
@@ -1378,7 +1351,7 @@ void SubdivisionSurface::setSelectedControlPoint(SubdivisionControlPoint* pt)
         _sel_control_points.add(pt);
 }
 
-bool SubdivisionSurface::hasSelectedControlPoint(SubdivisionControlPoint* pt)
+bool SubdivisionSurface::hasSelectedControlPoint(const SubdivisionControlPoint* pt) const
 {
     return _sel_control_points.has(pt);
 }
@@ -3510,10 +3483,14 @@ void SubdivisionSurface::saveBinary(FileBuffer &destination)
 {
     // first save layerdata
     destination.add(static_cast<quint32>(numberOfLayers()));
-    for (size_t i=0; i<numberOfLayers(); ++i)
+    quint32 active = 0;
+    for (size_t i=0; i<numberOfLayers(); ++i) {
         getLayer(i)->saveBinary(destination);
+        if (getLayer(i) == getActiveLayer())
+            active = i;
+    }
     // save index of active layer
-    destination.add(static_cast<quint32>(getActiveLayer()->getLayerIndex()));
+    destination.add(active);
     // first sort controlpoints for faster access of function
     sort(_control_points.begin(), _control_points.end());
     destination.add(static_cast<quint32>(numberOfControlPoints()));

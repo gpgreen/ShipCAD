@@ -79,7 +79,7 @@ void SubdivisionEdge::clear()
 }
 
 // algorithm from http://geomalgorithms.com/a07-_distance.html#Distance-between-Segments-and-Rays
-float SubdivisionEdge::distanceToEdge(const QVector3D& pt, const QVector3D& dir)
+float SubdivisionEdge::distanceToEdge(const QVector3D& pt, const QVector3D& dir) const
 {
     QVector3D l2p1 = pt + 100*dir;
     QVector3D u = _points[1]->getCoordinate() - _points[0]->getCoordinate();
@@ -148,31 +148,21 @@ float SubdivisionEdge::distanceToEdge(const QVector3D& pt, const QVector3D& dir)
     return dP.length();
 }
 
-size_t SubdivisionEdge::getIndex()
-{
-    try {
-        return _owner->indexOfEdge(this);
-    }
-    catch(range_error&) {
-        return _owner->indexOfControlEdge(static_cast<SubdivisionControlEdge*>(this));
-    }
-}
-
-bool SubdivisionEdge::isBoundaryEdge()
+bool SubdivisionEdge::isBoundaryEdge() const
 {
     return _faces.size() == 1
             && ((fabs(_points[0]->getCoordinate().y()) > 1E-4f
                 || fabs(_points[1]->getCoordinate().y()) > 1E-4f));
 }
 
-SubdivisionFace* SubdivisionEdge::getFace(size_t index)
+SubdivisionFace* SubdivisionEdge::getFace(size_t index) const
 {
     if (index < _faces.size())
         return _faces[index];
     throw range_error("SubdivisionEdge::getFace");
 }
 
-bool SubdivisionEdge::hasFace(SubdivisionFace* face)
+bool SubdivisionEdge::hasFace(const SubdivisionFace* face) const
 {
     return (find(_faces.begin(), _faces.end(), face) != _faces.end());
 }
@@ -466,7 +456,7 @@ void SubdivisionControlEdge::removeEdge()
         _owner->deleteControlPoint(sp);
 }
 
-QColor SubdivisionControlEdge::getColor()
+QColor SubdivisionControlEdge::getColor() const
 {
     QColor result;
     if (isSelected())
@@ -480,12 +470,7 @@ QColor SubdivisionControlEdge::getColor()
     return result;
 }
 
-size_t SubdivisionControlEdge::getIndex()
-{
-    return _owner->indexOfControlEdge(this);
-}
-
-bool SubdivisionControlEdge::isBoundaryEdge()
+bool SubdivisionControlEdge::isBoundaryEdge() const
 {
     bool result = false;
     int n = 0;
@@ -508,12 +493,12 @@ void SubdivisionControlEdge::setSelected(bool val)
         _owner->removeSelectedControlEdge(this);
 }
 
-bool SubdivisionControlEdge::isSelected()
+bool SubdivisionControlEdge::isSelected() const
 {
     return _owner->hasSelectedControlEdge(this);
 }
 
-bool SubdivisionControlEdge::isVisible()
+bool SubdivisionControlEdge::isVisible() const
 {
     // meant for control edges only
     // a control edge is visible if at least one of it's
@@ -621,7 +606,7 @@ void SubdivisionControlEdge::loadFromStream(size_t &lineno, QStringList &strings
     }
 }
 
-void SubdivisionControlEdge::saveToStream(QStringList &strings)
+void SubdivisionControlEdge::saveToStream(QStringList &strings) const
 {
     SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(_points[0]);
     SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(_points[1]);
@@ -631,7 +616,7 @@ void SubdivisionControlEdge::saveToStream(QStringList &strings)
                       .arg(BoolToStr(_crease)).arg(BoolToStr(isSelected())));
 }
 
-void SubdivisionControlEdge::saveBinary(FileBuffer& destination)
+void SubdivisionControlEdge::saveBinary(FileBuffer& destination) const
 {
     destination.add(_owner->indexOfControlPoint(dynamic_cast<SubdivisionControlPoint*>(startPoint())));
     destination.add(_owner->indexOfControlPoint(dynamic_cast<SubdivisionControlPoint*>(endPoint())));

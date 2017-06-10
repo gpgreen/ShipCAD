@@ -53,8 +53,6 @@ bool ShipCAD::g_edge_verbose = true;
 SubdivisionEdge* SubdivisionEdge::construct(SubdivisionSurface* owner)
 {
     void * mem = owner->getEdgePool().add();
-    if (mem == 0)
-        throw runtime_error("out of memory in SubdivisionEdge::construct");
     return new (mem) SubdivisionEdge(owner);
 }
 
@@ -159,7 +157,7 @@ SubdivisionFace* SubdivisionEdge::getFace(size_t index) const
 {
     if (index < _faces.size())
         return _faces[index];
-    throw range_error("SubdivisionEdge::getFace");
+    throw out_of_range("SubdivisionEdge::getFace");
 }
 
 bool SubdivisionEdge::hasFace(const SubdivisionFace* face) const
@@ -427,8 +425,6 @@ ostream& operator << (ostream& os, const ShipCAD::SubdivisionEdge& edge)
 SubdivisionControlEdge* SubdivisionControlEdge::construct(SubdivisionSurface* owner)
 {
     void * mem = owner->getControlEdgePool().add();
-    if (mem == 0)
-        throw runtime_error("out of memory in SubdivisionControlEdge::construct");
     return new (mem) SubdivisionControlEdge(owner);
 }
 
@@ -531,8 +527,8 @@ SubdivisionControlPoint* SubdivisionControlEdge::insertControlPoint(const QVecto
     SubdivisionControlPoint* result = SubdivisionControlPoint::construct(_owner);
     SubdivisionControlPoint* sp = dynamic_cast<SubdivisionControlPoint*>(startPoint());
     SubdivisionControlPoint* ep = dynamic_cast<SubdivisionControlPoint*>(endPoint());
-    if (sp == 0 || ep == 0)
-        throw runtime_error("start and/or end point are not control points");
+    if (sp == nullptr || ep == nullptr)
+        throw invalid_argument("start and/or end point are not control points");
     result->setCoordinate(p);
     if (getCurve() != 0) {
         // insert the new point in the controlcurve

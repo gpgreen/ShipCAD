@@ -72,23 +72,23 @@ public:
     void resetDivPoints();
 
     // getters/setters
-    bool isSelected();
-    bool isVisible();
-    bool isBuild() { return _build; }
-    QColor getColor();
-    size_t numberOfControlPoints() { return _points.size(); }
-    size_t numberOfSubdivPoints() { return _div_points.size(); }
-    SubdivisionControlPoint* getControlPoint(size_t index);
-    SubdivisionPoint* getSubdivPoint(size_t index);
+    bool isSelected() const;
+    bool isVisible() const;
+    bool isBuild() const { return _build; }
+    QColor getColor() const;
+    size_t numberOfControlPoints() const { return _points.size(); }
+    size_t numberOfSubdivPoints() const { return _div_points.size(); }
+    SubdivisionControlPoint* getControlPoint(size_t index) const;
+    SubdivisionPoint* getSubdivPoint(size_t index) const;
     void setVisible(bool val);
     void setBuild(bool val) { _build = val; }
     void setSelected(bool val);
-    Spline* getSpline() {return _curve;}
+    Spline* getSpline() const {return _curve;}
 
     // persistence
     void loadBinary(FileBuffer& source);
-    void saveBinary(FileBuffer& destiniation);
-    void saveToDXF(QStringList& strings);
+    void saveBinary(FileBuffer& destination) const;
+    void saveToDXF(QStringList& strings) const;
 
     // draw
     virtual void draw(Viewport& vp, LineShader* lineshader);

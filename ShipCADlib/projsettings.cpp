@@ -487,7 +487,7 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
             dest.add(_save_preview);
             if (_save_preview) {
                 if (_preview_img == nullptr)
-                    throw runtime_error("trying to save preview image that doesn't exist");
+                    throw logic_error("trying to save preview image that doesn't exist");
                 dest.add(*_preview_img);
             }
             if (_owner->getFileVersion() >= fv230) {

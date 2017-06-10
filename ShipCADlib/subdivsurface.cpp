@@ -1032,7 +1032,7 @@ void SubdivisionSurface::calculateGaussCurvature()
 float SubdivisionSurface::getGaussCurvature(size_t idx) const
 {
     if (idx >= _gaus_curvature.size())
-        throw range_error("curvature index out of range");
+        throw out_of_range("curvature index out of range");
     return _gaus_curvature[idx];
 }
 
@@ -1043,14 +1043,14 @@ size_t SubdivisionSurface::indexOfControlPoint(const SubdivisionControlPoint *pt
                                                         pt);
     if (i != _control_points.end())
         return i - _control_points.begin();
-    throw range_error("point not found in SubdivisionSurface::indexOfControlPoint");
+    throw out_of_range("point not found in SubdivisionSurface::indexOfControlPoint");
 }
 
 SubdivisionControlPoint* SubdivisionSurface::getControlPoint(size_t index) const
 {
     if (index < _control_points.size())
         return _control_points[index];
-    throw range_error("bad index in SubdivisionSurface::getControlPoint");
+    throw out_of_range("bad index in SubdivisionSurface::getControlPoint");
 }
 
 bool SubdivisionSurface::hasControlEdge(const SubdivisionControlEdge *edge) const
@@ -1063,7 +1063,7 @@ SubdivisionControlEdge* SubdivisionSurface::getControlEdge(size_t index) const
 {
     if (index < _control_edges.size())
         return _control_edges[index];
-    throw range_error("bad index in SubdivisionSurface::getControlEdge");
+    throw out_of_range("bad index in SubdivisionSurface::getControlEdge");
 }
 
 void SubdivisionSurface::removeControlEdge(SubdivisionControlEdge *edge)
@@ -1074,7 +1074,7 @@ void SubdivisionSurface::removeControlEdge(SubdivisionControlEdge *edge)
     if (i != _control_edges.end())
         _control_edges.erase(i);
     else
-        throw range_error("edge not found in SubdivisionSurface::removeControlEdge");
+        throw out_of_range("edge not found in SubdivisionSurface::removeControlEdge");
 }
 
 // delete a controledge singly, not by dumping the pool
@@ -1090,14 +1090,14 @@ void SubdivisionSurface::deleteControlEdge(SubdivisionControlEdge* edge)
     setBuild(false);
 }
 
-SubdivisionControlCurve* SubdivisionSurface::getControlCurve(size_t index)
+SubdivisionControlCurve* SubdivisionSurface::getControlCurve(size_t index) const
 {
     if (index < _control_curves.size())
         return _control_curves[index];
-    throw range_error("bad index in SubdivisionSurface::getControlCurve");
+    throw out_of_range("bad index in SubdivisionSurface::getControlCurve");
 }
 
-bool SubdivisionSurface::hasControlCurve(SubdivisionControlCurve* curve)
+bool SubdivisionSurface::hasControlCurve(const SubdivisionControlCurve* curve) const
 {
     return find(_control_curves.begin(), _control_curves.end(),
                 curve) != _control_curves.end();
@@ -1110,7 +1110,7 @@ void SubdivisionSurface::removeControlCurve(SubdivisionControlCurve *curve)
                                                         curve);
     if (i != _control_curves.end())
         _control_curves.erase(i);
-    throw range_error("curve not found in SubdivisionSurface::deleteControlCurve");
+    throw out_of_range("curve not found in SubdivisionSurface::deleteControlCurve");
 }
 
 void SubdivisionSurface::deleteControlCurve(SubdivisionControlCurve *curve)
@@ -1141,7 +1141,7 @@ void SubdivisionSurface::removeControlFace(SubdivisionControlFace *face)
     if (i != _control_faces.end())
         _control_faces.erase(i);
     else
-        throw range_error("face not found in SubdivisionSurface::removeControlFace");
+        throw out_of_range("face not found in SubdivisionSurface::removeControlFace");
 }
 
 void SubdivisionSurface::deleteControlFace(SubdivisionControlFace *face)
@@ -1160,7 +1160,7 @@ SubdivisionControlFace* SubdivisionSurface::getControlFace(size_t index) const
 {
     if (index < _control_faces.size())
         return _control_faces[index];
-    throw range_error("bad index in SubdivisionSurface::getControlFace");
+    throw out_of_range("bad index in SubdivisionSurface::getControlFace");
 }
 
 void SubdivisionSurface::addControlFace(SubdivisionControlFace* face)
@@ -1174,31 +1174,31 @@ bool SubdivisionSurface::isGaussCurvatureCalculated() const
     return (isBuild() && _gaus_curvature.size() == _points.size());
 }
 
-size_t SubdivisionSurface::indexOfLayer(SubdivisionLayer *layer)
+size_t SubdivisionSurface::indexOfLayer(const SubdivisionLayer *layer) const
 {
-    vector<SubdivisionLayer*>::iterator i = find(_layers.begin(),
+    vector<SubdivisionLayer*>::const_iterator i = find(_layers.begin(),
                                                  _layers.end(),
                                                  layer);
     if (i != _layers.end())
         return i - _layers.begin();
-    throw range_error("bad layer in SubdivisionSurface::indexOfLayer");
+    throw out_of_range("bad layer in SubdivisionSurface::indexOfLayer");
 }
 
 SubdivisionLayer* SubdivisionSurface::getLayer(size_t index)
 {
     if (index < _layers.size())
         return _layers[index];
-    throw range_error("bad index in SubdivisionSurface::getLayer");
+    throw out_of_range("bad index in SubdivisionSurface::getLayer");
 }
 
 const SubdivisionLayer* SubdivisionSurface::getLayer(size_t index) const
 {
     if (index < _layers.size())
         return _layers[index];
-    throw range_error("bad index in SubdivisionSurface::getLayer");
+    throw out_of_range("bad index in SubdivisionSurface::getLayer");
 }
 
-bool SubdivisionSurface::hasLayer(SubdivisionLayer *layer)
+bool SubdivisionSurface::hasLayer(const SubdivisionLayer *layer) const
 {
     return find(_layers.begin(), _layers.end(), layer)
             != _layers.end();
@@ -1212,7 +1212,7 @@ void SubdivisionSurface::deleteLayer(SubdivisionLayer *layer)
     if (i != _layers.end())
         _layers.erase(i);
     else
-        throw range_error("bad layer in SubdivisionSurface::deleteLayer");
+        throw out_of_range("bad layer in SubdivisionSurface::deleteLayer");
 }
 
 size_t SubdivisionSurface::numberOfFaces()
@@ -1240,14 +1240,14 @@ size_t SubdivisionSurface::indexOfPoint(const SubdivisionPoint *pt) const
     if (i != _points.end())
         return i - _points.begin();
 
-    throw range_error("point is not in SubdivisionSurface");
+    throw out_of_range("point is not in SubdivisionSurface");
 }
 
 SubdivisionPoint* SubdivisionSurface::getPoint(size_t index) const
 {
     if (index < _points.size())
         return _points[index];
-    throw range_error("bad index in SubdivisionSurface::getPoint");
+    throw out_of_range("bad index in SubdivisionSurface::getPoint");
 }
 
 void SubdivisionSurface::deletePoint(SubdivisionPoint* point)
@@ -1264,7 +1264,7 @@ SubdivisionEdge* SubdivisionSurface::getEdge(size_t index) const
 {
     if (index < _edges.size())
         return _edges[index];
-    throw range_error("bad index in SubdivisionSurface::getEdge");
+    throw out_of_range("bad index in SubdivisionSurface::getEdge");
 }
 
 void SubdivisionSurface::deleteEdge(SubdivisionEdge* edge)
@@ -1303,7 +1303,7 @@ void SubdivisionSurface::setSelectedControlCurve(SubdivisionControlCurve* curve)
         _sel_control_curves.insert(curve);
 }
 
-bool SubdivisionSurface::hasSelectedControlCurve(SubdivisionControlCurve* curve)
+bool SubdivisionSurface::hasSelectedControlCurve(const SubdivisionControlCurve* curve) const
 {
     return (find(_sel_control_curves.begin(), _sel_control_curves.end(), curve)
             != _sel_control_curves.end());
@@ -1367,7 +1367,7 @@ size_t SubdivisionSurface::requestNewLayerID()
     return n;
 }
 
-QString SubdivisionSurface::getDefaultLayerName()
+QString SubdivisionSurface::getDefaultLayerName() const
 {
     return tr("Layer");
 }
@@ -2035,12 +2035,12 @@ bool SubdivisionSurface::edgeConnect()
     return true;
 }
 
-void SubdivisionSurface::exportFeFFile(QStringList& strings)
+void SubdivisionSurface::exportFeFFile(QStringList& strings) const
 {
     // add layer information
     strings.push_back(QString("%1").arg(numberOfLayers()));
     for (size_t i=0; i<numberOfLayers(); ++i) {
-        SubdivisionLayer* layer = getLayer(i);
+        const SubdivisionLayer* layer = getLayer(i);
         strings.push_back(layer->getName());
         strings.push_back(QString("%1 %2 %3 %4 %5 %6 %7 %8 %9 %10")
                           .arg(layer->getLayerID())
@@ -2880,11 +2880,10 @@ void SubdivisionSurface::importFeFFile(QStringList &strings, size_t& lineno)
         for (size_t j=0; j<face->numberOfPoints(); ++j) {
             SubdivisionControlPoint* p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
             SubdivisionControlEdge* edge = controlEdgeExists(p1, p2);
-            if (edge != 0)
+            if (edge != nullptr)
                 edge->addFace(face);
             else
-                // BUGBUG: usestring 201
-                throw runtime_error("");
+                throw runtime_error(tr("Could not find edge").toStdString());
             p1 = p2;
         }
         // read layer index
@@ -3511,7 +3510,7 @@ void SubdivisionSurface::saveBinary(FileBuffer &destination)
         getControlFace(i)->saveBinary(destination);
 }
 
-void SubdivisionSurface::saveToStream(QStringList& strings)
+void SubdivisionSurface::saveToStream(QStringList& strings) const
 {
     // first save layerdata
     strings.push_back(QString("%1").arg(numberOfLayers()));

@@ -154,7 +154,7 @@ QColor ShipCAD::QColorFromDXFIndex(int index)
 {
     if (index >= 0 && index <= 255)
         return DXFLayerColors[index];
-    throw range_error("bad index in FindColorFromDXFIndex");
+    throw out_of_range("bad index in FindColorFromDXFIndex");
 }
 
 QColor ShipCAD::FillColor(float parameter)
@@ -631,7 +631,7 @@ size_t ShipCAD::to_size_t(int val)
 {
     if (val >= 0)
         return static_cast<size_t>(val);
-    throw runtime_error("int cannot be converted to unsigned int");
+    throw range_error("int cannot be converted to unsigned int");
 }
 
 QColor ShipCAD::RandomColor()

@@ -54,10 +54,7 @@ bool ShipCAD::g_point_verbose = true;
 
 SubdivisionPoint* SubdivisionPoint::construct(SubdivisionSurface* owner)
 {
-    //void * mem = owner->getPointPool().malloc();
     void * mem = owner->getPointPool().add();
-    if (mem == 0)
-        throw runtime_error("out of memory in SubdivisionPoint::construct");
     return new (mem) SubdivisionPoint(owner);
 }
 
@@ -85,21 +82,21 @@ ShipCAD::vertex_type_t SubdivisionPoint::fromInt(int val) const
         return svDart;
     if (val == 3)
         return svCorner;
-    throw range_error("invalid integer value conversion to vertex_type_t");
+    throw out_of_range("invalid integer value conversion to vertex_type_t");
 }
 
 SubdivisionEdge* SubdivisionPoint::getEdge(size_t index) const
 {
     if (index < _edges.size())
         return _edges[index];
-    throw range_error("SubdivisionPoint::getEdge");
+    throw out_of_range("SubdivisionPoint::getEdge");
 }
 
 SubdivisionFace* SubdivisionPoint::getFace(size_t index) const
 {
     if (index < _faces.size())
         return _faces[index];
-    throw range_error("SubdivisionPoint::getFace");
+    throw out_of_range("SubdivisionPoint::getFace");
 }
 
 size_t SubdivisionPoint::getIndex() const
@@ -450,7 +447,7 @@ size_t SubdivisionPoint::indexOfFace(SubdivisionFace* face) const
     for (size_t i=0; i<_faces.size(); ++i)
         if (_faces[i] == face)
             return i;
-    throw range_error("SubdivisionPoint::indexOfFace");
+    throw out_of_range("SubdivisionPoint::indexOfFace");
 }
 
 bool SubdivisionPoint::hasEdge(SubdivisionEdge* edge) const
@@ -531,8 +528,6 @@ ostream& operator << (ostream& os, const ShipCAD::SubdivisionPoint& point)
 SubdivisionControlPoint* SubdivisionControlPoint::construct(SubdivisionSurface* owner)
 {
     void * mem = owner->getControlPointPool().add();
-    if (mem == 0)
-        throw runtime_error("out of memory in SubdivisionControlPoint::construct");
     return new (mem) SubdivisionControlPoint(owner);
 }
 
@@ -651,12 +646,12 @@ void SubdivisionControlPoint::collapse()
     SubdivisionControlFace* face;
     if (_faces.size() <= 2) {
         setSelected(false);
-        p1 = 0;
-        p2 = 0;
+        p1 = nullptr;
+        p2 = nullptr;
         // this is possibly a point on a boundary edge
         // check for this special case
-        edge1 = 0;
-        edge2 = 0;
+        edge1 = nullptr;
+        edge2 = nullptr;
         for (size_t i=0; i<numberOfEdges(); ++i) {
             if (_edges[i]->numberOfFaces() == 1) {
                 if (edge1 == 0) {
@@ -667,7 +662,7 @@ void SubdivisionControlPoint::collapse()
                 }
             }
         }
-        if (edge1 != 0 && edge2 != 0) {
+        if (edge1 != nullptr && edge2 != nullptr) {
             _owner->collapseEdge(edge2);
             _owner->collapseEdge(edge1);
         }
@@ -676,8 +671,8 @@ void SubdivisionControlPoint::collapse()
         if (_edges.size() == 2) {
             edge_collapse = true;
             edge1 = dynamic_cast<SubdivisionControlEdge*>(_edges[0]);
-            if (edge1 == 0)
-                throw runtime_error("edge is not a control edge SubdivisionControlPoint::collapse");
+            if (edge1 == nullptr)
+                throw invalid_argument("edge is not a control edge SubdivisionControlPoint::collapse");
             if (edge1->startPoint() == this) {
                 p1 = dynamic_cast<SubdivisionControlPoint*>(edge1->endPoint());
             }
@@ -685,8 +680,8 @@ void SubdivisionControlPoint::collapse()
                 p1 = dynamic_cast<SubdivisionControlPoint*>(edge1->startPoint());
             }
             edge2 = dynamic_cast<SubdivisionControlEdge*>(_edges[1]);
-            if (edge2 == 0)
-                throw runtime_error("edge is not a control edge SubdivisionControlPoint::collapse");
+            if (edge2 == nullptr)
+                throw invalid_argument("edge is not a control edge SubdivisionControlPoint::collapse");
             if (edge2->startPoint() == this) {
                 p2 = dynamic_cast<SubdivisionControlPoint*>(edge2->endPoint());
             }
@@ -709,7 +704,7 @@ void SubdivisionControlPoint::collapse()
 
         if (edge_collapse) {
             edge1 = _owner->controlEdgeExists(p1, p2);
-            if (edge1 != 0)
+            if (edge1 != nullptr)
                 edge1->setCrease(crease);
         }
     }   // faces.size <= 2
@@ -719,8 +714,8 @@ void SubdivisionControlPoint::collapse()
         for (size_t i=0; i<numberOfEdges(); ++i) {
             SubdivisionControlPoint* s = dynamic_cast<SubdivisionControlPoint*>(edges[i]->startPoint());
             SubdivisionControlPoint* e = dynamic_cast<SubdivisionControlPoint*>(edges[i]->endPoint());
-            if (s == 0 || e == 0)
-                throw runtime_error("point not control point SubdivisionControlPoint::collapse");
+            if (s == nullptr || e == nullptr)
+                throw invalid_argument("point not control point SubdivisionControlPoint::collapse");
             if (s == this)
                 checklist.push_back(e);
             else
@@ -728,18 +723,18 @@ void SubdivisionControlPoint::collapse()
         }
         for (size_t i=0; i<numberOfFaces(); ++i) {
             face = dynamic_cast<SubdivisionControlFace*>(_faces[i]);
-            if (face == 0)
-                throw runtime_error("face is not a control face SubdivisionControlPoint::collapse");
+            if (face == nullptr)
+                throw invalid_argument("face is not a control face SubdivisionControlPoint::collapse");
             p1 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(face->numberOfPoints()-1));
-            if (p1 == 0)
-                throw runtime_error("point not control point SubdivisionControlPoint::collapse");
+            if (p1 == nullptr)
+                throw invalid_argument("point not control point SubdivisionControlPoint::collapse");
             for (size_t j=0; j<face->numberOfPoints(); ++j) {
                 p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
-                if (p2 == 0)
-                    throw runtime_error("point not control point SubdivisionControlPoint::collapse");
+                if (p2 == nullptr)
+                    throw invalid_argument("point not control point SubdivisionControlPoint::collapse");
                 if (p1 != this && p2 != this) {
                     edge1 = _owner->controlEdgeExists(p1, p2);
-                    if (edge1 != 0
+                    if (edge1 != nullptr
                             && find(edges.begin(), edges.end(), edge1) == edges.end())
                         _edges.push_back(edge1);
                 }
@@ -754,14 +749,14 @@ void SubdivisionControlPoint::collapse()
                 vector<SubdivisionControlPoint*>& points = sorted[i];
                 if (points.size() > 2) {
                     face = _owner->addControlFace(points, false);
-                    if (face != 0) {
+                    if (face != nullptr) {
                         p1 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(face->numberOfPoints()-1));
-                        if (p1 == 0)
-                            throw runtime_error("point not control point SubdivisionControlPoint::collapse");
+                        if (p1 == nullptr)
+                            throw invalid_argument("point not control point SubdivisionControlPoint::collapse");
                         for (size_t j=0; j<face->numberOfPoints(); j++) {
                             p2 = dynamic_cast<SubdivisionControlPoint*>(face->getPoint(j));
-                            if (p2 == 0)
-                                throw runtime_error("point not control point SubdivisionControlPoint::collapse");
+                            if (p2 == nullptr)
+                                throw invalid_argument("point not control point SubdivisionControlPoint::collapse");
                             // BUGBUG: doesn't do anything here
                             edge1 = _owner->controlEdgeExists(p1, p2);
                             p1 = p2;

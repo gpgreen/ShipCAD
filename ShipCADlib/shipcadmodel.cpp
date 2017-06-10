@@ -1386,11 +1386,7 @@ void ShipCADModel::savePart(const QString& filename, FileBuffer& buffer,
         for (size_t j=0; j<face->numberOfPoints(); j++)
             buffer.add(indexer.find(dynamic_cast<SubdivisionControlPoint*>(
                                         face->getPoint(j)))->second);
-        vector<SubdivisionLayer*>::iterator l = find(layerlist.begin(), layerlist.end(),
-                                                     face->getLayer());
-        if (l == layerlist.end())
-            throw runtime_error("Didn't find layer in ShipCADModel::savePart");
-        buffer.add(static_cast<size_t>(l-layerlist.begin()));
+        buffer.add(getSurface()->indexOfLayer(face->getLayer()));
     }
     // save control curves
     buffer.add(curvelist.size());

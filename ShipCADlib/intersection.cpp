@@ -427,6 +427,7 @@ void Intersection::createStarboardPart()
                 delta = 0.5 * (p2.x() + p1.x()) * (p2.y() - p1.y());
                 break;
             default:
+                // BUGBUG: better error message
                 throw runtime_error("66");
             }
             area += delta;

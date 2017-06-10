@@ -85,8 +85,6 @@ QString ShipCAD::WeightStr(unit_type_t units)
 QImage ShipCAD::CreateFromJPEG(const JPEGImage* image)
 {
     uchar* data = new uchar[image->data.size()];
-    if (data == nullptr)
-        throw std::runtime_error("unable to create image data array");
     for (size_t i=0; i<image->data.size(); ++i)
         data[i] = image->data[i];
     QImage result = QImage::fromData(data, image->data.size());

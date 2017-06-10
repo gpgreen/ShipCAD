@@ -264,8 +264,8 @@ public:
 
     // SubdivisionControlCurve
     size_t numberOfControlCurves() const {return _control_curves.size();}
-    SubdivisionControlCurve* getControlCurve(size_t index);
-    bool hasControlCurve(SubdivisionControlCurve* curve);
+    SubdivisionControlCurve* getControlCurve(size_t index) const;
+    bool hasControlCurve(const SubdivisionControlCurve* curve) const;
     void addControlCurve(SubdivisionControlCurve* curve);
     void addControlCurves(std::vector<SubdivisionControlEdge*>& edges);
     void removeControlCurve(SubdivisionControlCurve* curve);
@@ -275,23 +275,23 @@ public:
     size_t numberOfSelectedControlCurves() const {return _sel_control_curves.size();}
     void setSelectedControlCurve(SubdivisionControlCurve* curve);
     void removeSelectedControlCurve(SubdivisionControlCurve* curve);
-    bool hasSelectedControlCurve(SubdivisionControlCurve* curve);
+    bool hasSelectedControlCurve(const SubdivisionControlCurve* curve) const;
     std::set<SubdivisionControlCurve*>& getSelControlCurveCollection() {return _sel_control_curves;}
 
     // SubdivisionLayer
     size_t numberOfLayers() const {return _layers.size();}
-    size_t indexOfLayer(SubdivisionLayer* layer);
+    size_t indexOfLayer(const SubdivisionLayer* layer) const;
     SubdivisionLayer* getLayer(size_t index);
     const SubdivisionLayer* getLayer(size_t index) const;
     SubdivisionLayer* getActiveLayer() const {return _active_layer;}
     void setActiveLayer(SubdivisionLayer* layer);
-    bool hasLayer(SubdivisionLayer* layer);
+    bool hasLayer(const SubdivisionLayer* layer) const;
     void deleteLayer(SubdivisionLayer* layer);
-    size_t lastUsedLayerID() {return _last_used_layerID;}
+    size_t lastUsedLayerID() const {return _last_used_layerID;}
     void setLastUsedLayerID(size_t newid) {_last_used_layerID = newid;}
     size_t requestNewLayerID();
     SubdivisionLayer* addNewLayer();
-    QString getDefaultLayerName();
+    QString getDefaultLayerName() const;
     size_t deleteEmptyLayers();
     std::vector<SubdivisionLayer*>& getLayers() {return _layers;}
     const std::vector<SubdivisionLayer*>& getLayers() const {return _layers;}
@@ -308,12 +308,12 @@ public:
     float getMaxGausCurvature() const {return _max_gaus_curvature;}
     float getGaussCurvature(size_t idx) const;
     
-    const Plane& getWaterlinePlane() {return _waterline_plane;}
+    const Plane& getWaterlinePlane() const {return _waterline_plane;}
     void setWaterlinePlane(const Plane& val) {_waterline_plane = val;}
-    float getMainframeLocation() {return _main_frame_location;}
+    float getMainframeLocation() const {return _main_frame_location;}
     void setMainframeLocation(float val) {_main_frame_location=val;}
 
-    int getControlPointSize() {return _control_point_size;}
+    int getControlPointSize() const {return _control_point_size;}
     void setControlPointSize(int sz) 
         {_control_point_size=sz;}
 
@@ -359,10 +359,10 @@ public:
     void loadBinary(FileBuffer& source);
     void loadFromStream(size_t& lineno, QStringList& strings);
     void loadVRMLFile(const QString& filename);
-    void exportFeFFile(QStringList& strings);
+    void exportFeFFile(QStringList& strings) const;
     void importFeFFile(QStringList& strings, size_t& lineno);
     void exportObjFile(bool export_control_net, QStringList& strings);
-    void saveToStream(QStringList& strings);
+    void saveToStream(QStringList& strings) const;
 
     // drawing
     virtual void draw(Viewport &vp);

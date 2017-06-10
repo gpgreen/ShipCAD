@@ -51,8 +51,6 @@ using namespace ShipCAD;
 SubdivisionLayer* SubdivisionLayer::construct(SubdivisionSurface* owner)
 {
     void * mem = owner->getLayerPool().add();
-    if (mem == 0)
-        throw runtime_error("out of memory in SubdivisionLayer::construct");
     return new (mem) SubdivisionLayer(owner);
 }
 
@@ -86,14 +84,14 @@ SubdivisionControlFace* SubdivisionLayer::getFace(size_t index)
 {
     if (index < _patches.size())
         return _patches[index];
-    throw range_error("index out of range in SubdivisionLayer::getFace");
+    throw out_of_range("index out of range in SubdivisionLayer::getFace");
 }
 
 const SubdivisionControlFace* SubdivisionLayer::getFace(size_t index) const
 {
     if (index < _patches.size())
         return _patches[index];
-    throw range_error("index out of range in SubdivisionLayer::getFace");
+    throw out_of_range("index out of range in SubdivisionLayer::getFace");
 }
 
 void SubdivisionLayer::processTriangle(const QVector3D& p1, 

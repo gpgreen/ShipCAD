@@ -49,11 +49,7 @@ using namespace ShipCAD;
 SubdivisionControlCurve* SubdivisionControlCurve::construct(SubdivisionSurface* owner)
 {
     void * cmem = owner->getControlCurvePool().add();
-    if (cmem == 0)
-        throw runtime_error("out of memory in SubdivisionControlCurve::construct");
     void * smem = owner->getSplinePool().add();
-    if (smem == 0)
-        throw runtime_error("out of memory in SubdivisionControlCurve::construct:spline");
     Spline* spline = new (smem) Spline();
     return new (cmem) SubdivisionControlCurve(owner, spline);
 }
@@ -107,35 +103,35 @@ void SubdivisionControlCurve::resetDivPoints()
     setBuild(false);
 }
 
-QColor SubdivisionControlCurve::getColor()
+QColor SubdivisionControlCurve::getColor() const
 {
     if (isSelected())
         return _owner->getSelectedColor();
     return _owner->getControlCurveColor();
 }
 
-bool SubdivisionControlCurve::isSelected()
+bool SubdivisionControlCurve::isSelected() const
 {
     return _owner->hasSelectedControlCurve(this);
 }
 
-bool SubdivisionControlCurve::isVisible()
+bool SubdivisionControlCurve::isVisible() const
 {
     return _owner->showControlCurves();
 }
 
-SubdivisionControlPoint* SubdivisionControlCurve::getControlPoint(size_t index)
+SubdivisionControlPoint* SubdivisionControlCurve::getControlPoint(size_t index) const
 {
     if (index < _points.size())
         return _points[index];
-    throw range_error("index for SubdivisionControlCurve::getControlPoint");
+    throw out_of_range("index for SubdivisionControlCurve::getControlPoint");
 }
 
-SubdivisionPoint* SubdivisionControlCurve::getSubdivPoint(size_t index)
+SubdivisionPoint* SubdivisionControlCurve::getSubdivPoint(size_t index) const
 {
     if (index < _div_points.size())
         return _div_points[index];
-    throw range_error("index for SubdivisionControlCurve::getSubdivPoint");
+    throw out_of_range("index for SubdivisionControlCurve::getSubdivPoint");
 }
 
 void SubdivisionControlCurve::clear()
@@ -393,7 +389,7 @@ void SubdivisionControlCurve::replaceVertexPoint(SubdivisionPoint *oldpt, Subdiv
     }
 }
 
-void SubdivisionControlCurve::saveBinary(FileBuffer &destination)
+void SubdivisionControlCurve::saveBinary(FileBuffer &destination) const
 {
     destination.add(numberOfControlPoints());
     for (size_t i=0; i<numberOfControlPoints(); ++i) {
@@ -404,7 +400,7 @@ void SubdivisionControlCurve::saveBinary(FileBuffer &destination)
     destination.add(isSelected());
 }
 
-void SubdivisionControlCurve::saveToDXF(QStringList& strings)
+void SubdivisionControlCurve::saveToDXF(QStringList& strings) const
 {
     QString layer("Control_curves");
     _curve->setFragments(_curve->numberOfPoints());

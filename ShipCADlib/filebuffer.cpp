@@ -191,7 +191,7 @@ void FileBuffer::add(quint32 val)
 #ifndef _WIN32
 void FileBuffer::add(size_t val)
 {
-	if (val > 0xffffffff)
+	if (val > ULONG_MAX)
 		throw range_error("integer overflow");
     convert_type_t ct;
     ct.uval = val;

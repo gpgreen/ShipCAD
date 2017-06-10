@@ -27,6 +27,7 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <QObject>
 #include <stdexcept>
 
 #include "version.h"
@@ -82,6 +83,5 @@ QString ShipCAD::versionString(version_t v)
     else if (v == fv260)
         return QString("2.6");
     else
-      //MessageDlg(Userstring(204)+'!',mtError,[mbok],0);
-      throw std::runtime_error("Bad version enum");
+        throw std::runtime_error(QObject::tr("Unknown fileversion").toStdString());
 }

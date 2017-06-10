@@ -971,7 +971,7 @@ void Controller::addOrDeleteIntersections(ShipCAD::IntersectionsDialogData* data
                                    getModel()->getDiagonals().end());
             break;
         case fiFree:
-            throw runtime_error("");
+            throw logic_error("fiFree not allowed in addOrDeleteIntersections");
         }
 
         getModel()->setBuild(false);
@@ -1395,7 +1395,7 @@ void Controller::movePoint(QVector3D changedCoords)
 {
     cout << "Controller::movePoint" << endl;
     if (getSurface()->numberOfSelectedControlPoints() != 1)
-        throw runtime_error("moving multiple points at once");
+        throw invalid_argument("moving multiple points at once");
     SubdivisionControlPoint* pt = getModel()->getActiveControlPoint();
     if (pt->isLocked()) {
         // msg 0191, warning

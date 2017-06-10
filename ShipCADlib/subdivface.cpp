@@ -54,8 +54,6 @@ using namespace ShipCAD;
 SubdivisionFace* SubdivisionFace::construct(SubdivisionSurface* owner)
 {
     void * mem = owner->getFacePool().add();
-    if (mem == 0)
-        throw runtime_error("out of memory in SubdivisionFace::construct");
     return new (mem) SubdivisionFace(owner);
 }
 
@@ -74,7 +72,7 @@ size_t SubdivisionFace::indexOfPoint(const SubdivisionPoint* pt) const
 void SubdivisionFace::insertPoint(size_t index, SubdivisionPoint *point)
 {
     if (index >= _points.size())
-        throw range_error("bad index in SubdivisionFace::insertPoint");
+        throw out_of_range("bad index in SubdivisionFace::insertPoint");
     _points.insert(_points.begin()+index, point);
 }
 
@@ -150,13 +148,13 @@ SubdivisionPoint* SubdivisionFace::getPoint(size_t index) const
 {
     if (index < _points.size())
         return _points[index];
-    throw range_error("index not in range SubdivisionFace::getPoint");
+    throw out_of_range("index not in range SubdivisionFace::getPoint");
 }
 
 SubdivisionPoint* SubdivisionFace::getLastPoint() const
 {
     if (_points.size() == 0)
-        throw range_error("no last point for SubdivisionFace::getLastPoint");
+        throw out_of_range("no last point for SubdivisionFace::getLastPoint");
     return _points.back();
 }
 
@@ -217,7 +215,7 @@ SubdivisionPoint* SubdivisionFace::calculateFacePoint()
     SubdivisionPoint* result = 0;
     QVector3D centre = ZERO;
     if (_points.size() < 3)
-        throw range_error("trying to calculate face point with less than 3 points");
+        throw invalid_argument("trying to calculate face point with less than 3 points");
     if (_points.size() > 3 || _owner->getSubdivisionMode() == fmCatmullClark) {
         for (size_t i=0; i<_points.size(); ++i) {
             QVector3D p = _points[i]->getCoordinate();
@@ -253,11 +251,10 @@ void SubdivisionFace::edgeCheck(SubdivisionPoint* p1,
                                 vector<SubdivisionEdge*> &controledges
                                 )
 {
-    SubdivisionEdge* newedge = 0;
-    if (p1 == 0 || p2 == 0)
-        throw runtime_error("bad points in SubdivisionFace::edgeCheck");
-    newedge = _owner->edgeExists(p1, p2);
-    if (newedge == 0) {
+    if (p1 == nullptr || p2 == nullptr)
+        throw invalid_argument("null end points in SubdivisionFace::edgeCheck");
+    SubdivisionEdge* newedge = _owner->edgeExists(p1, p2);
+    if (newedge == nullptr) {
         newedge = SubdivisionEdge::construct(_owner);
         newedge->setControlEdge(controledge);
         newedge->setPoints(p1, p2);
@@ -435,8 +432,6 @@ ostream& operator << (ostream& os, const ShipCAD::SubdivisionFace& face)
 SubdivisionControlFace* SubdivisionControlFace::construct(SubdivisionSurface* owner)
 {
     void * mem = owner->getControlFacePool().add();
-    if (mem == 0)
-        throw runtime_error("out of memory in SubdivisionControlFace::construct");
     return new (mem) SubdivisionControlFace(owner);
 }
 
@@ -1065,7 +1060,7 @@ SubdivisionFace* SubdivisionControlFace::getChild(size_t index) const
 {
     if (index < _children.size())
         return _children[index];
-    throw runtime_error("Bad index in SubdivisionControlFace::getChild");
+    throw out_of_range("Bad index in SubdivisionControlFace::getChild");
 }
 
 QColor SubdivisionControlFace::getColor() const
@@ -1080,7 +1075,7 @@ SubdivisionEdge* SubdivisionControlFace::getControlEdge(size_t index) const
 {
     if (index < _control_edges.size())
         return _control_edges[index];
-    throw runtime_error("bad index in SubdivisionControlFace::getControlEdge");
+    throw out_of_range("bad index in SubdivisionControlFace::getControlEdge");
 }
 
 void SubdivisionControlFace::setSelected(bool val)
@@ -1100,7 +1095,7 @@ SubdivisionEdge* SubdivisionControlFace::getEdge(size_t index) const
 {
     if (index < _edges.size())
         return _edges[index];
-    throw runtime_error("bad index in SubdivisionControlFace::getEdge");
+    throw out_of_range("bad index in SubdivisionControlFace::getEdge");
 }
 
 bool SubdivisionControlFace::isVisible() const
@@ -1375,7 +1370,7 @@ void SubdivisionControlFace::loadFromStream(size_t &lineno, QStringList &strings
     else {
         _layer = _owner->getLayer(0);   // reference to an invalid layer, assign to owners default layer
     }
-    if (_layer != 0)
+    if (_layer != nullptr)
         _layer->useControlFace(this);
     else
         throw runtime_error("Invalid layer reference in SubdivisionControlFace::loadFromStream");
@@ -1388,7 +1383,7 @@ void SubdivisionControlFace::loadFromStream(size_t &lineno, QStringList &strings
     for (size_t i=0; i<_points.size(); ++i) {
         SubdivisionPoint* p2 = _points[i];
         SubdivisionControlEdge* edge = _owner->controlEdgeExists(p1, p2);
-        if (edge != 0)
+        if (edge != nullptr)
             edge->addFace(this);
         else
             throw runtime_error("missing control edge in SubdivisionControlFace::loadFromStream");

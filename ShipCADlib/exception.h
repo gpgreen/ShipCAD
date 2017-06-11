@@ -50,6 +50,30 @@ namespace ShipCAD {
         QString _info;
     };
 
+    class FileSaveError : public std::runtime_error
+    {
+    public:
+      FileSaveError(const QString& info)
+	: std::runtime_error(""), _info(info) {}
+
+      const QString& info() const {return _info;}
+
+    private:
+      QString _info;
+    };
+
+    class FileReadError : public std::runtime_error
+    {
+    public:
+      FileReadError(const QString& info)
+	: std::runtime_error(""), _info(info) {}
+
+      const QString& info() const {return _info;}
+
+    private:
+      QString _info;
+    };
+
 };
 
 #endif // EXCEPTION_H

@@ -36,6 +36,7 @@
 #include "filebuffer.h"
 #include "utility.h"
 #include "backgroundimage.h"
+#include "exception.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -69,7 +70,7 @@ void FileBuffer::loadFromFile(QFile &file)
     _pos = 0;
     _data.clear();
 	if (!file.open(QIODevice::ReadOnly))
-		return;
+		throw FileReadError("unable to open file for reading");
 	_data.reserve(file.size());
 	QDataStream in(&file);
     quint8 byte;
@@ -84,8 +85,8 @@ void FileBuffer::loadFromFile(QFile &file)
 void FileBuffer::saveToFile(QFile& file)
 {
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
-		return;
-	QDataStream out(&file);
+		throw FileSaveError("can't open file for write");
+    QDataStream out(&file);
     for (size_t i=0; i<_data.size(); ++i)
         out << _data[i];
     file.close();

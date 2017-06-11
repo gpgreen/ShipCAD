@@ -1396,13 +1396,27 @@ SubdivisionBase*
 SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
 {
     SubdivisionBase* pick = nullptr;
+    bool pick_aft = false;
+    bool pick_fwd = false;
+    PickRay useray(ray);
+    if (useray.pt.y() < 0)
+        useray.pt.setY(-useray.pt.y());
+    if (vp.getViewportType() == fvBodyplan) {
+        if (ray.pt.y() < 0 && !drawMirror())
+            pick_aft = true;
+        else
+            pick_fwd = true;
+    }
     // check control points
     if (ray.point) {
         for (size_t i=0; i<numberOfControlPoints(); i++) {
             SubdivisionControlPoint* cp = getControlPoint(i);
             if (!cp->isVisible())
                 continue;
-            if (cp->distanceFromPickRay(vp, ray) < 1E-2) {
+            if ((pick_aft && cp->getCoordinate().x() > _main_frame_location)
+                    || (pick_fwd && cp->getCoordinate().x() < _main_frame_location))
+                continue;
+            if (cp->distanceFromPickRay(vp, useray) < useray.pickDist) {
                 pick = cp;
                 break;
             }
@@ -1414,7 +1428,12 @@ SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
             SubdivisionControlEdge* edge = getControlEdge(i);
             if (!edge->isVisible())
                 continue;
-            if (edge->distanceToEdge(ray.pt, ray.dir) < 1E-2) {
+            if ((pick_aft && edge->startPoint()->getCoordinate().x() > _main_frame_location
+                             && edge->endPoint()->getCoordinate().x() > _main_frame_location)
+                || (pick_fwd && edge->startPoint()->getCoordinate().x() < _main_frame_location
+                                 && edge->endPoint()->getCoordinate().x() < _main_frame_location))
+                continue;
+            if (edge->distanceToEdge(useray.pt, useray.dir) < useray.pickDist) {
                 pick = edge;
                 break; // if we came close to an edge, pick it and stop looking
             }
@@ -1426,7 +1445,7 @@ SubdivisionSurface::shootPickRay(Viewport& vp, const PickRay& ray)
             SubdivisionControlFace* face = getControlFace(i);
             if (!face->isVisible())
                 continue;
-            if (face->intersectWithRay(ray)) {
+            if (face->intersectWithRay(useray)) {
                 pick = face;
                 break;
             }

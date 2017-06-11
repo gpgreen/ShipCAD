@@ -37,23 +37,8 @@
 namespace ShipCAD {
 
 class Viewport;
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-/*! \brief a pick ray (line)
- */
-struct PickRay 
-{
-    QVector3D pt;
-    QVector3D dir;
-    bool multi_sel;             // true if we are multi-selecting elements
-    bool point;
-    bool edge;
-    bool face;
-    PickRay(bool multi, bool p, bool e, bool f) :
-        multi_sel(multi), point(p), edge(e), face(f) {}
-};
-    
+struct PickRay;
+ 
 //////////////////////////////////////////////////////////////////////////////////////
 
 /*! \brief Abstract class to calculate view, world matrices and operations using those for a viewport
@@ -70,7 +55,9 @@ public:
     virtual void resetView();
     virtual void initializeViewport(const QVector3D& min, const QVector3D& max, int width, int height) = 0;
 
-    
+
+    float getPickDist() const
+        { return _pickDist;}
     const QMatrix4x4& getWorld() const
         {return _world;}
     const QMatrix4x4& getWorldInv() const
@@ -139,6 +126,7 @@ protected:
     float _panY;
     float _scale;
     float _margin;
+    float _pickDist;	    /* world coordinate pick distance, calculated from current view */
     QVector3D _midpoint;    // middle of model, used as rotation point
     QVector3D _camera_location;
     QMatrix4x4 _world;      // the final view matrix = proj * view

@@ -30,6 +30,7 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "shipcadlib.h"
 #include "viewportview.h"
 #include "viewport.h"
 #include "utility.h"
@@ -41,7 +42,7 @@ using namespace ShipCAD;
 
 ViewportView::ViewportView(Viewport* vp)
     : _vp(vp), _zoom(1.0), _panX(0.0), _panY(0.0),
-      _scale(1.0), _margin(5)
+      _scale(1.0), _margin(5), _pickDist(1E-2)
 {
     // does nothing
 }
@@ -90,8 +91,9 @@ bool ViewportView::leftMousePick(QPoint pos, int w, int h, PickRay& ray)
 {
     bool scene_changed = false;
     PickRay tray = convertMouseCoordToWorld(pos, w, h);
-    ray.dir = tray.dir;
     ray.pt = tray.pt;
+    ray.dir = tray.dir;
+    ray.pickDist = _pickDist;
     scene_changed = _vp->shootPickRay(ray);
     return scene_changed;
 }
@@ -162,7 +164,8 @@ ShipCAD::PickRay ViewportView::convertMouseCoordToWorld(QPoint pos, int w, int h
     ray.pt = from.toVector3D();
     ray.dir = to.toVector3D() - from.toVector3D();
     ray.dir.normalize();
-
+    ray.pickDist = _pickDist;
+    
     return ray;
 }
 
@@ -301,6 +304,12 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     _view = view;
 
     finishSetup();
+
+    // calculate picking distance for this view
+    PickRay ul = convertMouseCoordToWorld(QPoint(0,0), width, height);
+    PickRay lr = convertMouseCoordToWorld(QPoint(width-1,height-1), width, height);
+    dist = ul.pt.distanceToPoint(lr.pt);
+    _pickDist = dist * 0.02;
 }
 
 void ViewportViewPerspective::setCameraType(camera_type_t val)
@@ -369,6 +378,12 @@ void ViewportViewPlan::initializeViewport(const QVector3D& min, const QVector3D&
     _view = view;
 
     finishSetup();
+
+    // calculate picking distance for this view
+    QVector2D ul = projectTo3D(QPoint(0,0), width, height);
+    QVector2D lr = projectTo3D(QPoint(width-1, height-1), width, height);
+    float dist = ul.distanceToPoint(lr);
+    _pickDist = dist * 0.02;
 }
 
 QVector2D ViewportViewPlan::projectTo3D(QPoint pos, int w, int h)
@@ -446,6 +461,12 @@ void ViewportViewProfile::initializeViewport(const QVector3D& min, const QVector
     _view = view;
 
     finishSetup();
+
+    // calculate picking distance for this view
+    QVector2D ul = projectTo3D(QPoint(0,0), width, height);
+    QVector2D lr = projectTo3D(QPoint(width-1, height-1), width, height);
+    float dist = ul.distanceToPoint(lr);
+    _pickDist = dist * 0.02;
 }
 
 QVector2D ViewportViewProfile::projectTo3D(QPoint pos, int w, int h)
@@ -529,6 +550,12 @@ void ViewportViewBodyplan::initializeViewport(const QVector3D& min, const QVecto
     _view = view;
 
     finishSetup();
+
+    // calculate picking distance for this view
+    QVector2D ul = projectTo3D(QPoint(0,0), width, height);
+    QVector2D lr = projectTo3D(QPoint(width-1, height-1), width, height);
+    float dist = ul.distanceToPoint(lr);
+    _pickDist = dist * 0.02;
 }
 
 QVector2D ViewportViewBodyplan::projectTo3D(QPoint pos, int w, int h)

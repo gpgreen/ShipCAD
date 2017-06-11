@@ -166,6 +166,23 @@ enum plane_selected_t {
     
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief a pick ray (line)
+ */
+struct PickRay 
+{
+    QVector3D pt;
+    QVector3D dir;
+    float pickDist;
+    bool multi_sel;             // true if we are multi-selecting elements
+    bool point;
+    bool edge;
+    bool face;
+    PickRay(bool multi, bool p, bool e, bool f) :
+        multi_sel(multi), point(p), edge(e), face(f) {}
+};
+    
+//////////////////////////////////////////////////////////////////////////////////////
+
 struct LayerProperties
 {
     float surface_area;

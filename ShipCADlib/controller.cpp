@@ -73,7 +73,7 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
             cp->setSelected(true);
             getModel()->setActiveControlPoint(cp);
             element_sel = true;
-            cout << "control point selected" << endl;
+            cout << "control point selected:" << hex << cp << dec << endl;
             emit showControlPointDialog(true);
             emit updateControlPointValue(cp);
         } else {
@@ -84,14 +84,14 @@ bool Controller::shootPickRay(Viewport& vp, const PickRay& ray)
             if (edge != nullptr) {
                 edge->setSelected(true);
                 element_sel = true;
-                cout << "control edge selected" << endl;
+                cout << "control edge selected:" << hex << edge << dec << endl;
             }
             // is this a face?
             SubdivisionControlFace* face = dynamic_cast<SubdivisionControlFace*>(pick);
             if (!element_sel && face != nullptr) {
                 face->setSelected(true);
                 element_sel = true;
-                cout << "control face selected" << endl;
+                cout << "control face selected:" << hex << face << dec << endl;
             }
         }
     }
@@ -785,7 +785,7 @@ void Controller::saveFile()
         QFile tmp(ChangeFileExt(filename, ".tmp"));
         cout << "tmp:" << tmp.fileName().toStdString() << endl;
         if (tmp.exists())
-            throw runtime_error("tmp file already exists");
+            throw FileSaveError("tmp file already exists");
         try {
             FileBuffer dest;
             getModel()->saveBinary(dest);
@@ -794,17 +794,17 @@ void Controller::saveFile()
             QFile backup(ChangeFileExt(filename, ".bak"));
             cout << "backup:" << backup.fileName().toStdString() << endl;
             if (backup.exists() && !backup.remove())
-                throw runtime_error("unable to remove backup file");
+                throw FileSaveError("unable to remove backup file");
             cout << "removed backup\n";
             // rename existing to .bak
             QFile existing(filename);
             cout << "existing:" << existing.fileName().toStdString() << endl;
             if (existing.exists() && !existing.rename(backup.fileName()))
-                throw runtime_error("unable to rename original to backup file");
+                throw FileSaveError("unable to rename original to backup file");
             cout << "renamed existing to backup\n";
             // rename saved tmp
             if (!tmp.rename(filename))
-                throw runtime_error("unable to rename temporary to original");
+                throw FileSaveError("unable to rename temporary to original");
             cout << "renamed tmp to original\n";
             // all done with saving file
             emit modifiedModel();
@@ -814,7 +814,7 @@ void Controller::saveFile()
             throw;
         }
     } else {
-        throw runtime_error("no filename for save");
+        throw invalid_argument("no filename for save");
     }
 }
 

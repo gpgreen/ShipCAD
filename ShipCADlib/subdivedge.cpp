@@ -79,7 +79,7 @@ void SubdivisionEdge::clear()
 // algorithm from http://geomalgorithms.com/a07-_distance.html#Distance-between-Segments-and-Rays
 float SubdivisionEdge::distanceToEdge(const QVector3D& pt, const QVector3D& dir) const
 {
-    QVector3D l2p1 = pt + 100*dir;
+    QVector3D l2p1 = pt + 1000*dir;
     QVector3D u = _points[1]->getCoordinate() - _points[0]->getCoordinate();
     QVector3D v = l2p1 - pt;
     QVector3D w = _points[0]->getCoordinate() - pt;

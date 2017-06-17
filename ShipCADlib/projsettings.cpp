@@ -350,15 +350,14 @@ void ProjectSettings::clear()
 	_appendage_coefficient = 1.0; // default 1.0, typical values for ships to compensate for appendices and shellplate = 1.0005
 	_main_particulars_has_been_set = false;
 	_shade_underwater_ship = true;
-    // TODO:
-//	_underwater_color = _owner->getPreferences()->getUnderwaterColor();
+    _underwater_color = _owner->getPreferences().getUnderwaterColor();
 	_units = fuMetric;
     _use_default_mainframe_location = true;
 	_mainframe_location = 0.0;
 	_disable_model_check = false;
 	_save_preview = false;
 	delete _preview_img;
-	_preview_img = 0;
+	_preview_img = nullptr;
 	_hydrostatic_coefficients = fcActualData;
 	_simplify_intersections = true;
     _use_displ_increments = true;

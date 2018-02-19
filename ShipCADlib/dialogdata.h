@@ -26,12 +26,14 @@
 #include <vector>
 #include "shipcadlib.h"
 #include "intersection.h"
+#include "projsettings.h"
+#include "visibility.h"
 
 namespace ShipCAD {
 
 class SubdivisionLayer;
 class Preferences;
-    
+
 //////////////////////////////////////////////////////////////////////////////////////
 /*! \brief data structure for insert plane dialog exchange
  */
@@ -214,6 +216,19 @@ struct PreferencesDialogData
     std::map<int, ColorChanger> colors;
 
     explicit PreferencesDialogData(Preferences& p);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+/*! \brief data structure for project settings dialog exchange
+ */
+
+struct ProjectSettingsDialogData
+{
+    bool accepted;
+    ProjectSettings settings;
+    Visibility visibility;
+
+    explicit ProjectSettingsDialogData(ShipCADModel* model);
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

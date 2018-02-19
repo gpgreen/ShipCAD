@@ -62,6 +62,7 @@ class ColorView;
 class IntersectionsDialog;
 class NewModelDialog;
 class PreferencesDialog;
+class ProjectSettingsDialog;
 
 class ViewportState
 {
@@ -348,6 +349,10 @@ private slots:
      */
     void executePreferencesDialog(ShipCAD::PreferencesDialogData* data);
 
+    /*! \brief show the project settings dialog
+     */
+    void executeProjectSettingsDialog(ShipCAD::ProjectSettingsDialogData* data);
+
     /*! \brief get the list of recent files
      */
     const QStringList& getRecentFiles() const;
@@ -389,6 +394,7 @@ private:
     IntersectionsDialog* _intersectionsdialog; /**< the dialog to edit intersections */
     NewModelDialog* _newmodeldialog; /**< the dialog to get particulars of new model */
     PreferencesDialog* _preferencesdialog; /**< the dialog to set preferences */
+    ProjectSettingsDialog* _projectsettingsdialog; /**< the dialog for project settings */
     QLabel* _undo_info;
     QLabel* _geom_info;
     ShipCAD::Controller* _controller; /**< controller of the ShipCADModel */

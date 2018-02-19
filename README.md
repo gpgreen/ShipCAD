@@ -9,6 +9,8 @@ The original progam is located at: http://sourceforge.net/projects/freeship. It 
 # Prerequisites
 * c++
 * Qt 5.7
+* boost 1.55 or greater
+* Eigen 67e894c6cd8f linear algebra library
 
 # Functionality to do:
 
@@ -17,19 +19,46 @@ Graphics:
   grids, hydrostatic, curvature display
 
 Main Window:
-  display of number of faces and points, current mouse position
+  display current mouse position
+
+Dialogs:
+  DXF Export
+  Background Blending
+  Control Point Form - Done
+  Crosscurves
+  Cylinder
+  Expanded Plates
+  Hullform
+  Hydrostatics
+  Hydrostatics results
+  Insert Plane - Done
+  Intersection - Done
+  Keel Wizard
+  Lackenby
+  Layers - Done
+  Linesplan
+  Michlet Output
+  Mirror Plane - Done
+  New Model - Done
+  Preferences - Done
+  Project Settings
+  Resistance Delft
+  Resistance Kaper
+  Rotate - Done
+  Save Image
+  Select Layer - Done
+  Splash
+  Undo History
   
 Controller:
   import/export Background Image
   all import/export methods except native FreeShip
   Flowlines
-  hydrostatics dialogs and displays
   import frames
   intersection dialogs
   import/delete markers
   check model
   lackenby transformation
-  resistance dialogs and displays
   undo/redo/undo history
   add cylinder
   keel and rudder wizard

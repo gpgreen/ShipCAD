@@ -168,6 +168,10 @@ signals:
      */
     void resetPreferences(ShipCAD::PreferencesDialogData* data);
     
+    /*! \brief execute the project settings dialog
+     */
+    void exeProjectSettingsDialog(ShipCAD::ProjectSettingsDialogData* data);
+
     /*! \brief show an info dialog
      */
     void displayInfoDialog(const QString& msg);
@@ -608,6 +612,10 @@ public slots:
      */
     void resetPreferences();
 
+    /*! \brief edit project settings
+     */
+    void editProjectSettings();
+    
     /*! \brief corner point selected/deselected
      * \param sel true if corner point has been selected, false if deselected
      */

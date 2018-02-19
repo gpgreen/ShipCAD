@@ -108,3 +108,10 @@ PreferencesDialogData::PreferencesDialogData(Preferences& p)
 {
     p.getColorDialogMap(colors);
 }
+
+ProjectSettingsDialogData::ProjectSettingsDialogData(ShipCADModel* model)
+    : accepted(false), settings(model), visibility(model)
+{
+    settings.copy_to_dialog(model->getProjectSettings());
+    visibility.copy_to_dialog(model->getVisibility());
+}

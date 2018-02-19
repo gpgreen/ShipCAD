@@ -46,6 +46,7 @@
 #include "intersectionsdialog.h"
 #include "newmodeldialog.h"
 #include "preferencesdialog.h"
+#include "projectsettingsdialog.h"
 #include "viewport.h"
 #include "shipcadmodel.h"
 #include "subdivlayer.h"
@@ -63,7 +64,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     _intersectlayersdialog(nullptr), _extrudeedgedialog(nullptr), _chooselayerdialog(nullptr),
     _mirrordialog(nullptr), _rotatedialog(nullptr), _layerdialog(nullptr),
     _intersectionsdialog(nullptr), _newmodeldialog(nullptr), _preferencesdialog(nullptr),
-    _controller(c), _currentViewportContext(nullptr),
+    _projectsettingsdialog(nullptr), _controller(c), _currentViewportContext(nullptr),
     _menu_recent_files(nullptr), _contextMenu(nullptr), _cameraMenu(nullptr),
     _viewportModeGroup(nullptr),
     _wireframeAction(nullptr), _shadeAction(nullptr), _gaussCurvAction(nullptr), _zebraAction(nullptr),
@@ -145,6 +146,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
             SLOT(executeNewModelDialog(ShipCAD::NewModelDialogData&)));
     connect(_controller, SIGNAL(exePreferencesDialog(ShipCAD::PreferencesDialogData*)),
             SLOT(executePreferencesDialog(ShipCAD::PreferencesDialogData*)));
+    connect(_controller, SIGNAL(exeProjectSettingsDialog(ShipCAD::ProjectSettingsDialogData*)),
+            SLOT(executeProjectSettingsDialog(ShipCAD::ProjectSettingsDialogData*)));
     // generic dialogs
     connect(_controller,
             SIGNAL(displayInfoDialog(const QString&)),
@@ -188,6 +191,8 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionPreferences, SIGNAL(triggered()), _controller, SLOT(editPreferences()));
 
     // connect project actions
+    connect(ui->actionProject_settings, SIGNAL(triggered()),
+            _controller, SLOT(editProjectSettings()));
 
     // connect edit actions
     connect(ui->actionUndo, SIGNAL(triggered()), _controller, SLOT(undo()));
@@ -950,6 +955,9 @@ void MainWindow::enableActions()
     ui->actionExportOffsets->setEnabled(false/*nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0*/);
     ui->actionExportSTL->setEnabled(false/*ncfaces > 0*/);
     ui->actionExportIGES->setEnabled(false/*ncfaces > 0*/);
+
+    // project actions
+    ui->actionProject_settings->setEnabled(nlayers > 0);
 
     // edit actions
     ui->actionUndo->setEnabled(model->canUndo());
@@ -1783,4 +1791,19 @@ void MainWindow::executeNewModelDialog(ShipCAD::NewModelDialogData& data)
     data.accepted = (result == QDialog::Accepted);
     _newmodeldialog->retrieve(data);
     cout << "execute new model dialog:" << (data.accepted ? "t" : "f") << endl;
+}
+
+void MainWindow::executeProjectSettingsDialog(ProjectSettingsDialogData* data)
+{
+    if (_projectsettingsdialog == nullptr) {
+        _projectsettingsdialog = new ProjectSettingsDialog(this);
+    }
+    _projectsettingsdialog->initialize(data);
+
+    // execute the dialog
+    int result = _projectsettingsdialog->exec();
+
+    data->accepted = (result == QDialog::Accepted);
+    //_newmodeldialog->retrieve(data);
+    cout << "execute project settings dialog:" << (data->accepted ? "t" : "f") << endl;
 }

@@ -1884,6 +1884,22 @@ void Controller::resetPreferences()
     emit resetPreferences(&data);
 }
 
+void Controller::editProjectSettings()
+{
+    cout << "Controller::editProjectSettings" << endl;
+    ProjectSettingsDialogData data(getModel());
+    UndoObject* uo = getModel()->createUndo(tr("edit project settings"), false);
+    emit exeProjectSettingsDialog(&data);
+    if (data.accepted) {
+        uo->accept();
+        getModel()->setBuild(false);
+        getModel()->setFileChanged(true);
+        emit modifiedModel();
+    } else {
+        delete uo;
+    }
+}
+
 // FreeControlPointForm.pas:320
 void Controller::cornerPointSelected(bool sel)
 {

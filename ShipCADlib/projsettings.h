@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
- *    Original Copyright header below														   *
- *																							   *
+ *    ShipCAD										       *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>				       *
+ *    Original Copyright header below							       *
+ *											       *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -38,160 +38,163 @@
 
 namespace ShipCAD {
 
-class ShipCADModel;
-class FileBuffer;
-struct JPEGImage;
+    class ShipCADModel;
+    class FileBuffer;
+    struct JPEGImage;
 	
 //////////////////////////////////////////////////////////////////////////////////////
 
-class ProjectSettings : public QObject
-{
-    Q_OBJECT
-public:
+    class ProjectSettings : public QObject
+    {
+        Q_OBJECT
+    public:
 
-    explicit ProjectSettings(ShipCADModel* owner);
-    virtual ~ProjectSettings();
+        explicit ProjectSettings(ShipCADModel* owner);
+        virtual ~ProjectSettings();
 
-    hydrostatic_coeff_t getHydrostaticCoefficients()
+        hydrostatic_coeff_t getHydrostaticCoefficients()
         {return _hydrostatic_coefficients;}
 	void setHydrostaticCoefficients(hydrostatic_coeff_t coeff);
 
-    bool isDisableModelCheck() const
+        bool isDisableModelCheck() const
         { return _disable_model_check; }
 	void setDisableModelCheck(bool val);
 
-    float getAppendageCoefficient() const
+        float getAppendageCoefficient() const
         {return _appendage_coefficient;}
 	void setAppendageCoefficient(float coeff);
 
-    bool isMainParticularsSet() const
+        bool isMainParticularsSet() const
         { return _main_particulars_has_been_set; }
     
-    float getBeam() const
+        float getBeam() const
         {return _beam;}
 	void setBeam(float beam);
 
-    float getDraft() const
+        float getDraft() const
         {return _draft;}
 	void setDraft(float draft);
 
-    float getLength()
+        float getLength()
         {return _length;}
 	void setLength(float length);
 
-    bool useDefaultMainframeLocation() const
+        bool useDefaultMainframeLocation() const
         {return _use_default_mainframe_location;}
-    float getMainframeLocation() const;
-    void setMainframeLocation(float loc);
+        float getMainframeLocation() const;
+        void setMainframeLocation(float loc);
 	void setUseDefaultMainframeLocation(bool use);
 
-    float getWaterDensity() const
+        float getWaterDensity() const
         {return _water_density;}
 	void setWaterDensity(float val);
 
-    /*! \brief get the Save Preview setting
-     */
-    bool isSavePreview() const
+        /*! \brief get the Save Preview setting
+         */
+        bool isSavePreview() const
         {return _save_preview;}
-    /*! \brief set the Save Preview setting
-     */
-    void setSavePreview(bool val);
+        /*! \brief set the Save Preview setting
+         */
+        void setSavePreview(bool val);
 
-    bool useDisplacementIncrements() const
+        bool useDisplacementIncrements() const
         { return _use_displ_increments; }
-    void setUseDisplacementIncrements(bool set);
+        void setUseDisplacementIncrements(bool set);
 
-    float getStartDraft() const
+        float getStartDraft() const
         { return _start_draft; }
 	void setStartDraft(float val);
 
-    float getTrim() const
+        float getTrim() const
         { return _trim; }
 	void setTrim(float val);
 
-    float getEndDraft() const
+        float getEndDraft() const
         { return _end_draft; }
 	void setEndDraft(float val);
 
-    float getDraftStep() const
+        float getDraftStep() const
         { return _draft_step; }
 	void setDraftStep(float val);
 
-    float getMinDisplacement() const
+        float getMinDisplacement() const
         { return _min_displacement; }
-    void setMinDisplacement(float val);
+        void setMinDisplacement(float val);
 
-    float getMaxDisplacement() const
+        float getMaxDisplacement() const
         { return _max_displacement; }
-    void setMaxDisplacement(float val);
+        void setMaxDisplacement(float val);
 
-    float getDisplacementInc() const
+        float getDisplacementInc() const
         { return _displ_increment; }
-    void setDisplacementInc(float val);
+        void setDisplacementInc(float val);
 
-    bool isFreeTrim() const
+        bool isFreeTrim() const
         { return _free_trim; }
-    void setFreeTrim(bool set);
+        void setFreeTrim(bool set);
 
-    float getFVCG() const
+        float getFVCG() const
         { return _fvcg; }
-    void setFVCG(float val);
+        void setFVCG(float val);
     
-    QString getName() const
+        QString getName() const
         {return _name;}
 	void setName(const QString& name);
 
-    QString getDesigner() const
+        QString getDesigner() const
         {return _designer;}
 	void setDesigner(const QString& designer);
 
-    QString getComment() const
+        QString getComment() const
         {return _comment;}
 	void setComment(const QString& comment);
 
-    QString getFileCreatedBy() const
+        QString getFileCreatedBy() const
         {return _file_created_by;}
 	void setFileCreatedBy(const QString& createdby);
 
-    bool isShadeUnderwaterShip() const 
+        bool isShadeUnderwaterShip() const 
         {return _shade_underwater_ship;}
-    void setShadeUnderwaterShip(bool set);
+        void setShadeUnderwaterShip(bool set);
 
-    bool isSimplifyIntersections() const
+        bool isSimplifyIntersections() const
         {return _simplify_intersections;}
 	void setSimplifyIntersections(bool set);
 
-    QColor getUnderWaterColor() const
+        QColor getUnderWaterColor() const
         { return _underwater_color;}
 	void setUnderWaterColor(QColor col);
 
-    unit_type_t getUnits() const {return _units;}
-    /*! \brief set the units in the model. Scales the entire model appropriately
-     *
-     * \param unit the unit type for the model
-     * \return true if the unit type is different than previous setting, and the model
-     * has been scaled and changed, needs to be redrawn
-     */
+        unit_type_t getUnits() const {return _units;}
+        /*! \brief set the units in the model. Scales the entire model appropriately
+         *
+         * \param unit the unit type for the model
+         * \return true if the unit type is different than previous setting, and the model
+         * has been scaled and changed, needs to be redrawn
+         */
 	bool setUnits(unit_type_t unit);
 								   
-    void loadBinary(FileBuffer& source, QImage* img);
-    void saveBinary(FileBuffer& dest);
+        void loadBinary(FileBuffer& source, QImage* img);
+        void saveBinary(FileBuffer& dest);
 	
 	void clear();
-				
+
+        void copy_from_dialog(ProjectSettings* dialog_state);
+        void copy_to_dialog(ProjectSettings& original);
+        
 	void dump(std::ostream& os) const;
 	
-public slots:
+    public slots:
 
-protected:
+    protected:
 
-private:
+    private:
 
-    // define away
-    ProjectSettings(const ProjectSettings&);
-    ProjectSettings& operator=(const ProjectSettings&);
+        // define away
+        ProjectSettings(const ProjectSettings&);
+        ProjectSettings& operator=(const ProjectSettings&);
 
-    ShipCADModel* _owner;
+        ShipCADModel* _owner;
 	bool _main_particulars_has_been_set;
 	bool _disable_model_check;
 	float _appendage_coefficient;
@@ -225,7 +228,7 @@ private:
 	bool _free_trim;
 	float _fvcg;
 	JPEGImage* _preview_img;
-};
+    };
 
 //////////////////////////////////////////////////////////////////////////////////////
 

@@ -296,7 +296,19 @@ public:
         { return TempVarChange<model_view_t>(temp, &_model_view); }
     void clear();
 
-public slots:
+    /*! \brief copy settings from dialog
+     *
+     * \param pointer to dialog visibility state
+     */
+    void copy_from_dialog(Visibility* dialog_state);
+    
+    /*! \brief copy settings to dialog data
+     *
+     * \param reference to original visibility state
+     */
+    void copy_to_dialog(Visibility& original);
+
+    public slots:
 
     void decreaseCurvatureScale();
     void increaseCurvatureScale();

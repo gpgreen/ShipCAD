@@ -1892,6 +1892,13 @@ void Controller::editProjectSettings()
     emit exeProjectSettingsDialog(&data);
     if (data.accepted) {
         uo->accept();
+        // set the units first as it changes values that will be reset
+        // in the copy of settings (such as length, beam, etc)
+        if (data.units != getModel()->getProjectSettings().getUnits()) {
+            getModel()->getProjectSettings().setUnits(data.units);
+        }
+        getModel()->getProjectSettings().copy_from_dialog(data.settings);
+        getModel()->getVisibility().copy_from_dialog(data.visibility);
         getModel()->setBuild(false);
         getModel()->setFileChanged(true);
         emit modifiedModel();

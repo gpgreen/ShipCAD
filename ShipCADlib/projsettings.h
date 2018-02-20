@@ -83,7 +83,7 @@ namespace ShipCAD {
         {return _use_default_mainframe_location;}
         float getMainframeLocation() const;
         void setMainframeLocation(float loc);
-	void setUseDefaultMainframeLocation(bool use);
+	void setDefaultMainframeLocation(bool use);
 
         float getWaterDensity() const
         {return _water_density;}
@@ -173,13 +173,19 @@ namespace ShipCAD {
          * has been scaled and changed, needs to be redrawn
          */
 	bool setUnits(unit_type_t unit);
-								   
+
+        /*! \brief change the units settings, but only affect data in this object
+         * this is used in the project settings dialog to change the other data
+         * that depends on units, but not the entire model like setUnits does
+         */
+        void changeUnitsInSettingsOnly(unit_type_t unit);
+        
         void loadBinary(FileBuffer& source, QImage* img);
         void saveBinary(FileBuffer& dest);
 	
 	void clear();
 
-        void copy_from_dialog(ProjectSettings* dialog_state);
+        void copy_from_dialog(ProjectSettings& dialog_state);
         void copy_to_dialog(ProjectSettings& original);
         
 	void dump(std::ostream& os) const;

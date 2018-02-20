@@ -110,7 +110,8 @@ PreferencesDialogData::PreferencesDialogData(Preferences& p)
 }
 
 ProjectSettingsDialogData::ProjectSettingsDialogData(ShipCADModel* model)
-    : accepted(false), settings(model), visibility(model)
+    : accepted(false), settings(model), visibility(model),
+      units(model->getProjectSettings().getUnits())
 {
     settings.copy_to_dialog(model->getProjectSettings());
     visibility.copy_to_dialog(model->getVisibility());

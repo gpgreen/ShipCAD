@@ -175,7 +175,7 @@ void ProjectSettings::setDraftStep(float val)
     }
 }
 
-void ProjectSettings::setUseDefaultMainframeLocation(bool use)
+void ProjectSettings::setDefaultMainframeLocation(bool use)
 {
     if (use != _use_default_mainframe_location) {
         _use_default_mainframe_location = use;
@@ -304,6 +304,29 @@ void ProjectSettings::setUnderWaterColor(QColor col)
         _underwater_color = col;
         _owner->setFileChanged(true);
     }
+}
+
+void ProjectSettings::changeUnitsInSettingsOnly(unit_type_t unit)
+{
+    double unit_conversion_factor;
+    float weight_factor;
+
+    if (unit == _units)
+        return;
+    _units = unit;
+    if (_units == fuImperial) {
+        unit_conversion_factor = 1 / 0.3048;
+        weight_factor = kWeightConversionFactor;
+    } else {
+        unit_conversion_factor = 0.3048;
+        weight_factor = 1 / kWeightConversionFactor;
+    }
+    _water_density *= weight_factor;
+    setLength(abs(getLength() * unit_conversion_factor));
+    setBeam(abs(getBeam() * unit_conversion_factor));
+    setDraft(abs(getDraft() * unit_conversion_factor));
+    if (!useDefaultMainframeLocation())
+        setMainframeLocation(getMainframeLocation() * unit_conversion_factor);
 }
 
 bool ProjectSettings::setUnits(unit_type_t unit)
@@ -517,25 +540,24 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
     }
 }
 
-void ProjectSettings::copy_from_dialog(ProjectSettings* dialog_state)
+void ProjectSettings::copy_from_dialog(ProjectSettings& dialog_state)
 {
-    _name = dialog_state->_name;
-    _designer = dialog_state->_designer;
-    _comment = dialog_state->_comment;
-    _file_created_by = dialog_state->_file_created_by;
-    _units = dialog_state->_units;
-    _shade_underwater_ship = dialog_state->_shade_underwater_ship;
-    _save_preview = dialog_state->_save_preview;
-    _simplify_intersections = dialog_state->_simplify_intersections;
-    _length = dialog_state->_length;
-    _beam = dialog_state->_beam;
-    _draft = dialog_state->_draft;
-    _mainframe_location = dialog_state->_mainframe_location;
-    _use_default_mainframe_location = dialog_state->_use_default_mainframe_location;
-    _water_density = dialog_state->_water_density;
-    _appendage_coefficient = dialog_state->_appendage_coefficient;
-    _hydrostatic_coefficients = dialog_state->_hydrostatic_coefficients;
-    _disable_model_check = dialog_state->_disable_model_check;
+    _name = dialog_state._name;
+    _designer = dialog_state._designer;
+    _comment = dialog_state._comment;
+    _file_created_by = dialog_state._file_created_by;
+    _shade_underwater_ship = dialog_state._shade_underwater_ship;
+    _save_preview = dialog_state._save_preview;
+    _simplify_intersections = dialog_state._simplify_intersections;
+    _length = dialog_state._length;
+    _beam = dialog_state._beam;
+    _draft = dialog_state._draft;
+    _mainframe_location = dialog_state._mainframe_location;
+    _use_default_mainframe_location = dialog_state._use_default_mainframe_location;
+    _water_density = dialog_state._water_density;
+    _appendage_coefficient = dialog_state._appendage_coefficient;
+    _hydrostatic_coefficients = dialog_state._hydrostatic_coefficients;
+    _disable_model_check = dialog_state._disable_model_check;
 }
 
 void ProjectSettings::copy_to_dialog(ProjectSettings& original)

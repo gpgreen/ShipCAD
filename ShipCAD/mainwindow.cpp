@@ -1804,6 +1804,6 @@ void MainWindow::executeProjectSettingsDialog(ProjectSettingsDialogData* data)
     int result = _projectsettingsdialog->exec();
 
     data->accepted = (result == QDialog::Accepted);
-    //_newmodeldialog->retrieve(data);
+    
     cout << "execute project settings dialog:" << (data->accepted ? "t" : "f") << endl;
 }

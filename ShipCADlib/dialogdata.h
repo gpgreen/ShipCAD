@@ -227,7 +227,8 @@ struct ProjectSettingsDialogData
     bool accepted;
     ProjectSettings settings;
     Visibility visibility;
-
+    unit_type_t units;
+    
     explicit ProjectSettingsDialogData(ShipCADModel* model);
 };
 

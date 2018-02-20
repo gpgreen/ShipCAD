@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
- *    Original Copyright header below														   *
- *																							   *
+ *    ShipCAD										       *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>				       *
+ *    Original Copyright header below							       *
+ *											       *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -51,11 +51,11 @@ class Visibility : public QObject
     Q_OBJECT
 public:
 
-	/*! \brief constructor
-	 */
+    /*! \brief constructor
+     */
     explicit Visibility(ShipCADModel* owner);
-	/*! \brief destructor
-	 */
+    /*! \brief destructor
+     */
     virtual ~Visibility() {}
 
     /*! \brief get cursor increment
@@ -80,26 +80,26 @@ public:
     void setCurvatureScale(float val);
 
     /*! \brief show visibility of buttocks
-	 *
-	 * \return true if buttocks shown
-	 */
-	bool isShowButtocks() const
-		{ return _show_buttocks;}
-	/*! \brief set visibility of buttocks
-	 *
-	 * \param show visibility of buttocks
-	 */
+     *
+     * \return true if buttocks shown
+     */
+    bool isShowButtocks() const
+    { return _show_buttocks;}
+    /*! \brief set visibility of buttocks
+     *
+     * \param show visibility of buttocks
+     */
     void setShowButtocks(bool show);
-	/*! \brief is control net shown
-	 *
-	 * \return true if control net shown
-	 */
-	bool isShowControlNet() const
-		{return _show_control_net;}
-	/*! \brief set visibility of control net
-	 *
-	 * \param show visiblity of control net
-	 */
+    /*! \brief is control net shown
+     *
+     * \return true if control net shown
+     */
+    bool isShowControlNet() const
+    {return _show_control_net;}
+    /*! \brief set visibility of control net
+     *
+     * \param show visiblity of control net
+     */
     void setShowControlNet(bool show);
     /*! \brief show visibility of curvature
      *
@@ -116,100 +116,100 @@ public:
      *
      * \return true if diagonals visible
      */
-	bool isShowDiagonals() const
-		{return _show_diagonals;}
-	/*! \brief set show diagonals
-	 *
-	 * \param show diagonals
-	 */
+    bool isShowDiagonals() const
+    {return _show_diagonals;}
+    /*! \brief set show diagonals
+     *
+     * \param show diagonals
+     */
     void setShowDiagonals(bool show);
     /*! \brief show visibility of flowlines
      *
      * \return true if flowlines visible
      */
-	bool isShowFlowlines() const
-		{ return _show_flowlines;}
-	/*! \brief set show flowlines
-	 *
-	 * \param show flowlines
-	 */
+    bool isShowFlowlines() const
+    { return _show_flowlines;}
+    /*! \brief set show flowlines
+     *
+     * \param show flowlines
+     */
     void setShowFlowlines(bool show);
-	/*! \brief is grid shown
-	 *
-	 * \return true if grid shown
-	 */
-	bool isShowGrid() const
-		{return _show_grid;}
-	/*! \brief set visibility of grid
-	 *
-	 * \param show visibility of grid
-	 */
+    /*! \brief is grid shown
+     *
+     * \return true if grid shown
+     */
+    bool isShowGrid() const
+    {return _show_grid;}
+    /*! \brief set visibility of grid
+     *
+     * \param show visibility of grid
+     */
     void setShowGrid(bool show);
-	/*! \brief get model view setting
-	 *
-	 * \brief setting of model view
-	 */
+    /*! \brief get model view setting
+     *
+     * \brief setting of model view
+     */
     model_view_t getModelView() const
         {return _model_view;}
-	/*! \brief set model view
-	 *
-	 * \param vw model view setting
-	 */
+    /*! \brief set model view
+     *
+     * \param vw model view setting
+     */
     void setModelView(model_view_t vw);
-	/*! \brief is interior edges shown
-	 *
-	 * \return true if interior edges shown
-	 */
+    /*! \brief is interior edges shown
+     *
+     * \return true if interior edges shown
+     */
     bool isShowInteriorEdges() const
-		{return _show_interior_edges;}
-	/*! \brief set visibility of interior edges
-	 *
-	 * \param show visibility of interior edges
-	 */
+    {return _show_interior_edges;}
+    /*! \brief set visibility of interior edges
+     *
+     * \param show visibility of interior edges
+     */
     void setShowInteriorEdges(bool show);
-	/*! \brief show visibility of markers
-	 *
-	 * \return true if markers visible
-	 */
+    /*! \brief show visibility of markers
+     *
+     * \return true if markers visible
+     */
     bool isShowMarkers() const
-        {return _show_markers;}
-	/*! \brief set visiblity of markers
-	 *
-	 * \param show visibility of markers
-	 */
+    {return _show_markers;}
+    /*! \brief set visiblity of markers
+     *
+     * \param show visibility of markers
+     */
     void setShowMarkers(bool show);
-	/*! \brief show visibility of normals
-	 * 
-	 * \return true if normals visible
-	 */
-	bool isShowNormals() const
-		{return _show_normals;}
-	/*! \brief set visibility of normals
-	 *
-	 * \param show visibility of normals
-	 */
+    /*! \brief show visibility of normals
+     * 
+     * \return true if normals visible
+     */
+    bool isShowNormals() const
+    {return _show_normals;}
+    /*! \brief set visibility of normals
+     *
+     * \param show visibility of normals
+     */
     void setShowNormals(bool show);
-	/*! \brief show visibility of stations
-	 *
-	 * \return true if stations visible
-	 */
-	bool isShowStations() const
-		{return _show_stations;}
-	/*! \brief set visibility of stations
-	 *
-	 * \param show visibility of stations
-	 */
+    /*! \brief show visibility of stations
+     *
+     * \return true if stations visible
+     */
+    bool isShowStations() const
+    {return _show_stations;}
+    /*! \brief set visibility of stations
+     *
+     * \param show visibility of stations
+     */
     void setShowStations(bool show);
-	/*! \brief show visiblity of waterlines
-	 *
-	 * \return true if waterlines visible
-	 */
-	bool isShowWaterlines() const
-		{return _show_waterlines;}
-	/*! \brief set visibility of waterlines
-	 *
-	 * \param show visibility of waterlines
-	 */
+    /*! \brief show visiblity of waterlines
+     *
+     * \return true if waterlines visible
+     */
+    bool isShowWaterlines() const
+    {return _show_waterlines;}
+    /*! \brief set visibility of waterlines
+     *
+     * \param show visibility of waterlines
+     */
     void setShowWaterlines(bool show);
     /*! \brief show visibility of control curves
      *
@@ -222,67 +222,67 @@ public:
      * \param show visibility of control curves
      */
     void setShowControlCurves(bool show);
-	/*! \brief show visibility of hydrostatic data
-	 *
-	 * \return true if hydrostatic data visible
-	 */
-	bool isShowHydrostaticData() const
-		{return _show_hydrostatic_data;}
+    /*! \brief show visibility of hydrostatic data
+     *
+     * \return true if hydrostatic data visible
+     */
+    bool isShowHydrostaticData() const
+    {return _show_hydrostatic_data;}
     /*! \brief set visibility of Hydrostatic data
      *
      * \param show visibility of Hydrostatic data
      */
     void setShowHydrostaticData(bool show);
-	/*! \brief show visibility of hydrostatic displacement
-	 *
-	 * \return true if hydrostatic displacement visible
-	 */
-	bool isShowHydrostaticDisplacement() const
-		{return _show_hydro_displacement;}
+    /*! \brief show visibility of hydrostatic displacement
+     *
+     * \return true if hydrostatic displacement visible
+     */
+    bool isShowHydrostaticDisplacement() const
+    {return _show_hydro_displacement;}
     /*! \brief set visibility of Hydrostatic displacement
      *
      * \param show visibility of Hydrostatic displacement
      */
     void setShowHydrostaticDisplacement(bool show);
-	/*! \brief show visibility of hydrostatic lateral area
-	 *
-	 * \return true if hydrostatic lateral area visible
-	 */
-	bool isShowHydrostaticLateralArea() const
-		{return _show_hydro_lateral_area;}
+    /*! \brief show visibility of hydrostatic lateral area
+     *
+     * \return true if hydrostatic lateral area visible
+     */
+    bool isShowHydrostaticLateralArea() const
+    {return _show_hydro_lateral_area;}
     /*! \brief set visibility of Hydrostatic lateral area
      *
      * \param show visibility of Hydrostatic lateral area
      */
     void setShowHydrostaticLateralArea(bool show);
-	/*! \brief show visibility of hydrostatic section areas
-	 *
-	 * \return true if hydrostatic section areas visible
-	 */
-	bool isShowHydrostaticSectionalAreas() const
-		{return _show_hydro_sectional_areas;}
+    /*! \brief show visibility of hydrostatic section areas
+     *
+     * \return true if hydrostatic section areas visible
+     */
+    bool isShowHydrostaticSectionalAreas() const
+    {return _show_hydro_sectional_areas;}
     /*! \brief set visibility of Hydrostatic section areas
      *
      * \param show visibility of Hydrostatic section areas
      */
     void setShowHydrostaticSectionalAreas(bool show);
-	/*! \brief show visibility of hydrostatic metacenter
-	 *
-	 * \return true if hydrostatic metacenter visible
-	 */
-	bool isShowHydrostaticMetacentricHeight() const
-		{return _show_hydro_metacentric_height;}
+    /*! \brief show visibility of hydrostatic metacenter
+     *
+     * \return true if hydrostatic metacenter visible
+     */
+    bool isShowHydrostaticMetacentricHeight() const
+    {return _show_hydro_metacentric_height;}
     /*! \brief set visibility of Hydrostatic metacenter
      *
      * \param show visibility of Hydrostatic metacenter
      */
     void setShowHydrostaticMetacentricHeight(bool show);
-	/*! \brief show visibility of hydrostatic center of flotation
-	 *
-	 * \return true if hydrostatic center of flotation visible
-	 */
-	bool isShowHydrostaticLCF() const
-		{return _show_hydro_lcf;}
+    /*! \brief show visibility of hydrostatic center of flotation
+     *
+     * \return true if hydrostatic center of flotation visible
+     */
+    bool isShowHydrostaticLCF() const
+    {return _show_hydro_lcf;}
     /*! \brief set visibility of Hydrostatic center of flotation
      *
      * \param show visibility of Hydrostatic center of flotation
@@ -298,9 +298,9 @@ public:
 
     /*! \brief copy settings from dialog
      *
-     * \param pointer to dialog visibility state
+     * \param reference to dialog visibility state
      */
-    void copy_from_dialog(Visibility* dialog_state);
+    void copy_from_dialog(Visibility& dialog_state);
     
     /*! \brief copy settings to dialog data
      *
@@ -308,7 +308,7 @@ public:
      */
     void copy_to_dialog(Visibility& original);
 
-    public slots:
+public slots:
 
     void decreaseCurvatureScale();
     void increaseCurvatureScale();

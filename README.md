@@ -9,7 +9,7 @@ The original progam is located at: http://sourceforge.net/projects/freeship. It 
 # Prerequisites
 * c++
 * Qt 5.7
-* boost 1.55 or greater
+* Boost 1.55 or greater
 * Eigen 67e894c6cd8f linear algebra library
 
 # Functionality to do:
@@ -28,7 +28,7 @@ Dialogs:
   Crosscurves
   Cylinder
   Expanded Plates
-  Hullform
+  Hullform - Partial, missing view window operations, captions, background image
   Hydrostatics
   Hydrostatics results
   Insert Plane - Done
@@ -41,7 +41,7 @@ Dialogs:
   Mirror Plane - Done
   New Model - Done
   Preferences - Done
-  Project Settings
+  Project Settings - Done
   Resistance Delft
   Resistance Kaper
   Rotate - Done

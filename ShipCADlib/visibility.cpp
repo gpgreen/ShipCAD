@@ -314,13 +314,13 @@ void Visibility::setShowHydrostaticLCF(bool show)
     }
 }
 
-void Visibility::copy_from_dialog(Visibility* dialog_state)
+void Visibility::copy_from_dialog(Visibility& dialog_state)
 {
-    _show_hydro_displacement = dialog_state->_show_hydro_displacement;
-    _show_hydro_sectional_areas = dialog_state->_show_hydro_sectional_areas;
-    _show_hydro_metacentric_height = dialog_state->_show_hydro_metacentric_height;
-    _show_hydro_lcf = dialog_state->_show_hydro_lcf;
-    _show_hydro_lateral_area = dialog_state->_show_hydro_lateral_area;
+    _show_hydro_displacement = dialog_state._show_hydro_displacement;
+    _show_hydro_sectional_areas = dialog_state._show_hydro_sectional_areas;
+    _show_hydro_metacentric_height = dialog_state._show_hydro_metacentric_height;
+    _show_hydro_lcf = dialog_state._show_hydro_lcf;
+    _show_hydro_lateral_area = dialog_state._show_hydro_lateral_area;
 }
 
 void Visibility::copy_to_dialog(Visibility& original)

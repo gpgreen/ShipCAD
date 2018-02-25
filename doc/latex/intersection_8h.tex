@@ -1,27 +1,33 @@
-\hypertarget{intersection_8h}{\section{Ship\-C\-A\-Dlib/intersection.h File Reference}
-\label{intersection_8h}\index{Ship\-C\-A\-Dlib/intersection.\-h@{Ship\-C\-A\-Dlib/intersection.\-h}}
-}
+\hypertarget{intersection_8h}{}\section{Ship\+C\+A\+Dlib/intersection.h File Reference}
+\label{intersection_8h}\index{Ship\+C\+A\+Dlib/intersection.\+h@{Ship\+C\+A\+Dlib/intersection.\+h}}
 {\ttfamily \#include $<$vector$>$}\\*
-{\ttfamily \#include $<$Qt\-Core$>$}\\*
-{\ttfamily \#include $<$Qt\-Gui$>$}\\*
-{\ttfamily \#include \char`\"{}shipcadlib.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}entity.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}plane.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}pointervec.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}spline.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$Qt\+Core$>$}\\*
+{\ttfamily \#include $<$Qt\+Gui$>$}\\*
+{\ttfamily \#include \char`\"{}shipcadlib.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}entity.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}plane.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pointervec.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}spline.\+h\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classShipCAD_1_1Intersection}{Ship\-C\-A\-D\-::\-Intersection}
-\begin{DoxyCompactList}\small\item\em List of curves intersecting hull. \end{DoxyCompactList}\end{DoxyCompactItemize}
+class \hyperlink{classShipCAD_1_1Intersection}{Ship\+C\+A\+D\+::\+Intersection}
+\begin{DoxyCompactList}\small\item\em List of curves intersecting hull. \end{DoxyCompactList}\item 
+struct \hyperlink{structShipCAD_1_1IntersectionSorter}{Ship\+C\+A\+D\+::\+Intersection\+Sorter}
+\begin{DoxyCompactList}\small\item\em comparison class for sorting intersections in an Intersection\+Vector \end{DoxyCompactList}\item 
+struct \hyperlink{structShipCAD_1_1IntersectionFinder}{Ship\+C\+A\+D\+::\+Intersection\+Finder}
+\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceShipCAD}{Ship\-C\-A\-D}
+ \hyperlink{namespaceShipCAD}{Ship\+C\+AD}
 \end{DoxyCompactItemize}
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef \hyperlink{classPointerVector}{Pointer\-Vector}\\*
-$<$ Intersection $>$ \hyperlink{namespaceShipCAD_a9910f0963197f9df6125398efd4fa139}{Ship\-C\-A\-D\-::\-Intersection\-Vector}
+typedef \hyperlink{classPointerVector}{Pointer\+Vector}$<$ Intersection $>$ \hyperlink{namespaceShipCAD_a9910f0963197f9df6125398efd4fa139}{Ship\+C\+A\+D\+::\+Intersection\+Vector}
+\item 
+typedef std\+::vector$<$ Intersection $\ast$ $>$\+::iterator \hyperlink{namespaceShipCAD_af8171e2e69ad8453d540aa87b159ad75}{Ship\+C\+A\+D\+::\+Intersection\+Vector\+Iterator}
+\item 
+typedef std\+::vector$<$ Intersection $\ast$ $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_a354810638f1643d04b62af2d08fd21bd}{Ship\+C\+A\+D\+::\+Intersection\+Vector\+Const\+Iterator}
 \end{DoxyCompactItemize}

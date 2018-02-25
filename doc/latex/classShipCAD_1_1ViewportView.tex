@@ -1,6 +1,5 @@
-\hypertarget{classShipCAD_1_1ViewportView}{\section{Ship\-C\-A\-D\-:\-:Viewport\-View Class Reference}
-\label{classShipCAD_1_1ViewportView}\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-}
+\hypertarget{classShipCAD_1_1ViewportView}{}\section{Ship\+C\+AD\+:\+:Viewport\+View Class Reference}
+\label{classShipCAD_1_1ViewportView}\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
 
 
 Abstract class to calculate view, world matrices and operations using those for a viewport.  
@@ -8,9 +7,9 @@ Abstract class to calculate view, world matrices and operations using those for 
 
 
 
-{\ttfamily \#include $<$viewportview.\-h$>$}
+{\ttfamily \#include $<$viewportview.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Viewport\-View\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Viewport\+View\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.255605cm]{classShipCAD_1_1ViewportView}
@@ -19,129 +18,178 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Viewport\-View\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1ViewportView_a725088d3f0e113c97ae52cccab7fce42}{Viewport\-View} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
+\hyperlink{classShipCAD_1_1ViewportView_a725088d3f0e113c97ae52cccab7fce42}{Viewport\+View} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
 \item 
-virtual \hyperlink{classShipCAD_1_1ViewportView_a75f58efbb601f46ea20b70b1370cee1a}{$\sim$\-Viewport\-View} ()
+virtual \hyperlink{classShipCAD_1_1ViewportView_a75f58efbb601f46ea20b70b1370cee1a}{$\sim$\+Viewport\+View} ()
 \item 
-virtual void \hyperlink{classShipCAD_1_1ViewportView_ab70e778772325a67610d983f630c2c3d}{reset\-View} ()
+virtual void \hyperlink{classShipCAD_1_1ViewportView_ab70e778772325a67610d983f630c2c3d}{reset\+View} ()
 \item 
-virtual void \hyperlink{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}{initialize\-Viewport} (const Q\-Vector3\-D \&min, const Q\-Vector3\-D \&max, int width, int height)=0
+virtual void \hyperlink{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}{initialize\+Viewport} (const Q\+Vector3D \&min, const Q\+Vector3D \&max, int width, int height)=0
 \item 
-const Q\-Matrix4x4 \& \hyperlink{classShipCAD_1_1ViewportView_a0be1613b2ae2087da00811f2bdb0bd45}{get\-World} () const 
+float \hyperlink{classShipCAD_1_1ViewportView_a69e218b17f56faac4fb02fec6ac9c5fb}{get\+Pick\+Dist} () const 
 \item 
-const Q\-Matrix4x4 \& \hyperlink{classShipCAD_1_1ViewportView_a6bffec9328b29bf40c868f2862daebe0}{get\-World\-Inv} () const 
+const Q\+Matrix4x4 \& \hyperlink{classShipCAD_1_1ViewportView_a0be1613b2ae2087da00811f2bdb0bd45}{get\+World} () const 
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_ac1226ebc09cbc0ee33a53fc6fec9cd09}{left\-Mouse\-Pick} (Q\-Point pos, int w, int h)
+const Q\+Matrix4x4 \& \hyperlink{classShipCAD_1_1ViewportView_a6bffec9328b29bf40c868f2862daebe0}{get\+World\+Inv} () const 
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_a1e67e403d7307d3828336edbc1ded2f3}{right\-Mouse\-Pick} (Q\-Point pos, int w, int h)
+const Q\+Matrix4x4 \& \hyperlink{classShipCAD_1_1ViewportView_af87bb73f78d5393d013708542eb184ae}{get\+Proj} () const 
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_ad74e96e8fef750466b2771f8fc48900a}{left\-Mouse\-Release} (Q\-Point pos, int w, int h)
+const Q\+Matrix4x4 \& \hyperlink{classShipCAD_1_1ViewportView_a7e3e335818a369e64989f20d7a8dda4f}{get\+View} () const 
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_aaeff27f9b32dc7ee98dbfc14b7eca804}{right\-Mouse\-Release} (Q\-Point pos, int w, int h)
+const Q\+Vector3D \& \hyperlink{classShipCAD_1_1ViewportView_a33150e3f757ddbbe045d7d046b4862e5}{get\+Camera} () const 
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}{left\-Mouse\-Move} (Q\-Point cur, Q\-Point prev, int w, int h)
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_a4c2e113c5c0e58bb72576a8a802f5a29}{left\+Mouse\+Pick} (Q\+Point pos, int w, int h, \hyperlink{structShipCAD_1_1PickRay}{Pick\+Ray} \&ray)
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_a44baf7aad8a3ba7ded04395a8765caf9}{middle\-Mouse\-Move} (Q\-Point cur, Q\-Point prev, int w, int h)
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_a1e67e403d7307d3828336edbc1ded2f3}{right\+Mouse\+Pick} (Q\+Point pos, int w, int h)
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_a537210f7c2872e7b8921341660e85347}{right\-Mouse\-Move} (Q\-Point cur, Q\-Point prev, int w, int h)
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_ad74e96e8fef750466b2771f8fc48900a}{left\+Mouse\+Release} (Q\+Point pos, int w, int h)
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportView_a77ce1c6a0216a791ee2ae79dd6674cde}{wheel\-With\-Degrees} (Q\-Point degrees, int w, int h)
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_aaeff27f9b32dc7ee98dbfc14b7eca804}{right\+Mouse\+Release} (Q\+Point pos, int w, int h)
 \item 
-virtual \hyperlink{structShipCAD_1_1PickRay}{Pick\-Ray} \hyperlink{classShipCAD_1_1ViewportView_a845fc1fe9fa6ec52726fba1ad350e638}{convert\-Mouse\-Coord\-To\-World} (Q\-Point pos, int width, int height) const 
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}{left\+Mouse\+Move} (Q\+Point cur, Q\+Point prev, int w, int h)
+\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_a44baf7aad8a3ba7ded04395a8765caf9}{middle\+Mouse\+Move} (Q\+Point cur, Q\+Point prev, int w, int h)
+\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_a537210f7c2872e7b8921341660e85347}{right\+Mouse\+Move} (Q\+Point cur, Q\+Point prev, int w, int h)
+\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_a77ce1c6a0216a791ee2ae79dd6674cde}{wheel\+With\+Degrees} (Q\+Point degrees, int w, int h)
+\item 
+Q\+Point \hyperlink{classShipCAD_1_1ViewportView_ac763be6de52b393cb0b9ff4be4c66fcf}{convert3D} (const Q\+Vector3D \&pt, int w, int h) const 
+\begin{DoxyCompactList}\small\item\em convert a 3D point to viewport 2d coordinates \end{DoxyCompactList}\item 
+virtual Q\+Vector2D \hyperlink{classShipCAD_1_1ViewportView_a2bc94791273d6134566a386f2a735e37}{project\+To3D} (Q\+Point pos, int w, int h)=0
+\begin{DoxyCompactList}\small\item\em convert screen coordinates to 2D world coordinates \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportView_a6991b6b121b609ec7d18518a8f872859}{point\+Drag} (Q\+Point pos, int w, int h, Q\+Vector3D \&newcoord)
+\begin{DoxyCompactList}\small\item\em drag a point in the viewport \end{DoxyCompactList}\item 
+virtual \hyperlink{structShipCAD_1_1PickRay}{Pick\+Ray} \hyperlink{classShipCAD_1_1ViewportView_a845fc1fe9fa6ec52726fba1ad350e638}{convert\+Mouse\+Coord\+To\+World} (Q\+Point pos, int width, int height) const 
 \begin{DoxyCompactList}\small\item\em given mouse coordinates, find a pick ray for this view \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{classShipCAD_1_1ViewportView}{Viewport\-View} $\ast$ \hyperlink{classShipCAD_1_1ViewportView_aec2ef49c2d2ecf9099dfbf32cd645144}{construct} (\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0a}{viewport\-\_\-type\-\_\-t} ty, \hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
+static \hyperlink{classShipCAD_1_1ViewportView}{Viewport\+View} $\ast$ \hyperlink{classShipCAD_1_1ViewportView_aec2ef49c2d2ecf9099dfbf32cd645144}{construct} (\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0a}{viewport\+\_\+type\+\_\+t} ty, \hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void \hyperlink{classShipCAD_1_1ViewportView_a15b8dab8f55b9967feeb7b93c234053d}{finish\-Setup} ()
+virtual void \hyperlink{classShipCAD_1_1ViewportView_a15b8dab8f55b9967feeb7b93c234053d}{finish\+Setup} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$ \hyperlink{classShipCAD_1_1ViewportView_a9d980ea46c1638d05221dc71e666da04}{\-\_\-vp}
+\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$ \hyperlink{classShipCAD_1_1ViewportView_a9d980ea46c1638d05221dc71e666da04}{\+\_\+vp}
 \item 
-float \hyperlink{classShipCAD_1_1ViewportView_a337e90ffddd63535bad9b8de652a455a}{\-\_\-zoom}
+float \hyperlink{classShipCAD_1_1ViewportView_a337e90ffddd63535bad9b8de652a455a}{\+\_\+zoom}
 \item 
-float \hyperlink{classShipCAD_1_1ViewportView_a3cccfb1058f0c8f66d662c1f19ed5c33}{\-\_\-pan\-X}
+float \hyperlink{classShipCAD_1_1ViewportView_a3cccfb1058f0c8f66d662c1f19ed5c33}{\+\_\+panX}
 \item 
-float \hyperlink{classShipCAD_1_1ViewportView_aa2a8062a009ea1a9f26498a103134d3f}{\-\_\-pan\-Y}
+float \hyperlink{classShipCAD_1_1ViewportView_aa2a8062a009ea1a9f26498a103134d3f}{\+\_\+panY}
 \item 
-float \hyperlink{classShipCAD_1_1ViewportView_a808cc636969188f7c04c97902ecbe9d5}{\-\_\-scale}
+float \hyperlink{classShipCAD_1_1ViewportView_a808cc636969188f7c04c97902ecbe9d5}{\+\_\+scale}
 \item 
-float \hyperlink{classShipCAD_1_1ViewportView_a4cce24be9f8367c04714cd5f091ad637}{\-\_\-margin}
+float \hyperlink{classShipCAD_1_1ViewportView_a4cce24be9f8367c04714cd5f091ad637}{\+\_\+margin}
 \item 
-Q\-Vector3\-D \hyperlink{classShipCAD_1_1ViewportView_af4017af3ac64751ce2c5f348d2567657}{\-\_\-midpoint}
+float \hyperlink{classShipCAD_1_1ViewportView_a001cda888a20319d4d3b29bd9926d5e1}{\+\_\+pick\+Dist}
 \item 
-Q\-Vector3\-D \hyperlink{classShipCAD_1_1ViewportView_ac357a478169de078d3dc3289a15612b1}{\-\_\-camera\-\_\-location}
+Q\+Vector3D \hyperlink{classShipCAD_1_1ViewportView_af4017af3ac64751ce2c5f348d2567657}{\+\_\+midpoint}
 \item 
-Q\-Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_a1b2d9753e22af2e9a071e60799478905}{\-\_\-world}
+Q\+Vector3D \hyperlink{classShipCAD_1_1ViewportView_ac357a478169de078d3dc3289a15612b1}{\+\_\+camera\+\_\+location}
 \item 
-Q\-Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_a6b16d2dd6a5c1b812e9fa96dfcadebbb}{\-\_\-world\-Inv}
+Q\+Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_a1b2d9753e22af2e9a071e60799478905}{\+\_\+world}
 \item 
-Q\-Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_a56588119357f01d0764219252695e9c5}{\-\_\-view}
+Q\+Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_a6b16d2dd6a5c1b812e9fa96dfcadebbb}{\+\_\+world\+Inv}
 \item 
-Q\-Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_abb5933e4e5cbe5c97be2b63164cc8380}{\-\_\-proj}
+Q\+Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_a56588119357f01d0764219252695e9c5}{\+\_\+view}
+\item 
+Q\+Matrix4x4 \hyperlink{classShipCAD_1_1ViewportView_abb5933e4e5cbe5c97be2b63164cc8380}{\+\_\+proj}
+\item 
+Q\+Vector3D \hyperlink{classShipCAD_1_1ViewportView_af523ce78903a7c9b9d1c2e5548d8a283}{\+\_\+max}
+\item 
+Q\+Vector3D \hyperlink{classShipCAD_1_1ViewportView_a8d957ad40e793a09f4741200eec4a939}{\+\_\+min}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Abstract class to calculate view, world matrices and operations using those for a viewport. 
 
-Definition at line 55 of file viewportview.\-h.
+Definition at line 46 of file viewportview.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1ViewportView_a725088d3f0e113c97ae52cccab7fce42}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!Viewport\-View@{Viewport\-View}}
-\index{Viewport\-View@{Viewport\-View}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{Viewport\-View}]{\setlength{\rightskip}{0pt plus 5cm}Viewport\-View\-::\-Viewport\-View (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!Viewport\+View@{Viewport\+View}}
+\index{Viewport\+View@{Viewport\+View}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{Viewport\+View(\+Viewport $\ast$vp)}{ViewportView(Viewport *vp)}}]{\setlength{\rightskip}{0pt plus 5cm}Viewport\+View\+::\+Viewport\+View (
 \begin{DoxyParamCaption}
 \item[{{\bf Viewport} $\ast$}]{vp}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1ViewportView_a725088d3f0e113c97ae52cccab7fce42}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1ViewportView_a725088d3f0e113c97ae52cccab7fce42}{}\label{classShipCAD_1_1ViewportView_a725088d3f0e113c97ae52cccab7fce42}
 
 
-Definition at line 42 of file viewportview.\-cpp.
+Definition at line 45 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_a75f58efbb601f46ea20b70b1370cee1a}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!$\sim$\-Viewport\-View@{$\sim$\-Viewport\-View}}
-\index{$\sim$\-Viewport\-View@{$\sim$\-Viewport\-View}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{$\sim$\-Viewport\-View}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Viewport\-View\-::$\sim$\-Viewport\-View (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!````~Viewport\+View@{$\sim$\+Viewport\+View}}
+\index{````~Viewport\+View@{$\sim$\+Viewport\+View}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{$\sim$\+Viewport\+View()}{~ViewportView()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\+C\+A\+D\+::\+Viewport\+View\+::$\sim$\+Viewport\+View (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a75f58efbb601f46ea20b70b1370cee1a}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a75f58efbb601f46ea20b70b1370cee1a}{}\label{classShipCAD_1_1ViewportView_a75f58efbb601f46ea20b70b1370cee1a}
 
 
-Definition at line 60 of file viewportview.\-h.
+Definition at line 51 of file viewportview.\+h.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1ViewportView_aec2ef49c2d2ecf9099dfbf32cd645144}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!construct@{construct}}
-\index{construct@{construct}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Viewport\-View} $\ast$ Viewport\-View\-::construct (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!construct@{construct}}
+\index{construct@{construct}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{construct(viewport\+\_\+type\+\_\+t ty, Viewport $\ast$vp)}{construct(viewport_type_t ty, Viewport *vp)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Viewport\+View} $\ast$ Viewport\+View\+::construct (
 \begin{DoxyParamCaption}
-\item[{{\bf viewport\-\_\-type\-\_\-t}}]{ty, }
+\item[{{\bf viewport\+\_\+type\+\_\+t}}]{ty, }
 \item[{{\bf Viewport} $\ast$}]{vp}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1ViewportView_aec2ef49c2d2ecf9099dfbf32cd645144}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classShipCAD_1_1ViewportView_aec2ef49c2d2ecf9099dfbf32cd645144}{}\label{classShipCAD_1_1ViewportView_aec2ef49c2d2ecf9099dfbf32cd645144}
 
 
-Definition at line 49 of file viewportview.\-cpp.
+Definition at line 52 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_a845fc1fe9fa6ec52726fba1ad350e638}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!convert\-Mouse\-Coord\-To\-World@{convert\-Mouse\-Coord\-To\-World}}
-\index{convert\-Mouse\-Coord\-To\-World@{convert\-Mouse\-Coord\-To\-World}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{convert\-Mouse\-Coord\-To\-World}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ship\-C\-A\-D\-::\-Pick\-Ray} Viewport\-View\-::convert\-Mouse\-Coord\-To\-World (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!convert3D@{convert3D}}
+\index{convert3D@{convert3D}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{convert3\+D(const Q\+Vector3\+D \&pt, int w, int h) const }{convert3D(const QVector3D &pt, int w, int h) const }}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Point Viewport\+View\+::convert3D (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{pos, }
+\item[{const Q\+Vector3D \&}]{pt, }
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+) const}\hypertarget{classShipCAD_1_1ViewportView_ac763be6de52b393cb0b9ff4be4c66fcf}{}\label{classShipCAD_1_1ViewportView_ac763be6de52b393cb0b9ff4be4c66fcf}
+
+
+convert a 3D point to viewport 2d coordinates 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & the 3D point to convert \\
+\hline
+{\em w} & width of viewport in pixels \\
+\hline
+{\em h} & height of viewport in pixels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+point in x, y coordinates with 0,0 upper left corner of viewport 
+\end{DoxyReturn}
+
+
+Definition at line 86 of file viewportview.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!convert\+Mouse\+Coord\+To\+World@{convert\+Mouse\+Coord\+To\+World}}
+\index{convert\+Mouse\+Coord\+To\+World@{convert\+Mouse\+Coord\+To\+World}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{convert\+Mouse\+Coord\+To\+World(\+Q\+Point pos, int width, int height) const }{convertMouseCoordToWorld(QPoint pos, int width, int height) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ship\+C\+A\+D\+::\+Pick\+Ray} Viewport\+View\+::convert\+Mouse\+Coord\+To\+World (
+\begin{DoxyParamCaption}
+\item[{Q\+Point}]{pos, }
 \item[{int}]{width, }
 \item[{int}]{height}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a845fc1fe9fa6ec52726fba1ad350e638}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a845fc1fe9fa6ec52726fba1ad350e638}{}\label{classShipCAD_1_1ViewportView_a845fc1fe9fa6ec52726fba1ad350e638}
 
 
 given mouse coordinates, find a pick ray for this view 
@@ -152,280 +200,418 @@ given mouse coordinates, find a pick ray for this view
 \hline
 {\em width} & the viewport width in pixels \\
 \hline
-{\em height} & the viewport height in pixels  the world coordinate system \hyperlink{structShipCAD_1_1PickRay}{Pick\-Ray} corresponding to the mouse coordinages \\
+{\em height} & the viewport height in pixels \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the world coordinate system \hyperlink{structShipCAD_1_1PickRay}{Pick\+Ray} corresponding to the mouse coordinates 
+\end{DoxyReturn}
 
 
-Definition at line 137 of file viewportview.\-cpp.
+Definition at line 154 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_a15b8dab8f55b9967feeb7b93c234053d}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!finish\-Setup@{finish\-Setup}}
-\index{finish\-Setup@{finish\-Setup}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{finish\-Setup}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-View\-::finish\-Setup (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!finish\+Setup@{finish\+Setup}}
+\index{finish\+Setup@{finish\+Setup}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{finish\+Setup()}{finishSetup()}}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\+View\+::finish\+Setup (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a15b8dab8f55b9967feeb7b93c234053d}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a15b8dab8f55b9967feeb7b93c234053d}{}\label{classShipCAD_1_1ViewportView_a15b8dab8f55b9967feeb7b93c234053d}
 
 
-Definition at line 63 of file viewportview.\-cpp.
+Definition at line 66 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_a0be1613b2ae2087da00811f2bdb0bd45}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!get\-World@{get\-World}}
-\index{get\-World@{get\-World}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{get\-World}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Matrix4x4\& Ship\-C\-A\-D\-::\-Viewport\-View\-::get\-World (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!get\+Camera@{get\+Camera}}
+\index{get\+Camera@{get\+Camera}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{get\+Camera() const }{getCamera() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+Vector3D\& Ship\+C\+A\+D\+::\+Viewport\+View\+::get\+Camera (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ViewportView_a0be1613b2ae2087da00811f2bdb0bd45}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1ViewportView_a33150e3f757ddbbe045d7d046b4862e5}{}\label{classShipCAD_1_1ViewportView_a33150e3f757ddbbe045d7d046b4862e5}
 
 
-Definition at line 67 of file viewportview.\-h.
+Definition at line 69 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_a6bffec9328b29bf40c868f2862daebe0}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!get\-World\-Inv@{get\-World\-Inv}}
-\index{get\-World\-Inv@{get\-World\-Inv}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{get\-World\-Inv}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Matrix4x4\& Ship\-C\-A\-D\-::\-Viewport\-View\-::get\-World\-Inv (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!get\+Pick\+Dist@{get\+Pick\+Dist}}
+\index{get\+Pick\+Dist@{get\+Pick\+Dist}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{get\+Pick\+Dist() const }{getPickDist() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Viewport\+View\+::get\+Pick\+Dist (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1ViewportView_a6bffec9328b29bf40c868f2862daebe0}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1ViewportView_a69e218b17f56faac4fb02fec6ac9c5fb}{}\label{classShipCAD_1_1ViewportView_a69e218b17f56faac4fb02fec6ac9c5fb}
 
 
-Definition at line 69 of file viewportview.\-h.
+Definition at line 59 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!initialize\-Viewport@{initialize\-Viewport}}
-\index{initialize\-Viewport@{initialize\-Viewport}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{initialize\-Viewport}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\-C\-A\-D\-::\-Viewport\-View\-::initialize\-Viewport (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!get\+Proj@{get\+Proj}}
+\index{get\+Proj@{get\+Proj}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{get\+Proj() const }{getProj() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+Matrix4x4\& Ship\+C\+A\+D\+::\+Viewport\+View\+::get\+Proj (
 \begin{DoxyParamCaption}
-\item[{const Q\-Vector3\-D \&}]{min, }
-\item[{const Q\-Vector3\-D \&}]{max, }
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1ViewportView_af87bb73f78d5393d013708542eb184ae}{}\label{classShipCAD_1_1ViewportView_af87bb73f78d5393d013708542eb184ae}
+
+
+Definition at line 65 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!get\+View@{get\+View}}
+\index{get\+View@{get\+View}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{get\+View() const }{getView() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+Matrix4x4\& Ship\+C\+A\+D\+::\+Viewport\+View\+::get\+View (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1ViewportView_a7e3e335818a369e64989f20d7a8dda4f}{}\label{classShipCAD_1_1ViewportView_a7e3e335818a369e64989f20d7a8dda4f}
+
+
+Definition at line 67 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!get\+World@{get\+World}}
+\index{get\+World@{get\+World}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{get\+World() const }{getWorld() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+Matrix4x4\& Ship\+C\+A\+D\+::\+Viewport\+View\+::get\+World (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1ViewportView_a0be1613b2ae2087da00811f2bdb0bd45}{}\label{classShipCAD_1_1ViewportView_a0be1613b2ae2087da00811f2bdb0bd45}
+
+
+Definition at line 61 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!get\+World\+Inv@{get\+World\+Inv}}
+\index{get\+World\+Inv@{get\+World\+Inv}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{get\+World\+Inv() const }{getWorldInv() const }}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+Matrix4x4\& Ship\+C\+A\+D\+::\+Viewport\+View\+::get\+World\+Inv (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1ViewportView_a6bffec9328b29bf40c868f2862daebe0}{}\label{classShipCAD_1_1ViewportView_a6bffec9328b29bf40c868f2862daebe0}
+
+
+Definition at line 63 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!initialize\+Viewport@{initialize\+Viewport}}
+\index{initialize\+Viewport@{initialize\+Viewport}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{initialize\+Viewport(const Q\+Vector3\+D \&min, const Q\+Vector3\+D \&max, int width, int height)=0}{initializeViewport(const QVector3D &min, const QVector3D &max, int width, int height)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\+C\+A\+D\+::\+Viewport\+View\+::initialize\+Viewport (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector3D \&}]{min, }
+\item[{const Q\+Vector3D \&}]{max, }
 \item[{int}]{width, }
 \item[{int}]{height}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}{}\label{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}
 
 
-Implemented in \hyperlink{classShipCAD_1_1ViewportViewBodyplan_aaa33b893fbff1c2899d5779fc3b78d1e}{Ship\-C\-A\-D\-::\-Viewport\-View\-Bodyplan}, \hyperlink{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}, \hyperlink{classShipCAD_1_1ViewportViewPlan_a05836d5f48d28a0681a1a3214dc4aeac}{Ship\-C\-A\-D\-::\-Viewport\-View\-Plan}, and \hyperlink{classShipCAD_1_1ViewportViewPerspective_af96ca2b448d261206e360b1304510a65}{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}.
+Implemented in \hyperlink{classShipCAD_1_1ViewportViewBodyplan_aaa33b893fbff1c2899d5779fc3b78d1e}{Ship\+C\+A\+D\+::\+Viewport\+View\+Bodyplan}, \hyperlink{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}, \hyperlink{classShipCAD_1_1ViewportViewPlan_a05836d5f48d28a0681a1a3214dc4aeac}{Ship\+C\+A\+D\+::\+Viewport\+View\+Plan}, and \hyperlink{classShipCAD_1_1ViewportViewPerspective_af96ca2b448d261206e360b1304510a65}{Ship\+C\+A\+D\+::\+Viewport\+View\+Perspective}.
 
-\hypertarget{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!left\-Mouse\-Move@{left\-Mouse\-Move}}
-\index{left\-Mouse\-Move@{left\-Mouse\-Move}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{left\-Mouse\-Move}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::left\-Mouse\-Move (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!left\+Mouse\+Move@{left\+Mouse\+Move}}
+\index{left\+Mouse\+Move@{left\+Mouse\+Move}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{left\+Mouse\+Move(\+Q\+Point cur, Q\+Point prev, int w, int h)}{leftMouseMove(QPoint cur, QPoint prev, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::left\+Mouse\+Move (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{cur, }
-\item[{Q\-Point}]{prev, }
+\item[{Q\+Point}]{cur, }
+\item[{Q\+Point}]{prev, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}{}\label{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewBodyplan_a7006e77fb3b8470c418bc75528d0ad1b}{Ship\-C\-A\-D\-::\-Viewport\-View\-Bodyplan}, \hyperlink{classShipCAD_1_1ViewportViewProfile_aa31c0ed3151f473b68197f20b5475cfc}{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}, \hyperlink{classShipCAD_1_1ViewportViewPlan_a43c15e93e5dd097e0c251c9c4558717c}{Ship\-C\-A\-D\-::\-Viewport\-View\-Plan}, and \hyperlink{classShipCAD_1_1ViewportViewPerspective_a11f5f04a95646a701743804c4d7c1d10}{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}.
+Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewPerspective_a11f5f04a95646a701743804c4d7c1d10}{Ship\+C\+A\+D\+::\+Viewport\+View\+Perspective}.
 
 
 
-Definition at line 113 of file viewportview.\-cpp.
+Definition at line 125 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_ac1226ebc09cbc0ee33a53fc6fec9cd09}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!left\-Mouse\-Pick@{left\-Mouse\-Pick}}
-\index{left\-Mouse\-Pick@{left\-Mouse\-Pick}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{left\-Mouse\-Pick}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::left\-Mouse\-Pick (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!left\+Mouse\+Pick@{left\+Mouse\+Pick}}
+\index{left\+Mouse\+Pick@{left\+Mouse\+Pick}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{left\+Mouse\+Pick(\+Q\+Point pos, int w, int h, Pick\+Ray \&ray)}{leftMousePick(QPoint pos, int w, int h, PickRay &ray)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::left\+Mouse\+Pick (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{pos, }
+\item[{Q\+Point}]{pos, }
+\item[{int}]{w, }
+\item[{int}]{h, }
+\item[{{\bf Pick\+Ray} \&}]{ray}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a4c2e113c5c0e58bb72576a8a802f5a29}{}\label{classShipCAD_1_1ViewportView_a4c2e113c5c0e58bb72576a8a802f5a29}
+
+
+Definition at line 92 of file viewportview.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!left\+Mouse\+Release@{left\+Mouse\+Release}}
+\index{left\+Mouse\+Release@{left\+Mouse\+Release}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{left\+Mouse\+Release(\+Q\+Point pos, int w, int h)}{leftMouseRelease(QPoint pos, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::left\+Mouse\+Release (
+\begin{DoxyParamCaption}
+\item[{Q\+Point}]{pos, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_ac1226ebc09cbc0ee33a53fc6fec9cd09}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_ad74e96e8fef750466b2771f8fc48900a}{}\label{classShipCAD_1_1ViewportView_ad74e96e8fef750466b2771f8fc48900a}
 
 
-Definition at line 83 of file viewportview.\-cpp.
+Definition at line 108 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_ad74e96e8fef750466b2771f8fc48900a}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!left\-Mouse\-Release@{left\-Mouse\-Release}}
-\index{left\-Mouse\-Release@{left\-Mouse\-Release}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{left\-Mouse\-Release}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::left\-Mouse\-Release (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!middle\+Mouse\+Move@{middle\+Mouse\+Move}}
+\index{middle\+Mouse\+Move@{middle\+Mouse\+Move}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{middle\+Mouse\+Move(\+Q\+Point cur, Q\+Point prev, int w, int h)}{middleMouseMove(QPoint cur, QPoint prev, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::middle\+Mouse\+Move (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{pos, }
+\item[{Q\+Point}]{cur, }
+\item[{Q\+Point}]{prev, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_ad74e96e8fef750466b2771f8fc48900a}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a44baf7aad8a3ba7ded04395a8765caf9}{}\label{classShipCAD_1_1ViewportView_a44baf7aad8a3ba7ded04395a8765caf9}
 
 
-Definition at line 96 of file viewportview.\-cpp.
+Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewPerspective_a1de2fd402609b54c79c2d70390ba4a64}{Ship\+C\+A\+D\+::\+Viewport\+View\+Perspective}.
 
-\hypertarget{classShipCAD_1_1ViewportView_a44baf7aad8a3ba7ded04395a8765caf9}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!middle\-Mouse\-Move@{middle\-Mouse\-Move}}
-\index{middle\-Mouse\-Move@{middle\-Mouse\-Move}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{middle\-Mouse\-Move}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::middle\-Mouse\-Move (
+
+
+Definition at line 120 of file viewportview.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!point\+Drag@{point\+Drag}}
+\index{point\+Drag@{point\+Drag}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{point\+Drag(\+Q\+Point pos, int w, int h, Q\+Vector3\+D \&newcoord)}{pointDrag(QPoint pos, int w, int h, QVector3D &newcoord)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::point\+Drag (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{cur, }
-\item[{Q\-Point}]{prev, }
+\item[{Q\+Point}]{pos, }
+\item[{int}]{w, }
+\item[{int}]{h, }
+\item[{Q\+Vector3D \&}]{newcoord}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a6991b6b121b609ec7d18518a8f872859}{}\label{classShipCAD_1_1ViewportView_a6991b6b121b609ec7d18518a8f872859}
+
+
+drag a point in the viewport 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the current mouse coordinates \\
+\hline
+{\em w} & width of viewport in pixels \\
+\hline
+{\em h} & height of viewport in pixels \\
+\hline
+{\em newcoord} & the new coordinates of the point in 3D space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the point can be dragged in this view 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewBodyplan_af10d2ce23c6634a6f5824e49f678998b}{Ship\+C\+A\+D\+::\+Viewport\+View\+Bodyplan}, \hyperlink{classShipCAD_1_1ViewportViewProfile_abc8adc37b3539da20124a9d1930cfc92}{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}, and \hyperlink{classShipCAD_1_1ViewportViewPlan_aaac7978a626640198a7a92daae63bc51}{Ship\+C\+A\+D\+::\+Viewport\+View\+Plan}.
+
+
+
+Definition at line 149 of file viewportview.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!project\+To3D@{project\+To3D}}
+\index{project\+To3D@{project\+To3D}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{project\+To3\+D(\+Q\+Point pos, int w, int h)=0}{projectTo3D(QPoint pos, int w, int h)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Q\+Vector2D Ship\+C\+A\+D\+::\+Viewport\+View\+::project\+To3D (
+\begin{DoxyParamCaption}
+\item[{Q\+Point}]{pos, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a44baf7aad8a3ba7ded04395a8765caf9}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a2bc94791273d6134566a386f2a735e37}{}\label{classShipCAD_1_1ViewportView_a2bc94791273d6134566a386f2a735e37}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewPerspective_a1de2fd402609b54c79c2d70390ba4a64}{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}.
+convert screen coordinates to 2D world coordinates 
 
 
+\begin{DoxyParams}{Parameters}
+{\em pos} & screen position \\
+\hline
+{\em w} & width of viewport in pixels \\
+\hline
+{\em h} & height of viewport in pixels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the world coordinates of screen position 
+\end{DoxyReturn}
 
-Definition at line 108 of file viewportview.\-cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_ab70e778772325a67610d983f630c2c3d}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!reset\-View@{reset\-View}}
-\index{reset\-View@{reset\-View}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{reset\-View}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-View\-::reset\-View (
+Implemented in \hyperlink{classShipCAD_1_1ViewportViewBodyplan_a919c765ec9749814bac1ef0a3b3e8ef1}{Ship\+C\+A\+D\+::\+Viewport\+View\+Bodyplan}, \hyperlink{classShipCAD_1_1ViewportViewProfile_a6158e95a906d0b62064e72ead2263a73}{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}, \hyperlink{classShipCAD_1_1ViewportViewPlan_adcc5e44591098694df045848798be804}{Ship\+C\+A\+D\+::\+Viewport\+View\+Plan}, and \hyperlink{classShipCAD_1_1ViewportViewPerspective_afc402aace76462bb3b0431cebba6a6a5}{Ship\+C\+A\+D\+::\+Viewport\+View\+Perspective}.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!reset\+View@{reset\+View}}
+\index{reset\+View@{reset\+View}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{reset\+View()}{resetView()}}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\+View\+::reset\+View (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_ab70e778772325a67610d983f630c2c3d}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_ab70e778772325a67610d983f630c2c3d}{}\label{classShipCAD_1_1ViewportView_ab70e778772325a67610d983f630c2c3d}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewPerspective_ab3cc69a6cdb3271cc9e79ec16aa37a33}{Ship\-C\-A\-D\-::\-Viewport\-View\-Perspective}.
+Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewPerspective_ab3cc69a6cdb3271cc9e79ec16aa37a33}{Ship\+C\+A\+D\+::\+Viewport\+View\+Perspective}.
 
 
 
-Definition at line 75 of file viewportview.\-cpp.
+Definition at line 78 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_a537210f7c2872e7b8921341660e85347}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!right\-Mouse\-Move@{right\-Mouse\-Move}}
-\index{right\-Mouse\-Move@{right\-Mouse\-Move}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{right\-Mouse\-Move}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::right\-Mouse\-Move (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!right\+Mouse\+Move@{right\+Mouse\+Move}}
+\index{right\+Mouse\+Move@{right\+Mouse\+Move}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{right\+Mouse\+Move(\+Q\+Point cur, Q\+Point prev, int w, int h)}{rightMouseMove(QPoint cur, QPoint prev, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::right\+Mouse\+Move (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{cur, }
-\item[{Q\-Point}]{prev, }
+\item[{Q\+Point}]{cur, }
+\item[{Q\+Point}]{prev, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a537210f7c2872e7b8921341660e85347}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a537210f7c2872e7b8921341660e85347}{}\label{classShipCAD_1_1ViewportView_a537210f7c2872e7b8921341660e85347}
 
 
-Definition at line 118 of file viewportview.\-cpp.
+Reimplemented in \hyperlink{classShipCAD_1_1ViewportViewBodyplan_acbc25d95fff9310b5cf5cfa1c5dd5210}{Ship\+C\+A\+D\+::\+Viewport\+View\+Bodyplan}, \hyperlink{classShipCAD_1_1ViewportViewProfile_a8fccdc2ff4cb6021b6e810712d45b8f0}{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}, and \hyperlink{classShipCAD_1_1ViewportViewPlan_a932d06d121e39a91676053c667fc78d5}{Ship\+C\+A\+D\+::\+Viewport\+View\+Plan}.
 
-\hypertarget{classShipCAD_1_1ViewportView_a1e67e403d7307d3828336edbc1ded2f3}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!right\-Mouse\-Pick@{right\-Mouse\-Pick}}
-\index{right\-Mouse\-Pick@{right\-Mouse\-Pick}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{right\-Mouse\-Pick}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::right\-Mouse\-Pick (
+
+
+Definition at line 130 of file viewportview.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!right\+Mouse\+Pick@{right\+Mouse\+Pick}}
+\index{right\+Mouse\+Pick@{right\+Mouse\+Pick}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{right\+Mouse\+Pick(\+Q\+Point pos, int w, int h)}{rightMousePick(QPoint pos, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::right\+Mouse\+Pick (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{pos, }
+\item[{Q\+Point}]{pos, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a1e67e403d7307d3828336edbc1ded2f3}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a1e67e403d7307d3828336edbc1ded2f3}{}\label{classShipCAD_1_1ViewportView_a1e67e403d7307d3828336edbc1ded2f3}
 
 
-Definition at line 91 of file viewportview.\-cpp.
+Definition at line 103 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_aaeff27f9b32dc7ee98dbfc14b7eca804}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!right\-Mouse\-Release@{right\-Mouse\-Release}}
-\index{right\-Mouse\-Release@{right\-Mouse\-Release}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{right\-Mouse\-Release}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::right\-Mouse\-Release (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!right\+Mouse\+Release@{right\+Mouse\+Release}}
+\index{right\+Mouse\+Release@{right\+Mouse\+Release}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{right\+Mouse\+Release(\+Q\+Point pos, int w, int h)}{rightMouseRelease(QPoint pos, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::right\+Mouse\+Release (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{pos, }
+\item[{Q\+Point}]{pos, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_aaeff27f9b32dc7ee98dbfc14b7eca804}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_aaeff27f9b32dc7ee98dbfc14b7eca804}{}\label{classShipCAD_1_1ViewportView_aaeff27f9b32dc7ee98dbfc14b7eca804}
 
 
-Definition at line 102 of file viewportview.\-cpp.
+Definition at line 114 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportView_a77ce1c6a0216a791ee2ae79dd6674cde}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!wheel\-With\-Degrees@{wheel\-With\-Degrees}}
-\index{wheel\-With\-Degrees@{wheel\-With\-Degrees}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{wheel\-With\-Degrees}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-::wheel\-With\-Degrees (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!wheel\+With\+Degrees@{wheel\+With\+Degrees}}
+\index{wheel\+With\+Degrees@{wheel\+With\+Degrees}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{wheel\+With\+Degrees(\+Q\+Point degrees, int w, int h)}{wheelWithDegrees(QPoint degrees, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+::wheel\+With\+Degrees (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{degrees, }
+\item[{Q\+Point}]{degrees, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportView_a77ce1c6a0216a791ee2ae79dd6674cde}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportView_a77ce1c6a0216a791ee2ae79dd6674cde}{}\label{classShipCAD_1_1ViewportView_a77ce1c6a0216a791ee2ae79dd6674cde}
 
 
-Definition at line 123 of file viewportview.\-cpp.
+Definition at line 135 of file viewportview.\+cpp.
 
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classShipCAD_1_1ViewportView_ac357a478169de078d3dc3289a15612b1}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-camera\-\_\-location@{\-\_\-camera\-\_\-location}}
-\index{\-\_\-camera\-\_\-location@{\-\_\-camera\-\_\-location}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-camera\-\_\-location}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-camera\-\_\-location\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_ac357a478169de078d3dc3289a15612b1}
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+camera\+\_\+location@{\+\_\+camera\+\_\+location}}
+\index{\+\_\+camera\+\_\+location@{\+\_\+camera\+\_\+location}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+camera\+\_\+location}{_camera_location}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+camera\+\_\+location\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_ac357a478169de078d3dc3289a15612b1}{}\label{classShipCAD_1_1ViewportView_ac357a478169de078d3dc3289a15612b1}
 
 
-Definition at line 103 of file viewportview.\-h.
+Definition at line 131 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_a4cce24be9f8367c04714cd5f091ad637}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-margin@{\-\_\-margin}}
-\index{\-\_\-margin@{\-\_\-margin}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-margin}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-margin\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a4cce24be9f8367c04714cd5f091ad637}
-
-
-Definition at line 101 of file viewportview.\-h.
-
-\hypertarget{classShipCAD_1_1ViewportView_af4017af3ac64751ce2c5f348d2567657}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-midpoint@{\-\_\-midpoint}}
-\index{\-\_\-midpoint@{\-\_\-midpoint}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-midpoint}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-midpoint\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_af4017af3ac64751ce2c5f348d2567657}
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+margin@{\+\_\+margin}}
+\index{\+\_\+margin@{\+\_\+margin}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+margin}{_margin}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+margin\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a4cce24be9f8367c04714cd5f091ad637}{}\label{classShipCAD_1_1ViewportView_a4cce24be9f8367c04714cd5f091ad637}
 
 
-Definition at line 102 of file viewportview.\-h.
+Definition at line 128 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_a3cccfb1058f0c8f66d662c1f19ed5c33}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-pan\-X@{\-\_\-pan\-X}}
-\index{\-\_\-pan\-X@{\-\_\-pan\-X}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-pan\-X}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-pan\-X\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a3cccfb1058f0c8f66d662c1f19ed5c33}
-
-
-Definition at line 98 of file viewportview.\-h.
-
-\hypertarget{classShipCAD_1_1ViewportView_aa2a8062a009ea1a9f26498a103134d3f}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-pan\-Y@{\-\_\-pan\-Y}}
-\index{\-\_\-pan\-Y@{\-\_\-pan\-Y}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-pan\-Y}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-pan\-Y\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_aa2a8062a009ea1a9f26498a103134d3f}
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+max@{\+\_\+max}}
+\index{\+\_\+max@{\+\_\+max}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+max}{_max}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+max\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_af523ce78903a7c9b9d1c2e5548d8a283}{}\label{classShipCAD_1_1ViewportView_af523ce78903a7c9b9d1c2e5548d8a283}
 
 
-Definition at line 99 of file viewportview.\-h.
+Definition at line 136 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_abb5933e4e5cbe5c97be2b63164cc8380}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-proj@{\-\_\-proj}}
-\index{\-\_\-proj@{\-\_\-proj}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-proj}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Matrix4x4 Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-proj\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_abb5933e4e5cbe5c97be2b63164cc8380}
-
-
-Definition at line 107 of file viewportview.\-h.
-
-\hypertarget{classShipCAD_1_1ViewportView_a808cc636969188f7c04c97902ecbe9d5}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-scale@{\-\_\-scale}}
-\index{\-\_\-scale@{\-\_\-scale}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-scale\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a808cc636969188f7c04c97902ecbe9d5}
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+midpoint@{\+\_\+midpoint}}
+\index{\+\_\+midpoint@{\+\_\+midpoint}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+midpoint}{_midpoint}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+midpoint\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_af4017af3ac64751ce2c5f348d2567657}{}\label{classShipCAD_1_1ViewportView_af4017af3ac64751ce2c5f348d2567657}
 
 
-Definition at line 100 of file viewportview.\-h.
+Definition at line 130 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_a56588119357f01d0764219252695e9c5}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-view@{\-\_\-view}}
-\index{\-\_\-view@{\-\_\-view}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-view}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Matrix4x4 Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-view\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a56588119357f01d0764219252695e9c5}
-
-
-Definition at line 106 of file viewportview.\-h.
-
-\hypertarget{classShipCAD_1_1ViewportView_a9d980ea46c1638d05221dc71e666da04}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-vp@{\-\_\-vp}}
-\index{\-\_\-vp@{\-\_\-vp}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-vp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Viewport}$\ast$ Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-vp\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a9d980ea46c1638d05221dc71e666da04}
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+min@{\+\_\+min}}
+\index{\+\_\+min@{\+\_\+min}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+min}{_min}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+min\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a8d957ad40e793a09f4741200eec4a939}{}\label{classShipCAD_1_1ViewportView_a8d957ad40e793a09f4741200eec4a939}
 
 
-Definition at line 96 of file viewportview.\-h.
+Definition at line 137 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_a1b2d9753e22af2e9a071e60799478905}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-world@{\-\_\-world}}
-\index{\-\_\-world@{\-\_\-world}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-world}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Matrix4x4 Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-world\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a1b2d9753e22af2e9a071e60799478905}
-
-
-Definition at line 104 of file viewportview.\-h.
-
-\hypertarget{classShipCAD_1_1ViewportView_a6b16d2dd6a5c1b812e9fa96dfcadebbb}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-world\-Inv@{\-\_\-world\-Inv}}
-\index{\-\_\-world\-Inv@{\-\_\-world\-Inv}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-world\-Inv}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Matrix4x4 Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-world\-Inv\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a6b16d2dd6a5c1b812e9fa96dfcadebbb}
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+panX@{\+\_\+panX}}
+\index{\+\_\+panX@{\+\_\+panX}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+panX}{_panX}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+panX\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a3cccfb1058f0c8f66d662c1f19ed5c33}{}\label{classShipCAD_1_1ViewportView_a3cccfb1058f0c8f66d662c1f19ed5c33}
 
 
-Definition at line 105 of file viewportview.\-h.
+Definition at line 125 of file viewportview.\+h.
 
-\hypertarget{classShipCAD_1_1ViewportView_a337e90ffddd63535bad9b8de652a455a}{\index{Ship\-C\-A\-D\-::\-Viewport\-View@{Ship\-C\-A\-D\-::\-Viewport\-View}!\-\_\-zoom@{\-\_\-zoom}}
-\index{\-\_\-zoom@{\-\_\-zoom}!ShipCAD::ViewportView@{Ship\-C\-A\-D\-::\-Viewport\-View}}
-\subsubsection[{\-\_\-zoom}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\-C\-A\-D\-::\-Viewport\-View\-::\-\_\-zoom\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1ViewportView_a337e90ffddd63535bad9b8de652a455a}
-
-
-Definition at line 97 of file viewportview.\-h.
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+panY@{\+\_\+panY}}
+\index{\+\_\+panY@{\+\_\+panY}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+panY}{_panY}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+panY\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_aa2a8062a009ea1a9f26498a103134d3f}{}\label{classShipCAD_1_1ViewportView_aa2a8062a009ea1a9f26498a103134d3f}
 
 
+Definition at line 126 of file viewportview.\+h.
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+pick\+Dist@{\+\_\+pick\+Dist}}
+\index{\+\_\+pick\+Dist@{\+\_\+pick\+Dist}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+pick\+Dist}{_pickDist}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+pick\+Dist\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a001cda888a20319d4d3b29bd9926d5e1}{}\label{classShipCAD_1_1ViewportView_a001cda888a20319d4d3b29bd9926d5e1}
+
+
+Definition at line 129 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+proj@{\+\_\+proj}}
+\index{\+\_\+proj@{\+\_\+proj}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+proj}{_proj}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Matrix4x4 Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+proj\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_abb5933e4e5cbe5c97be2b63164cc8380}{}\label{classShipCAD_1_1ViewportView_abb5933e4e5cbe5c97be2b63164cc8380}
+
+
+Definition at line 135 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+scale@{\+\_\+scale}}
+\index{\+\_\+scale@{\+\_\+scale}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+scale}{_scale}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a808cc636969188f7c04c97902ecbe9d5}{}\label{classShipCAD_1_1ViewportView_a808cc636969188f7c04c97902ecbe9d5}
+
+
+Definition at line 127 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+view@{\+\_\+view}}
+\index{\+\_\+view@{\+\_\+view}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+view}{_view}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Matrix4x4 Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+view\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a56588119357f01d0764219252695e9c5}{}\label{classShipCAD_1_1ViewportView_a56588119357f01d0764219252695e9c5}
+
+
+Definition at line 134 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+vp@{\+\_\+vp}}
+\index{\+\_\+vp@{\+\_\+vp}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+vp}{_vp}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Viewport}$\ast$ Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+vp\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a9d980ea46c1638d05221dc71e666da04}{}\label{classShipCAD_1_1ViewportView_a9d980ea46c1638d05221dc71e666da04}
+
+
+Definition at line 123 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+world@{\+\_\+world}}
+\index{\+\_\+world@{\+\_\+world}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+world}{_world}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Matrix4x4 Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+world\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a1b2d9753e22af2e9a071e60799478905}{}\label{classShipCAD_1_1ViewportView_a1b2d9753e22af2e9a071e60799478905}
+
+
+Definition at line 132 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+world\+Inv@{\+\_\+world\+Inv}}
+\index{\+\_\+world\+Inv@{\+\_\+world\+Inv}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+world\+Inv}{_worldInv}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Matrix4x4 Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+world\+Inv\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a6b16d2dd6a5c1b812e9fa96dfcadebbb}{}\label{classShipCAD_1_1ViewportView_a6b16d2dd6a5c1b812e9fa96dfcadebbb}
+
+
+Definition at line 133 of file viewportview.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}!\+\_\+zoom@{\+\_\+zoom}}
+\index{\+\_\+zoom@{\+\_\+zoom}!Ship\+C\+A\+D\+::\+Viewport\+View@{Ship\+C\+A\+D\+::\+Viewport\+View}}
+\subsubsection[{\texorpdfstring{\+\_\+zoom}{_zoom}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Viewport\+View\+::\+\_\+zoom\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1ViewportView_a337e90ffddd63535bad9b8de652a455a}{}\label{classShipCAD_1_1ViewportView_a337e90ffddd63535bad9b8de652a455a}
+
+
+Definition at line 124 of file viewportview.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{viewportview_8h}{viewportview.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{viewportview_8cpp}{viewportview.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{viewportview_8h}{viewportview.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{viewportview_8cpp}{viewportview.\+cpp}\end{DoxyCompactItemize}

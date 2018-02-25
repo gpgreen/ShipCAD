@@ -1,11 +1,10 @@
-\hypertarget{classShipCAD_1_1UndoObject}{\section{Ship\-C\-A\-D\-:\-:Undo\-Object Class Reference}
-\label{classShipCAD_1_1UndoObject}\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-}
+\hypertarget{classShipCAD_1_1UndoObject}{}\section{Ship\+C\+AD\+:\+:Undo\+Object Class Reference}
+\label{classShipCAD_1_1UndoObject}\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
 
 
-{\ttfamily \#include $<$undoobject.\-h$>$}
+{\ttfamily \#include $<$undoobject.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Undo\-Object\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Undo\+Object\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classShipCAD_1_1UndoObject}
@@ -14,21 +13,23 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Undo\-Object\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1UndoObject_a7822f20d55e4647ad4e4508b3e3f229b}{Undo\-Object} (\hyperlink{classShipCAD_1_1ShipCADModel}{Ship\-C\-A\-D\-Model} $\ast$owner, const Q\-String \&filename, \hyperlink{namespaceShipCAD_a66144e3f3a53da01f51c9bdb94fcae31}{edit\-\_\-mode\-\_\-t} mode, bool file\-\_\-changed, bool filename\-\_\-set, bool is\-\_\-temp\-\_\-redo\-\_\-ob)
+\hyperlink{classShipCAD_1_1UndoObject_a7822f20d55e4647ad4e4508b3e3f229b}{Undo\+Object} (\hyperlink{classShipCAD_1_1ShipCADModel}{Ship\+C\+A\+D\+Model} $\ast$owner, const Q\+String \&filename, \hyperlink{namespaceShipCAD_a66144e3f3a53da01f51c9bdb94fcae31}{edit\+\_\+mode\+\_\+t} mode, bool file\+\_\+changed, bool filename\+\_\+set, bool is\+\_\+temp\+\_\+redo\+\_\+ob)
 \item 
-\hyperlink{classShipCAD_1_1UndoObject_abfeebd1cd99df71bea798fafe15c474f}{$\sim$\-Undo\-Object} ()
+\hyperlink{classShipCAD_1_1UndoObject_abfeebd1cd99df71bea798fafe15c474f}{$\sim$\+Undo\+Object} ()
 \item 
-size\-\_\-t \hyperlink{classShipCAD_1_1UndoObject_a74cc90d84599a153a37e13ab35018ff6}{get\-Memory} ()
+size\+\_\+t \hyperlink{classShipCAD_1_1UndoObject_a74cc90d84599a153a37e13ab35018ff6}{get\+Memory} ()
 \item 
-bool \hyperlink{classShipCAD_1_1UndoObject_a9f949591bc4031ed4af67ce493e42d2e}{is\-Temp\-Redo\-Obj} ()
+bool \hyperlink{classShipCAD_1_1UndoObject_a52d77a41fe335cea77e9cd20af930de2}{is\+Temp\+Redo\+Object} () const 
 \item 
-void \hyperlink{classShipCAD_1_1UndoObject_aecb1ca66c7c37fa2e1ef4ef2894bc9a4}{set\-Is\-Temp\-Redo\-Object} (bool set)
+void \hyperlink{classShipCAD_1_1UndoObject_aa4fdac113fedb0d552ac69e0e653fa6f}{set\+Temp\+Redo\+Object} (bool set)
 \item 
-Q\-String \hyperlink{classShipCAD_1_1UndoObject_a6d71ab49eb2b14834a0263a4292fb851}{get\-Time} ()
+Q\+String \hyperlink{classShipCAD_1_1UndoObject_afc8ab550246acb166070e0e2379cc19a}{get\+Time} () const 
 \item 
-Q\-String \& \hyperlink{classShipCAD_1_1UndoObject_abc895eabc12ece513bd763551f505a2e}{get\-Undo\-Text} ()
+Q\+String \hyperlink{classShipCAD_1_1UndoObject_a3007b17bbc46042a21baa0b895b8f751}{get\+Undo\+Text} () const 
 \item 
-\hyperlink{classShipCAD_1_1FileBuffer}{File\-Buffer} \& \hyperlink{classShipCAD_1_1UndoObject_a160e77df4c6ae2bdefc5257aa8e6d85b}{get\-Undo\-Data} ()
+void \hyperlink{classShipCAD_1_1UndoObject_aa6eac6ad9b80700ed37e354f970ff812}{set\+Undo\+Text} (const Q\+String \&txt)
+\item 
+\hyperlink{classShipCAD_1_1FileBuffer}{File\+Buffer} \& \hyperlink{classShipCAD_1_1UndoObject_a160e77df4c6ae2bdefc5257aa8e6d85b}{get\+Undo\+Data} ()
 \item 
 void \hyperlink{classShipCAD_1_1UndoObject_a93bad349f284a0ff1cece56aa931f9e3}{accept} ()
 \item 
@@ -39,132 +40,143 @@ void \hyperlink{classShipCAD_1_1UndoObject_a9cace556c2092492f681654d72e35ba6}{re
 \subsection{Detailed Description}
 
 
-Definition at line 44 of file undoobject.\-h.
+Definition at line 44 of file undoobject.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1UndoObject_a7822f20d55e4647ad4e4508b3e3f229b}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!Undo\-Object@{Undo\-Object}}
-\index{Undo\-Object@{Undo\-Object}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{Undo\-Object}]{\setlength{\rightskip}{0pt plus 5cm}Undo\-Object\-::\-Undo\-Object (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!Undo\+Object@{Undo\+Object}}
+\index{Undo\+Object@{Undo\+Object}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{Undo\+Object(\+Ship\+C\+A\+D\+Model $\ast$owner, const Q\+String \&filename, edit\+\_\+mode\+\_\+t mode, bool file\+\_\+changed, bool filename\+\_\+set, bool is\+\_\+temp\+\_\+redo\+\_\+ob)}{UndoObject(ShipCADModel *owner, const QString &filename, edit_mode_t mode, bool file_changed, bool filename_set, bool is_temp_redo_ob)}}]{\setlength{\rightskip}{0pt plus 5cm}Undo\+Object\+::\+Undo\+Object (
 \begin{DoxyParamCaption}
-\item[{{\bf Ship\-C\-A\-D\-Model} $\ast$}]{owner, }
-\item[{const Q\-String \&}]{filename, }
-\item[{{\bf edit\-\_\-mode\-\_\-t}}]{mode, }
-\item[{bool}]{file\-\_\-changed, }
-\item[{bool}]{filename\-\_\-set, }
-\item[{bool}]{is\-\_\-temp\-\_\-redo\-\_\-ob}
+\item[{{\bf Ship\+C\+A\+D\+Model} $\ast$}]{owner, }
+\item[{const Q\+String \&}]{filename, }
+\item[{{\bf edit\+\_\+mode\+\_\+t}}]{mode, }
+\item[{bool}]{file\+\_\+changed, }
+\item[{bool}]{filename\+\_\+set, }
+\item[{bool}]{is\+\_\+temp\+\_\+redo\+\_\+ob}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1UndoObject_a7822f20d55e4647ad4e4508b3e3f229b}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1UndoObject_a7822f20d55e4647ad4e4508b3e3f229b}{}\label{classShipCAD_1_1UndoObject_a7822f20d55e4647ad4e4508b3e3f229b}
 
 
-Definition at line 36 of file undoobject.\-cpp.
+Definition at line 36 of file undoobject.\+cpp.
 
-\hypertarget{classShipCAD_1_1UndoObject_abfeebd1cd99df71bea798fafe15c474f}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!$\sim$\-Undo\-Object@{$\sim$\-Undo\-Object}}
-\index{$\sim$\-Undo\-Object@{$\sim$\-Undo\-Object}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{$\sim$\-Undo\-Object}]{\setlength{\rightskip}{0pt plus 5cm}Ship\-C\-A\-D\-::\-Undo\-Object\-::$\sim$\-Undo\-Object (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!````~Undo\+Object@{$\sim$\+Undo\+Object}}
+\index{````~Undo\+Object@{$\sim$\+Undo\+Object}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{$\sim$\+Undo\+Object()}{~UndoObject()}}]{\setlength{\rightskip}{0pt plus 5cm}Ship\+C\+A\+D\+::\+Undo\+Object\+::$\sim$\+Undo\+Object (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1UndoObject_abfeebd1cd99df71bea798fafe15c474f}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1UndoObject_abfeebd1cd99df71bea798fafe15c474f}{}\label{classShipCAD_1_1UndoObject_abfeebd1cd99df71bea798fafe15c474f}
 
 
-Definition at line 52 of file undoobject.\-h.
+Definition at line 52 of file undoobject.\+h.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1UndoObject_a93bad349f284a0ff1cece56aa931f9e3}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!accept@{accept}}
-\index{accept@{accept}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{accept}]{\setlength{\rightskip}{0pt plus 5cm}void Undo\-Object\-::accept (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!accept@{accept}}
+\index{accept@{accept}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{accept()}{accept()}}]{\setlength{\rightskip}{0pt plus 5cm}void Undo\+Object\+::accept (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1UndoObject_a93bad349f284a0ff1cece56aa931f9e3}
+)}\hypertarget{classShipCAD_1_1UndoObject_a93bad349f284a0ff1cece56aa931f9e3}{}\label{classShipCAD_1_1UndoObject_a93bad349f284a0ff1cece56aa931f9e3}
 
 
-Definition at line 52 of file undoobject.\-cpp.
+Definition at line 53 of file undoobject.\+cpp.
 
-\hypertarget{classShipCAD_1_1UndoObject_a74cc90d84599a153a37e13ab35018ff6}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!get\-Memory@{get\-Memory}}
-\index{get\-Memory@{get\-Memory}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{get\-Memory}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Undo\-Object\-::get\-Memory (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!get\+Memory@{get\+Memory}}
+\index{get\+Memory@{get\+Memory}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{get\+Memory()}{getMemory()}}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Undo\+Object\+::get\+Memory (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1UndoObject_a74cc90d84599a153a37e13ab35018ff6}
+)}\hypertarget{classShipCAD_1_1UndoObject_a74cc90d84599a153a37e13ab35018ff6}{}\label{classShipCAD_1_1UndoObject_a74cc90d84599a153a37e13ab35018ff6}
 
 
-Definition at line 46 of file undoobject.\-cpp.
+Definition at line 47 of file undoobject.\+cpp.
 
-\hypertarget{classShipCAD_1_1UndoObject_a6d71ab49eb2b14834a0263a4292fb851}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!get\-Time@{get\-Time}}
-\index{get\-Time@{get\-Time}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{get\-Time}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String Ship\-C\-A\-D\-::\-Undo\-Object\-::get\-Time (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!get\+Time@{get\+Time}}
+\index{get\+Time@{get\+Time}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{get\+Time() const }{getTime() const }}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Ship\+C\+A\+D\+::\+Undo\+Object\+::get\+Time (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1UndoObject_a6d71ab49eb2b14834a0263a4292fb851}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1UndoObject_afc8ab550246acb166070e0e2379cc19a}{}\label{classShipCAD_1_1UndoObject_afc8ab550246acb166070e0e2379cc19a}
 
 
-Definition at line 59 of file undoobject.\-h.
+Definition at line 59 of file undoobject.\+h.
 
-\hypertarget{classShipCAD_1_1UndoObject_a160e77df4c6ae2bdefc5257aa8e6d85b}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!get\-Undo\-Data@{get\-Undo\-Data}}
-\index{get\-Undo\-Data@{get\-Undo\-Data}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{get\-Undo\-Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf File\-Buffer}\& Ship\-C\-A\-D\-::\-Undo\-Object\-::get\-Undo\-Data (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!get\+Undo\+Data@{get\+Undo\+Data}}
+\index{get\+Undo\+Data@{get\+Undo\+Data}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{get\+Undo\+Data()}{getUndoData()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf File\+Buffer}\& Ship\+C\+A\+D\+::\+Undo\+Object\+::get\+Undo\+Data (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1UndoObject_a160e77df4c6ae2bdefc5257aa8e6d85b}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1UndoObject_a160e77df4c6ae2bdefc5257aa8e6d85b}{}\label{classShipCAD_1_1UndoObject_a160e77df4c6ae2bdefc5257aa8e6d85b}
 
 
-Definition at line 63 of file undoobject.\-h.
+Definition at line 65 of file undoobject.\+h.
 
-\hypertarget{classShipCAD_1_1UndoObject_abc895eabc12ece513bd763551f505a2e}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!get\-Undo\-Text@{get\-Undo\-Text}}
-\index{get\-Undo\-Text@{get\-Undo\-Text}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{get\-Undo\-Text}]{\setlength{\rightskip}{0pt plus 5cm}Q\-String\& Ship\-C\-A\-D\-::\-Undo\-Object\-::get\-Undo\-Text (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!get\+Undo\+Text@{get\+Undo\+Text}}
+\index{get\+Undo\+Text@{get\+Undo\+Text}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{get\+Undo\+Text() const }{getUndoText() const }}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Ship\+C\+A\+D\+::\+Undo\+Object\+::get\+Undo\+Text (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1UndoObject_abc895eabc12ece513bd763551f505a2e}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1UndoObject_a3007b17bbc46042a21baa0b895b8f751}{}\label{classShipCAD_1_1UndoObject_a3007b17bbc46042a21baa0b895b8f751}
 
 
-Definition at line 61 of file undoobject.\-h.
+Definition at line 61 of file undoobject.\+h.
 
-\hypertarget{classShipCAD_1_1UndoObject_a9f949591bc4031ed4af67ce493e42d2e}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!is\-Temp\-Redo\-Obj@{is\-Temp\-Redo\-Obj}}
-\index{is\-Temp\-Redo\-Obj@{is\-Temp\-Redo\-Obj}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{is\-Temp\-Redo\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Undo\-Object\-::is\-Temp\-Redo\-Obj (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!is\+Temp\+Redo\+Object@{is\+Temp\+Redo\+Object}}
+\index{is\+Temp\+Redo\+Object@{is\+Temp\+Redo\+Object}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{is\+Temp\+Redo\+Object() const }{isTempRedoObject() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Undo\+Object\+::is\+Temp\+Redo\+Object (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1UndoObject_a9f949591bc4031ed4af67ce493e42d2e}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1UndoObject_a52d77a41fe335cea77e9cd20af930de2}{}\label{classShipCAD_1_1UndoObject_a52d77a41fe335cea77e9cd20af930de2}
 
 
-Definition at line 55 of file undoobject.\-h.
+Definition at line 55 of file undoobject.\+h.
 
-\hypertarget{classShipCAD_1_1UndoObject_a9cace556c2092492f681654d72e35ba6}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!restore@{restore}}
-\index{restore@{restore}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{restore}]{\setlength{\rightskip}{0pt plus 5cm}void Undo\-Object\-::restore (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!restore@{restore}}
+\index{restore@{restore}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{restore()}{restore()}}]{\setlength{\rightskip}{0pt plus 5cm}void Undo\+Object\+::restore (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1UndoObject_a9cace556c2092492f681654d72e35ba6}
+)}\hypertarget{classShipCAD_1_1UndoObject_a9cace556c2092492f681654d72e35ba6}{}\label{classShipCAD_1_1UndoObject_a9cace556c2092492f681654d72e35ba6}
 
 
-Definition at line 81 of file undoobject.\-cpp.
+Definition at line 59 of file undoobject.\+cpp.
 
-\hypertarget{classShipCAD_1_1UndoObject_aecb1ca66c7c37fa2e1ef4ef2894bc9a4}{\index{Ship\-C\-A\-D\-::\-Undo\-Object@{Ship\-C\-A\-D\-::\-Undo\-Object}!set\-Is\-Temp\-Redo\-Object@{set\-Is\-Temp\-Redo\-Object}}
-\index{set\-Is\-Temp\-Redo\-Object@{set\-Is\-Temp\-Redo\-Object}!ShipCAD::UndoObject@{Ship\-C\-A\-D\-::\-Undo\-Object}}
-\subsubsection[{set\-Is\-Temp\-Redo\-Object}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Undo\-Object\-::set\-Is\-Temp\-Redo\-Object (
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!set\+Temp\+Redo\+Object@{set\+Temp\+Redo\+Object}}
+\index{set\+Temp\+Redo\+Object@{set\+Temp\+Redo\+Object}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{set\+Temp\+Redo\+Object(bool set)}{setTempRedoObject(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Undo\+Object\+::set\+Temp\+Redo\+Object (
 \begin{DoxyParamCaption}
 \item[{bool}]{set}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1UndoObject_aecb1ca66c7c37fa2e1ef4ef2894bc9a4}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1UndoObject_aa4fdac113fedb0d552ac69e0e653fa6f}{}\label{classShipCAD_1_1UndoObject_aa4fdac113fedb0d552ac69e0e653fa6f}
 
 
-Definition at line 57 of file undoobject.\-h.
+Definition at line 57 of file undoobject.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}!set\+Undo\+Text@{set\+Undo\+Text}}
+\index{set\+Undo\+Text@{set\+Undo\+Text}!Ship\+C\+A\+D\+::\+Undo\+Object@{Ship\+C\+A\+D\+::\+Undo\+Object}}
+\subsubsection[{\texorpdfstring{set\+Undo\+Text(const Q\+String \&txt)}{setUndoText(const QString &txt)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Undo\+Object\+::set\+Undo\+Text (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{txt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1UndoObject_aa6eac6ad9b80700ed37e354f970ff812}{}\label{classShipCAD_1_1UndoObject_aa6eac6ad9b80700ed37e354f970ff812}
+
+
+Definition at line 63 of file undoobject.\+h.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{undoobject_8h}{undoobject.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{undoobject_8cpp}{undoobject.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{undoobject_8h}{undoobject.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{undoobject_8cpp}{undoobject.\+cpp}\end{DoxyCompactItemize}

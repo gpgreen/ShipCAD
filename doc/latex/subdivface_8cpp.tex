@@ -1,60 +1,106 @@
-\hypertarget{subdivface_8cpp}{\section{Ship\-C\-A\-Dlib/subdivface.cpp File Reference}
-\label{subdivface_8cpp}\index{Ship\-C\-A\-Dlib/subdivface.\-cpp@{Ship\-C\-A\-Dlib/subdivface.\-cpp}}
-}
+\hypertarget{subdivface_8cpp}{}\section{Ship\+C\+A\+Dlib/subdivface.cpp File Reference}
+\label{subdivface_8cpp}\index{Ship\+C\+A\+Dlib/subdivface.\+cpp@{Ship\+C\+A\+Dlib/subdivface.\+cpp}}
 {\ttfamily \#include $<$iostream$>$}\\*
 {\ttfamily \#include $<$cmath$>$}\\*
 {\ttfamily \#include $<$stdexcept$>$}\\*
 {\ttfamily \#include $<$algorithm$>$}\\*
-{\ttfamily \#include \char`\"{}subdivface.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}subdivsurface.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}subdivpoint.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}subdivedge.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}subdivcontrolcurve.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}subdivlayer.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}viewport.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}filebuffer.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}utility.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}shader.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivsurface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivpoint.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivedge.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivcontrolcurve.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivlayer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}viewport.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}filebuffer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}utility.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}shader.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}controlfacegrid.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}pointgrid.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}viewportview.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}predicate.\+h\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \hyperlink{structPointPred}{Point\-Pred}
-\item 
-struct \hyperlink{structFacePred}{Face\-Pred}
-\item 
-struct \hyperlink{structEdgePred}{Edge\-Pred}
+struct \hyperlink{structZebraIntersection}{Zebra\+Intersection}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-ostream \& \hyperlink{subdivface_8cpp_a9af871547d42e428e76b2642c0f3004d}{operator$<$$<$} (ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionFace}{Ship\-C\-A\-D\-::\-Subdivision\-Face} \&face)
+ostream \& \hyperlink{subdivface_8cpp_a9af871547d42e428e76b2642c0f3004d}{operator$<$$<$} (ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionFace}{Ship\+C\+A\+D\+::\+Subdivision\+Face} \&face)
 \item 
-ostream \& \hyperlink{subdivface_8cpp_a5a4c48688b141c9def2d45be8a0dbc88}{operator$<$$<$} (ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face} \&face)
+bool \hyperlink{subdivface_8cpp_a16f34ace3eb3938950674e3fe818d23e}{check\+Extents} (const Q\+Vector3D \&fmin, const Q\+Vector3D \&fmax, const Q\+Vector3D \&p1, const Q\+Vector3D \&p2, const Q\+Vector3D \&p3)
+\item 
+float \hyperlink{subdivface_8cpp_a0f3a8a9a206459012fb926e66e017ece}{Fragment} (float curvature, float mincurvature, float maxcurvature)
+\item 
+ostream \& \hyperlink{subdivface_8cpp_a5a4c48688b141c9def2d45be8a0dbc88}{operator$<$$<$} (ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face} \&face)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const float \hyperlink{subdivface_8cpp_a7e934765f8f2259b618b368d8c58b1f9}{Width} = 0.\+02
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{subdivface_8cpp_a9af871547d42e428e76b2642c0f3004d}{\index{subdivface.\-cpp@{subdivface.\-cpp}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivface.cpp@{subdivface.\-cpp}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\index{subdivface.\+cpp@{subdivface.\+cpp}!check\+Extents@{check\+Extents}}
+\index{check\+Extents@{check\+Extents}!subdivface.\+cpp@{subdivface.\+cpp}}
+\subsubsection[{\texorpdfstring{check\+Extents(const Q\+Vector3\+D \&fmin, const Q\+Vector3\+D \&fmax, const Q\+Vector3\+D \&p1, const Q\+Vector3\+D \&p2, const Q\+Vector3\+D \&p3)}{checkExtents(const QVector3D &fmin, const QVector3D &fmax, const QVector3D &p1, const QVector3D &p2, const QVector3D &p3)}}]{\setlength{\rightskip}{0pt plus 5cm}bool check\+Extents (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector3D \&}]{fmin, }
+\item[{const Q\+Vector3D \&}]{fmax, }
+\item[{const Q\+Vector3D \&}]{p1, }
+\item[{const Q\+Vector3D \&}]{p2, }
+\item[{const Q\+Vector3D \&}]{p3}
+\end{DoxyParamCaption}
+)}\hypertarget{subdivface_8cpp_a16f34ace3eb3938950674e3fe818d23e}{}\label{subdivface_8cpp_a16f34ace3eb3938950674e3fe818d23e}
+
+
+Definition at line 553 of file subdivface.\+cpp.
+
+\index{subdivface.\+cpp@{subdivface.\+cpp}!Fragment@{Fragment}}
+\index{Fragment@{Fragment}!subdivface.\+cpp@{subdivface.\+cpp}}
+\subsubsection[{\texorpdfstring{Fragment(float curvature, float mincurvature, float maxcurvature)}{Fragment(float curvature, float mincurvature, float maxcurvature)}}]{\setlength{\rightskip}{0pt plus 5cm}float Fragment (
+\begin{DoxyParamCaption}
+\item[{float}]{curvature, }
+\item[{float}]{mincurvature, }
+\item[{float}]{maxcurvature}
+\end{DoxyParamCaption}
+)}\hypertarget{subdivface_8cpp_a0f3a8a9a206459012fb926e66e017ece}{}\label{subdivface_8cpp_a0f3a8a9a206459012fb926e66e017ece}
+
+
+Definition at line 891 of file subdivface.\+cpp.
+
+\index{subdivface.\+cpp@{subdivface.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivface.\+cpp@{subdivface.\+cpp}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Face \&face)}{operator<<(ostream &os, const ShipCAD::SubdivisionFace &face)}}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Face} \&}]{face}
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Face} \&}]{face}
 \end{DoxyParamCaption}
-)}}\label{subdivface_8cpp_a9af871547d42e428e76b2642c0f3004d}
+)}\hypertarget{subdivface_8cpp_a9af871547d42e428e76b2642c0f3004d}{}\label{subdivface_8cpp_a9af871547d42e428e76b2642c0f3004d}
 
 
-Definition at line 392 of file subdivface.\-cpp.
+Definition at line 424 of file subdivface.\+cpp.
 
-\hypertarget{subdivface_8cpp_a5a4c48688b141c9def2d45be8a0dbc88}{\index{subdivface.\-cpp@{subdivface.\-cpp}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivface.cpp@{subdivface.\-cpp}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\index{subdivface.\+cpp@{subdivface.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivface.\+cpp@{subdivface.\+cpp}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face \&face)}{operator<<(ostream &os, const ShipCAD::SubdivisionControlFace &face)}}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
 \item[{ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face} \&}]{face}
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face} \&}]{face}
 \end{DoxyParamCaption}
-)}}\label{subdivface_8cpp_a5a4c48688b141c9def2d45be8a0dbc88}
+)}\hypertarget{subdivface_8cpp_a5a4c48688b141c9def2d45be8a0dbc88}{}\label{subdivface_8cpp_a5a4c48688b141c9def2d45be8a0dbc88}
 
 
-Definition at line 977 of file subdivface.\-cpp.
+Definition at line 1488 of file subdivface.\+cpp.
+
+
+
+\subsection{Variable Documentation}
+\index{subdivface.\+cpp@{subdivface.\+cpp}!Width@{Width}}
+\index{Width@{Width}!subdivface.\+cpp@{subdivface.\+cpp}}
+\subsubsection[{\texorpdfstring{Width}{Width}}]{\setlength{\rightskip}{0pt plus 5cm}const float Width = 0.\+02}\hypertarget{subdivface_8cpp_a7e934765f8f2259b618b368d8c58b1f9}{}\label{subdivface_8cpp_a7e934765f8f2259b618b368d8c58b1f9}
+
+
+Definition at line 503 of file subdivface.\+cpp.
 

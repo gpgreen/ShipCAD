@@ -1,11 +1,10 @@
-\hypertarget{classOpenGLWindow}{\section{Open\-G\-L\-Window Class Reference}
-\label{classOpenGLWindow}\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}}
-}
+\hypertarget{classOpenGLWindow}{}\section{Open\+G\+L\+Window Class Reference}
+\label{classOpenGLWindow}\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}}
 
 
-{\ttfamily \#include $<$openglwindow.\-h$>$}
+{\ttfamily \#include $<$openglwindow.\+h$>$}
 
-Inheritance diagram for Open\-G\-L\-Window\-:\begin{figure}[H]
+Inheritance diagram for Open\+G\+L\+Window\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classOpenGLWindow}
@@ -14,179 +13,188 @@ Inheritance diagram for Open\-G\-L\-Window\-:\begin{figure}[H]
 \subsection*{Public Slots}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classOpenGLWindow_abea9e50147496e5110b86f03122fbece}{render\-Later} ()
+void \hyperlink{classOpenGLWindow_abea9e50147496e5110b86f03122fbece}{render\+Later} ()
 \item 
-void \hyperlink{classOpenGLWindow_a8398ed62d646739fe54fae94c477ad1d}{render\-Now} ()
+void \hyperlink{classOpenGLWindow_a8398ed62d646739fe54fae94c477ad1d}{render\+Now} ()
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classOpenGLWindow_a90bb7dbb2dcb27b1fdc56ef4ef3f25fc}{Open\-G\-L\-Window} (Q\-Window $\ast$parent=0)
+\hyperlink{classOpenGLWindow_a90bb7dbb2dcb27b1fdc56ef4ef3f25fc}{Open\+G\+L\+Window} (Q\+Window $\ast$parent=0)
 \item 
-\hyperlink{classOpenGLWindow_aa220b192c71871aab9100f4058a8d62d}{$\sim$\-Open\-G\-L\-Window} ()
+\hyperlink{classOpenGLWindow_aa220b192c71871aab9100f4058a8d62d}{$\sim$\+Open\+G\+L\+Window} ()
 \item 
-virtual void \hyperlink{classOpenGLWindow_a186cffcb57053e4eda4875b1ab9aac92}{render} (Q\-Painter $\ast$painter)
+virtual void \hyperlink{classOpenGLWindow_add04ac504dabc486b3847b107e8f1384}{clear\+Background} ()=0
 \item 
-virtual void \hyperlink{classOpenGLWindow_ac9e094864803a0b29364f42c2a47fa8c}{render} ()
+virtual void \hyperlink{classOpenGLWindow_a0a15a4a8fc68d4318f3a59e884db1497}{render\+With\+Painter} (Q\+Painter $\ast$painter)=0
+\item 
+virtual void \hyperlink{classOpenGLWindow_aa0cf1ae550a2827b513bfde10f7e97b6}{render\+Open\+GL} ()=0
 \item 
 virtual void \hyperlink{classOpenGLWindow_aed4e2ee22e113b2f7e7d1eba4ef1b965}{initialize} ()
 \item 
-void \hyperlink{classOpenGLWindow_a68317e3284d7b0ffba262eac059b6b9e}{set\-Animating} (bool animating)
+void \hyperlink{classOpenGLWindow_a68317e3284d7b0ffba262eac059b6b9e}{set\+Animating} (bool animating)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event} (Q\-Event $\ast$event)
+bool \hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event} (Q\+Event $\ast$event)
 \item 
-void \hyperlink{classOpenGLWindow_a991121ba7a4bbfa208fa74e5c86004c3}{expose\-Event} (Q\-Expose\-Event $\ast$\hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event})
+void \hyperlink{classOpenGLWindow_a991121ba7a4bbfa208fa74e5c86004c3}{expose\+Event} (Q\+Expose\+Event $\ast$\hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event})
 \item 
-void \hyperlink{classOpenGLWindow_ae0e1d4dc039ce114ac615ce1dee38e51}{resize\-Event} (Q\-Resize\-Event $\ast$\hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event})
+void \hyperlink{classOpenGLWindow_ae0e1d4dc039ce114ac615ce1dee38e51}{resize\+Event} (Q\+Resize\+Event $\ast$\hyperlink{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{event})
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 75 of file openglwindow.\-h.
+Definition at line 75 of file openglwindow.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classOpenGLWindow_a90bb7dbb2dcb27b1fdc56ef4ef3f25fc}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!Open\-G\-L\-Window@{Open\-G\-L\-Window}}
-\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{Open\-G\-L\-Window}]{\setlength{\rightskip}{0pt plus 5cm}Open\-G\-L\-Window\-::\-Open\-G\-L\-Window (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{Open\+G\+L\+Window(\+Q\+Window $\ast$parent=0)}{OpenGLWindow(QWindow *parent=0)}}]{\setlength{\rightskip}{0pt plus 5cm}Open\+G\+L\+Window\+::\+Open\+G\+L\+Window (
 \begin{DoxyParamCaption}
-\item[{Q\-Window $\ast$}]{parent = {\ttfamily 0}}
+\item[{Q\+Window $\ast$}]{parent = {\ttfamily 0}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classOpenGLWindow_a90bb7dbb2dcb27b1fdc56ef4ef3f25fc}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classOpenGLWindow_a90bb7dbb2dcb27b1fdc56ef4ef3f25fc}{}\label{classOpenGLWindow_a90bb7dbb2dcb27b1fdc56ef4ef3f25fc}
 
 
-Definition at line 76 of file openglwindow.\-cpp.
+Definition at line 76 of file openglwindow.\+cpp.
 
-\hypertarget{classOpenGLWindow_aa220b192c71871aab9100f4058a8d62d}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!$\sim$\-Open\-G\-L\-Window@{$\sim$\-Open\-G\-L\-Window}}
-\index{$\sim$\-Open\-G\-L\-Window@{$\sim$\-Open\-G\-L\-Window}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{$\sim$\-Open\-G\-L\-Window}]{\setlength{\rightskip}{0pt plus 5cm}Open\-G\-L\-Window\-::$\sim$\-Open\-G\-L\-Window (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!````~Open\+G\+L\+Window@{$\sim$\+Open\+G\+L\+Window}}
+\index{````~Open\+G\+L\+Window@{$\sim$\+Open\+G\+L\+Window}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{$\sim$\+Open\+G\+L\+Window()}{~OpenGLWindow()}}]{\setlength{\rightskip}{0pt plus 5cm}Open\+G\+L\+Window\+::$\sim$\+Open\+G\+L\+Window (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classOpenGLWindow_aa220b192c71871aab9100f4058a8d62d}
+)}\hypertarget{classOpenGLWindow_aa220b192c71871aab9100f4058a8d62d}{}\label{classOpenGLWindow_aa220b192c71871aab9100f4058a8d62d}
 
 
-Definition at line 86 of file openglwindow.\-cpp.
+Definition at line 86 of file openglwindow.\+cpp.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!event@{event}}
-\index{event@{event}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{event}]{\setlength{\rightskip}{0pt plus 5cm}bool Open\-G\-L\-Window\-::event (
-\begin{DoxyParamCaption}
-\item[{Q\-Event $\ast$}]{event}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}
-
-
-Definition at line 120 of file openglwindow.\-cpp.
-
-\hypertarget{classOpenGLWindow_a991121ba7a4bbfa208fa74e5c86004c3}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!expose\-Event@{expose\-Event}}
-\index{expose\-Event@{expose\-Event}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{expose\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::expose\-Event (
-\begin{DoxyParamCaption}
-\item[{Q\-Expose\-Event $\ast$}]{event}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classOpenGLWindow_a991121ba7a4bbfa208fa74e5c86004c3}
-
-
-Definition at line 131 of file openglwindow.\-cpp.
-
-\hypertarget{classOpenGLWindow_aed4e2ee22e113b2f7e7d1eba4ef1b965}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!initialize@{initialize}}
-\index{initialize@{initialize}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{initialize}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::initialize (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!clear\+Background@{clear\+Background}}
+\index{clear\+Background@{clear\+Background}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{clear\+Background()=0}{clearBackground()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Open\+G\+L\+Window\+::clear\+Background (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classOpenGLWindow_aed4e2ee22e113b2f7e7d1eba4ef1b965}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classOpenGLWindow_add04ac504dabc486b3847b107e8f1384}{}\label{classOpenGLWindow_add04ac504dabc486b3847b107e8f1384}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1Viewport_a9c35de3f7c9d7c860c494081b48309b3}{Ship\-C\-A\-D\-::\-Viewport}.
+Implemented in \hyperlink{classShipCAD_1_1Viewport_ac0c02d6e3a0933669de2292f041c69e6}{Ship\+C\+A\+D\+::\+Viewport}.
 
-
-
-Definition at line 95 of file openglwindow.\-cpp.
-
-\hypertarget{classOpenGLWindow_a186cffcb57053e4eda4875b1ab9aac92}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!render@{render}}
-\index{render@{render}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::render (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!event@{event}}
+\index{event@{event}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{event(\+Q\+Event $\ast$event)}{event(QEvent *event)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Open\+G\+L\+Window\+::event (
 \begin{DoxyParamCaption}
-\item[{Q\-Painter $\ast$}]{painter}
+\item[{Q\+Event $\ast$}]{event}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classOpenGLWindow_a186cffcb57053e4eda4875b1ab9aac92}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}{}\label{classOpenGLWindow_a1e3045cffb900de55b7384f5091c9d94}
 
 
-Definition at line 90 of file openglwindow.\-cpp.
+Definition at line 105 of file openglwindow.\+cpp.
 
-\hypertarget{classOpenGLWindow_ac9e094864803a0b29364f42c2a47fa8c}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!render@{render}}
-\index{render@{render}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::render (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!expose\+Event@{expose\+Event}}
+\index{expose\+Event@{expose\+Event}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{expose\+Event(\+Q\+Expose\+Event $\ast$event)}{exposeEvent(QExposeEvent *event)}}]{\setlength{\rightskip}{0pt plus 5cm}void Open\+G\+L\+Window\+::expose\+Event (
 \begin{DoxyParamCaption}
-{}
+\item[{Q\+Expose\+Event $\ast$}]{event}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classOpenGLWindow_ac9e094864803a0b29364f42c2a47fa8c}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOpenGLWindow_a991121ba7a4bbfa208fa74e5c86004c3}{}\label{classOpenGLWindow_a991121ba7a4bbfa208fa74e5c86004c3}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1Viewport_a9e81b526db3c2b508322c29b9fda5845}{Ship\-C\-A\-D\-::\-Viewport}.
+Definition at line 116 of file openglwindow.\+cpp.
 
-
-
-Definition at line 99 of file openglwindow.\-cpp.
-
-\hypertarget{classOpenGLWindow_abea9e50147496e5110b86f03122fbece}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!render\-Later@{render\-Later}}
-\index{render\-Later@{render\-Later}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{render\-Later}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::render\-Later (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!initialize@{initialize}}
+\index{initialize@{initialize}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{initialize()}{initialize()}}]{\setlength{\rightskip}{0pt plus 5cm}void Open\+G\+L\+Window\+::initialize (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classOpenGLWindow_abea9e50147496e5110b86f03122fbece}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classOpenGLWindow_aed4e2ee22e113b2f7e7d1eba4ef1b965}{}\label{classOpenGLWindow_aed4e2ee22e113b2f7e7d1eba4ef1b965}
 
 
-Definition at line 112 of file openglwindow.\-cpp.
+Reimplemented in \hyperlink{classShipCAD_1_1Viewport_a9c35de3f7c9d7c860c494081b48309b3}{Ship\+C\+A\+D\+::\+Viewport}.
 
-\hypertarget{classOpenGLWindow_a8398ed62d646739fe54fae94c477ad1d}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!render\-Now@{render\-Now}}
-\index{render\-Now@{render\-Now}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{render\-Now}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::render\-Now (
+
+
+Definition at line 91 of file openglwindow.\+cpp.
+
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!render\+Later@{render\+Later}}
+\index{render\+Later@{render\+Later}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{render\+Later}{renderLater}}]{\setlength{\rightskip}{0pt plus 5cm}void Open\+G\+L\+Window\+::render\+Later (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [slot]}}}\label{classOpenGLWindow_a8398ed62d646739fe54fae94c477ad1d}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classOpenGLWindow_abea9e50147496e5110b86f03122fbece}{}\label{classOpenGLWindow_abea9e50147496e5110b86f03122fbece}
 
 
-Definition at line 147 of file openglwindow.\-cpp.
+Definition at line 97 of file openglwindow.\+cpp.
 
-\hypertarget{classOpenGLWindow_ae0e1d4dc039ce114ac615ce1dee38e51}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!resize\-Event@{resize\-Event}}
-\index{resize\-Event@{resize\-Event}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{resize\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::resize\-Event (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!render\+Now@{render\+Now}}
+\index{render\+Now@{render\+Now}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{render\+Now}{renderNow}}]{\setlength{\rightskip}{0pt plus 5cm}void Open\+G\+L\+Window\+::render\+Now (
 \begin{DoxyParamCaption}
-\item[{Q\-Resize\-Event $\ast$}]{event}
+{}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}}\label{classOpenGLWindow_ae0e1d4dc039ce114ac615ce1dee38e51}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classOpenGLWindow_a8398ed62d646739fe54fae94c477ad1d}{}\label{classOpenGLWindow_a8398ed62d646739fe54fae94c477ad1d}
 
 
-Definition at line 139 of file openglwindow.\-cpp.
+Definition at line 132 of file openglwindow.\+cpp.
 
-\hypertarget{classOpenGLWindow_a68317e3284d7b0ffba262eac059b6b9e}{\index{Open\-G\-L\-Window@{Open\-G\-L\-Window}!set\-Animating@{set\-Animating}}
-\index{set\-Animating@{set\-Animating}!OpenGLWindow@{Open\-G\-L\-Window}}
-\subsubsection[{set\-Animating}]{\setlength{\rightskip}{0pt plus 5cm}void Open\-G\-L\-Window\-::set\-Animating (
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!render\+Open\+GL@{render\+Open\+GL}}
+\index{render\+Open\+GL@{render\+Open\+GL}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{render\+Open\+G\+L()=0}{renderOpenGL()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Open\+G\+L\+Window\+::render\+Open\+GL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classOpenGLWindow_aa0cf1ae550a2827b513bfde10f7e97b6}{}\label{classOpenGLWindow_aa0cf1ae550a2827b513bfde10f7e97b6}
+
+
+Implemented in \hyperlink{classShipCAD_1_1Viewport_ae1a93920fcaf1b6eaa46d390bbd15ce4}{Ship\+C\+A\+D\+::\+Viewport}.
+
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!render\+With\+Painter@{render\+With\+Painter}}
+\index{render\+With\+Painter@{render\+With\+Painter}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{render\+With\+Painter(\+Q\+Painter $\ast$painter)=0}{renderWithPainter(QPainter *painter)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Open\+G\+L\+Window\+::render\+With\+Painter (
+\begin{DoxyParamCaption}
+\item[{Q\+Painter $\ast$}]{painter}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classOpenGLWindow_a0a15a4a8fc68d4318f3a59e884db1497}{}\label{classOpenGLWindow_a0a15a4a8fc68d4318f3a59e884db1497}
+
+
+Implemented in \hyperlink{classShipCAD_1_1Viewport_ad48bfa81c7034792f290ed47bac203c5}{Ship\+C\+A\+D\+::\+Viewport}.
+
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!resize\+Event@{resize\+Event}}
+\index{resize\+Event@{resize\+Event}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{resize\+Event(\+Q\+Resize\+Event $\ast$event)}{resizeEvent(QResizeEvent *event)}}]{\setlength{\rightskip}{0pt plus 5cm}void Open\+G\+L\+Window\+::resize\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Resize\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classOpenGLWindow_ae0e1d4dc039ce114ac615ce1dee38e51}{}\label{classOpenGLWindow_ae0e1d4dc039ce114ac615ce1dee38e51}
+
+
+Definition at line 124 of file openglwindow.\+cpp.
+
+\index{Open\+G\+L\+Window@{Open\+G\+L\+Window}!set\+Animating@{set\+Animating}}
+\index{set\+Animating@{set\+Animating}!Open\+G\+L\+Window@{Open\+G\+L\+Window}}
+\subsubsection[{\texorpdfstring{set\+Animating(bool animating)}{setAnimating(bool animating)}}]{\setlength{\rightskip}{0pt plus 5cm}void Open\+G\+L\+Window\+::set\+Animating (
 \begin{DoxyParamCaption}
 \item[{bool}]{animating}
 \end{DoxyParamCaption}
-)}}\label{classOpenGLWindow_a68317e3284d7b0ffba262eac059b6b9e}
+)}\hypertarget{classOpenGLWindow_a68317e3284d7b0ffba262eac059b6b9e}{}\label{classOpenGLWindow_a68317e3284d7b0ffba262eac059b6b9e}
 
 
-Definition at line 179 of file openglwindow.\-cpp.
+Definition at line 173 of file openglwindow.\+cpp.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{openglwindow_8h}{openglwindow.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{openglwindow_8cpp}{openglwindow.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{openglwindow_8h}{openglwindow.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{openglwindow_8cpp}{openglwindow.\+cpp}\end{DoxyCompactItemize}

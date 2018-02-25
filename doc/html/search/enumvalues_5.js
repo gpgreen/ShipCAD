@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['svcorner',['svCorner',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba8d802131f84b0a9edf8a419eded859d0',1,'ShipCAD']]],
-  ['svcrease',['svCrease',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba79fc4e40055439350070993be28ec8ca',1,'ShipCAD']]],
-  ['svdart',['svDart',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60debaf17373a62a5f899a61ed17d28e103d24',1,'ShipCAD']]],
-  ['svregular',['svRegular',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba11889066d8ae7a44f297f45684bb99de',1,'ShipCAD']]]
+  ['poccw',['poCCW',['../namespaceShipCAD.html#a22a4489ec7a6505c3c30fa7562175ca4a01f1428a8463fbd20d80a779e70b39cd',1,'ShipCAD']]],
+  ['pocw',['poCW',['../namespaceShipCAD.html#a22a4489ec7a6505c3c30fa7562175ca4a785617c870ff5f0a2321ca2f6542aa7b',1,'ShipCAD']]]
 ];

@@ -1,0 +1,225 @@
+\hypertarget{classOrderedPointMap}{}\section{Ordered\+Point\+Map Class Reference}
+\label{classOrderedPointMap}\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+
+
+class to keep collection of Subdivision\+Control\+Points and associated index  
+
+
+
+
+{\ttfamily \#include $<$orderedmap.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classOrderedPointMapIterator}{Ordered\+Point\+Map\+Iterator} \hyperlink{classOrderedPointMap_ae58ae7176ea9345af14a8f53bbe57d69}{iterator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classOrderedPointMap_a5e74979296c587cfa9153358f286c4bb}{Ordered\+Point\+Map} ()
+\item 
+\hyperlink{classOrderedPointMap_ab7a8f5d61169c6ac0422de451ac155d1}{$\sim$\+Ordered\+Point\+Map} ()
+\item 
+size\+\_\+t \hyperlink{classOrderedPointMap_a17d63e3732a91baa412fd265d18ac7c1}{size} () const 
+\item 
+void \hyperlink{classOrderedPointMap_afc97596deeaa4241ab8533aa2df0f8cf}{clear} ()
+\item 
+void \hyperlink{classOrderedPointMap_a0d5a8aa95c1f0b1646ea79f18a26f5fb}{add} (\hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$point)
+\item 
+bool \hyperlink{classOrderedPointMap_aeeee3160dd7ee2ee0fb1f35fa424e676}{has} (const \hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$point) const 
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$ \hyperlink{classOrderedPointMap_ae87e03500550c05c9b5fe8bd5554a88a}{get} (size\+\_\+t index) const 
+\item 
+size\+\_\+t \hyperlink{classOrderedPointMap_a34672c121eb0c4ca4229735fd62ee86a}{get} (const \hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$point) const 
+\item 
+void \hyperlink{classOrderedPointMap_a4625fae33a120853edad2ff7bf28e63b}{remove} (\hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$point)
+\item 
+\hyperlink{classOrderedPointMap_ae58ae7176ea9345af14a8f53bbe57d69}{iterator} \hyperlink{classOrderedPointMap_a4e4a269c790a35950901207c0d9ff4fb}{begin} ()
+\item 
+\hyperlink{classOrderedPointMap_ae58ae7176ea9345af14a8f53bbe57d69}{iterator} \hyperlink{classOrderedPointMap_a2b4e1630f6b13dba32a7200c670331cf}{end} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classOrderedPointMap_a23b5b6222b656298ba9d9a245ea382b5}{reorder} ()
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classOrderedPointMap_a7bb53502d3b4a6a62a846b20b2192e6b}{Ordered\+Point\+Map\+Iterator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class to keep collection of Subdivision\+Control\+Points and associated index 
+
+When selecting points, we need to keep track of the order they are selected. If we just use a vector though, we have linear lookup to see if it belongs to the selected set. This class primarily stores the points in a set, so we get O(1) lookup of point membership, and O(n) lookup by order. Since we only check for order when doing a user operation, this is the desired behaviour
+
+If a point is already in the set, the currently selected order of the points is not changed nor is the point in the set more than once. 
+
+Definition at line 120 of file orderedmap.\+h.
+
+
+
+\subsection{Member Typedef Documentation}
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!iterator@{iterator}}
+\index{iterator@{iterator}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{iterator}{iterator}}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf Ordered\+Point\+Map\+Iterator} {\bf Ordered\+Point\+Map\+::iterator}}\hypertarget{classOrderedPointMap_ae58ae7176ea9345af14a8f53bbe57d69}{}\label{classOrderedPointMap_ae58ae7176ea9345af14a8f53bbe57d69}
+
+
+Definition at line 124 of file orderedmap.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{Ordered\+Point\+Map()}{OrderedPointMap()}}]{\setlength{\rightskip}{0pt plus 5cm}Ordered\+Point\+Map\+::\+Ordered\+Point\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}\hypertarget{classOrderedPointMap_a5e74979296c587cfa9153358f286c4bb}{}\label{classOrderedPointMap_a5e74979296c587cfa9153358f286c4bb}
+
+
+Definition at line 127 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!````~Ordered\+Point\+Map@{$\sim$\+Ordered\+Point\+Map}}
+\index{````~Ordered\+Point\+Map@{$\sim$\+Ordered\+Point\+Map}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{$\sim$\+Ordered\+Point\+Map()}{~OrderedPointMap()}}]{\setlength{\rightskip}{0pt plus 5cm}Ordered\+Point\+Map\+::$\sim$\+Ordered\+Point\+Map (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_ab7a8f5d61169c6ac0422de451ac155d1}{}\label{classOrderedPointMap_ab7a8f5d61169c6ac0422de451ac155d1}
+
+
+Definition at line 129 of file orderedmap.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!add@{add}}
+\index{add@{add}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{add(\+Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point $\ast$point)}{add(ShipCAD::SubdivisionControlPoint *point)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ordered\+Point\+Map\+::add (
+\begin{DoxyParamCaption}
+\item[{{\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$}]{point}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_a0d5a8aa95c1f0b1646ea79f18a26f5fb}{}\label{classOrderedPointMap_a0d5a8aa95c1f0b1646ea79f18a26f5fb}
+
+
+Definition at line 141 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!begin@{begin}}
+\index{begin@{begin}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{begin()}{begin()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf iterator} Ordered\+Point\+Map\+::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_a4e4a269c790a35950901207c0d9ff4fb}{}\label{classOrderedPointMap_a4e4a269c790a35950901207c0d9ff4fb}
+
+
+Definition at line 186 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!clear@{clear}}
+\index{clear@{clear}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{clear()}{clear()}}]{\setlength{\rightskip}{0pt plus 5cm}void Ordered\+Point\+Map\+::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_afc97596deeaa4241ab8533aa2df0f8cf}{}\label{classOrderedPointMap_afc97596deeaa4241ab8533aa2df0f8cf}
+
+
+Definition at line 136 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!end@{end}}
+\index{end@{end}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{end()}{end()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf iterator} Ordered\+Point\+Map\+::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_a2b4e1630f6b13dba32a7200c670331cf}{}\label{classOrderedPointMap_a2b4e1630f6b13dba32a7200c670331cf}
+
+
+Definition at line 187 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!get@{get}}
+\index{get@{get}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{get(size\+\_\+t index) const }{get(size_t index) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point}$\ast$ Ordered\+Point\+Map\+::get (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{index}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_ae87e03500550c05c9b5fe8bd5554a88a}{}\label{classOrderedPointMap_ae87e03500550c05c9b5fe8bd5554a88a}
+
+
+Definition at line 157 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!get@{get}}
+\index{get@{get}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{get(const Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point $\ast$point) const }{get(const ShipCAD::SubdivisionControlPoint *point) const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Ordered\+Point\+Map\+::get (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$}]{point}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_a34672c121eb0c4ca4229735fd62ee86a}{}\label{classOrderedPointMap_a34672c121eb0c4ca4229735fd62ee86a}
+
+
+Definition at line 167 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!has@{has}}
+\index{has@{has}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{has(const Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point $\ast$point) const }{has(const ShipCAD::SubdivisionControlPoint *point) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Ordered\+Point\+Map\+::has (
+\begin{DoxyParamCaption}
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$}]{point}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_aeeee3160dd7ee2ee0fb1f35fa424e676}{}\label{classOrderedPointMap_aeeee3160dd7ee2ee0fb1f35fa424e676}
+
+
+Definition at line 149 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!remove@{remove}}
+\index{remove@{remove}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{remove(\+Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point $\ast$point)}{remove(ShipCAD::SubdivisionControlPoint *point)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ordered\+Point\+Map\+::remove (
+\begin{DoxyParamCaption}
+\item[{{\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} $\ast$}]{point}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_a4625fae33a120853edad2ff7bf28e63b}{}\label{classOrderedPointMap_a4625fae33a120853edad2ff7bf28e63b}
+
+
+Definition at line 177 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!reorder@{reorder}}
+\index{reorder@{reorder}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{reorder()}{reorder()}}]{\setlength{\rightskip}{0pt plus 5cm}void Ordered\+Point\+Map\+::reorder (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classOrderedPointMap_a23b5b6222b656298ba9d9a245ea382b5}{}\label{classOrderedPointMap_a23b5b6222b656298ba9d9a245ea382b5}
+
+
+Definition at line 193 of file orderedmap.\+h.
+
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!size@{size}}
+\index{size@{size}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{size() const }{size() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Ordered\+Point\+Map\+::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classOrderedPointMap_a17d63e3732a91baa412fd265d18ac7c1}{}\label{classOrderedPointMap_a17d63e3732a91baa412fd265d18ac7c1}
+
+
+Definition at line 131 of file orderedmap.\+h.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}!Ordered\+Point\+Map\+Iterator@{Ordered\+Point\+Map\+Iterator}}
+\index{Ordered\+Point\+Map\+Iterator@{Ordered\+Point\+Map\+Iterator}!Ordered\+Point\+Map@{Ordered\+Point\+Map}}
+\subsubsection[{\texorpdfstring{Ordered\+Point\+Map\+Iterator}{OrderedPointMapIterator}}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Ordered\+Point\+Map\+Iterator}\hspace{0.3cm}{\ttfamily [friend]}}\hypertarget{classOrderedPointMap_a7bb53502d3b4a6a62a846b20b2192e6b}{}\label{classOrderedPointMap_a7bb53502d3b4a6a62a846b20b2192e6b}
+
+
+Definition at line 228 of file orderedmap.\+h.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Ship\+C\+A\+Dlib/\hyperlink{orderedmap_8h}{orderedmap.\+h}\end{DoxyCompactItemize}

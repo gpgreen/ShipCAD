@@ -1,11 +1,10 @@
-\hypertarget{classShipCAD_1_1MonoFaceShader}{\section{Ship\-C\-A\-D\-:\-:Mono\-Face\-Shader Class Reference}
-\label{classShipCAD_1_1MonoFaceShader}\index{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader@{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader}}
-}
+\hypertarget{classShipCAD_1_1MonoFaceShader}{}\section{Ship\+C\+AD\+:\+:Mono\+Face\+Shader Class Reference}
+\label{classShipCAD_1_1MonoFaceShader}\index{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}}
 
 
-{\ttfamily \#include $<$shader.\-h$>$}
+{\ttfamily \#include $<$shader.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Mono\-Face\-Shader\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Mono\+Face\+Shader\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.000000cm]{classShipCAD_1_1MonoFaceShader}
@@ -14,11 +13,13 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Mono\-Face\-Shader\-:\begin{figure}[H
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1MonoFaceShader_a963aa389c930d6482a58f49b2ccb4473}{Mono\-Face\-Shader} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
+\hyperlink{classShipCAD_1_1MonoFaceShader_a963aa389c930d6482a58f49b2ccb4473}{Mono\+Face\+Shader} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
 \item 
-virtual \hyperlink{classShipCAD_1_1MonoFaceShader_ab1f3cb853a5a2b04f9c4944d9eca30b4}{$\sim$\-Mono\-Face\-Shader} ()
+virtual \hyperlink{classShipCAD_1_1MonoFaceShader_ab1f3cb853a5a2b04f9c4944d9eca30b4}{$\sim$\+Mono\+Face\+Shader} ()
 \item 
-virtual void \hyperlink{classShipCAD_1_1MonoFaceShader_a9a358ec63af4b067449e772cbc735d5a}{render\-Mesh} (Q\-Color mesh\-Color, Q\-Vector$<$ Q\-Vector3\-D $>$ \&vertices, Q\-Vector$<$ Q\-Vector3\-D $>$ \&normals)
+void \hyperlink{classShipCAD_1_1MonoFaceShader_a9fee4d776ac7604b35b868c2a4421d92}{set\+Matrix} (const Q\+Matrix4x4 \&matrix)
+\item 
+virtual void \hyperlink{classShipCAD_1_1MonoFaceShader_a9a358ec63af4b067449e772cbc735d5a}{render\+Mesh} (Q\+Color mesh\+Color, Q\+Vector$<$ Q\+Vector3D $>$ \&vertices, Q\+Vector$<$ Q\+Vector3D $>$ \&normals)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -26,56 +27,67 @@ virtual void \hyperlink{classShipCAD_1_1MonoFaceShader_a9a358ec63af4b067449e772c
 \subsection{Detailed Description}
 
 
-Definition at line 109 of file shader.\-h.
+Definition at line 114 of file shader.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1MonoFaceShader_a963aa389c930d6482a58f49b2ccb4473}{\index{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader@{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader}!Mono\-Face\-Shader@{Mono\-Face\-Shader}}
-\index{Mono\-Face\-Shader@{Mono\-Face\-Shader}!ShipCAD::MonoFaceShader@{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader}}
-\subsubsection[{Mono\-Face\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}Mono\-Face\-Shader\-::\-Mono\-Face\-Shader (
+\index{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}!Mono\+Face\+Shader@{Mono\+Face\+Shader}}
+\index{Mono\+Face\+Shader@{Mono\+Face\+Shader}!Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{Mono\+Face\+Shader(\+Viewport $\ast$vp)}{MonoFaceShader(Viewport *vp)}}]{\setlength{\rightskip}{0pt plus 5cm}Mono\+Face\+Shader\+::\+Mono\+Face\+Shader (
 \begin{DoxyParamCaption}
 \item[{{\bf Viewport} $\ast$}]{vp}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1MonoFaceShader_a963aa389c930d6482a58f49b2ccb4473}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1MonoFaceShader_a963aa389c930d6482a58f49b2ccb4473}{}\label{classShipCAD_1_1MonoFaceShader_a963aa389c930d6482a58f49b2ccb4473}
 
 
-Definition at line 177 of file shader.\-cpp.
+Definition at line 190 of file shader.\+cpp.
 
-\hypertarget{classShipCAD_1_1MonoFaceShader_ab1f3cb853a5a2b04f9c4944d9eca30b4}{\index{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader@{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader}!$\sim$\-Mono\-Face\-Shader@{$\sim$\-Mono\-Face\-Shader}}
-\index{$\sim$\-Mono\-Face\-Shader@{$\sim$\-Mono\-Face\-Shader}!ShipCAD::MonoFaceShader@{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader}}
-\subsubsection[{$\sim$\-Mono\-Face\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Mono\-Face\-Shader\-::$\sim$\-Mono\-Face\-Shader (
+\index{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}!````~Mono\+Face\+Shader@{$\sim$\+Mono\+Face\+Shader}}
+\index{````~Mono\+Face\+Shader@{$\sim$\+Mono\+Face\+Shader}!Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{$\sim$\+Mono\+Face\+Shader()}{~MonoFaceShader()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\+C\+A\+D\+::\+Mono\+Face\+Shader\+::$\sim$\+Mono\+Face\+Shader (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1MonoFaceShader_ab1f3cb853a5a2b04f9c4944d9eca30b4}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1MonoFaceShader_ab1f3cb853a5a2b04f9c4944d9eca30b4}{}\label{classShipCAD_1_1MonoFaceShader_ab1f3cb853a5a2b04f9c4944d9eca30b4}
 
 
-Definition at line 116 of file shader.\-h.
+Definition at line 121 of file shader.\+h.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1MonoFaceShader_a9a358ec63af4b067449e772cbc735d5a}{\index{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader@{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader}!render\-Mesh@{render\-Mesh}}
-\index{render\-Mesh@{render\-Mesh}!ShipCAD::MonoFaceShader@{Ship\-C\-A\-D\-::\-Mono\-Face\-Shader}}
-\subsubsection[{render\-Mesh}]{\setlength{\rightskip}{0pt plus 5cm}void Mono\-Face\-Shader\-::render\-Mesh (
+\index{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}!render\+Mesh@{render\+Mesh}}
+\index{render\+Mesh@{render\+Mesh}!Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{render\+Mesh(\+Q\+Color mesh\+Color, Q\+Vector$<$ Q\+Vector3\+D $>$ \&vertices, Q\+Vector$<$ Q\+Vector3\+D $>$ \&normals)}{renderMesh(QColor meshColor, QVector< QVector3D > &vertices, QVector< QVector3D > &normals)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mono\+Face\+Shader\+::render\+Mesh (
 \begin{DoxyParamCaption}
-\item[{Q\-Color}]{mesh\-Color, }
-\item[{Q\-Vector$<$ Q\-Vector3\-D $>$ \&}]{vertices, }
-\item[{Q\-Vector$<$ Q\-Vector3\-D $>$ \&}]{normals}
+\item[{Q\+Color}]{mesh\+Color, }
+\item[{Q\+Vector$<$ Q\+Vector3D $>$ \&}]{vertices, }
+\item[{Q\+Vector$<$ Q\+Vector3D $>$ \&}]{normals}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1MonoFaceShader_a9a358ec63af4b067449e772cbc735d5a}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1MonoFaceShader_a9a358ec63af4b067449e772cbc735d5a}{}\label{classShipCAD_1_1MonoFaceShader_a9a358ec63af4b067449e772cbc735d5a}
 
 
-Implements \hyperlink{classShipCAD_1_1FaceShader_adb71f051d1481058fe905f985a7166c1}{Ship\-C\-A\-D\-::\-Face\-Shader}.
-
-
-
-Definition at line 188 of file shader.\-cpp.
+Implements \hyperlink{classShipCAD_1_1FaceShader_adb71f051d1481058fe905f985a7166c1}{Ship\+C\+A\+D\+::\+Face\+Shader}.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+Definition at line 207 of file shader.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}!set\+Matrix@{set\+Matrix}}
+\index{set\+Matrix@{set\+Matrix}!Ship\+C\+A\+D\+::\+Mono\+Face\+Shader@{Ship\+C\+A\+D\+::\+Mono\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{set\+Matrix(const Q\+Matrix4x4 \&matrix)}{setMatrix(const QMatrix4x4 &matrix)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mono\+Face\+Shader\+::set\+Matrix (
+\begin{DoxyParamCaption}
+\item[{const Q\+Matrix4x4 \&}]{matrix}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1MonoFaceShader_a9fee4d776ac7604b35b868c2a4421d92}{}\label{classShipCAD_1_1MonoFaceShader_a9fee4d776ac7604b35b868c2a4421d92}
+
+
+Definition at line 202 of file shader.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{shader_8h}{shader.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{shader_8cpp}{shader.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{shader_8h}{shader.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{shader_8cpp}{shader.\+cpp}\end{DoxyCompactItemize}

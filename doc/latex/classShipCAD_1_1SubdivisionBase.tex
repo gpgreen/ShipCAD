@@ -1,6 +1,5 @@
-\hypertarget{classShipCAD_1_1SubdivisionBase}{\section{Ship\-C\-A\-D\-:\-:Subdivision\-Base Class Reference}
-\label{classShipCAD_1_1SubdivisionBase}\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-}
+\hypertarget{classShipCAD_1_1SubdivisionBase}{}\section{Ship\+C\+AD\+:\+:Subdivision\+Base Class Reference}
+\label{classShipCAD_1_1SubdivisionBase}\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
 
 
 the base class for all subdivision points, edges and faces  
@@ -8,9 +7,9 @@ the base class for all subdivision points, edges and faces
 
 
 
-{\ttfamily \#include $<$subdivbase.\-h$>$}
+{\ttfamily \#include $<$subdivbase.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Base\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Subdivision\+Base\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.534247cm]{classShipCAD_1_1SubdivisionBase}
@@ -19,27 +18,29 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Base\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionBase_ad424b99e73d138f565a152ed0ee648cb}{Subdivision\-Base} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
+\hyperlink{classShipCAD_1_1SubdivisionBase_ad424b99e73d138f565a152ed0ee648cb}{Subdivision\+Base} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\+Surface} $\ast$owner)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-virtual \hyperlink{classShipCAD_1_1SubdivisionBase_a12b4adebcd9fb52d4d82d9ff469e144d}{$\sim$\-Subdivision\-Base} ()
+virtual \hyperlink{classShipCAD_1_1SubdivisionBase_a12b4adebcd9fb52d4d82d9ff469e144d}{$\sim$\+Subdivision\+Base} ()
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionBase_a0b9a68b5c7e6a20cf52a465f2387ffba}{get\-Owner} ()
+\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\+Surface} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionBase_a0b9a68b5c7e6a20cf52a465f2387ffba}{get\+Owner} ()
 \begin{DoxyCompactList}\small\item\em get the owning surface \end{DoxyCompactList}\item 
-virtual void \hyperlink{classShipCAD_1_1SubdivisionBase_a8f64480f79c9260facc2d27cd19a36ed}{set\-Owner} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$newowner)
+const \hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\+Surface} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionBase_a8e98f69a132bcc75a0f6515b7a8a80f5}{get\+Owner} () const 
+\begin{DoxyCompactList}\small\item\em get the owning surface \end{DoxyCompactList}\item 
+virtual void \hyperlink{classShipCAD_1_1SubdivisionBase_a8f64480f79c9260facc2d27cd19a36ed}{set\+Owner} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\+Surface} $\ast$newowner)
 \begin{DoxyCompactList}\small\item\em set the owing surface \end{DoxyCompactList}\item 
 virtual void \hyperlink{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}{clear} ()=0
 \begin{DoxyCompactList}\small\item\em reset this element to default values \end{DoxyCompactList}\item 
-virtual void \hyperlink{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
+virtual void \hyperlink{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{dump} (std\+::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
 \begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionBase_a024aa781bbf2e54b6fb088e33126998e}{priv\-\_\-dump} (std\-::ostream \&os, const char $\ast$prefix) const 
+void \hyperlink{classShipCAD_1_1SubdivisionBase_a024aa781bbf2e54b6fb088e33126998e}{priv\+\_\+dump} (std\+::ostream \&os, const char $\ast$prefix) const 
 \begin{DoxyCompactList}\small\item\em dump the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionBase_a164481259436bf18bc22a0626ab66c09}{\-\_\-owner}
+\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\+Surface} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionBase_a164481259436bf18bc22a0626ab66c09}{\+\_\+owner}
 \end{DoxyCompactItemize}
 
 
@@ -48,18 +49,18 @@ the base class for all subdivision points, edges and faces
 
 
 
-Definition at line 45 of file subdivbase.\-h.
+Definition at line 45 of file subdivbase.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionBase_ad424b99e73d138f565a152ed0ee648cb}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!Subdivision\-Base@{Subdivision\-Base}}
-\index{Subdivision\-Base@{Subdivision\-Base}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{Subdivision\-Base}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Base\-::\-Subdivision\-Base (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!Subdivision\+Base@{Subdivision\+Base}}
+\index{Subdivision\+Base@{Subdivision\+Base}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{Subdivision\+Base(\+Subdivision\+Surface $\ast$owner)}{SubdivisionBase(SubdivisionSurface *owner)}}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\+Base\+::\+Subdivision\+Base (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
+\item[{{\bf Subdivision\+Surface} $\ast$}]{owner}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1SubdivisionBase_ad424b99e73d138f565a152ed0ee648cb}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1SubdivisionBase_ad424b99e73d138f565a152ed0ee648cb}{}\label{classShipCAD_1_1SubdivisionBase_ad424b99e73d138f565a152ed0ee648cb}
 
 
 Constructor. 
@@ -71,45 +72,45 @@ Constructor.
 \end{DoxyParams}
 
 
-Definition at line 40 of file subdivbase.\-cpp.
+Definition at line 40 of file subdivbase.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionBase_a12b4adebcd9fb52d4d82d9ff469e144d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!$\sim$\-Subdivision\-Base@{$\sim$\-Subdivision\-Base}}
-\index{$\sim$\-Subdivision\-Base@{$\sim$\-Subdivision\-Base}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{$\sim$\-Subdivision\-Base}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Base\-::$\sim$\-Subdivision\-Base (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!````~Subdivision\+Base@{$\sim$\+Subdivision\+Base}}
+\index{````~Subdivision\+Base@{$\sim$\+Subdivision\+Base}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{$\sim$\+Subdivision\+Base()}{~SubdivisionBase()}}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\+Base\+::$\sim$\+Subdivision\+Base (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionBase_a12b4adebcd9fb52d4d82d9ff469e144d}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a12b4adebcd9fb52d4d82d9ff469e144d}{}\label{classShipCAD_1_1SubdivisionBase_a12b4adebcd9fb52d4d82d9ff469e144d}
 
 
-Definition at line 46 of file subdivbase.\-cpp.
+Definition at line 46 of file subdivbase.\+cpp.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!clear@{clear}}
-\index{clear@{clear}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\-C\-A\-D\-::\-Subdivision\-Base\-::clear (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!clear@{clear}}
+\index{clear@{clear}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{clear()=0}{clear()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\+C\+A\+D\+::\+Subdivision\+Base\+::clear (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}{}\label{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}
 
 
 reset this element to default values 
 
 
 
-Implemented in \hyperlink{classShipCAD_1_1SubdivisionControlFace_ad168e31f0ef2537b3cd0f58b0c1c54e2}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}, \hyperlink{classShipCAD_1_1SubdivisionFace_a413ae7e76f559780c8a69e998974fb75}{Ship\-C\-A\-D\-::\-Subdivision\-Face}, \hyperlink{classShipCAD_1_1SubdivisionLayer_a7046d17ba87dd5ce7399f22ae327fc6e}{Ship\-C\-A\-D\-::\-Subdivision\-Layer}, \hyperlink{classShipCAD_1_1SubdivisionPoint_aef22d2b6cb48e57ce69652eeb7a69711}{Ship\-C\-A\-D\-::\-Subdivision\-Point}, \hyperlink{classShipCAD_1_1SubdivisionControlCurve_aa574f77f4abc5a8eef05e7cef7f8d8a2}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve}, and \hyperlink{classShipCAD_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}{Ship\-C\-A\-D\-::\-Subdivision\-Edge}.
+Implemented in \hyperlink{classShipCAD_1_1SubdivisionControlFace_ad168e31f0ef2537b3cd0f58b0c1c54e2}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face}, \hyperlink{classShipCAD_1_1SubdivisionFace_a413ae7e76f559780c8a69e998974fb75}{Ship\+C\+A\+D\+::\+Subdivision\+Face}, \hyperlink{classShipCAD_1_1SubdivisionLayer_a7046d17ba87dd5ce7399f22ae327fc6e}{Ship\+C\+A\+D\+::\+Subdivision\+Layer}, \hyperlink{classShipCAD_1_1SubdivisionPoint_aef22d2b6cb48e57ce69652eeb7a69711}{Ship\+C\+A\+D\+::\+Subdivision\+Point}, \hyperlink{classShipCAD_1_1SubdivisionControlCurve_aa574f77f4abc5a8eef05e7cef7f8d8a2}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Curve}, and \hyperlink{classShipCAD_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}{Ship\+C\+A\+D\+::\+Subdivision\+Edge}.
 
-\hypertarget{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!dump@{dump}}
-\index{dump@{dump}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Base\-::dump (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!dump@{dump}}
+\index{dump@{dump}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{dump(std\+::ostream \&os, const char $\ast$prefix="""") const }{dump(std::ostream &os, const char *prefix="") const }}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Base\+::dump (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
+\item[{std\+::ostream \&}]{os, }
 \item[{const char $\ast$}]{prefix = {\ttfamily \char`\"{}\char`\"{}}}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{}\label{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}
 
 
 print out the element to a stream 
@@ -123,19 +124,19 @@ print out the element to a stream
 \end{DoxyParams}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlFace_a947868fba3e9bb6c587847fb9245c9ff}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}, \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a4a9d6e45291c27f19f0d76c9b9d19048}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}, \hyperlink{classShipCAD_1_1SubdivisionPoint_aed72cf5e8dc67e980010d195f3a376a3}{Ship\-C\-A\-D\-::\-Subdivision\-Point}, \hyperlink{classShipCAD_1_1SubdivisionFace_aa5bd261ae5fc0a1c7fe8cc5328b8477f}{Ship\-C\-A\-D\-::\-Subdivision\-Face}, \hyperlink{classShipCAD_1_1SubdivisionControlEdge_abdfa96ff05eff404214a92d38d7eb715}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Edge}, \hyperlink{classShipCAD_1_1SubdivisionLayer_ab41e005f720a2bba4b2efa74bfd5943e}{Ship\-C\-A\-D\-::\-Subdivision\-Layer}, \hyperlink{classShipCAD_1_1SubdivisionControlCurve_a30e8d074583a386be2ab6343cb5f8502}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Curve}, and \hyperlink{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{Ship\-C\-A\-D\-::\-Subdivision\-Edge}.
+Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlFace_a947868fba3e9bb6c587847fb9245c9ff}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face}, \hyperlink{classShipCAD_1_1SubdivisionControlPoint_a4a9d6e45291c27f19f0d76c9b9d19048}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point}, \hyperlink{classShipCAD_1_1SubdivisionFace_aa5bd261ae5fc0a1c7fe8cc5328b8477f}{Ship\+C\+A\+D\+::\+Subdivision\+Face}, \hyperlink{classShipCAD_1_1SubdivisionPoint_aed72cf5e8dc67e980010d195f3a376a3}{Ship\+C\+A\+D\+::\+Subdivision\+Point}, \hyperlink{classShipCAD_1_1SubdivisionControlEdge_abdfa96ff05eff404214a92d38d7eb715}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Edge}, \hyperlink{classShipCAD_1_1SubdivisionLayer_ab41e005f720a2bba4b2efa74bfd5943e}{Ship\+C\+A\+D\+::\+Subdivision\+Layer}, \hyperlink{classShipCAD_1_1SubdivisionControlCurve_a30e8d074583a386be2ab6343cb5f8502}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Curve}, and \hyperlink{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{Ship\+C\+A\+D\+::\+Subdivision\+Edge}.
 
 
 
-Definition at line 51 of file subdivbase.\-cpp.
+Definition at line 51 of file subdivbase.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionBase_a0b9a68b5c7e6a20cf52a465f2387ffba}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!get\-Owner@{get\-Owner}}
-\index{get\-Owner@{get\-Owner}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{get\-Owner}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Surface}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Base\-::get\-Owner (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!get\+Owner@{get\+Owner}}
+\index{get\+Owner@{get\+Owner}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{get\+Owner()}{getOwner()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Surface}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Base\+::get\+Owner (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionBase_a0b9a68b5c7e6a20cf52a465f2387ffba}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a0b9a68b5c7e6a20cf52a465f2387ffba}{}\label{classShipCAD_1_1SubdivisionBase_a0b9a68b5c7e6a20cf52a465f2387ffba}
 
 
 get the owning surface 
@@ -145,16 +146,34 @@ the owning surface
 \end{DoxyReturn}
 
 
-Definition at line 60 of file subdivbase.\-h.
+Definition at line 60 of file subdivbase.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionBase_a024aa781bbf2e54b6fb088e33126998e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!priv\-\_\-dump@{priv\-\_\-dump}}
-\index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{priv\-\_\-dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Base\-::priv\-\_\-dump (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!get\+Owner@{get\+Owner}}
+\index{get\+Owner@{get\+Owner}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{get\+Owner() const }{getOwner() const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Subdivision\+Surface}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Base\+::get\+Owner (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a8e98f69a132bcc75a0f6515b7a8a80f5}{}\label{classShipCAD_1_1SubdivisionBase_a8e98f69a132bcc75a0f6515b7a8a80f5}
+
+
+get the owning surface 
+
+\begin{DoxyReturn}{Returns}
+the owning surface 
+\end{DoxyReturn}
+
+
+Definition at line 65 of file subdivbase.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!priv\+\_\+dump@{priv\+\_\+dump}}
+\index{priv\+\_\+dump@{priv\+\_\+dump}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{priv\+\_\+dump(std\+::ostream \&os, const char $\ast$prefix) const }{priv_dump(std::ostream &os, const char *prefix) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Base\+::priv\+\_\+dump (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os, }
 \item[{const char $\ast$}]{prefix}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionBase_a024aa781bbf2e54b6fb088e33126998e}
+) const\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a024aa781bbf2e54b6fb088e33126998e}{}\label{classShipCAD_1_1SubdivisionBase_a024aa781bbf2e54b6fb088e33126998e}
 
 
 dump the element to a stream 
@@ -168,15 +187,15 @@ dump the element to a stream
 \end{DoxyParams}
 
 
-Definition at line 57 of file subdivbase.\-cpp.
+Definition at line 57 of file subdivbase.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionBase_a8f64480f79c9260facc2d27cd19a36ed}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!set\-Owner@{set\-Owner}}
-\index{set\-Owner@{set\-Owner}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{set\-Owner}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\-C\-A\-D\-::\-Subdivision\-Base\-::set\-Owner (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!set\+Owner@{set\+Owner}}
+\index{set\+Owner@{set\+Owner}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{set\+Owner(\+Subdivision\+Surface $\ast$newowner)}{setOwner(SubdivisionSurface *newowner)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Ship\+C\+A\+D\+::\+Subdivision\+Base\+::set\+Owner (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Surface} $\ast$}]{newowner}
+\item[{{\bf Subdivision\+Surface} $\ast$}]{newowner}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionBase_a8f64480f79c9260facc2d27cd19a36ed}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a8f64480f79c9260facc2d27cd19a36ed}{}\label{classShipCAD_1_1SubdivisionBase_a8f64480f79c9260facc2d27cd19a36ed}
 
 
 set the owing surface 
@@ -188,21 +207,21 @@ set the owing surface
 \end{DoxyParams}
 
 
-Definition at line 65 of file subdivbase.\-h.
+Definition at line 70 of file subdivbase.\+h.
 
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionBase_a164481259436bf18bc22a0626ab66c09}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Base@{Ship\-C\-A\-D\-::\-Subdivision\-Base}!\-\_\-owner@{\-\_\-owner}}
-\index{\-\_\-owner@{\-\_\-owner}!ShipCAD::SubdivisionBase@{Ship\-C\-A\-D\-::\-Subdivision\-Base}}
-\subsubsection[{\-\_\-owner}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Surface}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Base\-::\-\_\-owner\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionBase_a164481259436bf18bc22a0626ab66c09}
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}!\+\_\+owner@{\+\_\+owner}}
+\index{\+\_\+owner@{\+\_\+owner}!Ship\+C\+A\+D\+::\+Subdivision\+Base@{Ship\+C\+A\+D\+::\+Subdivision\+Base}}
+\subsubsection[{\texorpdfstring{\+\_\+owner}{_owner}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Surface}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Base\+::\+\_\+owner\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionBase_a164481259436bf18bc22a0626ab66c09}{}\label{classShipCAD_1_1SubdivisionBase_a164481259436bf18bc22a0626ab66c09}
 the owning surface 
 
-Definition at line 90 of file subdivbase.\-h.
+Definition at line 95 of file subdivbase.\+h.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{subdivbase_8h}{subdivbase.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{subdivbase_8cpp}{subdivbase.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{subdivbase_8h}{subdivbase.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{subdivbase_8cpp}{subdivbase.\+cpp}\end{DoxyCompactItemize}

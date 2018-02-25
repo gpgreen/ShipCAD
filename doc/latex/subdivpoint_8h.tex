@@ -1,61 +1,71 @@
-\hypertarget{subdivpoint_8h}{\section{Ship\-C\-A\-Dlib/subdivpoint.h File Reference}
-\label{subdivpoint_8h}\index{Ship\-C\-A\-Dlib/subdivpoint.\-h@{Ship\-C\-A\-Dlib/subdivpoint.\-h}}
-}
+\hypertarget{subdivpoint_8h}{}\section{Ship\+C\+A\+Dlib/subdivpoint.h File Reference}
+\label{subdivpoint_8h}\index{Ship\+C\+A\+Dlib/subdivpoint.\+h@{Ship\+C\+A\+Dlib/subdivpoint.\+h}}
 {\ttfamily \#include $<$vector$>$}\\*
 {\ttfamily \#include $<$iosfwd$>$}\\*
-{\ttfamily \#include $<$Q\-Object$>$}\\*
-{\ttfamily \#include $<$Q\-Vector3\-D$>$}\\*
-{\ttfamily \#include $<$Q\-Color$>$}\\*
-{\ttfamily \#include \char`\"{}shipcadlib.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}subdivbase.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$Q\+Object$>$}\\*
+{\ttfamily \#include $<$Q\+Vector3D$>$}\\*
+{\ttfamily \#include $<$Q\+Color$>$}\\*
+{\ttfamily \#include \char`\"{}shipcadlib.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivbase.\+h\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classShipCAD_1_1SubdivisionPoint}{Ship\-C\-A\-D\-::\-Subdivision\-Point}
-\begin{DoxyCompactList}\small\item\em 3\-D Point \end{DoxyCompactList}\item 
-class \hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point}
+class \hyperlink{classShipCAD_1_1SubdivisionPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Point}
+\begin{DoxyCompactList}\small\item\em 3D Point \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point}
 \begin{DoxyCompactList}\small\item\em Control point. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceShipCAD}{Ship\-C\-A\-D}
+ \hyperlink{namespaceShipCAD}{Ship\+C\+AD}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ Subdivision\+Point $\ast$ $>$\+::iterator \hyperlink{namespaceShipCAD_a61bebf1ead1dfa9fc86ab99b1025f66a}{Ship\+C\+A\+D\+::subdivpt\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Point $\ast$ $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_ac2eb7686c5b725b6d2853c95bbd0a1f9}{Ship\+C\+A\+D\+::const\+\_\+subdivpt\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Control\+Point $\ast$ $>$\+::iterator \hyperlink{namespaceShipCAD_ae33d2f365316a630ce7c1eb7a889e36a}{Ship\+C\+A\+D\+::subdivctlpt\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Control\+Point $\ast$ $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_a8d30ac0ddba81aebfbe0589c7d25434e}{Ship\+C\+A\+D\+::const\+\_\+subdivctlpt\+\_\+iter}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\-::ostream \& \hyperlink{subdivpoint_8h_a1626ea5e66132d6f53bffe1ff584cf22}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionPoint}{Ship\-C\-A\-D\-::\-Subdivision\-Point} \&point)
+std\+::ostream \& \hyperlink{subdivpoint_8h_a1626ea5e66132d6f53bffe1ff584cf22}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Point} \&point)
 \item 
-std\-::ostream \& \hyperlink{subdivpoint_8h_a18e6e51ef4da8dfa53db122dac4b447c}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point} \&point)
+std\+::ostream \& \hyperlink{subdivpoint_8h_a18e6e51ef4da8dfa53db122dac4b447c}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlPoint}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} \&point)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{namespaceShipCAD_ae059a88fbc18c56ceee2fd1cd7f2aad0}{Ship\-C\-A\-D\-::g\-\_\-point\-\_\-verbose} = true
+bool \hyperlink{namespaceShipCAD_ae059a88fbc18c56ceee2fd1cd7f2aad0}{Ship\+C\+A\+D\+::g\+\_\+point\+\_\+verbose} = true
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{subdivpoint_8h_a1626ea5e66132d6f53bffe1ff584cf22}{\index{subdivpoint.\-h@{subdivpoint.\-h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivpoint.h@{subdivpoint.\-h}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\index{subdivpoint.\+h@{subdivpoint.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivpoint.\+h@{subdivpoint.\+h}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Point \&point)}{operator<<(std::ostream &os, const ShipCAD::SubdivisionPoint &point)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Point} \&}]{point}
+\item[{std\+::ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Point} \&}]{point}
 \end{DoxyParamCaption}
-)}}\label{subdivpoint_8h_a1626ea5e66132d6f53bffe1ff584cf22}
+)}\hypertarget{subdivpoint_8h_a1626ea5e66132d6f53bffe1ff584cf22}{}\label{subdivpoint_8h_a1626ea5e66132d6f53bffe1ff584cf22}
 
 
-Definition at line 527 of file subdivpoint.\-cpp.
+Definition at line 520 of file subdivpoint.\+cpp.
 
-\hypertarget{subdivpoint_8h_a18e6e51ef4da8dfa53db122dac4b447c}{\index{subdivpoint.\-h@{subdivpoint.\-h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivpoint.h@{subdivpoint.\-h}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\index{subdivpoint.\+h@{subdivpoint.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivpoint.\+h@{subdivpoint.\+h}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point \&point)}{operator<<(std::ostream &os, const ShipCAD::SubdivisionControlPoint &point)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Control\-Point} \&}]{point}
+\item[{std\+::ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Point} \&}]{point}
 \end{DoxyParamCaption}
-)}}\label{subdivpoint_8h_a18e6e51ef4da8dfa53db122dac4b447c}
+)}\hypertarget{subdivpoint_8h_a18e6e51ef4da8dfa53db122dac4b447c}{}\label{subdivpoint_8h_a18e6e51ef4da8dfa53db122dac4b447c}
 
 
-Definition at line 931 of file subdivpoint.\-cpp.
+Definition at line 920 of file subdivpoint.\+cpp.
 

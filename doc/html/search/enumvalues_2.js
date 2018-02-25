@@ -20,6 +20,8 @@ var searchData=
   ['fplow',['fpLow',['../namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915a493cc0c95c59b2a1a0ca04b7a337295b',1,'ShipCAD']]],
   ['fpmedium',['fpMedium',['../namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915af3fadd404d6708aa5759c5c33df67abb',1,'ShipCAD']]],
   ['fpveryhigh',['fpVeryHigh',['../namespaceShipCAD.html#ae13c7e36dfb1e2300741a631041cd915a1d5c86b4ae0e1bc82af908b35b29f3d6',1,'ShipCAD']]],
+  ['fsfaces',['fsFaces',['../namespaceShipCAD.html#a33e1c54e3609477478431b6a4c106804ade3fc9da994d6e6ab125978921665966',1,'ShipCAD']]],
+  ['fspoints',['fsPoints',['../namespaceShipCAD.html#a33e1c54e3609477478431b6a4c106804a542ad0cef590007de75623cc41a83551',1,'ShipCAD']]],
   ['ftfartele',['ftFarTele',['../namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe',1,'ShipCAD']]],
   ['ftmediumtele',['ftMediumTele',['../namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241eae0b0ae77e52d05ac3800353808e16afe',1,'ShipCAD']]],
   ['ftshorttele',['ftShortTele',['../namespaceShipCAD.html#a58f51ebd2e66de5e41c2ffd6f434241ea6f6aa44840629968cfa9815da646a9d0',1,'ShipCAD']]],

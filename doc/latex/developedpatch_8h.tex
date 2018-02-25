@@ -1,0 +1,56 @@
+\hypertarget{developedpatch_8h}{}\section{Ship\+C\+A\+Dlib/developedpatch.h File Reference}
+\label{developedpatch_8h}\index{Ship\+C\+A\+Dlib/developedpatch.\+h@{Ship\+C\+A\+Dlib/developedpatch.\+h}}
+{\ttfamily \#include $<$Q\+Object$>$}\\*
+{\ttfamily \#include $<$Q\+Vector2D$>$}\\*
+{\ttfamily \#include $<$Q\+Vector3D$>$}\\*
+{\ttfamily \#include $<$Q\+String$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$iosfwd$>$}\\*
+{\ttfamily \#include \char`\"{}plane.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}spline.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structShipCAD_1_1PatchPoints}{Ship\+C\+A\+D\+::\+Patch\+Points}
+\begin{DoxyCompactList}\small\item\em class to store \hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} to unrolled point mapping \end{DoxyCompactList}\item 
+class \hyperlink{classShipCAD_1_1DevelopedPatch}{Ship\+C\+A\+D\+::\+Developed\+Patch}
+\begin{DoxyCompactList}\small\item\em base class for all non-\/surface drawable elements \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceShipCAD}{Ship\+C\+AD}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ Patch\+Points $>$\+::iterator \hyperlink{namespaceShipCAD_a69b081dd347722fb55da2f3958db5d08}{Ship\+C\+A\+D\+::patchpt\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Patch\+Points $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_aea0ea62a5074a9ec5618bf822480b840}{Ship\+C\+A\+D\+::const\+\_\+patchpt\+\_\+iter}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespaceShipCAD_a22a4489ec7a6505c3c30fa7562175ca4}{Ship\+C\+A\+D\+::\+Polygon\+Orientation} \{ \hyperlink{namespaceShipCAD_a22a4489ec7a6505c3c30fa7562175ca4a01f1428a8463fbd20d80a779e70b39cd}{Ship\+C\+A\+D\+::po\+C\+CW}, 
+\hyperlink{namespaceShipCAD_a22a4489ec7a6505c3c30fa7562175ca4a785617c870ff5f0a2321ca2f6542aa7b}{Ship\+C\+A\+D\+::po\+CW}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \hyperlink{developedpatch_8h_a44e5fcf91c2601621059f154ec9d53d7}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classShipCAD_1_1DevelopedPatch}{Ship\+C\+A\+D\+::\+Developed\+Patch} \&patch)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{developedpatch.\+h@{developedpatch.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!developedpatch.\+h@{developedpatch.\+h}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, const Ship\+C\+A\+D\+::\+Developed\+Patch \&patch)}{operator<<(std::ostream &os, const ShipCAD::DevelopedPatch &patch)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Developed\+Patch} \&}]{patch}
+\end{DoxyParamCaption}
+)}\hypertarget{developedpatch_8h_a44e5fcf91c2601621059f154ec9d53d7}{}\label{developedpatch_8h_a44e5fcf91c2601621059f154ec9d53d7}
+
+
+Definition at line 1066 of file developedpatch.\+cpp.
+

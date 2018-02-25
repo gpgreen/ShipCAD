@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unit_5ftype_5ft',['unit_type_t',['../namespaceShipCAD.html#ac6a7a28b4b063771afae92decb602da5',1,'ShipCAD']]]
+  ['subdiv_5fmode_5ft',['subdiv_mode_t',['../namespaceShipCAD.html#a4a9d1acfd6a2e1e9078a5dcc36f0c817',1,'ShipCAD']]]
 ];

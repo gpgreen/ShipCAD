@@ -13,7 +13,7 @@ var searchData=
   ['km_5flongitudinal',['km_longitudinal',['../structShipCAD_1_1HydrostaticsData.html#a0a51e62f7d169fa892eaabc6a1937256',1,'ShipCAD::HydrostaticsData']]],
   ['km_5ftransverse',['km_transverse',['../structShipCAD_1_1HydrostaticsData.html#adbadaf4eafa63f1f10778f4c3e1f61a4',1,'ShipCAD::HydrostaticsData']]],
   ['kn_5fsin_5fphi',['kn_sin_phi',['../structShipCAD_1_1CrosscurvesData.html#a55150860fed821e314e18b72f1975749',1,'ShipCAD::CrosscurvesData']]],
-  ['knuckle',['knuckle',['../structSurfIntersectionData.html#aa0424f338bde27885e800c649d436c52',1,'SurfIntersectionData']]],
+  ['knuckle',['knuckle',['../structPatchIntersection.html#a328e33e74b1d1904db5d69fd512b7d5c',1,'PatchIntersection::knuckle()'],['../structSurfIntersectionData.html#aa0424f338bde27885e800c649d436c52',1,'SurfIntersectionData::knuckle()']]],
   ['kpixelcountmax',['kPixelCountMax',['../namespaceShipCAD.html#ac8176e9d12f859826fb131b7febb8c8a',1,'ShipCAD']]],
   ['kweightconversionfactor',['kWeightConversionFactor',['../namespaceShipCAD.html#aa4319c8e7adfa68048f95c1614984036',1,'ShipCAD']]],
   ['kzbufferscalefactor',['kZBufferScaleFactor',['../namespaceShipCAD.html#a519c591e5f5e3f60603b3133a4a2094e',1,'ShipCAD']]],

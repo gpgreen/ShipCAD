@@ -1,11 +1,10 @@
-\hypertarget{classShipCAD_1_1SubdivisionEdge}{\section{Ship\-C\-A\-D\-:\-:Subdivision\-Edge Class Reference}
-\label{classShipCAD_1_1SubdivisionEdge}\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-}
+\hypertarget{classShipCAD_1_1SubdivisionEdge}{}\section{Ship\+C\+AD\+:\+:Subdivision\+Edge Class Reference}
+\label{classShipCAD_1_1SubdivisionEdge}\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
 
 
-{\ttfamily \#include $<$subdivedge.\-h$>$}
+{\ttfamily \#include $<$subdivedge.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Edge\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Subdivision\+Edge\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classShipCAD_1_1SubdivisionEdge}
@@ -14,208 +13,220 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Subdivision\-Edge\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}{Subdivision\-Edge} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
+\hyperlink{classShipCAD_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}{Subdivision\+Edge} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\+Surface} $\ast$owner)
 \item 
-virtual \hyperlink{classShipCAD_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}{$\sim$\-Subdivision\-Edge} ()
+virtual \hyperlink{classShipCAD_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}{$\sim$\+Subdivision\+Edge} ()
 \item 
 virtual void \hyperlink{classShipCAD_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}{clear} ()
 \begin{DoxyCompactList}\small\item\em reset this element to default values \end{DoxyCompactList}\item 
-virtual void \hyperlink{classShipCAD_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}{draw} (bool draw\-\_\-mirror, \hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1LineShader}{Line\-Shader} $\ast$lineshader, const Q\-Color \&edge\-Color)
+virtual void \hyperlink{classShipCAD_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}{draw} (bool draw\+\_\+mirror, \hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1LineShader}{Line\+Shader} $\ast$lineshader, const Q\+Color \&edge\+Color)
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}{add\-Face} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
+float \hyperlink{classShipCAD_1_1SubdivisionEdge_a6b1e2c1ed917c6d8faf4d571446f3f7d}{distance\+To\+Edge} (const Q\+Vector3D \&pt, const Q\+Vector3D \&dir) const 
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_a847a6c74d35e25fdcb46ea8b7a989836}{assign} (\hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$edge)
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}{add\+Face} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$face)
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}{calculate\-Edge\-Point} ()
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_a847a6c74d35e25fdcb46ea8b7a989836}{assign} (\hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\+Edge} $\ast$edge)
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}{delete\-Face} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
+\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}{calculate\+Edge\+Point} ()
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}{swap\-Data} ()
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}{delete\+Face} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$face)
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a63a44ac44fe9d2729e5152303b249873}{start\-Point} ()
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}{swap\+Data} ()
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a69acb7c9d026f05ea727fd80dc7ab6a0}{end\-Point} ()
+\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aa6e28532f3ecc1610813844dfb385deb}{start\+Point} () const 
 \item 
-virtual bool \hyperlink{classShipCAD_1_1SubdivisionEdge_ad95a3ec8ba66deb74cbfd3d36428fc34}{is\-Boundary\-Edge} ()
+\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aa65e2e10929c52fd05b6bb90317977dc}{end\+Point} () const 
 \item 
-bool \hyperlink{classShipCAD_1_1SubdivisionEdge_a697962345138e27e520e3da8e3f2289a}{is\-Control\-Edge} ()
+virtual bool \hyperlink{classShipCAD_1_1SubdivisionEdge_ae1b7c9b23301bed5ce49abae834bd0f0}{is\+Boundary\+Edge} () const 
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_af48a9311daf8f3607e181922162e8c7b}{set\-Control\-Edge} (bool val)
+bool \hyperlink{classShipCAD_1_1SubdivisionEdge_afcf8f9f766c80cd90045194cde86d4c8}{is\+Control\+Edge} () const 
 \item 
-size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionEdge_ae42291f7c6f7e6bdb647f27b8b0aa08e}{number\-Of\-Faces} ()
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_af48a9311daf8f3607e181922162e8c7b}{set\+Control\+Edge} (bool val)
 \item 
-bool \hyperlink{classShipCAD_1_1SubdivisionEdge_a8bd402a4e395de86fb0095e72b91cfc4}{is\-Crease} ()
+size\+\_\+t \hyperlink{classShipCAD_1_1SubdivisionEdge_ac4004284f7ab47437b9a1fe7adbde70d}{number\+Of\+Faces} () const 
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}{set\-Crease} (bool val)
+bool \hyperlink{classShipCAD_1_1SubdivisionEdge_ae649fe7169f64a8e5ede1fbb36a176fa}{is\+Crease} () const 
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a659dd94b180681665d991db481a0cbc6}{get\-Curve} ()
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}{set\+Crease} (bool val)
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_a445c08836100060818c129ea7c694234}{set\-Curve} (\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$curve)
+\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\+Control\+Curve} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a46dd1e0aab4ca8b64c5db56d1796dd8e}{get\+Curve} () const 
 \item 
-size\-\_\-t \hyperlink{classShipCAD_1_1SubdivisionEdge_a4be990243bb29ead43c76171197130d5}{get\-Index} ()
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_a445c08836100060818c129ea7c694234}{set\+Curve} (\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\+Control\+Curve} $\ast$curve)
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a55dc9daab165567ed40e37f9e01ee766}{get\-Face} (size\-\_\-t index)
+\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_afe3de434f13adfde22f2c209197902de}{get\+Face} (size\+\_\+t index) const 
 \item 
-bool \hyperlink{classShipCAD_1_1SubdivisionEdge_a286bc4d7959703a153945e3bcb9c9ad3}{has\-Face} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$face)
+bool \hyperlink{classShipCAD_1_1SubdivisionEdge_acbadf30c024c432571304aa4b787036b}{has\+Face} (const \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$face) const 
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}{get\-Previous\-Edge} ()
+\hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\+Edge} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}{get\+Previous\+Edge} ()
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}{get\-Next\-Edge} ()
+\hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\+Edge} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}{get\+Next\+Edge} ()
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_ab86e4ccfa750684432c228ea2cc991ff}{set\-Points} (\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p1, \hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$p2)
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_ab86e4ccfa750684432c228ea2cc991ff}{set\+Points} (\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$p1, \hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$p2)
 \item 
-virtual void \hyperlink{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{dump} (std\-::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
+virtual void \hyperlink{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{dump} (std\+::ostream \&os, const char $\ast$prefix=\char`\"{}\char`\"{}) const 
 \begin{DoxyCompactList}\small\item\em print out the element to a stream \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\-Edge} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}{construct} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\-Surface} $\ast$owner)
+static \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\+Edge} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}{construct} (\hyperlink{classShipCAD_1_1SubdivisionSurface}{Subdivision\+Surface} $\ast$owner)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{classShipCAD_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}{priv\-\_\-dump} (std\-::ostream \&os, const char $\ast$prefix) const 
+void \hyperlink{classShipCAD_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}{priv\+\_\+dump} (std\+::ostream \&os, const char $\ast$prefix) const 
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\-Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a55519f9d615d6bd701c10c48259525ac}{\-\_\-points} \mbox{[}2\mbox{]}
+\hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a55519f9d615d6bd701c10c48259525ac}{\+\_\+points} \mbox{[}2\mbox{]}
 \item 
-std\-::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\-Face} $\ast$ $>$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aa1da730fcb3ac49c92e803a0b336d855}{\-\_\-faces}
+std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$ $>$ \hyperlink{classShipCAD_1_1SubdivisionEdge_aa1da730fcb3ac49c92e803a0b336d855}{\+\_\+faces}
 \item 
-bool \hyperlink{classShipCAD_1_1SubdivisionEdge_a9ea4714611e4970cf5e4014304a20190}{\-\_\-crease}
+bool \hyperlink{classShipCAD_1_1SubdivisionEdge_a9ea4714611e4970cf5e4014304a20190}{\+\_\+crease}
 \item 
-bool \hyperlink{classShipCAD_1_1SubdivisionEdge_ae933ee4901a7964ca50a83edad44e8ec}{\-\_\-control\-\_\-edge}
+bool \hyperlink{classShipCAD_1_1SubdivisionEdge_ae933ee4901a7964ca50a83edad44e8ec}{\+\_\+control\+\_\+edge}
 \item 
-\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\-Control\-Curve} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a1863a7ef84b2d73f0e1407f3536bbc9f}{\-\_\-curve}
+\hyperlink{classShipCAD_1_1SubdivisionControlCurve}{Subdivision\+Control\+Curve} $\ast$ \hyperlink{classShipCAD_1_1SubdivisionEdge_a1863a7ef84b2d73f0e1407f3536bbc9f}{\+\_\+curve}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 
 
-Definition at line 54 of file subdivedge.\-h.
+Definition at line 54 of file subdivedge.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!Subdivision\-Edge@{Subdivision\-Edge}}
-\index{Subdivision\-Edge@{Subdivision\-Edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{Subdivision\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Edge\-::\-Subdivision\-Edge (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!Subdivision\+Edge@{Subdivision\+Edge}}
+\index{Subdivision\+Edge@{Subdivision\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{Subdivision\+Edge(\+Subdivision\+Surface $\ast$owner)}{SubdivisionEdge(SubdivisionSurface *owner)}}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\+Edge\+::\+Subdivision\+Edge (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
+\item[{{\bf Subdivision\+Surface} $\ast$}]{owner}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}{}\label{classShipCAD_1_1SubdivisionEdge_ab08271ed7f5d371f0495d8a7d2c96dae}
 
 
-Definition at line 61 of file subdivedge.\-cpp.
+Definition at line 59 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!$\sim$\-Subdivision\-Edge@{$\sim$\-Subdivision\-Edge}}
-\index{$\sim$\-Subdivision\-Edge@{$\sim$\-Subdivision\-Edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{$\sim$\-Subdivision\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\-Edge\-::$\sim$\-Subdivision\-Edge (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!````~Subdivision\+Edge@{$\sim$\+Subdivision\+Edge}}
+\index{````~Subdivision\+Edge@{$\sim$\+Subdivision\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{$\sim$\+Subdivision\+Edge()}{~SubdivisionEdge()}}]{\setlength{\rightskip}{0pt plus 5cm}Subdivision\+Edge\+::$\sim$\+Subdivision\+Edge (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}{}\label{classShipCAD_1_1SubdivisionEdge_ac787ad1a0228f91038de9518ad217364}
 
 
-Definition at line 67 of file subdivedge.\-cpp.
+Definition at line 65 of file subdivedge.\+cpp.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!add\-Face@{add\-Face}}
-\index{add\-Face@{add\-Face}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{add\-Face}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::add\-Face (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!add\+Face@{add\+Face}}
+\index{add\+Face@{add\+Face}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{add\+Face(\+Subdivision\+Face $\ast$face)}{addFace(SubdivisionFace *face)}}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::add\+Face (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Face} $\ast$}]{face}
+\item[{{\bf Subdivision\+Face} $\ast$}]{face}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}{}\label{classShipCAD_1_1SubdivisionEdge_a1b2e2b1d7e051d42250c0ad1f5eaa560}
 
 
-Definition at line 226 of file subdivedge.\-cpp.
+Definition at line 281 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a847a6c74d35e25fdcb46ea8b7a989836}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!assign@{assign}}
-\index{assign@{assign}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{assign}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::assign (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!assign@{assign}}
+\index{assign@{assign}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{assign(\+Subdivision\+Edge $\ast$edge)}{assign(SubdivisionEdge *edge)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::assign (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Edge} $\ast$}]{edge}
+\item[{{\bf Subdivision\+Edge} $\ast$}]{edge}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_a847a6c74d35e25fdcb46ea8b7a989836}
-\hypertarget{classShipCAD_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!calculate\-Edge\-Point@{calculate\-Edge\-Point}}
-\index{calculate\-Edge\-Point@{calculate\-Edge\-Point}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{calculate\-Edge\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point} $\ast$ Subdivision\-Edge\-::calculate\-Edge\-Point (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}
-
-
-Definition at line 232 of file subdivedge.\-cpp.
-
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!clear@{clear}}
-\index{clear@{clear}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::clear (
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_a847a6c74d35e25fdcb46ea8b7a989836}{}\label{classShipCAD_1_1SubdivisionEdge_a847a6c74d35e25fdcb46ea8b7a989836}
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!calculate\+Edge\+Point@{calculate\+Edge\+Point}}
+\index{calculate\+Edge\+Point@{calculate\+Edge\+Point}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{calculate\+Edge\+Point()}{calculateEdgePoint()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Point} $\ast$ Subdivision\+Edge\+::calculate\+Edge\+Point (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}{}\label{classShipCAD_1_1SubdivisionEdge_aa1bce1c13f4911839205e812cfd0f683}
+
+
+Definition at line 287 of file subdivedge.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!clear@{clear}}
+\index{clear@{clear}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{clear()}{clear()}}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}{}\label{classShipCAD_1_1SubdivisionEdge_a08358ac65c2d710855b8b93c64ce9d02}
 
 
 reset this element to default values 
 
 
 
-Implements \hyperlink{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}{Ship\-C\-A\-D\-::\-Subdivision\-Base}.
+Implements \hyperlink{classShipCAD_1_1SubdivisionBase_a851bb7f1931f9dd6e53b6f9df7b5b352}{Ship\+C\+A\+D\+::\+Subdivision\+Base}.
 
 
 
-Definition at line 72 of file subdivedge.\-cpp.
+Definition at line 70 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!construct@{construct}}
-\index{construct@{construct}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Edge} $\ast$ Subdivision\-Edge\-::construct (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!construct@{construct}}
+\index{construct@{construct}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{construct(\+Subdivision\+Surface $\ast$owner)}{construct(SubdivisionSurface *owner)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Edge} $\ast$ Subdivision\+Edge\+::construct (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Surface} $\ast$}]{owner}
+\item[{{\bf Subdivision\+Surface} $\ast$}]{owner}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}}\label{classShipCAD_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}{}\label{classShipCAD_1_1SubdivisionEdge_ac2e94f4689d724a1d5b75c7f2619c37d}
 
 
-Definition at line 53 of file subdivedge.\-cpp.
+Definition at line 53 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!delete\-Face@{delete\-Face}}
-\index{delete\-Face@{delete\-Face}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{delete\-Face}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::delete\-Face (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!delete\+Face@{delete\+Face}}
+\index{delete\+Face@{delete\+Face}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{delete\+Face(\+Subdivision\+Face $\ast$face)}{deleteFace(SubdivisionFace *face)}}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::delete\+Face (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Face} $\ast$}]{face}
+\item[{{\bf Subdivision\+Face} $\ast$}]{face}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}{}\label{classShipCAD_1_1SubdivisionEdge_a1f4b70ab6d0c4dfec07a2d4348bc9a3e}
 
 
-Definition at line 249 of file subdivedge.\-cpp.
+Definition at line 304 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!draw@{draw}}
-\index{draw@{draw}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{draw}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::draw (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!distance\+To\+Edge@{distance\+To\+Edge}}
+\index{distance\+To\+Edge@{distance\+To\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{distance\+To\+Edge(const Q\+Vector3\+D \&pt, const Q\+Vector3\+D \&dir) const }{distanceToEdge(const QVector3D &pt, const QVector3D &dir) const }}]{\setlength{\rightskip}{0pt plus 5cm}float Subdivision\+Edge\+::distance\+To\+Edge (
 \begin{DoxyParamCaption}
-\item[{bool}]{draw\-\_\-mirror, }
+\item[{const Q\+Vector3D \&}]{pt, }
+\item[{const Q\+Vector3D \&}]{dir}
+\end{DoxyParamCaption}
+) const}\hypertarget{classShipCAD_1_1SubdivisionEdge_a6b1e2c1ed917c6d8faf4d571446f3f7d}{}\label{classShipCAD_1_1SubdivisionEdge_a6b1e2c1ed917c6d8faf4d571446f3f7d}
+
+
+Definition at line 80 of file subdivedge.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!draw@{draw}}
+\index{draw@{draw}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{draw(bool draw\+\_\+mirror, Viewport \&vp, Line\+Shader $\ast$lineshader, const Q\+Color \&edge\+Color)}{draw(bool draw_mirror, Viewport &vp, LineShader *lineshader, const QColor &edgeColor)}}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::draw (
+\begin{DoxyParamCaption}
+\item[{bool}]{draw\+\_\+mirror, }
 \item[{{\bf Viewport} \&}]{vp, }
-\item[{{\bf Line\-Shader} $\ast$}]{lineshader, }
-\item[{const Q\-Color \&}]{edge\-Color}
+\item[{{\bf Line\+Shader} $\ast$}]{lineshader, }
+\item[{const Q\+Color \&}]{edge\+Color}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}{}\label{classShipCAD_1_1SubdivisionEdge_a26deda12672fa679b49b28f2371e728b}
 
 
-Definition at line 261 of file subdivedge.\-cpp.
+Definition at line 316 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!dump@{dump}}
-\index{dump@{dump}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::dump (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!dump@{dump}}
+\index{dump@{dump}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{dump(std\+::ostream \&os, const char $\ast$prefix="""") const }{dump(std::ostream &os, const char *prefix="") const }}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::dump (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
+\item[{std\+::ostream \&}]{os, }
 \item[{const char $\ast$}]{prefix = {\ttfamily \char`\"{}\char`\"{}}}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}{}\label{classShipCAD_1_1SubdivisionEdge_a14cc58877644ebd7b7ebffbdf8ef87f7}
 
 
 print out the element to a stream 
@@ -229,261 +240,250 @@ print out the element to a stream
 \end{DoxyParams}
 
 
-Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\-C\-A\-D\-::\-Subdivision\-Base}.
+Reimplemented from \hyperlink{classShipCAD_1_1SubdivisionBase_a7807e64ac8d2acc3da572e03cf0523b6}{Ship\+C\+A\+D\+::\+Subdivision\+Base}.
 
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlEdge_abdfa96ff05eff404214a92d38d7eb715}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Edge}.
+Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlEdge_abdfa96ff05eff404214a92d38d7eb715}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Edge}.
 
 
 
-Definition at line 319 of file subdivedge.\-cpp.
+Definition at line 376 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a69acb7c9d026f05ea727fd80dc7ab6a0}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!end\-Point@{end\-Point}}
-\index{end\-Point@{end\-Point}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{end\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::end\-Point (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!end\+Point@{end\+Point}}
+\index{end\+Point@{end\+Point}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{end\+Point() const }{endPoint() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Point}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::end\+Point (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_a69acb7c9d026f05ea727fd80dc7ab6a0}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_aa65e2e10929c52fd05b6bb90317977dc}{}\label{classShipCAD_1_1SubdivisionEdge_aa65e2e10929c52fd05b6bb90317977dc}
 
 
-Definition at line 74 of file subdivedge.\-h.
+Definition at line 76 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a659dd94b180681665d991db481a0cbc6}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!get\-Curve@{get\-Curve}}
-\index{get\-Curve@{get\-Curve}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{get\-Curve}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Control\-Curve}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::get\-Curve (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!get\+Curve@{get\+Curve}}
+\index{get\+Curve@{get\+Curve}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{get\+Curve() const }{getCurve() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Control\+Curve}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::get\+Curve (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_a659dd94b180681665d991db481a0cbc6}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a46dd1e0aab4ca8b64c5db56d1796dd8e}{}\label{classShipCAD_1_1SubdivisionEdge_a46dd1e0aab4ca8b64c5db56d1796dd8e}
 
 
-Definition at line 81 of file subdivedge.\-h.
+Definition at line 83 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a55dc9daab165567ed40e37f9e01ee766}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!get\-Face@{get\-Face}}
-\index{get\-Face@{get\-Face}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{get\-Face}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Face} $\ast$ Subdivision\-Edge\-::get\-Face (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!get\+Face@{get\+Face}}
+\index{get\+Face@{get\+Face}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{get\+Face(size\+\_\+t index) const }{getFace(size_t index) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Face} $\ast$ Subdivision\+Edge\+::get\+Face (
 \begin{DoxyParamCaption}
-\item[{size\-\_\-t}]{index}
+\item[{size\+\_\+t}]{index}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_a55dc9daab165567ed40e37f9e01ee766}
+) const}\hypertarget{classShipCAD_1_1SubdivisionEdge_afe3de434f13adfde22f2c209197902de}{}\label{classShipCAD_1_1SubdivisionEdge_afe3de434f13adfde22f2c209197902de}
 
 
-Definition at line 101 of file subdivedge.\-cpp.
+Definition at line 156 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a4be990243bb29ead43c76171197130d5}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!get\-Index@{get\-Index}}
-\index{get\-Index@{get\-Index}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{get\-Index}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Subdivision\-Edge\-::get\-Index (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!get\+Next\+Edge@{get\+Next\+Edge}}
+\index{get\+Next\+Edge@{get\+Next\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{get\+Next\+Edge()}{getNextEdge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Edge} $\ast$ Subdivision\+Edge\+::get\+Next\+Edge (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_a4be990243bb29ead43c76171197130d5}
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}{}\label{classShipCAD_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}
 
 
-Definition at line 81 of file subdivedge.\-cpp.
+Definition at line 251 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!get\-Next\-Edge@{get\-Next\-Edge}}
-\index{get\-Next\-Edge@{get\-Next\-Edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{get\-Next\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Edge} $\ast$ Subdivision\-Edge\-::get\-Next\-Edge (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!get\+Previous\+Edge@{get\+Previous\+Edge}}
+\index{get\+Previous\+Edge@{get\+Previous\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{get\+Previous\+Edge()}{getPreviousEdge()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Edge} $\ast$ Subdivision\+Edge\+::get\+Previous\+Edge (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_aebb50514ff119a1484f7c7505a527a2b}
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}{}\label{classShipCAD_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}
 
 
-Definition at line 196 of file subdivedge.\-cpp.
+Definition at line 221 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!get\-Previous\-Edge@{get\-Previous\-Edge}}
-\index{get\-Previous\-Edge@{get\-Previous\-Edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{get\-Previous\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Edge} $\ast$ Subdivision\-Edge\-::get\-Previous\-Edge (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!has\+Face@{has\+Face}}
+\index{has\+Face@{has\+Face}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{has\+Face(const Subdivision\+Face $\ast$face) const }{hasFace(const SubdivisionFace *face) const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\+Edge\+::has\+Face (
+\begin{DoxyParamCaption}
+\item[{const {\bf Subdivision\+Face} $\ast$}]{face}
+\end{DoxyParamCaption}
+) const}\hypertarget{classShipCAD_1_1SubdivisionEdge_acbadf30c024c432571304aa4b787036b}{}\label{classShipCAD_1_1SubdivisionEdge_acbadf30c024c432571304aa4b787036b}
+
+
+Definition at line 163 of file subdivedge.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!is\+Boundary\+Edge@{is\+Boundary\+Edge}}
+\index{is\+Boundary\+Edge@{is\+Boundary\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{is\+Boundary\+Edge() const }{isBoundaryEdge() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\+Edge\+::is\+Boundary\+Edge (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_a7c1fe2cad6e7b8a0e532768b4a395137}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ae1b7c9b23301bed5ce49abae834bd0f0}{}\label{classShipCAD_1_1SubdivisionEdge_ae1b7c9b23301bed5ce49abae834bd0f0}
 
 
-Definition at line 166 of file subdivedge.\-cpp.
-
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a286bc4d7959703a153945e3bcb9c9ad3}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!has\-Face@{has\-Face}}
-\index{has\-Face@{has\-Face}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{has\-Face}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\-Edge\-::has\-Face (
-\begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Face} $\ast$}]{face}
-\end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_a286bc4d7959703a153945e3bcb9c9ad3}
+Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlEdge_addb133d29e0b48e436eb6710bb91d6bf}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Edge}.
 
 
-Definition at line 108 of file subdivedge.\-cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ad95a3ec8ba66deb74cbfd3d36428fc34}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!is\-Boundary\-Edge@{is\-Boundary\-Edge}}
-\index{is\-Boundary\-Edge@{is\-Boundary\-Edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{is\-Boundary\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}bool Subdivision\-Edge\-::is\-Boundary\-Edge (
+Definition at line 149 of file subdivedge.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!is\+Control\+Edge@{is\+Control\+Edge}}
+\index{is\+Control\+Edge@{is\+Control\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{is\+Control\+Edge() const }{isControlEdge() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::is\+Control\+Edge (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1SubdivisionEdge_ad95a3ec8ba66deb74cbfd3d36428fc34}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_afcf8f9f766c80cd90045194cde86d4c8}{}\label{classShipCAD_1_1SubdivisionEdge_afcf8f9f766c80cd90045194cde86d4c8}
 
 
-Reimplemented in \hyperlink{classShipCAD_1_1SubdivisionControlEdge_a23adc8ad28860987b7b4866eada3c463}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Edge}.
+Definition at line 78 of file subdivedge.\+h.
 
-
-
-Definition at line 91 of file subdivedge.\-cpp.
-
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a697962345138e27e520e3da8e3f2289a}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!is\-Control\-Edge@{is\-Control\-Edge}}
-\index{is\-Control\-Edge@{is\-Control\-Edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{is\-Control\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::is\-Control\-Edge (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!is\+Crease@{is\+Crease}}
+\index{is\+Crease@{is\+Crease}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{is\+Crease() const }{isCrease() const }}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::is\+Crease (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_a697962345138e27e520e3da8e3f2289a}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ae649fe7169f64a8e5ede1fbb36a176fa}{}\label{classShipCAD_1_1SubdivisionEdge_ae649fe7169f64a8e5ede1fbb36a176fa}
 
 
-Definition at line 76 of file subdivedge.\-h.
+Definition at line 81 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a8bd402a4e395de86fb0095e72b91cfc4}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!is\-Crease@{is\-Crease}}
-\index{is\-Crease@{is\-Crease}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{is\-Crease}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::is\-Crease (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!number\+Of\+Faces@{number\+Of\+Faces}}
+\index{number\+Of\+Faces@{number\+Of\+Faces}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{number\+Of\+Faces() const }{numberOfFaces() const }}]{\setlength{\rightskip}{0pt plus 5cm}size\+\_\+t Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::number\+Of\+Faces (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_a8bd402a4e395de86fb0095e72b91cfc4}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ac4004284f7ab47437b9a1fe7adbde70d}{}\label{classShipCAD_1_1SubdivisionEdge_ac4004284f7ab47437b9a1fe7adbde70d}
 
 
-Definition at line 79 of file subdivedge.\-h.
+Definition at line 80 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ae42291f7c6f7e6bdb647f27b8b0aa08e}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!number\-Of\-Faces@{number\-Of\-Faces}}
-\index{number\-Of\-Faces@{number\-Of\-Faces}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{number\-Of\-Faces}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::number\-Of\-Faces (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!priv\+\_\+dump@{priv\+\_\+dump}}
+\index{priv\+\_\+dump@{priv\+\_\+dump}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{priv\+\_\+dump(std\+::ostream \&os, const char $\ast$prefix) const }{priv_dump(std::ostream &os, const char *prefix) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::priv\+\_\+dump (
 \begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_ae42291f7c6f7e6bdb647f27b8b0aa08e}
-
-
-Definition at line 78 of file subdivedge.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!priv\-\_\-dump@{priv\-\_\-dump}}
-\index{priv\-\_\-dump@{priv\-\_\-dump}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{priv\-\_\-dump}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::priv\-\_\-dump (
-\begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
+\item[{std\+::ostream \&}]{os, }
 \item[{const char $\ast$}]{prefix}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}
+) const\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}{}\label{classShipCAD_1_1SubdivisionEdge_a8b33f4ae9edbd8ac4a386d9f5f5c1131}
 
 
-Definition at line 327 of file subdivedge.\-cpp.
+Definition at line 384 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_af48a9311daf8f3607e181922162e8c7b}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!set\-Control\-Edge@{set\-Control\-Edge}}
-\index{set\-Control\-Edge@{set\-Control\-Edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{set\-Control\-Edge}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::set\-Control\-Edge (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!set\+Control\+Edge@{set\+Control\+Edge}}
+\index{set\+Control\+Edge@{set\+Control\+Edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Control\+Edge(bool val)}{setControlEdge(bool val)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::set\+Control\+Edge (
 \begin{DoxyParamCaption}
 \item[{bool}]{val}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_af48a9311daf8f3607e181922162e8c7b}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_af48a9311daf8f3607e181922162e8c7b}{}\label{classShipCAD_1_1SubdivisionEdge_af48a9311daf8f3607e181922162e8c7b}
 
 
-Definition at line 77 of file subdivedge.\-h.
+Definition at line 79 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!set\-Crease@{set\-Crease}}
-\index{set\-Crease@{set\-Crease}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{set\-Crease}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::set\-Crease (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!set\+Crease@{set\+Crease}}
+\index{set\+Crease@{set\+Crease}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Crease(bool val)}{setCrease(bool val)}}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::set\+Crease (
 \begin{DoxyParamCaption}
 \item[{bool}]{val}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}{}\label{classShipCAD_1_1SubdivisionEdge_ad0313b8844a81c5802533376a09fce99}
 
 
-Definition at line 113 of file subdivedge.\-cpp.
+Definition at line 168 of file subdivedge.\+cpp.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a445c08836100060818c129ea7c694234}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!set\-Curve@{set\-Curve}}
-\index{set\-Curve@{set\-Curve}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{set\-Curve}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::set\-Curve (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!set\+Curve@{set\+Curve}}
+\index{set\+Curve@{set\+Curve}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Curve(\+Subdivision\+Control\+Curve $\ast$curve)}{setCurve(SubdivisionControlCurve *curve)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::set\+Curve (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Control\-Curve} $\ast$}]{curve}
+\item[{{\bf Subdivision\+Control\+Curve} $\ast$}]{curve}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_a445c08836100060818c129ea7c694234}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a445c08836100060818c129ea7c694234}{}\label{classShipCAD_1_1SubdivisionEdge_a445c08836100060818c129ea7c694234}
 
 
-Definition at line 82 of file subdivedge.\-h.
+Definition at line 84 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ab86e4ccfa750684432c228ea2cc991ff}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!set\-Points@{set\-Points}}
-\index{set\-Points@{set\-Points}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{set\-Points}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::set\-Points (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!set\+Points@{set\+Points}}
+\index{set\+Points@{set\+Points}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{set\+Points(\+Subdivision\+Point $\ast$p1, Subdivision\+Point $\ast$p2)}{setPoints(SubdivisionPoint *p1, SubdivisionPoint *p2)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::set\+Points (
 \begin{DoxyParamCaption}
-\item[{{\bf Subdivision\-Point} $\ast$}]{p1, }
-\item[{{\bf Subdivision\-Point} $\ast$}]{p2}
+\item[{{\bf Subdivision\+Point} $\ast$}]{p1, }
+\item[{{\bf Subdivision\+Point} $\ast$}]{p2}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_ab86e4ccfa750684432c228ea2cc991ff}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ab86e4ccfa750684432c228ea2cc991ff}{}\label{classShipCAD_1_1SubdivisionEdge_ab86e4ccfa750684432c228ea2cc991ff}
 
 
-Definition at line 88 of file subdivedge.\-h.
+Definition at line 89 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a63a44ac44fe9d2729e5152303b249873}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!start\-Point@{start\-Point}}
-\index{start\-Point@{start\-Point}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{start\-Point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::start\-Point (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classShipCAD_1_1SubdivisionEdge_a63a44ac44fe9d2729e5152303b249873}
-
-
-Definition at line 73 of file subdivedge.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!swap\-Data@{swap\-Data}}
-\index{swap\-Data@{swap\-Data}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{swap\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\-Edge\-::swap\-Data (
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!start\+Point@{start\+Point}}
+\index{start\+Point@{start\+Point}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{start\+Point() const }{startPoint() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Point}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::start\+Point (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_aa6e28532f3ecc1610813844dfb385deb}{}\label{classShipCAD_1_1SubdivisionEdge_aa6e28532f3ecc1610813844dfb385deb}
 
 
-Definition at line 244 of file subdivedge.\-cpp.
+Definition at line 75 of file subdivedge.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!swap\+Data@{swap\+Data}}
+\index{swap\+Data@{swap\+Data}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{swap\+Data()}{swapData()}}]{\setlength{\rightskip}{0pt plus 5cm}void Subdivision\+Edge\+::swap\+Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}{}\label{classShipCAD_1_1SubdivisionEdge_ad19ddea08367fa2307e131132e36c008}
+
+
+Definition at line 299 of file subdivedge.\+cpp.
 
 
 
 \subsection{Member Data Documentation}
-\hypertarget{classShipCAD_1_1SubdivisionEdge_ae933ee4901a7964ca50a83edad44e8ec}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!\-\_\-control\-\_\-edge@{\-\_\-control\-\_\-edge}}
-\index{\-\_\-control\-\_\-edge@{\-\_\-control\-\_\-edge}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{\-\_\-control\-\_\-edge}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::\-\_\-control\-\_\-edge\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionEdge_ae933ee4901a7964ca50a83edad44e8ec}
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!\+\_\+control\+\_\+edge@{\+\_\+control\+\_\+edge}}
+\index{\+\_\+control\+\_\+edge@{\+\_\+control\+\_\+edge}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{\+\_\+control\+\_\+edge}{_control_edge}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::\+\_\+control\+\_\+edge\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_ae933ee4901a7964ca50a83edad44e8ec}{}\label{classShipCAD_1_1SubdivisionEdge_ae933ee4901a7964ca50a83edad44e8ec}
 
 
-Definition at line 106 of file subdivedge.\-h.
+Definition at line 107 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a9ea4714611e4970cf5e4014304a20190}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!\-\_\-crease@{\-\_\-crease}}
-\index{\-\_\-crease@{\-\_\-crease}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{\-\_\-crease}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::\-\_\-crease\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionEdge_a9ea4714611e4970cf5e4014304a20190}
-
-
-Definition at line 105 of file subdivedge.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a1863a7ef84b2d73f0e1407f3536bbc9f}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!\-\_\-curve@{\-\_\-curve}}
-\index{\-\_\-curve@{\-\_\-curve}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{\-\_\-curve}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Control\-Curve}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::\-\_\-curve\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionEdge_a1863a7ef84b2d73f0e1407f3536bbc9f}
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!\+\_\+crease@{\+\_\+crease}}
+\index{\+\_\+crease@{\+\_\+crease}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{\+\_\+crease}{_crease}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::\+\_\+crease\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a9ea4714611e4970cf5e4014304a20190}{}\label{classShipCAD_1_1SubdivisionEdge_a9ea4714611e4970cf5e4014304a20190}
 
 
-Definition at line 107 of file subdivedge.\-h.
+Definition at line 106 of file subdivedge.\+h.
 
-\hypertarget{classShipCAD_1_1SubdivisionEdge_aa1da730fcb3ac49c92e803a0b336d855}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!\-\_\-faces@{\-\_\-faces}}
-\index{\-\_\-faces@{\-\_\-faces}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{\-\_\-faces}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Subdivision\-Face}$\ast$$>$ Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::\-\_\-faces\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionEdge_aa1da730fcb3ac49c92e803a0b336d855}
-
-
-Definition at line 104 of file subdivedge.\-h.
-
-\hypertarget{classShipCAD_1_1SubdivisionEdge_a55519f9d615d6bd701c10c48259525ac}{\index{Ship\-C\-A\-D\-::\-Subdivision\-Edge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}!\-\_\-points@{\-\_\-points}}
-\index{\-\_\-points@{\-\_\-points}!ShipCAD::SubdivisionEdge@{Ship\-C\-A\-D\-::\-Subdivision\-Edge}}
-\subsubsection[{\-\_\-points}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\-Point}$\ast$ Ship\-C\-A\-D\-::\-Subdivision\-Edge\-::\-\_\-points\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}}\label{classShipCAD_1_1SubdivisionEdge_a55519f9d615d6bd701c10c48259525ac}
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!\+\_\+curve@{\+\_\+curve}}
+\index{\+\_\+curve@{\+\_\+curve}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{\+\_\+curve}{_curve}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Control\+Curve}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::\+\_\+curve\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a1863a7ef84b2d73f0e1407f3536bbc9f}{}\label{classShipCAD_1_1SubdivisionEdge_a1863a7ef84b2d73f0e1407f3536bbc9f}
 
 
-Definition at line 103 of file subdivedge.\-h.
+Definition at line 108 of file subdivedge.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!\+\_\+faces@{\+\_\+faces}}
+\index{\+\_\+faces@{\+\_\+faces}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{\+\_\+faces}{_faces}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Subdivision\+Face}$\ast$$>$ Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::\+\_\+faces\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_aa1da730fcb3ac49c92e803a0b336d855}{}\label{classShipCAD_1_1SubdivisionEdge_aa1da730fcb3ac49c92e803a0b336d855}
+
+
+Definition at line 105 of file subdivedge.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}!\+\_\+points@{\+\_\+points}}
+\index{\+\_\+points@{\+\_\+points}!Ship\+C\+A\+D\+::\+Subdivision\+Edge@{Ship\+C\+A\+D\+::\+Subdivision\+Edge}}
+\subsubsection[{\texorpdfstring{\+\_\+points}{_points}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Point}$\ast$ Ship\+C\+A\+D\+::\+Subdivision\+Edge\+::\+\_\+points\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1SubdivisionEdge_a55519f9d615d6bd701c10c48259525ac}{}\label{classShipCAD_1_1SubdivisionEdge_a55519f9d615d6bd701c10c48259525ac}
+
+
+Definition at line 104 of file subdivedge.\+h.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{subdivedge_8h}{subdivedge.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{subdivedge_8cpp}{subdivedge.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{subdivedge_8h}{subdivedge.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{subdivedge_8cpp}{subdivedge.\+cpp}\end{DoxyCompactItemize}

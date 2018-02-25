@@ -1,6 +1,5 @@
-\hypertarget{classShipCAD_1_1ViewportViewProfile}{\section{Ship\-C\-A\-D\-:\-:Viewport\-View\-Profile Class Reference}
-\label{classShipCAD_1_1ViewportViewProfile}\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}}
-}
+\hypertarget{classShipCAD_1_1ViewportViewProfile}{}\section{Ship\+C\+AD\+:\+:Viewport\+View\+Profile Class Reference}
+\label{classShipCAD_1_1ViewportViewProfile}\index{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}}
 
 
 class to calculate view, world matrices and operations using those for a Profile viewport  
@@ -8,9 +7,9 @@ class to calculate view, world matrices and operations using those for a Profile
 
 
 
-{\ttfamily \#include $<$viewportview.\-h$>$}
+{\ttfamily \#include $<$viewportview.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Viewport\-View\-Profile\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Viewport\+View\+Profile\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classShipCAD_1_1ViewportViewProfile}
@@ -19,89 +18,162 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Viewport\-View\-Profile\-:\begin{figu
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1ViewportViewProfile_aff06a8bee0af9b969e4dc7373871700e}{Viewport\-View\-Profile} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
+\hyperlink{classShipCAD_1_1ViewportViewProfile_aff06a8bee0af9b969e4dc7373871700e}{Viewport\+View\+Profile} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
 \item 
-virtual \hyperlink{classShipCAD_1_1ViewportViewProfile_a1c3101fa8a458cf3908cd865349ace08}{$\sim$\-Viewport\-View\-Profile} ()
+virtual \hyperlink{classShipCAD_1_1ViewportViewProfile_a1c3101fa8a458cf3908cd865349ace08}{$\sim$\+Viewport\+View\+Profile} ()
 \item 
-virtual void \hyperlink{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}{initialize\-Viewport} (const Q\-Vector3\-D \&min, const Q\-Vector3\-D \&max, int width, int height)
+virtual void \hyperlink{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}{initialize\+Viewport} (const Q\+Vector3D \&min, const Q\+Vector3D \&max, int width, int height)
 \item 
-virtual bool \hyperlink{classShipCAD_1_1ViewportViewProfile_aa31c0ed3151f473b68197f20b5475cfc}{left\-Mouse\-Move} (Q\-Point cur, Q\-Point prev, int w, int h)
-\end{DoxyCompactItemize}
+virtual Q\+Vector2D \hyperlink{classShipCAD_1_1ViewportViewProfile_a6158e95a906d0b62064e72ead2263a73}{project\+To3D} (Q\+Point pos, int w, int h)
+\begin{DoxyCompactList}\small\item\em convert screen coordinates to 2D world coordinates \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportViewProfile_a8fccdc2ff4cb6021b6e810712d45b8f0}{right\+Mouse\+Move} (Q\+Point cur, Q\+Point prev, int w, int h)
+\item 
+virtual bool \hyperlink{classShipCAD_1_1ViewportViewProfile_abc8adc37b3539da20124a9d1930cfc92}{point\+Drag} (Q\+Point pos, int w, int h, Q\+Vector3D \&newcoord)
+\begin{DoxyCompactList}\small\item\em drag a point in the viewport \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
 class to calculate view, world matrices and operations using those for a Profile viewport 
 
-Definition at line 166 of file viewportview.\-h.
+Definition at line 204 of file viewportview.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1ViewportViewProfile_aff06a8bee0af9b969e4dc7373871700e}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}!Viewport\-View\-Profile@{Viewport\-View\-Profile}}
-\index{Viewport\-View\-Profile@{Viewport\-View\-Profile}!ShipCAD::ViewportViewProfile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}}
-\subsubsection[{Viewport\-View\-Profile}]{\setlength{\rightskip}{0pt plus 5cm}Viewport\-View\-Profile\-::\-Viewport\-View\-Profile (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}!Viewport\+View\+Profile@{Viewport\+View\+Profile}}
+\index{Viewport\+View\+Profile@{Viewport\+View\+Profile}!Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}}
+\subsubsection[{\texorpdfstring{Viewport\+View\+Profile(\+Viewport $\ast$vp)}{ViewportViewProfile(Viewport *vp)}}]{\setlength{\rightskip}{0pt plus 5cm}Viewport\+View\+Profile\+::\+Viewport\+View\+Profile (
 \begin{DoxyParamCaption}
 \item[{{\bf Viewport} $\ast$}]{vp}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1ViewportViewProfile_aff06a8bee0af9b969e4dc7373871700e}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1ViewportViewProfile_aff06a8bee0af9b969e4dc7373871700e}{}\label{classShipCAD_1_1ViewportViewProfile_aff06a8bee0af9b969e4dc7373871700e}
 
 
-Definition at line 385 of file viewportview.\-cpp.
+Definition at line 422 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportViewProfile_a1c3101fa8a458cf3908cd865349ace08}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}!$\sim$\-Viewport\-View\-Profile@{$\sim$\-Viewport\-View\-Profile}}
-\index{$\sim$\-Viewport\-View\-Profile@{$\sim$\-Viewport\-View\-Profile}!ShipCAD::ViewportViewProfile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}}
-\subsubsection[{$\sim$\-Viewport\-View\-Profile}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Viewport\-View\-Profile\-::$\sim$\-Viewport\-View\-Profile (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}!````~Viewport\+View\+Profile@{$\sim$\+Viewport\+View\+Profile}}
+\index{````~Viewport\+View\+Profile@{$\sim$\+Viewport\+View\+Profile}!Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}}
+\subsubsection[{\texorpdfstring{$\sim$\+Viewport\+View\+Profile()}{~ViewportViewProfile()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\+C\+A\+D\+::\+Viewport\+View\+Profile\+::$\sim$\+Viewport\+View\+Profile (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewProfile_a1c3101fa8a458cf3908cd865349ace08}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportViewProfile_a1c3101fa8a458cf3908cd865349ace08}{}\label{classShipCAD_1_1ViewportViewProfile_a1c3101fa8a458cf3908cd865349ace08}
 
 
-Definition at line 171 of file viewportview.\-h.
+Definition at line 209 of file viewportview.\+h.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}!initialize\-Viewport@{initialize\-Viewport}}
-\index{initialize\-Viewport@{initialize\-Viewport}!ShipCAD::ViewportViewProfile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}}
-\subsubsection[{initialize\-Viewport}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\-View\-Profile\-::initialize\-Viewport (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}!initialize\+Viewport@{initialize\+Viewport}}
+\index{initialize\+Viewport@{initialize\+Viewport}!Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}}
+\subsubsection[{\texorpdfstring{initialize\+Viewport(const Q\+Vector3\+D \&min, const Q\+Vector3\+D \&max, int width, int height)}{initializeViewport(const QVector3D &min, const QVector3D &max, int width, int height)}}]{\setlength{\rightskip}{0pt plus 5cm}void Viewport\+View\+Profile\+::initialize\+Viewport (
 \begin{DoxyParamCaption}
-\item[{const Q\-Vector3\-D \&}]{min, }
-\item[{const Q\-Vector3\-D \&}]{max, }
+\item[{const Q\+Vector3D \&}]{min, }
+\item[{const Q\+Vector3D \&}]{max, }
 \item[{int}]{width, }
 \item[{int}]{height}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}{}\label{classShipCAD_1_1ViewportViewProfile_ae8ac602b7c67fddbfce7ceeda85676b3}
 
 
-Implements \hyperlink{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}{Ship\-C\-A\-D\-::\-Viewport\-View}.
+Implements \hyperlink{classShipCAD_1_1ViewportView_ad1c89a6e34b7b3795a7f21e67181dc0f}{Ship\+C\+A\+D\+::\+Viewport\+View}.
 
 
 
-Definition at line 391 of file viewportview.\-cpp.
+Definition at line 428 of file viewportview.\+cpp.
 
-\hypertarget{classShipCAD_1_1ViewportViewProfile_aa31c0ed3151f473b68197f20b5475cfc}{\index{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}!left\-Mouse\-Move@{left\-Mouse\-Move}}
-\index{left\-Mouse\-Move@{left\-Mouse\-Move}!ShipCAD::ViewportViewProfile@{Ship\-C\-A\-D\-::\-Viewport\-View\-Profile}}
-\subsubsection[{left\-Mouse\-Move}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\-View\-Profile\-::left\-Mouse\-Move (
+\index{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}!point\+Drag@{point\+Drag}}
+\index{point\+Drag@{point\+Drag}!Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}}
+\subsubsection[{\texorpdfstring{point\+Drag(\+Q\+Point pos, int w, int h, Q\+Vector3\+D \&newcoord)}{pointDrag(QPoint pos, int w, int h, QVector3D &newcoord)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+Profile\+::point\+Drag (
 \begin{DoxyParamCaption}
-\item[{Q\-Point}]{cur, }
-\item[{Q\-Point}]{prev, }
+\item[{Q\+Point}]{pos, }
+\item[{int}]{w, }
+\item[{int}]{h, }
+\item[{Q\+Vector3D \&}]{newcoord}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportViewProfile_abc8adc37b3539da20124a9d1930cfc92}{}\label{classShipCAD_1_1ViewportViewProfile_abc8adc37b3539da20124a9d1930cfc92}
+
+
+drag a point in the viewport 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the current mouse coordinates \\
+\hline
+{\em w} & width of viewport in pixels \\
+\hline
+{\em h} & height of viewport in pixels \\
+\hline
+{\em newcoord} & the new coordinates of the point in 3D space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the point can be dragged in this view 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1ViewportView_a6991b6b121b609ec7d18518a8f872859}{Ship\+C\+A\+D\+::\+Viewport\+View}.
+
+
+
+Definition at line 495 of file viewportview.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}!project\+To3D@{project\+To3D}}
+\index{project\+To3D@{project\+To3D}!Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}}
+\subsubsection[{\texorpdfstring{project\+To3\+D(\+Q\+Point pos, int w, int h)}{projectTo3D(QPoint pos, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Viewport\+View\+Profile\+::project\+To3D (
+\begin{DoxyParamCaption}
+\item[{Q\+Point}]{pos, }
 \item[{int}]{w, }
 \item[{int}]{h}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1ViewportViewProfile_aa31c0ed3151f473b68197f20b5475cfc}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportViewProfile_a6158e95a906d0b62064e72ead2263a73}{}\label{classShipCAD_1_1ViewportViewProfile_a6158e95a906d0b62064e72ead2263a73}
 
 
-Reimplemented from \hyperlink{classShipCAD_1_1ViewportView_a2dc46f8d032d707308cf853c70bc965a}{Ship\-C\-A\-D\-::\-Viewport\-View}.
+convert screen coordinates to 2D world coordinates 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & screen position \\
+\hline
+{\em w} & width of viewport in pixels \\
+\hline
+{\em h} & height of viewport in pixels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the world coordinates of screen position 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classShipCAD_1_1ViewportView_a2bc94791273d6134566a386f2a735e37}{Ship\+C\+A\+D\+::\+Viewport\+View}.
 
 
 
-Definition at line 433 of file viewportview.\-cpp.
+Definition at line 474 of file viewportview.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}!right\+Mouse\+Move@{right\+Mouse\+Move}}
+\index{right\+Mouse\+Move@{right\+Mouse\+Move}!Ship\+C\+A\+D\+::\+Viewport\+View\+Profile@{Ship\+C\+A\+D\+::\+Viewport\+View\+Profile}}
+\subsubsection[{\texorpdfstring{right\+Mouse\+Move(\+Q\+Point cur, Q\+Point prev, int w, int h)}{rightMouseMove(QPoint cur, QPoint prev, int w, int h)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Viewport\+View\+Profile\+::right\+Mouse\+Move (
+\begin{DoxyParamCaption}
+\item[{Q\+Point}]{cur, }
+\item[{Q\+Point}]{prev, }
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1ViewportViewProfile_a8fccdc2ff4cb6021b6e810712d45b8f0}{}\label{classShipCAD_1_1ViewportViewProfile_a8fccdc2ff4cb6021b6e810712d45b8f0}
+
+
+Reimplemented from \hyperlink{classShipCAD_1_1ViewportView_a537210f7c2872e7b8921341660e85347}{Ship\+C\+A\+D\+::\+Viewport\+View}.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+Definition at line 480 of file viewportview.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{viewportview_8h}{viewportview.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{viewportview_8cpp}{viewportview.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{viewportview_8h}{viewportview.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{viewportview_8cpp}{viewportview.\+cpp}\end{DoxyCompactItemize}

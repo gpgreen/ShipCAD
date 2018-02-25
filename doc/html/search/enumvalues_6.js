@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['vmshade',['vmShade',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863ab1258f959e2d114750dffb3f9c2e2c0c',1,'ShipCAD']]],
-  ['vmshadedevelopable',['vmShadeDevelopable',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a85babb2fea8446064bbbf526b10bf36b',1,'ShipCAD']]],
-  ['vmshadegauss',['vmShadeGauss',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863aaf20984128d2e9697958fa8c329a801a',1,'ShipCAD']]],
-  ['vmshadezebra',['vmShadeZebra',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a70fcfa9199faab53e43f138ed64ad12f',1,'ShipCAD']]],
-  ['vmwireframe',['vmWireFrame',['../namespaceShipCAD.html#a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8',1,'ShipCAD']]]
+  ['svcorner',['svCorner',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba8d802131f84b0a9edf8a419eded859d0',1,'ShipCAD']]],
+  ['svcrease',['svCrease',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba79fc4e40055439350070993be28ec8ca',1,'ShipCAD']]],
+  ['svdart',['svDart',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60debaf17373a62a5f899a61ed17d28e103d24',1,'ShipCAD']]],
+  ['svregular',['svRegular',['../namespaceShipCAD.html#a03171cc921c53a568b778f5131a60deba11889066d8ae7a44f297f45684bb99de',1,'ShipCAD']]]
 ];

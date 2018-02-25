@@ -1,148 +1,166 @@
-\hypertarget{shipcadlib_8h}{\section{Ship\-C\-A\-Dlib/shipcadlib.h File Reference}
-\label{shipcadlib_8h}\index{Ship\-C\-A\-Dlib/shipcadlib.\-h@{Ship\-C\-A\-Dlib/shipcadlib.\-h}}
-}
-{\ttfamily \#include $<$Qt\-Core$>$}\\*
-{\ttfamily \#include $<$Qt\-Gui$>$}\\*
+\hypertarget{shipcadlib_8h}{}\section{Ship\+C\+A\+Dlib/shipcadlib.h File Reference}
+\label{shipcadlib_8h}\index{Ship\+C\+A\+Dlib/shipcadlib.\+h@{Ship\+C\+A\+Dlib/shipcadlib.\+h}}
+{\ttfamily \#include $<$Qt\+Core$>$}\\*
+{\ttfamily \#include $<$Qt\+Gui$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structShipCAD_1_1PickRay}{Ship\+C\+A\+D\+::\+Pick\+Ray}
+\begin{DoxyCompactList}\small\item\em a pick ray (line) \end{DoxyCompactList}\item 
+struct \hyperlink{structShipCAD_1_1LayerProperties}{Ship\+C\+A\+D\+::\+Layer\+Properties}
+\item 
+struct \hyperlink{structShipCAD_1_1SurfaceCheckResult}{Ship\+C\+A\+D\+::\+Surface\+Check\+Result}
+\begin{DoxyCompactList}\small\item\em used to collect statistics when doing the model check \end{DoxyCompactList}\item 
+struct \hyperlink{structShipCAD_1_1JPEGImage}{Ship\+C\+A\+D\+::\+J\+P\+E\+G\+Image}
+\begin{DoxyCompactList}\small\item\em struct to hold jpeg image as stored in Free!\+Ship \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceShipCAD}{Ship\-C\-A\-D}
+ \hyperlink{namespaceShipCAD}{Ship\+C\+AD}
 \end{DoxyCompactItemize}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863}{Ship\-C\-A\-D\-::viewport\-\_\-mode\-\_\-t} \{ \\*
-\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8}{Ship\-C\-A\-D\-::vm\-Wire\-Frame} = 0, 
-\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863ab1258f959e2d114750dffb3f9c2e2c0c}{Ship\-C\-A\-D\-::vm\-Shade}, 
-\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863aaf20984128d2e9697958fa8c329a801a}{Ship\-C\-A\-D\-::vm\-Shade\-Gauss}, 
-\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863a85babb2fea8446064bbbf526b10bf36b}{Ship\-C\-A\-D\-::vm\-Shade\-Developable}, 
+enum \hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863}{Ship\+C\+A\+D\+::viewport\+\_\+mode\+\_\+t} \{ \\*
+\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863a109cd328af19be260371a7e5333043f8}{Ship\+C\+A\+D\+::vm\+Wire\+Frame} = 0, 
+\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863ab1258f959e2d114750dffb3f9c2e2c0c}{Ship\+C\+A\+D\+::vm\+Shade}, 
+\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863aaf20984128d2e9697958fa8c329a801a}{Ship\+C\+A\+D\+::vm\+Shade\+Gauss}, 
+\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863a85babb2fea8446064bbbf526b10bf36b}{Ship\+C\+A\+D\+::vm\+Shade\+Developable}, 
 \\*
-\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863a70fcfa9199faab53e43f138ed64ad12f}{Ship\-C\-A\-D\-::vm\-Shade\-Zebra}
+\hyperlink{namespaceShipCAD_a67437198ee14f74e6c5277d761894863a70fcfa9199faab53e43f138ed64ad12f}{Ship\+C\+A\+D\+::vm\+Shade\+Zebra}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0a}{Ship\-C\-A\-D\-::viewport\-\_\-type\-\_\-t} \{ \hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aa1bc519e3e41c233dd8e94c40af1fd36d}{Ship\-C\-A\-D\-::fv\-Bodyplan} = 0, 
-\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aa05a0a083efb18429cbb855b2dcbf5e18}{Ship\-C\-A\-D\-::fv\-Profile}, 
-\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aab67fb04b0624572e1567bff4caefde27}{Ship\-C\-A\-D\-::fv\-Plan}, 
-\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1}{Ship\-C\-A\-D\-::fv\-Perspective}
+enum \hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0a}{Ship\+C\+A\+D\+::viewport\+\_\+type\+\_\+t} \{ \hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aa1bc519e3e41c233dd8e94c40af1fd36d}{Ship\+C\+A\+D\+::fv\+Bodyplan} = 0, 
+\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aa05a0a083efb18429cbb855b2dcbf5e18}{Ship\+C\+A\+D\+::fv\+Profile}, 
+\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aab67fb04b0624572e1567bff4caefde27}{Ship\+C\+A\+D\+::fv\+Plan}, 
+\hyperlink{namespaceShipCAD_aeeeb05810f2e31ef89fd4ac6b6ba9c0aaccdacbf26c0ffe78ae55326537a28dc1}{Ship\+C\+A\+D\+::fv\+Perspective}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241e}{Ship\-C\-A\-D\-::camera\-\_\-type\-\_\-t} \{ \\*
-\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241ea8dd7ff1f55f46fc3db3ca743a05d93af}{Ship\-C\-A\-D\-::ft\-Wide} = 0, 
-\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241eaa4100f3d3073015697dd72390b55fa44}{Ship\-C\-A\-D\-::ft\-Standard}, 
-\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241ea6f6aa44840629968cfa9815da646a9d0}{Ship\-C\-A\-D\-::ft\-Short\-Tele}, 
-\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241eae0b0ae77e52d05ac3800353808e16afe}{Ship\-C\-A\-D\-::ft\-Medium\-Tele}, 
+enum \hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241e}{Ship\+C\+A\+D\+::camera\+\_\+type\+\_\+t} \{ \\*
+\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241ea8dd7ff1f55f46fc3db3ca743a05d93af}{Ship\+C\+A\+D\+::ft\+Wide} = 0, 
+\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241eaa4100f3d3073015697dd72390b55fa44}{Ship\+C\+A\+D\+::ft\+Standard}, 
+\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241ea6f6aa44840629968cfa9815da646a9d0}{Ship\+C\+A\+D\+::ft\+Short\+Tele}, 
+\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241eae0b0ae77e52d05ac3800353808e16afe}{Ship\+C\+A\+D\+::ft\+Medium\+Tele}, 
 \\*
-\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe}{Ship\-C\-A\-D\-::ft\-Far\-Tele}
+\hyperlink{namespaceShipCAD_a58f51ebd2e66de5e41c2ffd6f434241ea849a215bd25942bb9594c0389614fafe}{Ship\+C\+A\+D\+::ft\+Far\+Tele}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2}{Ship\-C\-A\-D\-::hydrostatic\-\_\-type\-\_\-t} \{ \hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2acfe164530006cd2d42457ec37a0ac24b}{Ship\-C\-A\-D\-::fh\-Short} = 0, 
-\hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2affd22dfa116c9ea2aae175feba432961}{Ship\-C\-A\-D\-::fh\-Extensive}
+enum \hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2}{Ship\+C\+A\+D\+::hydrostatic\+\_\+type\+\_\+t} \{ \hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2acfe164530006cd2d42457ec37a0ac24b}{Ship\+C\+A\+D\+::fh\+Short} = 0, 
+\hyperlink{namespaceShipCAD_afea51c7ee52940acebde29bf44206fe2affd22dfa116c9ea2aae175feba432961}{Ship\+C\+A\+D\+::fh\+Extensive}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3}{Ship\-C\-A\-D\-::hydrostatics\-\_\-mode\-\_\-t} \{ \hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3ab322857f69d00b378f611acbb12bc663}{Ship\-C\-A\-D\-::fh\-Single\-Calculation} = 0, 
-\hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3aee242838cf07c1950c914a44851804b5}{Ship\-C\-A\-D\-::fh\-Multiple\-Calculations}
+enum \hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3}{Ship\+C\+A\+D\+::hydrostatics\+\_\+mode\+\_\+t} \{ \hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3ab322857f69d00b378f611acbb12bc663}{Ship\+C\+A\+D\+::fh\+Single\+Calculation} = 0, 
+\hyperlink{namespaceShipCAD_a2c84d37615dd30be37ed0253501fb9a3aee242838cf07c1950c914a44851804b5}{Ship\+C\+A\+D\+::fh\+Multiple\+Calculations}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0}{Ship\-C\-A\-D\-::hydrostatics\-\_\-error\-\_\-t} \{ \hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0a0813d6e8a63bd1d17941b321715da4dd}{Ship\-C\-A\-D\-::fe\-Nothing\-Submerged} = 0, 
-\hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0ab5378e2d38e12b21bcb9f89b4da7a024}{Ship\-C\-A\-D\-::fe\-Making\-Water}, 
-\hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0aabbfd93b3daf55e537540d8d4ac8eb0c}{Ship\-C\-A\-D\-::fe\-Not\-Enough\-Buoyancy}
+enum \hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0}{Ship\+C\+A\+D\+::hydrostatics\+\_\+error\+\_\+t} \{ \hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0a0813d6e8a63bd1d17941b321715da4dd}{Ship\+C\+A\+D\+::fe\+Nothing\+Submerged} = 0, 
+\hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0ab5378e2d38e12b21bcb9f89b4da7a024}{Ship\+C\+A\+D\+::fe\+Making\+Water}, 
+\hyperlink{namespaceShipCAD_a1d801b982c24bce0cf10ffd4b995dda0aabbfd93b3daf55e537540d8d4ac8eb0c}{Ship\+C\+A\+D\+::fe\+Not\+Enough\+Buoyancy}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fce}{Ship\-C\-A\-D\-::hydrostatics\-\_\-calc\-\_\-t} \{ \\*
-\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea286a6df9f1d51b98fcbb54f17fbe94d6}{Ship\-C\-A\-D\-::hc\-All} = 0, 
-\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea10c43915dd92febe1ef5328644ea2c11}{Ship\-C\-A\-D\-::hc\-Volume}, 
-\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceafb6824df148d1417a4db618e6b4dc4f6}{Ship\-C\-A\-D\-::hc\-Mainframe}, 
-\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaf80e166aa0cdd03c48f0633f31da8e9f}{Ship\-C\-A\-D\-::hc\-Waterline}, 
+enum \hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fce}{Ship\+C\+A\+D\+::hydrostatics\+\_\+calc\+\_\+t} \{ \\*
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea286a6df9f1d51b98fcbb54f17fbe94d6}{Ship\+C\+A\+D\+::hc\+All} = 0, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea10c43915dd92febe1ef5328644ea2c11}{Ship\+C\+A\+D\+::hc\+Volume}, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceafb6824df148d1417a4db618e6b4dc4f6}{Ship\+C\+A\+D\+::hc\+Mainframe}, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaf80e166aa0cdd03c48f0633f31da8e9f}{Ship\+C\+A\+D\+::hc\+Waterline}, 
 \\*
-\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaad2786c707b686af79e47765eba073d0}{Ship\-C\-A\-D\-::hc\-S\-A\-C}, 
-\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea3d6d84cee5b8c79bf4d75a5dbc084e45}{Ship\-C\-A\-D\-::hc\-Lateral\-Area}
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fceaad2786c707b686af79e47765eba073d0}{Ship\+C\+A\+D\+::hc\+S\+AC}, 
+\hyperlink{namespaceShipCAD_ac9ff7fc96a52fceafa83edc0d5d06fcea3d6d84cee5b8c79bf4d75a5dbc084e45}{Ship\+C\+A\+D\+::hc\+Lateral\+Area}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{Ship\-C\-A\-D\-::intersection\-\_\-type\-\_\-t} \{ \\*
-\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fda8e5e5dc412191234863fae2f98709477}{Ship\-C\-A\-D\-::fi\-Free} = 0, 
-\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fdaf57b8e7252f2c55c001df410276926e3}{Ship\-C\-A\-D\-::fi\-Station}, 
-\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fdabcf8818401977200b532a1e18ec2df70}{Ship\-C\-A\-D\-::fi\-Buttock}, 
-\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fda44c99d1edb96c2c22b5661d927eb9041}{Ship\-C\-A\-D\-::fi\-Waterline}, 
+enum \hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fd}{Ship\+C\+A\+D\+::intersection\+\_\+type\+\_\+t} \{ \\*
+\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fda8e5e5dc412191234863fae2f98709477}{Ship\+C\+A\+D\+::fi\+Free} = 0, 
+\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fdaf57b8e7252f2c55c001df410276926e3}{Ship\+C\+A\+D\+::fi\+Station}, 
+\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fdabcf8818401977200b532a1e18ec2df70}{Ship\+C\+A\+D\+::fi\+Buttock}, 
+\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fda44c99d1edb96c2c22b5661d927eb9041}{Ship\+C\+A\+D\+::fi\+Waterline}, 
 \\*
-\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fda5631b7711c628bad5c561953eaac2863}{Ship\-C\-A\-D\-::fi\-Diagonal}
+\hyperlink{namespaceShipCAD_aa56834b730aafdf2786ddc9a60a046fda5631b7711c628bad5c561953eaac2863}{Ship\+C\+A\+D\+::fi\+Diagonal}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{Ship\-C\-A\-D\-::unit\-\_\-type\-\_\-t} \{ \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f}{Ship\-C\-A\-D\-::fu\-Metric} = 0, 
-\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7}{Ship\-C\-A\-D\-::fu\-Imperial}
+enum \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{Ship\+C\+A\+D\+::unit\+\_\+type\+\_\+t} \{ \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5a867fb274949bd7c8474546b9d0fb703f}{Ship\+C\+A\+D\+::fu\+Metric} = 0, 
+\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5a77b7e6068aae48ecd768c4a6e7637fe7}{Ship\+C\+A\+D\+::fu\+Imperial}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a9cf77f0900561de9efc572dcbad4dbbd}{Ship\-C\-A\-D\-::hydrostatic\-\_\-coeff\-\_\-t} \{ \hyperlink{namespaceShipCAD_a9cf77f0900561de9efc572dcbad4dbbdad8361f42820d1f843333d60c0523d71d}{Ship\-C\-A\-D\-::fc\-Project\-Settings} = 0, 
-\hyperlink{namespaceShipCAD_a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2}{Ship\-C\-A\-D\-::fc\-Actual\-Data}
+enum \hyperlink{namespaceShipCAD_a9cf77f0900561de9efc572dcbad4dbbd}{Ship\+C\+A\+D\+::hydrostatic\+\_\+coeff\+\_\+t} \{ \hyperlink{namespaceShipCAD_a9cf77f0900561de9efc572dcbad4dbbdad8361f42820d1f843333d60c0523d71d}{Ship\+C\+A\+D\+::fc\+Project\+Settings} = 0, 
+\hyperlink{namespaceShipCAD_a9cf77f0900561de9efc572dcbad4dbbda3ccd536b7a23b7c708cde0d5ba9633d2}{Ship\+C\+A\+D\+::fc\+Actual\+Data}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915}{Ship\-C\-A\-D\-::precision\-\_\-t} \{ \hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915a493cc0c95c59b2a1a0ca04b7a337295b}{Ship\-C\-A\-D\-::fp\-Low} = 0, 
-\hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915af3fadd404d6708aa5759c5c33df67abb}{Ship\-C\-A\-D\-::fp\-Medium}, 
-\hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915a0ea3ca30ae42b68a60d3a4cd4d08fa17}{Ship\-C\-A\-D\-::fp\-High}, 
-\hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915a1d5c86b4ae0e1bc82af908b35b29f3d6}{Ship\-C\-A\-D\-::fp\-Very\-High}
+enum \hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915}{Ship\+C\+A\+D\+::precision\+\_\+t} \{ \hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915a493cc0c95c59b2a1a0ca04b7a337295b}{Ship\+C\+A\+D\+::fp\+Low} = 0, 
+\hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915af3fadd404d6708aa5759c5c33df67abb}{Ship\+C\+A\+D\+::fp\+Medium}, 
+\hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915a0ea3ca30ae42b68a60d3a4cd4d08fa17}{Ship\+C\+A\+D\+::fp\+High}, 
+\hyperlink{namespaceShipCAD_ae13c7e36dfb1e2300741a631041cd915a1d5c86b4ae0e1bc82af908b35b29f3d6}{Ship\+C\+A\+D\+::fp\+Very\+High}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a66144e3f3a53da01f51c9bdb94fcae31}{Ship\-C\-A\-D\-::edit\-\_\-mode\-\_\-t} \{ \hyperlink{namespaceShipCAD_a66144e3f3a53da01f51c9bdb94fcae31a756e1b357bd617f738749df02e51be25}{Ship\-C\-A\-D\-::em\-Select\-Items} = 0
+enum \hyperlink{namespaceShipCAD_a66144e3f3a53da01f51c9bdb94fcae31}{Ship\+C\+A\+D\+::edit\+\_\+mode\+\_\+t} \{ \hyperlink{namespaceShipCAD_a66144e3f3a53da01f51c9bdb94fcae31a756e1b357bd617f738749df02e51be25}{Ship\+C\+A\+D\+::em\+Select\+Items} = 0
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deb}{Ship\-C\-A\-D\-::vertex\-\_\-type\-\_\-t} \{ \hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deba11889066d8ae7a44f297f45684bb99de}{Ship\-C\-A\-D\-::sv\-Regular} = 0, 
-\hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deba79fc4e40055439350070993be28ec8ca}{Ship\-C\-A\-D\-::sv\-Crease}, 
-\hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60debaf17373a62a5f899a61ed17d28e103d24}{Ship\-C\-A\-D\-::sv\-Dart}, 
-\hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deba8d802131f84b0a9edf8a419eded859d0}{Ship\-C\-A\-D\-::sv\-Corner}
+enum \hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deb}{Ship\+C\+A\+D\+::vertex\+\_\+type\+\_\+t} \{ \hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deba11889066d8ae7a44f297f45684bb99de}{Ship\+C\+A\+D\+::sv\+Regular} = 0, 
+\hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deba79fc4e40055439350070993be28ec8ca}{Ship\+C\+A\+D\+::sv\+Crease}, 
+\hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60debaf17373a62a5f899a61ed17d28e103d24}{Ship\+C\+A\+D\+::sv\+Dart}, 
+\hyperlink{namespaceShipCAD_a03171cc921c53a568b778f5131a60deba8d802131f84b0a9edf8a419eded859d0}{Ship\+C\+A\+D\+::sv\+Corner}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817}{Ship\-C\-A\-D\-::subdiv\-\_\-mode\-\_\-t} \{ \hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817a8b220f0a4397af67b1431a98e2f44da0}{Ship\-C\-A\-D\-::fm\-Quad\-Triangle} = 0, 
-\hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817a7ae33add00d7fe33cdfac27bbddfef84}{Ship\-C\-A\-D\-::fm\-Catmull\-Clark}
+enum \hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817}{Ship\+C\+A\+D\+::subdiv\+\_\+mode\+\_\+t} \{ \hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817a8b220f0a4397af67b1431a98e2f44da0}{Ship\+C\+A\+D\+::fm\+Quad\+Triangle} = 0, 
+\hyperlink{namespaceShipCAD_a4a9d1acfd6a2e1e9078a5dcc36f0c817a7ae33add00d7fe33cdfac27bbddfef84}{Ship\+C\+A\+D\+::fm\+Catmull\+Clark}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20}{Ship\-C\-A\-D\-::assemble\-\_\-mode\-\_\-t} \{ \hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20aeaaf4833473e9e7c408d2f02c7d112c6}{Ship\-C\-A\-D\-::am\-Regular} = 0, 
-\hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20a33b807b55bc385bc5d69ceb0d74d53fc}{Ship\-C\-A\-D\-::am\-N\-U\-R\-B\-S}
+enum \hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20}{Ship\+C\+A\+D\+::assemble\+\_\+mode\+\_\+t} \{ \hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20aeaaf4833473e9e7c408d2f02c7d112c6}{Ship\+C\+A\+D\+::am\+Regular} = 0, 
+\hyperlink{namespaceShipCAD_aaba70dc1c80dc540bef320cb9b720a20a33b807b55bc385bc5d69ceb0d74d53fc}{Ship\+C\+A\+D\+::am\+N\+U\+R\+BS}
  \}
 \item 
-enum \hyperlink{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7}{Ship\-C\-A\-D\-::model\-\_\-view\-\_\-t} \{ \hyperlink{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7a033d1219796735edf6dbe71c266566ad}{Ship\-C\-A\-D\-::mv\-Port} = 0, 
-\hyperlink{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7ad45c94ca5dea7f967d58f9864f49c465}{Ship\-C\-A\-D\-::mv\-Both}
+enum \hyperlink{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7}{Ship\+C\+A\+D\+::model\+\_\+view\+\_\+t} \{ \hyperlink{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7a033d1219796735edf6dbe71c266566ad}{Ship\+C\+A\+D\+::mv\+Port} = 0, 
+\hyperlink{namespaceShipCAD_a742f9cd95e62e207769e17467ecd5bb7ad45c94ca5dea7f967d58f9864f49c465}{Ship\+C\+A\+D\+::mv\+Both}
+ \}
+\item 
+enum \hyperlink{namespaceShipCAD_aa0f3f220e102a298d2e698af90f5e1fc}{Ship\+C\+A\+D\+::plane\+\_\+selected\+\_\+t} \{ \hyperlink{namespaceShipCAD_aa0f3f220e102a298d2e698af90f5e1fca98cd91131ffa92087bfcefe6fb5e4d6d}{Ship\+C\+A\+D\+::transverse} = 0, 
+\hyperlink{namespaceShipCAD_aa0f3f220e102a298d2e698af90f5e1fca57120f6bafe4097088113cc547769d44}{Ship\+C\+A\+D\+::horizontal}, 
+\hyperlink{namespaceShipCAD_aa0f3f220e102a298d2e698af90f5e1fcaea2a3030c56526b9d4d3675ca0d5cefe}{Ship\+C\+A\+D\+::vertical}
  \}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-Q\-String \hyperlink{namespaceShipCAD_a2d7cf2fbcca4bd1dd75fd9ceb4ff0fa9}{Ship\-C\-A\-D\-::\-Area\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+Q\+Image \hyperlink{namespaceShipCAD_a31499c415c63299daeef4a846909daae}{Ship\+C\+A\+D\+::\+Create\+From\+J\+P\+EG} (const \hyperlink{structShipCAD_1_1JPEGImage}{Ship\+C\+A\+D\+::\+J\+P\+E\+G\+Image} $\ast$image)
+\begin{DoxyCompactList}\small\item\em create a Q\+Image from \hyperlink{structShipCAD_1_1JPEGImage}{J\+P\+E\+G\+Image} struct loaded from \hyperlink{namespaceShipCAD}{Ship\+C\+AD} binary \end{DoxyCompactList}\item 
+Q\+String \hyperlink{namespaceShipCAD_a2d7cf2fbcca4bd1dd75fd9ceb4ff0fa9}{Ship\+C\+A\+D\+::\+Area\+Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \item 
-Q\-String \hyperlink{namespaceShipCAD_aef3e2265fc686fbe6b50b081dcc4e6ff}{Ship\-C\-A\-D\-::\-Length\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+Q\+String \hyperlink{namespaceShipCAD_aef3e2265fc686fbe6b50b081dcc4e6ff}{Ship\+C\+A\+D\+::\+Length\+Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \item 
-Q\-String \hyperlink{namespaceShipCAD_a01d1e42109b5645919c004f6d7a30b68}{Ship\-C\-A\-D\-::\-Inertia\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+Q\+String \hyperlink{namespaceShipCAD_a01d1e42109b5645919c004f6d7a30b68}{Ship\+C\+A\+D\+::\+Inertia\+Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \item 
-Q\-String \hyperlink{namespaceShipCAD_a0758fd8275aafe6ad813d2a361281bf2}{Ship\-C\-A\-D\-::\-Vol\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+Q\+String \hyperlink{namespaceShipCAD_a0758fd8275aafe6ad813d2a361281bf2}{Ship\+C\+A\+D\+::\+Vol\+Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \item 
-Q\-String \hyperlink{namespaceShipCAD_af977e4008c66d1a323d105f27622991b}{Ship\-C\-A\-D\-::\-Density\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+Q\+String \hyperlink{namespaceShipCAD_af977e4008c66d1a323d105f27622991b}{Ship\+C\+A\+D\+::\+Density\+Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \item 
-Q\-String \hyperlink{namespaceShipCAD_a62749df66958d1389c3cc6f6f03d42fb}{Ship\-C\-A\-D\-::\-Weight\-Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+Q\+String \hyperlink{namespaceShipCAD_a62749df66958d1389c3cc6f6f03d42fb}{Ship\+C\+A\+D\+::\+Weight\+Str} (\hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-const float \hyperlink{namespaceShipCAD_a8c1484188fed1e735c5a94f64a6817ab}{Ship\-C\-A\-D\-::k\-Foot} = 0.\-3048f
+const float \hyperlink{namespaceShipCAD_a8c1484188fed1e735c5a94f64a6817ab}{Ship\+C\+A\+D\+::k\+Foot} = 0.\+3048f
 \item 
-const float \hyperlink{namespaceShipCAD_ad6937518d9742e268b279000d1e7a509}{Ship\-C\-A\-D\-::k\-Lbs} = 0.\-4535924f
+const float \hyperlink{namespaceShipCAD_ad6937518d9742e268b279000d1e7a509}{Ship\+C\+A\+D\+::k\+Lbs} = 0.\+4535924f
 \item 
-const float \hyperlink{namespaceShipCAD_aa4319c8e7adfa68048f95c1614984036}{Ship\-C\-A\-D\-::k\-Weight\-Conversion\-Factor} = (1000/k\-Lbs)/((1/k\-Foot)$\ast$(1/k\-Foot)$\ast$(1/k\-Foot))
+const float \hyperlink{namespaceShipCAD_aa4319c8e7adfa68048f95c1614984036}{Ship\+C\+A\+D\+::k\+Weight\+Conversion\+Factor} = (1000/k\+Lbs)/((1/k\+Foot)$\ast$(1/k\+Foot)$\ast$(1/k\+Foot))
 \item 
-const int \hyperlink{namespaceShipCAD_a1c0de7dc4306d7908bd8c6f7ff69ecdc}{Ship\-C\-A\-D\-::k\-Increment\-Size} = 25
+const int \hyperlink{namespaceShipCAD_a1c0de7dc4306d7908bd8c6f7ff69ecdc}{Ship\+C\+A\+D\+::k\+Increment\+Size} = 25
 \item 
-const int \hyperlink{namespaceShipCAD_ac88ffd27e117a3e612997a36a5d4616d}{Ship\-C\-A\-D\-::k\-Decimals} = 4
+const int \hyperlink{namespaceShipCAD_ac88ffd27e117a3e612997a36a5d4616d}{Ship\+C\+A\+D\+::k\+Decimals} = 4
 \item 
-const int \hyperlink{namespaceShipCAD_ac8176e9d12f859826fb131b7febb8c8a}{Ship\-C\-A\-D\-::k\-Pixel\-Count\-Max} = 32768
+const int \hyperlink{namespaceShipCAD_ac8176e9d12f859826fb131b7febb8c8a}{Ship\+C\+A\+D\+::k\+Pixel\+Count\+Max} = 32768
 \item 
-const float \hyperlink{namespaceShipCAD_a519c591e5f5e3f60603b3133a4a2094e}{Ship\-C\-A\-D\-::k\-Z\-Buffer\-Scale\-Factor} = 1.\-004f
+const float \hyperlink{namespaceShipCAD_a519c591e5f5e3f60603b3133a4a2094e}{Ship\+C\+A\+D\+::k\+Z\+Buffer\+Scale\+Factor} = 1.\+004f
 \item 
-const float \hyperlink{namespaceShipCAD_a80babe3fef93f1117e1c410f8d3c22c2}{Ship\-C\-A\-D\-::k\-Zoomfactor} = 1.\-02f
+const float \hyperlink{namespaceShipCAD_a80babe3fef93f1117e1c410f8d3c22c2}{Ship\+C\+A\+D\+::k\+Zoomfactor} = 1.\+02f
 \item 
-const int \hyperlink{namespaceShipCAD_afeba968c9abef53c8d1ff63855076dec}{Ship\-C\-A\-D\-::\-File\-Buffer\-Block\-Size} = 4096
+const int \hyperlink{namespaceShipCAD_afeba968c9abef53c8d1ff63855076dec}{Ship\+C\+A\+D\+::\+File\+Buffer\+Block\+Size} = 4096
 \item 
-const char $\ast$ \hyperlink{namespaceShipCAD_a6461e4d91e555f0c732b53f8998b325d}{Ship\-C\-A\-D\-::k\-File\-Extension} = \char`\"{}.fbm\char`\"{}
+const char $\ast$ \hyperlink{namespaceShipCAD_a6461e4d91e555f0c732b53f8998b325d}{Ship\+C\+A\+D\+::k\+File\+Extension} = \char`\"{}.fbm\char`\"{}
 \item 
-const Q\-Vector3\-D \hyperlink{namespaceShipCAD_a949bc53a1634b268b43de672807480fb}{Ship\-C\-A\-D\-::\-Z\-E\-R\-O}
+const Q\+Vector3D \hyperlink{namespaceShipCAD_a949bc53a1634b268b43de672807480fb}{Ship\+C\+A\+D\+::\+Z\+E\+RO}
 \item 
-const Q\-Vector3\-D \hyperlink{namespaceShipCAD_ad454d484187a50b115d2e77055617816}{Ship\-C\-A\-D\-::\-O\-N\-E}
+const Q\+Vector3D \hyperlink{namespaceShipCAD_ad454d484187a50b115d2e77055617816}{Ship\+C\+A\+D\+::\+O\+NE}
 \item 
-const Q\-Vector2\-D \hyperlink{namespaceShipCAD_ab47218dccdf4c94d5989b2e5b13d8603}{Ship\-C\-A\-D\-::\-Z\-E\-R\-O2}
+const Q\+Vector2D \hyperlink{namespaceShipCAD_ab47218dccdf4c94d5989b2e5b13d8603}{Ship\+C\+A\+D\+::\+Z\+E\+R\+O2}
 \end{DoxyCompactItemize}

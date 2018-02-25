@@ -1,70 +1,85 @@
-\hypertarget{utility_8h}{\section{Ship\-C\-A\-Dlib/utility.h File Reference}
-\label{utility_8h}\index{Ship\-C\-A\-Dlib/utility.\-h@{Ship\-C\-A\-Dlib/utility.\-h}}
-}
+\hypertarget{utility_8h}{}\section{Ship\+C\+A\+Dlib/utility.h File Reference}
+\label{utility_8h}\index{Ship\+C\+A\+Dlib/utility.\+h@{Ship\+C\+A\+Dlib/utility.\+h}}
 {\ttfamily \#include $<$vector$>$}\\*
-{\ttfamily \#include $<$Q\-Vector3\-D$>$}\\*
-{\ttfamily \#include $<$Q\-Color$>$}\\*
-{\ttfamily \#include $<$Q\-String$>$}\\*
-{\ttfamily \#include \char`\"{}spline.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}plane.\-h\char`\"{}}\\*
-{\ttfamily \#include \char`\"{}projsettings.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$Q\+Vector3D$>$}\\*
+{\ttfamily \#include $<$Q\+Color$>$}\\*
+{\ttfamily \#include $<$Q\+String$>$}\\*
+{\ttfamily \#include \char`\"{}spline.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}plane.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}projsettings.\+h\char`\"{}}\\*
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceShipCAD}{Ship\-C\-A\-D}
+ \hyperlink{namespaceShipCAD}{Ship\+C\+AD}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{namespaceShipCAD_aa5d3fc63603d716d3e24244049e1e510}{Ship\-C\-A\-D\-::\-Min\-Max} (const Q\-Vector3\-D \&p, Q\-Vector3\-D \&min, Q\-Vector3\-D \&max)
+void \hyperlink{namespaceShipCAD_aa5d3fc63603d716d3e24244049e1e510}{Ship\+C\+A\+D\+::\+Min\+Max} (const Q\+Vector3D \&p, Q\+Vector3D \&min, Q\+Vector3D \&max)
 \begin{DoxyCompactList}\small\item\em find the min and max coordinates from a point \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_a69361fa79b1f818e21306f6266ee45d3}{Ship\-C\-A\-D\-::\-Distancepoint\-To\-Line} (const Q\-Vector3\-D \&p, const Q\-Vector3\-D \&l1, const Q\-Vector3\-D \&l2)
+float \hyperlink{namespaceShipCAD_a69361fa79b1f818e21306f6266ee45d3}{Ship\+C\+A\+D\+::\+Distancepoint\+To\+Line} (const Q\+Vector3D \&p, const Q\+Vector3D \&l1, const Q\+Vector3D \&l2)
 \begin{DoxyCompactList}\small\item\em find the distance from a point to the line \end{DoxyCompactList}\item 
-Q\-Vector3\-D \hyperlink{namespaceShipCAD_a83f7c2b40959a0d02a2cc1085b0d07ee}{Ship\-C\-A\-D\-::\-Interpolate} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, float param)
+Q\+Vector3D \hyperlink{namespaceShipCAD_a83f7c2b40959a0d02a2cc1085b0d07ee}{Ship\+C\+A\+D\+::\+Interpolate} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2, float param)
 \begin{DoxyCompactList}\small\item\em linearly interpolate a point between 2 points \end{DoxyCompactList}\item 
-Q\-Vector3\-D \hyperlink{namespaceShipCAD_ad1ad66c896fe763fb4603989ff1f1182}{Ship\-C\-A\-D\-::\-Mid\-Point} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
+Q\+Vector3D \hyperlink{namespaceShipCAD_ad1ad66c896fe763fb4603989ff1f1182}{Ship\+C\+A\+D\+::\+Mid\+Point} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2)
 \begin{DoxyCompactList}\small\item\em get the midpoint between 2 points (interpolate 50\%) \end{DoxyCompactList}\item 
-int \hyperlink{namespaceShipCAD_a87efc267ae07a84fb1cd55a4562c2907}{Ship\-C\-A\-D\-::\-Find\-D\-X\-F\-Color\-Index} (Q\-Color color)
-\begin{DoxyCompactList}\small\item\em convert a Q\-Color to a D\-X\-F color index \end{DoxyCompactList}\item 
-Q\-Color \hyperlink{namespaceShipCAD_a9956eca83968462fc4c48c376a10d577}{Ship\-C\-A\-D\-::\-Q\-Color\-From\-D\-X\-F\-Index} (int index)
-\begin{DoxyCompactList}\small\item\em get a Q\-Color from a D\-X\-F color index \end{DoxyCompactList}\item 
-Q\-Vector3\-D \hyperlink{namespaceShipCAD_a81e47e31f89000550b007c0f9a4d09aa}{Ship\-C\-A\-D\-::\-Unified\-Normal} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3)
+Q\+Vector3D \hyperlink{namespaceShipCAD_a30b09a2ad6cc05c2ce1cdc450a0857d1}{Ship\+C\+A\+D\+::\+Point\+Project\+To\+Line} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2, const Q\+Vector3D \&p)
+\begin{DoxyCompactList}\small\item\em project a point to a line \end{DoxyCompactList}\item 
+int \hyperlink{namespaceShipCAD_a87efc267ae07a84fb1cd55a4562c2907}{Ship\+C\+A\+D\+::\+Find\+D\+X\+F\+Color\+Index} (Q\+Color color)
+\begin{DoxyCompactList}\small\item\em convert a Q\+Color to a D\+XF color index \end{DoxyCompactList}\item 
+Q\+Color \hyperlink{namespaceShipCAD_a9956eca83968462fc4c48c376a10d577}{Ship\+C\+A\+D\+::\+Q\+Color\+From\+D\+X\+F\+Index} (int index)
+\begin{DoxyCompactList}\small\item\em get a Q\+Color from a D\+XF color index \end{DoxyCompactList}\item 
+Q\+Color \hyperlink{namespaceShipCAD_acb142056788b7a6e18e908c5b2fd8d52}{Ship\+C\+A\+D\+::\+Fill\+Color} (float parameter)
+\begin{DoxyCompactList}\small\item\em calculate color on basis of wavelength (0.\+0 -\/ 1.\+0) \end{DoxyCompactList}\item 
+Q\+Vector3D \hyperlink{namespaceShipCAD_a81e47e31f89000550b007c0f9a4d09aa}{Ship\+C\+A\+D\+::\+Unified\+Normal} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2, const Q\+Vector3D \&p3)
 \begin{DoxyCompactList}\small\item\em find the unit normal of a plane defined by 3 points \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_ac344c080c66b4394cb988cf88c726029}{Ship\-C\-A\-D\-::\-Deg\-To\-Rad} (float deg)
+float \hyperlink{namespaceShipCAD_ac344c080c66b4394cb988cf88c726029}{Ship\+C\+A\+D\+::\+Deg\+To\+Rad} (float deg)
 \begin{DoxyCompactList}\small\item\em convert degrees to radians \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_a3ad1916db38fb61e8a053f944df49cee}{Ship\-C\-A\-D\-::\-Rad\-To\-Deg} (float rad)
+float \hyperlink{namespaceShipCAD_a3ad1916db38fb61e8a053f944df49cee}{Ship\+C\+A\+D\+::\+Rad\+To\+Deg} (float rad)
 \begin{DoxyCompactList}\small\item\em convert radians to degrees \end{DoxyCompactList}\item 
-bool \hyperlink{namespaceShipCAD_ae1773f0e415446342401a67430a8b643}{Ship\-C\-A\-D\-::\-Point\-In\-Triangle} (const Q\-Vector3\-D \&intercept, const Q\-Vector3\-D \&p0, const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
+bool \hyperlink{namespaceShipCAD_ae1773f0e415446342401a67430a8b643}{Ship\+C\+A\+D\+::\+Point\+In\+Triangle} (const Q\+Vector3D \&intercept, const Q\+Vector3D \&p0, const Q\+Vector3D \&p1, const Q\+Vector3D \&p2)
 \begin{DoxyCompactList}\small\item\em find if point lies inside a triangle and on the plane of the triangle \end{DoxyCompactList}\item 
-void \hyperlink{namespaceShipCAD_a36b9b33181823761bc327d66c36c8d8f}{Ship\-C\-A\-D\-::\-Clip\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, float s1, float s2, float s3, std\-::vector$<$ Q\-Vector3\-D $>$ \&front, std\-::vector$<$ Q\-Vector3\-D $>$ \&back)
+void \hyperlink{namespaceShipCAD_a36b9b33181823761bc327d66c36c8d8f}{Ship\+C\+A\+D\+::\+Clip\+Triangle} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2, const Q\+Vector3D \&p3, float s1, float s2, float s3, std\+::vector$<$ Q\+Vector3D $>$ \&front, std\+::vector$<$ Q\+Vector3D $>$ \&back)
 \begin{DoxyCompactList}\small\item\em clip a triangle given vertex point distances from a plane \end{DoxyCompactList}\item 
-void \hyperlink{namespaceShipCAD_a41e6294f71b66bca070c744accbb3ef2}{Ship\-C\-A\-D\-::\-Clip\-Triangle} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2, const Q\-Vector3\-D \&p3, const \hyperlink{classShipCAD_1_1Plane}{Plane} \&plane, std\-::vector$<$ Q\-Vector3\-D $>$ \&front, std\-::vector$<$ Q\-Vector3\-D $>$ \&back)
+void \hyperlink{namespaceShipCAD_a41e6294f71b66bca070c744accbb3ef2}{Ship\+C\+A\+D\+::\+Clip\+Triangle} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2, const Q\+Vector3D \&p3, const \hyperlink{classShipCAD_1_1Plane}{Plane} \&plane, std\+::vector$<$ Q\+Vector3D $>$ \&front, std\+::vector$<$ Q\+Vector3D $>$ \&back)
 \begin{DoxyCompactList}\small\item\em clip a triangle given a plane \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_a6f9f5ac15e7e2821bba27ba06827a4e1}{Ship\-C\-A\-D\-::\-Squared\-Dist\-P\-P} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
-\begin{DoxyCompactList}\small\item\em squared distance between 2 3\-D points \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_a438e97b711c6878eba3bf7182e68a3c7}{Ship\-C\-A\-D\-::\-Dist\-P\-P3\-D} (const Q\-Vector3\-D \&p1, const Q\-Vector3\-D \&p2)
-\begin{DoxyCompactList}\small\item\em distance between 2 3\-D points \end{DoxyCompactList}\item 
-Q\-String \hyperlink{namespaceShipCAD_a45ba7de6922e89cbddf2a4c9c810a2e4}{Ship\-C\-A\-D\-::\-Bool\-To\-Str} (bool val)
+bool \hyperlink{namespaceShipCAD_aec056383a39d900bd079feee8bcca060}{Ship\+C\+A\+D\+::\+Lines3\+D\+Intersect} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2, const Q\+Vector3D \&p3, const Q\+Vector3D \&p4, double \&param, Q\+Vector3D \&int1)
+\begin{DoxyCompactList}\small\item\em Calculate the line segment Pa\+Pb that is the shortest route between two lines P1\+P2 and P3\+P4. Calculate also the values of mua and mub where Pa = P1 + mua (P2 -\/ P1) Pb = P3 + mub (P4 -\/ P3) \end{DoxyCompactList}\item 
+float \hyperlink{namespaceShipCAD_a6f9f5ac15e7e2821bba27ba06827a4e1}{Ship\+C\+A\+D\+::\+Squared\+Dist\+PP} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2)
+\begin{DoxyCompactList}\small\item\em squared distance between 2 3D points \end{DoxyCompactList}\item 
+float \hyperlink{namespaceShipCAD_a438e97b711c6878eba3bf7182e68a3c7}{Ship\+C\+A\+D\+::\+Dist\+P\+P3D} (const Q\+Vector3D \&p1, const Q\+Vector3D \&p2)
+\begin{DoxyCompactList}\small\item\em distance between 2 3D points \end{DoxyCompactList}\item 
+Q\+String \hyperlink{namespaceShipCAD_a45ba7de6922e89cbddf2a4c9c810a2e4}{Ship\+C\+A\+D\+::\+Bool\+To\+Str} (bool val)
 \begin{DoxyCompactList}\small\item\em convert a bool to a string for serialization \end{DoxyCompactList}\item 
-void \hyperlink{namespaceShipCAD_a2eddf75f0e29363ab81a3fb0e0211848}{Ship\-C\-A\-D\-::\-Join\-Spline\-Segments} (float join\-\_\-error, bool force\-\_\-to\-\_\-one\-\_\-segment, \hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\-Vector} \&list)
+void \hyperlink{namespaceShipCAD_a2eddf75f0e29363ab81a3fb0e0211848}{Ship\+C\+A\+D\+::\+Join\+Spline\+Segments} (float join\+\_\+error, bool force\+\_\+to\+\_\+one\+\_\+segment, \hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\+Vector} \&list)
 \begin{DoxyCompactList}\small\item\em join a set of linesegments and connect them into as few as possible splines \end{DoxyCompactList}\item 
-int \hyperlink{namespaceShipCAD_a70b238d926183460670b82d9680b5cb9}{Ship\-C\-A\-D\-::\-Read\-Int\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
+int \hyperlink{namespaceShipCAD_a70b238d926183460670b82d9680b5cb9}{Ship\+C\+A\+D\+::\+Read\+Int\+From\+Str} (size\+\_\+t lineno, const Q\+String \&str, size\+\_\+t \&start)
 \begin{DoxyCompactList}\small\item\em convert a string to an integer value \end{DoxyCompactList}\item 
-bool \hyperlink{namespaceShipCAD_af343b5a2dfd09b32b9451d35e0676384}{Ship\-C\-A\-D\-::\-Read\-Bool\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
+bool \hyperlink{namespaceShipCAD_af343b5a2dfd09b32b9451d35e0676384}{Ship\+C\+A\+D\+::\+Read\+Bool\+From\+Str} (size\+\_\+t lineno, const Q\+String \&str, size\+\_\+t \&start)
 \begin{DoxyCompactList}\small\item\em convert a string to an boolean value \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_a696bc38864a736dda734802f3cda4346}{Ship\-C\-A\-D\-::\-Read\-Float\-From\-Str} (size\-\_\-t lineno, const Q\-String \&str, size\-\_\-t \&start)
+float \hyperlink{namespaceShipCAD_a696bc38864a736dda734802f3cda4346}{Ship\+C\+A\+D\+::\+Read\+Float\+From\+Str} (size\+\_\+t lineno, const Q\+String \&str, size\+\_\+t \&start)
 \begin{DoxyCompactList}\small\item\em convert a string to an float value \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_a44025ef38e6ee9f12cbf032660f637b5}{Ship\-C\-A\-D\-::\-Find\-Water\-Viscosity} (float density, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+float \hyperlink{namespaceShipCAD_a44025ef38e6ee9f12cbf032660f637b5}{Ship\+C\+A\+D\+::\+Find\+Water\+Viscosity} (float density, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \begin{DoxyCompactList}\small\item\em find water viscosity based on density \end{DoxyCompactList}\item 
-Q\-String \hyperlink{namespaceShipCAD_ae416df4a72579eb3a1a418b19551eb53}{Ship\-C\-A\-D\-::\-Change\-File\-Ext} (const Q\-String \&name, const Q\-String \&ext)
+Q\+String \hyperlink{namespaceShipCAD_ae416df4a72579eb3a1a418b19551eb53}{Ship\+C\+A\+D\+::\+Change\+File\+Ext} (const Q\+String \&name, const Q\+String \&ext)
 \begin{DoxyCompactList}\small\item\em Append or change the file extension to that given. \end{DoxyCompactList}\item 
-float \hyperlink{namespaceShipCAD_ad3ca198e79658bf065f1c1c416f23670}{Ship\-C\-A\-D\-::\-Volume\-To\-Displacement} (float volume, float density, float appcoeff, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\-\_\-type\-\_\-t} units)
+float \hyperlink{namespaceShipCAD_ad3ca198e79658bf065f1c1c416f23670}{Ship\+C\+A\+D\+::\+Volume\+To\+Displacement} (float volume, float density, float appcoeff, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
 \begin{DoxyCompactList}\small\item\em convert volume to displacement given density, appendage coefficient and unit type \end{DoxyCompactList}\item 
-Q\-String \hyperlink{namespaceShipCAD_ae378a523725f5718c9f2b55103f08dcb}{Ship\-C\-A\-D\-::\-Make\-Length} (float value, int decimals, int des\-\_\-length)
+Q\+String \hyperlink{namespaceShipCAD_ae378a523725f5718c9f2b55103f08dcb}{Ship\+C\+A\+D\+::\+Make\+Length} (float value, int decimals, int des\+\_\+length)
 \begin{DoxyCompactList}\small\item\em Create a formatted string from a float value. \end{DoxyCompactList}\item 
-Q\-String \hyperlink{namespaceShipCAD_ab520595d533b1626c8be82c0efd24e6d}{Ship\-C\-A\-D\-::\-Make\-Length} (const Q\-String \&value, int des\-\_\-length)
+Q\+String \hyperlink{namespaceShipCAD_ab520595d533b1626c8be82c0efd24e6d}{Ship\+C\+A\+D\+::\+Make\+Length} (const Q\+String \&value, int des\+\_\+length)
 \begin{DoxyCompactList}\small\item\em Create a string of a given length. \end{DoxyCompactList}\item 
-Q\-String \hyperlink{namespaceShipCAD_a83d943939c1d84473bb904360116f7be}{Ship\-C\-A\-D\-::truncate} (float val, int max\-\_\-length)
+Q\+String \hyperlink{namespaceShipCAD_a646812cc2b9066dfc47f2ed7e1faa955}{Ship\+C\+A\+D\+::\+Truncate} (float val, int max\+\_\+length)
 \begin{DoxyCompactList}\small\item\em convert a float value to a string with max number of decimals \end{DoxyCompactList}\item 
-bool \hyperlink{namespaceShipCAD_ae1b7d6603b6c5a2969befdbd629f2e8b}{Ship\-C\-A\-D\-::\-Fuzzy\-Compare} (float val1, float val2, float error)
-\begin{DoxyCompactList}\small\item\em compare 2 floats, if they are sufficiently close, return true \end{DoxyCompactList}\end{DoxyCompactItemize}
+bool \hyperlink{namespaceShipCAD_ae1b7d6603b6c5a2969befdbd629f2e8b}{Ship\+C\+A\+D\+::\+Fuzzy\+Compare} (float val1, float val2, float error)
+\begin{DoxyCompactList}\small\item\em compare 2 floats, if they are sufficiently close, return true \end{DoxyCompactList}\item 
+double \hyperlink{namespaceShipCAD_ad4bf48489d173fd29503cd9b511f52e9}{Ship\+C\+A\+D\+::\+Sign} (double val)
+\begin{DoxyCompactList}\small\item\em get the sign of a floating point number \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{namespaceShipCAD_a26237f4689cbf7e356c7c1ce3f9c69ff}{Ship\+C\+A\+D\+::to\+\_\+size\+\_\+t} (int val)
+\begin{DoxyCompactList}\small\item\em convert an int to a size\+\_\+t \end{DoxyCompactList}\item 
+Q\+Color \hyperlink{namespaceShipCAD_a6bc9d2025502c6f4052b89c82c72762c}{Ship\+C\+A\+D\+::\+Random\+Color} ()
+\begin{DoxyCompactList}\small\item\em get a random color \end{DoxyCompactList}\item 
+Q\+Vector3D \hyperlink{namespaceShipCAD_af88f847dc1803cadbeb655783961dbfd}{Ship\+C\+A\+D\+::\+Rotate\+Vector} (const Q\+Vector3D \&coord, double sinx, double cosx, double siny, double cosy, double sinz, double cosz)
+\begin{DoxyCompactList}\small\item\em rotate a vector \end{DoxyCompactList}\item 
+Q\+String \hyperlink{namespaceShipCAD_ac24d97adcdf1709fc8e857f5d07395ff}{Ship\+C\+A\+D\+::\+Convert\+Dimension} (float value, \hyperlink{namespaceShipCAD_ac6a7a28b4b063771afae92decb602da5}{unit\+\_\+type\+\_\+t} units)
+\begin{DoxyCompactList}\small\item\em create a string holding a dimension based on project units \end{DoxyCompactList}\end{DoxyCompactItemize}

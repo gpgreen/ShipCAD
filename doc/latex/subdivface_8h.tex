@@ -1,55 +1,65 @@
-\hypertarget{subdivface_8h}{\section{Ship\-C\-A\-Dlib/subdivface.h File Reference}
-\label{subdivface_8h}\index{Ship\-C\-A\-Dlib/subdivface.\-h@{Ship\-C\-A\-Dlib/subdivface.\-h}}
-}
+\hypertarget{subdivface_8h}{}\section{Ship\+C\+A\+Dlib/subdivface.h File Reference}
+\label{subdivface_8h}\index{Ship\+C\+A\+Dlib/subdivface.\+h@{Ship\+C\+A\+Dlib/subdivface.\+h}}
 {\ttfamily \#include $<$iosfwd$>$}\\*
 {\ttfamily \#include $<$vector$>$}\\*
-{\ttfamily \#include $<$Q\-Object$>$}\\*
-{\ttfamily \#include $<$Q\-Vector3\-D$>$}\\*
-{\ttfamily \#include $<$Q\-Color$>$}\\*
-{\ttfamily \#include \char`\"{}subdivbase.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$Q\+Object$>$}\\*
+{\ttfamily \#include $<$Q\+Vector3D$>$}\\*
+{\ttfamily \#include $<$Q\+Color$>$}\\*
+{\ttfamily \#include \char`\"{}subdivbase.\+h\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classShipCAD_1_1SubdivisionFace}{Ship\-C\-A\-D\-::\-Subdivision\-Face}
+class \hyperlink{classShipCAD_1_1SubdivisionFace}{Ship\+C\+A\+D\+::\+Subdivision\+Face}
 \item 
-class \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face}
+class \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face}
 \end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceShipCAD}{Ship\-C\-A\-D}
+ \hyperlink{namespaceShipCAD}{Ship\+C\+AD}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ Subdivision\+Face $\ast$ $>$\+::iterator \hyperlink{namespaceShipCAD_a14b9ceea38e54192b32764021161d199}{Ship\+C\+A\+D\+::subdivface\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Face $\ast$ $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_a6371e9995f829935912575008f969c1c}{Ship\+C\+A\+D\+::const\+\_\+subdivface\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Control\+Face $\ast$ $>$\+::iterator \hyperlink{namespaceShipCAD_a10428817114540e55d0c0b8668cb2579}{Ship\+C\+A\+D\+::subdivctlface\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Control\+Face $\ast$ $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_a18309973422a59f794be8aa48b9048e8}{Ship\+C\+A\+D\+::const\+\_\+subdivctlface\+\_\+iter}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\-::ostream \& \hyperlink{subdivface_8h_a1d2181dda9afeb5f08a690ca96d231b8}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionFace}{Ship\-C\-A\-D\-::\-Subdivision\-Face} \&face)
+std\+::ostream \& \hyperlink{subdivface_8h_a1d2181dda9afeb5f08a690ca96d231b8}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionFace}{Ship\+C\+A\+D\+::\+Subdivision\+Face} \&face)
 \item 
-std\-::ostream \& \hyperlink{subdivface_8h_a45e0806e0eb410a3d233225732b3ee56}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face} \&face)
+std\+::ostream \& \hyperlink{subdivface_8h_a45e0806e0eb410a3d233225732b3ee56}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face} \&face)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{subdivface_8h_a1d2181dda9afeb5f08a690ca96d231b8}{\index{subdivface.\-h@{subdivface.\-h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivface.h@{subdivface.\-h}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\index{subdivface.\+h@{subdivface.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivface.\+h@{subdivface.\+h}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Face \&face)}{operator<<(std::ostream &os, const ShipCAD::SubdivisionFace &face)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Face} \&}]{face}
+\item[{std\+::ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Face} \&}]{face}
 \end{DoxyParamCaption}
-)}}\label{subdivface_8h_a1d2181dda9afeb5f08a690ca96d231b8}
+)}\hypertarget{subdivface_8h_a1d2181dda9afeb5f08a690ca96d231b8}{}\label{subdivface_8h_a1d2181dda9afeb5f08a690ca96d231b8}
 
 
-Definition at line 392 of file subdivface.\-cpp.
+Definition at line 424 of file subdivface.\+cpp.
 
-\hypertarget{subdivface_8h_a45e0806e0eb410a3d233225732b3ee56}{\index{subdivface.\-h@{subdivface.\-h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivface.h@{subdivface.\-h}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\index{subdivface.\+h@{subdivface.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivface.\+h@{subdivface.\+h}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face \&face)}{operator<<(std::ostream &os, const ShipCAD::SubdivisionControlFace &face)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Control\-Face} \&}]{face}
+\item[{std\+::ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Face} \&}]{face}
 \end{DoxyParamCaption}
-)}}\label{subdivface_8h_a45e0806e0eb410a3d233225732b3ee56}
+)}\hypertarget{subdivface_8h_a45e0806e0eb410a3d233225732b3ee56}{}\label{subdivface_8h_a45e0806e0eb410a3d233225732b3ee56}
 
 
-Definition at line 977 of file subdivface.\-cpp.
+Definition at line 1488 of file subdivface.\+cpp.
 

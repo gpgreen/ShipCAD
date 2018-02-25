@@ -1,10 +1,19 @@
 var searchData=
 [
+  ['p',['p',['../structZebraIntersection.html#a6395a4b6dd83979bed301b4a6366ecd7',1,'ZebraIntersection']]],
+  ['p1',['p1',['../structTriangle.html#a0bd45e80838b35f6039141b54825021c',1,'Triangle']]],
+  ['p2',['p2',['../structTriangle.html#a262c0985278b81e4a35e45abc6634c77',1,'Triangle']]],
+  ['p3',['p3',['../structTriangle.html#a05641ea7149f1b30a2f9532f15f77ea2',1,'Triangle']]],
   ['padding',['padding',['../structShipCAD_1_1DelftSeriesResistance.html#acd08ff15cfab748bf4f54aa65b927950',1,'ShipCAD::DelftSeriesResistance::padding()'],['../structShipCAD_1_1KAPERResistance.html#a6ff5b219f299159cf66bc450d2ac2a73',1,'ShipCAD::KAPERResistance::padding()']]],
   ['parameters',['parameters',['../classShipCAD_1_1IntersectionData.html#a06fcbb71243644bdea0e5b86da3b191c',1,'ShipCAD::IntersectionData']]],
+  ['pickdist',['pickDist',['../structShipCAD_1_1PickRay.html#aea6c9d67dc7245b1edf930dfe019d4db',1,'ShipCAD::PickRay']]],
+  ['plane',['plane',['../structTriangle.html#ada7eceff17634fee881e0f679941aaaa',1,'Triangle']]],
   ['plane_5fnormal',['plane_normal',['../structMinMaxData.html#a62b4b4d97aba034731cdb0f11b23d856',1,'MinMaxData']]],
-  ['point',['point',['../structSurfIntersectionData.html#a789d1758e7035fdf5b902861e936113a',1,'SurfIntersectionData']]],
-  ['points',['points',['../classShipCAD_1_1IntersectionData.html#a926e126e42d95e01b39e2750a0e1fb95',1,'ShipCAD::IntersectionData::points()'],['../structShipCAD_1_1PointGrid.html#acb874cfa2bdda20e8a996e0e1a153feb',1,'ShipCAD::PointGrid::points()']]],
+  ['planeselected',['planeSelected',['../structShipCAD_1_1InsertPlaneDialogData.html#aa028c61547384932261d4a8b647f9eeb',1,'ShipCAD::InsertPlaneDialogData']]],
+  ['point',['point',['../structPatchIntersection.html#ada1d0adcd4dbc07d37a1676ac3c89cf0',1,'PatchIntersection::point()'],['../structShipCAD_1_1PickRay.html#a6576863fe4c5cb5eaa5ebcaa474104c8',1,'ShipCAD::PickRay::point()'],['../structSurfIntersectionData.html#a789d1758e7035fdf5b902861e936113a',1,'SurfIntersectionData::point()']]],
+  ['points',['points',['../classShipCAD_1_1IntersectionData.html#a926e126e42d95e01b39e2750a0e1fb95',1,'ShipCAD::IntersectionData::points()'],['../structShipCAD_1_1PointGrid.html#acb874cfa2bdda20e8a996e0e1a153feb',1,'ShipCAD::PointGrid::points()'],['../structShipCAD_1_1CPointGrid.html#a27d12df498a54a70a7d40c34def5b83c',1,'ShipCAD::CPointGrid::points()'],['../classShipCAD_1_1DeleteElementsCollection.html#a7e5748f6463683b23a8b762ceadeb49a',1,'ShipCAD::DeleteElementsCollection::points()']]],
   ['prism_5fcoefficient',['prism_coefficient',['../structShipCAD_1_1HydrostaticsData.html#acabee310fcde293fcb0d9a5fd5effe27',1,'ShipCAD::HydrostaticsData']]],
-  ['pt',['pt',['../structShipCAD_1_1PickRay.html#a2a9ed44a643481ceefcdec276ce7425a',1,'ShipCAD::PickRay']]]
+  ['processed',['processed',['../structShipCAD_1_1PatchPoints.html#a2f52ed0dc9945823b211f9e067164dce',1,'ShipCAD::PatchPoints::processed()'],['../structTriangle.html#aaeb1bcbff3141c314e7f9d2212cbc11c',1,'Triangle::processed()']]],
+  ['pt',['pt',['../structShipCAD_1_1PatchPoints.html#ac69ca0b5e51939979f4654afa3b210a9',1,'ShipCAD::PatchPoints::pt()'],['../structShipCAD_1_1PickRay.html#a2a9ed44a643481ceefcdec276ce7425a',1,'ShipCAD::PickRay::pt()']]],
+  ['pt2d',['pt2D',['../structShipCAD_1_1PatchPoints.html#abce4e4187927ae79ecd5aafd604c1785',1,'ShipCAD::PatchPoints']]]
 ];

@@ -175,6 +175,7 @@ boxfont setfont
 1 boundaspect scale
 (ShipCAD::Shader) cw
 (QObject) cw
+(ShipCAD::CurveFaceShader) cw
 (ShipCAD::FaceShader) cw
 (ShipCAD::LineShader) cw
 (ShipCAD::LightedFaceShader) cw
@@ -192,10 +193,11 @@ boundx scalefactor div boundy scalefactor div scale
 
  (ShipCAD::Shader) 1.000000 2.000000 box
  (QObject) 1.000000 3.000000 box
- (ShipCAD::FaceShader) 0.500000 1.000000 box
- (ShipCAD::LineShader) 1.500000 1.000000 box
- (ShipCAD::LightedFaceShader) 0.000000 0.000000 box
- (ShipCAD::MonoFaceShader) 1.000000 0.000000 box
+ (ShipCAD::CurveFaceShader) 0.000000 1.000000 box
+ (ShipCAD::FaceShader) 1.000000 1.000000 box
+ (ShipCAD::LineShader) 2.000000 1.000000 box
+ (ShipCAD::LightedFaceShader) 0.500000 0.000000 box
+ (ShipCAD::MonoFaceShader) 1.500000 0.000000 box
 
 % ----- relations -----
 
@@ -206,16 +208,18 @@ solid
 solid
 1 1.000000 1.250000 out
 solid
-0.500000 1.500000 2.000000 conn
+0.000000 2.000000 2.000000 conn
 solid
-0 0.500000 1.750000 in
+0 0.000000 1.750000 in
 solid
-1 0.500000 0.250000 out
+0 1.000000 1.750000 in
 solid
-0.000000 1.000000 1.000000 conn
+1 1.000000 0.250000 out
 solid
-0 1.500000 1.750000 in
+0.500000 1.500000 1.000000 conn
 solid
-0 0.000000 0.750000 in
+0 2.000000 1.750000 in
 solid
-0 1.000000 0.750000 in
+0 0.500000 0.750000 in
+solid
+0 1.500000 0.750000 in

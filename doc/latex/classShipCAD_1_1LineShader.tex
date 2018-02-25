@@ -1,11 +1,10 @@
-\hypertarget{classShipCAD_1_1LineShader}{\section{Ship\-C\-A\-D\-:\-:Line\-Shader Class Reference}
-\label{classShipCAD_1_1LineShader}\index{Ship\-C\-A\-D\-::\-Line\-Shader@{Ship\-C\-A\-D\-::\-Line\-Shader}}
-}
+\hypertarget{classShipCAD_1_1LineShader}{}\section{Ship\+C\+AD\+:\+:Line\+Shader Class Reference}
+\label{classShipCAD_1_1LineShader}\index{Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}}
 
 
-{\ttfamily \#include $<$shader.\-h$>$}
+{\ttfamily \#include $<$shader.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Line\-Shader\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Line\+Shader\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{classShipCAD_1_1LineShader}
@@ -14,13 +13,17 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Line\-Shader\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1LineShader_ae06ecf68dfc054511db3937893850d2f}{Line\-Shader} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
+\hyperlink{classShipCAD_1_1LineShader_ae06ecf68dfc054511db3937893850d2f}{Line\+Shader} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
 \item 
-virtual \hyperlink{classShipCAD_1_1LineShader_ae5c2761813aac4839a5b31648e37d343}{$\sim$\-Line\-Shader} ()
+virtual \hyperlink{classShipCAD_1_1LineShader_ae5c2761813aac4839a5b31648e37d343}{$\sim$\+Line\+Shader} ()
 \item 
-void \hyperlink{classShipCAD_1_1LineShader_aaa105117e559ec413a733e14dc638b5a}{render\-Points} (Q\-Vector$<$ Q\-Vector3\-D $>$ \&points, Q\-Color color)
+void \hyperlink{classShipCAD_1_1LineShader_ac0ee7d9d9f4fa7e4d233c2426c756a68}{set\+Matrix} (const Q\+Matrix4x4 \&matrix)
 \item 
-void \hyperlink{classShipCAD_1_1LineShader_a3d30bda1883e0eda65ea23c4da76f610}{render\-Lines} (Q\-Vector$<$ Q\-Vector3\-D $>$ \&vertices, Q\-Color line\-Color)
+void \hyperlink{classShipCAD_1_1LineShader_aaa105117e559ec413a733e14dc638b5a}{render\+Points} (Q\+Vector$<$ Q\+Vector3D $>$ \&points, Q\+Color color)
+\item 
+void \hyperlink{classShipCAD_1_1LineShader_a3d30bda1883e0eda65ea23c4da76f610}{render\+Lines} (Q\+Vector$<$ Q\+Vector3D $>$ \&vertices, Q\+Color line\+Color)
+\item 
+Q\+Vector$<$ Q\+Vector3D $>$ \& \hyperlink{classShipCAD_1_1LineShader_a68f7433ac957df5b454eb1440ad1c7d9}{get\+Vertex\+Buffer} ()
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -28,63 +31,85 @@ void \hyperlink{classShipCAD_1_1LineShader_a3d30bda1883e0eda65ea23c4da76f610}{re
 \subsection{Detailed Description}
 
 
-Definition at line 77 of file shader.\-h.
+Definition at line 75 of file shader.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1LineShader_ae06ecf68dfc054511db3937893850d2f}{\index{Ship\-C\-A\-D\-::\-Line\-Shader@{Ship\-C\-A\-D\-::\-Line\-Shader}!Line\-Shader@{Line\-Shader}}
-\index{Line\-Shader@{Line\-Shader}!ShipCAD::LineShader@{Ship\-C\-A\-D\-::\-Line\-Shader}}
-\subsubsection[{Line\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}Line\-Shader\-::\-Line\-Shader (
+\index{Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}!Line\+Shader@{Line\+Shader}}
+\index{Line\+Shader@{Line\+Shader}!Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}}
+\subsubsection[{\texorpdfstring{Line\+Shader(\+Viewport $\ast$vp)}{LineShader(Viewport *vp)}}]{\setlength{\rightskip}{0pt plus 5cm}Line\+Shader\+::\+Line\+Shader (
 \begin{DoxyParamCaption}
 \item[{{\bf Viewport} $\ast$}]{vp}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1LineShader_ae06ecf68dfc054511db3937893850d2f}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1LineShader_ae06ecf68dfc054511db3937893850d2f}{}\label{classShipCAD_1_1LineShader_ae06ecf68dfc054511db3937893850d2f}
 
 
-Definition at line 110 of file shader.\-cpp.
+Definition at line 111 of file shader.\+cpp.
 
-\hypertarget{classShipCAD_1_1LineShader_ae5c2761813aac4839a5b31648e37d343}{\index{Ship\-C\-A\-D\-::\-Line\-Shader@{Ship\-C\-A\-D\-::\-Line\-Shader}!$\sim$\-Line\-Shader@{$\sim$\-Line\-Shader}}
-\index{$\sim$\-Line\-Shader@{$\sim$\-Line\-Shader}!ShipCAD::LineShader@{Ship\-C\-A\-D\-::\-Line\-Shader}}
-\subsubsection[{$\sim$\-Line\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Line\-Shader\-::$\sim$\-Line\-Shader (
+\index{Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}!````~Line\+Shader@{$\sim$\+Line\+Shader}}
+\index{````~Line\+Shader@{$\sim$\+Line\+Shader}!Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}}
+\subsubsection[{\texorpdfstring{$\sim$\+Line\+Shader()}{~LineShader()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\+C\+A\+D\+::\+Line\+Shader\+::$\sim$\+Line\+Shader (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1LineShader_ae5c2761813aac4839a5b31648e37d343}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1LineShader_ae5c2761813aac4839a5b31648e37d343}{}\label{classShipCAD_1_1LineShader_ae5c2761813aac4839a5b31648e37d343}
 
 
-Definition at line 84 of file shader.\-h.
+Definition at line 82 of file shader.\+h.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1LineShader_a3d30bda1883e0eda65ea23c4da76f610}{\index{Ship\-C\-A\-D\-::\-Line\-Shader@{Ship\-C\-A\-D\-::\-Line\-Shader}!render\-Lines@{render\-Lines}}
-\index{render\-Lines@{render\-Lines}!ShipCAD::LineShader@{Ship\-C\-A\-D\-::\-Line\-Shader}}
-\subsubsection[{render\-Lines}]{\setlength{\rightskip}{0pt plus 5cm}void Line\-Shader\-::render\-Lines (
+\index{Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}!get\+Vertex\+Buffer@{get\+Vertex\+Buffer}}
+\index{get\+Vertex\+Buffer@{get\+Vertex\+Buffer}!Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}}
+\subsubsection[{\texorpdfstring{get\+Vertex\+Buffer()}{getVertexBuffer()}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector$<$ Q\+Vector3D $>$ \& Line\+Shader\+::get\+Vertex\+Buffer (
 \begin{DoxyParamCaption}
-\item[{Q\-Vector$<$ Q\-Vector3\-D $>$ \&}]{vertices, }
-\item[{Q\-Color}]{line\-Color}
+{}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1LineShader_a3d30bda1883e0eda65ea23c4da76f610}
+)}\hypertarget{classShipCAD_1_1LineShader_a68f7433ac957df5b454eb1440ad1c7d9}{}\label{classShipCAD_1_1LineShader_a68f7433ac957df5b454eb1440ad1c7d9}
 
 
-Definition at line 136 of file shader.\-cpp.
+Definition at line 159 of file shader.\+cpp.
 
-\hypertarget{classShipCAD_1_1LineShader_aaa105117e559ec413a733e14dc638b5a}{\index{Ship\-C\-A\-D\-::\-Line\-Shader@{Ship\-C\-A\-D\-::\-Line\-Shader}!render\-Points@{render\-Points}}
-\index{render\-Points@{render\-Points}!ShipCAD::LineShader@{Ship\-C\-A\-D\-::\-Line\-Shader}}
-\subsubsection[{render\-Points}]{\setlength{\rightskip}{0pt plus 5cm}void Line\-Shader\-::render\-Points (
+\index{Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}!render\+Lines@{render\+Lines}}
+\index{render\+Lines@{render\+Lines}!Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}}
+\subsubsection[{\texorpdfstring{render\+Lines(\+Q\+Vector$<$ Q\+Vector3\+D $>$ \&vertices, Q\+Color line\+Color)}{renderLines(QVector< QVector3D > &vertices, QColor lineColor)}}]{\setlength{\rightskip}{0pt plus 5cm}void Line\+Shader\+::render\+Lines (
 \begin{DoxyParamCaption}
-\item[{Q\-Vector$<$ Q\-Vector3\-D $>$ \&}]{points, }
-\item[{Q\-Color}]{color}
+\item[{Q\+Vector$<$ Q\+Vector3D $>$ \&}]{vertices, }
+\item[{Q\+Color}]{line\+Color}
 \end{DoxyParamCaption}
-)}}\label{classShipCAD_1_1LineShader_aaa105117e559ec413a733e14dc638b5a}
+)}\hypertarget{classShipCAD_1_1LineShader_a3d30bda1883e0eda65ea23c4da76f610}{}\label{classShipCAD_1_1LineShader_a3d30bda1883e0eda65ea23c4da76f610}
 
 
-Definition at line 120 of file shader.\-cpp.
+Definition at line 143 of file shader.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}!render\+Points@{render\+Points}}
+\index{render\+Points@{render\+Points}!Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}}
+\subsubsection[{\texorpdfstring{render\+Points(\+Q\+Vector$<$ Q\+Vector3\+D $>$ \&points, Q\+Color color)}{renderPoints(QVector< QVector3D > &points, QColor color)}}]{\setlength{\rightskip}{0pt plus 5cm}void Line\+Shader\+::render\+Points (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Vector3D $>$ \&}]{points, }
+\item[{Q\+Color}]{color}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1LineShader_aaa105117e559ec413a733e14dc638b5a}{}\label{classShipCAD_1_1LineShader_aaa105117e559ec413a733e14dc638b5a}
+
+
+Definition at line 127 of file shader.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}!set\+Matrix@{set\+Matrix}}
+\index{set\+Matrix@{set\+Matrix}!Ship\+C\+A\+D\+::\+Line\+Shader@{Ship\+C\+A\+D\+::\+Line\+Shader}}
+\subsubsection[{\texorpdfstring{set\+Matrix(const Q\+Matrix4x4 \&matrix)}{setMatrix(const QMatrix4x4 &matrix)}}]{\setlength{\rightskip}{0pt plus 5cm}void Line\+Shader\+::set\+Matrix (
+\begin{DoxyParamCaption}
+\item[{const Q\+Matrix4x4 \&}]{matrix}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1LineShader_ac0ee7d9d9f4fa7e4d233c2426c756a68}{}\label{classShipCAD_1_1LineShader_ac0ee7d9d9f4fa7e4d233c2426c756a68}
+
+
+Definition at line 122 of file shader.\+cpp.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{shader_8h}{shader.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{shader_8cpp}{shader.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{shader_8h}{shader.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{shader_8cpp}{shader.\+cpp}\end{DoxyCompactItemize}

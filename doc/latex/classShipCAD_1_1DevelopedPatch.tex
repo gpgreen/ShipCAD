@@ -1,0 +1,1207 @@
+\hypertarget{classShipCAD_1_1DevelopedPatch}{}\section{Ship\+C\+AD\+:\+:Developed\+Patch Class Reference}
+\label{classShipCAD_1_1DevelopedPatch}\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+
+
+base class for all non-\/surface drawable elements  
+
+
+
+
+{\ttfamily \#include $<$developedpatch.\+h$>$}
+
+Inheritance diagram for Ship\+C\+AD\+:\+:Developed\+Patch\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classShipCAD_1_1DevelopedPatch}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1DevelopedPatch_ac204705b008b75aa3633a4025d14e518}{Developed\+Patch} (\hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\+Layer} $\ast$layer)
+\item 
+virtual \hyperlink{classShipCAD_1_1DevelopedPatch_a7e47417b03f9d91f891edb34441eb045}{$\sim$\+Developed\+Patch} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1DevelopedPatch_af3c4ba4cad20580cc8d5a4591b0bffd0}{clear} ()
+\item 
+virtual void \hyperlink{classShipCAD_1_1DevelopedPatch_a6d8a53701a952c0a6777e0b0c2ca6127}{extents} (Q\+Vector3D \&min, Q\+Vector3D \&max)
+\item 
+virtual void \hyperlink{classShipCAD_1_1DevelopedPatch_a7ba24420b1e8a1fb98acac3d38f8e37e}{draw} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} \&vp, \hyperlink{classShipCAD_1_1LineShader}{Line\+Shader} $\ast$lineshader)
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\+Layer} $\ast$ \hyperlink{classShipCAD_1_1DevelopedPatch_a53dbb5c8582ded9fce56d81b3e79116d}{get\+Owner} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a71eaddef96ee0edcefb7c15f07c65f7a}{intersect\+Plane} (\hyperlink{classShipCAD_1_1Plane}{Plane} \&plane, Q\+Color color)
+\item 
+Q\+Vector3D \hyperlink{classShipCAD_1_1DevelopedPatch_acd5b00b39301b249e3c019674dd67186}{convert\+To3D} (Q\+Vector2D p)
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a9ecc3812de9fd0999336c99a71774bbd}{save\+To\+D\+XF} (Q\+String\+List \&strings)
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a0528f08293c1ac8e53e3954c8c9e8585}{save\+To\+Text\+File} (Q\+String\+List \&strings)
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a55470422ecac9d544c811eddc8c3d1c1}{unroll} (std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionControlFace}{Subdivision\+Control\+Face} $\ast$ $>$ controlfaces)
+\item 
+double \hyperlink{classShipCAD_1_1DevelopedPatch_a4ddcf2a3bb1886d6210a89d5b524a2eb}{total\+Area\+Error} ()
+\item 
+double \hyperlink{classShipCAD_1_1DevelopedPatch_ae069aa101604151d0349805ffeb3902e}{max\+Area\+Error} ()
+\item 
+double \hyperlink{classShipCAD_1_1DevelopedPatch_a18ecaf8785655a33537ae155208b4c17}{max\+Error} ()
+\item 
+Q\+Vector2D \hyperlink{classShipCAD_1_1DevelopedPatch_a14dffbaa2c469eb825bb791c7c7cff42}{mid\+Point} ()
+\item 
+double \hyperlink{classShipCAD_1_1DevelopedPatch_a93c223c8eb2a39524cae8f71a863a15a}{min\+Error} ()
+\item 
+const Q\+String \& \hyperlink{classShipCAD_1_1DevelopedPatch_ab6918e553621440eef4efd9e4ae6fd2e}{name} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a3ddb91773f49fa342f1fed811cd329f2}{set\+Name} (const Q\+String \&nm)
+\item 
+int \hyperlink{classShipCAD_1_1DevelopedPatch_a85be1d66371c43cedb1096bddf064e53}{number\+Of\+Iterations} ()
+\item 
+Q\+Vector3D \hyperlink{classShipCAD_1_1DevelopedPatch_a9cc5530b21f276b51279a2a46e261203}{get\+Point} (size\+\_\+t index)
+\item 
+Q\+Vector3D \hyperlink{classShipCAD_1_1DevelopedPatch_af7769b0032f7ca99b0790d1ae75d6d9f}{get\+Mirror\+Point} (size\+\_\+t index)
+\item 
+float \hyperlink{classShipCAD_1_1DevelopedPatch_a0a6aba001c536ddb4684d0c601ccc515}{rotation} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_ab91b09750cdae69f7f39b12980191f5e}{set\+Rotation} (float val)
+\item 
+Q\+Vector2D \hyperlink{classShipCAD_1_1DevelopedPatch_adce7adc7adf158ed0547a2dce708d8fe}{translation} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a1c16b7311901ed24f90f5f99947438aa}{set\+Translation} (Q\+Vector2D val)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_ae2a022f78ac1345f6ede335b32eadeb1}{is\+Mirror} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a968873808a19604ecf04c9818f222fbb}{set\+Mirror} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a58e6f298890172916af11e43ce9faedd}{mirror\+On\+Screen} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a47e52017866102fdc68c2502dd56eb7f}{set\+Mirror\+On\+Screen} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a3c9a16c7f2453d62b50e8ea40f9571e2}{is\+Shade\+Submerged} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_afd4cfdc14036055e13c1fcc2eaaaabda}{set\+Shade\+Submerged} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a456f6b0ba40c8a6be86f81c45c9062c4}{show\+Bounding\+Box} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a6adb505976cf4f01beba5774e2fa882b}{set\+Show\+Bounding\+Box} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a3563a7434a34b0a46bb7ee0413851179}{show\+Buttocks} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_ab406b4350137fcf93cca71b2c05c44be}{set\+Show\+Buttocks} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_abb80ca80bb26c6d44995161517a34c2f}{show\+Diagonals} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a9664cee0660a8e5d2ac41ff9056cc434}{set\+Show\+Diagonals} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_acab796afd80347da0b839511e0287fb1}{show\+Dimensions} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_abb6ef0e0db4819e5e70b6b1066f79736}{set\+Show\+Dimensions} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_aa6ab97dde9f6152f57b501b527cf9b34}{show\+Error\+Edges} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a1e69c1d9755df1b77757bfd07b39f16a}{set\+Show\+Error\+Edges} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_adb0eefd6031d26224f17f7e8ce32b0a5}{show\+Interior\+Edges} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_ab580d449a859b81adfd2542ceea0464d}{set\+Show\+Interior\+Edges} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a0ddb0069d07d2a27e709dc1f5c76275b}{show\+Part\+Name} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a9ece9e74aa65a84117568b0f0c74ef0b}{set\+Show\+Part\+Name} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a244492f9f03b465b7573fd7ee0556ad8}{show\+Solid} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_aba39dc6408881f90dc08c90779c7b1a6}{set\+Show\+Solid} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a98e0c1b8c6302ce1beb475fb4590f483}{show\+Stations} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_a7780c1a8816517c8bccadc4a9fe64b29}{set\+Show\+Stations} (bool set)
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_adbab0c37bf68eff8e68c272051fa6a94}{show\+Waterlines} ()
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_ac3daa557956f05c5ed4eb2da52706a85}{set\+Show\+Waterlines} (bool set)
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_ae4f82982b3828b99f27c11ab20132516}{dump} (std\+::ostream \&os) const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_aba8c1bb34e8690b2192b3cc2c389bad9}{export\+Spline} (Q\+String\+List \&strings, \hyperlink{classShipCAD_1_1Spline}{Spline} $\ast$spline, const Q\+String \&layername)
+\item 
+\hyperlink{namespaceShipCAD_a22a4489ec7a6505c3c30fa7562175ca4}{Polygon\+Orientation} \hyperlink{classShipCAD_1_1DevelopedPatch_a3210c1289d04ec78d1a13217b5ea742a}{crossproduct} (const Q\+Vector2D \&p1, const Q\+Vector2D \&p2, const Q\+Vector2D \&p3)
+\item 
+Q\+Vector2D \hyperlink{classShipCAD_1_1DevelopedPatch_aaa57f091d14d72af632b838a1cfd39c0}{calculate\+Triangle} (double a, double b, double c, const Q\+Vector2D \&p1, const Q\+Vector2D \&p2)
+\item 
+Q\+Vector2D \hyperlink{classShipCAD_1_1DevelopedPatch_a3c4527d0a0fcafff2b506aabef67a43e}{calculate\+Triangle2} (double a, double b, double c, const Q\+Vector2D \&p1, const Q\+Vector2D \&p2)
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_af5563e813910e11a78126223a6635faf}{unroll2D} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$face, bool \&firstface, bool \&error, \hyperlink{namespaceShipCAD_a22a4489ec7a6505c3c30fa7562175ca4}{Polygon\+Orientation} \&orientation)
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_ac9cab6969a888b9a1833271ce1fb3dde}{process\+Triangle} (\hyperlink{namespaceShipCAD_a69b081dd347722fb55da2f3958db5d08}{patchpt\+\_\+iter} ind1, \hyperlink{namespaceShipCAD_a69b081dd347722fb55da2f3958db5d08}{patchpt\+\_\+iter} ind2, \hyperlink{namespaceShipCAD_a69b081dd347722fb55da2f3958db5d08}{patchpt\+\_\+iter} ind3, bool \&first, bool \&error, \hyperlink{namespaceShipCAD_a22a4489ec7a6505c3c30fa7562175ca4}{Polygon\+Orientation} \&orientation)
+\item 
+double \hyperlink{classShipCAD_1_1DevelopedPatch_abd307ac53a6a3ab54b17c646d6f0bad5}{triangle\+Area} (const Q\+Vector2D \&p1, const Q\+Vector2D \&p2, const Q\+Vector2D \&p3)
+\item 
+void \hyperlink{classShipCAD_1_1DevelopedPatch_ad3a9b8115925272b974b003a27a7f4c7}{process\+Faces} (\hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$seedface, double \&maxerror, std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$ $>$\+::iterator \&error\+\_\+index, std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$ $>$ \&faces)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classShipCAD_1_1SubdivisionLayer}{Subdivision\+Layer} $\ast$ \hyperlink{classShipCAD_1_1DevelopedPatch_a8ef2df371c3be810ceeabca4e0daf4b3}{\+\_\+owner}
+\item 
+Q\+String \hyperlink{classShipCAD_1_1DevelopedPatch_a0af8b4e9e1ee667c781fef6df56ca7d3}{\+\_\+name}
+\item 
+\hyperlink{classShipCAD_1_1DevelopedPatch}{Developed\+Patch} $\ast$ \hyperlink{classShipCAD_1_1DevelopedPatch_a425239fe90e8afd53ad126a1afdce42f}{\+\_\+connected\+Mirror}
+\item 
+std\+::vector$<$ \hyperlink{structShipCAD_1_1PatchPoints}{Patch\+Points} $>$ \hyperlink{classShipCAD_1_1DevelopedPatch_a0f6690447bc683f1ea4f4872e1309a3f}{\+\_\+points}
+\item 
+std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\+Edge} $\ast$ $>$ \hyperlink{classShipCAD_1_1DevelopedPatch_a2c7e5cadc05bcf6a66992d7269a9971e}{\+\_\+edges}
+\item 
+std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionEdge}{Subdivision\+Edge} $\ast$ $>$ \hyperlink{classShipCAD_1_1DevelopedPatch_ae27386140a170f80afed4565202f522c}{\+\_\+boundary\+Edges}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classShipCAD_1_1DevelopedPatch_a997ac5cd92f3479d976f79a4da064d42}{\+\_\+edge\+Errors}
+\item 
+std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionFace}{Subdivision\+Face} $\ast$ $>$ \hyperlink{classShipCAD_1_1DevelopedPatch_a22be478eddc1140e6b800060c6ab513b}{\+\_\+donelist}
+\item 
+\hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\+Vector} \hyperlink{classShipCAD_1_1DevelopedPatch_a61db759391d5f9d542dfe4551e2406ca}{\+\_\+stations}
+\item 
+\hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\+Vector} \hyperlink{classShipCAD_1_1DevelopedPatch_a4708ff9dd3e334c0e774944d25b07947}{\+\_\+waterlines}
+\item 
+\hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\+Vector} \hyperlink{classShipCAD_1_1DevelopedPatch_a22b335fdb32b04aab580fc1dd90e0481}{\+\_\+buttocks}
+\item 
+\hyperlink{namespaceShipCAD_a053b941b2c87049bb9380428d4d5a056}{Spline\+Vector} \hyperlink{classShipCAD_1_1DevelopedPatch_aff34f25567574603034ffbab8892ad21}{\+\_\+diagonals}
+\item 
+std\+::vector$<$ \hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$ $>$ \hyperlink{classShipCAD_1_1DevelopedPatch_ae668e0bc0c43821a883881c752fd4725}{\+\_\+corners}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_ab4f30ac4039457e394a106294150a5eb}{\+\_\+visible}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_add1e0f68f33725c24a71bbd46e13820b}{\+\_\+mirror}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_af60d915295602a7d973f4accfe6f1074}{\+\_\+show\+Solid}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a18bd449dd6e474499a1fb28f20140919}{\+\_\+show\+Part\+Name}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a9f3f6d98182ef33bf1bef3bdacd41ecc}{\+\_\+show\+Bounding\+Box}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a7ac65e1c08ede7d63c94b4da7bfe6443}{\+\_\+show\+Interior\+Edges}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_ab970c1f908562c329577a568aa011268}{\+\_\+show\+Stations}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a647c43e415156bab3ecda6a849d4bb70}{\+\_\+show\+Buttocks}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_aff3046ee214026327f4cfda2733c31c6}{\+\_\+show\+Diagonals}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a876f5a294f194b79112c224ed66db35d}{\+\_\+show\+Waterlines}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_af20d320001ec91d649b59488bf08000e}{\+\_\+show\+Error\+Edges}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a349177098a4fcdbc6bf3812a79e3cb49}{\+\_\+show\+Dimensions}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a86574c4cb5748be1725e4a489270db1a}{\+\_\+mirror\+On\+Screen}
+\item 
+bool \hyperlink{classShipCAD_1_1DevelopedPatch_a85a8213cf1d96c9c1a959a67223971ea}{\+\_\+shade\+Submerged}
+\item 
+int \hyperlink{classShipCAD_1_1DevelopedPatch_ae3ef9cf6fd1e85f4739ea676b1a10aac}{\+\_\+num\+Iterations}
+\item 
+float \hyperlink{classShipCAD_1_1DevelopedPatch_a811b2655727eb8af2e15e9eb48b54e89}{\+\_\+rotation}
+\item 
+\hyperlink{classShipCAD_1_1Plane}{Plane} \hyperlink{classShipCAD_1_1DevelopedPatch_a88ff1deb88a87de3e54de5169edb542a}{\+\_\+mirror\+Plane}
+\item 
+Q\+Vector2D \hyperlink{classShipCAD_1_1DevelopedPatch_a7fe7981020e5078148b87c9b0bab9075}{\+\_\+min2D}
+\item 
+Q\+Vector2D \hyperlink{classShipCAD_1_1DevelopedPatch_a2d4528866ab65f5e92a808c21134003e}{\+\_\+max2D}
+\item 
+Q\+Vector2D \hyperlink{classShipCAD_1_1DevelopedPatch_a58a7a720496ce4fe60118e4e6e477fdd}{\+\_\+translation}
+\item 
+double \hyperlink{classShipCAD_1_1DevelopedPatch_af180b25af9b064398ad1c08747589d78}{\+\_\+max\+Area\+Error}
+\item 
+double \hyperlink{classShipCAD_1_1DevelopedPatch_ace1b56968ee580af5a6776bdc5d67d59}{\+\_\+total\+Area\+Error}
+\item 
+float \hyperlink{classShipCAD_1_1DevelopedPatch_a573e309a7022ad3b2eef7441b1f9f663}{\+\_\+xgrid}
+\item 
+float \hyperlink{classShipCAD_1_1DevelopedPatch_a501d803bd3252e9949a521cdd6ccff7b}{\+\_\+ygrid}
+\item 
+float \hyperlink{classShipCAD_1_1DevelopedPatch_a3b00c2638e7bf0d281914bb61d7d9717}{\+\_\+cos}
+\item 
+float \hyperlink{classShipCAD_1_1DevelopedPatch_aad8361f99a45d4fa04450828e0e177d0}{\+\_\+sin}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+base class for all non-\/surface drawable elements 
+
+Definition at line 70 of file developedpatch.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!Developed\+Patch@{Developed\+Patch}}
+\index{Developed\+Patch@{Developed\+Patch}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{Developed\+Patch(\+Subdivision\+Layer $\ast$layer)}{DevelopedPatch(SubdivisionLayer *layer)}}]{\setlength{\rightskip}{0pt plus 5cm}Developed\+Patch\+::\+Developed\+Patch (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\+Layer} $\ast$}]{layer}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ac204705b008b75aa3633a4025d14e518}{}\label{classShipCAD_1_1DevelopedPatch_ac204705b008b75aa3633a4025d14e518}
+
+
+Definition at line 49 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!````~Developed\+Patch@{$\sim$\+Developed\+Patch}}
+\index{````~Developed\+Patch@{$\sim$\+Developed\+Patch}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{$\sim$\+Developed\+Patch()}{~DevelopedPatch()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\+C\+A\+D\+::\+Developed\+Patch\+::$\sim$\+Developed\+Patch (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a7e47417b03f9d91f891edb34441eb045}{}\label{classShipCAD_1_1DevelopedPatch_a7e47417b03f9d91f891edb34441eb045}
+
+
+Definition at line 77 of file developedpatch.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!calculate\+Triangle@{calculate\+Triangle}}
+\index{calculate\+Triangle@{calculate\+Triangle}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{calculate\+Triangle(double a, double b, double c, const Q\+Vector2\+D \&p1, const Q\+Vector2\+D \&p2)}{calculateTriangle(double a, double b, double c, const QVector2D &p1, const QVector2D &p2)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Developed\+Patch\+::calculate\+Triangle (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{double}]{c, }
+\item[{const Q\+Vector2D \&}]{p1, }
+\item[{const Q\+Vector2D \&}]{p2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_aaa57f091d14d72af632b838a1cfd39c0}{}\label{classShipCAD_1_1DevelopedPatch_aaa57f091d14d72af632b838a1cfd39c0}
+
+
+Definition at line 770 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!calculate\+Triangle2@{calculate\+Triangle2}}
+\index{calculate\+Triangle2@{calculate\+Triangle2}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{calculate\+Triangle2(double a, double b, double c, const Q\+Vector2\+D \&p1, const Q\+Vector2\+D \&p2)}{calculateTriangle2(double a, double b, double c, const QVector2D &p1, const QVector2D &p2)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Developed\+Patch\+::calculate\+Triangle2 (
+\begin{DoxyParamCaption}
+\item[{double}]{a, }
+\item[{double}]{b, }
+\item[{double}]{c, }
+\item[{const Q\+Vector2D \&}]{p1, }
+\item[{const Q\+Vector2D \&}]{p2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a3c4527d0a0fcafff2b506aabef67a43e}{}\label{classShipCAD_1_1DevelopedPatch_a3c4527d0a0fcafff2b506aabef67a43e}
+
+
+Definition at line 810 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!clear@{clear}}
+\index{clear@{clear}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{clear()}{clear()}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1DevelopedPatch_af3c4ba4cad20580cc8d5a4591b0bffd0}{}\label{classShipCAD_1_1DevelopedPatch_af3c4ba4cad20580cc8d5a4591b0bffd0}
+
+
+Definition at line 56 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!convert\+To3D@{convert\+To3D}}
+\index{convert\+To3D@{convert\+To3D}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{convert\+To3\+D(\+Q\+Vector2\+D p)}{convertTo3D(QVector2D p)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Developed\+Patch\+::convert\+To3D (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector2D}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_acd5b00b39301b249e3c019674dd67186}{}\label{classShipCAD_1_1DevelopedPatch_acd5b00b39301b249e3c019674dd67186}
+
+
+Definition at line 321 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!crossproduct@{crossproduct}}
+\index{crossproduct@{crossproduct}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{crossproduct(const Q\+Vector2\+D \&p1, const Q\+Vector2\+D \&p2, const Q\+Vector2\+D \&p3)}{crossproduct(const QVector2D &p1, const QVector2D &p2, const QVector2D &p3)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Polygon\+Orientation} Developed\+Patch\+::crossproduct (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector2D \&}]{p1, }
+\item[{const Q\+Vector2D \&}]{p2, }
+\item[{const Q\+Vector2D \&}]{p3}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a3210c1289d04ec78d1a13217b5ea742a}{}\label{classShipCAD_1_1DevelopedPatch_a3210c1289d04ec78d1a13217b5ea742a}
+
+
+Definition at line 756 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!draw@{draw}}
+\index{draw@{draw}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{draw(\+Viewport \&vp, Line\+Shader $\ast$lineshader)}{draw(Viewport &vp, LineShader *lineshader)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf Viewport} \&}]{vp, }
+\item[{{\bf Line\+Shader} $\ast$}]{lineshader}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a7ba24420b1e8a1fb98acac3d38f8e37e}{}\label{classShipCAD_1_1DevelopedPatch_a7ba24420b1e8a1fb98acac3d38f8e37e}
+
+
+Definition at line 190 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!dump@{dump}}
+\index{dump@{dump}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{dump(std\+::ostream \&os) const }{dump(std::ostream &os) const }}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::dump (
+\begin{DoxyParamCaption}
+\item[{std\+::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const}\hypertarget{classShipCAD_1_1DevelopedPatch_ae4f82982b3828b99f27c11ab20132516}{}\label{classShipCAD_1_1DevelopedPatch_ae4f82982b3828b99f27c11ab20132516}
+
+
+Definition at line 1061 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!export\+Spline@{export\+Spline}}
+\index{export\+Spline@{export\+Spline}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{export\+Spline(\+Q\+String\+List \&strings, Spline $\ast$spline, const Q\+String \&layername)}{exportSpline(QStringList &strings, Spline *spline, const QString &layername)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::export\+Spline (
+\begin{DoxyParamCaption}
+\item[{Q\+String\+List \&}]{strings, }
+\item[{{\bf Spline} $\ast$}]{spline, }
+\item[{const Q\+String \&}]{layername}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_aba8c1bb34e8690b2192b3cc2c389bad9}{}\label{classShipCAD_1_1DevelopedPatch_aba8c1bb34e8690b2192b3cc2c389bad9}
+
+
+Definition at line 396 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!extents@{extents}}
+\index{extents@{extents}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{extents(\+Q\+Vector3\+D \&min, Q\+Vector3\+D \&max)}{extents(QVector3D &min, QVector3D &max)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::extents (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector3D \&}]{min, }
+\item[{Q\+Vector3D \&}]{max}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a6d8a53701a952c0a6777e0b0c2ca6127}{}\label{classShipCAD_1_1DevelopedPatch_a6d8a53701a952c0a6777e0b0c2ca6127}
+
+
+Definition at line 102 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!get\+Mirror\+Point@{get\+Mirror\+Point}}
+\index{get\+Mirror\+Point@{get\+Mirror\+Point}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{get\+Mirror\+Point(size\+\_\+t index)}{getMirrorPoint(size_t index)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Developed\+Patch\+::get\+Mirror\+Point (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_af7769b0032f7ca99b0790d1ae75d6d9f}{}\label{classShipCAD_1_1DevelopedPatch_af7769b0032f7ca99b0790d1ae75d6d9f}
+
+
+Definition at line 177 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!get\+Owner@{get\+Owner}}
+\index{get\+Owner@{get\+Owner}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{get\+Owner()}{getOwner()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Layer}$\ast$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::get\+Owner (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a53dbb5c8582ded9fce56d81b3e79116d}{}\label{classShipCAD_1_1DevelopedPatch_a53dbb5c8582ded9fce56d81b3e79116d}
+
+
+Definition at line 83 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!get\+Point@{get\+Point}}
+\index{get\+Point@{get\+Point}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{get\+Point(size\+\_\+t index)}{getPoint(size_t index)}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Developed\+Patch\+::get\+Point (
+\begin{DoxyParamCaption}
+\item[{size\+\_\+t}]{index}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a9cc5530b21f276b51279a2a46e261203}{}\label{classShipCAD_1_1DevelopedPatch_a9cc5530b21f276b51279a2a46e261203}
+
+
+Definition at line 169 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!intersect\+Plane@{intersect\+Plane}}
+\index{intersect\+Plane@{intersect\+Plane}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{intersect\+Plane(\+Plane \&plane, Q\+Color color)}{intersectPlane(Plane &plane, QColor color)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::intersect\+Plane (
+\begin{DoxyParamCaption}
+\item[{{\bf Plane} \&}]{plane, }
+\item[{Q\+Color}]{color}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a71eaddef96ee0edcefb7c15f07c65f7a}{}\label{classShipCAD_1_1DevelopedPatch_a71eaddef96ee0edcefb7c15f07c65f7a}
+
+
+Definition at line 219 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!is\+Mirror@{is\+Mirror}}
+\index{is\+Mirror@{is\+Mirror}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{is\+Mirror()}{isMirror()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::is\+Mirror (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ae2a022f78ac1345f6ede335b32eadeb1}{}\label{classShipCAD_1_1DevelopedPatch_ae2a022f78ac1345f6ede335b32eadeb1}
+
+
+Definition at line 116 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!is\+Shade\+Submerged@{is\+Shade\+Submerged}}
+\index{is\+Shade\+Submerged@{is\+Shade\+Submerged}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{is\+Shade\+Submerged()}{isShadeSubmerged()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::is\+Shade\+Submerged (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a3c9a16c7f2453d62b50e8ea40f9571e2}{}\label{classShipCAD_1_1DevelopedPatch_a3c9a16c7f2453d62b50e8ea40f9571e2}
+
+
+Definition at line 123 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!max\+Area\+Error@{max\+Area\+Error}}
+\index{max\+Area\+Error@{max\+Area\+Error}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{max\+Area\+Error()}{maxAreaError()}}]{\setlength{\rightskip}{0pt plus 5cm}double Ship\+C\+A\+D\+::\+Developed\+Patch\+::max\+Area\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ae069aa101604151d0349805ffeb3902e}{}\label{classShipCAD_1_1DevelopedPatch_ae069aa101604151d0349805ffeb3902e}
+
+
+Definition at line 95 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!max\+Error@{max\+Error}}
+\index{max\+Error@{max\+Error}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{max\+Error()}{maxError()}}]{\setlength{\rightskip}{0pt plus 5cm}double Developed\+Patch\+::max\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a18ecaf8785655a33537ae155208b4c17}{}\label{classShipCAD_1_1DevelopedPatch_a18ecaf8785655a33537ae155208b4c17}
+
+
+Definition at line 127 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!mid\+Point@{mid\+Point}}
+\index{mid\+Point@{mid\+Point}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{mid\+Point()}{midPoint()}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Developed\+Patch\+::mid\+Point (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a14dffbaa2c469eb825bb791c7c7cff42}{}\label{classShipCAD_1_1DevelopedPatch_a14dffbaa2c469eb825bb791c7c7cff42}
+
+
+Definition at line 163 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!min\+Error@{min\+Error}}
+\index{min\+Error@{min\+Error}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{min\+Error()}{minError()}}]{\setlength{\rightskip}{0pt plus 5cm}double Developed\+Patch\+::min\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a93c223c8eb2a39524cae8f71a863a15a}{}\label{classShipCAD_1_1DevelopedPatch_a93c223c8eb2a39524cae8f71a863a15a}
+
+
+Definition at line 136 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!mirror\+On\+Screen@{mirror\+On\+Screen}}
+\index{mirror\+On\+Screen@{mirror\+On\+Screen}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{mirror\+On\+Screen()}{mirrorOnScreen()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::mirror\+On\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a58e6f298890172916af11e43ce9faedd}{}\label{classShipCAD_1_1DevelopedPatch_a58e6f298890172916af11e43ce9faedd}
+
+
+Definition at line 120 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!name@{name}}
+\index{name@{name}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{name()}{name()}}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+String\& Ship\+C\+A\+D\+::\+Developed\+Patch\+::name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ab6918e553621440eef4efd9e4ae6fd2e}{}\label{classShipCAD_1_1DevelopedPatch_ab6918e553621440eef4efd9e4ae6fd2e}
+
+
+Definition at line 100 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!number\+Of\+Iterations@{number\+Of\+Iterations}}
+\index{number\+Of\+Iterations@{number\+Of\+Iterations}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{number\+Of\+Iterations()}{numberOfIterations()}}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\+C\+A\+D\+::\+Developed\+Patch\+::number\+Of\+Iterations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a85be1d66371c43cedb1096bddf064e53}{}\label{classShipCAD_1_1DevelopedPatch_a85be1d66371c43cedb1096bddf064e53}
+
+
+Definition at line 104 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!process\+Faces@{process\+Faces}}
+\index{process\+Faces@{process\+Faces}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{process\+Faces(\+Subdivision\+Face $\ast$seedface, double \&maxerror, std\+::vector$<$ Subdivision\+Face $\ast$ $>$\+::iterator \&error\+\_\+index, std\+::vector$<$ Subdivision\+Face $\ast$ $>$ \&faces)}{processFaces(SubdivisionFace *seedface, double &maxerror, std::vector< SubdivisionFace * >::iterator &error_index, std::vector< SubdivisionFace * > &faces)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::process\+Faces (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\+Face} $\ast$}]{seedface, }
+\item[{double \&}]{maxerror, }
+\item[{std\+::vector$<$ {\bf Subdivision\+Face} $\ast$ $>$\+::iterator \&}]{error\+\_\+index, }
+\item[{std\+::vector$<$ {\bf Subdivision\+Face} $\ast$ $>$ \&}]{faces}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ad3a9b8115925272b974b003a27a7f4c7}{}\label{classShipCAD_1_1DevelopedPatch_ad3a9b8115925272b974b003a27a7f4c7}
+
+
+Definition at line 956 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!process\+Triangle@{process\+Triangle}}
+\index{process\+Triangle@{process\+Triangle}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{process\+Triangle(patchpt\+\_\+iter ind1, patchpt\+\_\+iter ind2, patchpt\+\_\+iter ind3, bool \&first, bool \&error, Polygon\+Orientation \&orientation)}{processTriangle(patchpt_iter ind1, patchpt_iter ind2, patchpt_iter ind3, bool &first, bool &error, PolygonOrientation &orientation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::process\+Triangle (
+\begin{DoxyParamCaption}
+\item[{{\bf patchpt\+\_\+iter}}]{ind1, }
+\item[{{\bf patchpt\+\_\+iter}}]{ind2, }
+\item[{{\bf patchpt\+\_\+iter}}]{ind3, }
+\item[{bool \&}]{first, }
+\item[{bool \&}]{error, }
+\item[{{\bf Polygon\+Orientation} \&}]{orientation}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ac9cab6969a888b9a1833271ce1fb3dde}{}\label{classShipCAD_1_1DevelopedPatch_ac9cab6969a888b9a1833271ce1fb3dde}
+
+
+Definition at line 901 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!rotation@{rotation}}
+\index{rotation@{rotation}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{rotation()}{rotation()}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Developed\+Patch\+::rotation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a0a6aba001c536ddb4684d0c601ccc515}{}\label{classShipCAD_1_1DevelopedPatch_a0a6aba001c536ddb4684d0c601ccc515}
+
+
+Definition at line 109 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!save\+To\+D\+XF@{save\+To\+D\+XF}}
+\index{save\+To\+D\+XF@{save\+To\+D\+XF}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{save\+To\+D\+X\+F(\+Q\+String\+List \&strings)}{saveToDXF(QStringList &strings)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::save\+To\+D\+XF (
+\begin{DoxyParamCaption}
+\item[{Q\+String\+List \&}]{strings}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a9ecc3812de9fd0999336c99a71774bbd}{}\label{classShipCAD_1_1DevelopedPatch_a9ecc3812de9fd0999336c99a71774bbd}
+
+
+Definition at line 337 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!save\+To\+Text\+File@{save\+To\+Text\+File}}
+\index{save\+To\+Text\+File@{save\+To\+Text\+File}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{save\+To\+Text\+File(\+Q\+String\+List \&strings)}{saveToTextFile(QStringList &strings)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::save\+To\+Text\+File (
+\begin{DoxyParamCaption}
+\item[{Q\+String\+List \&}]{strings}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a0528f08293c1ac8e53e3954c8c9e8585}{}\label{classShipCAD_1_1DevelopedPatch_a0528f08293c1ac8e53e3954c8c9e8585}
+
+
+Definition at line 418 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Mirror@{set\+Mirror}}
+\index{set\+Mirror@{set\+Mirror}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Mirror(bool set)}{setMirror(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Mirror (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a968873808a19604ecf04c9818f222fbb}{}\label{classShipCAD_1_1DevelopedPatch_a968873808a19604ecf04c9818f222fbb}
+
+
+Definition at line 118 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Mirror\+On\+Screen@{set\+Mirror\+On\+Screen}}
+\index{set\+Mirror\+On\+Screen@{set\+Mirror\+On\+Screen}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Mirror\+On\+Screen(bool set)}{setMirrorOnScreen(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::set\+Mirror\+On\+Screen (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a47e52017866102fdc68c2502dd56eb7f}{}\label{classShipCAD_1_1DevelopedPatch_a47e52017866102fdc68c2502dd56eb7f}
+
+
+Definition at line 152 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Name@{set\+Name}}
+\index{set\+Name@{set\+Name}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Name(const Q\+String \&nm)}{setName(const QString &nm)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Name (
+\begin{DoxyParamCaption}
+\item[{const Q\+String \&}]{nm}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a3ddb91773f49fa342f1fed811cd329f2}{}\label{classShipCAD_1_1DevelopedPatch_a3ddb91773f49fa342f1fed811cd329f2}
+
+
+Definition at line 102 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Rotation@{set\+Rotation}}
+\index{set\+Rotation@{set\+Rotation}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Rotation(float val)}{setRotation(float val)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::set\+Rotation (
+\begin{DoxyParamCaption}
+\item[{float}]{val}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_ab91b09750cdae69f7f39b12980191f5e}{}\label{classShipCAD_1_1DevelopedPatch_ab91b09750cdae69f7f39b12980191f5e}
+
+
+Definition at line 145 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Shade\+Submerged@{set\+Shade\+Submerged}}
+\index{set\+Shade\+Submerged@{set\+Shade\+Submerged}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Shade\+Submerged(bool set)}{setShadeSubmerged(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Shade\+Submerged (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_afd4cfdc14036055e13c1fcc2eaaaabda}{}\label{classShipCAD_1_1DevelopedPatch_afd4cfdc14036055e13c1fcc2eaaaabda}
+
+
+Definition at line 125 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Bounding\+Box@{set\+Show\+Bounding\+Box}}
+\index{set\+Show\+Bounding\+Box@{set\+Show\+Bounding\+Box}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Bounding\+Box(bool set)}{setShowBoundingBox(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Bounding\+Box (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a6adb505976cf4f01beba5774e2fa882b}{}\label{classShipCAD_1_1DevelopedPatch_a6adb505976cf4f01beba5774e2fa882b}
+
+
+Definition at line 129 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Buttocks@{set\+Show\+Buttocks}}
+\index{set\+Show\+Buttocks@{set\+Show\+Buttocks}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Buttocks(bool set)}{setShowButtocks(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Buttocks (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ab406b4350137fcf93cca71b2c05c44be}{}\label{classShipCAD_1_1DevelopedPatch_ab406b4350137fcf93cca71b2c05c44be}
+
+
+Definition at line 133 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Diagonals@{set\+Show\+Diagonals}}
+\index{set\+Show\+Diagonals@{set\+Show\+Diagonals}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Diagonals(bool set)}{setShowDiagonals(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Diagonals (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a9664cee0660a8e5d2ac41ff9056cc434}{}\label{classShipCAD_1_1DevelopedPatch_a9664cee0660a8e5d2ac41ff9056cc434}
+
+
+Definition at line 137 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Dimensions@{set\+Show\+Dimensions}}
+\index{set\+Show\+Dimensions@{set\+Show\+Dimensions}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Dimensions(bool set)}{setShowDimensions(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Dimensions (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_abb6ef0e0db4819e5e70b6b1066f79736}{}\label{classShipCAD_1_1DevelopedPatch_abb6ef0e0db4819e5e70b6b1066f79736}
+
+
+Definition at line 141 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Error\+Edges@{set\+Show\+Error\+Edges}}
+\index{set\+Show\+Error\+Edges@{set\+Show\+Error\+Edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Error\+Edges(bool set)}{setShowErrorEdges(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Error\+Edges (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a1e69c1d9755df1b77757bfd07b39f16a}{}\label{classShipCAD_1_1DevelopedPatch_a1e69c1d9755df1b77757bfd07b39f16a}
+
+
+Definition at line 145 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Interior\+Edges@{set\+Show\+Interior\+Edges}}
+\index{set\+Show\+Interior\+Edges@{set\+Show\+Interior\+Edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Interior\+Edges(bool set)}{setShowInteriorEdges(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Interior\+Edges (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ab580d449a859b81adfd2542ceea0464d}{}\label{classShipCAD_1_1DevelopedPatch_ab580d449a859b81adfd2542ceea0464d}
+
+
+Definition at line 149 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Part\+Name@{set\+Show\+Part\+Name}}
+\index{set\+Show\+Part\+Name@{set\+Show\+Part\+Name}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Part\+Name(bool set)}{setShowPartName(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Part\+Name (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a9ece9e74aa65a84117568b0f0c74ef0b}{}\label{classShipCAD_1_1DevelopedPatch_a9ece9e74aa65a84117568b0f0c74ef0b}
+
+
+Definition at line 153 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Solid@{set\+Show\+Solid}}
+\index{set\+Show\+Solid@{set\+Show\+Solid}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Solid(bool set)}{setShowSolid(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Solid (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_aba39dc6408881f90dc08c90779c7b1a6}{}\label{classShipCAD_1_1DevelopedPatch_aba39dc6408881f90dc08c90779c7b1a6}
+
+
+Definition at line 157 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Stations@{set\+Show\+Stations}}
+\index{set\+Show\+Stations@{set\+Show\+Stations}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Stations(bool set)}{setShowStations(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Stations (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a7780c1a8816517c8bccadc4a9fe64b29}{}\label{classShipCAD_1_1DevelopedPatch_a7780c1a8816517c8bccadc4a9fe64b29}
+
+
+Definition at line 161 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Show\+Waterlines@{set\+Show\+Waterlines}}
+\index{set\+Show\+Waterlines@{set\+Show\+Waterlines}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Show\+Waterlines(bool set)}{setShowWaterlines(bool set)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Show\+Waterlines (
+\begin{DoxyParamCaption}
+\item[{bool}]{set}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ac3daa557956f05c5ed4eb2da52706a85}{}\label{classShipCAD_1_1DevelopedPatch_ac3daa557956f05c5ed4eb2da52706a85}
+
+
+Definition at line 165 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!set\+Translation@{set\+Translation}}
+\index{set\+Translation@{set\+Translation}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{set\+Translation(\+Q\+Vector2\+D val)}{setTranslation(QVector2D val)}}]{\setlength{\rightskip}{0pt plus 5cm}void Ship\+C\+A\+D\+::\+Developed\+Patch\+::set\+Translation (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector2D}]{val}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a1c16b7311901ed24f90f5f99947438aa}{}\label{classShipCAD_1_1DevelopedPatch_a1c16b7311901ed24f90f5f99947438aa}
+
+
+Definition at line 114 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Bounding\+Box@{show\+Bounding\+Box}}
+\index{show\+Bounding\+Box@{show\+Bounding\+Box}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Bounding\+Box()}{showBoundingBox()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Bounding\+Box (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a456f6b0ba40c8a6be86f81c45c9062c4}{}\label{classShipCAD_1_1DevelopedPatch_a456f6b0ba40c8a6be86f81c45c9062c4}
+
+
+Definition at line 127 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Buttocks@{show\+Buttocks}}
+\index{show\+Buttocks@{show\+Buttocks}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Buttocks()}{showButtocks()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Buttocks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a3563a7434a34b0a46bb7ee0413851179}{}\label{classShipCAD_1_1DevelopedPatch_a3563a7434a34b0a46bb7ee0413851179}
+
+
+Definition at line 131 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Diagonals@{show\+Diagonals}}
+\index{show\+Diagonals@{show\+Diagonals}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Diagonals()}{showDiagonals()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Diagonals (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_abb80ca80bb26c6d44995161517a34c2f}{}\label{classShipCAD_1_1DevelopedPatch_abb80ca80bb26c6d44995161517a34c2f}
+
+
+Definition at line 135 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Dimensions@{show\+Dimensions}}
+\index{show\+Dimensions@{show\+Dimensions}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Dimensions()}{showDimensions()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Dimensions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_acab796afd80347da0b839511e0287fb1}{}\label{classShipCAD_1_1DevelopedPatch_acab796afd80347da0b839511e0287fb1}
+
+
+Definition at line 139 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Error\+Edges@{show\+Error\+Edges}}
+\index{show\+Error\+Edges@{show\+Error\+Edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Error\+Edges()}{showErrorEdges()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Error\+Edges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_aa6ab97dde9f6152f57b501b527cf9b34}{}\label{classShipCAD_1_1DevelopedPatch_aa6ab97dde9f6152f57b501b527cf9b34}
+
+
+Definition at line 143 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Interior\+Edges@{show\+Interior\+Edges}}
+\index{show\+Interior\+Edges@{show\+Interior\+Edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Interior\+Edges()}{showInteriorEdges()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Interior\+Edges (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_adb0eefd6031d26224f17f7e8ce32b0a5}{}\label{classShipCAD_1_1DevelopedPatch_adb0eefd6031d26224f17f7e8ce32b0a5}
+
+
+Definition at line 147 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Part\+Name@{show\+Part\+Name}}
+\index{show\+Part\+Name@{show\+Part\+Name}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Part\+Name()}{showPartName()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Part\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a0ddb0069d07d2a27e709dc1f5c76275b}{}\label{classShipCAD_1_1DevelopedPatch_a0ddb0069d07d2a27e709dc1f5c76275b}
+
+
+Definition at line 151 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Solid@{show\+Solid}}
+\index{show\+Solid@{show\+Solid}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Solid()}{showSolid()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Solid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a244492f9f03b465b7573fd7ee0556ad8}{}\label{classShipCAD_1_1DevelopedPatch_a244492f9f03b465b7573fd7ee0556ad8}
+
+
+Definition at line 155 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Stations@{show\+Stations}}
+\index{show\+Stations@{show\+Stations}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Stations()}{showStations()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Stations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a98e0c1b8c6302ce1beb475fb4590f483}{}\label{classShipCAD_1_1DevelopedPatch_a98e0c1b8c6302ce1beb475fb4590f483}
+
+
+Definition at line 159 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!show\+Waterlines@{show\+Waterlines}}
+\index{show\+Waterlines@{show\+Waterlines}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{show\+Waterlines()}{showWaterlines()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::show\+Waterlines (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_adbab0c37bf68eff8e68c272051fa6a94}{}\label{classShipCAD_1_1DevelopedPatch_adbab0c37bf68eff8e68c272051fa6a94}
+
+
+Definition at line 163 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!total\+Area\+Error@{total\+Area\+Error}}
+\index{total\+Area\+Error@{total\+Area\+Error}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{total\+Area\+Error()}{totalAreaError()}}]{\setlength{\rightskip}{0pt plus 5cm}double Ship\+C\+A\+D\+::\+Developed\+Patch\+::total\+Area\+Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a4ddcf2a3bb1886d6210a89d5b524a2eb}{}\label{classShipCAD_1_1DevelopedPatch_a4ddcf2a3bb1886d6210a89d5b524a2eb}
+
+
+Definition at line 93 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!translation@{translation}}
+\index{translation@{translation}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{translation()}{translation()}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Ship\+C\+A\+D\+::\+Developed\+Patch\+::translation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classShipCAD_1_1DevelopedPatch_adce7adc7adf158ed0547a2dce708d8fe}{}\label{classShipCAD_1_1DevelopedPatch_adce7adc7adf158ed0547a2dce708d8fe}
+
+
+Definition at line 112 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!triangle\+Area@{triangle\+Area}}
+\index{triangle\+Area@{triangle\+Area}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{triangle\+Area(const Q\+Vector2\+D \&p1, const Q\+Vector2\+D \&p2, const Q\+Vector2\+D \&p3)}{triangleArea(const QVector2D &p1, const QVector2D &p2, const QVector2D &p3)}}]{\setlength{\rightskip}{0pt plus 5cm}double Developed\+Patch\+::triangle\+Area (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector2D \&}]{p1, }
+\item[{const Q\+Vector2D \&}]{p2, }
+\item[{const Q\+Vector2D \&}]{p3}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_abd307ac53a6a3ab54b17c646d6f0bad5}{}\label{classShipCAD_1_1DevelopedPatch_abd307ac53a6a3ab54b17c646d6f0bad5}
+
+
+Definition at line 946 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!unroll@{unroll}}
+\index{unroll@{unroll}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{unroll(std\+::vector$<$ Subdivision\+Control\+Face $\ast$ $>$ controlfaces)}{unroll(std::vector< SubdivisionControlFace * > controlfaces)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::unroll (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ {\bf Subdivision\+Control\+Face} $\ast$ $>$}]{controlfaces}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1DevelopedPatch_a55470422ecac9d544c811eddc8c3d1c1}{}\label{classShipCAD_1_1DevelopedPatch_a55470422ecac9d544c811eddc8c3d1c1}
+
+
+Definition at line 473 of file developedpatch.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!unroll2D@{unroll2D}}
+\index{unroll2D@{unroll2D}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{unroll2\+D(\+Subdivision\+Face $\ast$face, bool \&firstface, bool \&error, Polygon\+Orientation \&orientation)}{unroll2D(SubdivisionFace *face, bool &firstface, bool &error, PolygonOrientation &orientation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Developed\+Patch\+::unroll2D (
+\begin{DoxyParamCaption}
+\item[{{\bf Subdivision\+Face} $\ast$}]{face, }
+\item[{bool \&}]{firstface, }
+\item[{bool \&}]{error, }
+\item[{{\bf Polygon\+Orientation} \&}]{orientation}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_af5563e813910e11a78126223a6635faf}{}\label{classShipCAD_1_1DevelopedPatch_af5563e813910e11a78126223a6635faf}
+
+
+Definition at line 848 of file developedpatch.\+cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+boundary\+Edges@{\+\_\+boundary\+Edges}}
+\index{\+\_\+boundary\+Edges@{\+\_\+boundary\+Edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+boundary\+Edges}{_boundaryEdges}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Subdivision\+Edge}$\ast$$>$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+boundary\+Edges\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ae27386140a170f80afed4565202f522c}{}\label{classShipCAD_1_1DevelopedPatch_ae27386140a170f80afed4565202f522c}
+
+
+Definition at line 205 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+buttocks@{\+\_\+buttocks}}
+\index{\+\_\+buttocks@{\+\_\+buttocks}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+buttocks}{_buttocks}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spline\+Vector} Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+buttocks\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a22b335fdb32b04aab580fc1dd90e0481}{}\label{classShipCAD_1_1DevelopedPatch_a22b335fdb32b04aab580fc1dd90e0481}
+
+
+Definition at line 210 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+connected\+Mirror@{\+\_\+connected\+Mirror}}
+\index{\+\_\+connected\+Mirror@{\+\_\+connected\+Mirror}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+connected\+Mirror}{_connectedMirror}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Developed\+Patch}$\ast$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+connected\+Mirror\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a425239fe90e8afd53ad126a1afdce42f}{}\label{classShipCAD_1_1DevelopedPatch_a425239fe90e8afd53ad126a1afdce42f}
+
+
+Definition at line 202 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+corners@{\+\_\+corners}}
+\index{\+\_\+corners@{\+\_\+corners}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+corners}{_corners}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Subdivision\+Point}$\ast$$>$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+corners\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ae668e0bc0c43821a883881c752fd4725}{}\label{classShipCAD_1_1DevelopedPatch_ae668e0bc0c43821a883881c752fd4725}
+
+
+Definition at line 212 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+cos@{\+\_\+cos}}
+\index{\+\_\+cos@{\+\_\+cos}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+cos}{_cos}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+cos\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a3b00c2638e7bf0d281914bb61d7d9717}{}\label{classShipCAD_1_1DevelopedPatch_a3b00c2638e7bf0d281914bb61d7d9717}
+
+
+Definition at line 239 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+diagonals@{\+\_\+diagonals}}
+\index{\+\_\+diagonals@{\+\_\+diagonals}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+diagonals}{_diagonals}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spline\+Vector} Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+diagonals\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_aff34f25567574603034ffbab8892ad21}{}\label{classShipCAD_1_1DevelopedPatch_aff34f25567574603034ffbab8892ad21}
+
+
+Definition at line 211 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+donelist@{\+\_\+donelist}}
+\index{\+\_\+donelist@{\+\_\+donelist}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+donelist}{_donelist}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Subdivision\+Face}$\ast$$>$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+donelist\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a22be478eddc1140e6b800060c6ab513b}{}\label{classShipCAD_1_1DevelopedPatch_a22be478eddc1140e6b800060c6ab513b}
+
+
+Definition at line 207 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+edge\+Errors@{\+\_\+edge\+Errors}}
+\index{\+\_\+edge\+Errors@{\+\_\+edge\+Errors}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+edge\+Errors}{_edgeErrors}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$double$>$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+edge\+Errors\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a997ac5cd92f3479d976f79a4da064d42}{}\label{classShipCAD_1_1DevelopedPatch_a997ac5cd92f3479d976f79a4da064d42}
+
+
+Definition at line 206 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+edges@{\+\_\+edges}}
+\index{\+\_\+edges@{\+\_\+edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+edges}{_edges}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Subdivision\+Edge}$\ast$$>$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+edges\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a2c7e5cadc05bcf6a66992d7269a9971e}{}\label{classShipCAD_1_1DevelopedPatch_a2c7e5cadc05bcf6a66992d7269a9971e}
+
+
+Definition at line 204 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+max2D@{\+\_\+max2D}}
+\index{\+\_\+max2D@{\+\_\+max2D}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+max2D}{_max2D}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+max2D\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a2d4528866ab65f5e92a808c21134003e}{}\label{classShipCAD_1_1DevelopedPatch_a2d4528866ab65f5e92a808c21134003e}
+
+
+Definition at line 233 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+max\+Area\+Error@{\+\_\+max\+Area\+Error}}
+\index{\+\_\+max\+Area\+Error@{\+\_\+max\+Area\+Error}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+max\+Area\+Error}{_maxAreaError}}]{\setlength{\rightskip}{0pt plus 5cm}double Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+max\+Area\+Error\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_af180b25af9b064398ad1c08747589d78}{}\label{classShipCAD_1_1DevelopedPatch_af180b25af9b064398ad1c08747589d78}
+
+
+Definition at line 235 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+min2D@{\+\_\+min2D}}
+\index{\+\_\+min2D@{\+\_\+min2D}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+min2D}{_min2D}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+min2D\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a7fe7981020e5078148b87c9b0bab9075}{}\label{classShipCAD_1_1DevelopedPatch_a7fe7981020e5078148b87c9b0bab9075}
+
+
+Definition at line 232 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+mirror@{\+\_\+mirror}}
+\index{\+\_\+mirror@{\+\_\+mirror}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+mirror}{_mirror}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+mirror\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_add1e0f68f33725c24a71bbd46e13820b}{}\label{classShipCAD_1_1DevelopedPatch_add1e0f68f33725c24a71bbd46e13820b}
+
+
+Definition at line 215 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+mirror\+On\+Screen@{\+\_\+mirror\+On\+Screen}}
+\index{\+\_\+mirror\+On\+Screen@{\+\_\+mirror\+On\+Screen}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+mirror\+On\+Screen}{_mirrorOnScreen}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+mirror\+On\+Screen\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a86574c4cb5748be1725e4a489270db1a}{}\label{classShipCAD_1_1DevelopedPatch_a86574c4cb5748be1725e4a489270db1a}
+
+
+Definition at line 226 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+mirror\+Plane@{\+\_\+mirror\+Plane}}
+\index{\+\_\+mirror\+Plane@{\+\_\+mirror\+Plane}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+mirror\+Plane}{_mirrorPlane}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Plane} Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+mirror\+Plane\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a88ff1deb88a87de3e54de5169edb542a}{}\label{classShipCAD_1_1DevelopedPatch_a88ff1deb88a87de3e54de5169edb542a}
+
+
+Definition at line 231 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+name@{\+\_\+name}}
+\index{\+\_\+name@{\+\_\+name}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+name}{_name}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a0af8b4e9e1ee667c781fef6df56ca7d3}{}\label{classShipCAD_1_1DevelopedPatch_a0af8b4e9e1ee667c781fef6df56ca7d3}
+
+
+Definition at line 201 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+num\+Iterations@{\+\_\+num\+Iterations}}
+\index{\+\_\+num\+Iterations@{\+\_\+num\+Iterations}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+num\+Iterations}{_numIterations}}]{\setlength{\rightskip}{0pt plus 5cm}int Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+num\+Iterations\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ae3ef9cf6fd1e85f4739ea676b1a10aac}{}\label{classShipCAD_1_1DevelopedPatch_ae3ef9cf6fd1e85f4739ea676b1a10aac}
+
+
+Definition at line 229 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+owner@{\+\_\+owner}}
+\index{\+\_\+owner@{\+\_\+owner}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+owner}{_owner}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Subdivision\+Layer}$\ast$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+owner\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a8ef2df371c3be810ceeabca4e0daf4b3}{}\label{classShipCAD_1_1DevelopedPatch_a8ef2df371c3be810ceeabca4e0daf4b3}
+
+
+Definition at line 200 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+points@{\+\_\+points}}
+\index{\+\_\+points@{\+\_\+points}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+points}{_points}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Patch\+Points}$>$ Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+points\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a0f6690447bc683f1ea4f4872e1309a3f}{}\label{classShipCAD_1_1DevelopedPatch_a0f6690447bc683f1ea4f4872e1309a3f}
+
+
+Definition at line 203 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+rotation@{\+\_\+rotation}}
+\index{\+\_\+rotation@{\+\_\+rotation}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+rotation}{_rotation}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+rotation\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a811b2655727eb8af2e15e9eb48b54e89}{}\label{classShipCAD_1_1DevelopedPatch_a811b2655727eb8af2e15e9eb48b54e89}
+
+
+Definition at line 230 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+shade\+Submerged@{\+\_\+shade\+Submerged}}
+\index{\+\_\+shade\+Submerged@{\+\_\+shade\+Submerged}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+shade\+Submerged}{_shadeSubmerged}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+shade\+Submerged\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a85a8213cf1d96c9c1a959a67223971ea}{}\label{classShipCAD_1_1DevelopedPatch_a85a8213cf1d96c9c1a959a67223971ea}
+
+
+Definition at line 227 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Bounding\+Box@{\+\_\+show\+Bounding\+Box}}
+\index{\+\_\+show\+Bounding\+Box@{\+\_\+show\+Bounding\+Box}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Bounding\+Box}{_showBoundingBox}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Bounding\+Box\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a9f3f6d98182ef33bf1bef3bdacd41ecc}{}\label{classShipCAD_1_1DevelopedPatch_a9f3f6d98182ef33bf1bef3bdacd41ecc}
+
+
+Definition at line 218 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Buttocks@{\+\_\+show\+Buttocks}}
+\index{\+\_\+show\+Buttocks@{\+\_\+show\+Buttocks}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Buttocks}{_showButtocks}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Buttocks\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a647c43e415156bab3ecda6a849d4bb70}{}\label{classShipCAD_1_1DevelopedPatch_a647c43e415156bab3ecda6a849d4bb70}
+
+
+Definition at line 221 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Diagonals@{\+\_\+show\+Diagonals}}
+\index{\+\_\+show\+Diagonals@{\+\_\+show\+Diagonals}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Diagonals}{_showDiagonals}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Diagonals\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_aff3046ee214026327f4cfda2733c31c6}{}\label{classShipCAD_1_1DevelopedPatch_aff3046ee214026327f4cfda2733c31c6}
+
+
+Definition at line 222 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Dimensions@{\+\_\+show\+Dimensions}}
+\index{\+\_\+show\+Dimensions@{\+\_\+show\+Dimensions}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Dimensions}{_showDimensions}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Dimensions\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a349177098a4fcdbc6bf3812a79e3cb49}{}\label{classShipCAD_1_1DevelopedPatch_a349177098a4fcdbc6bf3812a79e3cb49}
+
+
+Definition at line 225 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Error\+Edges@{\+\_\+show\+Error\+Edges}}
+\index{\+\_\+show\+Error\+Edges@{\+\_\+show\+Error\+Edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Error\+Edges}{_showErrorEdges}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Error\+Edges\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_af20d320001ec91d649b59488bf08000e}{}\label{classShipCAD_1_1DevelopedPatch_af20d320001ec91d649b59488bf08000e}
+
+
+Definition at line 224 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Interior\+Edges@{\+\_\+show\+Interior\+Edges}}
+\index{\+\_\+show\+Interior\+Edges@{\+\_\+show\+Interior\+Edges}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Interior\+Edges}{_showInteriorEdges}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Interior\+Edges\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a7ac65e1c08ede7d63c94b4da7bfe6443}{}\label{classShipCAD_1_1DevelopedPatch_a7ac65e1c08ede7d63c94b4da7bfe6443}
+
+
+Definition at line 219 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Part\+Name@{\+\_\+show\+Part\+Name}}
+\index{\+\_\+show\+Part\+Name@{\+\_\+show\+Part\+Name}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Part\+Name}{_showPartName}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Part\+Name\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a18bd449dd6e474499a1fb28f20140919}{}\label{classShipCAD_1_1DevelopedPatch_a18bd449dd6e474499a1fb28f20140919}
+
+
+Definition at line 217 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Solid@{\+\_\+show\+Solid}}
+\index{\+\_\+show\+Solid@{\+\_\+show\+Solid}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Solid}{_showSolid}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Solid\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_af60d915295602a7d973f4accfe6f1074}{}\label{classShipCAD_1_1DevelopedPatch_af60d915295602a7d973f4accfe6f1074}
+
+
+Definition at line 216 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Stations@{\+\_\+show\+Stations}}
+\index{\+\_\+show\+Stations@{\+\_\+show\+Stations}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Stations}{_showStations}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Stations\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ab970c1f908562c329577a568aa011268}{}\label{classShipCAD_1_1DevelopedPatch_ab970c1f908562c329577a568aa011268}
+
+
+Definition at line 220 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+show\+Waterlines@{\+\_\+show\+Waterlines}}
+\index{\+\_\+show\+Waterlines@{\+\_\+show\+Waterlines}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+show\+Waterlines}{_showWaterlines}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+show\+Waterlines\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a876f5a294f194b79112c224ed66db35d}{}\label{classShipCAD_1_1DevelopedPatch_a876f5a294f194b79112c224ed66db35d}
+
+
+Definition at line 223 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+sin@{\+\_\+sin}}
+\index{\+\_\+sin@{\+\_\+sin}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+sin}{_sin}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+sin\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_aad8361f99a45d4fa04450828e0e177d0}{}\label{classShipCAD_1_1DevelopedPatch_aad8361f99a45d4fa04450828e0e177d0}
+
+
+Definition at line 240 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+stations@{\+\_\+stations}}
+\index{\+\_\+stations@{\+\_\+stations}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+stations}{_stations}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spline\+Vector} Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+stations\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a61db759391d5f9d542dfe4551e2406ca}{}\label{classShipCAD_1_1DevelopedPatch_a61db759391d5f9d542dfe4551e2406ca}
+
+
+Definition at line 208 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+total\+Area\+Error@{\+\_\+total\+Area\+Error}}
+\index{\+\_\+total\+Area\+Error@{\+\_\+total\+Area\+Error}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+total\+Area\+Error}{_totalAreaError}}]{\setlength{\rightskip}{0pt plus 5cm}double Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+total\+Area\+Error\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ace1b56968ee580af5a6776bdc5d67d59}{}\label{classShipCAD_1_1DevelopedPatch_ace1b56968ee580af5a6776bdc5d67d59}
+
+
+Definition at line 236 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+translation@{\+\_\+translation}}
+\index{\+\_\+translation@{\+\_\+translation}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+translation}{_translation}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector2D Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+translation\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a58a7a720496ce4fe60118e4e6e477fdd}{}\label{classShipCAD_1_1DevelopedPatch_a58a7a720496ce4fe60118e4e6e477fdd}
+
+
+Definition at line 234 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+visible@{\+\_\+visible}}
+\index{\+\_\+visible@{\+\_\+visible}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+visible}{_visible}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+visible\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_ab4f30ac4039457e394a106294150a5eb}{}\label{classShipCAD_1_1DevelopedPatch_ab4f30ac4039457e394a106294150a5eb}
+
+
+Definition at line 214 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+waterlines@{\+\_\+waterlines}}
+\index{\+\_\+waterlines@{\+\_\+waterlines}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+waterlines}{_waterlines}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Spline\+Vector} Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+waterlines\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a4708ff9dd3e334c0e774944d25b07947}{}\label{classShipCAD_1_1DevelopedPatch_a4708ff9dd3e334c0e774944d25b07947}
+
+
+Definition at line 209 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+xgrid@{\+\_\+xgrid}}
+\index{\+\_\+xgrid@{\+\_\+xgrid}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+xgrid}{_xgrid}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+xgrid\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a573e309a7022ad3b2eef7441b1f9f663}{}\label{classShipCAD_1_1DevelopedPatch_a573e309a7022ad3b2eef7441b1f9f663}
+
+
+Definition at line 237 of file developedpatch.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}!\+\_\+ygrid@{\+\_\+ygrid}}
+\index{\+\_\+ygrid@{\+\_\+ygrid}!Ship\+C\+A\+D\+::\+Developed\+Patch@{Ship\+C\+A\+D\+::\+Developed\+Patch}}
+\subsubsection[{\texorpdfstring{\+\_\+ygrid}{_ygrid}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Developed\+Patch\+::\+\_\+ygrid\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classShipCAD_1_1DevelopedPatch_a501d803bd3252e9949a521cdd6ccff7b}{}\label{classShipCAD_1_1DevelopedPatch_a501d803bd3252e9949a521cdd6ccff7b}
+
+
+Definition at line 238 of file developedpatch.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Ship\+C\+A\+Dlib/\hyperlink{developedpatch_8h}{developedpatch.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{developedpatch_8cpp}{developedpatch.\+cpp}\end{DoxyCompactItemize}

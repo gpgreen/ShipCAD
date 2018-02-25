@@ -1,10 +1,19 @@
 var searchData=
 [
   ['d',['d',['../unionconvert__type__t.html#a4fcd24be201830134d26395d6472f105',1,'convert_type_t']]],
-  ['data',['data',['../structShipCAD_1_1JPEGImage.html#aa1ec94e32147a6e39de7809b45604e21',1,'ShipCAD::JPEGImage::data()'],['../structVolumeCalc.html#acb7ab639ec6e5c77daf116c6eb58693a',1,'VolumeCalc::data()'],['../structStationAreaCalculation.html#ad1b380c3cc7135b5d659c7efb5a961c2',1,'StationAreaCalculation::data()']]],
+  ['data',['data',['../structShipCAD_1_1LayerPropertiesForDialog.html#a0bcd4eb69a1b82c26e9dfcf1707cf850',1,'ShipCAD::LayerPropertiesForDialog::data()'],['../structVolumeCalc.html#acb7ab639ec6e5c77daf116c6eb58693a',1,'VolumeCalc::data()'],['../structStationAreaCalculation.html#ad1b380c3cc7135b5d659c7efb5a961c2',1,'StationAreaCalculation::data()'],['../structShipCAD_1_1JPEGImage.html#aa1ec94e32147a6e39de7809b45604e21',1,'ShipCAD::JPEGImage::data()']]],
+  ['delete_5fall_5fintersections',['delete_all_intersections',['../structShipCAD_1_1IntersectionsDialogData.html#ae423b73a2c8644594ac4c7f56125af9f',1,'ShipCAD::IntersectionsDialogData']]],
+  ['delete_5fintersections',['delete_intersections',['../structShipCAD_1_1IntersectionsDialogData.html#a0b612a856d1875fb0062907fb1cc77a7',1,'ShipCAD::IntersectionsDialogData']]],
+  ['depth',['depth',['../structShipCAD_1_1NewModelDialogData.html#a6941e9fd4fd42257c0b05c6076aadc2a',1,'ShipCAD::NewModelDialogData']]],
+  ['developable',['developable',['../structShipCAD_1_1LayerPropertiesForDialog.html#ab2610addf8f227b9b9f00e9f275f6342',1,'ShipCAD::LayerPropertiesForDialog']]],
+  ['diagonals',['diagonals',['../structShipCAD_1_1IntersectionsDialogData.html#aa646939995a2b52262724964a6e1fd47',1,'ShipCAD::IntersectionsDialogData']]],
+  ['dialog_5ftitle',['dialog_title',['../structShipCAD_1_1RotateDialogData.html#af8648790d9c834ad4c65e3a188290738',1,'ShipCAD::RotateDialogData']]],
   ['dir',['dir',['../structShipCAD_1_1PickRay.html#a9e277629b120f405d2780f1235e8dcb1',1,'ShipCAD::PickRay']]],
   ['displ',['displ',['../structDraftData.html#ad911e175c740aa5e4e1bba6f5db3b448',1,'DraftData']]],
   ['displacement',['displacement',['../structShipCAD_1_1HydrostaticsData.html#a92d1a8a97eb9b21bad485e40ac4461a0',1,'ShipCAD::HydrostaticsData::displacement()'],['../structShipCAD_1_1CrosscurvesData.html#a9a7baa66159e203888390eaa63caf708',1,'ShipCAD::CrosscurvesData::displacement()'],['../structShipCAD_1_1DelftSeriesResistance.html#a1c98fdc7b3c1b28f6f8029af2e009992',1,'ShipCAD::DelftSeriesResistance::displacement()'],['../structShipCAD_1_1KAPERResistance.html#a5227818b90eab4991e339bbdf2e382ca',1,'ShipCAD::KAPERResistance::displacement()']]],
+  ['distance',['distance',['../structShipCAD_1_1InsertPlaneDialogData.html#a73456e4622597dce48d16c05be358593',1,'ShipCAD::InsertPlaneDialogData::distance()'],['../structShipCAD_1_1MirrorDialogData.html#ab692a899cc809b67fd65fee10848e863',1,'ShipCAD::MirrorDialogData::distance()']]],
+  ['dotprod',['dotprod',['../structZebraIntersection.html#a7da8915c55c4f1002df03c3294855a28',1,'ZebraIntersection']]],
+  ['double_5fedges',['double_edges',['../structShipCAD_1_1SurfaceCheckResult.html#ac9cd6a616b54cdfc8f2de4260810e751',1,'ShipCAD::SurfaceCheckResult']]],
   ['draft',['draft',['../structDraftData.html#a3f20aeee5cac97b57e9fc5c5315f3ad1',1,'DraftData::draft()'],['../structShipCAD_1_1DelftSeriesResistance.html#a208e360c5ca0d029f9f433a7bc2cade2',1,'ShipCAD::DelftSeriesResistance::draft()'],['../structShipCAD_1_1KAPERResistance.html#a0be8d3ba3d4e485abe71c462575b478a',1,'ShipCAD::KAPERResistance::draft()']]],
   ['draft_5ftotal',['draft_total',['../structShipCAD_1_1DelftSeriesResistance.html#a4db81049e448c381019f97dc630d51af',1,'ShipCAD::DelftSeriesResistance']]]
 ];

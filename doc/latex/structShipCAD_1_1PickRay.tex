@@ -1,6 +1,5 @@
-\hypertarget{structShipCAD_1_1PickRay}{\section{Ship\-C\-A\-D\-:\-:Pick\-Ray Struct Reference}
-\label{structShipCAD_1_1PickRay}\index{Ship\-C\-A\-D\-::\-Pick\-Ray@{Ship\-C\-A\-D\-::\-Pick\-Ray}}
-}
+\hypertarget{structShipCAD_1_1PickRay}{}\section{Ship\+C\+AD\+:\+:Pick\+Ray Struct Reference}
+\label{structShipCAD_1_1PickRay}\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
 
 
 a pick ray (line)  
@@ -8,41 +7,108 @@ a pick ray (line)
 
 
 
-{\ttfamily \#include $<$viewportview.\-h$>$}
+{\ttfamily \#include $<$shipcadlib.\+h$>$}
 
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structShipCAD_1_1PickRay_a423b609ea367f578f4c8abc6638daec4}{Pick\+Ray} (bool multi, bool p, bool e, bool f)
+\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Q\-Vector3\-D \hyperlink{structShipCAD_1_1PickRay_a2a9ed44a643481ceefcdec276ce7425a}{pt}
+Q\+Vector3D \hyperlink{structShipCAD_1_1PickRay_a2a9ed44a643481ceefcdec276ce7425a}{pt}
 \item 
-Q\-Vector3\-D \hyperlink{structShipCAD_1_1PickRay_a9e277629b120f405d2780f1235e8dcb1}{dir}
+Q\+Vector3D \hyperlink{structShipCAD_1_1PickRay_a9e277629b120f405d2780f1235e8dcb1}{dir}
+\item 
+float \hyperlink{structShipCAD_1_1PickRay_aea6c9d67dc7245b1edf930dfe019d4db}{pick\+Dist}
+\item 
+bool \hyperlink{structShipCAD_1_1PickRay_a5b5dbf3de2afc804978a5e35ac582028}{multi\+\_\+sel}
+\item 
+bool \hyperlink{structShipCAD_1_1PickRay_a6576863fe4c5cb5eaa5ebcaa474104c8}{point}
+\item 
+bool \hyperlink{structShipCAD_1_1PickRay_a9882c4e0e43e2141cbaa196fe109cf19}{edge}
+\item 
+bool \hyperlink{structShipCAD_1_1PickRay_a76218677660d84089b3db5a137410cec}{face}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 a pick ray (line) 
 
-Definition at line 45 of file viewportview.\-h.
+Definition at line 171 of file shipcadlib.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!Pick\+Ray@{Pick\+Ray}}
+\index{Pick\+Ray@{Pick\+Ray}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{Pick\+Ray(bool multi, bool p, bool e, bool f)}{PickRay(bool multi, bool p, bool e, bool f)}}]{\setlength{\rightskip}{0pt plus 5cm}Ship\+C\+A\+D\+::\+Pick\+Ray\+::\+Pick\+Ray (
+\begin{DoxyParamCaption}
+\item[{bool}]{multi, }
+\item[{bool}]{p, }
+\item[{bool}]{e, }
+\item[{bool}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structShipCAD_1_1PickRay_a423b609ea367f578f4c8abc6638daec4}{}\label{structShipCAD_1_1PickRay_a423b609ea367f578f4c8abc6638daec4}
+
+
+Definition at line 180 of file shipcadlib.\+h.
 
 
 
 \subsection{Member Data Documentation}
-\hypertarget{structShipCAD_1_1PickRay_a9e277629b120f405d2780f1235e8dcb1}{\index{Ship\-C\-A\-D\-::\-Pick\-Ray@{Ship\-C\-A\-D\-::\-Pick\-Ray}!dir@{dir}}
-\index{dir@{dir}!ShipCAD::PickRay@{Ship\-C\-A\-D\-::\-Pick\-Ray}}
-\subsubsection[{dir}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Pick\-Ray\-::dir}}\label{structShipCAD_1_1PickRay_a9e277629b120f405d2780f1235e8dcb1}
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!dir@{dir}}
+\index{dir@{dir}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{dir}{dir}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Ship\+C\+A\+D\+::\+Pick\+Ray\+::dir}\hypertarget{structShipCAD_1_1PickRay_a9e277629b120f405d2780f1235e8dcb1}{}\label{structShipCAD_1_1PickRay_a9e277629b120f405d2780f1235e8dcb1}
 
 
-Definition at line 48 of file viewportview.\-h.
+Definition at line 174 of file shipcadlib.\+h.
 
-\hypertarget{structShipCAD_1_1PickRay_a2a9ed44a643481ceefcdec276ce7425a}{\index{Ship\-C\-A\-D\-::\-Pick\-Ray@{Ship\-C\-A\-D\-::\-Pick\-Ray}!pt@{pt}}
-\index{pt@{pt}!ShipCAD::PickRay@{Ship\-C\-A\-D\-::\-Pick\-Ray}}
-\subsubsection[{pt}]{\setlength{\rightskip}{0pt plus 5cm}Q\-Vector3\-D Ship\-C\-A\-D\-::\-Pick\-Ray\-::pt}}\label{structShipCAD_1_1PickRay_a2a9ed44a643481ceefcdec276ce7425a}
-
-
-Definition at line 47 of file viewportview.\-h.
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!edge@{edge}}
+\index{edge@{edge}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{edge}{edge}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Pick\+Ray\+::edge}\hypertarget{structShipCAD_1_1PickRay_a9882c4e0e43e2141cbaa196fe109cf19}{}\label{structShipCAD_1_1PickRay_a9882c4e0e43e2141cbaa196fe109cf19}
 
 
+Definition at line 178 of file shipcadlib.\+h.
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!face@{face}}
+\index{face@{face}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{face}{face}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Pick\+Ray\+::face}\hypertarget{structShipCAD_1_1PickRay_a76218677660d84089b3db5a137410cec}{}\label{structShipCAD_1_1PickRay_a76218677660d84089b3db5a137410cec}
+
+
+Definition at line 179 of file shipcadlib.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!multi\+\_\+sel@{multi\+\_\+sel}}
+\index{multi\+\_\+sel@{multi\+\_\+sel}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{multi\+\_\+sel}{multi_sel}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Pick\+Ray\+::multi\+\_\+sel}\hypertarget{structShipCAD_1_1PickRay_a5b5dbf3de2afc804978a5e35ac582028}{}\label{structShipCAD_1_1PickRay_a5b5dbf3de2afc804978a5e35ac582028}
+
+
+Definition at line 176 of file shipcadlib.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!pick\+Dist@{pick\+Dist}}
+\index{pick\+Dist@{pick\+Dist}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{pick\+Dist}{pickDist}}]{\setlength{\rightskip}{0pt plus 5cm}float Ship\+C\+A\+D\+::\+Pick\+Ray\+::pick\+Dist}\hypertarget{structShipCAD_1_1PickRay_aea6c9d67dc7245b1edf930dfe019d4db}{}\label{structShipCAD_1_1PickRay_aea6c9d67dc7245b1edf930dfe019d4db}
+
+
+Definition at line 175 of file shipcadlib.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!point@{point}}
+\index{point@{point}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{point}{point}}]{\setlength{\rightskip}{0pt plus 5cm}bool Ship\+C\+A\+D\+::\+Pick\+Ray\+::point}\hypertarget{structShipCAD_1_1PickRay_a6576863fe4c5cb5eaa5ebcaa474104c8}{}\label{structShipCAD_1_1PickRay_a6576863fe4c5cb5eaa5ebcaa474104c8}
+
+
+Definition at line 177 of file shipcadlib.\+h.
+
+\index{Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}!pt@{pt}}
+\index{pt@{pt}!Ship\+C\+A\+D\+::\+Pick\+Ray@{Ship\+C\+A\+D\+::\+Pick\+Ray}}
+\subsubsection[{\texorpdfstring{pt}{pt}}]{\setlength{\rightskip}{0pt plus 5cm}Q\+Vector3D Ship\+C\+A\+D\+::\+Pick\+Ray\+::pt}\hypertarget{structShipCAD_1_1PickRay_a2a9ed44a643481ceefcdec276ce7425a}{}\label{structShipCAD_1_1PickRay_a2a9ed44a643481ceefcdec276ce7425a}
+
+
+Definition at line 173 of file shipcadlib.\+h.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{viewportview_8h}{viewportview.\-h}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{shipcadlib_8h}{shipcadlib.\+h}\end{DoxyCompactItemize}

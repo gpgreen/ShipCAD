@@ -1,0 +1,57 @@
+\hypertarget{developedpatch_8cpp}{}\section{Ship\+C\+A\+Dlib/developedpatch.cpp File Reference}
+\label{developedpatch_8cpp}\index{Ship\+C\+A\+Dlib/developedpatch.\+cpp@{Ship\+C\+A\+Dlib/developedpatch.\+cpp}}
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include \char`\"{}developedpatch.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}plane.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivlayer.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivpoint.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivsurface.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}subdivedge.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}viewport.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}shader.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}utility.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}shipcadlib.\+h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structPatchIntersection}{Patch\+Intersection}
+\item 
+struct \hyperlink{structPatchPointPred}{Patch\+Point\+Pred}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespaceShipCAD_a69b081dd347722fb55da2f3958db5d08}{patchpt\+\_\+iter} \hyperlink{developedpatch_8cpp_a80335a9b6548a17cc7b06055cb888564}{find\+\_\+point} (\hyperlink{namespaceShipCAD_a69b081dd347722fb55da2f3958db5d08}{patchpt\+\_\+iter} start, \hyperlink{namespaceShipCAD_a69b081dd347722fb55da2f3958db5d08}{patchpt\+\_\+iter} end, \hyperlink{classShipCAD_1_1SubdivisionPoint}{Subdivision\+Point} $\ast$pt)
+\item 
+ostream \& \hyperlink{developedpatch_8cpp_a4adf3a9100a69b26ee73b805726a8526}{operator$<$$<$} (ostream \&os, const \hyperlink{classShipCAD_1_1DevelopedPatch}{Ship\+C\+A\+D\+::\+Developed\+Patch} \&patch)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{developedpatch.\+cpp@{developedpatch.\+cpp}!find\+\_\+point@{find\+\_\+point}}
+\index{find\+\_\+point@{find\+\_\+point}!developedpatch.\+cpp@{developedpatch.\+cpp}}
+\subsubsection[{\texorpdfstring{find\+\_\+point(patchpt\+\_\+iter start, patchpt\+\_\+iter end, Subdivision\+Point $\ast$pt)}{find_point(patchpt_iter start, patchpt_iter end, SubdivisionPoint *pt)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf patchpt\+\_\+iter} find\+\_\+point (
+\begin{DoxyParamCaption}
+\item[{{\bf patchpt\+\_\+iter}}]{start, }
+\item[{{\bf patchpt\+\_\+iter}}]{end, }
+\item[{{\bf Subdivision\+Point} $\ast$}]{pt}
+\end{DoxyParamCaption}
+)}\hypertarget{developedpatch_8cpp_a80335a9b6548a17cc7b06055cb888564}{}\label{developedpatch_8cpp_a80335a9b6548a17cc7b06055cb888564}
+
+
+Definition at line 212 of file developedpatch.\+cpp.
+
+\index{developedpatch.\+cpp@{developedpatch.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!developedpatch.\+cpp@{developedpatch.\+cpp}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(ostream \&os, const Ship\+C\+A\+D\+::\+Developed\+Patch \&patch)}{operator<<(ostream &os, const ShipCAD::DevelopedPatch &patch)}}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Developed\+Patch} \&}]{patch}
+\end{DoxyParamCaption}
+)}\hypertarget{developedpatch_8cpp_a4adf3a9100a69b26ee73b805726a8526}{}\label{developedpatch_8cpp_a4adf3a9100a69b26ee73b805726a8526}
+
+
+Definition at line 1066 of file developedpatch.\+cpp.
+

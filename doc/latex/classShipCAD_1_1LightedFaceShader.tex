@@ -1,11 +1,10 @@
-\hypertarget{classShipCAD_1_1LightedFaceShader}{\section{Ship\-C\-A\-D\-:\-:Lighted\-Face\-Shader Class Reference}
-\label{classShipCAD_1_1LightedFaceShader}\index{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader@{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader}}
-}
+\hypertarget{classShipCAD_1_1LightedFaceShader}{}\section{Ship\+C\+AD\+:\+:Lighted\+Face\+Shader Class Reference}
+\label{classShipCAD_1_1LightedFaceShader}\index{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}}
 
 
-{\ttfamily \#include $<$shader.\-h$>$}
+{\ttfamily \#include $<$shader.\+h$>$}
 
-Inheritance diagram for Ship\-C\-A\-D\-:\-:Lighted\-Face\-Shader\-:\begin{figure}[H]
+Inheritance diagram for Ship\+C\+AD\+:\+:Lighted\+Face\+Shader\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.000000cm]{classShipCAD_1_1LightedFaceShader}
@@ -14,11 +13,13 @@ Inheritance diagram for Ship\-C\-A\-D\-:\-:Lighted\-Face\-Shader\-:\begin{figure
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classShipCAD_1_1LightedFaceShader_a2af0e951890116c518c54c8afe978a3a}{Lighted\-Face\-Shader} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
+\hyperlink{classShipCAD_1_1LightedFaceShader_a2af0e951890116c518c54c8afe978a3a}{Lighted\+Face\+Shader} (\hyperlink{classShipCAD_1_1Viewport}{Viewport} $\ast$vp)
 \item 
-virtual \hyperlink{classShipCAD_1_1LightedFaceShader_a6ce7e752639fd1c8dd12b721279ac814}{$\sim$\-Lighted\-Face\-Shader} ()
+virtual \hyperlink{classShipCAD_1_1LightedFaceShader_a6ce7e752639fd1c8dd12b721279ac814}{$\sim$\+Lighted\+Face\+Shader} ()
 \item 
-virtual void \hyperlink{classShipCAD_1_1LightedFaceShader_abd4fe9c01a7e09aa46f3017f014018a8}{render\-Mesh} (Q\-Color mesh\-Color, Q\-Vector$<$ Q\-Vector3\-D $>$ \&vertices, Q\-Vector$<$ Q\-Vector3\-D $>$ \&normals)
+void \hyperlink{classShipCAD_1_1LightedFaceShader_a0a5515fd6bcaf380de2ff15b42261f83}{set\+Matrices} (const Q\+Matrix4x4 \&proj, const Q\+Matrix4x4 \&view, const Q\+Matrix4x4 \&world)
+\item 
+virtual void \hyperlink{classShipCAD_1_1LightedFaceShader_abd4fe9c01a7e09aa46f3017f014018a8}{render\+Mesh} (Q\+Color mesh\+Color, Q\+Vector$<$ Q\+Vector3D $>$ \&vertices, Q\+Vector$<$ Q\+Vector3D $>$ \&normals)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -26,56 +27,69 @@ virtual void \hyperlink{classShipCAD_1_1LightedFaceShader_abd4fe9c01a7e09aa46f30
 \subsection{Detailed Description}
 
 
-Definition at line 126 of file shader.\-h.
+Definition at line 133 of file shader.\+h.
 
 
 
 \subsection{Constructor \& Destructor Documentation}
-\hypertarget{classShipCAD_1_1LightedFaceShader_a2af0e951890116c518c54c8afe978a3a}{\index{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader@{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader}!Lighted\-Face\-Shader@{Lighted\-Face\-Shader}}
-\index{Lighted\-Face\-Shader@{Lighted\-Face\-Shader}!ShipCAD::LightedFaceShader@{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader}}
-\subsubsection[{Lighted\-Face\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}Lighted\-Face\-Shader\-::\-Lighted\-Face\-Shader (
+\index{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}!Lighted\+Face\+Shader@{Lighted\+Face\+Shader}}
+\index{Lighted\+Face\+Shader@{Lighted\+Face\+Shader}!Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{Lighted\+Face\+Shader(\+Viewport $\ast$vp)}{LightedFaceShader(Viewport *vp)}}]{\setlength{\rightskip}{0pt plus 5cm}Lighted\+Face\+Shader\+::\+Lighted\+Face\+Shader (
 \begin{DoxyParamCaption}
 \item[{{\bf Viewport} $\ast$}]{vp}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{classShipCAD_1_1LightedFaceShader_a2af0e951890116c518c54c8afe978a3a}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classShipCAD_1_1LightedFaceShader_a2af0e951890116c518c54c8afe978a3a}{}\label{classShipCAD_1_1LightedFaceShader_a2af0e951890116c518c54c8afe978a3a}
 
 
-Definition at line 241 of file shader.\-cpp.
+Definition at line 291 of file shader.\+cpp.
 
-\hypertarget{classShipCAD_1_1LightedFaceShader_a6ce7e752639fd1c8dd12b721279ac814}{\index{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader@{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader}!$\sim$\-Lighted\-Face\-Shader@{$\sim$\-Lighted\-Face\-Shader}}
-\index{$\sim$\-Lighted\-Face\-Shader@{$\sim$\-Lighted\-Face\-Shader}!ShipCAD::LightedFaceShader@{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader}}
-\subsubsection[{$\sim$\-Lighted\-Face\-Shader}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader\-::$\sim$\-Lighted\-Face\-Shader (
+\index{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}!````~Lighted\+Face\+Shader@{$\sim$\+Lighted\+Face\+Shader}}
+\index{````~Lighted\+Face\+Shader@{$\sim$\+Lighted\+Face\+Shader}!Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{$\sim$\+Lighted\+Face\+Shader()}{~LightedFaceShader()}}]{\setlength{\rightskip}{0pt plus 5cm}virtual Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader\+::$\sim$\+Lighted\+Face\+Shader (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classShipCAD_1_1LightedFaceShader_a6ce7e752639fd1c8dd12b721279ac814}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1LightedFaceShader_a6ce7e752639fd1c8dd12b721279ac814}{}\label{classShipCAD_1_1LightedFaceShader_a6ce7e752639fd1c8dd12b721279ac814}
 
 
-Definition at line 133 of file shader.\-h.
+Definition at line 140 of file shader.\+h.
 
 
 
 \subsection{Member Function Documentation}
-\hypertarget{classShipCAD_1_1LightedFaceShader_abd4fe9c01a7e09aa46f3017f014018a8}{\index{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader@{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader}!render\-Mesh@{render\-Mesh}}
-\index{render\-Mesh@{render\-Mesh}!ShipCAD::LightedFaceShader@{Ship\-C\-A\-D\-::\-Lighted\-Face\-Shader}}
-\subsubsection[{render\-Mesh}]{\setlength{\rightskip}{0pt plus 5cm}void Lighted\-Face\-Shader\-::render\-Mesh (
+\index{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}!render\+Mesh@{render\+Mesh}}
+\index{render\+Mesh@{render\+Mesh}!Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{render\+Mesh(\+Q\+Color mesh\+Color, Q\+Vector$<$ Q\+Vector3\+D $>$ \&vertices, Q\+Vector$<$ Q\+Vector3\+D $>$ \&normals)}{renderMesh(QColor meshColor, QVector< QVector3D > &vertices, QVector< QVector3D > &normals)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lighted\+Face\+Shader\+::render\+Mesh (
 \begin{DoxyParamCaption}
-\item[{Q\-Color}]{mesh\-Color, }
-\item[{Q\-Vector$<$ Q\-Vector3\-D $>$ \&}]{vertices, }
-\item[{Q\-Vector$<$ Q\-Vector3\-D $>$ \&}]{normals}
+\item[{Q\+Color}]{mesh\+Color, }
+\item[{Q\+Vector$<$ Q\+Vector3D $>$ \&}]{vertices, }
+\item[{Q\+Vector$<$ Q\+Vector3D $>$ \&}]{normals}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classShipCAD_1_1LightedFaceShader_abd4fe9c01a7e09aa46f3017f014018a8}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classShipCAD_1_1LightedFaceShader_abd4fe9c01a7e09aa46f3017f014018a8}{}\label{classShipCAD_1_1LightedFaceShader_abd4fe9c01a7e09aa46f3017f014018a8}
 
 
-Implements \hyperlink{classShipCAD_1_1FaceShader_adb71f051d1481058fe905f985a7166c1}{Ship\-C\-A\-D\-::\-Face\-Shader}.
-
-
-
-Definition at line 253 of file shader.\-cpp.
+Implements \hyperlink{classShipCAD_1_1FaceShader_adb71f051d1481058fe905f985a7166c1}{Ship\+C\+A\+D\+::\+Face\+Shader}.
 
 
 
-The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+Definition at line 314 of file shader.\+cpp.
+
+\index{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}!set\+Matrices@{set\+Matrices}}
+\index{set\+Matrices@{set\+Matrices}!Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader@{Ship\+C\+A\+D\+::\+Lighted\+Face\+Shader}}
+\subsubsection[{\texorpdfstring{set\+Matrices(const Q\+Matrix4x4 \&proj, const Q\+Matrix4x4 \&view, const Q\+Matrix4x4 \&world)}{setMatrices(const QMatrix4x4 &proj, const QMatrix4x4 &view, const QMatrix4x4 &world)}}]{\setlength{\rightskip}{0pt plus 5cm}void Lighted\+Face\+Shader\+::set\+Matrices (
+\begin{DoxyParamCaption}
+\item[{const Q\+Matrix4x4 \&}]{proj, }
+\item[{const Q\+Matrix4x4 \&}]{view, }
+\item[{const Q\+Matrix4x4 \&}]{world}
+\end{DoxyParamCaption}
+)}\hypertarget{classShipCAD_1_1LightedFaceShader_a0a5515fd6bcaf380de2ff15b42261f83}{}\label{classShipCAD_1_1LightedFaceShader_a0a5515fd6bcaf380de2ff15b42261f83}
+
+
+Definition at line 306 of file shader.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Ship\-C\-A\-Dlib/\hyperlink{shader_8h}{shader.\-h}\item 
-Ship\-C\-A\-Dlib/\hyperlink{shader_8cpp}{shader.\-cpp}\end{DoxyCompactItemize}
+Ship\+C\+A\+Dlib/\hyperlink{shader_8h}{shader.\+h}\item 
+Ship\+C\+A\+Dlib/\hyperlink{shader_8cpp}{shader.\+cpp}\end{DoxyCompactItemize}

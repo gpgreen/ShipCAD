@@ -1,59 +1,69 @@
-\hypertarget{subdivedge_8h}{\section{Ship\-C\-A\-Dlib/subdivedge.h File Reference}
-\label{subdivedge_8h}\index{Ship\-C\-A\-Dlib/subdivedge.\-h@{Ship\-C\-A\-Dlib/subdivedge.\-h}}
-}
+\hypertarget{subdivedge_8h}{}\section{Ship\+C\+A\+Dlib/subdivedge.h File Reference}
+\label{subdivedge_8h}\index{Ship\+C\+A\+Dlib/subdivedge.\+h@{Ship\+C\+A\+Dlib/subdivedge.\+h}}
 {\ttfamily \#include $<$iosfwd$>$}\\*
 {\ttfamily \#include $<$vector$>$}\\*
-{\ttfamily \#include $<$Q\-Object$>$}\\*
-{\ttfamily \#include $<$Q\-Color$>$}\\*
-{\ttfamily \#include \char`\"{}subdivbase.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$Q\+Object$>$}\\*
+{\ttfamily \#include $<$Q\+Color$>$}\\*
+{\ttfamily \#include \char`\"{}subdivbase.\+h\char`\"{}}\\*
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \hyperlink{classShipCAD_1_1SubdivisionEdge}{Ship\-C\-A\-D\-::\-Subdivision\-Edge}
+class \hyperlink{classShipCAD_1_1SubdivisionEdge}{Ship\+C\+A\+D\+::\+Subdivision\+Edge}
 \item 
-class \hyperlink{classShipCAD_1_1SubdivisionControlEdge}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Edge}
+class \hyperlink{classShipCAD_1_1SubdivisionControlEdge}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Edge}
 \end{DoxyCompactItemize}
 \subsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{namespaceShipCAD}{Ship\-C\-A\-D}
+ \hyperlink{namespaceShipCAD}{Ship\+C\+AD}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::vector$<$ Subdivision\+Edge $\ast$ $>$\+::iterator \hyperlink{namespaceShipCAD_a7767250c742ad6114e3f076743d18461}{Ship\+C\+A\+D\+::subdivedge\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Edge $\ast$ $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_a42f420b898cf32478eeab87aa058e024}{Ship\+C\+A\+D\+::const\+\_\+subdivedge\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Control\+Edge $\ast$ $>$\+::iterator \hyperlink{namespaceShipCAD_a622b92c46380228698ff1e0e1d78aa3a}{Ship\+C\+A\+D\+::subdivctledge\+\_\+iter}
+\item 
+typedef std\+::vector$<$ Subdivision\+Control\+Edge $\ast$ $>$\+::const\+\_\+iterator \hyperlink{namespaceShipCAD_af78c33b3ea7d42b713572baf86e2b01a}{Ship\+C\+A\+D\+::const\+\_\+subdivctledge\+\_\+iter}
 \end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\-::ostream \& \hyperlink{subdivedge_8h_a202b132b67c2f627ca529138155357d1}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionEdge}{Ship\-C\-A\-D\-::\-Subdivision\-Edge} \&edge)
+std\+::ostream \& \hyperlink{subdivedge_8h_a202b132b67c2f627ca529138155357d1}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionEdge}{Ship\+C\+A\+D\+::\+Subdivision\+Edge} \&edge)
 \item 
-std\-::ostream \& \hyperlink{subdivedge_8h_abe9c225e8d363635122150c0bcf855d4}{operator$<$$<$} (std\-::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlEdge}{Ship\-C\-A\-D\-::\-Subdivision\-Control\-Edge} \&edge)
+std\+::ostream \& \hyperlink{subdivedge_8h_abe9c225e8d363635122150c0bcf855d4}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{classShipCAD_1_1SubdivisionControlEdge}{Ship\+C\+A\+D\+::\+Subdivision\+Control\+Edge} \&edge)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{namespaceShipCAD_ad5a157bd082e37a863f05b7c54a1d7cc}{Ship\-C\-A\-D\-::g\-\_\-edge\-\_\-verbose} = true
+bool \hyperlink{namespaceShipCAD_ad5a157bd082e37a863f05b7c54a1d7cc}{Ship\+C\+A\+D\+::g\+\_\+edge\+\_\+verbose} = true
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\hypertarget{subdivedge_8h_a202b132b67c2f627ca529138155357d1}{\index{subdivedge.\-h@{subdivedge.\-h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivedge.h@{subdivedge.\-h}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\index{subdivedge.\+h@{subdivedge.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivedge.\+h@{subdivedge.\+h}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Edge \&edge)}{operator<<(std::ostream &os, const ShipCAD::SubdivisionEdge &edge)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Edge} \&}]{edge}
+\item[{std\+::ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Edge} \&}]{edge}
 \end{DoxyParamCaption}
-)}}\label{subdivedge_8h_a202b132b67c2f627ca529138155357d1}
+)}\hypertarget{subdivedge_8h_a202b132b67c2f627ca529138155357d1}{}\label{subdivedge_8h_a202b132b67c2f627ca529138155357d1}
 
 
-Definition at line 360 of file subdivedge.\-cpp.
+Definition at line 417 of file subdivedge.\+cpp.
 
-\hypertarget{subdivedge_8h_abe9c225e8d363635122150c0bcf855d4}{\index{subdivedge.\-h@{subdivedge.\-h}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!subdivedge.h@{subdivedge.\-h}}
-\subsubsection[{operator$<$$<$}]{\setlength{\rightskip}{0pt plus 5cm}std\-::ostream\& operator$<$$<$ (
+\index{subdivedge.\+h@{subdivedge.\+h}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!subdivedge.\+h@{subdivedge.\+h}}
+\subsubsection[{\texorpdfstring{operator$<$$<$(std\+::ostream \&os, const Ship\+C\+A\+D\+::\+Subdivision\+Control\+Edge \&edge)}{operator<<(std::ostream &os, const ShipCAD::SubdivisionControlEdge &edge)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::ostream\& operator$<$$<$ (
 \begin{DoxyParamCaption}
-\item[{std\-::ostream \&}]{os, }
-\item[{const {\bf Ship\-C\-A\-D\-::\-Subdivision\-Control\-Edge} \&}]{edge}
+\item[{std\+::ostream \&}]{os, }
+\item[{const {\bf Ship\+C\+A\+D\+::\+Subdivision\+Control\+Edge} \&}]{edge}
 \end{DoxyParamCaption}
-)}}\label{subdivedge_8h_abe9c225e8d363635122150c0bcf855d4}
+)}\hypertarget{subdivedge_8h_abe9c225e8d363635122150c0bcf855d4}{}\label{subdivedge_8h_abe9c225e8d363635122150c0bcf855d4}
 
 
-Definition at line 699 of file subdivedge.\-cpp.
+Definition at line 743 of file subdivedge.\+cpp.
 

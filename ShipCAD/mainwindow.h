@@ -194,22 +194,18 @@ private slots:
     void enableActions();
 
     void updateVisibilityActions();
+
     /*! \brief the list of recent files has been changed
      */
     void changeRecentFiles();
+
     /*! \brief open a "recent file"
      */
     void openRecentFile();
+
     /*! \brief undo data update
      */
     void updateUndoData();
-    /*! \brief show preference dialog
-     */
-    void showPreferences();
-
-    /*! \brief selected items has changed
-     */
-    void changeSelectedItems();
 
     /*! \brief check the model
      */

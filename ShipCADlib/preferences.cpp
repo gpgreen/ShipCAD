@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -27,6 +27,7 @@
  *                                                                                             *
  *#############################################################################################*/
 
+#include <QSettings>
 #include "preferences.h"
 #include "shipcadmodel.h"
 #include "subdivsurface.h"
@@ -37,14 +38,15 @@ using namespace std;
 Preferences::Preferences(ShipCADModel* owner)
     : _owner(owner), _point_size(4), _max_undo_memory(20)
 {
-	resetColors();
+    resetColors();
+    readSettings();
 }
 
 void Preferences::clear()
 {
-	resetColors();
+    resetColors();
     _point_size = 4;
-	_max_undo_memory = 20;
+    _max_undo_memory = 20;
 }
 
 void Preferences::resetColors()
@@ -94,7 +96,6 @@ void Preferences::setSurfaceColors(SubdivisionSurface& surface)
     surface._curvature_color = _curvature_plot_color;
     surface._control_curve_color = _control_curve_color;
     surface._zebra_color = _zebra_stripe_color;
-    
 }
 
 void Preferences::getColorDialogMap(map<int, ColorChanger>& colors)
@@ -125,3 +126,54 @@ void Preferences::getColorDialogMap(map<int, ColorChanger>& colors)
     colors.insert(make_pair(23, ColorChanger(&_zebra_stripe_color)));
 }
 
+void Preferences::readSettings()
+{
+    // the colors
+    map<int, ColorChanger> colors;
+    getColorDialogMap(colors);
+    QSettings settings;
+    int size = settings.beginReadArray("preferences/color");
+    if (size > 0) {
+        for (int i=0; i<size && i<colors.size(); ++i) {
+            settings.setArrayIndex(i);
+            int red = settings.value("red").toInt();
+            int green = settings.value("green").toInt();
+            int blue = settings.value("blue").toInt();
+            map<int, ColorChanger>::iterator j = colors.find(i);
+            if (j == colors.end())
+                continue;
+            ColorChanger& changer = (*j).second;
+            *(changer.setColor) = QColor(red, green, blue);
+        }
+    }
+    settings.endArray();
+    // the rest
+    if (settings.contains("preferences/pointsize"))
+        _point_size = settings.value("preferences/pointsize").toInt();
+    if (settings.contains("preferences/maxundomemory"))
+        _max_undo_memory = settings.value("preferences/maxundomemory").toInt();
+    
+}
+
+void Preferences::saveSettings() const
+{
+    // colors
+    map<int, ColorChanger> colors;
+    const_cast<Preferences*>(this)->getColorDialogMap(colors);
+    QSettings settings;
+    settings.beginWriteArray("preferences/color");
+    for (int i=0; i<colors.size(); ++i) {
+        settings.setArrayIndex(i);
+        map<int, ColorChanger>::iterator j = colors.find(i);
+        if (j == colors.end())
+            continue;
+        ColorChanger& changer = (*j).second;
+        settings.setValue("red", (*changer.setColor).red());
+        settings.setValue("green", (*changer.setColor).green());
+        settings.setValue("blue", (*changer.setColor).blue());
+    }
+    settings.endArray();
+    // the rest
+    settings.setValue("preferences/pointsize", _point_size);
+    settings.setValue("preferences/maxundomemory", static_cast<int>(_max_undo_memory));
+}

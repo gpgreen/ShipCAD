@@ -1,6 +1,6 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>								   *
+ *    ShipCAD										       *
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>				       *
  *                                                                                             *
  *    This program is free software; you can redistribute it and/or modify it under            *
  *    the terms of the GNU General Public License as published by the                          *
@@ -38,8 +38,6 @@ public:
     explicit PreferencesDialog(QWidget *parent = 0);
     ~PreferencesDialog();
 
-    void initialize(ShipCAD::PreferencesDialogData* data);
-
 signals:
     
     void exeChooseColorDialog(ShipCAD::ChooseColorDialogData& data);
@@ -47,6 +45,7 @@ signals:
                                                                    
 public slots:
 
+    void initialize(ShipCAD::PreferencesDialogData* data);
     void colorClicked(int id);
     
 protected:

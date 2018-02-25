@@ -161,10 +161,6 @@ namespace ShipCAD {
         {return _simplify_intersections;}
 	void setSimplifyIntersections(bool set);
 
-        QColor getUnderWaterColor() const
-        { return _underwater_color;}
-	void setUnderWaterColor(QColor col);
-
         unit_type_t getUnits() const {return _units;}
         /*! \brief set the units in the model. Scales the entire model appropriately
          *
@@ -216,7 +212,6 @@ namespace ShipCAD {
 	QString _file_created_by;
 	bool _shade_underwater_ship;
 	bool _save_preview;
-	QColor _underwater_color;
 	unit_type_t _units;
 	bool _simplify_intersections;
 	hydrostatic_coeff_t _hydrostatic_coefficients;

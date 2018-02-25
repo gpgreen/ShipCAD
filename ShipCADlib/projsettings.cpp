@@ -298,14 +298,6 @@ void ProjectSettings::setSimplifyIntersections(bool set)
     }
 }
 
-void ProjectSettings::setUnderWaterColor(QColor col)
-{
-    if (_underwater_color != col) {
-        _underwater_color = col;
-        _owner->setFileChanged(true);
-    }
-}
-
 void ProjectSettings::changeUnitsInSettingsOnly(unit_type_t unit)
 {
     double unit_conversion_factor;
@@ -373,7 +365,6 @@ void ProjectSettings::clear()
     _appendage_coefficient = 1.0; // default 1.0, typical values for ships to compensate for appendices and shellplate = 1.0005
     _main_particulars_has_been_set = false;
     _shade_underwater_ship = true;
-    _underwater_color = _owner->getPreferences().getUnderwaterColor();
     _units = fuMetric;
     _use_default_mainframe_location = true;
     _mainframe_location = 0.0;
@@ -422,7 +413,9 @@ void ProjectSettings::loadBinary(FileBuffer& source, QImage* img)
     source.load(_water_density);
     source.load(_appendage_coefficient);
     source.load(_shade_underwater_ship);
-    source.load(_underwater_color);
+    QColor uc;
+    source.load(uc);
+    _owner->getPreferences().setUnderwaterColor(uc);
     quint32 n;
     source.load(n);
     _units = static_cast<unit_type_t>(n);
@@ -493,7 +486,7 @@ void ProjectSettings::saveBinary(FileBuffer& dest)
         dest.add(_water_density);
         dest.add(_appendage_coefficient);
         dest.add(_shade_underwater_ship);
-        dest.add(_underwater_color);
+        dest.add(_owner->getPreferences().getUnderwaterColor());
         dest.add(static_cast<quint32>(_units));
         if (_owner->getFileVersion() >= fv160) {
             dest.add(_use_default_mainframe_location);

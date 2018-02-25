@@ -1,6 +1,6 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>								   *
+ *    ShipCAD										       *
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>				       *
  *                                                                                             *
  *    This program is free software; you can redistribute it and/or modify it under            *
  *    the terms of the GNU General Public License as published by the                          *
@@ -18,6 +18,7 @@
  *#############################################################################################*/
 
 #include <stdexcept>
+#include <iostream>
 #include <QIntValidator>
 #include "preferencesdialog.h"
 #include "ui_preferencesdialog.h"
@@ -96,10 +97,12 @@ void PreferencesDialog::initialize(ShipCAD::PreferencesDialogData* data)
     map<int, ColorChanger>::iterator i = _data->colors.begin();
     for (size_t j=0; i!=_data->colors.end(); ++i,++j)
         _color_views[j].second->setColor((*i).second.orig);
+    cout << "PreferencesDialog::initialize" << endl;
 }
 
 void PreferencesDialog::colorClicked(int id)
 {
+    cout << "PreferencesDialog::colorClicked:" << id << endl;
     map<int, ColorChanger>::iterator i = _data->colors.find(id);
     if (i == _data->colors.end())
         throw range_error("id not found in color map");
@@ -107,7 +110,11 @@ void PreferencesDialog::colorClicked(int id)
     ChooseColorDialogData cdata(tr("Choose color"), *(changer.setColor));
     emit exeChooseColorDialog(cdata);
     if (cdata.accepted) {
+        _color_views[id].second->setColor(cdata.chosen);
         *(changer.setColor) = cdata.chosen;
+        cout << "PreferencesDialog::colorClicked:" << id << " and changed:"
+             << cdata.chosen.name().toStdString() << endl;
+        update();
     }
 }
 

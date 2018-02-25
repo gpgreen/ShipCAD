@@ -114,6 +114,8 @@ public:
         {return _normal_color;}
     QColor getUnderwaterColor() const
         {return _underwater_color;}
+    void setUnderwaterColor(QColor c)
+        {_underwater_color = c;}
     QColor getViewportColor() const
         {return _viewport_color;}
     QColor getLeakPointColor() const
@@ -131,6 +133,9 @@ public:
 
     void clear();
 
+    void readSettings();
+    void saveSettings() const;
+    
 private:
 
     ShipCADModel* _owner;

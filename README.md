@@ -24,29 +24,19 @@ Main Window:
 Dialogs:
   DXF Export
   Background Blending
-  Control Point Form - Done
   Crosscurves
   Cylinder
   Expanded Plates
   Hullform - Partial, missing view window operations, captions, background image
   Hydrostatics
   Hydrostatics results
-  Insert Plane - Done
-  Intersection - Done
   Keel Wizard
   Lackenby
-  Layers - Done
   Linesplan
   Michlet Output
-  Mirror Plane - Done
-  New Model - Done
-  Preferences - Done
-  Project Settings - Done
   Resistance Delft
   Resistance Kaper
-  Rotate - Done
   Save Image
-  Select Layer - Done
   Splash
   Undo History
   
@@ -55,9 +45,6 @@ Controller:
   all import/export methods except native FreeShip
   Flowlines
   import frames
-  intersection dialogs
-  import/delete markers
-  check model
   lackenby transformation
   undo/redo/undo history
   add cylinder
@@ -74,9 +61,6 @@ Flowline:
 
 Resistance:
   all methods
-
-Preferences:
-  resetColors, persistence
 
 BackgroundImage:
   updateData, updateViews

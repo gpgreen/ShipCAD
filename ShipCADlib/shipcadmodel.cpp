@@ -211,7 +211,6 @@ void ShipCADModel::rebuildModel(bool redo_intersections)
     ProjectSettings& ps = getProjectSettings();
     _surface.setShadeUnderWater(ps.isShadeUnderwaterShip());
     _surface.setMainframeLocation(ps.getMainframeLocation());
-    _surface.setUnderWaterColor(ps.getUnderWaterColor());
     if (ps.isShadeUnderwaterShip()) {
         Plane pln(0, 0, 1.0f, -(findLowestHydrostaticsPoint() + ps.getDraft()));
         _surface.setWaterlinePlane(pln);

@@ -116,7 +116,6 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(_controller, SIGNAL(modelLoaded()), SIGNAL(viewportRender()));
     // selection change
     connect(_controller, SIGNAL(changeSelectedItems()), SLOT(enableActions()));
-    connect(_controller, SIGNAL(changeSelectedItems()), SLOT(changeSelectedItems()));
     // show dialogs
     connect(_controller,
             SIGNAL(exeInsertPlanePointsDialog(ShipCAD::InsertPlaneDialogData&)),
@@ -1296,11 +1295,6 @@ void MainWindow::updateUndoData()
     _undoMemLabel->setText(tr("undo memory: %1").arg(mem));
 }
 
-void MainWindow::showPreferences()
-{
-
-}
-
 void
 MainWindow::wireFrame()
 {
@@ -1641,6 +1635,8 @@ void MainWindow::executePreferencesDialog(PreferencesDialogData* data)
                 this, SLOT(executeChooseColorDialog(ShipCAD::ChooseColorDialogData&)));
         connect(_preferencesdialog, SIGNAL(reset()),
                 _controller, SLOT(resetPreferences()));
+        connect(_controller, SIGNAL(resetPreferences(ShipCAD::PreferencesDialogData*)),
+                _preferencesdialog, SLOT(initialize(ShipCAD::PreferencesDialogData*)));
     }
     _preferencesdialog->initialize(data);
 
@@ -1649,11 +1645,6 @@ void MainWindow::executePreferencesDialog(PreferencesDialogData* data)
     data->accepted = (result == QDialog::Accepted);
 
     cout << "execute preferences dialog:" << data->accepted << endl;
-}
-
-void MainWindow::changeSelectedItems()
-{
-    // TODO
 }
 
 void MainWindow::checkModel()

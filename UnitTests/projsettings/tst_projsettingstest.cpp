@@ -56,7 +56,6 @@ ProjectSettings* ProjsettingsTest::getNonDefault()
     settings->setDraft(1.0f);
     settings->setAppendageCoefficient(1.02f);
     settings->setShadeUnderwaterShip(false);
-    settings->setUnderWaterColor(Qt::black);
     settings->setUnits(fuImperial);
     // set water density after setting units, as that changes it
     settings->setWaterDensity(1.2f);
@@ -111,7 +110,6 @@ void ProjsettingsTest::testWriteRead()
     QVERIFY(settingsW->getWaterDensity() == settingsR->getWaterDensity());
     QVERIFY(settingsW->getAppendageCoefficient() == settingsR->getAppendageCoefficient());
     QVERIFY(settingsW->isShadeUnderwaterShip() == settingsR->isShadeUnderwaterShip());
-    QVERIFY(settingsW->getUnderWaterColor() == settingsR->getUnderWaterColor());
     QVERIFY(settingsW->getUnits() == settingsR->getUnits());
     QVERIFY(settingsW->getMainframeLocation() == settingsR->getMainframeLocation());
     QVERIFY(settingsW->isDisableModelCheck() == settingsR->isDisableModelCheck());

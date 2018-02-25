@@ -1853,7 +1853,7 @@ void Controller::setActiveLayerColor()
 // Main.pas:952
 void Controller::setActiveLayerColor(const QColor& color)
 {
-	cout << "Controller::setActiveLayerColor with color" << endl;
+    cout << "Controller::setActiveLayerColor with color" << endl;
     getSurface()->getActiveLayer()->setColor(color);
     getModel()->setBuild(false);
     getModel()->setFileChanged(true);
@@ -1868,7 +1868,8 @@ void Controller::editPreferences()
     emit exePreferencesDialog(&data);
     if (data.accepted) {
         uo->accept();
-        getModel()->setBuild(false);
+        getModel()->getPreferences().saveSettings();
+        getModel()->rebuildModel(true);
         getModel()->setFileChanged(true);
         emit modifiedModel();
     } else {
@@ -1899,7 +1900,7 @@ void Controller::editProjectSettings()
         }
         getModel()->getProjectSettings().copy_from_dialog(data.settings);
         getModel()->getVisibility().copy_from_dialog(data.visibility);
-        getModel()->setBuild(false);
+        getModel()->rebuildModel(true);
         getModel()->setFileChanged(true);
         emit modifiedModel();
     } else {

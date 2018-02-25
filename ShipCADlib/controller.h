@@ -109,8 +109,8 @@ signals:
     void changeSelectedItems();
 
     /*! \brief signal when model has changes
-	 */
-	void modifiedModel();
+     */
+    void modifiedModel();
 
     /*! \brief signal when new model loaded
      */
@@ -589,19 +589,19 @@ public slots:
     void setActiveLayer(int layernum);
     
     /*! \brief dialog to create keels and rudders
-	 */
-	void keelAndRudderWizard();
+     */
+    void keelAndRudderWizard();
 
     /*! \brief add a cylinder to model
-	 */
-	void addCylinder();
-
+     */
+    void addCylinder();
+    
     /*! \brief set active layer color
-	 */
-	void setActiveLayerColor();
+     */
+    void setActiveLayerColor();
 
     /*! \brief set active layer color with specified color, no undo
-	 */
+     */
     void setActiveLayerColor(const QColor& color);
 
     /*! \brief edit preferences

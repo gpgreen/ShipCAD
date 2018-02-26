@@ -51,7 +51,7 @@ class SubdivisionPoint;
     
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief class to store SubdivisionPoint to unrolled point mapping
+/*! \brief Store SubdivisionPoint to unrolled point mapping
  */
 struct PatchPoints
 {
@@ -65,7 +65,7 @@ typedef std::vector<PatchPoints>::const_iterator const_patchpt_iter;
 
 enum PolygonOrientation {poCCW, poCW};
     
-/*! \brief base class for all non-surface drawable elements
+/*! \brief Portion of developed surface
  */
 class DevelopedPatch : public QObject
 {

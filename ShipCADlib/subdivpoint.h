@@ -200,7 +200,7 @@ typedef std::vector<SubdivisionPoint*>::const_iterator const_subdivpt_iter;
     
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief Control point
+/*! \brief 3D Control point
  *
  * Subdivision Surfaces consist of control points which define the surface contour
  *

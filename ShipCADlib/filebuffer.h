@@ -47,7 +47,7 @@ struct JPEGImage;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief in-memory buffer of data for a binary file (FREE!Ship format)
+/*! \brief in-memory buffer for a binary file (FREE!Ship format)
  */
 class FileBuffer : public QObject
 {

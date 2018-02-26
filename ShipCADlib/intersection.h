@@ -142,7 +142,7 @@ private:
     bool _use_hydrostatic_surfaces_only;
 };
 
-/*! \brief comparison class for sorting intersections in an IntersectionVector
+/*! \brief sorting intersections in an IntersectionVector
  */
 struct IntersectionSorter {
     bool operator() (Intersection* i, Intersection* j)
@@ -151,6 +151,8 @@ struct IntersectionSorter {
     }
 };
 
+/*! \brief find intersections in an IntersectionVector
+ */
 struct IntersectionFinder {
     bool operator () (Intersection* i) {
         return (i->getPlane().d()==_d);

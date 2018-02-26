@@ -41,7 +41,7 @@ struct PickRay;
  
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief Abstract class to calculate view, world matrices and operations using those for a viewport
+/*! \brief Viewport matrices
  */
 class ViewportView
 {
@@ -139,7 +139,7 @@ protected:
         
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief class to calculate view, world matrices and operations using those for a Perspective viewport
+/*! \brief calculate view, world matrices and operations for a Perspective viewport
  */
 class ViewportViewPerspective : public ViewportView
 {
@@ -179,7 +179,7 @@ private:
         
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief class to calculate view, world matrices and operations using those for a Plan viewport
+/*! \brief calculate view, world matrices and operations for a Plan viewport
  */
 class ViewportViewPlan : public ViewportView
 {
@@ -199,7 +199,7 @@ private:
         
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief class to calculate view, world matrices and operations using those for a Profile viewport
+/*! \brief calculate view, world matrices and operations for a Profile viewport
  */
 class ViewportViewProfile : public ViewportView
 {

@@ -63,7 +63,7 @@ public:
 
     /*! \brief destructor
      */
-	~Controller() {}
+    ~Controller() {}
 
     /*! \brief get the model this is controlling
      */
@@ -95,13 +95,13 @@ public:
     
 signals:
 
-	/*! \brief signal when undo data is changed
-	 */
-	void updateUndoData();
+    /*! \brief signal when undo data is changed
+     */
+    void updateUndoData();
 
     /*! \brief signal when active layer changes
      */
-	void changeActiveLayer();
+    void changeActiveLayer();
 
     /*! \brief signal when selection of items changes
      * signal isn't required when modifiedModel is issued
@@ -199,184 +199,184 @@ public slots:
     void openBackgroundImage();
 
     /*! \brief add a new controlcurve
-	 */
-	void addCurve();
+     */
+    void addCurve();
 
     /*! \brief remove an edge by replacing the two connected faces with one face
-	 */
-	void collapseEdges();
+     */
+    void collapseEdges();
 
     /*! \brief create a new edge by connecting 2 points belonging to the same face
-	 */
-	void connectEdges();
+     */
+    void connectEdges();
 
     /*! \brief switch selected edges between normal or crease edges
-	 */
-	void creaseEdges();
+     */
+    void creaseEdges();
 
     /*! \brief extrude selected boundary edge
-	 */
-	void extrudeEdges();
+     */
+    void extrudeEdges();
 
     /*! \brief create new controlpoints by splitting control edge into two
-	 */
-	void splitEdges();
+     */
+    void splitEdges();
 
     /*! \brief assemble
-	 */
-	void assembleFace();
+     */
+    void assembleFace();
 
     /*! \brief delete all faces on the starboard side of the hull
-	 */
-	void deleteNegativeFaces();
+     */
+    void deleteNegativeFaces();
 
     /*! \brief invert normal-direction of all selected faces
-	 */
-	void flipFaces();
+     */
+    void flipFaces();
 
     /*! \brief mirror all selected faces on a plane
-	 */
-	void mirrorPlaneFace();
+     */
+    void mirrorPlaneFace();
 
     /*! \brief create a new control face from selected control points
-	 */
-	void newFace();
+     */
+    void newFace();
 
     /*! \brief rotate selected faces around an axis
-	 */
-	void rotateFaces();
+     */
+    void rotateFaces();
 
     /*! \brief scale selected faces
-	 */
-	void scaleFaces();
+     */
+    void scaleFaces();
 
     /*! \brief move selected faces
-	 */
-	void moveFaces();
+     */
+    void moveFaces();
 
     /*! \brief export stations to archimedes
-	 */
-	void exportFileArchimedes();
+     */
+    void exportFileArchimedes();
 
     /*! \brief export coordinates of controlpoints to a textfile
-	 */
-	void exportCoordinates();
+     */
+    void exportCoordinates();
 
     /*! \brief export intersections to DXF file as 2D polylines
-	 */
-	void export2DPolylinesDXF();
+     */
+    void export2DPolylinesDXF();
 
     /*! \briefbrief export all lines to a 3D DXF file as polylines
-	 */
-	void export3DPolylinesDXF();
+     */
+    void export3DPolylinesDXF();
 
     /*! \brief export all faces to a 3D DXF file
-	 */
-	void exportFacesDXF();
+     */
+    void exportFacesDXF();
 
     /*! \brief export Freeship exchange format (FEF) file
-	 */
-	void exportFEF();
+     */
+    void exportFEF();
 
     /*! \brief export GHS file format
-	 */
-	void exportGHS();
+     */
+    void exportGHS();
 
     /*! \brief export geometry as a part file
-	 */
-	void exportPart(const QString& filename);
+     */
+    void exportPart(const QString& filename);
 
     /*! \brief export file for CFD program Michlet
-	 */
-	void exportMichlet();
+     */
+    void exportMichlet();
 
     /*! \brief import file from CFD program Michlet
-	 */
-	void importMichletWaves();
+     */
+    void importMichletWaves();
 
     /*! \brief export model as wavefront .obj file
-	 */
-	void exportObj();
+     */
+    void exportObj();
 
     /*! \brief export intersections as a textfile of 3D points
-	 */
-	void exportOffsets();
+     */
+    void exportOffsets();
 
     /*! \brief export surface to STL file
-	 */
-	void exportSTL();
+     */
+    void exportSTL();
 
     /*! \brief export an IGES file
      */
     void exportIGES();
 
     /*! \brief import a Carene XYZ file, create multi-chine boat with developable surfaces
-	 */
-	void importCarene();
+     */
+    void importCarene();
 
     /*! \brief import chines from a textfile and fit a surface through them
      *
      * \param filename path of file containing chines
-	 */
-	void importChines(const QString& filename);
+     */
+    void importChines(const QString& filename);
 
     /*! \brief import a Freeship exchange format (FEF) file
-	 */
-	void importFEF();
+     */
+    void importFEF();
 
     /*! \brief import a file created with Carlsson's Hulls program
-	 */
+     */
     void importHull();
 
     /*! \brief import a partfile and add to current geometry
      *
      * \param filename the filename of the part to load
-	 */
+     */
     void importPart(const QString& filename);
 
     /*! \brief import a polycad file
-	 */
-	void importPolycad();
+     */
+    void importPolycad();
 
     /*! \brief import a number of curves and fit a surface
-	 */
-	void importSurface();
+     */
+    void importSurface();
 
     /*! \brief import a VRML 1.0 file
-	 */
-	void importVRML();
+     */
+    void importVRML();
 
     /*! \brief load a FREE!Ship file by name
-	 */
-	void loadFile(const QString& filename);
+     */
+    void loadFile(const QString& filename);
 
     /*! \brief save a FREE!Ship file without asking for filename
-	 */
-	void saveFile();
+     */
+    void saveFile();
 
     /*! \brief save a FREE!Ship file with given filename
-	 */
-	void saveFileAs(const QString& filename);
+     */
+    void saveFileAs(const QString& filename);
 
     /*! \brief
-	 */
+     */
     void addFlowline(const QVector2D& source, Viewport& vp);
 
     /*! \brief calculate hydrostatics
-	 *
-	 * \param draft draft of calculation
-	 * \param heel_angle angle of heel for calculation
-	 * \param trim trim for calculation
-	 */
-	void calculateHydrostatics();
-
+     *
+     * \param draft draft of calculation
+     * \param heel_angle angle of heel for calculation
+     * \param trim trim for calculation
+     */
+    void calculateHydrostatics();
+    
     /*! \brief calculate crosscurves
-	 */
-	void crossCurvesHydrostatics();
+     */
+    void crossCurvesHydrostatics();
 
     /*! \brief calculate a range of hydrostatics
-	 */
-	void hydrostaticsDialog();
+     */
+    void hydrostaticsDialog();
 
     /*! \brief Load a bodyplan and try to fit surface to it
      */

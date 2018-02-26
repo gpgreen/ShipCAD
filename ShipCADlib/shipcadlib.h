@@ -207,7 +207,7 @@ struct SurfaceCheckResult
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief struct to hold jpeg image as stored in Free!Ship
+/*! \brief jpeg image as stored in Free!Ship binary file
  */
 struct JPEGImage 
 {

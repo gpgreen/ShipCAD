@@ -1,6 +1,6 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>								   *
+ *    ShipCAD										       *
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>				       *
  *                                                                                             *
  *    This program is free software; you can redistribute it and/or modify it under            *
  *    the terms of the GNU General Public License as published by the                          *
@@ -35,7 +35,8 @@ class SubdivisionLayer;
 class Preferences;
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for insert plane dialog exchange
+
+/*! \brief insert plane dialog exchange
  */
 struct InsertPlaneDialogData
 {
@@ -49,7 +50,8 @@ struct InsertPlaneDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for intersect layer dialog exchange
+
+/*! \brief intersect layer dialog exchange
  */
 struct IntersectLayersDialogData
 {
@@ -61,7 +63,8 @@ struct IntersectLayersDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for extrude edge dialog exchange
+
+/*! \brief extrude edge dialog exchange
  */
 struct ExtrudeEdgeDialogData
 {
@@ -71,7 +74,8 @@ struct ExtrudeEdgeDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for color chooser dialog exchange
+
+/*! \brief color chooser dialog exchange
  */
 struct ChooseColorDialogData
 {
@@ -84,7 +88,8 @@ struct ChooseColorDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for layer properties dialog exchange
+
+/*! \brief layer properties
  */
 struct LayerPropertiesForDialog
 {
@@ -102,6 +107,8 @@ struct LayerPropertiesForDialog
     ShipCAD::LayerProperties layer_properties;
 };
     
+/*! \brief layer properties dialog exchange
+ */
 struct LayerDialogData
 {
     const SubdivisionLayer* active;
@@ -111,13 +118,16 @@ struct LayerDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for layer chooser dialog exchange
+
+/*! \brief enumeration of layer select mode
  */
 enum LayerSelectMode {
     fsFaces = 0,
     fsPoints
 };
     
+/*! \brief layer chooser dialog exchange
+ */
 struct ChooseLayerDialogData
 {
     bool accepted;
@@ -130,9 +140,9 @@ struct ChooseLayerDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for mirror dialog exchange
- */
 
+/*! \brief mirror dialog exchange
+ */
 struct MirrorDialogData
 {
     bool accepted;
@@ -144,9 +154,9 @@ struct MirrorDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for rotate dialog exchange
- */
 
+/*! \brief rotate dialog exchange
+ */
 struct RotateDialogData
 {
     bool accepted;
@@ -158,9 +168,9 @@ struct RotateDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for intersections dialog exchange
- */
 
+/*! \brief intersections dialog exchange
+ */
 struct IntersectionsDialogData
 {
     intersection_type_t intersection_type;
@@ -179,9 +189,9 @@ struct IntersectionsDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for new model dialog exchange
- */
 
+/*! \brief new model dialog exchange
+ */
 struct NewModelDialogData
 {
     bool accepted;
@@ -196,9 +206,9 @@ struct NewModelDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for preferences dialog exchange
- */
 
+/*! \brief original and new color in preferences dialog exchange
+ */
 struct ColorChanger 
 {
     QColor orig;
@@ -208,6 +218,8 @@ struct ColorChanger
     
 };
 
+/*! \brief preferences dialog exchange
+ */
 struct PreferencesDialogData
 {
     bool accepted;
@@ -219,9 +231,9 @@ struct PreferencesDialogData
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
-/*! \brief data structure for project settings dialog exchange
- */
 
+/*! \brief project settings dialog exchange
+ */
 struct ProjectSettingsDialogData
 {
     bool accepted;

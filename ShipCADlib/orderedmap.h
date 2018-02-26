@@ -44,7 +44,7 @@ class OrderedPointMap;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief Iterator class for OrderedPointMap
+/*! \brief Iterator for OrderedPointMap
  */
 class OrderedPointMapIterator
 {
@@ -105,7 +105,7 @@ private:
     
 };
 
-/*! \brief class to keep collection of SubdivisionControlPoints and associated index
+/*! \brief Collection of SubdivisionControlPoints and associated index
  *
  * When selecting points, we need to keep track of the order they are selected. If
  * we just use a vector though, we have linear lookup to see if it belongs to the

@@ -73,11 +73,11 @@ public:
     int getPointSize() const
         {return _point_size;}
 
-	/*! \brief get maximum amount of undo memory
-	 *
-	 * \return max amount of undo memory in mb
-	 */
-	size_t getMaxUndoMemory() const
+    /*! \brief get maximum amount of undo memory
+     *
+     * \return max amount of undo memory in mb
+     */
+    size_t getMaxUndoMemory() const
         {return _max_undo_memory;}
 
     QColor getButtockColor() const

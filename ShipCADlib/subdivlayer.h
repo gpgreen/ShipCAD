@@ -53,7 +53,7 @@ struct LayerProperties;
     
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief add SubdivisionControlFaces can be assigned to a layer
+/*! \brief Layer, collection of SubdivisionControlFaces
  *
  * Each layer has common properties for displaying and calculations for faces belonging
  * to that layer

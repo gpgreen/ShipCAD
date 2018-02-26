@@ -2,7 +2,7 @@
 \label{classOrderedPointMap}\index{Ordered\+Point\+Map@{Ordered\+Point\+Map}}
 
 
-class to keep collection of Subdivision\+Control\+Points and associated index  
+Collection of Subdivision\+Control\+Points and associated index.  
 
 
 
@@ -52,7 +52,7 @@ class \hyperlink{classOrderedPointMap_a7bb53502d3b4a6a62a846b20b2192e6b}{Ordered
 
 
 \subsection{Detailed Description}
-class to keep collection of Subdivision\+Control\+Points and associated index 
+Collection of Subdivision\+Control\+Points and associated index. 
 
 When selecting points, we need to keep track of the order they are selected. If we just use a vector though, we have linear lookup to see if it belongs to the selected set. This class primarily stores the points in a set, so we get O(1) lookup of point membership, and O(n) lookup by order. Since we only check for order when doing a user operation, this is the desired behaviour
 

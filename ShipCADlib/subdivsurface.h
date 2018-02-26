@@ -91,12 +91,15 @@ private:
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-// This is the subdivision surface used for modelling the hull.
-// This is actually a quad-triangle subdivision surface as published in the articles:
-//
-//   "Quad/triangle subdivision" by J. Stam & C. Loop 
-//       http://research.microsoft.com/~cloop/qtEG.pdf
-//   "On C2 triangle/quad subdivision" by Scott Schaeffer & Joe Warren
+/*! \brief Subdivision Surface
+ *
+ * This is the subdivision surface used for modelling the hull.
+ * This is actually a quad-triangle subdivision surface as published in the articles:
+ *
+ *   "Quad/triangle subdivision" by J. Stam & C. Loop 
+ *       http://research.microsoft.com/~cloop/qtEG.pdf
+ *   "On C2 triangle/quad subdivision" by Scott Schaeffer & Joe Warren
+ */
 class SubdivisionSurface : public Entity
 {
     Q_OBJECT

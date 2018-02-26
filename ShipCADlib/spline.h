@@ -48,7 +48,7 @@ class LineShader;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief Represents a spline
+/*! \brief spline entity used in intersections etc
  */
 class Spline : public Entity
 {

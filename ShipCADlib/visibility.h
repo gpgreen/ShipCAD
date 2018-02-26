@@ -44,7 +44,7 @@ class FileBuffer;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-/*! \brief Settings class for visibility of different features
+/*! \brief Settings for visibility of different features
  */
 class Visibility : public QObject
 {

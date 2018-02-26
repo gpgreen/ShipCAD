@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
- *    Original Copyright header below														   *
- *																							   *
+ *    ShipCAD										       *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>				       *
+ *    Original Copyright header below							       *
+ *											       *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -45,57 +45,59 @@ class ShipCADModel;
 class Plane;
 class Intersection;
 	
-/*! \brief Structure to hold Hydrostatics Calculation results
+/*! \brief Hydrostatics Calculation results
  */
 struct HydrostaticsData
 {
-	QVector3D model_min;
-	QVector3D model_max;
-	QVector3D wl_min;
-	QVector3D wl_max;
-	QVector3D sub_min;
-	QVector3D sub_max;
-	Plane waterline_plane;
-	float absolute_draft;
-	float volume;
-	float displacement;
-	QVector3D center_of_buoyancy;
-	float lcb_perc;
-	float length_waterline;
-	float beam_waterline;
-	float block_coefficient;
-	float wetted_surface;
-	QVector3D leak;
-	float mainframe_area;
-	QVector3D mainframe_cog;
-	float mainframe_coeff;
-	float waterplane_area;
-	QVector3D waterplane_cog;
-	float waterplane_entrance_angle;
-	float waterplane_coeff;
-	QVector2D waterplane_mom_inertia;
-	float km_transverse;
-	float km_longitudinal;
-	float lateral_area;
-	QVector3D lateral_cog;
-	float prism_coefficient;
-	float vert_prism_coefficient;
-	std::vector<QVector2D> sac;
-
+    QVector3D model_min;
+    QVector3D model_max;
+    QVector3D wl_min;
+    QVector3D wl_max;
+    QVector3D sub_min;
+    QVector3D sub_max;
+    Plane waterline_plane;
+    float absolute_draft;
+    float volume;
+    float displacement;
+    QVector3D center_of_buoyancy;
+    float lcb_perc;
+    float length_waterline;
+    float beam_waterline;
+    float block_coefficient;
+    float wetted_surface;
+    QVector3D leak;
+    float mainframe_area;
+    QVector3D mainframe_cog;
+    float mainframe_coeff;
+    float waterplane_area;
+    QVector3D waterplane_cog;
+    float waterplane_entrance_angle;
+    float waterplane_coeff;
+    QVector2D waterplane_mom_inertia;
+    float km_transverse;
+    float km_longitudinal;
+    float lateral_area;
+    QVector3D lateral_cog;
+    float prism_coefficient;
+    float vert_prism_coefficient;
+    std::vector<QVector2D> sac;
+    
     /*! \brief reset all data to default values
      */
     void clear();
 };
 
+/*! \brief crosscurves data
+ */
 struct CrosscurvesData
 {
-	Plane waterline_plane;
-	float absolute_draft;
-	float volume;
-	float displacement;
-	QVector3D center_of_buoyancy;
-	float kn_sin_phi;
-
+    Plane waterline_plane;
+    float absolute_draft;
+    float volume;
+    float displacement;
+    QVector3D center_of_buoyancy;
+    float kn_sin_phi;
+    
     void clear();
 };
 	
@@ -111,7 +113,7 @@ public:
 
     static HydrostaticCalc* construct(ShipCADModel* owner);
 	
-	void clear();
+    void clear();
 
     ShipCADModel* getOwner() const {return _owner;}
 
@@ -126,9 +128,9 @@ public:
      */
     Plane getWlPlane() const;
     bool isCalculated() {return _calculated;}
-	void setCalculated(bool calc);
+    void setCalculated(bool calc);
     float getDraft() const {return _draft;}
-	void setDraft(float draft);
+    void setDraft(float draft);
     HydrostaticsData& getData() {return _data;}
     /*! \brief does this calculation have this type of error
      *
@@ -158,7 +160,7 @@ public:
      * \return the heeling angle in degrees
      */
     float getHeelingAngle() const {return _heeling_angle;}
-	void setHeelingAngle(float angle);
+    void setHeelingAngle(float angle);
 
     void setHydrostaticType(hydrostatic_type_t ty);
     /*! \brief get the trim angle for this calculation
@@ -179,7 +181,7 @@ public:
      *
      * \param trim the trim of the hull
      */
-	void setTrim(float trim);
+    void setTrim(float trim);
 
     /*! \brief get all Hydrostatics data in a list of strings
      *
@@ -196,7 +198,7 @@ public:
      * with the results of that calculation
      * The calculated flag will also be set
      */
-	void calculate();
+    void calculate();
     /*! \brief calculate the volume of the ship below plane
      *
      * When this method is completed, then _data will have
@@ -218,13 +220,13 @@ protected:
 private:
 
     ShipCADModel* _owner;
-	float _heeling_angle;
-	float _trim;
-	float _draft;
-	bool _calculated;
+    float _heeling_angle;
+    float _trim;
+    float _draft;
+    bool _calculated;
     std::vector<hydrostatics_error_t> _errors;
     hydrostatic_type_t _hydrostatic_type;
-	HydrostaticsData _data;
+    HydrostaticsData _data;
     std::vector<hydrostatics_calc_t> _calculations;
     Intersection* _mainframe;
 	

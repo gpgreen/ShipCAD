@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD																				   *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>								   *
- *    Original Copyright header below														   *
- *																							   *
+ *    ShipCAD										       *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>				       *
+ *    Original Copyright header below							       *
+ *											       *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -156,8 +156,8 @@ public:
     IntersectionVector& getButtocks() {return _buttocks;}
     IntersectionVector& getDiagonals() {return _diagonals;}
     
-	edit_mode_t getEditMode() const {return _edit_mode;}
-	void setEditMode(edit_mode_t mode);
+    edit_mode_t getEditMode() const {return _edit_mode;}
+    void setEditMode(edit_mode_t mode);
 
     /*! \brief count the number of currently selected items
      *
@@ -169,26 +169,26 @@ public:
      */
     void clearSelectedItems();
 
-	/*! \brief name of file
-	 *
-	 * \return the file name
-	 */
+    /*! \brief name of file
+     *
+     * \return the file name
+     */
     QString getFilename() const;
-	/*! \brief set the name of the file
-	 *
-	 * \param name name of the file
-	 */
-	void setFilename(const QString& name);
-	/*! \brief get flag for filename set
-	 *
-	 * \return true if filename has been set
-	 */
+    /*! \brief set the name of the file
+     *
+     * \param name name of the file
+     */
+    void setFilename(const QString& name);
+    /*! \brief get flag for filename set
+     *
+     * \return true if filename has been set
+     */
     bool isFilenameSet() const
         {return _filename_set;}
-	/*! \brief set flag for filename set
-	 *
-	 * \param set new flag for filename set
-	 */
+    /*! \brief set flag for filename set
+     *
+     * \param set new flag for filename set
+     */
     void setFilenameSet(bool flag)
         {_filename_set=flag;}
 	
@@ -237,54 +237,54 @@ public:
      */
     void deleteFlowline(Flowline* flow);
 
-	/*! \brief file changed flag
-	 *
-	 * \return true if file changed
-	 */
-	bool isFileChanged() const {return _file_changed;}	
-	/*! \brief set file changed flag
-	 *
-	 * \param changed new value for flag
-	 */
-	void setFileChanged(bool changed) { _file_changed=changed;}
-
-	// undo
-	/*! \brief create an undo object
-	 *
-	 * \param undotext name of object shown in gui
+    /*! \brief file changed flag
+     *
+     * \return true if file changed
+     */
+    bool isFileChanged() const {return _file_changed;}	
+    /*! \brief set file changed flag
+     *
+     * \param changed new value for flag
+     */
+    void setFileChanged(bool changed) { _file_changed=changed;}
+    
+    // undo
+    /*! \brief create an undo object
+     *
+     * \param undotext name of object shown in gui
      * \param accept whether to accept the object into undo list at creation
-	 * \return the undo object
-	 */
-	UndoObject* createUndo(const QString& undotext, bool accept);
-	/*! \brief add an undo to the undo list
-	 *
+     * \return the undo object
+     */
+    UndoObject* createUndo(const QString& undotext, bool accept);
+    /*! \brief add an undo to the undo list
+     *
      * \param undo the object to put in the undo list
-	 */
-	void acceptUndo(UndoObject* undo);
-	/*! \brief undo the last operation
-	 *
-	 */
-	void undo();
-	/*! \brief redo the last undo
-	 *
-	 */
-	void redo();
-	/*! \brief get amount of memory used for undo
-	 *
-	 * \return memory used in mb
-	 */
-	size_t getUndoMemory() const;
-
+     */
+    void acceptUndo(UndoObject* undo);
+    /*! \brief undo the last operation
+     *
+     */
+    void undo();
+    /*! \brief redo the last undo
+     *
+     */
+    void redo();
+    /*! \brief get amount of memory used for undo
+     *
+     * \return memory used in mb
+     */
+    size_t getUndoMemory() const;
+    
     bool canUndo() const;
     bool canRedo() const;
     void clearUndo();
     
     /*! \brief get the lowest underwater point of hull
-	 *
+     *
      * \return lowest point of hull
-	 */
-	float findLowestHydrostaticsPoint() const;
-	
+     */
+    float findLowestHydrostaticsPoint() const;
+    
     void loadBinary(FileBuffer& source);
     void saveBinary(FileBuffer& dest);
     /*! \brief load the preview image from a file
@@ -332,7 +332,7 @@ public:
      */
     void deleteSelected();
     
-	void clear();
+    void clear();
 
     /*! \brief find the bounding box of the model
      *
@@ -345,16 +345,14 @@ signals:
 	
     void undoDataChanged();
                                
-public slots:
-
 protected:
 
     void drawGrid(Viewport& vp, QPainter* painter);
-	/*! \brief create temp redo object at end of undo list
-	 *
-	 * \return the undo object
-	 */
-	UndoObject* createRedo();
+    /*! \brief create temp redo object at end of undo list
+     *
+     * \return the undo object
+     */
+    UndoObject* createRedo();
 
 private:
 
@@ -371,27 +369,23 @@ private:
     bool _file_changed;
     SubdivisionSurface _surface;
     QString _filename;
-    // Edit class
     IntersectionVector _stations;
     IntersectionVector _waterlines;
     IntersectionVector _buttocks;
     IntersectionVector _diagonals;
     MarkerVector _markers;
     Visibility _vis;
-    // Frame class
     bool _filename_set;
     bool _currently_moving;
     bool _stop_asking_for_file_version;
-    // previous cursor position
     ProjectSettings _settings;
     HydrostaticCalcVector _calculations;
-    // undo objects
     DelftSeriesResistance _delft_resistance;
-	KAPERResistance _kaper_resistance;
+    KAPERResistance _kaper_resistance;
     HydrostaticCalc* _design_hydrostatics;
-	size_t _undo_pos;   /**< current undo position */
-	int _prev_undo_pos; /**< make this an int so we can start at -1 **/
-	std::deque<UndoObject*> _undo_list;
+    size_t _undo_pos;   /**< current undo position */
+    int _prev_undo_pos; /**< make this an int so we can start at -1 **/
+    std::deque<UndoObject*> _undo_list;
     std::set<Marker*> _selected_markers;
     std::set<Flowline*> _selected_flowlines;
     FlowlineVector _flowlines;

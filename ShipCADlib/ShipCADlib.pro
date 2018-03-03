@@ -47,7 +47,8 @@ SOURCES += shipcadlib.cpp \
     flowline.cpp \
     backgroundimage.cpp \
     developedpatch.cpp \
-    dialogdata.cpp
+    dialogdata.cpp \
+    drawfaces.cpp
 
 HEADERS += shipcadlib.h \
     dialogdata.h \
@@ -89,7 +90,8 @@ HEADERS += shipcadlib.h \
     mempool.h \
     orderedmap.h \
     predicate.h \
-    tempvar.h
+    tempvar.h \
+    drawfaces.h
 
 unix:!symbian {
     maemo5 {

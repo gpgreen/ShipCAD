@@ -304,7 +304,7 @@ public slots:
 
     /*! \brief export surface to STL file
      */
-    void exportSTL();
+    void exportSTL(const QString& filename);
 
     /*! \brief export an IGES file
      */

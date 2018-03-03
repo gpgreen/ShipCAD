@@ -1,8 +1,8 @@
 /*###############################################################################################
- *    ShipCAD																					*
- *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>									*
- *    Original Copyright header below															*
- *																								*
+ *    ShipCAD											*
+ *    Copyright 2017, by Greg Green <ggreen@bit-builder.com>					*
+ *    Original Copyright header below								*
+ *												*
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an                *
  *    open source surface-modelling program based on subdivision surfaces and intended for      *
  *    designing ships.                                                                          *
@@ -43,6 +43,7 @@ namespace ShipCAD {
 
 class Viewport;
 class LineShader;
+class FaceShader;
 class SubdivisionLayer;
 class SubdivisionFace;
 class SubdivisionControlFace;
@@ -79,7 +80,8 @@ public:
     virtual void clear();
     virtual void extents(QVector3D& min, QVector3D& max);
     virtual void draw(Viewport& vp, LineShader* lineshader);
-
+    virtual void draw(Viewport& vp, FaceShader* faceshader);
+    
     SubdivisionLayer* getOwner()
         {return _owner;}
 
@@ -194,6 +196,10 @@ protected:
     void processFaces(SubdivisionFace* seedface, double& maxerror,
                       std::vector<SubdivisionFace*>::iterator& error_index,
                       std::vector<SubdivisionFace*>& faces);
+    // used in draw
+    void drawSpline(LineShader* lineshader, Spline& spline);
+    void setFontHeight(Viewport& vp, float desired_height);
+    void drawDimension(Viewport& vp, LineShader* lineshader, QVector3D p1, QVector3D p2);
     
 protected:
 
@@ -238,6 +244,8 @@ protected:
     float _ygrid;
     float _cos;
     float _sin;
+    size_t _vertices1;          /**< number of vertices drawn to size buffers for next draw */
+    size_t _vertices2;          /**< number of underwater vertices drawn to size buffers for next draw */
     // _units;
 };
 

@@ -40,6 +40,7 @@
 #include "shader.h"
 #include "utility.h"
 #include "shipcadlib.h"
+#include "drawfaces.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -97,6 +98,8 @@ void DevelopedPatch::clear()
     // these are set in setRotation
     //_cos = 0.0;
     //_sin = 0.0;
+    _vertices1 = 0;
+    _vertices2 = 0;
 }
 
 void DevelopedPatch::extents(QVector3D& min, QVector3D& max)
@@ -186,10 +189,74 @@ QVector3D DevelopedPatch::getMirrorPoint(size_t index)
     return convertTo3D(p);
 }
 
+// FreeGeometry.pas:5568
+void DevelopedPatch::drawSpline(LineShader* lineshader, Spline& spline)
+{
+    QVector<QVector3D>& vertices = lineshader->getVertexBuffer();
+    for (size_t i=0; i<spline.getFragments(); ++i) {
+        QVector3D p3d = spline.value(i/static_cast<float>(spline.getFragments()));
+        QVector2D p2d(p3d.x(), p3d.y());
+        if (mirrorOnScreen() && !isMirror())
+            p2d.setY(-p2d.y());
+        p3d = convertTo3D(p2d);
+        vertices << p3d;
+    }
+    glLineWidth(1);
+    lineshader->renderPoints(vertices, spline.getColor());
+}
+
+// FreeGeometry.pas:5589
+void DevelopedPatch::setFontHeight(Viewport& vp, float desired_height)
+{
+    // set the fontheight to a height in modelspace
+    //float height = desired_height * vp.scale() * vp.zoom();
+    // TODO: set font height size of 8, then get height of that
+}
+
+// FreeGeometry.pas:5613
+void DevelopedPatch::drawDimension(Viewport& /*vp*/, LineShader* /*lineshader*/,
+                                   QVector3D p1, QVector3D p2)
+{
+    // TODO
+}
+
+void DevelopedPatch::draw(Viewport& /*vp*/, FaceShader* faceshader)
+{
+    if (showSolid() || showInteriorEdges()) {
+        DrawFaces(faceshader, _owner->getOwner()->getWaterlinePlane(),
+                  _donelist, _vertices1, _vertices2,
+                  isShadeSubmerged(), isMirror(),
+                  _owner->getColor(), _owner->getOwner()->getUnderWaterColor());
+                  
+    }
+}
+
 // FreeGeometry.pas:5548
 void DevelopedPatch::draw(Viewport& /*vp*/, LineShader* /*lineshader*/)
 {
     // TODO
+    if (showSolid() || showInteriorEdges()) {
+        // draw edges of faces
+    } else if (!showInteriorEdges()) {
+        // draw only boundary edges
+    }
+    if (showDimensions()) {
+    }
+    // show edges with errors
+    if (showErrorEdges()) {
+    }
+    if (showStations()) {
+    }
+    if (showButtocks()) {
+    }
+    if (showWaterlines()) {
+    }
+    if (showDiagonals()) {
+    }
+    if (showPartName()) {
+    }
+    if (showBoundingBox()) {
+    }
 }
 
 struct PatchIntersection 

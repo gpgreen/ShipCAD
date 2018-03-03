@@ -1,8 +1,8 @@
 /*###############################################################################################
- *    ShipCAD																					*
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>									*
- *    Original Copyright header below															*
- *																								*
+ *    ShipCAD											*
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>					*
+ *    Original Copyright header below								*
+ *												*
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an                *
  *    open source surface-modelling program based on subdivision surfaces and intended for      *
  *    designing ships.                                                                          *
@@ -45,6 +45,7 @@
 #include "pointgrid.h"
 #include "viewportview.h"
 #include "predicate.h"
+#include "drawfaces.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -462,15 +463,6 @@ void SubdivisionControlFace::removeFace()
     clear();
 }
 
-// add face to display list, face is constant color
-static void addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normals,
-                        const QVector3D& p1, const QVector3D& p2, const QVector3D& p3)
-{
-    QVector3D n = UnifiedNormal(p1, p2, p3);
-    vertices << p1 << p2 << p3;
-    normals << n << n << n;
-}
-
 // add face to display list, face has a different color at each vertex, colors are provided as r,g,b triples
 static void addCurveFaceToDL(QVector<QVector3D>& vertices,
                              QVector<QVector3D>& colors,
@@ -711,135 +703,11 @@ void SubdivisionControlFace::drawZebraFaces(Viewport& vp, CurveFaceShader* shade
 // FreeGeometry.pas:11995
 void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
 {
-    // make the vertex and color buffers
-    QVector<QVector3D> vertices;
-    QVector<QVector3D> normals;
-    QVector<QVector3D> vertices_underwater;
-    QVector<QVector3D> normals_underwater;
-    // reserve the size of the lists to save memory allocations
-    if (_vertices1 != 0) {
-        vertices.reserve(_vertices1);
-        normals.reserve(_vertices1);
-    }
-    if (_vertices2 != 0) {
-        vertices_underwater.reserve(_vertices2);
-        normals_underwater.reserve(_vertices2);
-    }
-
-    if (_owner->shadeUnderWater() && vp.getViewportMode() == vmShade
-            && getLayer()->useInHydrostatics()) {
-        for (size_t i=0; i<_children.size(); ++i) {
-            // clip all triangles against the waterline plane
-            for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
-                QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
-                QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
-                QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
-
-                // check if clipping is required
-                float min = _owner->getWaterlinePlane().distance(p1);
-                float max = min;
-                float tmp = _owner->getWaterlinePlane().distance(p2);
-                if (tmp < min)
-                    min = tmp;
-                else if (tmp > max)
-                    max = tmp;
-                tmp = _owner->getWaterlinePlane().distance(p3);
-                if (tmp < min)
-                    min = tmp;
-                else if (tmp > max)
-                    max = tmp;
-                if (max <= 0.0) {
-                    // entirely below the plane
-                    addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
-                }
-                else if (min >= 0.0) {
-                    // entirely above the plane
-                    addFaceToDL(vertices, normals, p1, p2, p3);
-                }
-                else {
-                    // pierces water, clip triangle
-                    std::vector<QVector3D> above;
-                    above.reserve(6);
-                    std::vector<QVector3D> below;
-                    below.reserve(6);
-                    ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
-                    for (size_t k=2; k<above.size(); ++k)
-                        // shade triangle above
-                        addFaceToDL(vertices, normals, above[0], above[k-1], above[k]);
-                    for (size_t k=2; k<below.size(); ++k)
-                        // shade triangle below
-                        addFaceToDL(vertices_underwater, normals_underwater, below[0], below[k-1], below[k]);
-                }
-                if (_owner->drawMirror() && getLayer()->isSymmetric()) {
-                    p1.setY(-p1.y());
-                    p2.setY(-p2.y());
-                    p3.setY(-p3.y());
-
-                    // check if clipping is required
-                    float min = _owner->getWaterlinePlane().distance(p1);
-                    float max = min;
-                    float tmp = _owner->getWaterlinePlane().distance(p2);
-                    if (tmp < min)
-                        min = tmp;
-                    else if (tmp > max)
-                        max = tmp;
-                    tmp = _owner->getWaterlinePlane().distance(p3);
-                    if (tmp < min)
-                        min = tmp;
-                    else if (tmp > max)
-                        max = tmp;
-                    if (max <= 0.0) {
-                        // entirely below the plane
-                        addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
-                    }
-                    else if (min >= 0.0) {
-                        // entirely above the plane
-                        addFaceToDL(vertices, normals, p1, p2, p3);
-                    }
-                    else {
-                        // pierces water, clip triangle
-                        std::vector<QVector3D> above;
-                        above.reserve(6);
-                        std::vector<QVector3D> below;
-                        below.reserve(6);
-                        ClipTriangle(p1, p2, p3, _owner->getWaterlinePlane(), above, below);
-                        for (size_t k=2; k<above.size(); ++k)
-                            // shade triangle above
-                            addFaceToDL(vertices, normals, above[0], above[k-1], above[k]);
-                        for (size_t k=2; k<below.size(); ++k)
-                            // shade triangle below
-                            addFaceToDL(vertices_underwater, normals_underwater, below[0], below[k-1], below[k]);
-                    }
-                }
-            }
-        }
-    } else {
-        for (size_t i=0; i<_children.size(); ++i) {
-            for (size_t j=2; j<_children[i]->numberOfPoints(); ++j) {
-                QVector3D p1 = _children[i]->getPoint(0)->getCoordinate();
-                QVector3D p2 = _children[i]->getPoint(j-1)->getCoordinate();
-                QVector3D p3 = _children[i]->getPoint(j)->getCoordinate();
-                addFaceToDL(vertices, normals, p1, p2, p3);
-                if (_owner->drawMirror() && getLayer()->isSymmetric()) {
-                    p1.setY(-p1.y());
-                    p2.setY(-p2.y());
-                    p3.setY(-p3.y());
-                    addFaceToDL(vertices, normals, p1, p2, p3);
-                }
-            }
-        }
-    }
-        
-    // render above the waterline
-    if (vertices.size() > 0) {
-        faceshader->renderMesh(getColor(), vertices, normals);
-        _vertices1 = vertices.size();
-    }
-    // render below the waterline
-    if (vertices_underwater.size() > 0) {
-        faceshader->renderMesh(_owner->getUnderWaterColor(), vertices_underwater, normals_underwater);
-        _vertices2 = vertices_underwater.size();
-    }
+    DrawFaces(faceshader, _owner->getWaterlinePlane(), _children, _vertices1, _vertices2,
+              (_owner->shadeUnderWater() && vp.getViewportMode() == vmShade
+               && getLayer()->useInHydrostatics()),
+              (_owner->drawMirror() && getLayer()->isSymmetric()),
+              getColor(), _owner->getUnderWaterColor());
 }
 
 // developable surface shading

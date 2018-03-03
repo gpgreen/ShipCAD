@@ -358,7 +358,7 @@ namespace ShipCAD {
     std::vector<SubdivisionEdge*> _edges;       /**< subdivided internal edges */
     std::vector<SubdivisionEdge*> _control_edges;   /**< control edges (may be of SubdivisionEdge type if this face has been subdivided */
     size_t _vertices1;           /**< number of vertices drawn to size buffers for next draw */
-    size_t _vertices2;           /**< number of vertices drawn to size buffers for next draw */
+    size_t _vertices2;           /**< number of underwater vertices drawn to size buffers for next draw */
   };
 
   typedef std::vector<SubdivisionControlFace*>::iterator subdivctlface_iter;

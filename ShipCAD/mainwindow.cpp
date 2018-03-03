@@ -185,7 +185,7 @@ MainWindow::MainWindow(Controller* c, QWidget *parent) :
     connect(ui->actionExportMichlet, SIGNAL(triggered()), _controller, SLOT(exportMichlet()));
     connect(ui->actionExportWavefront, SIGNAL(triggered()), _controller, SLOT(exportObj()));
     connect(ui->actionExportOffsets, SIGNAL(triggered()), _controller, SLOT(exportOffsets()));
-    connect(ui->actionExportSTL, SIGNAL(triggered()), _controller, SLOT(exportSTL()));
+    connect(ui->actionExportSTL, SIGNAL(triggered()), SLOT(exportSTL()));
     connect(ui->actionExportIGES, SIGNAL(triggered()), _controller, SLOT(exportIGES()));
     connect(ui->actionPreferences, SIGNAL(triggered()), _controller, SLOT(editPreferences()));
 
@@ -952,7 +952,7 @@ void MainWindow::enableActions()
     ui->actionExportMichlet->setEnabled(false/*ncfaces > 0 && model->getProjectSettings().isMainParticularsSet()*/);
     ui->actionExportWavefront->setEnabled(false/*ncfaces > 0*/);
     ui->actionExportOffsets->setEnabled(false/*nstations+nbuttocks+nwaterlines+ndiagonals+ncurves > 0*/);
-    ui->actionExportSTL->setEnabled(false/*ncfaces > 0*/);
+    ui->actionExportSTL->setEnabled(ncfaces > 0);
     ui->actionExportIGES->setEnabled(false/*ncfaces > 0*/);
 
     // project actions
@@ -1287,6 +1287,27 @@ void MainWindow::importChines()
     QString filepath = fi.filePath();
     settings.setValue("file/opendir", filepath);
     _controller->importChines(filename);
+}
+
+void MainWindow::exportSTL()
+{
+    cout << "MainWindow::exportSTL" << endl;
+    // get last directory
+    QSettings settings;
+    QString lastdir;
+    if (settings.contains("file/savedir")) {
+        lastdir = settings.value("file/savedir").toString();
+    }
+    // get the filename
+    QString filename = QFileDialog::getSaveFileName(this, tr("Export STL"),
+                                                    lastdir,
+                                                    tr("(*.stl)"));
+    if (filename.length() == 0)
+        return;
+    QFileInfo fi(filename);
+    QString filepath = fi.filePath();
+    settings.setValue("file/savedir", filepath);
+    _controller->exportSTL(filename);
 }
 
 void MainWindow::updateUndoData()

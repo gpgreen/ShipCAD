@@ -657,9 +657,92 @@ void Controller::exportOffsets()
 	// TODO
 }
 
-void Controller::exportSTL()
+// used in exportSTL
+static void AddFacet(QTextStream& out, const SubdivisionPoint& p1, const SubdivisionPoint& p2,
+                     const SubdivisionPoint& p3, bool alterCoords, QVector3D& movement)
 {
-	// TODO
+    QVector3D pt1 = p1.getCoordinate();
+    QVector3D pt2 = p2.getCoordinate();
+    QVector3D pt3 = p3.getCoordinate();
+    if (alterCoords) {
+        pt1 += movement;
+        pt2 += movement;
+        pt3 += movement;
+    }
+    QVector3D normal = UnifiedNormal(pt1, pt2, pt3);
+    out << "  facet normal " << Truncate(normal.x(), 4) << " " << Truncate(normal.y(), 4)
+        << " " << Truncate(normal.z(), 4);
+    out << "\n    outer loop\n      vertex " << Truncate(pt1.x(), 4) << " "
+        << Truncate(pt1.y(), 4) << " " << Truncate(pt1.z(), 4);
+    out << "\n      vertex " << Truncate(pt2.x(), 4) << " "
+        << Truncate(pt2.y(), 4) << " " << Truncate(pt2.z(), 4);
+    out << "\n      vertex " << Truncate(pt3.x(), 4) << " "
+        << Truncate(pt3.y(), 4) << " " << Truncate(pt3.z(), 4);
+    out << "\n    endloop\n  endfacet\n";
+}
+
+// FreeShipUnit.pas:7214
+// Export the surface to a STL file
+//
+// The native STL format has to fulfill the following specifications:
+// 1. The normal and each vertex of every facet are specified by three coordinates each,
+//    so there is a total of 12 numbers stored for each facet.
+// 2. Each facet is part of the boundary between the interior and the exterior of the object.
+//    The orientation of the facets is specified redundantly in two ways which must be consistent.
+//    First, the direction of the normal is outward. Second, the vertices are listed in
+//    counterclockwise order when looking at the object from the outside.
+// 3. Each triangle must share two vertices with each of its adjacent triangles.
+//    This is known as vertex-to-vertex rule.
+// 4. The object represented must be located in the all-positive octant (all vertex coordinates
+//    must be positive).
+void Controller::exportSTL(const QString& filename)
+{
+    cout << "Controller::exportSTL" << endl;
+
+    QFile exportfile(ChangeFileExt(filename, ".stl"));
+    if (!exportfile.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
+        throw runtime_error("unable to open stl file");
+    QTextStream out(&exportfile);
+    // perform modelcheck to ensure normals point outward
+    if (!getModel()->getProjectSettings().isDisableModelCheck())
+        checkModel(false);
+    // now make sure all coordinates are positive
+    QVector3D min, max;
+    bool alterCoords = false;
+    QVector3D movement;
+    getModel()->getSurface()->extents(min, max);
+    if (min.x() < 0 || min.y() < 0 || min.z() < 0) {
+        if (min.x() < 0)
+            movement.setX(0 - min.x() * 1.02);
+        if (min.y() < 0)
+            movement.setY(0 - min.y() * 1.02);
+        if (min.z() < 0)
+            movement.setZ(0 - min.z() * 1.02);
+        if (movement.x() != 0.0 || movement.y() != 0.0 || movement.z() != 0.0) {
+            alterCoords = true;
+            cout << "Altering coordinates by (" << movement.x() << "," << movement.y()
+                 << "," << movement.z() << ")" << endl;
+        }
+    }
+    out << "solid\n";
+    for (size_t i=0; i<getModel()->getSurface()->numberOfLayers(); ++i) {
+        const SubdivisionLayer* layer = getModel()->getSurface()->getLayer(i);
+        if (!layer->isVisible())
+            continue;
+        for (size_t j=0; j<layer->numberOfFaces(); ++j) {
+            const SubdivisionControlFace* face = layer->getFace(j);
+            for (size_t k=0; k<face->numberOfChildren(); ++k) {
+                const SubdivisionFace* child = face->getChild(k);
+                for (size_t l=2; l<child->numberOfPoints(); ++l) {
+                    AddFacet(out, *child->getPoint(0), *child->getPoint(l-1),
+                             *child->getPoint(l), alterCoords, movement);
+                }
+            }
+        }
+    }
+    out << "endsolid\n";
+    exportfile.close();
+    cout << "exported '" << filename.toStdString() << "'" << endl;
 }
 
 // FreeShipUnit.pas:7276

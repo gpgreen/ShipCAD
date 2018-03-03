@@ -185,6 +185,10 @@ private slots:
      */
     void importChines();
 
+    /*! \brief slot for exporting STL file
+     */
+    void exportSTL();
+
     /*! \brief new model loaded
      */
     void modelLoaded();

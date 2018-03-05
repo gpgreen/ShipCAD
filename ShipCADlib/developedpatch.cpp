@@ -232,18 +232,69 @@ void DevelopedPatch::draw(Viewport& /*vp*/, FaceShader* faceshader)
 }
 
 // FreeGeometry.pas:5548
-void DevelopedPatch::draw(Viewport& /*vp*/, LineShader* /*lineshader*/)
+void DevelopedPatch::draw(Viewport& /*vp*/, LineShader* lineshader)
 {
     // TODO
+    QVector<QVector3D>& redvertices = lineshader->getVertexBuffer();
+    
     if (showSolid() || showInteriorEdges()) {
         // draw edges of faces
     } else if (!showInteriorEdges()) {
         // draw only boundary edges
+        for (size_t i=0; i<_boundary_edges.size(); ++i) {
+            SubdivisionEdge* edge = _boundaryEdges[i];
+            SubdivisionPoint* s = edge->startPoint();
+            SubdivisionPoint* e = edge->endPoint();
+            patchpt_iter index1 = find_point(_points.begin(),
+                                             _points.end(), s);
+            patchpt_iter index2 = find_point(_points.begin(),
+                                             _points.end(), e);
+            if (index1 != _points.end() && index2 != _points.end()) {
+                vertices << getPoint(index1 - _points.begin());
+                vertices << getPoint(index2 - _points.begin());
+                if (isMirror()) {
+                    vertices << getMirrorPoint(index1 - _points.begin());
+                    vertices << getMirrorPoint(index2 - _points.begin());
+                }
+            }
+        }
+        lineshader->renderLines(vertices, edgeColor);
     }
     if (showDimensions()) {
     }
     // show edges with errors
     if (showErrorEdges()) {
+        vertices.clear();
+        glLineWidth(2);
+        // blue lines
+        QVector<QVector3D> bluevertices;
+        QVector<QVector3D>& which = redvertices;
+        // draw blue lines
+        for (size_t i=0; i<_edges.size(); ++i) {
+            if (fabs(_edgeErrors[i]) > 1E-4) {
+                if (_edgeErrors[i] > 0)
+                    which = redvertices;
+                else
+                    which = bluevertices;
+                SubdivisionEdge* edge = _edges[i];
+                SubdivisionPoint* s = edge->startPoint();
+                SubdivisionPoint* e = edge->endPoint();
+                patchpt_iter index1 = find_point(_points.begin(),
+                                                 _points.end(), s);
+                patchpt_iter index2 = find_point(_points.begin(),
+                                                 _points.end(), e);
+                if (index1 != _points.end() && index2 != _points.end()) {
+                    which << getPoint(index1 - _points.begin());
+                    which << getPoint(index2 - _points.begin());
+                    if (isMirror()) {
+                        which << getMirrorPoint(index1 - _points.begin());
+                        which << getMirrorPoint(index2 - _points.begin());
+                    }
+                }
+            }
+        }
+        lineshader->renderLines(redvertices, Qt::red);
+        lineshader->renderLines(bluevertices, Qt::blue);
     }
     if (showStations()) {
     }

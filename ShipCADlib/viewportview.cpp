@@ -282,14 +282,14 @@ void ViewportViewPerspective::initializeViewport(const QVector3D& surfmin, const
     float mindist = (model.map(surfmin) - _camera_location).length();
     float near = 0;
     if (abs(maxdist) > abs(mindist))
-        near = abs(mindist) * 0.80;
+        near = abs(mindist) * 0.20;
     else
-        near = abs(maxdist) * 0.80;
+        near = abs(maxdist) * 0.20;
     float far = 0;
     if (abs(maxdist) > abs(mindist))
-        far = abs(maxdist) * 1.20;
+        far = abs(maxdist) * 2.0;
     else
-        far = abs(mindist) * 1.20;
+        far = abs(mindist) * 2.0;
 
     float aspect_ratio = 1.0;
     if (height != 0)

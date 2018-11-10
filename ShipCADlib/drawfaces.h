@@ -22,6 +22,7 @@
 
 #include <QtCore>
 #include <vector>
+#include <functional>
 
 namespace ShipCAD {
 
@@ -31,12 +32,17 @@ class Plane;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+/*! \brief Function to mirror a point around the Y axis, a normal mirror
+ */
+void HullMirror(QVector3D& mp, QVector3D& p);
+    
 /*! \brief draw SubdivisionFaces
  */
 void DrawFaces(ShipCAD::FaceShader* faceshader,
                const ShipCAD::Plane& waterlinePlane,
                std::vector<ShipCAD::SubdivisionFace*>& faces,
                size_t& vertices1, size_t& vertices2,
+               std::function<void(QVector3D&, QVector3D&)>& mirrorAPoint,
                bool shadeUnderwater, bool drawMirror,
                QColor color, QColor underWaterColor);
 

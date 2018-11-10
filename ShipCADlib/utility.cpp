@@ -29,6 +29,7 @@
 
 #include <cmath>
 #include <climits>
+#include <algorithm>
 #include <boost/math/constants/constants.hpp>
 #include "utility.h"
 #include "shipcadlib.h"
@@ -414,14 +415,8 @@ QString ShipCAD::BoolToStr(bool val)
 
 static float Minimum(float d1, float d2, float d3, float d4)
 {
-    float result = d1;
-    if (d2 < result)
-        result = d2;
-    if (d3 < result)
-        result = d3;
-    if (d4 < result)
-        result = d4;
-    return result;
+    auto result = minmax({d1, d2, d3, d4});
+    return result.first;
 }
 
 // This procedure takes a lot of linesegments and tries to connect them into as few as possible splines

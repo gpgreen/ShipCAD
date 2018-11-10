@@ -703,7 +703,8 @@ void SubdivisionControlFace::drawZebraFaces(Viewport& vp, CurveFaceShader* shade
 // FreeGeometry.pas:11995
 void SubdivisionControlFace::drawFaces(Viewport &vp, FaceShader* faceshader)
 {
-    DrawFaces(faceshader, _owner->getWaterlinePlane(), _children, _vertices1, _vertices2,
+    function<void(QVector3D&, QVector3D&)> mirrorit = HullMirror;
+    DrawFaces(faceshader, _owner->getWaterlinePlane(), _children, _vertices1, _vertices2, mirrorit,
               (_owner->shadeUnderWater() && vp.getViewportMode() == vmShade
                && getLayer()->useInHydrostatics()),
               (_owner->drawMirror() && getLayer()->isSymmetric()),

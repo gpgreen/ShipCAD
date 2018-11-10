@@ -172,6 +172,9 @@ public:
 
 protected:
 
+    // used for DrawFaces
+    void mirrorPoint(QVector3D& mp, QVector3D& p);
+    
     // used in saveToDXF
     void exportSpline(QStringList& strings, Spline* spline, const QString& layername);
 

@@ -177,16 +177,44 @@ QVector3D DevelopedPatch::getPoint(size_t index)
     return convertTo3D(p);
 }
 
+void DevelopedPatch::mirrorPoint(QVector3D& mp, QVector3D& p)
+{
+    mp = _mirrorPlane.mirror(p);
+    QVector2D p2(mp.x(), mp.y());
+    if (_mirrorOnScreen && !_mirror)
+        p2.setY(-p2.y());
+    mp = convertTo3D(p2);
+}
+
 QVector3D DevelopedPatch::getMirrorPoint(size_t index)
 {
-    QVector2D p = _points[index].pt2D;
-    QVector3D tmp(p.x(), p.y(), 0.0);
-    tmp = _mirrorPlane.mirror(tmp);
-    p.setX(tmp.x());
-    p.setY(tmp.y());
-    if (_mirrorOnScreen && !_mirror)
-        p.setY(-p.y());
-    return convertTo3D(p);
+   QVector2D p2 = _points[index].pt2D;
+   QVector3D tmp(p2.x(), p2.y(), 0.0);
+   mirrorPoint(tmp, tmp);
+   return tmp;
+}
+
+struct PatchIntersection 
+{
+    QVector3D point;
+    bool knuckle;
+};
+
+// predicate class to find SubdivisionPoint in PatchPoints vector
+struct PatchPointPred
+{
+    ShipCAD::SubdivisionPoint* querypt;
+    bool operator()(const ShipCAD::PatchPoints& val) {
+        return (val.pt == querypt);
+    }
+    explicit PatchPointPred (ShipCAD::SubdivisionPoint* pt) : querypt(pt) {}
+};
+
+// function to find a point in a vector
+patchpt_iter find_point(patchpt_iter start, patchpt_iter end, SubdivisionPoint* pt)
+{
+    PatchPointPred pred1(pt);
+    return find_if(start, end, pred1);
 }
 
 // FreeGeometry.pas:5568
@@ -223,8 +251,10 @@ void DevelopedPatch::drawDimension(Viewport& /*vp*/, LineShader* /*lineshader*/,
 void DevelopedPatch::draw(Viewport& /*vp*/, FaceShader* faceshader)
 {
     if (showSolid() || showInteriorEdges()) {
+        using namespace std::placeholders;
+        function<void(QVector3D&, QVector3D&)> mirrorit = bind(&DevelopedPatch::mirrorPoint, this, _1, _2);
         DrawFaces(faceshader, _owner->getOwner()->getWaterlinePlane(),
-                  _donelist, _vertices1, _vertices2,
+                  _donelist, _vertices1, _vertices2, mirrorit,
                   isShadeSubmerged(), isMirror(),
                   _owner->getColor(), _owner->getOwner()->getUnderWaterColor());
                   
@@ -235,13 +265,18 @@ void DevelopedPatch::draw(Viewport& /*vp*/, FaceShader* faceshader)
 void DevelopedPatch::draw(Viewport& /*vp*/, LineShader* lineshader)
 {
     // TODO
+    // create color
+    QColor lcolor = getOwner()->getColor();
+    QColor patchcolor(lcolor.red()*0.9, lcolor.green()*0.9, lcolor.blue()*0.9);
+
     QVector<QVector3D>& redvertices = lineshader->getVertexBuffer();
     
     if (showSolid() || showInteriorEdges()) {
+        const Plane& wl = getOwner()->getOwner()->getWaterlinePlane();
         // draw edges of faces
     } else if (!showInteriorEdges()) {
         // draw only boundary edges
-        for (size_t i=0; i<_boundary_edges.size(); ++i) {
+        for (size_t i=0; i<_boundaryEdges.size(); ++i) {
             SubdivisionEdge* edge = _boundaryEdges[i];
             SubdivisionPoint* s = edge->startPoint();
             SubdivisionPoint* e = edge->endPoint();
@@ -250,21 +285,21 @@ void DevelopedPatch::draw(Viewport& /*vp*/, LineShader* lineshader)
             patchpt_iter index2 = find_point(_points.begin(),
                                              _points.end(), e);
             if (index1 != _points.end() && index2 != _points.end()) {
-                vertices << getPoint(index1 - _points.begin());
-                vertices << getPoint(index2 - _points.begin());
+                redvertices << getPoint(index1 - _points.begin());
+                redvertices << getPoint(index2 - _points.begin());
                 if (isMirror()) {
-                    vertices << getMirrorPoint(index1 - _points.begin());
-                    vertices << getMirrorPoint(index2 - _points.begin());
+                    redvertices << getMirrorPoint(index1 - _points.begin());
+                    redvertices << getMirrorPoint(index2 - _points.begin());
                 }
             }
         }
-        lineshader->renderLines(vertices, edgeColor);
+        lineshader->renderLines(redvertices, patchcolor);
     }
     if (showDimensions()) {
     }
     // show edges with errors
     if (showErrorEdges()) {
-        vertices.clear();
+        redvertices.clear();
         glLineWidth(2);
         // blue lines
         QVector<QVector3D> bluevertices;
@@ -297,40 +332,25 @@ void DevelopedPatch::draw(Viewport& /*vp*/, LineShader* lineshader)
         lineshader->renderLines(bluevertices, Qt::blue);
     }
     if (showStations()) {
+        for (size_t i=0; i<_stations.size(); ++i)
+            drawSpline(lineshader, *_stations.get(i));
     }
     if (showButtocks()) {
+        for (size_t i=0; i<_buttocks.size(); ++i)
+            drawSpline(lineshader, *_buttocks.get(i));
     }
     if (showWaterlines()) {
+        for (size_t i=0; i<_waterlines.size(); ++i)
+            drawSpline(lineshader, *_waterlines.get(i));
     }
     if (showDiagonals()) {
+        for (size_t i=0; i<_diagonals.size(); ++i)
+            drawSpline(lineshader, *_diagonals.get(i));
     }
     if (showPartName()) {
     }
     if (showBoundingBox()) {
     }
-}
-
-struct PatchIntersection 
-{
-    QVector3D point;
-    bool knuckle;
-};
-
-// predicate class to find SubdivisionPoint in PatchPoints vector
-struct PatchPointPred
-{
-    ShipCAD::SubdivisionPoint* querypt;
-    bool operator()(const ShipCAD::PatchPoints& val) {
-        return (val.pt == querypt);
-    }
-    explicit PatchPointPred (ShipCAD::SubdivisionPoint* pt) : querypt(pt) {}
-};
-
-// function to find a point in a vector
-patchpt_iter find_point(patchpt_iter start, patchpt_iter end, SubdivisionPoint* pt)
-{
-    PatchPointPred pred1(pt);
-    return find_if(start, end, pred1);
 }
 
 // FreeGeometry.pas:5952

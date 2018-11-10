@@ -18,6 +18,7 @@
  *#############################################################################################*/
 
 #include <iostream>
+#include <QAction>
 
 #include "layerdialog.h"
 #include "ui_layerdialog.h"

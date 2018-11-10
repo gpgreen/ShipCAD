@@ -20,6 +20,8 @@
 #include <iostream>
 #include <QInputDialog>
 #include <QDialogButtonBox>
+#include <QAction>
+
 #include "intersectionsdialog.h"
 #include "ui_intersectionsdialog.h"
 #include "shipcadlib.h"

@@ -18,6 +18,8 @@
  *##############################################################################################*/
 
 #include <QVector3D>
+#include <functional>
+#include <algorithm>
 
 #include "drawfaces.h"
 #include "subdivface.h"
@@ -42,11 +44,25 @@ static void addFaceToDL(QVector<QVector3D>& vertices, QVector<QVector3D>& normal
 
 //////////////////////////////////////////////////////////////////////////////////////
 
+// mirror a point around hull axis plane, ie invert y coordinate
+void ShipCAD::HullMirror(QVector3D& mp, QVector3D& p)
+{
+    mp.setX(p.x());
+    mp.setY(-p.y());
+    mp.setZ(p.z());
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 // FreeGeometry.pas:11995
 void ShipCAD::DrawFaces(FaceShader* faceshader,
                         const Plane& waterlinePlane,
                         vector<SubdivisionFace*>& faces,
+                        // these are set to the number of vertices in each
+                        // set, under/over water, next time this is called
+                        // the vectors will be reserved to this size
                         size_t& vertices1, size_t& vertices2,
+                        function<void(QVector3D&, QVector3D&)>& mirrorAPoint, 
                         bool shadeUnderwater, bool drawMirror,
                         QColor color, QColor underWaterColor)
 {
@@ -74,23 +90,18 @@ void ShipCAD::DrawFaces(FaceShader* faceshader,
                 QVector3D p3 = faces[i]->getPoint(j)->getCoordinate();
 
                 // check if clipping is required
-                float min = waterlinePlane.distance(p1);
-                float max = min;
-                float tmp = waterlinePlane.distance(p2);
-                if (tmp < min)
-                    min = tmp;
-                else if (tmp > max)
-                    max = tmp;
-                tmp = waterlinePlane.distance(p3);
-                if (tmp < min)
-                    min = tmp;
-                else if (tmp > max)
-                    max = tmp;
-                if (max <= 0.0) {
+                float p1d = waterlinePlane.distance(p1);
+                float p2d = waterlinePlane.distance(p2);
+                float p3d = waterlinePlane.distance(p3);
+                auto result = minmax(
+                    {
+                        p1d, p2d, p3d
+                    });
+                if (result.second <= 0.0) {
                     // entirely below the plane
                     addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
                 }
-                else if (min >= 0.0) {
+                else if (result.first >= 0.0) {
                     // entirely above the plane
                     addFaceToDL(vertices, normals, p1, p2, p3);
                 }
@@ -109,28 +120,20 @@ void ShipCAD::DrawFaces(FaceShader* faceshader,
                         addFaceToDL(vertices_underwater, normals_underwater, below[0], below[k-1], below[k]);
                 }
                 if (drawMirror) {
-                    p1.setY(-p1.y());
-                    p2.setY(-p2.y());
-                    p3.setY(-p3.y());
+                    mirrorAPoint(p1, p1);
+                    mirrorAPoint(p2, p2);
+                    mirrorAPoint(p3, p3);
 
                     // check if clipping is required
-                    float min = waterlinePlane.distance(p1);
-                    float max = min;
-                    float tmp = waterlinePlane.distance(p2);
-                    if (tmp < min)
-                        min = tmp;
-                    else if (tmp > max)
-                        max = tmp;
-                    tmp = waterlinePlane.distance(p3);
-                    if (tmp < min)
-                        min = tmp;
-                    else if (tmp > max)
-                        max = tmp;
-                    if (max <= 0.0) {
+                    float p1d = waterlinePlane.distance(p1);
+                    float p2d = waterlinePlane.distance(p2);
+                    float p3d = waterlinePlane.distance(p3);
+                    auto result = minmax({p1d,p2d,p3d});
+                    if (result.second <= 0.0) {
                         // entirely below the plane
                         addFaceToDL(vertices_underwater, normals_underwater, p1, p2, p3);
                     }
-                    else if (min >= 0.0) {
+                    else if (result.first >= 0.0) {
                         // entirely above the plane
                         addFaceToDL(vertices, normals, p1, p2, p3);
                     }

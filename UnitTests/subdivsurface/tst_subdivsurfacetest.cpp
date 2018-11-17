@@ -32,7 +32,7 @@
 #include <vector>
 
 #include "subdivsurface.h"
-#include "controlfacegrid.h"
+#include "grid.h"
 
 using namespace std;
 using namespace ShipCAD;
@@ -64,7 +64,7 @@ void SubdivsurfaceTest::testCaseAssemblePatches()
 {
     SubdivisionSurface *surface = new SubdivisionSurface();
     surface->initialize(1, 1);
-    vector<ControlFaceGrid> patches;
+    vector<Grid<SubdivisionControlFace*> > patches;
     surface->assembleFacesToPatches(amRegular, patches);
     QVERIFY2(true, "Failure");
 }

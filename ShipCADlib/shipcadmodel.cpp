@@ -43,7 +43,7 @@
 #include "viewport.h"
 #include "subdivpoint.h"
 #include "subdivedge.h"
-#include "pointgrid.h"
+#include "grid.h"
 #include "exception.h"
 
 using namespace std;
@@ -1636,7 +1636,7 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
     qr.compute(mat);
     MatrixXd row(np, 3);
     QVector3D min, max;
-    CPointGrid points;
+    Grid<SubdivisionControlPoint*> points;
     points.setRows(np);
     points.setCols(chines.size());
     
@@ -1659,7 +1659,7 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
                 max = min;
             } else
                 MinMax(pt, min, max);
-            points.setPoint(j, i, surf->addControlPoint(pt));
+            points.set(j, i, surf->addControlPoint(pt));
         }
     }
     // add chines as markers
@@ -1676,16 +1676,16 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
     for (size_t i=1; i<np; ++i) {
         for (size_t j=1; j<chines.size(); ++j) {
             pts.clear();
-            SubdivisionControlPoint* point = points.getPoint(i, j);
+            SubdivisionControlPoint* point = points.get(i, j);
             if (find(pts.begin(), pts.end(), point) == pts.end())
                 pts.push_back(point);
-            point = points.getPoint(i-1, j);
+            point = points.get(i-1, j);
             if (find(pts.begin(), pts.end(), point) == pts.end())
                 pts.push_back(point);
-            point = points.getPoint(i-1, j-1);
+            point = points.get(i-1, j-1);
             if (find(pts.begin(), pts.end(), point) == pts.end())
                 pts.push_back(point);
-            point = points.getPoint(i, j-1);
+            point = points.get(i, j-1);
             if (find(pts.begin(), pts.end(), point) == pts.end())
                 pts.push_back(point);
             if (pts.size() > 2)
@@ -1694,8 +1694,8 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
     }
     for (size_t i=1; i<np; ++i) {
         for (size_t j=0; j<chines.size(); ++j) {
-            SubdivisionControlEdge* edge = surf->controlEdgeExists(points.getPoint(i-1, j-1),
-                                                                   points.getPoint(i, j));
+            SubdivisionControlEdge* edge = surf->controlEdgeExists(points.get(i-1, j-1),
+                                                                   points.get(i, j));
             if (edge != nullptr)
                 edge->setCrease(true);
         }
@@ -1706,10 +1706,10 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
         SubdivisionControlCurve* curve = SubdivisionControlCurve::construct(surf);
         surf->addControlCurve(curve);
         for (size_t i=0; i<np; ++i) {
-            curve->addPoint(points.getPoint(i, j));
+            curve->addPoint(points.get(i, j));
             if (i > 0) {
-                SubdivisionControlEdge* edge = surf->controlEdgeExists(points.getPoint(i-1, j),
-                                                                       points.getPoint(i, j));
+                SubdivisionControlEdge* edge = surf->controlEdgeExists(points.get(i-1, j),
+                                                                       points.get(i, j));
                 if (edge != nullptr)
                     edge->setCurve(curve);
             }
@@ -1720,13 +1720,13 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
     pts.clear();
     // first stern
     for (size_t i=chines.size(); i>=2; --i)
-        pts.push_back(points.getPoint(np-1, i-1));
+        pts.push_back(points.get(np-1, i-1));
     // then keel
     for (size_t i=np; i>=1; --i)
-        pts.push_back(points.getPoint(i-1, 0));
+        pts.push_back(points.get(i-1, 0));
     // and finally stem
     for (size_t i=2; i<=chines.size(); ++i)
-        pts.push_back(points.getPoint(0, i-1));
+        pts.push_back(points.get(0, i-1));
     vector<SubdivisionControlPoint*> pts2;
     for (size_t i=0; i<pts.size(); ++i) {
         SubdivisionControlPoint* point = pts[i];
@@ -1754,8 +1754,8 @@ void ShipCADModel::importChines(size_t np, SplineVector& chines)
 
     // set transom as knuckle
     for (size_t j=1; j<chines.size(); ++j) {
-        SubdivisionControlEdge* edge = surf->controlEdgeExists(points.getPoint(np-1, j-1),
-                                                               points.getPoint(np-1, j));
+        SubdivisionControlEdge* edge = surf->controlEdgeExists(points.get(np-1, j-1),
+                                                               points.get(np-1, j));
         if (edge != nullptr)
             edge->setCrease(true);
     }

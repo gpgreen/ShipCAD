@@ -39,8 +39,7 @@
 #include "utility.h"
 #include "filebuffer.h"
 #include "viewport.h"
-#include "controlfacegrid.h"
-#include "pointgrid.h"
+#include "grid.h"
 #include "developedpatch.h"
 
 using namespace std;
@@ -713,16 +712,16 @@ void SubdivisionLayer::saveToDXF(QStringList& strings)
 {
     if (!isVisible())
         return;
-    vector<ControlFaceGrid> assembled;
+    vector<Grid<SubdivisionControlFace*> > assembled;
     getOwner()->assembleFacesToPatches(amRegular, assembled);
     if (assembled.size() == 0)
         return;
     for (size_t i=0; i<assembled.size(); ++i) {
-        ControlFaceGrid assface = assembled[i];
+        Grid<SubdivisionControlFace*> assface = assembled[i];
         if ((assface.cols() > 1 && assface.rows() >= 1) ||
             (assface.cols() >= 1 && assface.rows() > 1) ||
-            (assface.cols() == 1 && assface.rows() == 1 && assface.getFace(0,0)->numberOfPoints() == 4)) {
-            PointGrid grid;
+            (assface.cols() == 1 && assface.rows() == 1 && assface.get(0,0)->numberOfPoints() == 4)) {
+            Grid<SubdivisionPoint*> grid;
             getOwner()->convertToGrid(assface, grid);
             if (grid.cols() > 0 && grid.rows() > 0) {
                 strings.push_back(QString("0\r\nPOLYLINE"));
@@ -736,7 +735,7 @@ void SubdivisionLayer::saveToDXF(QStringList& strings)
                     for (size_t k=0; k<grid.cols(); k++) {
                         strings.push_back(QString("0\r\nVERTEX"));
                         strings.push_back(QString("8\r\n%1").arg(getName()));
-                        QVector3D p = grid.getPoint(j, k)->getCoordinate();
+                        QVector3D p = grid.get(j, k)->getCoordinate();
                         strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
                         strings.push_back(QString("20\r\n%1").arg(Truncate(p.y(), 4)));
                         strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
@@ -756,7 +755,7 @@ void SubdivisionLayer::saveToDXF(QStringList& strings)
                         for (size_t k=0; k<grid.cols(); k++) {
                             strings.push_back(QString("0\r\nVERTEX"));
                             strings.push_back(QString("8\r\n%1").arg(getName()));
-                            QVector3D p = grid.getPoint(j, k)->getCoordinate();
+                            QVector3D p = grid.get(j, k)->getCoordinate();
                             strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
                             strings.push_back(QString("20\r\n%1").arg(Truncate(-p.y(), 4)));
                             strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
@@ -768,14 +767,14 @@ void SubdivisionLayer::saveToDXF(QStringList& strings)
             } else {
                 for (size_t j=0; j<assface.rows(); j++) {
                     for (size_t k=0; k<assface.cols(); k++) {
-                        SubdivisionControlFace* face = assface.getFace(j, k);
+                        SubdivisionControlFace* face = assface.get(j, k);
                         if (face != 0)
                             face->saveToDXF(strings);
                     }
                 }
             }
         } else if (assface.rows() == 1 && assface.cols() == 1) {
-            assface.getFace(0, 0)->saveToDXF(strings);
+            assface.get(0, 0)->saveToDXF(strings);
         }
     }
 }

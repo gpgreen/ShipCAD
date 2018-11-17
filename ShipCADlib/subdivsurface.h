@@ -43,6 +43,7 @@
 #include "mempool.h"
 #include "orderedmap.h"
 #include "tempvar.h"
+#include "grid.h"
 
 namespace ShipCAD {
 
@@ -61,8 +62,6 @@ class Viewport;
 class FileBuffer;
 class Preferences;
 struct PickRay;
-struct ControlFaceGrid;
-struct PointGrid;
     
 extern bool g_surface_verbose;
 
@@ -106,8 +105,6 @@ class SubdivisionSurface : public Entity
 
 public:
 
-    typedef std::vector<std::vector<QVector3D> > coordinate_grid_t;
-
     explicit SubdivisionSurface();
     virtual ~SubdivisionSurface();
 
@@ -130,7 +127,7 @@ public:
     
     // tries to assemble quads into as few as possible rectangular patches
     void assembleFacesToPatches(assemble_mode_t mode,
-                                std::vector<ControlFaceGrid>& assembledPatches);
+                                std::vector<Grid<SubdivisionControlFace*> >& assembledPatches);
     /*! \brief group faces
      *
      * \return true if any faces were moved to new layers
@@ -149,7 +146,7 @@ public:
     
     void calculateGaussCurvature();
     void clearSelection();
-    void convertToGrid(ControlFaceGrid& input, PointGrid& grid);
+    void convertToGrid(Grid<SubdivisionControlFace*>& input, Grid<SubdivisionPoint*>& grid);
     /*! \brief connect edges between selected points
      *
      * \return true if successful, false if edge already exists
@@ -167,7 +164,7 @@ public:
                                 size_t& lockedpoints);
     void extractPointsFromSelection(std::vector<SubdivisionControlPoint*>& selectedpoints,
                                     size_t& lockedpoints);
-    void importGrid(coordinate_grid_t& points, SubdivisionLayer* layer);
+    void importGrid(Grid<QVector3D>& points, SubdivisionLayer* layer);
     bool intersectPlane(const Plane& plane, bool hydrostatics_layers_only, SplineVector& destination);
     void insertPlane(const Plane& plane, bool add_curves);
     void subdivide();
@@ -398,17 +395,17 @@ protected:
     void priv_dump(std::ostream& os, const char* prefix) const;
     SubdivisionControlPoint* newControlPoint(const QVector3D& p);
     // used in convertToGrid
-    void doAssemble(PointGrid& grid, size_t& cols, size_t& rows,
+    void doAssemble(Grid<SubdivisionPoint*>& grid, size_t& cols, size_t& rows,
                     std::vector<SubdivisionFace*>& faces);
     // used in assembleFaces
-    void doAssembleSpecial(PointGrid& grid, size_t& cols, size_t& rows,
+    void doAssembleSpecial(Grid<SubdivisionPoint*>& grid, size_t& cols, size_t& rows,
                            assemble_mode_t mode,
                            std::vector<SubdivisionControlFace*>& checkfaces,
                            std::vector<SubdivisionControlFace*>& faces);
     // used in assembleFacesToPatches
     void assembleFaces(assemble_mode_t mode,
                        std::vector<SubdivisionControlFace*>& ctrlfaces,
-                       std::vector<ControlFaceGrid>& assembled);
+                       std::vector<Grid<SubdivisionControlFace*> >& assembled);
     void sortEdges(std::vector<SubdivisionEdge*>& edges);
     void sortEdges(std::vector<SubdivisionPoint*>& points, std::vector<SubdivisionEdge*>& edges);
     void sortControlEdges(std::vector<SubdivisionControlPoint*>& points, std::vector<SubdivisionControlEdge*>& edges);

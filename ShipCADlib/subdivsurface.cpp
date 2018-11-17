@@ -45,8 +45,7 @@
 #include "filebuffer.h"
 #include "utility.h"
 #include "version.h"
-#include "controlfacegrid.h"
-#include "pointgrid.h"
+#include "grid.h"
 #include "predicate.h"
 
 using namespace std;
@@ -392,7 +391,7 @@ static bool privValidFace(SubdivisionControlFace* face,
     return result;
 }
 
-void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
+void SubdivisionSurface::doAssembleSpecial(Grid<SubdivisionPoint*>& grid,
                                            size_t& cols, size_t& rows,
                                            assemble_mode_t mode,
                                            vector<SubdivisionControlFace*>& checkfaces,
@@ -404,19 +403,19 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
     bool searchright = true;
     int counter = 0;
     if (mode == amNURBS) {
-        if (!grid.getPoint(0,0)->isRegularNURBSPoint(checkfaces)) {
+        if (!grid.get(0,0)->isRegularNURBSPoint(checkfaces)) {
             searchleft = false;
             searchtop = false;
         }
-        if (!grid.getPoint(rows-1,0)->isRegularNURBSPoint(checkfaces)) {
+        if (!grid.get(rows-1,0)->isRegularNURBSPoint(checkfaces)) {
             searchleft = false;
             searchbottom = false;
         }
-        if (!grid.getPoint(rows-1,cols-1)->isRegularNURBSPoint(checkfaces)) {
+        if (!grid.get(rows-1,cols-1)->isRegularNURBSPoint(checkfaces)) {
             searchright = false;
             searchbottom = false;
         }
-        if (!grid.getPoint(0,cols-1)->isRegularNURBSPoint(checkfaces)) {
+        if (!grid.get(0,cols-1)->isRegularNURBSPoint(checkfaces)) {
             searchright = false;
             searchtop = false;
         }
@@ -430,8 +429,8 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
         if (counter == 1 && searchbottom) {
             for (size_t i=2; i<=cols; i++) {
                 SubdivisionEdge* edge = edgeExists(
-                    grid.getPoint(rows-1,i-2),
-                    grid.getPoint(rows-1,i-1));
+                    grid.get(rows-1,i-2),
+                    grid.get(rows-1,i-1));
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
@@ -453,37 +452,37 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                         faces.begin(), faces.end(), face);
                     if (index != faces.end())
                         faces.erase(index);
-                    size_t idx = face->indexOfPoint(grid.getPoint(rows-1,i));
+                    size_t idx = face->indexOfPoint(grid.get(rows-1,i));
                     idx = (idx + 1) % face->numberOfPoints();
-                    if (face->getPoint(idx) == grid.getPoint(rows-1,i-1)) {
+                    if (face->getPoint(idx) == grid.get(rows-1,i-1)) {
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(rows, i-1, face->getPoint(idx));
+                        grid.set(rows, i-1, face->getPoint(idx));
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(rows, i, face->getPoint(idx));
+                        grid.set(rows, i, face->getPoint(idx));
                     } else {
-                        idx = face->indexOfPoint(grid.getPoint(rows-1,i-1));
+                        idx = face->indexOfPoint(grid.get(rows-1,i-1));
                         idx = (idx + 1) % face->numberOfPoints();
-                        if (face->getPoint(idx) == grid.getPoint(rows-1,i)) {
+                        if (face->getPoint(idx) == grid.get(rows-1,i)) {
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(rows, i, face->getPoint(idx));
+                            grid.set(rows, i, face->getPoint(idx));
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(rows, i-1, face->getPoint(idx));
+                            grid.set(rows, i-1, face->getPoint(idx));
                         }
                     }
                 }
                 // check if the boundary edges do not switch between crease or not crease
                 bool dataOK = true;
                 if (mode == amNURBS) {
-                    edge1 = edgeExists(grid.getPoint(rows, 0),
-                                       grid.getPoint(rows-1, 0));
-                    edge2 = edgeExists(grid.getPoint(rows-1, 0),
-                                       grid.getPoint(rows-2, 0));
+                    edge1 = edgeExists(grid.get(rows, 0),
+                                       grid.get(rows-1, 0));
+                    edge2 = edgeExists(grid.get(rows-1, 0),
+                                       grid.get(rows-2, 0));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
-                    edge1 = edgeExists(grid.getPoint(rows,cols-1),
-                                       grid.getPoint(rows-1, cols-1));
-                    edge2 = edgeExists(grid.getPoint(rows-1,cols-1),
-                                       grid.getPoint(rows-2, cols-1));
+                    edge1 = edgeExists(grid.get(rows,cols-1),
+                                       grid.get(rows-1, cols-1));
+                    edge2 = edgeExists(grid.get(rows-1,cols-1),
+                                       grid.get(rows-2, cols-1));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
                     if (!dataOK) {
@@ -501,8 +500,8 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
         } else if (counter == 2 && searchright) {
             for (size_t i=2; i<=rows; i++) {
                 SubdivisionEdge* edge = edgeExists(
-                    grid.getPoint(i-1,cols-1),
-                    grid.getPoint(i-2,cols-1));
+                    grid.get(i-1,cols-1),
+                    grid.get(i-2,cols-1));
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
@@ -524,37 +523,37 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                         faces.begin(), faces.end(), face);
                     if (index != faces.end())
                         faces.erase(index);
-                    size_t idx = face->indexOfPoint(grid.getPoint(i-1,cols-1));
+                    size_t idx = face->indexOfPoint(grid.get(i-1,cols-1));
                     idx = (idx + 1) % face->numberOfPoints();
-                    if (face->getPoint(idx) == grid.getPoint(i,cols-1)) {
+                    if (face->getPoint(idx) == grid.get(i,cols-1)) {
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(i, cols, face->getPoint(idx));
+                        grid.set(i, cols, face->getPoint(idx));
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(i-1, cols, face->getPoint(idx));
+                        grid.set(i-1, cols, face->getPoint(idx));
                     } else {
-                        idx = face->indexOfPoint(grid.getPoint(i,cols-1));
+                        idx = face->indexOfPoint(grid.get(i,cols-1));
                         idx = (idx + 1) % face->numberOfPoints();
-                        if (face->getPoint(idx) == grid.getPoint(i-1,cols-1)) {
+                        if (face->getPoint(idx) == grid.get(i-1,cols-1)) {
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(i-1, cols, face->getPoint(idx));
+                            grid.set(i-1, cols, face->getPoint(idx));
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(i, cols, face->getPoint(idx));
+                            grid.set(i, cols, face->getPoint(idx));
                         }
                     }
                 }
                 // check if the boundary edges do not switch between crease or not crease
                 bool dataOK = true;
                 if (mode == amNURBS) {
-                    edge1 = edgeExists(grid.getPoint(0, cols),
-                                       grid.getPoint(0, cols-1));
-                    edge2 = edgeExists(grid.getPoint(0, cols-1),
-                                       grid.getPoint(0, cols-2));
+                    edge1 = edgeExists(grid.get(0, cols),
+                                       grid.get(0, cols-1));
+                    edge2 = edgeExists(grid.get(0, cols-1),
+                                       grid.get(0, cols-2));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
-                    edge1 = edgeExists(grid.getPoint(rows-1, cols),
-                                       grid.getPoint(rows-1, cols-1));
-                    edge2 = edgeExists(grid.getPoint(rows-1, cols-1),
-                                       grid.getPoint(rows-1, cols-2));
+                    edge1 = edgeExists(grid.get(rows-1, cols),
+                                       grid.get(rows-1, cols-1));
+                    edge2 = edgeExists(grid.get(rows-1, cols-1),
+                                       grid.get(rows-1, cols-2));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
                     if (!dataOK) {
@@ -572,8 +571,8 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
         } else if (counter == 3 && searchtop) {
             for (size_t i=2; i<=cols; i++) {
                 SubdivisionEdge* edge = edgeExists(
-                    grid.getPoint(0, i-2),
-                    grid.getPoint(0, i-1));
+                    grid.get(0, i-2),
+                    grid.get(0, i-1));
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
@@ -591,52 +590,52 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                 grid.setRows(rows+1);
                 for (size_t i=rows; i>=1; i--) {
                     for (size_t j=0; j<cols; j++) {
-                        grid.setPoint(i,j,grid.getPoint(i-1,j));
+                        grid.set(i,j,grid.get(i-1,j));
                     }
                 }
                 for (size_t i=0; i<cols; i++)
-                    grid.setPoint(0, i, 0);
+                    grid.set(0, i, 0);
                 for (size_t i=1; i<=tmpfaces.size(); i++) {
                     face = tmpfaces[i-1];
                     vector<SubdivisionControlFace*>::iterator index = find(
                         faces.begin(), faces.end(), face);
                     if (index != faces.end())
                         faces.erase(index);
-                    size_t idx = face->indexOfPoint(grid.getPoint(1,i-1));
+                    size_t idx = face->indexOfPoint(grid.get(1,i-1));
                     idx = (idx + 1) % face->numberOfPoints();
-                    if (face->getPoint(idx) == grid.getPoint(1,i)) {
+                    if (face->getPoint(idx) == grid.get(1,i)) {
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(0, i, face->getPoint(idx));
+                        grid.set(0, i, face->getPoint(idx));
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(0, i-1, face->getPoint(idx));
+                        grid.set(0, i-1, face->getPoint(idx));
                     } else {
-                        idx = face->indexOfPoint(grid.getPoint(1,i));
+                        idx = face->indexOfPoint(grid.get(1,i));
                         idx = (idx + 1) % face->numberOfPoints();
-                        if (face->getPoint(idx) == grid.getPoint(1,i-1)) {
+                        if (face->getPoint(idx) == grid.get(1,i-1)) {
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(0, i-1, face->getPoint(idx));
+                            grid.set(0, i-1, face->getPoint(idx));
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(0, i, face->getPoint(idx));
+                            grid.set(0, i, face->getPoint(idx));
                         }
                     }
                 }
                 // check if the boundary edges do not switch between crease or not crease
                 bool dataOK = true;
                 if (mode == amNURBS) {
-                    edge1 = edgeExists(grid.getPoint(0, 0),
-                                       grid.getPoint(1, 0));
-                    edge2 = edgeExists(grid.getPoint(1, 0),
-                                       grid.getPoint(2, 0));
+                    edge1 = edgeExists(grid.get(0, 0),
+                                       grid.get(1, 0));
+                    edge2 = edgeExists(grid.get(1, 0),
+                                       grid.get(2, 0));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
-                    edge1 = edgeExists(grid.getPoint(0, cols-1),
-                                       grid.getPoint(1, cols-1));
-                    edge2 = edgeExists(grid.getPoint(1, cols-1),
-                                       grid.getPoint(2, cols-1));
+                    edge1 = edgeExists(grid.get(0, cols-1),
+                                       grid.get(1, cols-1));
+                    edge2 = edgeExists(grid.get(1, cols-1),
+                                       grid.get(2, cols-1));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
                     for (size_t i=2; i<=cols-1; i++) {
-                        if (!grid.getPoint(0,i-1)->isRegularNURBSPoint(checkfaces))
+                        if (!grid.get(0,i-1)->isRegularNURBSPoint(checkfaces))
                             dataOK = false;
                     }
                     if (!dataOK) {
@@ -646,7 +645,7 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                         searchtop = false;
                         for (size_t i=1; i<=rows; i++) {
                             for (size_t j=0; j<cols; j++) {
-                                grid.setPoint(i-1,j,grid.getPoint(i,j));
+                                grid.set(i-1,j,grid.get(i,j));
                             }
                         }
                     } else {
@@ -659,8 +658,8 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
         } else if (counter == 4 && searchleft) {
             for (size_t i=2; i<=rows; i++) {
                 SubdivisionEdge* edge = edgeExists(
-                    grid.getPoint(i-2, 0),
-                    grid.getPoint(i-1, 0));
+                    grid.get(i-2, 0),
+                    grid.get(i-1, 0));
                 if (edge != 0 && !edge->isCrease()) {
                     for (size_t j=0; j<edge->numberOfFaces(); j++) {
                         face = dynamic_cast<SubdivisionControlFace*>(edge->getFace(j));
@@ -678,48 +677,48 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                 grid.setCols(cols+1);
                 for (size_t i=0; i<rows; i++) {
                     for (size_t j=cols; j>=1; j--)
-                        grid.setPoint(i,j,grid.getPoint(i,j-1));
+                        grid.set(i,j,grid.get(i,j-1));
                 }
                 for (size_t i=1; i<=tmpfaces.size(); i++) {
                     face = tmpfaces[i-1];
                     vector<SubdivisionControlFace*>::iterator index = find(faces.begin(), faces.end(), face);
                     if (index != faces.end())
                         faces.erase(index);
-                    size_t idx = face->indexOfPoint(grid.getPoint(i,1));
+                    size_t idx = face->indexOfPoint(grid.get(i,1));
                     idx = (idx + 1) % face->numberOfPoints();
-                    if (face->getPoint(idx) == grid.getPoint(i-1,1)) {
+                    if (face->getPoint(idx) == grid.get(i-1,1)) {
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(i-1, 0, face->getPoint(idx));
+                        grid.set(i-1, 0, face->getPoint(idx));
                         idx = (idx + 1) % face->numberOfPoints();
-                        grid.setPoint(i, 0, face->getPoint(idx));
+                        grid.set(i, 0, face->getPoint(idx));
                     } else {
-                        idx = face->indexOfPoint(grid.getPoint(i-1,1));
+                        idx = face->indexOfPoint(grid.get(i-1,1));
                         idx = (idx + 1) % face->numberOfPoints();
-                        if (face->getPoint(idx) == grid.getPoint(i,1)) {
+                        if (face->getPoint(idx) == grid.get(i,1)) {
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(i, 0, face->getPoint(idx));
+                            grid.set(i, 0, face->getPoint(idx));
                             idx = (idx + 1) % face->numberOfPoints();
-                            grid.setPoint(i-1, 0, face->getPoint(idx));
+                            grid.set(i-1, 0, face->getPoint(idx));
                         }
                     }
                 }
                 // check if the boundary edges do not switch between crease or not crease
                 bool dataOK = true;
                 if (mode == amNURBS) {
-                    edge1 = edgeExists(grid.getPoint(0, 0),
-                                       grid.getPoint(0, 1));
-                    edge2 = edgeExists(grid.getPoint(0, 1),
-                                       grid.getPoint(0, 2));
+                    edge1 = edgeExists(grid.get(0, 0),
+                                       grid.get(0, 1));
+                    edge2 = edgeExists(grid.get(0, 1),
+                                       grid.get(0, 2));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
-                    edge1 = edgeExists(grid.getPoint(rows-1, 0),
-                                       grid.getPoint(rows-1, 1));
-                    edge2 = edgeExists(grid.getPoint(rows-1, 1),
-                                       grid.getPoint(rows-1, 2));
+                    edge1 = edgeExists(grid.get(rows-1, 0),
+                                       grid.get(rows-1, 1));
+                    edge2 = edgeExists(grid.get(rows-1, 1),
+                                       grid.get(rows-1, 2));
                     if (edge1 != 0 && edge2 != 0 && edge1->isCrease() != edge2->isCrease())
                         dataOK = false;
                     for (size_t i=2; i<=rows-1; i++) {
-                        if (!grid.getPoint(i-2,0)->isRegularNURBSPoint(checkfaces))
+                        if (!grid.get(i-2,0)->isRegularNURBSPoint(checkfaces))
                             dataOK = false;
                     }
                     if (!dataOK) {
@@ -729,7 +728,7 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
                         searchleft = false;
                         for (size_t i=0; i<rows; i++) {
                             for (size_t j=1; j<=cols; j++) {
-                                grid.setPoint(i,j-1,grid.getPoint(i,j));
+                                grid.set(i,j-1,grid.get(i,j));
                             }
                         }
                     } else {
@@ -741,19 +740,19 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
             }
         }
         if (mode == amNURBS) {
-            if (!grid.getPoint(0,0)->isRegularNURBSPoint(checkfaces)) {
+            if (!grid.get(0,0)->isRegularNURBSPoint(checkfaces)) {
                 searchleft = false;
                 searchtop = false;
             }
-            if (!grid.getPoint(rows-1,0)->isRegularNURBSPoint(checkfaces)) {
+            if (!grid.get(rows-1,0)->isRegularNURBSPoint(checkfaces)) {
                 searchleft = false;
                 searchbottom = false;
             }
-            if (!grid.getPoint(rows-1,cols-1)->isRegularNURBSPoint(checkfaces)) {
+            if (!grid.get(rows-1,cols-1)->isRegularNURBSPoint(checkfaces)) {
                 searchright = false;
                 searchbottom = false;
             }
-            if (!grid.getPoint(0,cols-1)->isRegularNURBSPoint(checkfaces)) {
+            if (!grid.get(0,cols-1)->isRegularNURBSPoint(checkfaces)) {
                 searchright = false;
                 searchtop = false;
             }
@@ -763,7 +762,7 @@ void SubdivisionSurface::doAssembleSpecial(PointGrid& grid,
 
 void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
                                        vector<SubdivisionControlFace*>& ctrlfaces,
-                                       vector<ControlFaceGrid>& assembled)
+                                       vector<Grid<SubdivisionControlFace*> >& assembled)
 {
     size_t rows, cols;
     int errind = 0;
@@ -775,8 +774,8 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
         errind++;
         if (face != 0) {
 
-            ControlFaceGrid newfacegrid;
-            PointGrid grid;
+            Grid<SubdivisionControlFace*> newfacegrid;
+            Grid<SubdivisionPoint*> grid;
             
             vector<SubdivisionControlFace*>::iterator index = find(
                 ctrlfaces.begin(), ctrlfaces.end(), face);
@@ -787,10 +786,10 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
                 rows = 2;
                 grid.setRows(2);
                 grid.setCols(2);
-                grid.setPoint(0,1,face->getPoint(0));
-                grid.setPoint(0,0,face->getPoint(1));
-                grid.setPoint(1,0,face->getPoint(2));
-                grid.setPoint(1,1,face->getPoint(3));
+                grid.set(0,1,face->getPoint(0));
+                grid.set(0,0,face->getPoint(1));
+                grid.set(1,0,face->getPoint(2));
+                grid.set(1,1,face->getPoint(3));
                 doAssembleSpecial(grid, cols, rows, mode, checkfaces, ctrlfaces);
 
                 newfacegrid.setRows(rows - 1);
@@ -798,12 +797,12 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
                 for (size_t i=2; i<=rows; i++) {
                     for (size_t j=2; j<=cols; j++) {
                         SubdivisionControlFace* face = privGetControlFace(
-                            grid.getPoint(i-2, j-1),
-                            grid.getPoint(i-2, j-2),
-                            grid.getPoint(i-1, j-2),
-                            grid.getPoint(i-1, j-1));
+                            grid.get(i-2, j-1),
+                            grid.get(i-2, j-2),
+                            grid.get(i-1, j-2),
+                            grid.get(i-1, j-1));
                         if (face != 0)
-                            newfacegrid.setFace(i-2, j-2, face);
+                            newfacegrid.set(i-2, j-2, face);
                         // elseraise exception
                     }
                 }
@@ -811,7 +810,7 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
             } else {
                 newfacegrid.setRows(1);
                 newfacegrid.setCols(1);
-                newfacegrid.setFace(0, 0, face);
+                newfacegrid.set(0, 0, face);
                 assembled.push_back(newfacegrid);
             }
         }
@@ -820,7 +819,7 @@ void SubdivisionSurface::assembleFaces(assemble_mode_t mode,
 
 // tries to assemble quads into as few as possible rectangular patches
 void SubdivisionSurface::assembleFacesToPatches(assemble_mode_t mode,
-                                                vector<ControlFaceGrid>& assembledPatches)
+                                                vector<Grid<SubdivisionControlFace*> >& assembledPatches)
 {
     vector<SubdivisionControlFace*> todo;
     vector<vector<SubdivisionControlFace*> > done;
@@ -1754,7 +1753,7 @@ void SubdivisionSurface::clearSelection()
     _sel_control_points.clear();
 }
 
-void SubdivisionSurface::doAssemble(PointGrid& grid, 
+void SubdivisionSurface::doAssemble(Grid<SubdivisionPoint*>& grid,
                                     size_t& cols,
                                     size_t& rows,
                                     vector<SubdivisionFace*>& faces)
@@ -1776,7 +1775,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
         if (counter == 1 && search_bottom) {
             tmpfaces.clear();
             for (size_t i=2; i<=grid.cols(); ++i) {
-                edge = edgeExists(grid.getPoint(rows-1,i-2), grid.getPoint(rows-1,i-1));
+                edge = edgeExists(grid.get(rows-1,i-2), grid.get(rows-1,i-1));
                 if (edge != 0) {
                     for (size_t j=1; j<=edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j-1);
@@ -1797,22 +1796,22 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                     fidx = find(faces.begin(), faces.end(), face);
                     if (fidx != faces.end())
                         faces.erase(fidx);
-                    index = face->indexOfPoint(grid.getPoint(rows-1,i));
+                    index = face->indexOfPoint(grid.get(rows-1,i));
                     index = (index + 1) % face->numberOfPoints();
-                    if (face->getPoint(index) == grid.getPoint(rows-1,i-1)) {
+                    if (face->getPoint(index) == grid.get(rows-1,i-1)) {
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(rows, i-1, face->getPoint(index));
+                        grid.set(rows, i-1, face->getPoint(index));
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(rows, i, face->getPoint(index));
+                        grid.set(rows, i, face->getPoint(index));
                     }
                     else {
-                        index = face->indexOfPoint(grid.getPoint(rows-1,i-1));
+                        index = face->indexOfPoint(grid.get(rows-1,i-1));
                         index = (index + 1) % face->numberOfPoints();
-                        if (face->getPoint(index) == grid.getPoint(rows-1,i)) {
+                        if (face->getPoint(index) == grid.get(rows-1,i)) {
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(rows, i, face->getPoint(index));
+                            grid.set(rows, i, face->getPoint(index));
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(rows, i-1, face->getPoint(index));
+                            grid.set(rows, i-1, face->getPoint(index));
                         }
                     }
                 }
@@ -1824,7 +1823,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
         else if (counter == 2 && search_right) {
             tmpfaces.clear();
             for (size_t i=2; i<=rows; ++i) {
-                edge = edgeExists(grid.getPoint(i-1, cols-1), grid.getPoint(i-2, cols-1));
+                edge = edgeExists(grid.get(i-1, cols-1), grid.get(i-2, cols-1));
                 if (edge != 0) {
                     for (size_t j=1; j<=edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j-1);
@@ -1845,22 +1844,22 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                     fidx = find(faces.begin(), faces.end(), face);
                     if (fidx != faces.end())
                         faces.erase(fidx);
-                    index = face->indexOfPoint(grid.getPoint(i-1,cols-1));
+                    index = face->indexOfPoint(grid.get(i-1,cols-1));
                     index = (index + 1) % face->numberOfPoints();
-                    if (face->getPoint(index) == grid.getPoint(i, cols-1)) {
+                    if (face->getPoint(index) == grid.get(i, cols-1)) {
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(i, cols, face->getPoint(index));
+                        grid.set(i, cols, face->getPoint(index));
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(i-1, cols, face->getPoint(index));
+                        grid.set(i-1, cols, face->getPoint(index));
                     }
                     else {
-                        index = face->indexOfPoint(grid.getPoint(i, cols-1));
+                        index = face->indexOfPoint(grid.get(i, cols-1));
                         index = (index + 1) % face->numberOfPoints();
-                        if (face->getPoint(index) == grid.getPoint(i-1, cols-1)) {
+                        if (face->getPoint(index) == grid.get(i-1, cols-1)) {
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(i-1, cols, face->getPoint(index));
+                            grid.set(i-1, cols, face->getPoint(index));
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(i, cols, face->getPoint(index));
+                            grid.set(i, cols, face->getPoint(index));
                         }
                     }
                 }
@@ -1872,7 +1871,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
         else if (counter == 3 && search_top) {
             tmpfaces.clear();
             for (size_t i=2; i<=cols; ++i) {
-                edge = edgeExists(grid.getPoint(0, i-2), grid.getPoint(0, i-1));
+                edge = edgeExists(grid.get(0, i-2), grid.get(0, i-1));
                 if (edge != 0) {
                     for (size_t j=1; j<=edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j-1);
@@ -1890,7 +1889,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                 grid.setRows(rows+1);
                 for (size_t i=rows; i>=1; i--) {
                     for (size_t j=0; j<cols; j++) {
-                        grid.setPoint(i,j,grid.getPoint(i-1,j));
+                        grid.set(i,j,grid.get(i-1,j));
                     }
                 }
                 for (size_t i=1; i<=tmpfaces.size(); ++i) {
@@ -1898,22 +1897,22 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                     fidx = find(faces.begin(), faces.end(), face);
                     if (fidx != faces.end())
                         faces.erase(fidx);
-                    index = face->indexOfPoint(grid.getPoint(1, i-1));
+                    index = face->indexOfPoint(grid.get(1, i-1));
                     index = (index + 1) % face->numberOfPoints();
-                    if (face->getPoint(index) == grid.getPoint(1, i)) {
+                    if (face->getPoint(index) == grid.get(1, i)) {
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(0, i, face->getPoint(index));
+                        grid.set(0, i, face->getPoint(index));
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(0, i-1, face->getPoint(index));
+                        grid.set(0, i-1, face->getPoint(index));
                     }
                     else {
-                        index = face->indexOfPoint(grid.getPoint(1, i));
+                        index = face->indexOfPoint(grid.get(1, i));
                         index = (index + 1) % face->numberOfPoints();
-                        if (face->getPoint(index) == grid.getPoint(1, i-1)) {
+                        if (face->getPoint(index) == grid.get(1, i-1)) {
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(0, i-1, face->getPoint(index));
+                            grid.set(0, i-1, face->getPoint(index));
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(0, i, face->getPoint(index));
+                            grid.set(0, i, face->getPoint(index));
                         }
                     }
                 }
@@ -1925,7 +1924,7 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
         else if (counter == 4 && search_left) {
             tmpfaces.clear();
             for (size_t i=2; i<=rows; ++i) {
-                edge = edgeExists(grid.getPoint(i-2, 0), grid.getPoint(i-1, 0));
+                edge = edgeExists(grid.get(i-2, 0), grid.get(i-1, 0));
                 if (edge != 0) {
                     for (size_t j=0; j<edge->numberOfFaces(); ++j) {
                         face = edge->getFace(j);
@@ -1943,29 +1942,29 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
                 grid.setCols(cols+1);
                 for (size_t i=0; i<rows; ++i) {
                     for (size_t j=cols; j>=1; j--)
-                        grid.setPoint(i, j, grid.getPoint(i, j-1));
+                        grid.set(i, j, grid.get(i, j-1));
                 }
                 for (size_t i=1; i<=tmpfaces.size(); ++i) {
                     face = tmpfaces[i-1];
                     fidx = find(faces.begin(), faces.end(), face);
                     if (fidx != faces.end())
                         faces.erase(fidx);
-                    index = face->indexOfPoint(grid.getPoint(i, 1));
+                    index = face->indexOfPoint(grid.get(i, 1));
                     index = (index + 1) % face->numberOfPoints();
-                    if (face->getPoint(index) == grid.getPoint(i-1, 1)) {
+                    if (face->getPoint(index) == grid.get(i-1, 1)) {
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(i-1, 0, face->getPoint(index));
+                        grid.set(i-1, 0, face->getPoint(index));
                         index = (index + 1) % face->numberOfPoints();
-                        grid.setPoint(i, 0, face->getPoint(index));
+                        grid.set(i, 0, face->getPoint(index));
                     }
                     else {
-                        index = face->indexOfPoint(grid.getPoint(i-1, 1));
+                        index = face->indexOfPoint(grid.get(i-1, 1));
                         index = (index + 1) % face->numberOfPoints();
-                        if (face->getPoint(index) == grid.getPoint(i, 1)) {
+                        if (face->getPoint(index) == grid.get(i, 1)) {
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(i, 0, face->getPoint(index));
+                            grid.set(i, 0, face->getPoint(index));
                             index = (index + 1) % face->numberOfPoints();
-                            grid.setPoint(i-1, 0, face->getPoint(index));
+                            grid.set(i-1, 0, face->getPoint(index));
                         }
                     }
                 }
@@ -1977,19 +1976,19 @@ void SubdivisionSurface::doAssemble(PointGrid& grid,
     }
 }
 
-void SubdivisionSurface::convertToGrid(ControlFaceGrid& input, PointGrid& grid)
+void SubdivisionSurface::convertToGrid(Grid<SubdivisionControlFace*>& input, Grid<SubdivisionPoint*>& grid)
 {
     size_t cols = 0;
     size_t rows = 0;
     if (input.rows() == 0 || input.cols() == 0)
         return;
     // assemble all childfaces in one temp sorted list
-    size_t n = input.getFace(0, 0)->numberOfChildren();
+    size_t n = input.get(0, 0)->numberOfChildren();
     vector<SubdivisionFace*> backup;
     backup.reserve(input.rows() * input.cols() * n);
     for (size_t i=0; i<input.rows(); ++i) {
         for (size_t j=0; j<input.cols(); ++j) {
-            SubdivisionControlFace* ctrlface = input.getFace(i, j);
+            SubdivisionControlFace* ctrlface = input.get(i, j);
             backup.insert(backup.end(), ctrlface->childrenBegin(), ctrlface->childrenEnd());
         }
     }
@@ -2009,10 +2008,10 @@ void SubdivisionSurface::convertToGrid(ControlFaceGrid& input, PointGrid& grid)
         grid.setCols(2);
         rows = 2;
         cols = 2;
-        grid.setPoint(0, 0, face->getPoint(0));
-        grid.setPoint(0, 1, face->getPoint(1));
-        grid.setPoint(1, 0, face->getPoint(2));
-        grid.setPoint(1, 1, face->getPoint(3));
+        grid.set(0, 0, face->getPoint(0));
+        grid.set(0, 1, face->getPoint(1));
+        grid.set(1, 0, face->getPoint(2));
+        grid.set(1, 1, face->getPoint(3));
         doAssemble(grid, cols, rows, faces);
     }
     while (faces.size() > 0 && ind < backup.size());
@@ -2915,31 +2914,31 @@ void SubdivisionSurface::importFeFFile(QStringList &strings, size_t& lineno)
     setActiveLayer(0);
 }
 
-void SubdivisionSurface::importGrid(coordinate_grid_t& points, SubdivisionLayer* layer)
+void SubdivisionSurface::importGrid(Grid<QVector3D>& points, SubdivisionLayer* layer)
 {
-    size_t rows = points.size();
-    size_t cols = points[0].size();
+    size_t rows = points.rows();
+    size_t cols = points.cols();
 
-    PointGrid grid;
+    Grid<SubdivisionPoint*> grid;
     grid.setRows(rows);
     grid.setCols(cols);
     for (size_t i=0; i<rows; ++i) {
         for (size_t j=0; j<cols; ++j)
-            grid.setPoint(i, j, addControlPoint(points[i-1][j-1]));
+            grid.set(i, j, addControlPoint(points.get(i-1, j-1)));
     }
 
     vector<SubdivisionControlPoint*> facepoints;
     for (size_t i=2; i<=rows; ++i) {
         for (size_t j=2; j<=cols; ++j) {
             facepoints.clear();
-            if (find(facepoints.begin(), facepoints.end(), grid.getPoint(i-1,j-1)) == facepoints.end())
-                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.getPoint(i-1,j-1)));
-            if (find(facepoints.begin(), facepoints.end(), grid.getPoint(i-1,j-2)) == facepoints.end())
-                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.getPoint(i-1,j-2)));
-            if (find(facepoints.begin(), facepoints.end(), grid.getPoint(i-2,j-2)) == facepoints.end())
-                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.getPoint(i-2,j-2)));
-            if (find(facepoints.begin(), facepoints.end(), grid.getPoint(i-2,j-1)) == facepoints.end())
-                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.getPoint(i-2,j-1)));
+            if (find(facepoints.begin(), facepoints.end(), grid.get(i-1,j-1)) == facepoints.end())
+                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.get(i-1,j-1)));
+            if (find(facepoints.begin(), facepoints.end(), grid.get(i-1,j-2)) == facepoints.end())
+                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.get(i-1,j-2)));
+            if (find(facepoints.begin(), facepoints.end(), grid.get(i-2,j-2)) == facepoints.end())
+                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.get(i-2,j-2)));
+            if (find(facepoints.begin(), facepoints.end(), grid.get(i-2,j-1)) == facepoints.end())
+                facepoints.push_back(dynamic_cast<SubdivisionControlPoint*>(grid.get(i-2,j-1)));
             if (facepoints.size() >= 3) {
                 if (layer != 0)
                     addControlFace(facepoints, true, layer);
@@ -2950,26 +2949,26 @@ void SubdivisionSurface::importGrid(coordinate_grid_t& points, SubdivisionLayer*
     }
     // set crease edges
     for (size_t i=2; i<=cols; ++i) {
-        SubdivisionEdge* edge = edgeExists(grid.getPoint(0,i-2), grid.getPoint(0,i-1));
+        SubdivisionEdge* edge = edgeExists(grid.get(0,i-2), grid.get(0,i-1));
         if (edge != 0)
             edge->setCrease(true);
-        edge = edgeExists(grid.getPoint(rows-1,i-2), grid.getPoint(rows-1,i-1));
+        edge = edgeExists(grid.get(rows-1,i-2), grid.get(rows-1,i-1));
         if (edge != 0)
             edge->setCrease(true);
     }
     for (size_t i=2; i<=rows; ++i) {
-        SubdivisionEdge* edge = edgeExists(grid.getPoint(i-2,0), grid.getPoint(i-1,0));
+        SubdivisionEdge* edge = edgeExists(grid.get(i-2,0), grid.get(i-1,0));
         if (edge != 0)
             edge->setCrease(true);
-        edge = edgeExists(grid.getPoint(i-2,cols-1), grid.getPoint(i-1,cols-1));
+        edge = edgeExists(grid.get(i-2,cols-1), grid.get(i-1,cols-1));
         if (edge != 0)
             edge->setCrease(true);
     }
     // set cornerpoints
     for (size_t i=0; i<rows; ++i) {
         for (size_t j=0; j<cols; ++j) {
-            if (grid.getPoint(i, j)->numberOfFaces() < 2)
-                grid.getPoint(i, j)->setVertexType(svCorner);
+            if (grid.get(i, j)->numberOfFaces() < 2)
+                grid.get(i, j)->setVertexType(svCorner);
         }
     }
 }

@@ -84,8 +84,7 @@ HEADERS += shipcadlib.h \
     backgroundimage.h \
     pointervec.h \
     controller.h \
-    pointgrid.h \
-    controlfacegrid.h \
+    grid.h \
     developedpatch.h \
     mempool.h \
     orderedmap.h \

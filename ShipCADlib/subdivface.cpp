@@ -41,8 +41,7 @@
 #include "filebuffer.h"
 #include "utility.h"
 #include "shader.h"
-#include "controlfacegrid.h"
-#include "pointgrid.h"
+#include "grid.h"
 #include "viewportview.h"
 #include "predicate.h"
 #include "drawfaces.h"
@@ -1110,11 +1109,11 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings) const
     int colorindex = FindDXFColorIndex(getLayer()->getColor());
     if (numberOfPoints() == 4) {
         // create one polymesh for all childfaces
-        ControlFaceGrid facedata;
+        Grid<SubdivisionControlFace*> facedata;
         facedata.setRows(1);
         facedata.setCols(1);
-        facedata.setFace(0, 0, const_cast<SubdivisionControlFace*>(this));
-        PointGrid grid;
+        facedata.set(0, 0, const_cast<SubdivisionControlFace*>(this));
+        Grid<SubdivisionPoint*> grid;
         _owner->convertToGrid(facedata, grid);
         if (grid.rows() > 0 && grid.cols() > 0) {
             strings.push_back(QString("0\r\nPOLYLINE"));
@@ -1128,7 +1127,7 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings) const
                 for (size_t j=0; j<grid.cols(); j++) {
                     strings.push_back(QString("0\r\nVERTEX"));
                     strings.push_back(QString("8\r\n%1").arg(layername));
-                    QVector3D p = grid.getPoint(i, j)->getCoordinate();
+                    QVector3D p = grid.get(i, j)->getCoordinate();
                     strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
                     strings.push_back(QString("20\r\n%1").arg(Truncate(p.y(), 4)));
                     strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));
@@ -1148,7 +1147,7 @@ void SubdivisionControlFace::saveToDXF(QStringList& strings) const
                     for (size_t j=0; j<grid.cols(); j++) {
                         strings.push_back(QString("0\r\nVERTEX"));
                         strings.push_back(QString("8\r\n%1").arg(layername));
-                        QVector3D p = grid.getPoint(i, j)->getCoordinate();
+                        QVector3D p = grid.get(i, j)->getCoordinate();
                         strings.push_back(QString("10\r\n%1").arg(Truncate(p.x(), 4)));
                         strings.push_back(QString("20\r\n%1").arg(Truncate(-p.y(), 4)));
                         strings.push_back(QString("30\r\n%1").arg(Truncate(p.z(), 4)));

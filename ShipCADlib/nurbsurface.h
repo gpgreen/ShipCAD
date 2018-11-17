@@ -1,8 +1,8 @@
 /*##############################################################################################
- *    ShipCAD
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>
- *    Original Copyright header below
- *
+ *    ShipCAD                                                                                  *
+ *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Original Copyright header below                                                          *
+ *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
  *    open source surface-modelling program based on subdivision surfaces and intended for     *
  *    designing ships.                                                                         *
@@ -34,13 +34,13 @@
 #include <iosfwd>
 #include <QObject>
 #include <QVector3D>
-#include "entity.h"
+#include "grid.h"
 
 namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class NURBSurface : public Entity
+class NURBSurface : public QObject
 {
     Q_OBJECT
 
@@ -52,40 +52,43 @@ public:
     // altering
     virtual void clear();
     virtual void rebuild();
-
-    // geometry ops
-
-    // persistence
-
-    // drawing
-    //int distance_to_cursor(int x, int y, Viewport& vp) const;
-    virtual void draw(Viewport& vp);
-
+    void deleteColumn(size_t col) 
+        {_points.deleteColumn(col);}
+    void deleteRow(size_t row)
+        {_points.deleteRow(row);}
+    void insertColKnot(float u);
+    void insertRowKnot(float v);
+    void normalizeKnotVectors();
+    
     // getters/setters
-    QVector3D getPoint(size_t row, size_t col);
+    size_t rows() const
+        { return _points.rows(); }
+    size_t cols() const
+        { return _points.cols(); }
+    const QVector3D& getPoint(size_t row, size_t col) const
+        {return _points.get(row, col);}
     void setColDegree(size_t val);
     void setRowDegree(size_t val);
-    void setPoint(size_t row, size_t col, const QVector3D& val);
+    void setPoint(size_t row, size_t col, const QVector3D& val)
+        {_points.set(row, col, val);}
     virtual void setBuild(bool val);
-
+    void setDefaultColKnotVector();
+    void setDefaultRowKnotVector();
+    void setUniformColKnotVector();
+    void setUniformRowKnotVector();
+    
     // output
     void dump(std::ostream& os) const;
 
 protected:
 
-protected:
-
-    int _col_count;
-    int _row_count;
+    bool _build;
     int _col_degree;
     int _row_degree;
-    int _col_knots;
-    int _row_knots;
 
-    std::vector<QVector3D> _points;
-    std::vector<bool> _knuckles;
-    std::vector<float> _parameters;
-    std::vector<QVector3D> _derivatives;
+    Grid<QVector3D> _points;
+    std::vector<float> _col_knots;
+    std::vector<float> _row_knots;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////

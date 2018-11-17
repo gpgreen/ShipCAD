@@ -27,79 +27,101 @@
  *                                                                                              *
  *##############################################################################################*/
 
-#ifndef POINTGRID_H_
-#define POINTGRID_H_
+#ifndef GRID_H_
+#define GRID_H_
 
 #include <vector>
-#include <iosfwd>
+#include <stdexcept>
 
 namespace ShipCAD {
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-class SubdivisionPoint;
-class SubdivisionControlPoint;
-
-struct PointGrid
+template <typename T> class Grid
 {
-    std::vector<std::vector<SubdivisionPoint*> > points;
-    size_t cols() {return points[0].size();}
-    size_t rows() {return points.size();}
+public:
+    std::vector<std::vector<T> > grid;
+
+    explicit Grid() {}
+    
+    explicit Grid(size_t rows, size_t cols)
+        {
+            setRows(rows);
+            setCols(cols);
+        }
+    
+    size_t cols() const {return grid.size() > 0 ? grid[0].size() : 0;}
+    size_t rows() const {return grid.size();}
     
     void setRows(size_t rows) 
         {
-            points.resize(rows);
+            grid.resize(rows);
         }
 
     void setCols(size_t cols)
         {
-            for (size_t i=0; i<points.size(); i++)
-                points[i].resize(cols);
+            if (grid.size() == 0)
+                throw std::overflow_error("can't set column size when rows are 0");
+            for (size_t i=0; i<grid.size(); i++)
+                grid[i].resize(cols);
         }
     
-    SubdivisionPoint* getPoint(size_t row, size_t col) {
-        return points[row][col];
+    const T& get(size_t row, size_t col) const {
+        if (row >= grid.size())
+            throw std::overflow_error("grid row out of bounds");
+        if (col >= grid[0].size())
+            throw std::overflow_error("grid col out of bounds");
+        return grid[row][col];
     }
 
-    void setPoint(size_t row, size_t col, SubdivisionPoint* pt) {
-        points[row][col] = pt;
+    void set(size_t row, size_t col, T elem) {
+        if (row >= grid.size())
+            throw std::overflow_error("grid row out of bounds");
+        if (col >= grid[0].size())
+            throw std::overflow_error("grid col out of bounds");
+        grid[row][col] = elem;
     }
-};
 
-//////////////////////////////////////////////////////////////////////////////////////
-
-struct CPointGrid
-{
-    std::vector<std::vector<SubdivisionControlPoint*> > points;
-    size_t cols() {return points[0].size();}
-    size_t rows() {return points.size();}
-
-    void setRows(size_t rows)
+    void setWithExpansion(size_t row, size_t col, T elem, T defaultval) 
         {
-            points.resize(rows);
+            while (row >= grid.rows())
+            {
+                std::vector<T> newrow(cols(), defaultval);
+                grid.push_back(newrow);
+            }
+            while (col >= grid.cols())
+            {
+                for (size_t i=0; i<grid.size(); ++i)
+                    grid.push_back(defaultval);
+            }
+    
+            grid[row][col] = elem;
         }
 
-    void setCols(size_t cols)
+    void deleteColumn(size_t col)
         {
-            for (size_t i=0; i<points.size(); i++)
-                points[i].resize(cols);
+            if (grid.size() == 0 || col > grid[0].size())
+                throw std::overflow_error("grid col out of bounds");
+            for(size_t i=0; i<grid.size(); ++i)
+                grid[i].erase(grid[i].begin() + col);
         }
 
-    SubdivisionControlPoint* getPoint(size_t row, size_t col) {
-        return points[row][col];
-    }
+    void deleteRow(size_t row)
+        {
+            if (row > grid.size())
+                throw std::overflow_error("grid row out of bounds");
+            grid.erase(grid.begin() + row);
+        }
 
-    void setPoint(size_t row, size_t col, SubdivisionControlPoint* pt) {
-        points[row][col] = pt;
-    }
+    void clear()
+        {
+            for (size_t i=0; i<grid.size(); ++i)
+                grid[i].clear();
+            grid.clear();
+        }
 };
 
 };				/* end namespace */
-
-//////////////////////////////////////////////////////////////////////////////////////
-
-std::ostream& operator << (std::ostream& os, const ShipCAD::PointGrid& grid);
-std::ostream& operator << (std::ostream& os, const ShipCAD::CPointGrid& grid);
 
 //////////////////////////////////////////////////////////////////////////////////////
 

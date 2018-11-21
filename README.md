@@ -62,9 +62,6 @@ Controller:
 Spline:
   draw doesn't show points
 
-NurbSurface:
-  all methods
-
 Flowline:
   draw, rebuild
 

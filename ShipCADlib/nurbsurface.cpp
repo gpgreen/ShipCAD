@@ -30,17 +30,29 @@
 #include <iostream>
 
 #include "nurbsurface.h"
-#include "viewport.h"
+#include "subdivpoint.h"
 
 using namespace ShipCAD;
 using namespace std;
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-NURBSurface::NURBSurface()
-    : _build(false)
+NURBSurface::NURBSurface(size_t rows, size_t cols)
+    : _build(false), _col_degree(3), _row_degree(3),
+      _points(rows, cols, ZERO)
 {
 	// does nothing
+}
+
+void NURBSurface::set(const Grid<SubdivisionPoint*>& src)
+{
+    if (_points.rows() < src.rows())
+        _points.setRows(src.rows());
+    if (_points.cols() < src.cols())
+        _points.setCols(src.cols());
+    for (size_t i=0; i<src.rows(); ++i)
+        for (size_t j=0; j<src.cols(); ++j)
+            _points.set(i, j, src.get(i, j)->getCoordinate());
 }
 
 void NURBSurface::setBuild(bool val)
@@ -85,6 +97,20 @@ void NURBSurface::rebuild()
     setDefaultColKnotVector();
     setDefaultRowKnotVector();
     _build = true;
+}
+
+float NURBSurface::getColKnotVector(size_t index) const
+{
+    if (index > _col_knots.size())
+        throw out_of_range("col knot vector index too large");
+    return _col_knots[index];
+}
+
+float NURBSurface::getRowKnotVector(size_t index) const
+{
+    if (index > _row_knots.size())
+        throw out_of_range("row knot vector index too large");
+    return _row_knots[index];
 }
 
 // FreeShipUnit.pas:8032

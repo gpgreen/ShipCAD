@@ -309,6 +309,15 @@ public:
      */
     bool loadPart(FileBuffer& source, version_t& partversion);
 
+    /*! \brief save IGES file
+     *
+     * \param dest
+     * \param minimize_faces
+     * \param send_triangles
+     */
+    void exportIGES(QTextStream& dest, bool minimize_faces,
+                    bool send_triangles);
+    
     /*! \brief load splines from a text file
      *
      * \param file the textstream to load from

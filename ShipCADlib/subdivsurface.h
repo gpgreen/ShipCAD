@@ -299,6 +299,8 @@ public:
     // getters/setters
     subdiv_mode_t getSubdivisionMode() const {return _subdivision_mode;}
     void setSubdivisionMode(subdiv_mode_t val);
+    int getDesiredSubdivisionLevel() const {return _desired_subdiv_level;}
+    
     void setDesiredSubdivisionLevel(int val);
 
     bool isGaussCurvatureCalculated() const;

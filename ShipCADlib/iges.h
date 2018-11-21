@@ -1,6 +1,6 @@
 /*##############################################################################################
  *    ShipCAD                                                                                  *
- *    Copyright 2015, by Greg Green <ggreen@bit-builder.com>                                   *
+ *    Copyright 2018, by Greg Green <ggreen@bit-builder.com>                                   *
  *    Original Copyright header below                                                          *
  *                                                                                             *
  *    This code is distributed as part of the FREE!ship project. FREE!ship is an               *
@@ -25,89 +25,85 @@
  *    this program; if not, write to the Free Software Foundation, Inc.,                       *
  *    59 Temple Place, Suite 330, Boston, MA 02111-1307 USA                                    *
  *                                                                                             *
- *#############################################################################################*/
+ *#############################################################################################*/                 
 
-#ifndef NURBSURFACE_H_
-#define NURBSURFACE_H_
+#ifndef IGES_H_
+#define IGES_H_
 
-#include <vector>
 #include <iosfwd>
 #include <QObject>
-#include <QVector3D>
+#include <QString>
+#include <QStringList>
+#include "shipcadlib.h"
 #include "grid.h"
 
 namespace ShipCAD {
 
-// forward declarations
+// forward class definitions
+class NURBSurface;
+class ShipCADModel;
 class SubdivisionPoint;
     
 //////////////////////////////////////////////////////////////////////////////////////
 
-class NURBSurface : public QObject
+class IGES : public QObject
 {
     Q_OBJECT
 
 public:
 
-    explicit NURBSurface(size_t rows, size_t cols);
-    virtual ~NURBSurface() {}
+    explicit IGES(ShipCADModel* model, bool minimize_faces, bool send_triangles);
+    virtual ~IGES() {}
 
-    // set values from grid
-    void set(const Grid<SubdivisionPoint*>& src);
+    void addEntity128(NURBSurface& nurb, size_t color_index);
+    size_t addEntity314(QColor col);
     
     // altering
     virtual void clear();
-    virtual void rebuild();
-    void deleteColumn(size_t col) 
-        {_points.deleteColumn(col);}
-    void deleteRow(size_t row)
-        {_points.deleteRow(row);}
-    void insertColKnot(float u);
-    void insertRowKnot(float v);
-    void normalizeKnotVectors();
-    
+
     // getters/setters
-    size_t rows() const
-        { return _points.rows(); }
-    size_t cols() const
-        { return _points.cols(); }
-    const QVector3D& getPoint(size_t row, size_t col) const
-        {return _points.get(row, col);}
-    int getColDegree() const 
-        { return _col_degree; }
-    int getRowDegree() const
-        { return _row_degree; }
-    float getColKnotVector(size_t idx) const;
-    float getRowKnotVector(size_t idx) const;
-    void setColDegree(size_t val);
-    void setRowDegree(size_t val);
-    void setPoint(size_t row, size_t col, const QVector3D& val)
-        {_points.set(row, col, val);}
-    virtual void setBuild(bool val);
-    void setDefaultColKnotVector();
-    void setDefaultRowKnotVector();
-    void setUniformColKnotVector();
-    void setUniformRowKnotVector();
-    
+    const QString& getFileCreatedBy() const
+        { return _file_created_by;}
+    const QString& getFileName() const
+        { return _file_name;}
+    const QString& getSystemID() const
+        { return _system_id; }
+    unit_type_t getIGESUnits() const
+        { return _iges_units; }
+
     // output
+    void saveToFile(const QString& filename);
+    
     void dump(std::ostream& os) const;
 
 protected:
 
-    bool _build;
-    int _col_degree;
-    int _row_degree;
+    void processParameterData(const QString& str, QStringList& param_data);
+    void processGrid(ShipCAD::Grid<ShipCAD::SubdivisionPoint*>& grid, size_t color_index);
+    
+protected:
 
-    Grid<QVector3D> _points;
-    std::vector<float> _col_knots;
-    std::vector<float> _row_knots;
+    QStringList _start_section;
+    QStringList _global_section;
+    QStringList _directory_section;
+    QStringList _parameter_section;
+    QStringList _terminate_section;
+    size_t _num_surfaces;
+    unit_type_t _iges_units;
+    float _max_coordinate;
+    QString _system_id;
+    QString _file_created_by;
+    QString _file_name;
+    ShipCADModel* _model;
+    bool _minimize_faces;
+    bool _send_triangles;
 };
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 };				/* end namespace */
 
-std::ostream& operator << (std::ostream& os, const ShipCAD::NURBSurface& surface);
+std::ostream& operator << (std::ostream& os, const ShipCAD::IGES& iges);
 
 #endif
 

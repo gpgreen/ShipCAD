@@ -49,6 +49,13 @@ public:
             setRows(rows);
             setCols(cols);
         }
+
+    explicit Grid(size_t rows, size_t cols, const T& defval)
+    {
+        setRows(rows);
+        for (size_t i=0; i<rows; ++i)
+            grid[i].assign(cols, defval);
+    }
     
     size_t cols() const {return grid.size() > 0 ? grid[0].size() : 0;}
     size_t rows() const {return grid.size();}

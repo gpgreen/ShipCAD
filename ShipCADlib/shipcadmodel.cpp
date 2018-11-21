@@ -43,6 +43,8 @@
 #include "viewport.h"
 #include "subdivpoint.h"
 #include "subdivedge.h"
+#include "nurbsurface.h"
+#include "iges.h"
 #include "grid.h"
 #include "exception.h"
 
@@ -1525,6 +1527,13 @@ bool ShipCADModel::loadPart(FileBuffer& source, version_t& partversion)
         }
     }
     return changed;
+}
+
+// FreeShipUnit.pas:6239
+void ShipCADModel::exportIGES(QTextStream& dest, bool minimize_faces,
+                              bool send_triangles)
+{
+    IGES iges(this, minimize_faces, send_triangles);
 }
 
 void ShipCADModel::loadChinesFromText(QTextStream& file, SplineVector& splines)
